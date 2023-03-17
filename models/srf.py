@@ -21,3 +21,15 @@ class Group(models.Model):
 
     def __str__(self):
         return self.group
+    
+
+class TestMethod(models.Model):
+    _name = "lerm_civil.test_method"
+    _description = "Lerm Test Method"
+    _rec_name = 'test_method'
+
+    test_method = fields.Char(string="Test Method", required=True)
+
+
+    def __str__(self):
+        return self.test_method

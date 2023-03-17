@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3b2e5ad8-686b-4f0a-965f-5963904a4a23" name="Changes" comment="Added Sample Entry One2Many field" />
+    <list default="true" id="3b2e5ad8-686b-4f0a-965f-5963904a4a23" name="Changes" comment="required=True" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +23,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -38,6 +39,7 @@
       <workItem from="1673586670702" duration="42000" />
       <workItem from="1673640575868" duration="81000" />
       <workItem from="1673641486570" duration="55000" />
+      <workItem from="1679057926229" duration="69000" />
     </task>
     <task id="LOCAL-00001" summary="sample entry">
       <created>1673586691766</created>
@@ -53,7 +55,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673641529863</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="required=True">
+      <created>1679057971932</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679057971932</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -73,6 +82,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="sample entry" />
     <MESSAGE value="Added Sample Entry One2Many field" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Sample Entry One2Many field" />
+    <MESSAGE value="required=True" />
+    <option name="LAST_COMMIT_MESSAGE" value="required=True" />
   </component>
 </project>
