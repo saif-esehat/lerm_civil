@@ -7,6 +7,7 @@
  'depends':['base' , 'contacts'],
  'data': [
     'views/lerm.xml',
-    'views/groups.xml'
+    'views/groups.xml',
+    'views/material.xml'
     ]
 }

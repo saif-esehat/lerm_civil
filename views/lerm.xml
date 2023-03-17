@@ -27,6 +27,17 @@
 
     </record>
 
+    <record id="lerm_civil_material_action" model="ir.actions.act_window">
+        <field name="name">Material</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.civil.material</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Material</p>
+        </field>
+
+    </record>
+    
     <menuitem id="lerm_root"
         name="LERM Civil"
         sequence="10" />
@@ -40,5 +51,11 @@
         name="Discipline"
         parent="lerm_menu"
         action="lerm_discipline_action"
+        sequence="10" />
+    
+    <menuitem id="lerm_civil_material"
+        name="Material"
+        parent="lerm_menu"
+        action="lerm_civil_material_action"
         sequence="10" />
 </odoo>
