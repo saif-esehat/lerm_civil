@@ -5,7 +5,7 @@ class Discipline(models.Model):
     _description = "Lerm Discipline"
     _rec_name = 'discipline'
 
-    discipline = fields.Char(string="Discipline")
+    discipline = fields.Char(string="Discipline", required=True)
 
     def __str__(self):
         return self.discipline
@@ -15,8 +15,8 @@ class Group(models.Model):
     _description = "Lerm Group"
     _rec_name = 'group'
 
-    discipline = fields.Many2one('lerm_civil.discipline', string="Discipline")
-    group = fields.Char(string="Group")
+    discipline = fields.Many2one('lerm_civil.discipline', string="Discipline", required=True)
+    group = fields.Char(string="Group", required=True)
 
 
     def __str__(self):
