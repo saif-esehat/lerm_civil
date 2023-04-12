@@ -27,17 +27,6 @@
 
     </record>
 
-    <record id="lerm_civil_material_action" model="ir.actions.act_window">
-        <field name="name">Material</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">lerm.civil.material</field>
-        <field name="view_mode">tree,kanban,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Material</p>
-        </field>
-
-    </record>
-
     <record id="test_method_action" model="ir.actions.act_window">
         <field name="name">TestMethod</field>
         <field name="type">ir.actions.act_window</field>
@@ -63,12 +52,6 @@
         parent="lerm_menu"
         action="lerm_discipline_action"
         sequence="12" />
-    
-    <menuitem id="lerm_civil_material"
-        name="Material"
-        parent="lerm_menu"
-        action="lerm_civil_material_action"
-        sequence="13" />
 
     <menuitem id="lerm_test_method"
         name="Test Method"
