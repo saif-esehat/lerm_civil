@@ -8,6 +8,7 @@
  'data': [
     'views/lerm.xml',
     'views/groups.xml',
-    'views/material.xml'
+    'views/material.xml',
+    'views/srf.xml'
     ]
 }
