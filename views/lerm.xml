@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="lerm_discipline_form" model="ir.ui.view">
+        <field name="name">lerm_civil.discipline.form</field>
+        <field name="model">lerm_civil.discipline</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="discipline"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="lerm_discipline_action" model="ir.actions.act_window">
+        <field name="name">Discipline</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm_civil.discipline</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Discipline</p>
+        </field>
+
+    </record>
+
+    <record id="test_method_action" model="ir.actions.act_window">
+        <field name="name">TestMethod</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm_civil.test_method</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Test Method</p>
+        </field>
+
+    </record>
+
+    
+    <menuitem id="lerm_root"
+        name="LERM Civil"
+        sequence="10" />
+
+    <menuitem id="lerm_menu"
+        name="Master Data"
+        parent="lerm_root"
+        sequence="11" />
+
+    <menuitem id="discipline"
+        name="Discipline"
+        parent="lerm_menu"
+        action="lerm_discipline_action"
+        sequence="12" />
+
+    <menuitem id="lerm_test_method"
+        name="Test Method"
+        parent="lerm_menu"
+        action="test_method_action"
+        sequence="14" />
+</odoo>

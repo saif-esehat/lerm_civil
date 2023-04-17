@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="lerm_civil_group_form" model="ir.ui.view">
+        <field name="name">lerm_civil.group.form</field>
+        <field name="model">lerm_civil.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="discipline"/>
+                            <field name="group"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+
+    </record>
+
+    <record id="lerm_civil_group_action" model="ir.actions.act_window">
+        <field name="name">Group</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm_civil.group</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Group</p>
+        </field>
+
+    </record>
+
+
+    <menuitem id="lerm_civil_group"
+        name="Group"
+        parent="lerm_menu"
+        action="lerm_civil_group_action"
+        sequence="10" />
+
+    
+</odoo>
