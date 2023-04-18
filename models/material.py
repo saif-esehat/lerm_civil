@@ -40,7 +40,7 @@ class ParameterLine(models.Model):
     specification1 = fields.Char("Specification 1")
     specification2 = fields.Char("Specifications 2")
     unit = fields.Char("Unit")
-    test_method = fields.Char("Test Method")
+    test_method = fields.Many2one('lerm_civil.test_method',string="Test Parameter")
 
 class SizeLine(models.Model):
     _name = 'lerm.size.line'
