@@ -4,6 +4,7 @@ class Material(models.Model):
     _inherit = "product.template"
 
     is_sample = fields.Boolean(string="Is Sample?")
+    casting_required = fields.Boolean(string="Casting Required")
 
     test_parameter = fields.Char("Test Column Title")
     results = fields.Char("Result Column Title")
@@ -32,12 +33,13 @@ class ParameterLine(models.Model):
 
     parameter_id = fields.Many2one('product.template')
     parameter = fields.Char("Parameter")
-    minimum = fields.Integer("min")
-    maximum = fields.Integer("max")
+    minimum = fields.Float("min")
+    maximum = fields.Float("max")
+    mu_value = fields.Float("MU Value")
     specification1 = fields.Char("Specification 1")
     specification2 = fields.Char("Specifications 2")
     unit = fields.Char("Unit")
-    test_method = fields.Char("Test Method")
+    test_method = fields.Many2one('lerm_civil.test_method',string="Test Parameter")
 
 class SizeLine(models.Model):
     _name = 'lerm.size.line'

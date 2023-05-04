@@ -1,84 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
- <data>
-      <record id="product_template_form_inherited" model ="ir.ui.view">
-          <field name="name">product.template.form</field>
-          <field name="model">product.template</field>
-          <field name="inherit_id" ref="product.product_template_form_view" />
-          <field name="arch" type="xml">
-              <xpath expr="//div[@name='options']" position="inside">
-                <span class="d-inline-block">
-                            <field name="is_sample"/>
-                            <label for="is_sample"/>
-                        </span>
-              </xpath>
-              <xpath expr="//page[@name='general_information']" position="after">
-                <page string="LERM" attrs="{'invisible': [('is_sample','=',False)]}">
+  <data>
+    <record id="product_template_form_inherited" model ="ir.ui.view">
+      <field name="name">product.template.form</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_form_view" />
+      <field name="arch" type="xml">
+        <xpath expr="//div[@name='options']" position="inside">
+          <span class="d-inline-block">
+            <field name="is_sample"/>
+            <label for="is_sample"/>
+          </span>
+          <span class="d-inline-block">
+            <field name="casting_required"/>
+            <label for="casting_required"/>
+          </span>
+        </xpath>
+        <xpath expr="//page[@name='general_information']" position="after">
+          <page string="LERM" attrs="{'invisible': [('is_sample','=',False)]}">
+            
+            <group style="width:50%">
+              <field name="discipline"/>
+              <field name="test_format_no"/>
+            </group>
+            <group style="width:50%">
+              <field name="group" domain="[('id', 'in', group_ids)]"/>
+              <field name="group_ids" invisible='1'/>
+              <field name="data_sheet_format_no"/>    
+            </group>
+            
+            <field name="parameter_table" nolabel="1" >
+              <tree>
+                <field name="parameter" />
+                <field name="minimum" />
+                <field name="maximum" />
+                <field name="mu_value" />
+                <field name="specification1" />  
+                <field name="specification2" />
+                <field name="unit" />  
+                <field name="test_method" />
+              </tree>
+              
+            </field>
+          </page>
+          <page string="Report Column Title"  attrs="{'invisible': [('is_sample','=',False)]}">
+            <group>
+              <group style="width:33%">
+                <field name="test_parameter"/>
+                <field name="results"/>
+              </group>
+              <group style="width:33%">
+                <field name="method_reference"/>
+                <field name="result_remark"/>   
+              </group>
+              <group style="width:33%">
+                <field name="specifications"/>
+                <field name="unit"/>
+              </group>
+            </group>
+          </page>
+          <page name="grade_page" string="Grade" attrs="{'invisible': [('is_sample','=',False)]}">
+            <field name="grade_table">
+              <tree editable="bottom">
+                <field name="grade"/>
+              </tree>
+            </field>
+          </page>
+          <page name="size_page" string="Size" attrs="{'invisible': [('is_sample','=',False)]}">
+            <field name="size_table">
+              <tree editable="bottom">
+                <field name="size"/>
+              </tree>
+            </field>
+          </page>
+          <page name="qty_page" string="Qty" attrs="{'invisible': [('is_sample','=',False)]}">
+            <field name="qty_table">
+              <tree editable="bottom">
+                <field name="qty"/>
+              </tree>
+            </field>
+          </page>
+        </xpath>
+      </field>
+    </record>
 
-                <group style="width:50%">
-                      <field name="discipline"/>
-                      <field name="test_format_no"/>
-                </group>
-                <group style="width:50%">
-                      <field name="group" domain="[('id', 'in', group_ids)]"/>
-                      <field name="group_ids" invisible='1'/>
-                      <field name="data_sheet_format_no"/>    
-                </group>
-                  
-                  <field name="parameter_table" nolabel="1" >
-                            <tree>
-                                <field name="parameter" />
-                                <field name="minimum" />
-                                <field name="maximum" />
-                                <field name="specification1" />  
-                                <field name="specification2" />
-                                <field name="unit" />  
-                                <field name="test_method" />
-                            </tree>
-                  </field>
-                </page>
-                <page string="Report Column Title"  attrs="{'invisible': [('is_sample','=',False)]}">
-                  <group>
-                    <group style="width:33%">
-                      <field name="test_parameter"/>
-                      <field name="results"/>
+     <record id="lerm_civil_parameter_line_form" model="ir.ui.view">
+
+        <field name="name">lerm.parameter.line.form</field>
+        <field name="model">lerm.parameter.line</field>
+        <field name="arch" type="xml">
+         <form>
+          <sheet>
+                    <group>
+                      <group style="width:33%">
+                        <field name="parameter" />
+                        <field name="minimum" />
+                        <field name="maximum" />
+                        <field name="mu_value" />
+                      </group>
+                      <group>
+                        <field name="specification1" />  
+                        <field name="specification2" />
+                        <field name="unit" />  
+                        <field name="test_method" />
+                      </group>
                     </group>
-                    <group style="width:33%">
-                      <field name="method_reference"/>
-                      <field name="result_remark"/>   
-                    </group>
-                    <group style="width:33%">
-                      <field name="specifications"/>
-                      <field name="unit"/>
-                    </group>
-                  </group>
-                </page>
-                <page name="grade_page" string="Grade" attrs="{'invisible': [('is_sample','=',False)]}">
-                    <field name="grade_table">
-                      <tree editable="bottom">
-                        <field name="grade"/>
-                      </tree>
-                    </field>
-                </page>
-                <page name="size_page" string="Size" attrs="{'invisible': [('is_sample','=',False)]}">
-                    <field name="size_table">
-                      <tree editable="bottom">
-                        <field name="size"/>
-                      </tree>
-                    </field>
-                </page>
-                <page name="qty_page" string="Qty" attrs="{'invisible': [('is_sample','=',False)]}">
-                    <field name="qty_table">
-                      <tree editable="bottom">
-                        <field name="qty"/>
-                      </tree>
-                    </field>
-                </page>
-                </xpath>
-          </field>
+          </sheet>
+          </form>
+        </field>
       </record>
-    </data>
 
-   
-    
+
+  </data>
+  
+  
+  
 </odoo>

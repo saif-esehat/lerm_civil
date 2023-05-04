@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <record id="srf_form_id" model="ir.actions.act_window">
-        <field name="name">Srf</field>
+        <field name="name">SRF</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">lerm.civil.srf</field>
         <field name="view_mode">tree,kanban,form</field>
