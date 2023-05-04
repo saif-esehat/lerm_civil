@@ -16,16 +16,14 @@ class Material(models.Model):
     test_format_no = fields.Char(string="Test Format No")
     data_sheet_format_no = fields.Char(string="Data Sheet Format No")
     group_ids = fields.Many2many('lerm_civil.group',string="Group Ids",compute="compute_group_ids")
-
     parameter_table = fields.One2many('lerm.parameter.line','parameter_id',string="Parameter")
-    size_table = fields.One2many('lerm.size.line','size_id',string="Size")
-    qty_table = fields.One2many('lerm.qty.line','qty_id',string="Qty")
-    grade_table = fields.One2many('lerm.grade.line','grade_id',string="Grade")
+    size_table = fields.One2many('lerm.size.line','product_id',string="Size")
+    qty_table = fields.One2many('lerm.qty.line','product_id',string="Qty")
+    grade_table = fields.One2many('lerm.grade.line','product_id',string="Grade")
 
     @api.depends('discipline')
     def compute_group_ids(self):
         for record in self:
-            record.group = ''
             group_ids = self.env['lerm_civil.group'].search([('discipline', '=', record.discipline.id)])
             record.group_ids = group_ids
 
@@ -43,19 +41,22 @@ class ParameterLine(models.Model):
 
 class SizeLine(models.Model):
     _name = 'lerm.size.line'
+    _rec_name = 'size'
 
-    size_id = fields.Many2one('product.template')
+    product_id = fields.Many2one('product.template')
     size = fields.Char("Size")
 
 
 class QtyLine(models.Model):
     _name = 'lerm.qty.line'
+    _rec_name = 'qty'
 
-    qty_id = fields.Many2one('product.template')
+    product_id = fields.Many2one('product.template')
     qty = fields.Char("Qty")
 
 class GradeLine(models.Model):
     _name = 'lerm.grade.line'
-
-    grade_id = fields.Many2one('product.template')
+    _rec_name = 'grade'
+    
+    product_id = fields.Many2one('product.template')
     grade = fields.Char("Grade")
