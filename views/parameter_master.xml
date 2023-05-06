@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="lerm_parameter_master_form" model="ir.ui.view">
+        <field name="name">lerm.parameter.master.form</field>
+        <field name="model">lerm.parameter.master</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="parameter_name"/>
+                            <field name="lab_min_value"/>
+                            <field name="nabl_min_value"/>
+                            <field name="client_min_value"/>
+                            <field name="test_method"/>
+                        </group><group>
+                            <field name="mu_value"/>
+                            <field name="lab_max_value"/>
+                            <field name="nabl_max_value"/>
+                            <field name="client_max_value"/>
+                            <field name="unit"/>
+                        </group>
+                    </group>
+                    <!-- <notebook>
+                        <page string="Alias">
+                            <field name='alias_table'>
+                                <tree edidable="bottom">
+                                    <field name="alias"/>
+                                    <field name="customer"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="alias"/>
+                                        <field name="customer"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook> -->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+        <record id="lerm_parameter_master_tree" model="ir.ui.view">
+        <field name="name">lerm.parameter.master.tree</field>
+        <field name="model">lerm.parameter.master</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="parameter_name"/>
+                <field name="mu_value"/>
+
+            </tree>
+        </field>
+    </record>
+    </data>
+</odoo>

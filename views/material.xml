@@ -80,6 +80,20 @@
               </tree>
             </field>
           </page>
+          <page string="Alias" attrs="{'invisible': [('is_sample','=',False)]}">
+            <field name='alias_table'>
+                <tree edidable="bottom">
+                    <field name="alias"/>
+                    <field name="customer"/>
+                </tree>
+                <form>
+                  <group>
+                    <field name="alias"/>
+                    <field name="customer"/>
+                  </group>
+                </form>
+              </field>
+          </page>
         </xpath>
       </field>
     </record>
@@ -108,6 +122,17 @@
           </sheet>
           </form>
         </field>
+      </record>
+
+      <record id="view_partner_inherited_form" model="ir.ui.view">
+            <field name="name">view.partner.inherited.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="string">GST</attribute>
+                </xpath>
+            </field>
       </record>
 
 

@@ -22,12 +22,21 @@ class Material(models.Model):
     size_table = fields.One2many('lerm.size.line','size_id',string="Size")
     qty_table = fields.One2many('lerm.qty.line','qty_id',string="Qty")
     grade_table = fields.One2many('lerm.grade.line','grade_id',string="Grade")
+    alias_table = fields.One2many('lerm.alias.line','parameter_id',string="Alias")
 
     @api.depends('discipline')
     def compute_group_ids(self):
         for record in self:
+            record.group = None
             group_ids = self.env['lerm_civil.group'].search([('discipline', '=', record.discipline.id)])
             record.group_ids = group_ids
+
+class ParameterMasterAliasLine(models.Model):
+    _name = 'lerm.alias.line'
+
+    parameter_id = fields.Many2one('product.template',string="Parameter Id")
+    alias = fields.Char(string="Alias")
+    customer = fields.Many2one('res.partner',string="Customer")
 
 class ParameterLine(models.Model):
     _name = 'lerm.parameter.line'

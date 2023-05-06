@@ -9,6 +9,8 @@
     'views/lerm.xml',
     'views/groups.xml',
     'views/material.xml',
-    'views/srf.xml'
+    'views/srf.xml',
+    'views/parameter_master.xml',
+    'views/datasheet_master.xml'
     ]
 }
