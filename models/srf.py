@@ -89,8 +89,7 @@ class LermSampleForm(models.Model):
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
     qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
-
-    sample_qty_id = fields.Many2one('product.template',string="Sample Quantity")
+    sample_qty_id = fields.Many2one('lerm.qty.line',string="Sample Quantity")
     received_by_id = fields.Many2one('res.partner',string="Received By")
     sample_received_date = fields.Date(string="Sample Received Date")
     sample_condition = fields.Selection([
@@ -110,10 +109,21 @@ class LermSampleForm(models.Model):
     size_ids = fields.Many2many('lerm.size.line',string="Size Ids",compute="compute_size_ids")
     grade_ids = fields.Many2many('lerm.grade.line',string="Grade Ids",compute="compute_grade_ids")
     qty_ids = fields.Many2many('lerm.qty.line',string="Qty Ids",compute="compute_qty_ids")
+    days_casting = fields.Selection([
+        ('3', '3 Days'),
+        ('7', '7 Days'),
+        ('14', '14 Days'),
+        ('28', '28 Days'),
+    ], string='Days of casting', default='3')
+    customer = fields.
 
-
-
-
+    @api.onchange('material_id.casting_required','material_id')
+    def onchange_material_id(self):
+        for record in self:
+            if record.material_id.casting_required:
+                record.casting = True
+            else:
+                record.casting = False
 
     @api.depends('discipline_id')
     def compute_group_ids(self):
@@ -130,7 +140,6 @@ class LermSampleForm(models.Model):
             else:
                 record.material_ids = None
 
-    
     @api.depends('material_id')
     def compute_size_ids(self):
         for record in self:
@@ -160,7 +169,6 @@ class LermSampleForm(models.Model):
                 record.qty_ids = qty_ids
             else:
                 record.qty_ids = None
- 
 
 
 

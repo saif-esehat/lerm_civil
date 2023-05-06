@@ -28,6 +28,7 @@ class Material(models.Model):
             group_ids = self.env['lerm_civil.group'].search([('discipline', '=', record.discipline.id)])
             record.group_ids = group_ids
 
+
 class ParameterLine(models.Model):
     _name = 'lerm.parameter.line'
 

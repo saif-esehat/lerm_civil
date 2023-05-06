@@ -50,6 +50,9 @@
                             <tree>
                                 <field name="sample_no"/>
                                 <field name="material_id"/>
+                                <field name="discipline_id"/>
+                                <field name="sample_qty_id"/>
+                                <field name="sample_received_date"/>
                             </tree>
                     </field>
                 </sheet>
@@ -80,13 +83,12 @@
         <field name="model">lerm.srf.sample</field>
         <field name="arch" type="xml">
             <form>
-
                 <sheet>
                     <group style="width:50%">
                         <field name="sample_no"/>
                     </group>
                     <group style="width:50%">
-                        <field name="casting"/>
+                        <field name="casting" invisible='1'/>
                     </group>
                     <group style="width:50%">
                         <field name="discipline_id"/>
@@ -125,6 +127,9 @@
                     </group>
                     <group style="width:50%">
                         <field name="location"/>
+                    </group>
+                     <group style="width:50%">
+                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
                     </group>
                     <group style="width:100%">
                         <field name="sample_reject_reason"/>
