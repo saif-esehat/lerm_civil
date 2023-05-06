@@ -115,7 +115,19 @@ class LermSampleForm(models.Model):
         ('14', '14 Days'),
         ('28', '28 Days'),
     ], string='Days of casting', default='3')
-    # customer = fields.
+    customer_id = fields.Many2one('res.partner' , string="Customer")
+    alias = fields.Char(stirng="Alias")
+    parameters = fields.Many2many('lerm.datasheet.line',stirng="Parameter")
+    parameters_ids = fields.Many2many('lerm.datasheet.line',stirng="Parameter" , compute="compute_param_ids")
+
+
+    @api.depends('material_id')
+    def compute_param_ids(self):
+        for record in self:
+            parameters_ids = self.env['lerm.datasheet.line'].search([('datasheet_id','=', record.material_id.data_sheet_format_no.id)])
+            print("sas",parameters_ids)
+            record.parameters_ids = parameters_ids
+                
 
     @api.onchange('material_id.casting_required','material_id')
     def onchange_material_id(self):
@@ -125,6 +137,11 @@ class LermSampleForm(models.Model):
             else:
                 record.casting = False
 
+    @api.onchange('material_id.alias' ,'customer_id', 'material_id')
+    def onchange_material_id(self):
+        for record in self:
+            result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
+            record.alias = result.alias
     @api.depends('discipline_id')
     def compute_group_ids(self):
         for record in self:
@@ -143,7 +160,6 @@ class LermSampleForm(models.Model):
     @api.depends('material_id')
     def compute_size_ids(self):
         for record in self:
-            record.size_id = None
             if record.material_id:
                 size_ids = self.env['lerm.size.line'].search([('product_id','=', record.material_id.id)])
                 record.size_ids = size_ids
@@ -153,7 +169,6 @@ class LermSampleForm(models.Model):
     @api.depends('material_id')
     def compute_grade_ids(self):
         for record in self:
-            record.grade_id = None
             if record.material_id:
                 grade_ids = self.env['lerm.grade.line'].search([('product_id','=', record.material_id.id)])
                 record.grade_ids = grade_ids
@@ -163,12 +178,21 @@ class LermSampleForm(models.Model):
     @api.depends('material_id')
     def compute_qty_ids(self):
         for record in self:
-            record.qty_id = None
             if record.material_id:
                 qty_ids = self.env['lerm.qty.line'].search([('product_id','=', record.material_id.id)])
                 record.qty_ids = qty_ids
             else:
                 record.qty_ids = None
+    
+
+
+class SampleParameter(models.Model):
+    _name = "lerm.srf.sample.parameter"
+    _description = "Sample Parameter"
+    sample_id = fields.Many2one('',string="Sample Id")
+    product_id = fields.Many2one('product.template' , string="Product Id")
+    paramter = fields.Many2one('lerm.parameter.master' , string="Parameter")
+
 
 
 

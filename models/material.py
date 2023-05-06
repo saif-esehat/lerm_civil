@@ -15,25 +15,25 @@ class Material(models.Model):
     discipline = fields.Many2one('lerm_civil.discipline',string="Discipline")
     group = fields.Many2one('lerm_civil.group',string="Group")
     test_format_no = fields.Char(string="Test Format No")
-    data_sheet_format_no = fields.Char(string="Data Sheet Format No")
+    data_sheet_format_no = fields.Many2one('lerm.datasheet.master',string="Data Sheet Format No")
     group_ids = fields.Many2many('lerm_civil.group',string="Group Ids",compute="compute_group_ids")
     parameter_table = fields.One2many('lerm.parameter.line','parameter_id',string="Parameter")
     size_table = fields.One2many('lerm.size.line','product_id',string="Size")
     qty_table = fields.One2many('lerm.qty.line','product_id',string="Qty")
     grade_table = fields.One2many('lerm.grade.line','product_id',string="Grade")
-    alias_table = fields.One2many('lerm.alias.line','parameter_id',string="Alias")
+    alias_table = fields.One2many('lerm.alias.line','product_id',string="Alias")
 
     @api.depends('discipline')
     def compute_group_ids(self):
         for record in self:
-            record.group = None
+            # record.group = None
             group_ids = self.env['lerm_civil.group'].search([('discipline', '=', record.discipline.id)])
             record.group_ids = group_ids
 
 class ParameterMasterAliasLine(models.Model):
     _name = 'lerm.alias.line'
 
-    parameter_id = fields.Many2one('product.template',string="Parameter Id")
+    product_id = fields.Many2one('product.template',string="Parameter Id")
     alias = fields.Char(string="Alias")
     customer = fields.Many2one('res.partner',string="Customer")
 
