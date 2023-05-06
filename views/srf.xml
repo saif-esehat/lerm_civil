@@ -4,7 +4,7 @@
         <field name="name">SRF</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">lerm.civil.srf</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,kanban,form</field>
         <!-- <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Test Method</p>
         </field> -->
@@ -29,13 +29,16 @@
                         <field name="customer"/>
                     </group>
                     <group style="width:33.33%">
-                        <field name="billing_customer"/>
+                        <field name="contact_other_ids" invisible='1'/>
+                        <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]"/>
                     </group>
                     <group style="width:33.33%">
-                        <field name="contact_person"/>
+                        <field name="contact_contact_ids" invisible='1'/>
+                        <field name="contact_person" domain="[('id', 'in', contact_contact_ids)]"/>
                     </group>
                     <group style="width:33.33%">
-                        <field name="site_address"/>
+                        <field name="contact_site_ids" invisible='1'/>
+                        <field name="site_address" domain="[('id', 'in', contact_site_ids)]"/>
                     </group>
                     <group style="width:33.33%">
                         <field name="name_work"/>
@@ -47,12 +50,31 @@
                             <tree>
                                 <field name="sample_no"/>
                                 <field name="material_id"/>
+                                <field name="discipline_id"/>
+                                <field name="sample_qty_id"/>
+                                <field name="sample_received_date"/>
                             </tree>
                     </field>
                 </sheet>
+                <div class="oe_chatter"> 
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name= "message_ids" widget="mail_thread"/> 
+                    <field name= "activity_ids" widget="mail_activity"/> 
+                </div>
             </form>
         </field>
+    </record>
 
+
+    <record id="lerm_civil_srf_tree" model="ir.ui.view">
+        <field name="name">lerm.civil.srf.tree</field>
+        <field name="model">lerm.civil.srf</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="srf_no"></field>
+                <field name="job_no"></field>
+            </tree>
+        </field>
     </record>
     <record id="lerm_civil_srf_tree" model="ir.ui.view">
         <field name="name">lerm.civil.srf.tree</field>
@@ -75,28 +97,33 @@
                         <field name="sample_no"/>
                     </group>
                     <group style="width:50%">
-                        <field name="casting"/>
+                        <field name="casting" invisible='1'/>
                     </group>
                     <group style="width:50%">
                         <field name="discipline_id"/>
                     </group>
                     <group style="width:50%">
-                        <field name="group_id"/>
+                        <field name="group_ids" invisible='1'/>
+                        <field name="group_id" domain="[('id', 'in', group_ids)]"/>
                     </group>
                     <group style="width:50%">
-                        <field name="material_id"/>
+                        <field name="material_ids" invisible='1'/>
+                        <field name="material_id" domain="[('id', 'in', material_ids)]"/>
                     </group>
                     <group style="width:50%">
                         <field name="brand"/>
                     </group>
                     <group style="width:50%">
-                        <field name="size_id"/>
+                        <field name="size_ids" invisible='1'/>
+                        <field name="size_id" domain="[('id', 'in', size_ids)]"/>
                     </group>
                     <group style="width:50%">
-                        <field name="grade_id"/>
+                        <field name="grade_ids" invisible='1'/>
+                        <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
                     </group>
                     <group style="width:50%">
-                        <field name="sample_qty_id"/>
+                        <field name="qty_ids" invisible='1'/>
+                        <field name="sample_qty_id" domain="[('id', 'in', qty_ids)]"/>
                     </group>
                     <group style="width:50%">
                         <field name="received_by_id"/>
@@ -109,6 +136,9 @@
                     </group>
                     <group style="width:50%">
                         <field name="location"/>
+                    </group>
+                     <group style="width:50%">
+                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
                     </group>
                     <group style="width:100%">
                         <field name="sample_reject_reason"/>
@@ -123,6 +153,7 @@
                         <field name="sample_description"/>
                     </group>
                 </sheet>
+
             </form>
         </field>
 
