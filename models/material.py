@@ -18,9 +18,9 @@ class Material(models.Model):
     data_sheet_format_no = fields.Char(string="Data Sheet Format No")
     group_ids = fields.Many2many('lerm_civil.group',string="Group Ids",compute="compute_group_ids")
     parameter_table = fields.One2many('lerm.parameter.line','parameter_id',string="Parameter")
-    size_table = fields.One2many('lerm.size.line','size_id',string="Size")
-    qty_table = fields.One2many('lerm.qty.line','qty_id',string="Qty")
-    grade_table = fields.One2many('lerm.grade.line','grade_id',string="Grade")
+    size_table = fields.One2many('lerm.size.line','product_id',string="Size")
+    qty_table = fields.One2many('lerm.qty.line','product_id',string="Qty")
+    grade_table = fields.One2many('lerm.grade.line','product_id',string="Grade")
     alias_table = fields.One2many('lerm.alias.line','parameter_id',string="Alias")
 
     @api.depends('discipline')

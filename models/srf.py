@@ -115,7 +115,7 @@ class LermSampleForm(models.Model):
         ('14', '14 Days'),
         ('28', '28 Days'),
     ], string='Days of casting', default='3')
-    customer = fields.
+    # customer = fields.
 
     @api.onchange('material_id.casting_required','material_id')
     def onchange_material_id(self):
