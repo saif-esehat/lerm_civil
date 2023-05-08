@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="kes_lerm_access_categories">
+            <field name="name">LERM Civil</field>
+        </record>
+
+        <record model="res.groups" id="kes_technician_access_group">
+            <field name="name">Technician</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
+    </data>
+</odoo>
