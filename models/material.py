@@ -22,6 +22,8 @@ class Material(models.Model):
     qty_table = fields.One2many('lerm.qty.line','product_id',string="Qty")
     grade_table = fields.One2many('lerm.grade.line','product_id',string="Grade")
     alias_table = fields.One2many('lerm.alias.line','product_id',string="Alias")
+    datasheet_table = fields.One2many('lerm.material.datasheet.line','product_id',string="Datasheet Table")
+
 
     @api.depends('discipline')
     def compute_group_ids(self):
@@ -29,6 +31,12 @@ class Material(models.Model):
             # record.group = None
             group_ids = self.env['lerm_civil.group'].search([('discipline', '=', record.discipline.id)])
             record.group_ids = group_ids
+
+class DatasheetLine(models.Model):
+    _name = 'lerm.material.datasheet.line'
+
+    product_id = fields.Many2one('product.template',string="Product ID")
+    datasheet = fields.Many2one('lerm.datasheet.master',string="Datasheet")
 
 class ParameterMasterAliasLine(models.Model):
     _name = 'lerm.alias.line'
@@ -41,14 +49,21 @@ class ParameterLine(models.Model):
     _name = 'lerm.parameter.line'
 
     parameter_id = fields.Many2one('product.template')
-    parameter = fields.Char("Parameter")
-    minimum = fields.Float("min")
-    maximum = fields.Float("max")
-    mu_value = fields.Float("MU Value")
-    specification1 = fields.Char("Specification 1")
-    specification2 = fields.Char("Specifications 2")
-    unit = fields.Char("Unit")
-    test_method = fields.Many2one('lerm_civil.test_method',string="Test Parameter")
+    parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+    discipline = fields.Many2one('lerm_civil.discipline',readonly=True)
+    # minimum = fields.Float("min")
+    # maximum = fields.Float("max")
+    # mu_value = fields.Float("MU Value")
+    # specification1 = fields.Char("Specification 1")
+    # specification2 = fields.Char("Specifications 2")
+    # unit = fields.Char("Unit")
+    # test_method = fields.Many2one('lerm_civil.test_method',string="Test Parameter")
+
+    @api.depends('parameter')
+    def compute_discipline(self):
+        for record in self:
+            return
+            # self.discipline = parameter.discipline
 
 class SizeLine(models.Model):
     _name = 'lerm.size.line'

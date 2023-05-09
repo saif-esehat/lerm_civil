@@ -32,13 +32,14 @@
             <field name="parameter_table" nolabel="1" >
               <tree>
                 <field name="parameter" />
-                <field name="minimum" />
+                <field name="discipline" />
+                <!-- <field name="minimum" />
                 <field name="maximum" />
                 <field name="mu_value" />
                 <field name="specification1" />  
                 <field name="specification2" />
                 <field name="unit" />  
-                <field name="test_method" />
+                <field name="test_method" /> -->
               </tree>
               
             </field>
@@ -94,6 +95,18 @@
                 </form>
               </field>
           </page>
+          <page string="Datasheet" attrs="{'invisible': [('is_sample','=',False)]}">
+            <field name='datasheet_table'>
+                <tree edidable="bottom">
+                    <field name="datasheet"/>
+                </tree>
+                <form>
+                  <group>
+                    <field name="datasheet"/>
+                  </group>
+                </form>
+              </field>
+          </page>
         </xpath>
       </field>
     </record>
@@ -108,16 +121,17 @@
                     <group>
                       <group style="width:33%">
                         <field name="parameter" />
-                        <field name="minimum" />
+                        <field name="discipline"/>
+                        <!-- <field name="minimum" />
                         <field name="maximum" />
-                        <field name="mu_value" />
+                        <field name="mu_value" /> -->
                       </group>
-                      <group>
+                      <!-- <group>
                         <field name="specification1" />  
                         <field name="specification2" />
                         <field name="unit" />  
                         <field name="test_method" />
-                      </group>
+                      </group> -->
                     </group>
           </sheet>
           </form>

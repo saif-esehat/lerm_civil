@@ -10,5 +10,10 @@
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
 
+        <record model="res.groups" id="kes_hod_access_group">
+            <field name="name">Head of Department</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
     </data>
 </odoo>
