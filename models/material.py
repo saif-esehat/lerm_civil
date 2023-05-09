@@ -59,11 +59,10 @@ class ParameterLine(models.Model):
     # unit = fields.Char("Unit")
     # test_method = fields.Many2one('lerm_civil.test_method',string="Test Parameter")
 
-    @api.depends('parameter')
+    @api.onchange('parameter')
     def compute_discipline(self):
         for record in self:
-            return
-            # self.discipline = parameter.discipline
+            self.discipline = self.parameter.discipline
 
 class SizeLine(models.Model):
     _name = 'lerm.size.line'
