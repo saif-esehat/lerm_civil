@@ -13,6 +13,7 @@ class ParameterMaster(models.Model):
     client_max_value = fields.Float(string="Client max Value")
     mu_value = fields.Float(string="Mu Value")
     unit = fields.Char("Unit")
+    calculated = fields.Boolean("Calulated")
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
     
 

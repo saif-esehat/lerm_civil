@@ -124,7 +124,7 @@ class LermSampleForm(models.Model):
     @api.depends('material_id')
     def compute_param_ids(self):
         for record in self:
-            parameters_ids = self.env['lerm.datasheet.line'].search([('datasheet_id','=', record.material_id.data_sheet_format_no.id)])
+            parameters_ids = self.env['lerm.datasheet.line'].search([('datasheet_id','=', record.material_id.data_sheet_format_no.id),('calculated','=', True)])
             print("sas",parameters_ids)
             record.parameters_ids = parameters_ids
                 
