@@ -28,7 +28,7 @@
               <field name="group_ids" invisible='1'/>
               <field name="data_sheet_format_no"/>    
             </group>
-            <field name='parameter_table1' domain="[('discipline', '=', discipline)]"/>
+            <field name='parameter_table1' domain="[('discipline', '=', discipline)]" options="{'no_create': True}"/>
             
             <!-- <field name="parameter_table" context="{'default_discipline':discipline}" nolabel="1" >
               <tree>
