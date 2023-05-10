@@ -25,26 +25,20 @@
                         <field name="job_no"/>
                         <field name="job_date"/>
                     </group>
-                    <group style="width:33.33%">
+                    <group style="width:50%">
                         <field name="customer"/>
-                    </group>
-                    <group style="width:33.33%">
                         <field name="contact_other_ids" invisible='1'/>
                         <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]"/>
-                    </group>
-                    <group style="width:33.33%">
-                        <field name="contact_contact_ids" invisible='1'/>
-                        <field name="contact_person" domain="[('id', 'in', contact_contact_ids)]"/>
-                    </group>
-                    <group style="width:33.33%">
-                        <field name="contact_site_ids" invisible='1'/>
-                        <field name="site_address" domain="[('id', 'in', contact_site_ids)]"/>
-                    </group>
-                    <group style="width:33.33%">
                         <field name="name_work"/>
                     </group>
-                    <group style="width:33.33%">
+                    <!-- <group style="width:33.33%">
+                    </group> -->
+                    <group style="width:50%">
+                        <field name="contact_person" domain="[('id', 'in', contact_contact_ids)]"/>
+                        <field name="contact_site_ids" invisible='1'/>
+                        <field name="site_address" domain="[('id', 'in', contact_site_ids)]"/>
                         <field name="client_refrence"/>
+                        <field name="contact_contact_ids" invisible='1'/>
                     </group>
                     <field name="samples" context = "{'default_customer_id' : customer}">
                         <tree>
@@ -95,56 +89,27 @@
                 <sheet>
                     <group style="width:50%">
                         <field name="sample_no"/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="customer_id" invisible='1'/>
-                        <field name="casting" invisible='1'/>
-                    </group>
-                    <group style="width:50%">
                         <field name="discipline_id"/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="group_ids" invisible='1'/>
-                        <field name="group_id" domain="[('id', 'in', group_ids)]"/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="material_ids" invisible='1'/>
                         <field name="material_id" domain="[('id', 'in', material_ids)]"/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="alias"/>
-                    </group>
-                    <group style="width:50%">
                         <field name="brand"/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="size_ids" invisible='1'/>
-                        <field name="size_id" domain="[('id', 'in', size_ids)]"/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="grade_ids" invisible='1'/>
                         <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="qty_ids" invisible='1'/>
-                        <field name="sample_qty_id" domain="[('id', 'in', qty_ids)]"/>
-                    </group>
-                    <group style="width:50%">
                         <field name="received_by_id"/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="sample_received_date"/>
-                    </group>
-                    <group style="width:50%">
                         <field name="sample_condition"/>
+                        <field name="material_ids" invisible='1'/>
+                        <field name="grade_ids" invisible='1'/>
                     </group>
                     <group style="width:50%">
+                        <field name="group_id" domain="[('id', 'in', group_ids)]"/>
+                        <field name="alias"/>
+                        <field name="size_id" domain="[('id', 'in', size_ids)]"/>
+                        <field name="sample_qty_id" domain="[('id', 'in', qty_ids)]"/>
+                        <field name="sample_received_date"/>
                         <field name="location"/>
+                        <field name="group_ids" invisible='1'/>
+                        <field name="size_ids" invisible='1'/>
+                        <field name="qty_ids" invisible='1'/>
                     </group>
-                    <group style="width:50%">
-                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
-                    </group>
-                    <group style="width:100%">
+                     <group style="width:100%">
                         <field name="sample_reject_reason"/>
                     </group>
                     <group style="width:50%">
@@ -156,6 +121,16 @@
                     <group style="width:100%">
                         <field name="sample_description"/>
                     </group>
+                    <group style="width:50%">
+                        <field name="customer_id" invisible='1'/>
+                        <field name="casting" invisible='1'/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
+                    </group>
+                   
+                    
+                    
                     <group style="width:100%">
                         <field name="parameters_ids" invisible="1"/>
                         <field name="parameters" options="{'no_create': True}" domain="[('id', 'in', parameters_ids)]"/>
