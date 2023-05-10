@@ -11,6 +11,8 @@
     'views/material.xml',
     'views/srf.xml',
     'views/parameter_master.xml',
-    'views/datasheet_master.xml'
+    'views/datasheet_master.xml',
+    'security/security.xml',
+    'security/ir.model.access.csv'
     ]
 }

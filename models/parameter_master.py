@@ -15,5 +15,6 @@ class ParameterMaster(models.Model):
     unit = fields.Char("Unit")
     calculated = fields.Boolean("Calulated")
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
+    discipline = fields.Many2one('lerm_civil.discipline',string="Discipline")
     
 

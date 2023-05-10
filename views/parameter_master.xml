@@ -15,6 +15,7 @@
                             <field name="client_min_value"/>
                             <field name="test_method"/>
                             <field name="calculated"/>
+                            <field name="discipline"/>
                         </group><group>
                         
                             <field name="mu_value"/>
@@ -52,7 +53,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="parameter_name"/>
-                <field name="mu_value"/>
+                <field name="discipline"/>
 
             </tree>
         </field>
