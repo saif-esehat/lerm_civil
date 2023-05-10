@@ -118,7 +118,7 @@ class LermSampleForm(models.Model):
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(stirng="Alias")
     parameters = fields.Many2many('lerm.datasheet.line',stirng="Parameter")
-    parameters_ids = fields.Many2many('lerm.datasheet.line',stirng="Parameter" , compute="compute_param_ids")
+    parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
 
 
     @api.depends('material_id')

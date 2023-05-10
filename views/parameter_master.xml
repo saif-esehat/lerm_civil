@@ -51,7 +51,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="parameter_name"/>
-                <field name="mu_value"/>
+                <field name="discipline"/>
 
             </tree>
         </field>
