@@ -18,7 +18,7 @@
             <form>
                 <sheet>
                     <group style="width:50%">
-                        <field name="srf_no"/>
+                        <field name="srf_id"/>
                         <field name="srf_date"/>
                     </group>
                     <group style="width:50%">
@@ -68,22 +68,11 @@
         <field name="model">lerm.civil.srf</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="srf_no"></field>
-                <field name="job_no"></field>
+                <field name="srf_id"></field>
             </tree>
         </field>
     </record>
-    <record id="lerm_civil_srf_tree" model="ir.ui.view">
-        <field name="name">lerm.civil.srf.tree</field>
-        <field name="model">lerm.civil.srf</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="srf_no"/>
-                <field name="job_no"/>
-            </tree>
-        </field>
-
-    </record>
+    
     <record id="lerm_civil_sample_form" model="ir.ui.view">
         <field name="name">lerm.srf.sample.form</field>
         <field name="model">lerm.srf.sample</field>
