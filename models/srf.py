@@ -40,8 +40,8 @@ class SrfForm(models.Model):
     _description = "SRF"
     _inherit = ['mail.thread','mail.activity.mixin']
 
-    srf_no = fields.Char(string="SRF No.")
-    job_no = fields.Char(string="Job NO.")
+    srf_no = fields.Char(string="SRF ID")
+    # job_no = fields.Char(string="Job NO.")
     srf_date = fields.Date(string="SRF Date")
     job_date = fields.Date(string="JOB Date")
     customer = fields.Many2one('res.partner',string="Customer")
@@ -49,12 +49,14 @@ class SrfForm(models.Model):
     contact_person = fields.Many2one('res.partner',string="Contact Person")
     site_address = fields.Many2one('res.partner',string="Site Address")
     name_work = fields.Char(string="Name of Work")
-    client_refrence = fields.Char(string="Client Reference")
+    client_refrence = fields.Char(string="Client Reference Letter")
     samples = fields.One2many('lerm.srf.sample' , 'srf_id' , string="Samples")
     contact_other_ids = fields.Many2many('res.partner',string="Other Ids",compute="compute_other_ids")
     contact_contact_ids = fields.Many2many('res.partner',string="Contact Ids",compute="compute_contact_ids")
     contact_site_ids = fields.Many2many('res.partner',string="Site Ids",compute="compute_site_ids")
-
+    attachment = fields.Binary(string="Attachment")
+    attachment_name = fields.Char(string="Attachment Name")
+    # name_of_work = fields.Many2one('res.partner.project',string='Name of Work')
 
     @api.depends('customer')
     def compute_contact_ids(self):
