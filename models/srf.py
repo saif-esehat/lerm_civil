@@ -116,7 +116,7 @@ class LermSampleForm(models.Model):
     _description = "Sample"
     _rec_name = 'sample_no'
     srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id")
-    sample_no = fields.Char(string="Sample No.")
+    sample_no = fields.Char(string="Sample ID.")
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
     group_id = fields.Many2one('lerm_civil.group',string="Group")
@@ -155,6 +155,7 @@ class LermSampleForm(models.Model):
     alias = fields.Char(stirng="Alias")
     parameters = fields.Many2many('lerm.datasheet.line',stirng="Parameter")
     parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
+    kes_no = fields.Char("KES No")
 
 
     @api.depends('material_id')

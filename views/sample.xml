@@ -20,10 +20,11 @@
                         <field name="grade_ids" invisible='1'/>
                     </group>
                     <group style="width:50%">
+                        <field name='kes_no'/>
                         <field name="group_id" domain="[('id', 'in', group_ids)]"/>
                         <field name="alias"/>
                         <field name="size_id" domain="[('id', 'in', size_ids)]"/>
-                        <field name="sample_quantity"/>
+                        <!-- <field name="sample_quantity"/> -->
                         <field name="sample_received_date"/>
                         <field name="location"/>
                         <field name="group_ids" invisible='1'/>
