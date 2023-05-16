@@ -153,17 +153,17 @@ class LermSampleForm(models.Model):
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(stirng="Alias")
-    parameters = fields.Many2many('lerm.datasheet.line',stirng="Parameter")
-    parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
+    parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
+    # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
     kes_no = fields.Char("KES No")
 
 
-    @api.depends('material_id')
-    def compute_param_ids(self):
-        for record in self:
-            parameters_ids = self.env['lerm.datasheet.line'].search([('datasheet_id','=', record.material_id.data_sheet_format_no.id)])
-            print("sas",parameters_ids)
-            record.parameters_ids = parameters_ids
+    # @api.depends('material_id')
+    # def compute_param_ids(self):
+    #     for record in self:
+    #         parameters_ids = self.env['lerm.datasheet.line'].search([('datasheet_id','=', record.material_id.data_sheet_format_no.id)])
+    #         print("sas",parameters_ids)
+    #         record.parameters_ids = parameters_ids
                 
 
     @api.onchange('material_id.casting_required','material_id')
@@ -274,7 +274,7 @@ class CreateSampleWizard(models.TransientModel):
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(stirng="Alias")
-    parameters = fields.Many2many('lerm.datasheet.line',stirng="Parameter")
+    parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
 
     def close_sample_wizard(self):
         return {'type': 'ir.actions.act_window_close'}

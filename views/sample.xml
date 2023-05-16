@@ -54,8 +54,8 @@
                     
                     
                     <group style="width:100%">
-                        <field name="parameters_ids" invisible="1"/>
-                        <field name="parameters" options="{'no_create': True}" domain="[('id', 'in', parameters_ids)]"/>
+                        <!-- <field name="parameters_ids" invisible="1"/> -->
+                        <field name="parameters" options="{'no_create': True}"/>
                     </group>
                 </sheet>
 
