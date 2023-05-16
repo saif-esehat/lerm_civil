@@ -81,6 +81,7 @@ class SrfForm(models.Model):
 class LermSampleForm(models.Model):
     _name = "lerm.srf.sample"
     _description = "Sample"
+    _rec_name = 'sample_no'
     srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id")
     sample_no = fields.Char(string="Sample No.")
     casting = fields.Boolean(string="Casting")
@@ -91,7 +92,7 @@ class LermSampleForm(models.Model):
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
     qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
-    sample_qty_id = fields.Integer(string="Sample Quantity")
+    sample_quantity = fields.Integer(string="Sample Quantity")
     received_by_id = fields.Many2one('res.partner',string="Received By")
     sample_received_date = fields.Date(string="Sample Received Date")
     sample_condition = fields.Selection([
