@@ -73,5 +73,96 @@
         </field>
     </record>
     
+<<<<<<< HEAD
     
+=======
+    <record id="lerm_civil_sample_form" model="ir.ui.view">
+        <field name="name">lerm.srf.sample.form</field>
+        <field name="model">lerm.srf.sample</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group style="width:50%">
+                        <field name="sample_no"/>
+                        <field name="discipline_id"/>
+                        <field name="material_id" domain="[('id', 'in', material_ids)]"/>
+                        <field name="brand"/>
+                        <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
+                        <field name="received_by_id"/>
+                        <field name="sample_condition"/>
+                        <field name="material_ids" invisible='1'/>
+                        <field name="grade_ids" invisible='1'/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="group_id" domain="[('id', 'in', group_ids)]"/>
+                        <field name="alias"/>
+                        <field name="size_id" domain="[('id', 'in', size_ids)]"/>
+                        <field name="sample_quantity"/>
+                        <field name="sample_received_date"/>
+                        <field name="location"/>
+                        <field name="group_ids" invisible='1'/>
+                        <field name="size_ids" invisible='1'/>
+                        <field name="qty_ids" invisible='1'/>
+                    </group>
+                     <group style="width:100%">
+                        <field name="sample_reject_reason"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="witness"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="scope"/>
+                    </group>
+                    <group style="width:100%">
+                        <field name="sample_description"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="customer_id" invisible='1'/>
+                        <field name="casting" invisible='1'/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
+                    </group>
+                   
+                    
+                    
+                    <group style="width:100%">
+                        <field name="parameters_ids" invisible="1"/>
+                        <field name="parameters" options="{'no_create': True}" domain="[('id', 'in', parameters_ids)]">
+                            <tree>
+                                <field name="parameter"/>
+                                <field name="test_method"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+
+    </record>
+
+
+    <record id="lerm_civil_sample_kanban" model="ir.ui.view">
+        <field name="name">lerm.srf.sample.kanban</field>
+        <field name="model">lerm.srf.sample</field>
+        <field name="arch" type="xml">
+            <kanban class="o_res_partner_kanban">
+                <field name='sample_no'/>
+                 <templates>
+                    <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_global_click">
+                    <div class="oe_kanban_details">
+                    <strong class="o_kanban_record_title">
+                    <field name="display_name"/>
+                    </strong>
+                    </div>
+                    </div>
+                    </t>
+                    </templates>
+            </kanban>
+        </field>
+
+    </record>
+>>>>>>> e6ef1e80cbdf12e498a61d7eb3bd0df733d47877
 </odoo>
