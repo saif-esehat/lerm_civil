@@ -43,6 +43,9 @@
                         <!-- <field name='name_of_work'/> -->
                         <field name="contact_contact_ids" invisible='1'/>
                     </group>
+                    <group style="width:100%">
+                        <button name="open_sample_add_wizard" string="Add Sample" type="object" class="btn-primary"/>
+                    </group>
                     <field name="samples" context = "{'default_customer_id' : customer}">
                         <tree>
                             <field name="sample_no"/>
@@ -137,6 +140,79 @@
             </form>
         </field>
 
+    </record>
+
+    <record id="srf_sample_wizard_form" model="ir.ui.view">
+        <field name="name">create.srf.sample.wizard</field>
+        <field name="model">create.srf.sample.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group style="width:50%">
+                        <field name="sample_id"/>
+                        <field name="discipline_id"/>
+                        <field name="material_id" />
+                        <field name="brand"/>
+                        <field name="grade_id"/>
+                        <field name="received_by_id"/>
+                        <field name="sample_condition"/>
+                        <!-- <field name="material_ids" invisible='1'/>
+                        <field name="grade_ids" invisible='1'/> -->
+                    </group>
+                    <group style="width:50%">
+                        <field name="group_id"/>
+                        <field name="alias"/>
+                        <field name="size_id" />
+                        <field name="qty_id" />
+                        <field name="sample_received_date"/>
+                        <field name="location"/>
+                        <!-- <field name="group_ids" invisible='1'/>
+                        <field name="size_ids" invisible='1'/>
+                        <field name="qty_ids" invisible='1'/> -->
+                    </group>
+                    <group style="width:100%">
+                        <field name="sample_reject_reason"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="witness"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="scope"/>
+                    </group>
+                    <group style="width:100%">
+                        <field name="sample_description"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="customer_id" invisible='1'/>
+                        <field name="casting" invisible='1'/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
+                    </group>
+
+
+
+                    <group style="width:100%">
+                        <!-- <field name="parameters_ids" invisible="1"/> -->
+                        <field name="parameters" options="{'no_create': True}"/>
+                    </group>
+                </sheet>
+
+
+
+                <footer>
+                        <button name="close_sample_wizard" string="Close" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+     <record id="open_srf_sample_wizard_action" model="ir.actions.act_window">
+        <field name="name">Add Sample</field>
+        <field name="res_model">create.srf.sample.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="lerm_civil.srf_sample_wizard_form"/>
+        <field name="target">new</field>
     </record>
 
 

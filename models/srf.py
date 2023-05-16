@@ -75,7 +75,40 @@ class SrfForm(models.Model):
         for record in self:
             contact_ids = self.env['res.partner'].search([('parent_id', '=', record.customer.id),('type','=','delivery')])
             record.contact_site_ids = contact_ids
-            
+    
+    def open_sample_add_wizard(self):
+
+        samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])
+        print("Samples "+ str(samples))
+
+
+        action = self.env.ref('lerm_civil.srf_sample_wizard_form')
+        if len(samples) > 0:
+            print(samples[0].material_id.id , 'error')
+            material_id = samples[0].material_id.id
+            return {
+            'name': "Add Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'create.srf.sample.wizard',
+            'view_id': action.id,
+            'target': 'new',
+            'context': {
+            'default_material_id' : material_id
+            }
+            }
+        else:
+            return {
+            'name': "Add Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'create.srf.sample.wizard',
+            'view_id': action.id,
+            'target': 'new'
+            }
+
 
 
 class LermSampleForm(models.Model):
@@ -198,4 +231,49 @@ class SampleParameter(models.Model):
 
 
 
+class CreateSampleWizard(models.TransientModel):
+    _name = 'create.srf.sample.wizard'
+    
+    srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id")
+    sample_id = fields.Char(string="Sample Id")
+    casting = fields.Boolean(string="Casting")
+    discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
+    group_id = fields.Many2one('lerm_civil.group',string="Group")
+    material_id = fields.Many2one('product.template',string="Material")
+    brand = fields.Char(string="Brand")
+    size_id = fields.Many2one('lerm.size.line',string="Size")
+    grade_id = fields.Many2one('lerm.grade.line',string="Grade")
+    # qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
+    qty_id = fields.Integer(string="Sample Quantity")
+    # sample_qty_id = fields.Integer(string="Sample Quantity")
+    received_by_id = fields.Many2one('res.partner',string="Received By")
+    sample_received_date = fields.Date(string="Sample Received Date")
+    sample_condition = fields.Selection([
+        ('satisfactory', 'Satisfactory'),
+        ('non_satisfactory', 'Non-Satisfactory'),
+    ], string='Sample Condition', default='satisfactory')
+    location = fields.Char(string="Location")
+    sample_reject_reason = fields.Char(string="Sample Reject Reason")
+    witness = fields.Char(string="Witness")
+    scope = fields.Selection([
+        ('nabl', 'NABL'),
+        ('non_nabl', 'Non-NABL'),
+    ], string='Scope', default='nabl')
+    sample_description = fields.Text(string="Sample Description")
+    # group_ids = fields.Many2many('lerm_civil.group',string="Group Ids")
+    # material_ids = fields.Many2many('product.template',string="Material Ids")
+    # size_ids = fields.Many2many('lerm.size.line',string="Size Ids")
+    # grade_ids = fields.Many2many('lerm.grade.line',string="Grade Ids")
+    # qty_ids = fields.Many2many('lerm.qty.line',string="Qty Ids")
+    days_casting = fields.Selection([
+        ('3', '3 Days'),
+        ('7', '7 Days'),
+        ('14', '14 Days'),
+        ('28', '28 Days'),
+    ], string='Days of casting', default='3')
+    customer_id = fields.Many2one('res.partner' , string="Customer")
+    alias = fields.Char(stirng="Alias")
+    parameters = fields.Many2many('lerm.datasheet.line',stirng="Parameter")
 
+    def close_sample_wizard(self):
+        return {'type': 'ir.actions.act_window_close'}
