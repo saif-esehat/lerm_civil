@@ -14,5 +14,7 @@ class ParameterMaster(models.Model):
     mu_value = fields.Float(string="Mu Value")
     unit = fields.Char("Unit")
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
+    discipline = fields.Many2one('lerm_civil.discipline',string="Discipline")
+    nabl_select = fields.Selection([('nabl', 'NABL'), ('non_nabl', 'Non NABL')], string='NABL')
     
 

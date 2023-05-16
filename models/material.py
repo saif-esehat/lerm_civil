@@ -17,11 +17,15 @@ class Material(models.Model):
     test_format_no = fields.Char(string="Test Format No")
     data_sheet_format_no = fields.Many2one('lerm.datasheet.master',string="Data Sheet Format No")
     group_ids = fields.Many2many('lerm_civil.group',string="Group Ids",compute="compute_group_ids")
-    parameter_table = fields.One2many('lerm.parameter.line','parameter_id',string="Parameter")
+    # parameter_table = fields.One2many('lerm.parameter.line','parameter_id',string="Parameter")
     size_table = fields.One2many('lerm.size.line','product_id',string="Size")
     qty_table = fields.One2many('lerm.qty.line','product_id',string="Qty")
     grade_table = fields.One2many('lerm.grade.line','product_id',string="Grade")
     alias_table = fields.One2many('lerm.alias.line','product_id',string="Alias")
+    datasheet_table = fields.One2many('lerm.material.datasheet.line','product_id',string="Datasheet Table")
+    parameter_table1 = fields.Many2many('lerm.parameter.master',string="Parameters")
+    # discipline2 = fields.One2many('material.discipline.line')
+
 
     @api.depends('discipline')
     def compute_group_ids(self):
@@ -30,6 +34,12 @@ class Material(models.Model):
             group_ids = self.env['lerm_civil.group'].search([('discipline', '=', record.discipline.id)])
             record.group_ids = group_ids
 
+class DatasheetLine(models.Model):
+    _name = 'lerm.material.datasheet.line'
+
+    product_id = fields.Many2one('product.template',string="Product ID")
+    datasheet = fields.Many2one('lerm.datasheet.master',string="Datasheet")
+
 class ParameterMasterAliasLine(models.Model):
     _name = 'lerm.alias.line'
 
@@ -37,18 +47,31 @@ class ParameterMasterAliasLine(models.Model):
     alias = fields.Char(string="Alias")
     customer = fields.Many2one('res.partner',string="Customer")
 
-class ParameterLine(models.Model):
-    _name = 'lerm.parameter.line'
+# class ParameterLine(models.Model):
+#     _name = 'lerm.parameter.line'
 
-    parameter_id = fields.Many2one('product.template')
-    parameter = fields.Char("Parameter")
-    minimum = fields.Float("min")
-    maximum = fields.Float("max")
-    mu_value = fields.Float("MU Value")
-    specification1 = fields.Char("Specification 1")
-    specification2 = fields.Char("Specifications 2")
-    unit = fields.Char("Unit")
-    test_method = fields.Many2one('lerm_civil.test_method',string="Test Parameter")
+#     parameter_id = fields.Many2one('product.template')
+#     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+#     discipline = fields.Many2one('lerm_civil.discipline',readonly=True)
+#     parameters_ids = fields.Many2many('lerm.parameter.master',string="Parameters")
+    # minimum = fields.Float("min")
+    # maximum = fields.Float("max")
+    # mu_value = fields.Float("MU Value")
+    # specification1 = fields.Char("Specification 1")
+    # specification2 = fields.Char("Specifications 2")
+    # unit = fields.Char("Unit")
+    # test_method = fields.Many2one('lerm_civil.test_method',string="Test Parameter")
+
+    # @api.onchange('parameter')
+    # def compute_discipline(self):
+    #     for record in self:
+    #         self.discipline = self.parameter.discipline
+
+    # @api.depends('discipline')
+    # def compute_parameter_ids(self):
+    #     for rec in self:
+    #         parameters_ids = self.env['lerm.parameter.master'].search(['discipline','=',rec.discipline.id])
+    #         rec.parameters_ids = parameters_ids
 
 class SizeLine(models.Model):
     _name = 'lerm.size.line'

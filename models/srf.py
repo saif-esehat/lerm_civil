@@ -40,8 +40,8 @@ class SrfForm(models.Model):
     _description = "SRF"
     _inherit = ['mail.thread','mail.activity.mixin']
 
-    srf_no = fields.Char(string="SRF No.")
-    job_no = fields.Char(string="Job NO.")
+    srf_id = fields.Char(string="SRF ID")
+    # job_no = fields.Char(string="Job NO.")
     srf_date = fields.Date(string="SRF Date")
     job_date = fields.Date(string="JOB Date")
     customer = fields.Many2one('res.partner',string="Customer")
@@ -49,12 +49,14 @@ class SrfForm(models.Model):
     contact_person = fields.Many2one('res.partner',string="Contact Person")
     site_address = fields.Many2one('res.partner',string="Site Address")
     name_work = fields.Char(string="Name of Work")
-    client_refrence = fields.Char(string="Client Reference")
+    client_refrence = fields.Char(string="Client Reference Letter")
     samples = fields.One2many('lerm.srf.sample' , 'srf_id' , string="Samples")
     contact_other_ids = fields.Many2many('res.partner',string="Other Ids",compute="compute_other_ids")
     contact_contact_ids = fields.Many2many('res.partner',string="Contact Ids",compute="compute_contact_ids")
     contact_site_ids = fields.Many2many('res.partner',string="Site Ids",compute="compute_site_ids")
-
+    attachment = fields.Binary(string="Attachment")
+    attachment_name = fields.Char(string="Attachment Name")
+    # name_of_work = fields.Many2one('res.partner.project',string='Name of Work')
 
     @api.depends('customer')
     def compute_contact_ids(self):
@@ -79,6 +81,7 @@ class SrfForm(models.Model):
 class LermSampleForm(models.Model):
     _name = "lerm.srf.sample"
     _description = "Sample"
+    _rec_name = 'sample_no'
     srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id")
     sample_no = fields.Char(string="Sample No.")
     casting = fields.Boolean(string="Casting")
@@ -89,7 +92,7 @@ class LermSampleForm(models.Model):
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
     qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
-    sample_qty_id = fields.Many2one('lerm.qty.line',string="Sample Quantity")
+    sample_quantity = fields.Integer(string="Sample Quantity")
     received_by_id = fields.Many2one('res.partner',string="Received By")
     sample_received_date = fields.Date(string="Sample Received Date")
     sample_condition = fields.Selection([
@@ -118,7 +121,7 @@ class LermSampleForm(models.Model):
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(stirng="Alias")
     parameters = fields.Many2many('lerm.datasheet.line',stirng="Parameter")
-    parameters_ids = fields.Many2many('lerm.datasheet.line',stirng="Parameter" , compute="compute_param_ids")
+    parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
 
 
     @api.depends('material_id')

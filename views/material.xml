@@ -28,20 +28,15 @@
               <field name="group_ids" invisible='1'/>
               <field name="data_sheet_format_no"/>    
             </group>
+            <field name='parameter_table1' options="{'no_create': True}"/>
             
-            <field name="parameter_table" nolabel="1" >
+            <!-- <field name="parameter_table" context="{'default_discipline':discipline}" nolabel="1" >
               <tree>
                 <field name="parameter" />
-                <field name="minimum" />
-                <field name="maximum" />
-                <field name="mu_value" />
-                <field name="specification1" />  
-                <field name="specification2" />
-                <field name="unit" />  
-                <field name="test_method" />
+                <field name="discipline" />
               </tree>
               
-            </field>
+            </field> -->
           </page>
           <page string="Report Column Title"  attrs="{'invisible': [('is_sample','=',False)]}">
             <group>
@@ -94,35 +89,38 @@
                 </form>
               </field>
           </page>
+          <page string="Datasheet" attrs="{'invisible': [('is_sample','=',False)]}">
+            <field name='datasheet_table'>
+                <tree edidable="bottom">
+                    <field name="datasheet"/>
+                </tree>
+                <form>
+                  <group>
+                    <field name="datasheet"/>
+                  </group>
+                </form>
+              </field>
+          </page>
         </xpath>
       </field>
     </record>
 
-     <record id="lerm_civil_parameter_line_form" model="ir.ui.view">
-
+     <!-- <record id="lerm_civil_parameter_line_form" model="ir.ui.view">
         <field name="name">lerm.parameter.line.form</field>
         <field name="model">lerm.parameter.line</field>
         <field name="arch" type="xml">
          <form>
           <sheet>
-                    <group>
                       <group style="width:33%">
                         <field name="parameter" />
-                        <field name="minimum" />
-                        <field name="maximum" />
-                        <field name="mu_value" />
+                        <field name="discipline"/>
+                        <field name="parameters_ids" domain="[('discipline', '=', discipline)]"/>
                       </group>
-                      <group>
-                        <field name="specification1" />  
-                        <field name="specification2" />
-                        <field name="unit" />  
-                        <field name="test_method" />
-                      </group>
-                    </group>
+                      
           </sheet>
           </form>
         </field>
-      </record>
+      </record> -->
 
       <record id="view_partner_inherited_form" model="ir.ui.view">
             <field name="name">view.partner.inherited.form</field>

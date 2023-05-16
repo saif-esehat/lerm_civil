@@ -38,6 +38,16 @@
 
     </record>
 
+    <record id="test_sample_action" model="ir.actions.act_window">
+        <field name="name">Sample</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.srf.sample</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Sample</p>
+        </field>
+
+    </record>
     
     <menuitem id="lerm_root"
         name="LERM Civil"
@@ -59,4 +69,15 @@
         parent="lerm_menu"
         action="test_method_action"
         sequence="14" />
+
+    <menuitem id="lerm_transaction_data"
+        name="Transaction Data"
+        parent="lerm_root"
+        sequence="14" />
+
+    <menuitem id="lerm_sample"
+        name="Sample"
+        parent="lerm_transaction_data"
+        action="test_sample_action"
+        sequence="15" />
 </odoo>

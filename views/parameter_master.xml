@@ -14,12 +14,14 @@
                             <field name="nabl_min_value"/>
                             <field name="client_min_value"/>
                             <field name="test_method"/>
+                            <field name="discipline"/>
                         </group><group>
                             <field name="mu_value"/>
                             <field name="lab_max_value"/>
                             <field name="nabl_max_value"/>
                             <field name="client_max_value"/>
                             <field name="unit"/>
+                            <field  name='nabl_select'/>
                         </group>
                     </group>
                     <!-- <notebook>
@@ -50,7 +52,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="parameter_name"/>
-                <field name="mu_value"/>
+                <field name="discipline"/>
 
             </tree>
         </field>

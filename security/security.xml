@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="kes_lerm_access_categories">
+            <field name="name">LERM Civil</field>
+        </record>
+
+        <record model="res.groups" id="kes_technician_access_group">
+            <field name="name">Technician</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
+        <record model="res.groups" id="kes_srf_backdate_creation_group">
+            <field name="name">SRF Backdate creation</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
+        <record model="res.groups" id="kes_hod_access_group">
+            <field name="name">Head of Department</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
+    </data>
+</odoo>
