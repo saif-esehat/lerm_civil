@@ -6,6 +6,7 @@ class Discipline(models.Model):
     _rec_name = 'discipline'
 
     discipline = fields.Char(string="Discipline", required=True)
+    hod = fields.Many2one('res.users',string="Head of Department")
 
     def __str__(self):
         return self.discipline
