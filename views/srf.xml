@@ -138,8 +138,13 @@
                     </group>
 
                     <group style="width:100%">
-                        <!-- <field name="parameters_ids" invisible="1"/> -->
-                        <field name="parameters" options="{'no_create': True}"/>
+                        <field name="parameters_ids" invisible="1"/>
+                        <field name="parameters" options="{'no_create': True}" domain="[('id', 'in', parameters_ids)]">
+                            <tree>
+                                <field name="parameter"/>
+                                <field name="test_method"/>
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
                 <footer>

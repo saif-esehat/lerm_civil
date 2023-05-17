@@ -203,6 +203,7 @@ class LermSampleForm(models.Model):
     parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
     kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New')
+    casting_date = fields.Date(string="Casting Date")
     
     status = fields.Selection([
         ('1-pending', 'Pending'),
@@ -357,7 +358,18 @@ class CreateSampleWizard(models.TransientModel):
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(stirng="Alias")
-    parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
+    parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
+
+
+    @api.onchange('material_id')
+    def compute_parameters(self):
+        for record in self:
+            if record.material_id:
+                product_record = self.env['product.template'].search([('id','=', record.material_id.id)]).parameter_table1
+                record.parameters = product_record
+            else:
+                record.parameters = None
+
    
 
     def add_sample(self):

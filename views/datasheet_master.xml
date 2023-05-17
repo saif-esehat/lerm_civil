@@ -11,7 +11,8 @@
                     <field name="datasheet">
                         <tree editable="bottom">
                             <field name="parameter"/>
-                            <field name="test_method"/>                            
+                            <field name="test_method"/>         
+                            <field name="calculated"/>   
                         </tree>
                 </field>
                 </group>
