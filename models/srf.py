@@ -418,7 +418,6 @@ class CreateSampleWizard(models.TransientModel):
     def close_sample_wizard(self):
         return {'type': 'ir.actions.act_window_close'}
 
-
     
     class AllotSampleWizard(models.TransientModel):
         _name = "sample.allotment.wizard"
