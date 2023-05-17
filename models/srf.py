@@ -200,7 +200,6 @@ class LermSampleForm(models.Model):
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(stirng="Alias")
-<<<<<<< HEAD
     parameters = fields.Many2many('lerm.datasheet.line',stirng="Parameter")
     parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
 
@@ -211,8 +210,7 @@ class LermSampleForm(models.Model):
             parameters_ids = self.env['lerm.datasheet.line'].search([('datasheet_id','=', record.material_id.data_sheet_format_no.id),('calculated','=', True)])
             print("sas",parameters_ids)
             record.parameters_ids = parameters_ids
-=======
-    parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
+    # parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
     kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New')
     casting_date = fields.Date(string="Casting Date")
@@ -257,7 +255,6 @@ class LermSampleForm(models.Model):
     #         parameters_ids = self.env['lerm.datasheet.line'].search([('datasheet_id','=', record.material_id.data_sheet_format_no.id)])
     #         print("sas",parameters_ids)
     #         record.parameters_ids = parameters_ids
->>>>>>> 2c897141ecbd10d66120adc678d1debd8012fed2
                 
 
     @api.onchange('material_id.casting_required','material_id')
@@ -378,10 +375,16 @@ class CreateSampleWizard(models.TransientModel):
     def compute_parameters(self):
         for record in self:
             if record.material_id:
-                product_record = self.env['product.template'].search([('id','=', record.material_id.id)]).parameter_table1
-                record.parameters = product_record
-            else:
-                record.parameters = None
+                parameters_ids = []
+                product_records = self.env['product.template'].search([('id','=', record.material_id.id)]).parameter_table1
+                for rec in product_records:
+                    parameters_ids.append(rec.id)
+                # record.parameters = product_record
+            # else:
+            #     record.parameters = None
+                domain = {'parameters': [('id', 'in', parameters_ids)]}
+                return {'domain': domain}
+
 
    
 
