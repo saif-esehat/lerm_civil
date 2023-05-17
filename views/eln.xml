@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="lerm_parameter_master_form" model="ir.ui.view">
+        <field name="name">lerm.eln.form</field>
+        <field name="model">lerm.eln</field>
+        <field name="arch" type="xml">
+            <form>
+                <group style="width:40%">
+                    <field name='srf_id'/>
+                    <field name='sample_id'/>
+                </group>
+            </form>
+        </field>
+        </record>
+
+
+        <record id="lerm_parameter_master_tree" model="ir.ui.view">
+        <field name="name">lerm.eln.tree</field>
+        <field name="model">lerm.eln</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='srf_id'/>
+                <field name='sample_id'/>
+            </tree>
+        </field>
+        </record>
+    </data>
+</odoo>

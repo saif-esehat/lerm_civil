@@ -40,6 +40,7 @@ class SrfForm(models.Model):
     _name = "lerm.civil.srf"
     _description = "SRF"
     _inherit = ['mail.thread','mail.activity.mixin']
+    _rec_name = 'srf_id'
 
     srf_id = fields.Char(string="SRF ID")
     # job_no = fields.Char(string="Job NO.")

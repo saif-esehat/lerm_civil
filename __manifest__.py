@@ -13,6 +13,7 @@
     'views/parameter_master.xml',
     'views/datasheet_master.xml',
     'views/sample.xml',
+    'views/eln.xml',
     'security/security.xml',
     'security/ir.model.access.csv'
     ]
