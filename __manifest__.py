@@ -6,12 +6,15 @@
  'version': '13.0.1', 
  'depends':['base' , 'contacts','stock','product' , 'mail'],
  'data': [
+    'data/sequence.xml',
     'views/lerm.xml',
     'views/groups.xml',
     'views/material.xml',
     'views/srf.xml',
     'views/parameter_master.xml',
     'views/datasheet_master.xml',
+    'views/sample.xml',
+    'views/eln.xml',
     'security/security.xml',
     'security/ir.model.access.csv'
     ]

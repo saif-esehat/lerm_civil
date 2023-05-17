@@ -9,6 +9,7 @@
                     <group>
                         <group>
                             <field name="discipline"/>
+                            <field name="hod"/>
                         </group>
                     </group>
                 </sheet>
@@ -38,6 +39,28 @@
 
     </record>
 
+    <record id="test_sample_action" model="ir.actions.act_window">
+        <field name="name">Sample</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.srf.sample</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('status','=','2-confirmed')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Sample</p>
+        </field>
+
+    </record>
+
+    <record id="test_eln_action" model="ir.actions.act_window">
+        <field name="name">ELN</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.eln</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">ELN</p>
+        </field>
+
+    </record>
     
     <menuitem id="lerm_root"
         name="LERM Civil"
@@ -59,4 +82,21 @@
         parent="lerm_menu"
         action="test_method_action"
         sequence="14" />
+
+    <menuitem id="lerm_transaction_data"
+        name="Transaction Data"
+        parent="lerm_root"
+        sequence="14" />
+
+    <menuitem id="lerm_sample"
+        name="Sample"
+        parent="lerm_transaction_data"
+        action="test_sample_action"
+        sequence="15" />
+
+    <menuitem id="lerm_eln"
+        name="ELN"
+        parent="lerm_transaction_data"
+        action="test_eln_action"
+        sequence="16" />
 </odoo>

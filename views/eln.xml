@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="lerm_parameter_master_form" model="ir.ui.view">
+        <field name="name">lerm.eln.form</field>
+        <field name="model">lerm.eln</field>
+        <field name="arch" type="xml">
+            <form>
+                <group style="width:40%">
+                    <field name='srf_id'/>
+                    <field name='srf_date'/>
+                    <field name='discipline'/>
+                    <field name='material'/>
+                    <field name='casting_date'/>
+                </group>
+                <group style="width:40%">
+                    <field name='sample_id'/>
+                    <field name='kes_no'/>
+                    <field name='group'/>
+                    <field name='witness_name'/>
+                    <field name='attachment' filename='attachment_name'/>
+                    <field name='attachment_name' invisible='1'/>
+                </group>
+            </form>
+        </field>
+        </record>
+
+
+        <record id="lerm_parameter_master_tree" model="ir.ui.view">
+        <field name="name">lerm.eln.tree</field>
+        <field name="model">lerm.eln</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='srf_id'/>
+                <field name='sample_id'/>
+            </tree>
+        </field>
+        </record>
+    </data>
+</odoo>

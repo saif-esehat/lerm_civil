@@ -9,43 +9,55 @@
             <p class="o_view_nocontent_smiling_face">Test Method</p>
         </field> -->
     </record>
-    <menuitem id="srf_form" name="SRF" parent="lerm_root" action="srf_form_id" sequence="15" />
+    <menuitem id="srf_form" name="SRF" parent="lerm_transaction_data" action="srf_form_id" sequence="10" />
 
     <record id="lerm_civil_srf_form" model="ir.ui.view">
         <field name="name">lerm.civil.srf.form</field>
         <field name="model">lerm.civil.srf</field>
         <field name="arch" type="xml">
             <form>
+            <header>
+                <button
+                    type="object"
+                    name="confirm_srf"
+                    string="Confirm"
+                    attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"
+                    />       
+                                 
+                    <field   readonly="1" name="state" widget="statusbar"/>
+            </header>
                 <sheet>
                     <group style="width:50%">
-                        <field name="srf_no"/>
+                        <field name="srf_id"/>
                         <field name="srf_date"/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="job_no"/>
-                        <field name="job_date"/>
+                        <field name="contact_person" domain="[('id', 'in', contact_contact_ids)]"/>
+                        <field name="site_address" domain="[('id', 'in', contact_site_ids)]"/>
+                        <field name="client_refrence"/>
                     </group>
                     <group style="width:50%">
                         <field name="customer"/>
                         <field name="contact_other_ids" invisible='1'/>
                         <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]"/>
                         <field name="name_work"/>
+                        <field name="attachment" filename="attachment_name" />
+                        <field name='attachment_name' invisible='1'/>
                     </group>
                     <!-- <group style="width:33.33%">
                     </group> -->
                     <group style="width:50%">
-                        <field name="contact_person" domain="[('id', 'in', contact_contact_ids)]"/>
                         <field name="contact_site_ids" invisible='1'/>
-                        <field name="site_address" domain="[('id', 'in', contact_site_ids)]"/>
-                        <field name="client_refrence"/>
+                        <!-- <field name='name_of_work'/> -->
                         <field name="contact_contact_ids" invisible='1'/>
                     </group>
-                    <field name="samples" context = "{'default_customer_id' : customer}">
+                    <group style="width:100%">
+                        <button name="open_sample_add_wizard" string="Add Sample" type="object" class="btn-primary"/>
+                    </group>
+                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="samples" context = "{'default_customer_id' : customer,'is_local': True}">
                         <tree>
                             <field name="sample_no"/>
                             <field name="material_id"/>
                             <field name="discipline_id"/>
-                            <field name="sample_qty_id"/>
+                            <!-- <field name="sample_quantity"/> -->
                             <field name="sample_received_date"/>
                         </tree>
                     </field>
@@ -65,51 +77,47 @@
         <field name="model">lerm.civil.srf</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="srf_no"></field>
-                <field name="job_no"></field>
+                <field name="srf_id"/>
+                <field name="srf_date"/>
+                <field name="customer"/>
+                <field name="contact_person" />
+                <field name="billing_customer" />
+                <field name="name_work"/>
+                <field name="client_refrence"/>
             </tree>
         </field>
     </record>
-    <record id="lerm_civil_srf_tree" model="ir.ui.view">
-        <field name="name">lerm.civil.srf.tree</field>
-        <field name="model">lerm.civil.srf</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="srf_no"/>
-                <field name="job_no"/>
-            </tree>
-        </field>
+    
 
-    </record>
-    <record id="lerm_civil_sample_form" model="ir.ui.view">
-        <field name="name">lerm.srf.sample.form</field>
-        <field name="model">lerm.srf.sample</field>
+    <record id="srf_sample_wizard_form" model="ir.ui.view">
+        <field name="name">create.srf.sample.wizard</field>
+        <field name="model">create.srf.sample.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
                     <group style="width:50%">
-                        <field name="sample_no"/>
+                        <!-- <field name="sample_id"/> -->
                         <field name="discipline_id"/>
-                        <field name="material_id" domain="[('id', 'in', material_ids)]"/>
+                        <field name="material_id" />
                         <field name="brand"/>
-                        <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
+                        <field name="grade_id"/>
                         <field name="received_by_id"/>
                         <field name="sample_condition"/>
-                        <field name="material_ids" invisible='1'/>
-                        <field name="grade_ids" invisible='1'/>
+                        <!-- <field name="material_ids" invisible='1'/>
+                        <field name="grade_ids" invisible='1'/> -->
                     </group>
                     <group style="width:50%">
-                        <field name="group_id" domain="[('id', 'in', group_ids)]"/>
+                        <field name="group_id"/>
                         <field name="alias"/>
-                        <field name="size_id" domain="[('id', 'in', size_ids)]"/>
-                        <field name="sample_qty_id" domain="[('id', 'in', qty_ids)]"/>
+                        <field name="size_id" />
+                        <field name="qty_id" />
                         <field name="sample_received_date"/>
                         <field name="location"/>
-                        <field name="group_ids" invisible='1'/>
+                        <!-- <field name="group_ids" invisible='1'/>
                         <field name="size_ids" invisible='1'/>
-                        <field name="qty_ids" invisible='1'/>
+                        <field name="qty_ids" invisible='1'/> -->
                     </group>
-                     <group style="width:100%">
+                    <group style="width:100%">
                         <field name="sample_reject_reason"/>
                     </group>
                     <group style="width:50%">
@@ -128,9 +136,7 @@
                     <group style="width:50%">
                         <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
                     </group>
-                   
-                    
-                    
+
                     <group style="width:100%">
                         <field name="parameters_ids" invisible="1"/>
                         <field name="parameters" options="{'no_create': True}" domain="[('id', 'in', parameters_ids)]">
@@ -142,8 +148,24 @@
                     </group>
                 </sheet>
 
+
+
+                <footer>
+                        <button name="add_sample" string="Create Sample" type="object" class="btn-primary"/>
+                        <button name="close_sample_wizard" string="Close" type="object"/>
+                </footer>
             </form>
         </field>
-
     </record>
+
+    <record id="open_srf_sample_wizard_action" model="ir.actions.act_window">
+        <field name="name">Add Sample</field>
+        <field name="res_model">create.srf.sample.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="lerm_civil.srf_sample_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+  
 </odoo>

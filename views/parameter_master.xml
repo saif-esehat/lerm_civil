@@ -23,6 +23,7 @@
                             <field name="nabl_max_value"/>
                             <field name="client_max_value"/>
                             <field name="unit"/>
+                            <field  name='nabl_select'/>
                         </group>
                     </group>
                     <!-- <notebook>
