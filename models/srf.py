@@ -276,7 +276,17 @@ class CreateSampleWizard(models.TransientModel):
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(stirng="Alias")
-    parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
+    parameters = fields.Many2many('lerm.parameter.master',string="Parameter",compute='compute_parameters')
+
+
+    @api.depends('material_id')
+    def compute_parameters(self):
+        for record in self:
+            if record.material_id:
+                product_record = self.env['product.template'].search([('id','=', record.material_id.id)])
+                record.parameters = product_record.parameter_table1
+            else:
+                record.parameters = None
 
     def close_sample_wizard(self):
         return {'type': 'ir.actions.act_window_close'}
