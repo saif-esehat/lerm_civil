@@ -216,6 +216,21 @@ class LermSampleForm(models.Model):
         ('3-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
 
+
+    @api.onchange('material_id')
+    def compute_parameters(self):
+        for record in self:
+            if record.material_id:
+                parameters_ids = []
+                product_records = self.env['product.template'].search([('id','=', record.material_id.id)]).parameter_table1
+                for rec in product_records:
+                    parameters_ids.append(rec.id)
+                domain = {'parameters': [('id', 'in', parameters_ids)]}
+                return {'domain': domain}
+            else:
+                domain = {'parameters': [('id', 'in', [])]}
+                return {'domain': domain}
+
     def open_sample_allotment_wizard(self):
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
 
@@ -369,10 +384,10 @@ class CreateSampleWizard(models.TransientModel):
                 product_records = self.env['product.template'].search([('id','=', record.material_id.id)]).parameter_table1
                 for rec in product_records:
                     parameters_ids.append(rec.id)
-                # record.parameters = product_record
-            # else:
-            #     record.parameters = None
                 domain = {'parameters': [('id', 'in', parameters_ids)]}
+                return {'domain': domain}
+            else:
+                domain = {'parameters': [('id', 'in', [])]}
                 return {'domain': domain}
 
 
