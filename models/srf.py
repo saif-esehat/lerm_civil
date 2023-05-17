@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 class Discipline(models.Model):
     _name = "lerm_civil.discipline"
@@ -58,6 +59,25 @@ class SrfForm(models.Model):
     contact_site_ids = fields.Many2many('res.partner',string="Site Ids",compute="compute_site_ids")
     attachment = fields.Binary(string="Attachment")
     attachment_name = fields.Char(string="Attachment Name")
+    state = fields.Selection([
+        ('1-draft', 'Draft'),
+        ('2-confirm', 'Confirm')
+    ], string='State', default='1-draft')
+
+
+    def confirm_srf(self):
+        
+        for record in self.samples:
+            # if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
+            sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
+            kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+            # res = super(LermSampleForm, self).create(vals)
+            #     return res
+            record.write({'status':'2-confirmed','sample_no':sample_id,'kes_no':kes_no})
+        
+        self.write({'state': '2-confirm'})
+        # for record in self:
+
     # name_of_work = fields.Many2one('res.partner.project',string='Name of Work')
 
     @api.depends('customer')
@@ -81,13 +101,26 @@ class SrfForm(models.Model):
     def open_sample_add_wizard(self):
 
         samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])
-        print("Samples "+ str(samples))
+        # print("Samples "+ str(samples))
 
 
         action = self.env.ref('lerm_civil.srf_sample_wizard_form')
         if len(samples) > 0:
             print(samples[0].material_id.id , 'error')
             material_id = samples[0].material_id.id
+            group_id = samples[0].group_id.id
+            alias = samples[0].alias
+            brand = samples[0].brand
+            size_id = samples[0].size_id.id
+            grade_id = samples[0].grade_id.id
+            sample_received_date = samples[0].sample_received_date
+            location = samples[0].location
+            sample_condition = samples[0].sample_condition
+            sample_reject_reason = samples[0].sample_reject_reason
+            witness = samples[0].witness
+            scope = samples[0].scope
+            sample_description = samples[0].sample_description
+
             return {
             'name': "Add Sample",
             'type': 'ir.actions.act_window',
@@ -97,7 +130,20 @@ class SrfForm(models.Model):
             'view_id': action.id,
             'target': 'new',
             'context': {
-            'default_material_id' : material_id
+            'default_material_id' : material_id,
+            'default_alias':alias,
+            'default_brand':brand,
+            'default_size_id':size_id,
+            'default_grade_id':grade_id,
+            'default_sample_received_date': sample_received_date,
+            'default_location':location,
+            'default_sample_condition':sample_condition,
+            'default_sample_reject_reason':sample_reject_reason,
+            'default_witness':witness,
+            'default_scope':scope,
+            'default_sample_description':sample_description,
+            'default_group_id':group_id
+
             }
             }
         else:
@@ -112,13 +158,12 @@ class SrfForm(models.Model):
             }
 
 
-
 class LermSampleForm(models.Model):
     _name = "lerm.srf.sample"
     _description = "Sample"
     _rec_name = 'sample_no'
-    srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id")
-    sample_no = fields.Char(string="Sample ID.")
+    srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id" )
+    sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
     group_id = fields.Many2one('lerm_civil.group',string="Group")
@@ -157,7 +202,40 @@ class LermSampleForm(models.Model):
     alias = fields.Char(stirng="Alias")
     parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
-    kes_no = fields.Char("KES No")
+    kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New')
+    
+    status = fields.Selection([
+        ('1-pending', 'Pending'),
+        ('2-confirmed', 'Confirmed'),
+    ], string='Status', default='1-pending')
+
+    state = fields.Selection([
+        ('1-allotment_pending', 'Allotment Pending'),
+        ('2-alloted', 'Alloted'),
+        ('3-in_report', 'In-Report'),
+    ], string='State',default='1-allotment_pending')
+
+    def open_sample_allotment_wizard(self):
+        action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
+
+        return {
+            'name': "Add Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'sample.allotment.wizard',
+            'view_id': action.id,
+            'target': 'new'
+            }
+        
+
+    # @api.model
+    # def create(self, vals):
+    #     if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
+    #         vals['sample_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
+    #         vals['kes_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+    #         res = super(LermSampleForm, self).create(vals)
+    #         return res
 
 
     # @api.depends('material_id')
@@ -181,6 +259,9 @@ class LermSampleForm(models.Model):
         for record in self:
             result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
             record.alias = result.alias
+
+
+    
     @api.depends('discipline_id')
     def compute_group_ids(self):
         for record in self:
@@ -287,6 +368,60 @@ class CreateSampleWizard(models.TransientModel):
                 record.parameters = product_record.parameter_table1
             else:
                 record.parameters = None
+    parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
+   
+
+    def add_sample(self):
+        group_id =  self.group_id.id
+        alias = self.alias
+        material_id = self.material_id.id
+        size_id = self.size_id.id
+        brand = self.brand
+        grade_id = self.grade_id.id
+        sample_received_date = self.sample_received_date
+        location = self.location
+        sample_condition = self.sample_condition
+        sample_reject_reason = self.sample_reject_reason
+        witness = self.witness
+        scope = self.scope
+        sample_description =self.sample_condition
+        parameters = self.parameters
+
+        if self.qty_id > 0:
+
+            for i in range(self.qty_id):
+                self.env["lerm.srf.sample"].create({
+                    'srf_id': self.env.context.get('active_id'),
+                    'group_id':group_id,
+                    'alias':alias,
+                    'material_id' : self.material_id.id,
+                    'size_id':size_id,
+                    'brand':brand,
+                    'grade_id':grade_id,
+                    'sample_received_date':sample_received_date,
+                    'location':location,
+                    'sample_condition':sample_condition,
+                    'sample_reject_reason':sample_reject_reason,
+                    'witness':witness,
+                    'scope':scope,
+                    'sample_description':sample_description,
+                    'parameters':parameters
+                })        
+
+            print("Parameters "+ str(self.parameters))
+
+            return {'type': 'ir.actions.act_window_close'}
+        else:
+            raise UserError("Sample Quantity Must be Greater Than Zero")
 
     def close_sample_wizard(self):
         return {'type': 'ir.actions.act_window_close'}
+
+
+    
+    class AllotSampleWizard(models.TransientModel):
+        _name = "sample.allotment.wizard"
+
+        technicians = fields.Many2one("res.users",string="Technicians")
+
+

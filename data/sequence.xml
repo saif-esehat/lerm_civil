@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_sample_no" model="ir.sequence">
+            <field name="name">Sample Sequence</field>
+            <field name="code">lerm.srf.sample</field>
+            <field name="prefix">SAM</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_kes_no" model="ir.sequence">
+            <field name="name">Kes Sequence</field>
+            <field name="code">lerm.srf.sample.kes</field>
+            <field name="prefix">KES</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

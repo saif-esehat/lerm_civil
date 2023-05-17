@@ -6,6 +6,7 @@
  'version': '13.0.1', 
  'depends':['base' , 'contacts','stock','product' , 'mail'],
  'data': [
+    'data/sequence.xml',
     'views/lerm.xml',
     'views/groups.xml',
     'views/material.xml',
