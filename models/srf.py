@@ -199,8 +199,8 @@ class LermSampleForm(models.Model):
         ('28', '28 Days'),
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
-    alias = fields.Char(stirng="Alias")
-    parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
+    alias = fields.Char(string="Alias")
+    parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
     kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New')
     casting_date = fields.Date(string="Casting Date")
@@ -230,6 +230,8 @@ class LermSampleForm(models.Model):
             else:
                 domain = {'parameters': [('id', 'in', [])]}
                 return {'domain': domain}
+
+    
 
     def open_sample_allotment_wizard(self):
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
@@ -372,7 +374,7 @@ class CreateSampleWizard(models.TransientModel):
         ('28', '28 Days'),
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
-    alias = fields.Char(stirng="Alias")
+    alias = fields.Char(string="Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
 
 
@@ -445,6 +447,7 @@ class CreateSampleWizard(models.TransientModel):
 
         technicians = fields.Many2one("res.users",string="Technicians")
 
+
         @api.onchange('technicians')
         def onchange_technicians(self):
             users = self.env.ref('lerm_civil.kes_technician_access_group').users
@@ -453,7 +456,34 @@ class CreateSampleWizard(models.TransientModel):
                 ids.append(user_id.id)
             print("IDS " + str(ids))
             return {'domain': {'technicians': [('id', 'in', ids)]}}
-    
+
+        def allot_sample(self):
+            parameters = []
+
+            active_id = self.env.context.get('active_id')
+            sample = self.env['lerm.srf.sample'].search([('id','=',active_id)])  
+            for parameter in sample.parameters:
+                parameters.append((0,0,{'parameter':parameter.id}))
+
+            self.env['lerm.eln'].create({
+                'srf_id': sample.srf_id.id,
+                'srf_date':sample.srf_id.srf_date,
+                'kes_no':sample.kes_no,
+                'discipline':sample.discipline_id.id,
+                'group': sample.group_id.id,
+                'material': sample.material_id.id,
+                'witness_name': sample.witness,
+                'sample_id':sample.id,
+                'parameters':parameters,
+                'technician': self.technicians.id
+            })
+
+            sample.write({'state':'2-alloted'})
+                # print(parameter)
+
+         
+            return {'type': 'ir.actions.act_window_close'}
+
 
         def close_allotment_wizard(self):
             return {'type': 'ir.actions.act_window_close'}

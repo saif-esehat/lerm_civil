@@ -17,5 +17,5 @@ class ParameterMaster(models.Model):
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
     discipline = fields.Many2one('lerm_civil.discipline',string="Discipline")
     nabl_select = fields.Selection([('nabl', 'NABL'), ('non_nabl', 'Non NABL')], string='NABL')
-    
+    spreadsheet_template = fields.Many2one("spreadsheet.template",string="Spreadsheet Template")
 

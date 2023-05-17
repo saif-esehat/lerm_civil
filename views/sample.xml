@@ -17,8 +17,11 @@
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
                 </header>
                 <sheet>
+                <group style="width:100%">
+                    <field name="srf_id"  invisible="context.get('is_local',False)"/>
+                </group>
+
                     <group style="width:50%">
-                        <field name="srf_id"  invisible="context.get('is_local',False)"/>
                         <field name="sample_no"/>
                         <field name="discipline_id"/>
                         <field name="material_id" domain="[('id', 'in', material_ids)]"/>
@@ -109,7 +112,7 @@
                         <field name='technicians'/>
                     </group>
                     <footer>
-                        <!-- <button name="add_sample" string="Create Sample" type="object" class="btn-primary"/> -->
+                        <button name="allot_sample" string="Allot Sample" type="object" class="btn-primary"/>
                         <button name="close_allotment_wizard" string="Close" type="object"/>
                     </footer>
                 </sheet>
