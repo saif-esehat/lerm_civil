@@ -8,7 +8,18 @@
             <form>
                 <group style="width:40%">
                     <field name='srf_id'/>
+                    <field name='srf_date'/>
+                    <field name='discipline'/>
+                    <field name='material'/>
+                    <field name='casting_date'/>
+                </group>
+                <group style="width:40%">
                     <field name='sample_id'/>
+                    <field name='kes_no'/>
+                    <field name='group'/>
+                    <field name='witness_name'/>
+                    <field name='attachment' filename='attachment_name'/>
+                    <field name='attachment_name' invisible='1'/>
                 </group>
             </form>
         </field>
