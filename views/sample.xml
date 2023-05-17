@@ -105,7 +105,13 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <field name='technicians'/>
+                    <group style="width:100%">
+                        <field name='technicians'/>
+                    </group>
+                    <footer>
+                        <!-- <button name="add_sample" string="Create Sample" type="object" class="btn-primary"/> -->
+                        <button name="close_allotment_wizard" string="Close" type="object"/>
+                    </footer>
                 </sheet>
             </form>
         </field>

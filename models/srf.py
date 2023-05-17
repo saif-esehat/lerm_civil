@@ -200,17 +200,7 @@ class LermSampleForm(models.Model):
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(stirng="Alias")
-    parameters = fields.Many2many('lerm.datasheet.line',stirng="Parameter")
-    parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
-
-
-    @api.depends('material_id')
-    def compute_param_ids(self):
-        for record in self:
-            parameters_ids = self.env['lerm.datasheet.line'].search([('datasheet_id','=', record.material_id.data_sheet_format_no.id),('calculated','=', True)])
-            print("sas",parameters_ids)
-            record.parameters_ids = parameters_ids
-    # parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
+    parameters = fields.Many2many('lerm.parameter.master',stirng="Parameter")
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
     kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New')
     casting_date = fields.Date(string="Casting Date")
@@ -230,7 +220,7 @@ class LermSampleForm(models.Model):
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
 
         return {
-            'name': "Add Sample",
+            'name': "Allot Sample",
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form',
@@ -439,5 +429,18 @@ class CreateSampleWizard(models.TransientModel):
         _name = "sample.allotment.wizard"
 
         technicians = fields.Many2one("res.users",string="Technicians")
+
+        @api.onchange('technicians')
+        def onchange_technicians(self):
+            users = self.env.ref('lerm_civil.kes_technician_access_group').users
+            ids = []
+            for user_id in users:
+                ids.append(user_id.id)
+            print("IDS " + str(ids))
+            return {'domain': {'technicians': [('id', 'in', ids)]}}
+    
+
+        def close_allotment_wizard(self):
+            return {'type': 'ir.actions.act_window_close'}
 
 
