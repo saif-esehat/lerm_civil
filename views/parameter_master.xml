@@ -14,8 +14,10 @@
                             <field name="nabl_min_value"/>
                             <field name="client_min_value"/>
                             <field name="test_method"/>
+                            <field name="calculated"/>
                             <field name="discipline"/>
                         </group><group>
+                        
                             <field name="mu_value"/>
                             <field name="lab_max_value"/>
                             <field name="nabl_max_value"/>
