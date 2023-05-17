@@ -7,8 +7,18 @@
         <field name="model">lerm.srf.sample</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                        <button
+                            type="object"
+                            name="open_sample_allotment_wizard"
+                            string="Allotment"
+                            invisible="context.get('is_local',False)"
+                            />       
+                        <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group style="width:50%">
+                        <field name="srf_id"  invisible="context.get('is_local',False)"/>
                         <field name="sample_no"/>
                         <field name="discipline_id"/>
                         <field name="material_id" domain="[('id', 'in', material_ids)]"/>
@@ -20,10 +30,11 @@
                         <field name="grade_ids" invisible='1'/>
                     </group>
                     <group style="width:50%">
+                        <field name='kes_no'/>
                         <field name="group_id" domain="[('id', 'in', group_ids)]"/>
                         <field name="alias"/>
                         <field name="size_id" domain="[('id', 'in', size_ids)]"/>
-                        <field name="sample_quantity"/>
+                        <!-- <field name="sample_quantity"/> -->
                         <field name="sample_received_date"/>
                         <field name="location"/>
                         <field name="group_ids" invisible='1'/>
@@ -53,8 +64,8 @@
                     
                     
                     <group style="width:100%">
-                        <field name="parameters_ids" invisible="1"/>
-                        <field name="parameters" options="{'no_create': True}" domain="[('id', 'in', parameters_ids)]"/>
+                        <!-- <field name="parameters_ids" invisible="1"/> -->
+                        <field name="parameters" options="{'no_create': True}"/>
                     </group>
                 </sheet>
 
@@ -68,7 +79,7 @@
         <field name="name">lerm.srf.sample.kanban</field>
         <field name="model">lerm.srf.sample</field>
         <field name="arch" type="xml">
-            <kanban class="o_res_partner_kanban">
+            <kanban records_draggable="0"  default_group_by="state" class="o_res_partner_kanban">
                 <field name='sample_no'/>
                  <templates>
                     <t t-name="kanban-box">
@@ -85,6 +96,28 @@
         </field>
 
     </record>
+
+    <record id="srf_sample_allotment_wizard" model="ir.ui.view">
+        <field name="name">sample.allotment.wizard</field>
+        <field name="model">sample.allotment.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name='technicians'/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="srf_sample_allotment_wizard_action" model="ir.actions.act_window">
+        <field name="name">Allotment</field>
+        <field name="res_model">sample.allotment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="lerm_civil.srf_sample_allotment_wizard"/>
+        <field name="target">new</field>
+    </record>
+
 
     </data>
 
