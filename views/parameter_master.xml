@@ -24,6 +24,7 @@
                             <field name="client_max_value"/>
                             <field name="unit"/>
                             <field  name='nabl_select'/>
+                            <field  name='spreadsheet_template'/>
                         </group>
                     </group>
                     <!-- <notebook>

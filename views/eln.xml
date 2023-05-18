@@ -6,21 +6,34 @@
         <field name="model">lerm.eln</field>
         <field name="arch" type="xml">
             <form>
-                <group style="width:40%">
-                    <field name='srf_id'/>
-                    <field name='srf_date'/>
-                    <field name='discipline'/>
-                    <field name='material'/>
-                    <field name='casting_date'/>
-                </group>
-                <group style="width:40%">
-                    <field name='sample_id'/>
-                    <field name='kes_no'/>
-                    <field name='group'/>
-                    <field name='witness_name'/>
-                    <field name='attachment' filename='attachment_name'/>
-                    <field name='attachment_name' invisible='1'/>
-                </group>
+                <sheet>
+
+                    <group style="width:100%">                    
+                        <field name='eln_id'/>
+                        <field name='technician'/>
+                    </group>
+
+                    <group style="width:50%">                    
+                        <field name='srf_id'/>
+                        <field name='srf_date'/>
+                        <field name='discipline'/>
+                        <field name='material'/>
+                        <field name='casting_date'/>
+                    </group>
+                    <group style="width:50%">
+                        <field name='sample_id'/>
+                        <field name='kes_no'/>
+                        <field name='group'/>
+                        <field name='witness_name'/>
+                        <field name='attachment' filename='attachment_name'/>
+                        <field name='attachment_name' invisible='1'/>
+                    </group>
+                    <field name="parameters" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="parameter"/>
+                            </tree>
+                    </field>
+                </sheet>
             </form>
         </field>
         </record>
