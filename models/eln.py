@@ -2,7 +2,7 @@ from odoo import api, fields, models
 
 class ELN(models.Model):
     _name = 'lerm.eln'
-    _rec_no = 'eln_id'
+    _rec_name = 'eln_id'
     eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New')
     srf_id = fields.Many2one('lerm.civil.srf',string="SRF ID")
     technician = fields.Many2one('res.users',string="Technicians")
@@ -96,4 +96,14 @@ class ELNParameters(models.Model):
     _name = 'eln.parameters'
     eln_id = fields.Many2one('lerm.eln',string="ELN ID")
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+    test_method = fields.Many2one('lerm_civil.test_method',compute="compute_method",string="Test Method")
+    datasheet = fields.Many2one('documents.document',string="Datasheet")
+    result = fields.Float(string="Result")
+    button = fields.Float(string="Button")
+
+    @api.depends('parameter')
+    def compute_method(self):
+        for record in self:
+            record.test_method = record.parameter.test_method.id
+
     

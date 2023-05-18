@@ -17,5 +17,15 @@
     'views/eln.xml',
     'security/security.xml',
     'security/ir.model.access.csv'
-    ]
+    ],
+'assets': {
+    'web.assets_backend':[
+        '/lerm_civil/static/src/js/spreadsheet.js'
+    ],
+    'web.assets_qweb': [
+        '/lerm_civil/static/src/xml/spreadsheet.xml'
+
+    ],
+
+        }
 }
