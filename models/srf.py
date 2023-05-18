@@ -88,7 +88,7 @@ class SrfForm(models.Model):
         # formatted_numbers = "-".join([f"{int(num):05d}" for num in numbers])
 
         # Creating the modified string
-        modified_srf_id = f"SFR/{numbers[0][-5:]}-{numbers[1][-5:]}"
+        modified_srf_id = f"SRF/{numbers[0][-5:]}-{numbers[1][-5:]}"
         modified_kes_number = f"KES/{numbers[0][-5:]}-{numbers[1][-5:]}"
         self.write({'srf_id': modified_srf_id})
         self.write({'kes_number': modified_kes_number})
@@ -228,7 +228,7 @@ class LermSampleForm(models.Model):
     ], string='Status', default='1-pending')
 
     state = fields.Selection([
-        ('1-allotment_pending', 'Allotment Pending'),
+        ('1-allotment_pending', 'Assignment Pending'),
         ('2-alloted', 'Alloted'),
         ('3-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
