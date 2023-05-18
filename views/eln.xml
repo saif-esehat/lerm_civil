@@ -2,44 +2,87 @@
 <odoo>
     <data>
         <record id="lerm_eln_form" model="ir.ui.view">
+<<<<<<< HEAD
+            <field name="name">lerm.eln.form</field>
+            <field name="model">lerm.eln</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group style="width:100%">                    
+                            <field name='eln_id'/>
+                            <field name='technician'/>
+                        </group>
+                        <group style="width:50%">                    
+                            <field name='srf_id'/>
+                            <field name='srf_date'/>
+                            <field name='discipline'/>
+                            <field name='material'/>
+                            <field name='casting_date'/>
+                        </group>
+                        <group style="width:50%">
+                            <field name='sample_id'/>
+                            <field name='kes_no'/>
+                            <field name='group'/>
+                            <field name='witness_name'/>
+                            <field name='attachment' filename='attachment_name'/>
+                            <field name='attachment_name' invisible='1'/>
+                        </group>
+                        <field name="parameters" nolabel="1" >
+                                <tree>
+                                    <field name="parameter"/>
+                                    <field name='test_method'/>
+                                    <field name='result'/>                            
+                                </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+=======
         <field name="name">lerm.eln.form</field>
         <field name="model">lerm.eln</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
+>>>>>>> 9bcdd59c3811c2d278bc7ede2d2346ca47823622
 
-                    <group style="width:100%">                    
-                        <field name='eln_id'/>
-                        <field name='technician'/>
-                    </group>
 
-                    <group style="width:50%">                    
-                        <field name='srf_id'/>
-                        <field name='srf_date'/>
-                        <field name='discipline'/>
-                        <field name='material'/>
-                        <field name='casting_date'/>
-                    </group>
-                    <group style="width:50%">
-                        <field name='sample_id'/>
-                        <field name='kes_no'/>
-                        <field name='group'/>
-                        <field name='witness_name'/>
-                        <field name='attachment' filename='attachment_name'/>
-                        <field name='attachment_name' invisible='1'/>
-                    </group>
-                    <field name="parameters" nolabel="1" >
-                            <tree editable="bottom">
-                                <field name="parameter"/>
-                            </tree>
-                    </field>
-                </sheet>
-            </form>
-        </field>
+        <record id="lerm_eln_parameters_form" model="ir.ui.view">
+            <field name="name">eln.parameters.form</field>
+            <field name="model">eln.parameters</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group invisible="1" style="width:50%">                    
+                            <field name='eln_id'/>
+    
+                        </group>
+                        <group style="width:100%">                    
+                            <field name='parameter'/>
+                            <field name='test_method'/>
+                        </group>
+                        <group style="width:50%">                    
+                            <field name='result'/>
+                            <field name='datasheet'/>
+                        </group>
+                        <field name='button' widget="datasheet" />
+                    </sheet>
+                </form>
+            </field>
         </record>
 
 
         <record id="lerm_eln_tree" model="ir.ui.view">
+<<<<<<< HEAD
+            <field name="name">lerm.eln.tree</field>
+            <field name="model">lerm.eln</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name='srf_id'/>
+                    <field name='sample_id'/>
+                </tree>
+            </field>
+=======
         <field name="name">lerm.eln.tree</field>
         <field name="model">lerm.eln</field>
         <field name="arch" type="xml">
@@ -48,6 +91,10 @@
                 <field name='sample_id'/>
             </tree>
         </field>
+>>>>>>> 9bcdd59c3811c2d278bc7ede2d2346ca47823622
         </record>
+
+
+
     </data>
 </odoo>
