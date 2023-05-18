@@ -43,7 +43,8 @@ class SrfForm(models.Model):
     _inherit = ['mail.thread','mail.activity.mixin']
     _rec_name = 'srf_id'
 
-    srf_id = fields.Char(string="SRF ID")
+    srf_id = fields.Char(string="SRF ID" , readonly=True)
+    kes_number = fields.Char(string="KES No" , readonly=True)
     # job_no = fields.Char(string="Job NO.")
     srf_date = fields.Date(string="SRF Date")
     job_date = fields.Date(string="JOB Date")
@@ -66,7 +67,7 @@ class SrfForm(models.Model):
 
 
     def confirm_srf(self):
-        
+        srf_ids=[]
         for record in self.samples:
             # if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
             sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
@@ -74,7 +75,23 @@ class SrfForm(models.Model):
             # res = super(LermSampleForm, self).create(vals)
             #     return res
             record.write({'status':'2-confirmed','sample_no':sample_id,'kes_no':kes_no})
-        
+            srf_ids.append(sample_id)
+            if len(srf_ids) == 1:
+                srfidstring = srf_ids[0]
+            else:
+                srfidstring = str(srf_ids[0])+'/'+str(srf_ids[-1])
+            
+        # Extracting the numbers from the original string
+        numbers = srfidstring.split("/")
+
+        # # Formatting the numbers in the desired format
+        # formatted_numbers = "-".join([f"{int(num):05d}" for num in numbers])
+
+        # Creating the modified string
+        modified_srf_id = f"SFR/{numbers[0][-5:]}-{numbers[1][-5:]}"
+        modified_kes_number = f"KES/{numbers[0][-5:]}-{numbers[1][-5:]}"
+        self.write({'srf_id': modified_srf_id})
+        self.write({'kes_number': modified_kes_number})
         self.write({'state': '2-confirm'})
         # for record in self:
 
@@ -411,8 +428,13 @@ class CreateSampleWizard(models.TransientModel):
         sample_description =self.sample_condition
         parameters = self.parameters
 
-        if self.qty_id > 0:
+        srf_ids = []
+        #     for i in range(1, self.qty_id + 1):
+        #         srf_number = str(i).zfill(4)  # Pad the number with leading zeros
+        #         srf_id = f"SRF/{srf_number}-{str(self.qty_id).zfill(4)}"
+        #         srf_ids.append(srf_id)
 
+        if self.qty_id > 0:
             for i in range(self.qty_id):
                 self.env["lerm.srf.sample"].create({
                     'srf_id': self.env.context.get('active_id'),
@@ -430,7 +452,10 @@ class CreateSampleWizard(models.TransientModel):
                     'scope':scope,
                     'sample_description':sample_description,
                     'parameters':parameters
-                })        
+                })
+
+        
+
 
             print("Parameters "+ str(self.parameters))
 
