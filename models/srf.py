@@ -52,7 +52,7 @@ class SrfForm(models.Model):
     billing_customer = fields.Many2one('res.partner',string="Billing Customer")
     contact_person = fields.Many2one('res.partner',string="Contact Person")
     site_address = fields.Many2one('res.partner',string="Site Address")
-    name_work = fields.Char(string="Name of Work")
+    name_work = fields.Many2one('res.partner.project',string="Name of Work")
     client_refrence = fields.Char(string="Client Reference Letter")
     samples = fields.One2many('lerm.srf.sample' , 'srf_id' , string="Samples")
     contact_other_ids = fields.Many2many('res.partner',string="Other Ids",compute="compute_other_ids")
