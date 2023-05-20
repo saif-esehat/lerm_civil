@@ -26,7 +26,7 @@
     ],
     'web.report_assets_common': [
             '/lerm_civil/static/src/css/eln_report.scss',
-        ]
+        ],
     'web.assets_qweb': [
         '/lerm_civil/static/src/xml/spreadsheet.xml'
 

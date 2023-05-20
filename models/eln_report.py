@@ -14,10 +14,32 @@ class ElnReport(models.AbstractModel):
         tax_totals = json.loads(tax_totals_json)
         # Pass the tax_totals to the report context
         report_data = {'tax_totals': tax_totals}
-
+        data_mock = [
+            {
+                "columns" : [
+                    {"name": "Particulars"},
+                    {"name": "Results"}
+                ]
+            },
+            {
+            "rows": [
+                {
+                "row" : [
+                {"value": "i) Mean weight of the aggregate in the cylinder in gm, W"},
+                {"value": 21}
+                ]
+                },
+                {
+                "row" : [
+                {"value": "i) Mean weight of the aggregate in the cylinder in gm, W"},
+                {"value": 21}
+                ]
+                }
+        ]
+    }
+           
+]
+        print(data_mock[0]['columns'][0], 'data')
         return {
-              'doc_ids': docids,
-              'doc_model': 'account.move',
-              'data': docs1,
-              'report_data': report_data,
+            'data_mock': data_mock
         }
