@@ -96,4 +96,6 @@ class ELNParameters(models.Model):
     _name = 'eln.parameters'
     eln_id = fields.Many2one('lerm.eln',string="ELN ID")
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+
+
     

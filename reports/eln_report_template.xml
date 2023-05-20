@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="eln_report_template">
+		<t t-call="web.html_container">
+			<t t-call="web.basic_layout">
+				<div class="imageContainer" style="padding-bottom:8px">
+					<img t-attf-src="/lerm_civil_inv/static/src/img/letterHead.jpg" class="company_logo" alt="Image" />
+				</div>
+				<div>
+					<table>
+						<thead>
+            <t t-foreach="iteration" t-as="o">
+							<th>
+                <span t-field="o"/>
+							</th>
+            </t>
+						</thead>
+						<tbody>
+            <t t-foreach="iteration" t-as="p">
+							<tr>
+								<td>
+                  <span t-field="p"/>
+								</td>
+							</tr>
+            </t>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>
