@@ -30,7 +30,6 @@ class Spreadsheet extends AbstractFieldOwl {
             var datasheet = await this.getDatasheetData()
             var templateId = datasheet[0].spreadsheet_template[0]
             const data = await getDataFromTemplate(this.env.services.rpc, templateId)
-            // console.log(data)
             const name = this.props.record.data.eln_id.data.display_name + "-" + this.record.data.parameter.parameter_name
 
             const spreadsheetId = await this.env.services.rpc({
@@ -68,7 +67,6 @@ class Spreadsheet extends AbstractFieldOwl {
 
 
         } else {
-            // console.log(this.props.record.data.datasheet.data.id)
             // var datasheet = await this.getDatasheetData()
             // var templateId = datasheet[0].spreadsheet_template[0]
             // const data = await getDataFromTemplate(this.env.services.rpc, templateId)
@@ -101,7 +99,6 @@ class Spreadsheet extends AbstractFieldOwl {
             // //     args: [posted],
             // // })
             // // debugger
-            // console.log(xlsx)
 
         }
 
@@ -164,7 +161,14 @@ class SetResult extends AbstractFieldOwl {
         const filteredDataFromSheet = filteredSheet[0].rows.filter((result) => {
             return Object.keys(result.cells).length !== 0
         });
-        const columnsHeading = Object.values(filteredDataFromSheet[0].cells).map(entry => entry.evaluated.value);
+
+
+        let columnsHeading = Object.values(filteredDataFromSheet[0].cells).map(entry => entry.evaluated.value);
+
+        columnsHeading = columnsHeading.map(function(value) {
+            return { name: value };
+        });
+
 
 
         var rows = [];
@@ -194,13 +198,21 @@ class SetResult extends AbstractFieldOwl {
             // Append the row values to the rows array
             rows.push(rowValues);
         }
+
+        rows = rows.map(function(row) {
+            return {
+                "row": [
+                    {"value": row[0]},
+                    {"value": row[1]}
+                ]
+            };
+        });
         var formatedFinalData = [
             {'columns' : columnsHeading},
             {'rows' : rows}
         ]
-        console.log(formatedFinalData)
+
         formatedFinalData = JSON.stringify(formatedFinalData);
-        console.log(formatedFinalData)
 
     
         var eln_parameters_id = this.record.data.id
@@ -216,10 +228,6 @@ class SetResult extends AbstractFieldOwl {
 
 
     }
-
-
-
-
 }
 
 SetResult.template = "lerm_civil.set_result"
