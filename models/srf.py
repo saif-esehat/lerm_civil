@@ -427,6 +427,8 @@ class CreateSampleWizard(models.TransientModel):
         scope = self.scope
         sample_description =self.sample_condition
         parameters = self.parameters
+        discipline_id = self.discipline_id
+        casting = self.casting
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -451,7 +453,10 @@ class CreateSampleWizard(models.TransientModel):
                     'witness':witness,
                     'scope':scope,
                     'sample_description':sample_description,
-                    'parameters':parameters
+                    'parameters':parameters,
+                    'discipline_id':discipline_id.id,
+                    'casting':casting
+                
                 })
 
         
