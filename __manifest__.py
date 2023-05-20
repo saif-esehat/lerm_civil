@@ -20,22 +20,17 @@
     'security/security.xml',
     'security/ir.model.access.csv'
     ],
-<<<<<<< HEAD
-    'assets': {
-        'web.report_assets_common': [
-            '/lerm_civil/static/src/css/eln_report.scss',
-        ]
-    }
-=======
-'assets': {
+        'assets': {
     'web.assets_backend':[
         '/lerm_civil/static/src/js/spreadsheet.js'
     ],
+    'web.report_assets_common': [
+            '/lerm_civil/static/src/css/eln_report.scss',
+        ]
     'web.assets_qweb': [
         '/lerm_civil/static/src/xml/spreadsheet.xml'
 
     ],
 
         }
->>>>>>> 53da73a6d59001a1a00366aa9ce02c0d30470eae
 }
