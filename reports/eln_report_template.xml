@@ -4,25 +4,23 @@
 		<t t-call="web.html_container">
 			<t t-call="web.basic_layout">
 				<div class="imageContainer" style="padding-bottom:8px">
-					<img t-attf-src="/lerm_civil_inv/static/src/img/letterHead.jpg" class="company_logo" alt="Image" />
+					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" class="company_logo" alt="Image" />
 				</div>
-				<div>
+				<div class="container_eln">
 					<table>
 						<thead>
-            <t t-foreach="iteration" t-as="o">
-							<th>
-                <span t-field="o"/>
-							</th>
-            </t>
+							<tr>
+								<th t-foreach="data_mock[0]['columns']" t-as="column">
+    								<span t-esc="column['name']"/>
+								</th>
+							</tr>
 						</thead>
 						<tbody>
-            <t t-foreach="iteration" t-as="p">
-							<tr>
-								<td>
-                  <span t-field="p"/>
-								</td>
-							</tr>
-            </t>
+								<tr t-foreach="data_mock[1]['rows']" t-as="r">
+									<td t-foreach="r['row']" t-as="row">
+										<span t-esc="row['value']"/>
+									</td>
+								</tr>
 						</tbody>
 					</table>
 				</div>
