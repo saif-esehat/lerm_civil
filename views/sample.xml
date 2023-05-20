@@ -13,6 +13,7 @@
                             name="open_sample_allotment_wizard"
                             string="Allotment"
                             invisible="context.get('is_local',False)"
+                            attrs="{'invisible': [('state', 'not in', ('1-allotment_pending'))]}"
                             />       
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
                 </header>
@@ -46,7 +47,7 @@
                         <field name="qty_ids" invisible='1'/>
                     </group>
                      <group style="width:100%">
-                        <field name="sample_reject_reason"/>
+                        <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')]}"/>
                     </group>
                     <group style="width:50%">
                         <field name="witness"/>
@@ -73,6 +74,10 @@
                     </group>
                     
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
 
             </form>
         </field>
@@ -84,20 +89,76 @@
         <field name="name">lerm.srf.sample.kanban</field>
         <field name="model">lerm.srf.sample</field>
         <field name="arch" type="xml">
-            <kanban records_draggable="0"  default_group_by="state" class="o_res_partner_kanban">
+
+        <kanban records_draggable="0"  default_group_by="state" class="o_res_partner_kanban">
                 <field name='sample_no'/>
                  <templates>
                     <t t-name="kanban-box">
                     <div t-attf-class="oe_kanban_global_click">
-                    <div class="oe_kanban_details">
-                    <strong class="o_kanban_record_title">
-                    <field name="display_name"/>
-                    </strong>
-                    </div>
+                       <div class="oe_kanban_details">
+                                <!-- <div class="o_kanban_image">
+                                </div> -->
+                                <div id="car_view_kanban" class="o_kanban_record_top mb0">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title">
+                                            <span>
+                                                <field name="sample_no"/>
+                                            </span>
+                                        </strong>
+                                        <ul>
+                                            <li>
+                                                <b>KES NO :</b>
+                                                <field name="kes_no"/>
+                                            </li>
+
+                                        </ul>
+
+                                        <ul>
+                                            <li>
+                                                <b>Group :</b>
+                                                <field name="group_id"/>
+                                            </li>
+
+                                        </ul>
+                                        <ul>
+                                            <li>
+                                             <span style="color:Green;">
+                                                <field  name="technicians"/>
+
+                                            </span>
+                                            </li>
+                                        </ul>
+                                         <ul>
+                                            <li>
+                                             <span>
+                                                <field name="activity_ids" widget="kanban_activity"/>
+                                            </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                     </t>
-                    </templates>
+                </templates>
             </kanban>
+           
+        </field>
+
+    </record>
+
+    <record id="lerm_srf_sample_tree" model="ir.ui.view">
+        <field name="name">lerm.srf.sample.tree</field>
+        <field name="model">lerm.srf.sample</field>
+        <field name="arch" type="xml">
+            <tree>
+                      <field name="sample_received_date"/>
+                      <field name='kes_no'/>
+                      <field name="activity_ids" widget="list_activity" optional="show"/>
+                      <field name="sample_no"/>
+                      <field name="discipline_id"/>
+                      <field name="state" widget="badge"/>
+            </tree>
         </field>
 
     </record>

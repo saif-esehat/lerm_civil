@@ -63,7 +63,7 @@
     </record>
     
     <menuitem id="lerm_root"
-        name="LERM Civil"
+        name="LERM CIVIL"
         sequence="10" />
 
     <menuitem id="lerm_menu"

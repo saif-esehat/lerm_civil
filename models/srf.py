@@ -52,7 +52,7 @@ class SrfForm(models.Model):
     billing_customer = fields.Many2one('res.partner',string="Billing Customer")
     contact_person = fields.Many2one('res.partner',string="Contact Person")
     site_address = fields.Many2one('res.partner',string="Site Address")
-    name_work = fields.Char(string="Name of Work")
+    name_work = fields.Many2one('res.partner.project',string="Name of Work")
     client_refrence = fields.Char(string="Client Reference Letter")
     samples = fields.One2many('lerm.srf.sample' , 'srf_id' , string="Samples")
     contact_other_ids = fields.Many2many('res.partner',string="Other Ids",compute="compute_other_ids")
@@ -88,7 +88,7 @@ class SrfForm(models.Model):
         # formatted_numbers = "-".join([f"{int(num):05d}" for num in numbers])
 
         # Creating the modified string
-        modified_srf_id = f"SFR/{numbers[0][-5:]}-{numbers[1][-5:]}"
+        modified_srf_id = f"SRF/{numbers[0][-5:]}-{numbers[1][-5:]}"
         modified_kes_number = f"KES/{numbers[0][-5:]}-{numbers[1][-5:]}"
         self.write({'srf_id': modified_srf_id})
         self.write({'kes_number': modified_kes_number})
@@ -177,9 +177,12 @@ class SrfForm(models.Model):
 
 class LermSampleForm(models.Model):
     _name = "lerm.srf.sample"
+    _inherit = ['mail.thread','mail.activity.mixin']
+
     _description = "Sample"
     _rec_name = 'sample_no'
-    srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id" )
+    
+    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" )
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -196,6 +199,7 @@ class LermSampleForm(models.Model):
         ('satisfactory', 'Satisfactory'),
         ('non_satisfactory', 'Non-Satisfactory'),
     ], string='Sample Condition', default='satisfactory')
+    technicians = fields.Many2one("res.users",string="Technicians")
     location = fields.Char(string="Location")
     sample_reject_reason = fields.Char(string="Sample Reject Reason")
     witness = fields.Char(string="Witness")
@@ -228,7 +232,7 @@ class LermSampleForm(models.Model):
     ], string='Status', default='1-pending')
 
     state = fields.Selection([
-        ('1-allotment_pending', 'Allotment Pending'),
+        ('1-allotment_pending', 'Assignment Pending'),
         ('2-alloted', 'Alloted'),
         ('3-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
@@ -424,9 +428,12 @@ class CreateSampleWizard(models.TransientModel):
         sample_condition = self.sample_condition
         sample_reject_reason = self.sample_reject_reason
         witness = self.witness
+        discipline_id = self.discipline_id.id
         scope = self.scope
         sample_description =self.sample_condition
         parameters = self.parameters
+        discipline_id = self.discipline_id
+        casting = self.casting
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -440,6 +447,7 @@ class CreateSampleWizard(models.TransientModel):
                     'srf_id': self.env.context.get('active_id'),
                     'group_id':group_id,
                     'alias':alias,
+                    'discipline_id': discipline_id,
                     'material_id' : self.material_id.id,
                     'size_id':size_id,
                     'brand':brand,
@@ -451,7 +459,10 @@ class CreateSampleWizard(models.TransientModel):
                     'witness':witness,
                     'scope':scope,
                     'sample_description':sample_description,
-                    'parameters':parameters
+                    'parameters':parameters,
+                    'discipline_id':discipline_id.id,
+                    'casting':casting
+                
                 })
 
         
@@ -503,7 +514,7 @@ class CreateSampleWizard(models.TransientModel):
                 'technician': self.technicians.id
             })
 
-            sample.write({'state':'2-alloted'})
+            sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})
                 # print(parameter)
 
          
