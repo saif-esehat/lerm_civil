@@ -47,7 +47,7 @@
                         <field name="qty_ids" invisible='1'/>
                     </group>
                      <group style="width:100%">
-                        <field name="sample_reject_reason"/>
+                        <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')]}"/>
                     </group>
                     <group style="width:50%">
                         <field name="witness"/>

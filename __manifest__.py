@@ -4,7 +4,7 @@
  'website': "http://www.esehat.org", 
  'category': 'Uncategorized', 
  'version': '13.0.1', 
- 'depends':['base' , 'contacts','stock','product' , 'mail'],
+ 'depends':['base' , 'contacts','stock','product' , 'mail','lerm_civil_inv'],
  'data': [
     'data/sequence.xml',
     'views/lerm.xml',

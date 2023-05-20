@@ -52,7 +52,7 @@ class SrfForm(models.Model):
     billing_customer = fields.Many2one('res.partner',string="Billing Customer")
     contact_person = fields.Many2one('res.partner',string="Contact Person")
     site_address = fields.Many2one('res.partner',string="Site Address")
-    name_work = fields.Char(string="Name of Work")
+    name_work = fields.Many2one('res.partner.project',string="Name of Work")
     client_refrence = fields.Char(string="Client Reference Letter")
     samples = fields.One2many('lerm.srf.sample' , 'srf_id' , string="Samples")
     contact_other_ids = fields.Many2many('res.partner',string="Other Ids",compute="compute_other_ids")
@@ -88,7 +88,7 @@ class SrfForm(models.Model):
         # formatted_numbers = "-".join([f"{int(num):05d}" for num in numbers])
 
         # Creating the modified string
-        modified_srf_id = f"SFR/{numbers[0][-5:]}-{numbers[1][-5:]}"
+        modified_srf_id = f"SRF/{numbers[0][-5:]}-{numbers[1][-5:]}"
         modified_kes_number = f"KES/{numbers[0][-5:]}-{numbers[1][-5:]}"
         self.write({'srf_id': modified_srf_id})
         self.write({'kes_number': modified_kes_number})
@@ -232,7 +232,7 @@ class LermSampleForm(models.Model):
     ], string='Status', default='1-pending')
 
     state = fields.Selection([
-        ('1-allotment_pending', 'Allotment Pending'),
+        ('1-allotment_pending', 'Assignment Pending'),
         ('2-alloted', 'Alloted'),
         ('3-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
@@ -432,6 +432,8 @@ class CreateSampleWizard(models.TransientModel):
         scope = self.scope
         sample_description =self.sample_condition
         parameters = self.parameters
+        discipline_id = self.discipline_id
+        casting = self.casting
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -457,7 +459,10 @@ class CreateSampleWizard(models.TransientModel):
                     'witness':witness,
                     'scope':scope,
                     'sample_description':sample_description,
-                    'parameters':parameters
+                    'parameters':parameters,
+                    'discipline_id':discipline_id.id,
+                    'casting':casting
+                
                 })
 
         

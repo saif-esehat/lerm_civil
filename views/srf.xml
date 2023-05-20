@@ -58,6 +58,9 @@
                             <field name="sample_no"/>
                             <field name="material_id"/>
                             <field name="discipline_id"/>
+                            <field name="group_id"/>
+                            <field name='parameters' widget="many2many_tags"/>
+                            <field name='casting'/>
                             <!-- <field name="sample_quantity"/> -->
                             <field name="sample_received_date"/>
                         </tree>
@@ -114,12 +117,13 @@
                         <field name="qty_id" />
                         <field name="sample_received_date"/>
                         <field name="location"/>
+                        <field name="casting" />
                         <!-- <field name="group_ids" invisible='1'/>
                         <field name="size_ids" invisible='1'/>
                         <field name="qty_ids" invisible='1'/> -->
                     </group>
                     <group style="width:100%">
-                        <field name="sample_reject_reason"/>
+                        <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')]}"/>
                     </group>
                     <group style="width:50%">
                         <field name="witness"/>
@@ -132,7 +136,7 @@
                     </group>
                     <group style="width:50%">
                         <field name="customer_id" invisible='1'/>
-                        <field name="casting" invisible='1'/>
+                        
                     </group>
                     <group style="width:50%">
                         <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
