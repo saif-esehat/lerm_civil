@@ -1,4 +1,6 @@
 from odoo import api, fields, models
+import base64
+import json
 
 class ELN(models.Model):
     _name = 'lerm.eln'
@@ -17,7 +19,11 @@ class ELN(models.Model):
     attachment = fields.Binary(string="Attachment")
     attachment_name = fields.Char(string="Attachment Name")
     parameters = fields.One2many('eln.parameters','eln_id',string="Parameters")
+    # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
 
+
+
+        
 
     @api.model
     def create(self,vals):
@@ -100,7 +106,21 @@ class ELNParameters(models.Model):
     datasheet = fields.Many2one('documents.document',string="Datasheet")
     result = fields.Float(string="Result")
     button = fields.Float(string="Button")
+    result_json = fields.Text(string="Result JSON")
+    set_result_button = fields.Float(string="Button")
 
+
+    def set_result(self):
+        binary_data = base64.b64decode(self.datasheet.datas)
+        json_data = json.loads(binary_data.decode('utf-8'))
+        print(json_data)
+        # sheet_name = self.parameter.sheets
+        # cell = self.parameter.cell
+        # filtered_sheet = next((sheet for sheet in json_data["sheets"] if sheet["name"] == sheet_name), None)
+        # if filtered_sheet:
+        #     print(filtered_sheet)
+
+        
     @api.depends('parameter')
     def compute_method(self):
         for record in self:

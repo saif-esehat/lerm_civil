@@ -177,9 +177,12 @@ class SrfForm(models.Model):
 
 class LermSampleForm(models.Model):
     _name = "lerm.srf.sample"
+    _inherit = ['mail.thread','mail.activity.mixin']
+
     _description = "Sample"
     _rec_name = 'sample_no'
-    srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id" )
+    
+    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" )
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -196,6 +199,7 @@ class LermSampleForm(models.Model):
         ('satisfactory', 'Satisfactory'),
         ('non_satisfactory', 'Non-Satisfactory'),
     ], string='Sample Condition', default='satisfactory')
+    technicians = fields.Many2one("res.users",string="Technicians")
     location = fields.Char(string="Location")
     sample_reject_reason = fields.Char(string="Sample Reject Reason")
     witness = fields.Char(string="Witness")
@@ -424,6 +428,7 @@ class CreateSampleWizard(models.TransientModel):
         sample_condition = self.sample_condition
         sample_reject_reason = self.sample_reject_reason
         witness = self.witness
+        discipline_id = self.discipline_id.id
         scope = self.scope
         sample_description =self.sample_condition
         parameters = self.parameters
@@ -440,6 +445,7 @@ class CreateSampleWizard(models.TransientModel):
                     'srf_id': self.env.context.get('active_id'),
                     'group_id':group_id,
                     'alias':alias,
+                    'discipline_id': discipline_id,
                     'material_id' : self.material_id.id,
                     'size_id':size_id,
                     'brand':brand,
@@ -503,7 +509,7 @@ class CreateSampleWizard(models.TransientModel):
                 'technician': self.technicians.id
             })
 
-            sample.write({'state':'2-alloted'})
+            sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})
                 # print(parameter)
 
          
