@@ -7,39 +7,50 @@ class ElnReport(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        docs1 = self.env['account.move'].sudo().browse(docids)
-        tax_totals_json = docs1.tax_totals_json
+
+        eln = self.env['lerm.eln'].sudo().browse(docids)
+        
+        for parameter in eln.parameters:
+            print(parameter.result_json)
+            data = parameter.result_json
+
+
+        print(data)
+
+        data_json = json.loads(data)
+        # docs1 = self.env['account.move'].sudo().browse(docids)
+        # tax_totals_json = docs1.tax_totals_json
 
         # Parse the tax_totals_json string into a Python object
-        tax_totals = json.loads(tax_totals_json)
+        # tax_totals = json.loads(tax_totals_json)
         # Pass the tax_totals to the report context
-        report_data = {'tax_totals': tax_totals}
-        data_mock = [
-            {
-                "columns" : [
-                    {"name": "Particulars"},
-                    {"name": "Results"}
-                ]
-            },
-            {
-            "rows": [
-                {
-                "row" : [
-                {"value": "i) Mean weight of the aggregate in the cylinder in gm, W"},
-                {"value": 21}
-                ]
-                },
-                {
-                "row" : [
-                {"value": "i) Mean weight of the aggregate in the cylinder in gm, W"},
-                {"value": 21}
-                ]
-                }
-        ]
-    }
+        # report_data = {'tax_totals': tax_totals}
+#         data_mock = [
+#             {
+#                 "columns" : [
+#                     {"name": "Particulars"},
+#                     {"name": "Results"}
+#                 ]
+#             },
+#             {
+#             "rows": [
+#                 {
+#                 "row" : [
+#                 {"value": "i) Mean weight of the aggregate in the cylinder in gm, W"},
+#                 {"value": 21}
+#                 ]
+#                 },
+#                 {
+#                 "row" : [
+#                 {"value": "i) M of the aggregate in the cylinder in gm, W"},
+#                 {"value": 81}
+#                 ]
+#                 }
+#         ]
+#     }
            
-]
-        print(data_mock[0]['columns'][0], 'data')
+# ]
+
         return {
-            'data_mock': data_mock
+            'data_mock': data_json
         }

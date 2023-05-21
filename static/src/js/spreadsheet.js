@@ -108,7 +108,7 @@ class Spreadsheet extends AbstractFieldOwl {
 
     async getDatasheetData() {
         // console.log(this.record.data)
-
+        // debugger
         var datasheet_id = this.record.data.parameter.data.id
         var datasheet_data = await rpc.query({
             model: 'lerm.parameter.master',
@@ -136,26 +136,50 @@ class SetResult extends AbstractFieldOwl {
             args: [[datasheet_id], ["datas"]]
         })
         var data = base64ToJson(datasheet_data[0].datas)
+        // const model = await new Model(data, {
+        //     mode: "normal",
+        //     evalContext: {
+        //         env: {
+        //             delayedRPC: rpc,
+        //             services: { rpc },
+        //         },
+        //     },
+        // });
+
         const model = await new Model(data, {
-            mode: "normal",
-            evalContext: {
-                env: {
-                    delayedRPC: rpc,
-                    services: { rpc },
-                },
-            },
+            mode: "normal"
         });
 
+        var sheets = model.getters.getSheets()
+        for (let index = 0; index < sheets.length; index++) {
+            await model.dispatch("EVALUATE_CELLS", { sheetId: sheets[index].id})
+        }
+
+        // await model.dispatch("EVALUATE_CELLS", { sheetId: "UPV DATA SHEET" })
+        // await model.dispatch("EVALUATE_CELLS", { sheetId: "Sheet1" })
         await model.waitForIdle();
-        await model.dispatch("EVALUATE_CELLS", { sheetId: "Sheet1" })
         await model.waitForIdle();
+        await model.waitForIdle();
+        await model.waitForIdle();
+        await model.waitForIdle();
+        await model.waitForIdle();
+        await model.waitForIdle();
+        await model.waitForIdle();
+        await model.waitForIdle();
+        await model.waitForIdle();
+        await model.waitForIdle();
+        await model.waitForIdle();
+
+
         const sheet = model.getters.getSheets();
+        debugger
+        console.log(sheet , 'shhett')
         const filteredSheet = sheet.filter((result) => {
-            return result.name == 'Sheet1';
+            return result.name == 'Report';
         });
         console.log(filteredSheet , 'sheet')
-        const id = filteredSheet[0].rows[12].cells[1].evaluated.value;
-        console.log(id , 'evalutaed value')
+        // const id = filteredSheet[0].rows[12].cells[1].evaluated.value;
+        // console.log(id , 'evalutaed value')
 
 
         const filteredDataFromSheet = filteredSheet[0].rows.filter((result) => {
@@ -211,9 +235,9 @@ class SetResult extends AbstractFieldOwl {
             {'columns' : columnsHeading},
             {'rows' : rows}
         ]
-
+        debugger
+        console.log(formatedFinalData)
         formatedFinalData = JSON.stringify(formatedFinalData);
-
     
         var eln_parameters_id = this.record.data.id
         await this.env.services.rpc({
@@ -222,7 +246,7 @@ class SetResult extends AbstractFieldOwl {
             args: [[eln_parameters_id], { "result_json": formatedFinalData }]
         });
 
-        $( ".set_result_class" ).val(String(id))
+        $( ".set_result_class" ).val(String(10))
         $( ".set_result_class" ).trigger("change")
 
 
