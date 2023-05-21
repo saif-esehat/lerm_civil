@@ -235,7 +235,7 @@ class SetResult extends AbstractFieldOwl {
             {'columns' : columnsHeading},
             {'rows' : rows}
         ]
-        debugger
+        // debugger
         console.log(formatedFinalData)
         formatedFinalData = JSON.stringify(formatedFinalData);
     
