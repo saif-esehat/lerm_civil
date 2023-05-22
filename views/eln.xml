@@ -25,12 +25,16 @@
                             <field name='witness_name'/>
                             <field name='attachment' filename='attachment_name'/>
                             <field name='attachment_name' invisible='1'/>
+                            <button name="open_result_wizard" string="Update Result" type="object" class="btn-primary"/>
+
                         </group>
                         <field name="parameters" nolabel="1" >
-                                <tree>
+                                <tree  >
                                     <field name="parameter"/>
                                     <field name='test_method'/>
-                                    <field name='result'/>                            
+                                    <field name='result'/>
+                                    <field name='specification'/>
+                                    <!-- <field name='button' widget="datasheet"/>                          -->
                                 </tree>
                         </field>
                     </sheet>
@@ -84,6 +88,42 @@
                 </tree>
             </field>
         </record>
+
+
+        <record id="eln_result_update_wizard" model="ir.ui.view">
+        <field name="name">eln.update.result.wizard</field>
+        <field name="model">eln.update.result.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group style="width:100%">
+                        <!-- <field name='results'/> -->
+                        <field name="results" widget="one2many_list" >
+                                <tree editable="bottom" >
+                                    <field name="parameter"/>
+                                    <!-- <field name='test_method'/> -->
+                                    <field name='result' />   
+                        </tree>
+                        </field>
+                    </group>
+         
+                </sheet>
+                 <footer>
+                        <button name="update_result" string="Update Result" type="object" class="btn-primary"/>
+                        <!-- <button name="close_sample_wizard" string="Close" type="object"/> -->
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="eln_result_update_wizard_action" model="ir.actions.act_window">
+        <field name="name">Update Result</field>
+        <field name="res_model">eln.update.result.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="lerm_civil.eln_result_update_wizard"/>
+        <field name="target">new</field>
+    </record>
 
 
 

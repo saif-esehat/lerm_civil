@@ -23,6 +23,30 @@ class ELN(models.Model):
 
 
 
+    def open_result_wizard(self):
+        action = self.env.ref('lerm_civil.eln_result_update_wizard')
+
+        parameters = []
+        for parameter in self.parameters:
+            parameters.append((0,0,{'parameter':parameter.id}))
+        
+
+
+        return {
+            'name': "Result Update",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'eln.update.result.wizard',
+            'view_id': action.id,
+            'target': 'new',
+            'context': {
+                'default_results':parameters
+            }
+            }
+
+
+
         
 
     @api.model
@@ -100,13 +124,16 @@ class ELN(models.Model):
 
 class ELNParameters(models.Model):
     _name = 'eln.parameters'
+    _rec_name = 'parameter'
     eln_id = fields.Many2one('lerm.eln',string="ELN ID")
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+    specification = fields.Text(string="Specification")
     test_method = fields.Many2one('lerm_civil.test_method',compute="compute_method",string="Test Method")
     datasheet = fields.Many2one('documents.document',string="Datasheet")
     result = fields.Float(string="Result")
     button = fields.Float(string="Button")
     result_json = fields.Text(string="Result JSON")
+
     set_result_button = fields.Float(string="Button")
 
 
@@ -127,3 +154,23 @@ class ELNParameters(models.Model):
             record.test_method = record.parameter.test_method.id
 
     
+
+class UpdateResult(models.TransientModel):
+    _name = 'eln.update.result.wizard'
+
+    results = fields.One2many('eln.result.child','wizard_id',string="Parameters")
+
+
+
+    def update_result(self):
+        print("working")
+
+
+
+class UpdateResultChild(models.TransientModel):
+    _name ="eln.result.child"
+    wizard_id = fields.Many2one('eln.update.result.wizard')
+    parameter = fields.Many2one('eln.parameters',string="Parameter")
+    result = fields.Float(string="Result")
+
+

@@ -88,8 +88,8 @@ class SrfForm(models.Model):
         # formatted_numbers = "-".join([f"{int(num):05d}" for num in numbers])
 
         # Creating the modified string
-        modified_srf_id = f"SRF/{numbers[0][-5:]}-{numbers[1][-5:]}"
-        modified_kes_number = f"KES/{numbers[0][-5:]}-{numbers[1][-5:]}"
+        modified_srf_id = f"SRF/DUS"
+        modified_kes_number = f"KES/DUS"
         self.write({'srf_id': modified_srf_id})
         self.write({'kes_number': modified_kes_number})
         self.write({'state': '2-confirm'})
