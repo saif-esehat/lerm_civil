@@ -9,7 +9,7 @@ class ElnReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
 
         eln = self.env['lerm.eln'].sudo().browse(docids)
-        import wdb ; wdb.set_trace()        
+              
         for parameter in eln.parameters:
             print(parameter.result_json)
             data = parameter.result_json
