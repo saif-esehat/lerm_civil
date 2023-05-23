@@ -9,15 +9,13 @@ class ElnReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
 
         eln = self.env['lerm.eln'].sudo().browse(docids)
-        
+        import wdb ; wdb.set_trace()        
         for parameter in eln.parameters:
             print(parameter.result_json)
             data = parameter.result_json
 
 
-        print(data)
 
-        data_json = json.loads(data)
         # docs1 = self.env['account.move'].sudo().browse(docids)
         # tax_totals_json = docs1.tax_totals_json
 
