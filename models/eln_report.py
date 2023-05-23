@@ -10,11 +10,11 @@ class ElnReport(models.AbstractModel):
 
         eln = self.env['lerm.eln'].sudo().browse(docids)
               
-        for parameter in eln.parameters:
-            print(parameter.result_json)
-            data = parameter.result_json
+        # for parameter in eln.parameters:
+        #     print(parameter.result_json)
+        #     data = parameter.result_json
 
-
+        print(eln,"ELN DATA")
 
         # docs1 = self.env['account.move'].sudo().browse(docids)
         # tax_totals_json = docs1.tax_totals_json
@@ -50,5 +50,5 @@ class ElnReport(models.AbstractModel):
 # ]
 
         return {
-            'data_mock': data_json
+            'eln': eln
         }
