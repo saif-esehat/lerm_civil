@@ -4,3 +4,4 @@ from . import parameter_master
 from . import datasheet_master
 from . import eln
 from . import eln_report
+from . import sample

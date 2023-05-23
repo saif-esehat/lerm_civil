@@ -27,6 +27,19 @@
                     <field   readonly="1" name="state" widget="statusbar"/>
             </header>
                 <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="sample_count_button"
+                                type="object" class="oe_stat_button" icon="fa-align-justify">
+                            <field name="sample_count" string="Samples" widget="statinfo"/>
+                            </button>
+                            <button name="eln_count_button"
+                                type="object" class="oe_stat_button" icon="fa-align-justify">
+                            <field string="ELN" name="eln_count" widget="statinfo"/>
+                            </button>
+                        </div>
+
+                            
+
                     <group style="width:50%">
                         <field name="srf_id"/>
                         <field name="kes_number"/>
@@ -102,24 +115,24 @@
                     <group style="width:50%">
                         <!-- <field name="sample_id"/> -->
                         <field name="discipline_id"/>
-                        <field name="material_id" />
+                        <field name="material_id" domain="[('id', 'in', material_ids)]"/>
                         <field name="brand"/>
                         <field name="grade_id"/>
                         <field name="received_by_id"/>
                         <field name="sample_condition"/>
-                        <!-- <field name="material_ids" invisible='1'/>
-                        <field name="grade_ids" invisible='1'/> -->
+                        <field name="material_ids" invisible='1'/>
+                        <!--<field name="grade_ids" invisible='1'/> -->
                     </group>
                     <group style="width:50%">
-                        <field name="group_id"/>
+                        <field name="group_id" domain="[('id', 'in', group_ids)]"/>
                         <field name="alias"/>
                         <field name="size_id" />
                         <field name="qty_id" />
                         <field name="sample_received_date"/>
                         <field name="location"/>
                         <field name="casting" />
-                        <!-- <field name="group_ids" invisible='1'/>
-                        <field name="size_ids" invisible='1'/>
+                        <field name="group_ids" invisible='1'/>
+                        <!-- <field name="size_ids" invisible='1'/>
                         <field name="qty_ids" invisible='1'/> -->
                     </group>
                     <group style="width:100%">
