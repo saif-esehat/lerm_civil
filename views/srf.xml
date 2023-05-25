@@ -63,12 +63,17 @@
                         <!-- <field name='name_of_work'/> -->
                         <field name="contact_contact_ids" invisible='1'/>
                     </group>
-                    <group style="width:100%">
-                        <button name="open_sample_add_wizard" string="Add Sample" type="object" class="btn-primary"/>
+                    <group>
+                    <group style="width:15%">
+                        <button name="open_sample_add_wizard" string="Repeat Sample" type="object" class="btn-primary"/>
+                    </group>
+                    <group style="width:15%">
+                        <button name="open_new_sample_add_wizard" string="New Sample" type="object" class="btn-primary"/>
+                    </group>
                     </group>
                     <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="samples" context = "{'default_customer_id' : customer,'is_local': True}">
                         <tree>
-                            <field name="sample_no"/>
+                            <field name='kes_no'/>
                             <field name="material_id"/>
                             <field name="discipline_id"/>
                             <field name="group_id"/>
@@ -76,6 +81,19 @@
                             <field name='casting'/>
                             <!-- <field name="sample_quantity"/> -->
                             <field name="sample_received_date"/>
+                            <field name="sample_description"/>                           
+                        </tree>
+                    </field>
+                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" context = "{'default_customer_id' : customer,'is_local': True}">
+                        <tree>
+                            <field name='kes_range'/>
+                            <field name="material_id"/>
+                            <field name="discipline_id"/>
+                            <field name="group_id"/>
+                            <field name='parameters' widget="many2many_tags"/>
+                            <field name='casting'/>
+                            <field name="sample_received_date"/>
+                            <field name="sample_description"/>                           
                         </tree>
                     </field>
                 </sheet>
@@ -118,6 +136,7 @@
                         <field name="material_id" domain="[('id', 'in', material_ids)]"/>
                         <field name="brand"/>
                         <field name="grade_id"/>
+                        <field name="client_sample_id"/>
                         <field name="received_by_id"/>
                         <field name="sample_condition"/>
                         <field name="material_ids" invisible='1'/>
@@ -127,7 +146,7 @@
                         <field name="group_id" domain="[('id', 'in', group_ids)]"/>
                         <field name="alias"/>
                         <field name="size_id" />
-                        <field name="qty_id" />
+                        <field name="sample_qty" />
                         <field name="sample_received_date"/>
                         <field name="location"/>
                         <field name="casting" />
@@ -148,7 +167,7 @@
                         <field name="sample_description"/>
                     </group>
                     <group style="width:50%">
-                        <field name="customer_id" invisible='1'/>
+                        <field name="customer_id" invisible='1' />
                         
                     </group>
                     <group style="width:50%">
@@ -166,7 +185,7 @@
                     </group>
                 </sheet>
                 <footer>
-                        <button name="add_sample" string="Create Sample" type="object" class="btn-primary"/>
+                        <button name="add_sample" string="Add Sample" type="object" class="btn-primary"/>
                         <button name="close_sample_wizard" string="Close" type="object"/>
                 </footer>
             </form>

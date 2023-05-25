@@ -66,6 +66,8 @@ class SrfForm(models.Model):
     ], string='State', default='1-draft')
     sample_count = fields.Integer(string="Sample Count", compute='compute_sample_count')
     eln_count = fields.Integer(string="ELN Count", compute='compute_eln_count')
+    sample_range_table = fields.One2many('sample.range.line','srf_id',string="Sample Range")
+    
 
     def sample_count_button(self):
         return {
@@ -153,6 +155,7 @@ class SrfForm(models.Model):
         action = self.env.ref('lerm_civil.srf_sample_wizard_form')
         if len(samples) > 0:
             print(samples[0].material_id.id , 'error')
+            discipline_id = samples[0].discipline_id.id
             material_id = samples[0].material_id.id
             group_id = samples[0].group_id.id
             alias = samples[0].alias
@@ -176,6 +179,7 @@ class SrfForm(models.Model):
             'view_id': action.id,
             'target': 'new',
             'context': {
+            'default_discipline_id' : discipline_id,
             'default_material_id' : material_id,
             'default_alias':alias,
             'default_brand':brand,
@@ -204,7 +208,19 @@ class SrfForm(models.Model):
             }
 
 
-    
+    def open_new_sample_add_wizard(self):
+        samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])
+
+        action = self.env.ref('lerm_civil.srf_sample_wizard_form')
+        return {
+            'name': "Add Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'create.srf.sample.wizard',
+            'view_id': action.id,
+            'target': 'new'
+            }
 
 
 
@@ -222,8 +238,8 @@ class CreateSampleWizard(models.TransientModel):
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
     # qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
-    qty_id = fields.Integer(string="Sample Quantity")
-    # sample_qty_id = fields.Integer(string="Sample Quantity")
+    # qty_id = fields.Integer(string="Sample Quantity")
+    sample_qty = fields.Integer(string="Sample Quantity")
     received_by_id = fields.Many2one('res.partner',string="Received By")
     sample_received_date = fields.Date(string="Sample Received Date")
     sample_condition = fields.Selection([
@@ -240,6 +256,7 @@ class CreateSampleWizard(models.TransientModel):
     sample_description = fields.Text(string="Sample Description")
     group_ids = fields.Many2many('lerm_civil.group',string="Group Ids")
     material_ids = fields.Many2many('product.template',string="Material Ids")
+    client_sample_id = fields.Char(string="Client Sample Id")
     # size_ids = fields.Many2many('lerm.size.line',string="Size Ids")
     # grade_ids = fields.Many2many('lerm.grade.line',string="Grade Ids")
     # qty_ids = fields.Many2many('lerm.qty.line',string="Qty Ids")
@@ -252,7 +269,6 @@ class CreateSampleWizard(models.TransientModel):
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(string="Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
-
 
     @api.onchange('material_id')
     def compute_parameters(self):
@@ -309,6 +325,7 @@ class CreateSampleWizard(models.TransientModel):
         parameters = self.parameters
         discipline_id = self.discipline_id
         casting = self.casting
+        sample_qty = self.sample_qty
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -316,8 +333,30 @@ class CreateSampleWizard(models.TransientModel):
         #         srf_id = f"SRF/{srf_number}-{str(self.qty_id).zfill(4)}"
         #         srf_ids.append(srf_id)
 
-        if self.qty_id > 0:
-            for i in range(self.qty_id):
+        if self.sample_qty > 0:
+
+            sample_range = self.env['sample.range.line'].create({
+                'srf_id': self.env.context.get('active_id'),
+                'group_id':group_id,
+                'alias':alias,
+                'discipline_id': discipline_id,
+                'material_id' : self.material_id.id,
+                'size_id':size_id,
+                'brand':brand,
+                'grade_id':grade_id,
+                'sample_received_date':sample_received_date,
+                'location':location,
+                'sample_condition':sample_condition,
+                'sample_reject_reason':sample_reject_reason,
+                'witness':witness,
+                'scope':scope,
+                'sample_description':sample_description,
+                'parameters':parameters,
+                'discipline_id':discipline_id.id,
+                'casting':casting,
+                'sample_qty':sample_qty
+            })
+            for i in range(self.sample_qty):
                 self.env["lerm.srf.sample"].create({
                     'srf_id': self.env.context.get('active_id'),
                     'group_id':group_id,
@@ -336,9 +375,11 @@ class CreateSampleWizard(models.TransientModel):
                     'sample_description':sample_description,
                     'parameters':parameters,
                     'discipline_id':discipline_id.id,
-                    'casting':casting
-                
+                    'casting':casting,
+                    'sample_range_id':sample_range.id
                 })
+
+            
 
         
 

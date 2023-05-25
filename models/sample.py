@@ -9,6 +9,7 @@ class LermSampleForm(models.Model):
     _rec_name = 'sample_no'
     
     srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" )
+    sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -17,8 +18,8 @@ class LermSampleForm(models.Model):
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
-    qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
-    sample_quantity = fields.Integer(string="Sample Quantity")
+    # qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
+    sample_qty = fields.Integer(string="Sample Quantity")
     received_by_id = fields.Many2one('res.partner',string="Received By")
     sample_received_date = fields.Date(string="Sample Received Date")
     sample_condition = fields.Selection([
@@ -51,6 +52,7 @@ class LermSampleForm(models.Model):
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
     kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New')
     casting_date = fields.Date(string="Casting Date")
+    client_sample_id = fields.Char(string='Client Sample ID')
     
     status = fields.Selection([
         ('1-pending', 'Pending'),
@@ -94,13 +96,13 @@ class LermSampleForm(models.Model):
             }
     
 
-    # @api.model
-    # def create(self, vals):
-    #     if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
-    #         vals['sample_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
-    #         vals['kes_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
-    #         res = super(LermSampleForm, self).create(vals)
-    #         return res
+    @api.model
+    def create(self, vals):
+        if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
+            vals['sample_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
+            vals['kes_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+            res = super(LermSampleForm, self).create(vals)
+            return res
 
 
     # @api.depends('material_id')
