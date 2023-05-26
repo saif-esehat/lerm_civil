@@ -14,9 +14,12 @@
     'views/parameter_master.xml',
     'views/datasheet_master.xml',
     'views/sample.xml',
+    'views/sample_range.xml',
     'views/eln.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
+    'reports/srf_report_action.xml',
+    'reports/srf_report_template.xml',
     'security/security.xml',
     'security/ir.model.access.csv'
     ],

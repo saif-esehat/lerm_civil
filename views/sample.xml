@@ -29,6 +29,7 @@
                         <field name="brand"/>
                         <field name='casting_date'/>
                         <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
+                        <field name="client_sample_id"/>
                         <field name="received_by_id"/>
                         <field name="sample_condition"/>
                         <field name="material_ids" invisible='1'/>
@@ -151,13 +152,44 @@
         <field name="name">lerm.srf.sample.tree</field>
         <field name="model">lerm.srf.sample</field>
         <field name="arch" type="xml">
+
+
             <tree>
+<<<<<<< HEAD
                       <field name="sample_received_date"/>
                       <field name='kes_no'/>
+                      <field name="srf_id"/>
                       <field name="activity_ids" widget="list_activity" optional="show"/>
                       <field name="sample_no"/>
                       <field name="discipline_id"/>
+                      <field name="group_id"/>
+                      <field name="material_id"/>
+                      <field name="alias"/>
+                      <field name="brand"/>
+                      <field name="size_id"/>
+                      <field name="casting_date"/>
+                      <field name="grade_id"/>
+                      <field name="client_sample_id"/>
+                      <field name="received_by_id"/>
+                      <field name="sample_condition"/>
+                      <field name="sample_reject_reason"/>
+                      <field name="witness"/>
+                      <field name="scope"/>
+                      <field name="sample_description"/>
                       <field name="state" widget="badge"/>
+
+=======
+                <header>
+                    <button type="object" class="oe_highlight" name="open_sample_allotment_wizard" string="Bulk Allotment" />
+                </header>
+
+                <field name="sample_received_date"/>
+                <field name='kes_no'/>
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+                <field name="sample_no"/>
+                <field name="discipline_id"/>
+                <field name="state" widget="badge"/>
+>>>>>>> 1c55f10 (ELN Updated)
             </tree>
         </field>
 

@@ -8,6 +8,8 @@ class ElnReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data=None):
 
+
+        # import wdb; wdb.set_trace()
         eln = self.env['lerm.eln'].sudo().browse(docids)
 
         print(eln,"ELN DATA")
