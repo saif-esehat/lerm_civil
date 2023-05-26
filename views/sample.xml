@@ -152,7 +152,10 @@
         <field name="name">lerm.srf.sample.tree</field>
         <field name="model">lerm.srf.sample</field>
         <field name="arch" type="xml">
+
+
             <tree>
+<<<<<<< HEAD
                       <field name="sample_received_date"/>
                       <field name='kes_no'/>
                       <field name="srf_id"/>
@@ -175,6 +178,18 @@
                       <field name="sample_description"/>
                       <field name="state" widget="badge"/>
 
+=======
+                <header>
+                    <button type="object" class="oe_highlight" name="open_sample_allotment_wizard" string="Bulk Allotment" />
+                </header>
+
+                <field name="sample_received_date"/>
+                <field name='kes_no'/>
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+                <field name="sample_no"/>
+                <field name="discipline_id"/>
+                <field name="state" widget="badge"/>
+>>>>>>> 1c55f10 (ELN Updated)
             </tree>
         </field>
 

@@ -408,30 +408,37 @@ class CreateSampleWizard(models.TransientModel):
                 ids.append(user_id.id)
             print("IDS " + str(ids))
             return {'domain': {'technicians': [('id', 'in', ids)]}}
+        
 
+        # @api.one
         def allot_sample(self):
-            parameters = []
+            # import wdb;wdb.set_trace()
 
-            active_id = self.env.context.get('active_id')
-            sample = self.env['lerm.srf.sample'].search([('id','=',active_id)])  
-            for parameter in sample.parameters:
-                parameters.append((0,0,{'parameter':parameter.id}))
+            active_ids = self.env.context.get('active_ids')
+            for id in active_ids:
+                parameters = []
 
-            self.env['lerm.eln'].create({
-                'srf_id': sample.srf_id.id,
-                'srf_date':sample.srf_id.srf_date,
-                'kes_no':sample.kes_no,
-                'discipline':sample.discipline_id.id,
-                'group': sample.group_id.id,
-                'material': sample.material_id.id,
-                'witness_name': sample.witness,
-                'sample_id':sample.id,
-                'parameters':parameters,
-                'technician': self.technicians.id
-            })
+                sample = self.env['lerm.srf.sample'].search([('id','=',id)])
+                if sample.state == '1-allotment_pending':
+                    for parameter in sample.parameters:
+                        parameters.append((0,0,{'parameter':parameter.id ,'spreadsheet_template':parameter.spreadsheet_template.id}))
 
-            sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})
-                # print(parameter)
+                    self.env['lerm.eln'].create({
+                        'srf_id': sample.srf_id.id,
+                        'srf_date':sample.srf_id.srf_date,
+                        'kes_no':sample.kes_no,
+                        'discipline':sample.discipline_id.id,
+                        'group': sample.group_id.id,
+                        'material': sample.material_id.id,
+                        'witness_name': sample.witness,
+                        'sample_id':sample.id,
+                        'parameters':parameters,
+                        'technician': self.technicians.id
+                    })
+
+                    sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})
+                else:
+                    pass
 
          
             return {'type': 'ir.actions.act_window_close'}

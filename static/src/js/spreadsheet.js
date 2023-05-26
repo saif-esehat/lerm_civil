@@ -254,14 +254,135 @@ class SetResult extends AbstractFieldOwl {
     }
 }
 
-SetResult.template = "lerm_civil.set_result"
+class FetchDatasheet extends AbstractFieldOwl{
+
+    async FetchDataSheets(){
+
+        
+        
+        var existedds = await rpc.query({
+            model: 'eln.spreadsheets',
+            method: 'search_read',
+            args: [[["eln_id", "=", this.record.data.id]],['id']],
+        })
 
 
-Spreadsheet.template = 'lerm_civil.fill_datasheet';
+        if (existedds.length > 0) {
+
+            var idstodelete = []
+            for (let index = 0; index < existedds.length; index++) {
+                const elementid = existedds[index].id;
+                idstodelete.push(elementid)
+
+                
+            }
+            await rpc.query({
+                model: 'eln.spreadsheets',
+                method: 'unlink',
+                args: [idstodelete],
+            })
+            
+        }
+
+        // console.log(this.props.record.data)
+        var spreadsheet_templates_ids = []
+        var parameters = this.props.record.data.parameters.data
+        for (var i = 0; i < parameters.length; i++) {
+            // console.log(parameters[i].data.parameter.data.id);
+            var parameter_id = parameters[i].data.parameter.data.id
+
+            var datasheet_data = await rpc.query({
+                model: 'lerm.parameter.master',
+                method: 'read',
+                args: [[parameter_id], []]
+            })
+            // debugger
+            if (datasheet_data[0].spreadsheet_template) {
+                var spreadsheet_template_id = datasheet_data[0].spreadsheet_template[0]
+                spreadsheet_templates_ids.push(spreadsheet_template_id)
+            }
+          
+          }
+        
+          var unique_spreadsheet_templates_ids = [...new Set(spreadsheet_templates_ids)];
+
+          for (let index = 0; index < unique_spreadsheet_templates_ids.length; index++) {
+            const templateId = unique_spreadsheet_templates_ids[index];
+            const data = await getDataFromTemplate(this.env.services.rpc, templateId)
+            // name for spreadsheet
+            const name = "Spreadsheet"
+
+            const spreadsheetId = await this.env.services.rpc({
+                model: "documents.document",
+                method: "create",
+                args: [
+                    {
+                        name,
+                        mimetype: "application/o-spreadsheet",
+                        folder_id: this.props.folderId,
+                        handler: "spreadsheet",
+                        raw: JSON.stringify(data),
+                    },
+                ],
+                context: this.props.context,
+            });
+
+
+            var eln_parameters_ids = await rpc.query({
+                model: 'eln.parameters',
+                method: 'search_read',
+                domain: [['eln_id', '=', this.record.data.id],['spreadsheet_template','=',templateId]],
+                fields: [],
+
+            })
+
+            debugger
+
+
+            var eln_parameters = []
+            for (let index = 0; index < eln_parameters_ids.length; index++) {
+                // const element = eln_parameters_id[index].id;
+                eln_parameters.push(eln_parameters_ids[index].id)                
+            }
+
+
+            var spreadsheet_data = {
+                'eln_id': this.props.record.data.id,
+                'datasheet':spreadsheetId,
+                'spreadsheet_template': templateId,
+                'related_parameters': eln_parameters
+            }
+
+            // var spreadsheet_data = {
+            //     'eln_id': this.props.record.data.id,
+            //     'datasheet':spreadsheetId,
+            //     'spreadsheet_template': templateId
+            // }
+
+           var spreadSheet = await this.env.services.rpc({
+                model: "eln.spreadsheets",
+                method: "create",
+                args: [spreadsheet_data]
+            });
+
+ 
+          }
+
+          this.trigger("reload")
+          
+
+    }
+
+
+}
+
+SetResult.template = "lerm_civil.set_result";
+Spreadsheet.template = 'lerm_civil.fill_datasheet'
+FetchDatasheet.template = 'lerm_civil.fetch_required_datasheet'
 
 
 field_registry.add('set_result', SetResult);
-
+field_registry.add('fetch_datasheet', FetchDatasheet);
 field_registry.add('datasheet', Spreadsheet);
 
 export default Spreadsheet

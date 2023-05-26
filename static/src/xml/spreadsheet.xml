@@ -15,4 +15,12 @@
         </div>
     </t>
 
+    <t t-name="lerm_civil.fetch_required_datasheet" owl="1">
+        <div>
+            <button type="button" class="btn btn-primary" t-on-click="FetchDataSheets()">
+                    Fetch Datasheet
+            </button>
+        </div>
+    </t>
+
 </templates>

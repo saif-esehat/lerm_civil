@@ -19,9 +19,12 @@ class ELN(models.Model):
     attachment = fields.Binary(string="Attachment")
     attachment_name = fields.Char(string="Attachment Name")
     parameters = fields.One2many('eln.parameters','eln_id',string="Parameters")
+    datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
+    fetch_ds_button = fields.Float(string="Fetch Datasheet")
+
     # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
 
-
+ 
 
     def open_result_wizard(self):
         action = self.env.ref('lerm_civil.eln_result_update_wizard')
@@ -122,6 +125,18 @@ class ELN(models.Model):
             else:
                 record.srf_date = None
 
+
+class ELNSpreadsheet(models.Model):
+    _name = 'eln.spreadsheets'
+    _rec_name = 'datasheet'
+    eln_id = fields.Many2one('lerm.eln',string="ELN ID")
+    datasheet = fields.Many2one('documents.document',string="Datasheet")
+    spreadsheet_template = fields.Many2one("spreadsheet.template",string="Spreadsheet Template")
+    related_parameters = fields.Many2many("eln.parameters",string="Related Parameters")
+
+
+
+
 class ELNParameters(models.Model):
     _name = 'eln.parameters'
     _rec_name = 'parameter'
@@ -133,7 +148,7 @@ class ELNParameters(models.Model):
     result = fields.Float(string="Result")
     button = fields.Float(string="Button")
     result_json = fields.Text(string="Result JSON")
-
+    spreadsheet_template = fields.Many2one("spreadsheet.template",string="Spreadsheet Template")
     set_result_button = fields.Float(string="Button")
 
 

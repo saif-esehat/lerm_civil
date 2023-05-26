@@ -80,11 +80,11 @@ class LermSampleForm(models.Model):
                 domain = {'parameters': [('id', 'in', [])]}
                 return {'domain': domain}
 
-    
+    # def open_bulk_allotment_wizard(self):
+    #     print("Workign")
 
     def open_sample_allotment_wizard(self):
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
-
         return {
             'name': "Allot Sample",
             'type': 'ir.actions.act_window',

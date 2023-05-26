@@ -1,42 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="lerm_eln_form" model="ir.ui.view">
+        <record id="lerm_eln_forms" model="ir.ui.view">
             <field name="name">lerm.eln.form</field>
             <field name="model">lerm.eln</field>
             <field name="arch" type="xml">
-                <form>
+                <form string="ELN">
                     <sheet>
-                        <group style="width:100%">                    
+                        <group style="width:100%">
                             <field name='eln_id'/>
                             <field name='technician'/>
                         </group>
-                        <group style="width:50%">                    
-                            <field name='srf_id'/>
-                            <field name='srf_date'/>
-                            <field name='discipline'/>
-                            <field name='material'/>
-                            <field name='casting_date'/>
+                        <group>
+                            <group style="width:50%">
+                                <field name='srf_id'/>
+                                <field name='srf_date'/>
+                                <field name='discipline'/>
+                                <field name='material'/>
+                                <field name='casting_date'/>
+
+                            </group>
+                            <group style="width:50%">
+                                <field name='sample_id'/>
+                                <field name='kes_no'/>
+                                <field name='group'/>
+                                <field name='witness_name'/>
+                                <field name='attachment' filename='attachment_name'/>
+                                <field name='attachment_name' invisible='1'/>
+                            </group>
                         </group>
                         <group style="width:50%">
-                            <field name='sample_id'/>
-                            <field name='kes_no'/>
-                            <field name='group'/>
-                            <field name='witness_name'/>
-                            <field name='attachment' filename='attachment_name'/>
-                            <field name='attachment_name' invisible='1'/>
-                            <button name="open_result_wizard" string="Update Result" type="object" class="btn-primary"/>
+                            <field name="datasheets" nolabel="1">
+                                <tree>
+                                    <field name="datasheet"/>
+                                    <field name="spreadsheet_template" />
+                                    <field name="related_parameters" widget="badge"/>
+                                </tree>
+                            </field>
+                            <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
 
                         </group>
-                        <field name="parameters" nolabel="1" >
+
+                        <group style="width:100%">
+
+                            <field name="parameters" nolabel="1">
                                 <tree  >
                                     <field name="parameter"/>
                                     <field name='test_method'/>
                                     <field name='result'/>
+                                    <field name="spreadsheet_template"/>
                                     <field name='specification'/>
                                     <!-- <field name='button' widget="datasheet"/>                          -->
                                 </tree>
-                        </field>
+                            </field>
+                        </group>
+
                     </sheet>
                 </form>
             </field>
@@ -49,23 +67,27 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <group invisible="1" style="width:50%">                    
+                        <group invisible="1" style="width:50%">
                             <field name='eln_id'/>
-    
+
                         </group>
-                        <group style="width:100%">                    
+                        <group style="width:100%">
                             <field name='parameter'/>
                             <field name='test_method'/>
                         </group>
-                        <group style="width:100%">                    
+                        <group style="width:100%">
                             <field class="set_result_class" name='result'/>
                             <field name='datasheet'/>
+                            <field name="spreadsheet_template"/>
+
+                            
                         </group>
-                        <group style="width:50%">                    
+                        <group style="width:50%">
                             <field name='button' widget="datasheet" nolabel="1"/>
                         </group>
 
-                        <group style="width:50%">                    
+
+                        <group style="width:50%">
                             <field name='set_result_button' widget="set_result" nolabel="1"/>
                         </group>
                         <!-- <group style="width:100%">                    
@@ -91,39 +113,39 @@
 
 
         <record id="eln_result_update_wizard" model="ir.ui.view">
-        <field name="name">eln.update.result.wizard</field>
-        <field name="model">eln.update.result.wizard</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group style="width:100%">
-                        <!-- <field name='results'/> -->
-                        <field name="results" widget="one2many_list" >
-                                <tree editable="bottom" >
+            <field name="name">eln.update.result.wizard</field>
+            <field name="model">eln.update.result.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group style="width:100%">
+                            <!-- <field name='results'/> -->
+                            <field name="results" widget="one2many_list">
+                                <tree editable="bottom">
                                     <field name="parameter"/>
                                     <!-- <field name='test_method'/> -->
-                                    <field name='result' />   
-                        </tree>
-                        </field>
-                    </group>
-         
-                </sheet>
-                 <footer>
+                                    <field name='result' />
+                                </tree>
+                            </field>
+                        </group>
+
+                    </sheet>
+                    <footer>
                         <button name="update_result" string="Update Result" type="object" class="btn-primary"/>
                         <!-- <button name="close_sample_wizard" string="Close" type="object"/> -->
-                </footer>
-            </form>
-        </field>
-    </record>
+                    </footer>
+                </form>
+            </field>
+        </record>
 
 
-    <record id="eln_result_update_wizard_action" model="ir.actions.act_window">
-        <field name="name">Update Result</field>
-        <field name="res_model">eln.update.result.wizard</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="lerm_civil.eln_result_update_wizard"/>
-        <field name="target">new</field>
-    </record>
+        <record id="eln_result_update_wizard_action" model="ir.actions.act_window">
+            <field name="name">Update Result</field>
+            <field name="res_model">eln.update.result.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="lerm_civil.eln_result_update_wizard"/>
+            <field name="target">new</field>
+        </record>
 
 
 
