@@ -110,21 +110,38 @@ class SrfForm(models.Model):
 
     def confirm_srf(self):
         srf_ids=[]
-        for record in self.samples:
-            # if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
-            sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
-            kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
-            # res = super(LermSampleForm, self).create(vals)
-            #     return res
-            record.write({'status':'2-confirmed','sample_no':sample_id,'kes_no':kes_no})
-            srf_ids.append(sample_id)
-            if len(srf_ids) == 1:
-                srfidstring = srf_ids[0]
-            else:
-                srfidstring = str(srf_ids[0])+'/'+str(srf_ids[-1])
+
+        for record in self.sample_range_table:
+            sam_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample')]).number_next_actual
+            kes_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample.kes')]).number_next_actual
+            
+            sample_range = "SAM/"+str(sam_next_number)+"-"+str(sam_next_number+record.sample_qty-1)
+            kes_range = "KES/"+str(kes_next_number)+"-"+str(kes_next_number+record.sample_qty-1)
+            record.write({'sample_range': sample_range , 'kes_range': kes_range })
+            samples = self.env['lerm.srf.sample'].search([('sample_range_id','=',record.id)])
+            # import wdb ; wdb.set_trace()
+            for sample in samples:
+                sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
+                kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+                sample.write({'sample_no':sample_id,'kes_no':kes_no})
+
+
+
+        # for record in self.samples:
+        #     # if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
+        #     sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
+        #     kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+        #     # res = super(LermSampleForm, self).create(vals)
+        #     #     return res
+        #     record.write({'status':'2-confirmed','sample_no':sample_id,'kes_no':kes_no})
+        #     srf_ids.append(sample_id)
+        #     if len(srf_ids) == 1:
+        #         srfidstring = srf_ids[0]
+        #     else:
+        #         srfidstring = str(srf_ids[0])+'/'+str(srf_ids[-1])
             
         # Extracting the numbers from the original string
-        numbers = srfidstring.split("/")
+        # numbers = srfidstring.split("/")
 
         # # Formatting the numbers in the desired format
         # formatted_numbers = "-".join([f"{int(num):05d}" for num in numbers])

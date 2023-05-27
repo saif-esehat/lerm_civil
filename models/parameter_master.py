@@ -19,5 +19,5 @@ class ParameterMaster(models.Model):
     nabl_select = fields.Selection([('nabl', 'NABL'), ('non_nabl', 'Non NABL')], string='NABL')
     spreadsheet_template = fields.Many2one("spreadsheet.template",string="Spreadsheet Template")
     sheets = fields.Char("Sheet Name")
-    cell = fields.Char("Cell")
+    cell = fields.Char("Result Cell")
 
