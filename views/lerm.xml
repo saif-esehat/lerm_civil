@@ -47,7 +47,38 @@
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Sample</p>
         </field>
+    </record>
 
+    <record id="test_sample_pending_allotment_action" model="ir.actions.act_window">
+        <field name="name">Sample</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.srf.sample</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="domain">[('status','=','2-confirmed'),('state','=','1-allotment_pending')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Allotment Pending Sample</p>
+        </field>
+    </record>
+
+    <record id="test_sample_pending_allotted_action" model="ir.actions.act_window">
+        <field name="name">Sample</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.srf.sample</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="domain">[('status','=','2-confirmed'),('state','=','2-alloted')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Alotted Sample</p>
+        </field>
+    </record>
+    <record id="test_sample_pending_in_report_action" model="ir.actions.act_window">
+        <field name="name">Sample</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.srf.sample</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="domain">[('status','=','2-confirmed'),('state','=','3-in_report')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Sample In Report</p>
+        </field>
     </record>
 
     <record id="test_eln_action" model="ir.actions.act_window">
@@ -62,13 +93,14 @@
     </record>
     
     <menuitem id="lerm_root"
+        groups="kes_hod_access_group"
         name="LERM CIVIL"
         sequence="10" />
 
     <menuitem id="lerm_menu"
         name="Master Data"
         parent="lerm_root"
-        sequence="11" />
+        sequence="11"  />
 
     <menuitem id="discipline"
         name="Discipline"
@@ -95,7 +127,37 @@
 
     <menuitem id="lerm_eln"
         name="ELN"
+        groups="kes_technician_access_group"
         parent="lerm_transaction_data"
         action="test_eln_action"
         sequence="16" />
+    
+    <menuitem id="sample_status"
+        groups="kes_hod_access_group"
+        name="Sample Status"
+        parent="lerm_root"
+        sequence="20" />
+    
+    <menuitem id="sample_status_pending_allotment"
+        groups="kes_hod_access_group"
+        name="Allotment Pending"
+        parent="sample_status"
+        action="test_sample_pending_allotment_action"
+        sequence="20" />
+    
+    <menuitem id="sample_status_allotted"
+        groups="kes_hod_access_group"
+        name="Alloted"
+        parent="sample_status"
+        action="test_sample_pending_allotted_action"
+        sequence="21" />
+
+    <menuitem id="sample_status_in_report"
+        groups="kes_hod_access_group"
+        name="In-Report"
+        parent="sample_status"
+        action="test_sample_pending_in_report_action"
+        sequence="22" />
+
+        
 </odoo>

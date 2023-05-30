@@ -71,7 +71,7 @@
                     
                     <group style="width:100%">
                         <!-- <field name="parameters_ids" invisible="1"/> -->
-                        <field name="parameters" options="{'no_create': True}" />
+                        <field name="parameters" options="{'no_create': True, 'no_open': True}" />
                     </group>
                     
                 </sheet>
@@ -169,6 +169,7 @@
                       <field name="alias" optional="show"/>
                       <field name="brand" optional="show"/>
                       <field name="size_id" optional="show"/>
+                      <field name="parameters" widget="many2many_tags" optional="show"/>
                       <field name="casting_date" optional="show"/>
                       <field name="grade_id" optional="show"/>
                       <field name="client_sample_id" optional="show"/>

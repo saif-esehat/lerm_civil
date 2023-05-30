@@ -9,7 +9,7 @@
             <p class="o_view_nocontent_smiling_face">Test Method</p>
         </field> -->
     </record>
-    <menuitem id="srf_form" name="SRF" parent="lerm_transaction_data" action="srf_form_id" sequence="10" />
+    <menuitem id="srf_form" groups="kes_hod_access_group" name="SRF" parent="lerm_transaction_data" action="srf_form_id" sequence="10" />
 
     <record id="lerm_civil_srf_form" model="ir.ui.view">
         <field name="name">lerm.civil.srf.form</field>
@@ -32,8 +32,8 @@
                     <field   readonly="1" name="state" widget="statusbar"/>
             </header>
                 <sheet>
-                        <div class="oe_button_box" name="button_box">
-                            <button name="sample_count_button"
+                        <div class="oe_button_box" name="button_box" attrs="{'invisible':[('state','!=','2-confirm')]}" >
+                            <button name="sample_count_button" 
                                 type="object" class="oe_stat_button" icon="fa-align-justify">
                             <field name="sample_count" string="Samples" widget="statinfo"/>
                             </button>
@@ -89,7 +89,7 @@
                             <field name="sample_description"/>                           
                         </tree>
                     </field>
-                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" context = "{'default_customer_id' : customer,'is_local': True}">
+                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" invisible='1' context = "{'default_customer_id' : customer,'is_local': True}">
                         <tree>
                             <field name='kes_range'/>
                             <field name="material_id"/>

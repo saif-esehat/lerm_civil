@@ -446,12 +446,12 @@ class CreateSampleWizard(models.TransientModel):
             for id in active_ids:
                 parameters = []
 
-                sample = self.env['lerm.srf.sample'].search([('id','=',id)])
+                sample = self.env['lerm.srf.sample'].sudo().search([('id','=',id)])
                 if sample.state == '1-allotment_pending':
                     for parameter in sample.parameters:
                         parameters.append((0,0,{'parameter':parameter.id ,'spreadsheet_template':parameter.spreadsheet_template.id}))
 
-                    self.env['lerm.eln'].create({
+                    self.env['lerm.eln'].sudo().create({
                         'srf_id': sample.srf_id.id,
                         'srf_date':sample.srf_id.srf_date,
                         'kes_no':sample.kes_no,
