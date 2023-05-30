@@ -93,6 +93,7 @@
     </record>
     
     <menuitem id="lerm_root"
+        groups="kes_hod_access_group"
         name="LERM CIVIL"
         sequence="10" />
 
@@ -126,28 +127,33 @@
 
     <menuitem id="lerm_eln"
         name="ELN"
+        groups="kes_technician_access_group"
         parent="lerm_transaction_data"
         action="test_eln_action"
         sequence="16" />
     
     <menuitem id="sample_status"
+        groups="kes_hod_access_group"
         name="Sample Status"
         parent="lerm_root"
         sequence="20" />
     
     <menuitem id="sample_status_pending_allotment"
+        groups="kes_hod_access_group"
         name="Allotment Pending"
         parent="sample_status"
         action="test_sample_pending_allotment_action"
         sequence="20" />
     
     <menuitem id="sample_status_allotted"
+        groups="kes_hod_access_group"
         name="Alloted"
         parent="sample_status"
         action="test_sample_pending_allotted_action"
         sequence="21" />
 
     <menuitem id="sample_status_in_report"
+        groups="kes_hod_access_group"
         name="In-Report"
         parent="sample_status"
         action="test_sample_pending_in_report_action"
