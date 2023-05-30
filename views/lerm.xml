@@ -93,12 +93,13 @@
     </record>
     
     <menuitem id="lerm_root"
-        groups="kes_hod_access_group"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group"
         name="LERM CIVIL"
         sequence="10" />
 
     <menuitem id="lerm_menu"
         name="Master Data"
+        groups="kes_technician_access_group"
         parent="lerm_root"
         sequence="11"  />
 
@@ -116,6 +117,7 @@
 
     <menuitem id="lerm_transaction_data"
         name="Transaction Data"
+        groups="kes_technician_access_group"
         parent="lerm_root"
         sequence="14" />
 
