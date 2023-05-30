@@ -38,6 +38,7 @@
                                 </tree>
                             </field>
                             <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
+                            <field name='update_result' widget="update_result" nolabel="1"/>
 
                         </group>
 
@@ -54,6 +55,22 @@
                                 </tree>
                             </field>
                         </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lerm_eln_spreadsheet" model="ir.ui.view">
+            <field name="name">eln.spreadsheets.form</field>
+            <field name="model">eln.spreadsheets</field>
+            <field name="arch" type="xml">
+                <form string="Spread Sheet">
+                    <sheet>
+                        <field name='datasheet'/>
+                        <field name='spreadsheet_template'/>
+                        <field name='related_parameters'/>
+                        <field name='fill_datasheet' widget="fill_datasheet" />
 
                     </sheet>
                 </form>

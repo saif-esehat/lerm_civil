@@ -21,6 +21,8 @@ class ELN(models.Model):
     parameters = fields.One2many('eln.parameters','eln_id',string="Parameters")
     datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
     fetch_ds_button = fields.Float(string="Fetch Datasheet")
+    update_result = fields.Integer("Update Result")
+
 
     # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
 
@@ -133,8 +135,7 @@ class ELNSpreadsheet(models.Model):
     datasheet = fields.Many2one('documents.document',string="Datasheet")
     spreadsheet_template = fields.Many2one("spreadsheet.template",string="Spreadsheet Template")
     related_parameters = fields.Many2many("eln.parameters",string="Related Parameters")
-
-
+    fill_datasheet = fields.Integer("Fill Spreadsheet")
 
 
 class ELNParameters(models.Model):

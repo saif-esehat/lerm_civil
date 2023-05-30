@@ -23,6 +23,11 @@
                     string="Confirm"
                     attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"
                     />       
+
+                    <button name="action_srf_sent_mail"
+                                type="object"
+                                string="Send Mail"
+                               />       
                                  
                     <field   readonly="1" name="state" widget="statusbar"/>
             </header>

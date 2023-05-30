@@ -155,27 +155,30 @@
 
 
             <tree>
-                      <field name="sample_received_date"/>
+              <header>
+                    <button type="object" class="oe_highlight" name="open_sample_allotment_wizard" string="Bulk Allotment" />
+                </header>
+                      <field name="sample_received_date" optional="show"/>
                       <field name='kes_no'/>
-                      <field name="srf_id"/>
+                      <field name="srf_id" optional="show" />
                       <field name="activity_ids" widget="list_activity" optional="show"/>
-                      <field name="sample_no"/>
-                      <field name="discipline_id"/>
-                      <field name="group_id"/>
-                      <field name="material_id"/>
-                      <field name="alias"/>
-                      <field name="brand"/>
-                      <field name="size_id"/>
-                      <field name="casting_date"/>
-                      <field name="grade_id"/>
-                      <field name="client_sample_id"/>
-                      <field name="received_by_id"/>
-                      <field name="sample_condition"/>
-                      <field name="sample_reject_reason"/>
-                      <field name="witness"/>
-                      <field name="scope"/>
-                      <field name="sample_description"/>
-                      <field name="state" widget="badge"/>
+                      <field name="sample_no" optional="show"/>
+                      <field name="discipline_id" optional="show"/>
+                      <field name="group_id" optional="show"/>
+                      <field name="material_id" optional="show"/>
+                      <field name="alias" optional="show"/>
+                      <field name="brand" optional="show"/>
+                      <field name="size_id" optional="show"/>
+                      <field name="casting_date" optional="show"/>
+                      <field name="grade_id" optional="show"/>
+                      <field name="client_sample_id" optional="show"/>
+                      <field name="received_by_id" optional="show"/>
+                      <field name="sample_condition" optional="show"/>
+                      <field name="sample_reject_reason" optional="show"/>
+                      <field name="witness" optional="show"/>
+                      <field name="scope" optional="show"/>
+                      <field name="sample_description" optional="show"/>
+                      <field name="state" widget="badge" optional="show"/>
 
             </tree>
         </field>

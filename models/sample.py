@@ -96,13 +96,13 @@ class LermSampleForm(models.Model):
             }
     
 
-    @api.model
-    def create(self, vals):
-        if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
-            vals['sample_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
-            vals['kes_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
-            res = super(LermSampleForm, self).create(vals)
-            return res
+    # @api.model
+    # def create(self, vals):
+    #     if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
+    #         vals['sample_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
+    #         vals['kes_no'] = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+    #         res = super(LermSampleForm, self).create(vals)
+    #         return res
 
 
     # @api.depends('material_id')
