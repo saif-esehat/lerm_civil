@@ -93,12 +93,13 @@
     </record>
     
     <menuitem id="lerm_root"
-        groups="kes_hod_access_group"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group"
         name="LERM CIVIL"
         sequence="10" />
 
     <menuitem id="lerm_menu"
         name="Master Data"
+        groups="kes_technician_access_group"
         parent="lerm_root"
         sequence="11"  />
 
@@ -116,11 +117,13 @@
 
     <menuitem id="lerm_transaction_data"
         name="Transaction Data"
+        groups="kes_technician_access_group"
         parent="lerm_root"
         sequence="14" />
 
     <menuitem id="lerm_sample"
         name="Sample"
+        groups="kes_hod_access_group"
         parent="lerm_transaction_data"
         action="test_sample_action"
         sequence="15" />
@@ -139,7 +142,6 @@
         sequence="20" />
     
     <menuitem id="sample_status_pending_allotment"
-        groups="kes_hod_access_group"
         name="Allotment Pending"
         parent="sample_status"
         action="test_sample_pending_allotment_action"
