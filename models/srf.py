@@ -183,20 +183,20 @@ class SrfForm(models.Model):
         action = self.env.ref('lerm_civil.srf_sample_wizard_form')
         if len(samples) > 0:
             print(samples[0].material_id.id , 'error')
-            discipline_id = samples[0].discipline_id.id
-            material_id = samples[0].material_id.id
-            group_id = samples[0].group_id.id
-            alias = samples[0].alias
-            brand = samples[0].brand
-            size_id = samples[0].size_id.id
-            grade_id = samples[0].grade_id.id
-            sample_received_date = samples[0].sample_received_date
-            location = samples[0].location
-            sample_condition = samples[0].sample_condition
-            sample_reject_reason = samples[0].sample_reject_reason
-            witness = samples[0].witness
-            scope = samples[0].scope
-            sample_description = samples[0].sample_description
+            discipline_id = samples[-1].discipline_id.id
+            material_id = samples[-1].material_id.id
+            group_id = samples[-1].group_id.id
+            alias = samples[-1].alias
+            brand = samples[-1].brand
+            size_id = samples[-1].size_id.id
+            grade_id = samples[-1].grade_id.id
+            sample_received_date = samples[-1].sample_received_date
+            location = samples[-1].location
+            sample_condition = samples[-1].sample_condition
+            sample_reject_reason = samples[-1].sample_reject_reason
+            witness = samples[-1].witness
+            scope = samples[-1].scope
+            sample_description = samples[-1].sample_description
 
             return {
             'name': "Add Sample",
@@ -207,7 +207,7 @@ class SrfForm(models.Model):
             'view_id': action.id,
             'target': 'new',
             'context': {
-            'default_discipline_id' : discipline_id,
+            # 'default_discipline_id' : discipline_id,
             'default_material_id' : material_id,
             'default_alias':alias,
             'default_brand':brand,
@@ -221,9 +221,8 @@ class SrfForm(models.Model):
             'default_scope':scope,
             'default_sample_description':sample_description,
             'default_group_id':group_id
-
             }
-            }
+        }
         else:
             return {
             'name': "Add Sample",
@@ -238,7 +237,6 @@ class SrfForm(models.Model):
 
     def open_new_sample_add_wizard(self):
         samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])
-
         action = self.env.ref('lerm_civil.srf_sample_wizard_form')
         return {
             'name': "Add Sample",
@@ -247,7 +245,10 @@ class SrfForm(models.Model):
             'view_mode': 'form',
             'res_model': 'create.srf.sample.wizard',
             'view_id': action.id,
-            'target': 'new'
+            'target': 'new',
+            'context':{
+                'default_customer_id': self.customer.id
+            }
             }
 
 
@@ -332,7 +333,9 @@ class CreateSampleWizard(models.TransientModel):
     def onchange_material_id(self):
         for record in self:
             result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
+            print(result)
             record.alias = result.alias
+       
    
 
     def add_sample(self):
