@@ -23,7 +23,7 @@
         <record id="hod_discipline_record" model="ir.rule">
             <field name="name">HOD can see only their Discipline</field>
             <field ref="model_lerm_srf_sample" name="model_id"/>
-            <field name="domain_force">[('discipline_id.hod','=',user.id)]</field>
+            <field name="domain_force">[('discipline_id.hod.id','=',user.id)]</field>
             <field name="groups" eval="[(4, ref('kes_hod_access_group'))]"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -35,7 +35,7 @@
         <record id="technician_eln_record" model="ir.rule">
             <field name="name">Technician can only see their eln</field>
             <field ref="model_lerm_eln" name="model_id"/>
-            <field name="domain_force">[('technician','=',user.id)]</field>
+            <field name="domain_force">[('technician.id','=',user.id)]</field>
             <field name="groups" eval="[(4, ref('kes_technician_access_group'))]"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -47,6 +47,18 @@
         <record model="res.groups" id="kes_admin_access_group">
             <field name="name">Lerm Admin</field>
             <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
+        <record id="admin_discipline_record" model="ir.rule">
+            <field name="name">Admin can see all Discipline</field>
+            <field ref="model_lerm_srf_sample" name="model_id"/>
+            <field name="domain_force">[]</field>
+            <field name="groups" eval="[(4, ref('kes_admin_access_group'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="active" eval="True"/>
         </record>
 
     </data>

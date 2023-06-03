@@ -123,7 +123,7 @@ class SrfForm(models.Model):
             for sample in samples:
                 sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
                 kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
-                sample.write({'sample_no':sample_id,'kes_no':kes_no})
+                sample.write({'sample_no':sample_id,'kes_no':kes_no,'status':'2-confirmed'})
 
 
 
