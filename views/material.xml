@@ -16,6 +16,10 @@
             <label for="casting_required"/>
           </span>
         </xpath>
+       
+        <xpath expr="//field[@name='name']" position="attributes">
+            <attribute name="placeholder">e.g. Fly Ash</attribute>
+        </xpath>
         <xpath expr="//page[@name='general_information']" position="after">
           <page string="LERM" attrs="{'invisible': [('is_sample','=',False)]}">
             

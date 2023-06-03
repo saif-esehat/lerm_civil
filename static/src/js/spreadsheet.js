@@ -410,9 +410,10 @@ class UpdateResult extends AbstractFieldOwl {
             args: [[parameter_id], []],
           });
 
-        var sheet_name =  parameters_master[0].sheets
+        var sheet_name =   model.getters.getSheetIdByName(parameters_master[0].sheets)
 
         var cell =  parameters_master[0].cell
+        debugger
         var cordinates = this.convertCellToCoordinate(cell)
         var result = model.getters.getCell(sheet_name,cordinates.column,cordinates.row).evaluated.value
         // debugger
