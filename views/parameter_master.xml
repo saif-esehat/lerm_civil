@@ -2,34 +2,35 @@
 <odoo>
     <data>
         <record id="lerm_parameter_master_form" model="ir.ui.view">
-        <field name="name">lerm.parameter.master.form</field>
-        <field name="model">lerm.parameter.master</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
+            <field name="name">lerm.parameter.master.form</field>
+            <field name="model">lerm.parameter.master</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
                         <group>
-                            <field name="parameter_name"/>
-                            <field name="lab_min_value"/>
-                            <field name="nabl_min_value"/>
-                            <field name="client_min_value"/>
-                            <field name="test_method"/>
-                            <field name="calculated"/>
-                            <field name="discipline"/>
-                            <field name="sheets"/>
+                            <group>
+                                <field name="parameter_name"/>
+                                <field name="lab_min_value"/>
+                                <field name="nabl_min_value"/>
+                                <field name="client_min_value"/>
+                                <field name="test_method"/>
+                                <field name="calculated"/>
+                                <field name="discipline"/>
+                                <field name="sheets"/>
+                            </group>
+                            <group>
+                                <field name="group"/>
+                                <field name="mu_value"/>
+                                <field name="lab_max_value"/>
+                                <field name="nabl_max_value"/>
+                                <field name="client_max_value"/>
+                                <field name="unit"/>
+                                <field name='nabl_select'/>
+                                <field name='spreadsheet_template'/>
+                                <field name="cell"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="mu_value"/>
-                            <field name="lab_max_value"/>
-                            <field name="nabl_max_value"/>
-                            <field name="client_max_value"/>
-                            <field name="unit"/>
-                            <field name='nabl_select'/>
-                            <field name='spreadsheet_template'/>
-                            <field name="cell"/>
-                        </group>
-                    </group>
-                    <!-- <notebook>
+                        <!-- <notebook>
                         <page string="Alias">
                             <field name='alias_table'>
                                 <tree edidable="bottom">
@@ -45,22 +46,36 @@
                             </field>
                         </page>
                     </notebook> -->
-                </sheet>
-            </form>
-        </field>
-    </record>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
 
         <record id="lerm_parameter_master_tree" model="ir.ui.view">
-        <field name="name">lerm.parameter.master.tree</field>
-        <field name="model">lerm.parameter.master</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="parameter_name"/>
-                <field name="discipline"/>
-
-            </tree>
-        </field>
-    </record>
+            <field name="name">lerm.parameter.master.tree</field>
+            <field name="model">lerm.parameter.master</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="parameter_name" optional="show"/>
+                    <field name="group" optional="show"/>
+                    <field name="lab_min_value" optional="show"/>
+                    <field name="nabl_min_value" optional="show"/>
+                    <field name="client_min_value" optional="show"/>
+                    <field name="test_method" optional="show"/>
+                    <field name="calculated" optional="show"/>
+                    <field name="discipline" optional="show"/>
+                    <field name="sheets" optional="show"/>
+                    <field name="mu_value" optional="show"/>
+                    <field name="lab_max_value" optional="show"/>
+                    <field name="nabl_max_value" optional="show"/>
+                    <field name="client_max_value" optional="show"/>
+                    <field name="unit" optional="show"/>
+                    <field name='nabl_select' optional="show"/>
+                    <field name='spreadsheet_template' optional="show"/>
+                    <field name="cell" optional="show"/>
+                </tree>
+            </field>
+        </record>
     </data>
 </odoo>
