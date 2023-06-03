@@ -16,7 +16,6 @@
             <label for="casting_required"/>
           </span>
         </xpath>
-       
         <xpath expr="//field[@name='name']" position="attributes">
             <attribute name="placeholder">e.g. Fly Ash</attribute>
         </xpath>

@@ -6,6 +6,14 @@
             <field name="model">lerm.eln</field>
             <field name="arch" type="xml">
                 <form string="ELN">
+                <header>
+                    <button
+                    type="object"
+                    name="confirm_eln"
+                    string="Confirm"
+                    attrs="{'invisible': [('state', 'in', ('2-confirm'))]}" />      
+                    <field readonly="1" name="state" widget="statusbar"/>
+                </header>
                     <sheet>
                         <group style="width:100%">
                             <field name='eln_id'/>

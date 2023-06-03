@@ -12,7 +12,7 @@ class ParameterMaster(models.Model):
     client_min_value = fields.Float(string="Client min Value")
     client_max_value = fields.Float(string="Client max Value")
     mu_value = fields.Float(string="Mu Value")
-    unit = fields.Char("Unit")
+    unit = fields.Many2one('uom.uom',string="Unit")
     calculated = fields.Boolean("Calulated")
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
     discipline = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -20,4 +20,5 @@ class ParameterMaster(models.Model):
     spreadsheet_template = fields.Many2one("spreadsheet.template",string="Spreadsheet Template")
     sheets = fields.Char("Sheet Name")
     cell = fields.Char("Result Cell")
+    group = fields.Many2one('lerm_civil.group',string="Group")
 

@@ -117,7 +117,7 @@
 
     <menuitem id="lerm_transaction_data"
         name="Transaction Data"
-        groups="kes_technician_access_group"
+        groups="kes_technician_access_group,kes_hod_access_group"
         parent="lerm_root"
         sequence="14" />
 

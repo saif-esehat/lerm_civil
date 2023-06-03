@@ -76,7 +76,7 @@
                         <button name="open_new_sample_add_wizard" string="New Sample" type="object" class="btn-primary"/>
                     </group>
                     </group>
-                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="samples" context = "{'default_customer_id' : customer,'is_local': True}">
+                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="samples" context = "{'default_customer_id' : customer,'is_local': True}" invisible='1'>
                         <tree>
                             <field name='kes_no'/>
                             <field name="material_id"/>
@@ -89,7 +89,7 @@
                             <field name="sample_description"/>                           
                         </tree>
                     </field>
-                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" invisible='1' context = "{'default_customer_id' : customer,'is_local': True}">
+                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" context = "{'default_customer_id' : customer,'is_local': True}">
                         <tree>
                             <field name='kes_range'/>
                             <field name="material_id"/>
