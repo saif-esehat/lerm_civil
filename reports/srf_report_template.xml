@@ -142,7 +142,7 @@
 								</td>
 								
 								<td>
-									<span t-esc="r['material_id']"/>
+									<span t-esc="r['material_id']['name']"/>
 								</td>
 								<td>
 									<span t-esc="r['discipline_id']"/>
@@ -151,7 +151,7 @@
 									<span t-esc="r['group_id']"/>
 								</td>
 								<td>
-									<span t-esc="r['parameters']"/>
+									<span t-esc="r['parameters']['parameter_name']"/>
 								</td>
 								<td>
 									<span t-esc="r['casting']"/>
@@ -219,7 +219,7 @@
 								</td>
 								
 								<td>
-									<span t-esc="r['material_id']"/>
+									<span t-esc="r['material_id']['name']"/>
 								</td>
 								<td>
 									<span t-esc="r['discipline_id']"/>
@@ -228,7 +228,7 @@
 									<span t-esc="r['group_id']"/>
 								</td>
 								<td>
-									<span t-esc="r['parameters']"/>
+									<span t-esc="r['parameters']['parameter_name']"/>
 								</td>
 								<td>
 									<span t-esc="r['casting']"/>
