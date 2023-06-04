@@ -4,7 +4,7 @@
  'website': "http://www.esehat.org", 
  'category': 'Uncategorized', 
  'version': '13.0.1', 
- 'depends':['base' , 'contacts','stock','product' , 'mail','lerm_civil_inv'],
+ 'depends':['base' , 'contacts','stock','product' , 'mail','lerm_civil_inv','documents','documents_spreadsheet'],
  'data': [
     'data/sequence.xml',
     'views/lerm.xml',
@@ -18,10 +18,12 @@
     'views/eln.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
+    'reports/sample_report_template.xml',
     'reports/srf_report_action.xml',
     'reports/srf_report_template.xml',
     'security/security.xml',
-    'security/ir.model.access.csv'
+    'security/ir.model.access.csv',
+    'reports/sample_report_action.xml'
     ],
         'assets': {
     'web.assets_backend':[

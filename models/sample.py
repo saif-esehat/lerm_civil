@@ -83,6 +83,10 @@ class LermSampleForm(models.Model):
     # def open_bulk_allotment_wizard(self):
     #     print("Workign")
 
+
+    def print_sample_report(self):
+        return self.env.ref('lerm_civil.sample_report_action').report_action(self)
+
     def open_sample_allotment_wizard(self):
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
         return {

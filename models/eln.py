@@ -22,8 +22,14 @@ class ELN(models.Model):
     datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
     fetch_ds_button = fields.Float(string="Fetch Datasheet")
     update_result = fields.Integer("Update Result")
+    state = fields.Selection([
+        ('1-draft', 'Draft'),
+        ('2-confirm', 'Confirm'),
+    ], string='State',default='1-draft')
 
-
+    def confirm_eln(self):
+        self.sample_id.write({'state':'3-in_report'})
+        self.write({'state': '2-confirm'})
     # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
 
  

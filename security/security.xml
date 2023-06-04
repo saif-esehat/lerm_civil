@@ -5,6 +5,11 @@
             <field name="name">LERM Civil</field>
         </record>
 
+        <!-- <record model="res.groups" id="kes_admin_access_group">
+            <field name="name">Admin</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record> -->
+
         <record model="res.groups" id="kes_technician_access_group">
             <field name="name">Technician</field>
             <field name="category_id" ref="kes_lerm_access_categories"/>
