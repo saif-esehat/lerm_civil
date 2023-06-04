@@ -28,6 +28,7 @@ class ELN(models.Model):
     ], string='State',default='1-draft')
 
     def confirm_eln(self):
+        self.sample_id.write({'state':'3-in_report'})
         self.write({'state': '2-confirm'})
     # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
 

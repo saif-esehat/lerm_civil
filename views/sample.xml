@@ -14,6 +14,13 @@
                             string="Allotment"
                             invisible="context.get('is_local',False)"
                             attrs="{'invisible': [('state', 'not in', ('1-allotment_pending'))]}"
+                            />
+
+                        <button
+                            type="object"
+                            name="print_sample_report"
+                            string="Print"
+                            attrs="{'invisible': [('state', 'not in', ('3-in_report'))]}"
                             />       
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
                 </header>
@@ -69,10 +76,9 @@
                    
                     
                     
-                    <group style="width:100%">
-                        <!-- <field name="parameters_ids" invisible="1"/> -->
-                        <field name="parameters" options="{'no_create': True, 'no_open': True}" />
-                    </group>
+           
+                    <field name="parameters" nolabel="1" options="{'no_create': True, 'no_open': True}" />
+                
                     
                 </sheet>
                 <div class="oe_chatter">
