@@ -265,7 +265,10 @@ class CreateSampleWizard(models.TransientModel):
     material_id = fields.Many2one('product.template',string="Material")
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
+    size_ids = fields.Many2many('lerm.size.line',string="Size")
+
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
+    grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
     # qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
     # qty_id = fields.Integer(string="Sample Quantity")
     sample_qty = fields.Integer(string="Sample Quantity")
@@ -298,6 +301,19 @@ class CreateSampleWizard(models.TransientModel):
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(string="Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
+
+    @api.onchange('material_id')
+    def compute_grade(self):
+        for record in self:
+            if record.material_id:
+                record.grade_ids = self.env['product.template'].search([('id','=', record.material_id.id)]).grade_table
+    
+
+    @api.onchange('material_id')
+    def compute_size(self):
+        for record in self:
+            if record.material_id:
+                record.size_ids = self.env['product.template'].search([('id','=', record.material_id.id)]).size_table
 
     @api.onchange('material_id')
     def compute_parameters(self):

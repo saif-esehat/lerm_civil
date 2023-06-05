@@ -140,22 +140,24 @@
                         <field name="discipline_id"/>
                         <field name="material_id" domain="[('id', 'in', material_ids)]"/>
                         <field name="brand"/>
-                        <field name="grade_id"/>
+                        <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
                         <field name="client_sample_id"/>
                         <field name="received_by_id"/>
                         <field name="sample_condition"/>
                         <field name="material_ids" invisible='1'/>
+                        <field name="grade_ids" invisible='1'/>
                         <!--<field name="grade_ids" invisible='1'/> -->
                     </group>
                     <group style="width:50%">
                         <field name="group_id" domain="[('id', 'in', group_ids)]"/>
                         <field name="alias"/>
-                        <field name="size_id" />
+                        <field name="size_id" domain="[('id', 'in', size_ids)]"/>
                         <field name="sample_qty" />
                         <field name="sample_received_date"/>
                         <field name="location"/>
                         <field name="casting" />
                         <field name="group_ids" invisible='1'/>
+                         <field name="size_ids" invisible='1'/>
                         <!-- <field name="size_ids" invisible='1'/>
                         <field name="qty_ids" invisible='1'/> -->
                     </group>
