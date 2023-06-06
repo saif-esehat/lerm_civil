@@ -142,7 +142,7 @@
 								</td>
 								
 								<td>
-									<span t-esc="r['material_id']['name']"/>
+									<span t-esc="r['material_id'].name"/>
 								</td>
 								<td>
 									<span t-esc="r['discipline_id']"/>
@@ -151,7 +151,9 @@
 									<span t-esc="r['group_id']"/>
 								</td>
 								<td>
-									<span t-esc="r['parameters']['parameter_name']"/>
+									<span t-foreach="r['parameters']" t-as="param">
+										<span t-esc="param.parameter_name"/> ,
+									</span>
 								</td>
 								<td>
 									<span t-esc="r['casting']"/>
@@ -166,7 +168,7 @@
 						</tbody>
 					</table>
 
-					<table style="margin-top:30px;">
+					<!-- <table style="margin-top:30px;">
 						<thead>
 							<tr>
 								<th>
@@ -241,7 +243,7 @@
 								</td>
 							</tr>
 						</tbody>
-					</table>
+					</table> -->
 				</div>
 			</t>
 		</t>

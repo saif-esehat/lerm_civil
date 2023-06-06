@@ -11,12 +11,12 @@
                     type="object"
                     name="confirm_eln"
                     string="Confirm"
-                    attrs="{'invisible': [('state', 'in', ('2-confirm'))]}" />      
-                    <field readonly="1" name="state" widget="statusbar"/>
+                    attrs="{'invisible': [('state', 'not in', ('1-draft'))]}" />      
+                    <field readonly="1" name="state" widget="statusbar" statusbar_visible="1-draft,2-confirm,3-approved"/>
                 </header>
                     <sheet>
                         <group style="width:100%">
-                            <field name='eln_id'/>
+                            <field name='eln_id' invisible="1"/>
                             <field name='technician'/>
                         </group>
                         <group>
@@ -26,7 +26,6 @@
                                 <field name='discipline'/>
                                 <field name='material'/>
                                 <field name='casting_date'/>
-
                             </group>
                             <group style="width:50%">
                                 <field name='sample_id'/>
@@ -47,13 +46,12 @@
                             </field>
                             <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
                             <field name='update_result' widget="update_result" nolabel="1"/>
-
                         </group>
 
                         <group style="width:100%">
 
                             <field name="parameters" nolabel="1">
-                                <tree  >
+                                <tree>
                                     <field name="parameter"/>
                                     <field name='test_method'/>
                                     <field name='result'/>
@@ -129,9 +127,17 @@
             <field name="model">lerm.eln</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name='eln_id'/>
-                    <field name='srf_id'/>
-                    <field name='sample_id'/>
+                    <!-- <field name='eln_id' optional="show"/> -->
+                    <field name='srf_id' optional="show"/>
+                    <field name='sample_id' optional="show"/>
+                    <field name='technician' optional="show"/>
+                    <field name='srf_date' optional="show"/>
+                    <field name='kes_no' optional="show"/>
+                    <field name='discipline' optional="show"/>
+                    <field name='group' optional="show"/>
+                    <field name='material' optional="show"/>
+                    <field name='witness_name' optional="show"/>
+                    <field name='casting_date' optional="show"/>
                 </tree>
             </field>
         </record>

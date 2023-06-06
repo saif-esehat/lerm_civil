@@ -62,7 +62,8 @@ class LermSampleForm(models.Model):
     state = fields.Selection([
         ('1-allotment_pending', 'Assignment Pending'),
         ('2-alloted', 'Alloted'),
-        ('3-in_report', 'In-Report'),
+        ('3-pending_verification','Pending Verification'),
+        ('4-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
 
 
@@ -83,6 +84,11 @@ class LermSampleForm(models.Model):
     # def open_bulk_allotment_wizard(self):
     #     print("Workign")
 
+
+    def approve_sample(self):
+        self.write({'state': '4-in_report'})
+        eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+        eln.write({'state':'3-approved'})
 
     def print_sample_report(self):
         return self.env.ref('lerm_civil.sample_report_action').report_action(self)

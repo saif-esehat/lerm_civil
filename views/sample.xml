@@ -20,17 +20,22 @@
                             type="object"
                             name="print_sample_report"
                             string="Print"
-                            attrs="{'invisible': [('state', 'not in', ('3-in_report'))]}"
-                            />       
+                            attrs="{'invisible': [('state', 'not in', ('3-pending_verification','4-in_report'))]}"
+                            />
+
+                        <button type="object" 
+                        class="oe_highlight" 
+                        name="approve_sample" 
+                        string="Approve Sample" 
+                        attrs="{'invisible': [('state', 'not in', ('3-pending_verification'))]}"/>
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                 <group style="width:100%">
                     <field name="srf_id"  invisible="context.get('is_local',False)"/>
                 </group>
-
                     <group style="width:50%">
-                        <field name="sample_no"/>
+                      
                         <field name="discipline_id"/>
                         <field name="material_id" domain="[('id', 'in', material_ids)]"/>
                         <field name="brand"/>
@@ -67,6 +72,7 @@
                         <field name="sample_description"/>
                     </group>
                     <group style="width:50%">
+                        <field name="sample_no" invisible="1"/>
                         <field name="customer_id" invisible='1'/>
                         <field name="casting" invisible='1'/>
                     </group>
