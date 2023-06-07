@@ -28,6 +28,15 @@
                         name="approve_sample" 
                         string="Approve Sample" 
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification'))]}"/>
+<<<<<<< HEAD
+=======
+
+                        <button type="object" 
+                        name="reject_sample" 
+                        string="Reject Sample" 
+                        attrs="{'invisible': [('state', 'not in', ('3-pending_verification'))]}"/>
+       
+>>>>>>> f0b7ac3 (Approval System)
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
                 </header>
                 <sheet>

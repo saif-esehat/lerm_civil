@@ -89,6 +89,12 @@ class LermSampleForm(models.Model):
         self.write({'state': '4-in_report'})
         eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
         eln.write({'state':'3-approved'})
+    
+
+    def reject_sample(self):
+        self.write({'state': '2-alloted'})
+        eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+        eln.write({'state':'4-rejected'})
 
     def print_sample_report(self):
         return self.env.ref('lerm_civil.sample_report_action').report_action(self)
