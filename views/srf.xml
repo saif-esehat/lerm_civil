@@ -45,20 +45,21 @@
 
                             
 
-                    <group style="width:50%">
+                    <group style="width:50%" >
                         <field name="srf_id"/>
                         <field name="kes_number"/>
-                        <field name="srf_date"/>
-                        <field name="contact_person" domain="[('id', 'in', contact_contact_ids)]"/>
-                        <field name="site_address" domain="[('id', 'in', contact_site_ids)]"/>
-                        <field name="client_refrence"/>
+                        <field name="srf_date" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="contact_person" domain="[('id', 'in', contact_contact_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="site_address" domain="[('id', 'in', contact_site_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="client_refrence" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                     </group>
                     <group style="width:50%">
-                        <field name="customer"/>
+                        <field name="customer" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name='client' attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name="contact_other_ids" invisible='1'/>
-                        <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]"/>
-                        <field name="name_work"/>
-                        <field name="attachment" filename="attachment_name" />
+                        <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="name_work" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="attachment" filename="attachment_name" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name='attachment_name' invisible='1'/>
                     </group>
                     <!-- <group style="width:33.33%">
@@ -70,10 +71,10 @@
                     </group>
                     <group>
                     <group style="width:15%">
-                        <button name="open_sample_add_wizard" string="Repeat Sample" type="object" class="btn-primary"/>
+                        <button name="open_sample_add_wizard" string="Repeat Sample" type="object" class="btn-primary" attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"/>
                     </group>
                     <group style="width:15%">
-                        <button name="open_new_sample_add_wizard" string="New Sample" type="object" class="btn-primary"/>
+                        <button name="open_new_sample_add_wizard" string="New Sample" type="object" class="btn-primary" attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"/>
                     </group>
                     </group>
                     <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="samples" context = "{'default_customer_id' : customer,'is_local': True}" invisible='1'>
@@ -173,14 +174,17 @@
                     <group style="width:100%">
                         <field name="sample_description"/>
                     </group>
+                    
+                    <group style="width:50%">
+                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="date_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
+                    </group>
                     <group style="width:50%">
                         <field name="customer_id" invisible='1' />
                         
                     </group>
-                    <group style="width:50%">
-                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
-                    </group>
-
                     <group style="width:100%">
                         <!-- <field name="parameters_ids" invisible="1"/> -->
                         <field name="parameters" options="{'no_create': True}" >
