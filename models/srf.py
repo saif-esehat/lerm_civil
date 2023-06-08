@@ -285,7 +285,7 @@ class CreateSampleWizard(models.TransientModel):
     grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
     # qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
     # qty_id = fields.Integer(string="Sample Quantity")
-    sample_qty = fields.Integer(string="Sample Quantity")
+    sample_qty = fields.Integer(string="Sample Quantity",default=1)
     received_by_id = fields.Many2one('res.users',string="Received By",default=lambda self: self.env.user)
     sample_received_date = fields.Date(string="Sample Received Date")
     sample_condition = fields.Selection([
