@@ -51,6 +51,7 @@ class SrfForm(models.Model):
     customer = fields.Many2one('res.partner',string="Customer")
     billing_customer = fields.Many2one('res.partner',string="Billing Customer")
     contact_person = fields.Many2one('res.partner',string="Contact Person")
+    client = fields.Char("Client")
     site_address = fields.Many2one('res.partner',string="Site Address")
     name_work = fields.Many2one('res.partner.project',string="Name of Work")
     client_refrence = fields.Char(string="Client Reference Letter")
@@ -93,6 +94,14 @@ class SrfForm(models.Model):
     def compute_eln_count(self):
         count = self.env['lerm.eln'].search_count([('srf_id', '=', self.id)])
         self.eln_count = count
+
+    @api.onchange('customer')
+    def compute_client(self):
+        for record in self:
+            if record.customer:
+                self.client = self.env['res.partner'].search([("id","=",self.customer.id)]).consultant
+
+
 
     def eln_count_button(self):
         return {
@@ -199,6 +208,7 @@ class SrfForm(models.Model):
             witness = samples[-1].witness
             scope = samples[-1].scope
             sample_description = samples[-1].sample_description
+            sample_received_date = self.srf_date
 
             return {
             'name': "Add Sample",
@@ -222,7 +232,8 @@ class SrfForm(models.Model):
             'default_witness':witness,
             'default_scope':scope,
             'default_sample_description':sample_description,
-            'default_group_id':group_id
+            'default_group_id':group_id,
+            'default_sample_received_date':sample_received_date
             }
         }
         else:
@@ -249,7 +260,8 @@ class SrfForm(models.Model):
             'view_id': action.id,
             'target': 'new',
             'context':{
-                'default_customer_id': self.customer.id
+                'default_customer_id': self.customer.id,
+                'default_sample_received_date':self.srf_date
             }
             }
 
@@ -273,8 +285,8 @@ class CreateSampleWizard(models.TransientModel):
     grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
     # qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
     # qty_id = fields.Integer(string="Sample Quantity")
-    sample_qty = fields.Integer(string="Sample Quantity")
-    received_by_id = fields.Many2one('res.partner',string="Received By")
+    sample_qty = fields.Integer(string="Sample Quantity",default=1)
+    received_by_id = fields.Many2one('res.users',string="Received By",default=lambda self: self.env.user)
     sample_received_date = fields.Date(string="Sample Received Date")
     sample_condition = fields.Selection([
         ('satisfactory', 'Satisfactory'),
@@ -300,6 +312,7 @@ class CreateSampleWizard(models.TransientModel):
         ('14', '14 Days'),
         ('28', '28 Days'),
     ], string='Days of casting', default='3')
+    date_casting = fields.Date(string="Date of Casting")
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(string="Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
@@ -370,11 +383,12 @@ class CreateSampleWizard(models.TransientModel):
         witness = self.witness
         discipline_id = self.discipline_id.id
         scope = self.scope
-        sample_description =self.sample_condition
+        sample_description =self.sample_description
         parameters = self.parameters
         discipline_id = self.discipline_id
         casting = self.casting
         sample_qty = self.sample_qty
+        client_sample_id = self.client_sample_id
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -403,7 +417,8 @@ class CreateSampleWizard(models.TransientModel):
                 'parameters':parameters,
                 'discipline_id':discipline_id.id,
                 'casting':casting,
-                'sample_qty':sample_qty
+                'sample_qty':sample_qty,
+                'client_sample_id':client_sample_id
             })
             for i in range(self.sample_qty):
                 self.env["lerm.srf.sample"].create({
@@ -425,7 +440,8 @@ class CreateSampleWizard(models.TransientModel):
                     'parameters':parameters,
                     'discipline_id':discipline_id.id,
                     'casting':casting,
-                    'sample_range_id':sample_range.id
+                    'sample_range_id':sample_range.id,
+                    'client_sample_id':client_sample_id
                 })
 
             
