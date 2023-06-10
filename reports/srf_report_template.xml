@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+	 <template id="custom_layout_header_footer_lerm">
+        <div t-attf-class="header article" t-att-style="report_header_style">
+			<div class="row">
+				<div class="col-12 imageContainer" >
+					<img t-attf-src="/lerm_civil_inv/static/src/img/kes_letterHead.jpg" alt="Image"/>
+				</div>
+			</div>
+        </div>
+        <div t-attf-class="article" t-att-style="report_header_style">
+            <t t-out="0"/>
+        </div>
+		<div t-attf-class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <div class="footertext">
+						Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+					</div>
+					<div class="footertext">
+						Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
+					</div>
+					<div class="footertext">
+						CIN No.: U45209MH2017PTC291168
+					</div>
+                </ul>
+                <div t-if="report_type == 'pdf'" class="footertext">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+	</template>
+
+
 	<template id="srf_report_template">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout">
@@ -26,10 +58,8 @@
 								</div>
 								</t> -->
 			
-			<t t-call="web.basic_layout">
-				<div class="imageContainer" style="padding-bottom:8px">
-					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" class="company_logo" alt="Image" />
-				</div>
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.custom_layout_header_footer_lerm">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Srf Report</b></p>
 				</div>
@@ -37,39 +67,31 @@
 					<div t-foreach="srf" t-as="o">
 						<table>
 							<tr>
-								<td colspan="4">Report no :
+								<td colspan="4">Test Report no :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id"/>
 								</td>
-								<td colspan="4">Customer :
+								<td colspan="4">Report Issue Date :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.customer.name"/>
+									<span t-field="o.srf_date"/>
 								</td>
-								<td colspan="4">Kes No :
+								<td colspan="4">ULR No :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.kes_number"/>
+									<!-- <span t-field="o.srf_date"/> -->
 								</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td colspan="4">Billing Customer :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.billing_customer.name"/>
-								</td>
-								<td colspan="4">Srf Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_date"/>
 								</td>
 								<td colspan="4">Name of work :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.name_work.project_name"/>
 								</td>
-							</tr>
+							</tr> -->
 							<tr>
-								<td colspan="4">Contact Person :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.contact_person.name"/>
-								</td>
-								<td colspan="8">Site Address :
+								<td colspan="12">Project / Site Address :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.site_address.name"/>
 									<span t-field="o.site_address.street"/>
@@ -82,11 +104,73 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Client Refrence Letter :
+								<td colspan="12">Sample Description :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Sample Id Mark :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Size :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="o.billing_customer.name"/> -->
+								</td>
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="o.name_work.project_name"/> -->
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Brand :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="o.billing_customer.name"/> -->
+								</td>
+								<td colspan="6">Consultant Name :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="o.name_work.project_name"/> -->
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Client Name :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="o.billing_customer.name"/> -->
+								</td>
+								<td colspan="6">Client Refrence :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="o.name_work.project_name"/> -->
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Discipline :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="o.billing_customer.name"/> -->
+								</td>
+								<td colspan="6">Group :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="o.name_work.project_name"/> -->
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Material Test Name :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+							</tr>
+							<!-- <tr>
+								<td colspan="8">Client Refrence Letter :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.client_refrence"/>
 								</td>
-							</tr>
+								<td colspan="4">Contact Person :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.contact_person.name"/>
+								</td>
+							</tr> -->
 						</table>
 					</div>
 					<table style="margin-top:30px;">
@@ -244,6 +328,46 @@
 							</tr>
 						</tbody>
 					</table> -->
+					<div style="margin-top:20px" class="noteContainer">
+						<div>
+							<b>Note :-</b>
+						</div>
+						<div>
+							<ul>
+								<li>
+									The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+								</li>
+								<li>
+									Sample(s) was/were not drawn by laboratory.
+								</li>
+								<li>
+									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="signatureContainer">
+						<div>
+							<div>
+								<b>
+									Approved By
+								</b>
+							</div>
+							<div style="height:20px">
+
+							</div>
+							<div>
+								<b>
+									Chemical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									(Authorized Signatory)
+								</b>
+							</div>
+						</div>
+					</div>
 				</div>
 			</t>
 		</t>

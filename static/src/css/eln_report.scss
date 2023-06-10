@@ -82,18 +82,32 @@
   .saif{
     display: none;
   }
-  
-  
-  .imageContainer {
-    top:10px;
-    img{
-      width:100%
-    }
-    /* Additional CSS properties for positioning, size, etc. */
-  }
+
   
   .maincontent {
     position: absolute !important;
     top:8 !important;
   }
   
+
+  .imageContainer {
+
+    img{
+      height:115px;
+      width:100%;
+    }
+    /* Additional CSS properties for positioning, size, etc. */
+  }
+
+  .noteContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .signatureContainer{
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+  }
