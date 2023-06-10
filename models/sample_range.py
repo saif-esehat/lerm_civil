@@ -49,6 +49,13 @@ class SampleRangeLine(models.Model):
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
     kes_range = fields.Char("KES Range",required=True,readonly=True, default=lambda self: 'New')
     casting_date = fields.Date(string="Casting Date")
+    days_casting = fields.Selection([
+        ('3', '3 Days'),
+        ('7', '7 Days'),
+        ('14', '14 Days'),
+        ('28', '28 Days'),
+    ], string='Days of casting', default='3')
+    casting = fields.Boolean(string="Casting")
     client_sample_id = fields.Char(string="Client Sample Id")
     
     status = fields.Selection([

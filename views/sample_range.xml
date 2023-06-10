@@ -34,12 +34,13 @@
                         <!-- <field name="sample_quantity"/> -->
                         <field name="sample_received_date"/>
                         <field name="location"/>
+                        <field name="casting"/>
                         <field name="group_ids" invisible='1'/>
                         <field name="size_ids" invisible='1'/>
                         <field name="qty_ids" invisible='1'/>
                     </group>
                      <group style="width:100%">
-                        <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')]}"/>
+                        <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')] , 'invisible': [('sample_condition', '=', 'satisfactory')]}"/>
                     </group>
                     <group style="width:50%">
                         <field name="witness"/>
@@ -48,7 +49,14 @@
                         <field name="scope"/>
                     </group>
                     <group style="width:100%">
-                        <field name="sample_description"/>
+                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
+                        <field name="sample_description" attrs="{'invisible':[('casting','!=',True)]}"/>
+                    </group>
+                    <!-- <group style="width:100%">
+                        <field name="days_casting"/>
+                    </group> -->
+                    <group style="width:100%">
+                        <field name="casting_date"/>
                     </group>
                     <group style="width:50%">
                         <field name="customer_id" invisible='1'/>

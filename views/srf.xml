@@ -70,11 +70,10 @@
                         <field name="contact_contact_ids" invisible='1'/>
                     </group>
                     <group>
-                    <group style="width:15%">
+                    <group style="width:14%">
+                        <button name="open_new_sample_add_wizard" string="New Sample" type="object" class="btn-primary" attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"/>                    </group>
+                    <group style="width:14%">
                         <button name="open_sample_add_wizard" string="Repeat Sample" type="object" class="btn-primary" attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"/>
-                    </group>
-                    <group style="width:15%">
-                        <button name="open_new_sample_add_wizard" string="New Sample" type="object" class="btn-primary" attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"/>
                     </group>
                     </group>
                     <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="samples" context = "{'default_customer_id' : customer,'is_local': True}" invisible='1'>
@@ -163,7 +162,7 @@
                         <field name="qty_ids" invisible='1'/> -->
                     </group>
                     <group style="width:100%">
-                        <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')]}"/>
+                        <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')] , 'invisible': [('sample_condition', '=', 'satisfactory')]}"/>
                     </group>
                     <group style="width:50%">
                         <field name="witness"/>

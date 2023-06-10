@@ -441,7 +441,10 @@ class CreateSampleWizard(models.TransientModel):
                     'discipline_id':discipline_id.id,
                     'casting':casting,
                     'sample_range_id':sample_range.id,
-                    'client_sample_id':client_sample_id
+                    'client_sample_id':client_sample_id,
+                    'date_casting':self.date_casting,
+                    'days_casting':self.days_casting,
+                    'casting':self.casting
                 })
 
             

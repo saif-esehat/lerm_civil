@@ -75,7 +75,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">lerm.srf.sample</field>
         <field name="view_mode">tree,kanban,form</field>
-        <field name="domain">[('status','=','2-confirmed'),('state','=','3-in_report')]</field>
+        <field name="domain">[('status','=','2-confirmed'),('state','=','4-in_report')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Sample In Report</p>
         </field>
@@ -101,7 +101,7 @@
         name="Master Data"
         groups="kes_technician_access_group"
         parent="lerm_root"
-        sequence="11"  />
+        sequence="20"  />
 
     <menuitem id="discipline"
         name="Discipline"
@@ -116,10 +116,10 @@
         sequence="14" />
 
     <menuitem id="lerm_transaction_data"
-        name="Transaction Data"
+        name="Lab Operations"
         groups="kes_technician_access_group,kes_hod_access_group"
         parent="lerm_root"
-        sequence="14" />
+        sequence="10" />
 
     <menuitem id="lerm_sample"
         name="Sample"
@@ -137,9 +137,9 @@
     
     <menuitem id="sample_status"
         groups="kes_hod_access_group"
-        name="Sample Status"
+        name="Operational Status"
         parent="lerm_root"
-        sequence="20" />
+        sequence="15" />
     
     <menuitem id="sample_status_pending_allotment"
         name="Allotment Pending"

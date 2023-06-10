@@ -31,6 +31,9 @@ class ELN(models.Model):
         ('3-approved','Approved'),
         ('4-rejected','Rejected')
     ], string='State',default='1-draft')
+    start_date = fields.Date(string="Start Date")
+    end_date = fields.Date(string="End Date")
+
 
     def confirm_eln(self):
         self.sample_id.write({'state':'3-pending_verification'})
