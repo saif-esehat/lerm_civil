@@ -30,6 +30,15 @@
                                 <field name="cell"/>
                             </group>
                         </group>
+
+                        <field name="dependent_inputs">
+                            <tree editable="bottom">
+                                <field name="identifier"/>
+                                <field name="label"/>
+                            </tree>
+                        </field>
+                        <field name="formula" widget="ace" options="{'mode': 'python'}" />
+
                         <!-- <notebook>
                         <page string="Alias">
                             <field name='alias_table'>

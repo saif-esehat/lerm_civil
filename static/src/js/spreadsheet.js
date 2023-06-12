@@ -146,6 +146,8 @@ class SetResult extends AbstractFieldOwl {
       mode: "normal",
     });
 
+
+
     var sheets = model.getters.getSheets();
     for (let index = 0; index < sheets.length; index++) {
       await model.dispatch("EVALUATE_CELLS", { sheetId: sheets[index].id });
@@ -287,7 +289,8 @@ class FetchDatasheet extends AbstractFieldOwl {
       index++
     ) {
       const templateId = unique_spreadsheet_templates_ids[index];
-      const data = await getDataFromTemplate(this.env.services.rpc, templateId);
+      const data = await this.getDataFromTemplate(this.env.services.rpc, templateId);
+      debugger
       // name for spreadsheet
       const name = "Spreadsheet";
 
@@ -346,7 +349,36 @@ class FetchDatasheet extends AbstractFieldOwl {
 
     this.trigger("reload");
   }
+
+   async getDataFromTemplate(rpc, templateId) {
+    let [{ data }] = await rpc({
+        method: "read",
+        model: "spreadsheet.template",
+        args: [templateId, ["data"]],
+    });
+    data = base64ToJson(data);
+    const model = new Model(data, {
+        mode: "headless",
+        evalContext: {
+            env: {
+                delayedRPC: rpc,
+                services: { rpc },
+            },
+        },
+    });
+    debugger
+    await model.waitForIdle();
+    model.dispatch("CONVERT_PIVOT_FROM_TEMPLATE");
+    return model.exportData();
+  }
+
+
+
 }
+
+
+
+
 
 class FillDataSheet extends AbstractFieldOwl {
   async openDatasheet() {
@@ -381,7 +413,9 @@ class UpdateResult extends AbstractFieldOwl {
       const model = await new Model(data, {
         mode: "normal",
       });
-      ;
+
+      debugger
+      
 
       var sheets = model.getters.getSheets();
       for (let index = 0; index < sheets.length; index++) {
@@ -413,8 +447,9 @@ class UpdateResult extends AbstractFieldOwl {
         var sheet_name =   model.getters.getSheetIdByName(parameters_master[0].sheets)
 
         var cell =  parameters_master[0].cell
-        debugger
         var cordinates = this.convertCellToCoordinate(cell)
+        debugger
+
         var result = model.getters.getCell(sheet_name,cordinates.column,cordinates.row).evaluated.value
         // debugger
 
