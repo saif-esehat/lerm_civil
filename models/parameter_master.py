@@ -29,6 +29,7 @@ class ParameterMaster(models.Model):
 
 class DependentInputs(models.Model):
     _name = 'lerm.dependent.inputs'
+    _rec_name = 'label'
     parameter_id =  fields.Many2one('lerm.parameter.master',string="Parameters")
     identifier = fields.Char(string="Identifier")
     label = fields.Char(string="Label")

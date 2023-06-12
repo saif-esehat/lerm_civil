@@ -34,6 +34,12 @@ class ELN(models.Model):
     start_date = fields.Date(string="Start Date")
     end_date = fields.Date(string="End Date")
 
+    parameters_result = fields.One2many('eln.parameters.result','eln_id',string="Parameters")
+    parameters_input = fields.One2many('eln.parameters.inputs','eln_id',string="Parameters Inputs")
+
+
+
+
 
     def confirm_eln(self):
         self.sample_id.write({'state':'3-pending_verification'})
@@ -141,6 +147,7 @@ class ELN(models.Model):
                 record.srf_date = srf_record
             else:
                 record.srf_date = None
+                
 
 
 class ELNSpreadsheet(models.Model):
@@ -151,6 +158,28 @@ class ELNSpreadsheet(models.Model):
     spreadsheet_template = fields.Many2one("spreadsheet.template",string="Spreadsheet Template")
     related_parameters = fields.Many2many("eln.parameters",string="Related Parameters")
     fill_datasheet = fields.Integer("Fill Spreadsheet")
+
+
+class ELNParametersResult(models.Model):
+    _name = 'eln.parameters.result'
+    eln_id = fields.Many2one('lerm.eln',string="ELN ID")
+    parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+    result = fields.Float(string="Result")
+
+    
+
+class ELNParametersInputs(models.Model):
+    _name = 'eln.parameters.inputs'
+    eln_id = fields.Many2one('lerm.eln',string="ELN ID")
+    parameter_result = fields.Many2one('eln.parameters.result',string="Parameter")
+    identifier = fields.Char(string="Identifier")
+    inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
+    value = fields.Float(string="Value")
+
+
+
+
+
 
 
 class ELNParameters(models.Model):
