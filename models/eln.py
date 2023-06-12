@@ -1,4 +1,6 @@
 from odoo import api, fields, models
+from odoo.tools.safe_eval import safe_eval
+
 import base64
 import json
 
@@ -38,6 +40,23 @@ class ELN(models.Model):
     parameters_input = fields.One2many('eln.parameters.inputs','eln_id',string="Parameters Inputs")
 
 
+
+
+    def fetch_inputs(self):
+        for record in self.parameters_result:
+            for inputs in record.parameter.dependent_inputs:
+                self.write({"parameters_input":[(0,0,{'parameter_result':record.id,'identifier':inputs.identifier,'inputs':inputs.id})]})
+
+    def calculate_results(self):
+        for record in self.parameters_result:
+            inputs = self.env["eln.parameters.inputs"].search([("parameter_result","=",record.id)])
+            values = {}
+            for input in inputs:
+                values[input.identifier] = input.value
+            # import wdb; wdb.set_trace()
+            result = safe_eval(record.parameter.formula, values)
+            record.write({'result':result})
+            print(result) 
 
 
 
@@ -162,6 +181,7 @@ class ELNSpreadsheet(models.Model):
 
 class ELNParametersResult(models.Model):
     _name = 'eln.parameters.result'
+    _rec_name = 'parameter'
     eln_id = fields.Many2one('lerm.eln',string="ELN ID")
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
     result = fields.Float(string="Result")
