@@ -65,7 +65,9 @@
 
                             </tree>
                         </field>
-                        <field name="formula" widget="ace" options="{'mode': 'python'}" />
+                        <group>
+                            <field name="formula" widget="ace" options="{'mode': 'python'}" />
+                        </group>
 
                         <!-- <notebook>
                         <page string="Alias">
