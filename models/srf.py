@@ -485,12 +485,13 @@ class CreateSampleWizard(models.TransientModel):
             active_ids = self.env.context.get('active_ids')
             for id in active_ids:
                 parameters = []
+                parameters_result = []
 
                 sample = self.env['lerm.srf.sample'].sudo().search([('id','=',id)])
                 if sample.state == '1-allotment_pending':
                     for parameter in sample.parameters:
                         parameters.append((0,0,{'parameter':parameter.id ,'spreadsheet_template':parameter.spreadsheet_template.id}))
-
+                        parameters_result.append((0,0,{'parameter':parameter.id,'unit': parameter.unit.id,'test_method':parameter.test_method.id}))
                     self.env['lerm.eln'].sudo().create({
                         'srf_id': sample.srf_id.id,
                         'srf_date':sample.srf_id.srf_date,
@@ -501,7 +502,8 @@ class CreateSampleWizard(models.TransientModel):
                         'witness_name': sample.witness,
                         'sample_id':sample.id,
                         'parameters':parameters,
-                        'technician': self.technicians.id
+                        'technician': self.technicians.id,
+                        'parameters_result':parameters_result
                     })
 
                     sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})

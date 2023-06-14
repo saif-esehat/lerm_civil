@@ -184,6 +184,9 @@ class ELNParametersResult(models.Model):
     _rec_name = 'parameter'
     eln_id = fields.Many2one('lerm.eln',string="ELN ID")
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+    unit = fields.Many2one('uom.uom',string="Unit")
+    test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
+    specification = fields.Text(string="Specification")
     result = fields.Float(string="Result")
 
     

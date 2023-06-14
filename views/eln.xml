@@ -41,7 +41,7 @@
                                 <field name='attachment_name' invisible='1'/>
                             </group>
                         </group>
-                        <group style="width:50%">
+                        <group style="width:50%" invisible="1">
                             <field name="datasheets" nolabel="1">
                                 <tree>
                                     <field name="datasheet"/>
@@ -53,7 +53,7 @@
                             <field name='update_result' widget="update_result" nolabel="1"/>
                         </group>
 
-                        <group style="width:100%">
+                        <group style="width:100%" invisible="1">
 
                             <field name="parameters" nolabel="1">
                                 <tree>
@@ -72,19 +72,23 @@
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
                                     <field name="result" />
+                                    <field name="unit" />
+                                    <field name="specification" />
+                                    <field name="test_method" />
                                 </tree>
                             </field>
+                        <button string="Fetch Inputs" name="fetch_inputs"  type="object"/>
+                        <button string="Calculate Inputs" name="calculate_results"  type="object"/>
                             <!-- <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
                             <field name='update_result' widget="update_result" nolabel="1"/> -->
                         </group>
-                        <button string="Fetch Inputs" name="fetch_inputs"  type="object"/>
-                        <button string="Calculate Inputs" name="calculate_results"  type="object"/>
+
 
                         <group style="width:100%">
                             <field name="parameters_input" nolabel="1">
                                 <tree editable="bottom">
                                     <field name="parameter_result"/>
-                                    <field name="identifier" />
+                                    <field name="identifier" invisible="1" />
                                     <field name="inputs" />
                                     <field name="value" />
                                 </tree>
