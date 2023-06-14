@@ -22,6 +22,19 @@ class ParameterMaster(models.Model):
     cell = fields.Char("Result Cell")
     group = fields.Many2one('lerm_civil.group',string="Group")
     parameter_table = fields.One2many('lerm.parameter.master.table','parameter_id',string="Material Table")
+    dependent_inputs = fields.One2many("lerm.dependent.inputs","parameter_id",string="Inputs")
+    formula = fields.Text("Formula")
+
+
+
+
+class DependentInputs(models.Model):
+    _name = 'lerm.dependent.inputs'
+    _rec_name = 'label'
+    parameter_id =  fields.Many2one('lerm.parameter.master',string="Parameters")
+    identifier = fields.Char(string="Identifier")
+    label = fields.Char(string="Label")
+
 
 
 class ParameterMaster(models.Model):

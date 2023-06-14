@@ -67,6 +67,32 @@
                             </field>
                         </group>
 
+                        <group style="width:50%">
+                            <field name="parameters_result" nolabel="1">
+                                <tree editable="bottom" >
+                                    <field name="parameter"/>
+                                    <field name="result" />
+                                </tree>
+                            </field>
+                            <!-- <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
+                            <field name='update_result' widget="update_result" nolabel="1"/> -->
+                        </group>
+                        <button string="Fetch Inputs" name="fetch_inputs"  type="object"/>
+                        <button string="Calculate Inputs" name="calculate_results"  type="object"/>
+
+                        <group style="width:100%">
+                            <field name="parameters_input" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="parameter_result"/>
+                                    <field name="identifier" />
+                                    <field name="inputs" />
+                                    <field name="value" />
+                                </tree>
+                            </field>
+                            <!-- <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
+                            <field name='update_result' widget="update_result" nolabel="1"/> -->
+                        </group>
+
                     </sheet>
                 </form>
             </field>

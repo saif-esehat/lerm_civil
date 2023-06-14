@@ -1,4 +1,6 @@
 from odoo import api, fields, models
+from odoo.tools.safe_eval import safe_eval
+
 import base64
 import json
 
@@ -33,6 +35,29 @@ class ELN(models.Model):
     ], string='State',default='1-draft')
     start_date = fields.Date(string="Start Date")
     end_date = fields.Date(string="End Date")
+
+    parameters_result = fields.One2many('eln.parameters.result','eln_id',string="Parameters")
+    parameters_input = fields.One2many('eln.parameters.inputs','eln_id',string="Parameters Inputs")
+
+
+
+
+    def fetch_inputs(self):
+        for record in self.parameters_result:
+            for inputs in record.parameter.dependent_inputs:
+                self.write({"parameters_input":[(0,0,{'parameter_result':record.id,'identifier':inputs.identifier,'inputs':inputs.id})]})
+
+    def calculate_results(self):
+        for record in self.parameters_result:
+            inputs = self.env["eln.parameters.inputs"].search([("parameter_result","=",record.id)])
+            values = {}
+            for input in inputs:
+                values[input.identifier] = input.value
+            # import wdb; wdb.set_trace()
+            result = safe_eval(record.parameter.formula, values)
+            record.write({'result':result})
+            print(result) 
+
 
 
     def confirm_eln(self):
@@ -141,6 +166,7 @@ class ELN(models.Model):
                 record.srf_date = srf_record
             else:
                 record.srf_date = None
+                
 
 
 class ELNSpreadsheet(models.Model):
@@ -151,6 +177,29 @@ class ELNSpreadsheet(models.Model):
     spreadsheet_template = fields.Many2one("spreadsheet.template",string="Spreadsheet Template")
     related_parameters = fields.Many2many("eln.parameters",string="Related Parameters")
     fill_datasheet = fields.Integer("Fill Spreadsheet")
+
+
+class ELNParametersResult(models.Model):
+    _name = 'eln.parameters.result'
+    _rec_name = 'parameter'
+    eln_id = fields.Many2one('lerm.eln',string="ELN ID")
+    parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+    result = fields.Float(string="Result")
+
+    
+
+class ELNParametersInputs(models.Model):
+    _name = 'eln.parameters.inputs'
+    eln_id = fields.Many2one('lerm.eln',string="ELN ID")
+    parameter_result = fields.Many2one('eln.parameters.result',string="Parameter")
+    identifier = fields.Char(string="Identifier")
+    inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
+    value = fields.Float(string="Value")
+
+
+
+
+
 
 
 class ELNParameters(models.Model):
