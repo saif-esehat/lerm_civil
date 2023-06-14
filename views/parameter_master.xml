@@ -30,6 +30,32 @@
                                 <field name="cell"/>
                             </group>
                         </group>
+                        <group style="width:100%">
+                            <field name='parameter_table'>
+                                <tree edidable="bottom">
+                                    <field name="material"/>
+                                    <field name="grade"/>
+                                    <field name="size"/>
+                                    <field name="specification"/>
+                                    <field name="req_max"/>
+                                    <field name="req_min"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="material"/>
+                                        <field name="grade"/>
+                                        <field name="size"/>
+                                        <field name="specification"/>
+                                        <field name="req_max"/>
+                                        <field name="req_min"/>
+                                        <field name="size_ids" invisible='1'/>
+                                        <field name="grade_ids" invisible='1'/>
+                                        <field name="material_ids" invisible='1'/>
+
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
                         <!-- <notebook>
                         <page string="Alias">
                             <field name='alias_table'>

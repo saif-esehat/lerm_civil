@@ -68,6 +68,7 @@ class SrfForm(models.Model):
     sample_count = fields.Integer(string="Sample Count", compute='compute_sample_count')
     eln_count = fields.Integer(string="ELN Count", compute='compute_eln_count')
     sample_range_table = fields.One2many('sample.range.line','srf_id',string="Sample Range")
+    
 
     def action_srf_sent_mail(self):
 
@@ -280,7 +281,6 @@ class CreateSampleWizard(models.TransientModel):
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
     size_ids = fields.Many2many('lerm.size.line',string="Size")
-
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
     grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
     # qty_id = fields.Many2one('lerm.qty.line',string="Quantity")

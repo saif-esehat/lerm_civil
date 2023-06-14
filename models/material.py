@@ -5,7 +5,6 @@ class Material(models.Model):
 
     is_sample = fields.Boolean(string="Is Sample?")
     casting_required = fields.Boolean(string="Casting Required")
-
     test_parameter = fields.Char("Test Column Title")
     results = fields.Char("Result Column Title")
     specifications = fields.Char("Specifications Column Title")
@@ -80,11 +79,10 @@ class SizeLine(models.Model):
     product_id = fields.Many2one('product.template')
     size = fields.Char("Size")
 
-
 class QtyLine(models.Model):
     _name = 'lerm.qty.line'
     _rec_name = 'qty'
-
+    
     product_id = fields.Many2one('product.template')
     qty = fields.Char("Qty")
 
