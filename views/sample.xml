@@ -45,7 +45,7 @@
                         <field name="discipline_id"/>
                         <field name="material_id" domain="[('id', 'in', material_ids)]"/>
                         <field name="brand"/>
-                        <field name='casting_date'/>
+                        <field name='casting_date' attrs="{'invisible':[('casting','!=',True)]}"/>
                         <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
                         <field name="client_sample_id"/>
                         <field name="received_by_id"/>

@@ -418,7 +418,8 @@ class CreateSampleWizard(models.TransientModel):
                 'discipline_id':discipline_id.id,
                 'casting':casting,
                 'sample_qty':sample_qty,
-                'client_sample_id':client_sample_id
+                'client_sample_id':client_sample_id,
+                'casting_date':self.date_casting
             })
             for i in range(self.sample_qty):
                 self.env["lerm.srf.sample"].create({
@@ -442,7 +443,7 @@ class CreateSampleWizard(models.TransientModel):
                     'casting':casting,
                     'sample_range_id':sample_range.id,
                     'client_sample_id':client_sample_id,
-                    'date_casting':self.date_casting,
+                    'casting_date':self.date_casting,
                     'days_casting':self.days_casting,
                     'casting':self.casting
                 })
