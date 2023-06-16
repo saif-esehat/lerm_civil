@@ -26,14 +26,37 @@ class ParameterMaster(models.Model):
     formula = fields.Text("Formula")
 
 
+    def fetch_dependent_parameters_recursive(self, depth=1):
+        parameters = []
+
+        def recursive_fetch(record, curr_depth):
+            nonlocal parameters
+            if curr_depth <= 0:
+                return
+
+            for input_record in record.dependent_inputs:
+                if input_record.is_parameter_dependent:
+                    parameters.append(input_record.parameter)
+                    recursive_fetch(input_record.parameter, curr_depth - 1)
+
+        recursive_fetch(self, depth)
+
+        return parameters
+
+
 
 
 class DependentInputs(models.Model):
     _name = 'lerm.dependent.inputs'
     _rec_name = 'label'
     parameter_id =  fields.Many2one('lerm.parameter.master',string="Parameters")
+    is_parameter_dependent = fields.Boolean("Dependent Parameter")
     identifier = fields.Char(string="Identifier")
     label = fields.Char(string="Label")
+    parameter = fields.Many2one("lerm.parameter.master",string="Parameter")
+
+
+
 
 
 

@@ -51,7 +51,6 @@
                                         <field name="size_ids" invisible='1'/>
                                         <field name="grade_ids" invisible='1'/>
                                         <field name="material_ids" invisible='1'/>
-
                                     </group>
                                 </form>
                             </field>
@@ -59,11 +58,16 @@
 
                         <field name="dependent_inputs">
                             <tree editable="bottom">
+                                <field name="is_parameter_dependent"/>
                                 <field name="identifier"/>
                                 <field name="label"/>
+                                <field name="parameter"/>
+
                             </tree>
                         </field>
-                        <field name="formula" widget="ace" options="{'mode': 'python'}" />
+                        <group>
+                            <field name="formula" widget="ace" options="{'mode': 'python'}" />
+                        </group>
 
                         <!-- <notebook>
                         <page string="Alias">

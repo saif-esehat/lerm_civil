@@ -67,7 +67,7 @@
                             </field>
                         </group>
 
-                        <group style="width:50%">
+                        <group style="width:100%">
                             <field name="parameters_result" nolabel="1">
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
@@ -75,6 +75,7 @@
                                     <field name="unit" />
                                     <field name="specification" />
                                     <field name="test_method" />
+                                    <button string="Calculation" name="open_calculation_wizard" type="object" class="oe_highlight"/>
                                 </tree>
                             </field>
                         <button string="Fetch Inputs" name="fetch_inputs"  type="object"/>
@@ -88,6 +89,7 @@
                             <field name="parameters_input" nolabel="1">
                                 <tree editable="bottom">
                                     <field name="parameter_result"/>
+                                    <field name="is_parameter_dependent"/>
                                     <field name="identifier" invisible="1" />
                                     <field name="inputs" />
                                     <field name="value" />
@@ -212,6 +214,50 @@
             <field name="view_id" ref="lerm_civil.eln_result_update_wizard"/>
             <field name="target">new</field>
         </record>
+
+        <record id="parameter_calculation_wizard_action" model="ir.actions.act_window">
+            <field name="name">Calculation Wizard</field>
+            <field name="res_model">parameter.calculation.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="lerm_civil.parameter_calculation_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="parameter_calculation_wizard" model="ir.ui.view">
+        <field name="name">parameter.calculation.wizard.form</field>
+        <field name="model">parameter.calculation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Your Wizard">
+                <group>
+                    <field name="parameter"/>
+                </group>
+                <notebook>
+                    <page string="Input Lines">
+                        <field name="inputs_lines" >
+                            <tree editable="bottom">
+                                
+                                <field name="inputs_id" invisible="1"/>
+                                <field name="parameter_result"/>
+                                <field name="is_parameter_dependent"/>
+                                <field name="identifier"/>
+                                <field name="inputs" />
+                                <field name="value" />
+                            </tree>
+                        </field>
+                        <group>
+                            <field name="result"/>
+                        </group>
+
+                    </page>
+                    
+
+                </notebook>
+                <footer>
+                    <button name="update_result" string="Update" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
 
 

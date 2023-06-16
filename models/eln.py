@@ -43,9 +43,47 @@ class ELN(models.Model):
 
 
     def fetch_inputs(self):
+
+        # parameter = self.env['lerm.parameter.master'].browse(7)  # Replace 'parameter_id' with the actual ID of the parameter
+        # dependent_parameters = parameter.fetch_dependent_parameters_recursive(depth=80)  # Fetch up to 3 levels of dependent parameters
+        # # import wdb ; wdb.set_trace() 
+        # for dependent_parameter in dependent_parameters:
+        #     import wdb ; wdb.set_trace() 
+        #     print(dependent_parameter.parameter_name)
+        # parameters = []
+
         for record in self.parameters_result:
-            for inputs in record.parameter.dependent_inputs:
-                self.write({"parameters_input":[(0,0,{'parameter_result':record.id,'identifier':inputs.identifier,'inputs':inputs.id})]})
+            parameter = self.env['lerm.parameter.master'].browse(record.parameter.id)
+            # import wdb ; wdb.set_trace() 
+
+            for inputs in parameter.dependent_inputs:
+                self.write({"parameters_input":[(0,0,{'parameter_result':record.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id})]})
+            
+            dependent_parameters = parameter.fetch_dependent_parameters_recursive(depth=80)
+            for dependent_parameter in dependent_parameters:
+                # import wdb ; wdb.set_trace()
+                data = self.env["eln.parameters.result"].create({"eln_id":self.id,'parameter':dependent_parameter.id})
+                # data = self.write({"parameters_result":[(0,0,{'parameter':dependent_parameter.id})]})
+                for inputs in dependent_parameter.dependent_inputs:
+                    # import wdb ; wdb.set_trace() 
+                    self.write({"parameters_input":[(0,0,{'parameter_result':data.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id})]})
+
+
+
+            # dependent_parameters = parameter.fetch_dependent_parameters_recursive(depth=80)
+
+            # for inputs in record.parameter.dependent_inputs:
+                
+            #     self.write({"parameters_input":[(0,0,{'parameter_result':record.id,'identifier':inputs.identifier,'inputs':inputs.id})]})
+            #     if inputs.is_parameter_dependent:
+
+            #         # data = self.write({"parameters_result":[(0,0,{'parameter':inputs.parameter.id})]})
+            #         data = self.env["eln.parameters.result"].create({"eln_id":self.id,'parameter':inputs.parameter.id})
+            #         import wdb ; wdb.set_trace()
+            #         for inputs in data.parameter.dependent_inputs: 
+            #             self.write({"parameters_input":[(0,0,{'parameter_result':data.id,'identifier':inputs.identifier,'inputs':inputs.id})]})
+
+            #         self.env.cr.commit()
 
     def calculate_results(self):
         for record in self.parameters_result:
@@ -166,6 +204,71 @@ class ELN(models.Model):
                 record.srf_date = srf_record
             else:
                 record.srf_date = None
+
+class ParameteResultCalculationWizard(models.TransientModel):
+    _name = 'parameter.calculation.wizard'
+    parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+    inputs_lines = fields.One2many('input.line.wizard', 'wizard_id', string='Inputs')
+    result = fields.Float(string="Result",compute="compute_result")
+
+
+    def update_result(self):
+        result_id = self.env.context.get('result_id')
+        result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
+        self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
+        self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
+        for input in self.inputs_lines:
+            # import wdb; wdb.set_trace()
+            self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value})
+
+
+
+
+        result_id.write({'result':self.result})
+
+        return {'type': 'ir.actions.act_window_close'}
+
+    # def calculate(self):
+    #     values = {}
+    #     for input in self.inputs_lines:
+    #         values[input.identifier] = input.value
+        
+
+    #     result_id = self.env.context.get('result_id')
+    #     result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
+    #     result = safe_eval(result_id.parameter.formula, values)
+    #     # import wdb; wdb.set_trace()
+    #     self.write({'result':result})
+
+    @api.depends('inputs_lines.value')
+    def compute_result(self):
+        for record in self:
+            values = {}
+            for input in self.inputs_lines:
+                values[input.identifier] = input.value
+            
+
+            result_id = self.env.context.get('result_id')
+            result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
+            result = safe_eval(result_id.parameter.formula, values)
+            record.result = result
+
+        # print(input)
+
+
+class InputLines(models.TransientModel):
+    _name = 'input.line.wizard'
+    wizard_id = fields.Many2one('parameter.calculation.wizard', string='Wizard')
+    inputs_id = fields.Many2one('eln.parameters.inputs', string='Inputs ID')
+    parameter_result = fields.Many2one('eln.parameters.result',string="Parameter")
+    is_parameter_dependent = fields.Boolean("Parameter Dependent")
+    identifier = fields.Char(string="Identifier")
+    inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
+    value = fields.Float(string="Value")
+
+
+
+  
                 
 
 
@@ -189,12 +292,44 @@ class ELNParametersResult(models.Model):
     specification = fields.Text(string="Specification")
     result = fields.Float(string="Result")
 
+
+    def open_calculation_wizard(self):
+        # wizard = self.env['parameter.calculation.wizard'].create({})
+        action = self.env.ref('lerm_civil.parameter_calculation_wizard')
+
+        inputs =self.env["eln.parameters.inputs"].search([("eln_id","=",self.eln_id.id),("parameter_result","=",self.id)])
+        parameters_inputs=[]
+        for input in inputs:
+            # import wdb; wdb.set_trace()
+            parameters_input = (0,0,{'inputs_id':input.id,'parameter_result':input.parameter_result.id,"is_parameter_dependent":input.is_parameter_dependent,'identifier':input.identifier,'inputs':input.inputs.id,'value':input.value})
+            parameters_inputs.append(parameters_input)
+        # import wdb; wdb.set_trace()
+
+
+        return {
+            'name': "Calculation",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'parameter.calculation.wizard',
+            'view_id': action.id,
+            'target': 'new',
+            'context':{
+                'default_parameter':self.parameter.id,
+                'default_inputs_lines': parameters_inputs,
+                'result_id':self.id,
+                'eln_id':self.eln_id.id
+            }
+            }
+
+
     
 
 class ELNParametersInputs(models.Model):
     _name = 'eln.parameters.inputs'
     eln_id = fields.Many2one('lerm.eln',string="ELN ID")
     parameter_result = fields.Many2one('eln.parameters.result',string="Parameter")
+    is_parameter_dependent = fields.Boolean("Parameter Dependent")
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
     value = fields.Float(string="Value")
