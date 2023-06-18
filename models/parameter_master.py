@@ -13,7 +13,7 @@ class ParameterMaster(models.Model):
     client_max_value = fields.Float(string="Client max Value")
     mu_value = fields.Float(string="Mu Value")
     unit = fields.Many2one('uom.uom',string="Unit")
-    calculated = fields.Boolean("Calulated")
+    calculated = fields.Boolean("Pseudo Parameters")
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
     discipline = fields.Many2one('lerm_civil.discipline',string="Discipline")
     nabl_select = fields.Selection([('nabl', 'NABL'), ('non_nabl', 'Non NABL')], string='NABL')
