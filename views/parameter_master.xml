@@ -7,9 +7,12 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <group style="width:100%">
+                            <field name="parameter_name"/>
+                        </group>
                         <group>
                             <group>
-                                <field name="parameter_name"/>
+                                <field name="material"/>
                                 <field name="lab_min_value"/>
                                 <field name="nabl_min_value" invisible="1"/>
                                 <field name="client_min_value" invisible="1"/>

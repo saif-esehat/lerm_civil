@@ -29,7 +29,8 @@ class LermSampleForm(models.Model):
     technicians = fields.Many2one("res.users",string="Technicians")
     location = fields.Char(string="Location")
     sample_reject_reason = fields.Char(string="Sample Reject Reason")
-    witness = fields.Char(string="Witness")
+    has_witness = fields.Boolean(string="Witness")
+    witness = fields.Char(string="Witness Name")
     scope = fields.Selection([
         ('nabl', 'NABL'),
         ('non_nabl', 'Non-NABL'),

@@ -69,7 +69,8 @@
                         <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')]}"/>
                     </group>
                     <group style="width:50%">
-                        <field name="witness"/>
+                        <field name="has_witness"/>
+                        <field name="witness" attrs="{'invisible': [('has_witness','!=',True)]}"/>
                     </group>
                     <group style="width:50%">
                         <field name="scope"/>

@@ -24,6 +24,7 @@ class ParameterMaster(models.Model):
     parameter_table = fields.One2many('lerm.parameter.master.table','parameter_id',string="Material Table")
     dependent_inputs = fields.One2many("lerm.dependent.inputs","parameter_id",string="Inputs")
     formula = fields.Text("Formula")
+    material = fields.Many2one('product.template',string="Material")
 
 
     def fetch_dependent_parameters_recursive(self, depth=1):
