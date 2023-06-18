@@ -231,6 +231,22 @@
         <field name="target">new</field>
     </record>
 
+    <record id="sample_reject_wizard" model="ir.ui.view">
+        <field name="name">sample.reject.wizard</field>
+        <field name="model">sample.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+            <group>
+                <field name="sample_id" invisible='1'/>
+                <field name="reject_reason"/>
+            </group>
+            <footer>
+                    <button name="reject_sample_button" string="Reject Sample" type="object" class="btn-primary"/>
+                    <button name="close_reject_wizard" string="Close" type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
     </data>
 

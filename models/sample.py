@@ -92,9 +92,20 @@ class LermSampleForm(models.Model):
     
 
     def reject_sample(self):
-        self.write({'state': '2-alloted'})
-        eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
-        eln.write({'state':'4-rejected'})
+        # self.write({'state': '2-alloted'})
+        # eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+        # eln.write({'state':'4-rejected'})
+
+        action = self.env.ref('lerm_civil.sample_reject_wizard')
+        return {
+            'name': "Reject Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'sample.reject.wizard',
+            'view_id': action.id,
+            'target': 'new'
+            }
 
     def print_sample_report(self):
         return self.env.ref('lerm_civil.sample_report_action').report_action(self)
@@ -194,3 +205,32 @@ class SampleParameter(models.Model):
     sample_id = fields.Many2one('',string="Sample Id")
     product_id = fields.Many2one('product.template' , string="Product Id")
     paramter = fields.Many2one('lerm.parameter.master' , string="Parameter")
+
+
+class RejectSampleWizard(models.Model):
+    _name = 'sample.reject.wizard'
+
+    sample_id = fields.Many2one('lerm.srf.sample',string="Sample")
+    reject_reason = fields.Char('Reject Reason')
+
+
+    def reject_sample_button(self):
+        # return {'type': 'ir.actions.act_window_close'}
+        if self.reject_reason:
+            sample_id = self.env.context.get('active_id')
+            sample = self.env['lerm.srf.sample'].search([('id','=',sample_id)]).write({'state': '2-alloted'})
+            eln = self.env['lerm.eln'].search([('sample_id','=',sample_id)])
+            eln.write({'state':'4-rejected'})
+
+            sample_reject = self.env['sample.reject.wizard'].create({
+                'sample_id': self.env.context.get('active_id'),
+                'reject_reason':self.reject_reason,
+                
+            })
+
+            return {'type': 'ir.actions.act_window_close'}
+        else:
+            raise UserError("Please Specify Reject Reason")
+
+    def close_reject_wizard(self):
+        return {'type': 'ir.actions.act_window_close'}
