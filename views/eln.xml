@@ -214,14 +214,14 @@
             <field name="view_id" ref="lerm_civil.eln_result_update_wizard"/>
             <field name="target">new</field>
         </record>
-
+<!-- 
         <record id="parameter_calculation_wizard_action" model="ir.actions.act_window">
             <field name="name">Calculation Wizard</field>
             <field name="res_model">parameter.calculation.wizard</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="lerm_civil.parameter_calculation_wizard"/>
             <field name="target">new</field>
-        </record>
+        </record> -->
 
         <record id="parameter_calculation_wizard" model="ir.ui.view">
         <field name="name">parameter.calculation.wizard.form</field>

@@ -244,14 +244,18 @@ class ParameteResultCalculationWizard(models.TransientModel):
     def compute_result(self):
         for record in self:
             values = {}
-            for input in self.inputs_lines:
-                values[input.identifier] = input.value
-            
+            try:
+                for input in self.inputs_lines:
+                    values[input.identifier] = input.value
+                
 
-            result_id = self.env.context.get('result_id')
-            result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
-            result = safe_eval(result_id.parameter.formula, values)
-            record.result = result
+                result_id = self.env.context.get('result_id')
+                result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
+                result = safe_eval(result_id.parameter.formula, values)
+                record.result = result
+            except:
+                record.result = 0
+                pass
 
         # print(input)
 
