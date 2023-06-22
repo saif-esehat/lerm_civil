@@ -303,7 +303,8 @@ class CreateSampleWizard(models.TransientModel):
     ], string='Sample Condition', default='satisfactory')
     location = fields.Char(string="Location")
     sample_reject_reason = fields.Char(string="Sample Reject Reason")
-    witness = fields.Char(string="Witness")
+    has_witness = fields.Boolean(string="Witness")
+    witness = fields.Char(string="Witness name")
     scope = fields.Selection([
         ('nabl', 'NABL'),
         ('non_nabl', 'Non-NABL'),
@@ -325,6 +326,7 @@ class CreateSampleWizard(models.TransientModel):
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(string="Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
+    conformity = fields.Boolean(string="Conformity Requested")
 
     @api.onchange('material_id')
     def compute_grade(self):
@@ -389,6 +391,7 @@ class CreateSampleWizard(models.TransientModel):
         location = self.location
         sample_condition = self.sample_condition
         sample_reject_reason = self.sample_reject_reason
+        has_witness = self.has_witness
         witness = self.witness
         discipline_id = self.discipline_id.id
         scope = self.scope
@@ -398,6 +401,7 @@ class CreateSampleWizard(models.TransientModel):
         casting = self.casting
         sample_qty = self.sample_qty
         client_sample_id = self.client_sample_id
+        conformity = self.conformity
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -420,7 +424,9 @@ class CreateSampleWizard(models.TransientModel):
                 'location':location,
                 'sample_condition':sample_condition,
                 'sample_reject_reason':sample_reject_reason,
+                'has_witness':has_witness,
                 'witness':witness,
+                'conformity':conformity,
                 'scope':scope,
                 'sample_description':sample_description,
                 'parameters':parameters,
@@ -444,7 +450,9 @@ class CreateSampleWizard(models.TransientModel):
                     'location':location,
                     'sample_condition':sample_condition,
                     'sample_reject_reason':sample_reject_reason,
+                    'has_witness':has_witness,
                     'witness':witness,
+                    'conformity':conformity,
                     'scope':scope,
                     'sample_description':sample_description,
                     'parameters':parameters,
