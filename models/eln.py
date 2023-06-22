@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 from odoo.tools.safe_eval import safe_eval
+from odoo.exceptions import ValidationError
+
 
 import base64
 import json
@@ -35,9 +37,13 @@ class ELN(models.Model):
     ], string='State',default='1-draft')
     start_date = fields.Date(string="Start Date")
     end_date = fields.Date(string="End Date")
-
+    remarks = fields.Text("Remarks")
     parameters_result = fields.One2many('eln.parameters.result','eln_id',string="Parameters")
-    parameters_input = fields.One2many('eln.parameters.inputs','eln_id',string="Parameters Inputs")
+    parameters_input = fields.One2many('eln.parameters.inputs','eln_id',string="Parameters Inputs") 
+    conformity = fields.Boolean(string="Conformity")
+    has_witness = fields.Boolean(string="Witness")
+
+
 
 
 
@@ -100,6 +106,17 @@ class ELN(models.Model):
 
     def confirm_eln(self):
         self.sample_id.write({'state':'3-pending_verification'})
+        # import wdb;wdb.set_trace();
+        self.sample_id.parameters_result.unlink()
+        for result in self.parameters_result:
+            self.env["sample.parameters.result"].create({
+                'sample_id':self.sample_id.id,
+                'parameter': result.parameter.id,
+                'result': result.result,
+                'unit':result.unit.id,
+                'specification':result.specification,
+                'test_method':result.test_method.id
+            })
         self.write({'state': '2-confirm'})
 
     # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
@@ -268,7 +285,18 @@ class InputLines(models.TransientModel):
     is_parameter_dependent = fields.Boolean("Parameter Dependent")
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
-    value = fields.Float(string="Value")
+    value = fields.Float(string="Value",digits=(16, 10))
+    
+    
+    @api.onchange('value')
+    def _onchange_value(self):
+        decimal_digits_limit = self.inputs.decimal_place
+
+        for record in self:
+            decimal_part = str(record.value).split('.')[1] if '.' in str(record.value) else ''
+            if len(decimal_part) > decimal_digits_limit:
+                raise ValidationError("Number of digits after decimal should not exceed %s." % decimal_digits_limit)
+
 
 
 
@@ -336,7 +364,7 @@ class ELNParametersInputs(models.Model):
     is_parameter_dependent = fields.Boolean("Parameter Dependent")
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
-    value = fields.Float(string="Value")
+    value = fields.Float(string="Value",digits=(16, 10))
 
 
 

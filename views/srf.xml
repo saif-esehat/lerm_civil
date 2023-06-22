@@ -49,7 +49,7 @@
                         <field name="srf_id"/>
                         <field name="kes_number"/>
                         <field name="srf_date" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
-                        <field name="contact_person" domain="[('id', 'in', contact_contact_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="contact_person" context="{'hide_reference':True}" domain="[('id', 'in', contact_contact_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name="site_address" domain="[('id', 'in', contact_site_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name="client_refrence" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                     </group>
@@ -146,6 +146,7 @@
                         <field name="sample_condition"/>
                         <field name="material_ids" invisible='1'/>
                         <field name="grade_ids" invisible='1'/>
+                        <field name='conformity'/>
                         <!--<field name="grade_ids" invisible='1'/> -->
                     </group>
                     <group style="width:50%">
@@ -165,7 +166,8 @@
                         <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')] , 'invisible': [('sample_condition', '=', 'satisfactory')]}"/>
                     </group>
                     <group style="width:50%">
-                        <field name="witness"/>
+                        <field name="has_witness"/>
+                        <field name="witness" attrs="{'invisible': [('has_witness','!=',True)]}"/>
                     </group>
                     <group style="width:50%">
                         <field name="scope"/>

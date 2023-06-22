@@ -26,7 +26,8 @@ class SampleRangeLine(models.Model):
     # technicians = fields.Many2one("res.users",string="Technicians")
     location = fields.Char(string="Location")
     sample_reject_reason = fields.Char(string="Sample Reject Reason")
-    witness = fields.Char(string="Witness")
+    has_witness = fields.Boolean(string='Witness')
+    witness = fields.Char(string="Witness Name")
     scope = fields.Selection([
         ('nabl', 'NABL'),
         ('non_nabl', 'Non-NABL'),
@@ -57,6 +58,7 @@ class SampleRangeLine(models.Model):
     ], string='Days of casting', default='3')
     casting = fields.Boolean(string="Casting")
     client_sample_id = fields.Char(string="Client Sample Id")
+    conformity = fields.Boolean(string='Conformity')
     
     status = fields.Selection([
         ('1-pending', 'Pending'),
