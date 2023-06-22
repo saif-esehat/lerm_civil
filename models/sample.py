@@ -66,6 +66,7 @@ class LermSampleForm(models.Model):
         ('3-pending_verification','Pending Verification'),
         ('4-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
+    conformity = fields.Boolean(string="Conformity")
 
 
     @api.onchange('material_id')

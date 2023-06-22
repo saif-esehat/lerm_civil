@@ -52,6 +52,7 @@
                         <field name="sample_condition"/>
                         <field name="material_ids" invisible='1'/>
                         <field name="grade_ids" invisible='1'/>
+                        <field name='conformity'/>
                     </group>
                     <group style="width:50%">
                         <field name='kes_no'/>
