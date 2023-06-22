@@ -49,7 +49,7 @@
                         <field name="srf_id"/>
                         <field name="kes_number"/>
                         <field name="srf_date" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
-                        <field name="contact_person" domain="[('id', 'in', contact_contact_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="contact_person" context="{'hide_reference':True}" domain="[('id', 'in', contact_contact_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name="site_address" domain="[('id', 'in', contact_site_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name="client_refrence" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                     </group>

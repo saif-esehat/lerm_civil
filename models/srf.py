@@ -159,7 +159,16 @@ class SrfForm(models.Model):
         # formatted_numbers = "-".join([f"{int(num):05d}" for num in numbers])
 
         # Creating the modified string
-        modified_srf_id = f"SRF/DUS"
+        # import wdb; wdb.set_trace()
+        first_sample_range = self.sample_range_table[0].kes_range
+        last_sample_range = self.sample_range_table[-1].kes_range  
+        first_samplerange_slash_index = first_sample_range.find("/")
+        srffirstnumber_str = first_sample_range[first_samplerange_slash_index+1:first_sample_range.find("-")]
+        last_sample_range_index = last_sample_range.find("-")
+        srf_last_number = last_sample_range[last_sample_range_index+1:]
+
+      
+        modified_srf_id = f"SRF/"+srffirstnumber_str+"-"+srf_last_number
         modified_kes_number = f"KES/DUS"
         self.write({'srf_id': modified_srf_id})
         self.write({'kes_number': modified_kes_number})
