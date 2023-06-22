@@ -39,7 +39,11 @@ class ELN(models.Model):
     end_date = fields.Date(string="End Date")
     remarks = fields.Text("Remarks")
     parameters_result = fields.One2many('eln.parameters.result','eln_id',string="Parameters")
-    parameters_input = fields.One2many('eln.parameters.inputs','eln_id',string="Parameters Inputs")
+    parameters_input = fields.One2many('eln.parameters.inputs','eln_id',string="Parameters Inputs") 
+    conformity = fields.Boolean(string="Conformity")
+    has_witness = fields.Boolean(string="Witness")
+
+
 
 
 
