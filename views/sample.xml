@@ -37,6 +37,12 @@
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
                 </header>
                 <sheet>
+                <div class="oe_button_box" name="button_box"  >
+                            <button attrs="{'invisible': [('state', '=', '1-allotment_pending')]}" string="ELN" name="open_related_eln" type="object" class="oe_stat_button" icon="fa-align-justify">
+                                <!-- <field name="sample_count" string="Samples" widget="statinfo"/> -->
+                            </button>
+            
+                </div>
                 <group style="width:100%">
                     <field name="srf_id"  invisible="context.get('is_local',False)"/>
                 </group>
@@ -91,6 +97,16 @@
                     
            
                     <field name="parameters" nolabel="1" options="{'no_create': True, 'no_open': True}" />
+                    <field name="parameters_result" nolabel="1">
+                                <tree editable="bottom" >
+                                    <field name="parameter"/>
+                                    <field name="result" />
+                                    <field name="unit" />
+                                    <field name="specification" />
+                                    <field name="test_method" />
+                                    <!-- <button string="Calculation" name="open_calculation_wizard" type="object" class="oe_highlight"/> -->
+                                </tree>
+                </field>
                 
                     
                 </sheet>

@@ -28,6 +28,7 @@
                                 <field name='start_date'/>
                                 <field name='witness_description'/>
                                 <field name='casting_date'/>
+                                <field name='remarks'/>
                             </group>
                             <group style="width:50%">
                                 <field name='sample_id'/>
