@@ -364,7 +364,7 @@ class ELNParametersInputs(models.Model):
     is_parameter_dependent = fields.Boolean("Parameter Dependent")
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
-    value = fields.Float(string="Value")
+    value = fields.Float(string="Value",digits=(16, 10))
 
 
 
