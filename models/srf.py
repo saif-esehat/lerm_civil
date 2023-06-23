@@ -527,7 +527,9 @@ class CreateSampleWizard(models.TransientModel):
                         'sample_id':sample.id,
                         'parameters':parameters,
                         'technician': self.technicians.id,
-                        'parameters_result':parameters_result
+                        'parameters_result':parameters_result,
+                        'conformity':sample.conformity,
+                        'has_witness':sample.has_witness
                     })
 
                     sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})
