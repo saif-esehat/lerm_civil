@@ -86,6 +86,9 @@
                         <field name="sample_description"/>
                     </group>
                     <group style="width:50%">
+                        <field name="volume"/>
+                    </group>
+                    <group style="width:50%">
                         <field name="sample_no" invisible="1"/>
                         <field name="customer_id" invisible='1'/>
                         <field name="casting" invisible='1'/>

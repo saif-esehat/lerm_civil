@@ -54,6 +54,9 @@
                         <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
                         <field name="sample_description"/>
                     </group>
+                    <group style="width:50%">
+                        <field name="volume"/>
+                    </group>
                     <!-- <group style="width:100%">
                         <field name="days_casting"/>
                     </group> -->

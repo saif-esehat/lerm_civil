@@ -59,6 +59,7 @@ class SampleRangeLine(models.Model):
     casting = fields.Boolean(string="Casting")
     client_sample_id = fields.Char(string="Client Sample Id")
     conformity = fields.Boolean(string='Conformity')
+    volume = fields.Char(string="Volume")
     
     status = fields.Selection([
         ('1-pending', 'Pending'),

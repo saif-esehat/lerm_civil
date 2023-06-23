@@ -175,7 +175,9 @@
                     <group style="width:100%">
                         <field name="sample_description"/>
                     </group>
-                    
+                    <group>
+                        <field name="volume"/>
+                    </group>
                     <group style="width:50%">
                         <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
                     </group>

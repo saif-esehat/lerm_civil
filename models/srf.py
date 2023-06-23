@@ -333,6 +333,7 @@ class CreateSampleWizard(models.TransientModel):
     alias = fields.Char(string="Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
     conformity = fields.Boolean(string="Conformity Requested")
+    volume = fields.Char(string="Volume")
 
     @api.onchange('material_id')
     def compute_grade(self):
@@ -346,6 +347,12 @@ class CreateSampleWizard(models.TransientModel):
         for record in self:
             if record.material_id:
                 record.size_ids = self.env['product.template'].search([('id','=', record.material_id.id)]).size_table
+
+    @api.onchange('material_id')
+    def compute_volume(self):
+        for record in self:
+            if record.material_id:
+                record.volume = self.env['product.template'].search([('id','=', record.material_id.id)]).volume
 
     @api.onchange('material_id')
     def compute_parameters(self):
@@ -376,6 +383,7 @@ class CreateSampleWizard(models.TransientModel):
                 record.material_ids = material_ids
             else:
                 record.material_ids = None
+                
 
     @api.onchange('material_id.alias' ,'customer_id', 'material_id')
     def onchange_material_id(self):
@@ -408,6 +416,7 @@ class CreateSampleWizard(models.TransientModel):
         sample_qty = self.sample_qty
         client_sample_id = self.client_sample_id
         conformity = self.conformity
+        volume = self.volume
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -440,7 +449,8 @@ class CreateSampleWizard(models.TransientModel):
                 'casting':casting,
                 'sample_qty':sample_qty,
                 'client_sample_id':client_sample_id,
-                'casting_date':self.date_casting
+                'casting_date':self.date_casting,
+                'volume':volume
             })
             for i in range(self.sample_qty):
                 self.env["lerm.srf.sample"].create({
@@ -468,7 +478,8 @@ class CreateSampleWizard(models.TransientModel):
                     'client_sample_id':client_sample_id,
                     'casting_date':self.date_casting,
                     'days_casting':self.days_casting,
-                    'casting':self.casting
+                    'casting':self.casting,
+                    'volume':volume
                 })
 
             

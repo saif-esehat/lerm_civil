@@ -25,6 +25,7 @@
             <group style="width:50%">
               <field name="discipline"/>
               <field name="test_format_no"/>
+              <field name="volume"/>
             </group>
             <group style="width:50%">
               <field name="group" domain="[('id', 'in', group_ids)]"/>
@@ -71,13 +72,13 @@
               </tree>
             </field>
           </page>
-          <page name="qty_page" string="Qty" attrs="{'invisible': [('is_sample','=',False)]}">
+          <!-- <page name="qty_page" string="Qty" attrs="{'invisible': [('is_sample','=',False)]}">
             <field name="qty_table">
               <tree editable="bottom">
                 <field name="qty"/>
               </tree>
             </field>
-          </page>
+          </page> -->
           <page string="Alias" attrs="{'invisible': [('is_sample','=',False)]}">
             <field name='alias_table'>
                 <tree edidable="bottom">
