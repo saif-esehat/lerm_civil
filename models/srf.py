@@ -46,7 +46,7 @@ class SrfForm(models.Model):
     srf_id = fields.Char(string="SRF ID" , readonly=True)
     kes_number = fields.Char(string="KES No" , readonly=True)
     # job_no = fields.Char(string="Job NO.")
-    srf_date = fields.Date(string="SRF Date")
+    srf_date = fields.Date(string="SRF Date",default=lambda self: self._get_default_date())
     job_date = fields.Date(string="JOB Date")
     customer = fields.Many2one('res.partner',string="Customer")
     billing_customer = fields.Many2one('res.partner',string="Billing Customer")
@@ -68,6 +68,12 @@ class SrfForm(models.Model):
     sample_count = fields.Integer(string="Sample Count", compute='compute_sample_count')
     eln_count = fields.Integer(string="ELN Count", compute='compute_eln_count')
     sample_range_table = fields.One2many('sample.range.line','srf_id',string="Sample Range")
+
+
+    @api.model
+    def _get_default_date(self):
+        previous_record = self.search([], limit=1, order='id desc')
+        return previous_record.srf_date if previous_record else None
     
 
     def action_srf_sent_mail(self):
