@@ -66,6 +66,36 @@ class LermSampleForm(models.Model):
         ('3-pending_verification','Pending Verification'),
         ('4-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
+    conformity = fields.Boolean(string="Conformity")
+
+
+    parameters_result = fields.One2many('sample.parameters.result','sample_id',string="Parameters Result")
+
+
+
+    def open_related_eln(self):
+
+        #  self.env['lerm.eln'].search()
+        # import wdb ; wdb.set_trace()
+        # Assuming you want to open a record in the 'res.partner' model
+        eln_id = self.env['lerm.eln'].search([('sample_id','=',self.id)]).id  # Replace with the actual ID of the record you want to open
+
+        eln = self.env['lerm.eln'].browse(eln_id)
+
+        if eln:
+            # Open the record in a form view
+            return {
+                'name': eln.eln_id,
+                'view_mode': 'form',
+                'res_model': 'lerm.eln',
+                'res_id': eln.id,
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+            }
+        else:
+            raise UserError('ELN record not found!')
+
+
 
 
     @api.onchange('material_id')
@@ -235,3 +265,14 @@ class RejectSampleWizard(models.Model):
 
     def close_reject_wizard(self):
         return {'type': 'ir.actions.act_window_close'}
+
+
+class SampleParametersResult(models.Model):
+    _name = 'sample.parameters.result'
+    _rec_name = 'parameter'
+    sample_id = fields.Many2one('lerm.srf.sample',string="Sample ID")
+    parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+    unit = fields.Many2one('uom.uom',string="Unit")
+    test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
+    specification = fields.Text(string="Specification")
+    result = fields.Float(string="Result",digits=(16, 10))

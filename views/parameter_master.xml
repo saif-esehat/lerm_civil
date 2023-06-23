@@ -64,6 +64,7 @@
                                 <field name="is_parameter_dependent"/>
                                 <field name="identifier"/>
                                 <field name="label"/>
+                                <field name="decimal_place"/>
                                 <field name="parameter"/>
 
                             </tree>

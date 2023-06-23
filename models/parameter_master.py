@@ -54,6 +54,7 @@ class DependentInputs(models.Model):
     is_parameter_dependent = fields.Boolean("Dependent Parameter")
     identifier = fields.Char(string="Identifier")
     label = fields.Char(string="Label")
+    decimal_place = fields.Integer(string="Decimal Place")
     parameter = fields.Many2one("lerm.parameter.master",string="Parameter")
 
 

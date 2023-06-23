@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
 	 <template id="custom_layout_header_footer_lerm_eln">
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
@@ -197,7 +196,6 @@
 			</t>
 		</t>
 	</template>
-
 	<template id="datasheet_report_template">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->

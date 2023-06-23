@@ -146,6 +146,7 @@
                         <field name="sample_condition"/>
                         <field name="material_ids" invisible='1'/>
                         <field name="grade_ids" invisible='1'/>
+                        <field name='conformity'/>
                         <!--<field name="grade_ids" invisible='1'/> -->
                     </group>
                     <group style="width:50%">
@@ -165,7 +166,8 @@
                         <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')] , 'invisible': [('sample_condition', '=', 'satisfactory')]}"/>
                     </group>
                     <group style="width:50%">
-                        <field name="witness"/>
+                        <field name="has_witness"/>
+                        <field name="witness" attrs="{'invisible': [('has_witness','!=',True)]}"/>
                     </group>
                     <group style="width:50%">
                         <field name="scope"/>
