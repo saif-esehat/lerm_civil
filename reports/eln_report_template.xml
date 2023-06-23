@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+	 <template id="custom_layout_header_footer_lerm_eln">
+        <div t-attf-class="header article" t-att-style="report_header_style">
+			<div class="row">
+				<div class="col-12 imageContainer" >
+					<img t-attf-src="/lerm_civil_inv/static/src/img/kes_letterHead.jpg" alt="Image"/>
+				</div>
+			</div>
+        </div>
+        <div t-attf-class="article" t-att-style="report_header_style">
+            <t t-out="0"/>
+        </div>
+		<div t-attf-class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <div class="footertext">
+						Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+					</div>
+					<div class="footertext">
+						Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
+					</div>
+					<div class="footertext">
+						CIN No.: U45209MH2017PTC291168
+					</div>
+                </ul>
+                <div t-if="report_type == 'pdf'" class="footertext">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+	</template>
 	<template id="eln_report_template">
 		<t t-call="web.html_container">
-			<!-- <t t-call="web.basic_layout">
-								<div class="imageContainer" style="padding-bottom:8px">
-								<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" class="company_logo" alt="Image" />
-								</div>
-								<div class="container_eln">
-								<table>
-								<thead>
-								<tr>
-								<th t-foreach="data_mock[0]['columns']" t-as="column">
-								<span t-esc="column['name']"/>
-								</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr t-foreach="data_mock[1]['rows']" t-as="r">
-								<td t-foreach="r['row']" t-as="row">
-								<span t-esc="row['value']"/>
-								</td>
-								</tr>
-								</tbody>
-								</table>
-								</div>
-								</t> -->
-			
-			<!-- uncomment this -->
-			<t t-call="web.basic_layout">
-				<div class="imageContainer" style="padding-bottom:8px">
-					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" class="company_logo" alt="Image" />
-				</div>
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
 				</div>
@@ -154,13 +158,23 @@
 
 								<th>
 									<span>
-										Requirement as per IS 1786 2008 (RA:2018)
+										Unit
+									</span>
+								</th>
+								<th>
+									<span>
+										Specification
+									</span>
+								</th>
+								<th>
+									<span>
+										Test Method
 									</span>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr t-foreach="eln.parameters" t-as="r">
+							<tr t-foreach="eln.parameters_result" t-as="r">
 								<td>
 									<span t-esc="r['parameter'].parameter_name"/>
 								</td>
@@ -168,21 +182,161 @@
 									<span t-esc="r['result']"/>
 								</td>
 								<td>
+									<span t-esc="r['unit'].name"/>
+								</td>
+								<td>
 									<span t-esc="r['specification']"/>
+								</td>
+								<td>
+									<span t-esc="r['test_method']"/>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</t>
+		</t>
+	</template>
 
-			<!-- uncomment this  -->
+	<template id="datasheet_report_template">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
+				<div style="text-align:center;margin-top:10px">
+					<p style="font-size:15px"><b>Data Sheet</b></p>
+				</div>
+				<div class="container_eln">
+					<div t-foreach="eln" t-as="o">
+						<table>
+							<tr>
+								<td colspan="4">Report no :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.eln_id"/>
+								</td>
+								<td colspan="4">Report Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_date"/>
+								</td>
+								<td colspan="4">ULR NO :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Customer Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.street"/>
+									<span t-field="o.srf_id.customer.street2"/>
+									<span t-field="o.srf_id.customer.city"/>
+									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+									<span t-field="o.srf_id.customer.state_id"/>
+											,
+									<span t-field="o.srf_id.customer.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Project / Site Address :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address.name"/>
+									<span t-field="o.srf_id.site_address.street"/>
+									<span t-field="o.srf_id.site_address.street2"/>
+									<span t-field="o.srf_id.site_address.city"/>
+									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
+									<span t-field="o.srf_id.site_address.state_id"/>
+											,
+									<span t-field="o.srf_id.site_address.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Sample Description :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Sample Id :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_no"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Size :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.size_id.size"/>
+								</td>
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.grade_id.grade"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Brand :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.brand"/>
+								</td>
+								<td colspan="6">Consultant Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Client Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">Client Reference :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client_refrence"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Discipline :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.discipline.discipline"/>
+								</td>
+								<td colspan="6">Group :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.group.group"/>
+								</td>
+							</tr>
 
-
-		<!-- remove this -->
-	<!-- <div style="text-align:center;margin-top:10px">
-					<p style="font-size:15px"><b>Test Report</b></p>
-				</div> -->
+							<tr>
+								<td colspan="12">Material/Test Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.material.name"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<table style="margin-top:30px;">
+						<thead>
+							<tr>
+								
+								<th>
+									<span>
+										Inputs
+									</span>
+								</th>
+								
+								<th>
+									<span>
+										Values
+									</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr t-foreach="eln.parameters_input" t-as="r">
+								<td>
+									<span t-esc="r['inputs'].label"/>
+								</td>
+								<td>
+									<span t-esc="r['value']"/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
 		</t>
 	</template>
 </odoo>
