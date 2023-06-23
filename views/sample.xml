@@ -100,7 +100,7 @@
                     
                     
            
-                    <field name="parameters" nolabel="1" options="{'no_create': True, 'no_open': True}" />
+                    <field invisible="1" name="parameters" nolabel="1" options="{'no_create': True, 'no_open': True}" />
                     <field name="parameters_result" nolabel="1">
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
