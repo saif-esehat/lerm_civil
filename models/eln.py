@@ -42,13 +42,16 @@ class ELN(models.Model):
     parameters_input = fields.One2many('eln.parameters.inputs','eln_id',string="Parameters Inputs") 
     conformity = fields.Boolean(string="Conformity")
     has_witness = fields.Boolean(string="Witness")
-
+    invisible_fetch_inputs = fields.Boolean(string="Fetch Inputs")
 
 
 
 
 
     def fetch_inputs(self):
+        self.write({
+            "invisible_fetch_inputs": True
+        })
 
         # parameter = self.env['lerm.parameter.master'].browse(7)  # Replace 'parameter_id' with the actual ID of the parameter
         # dependent_parameters = parameter.fetch_dependent_parameters_recursive(depth=80)  # Fetch up to 3 levels of dependent parameters
