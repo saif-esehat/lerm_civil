@@ -27,6 +27,21 @@ class Material(models.Model):
     lab_name = fields.Char(string="Lab Name")
     # discipline2 = fields.One2many('material.discipline.line')
 
+    def name_get(self):
+        res = []
+        for product in self:
+            # print("saa" + str(self.env.context.get('hide_reference')))
+            if self.env.context.get('lab_name'):
+                # import wdb; wdb.set_trace()
+                name = product.lab_name
+                print("name" + str(name))
+                res.append((product.id, name))
+            else:
+                name = product.name
+                print("name" + str(name))
+                res.append((product.id, name))
+        return res
+
 
     @api.depends('discipline')
     def compute_group_ids(self):

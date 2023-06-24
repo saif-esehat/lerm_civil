@@ -138,7 +138,7 @@
                     <group style="width:50%">
                         <!-- <field name="sample_id"/> -->
                         <field name="discipline_id"/>
-                        <field name="material_id" domain="[('id', 'in', material_ids)]"/>
+                        <field name="material_id" context="{'lab_name':True}" domain="[('id', 'in', material_ids)]"/>
                         <field name="brand"/>
                         <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
                         <field name="client_sample_id"/>
