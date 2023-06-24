@@ -69,6 +69,7 @@ class LermSampleForm(models.Model):
     conformity = fields.Boolean(string="Conformity")
     parameters_result = fields.One2many('sample.parameters.result','sample_id',string="Parameters Result")
     volume = fields.Char(string="Volume")
+    product_name = fields.Many2one('product.template',string="Product Name")
 
 
 
