@@ -418,6 +418,7 @@ class CreateSampleWizard(models.TransientModel):
         client_sample_id = self.client_sample_id
         conformity = self.conformity
         volume = self.volume
+        product_name = self.product_name
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -451,7 +452,8 @@ class CreateSampleWizard(models.TransientModel):
                 'sample_qty':sample_qty,
                 'client_sample_id':client_sample_id,
                 'casting_date':self.date_casting,
-                'volume':volume
+                'volume':volume,
+                'product_name':product_name.id
             })
             for i in range(self.sample_qty):
                 self.env["lerm.srf.sample"].create({
@@ -480,7 +482,9 @@ class CreateSampleWizard(models.TransientModel):
                     'casting_date':self.date_casting,
                     'days_casting':self.days_casting,
                     'casting':self.casting,
-                    'volume':volume
+                    'volume':volume,
+                    'product_name':product_name.id
+
                 })
 
             
