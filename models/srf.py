@@ -334,6 +334,7 @@ class CreateSampleWizard(models.TransientModel):
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
     conformity = fields.Boolean(string="Conformity Requested")
     volume = fields.Char(string="Volume")
+    product_name = fields.Many2one('product.template',string="Product Name")
 
     @api.onchange('material_id')
     def compute_grade(self):

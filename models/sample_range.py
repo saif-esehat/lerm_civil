@@ -60,6 +60,8 @@ class SampleRangeLine(models.Model):
     client_sample_id = fields.Char(string="Client Sample Id")
     conformity = fields.Boolean(string='Conformity')
     volume = fields.Char(string="Volume")
+    product_name = fields.Many2one('product.template',string="Product Name")
+
     
     status = fields.Selection([
         ('1-pending', 'Pending'),

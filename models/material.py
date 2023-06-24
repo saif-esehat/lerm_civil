@@ -24,6 +24,7 @@ class Material(models.Model):
     datasheet_table = fields.One2many('lerm.material.datasheet.line','product_id',string="Datasheet Table")
     parameter_table1 = fields.Many2many('lerm.parameter.master',string="Parameters")
     volume = fields.Char("Volume")
+    lab_name = fields.Char(string="Lab Name")
     # discipline2 = fields.One2many('material.discipline.line')
 
 

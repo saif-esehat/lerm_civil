@@ -19,6 +19,11 @@
         <xpath expr="//field[@name='name']" position="attributes">
             <attribute name="placeholder">e.g. Fly Ash</attribute>
         </xpath>
+        <xpath expr="//div[@name='options']" position="after">
+          <group style="width:50%">
+            <field name="lab_name"/>
+          </group>
+        </xpath>
         <xpath expr="//page[@name='general_information']" position="after">
           <page string="LERM" attrs="{'invisible': [('is_sample','=',False)]}">
             
@@ -79,7 +84,7 @@
               </tree>
             </field>
           </page> -->
-          <page string="Alias" attrs="{'invisible': [('is_sample','=',False)]}">
+          <!-- <page string="Alias" attrs="{'invisible': [('is_sample','=',False)]}">
             <field name='alias_table'>
                 <tree edidable="bottom">
                     <field name="alias"/>
@@ -92,7 +97,7 @@
                   </group>
                 </form>
               </field>
-          </page>
+          </page> -->
           <page string="Datasheet" attrs="{'invisible': [('is_sample','=',False)]}">
             <field name='datasheet_table'>
                 <tree edidable="bottom">
