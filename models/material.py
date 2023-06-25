@@ -36,6 +36,10 @@ class Material(models.Model):
                 name = product.lab_name
                 print("name" + str(name))
                 res.append((product.id, name))
+            elif self.env.context.get('main_name'):
+                name = product.name
+                print("name" + str(name))
+                res.append((product.id, name))
             else:
                 name = product.name
                 print("name" + str(name))

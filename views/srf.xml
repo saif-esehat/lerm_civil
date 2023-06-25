@@ -152,7 +152,10 @@
                     <group style="width:50%">
                         <field name="group_id" domain="[('id', 'in', group_ids)]"/>
                         <!-- <field name="alias"/> -->
-                        <field name="product_name"/>
+                        <field name="pricelist"/>
+                        <field name="product_name" context="{'main_name':True}"/>
+                        <field name="main_name" />
+                        <field name="price" />
                         <field name="size_id" domain="[('id', 'in', size_ids)]"/>
                         <field name="sample_qty" />
                         <field name="sample_received_date"/>

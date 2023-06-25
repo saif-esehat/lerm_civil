@@ -61,6 +61,8 @@ class SampleRangeLine(models.Model):
     conformity = fields.Boolean(string='Conformity')
     volume = fields.Char(string="Volume")
     product_name = fields.Many2one('product.template',string="Product Name")
+    main_name = fields.Char(string="Product Name")
+    price = fields.Float(string="Price")
 
     
     status = fields.Selection([

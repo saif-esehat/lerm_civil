@@ -70,7 +70,8 @@ class LermSampleForm(models.Model):
     parameters_result = fields.One2many('sample.parameters.result','sample_id',string="Parameters Result")
     volume = fields.Char(string="Volume")
     product_name = fields.Many2one('product.template',string="Product Name")
-
+    main_name = fields.Char(string="Product Name")
+    price = fields.Float(string="Price")
 
 
     def open_related_eln(self):
