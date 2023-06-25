@@ -50,6 +50,7 @@
                       
                         <field name="discipline_id"/>
                         <field name="material_id" domain="[('id', 'in', material_ids)]"/>
+                        <field name="material_id_lab_name"/>
                         <field name="brand"/>
                         <field name='casting_date' attrs="{'invisible':[('casting','!=',True)]}"/>
                         <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>

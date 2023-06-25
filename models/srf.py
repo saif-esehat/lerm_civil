@@ -382,7 +382,7 @@ class CreateSampleWizard(models.TransientModel):
                 parameters_ids = []
                 product_records = self.env['product.template'].search([('id','=', record.material_id.id)]).parameter_table1
                 record.product_name = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).product_tmpl_id.product_variant_ids.id
-                import wdb; wdb.set_trace()
+                # import wdb; wdb.set_trace()
                 for rec in product_records:
                     parameters_ids.append(rec.id)
                 domain = {'parameters': [('id', 'in', parameters_ids)]}
@@ -476,7 +476,10 @@ class CreateSampleWizard(models.TransientModel):
                 'client_sample_id':client_sample_id,
                 'casting_date':self.date_casting,
                 'volume':volume,
-                'product_name':product_name.id
+                'product_name':product_name.id,
+                'main_name':self.main_name,
+                'price':self.price
+
             })
             for i in range(self.sample_qty):
                 self.env["lerm.srf.sample"].create({
@@ -506,7 +509,9 @@ class CreateSampleWizard(models.TransientModel):
                     'days_casting':self.days_casting,
                     'casting':self.casting,
                     'volume':volume,
-                    'product_name':product_name.id
+                    'product_name':product_name.id,
+                    'main_name':self.main_name,
+                    'price':self.price
 
                 })
 
