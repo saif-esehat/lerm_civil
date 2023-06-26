@@ -6,7 +6,7 @@ class LermSampleForm(models.Model):
     _inherit = ['mail.thread','mail.activity.mixin']
 
     _description = "Sample"
-    _rec_name = 'sample_no'
+    _rec_name = 'kes_no'
     
     srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" )
     sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
