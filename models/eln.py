@@ -112,6 +112,10 @@ class ELN(models.Model):
         # import wdb;wdb.set_trace();
         self.sample_id.parameters_result.unlink()
         for result in self.parameters_result:
+            if not result.calculated:
+                raise ValidationError("Not all parameters are calculated. Please ensure all parameters are calculated before proceeding.")
+
+        for result in self.parameters_result:
             self.env["sample.parameters.result"].create({
                 'sample_id':self.sample_id.id,
                 'parameter': result.parameter.id,
@@ -244,7 +248,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
 
 
 
-        result_id.write({'result':self.result})
+        result_id.write({'result':self.result,'calculated':True})
 
         return {'type': 'ir.actions.act_window_close'}
 
@@ -323,6 +327,7 @@ class ELNParametersResult(models.Model):
     eln_id = fields.Many2one('lerm.eln',string="ELN ID")
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
     unit = fields.Many2one('uom.uom',string="Unit")
+    calculated = fields.Boolean("Calculated")
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
     specification = fields.Text(string="Specification")
     result = fields.Float(string="Result")

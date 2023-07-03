@@ -77,6 +77,7 @@
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
                                     <field name="result" />
+                                    <field name="calculated" />
                                     <field name="unit" />
                                     <field name="specification" />
                                     <field name="test_method" />
