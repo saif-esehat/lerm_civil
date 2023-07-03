@@ -28,6 +28,8 @@ class ELN(models.Model):
     parameters = fields.One2many('eln.parameters','eln_id',string="Parameters")
     datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
     fetch_ds_button = fields.Float(string="Fetch Datasheet")
+    size_id = fields.Many2one('lerm.size.line',string="Size")
+    grade_id = fields.Many2one('lerm.grade.line',string="Grade")
     update_result = fields.Integer("Update Result")
     state = fields.Selection([
         ('1-draft', 'In-Test'),
@@ -329,8 +331,21 @@ class ELNParametersResult(models.Model):
     unit = fields.Many2one('uom.uom',string="Unit")
     calculated = fields.Boolean("Calculated")
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
-    specification = fields.Text(string="Specification")
+    specification = fields.Text(string="Specification", compute='_compute_specification')
     result = fields.Float(string="Result")
+
+
+    @api.depends('eln_id.material', 'eln_id.grade_id', 'eln_id.size_id','parameter')
+    def _compute_specification(self):
+        for record in self:
+            # import wdb; wdb.set_trace()
+            material_id = record.eln_id.material.id
+            grade_id = record.eln_id.grade_id.id
+            size_id = record.eln_id.size_id.id
+            parameter_id = record.parameter.id
+            specification = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+            record.specification = specification
+
 
 
     def open_calculation_wizard(self):
