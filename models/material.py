@@ -24,7 +24,36 @@ class Material(models.Model):
     datasheet_table = fields.One2many('lerm.material.datasheet.line','product_id',string="Datasheet Table")
     parameter_table1 = fields.Many2many('lerm.parameter.master',string="Parameters")
     volume = fields.Char("Volume")
+    lab_name = fields.Char(string="Lab Name")
     # discipline2 = fields.One2many('material.discipline.line')
+
+    def name_get(self):
+        res = []
+        for product in self:
+            # print("saa" + str(self.env.context.get('hide_reference')))
+            if self.env.context.get('lab_name'):
+                # import wdb; wdb.set_trace()
+                if product.lab_name:
+                    name = product.lab_name
+                    print("from lab")
+                    print("name" + str(name))
+                    res.append((product.id, name))
+                else:
+                    print("from elsse")
+                    name = product.name
+                    print("name" + str(name))
+                    res.append((product.id, name))
+            elif self.env.context.get('main_name'):
+                print("from main")
+                name = product.name
+                print("name" + str(name))
+                res.append((product.id, name))
+            else:
+                print("from elsse")
+                name = product.name
+                print("name" + str(name))
+                res.append((product.id, name))
+        return res
 
 
     @api.depends('discipline')

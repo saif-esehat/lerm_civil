@@ -6,7 +6,7 @@ class LermSampleForm(models.Model):
     _inherit = ['mail.thread','mail.activity.mixin']
 
     _description = "Sample"
-    _rec_name = 'sample_no'
+    _rec_name = 'kes_no'
     
     srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" )
     sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
@@ -15,6 +15,8 @@ class LermSampleForm(models.Model):
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
+    material_id_lab_name = fields.Char(string="Material",compute="compute_material_id_lab_name",store=True)
+
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
@@ -69,7 +71,14 @@ class LermSampleForm(models.Model):
     conformity = fields.Boolean(string="Conformity")
     parameters_result = fields.One2many('sample.parameters.result','sample_id',string="Parameters Result")
     volume = fields.Char(string="Volume")
+    product_name = fields.Many2one('product.template',string="Product Name")
+    main_name = fields.Char(string="Product Name")
+    price = fields.Float(string="Price")
 
+    @api.depends('material_id')
+    def compute_material_id_lab_name(self):
+        for record in self:
+            record.material_id_lab_name = record.material_id.lab_name
 
 
     def open_related_eln(self):

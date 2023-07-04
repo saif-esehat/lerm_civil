@@ -14,6 +14,7 @@ class SampleRangeLine(models.Model):
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
+    material_id_lab_name = fields.Char(string="Material",compute="compute_material_id_lab_name",store=True)
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
@@ -60,6 +61,10 @@ class SampleRangeLine(models.Model):
     client_sample_id = fields.Char(string="Client Sample Id")
     conformity = fields.Boolean(string='Conformity')
     volume = fields.Char(string="Volume")
+    product_name = fields.Many2one('product.template',string="Product Name")
+    main_name = fields.Char(string="Product Name")
+    price = fields.Float(string="Price")
+
     
     status = fields.Selection([
         ('1-pending', 'Pending'),
@@ -71,6 +76,13 @@ class SampleRangeLine(models.Model):
         ('2-alloted', 'Alloted'),
         ('3-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
+
+
+    @api.depends('material_id')
+    def compute_material_id_lab_name(self):
+        for record in self:
+            record.material_id_lab_name = record.material_id.lab_name
+
 
 
     

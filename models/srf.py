@@ -265,6 +265,9 @@ class SrfForm(models.Model):
 
 
     def open_new_sample_add_wizard(self):
+        
+
+        # import wdb;wdb.set_trace()
         samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])
         action = self.env.ref('lerm_civil.srf_sample_wizard_form')
         return {
@@ -277,8 +280,9 @@ class SrfForm(models.Model):
             'target': 'new',
             'context':{
                 'default_customer_id': self.customer.id,
-                'default_sample_received_date':self.srf_date
-            }
+                'default_sample_received_date':self.srf_date,
+                'default_pricelist':self.customer.property_product_pricelist.id
+                }
             }
 
 
@@ -334,6 +338,23 @@ class CreateSampleWizard(models.TransientModel):
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
     conformity = fields.Boolean(string="Conformity Requested")
     volume = fields.Char(string="Volume")
+    product_name = fields.Many2one('product.template',string="Product Name")
+    pricelist = fields.Many2one('product.pricelist',string='Pricelist')
+    main_name = fields.Char(string="Product Name",compute='compute_main_name',store=True)
+    price = fields.Float(string="Price",compute='compute_price',store=True)
+
+    @api.depends('product_name')
+    def compute_main_name(self):
+        for record in self:
+            record.main_name = record.product_name.name
+    
+    @api.depends('pricelist','material_id')
+    def compute_price(self):
+        for record in self:
+            # record.main_name = record.product_name.name
+            record.price = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).fixed_price
+
+
 
     @api.onchange('material_id')
     def compute_grade(self):
@@ -360,6 +381,8 @@ class CreateSampleWizard(models.TransientModel):
             if record.material_id:
                 parameters_ids = []
                 product_records = self.env['product.template'].search([('id','=', record.material_id.id)]).parameter_table1
+                record.product_name = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).product_tmpl_id.id
+                # import wdb; wdb.set_trace()
                 for rec in product_records:
                     parameters_ids.append(rec.id)
                 domain = {'parameters': [('id', 'in', parameters_ids)]}
@@ -367,6 +390,7 @@ class CreateSampleWizard(models.TransientModel):
             else:
                 domain = {'parameters': [('id', 'in', [])]}
                 return {'domain': domain}
+    
 
 
     @api.onchange('discipline_id')
@@ -417,6 +441,7 @@ class CreateSampleWizard(models.TransientModel):
         client_sample_id = self.client_sample_id
         conformity = self.conformity
         volume = self.volume
+        product_name = self.product_name
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -450,7 +475,11 @@ class CreateSampleWizard(models.TransientModel):
                 'sample_qty':sample_qty,
                 'client_sample_id':client_sample_id,
                 'casting_date':self.date_casting,
-                'volume':volume
+                'volume':volume,
+                'product_name':product_name.id,
+                'main_name':self.main_name,
+                'price':self.price
+
             })
             for i in range(self.sample_qty):
                 self.env["lerm.srf.sample"].create({
@@ -479,7 +508,11 @@ class CreateSampleWizard(models.TransientModel):
                     'casting_date':self.date_casting,
                     'days_casting':self.days_casting,
                     'casting':self.casting,
-                    'volume':volume
+                    'volume':volume,
+                    'product_name':product_name.id,
+                    'main_name':self.main_name,
+                    'price':self.price
+
                 })
 
             
