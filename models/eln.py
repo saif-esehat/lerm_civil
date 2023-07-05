@@ -100,7 +100,7 @@ class ELN(models.Model):
             # import wdb ; wdb.set_trace() 
 
             for inputs in parameter.dependent_inputs:
-                self.write({"parameters_input":[(0,0,{'parameter_result':record.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id})]})
+                self.write({"parameters_input":[(0,0,{'parameter_result':record.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id,'value':inputs.default})]})
             
             dependent_parameters = parameter.fetch_dependent_parameters_recursive(depth=80)
             for dependent_parameter in dependent_parameters:
@@ -108,7 +108,7 @@ class ELN(models.Model):
                 data = self.env["eln.parameters.result"].create({"eln_id":self.id,'parameter':dependent_parameter.id})
                 # data = self.write({"parameters_result":[(0,0,{'parameter':dependent_parameter.id})]})
                 for inputs in dependent_parameter.dependent_inputs:
-                    # import wdb ; wdb.set_trace() 
+                    import wdb ; wdb.set_trace() 
                     self.write({"parameters_input":[(0,0,{'parameter_result':data.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id,'value':inputs.default})]})
 
 

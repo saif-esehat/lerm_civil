@@ -87,7 +87,7 @@
                                 </tree>
                             </field>
                         <button string="Fetch Inputs" name="fetch_inputs"  type="object" attrs="{'invisible': [('invisible_fetch_inputs', '=', True)]}"/>
-                        <button string="Calculate Graph" name="calculate_graphs"  type="object"/>
+                        <!-- <button string="Calculate Graph" name="calculate_graphs"  type="object"/> -->
                             <!-- <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
                             <field name='update_result' widget="update_result" nolabel="1"/> -->
                         </group>
