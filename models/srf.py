@@ -65,6 +65,9 @@ class SrfForm(models.Model):
     sample_count = fields.Integer(string="Sample Count", compute='compute_sample_count')
     eln_count = fields.Integer(string="ELN Count", compute='compute_eln_count')
     sample_range_table = fields.One2many('sample.range.line','srf_id',string="Sample Range")
+    contractor = fields.Many2one('lerm.contractor.line',string="Contractor")
+    contractor_ids = fields.Many2many('lerm.contractor.line')
+
 
 
     @api.model
@@ -184,6 +187,14 @@ class SrfForm(models.Model):
         for record in self:
             contact_ids = self.env['res.partner'].search([('parent_id', '=', record.customer.id),('type','=','contact')])
             record.contact_contact_ids = contact_ids
+
+    @api.onchange('customer')
+    def compute_contractor_ids(self):
+        for record in self:
+            contractor_ids = self.env['res.partner'].search([('id', '=', record.customer.id)]).contractor_table
+            record.contractor_ids = contractor_ids
+
+    
 
     @api.depends('customer')
     def compute_other_ids(self):
@@ -569,7 +580,9 @@ class CreateSampleWizard(models.TransientModel):
                         'technician': self.technicians.id,
                         'parameters_result':parameters_result,
                         'conformity':sample.conformity,
-                        'has_witness':sample.has_witness
+                        'has_witness':sample.has_witness,
+                        'size_id':sample.size_id.id,
+                        'grade_id':sample.grade_id.id
                     })
 
                     sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})

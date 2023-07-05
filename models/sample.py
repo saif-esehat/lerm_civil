@@ -1,5 +1,5 @@
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError,ValidationError
 
 class LermSampleForm(models.Model):
     _name = "lerm.srf.sample"
@@ -125,6 +125,9 @@ class LermSampleForm(models.Model):
 
 
     def approve_sample(self):
+        for result in self.parameters_result:
+            if not result.verified:
+                raise ValidationError("Not all parameters are verified. Please ensure all parameters are verified before proceeding.")
         self.write({'state': '4-in_report'})
         eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
         eln.write({'state':'3-approved'})
@@ -283,4 +286,5 @@ class SampleParametersResult(models.Model):
     unit = fields.Many2one('uom.uom',string="Unit")
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
     specification = fields.Text(string="Specification")
+    verified = fields.Boolean("Verified")
     result = fields.Float(string="Result",digits=(16, 10))

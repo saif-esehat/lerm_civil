@@ -56,6 +56,8 @@
                     <group style="width:50%">
                         <field name="customer" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name='client' attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name='contractor' domain="[('id', 'in', contractor_ids)]"/>
+                        <field name='contractor_ids' invisible='1'/>
                         <field name="contact_other_ids" invisible='1'/>
                         <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name="name_work" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>

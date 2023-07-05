@@ -110,6 +110,7 @@
                                     <field name="parameter"/>
                                     <field name="result" />
                                     <field name="unit" />
+                                    <field name="verified" />
                                     <field name="specification" />
                                     <field name="test_method" />
                                     <!-- <button string="Calculation" name="open_calculation_wizard" type="object" class="oe_highlight"/> -->
@@ -199,7 +200,7 @@
 
             <tree>
               <header>
-                    <button type="object" class="oe_highlight" name="open_sample_allotment_wizard" string="Bulk Allotment" />
+                    <button type="object" class="oe_highlight" name="open_sample_allotment_wizard"  string="Bulk Allotment" />
                 </header>
                       <field name="sample_received_date" optional="show"/>
                       <field name='kes_no'/>
