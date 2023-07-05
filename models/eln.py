@@ -44,10 +44,6 @@ class ELN(models.Model):
     has_witness = fields.Boolean(string="Witness")
     invisible_fetch_inputs = fields.Boolean(string="Fetch Inputs")
 
-
-
-
-
     def fetch_inputs(self):
         self.write({
             "invisible_fetch_inputs": True
@@ -289,7 +285,6 @@ class InputLines(models.TransientModel):
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
     value = fields.Float(string="Value",digits=(16, 10))
-    
     
     @api.onchange('value')
     def _onchange_value(self):
