@@ -200,7 +200,7 @@
 
             <tree>
               <header>
-                    <button type="object" class="oe_highlight" name="open_sample_allotment_wizard" string="Bulk Allotment" />
+                    <button type="object" class="oe_highlight" name="open_sample_allotment_wizard"  string="Bulk Allotment" />
                 </header>
                       <field name="sample_received_date" optional="show"/>
                       <field name='kes_no'/>

@@ -46,10 +46,6 @@ class ELN(models.Model):
     has_witness = fields.Boolean(string="Witness")
     invisible_fetch_inputs = fields.Boolean(string="Fetch Inputs")
 
-
-
-
-
     def fetch_inputs(self):
         self.write({
             "invisible_fetch_inputs": True
@@ -235,7 +231,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
     _name = 'parameter.calculation.wizard'
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
     inputs_lines = fields.One2many('input.line.wizard', 'wizard_id', string='Inputs')
-    result = fields.Float(string="Result",compute="compute_result")
+    result = fields.Float(string="Result",compute="compute_result",digits=(16, 3))
 
 
     def update_result(self):
@@ -295,7 +291,6 @@ class InputLines(models.TransientModel):
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
     value = fields.Float(string="Value",digits=(16, 10))
-    
     
     @api.onchange('value')
     def _onchange_value(self):

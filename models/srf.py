@@ -19,12 +19,9 @@ class Group(models.Model):
 
     discipline = fields.Many2one('lerm_civil.discipline', string="Discipline", required=True)
     group = fields.Char(string="Group", required=True)
-
-
     def __str__(self):
         return self.group
     
-
 class TestMethod(models.Model):
     _name = "lerm_civil.test_method"
     _description = "Lerm Test Method"
@@ -43,8 +40,8 @@ class SrfForm(models.Model):
     _inherit = ['mail.thread','mail.activity.mixin']
     _rec_name = 'srf_id'
 
-    srf_id = fields.Char(string="SRF ID" , readonly=True)
-    kes_number = fields.Char(string="KES No" , readonly=True)
+    srf_id = fields.Char(string="SRF ID")
+    kes_number = fields.Char(string="KES No")
     # job_no = fields.Char(string="Job NO.")
     srf_date = fields.Date(string="SRF Date",default=lambda self: self._get_default_date())
     job_date = fields.Date(string="JOB Date")
@@ -68,6 +65,9 @@ class SrfForm(models.Model):
     sample_count = fields.Integer(string="Sample Count", compute='compute_sample_count')
     eln_count = fields.Integer(string="ELN Count", compute='compute_eln_count')
     sample_range_table = fields.One2many('sample.range.line','srf_id',string="Sample Range")
+    contractor = fields.Many2one('lerm.contractor.line',string="Contractor")
+    contractor_ids = fields.Many2many('lerm.contractor.line')
+
 
 
     @api.model
@@ -75,9 +75,7 @@ class SrfForm(models.Model):
         previous_record = self.search([], limit=1, order='id desc')
         return previous_record.srf_date if previous_record else None
     
-
     def action_srf_sent_mail(self):
-
         return {
             'type': 'ir.actions.act_window',
             'view_mode': 'form',
@@ -101,6 +99,7 @@ class SrfForm(models.Model):
     def compute_eln_count(self):
         count = self.env['lerm.eln'].search_count([('srf_id', '=', self.id)])
         self.eln_count = count
+        
 
     @api.onchange('customer')
     def compute_client(self):
@@ -188,6 +187,14 @@ class SrfForm(models.Model):
         for record in self:
             contact_ids = self.env['res.partner'].search([('parent_id', '=', record.customer.id),('type','=','contact')])
             record.contact_contact_ids = contact_ids
+
+    @api.onchange('customer')
+    def compute_contractor_ids(self):
+        for record in self:
+            contractor_ids = self.env['res.partner'].search([('id', '=', record.customer.id)]).contractor_table
+            record.contractor_ids = contractor_ids
+
+    
 
     @api.depends('customer')
     def compute_other_ids(self):
