@@ -25,6 +25,7 @@
                                 <field name='srf_date'/>
                                 <field name='discipline'/>
                                 <field name='material'/>
+                                <field name='size_id'/>
                                 <field name='start_date'/>
                                 <field name='witness_description'/>
                                 <field name='casting_date'/>
@@ -39,6 +40,7 @@
                                 <field name='kes_no'/>
                                 <field name='group'/>
                                 <field name='witness_name'/>
+                                <field name='grade_id'/>
                                 <field name='end_date'/>
                                 <field name="witness_photo" filename='witness_photo_name'/>
                                 <field name='witness_photo_name' invisible='1'/>
@@ -77,6 +79,7 @@
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
                                     <field name="result" />
+                                    <field name="calculated" />
                                     <field name="unit" />
                                     <field name="specification" />
                                     <field name="test_method" />

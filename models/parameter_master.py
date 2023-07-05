@@ -25,6 +25,7 @@ class ParameterMaster(models.Model):
     dependent_inputs = fields.One2many("lerm.dependent.inputs","parameter_id",string="Inputs")
     formula = fields.Text("Formula")
     material = fields.Many2one('product.template',string="Material")
+    
 
 
     def fetch_dependent_parameters_recursive(self, depth=1):
@@ -56,6 +57,7 @@ class DependentInputs(models.Model):
     label = fields.Char(string="Label")
     decimal_place = fields.Integer(string="Decimal Place")
     parameter = fields.Many2one("lerm.parameter.master",string="Parameter")
+    default = fields.Float(string='Default')
 
 
 
