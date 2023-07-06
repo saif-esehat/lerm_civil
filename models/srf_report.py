@@ -10,23 +10,20 @@ class SrfReport(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        srf_id = data['srf_id']
-        srf = self.env['lerm.civil.srf'].sudo().browse(srf_id)
-        # srf = self.env['lerm.civil.srf'].sudo().browse(docids)
-        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
-        qr.add_data(srf.kes_number)
-        qr.make(fit=True)
-        qr_image = qr.make_image()
+        # srf = self.env['lerm.civil.srf'].sudo().browse(srf_id)
+        srf = self.env['lerm.civil.srf'].sudo().browse(docids)
+        # qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+        # qr.add_data(srf.kes_number)
+        # qr.make(fit=True)
+        # qr_image = qr.make_image()
 
         # Convert the QR code image to base64 string
-        buffered = BytesIO()
-        qr_image.save(buffered, format="PNG")
-        qr_image_base64 = base64.b64encode(buffered.getvalue()).decode()
-        qr_code = qr_image_base64
-        eln_record = self.env['lerm.eln'].search([('srf_id', '=', self.srf_id)], limit=1)
-        print(eln_record , 'eln record')
+        # buffered = BytesIO()
+        # qr_image.save(buffered, format="PNG")
+        # qr_image_base64 = base64.b64encode(buffered.getvalue()).decode()
+        # qr_code = qr_image_base64
+        # eln_record = self.env['lerm.eln'].search([('srf_id', '=', self.srf_id)], limit=1)
+        # print(eln_record , 'eln record')
         return {
-                'srf': srf,
-                'qrcode' : qr_code,
-                'eln_record' : eln_record
+                'srf': srf
             }

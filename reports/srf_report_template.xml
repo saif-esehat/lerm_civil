@@ -34,10 +34,10 @@
 	<template id="srf_report_template">
 		<t t-call="web.html_container">
 			 <t t-call="lerm_civil.custom_layout_header_footer_lerm">
-				<!-- <div style="text-align:center;margin-top:10px">
+				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Srf Report</b></p>
-				</div> -->
-				<!-- <div class="container_eln">
+				</div>
+				<div class="container_eln">
 					<div t-foreach="srf" t-as="o">
 						<table>
 							<tr>
@@ -241,8 +241,8 @@
 							</div>
 						</div>
 					</div>
-				</div> -->
-				<div style="text-align:center;margin-top:10px">
+				</div>
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>SRF Report</b></p>
 				</div>
 				<div class="container_eln">
@@ -252,7 +252,7 @@
 								<td colspan="3">Report no :
 								</td>
 								<td colspan="3">
-									<span t-field="o.eln_id"/>
+									<span t-field="o.srf_id"/>
 								</td>
 								<td colspan="3">Report Date :
 								</td>
@@ -262,7 +262,7 @@
 								<td colspan="3">ULR NO :
 								</td>
 								<td colspan="3">
-									<span t-field="o.eln_id"/>
+									
 								</td>
 							</tr>
 						</table>
@@ -481,7 +481,7 @@
 					<div style="text-align:center">
 						......End of Report......
 					</div>
-				</div>
+				</div> -->
 			</t>
 		</t>
 	</template>
