@@ -388,7 +388,7 @@ class CreateSampleWizard(models.TransientModel):
             if record.material_id:
                 parameters_ids = []
                 product_records = self.env['product.template'].search([('id','=', record.material_id.id)]).parameter_table1
-                record.product_name = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).product_tmpl_id.product_variant_ids.id
+                record.product_name = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).product_tmpl_id.id
                 # import wdb; wdb.set_trace()
                 for rec in product_records:
                     parameters_ids.append(rec.id)

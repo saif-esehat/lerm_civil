@@ -4,6 +4,7 @@ import base64
 import qrcode
 from io import BytesIO
 
+
 class ElnReport(models.AbstractModel):
     _name = 'report.lerm_civil.eln_report_template'
     _description = 'ELN Report'

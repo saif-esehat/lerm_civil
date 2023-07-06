@@ -87,12 +87,14 @@
                                 </tree>
                             </field>
                         <button string="Fetch Inputs" name="fetch_inputs"  type="object" attrs="{'invisible': [('invisible_fetch_inputs', '=', True)]}"/>
-                        <button string="Calculate Inputs" name="calculate_results"  type="object"/>
+                        <!-- <button string="Calculate Graph" name="calculate_graphs"  type="object"/> -->
                             <!-- <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
                             <field name='update_result' widget="update_result" nolabel="1"/> -->
                         </group>
-
-
+                        <group>
+                            <field name="name"/>
+                            <field name="image" widget="image"/>
+                        </group>
                         <group style="width:100%">
                             <field name="parameters_input" nolabel="1">
                                 <tree editable="bottom">

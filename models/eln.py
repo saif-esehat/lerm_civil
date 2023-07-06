@@ -1,6 +1,11 @@
 from odoo import api, fields, models
 from odoo.tools.safe_eval import safe_eval
 from odoo.exceptions import ValidationError
+# from matplotlib import pyplot as plt
+# import io
+# from PIL import Image
+# import base64
+
 
 
 import base64
@@ -8,6 +13,8 @@ import json
 
 class ELN(models.Model):
     _name = 'lerm.eln'
+    _inherit = ['abstract.mpld3.parser']
+
     _rec_name = 'eln_id'
     eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New')
     srf_id = fields.Many2one('lerm.civil.srf',string="SRF ID")
@@ -45,6 +52,35 @@ class ELN(models.Model):
     conformity = fields.Boolean(string="Conformity")
     has_witness = fields.Boolean(string="Witness")
     invisible_fetch_inputs = fields.Boolean(string="Fetch Inputs")
+    name = fields.Char(string="Name")
+    image = fields.Binary(string="Image", attachment=True)
+
+    # def calculate_graphs(self):
+    #     import wdb; wdb.set_trace()
+    #     x = [1, 2, 3, 4, 5]
+    #     y = [1, 4, 9, 16, 25]
+
+    #     # Plot the line chart
+    #     plt.plot(x, y)
+    #     plt.xlabel('X values')
+    #     plt.ylabel('Y values')
+    #     plt.title('Line Chart')
+
+    #     # Save the chart as an image file
+    #     buffer = io.BytesIO()
+    #     plt.savefig(buffer, format='png')
+    #     buffer.seek(0)
+    #     image_data = buffer.read()
+    #     buffer.close()
+
+    #     # Convert the image data to base64 format
+    #     encoded_image_data = base64.b64encode(image_data)
+
+    #     # Update the image field with the chart image
+    #     self.image = encoded_image_data
+
+    #     # Close the plot to release resources
+    #     plt.close()
 
     def fetch_inputs(self):
         self.write({
@@ -64,7 +100,7 @@ class ELN(models.Model):
             # import wdb ; wdb.set_trace() 
 
             for inputs in parameter.dependent_inputs:
-                self.write({"parameters_input":[(0,0,{'parameter_result':record.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id})]})
+                self.write({"parameters_input":[(0,0,{'parameter_result':record.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id,'value':inputs.default})]})
             
             dependent_parameters = parameter.fetch_dependent_parameters_recursive(depth=80)
             for dependent_parameter in dependent_parameters:
@@ -72,8 +108,8 @@ class ELN(models.Model):
                 data = self.env["eln.parameters.result"].create({"eln_id":self.id,'parameter':dependent_parameter.id})
                 # data = self.write({"parameters_result":[(0,0,{'parameter':dependent_parameter.id})]})
                 for inputs in dependent_parameter.dependent_inputs:
-                    # import wdb ; wdb.set_trace() 
-                    self.write({"parameters_input":[(0,0,{'parameter_result':data.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id})]})
+                    import wdb ; wdb.set_trace() 
+                    self.write({"parameters_input":[(0,0,{'parameter_result':data.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id,'value':inputs.default})]})
 
 
 
@@ -231,7 +267,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
     _name = 'parameter.calculation.wizard'
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
     inputs_lines = fields.One2many('input.line.wizard', 'wizard_id', string='Inputs')
-    result = fields.Float(string="Result",compute="compute_result")
+    result = fields.Float(string="Result",compute="compute_result",digits=(16, 3))
 
 
     def update_result(self):
@@ -291,6 +327,7 @@ class InputLines(models.TransientModel):
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
     value = fields.Float(string="Value",digits=(16, 10))
+    
     
     @api.onchange('value')
     def _onchange_value(self):

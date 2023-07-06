@@ -33,14 +33,23 @@ class Material(models.Model):
             # print("saa" + str(self.env.context.get('hide_reference')))
             if self.env.context.get('lab_name'):
                 # import wdb; wdb.set_trace()
-                name = product.lab_name
-                print("name" + str(name))
-                res.append((product.id, name))
+                if product.lab_name:
+                    name = product.lab_name
+                    print("from lab")
+                    print("name" + str(name))
+                    res.append((product.id, name))
+                else:
+                    print("from elsse")
+                    name = product.name
+                    print("name" + str(name))
+                    res.append((product.id, name))
             elif self.env.context.get('main_name'):
+                print("from main")
                 name = product.name
                 print("name" + str(name))
                 res.append((product.id, name))
             else:
+                print("from elsse")
                 name = product.name
                 print("name" + str(name))
                 res.append((product.id, name))
