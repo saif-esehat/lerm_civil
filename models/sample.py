@@ -56,6 +56,11 @@ class LermSampleForm(models.Model):
     kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New')
     casting_date = fields.Date(string="Casting Date")
     client_sample_id = fields.Char(string='Client Sample ID')
+    filled_by = fields.Many2one('res.users',string="Filled By")
+    check_by = fields.Many2one('res.users',string="Check By")
+    approved_by = fields.Many2one('res.users',string="Approved By")
+
+
     
     status = fields.Selection([
         ('1-pending', 'Pending'),
@@ -66,6 +71,7 @@ class LermSampleForm(models.Model):
         ('1-allotment_pending', 'Assignment Pending'),
         ('2-alloted', 'Alloted'),
         ('3-pending_verification','Pending Verification'),
+        ('5-pending_approval','Pending Approval'),
         ('4-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
     conformity = fields.Boolean(string="Conformity")

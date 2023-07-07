@@ -90,6 +90,15 @@
                         <field name="sample_description"/>
                     </group>
                     <group style="width:50%">
+                        <field name="filled_by"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="check_by"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="approved_by"/>
+                    </group>
+                    <group style="width:50%">
                         <field name="volume"/>
                     </group>
                     <group style="width:50%">
