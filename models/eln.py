@@ -13,7 +13,6 @@ import json
 
 class ELN(models.Model):
     _name = 'lerm.eln'
-    _inherit = ['abstract.mpld3.parser']
 
     _rec_name = 'eln_id'
     eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New')
@@ -108,7 +107,7 @@ class ELN(models.Model):
                 data = self.env["eln.parameters.result"].create({"eln_id":self.id,'parameter':dependent_parameter.id})
                 # data = self.write({"parameters_result":[(0,0,{'parameter':dependent_parameter.id})]})
                 for inputs in dependent_parameter.dependent_inputs:
-                    import wdb ; wdb.set_trace() 
+                    # import wdb ; wdb.set_trace() 
                     self.write({"parameters_input":[(0,0,{'parameter_result':data.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id,'value':inputs.default})]})
 
 
@@ -267,8 +266,43 @@ class ParameteResultCalculationWizard(models.TransientModel):
     _name = 'parameter.calculation.wizard'
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
     inputs_lines = fields.One2many('input.line.wizard', 'wizard_id', string='Inputs')
+    nabl_status = fields.Selection([
+        ('nabl', 'NABL'),
+        ('non-nabl', 'Non-NABL')
+
+    ],compute="compute_nabl_status", string='NABL Status')
+    conformity_status = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')
+    ],compute="compute_conformity_status",string='Conformity Status')
     result = fields.Float(string="Result",compute="compute_result",digits=(16, 3))
 
+    @api.depends('result')
+    def compute_conformity_status(self):
+        for record in self:
+            # import wdb;wdb.set_trace()
+            material_table = self.parameter.parameter_table.filtered(lambda rec: rec.grade.id == self.env.context.get('grade_id') and rec.material.id == self.env.context.get('material_id') and rec.size.id == self.env.context.get('size_id'))
+            req_min = material_table.req_min
+            req_max = material_table.req_max
+            mu_neg = record.result - record.parameter.mu_value
+            mu_pos = record.result + record.parameter.mu_value
+            if req_min <= mu_neg <= req_max and req_min <= mu_pos <= mu_pos:
+                record.conformity_status = "pass"
+            else:
+                record.conformity_status = "fail"
+
+
+    @api.depends('result')
+    def compute_nabl_status(self):
+        for record in self:
+            if record.parameter.lab_min_value <= record.result <= record.parameter.lab_max_value:
+                record.nabl_status = 'nabl'
+            elif record.parameter.lab_min_value <= record.result and record.parameter.lab_max_value == 0:
+                record.nabl_status = 'nabl'
+            else:
+                record.nabl_status = 'non-nabl'
+
+    
 
     def update_result(self):
         result_id = self.env.context.get('result_id')
@@ -404,6 +438,9 @@ class ELNParametersResult(models.Model):
             'context':{
                 'default_parameter':self.parameter.id,
                 'default_inputs_lines': parameters_inputs,
+                'material_id':self.eln_id.material.id,
+                'size_id':self.eln_id.size_id.id,
+                'grade_id':self.eln_id.grade_id.id,
                 'result_id':self.id,
                 'eln_id':self.eln_id.id
             }

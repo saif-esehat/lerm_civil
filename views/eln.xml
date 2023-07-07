@@ -256,6 +256,8 @@
                         </field>
                         <group>
                             <field name="result"/>
+                            <field name="nabl_status" readonly="1"/>
+                            <field name="conformity_status" readonly="1"/>
                         </group>
 
                     </page>

@@ -30,9 +30,6 @@ class TestMethod(models.Model):
     test_method = fields.Char(string="Test Method", required=True)
 
 
-    def __str__(self):
-        return self.test_method
-
 
 class SrfForm(models.Model):
     _name = "lerm.civil.srf"
