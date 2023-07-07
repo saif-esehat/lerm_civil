@@ -269,12 +269,9 @@ class RejectSampleWizard(models.Model):
             sample = self.env['lerm.srf.sample'].search([('id','=',sample_id)]).write({'state': '2-alloted'})
             eln = self.env['lerm.eln'].search([('sample_id','=',sample_id)])
             eln.write({'state':'4-rejected'})
+            eln.message_post(body="<b>Sample Rejected :<b> " + self.reject_reason)
 
-            sample_reject = self.env['sample.reject.wizard'].create({
-                'sample_id': self.env.context.get('active_id'),
-                'reject_reason':self.reject_reason,
-                
-            })
+            
 
             return {'type': 'ir.actions.act_window_close'}
         else:

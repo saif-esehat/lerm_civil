@@ -18,6 +18,7 @@
                                 <field name="client_min_value" invisible="1"/>
                                 <field name="test_method"/>
                                 <field name="calculated"/>
+                                <field name="time_based"/>
                                 <field name="discipline"/>
                                 <field name="sheets"/>
                             </group>

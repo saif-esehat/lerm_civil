@@ -74,23 +74,27 @@
                             </field>
                         </group>
 
-                        <group style="width:100%">
+                        
+
                             <field name="parameters_result" nolabel="1">
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
                                     <field name="result" />
-                                    <field name="calculated" />
+                                    <field name="calculated" readonly="1"/>
                                     <field name="unit" />
                                     <field name="specification" />
                                     <field name="test_method" />
+                                    <field name="nabl_status" readonly="1"/>
+                                    <field name="conformity_status" readonly="1"/>
                                     <button string="Calculation" name="open_calculation_wizard" type="object" class="oe_highlight"/>
                                 </tree>
                             </field>
+                        
+
                         <button string="Fetch Inputs" name="fetch_inputs"  type="object" attrs="{'invisible': [('invisible_fetch_inputs', '=', True)]}"/>
                         <!-- <button string="Calculate Graph" name="calculate_graphs"  type="object"/> -->
                             <!-- <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
                             <field name='update_result' widget="update_result" nolabel="1"/> -->
-                        </group>
                         <group>
                             <field name="name"/>
                             <field name="image" widget="image"/>
@@ -103,6 +107,7 @@
                                     <field name="identifier" invisible="1" />
                                     <field name="inputs" />
                                     <field name="value" />
+                                    <field name="date_time" />
                                 </tree>
                             </field>
                             <!-- <field name='fetch_ds_button' widget="fetch_datasheet" nolabel="1"/>
@@ -110,6 +115,11 @@
                         </group>
 
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name= "message_ids" widget="mail_thread"/>
+                        <field name= "activity_ids" widget="mail_activity"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -124,7 +134,7 @@
                         <field name='spreadsheet_template'/>
                         <field name='related_parameters'/>
                         <field name='fill_datasheet' widget="fill_datasheet" />
-
+                        
                     </sheet>
                 </form>
             </field>
@@ -240,18 +250,22 @@
             <form string="Your Wizard">
                 <group>
                     <field name="parameter"/>
+                    <field name="time_based"/>
                 </group>
                 <notebook>
                     <page string="Input Lines">
                         <field name="inputs_lines" >
                             <tree editable="bottom">
-                                
+                                <field name="wizard_id" invisible="1"/>
                                 <field name="inputs_id" invisible="1"/>
                                 <field name="parameter_result"/>
                                 <field name="is_parameter_dependent"/>
                                 <field name="identifier"/>
                                 <field name="inputs" />
-                                <field name="value" />
+                                <field name="value" attrs="{'readonly':[('parent.time_based','=',True)]}" />
+                                <field name="date_time" attrs="{'column_invisible': [('parent.time_based','=',False)]}" />
+                                
+
                             </tree>
                         </field>
                         <group>

@@ -3,7 +3,7 @@ from odoo import models, fields ,api
 class ParameterMaster(models.Model):
     _name = 'lerm.parameter.master'
     _rec_name = 'parameter_name'
-
+    
     parameter_name = fields.Char(string="Parameter Name")
     lab_min_value = fields.Float(string="Lab min Value")
     lab_max_value = fields.Float(string="Lab max Value")
@@ -11,6 +11,7 @@ class ParameterMaster(models.Model):
     nabl_max_value = fields.Float(string="Nabl max value")
     client_min_value = fields.Float(string="Client min Value")
     client_max_value = fields.Float(string="Client max Value")
+    time_based = fields.Boolean("Time Based")
     mu_value = fields.Float(string="Mu Value")
     unit = fields.Many2one('uom.uom',string="Unit")
     calculated = fields.Boolean("Pseudo Parameter")
