@@ -13,7 +13,7 @@ import json
 
 class ELN(models.Model):
     _name = 'lerm.eln'
-    _inherit = ['abstract.mpld3.parser']
+    # _inherit = ['abstract.mpld3.parser']
 
     _rec_name = 'eln_id'
     eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New')
@@ -108,7 +108,7 @@ class ELN(models.Model):
                 data = self.env["eln.parameters.result"].create({"eln_id":self.id,'parameter':dependent_parameter.id})
                 # data = self.write({"parameters_result":[(0,0,{'parameter':dependent_parameter.id})]})
                 for inputs in dependent_parameter.dependent_inputs:
-                    import wdb ; wdb.set_trace() 
+                    # import wdb ; wdb.set_trace() 
                     self.write({"parameters_input":[(0,0,{'parameter_result':data.id,"is_parameter_dependent":inputs.is_parameter_dependent,'identifier':inputs.identifier,'inputs':inputs.id,'value':inputs.default})]})
 
 
