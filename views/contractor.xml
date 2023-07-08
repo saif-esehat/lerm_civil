@@ -7,6 +7,16 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
+                <xpath expr="//notebook" position="before">
+                    <group style="width:50%">
+                        <field name='signature' widget="image" class="oe_avatar"/>
+                        <!-- <field name='stamp' widget="image"/> -->
+                    </group>
+                    <group style="width:50%">
+                        <!-- <field name='signature' widget="image"/> -->
+                        <field name='stamp' widget="image" class="oe_avatar"/>
+                    </group>
+                </xpath>
                 <xpath expr="//page[@name='internal_notes']" position="after">
                     <page string="Contractor">
                         <field name="contractor_table" nolabel="1" >

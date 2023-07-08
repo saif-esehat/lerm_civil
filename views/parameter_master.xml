@@ -18,13 +18,14 @@
                                 <field name="client_min_value" invisible="1"/>
                                 <field name="test_method"/>
                                 <field name="calculated"/>
+                                <field name="time_based"/>
                                 <field name="discipline"/>
                                 <field name="sheets"/>
                             </group>
                             <group>
                                 <field name="group"/>
                                 <field name="lab_max_value"/>
-                                <field name="mu_value"/>
+                                <field name="mu_value" widget="percentage"/>
                                 <field name="nabl_max_value" invisible="1"/>
                                 <field name="client_max_value" invisible="1"/>
                                 <field name="unit"/>
@@ -40,8 +41,8 @@
                                     <field name="grade"/>
                                     <field name="size"/>
                                     <field name="specification"/>
-                                    <field name="req_max"/>
                                     <field name="req_min"/>
+                                    <field name="req_max"/>
                                 </tree>
                                 <form>
                                     <group>
