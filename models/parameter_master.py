@@ -70,7 +70,7 @@ class DependentInputs(models.Model):
     label = fields.Char(string="Label")
     decimal_place = fields.Integer(string="Decimal Place")
     parameter = fields.Many2one("lerm.parameter.master",string="Parameter")
-    default = fields.Float(string='Default')
+    default = fields.Float(string='Default',digits=(10,6))
 
 
 
