@@ -40,6 +40,7 @@
                                     <field name="material"/>
                                     <field name="grade"/>
                                     <field name="size"/>
+                                    <field name="permissable_limit"/>
                                     <field name="specification"/>
                                     <field name="req_min"/>
                                     <field name="req_max"/>
