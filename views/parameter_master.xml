@@ -51,7 +51,8 @@
                                         <field name="grade" domain="[('id', 'in', grade_ids)]"/>
                                         <field name="size" domain="[('id', 'in', size_ids)]"/>
                                         <field name="specification"/>
-                                        <field name="req_max"/>
+                                        <field name="permissable_limit"/>
+                                        <field name="req_min"/>
                                         <field name="req_min"/>
                                         <field name="size_ids" invisible='1'/>
                                         <field name="grade_ids" invisible='1'/>
