@@ -17,8 +17,11 @@
                                 <field name="nabl_min_value" invisible="1"/>
                                 <field name="client_min_value" invisible="1"/>
                                 <field name="test_method"/>
+                                <field name="decimal"/>
                                 <field name="calculated"/>
-                                <field name="time_based"/>
+                                <field name="time_based"/>  
+                                <field name="main_report_template"/>
+                                <field name="datasheet_report_template"/>
                                 <field name="discipline"/>
                                 <field name="sheets"/>
                             </group>
@@ -70,7 +73,6 @@
                                 <field name='default'/>
                                 <field name="decimal_place"/>
                                 <field name="parameter"/>
-
                             </tree>
                         </field>
                         <group>

@@ -264,12 +264,11 @@
                                 <field name="inputs" />
                                 <field name="value" attrs="{'readonly':[('parent.time_based','=',True)]}" />
                                 <field name="date_time" attrs="{'column_invisible': [('parent.time_based','=',False)]}" />
-                                
-
                             </tree>
                         </field>
                         <group>
                             <field name="result"/>
+                            <!-- <field name="result_char"/> -->
                             <field name="nabl_status" readonly="1" invisible="1"/>
                             <field name="conformity_status" readonly="1"  invisible="1"/>
                         </group>
