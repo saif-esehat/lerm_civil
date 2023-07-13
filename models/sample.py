@@ -134,10 +134,26 @@ class LermSampleForm(models.Model):
         for result in self.parameters_result:
             if not result.verified:
                 raise ValidationError("Not all parameters are verified. Please ensure all parameters are verified before proceeding.")
+        self.write({'state': '5-pending_approval'})
+        # eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+        # eln.write({'state':'3-approved'})
+
+
+    def approve_pending_sample(self):
+        for result in self.parameters_result:
+            if not result.verified:
+                raise ValidationError("Not all parameters are verified. Please ensure all parameters are verified before proceeding.")
         self.write({'state': '4-in_report'})
         eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
         eln.write({'state':'3-approved'})
     
+
+    # def reject_pending_sample(self):
+    #     self.write({'state': '2-alloted'})
+    #     eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+    #     eln.write({'state':'1-draft'})
+
+
 
     def reject_sample(self):
         # self.write({'state': '2-alloted'})
