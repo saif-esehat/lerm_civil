@@ -9,3 +9,4 @@ from . import sample_range
 from . import srf_report
 from . import sample_report
 from . import contractor
+from . import data_sheets_report

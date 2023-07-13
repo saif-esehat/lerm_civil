@@ -24,7 +24,8 @@
     'reports/srf_report_template.xml',
     'security/security.xml',
     'security/ir.model.access.csv',
-    'reports/sample_report_action.xml'
+    'reports/sample_report_action.xml',
+    'reports/datasheet_templates.xml'
     ],
         'assets': {
     'web.assets_backend':[
@@ -32,6 +33,7 @@
     ],
     'web.report_assets_common': [
             '/lerm_civil/static/src/css/eln_report.scss',
+            '/lerm_civil/static/src/css/data_sheet_styles.scss',
         ],
     'web.assets_qweb': [
         '/lerm_civil/static/src/xml/spreadsheet.xml'

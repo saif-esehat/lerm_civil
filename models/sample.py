@@ -172,6 +172,11 @@ class LermSampleForm(models.Model):
             }
 
     def print_sample_report(self):
+        sample = self
+        print(self.kes_no , 'kes no of self')
+
+        template_name = sample.parameters_result.parameter[0].datasheet_report_template.report_name
+
         # report = self.env.ref('lerm_civil.sample_report_action')
         # report_action = report.report_action(self)
         # import wdb;wdb.set_trace()
@@ -180,11 +185,16 @@ class LermSampleForm(models.Model):
         # report_name = report.filename
 
         # Return the report as a file to be downloaded or printed
+        # dynamic_part = "sample_report_template"
+        # dynamic_part = "10per_fine_coarse_agg_mechanical"
+
+        # report_name = f"lerm_civil.{dynamic_part}"
+        
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
-            'report_name': 'lerm_civil.sample_report_template',
-            'report_file': 'lerm_civil.sample_report_template',
+            'report_name': template_name,
+            'report_file': template_name
         }
         # return self.env.ref('lerm_civil.sample_report_action').report_action(self)
 
