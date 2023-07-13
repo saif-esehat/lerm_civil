@@ -172,7 +172,21 @@ class LermSampleForm(models.Model):
             }
 
     def print_sample_report(self):
-        return self.env.ref('lerm_civil.sample_report_action').report_action(self)
+        # report = self.env.ref('lerm_civil.sample_report_action')
+        # report_action = report.report_action(self)
+        # import wdb;wdb.set_trace()
+        # Generate the report and retrieve the file content
+        # report_data = report.render_qweb_pdf(self.ids)[0]
+        # report_name = report.filename
+
+        # Return the report as a file to be downloaded or printed
+        return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': 'lerm_civil.sample_report_template',
+            'report_file': 'lerm_civil.sample_report_template',
+        }
+        # return self.env.ref('lerm_civil.sample_report_action').report_action(self)
 
     def open_sample_allotment_wizard(self):
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
@@ -285,12 +299,9 @@ class RejectSampleWizard(models.Model):
             sample = self.env['lerm.srf.sample'].search([('id','=',sample_id)]).write({'state': '2-alloted'})
             eln = self.env['lerm.eln'].search([('sample_id','=',sample_id)])
             eln.write({'state':'4-rejected'})
+            eln.message_post(body="<b>Sample Rejected :<b> " + self.reject_reason)
 
-            sample_reject = self.env['sample.reject.wizard'].create({
-                'sample_id': self.env.context.get('active_id'),
-                'reject_reason':self.reject_reason,
-                
-            })
+            
 
             return {'type': 'ir.actions.act_window_close'}
         else:

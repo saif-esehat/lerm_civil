@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.tools.safe_eval import safe_eval
 from odoo.exceptions import ValidationError
+from datetime import datetime
+import math
 # from matplotlib import pyplot as plt
 # import io
 # from PIL import Image
@@ -13,7 +15,7 @@ import json
 
 class ELN(models.Model):
     _name = 'lerm.eln'
-
+    _inherit = ['mail.thread','mail.activity.mixin']
     _rec_name = 'eln_id'
     eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New')
     srf_id = fields.Many2one('lerm.civil.srf',string="SRF ID")
@@ -130,10 +132,11 @@ class ELN(models.Model):
     def calculate_results(self):
         for record in self.parameters_result:
             inputs = self.env["eln.parameters.inputs"].search([("parameter_result","=",record.id)])
-            values = {}
+            values = {
+                        'datetime':datetime
+                    }
             for input in inputs:
                 values[input.identifier] = input.value
-            # import wdb; wdb.set_trace()
             result = safe_eval(record.parameter.formula, values)
             record.write({'result':result})
             print(result) 
@@ -265,6 +268,7 @@ class ELN(models.Model):
 class ParameteResultCalculationWizard(models.TransientModel):
     _name = 'parameter.calculation.wizard'
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
+    time_based = fields.Boolean("Time Based",compute="compute_is_time")
     inputs_lines = fields.One2many('input.line.wizard', 'wizard_id', string='Inputs')
     nabl_status = fields.Selection([
         ('nabl', 'NABL'),
@@ -276,6 +280,12 @@ class ParameteResultCalculationWizard(models.TransientModel):
         ('fail', 'Fail')
     ],compute="compute_conformity_status",string='Conformity Status')
     result = fields.Float(string="Result",compute="compute_result",digits=(16, 3))
+    # result_char = fields.Char(string="Result")
+
+    @api.depends('parameter')
+    def compute_is_time(self):
+        for rec in self:
+            rec.time_based = rec.parameter.time_based
 
     @api.depends('result')
     def compute_conformity_status(self):
@@ -305,18 +315,19 @@ class ParameteResultCalculationWizard(models.TransientModel):
     
 
     def update_result(self):
+        import wdb; wdb.set_trace()
         result_id = self.env.context.get('result_id')
         result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
         for input in self.inputs_lines:
             # import wdb; wdb.set_trace()
-            self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value})
+            self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
 
 
 
 
-        result_id.write({'result':self.result,'calculated':True})
+        result_id.write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
 
         return {'type': 'ir.actions.act_window_close'}
 
@@ -335,16 +346,25 @@ class ParameteResultCalculationWizard(models.TransientModel):
     @api.depends('inputs_lines.value')
     def compute_result(self):
         for record in self:
-            values = {}
+            values = {
+                        'datetime':datetime
+                                            
+                    }
             try:
                 for input in self.inputs_lines:
-                    values[input.identifier] = input.value
-                
+                    if record.time_based:
+                        values[input.identifier] = input.date_time
+                    else:
+                        values[input.identifier] = input.value
 
+                
                 result_id = self.env.context.get('result_id')
                 result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
                 result = safe_eval(result_id.parameter.formula, values)
-                record.result = result
+                if record.time_based:
+                    record.result = result.total_seconds() / 60
+                else:
+                    record.result = result
             except:
                 record.result = 0
                 pass
@@ -361,7 +381,7 @@ class InputLines(models.TransientModel):
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
     value = fields.Float(string="Value",digits=(16, 10))
-    
+    date_time = fields.Datetime("Time") 
     
     @api.onchange('value')
     def _onchange_value(self):
@@ -398,6 +418,15 @@ class ELNParametersResult(models.Model):
     calculated = fields.Boolean("Calculated")
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
     specification = fields.Text(string="Specification", compute='_compute_specification')
+    nabl_status = fields.Selection([
+        ('nabl', 'NABL'),
+        ('non-nabl', 'Non-NABL')
+
+    ], string='NABL Status')
+    conformity_status = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')
+    ],string='Conformity Status')
     result = fields.Float(string="Result")
 
 
@@ -457,7 +486,7 @@ class ELNParametersInputs(models.Model):
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
     value = fields.Float(string="Value",digits=(16, 10))
-
+    date_time = fields.Datetime("Time") 
 
 
 

@@ -17,7 +17,11 @@
                                 <field name="nabl_min_value" invisible="1"/>
                                 <field name="client_min_value" invisible="1"/>
                                 <field name="test_method"/>
+                                <field name="decimal"/>
                                 <field name="calculated"/>
+                                <field name="time_based"/>  
+                                <field name="main_report_template"/>
+                                <field name="datasheet_report_template"/>
                                 <field name="discipline"/>
                                 <field name="sheets"/>
                             </group>
@@ -39,6 +43,7 @@
                                     <field name="material"/>
                                     <field name="grade"/>
                                     <field name="size"/>
+                                    <field name="permissable_limit"/>
                                     <field name="specification"/>
                                     <field name="req_min"/>
                                     <field name="req_max"/>
@@ -49,8 +54,9 @@
                                         <field name="grade" domain="[('id', 'in', grade_ids)]"/>
                                         <field name="size" domain="[('id', 'in', size_ids)]"/>
                                         <field name="specification"/>
-                                        <field name="req_max"/>
+                                        <field name="permissable_limit"/>
                                         <field name="req_min"/>
+                                        <field name="req_max"/>
                                         <field name="size_ids" invisible='1'/>
                                         <field name="grade_ids" invisible='1'/>
                                         <field name="material_ids" invisible='1'/>
@@ -67,7 +73,6 @@
                                 <field name='default'/>
                                 <field name="decimal_place"/>
                                 <field name="parameter"/>
-
                             </tree>
                         </field>
                         <group>

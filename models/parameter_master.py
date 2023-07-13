@@ -3,14 +3,18 @@ from odoo import models, fields ,api
 class ParameterMaster(models.Model):
     _name = 'lerm.parameter.master'
     _rec_name = 'parameter_name'
-
+    
     parameter_name = fields.Char(string="Parameter Name")
     lab_min_value = fields.Float(string="Lab min Value")
     lab_max_value = fields.Float(string="Lab max Value")
     nabl_min_value = fields.Float(string="Nabl min value")
     nabl_max_value = fields.Float(string="Nabl max value")
+    main_report_template = fields.Many2one('ir.actions.report',string="Main Report Template")
+    datasheet_report_template = fields.Many2one('ir.actions.report',string="DataSheet Report Template")
+    decimal = fields.Integer("Decimal")
     client_min_value = fields.Float(string="Client min Value")
     client_max_value = fields.Float(string="Client max Value")
+    time_based = fields.Boolean("Time Based")
     mu_value = fields.Float(string="Mu Value")
     unit = fields.Many2one('uom.uom',string="Unit")
     calculated = fields.Boolean("Pseudo Parameter")
@@ -69,7 +73,7 @@ class DependentInputs(models.Model):
     label = fields.Char(string="Label")
     decimal_place = fields.Integer(string="Decimal Place")
     parameter = fields.Many2one("lerm.parameter.master",string="Parameter")
-    default = fields.Float(string='Default')
+    default = fields.Float(string='Default',digits=(10,6))
 
 
 
@@ -85,6 +89,7 @@ class ParameterMaster(models.Model):
     grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
     size = fields.Many2one('lerm.size.line' , string="Size")
     size_ids = fields.Many2many('lerm.size.line',string="Size")
+    permissable_limit = fields.Char(string="Permissable Limit")
     specification = fields.Char(string="Specification")
     req_max = fields.Float(string="Req Max")
     req_min = fields.Float(string="Req Min")
