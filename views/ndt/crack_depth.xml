@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="crack_depth_view" model="ir.ui.view">
+        <field name="name">ndt.crack.depth.form</field>
+        <field name="model">ndt.crack.depth</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id"/>
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="tc" />
+                                <field name="ts" />
+                                <field name="distance" />
+                                <field name="tc2" />
+                                <field name="ts2" />
+                                <field name="tc2_by_ts2" />
+                                <field name="sqrt_Tc2_by_Ts2minus1" />
+                                <field name="cd" />
+                            </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

@@ -315,7 +315,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
     
 
     def update_result(self):
-        import wdb; wdb.set_trace()
+        # import wdb; wdb.set_trace()
         result_id = self.env.context.get('result_id')
         result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
@@ -416,6 +416,7 @@ class ELNParametersResult(models.Model):
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
     unit = fields.Many2one('uom.uom',string="Unit")
     calculated = fields.Boolean("Calculated")
+    calculation_type = fields.Selection([('parameter_based', 'Parameter Based'), ('form_based', 'Form Based')],compute='_compute_calculation_type',string='Calculation Type')
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
     specification = fields.Text(string="Specification", compute='_compute_specification')
     nabl_status = fields.Selection([
@@ -427,7 +428,13 @@ class ELNParametersResult(models.Model):
         ('pass', 'Pass'),
         ('fail', 'Fail')
     ],string='Conformity Status')
+    model_id = fields.Integer(string="Model Id")
     result = fields.Float(string="Result")
+
+    @api.depends('parameter.calculation_type')
+    def _compute_calculation_type(self):
+        for record in self:
+            record.calculation_type = record.parameter.calculation_type
 
 
     @api.depends('eln_id.material', 'eln_id.grade_id', 'eln_id.size_id','parameter')
@@ -440,6 +447,34 @@ class ELNParametersResult(models.Model):
             parameter_id = record.parameter.id
             specification = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
             record.specification = specification
+
+    def open_form(self):
+        # import wdb; wdb.set_trace()
+        if self.model_id != 0:
+            return {
+                'view_mode': 'form',
+                'res_model': self.parameter.ir_model.model,
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.model_id,
+                'context': {
+                    'default_srf_id':self.eln_id.srf_id.id,
+                    'default_sample_id': self.eln_id.sample_id.id,
+                    'default_parameter_id':self.id
+                 }
+            }
+        else:
+            return {
+                'view_mode': 'form',
+                'res_model': self.parameter.ir_model.model,
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'context': {
+                    'default_srf_id':self.eln_id.srf_id.id,
+                    'default_sample_id': self.eln_id.sample_id.id,
+                    'default_parameter_id':self.id
+                 }
+                }
 
 
 

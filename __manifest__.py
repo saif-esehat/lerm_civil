@@ -17,6 +17,7 @@
     'views/sample_range.xml',
     'views/eln.xml',
     'views/contractor.xml',
+    'views/ndt/crack_depth.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',

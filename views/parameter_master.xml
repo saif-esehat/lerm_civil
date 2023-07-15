@@ -19,6 +19,8 @@
                                 <field name="test_method"/>
                                 <field name="decimal"/>
                                 <field name="calculated"/>
+                                <field name="calculation_type"/>
+                                <field name="ir_model" attrs="{'invisible': [('calculation_type', '=', 'parameter_based')], 'required': [('calculation_type', '=', 'form_based')]}"  />
                                 <field name="time_based"/>  
                                 <field name="main_report_template"/>
                                 <field name="datasheet_report_template"/>
