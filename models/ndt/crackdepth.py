@@ -21,6 +21,8 @@ class CrackDepth(models.Model):
 class CrackDepthLine(models.Model):
     _name = "ndt.crack.depth.line"
     parent_id = fields.Many2one('ndt.crack.depth',string="Parent Id")
+    member = fields.Char("Member")
+    location = fields.Char("Location")
     tc = fields.Float("Tc")
     ts = fields.Float("Ts")
     distance = fields.Float("Distance")

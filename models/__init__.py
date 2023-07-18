@@ -11,3 +11,5 @@ from . import sample_report
 from . import contractor
 from . import data_sheets_report
 from .ndt import crackdepth
+from .ndt import acil_upv
+from .ndt import upv

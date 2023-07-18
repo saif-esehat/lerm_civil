@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="crack_depth_view" model="ir.ui.view">
-        <field name="name">ndt.crack.depth.form</field>
-        <field name="model">ndt.crack.depth</field>
+        <record id="acil_upv" model="ir.ui.view">
+        <field name="name">ndt.acil.upv.form</field>
+        <field name="model">ndt.acil.upv</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -22,16 +22,21 @@
                             <tree editable="bottom">
                                 <field name="member" />
                                 <field name="location" />
-                                <field name="tc" />
-                                <field name="ts" />
-                                <field name="distance" />
-                                <field name="tc2" />
-                                <field name="ts2" />
-                                <field name="tc2_by_ts2" />
-                                <field name="sqrt_Tc2_by_Ts2minus1" />
-                                <field name="cd" />
+                                <field name="level" />
+                                <field name="dist" />
+                                <field name="time" />
+                                <field name="velocity" />
+                                <field name="concrete_condition" />
+                                <field name="quality" />
+                                <field name="method" />
                             </tree>
                     </field>
+                    <group>
+                        <field name="average" />
+                        <field name="min"  />
+                        <field name="max"/>
+                    </group>
+                   
                 </sheet>
             </form>
         </field>

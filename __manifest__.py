@@ -18,6 +18,8 @@
     'views/eln.xml',
     'views/contractor.xml',
     'views/ndt/crack_depth.xml',
+    'views/ndt/acil_upv.xml', 
+    'views/ndt/upv.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',
