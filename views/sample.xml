@@ -30,9 +30,17 @@
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification'))]}"/>
 
                         <button type="object" 
+                        class="oe_highlight" 
+                        name="approve_pending_sample" 
+                        string="Approve Sample" 
+                        attrs="{'invisible': [('state', 'not in', ('5-pending_approval'))]}"/>
+
+                        <button type="object" 
                         name="reject_sample" 
                         string="Reject Sample" 
-                        attrs="{'invisible': [('state', 'not in', ('3-pending_verification'))]}"/>
+                        attrs="{'invisible': [('state', 'not in', ('3-pending_verification','5-pending_approval'))]}"/>
+
+                        
        
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
                 </header>
