@@ -315,7 +315,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
     
 
     def update_result(self):
-        import wdb; wdb.set_trace()
+        # import wdb; wdb.set_trace()
         result_id = self.env.context.get('result_id')
         result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])

@@ -269,7 +269,7 @@
 									<span t-esc="r['specification']"/>
 								</td>
 								<td>
-									<span t-esc="r['test_method']"/>
+									<span t-esc="r['test_method'].test_method"/>
 								</td>
 							</tr>
 						</tbody>
@@ -357,6 +357,20 @@
 								<td colspan="6">Test End Date :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.end_date"/>
+								</td>
+							</tr>
+							<tr style="height:50px" cols="12">
+								<td colspan="4">Performed By :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.technician.name"/>
+								</td>
+								<td colspan="4">Witness Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.witness_name"/>
+								</td>
+								<td colspan="4">Witness Signature :
+									<![CDATA[&nbsp;]]>
+									<span style='padding:20px'></span>
 								</td>
 							</tr>
 						</table>

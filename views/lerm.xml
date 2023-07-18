@@ -114,13 +114,13 @@
     </record>
     
     <menuitem id="lerm_root"
-        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group"
         name="LERM CIVIL"
         sequence="10" />
 
     <menuitem id="lerm_menu"
         name="Master Data"
-        groups="kes_technician_access_group"
+        groups="kes_technician_access_group,kes_admin_access_group"
         parent="lerm_root"
         sequence="20"  />
 
@@ -128,69 +128,73 @@
         name="Discipline"
         parent="lerm_menu"
         action="lerm_discipline_action"
+        groups="kes_admin_access_group"
         sequence="12" />
 
     <menuitem id="lerm_test_method"
         name="Test Method"
         parent="lerm_menu"
+        groups="kes_admin_access_group"
         action="test_method_action"
         sequence="14" />
 
     <menuitem id="lerm_transaction_data"
         name="Lab Operations"
-        groups="kes_technician_access_group,kes_hod_access_group"
+        groups="kes_technician_access_group,kes_hod_access_group,kes_admin_access_group"
         parent="lerm_root"
         sequence="10" />
 
     <menuitem id="lerm_sample"
         name="Sample"
-        groups="kes_hod_access_group"
+        groups="kes_hod_access_group,kes_admin_access_group"
         parent="lerm_transaction_data"
         action="test_sample_action"
         sequence="15" />
 
     <menuitem id="lerm_rejected_sample"
         name="Rejected Sample"
-        groups="kes_hod_access_group"
+        groups="kes_hod_access_group,kes_admin_access_group"
         parent="lerm_transaction_data"
         action="rejected_sample_action"
         sequence="16" />
 
     <menuitem id="lerm_eln"
-        name="ELN"
-        groups="kes_technician_access_group"
+        name="Laboratory Notebook"
+        groups="kes_technician_access_group,kes_admin_access_group,kes_hod_access_group"
         parent="lerm_transaction_data"
         action="test_eln_action"
         sequence="17" />
     
     <menuitem id="sample_status"
-        groups="kes_hod_access_group"
+        groups="kes_hod_access_group,kes_admin_access_group"
         name="Operational Status"
         parent="lerm_root"
         sequence="15" />
     
     <menuitem id="sample_status_pending_allotment"
         name="Allotment Pending"
+        groups="kes_admin_access_group"
+
         parent="sample_status"
         action="test_sample_pending_allotment_action"
         sequence="20" />
     
     <menuitem id="sample_status_allotted"
-        groups="kes_hod_access_group"
+        groups="kes_hod_access_group,kes_admin_access_group"
         name="Alloted"
         parent="sample_status"
         action="test_sample_pending_allotted_action"
         sequence="21" />
 
     <menuitem id="sample_status_pending_verification"
-        groups="kes_hod_access_group"
+        groups="kes_hod_access_group,kes_admin_access_group"
         name="Pending Verification"
         parent="sample_status"
         action="sample_pending_verification_action"
         sequence="22" />
 
     <menuitem id="sample_status_in_report"
-        groups="kes_hod_access_group"
+        groups="kes_hod_access_group,kes_admin_access_group"
         name="In-Report"
         parent="sample_status"
         action="test_sample_pending_in_report_action"
