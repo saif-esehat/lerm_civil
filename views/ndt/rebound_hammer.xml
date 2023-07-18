@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="rebound_hammer_view" model="ir.ui.view">
+        <field name="name">ndt.rebound.hammer.form</field>
+        <field name="model">ndt.rebound.hammer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id"/>
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="element" />
+                                <field name="location" />
+                                <field name="f1" />
+                                <field name="f2" />
+                                <field name="f3" />
+                                <field name="f4" />
+                                <field name="f5" />
+                                <field name="f6" />
+                                <field name="avg" />
+                                <field name="mpa" />
+                                <field name="direction" />
+                            </tree>
+                    </field>
+                    <group>
+                    <field name="average" />
+                    <field name="minimum" />
+                    <field name="maximum" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>
