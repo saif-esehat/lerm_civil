@@ -124,7 +124,8 @@
                     <field name="unit" optional="show"/>
                     <field name='nabl_select' optional="show"/>
                     <field name='spreadsheet_template' optional="show"/>
-                    <field name="cell" optional="show"/>
+                    <field name="parameter_table" optional="show"/>
+                    <field name="dependent_inputs" optional="show"/>
                 </tree>
             </field>
         </record>

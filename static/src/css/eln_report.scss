@@ -113,6 +113,8 @@
   }
 
   .authorizeRowDataSheet{
+    padding-top: 50px !important;
+    page-break-inside: avoid;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;

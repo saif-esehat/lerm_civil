@@ -19,10 +19,15 @@
     'views/contractor.xml',
     'views/mechanical/sieve_analysis.xml',
     'views/ndt/crack_depth.xml',
+<<<<<<< HEAD
     'views/ndt/acil_crack_depth.xml',
     'views/ndt/cover_meter.xml',
     'views/ndt/carbonation_test.xml',
     'views/ndt/rebound_hammer.xml',
+=======
+    'views/ndt/acil_upv.xml', 
+    'views/ndt/upv.xml',
+>>>>>>> 8c8effcf1e599499a2612571b8bade20dc071c95
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',
