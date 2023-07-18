@@ -11,6 +11,7 @@ class SieveAnalysis(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('mechanical.sieve.analysis.line','parent_id',string="Parameter")
     total = fields.Integer(string="Total",compute="_compute_total")
+    
 
     @api.model
     def create(self, vals):
