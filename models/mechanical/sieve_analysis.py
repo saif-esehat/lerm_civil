@@ -67,7 +67,9 @@ class SieveAnalyisLine(models.Model):
         for line in sorted_lines:
             line.cumulative_retained = cumulative_retained + line.percent_retained
             cumulative_retained = line.cumulative_retained
-            
+
+
+
             
                 
 
