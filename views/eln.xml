@@ -80,6 +80,7 @@
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
                                     <field name="result" />
+                                    <field name="context_data" />
                                     <field name="calculation_type" />
                                     <field name="calculated" readonly="1"/>
                                     <field name="unit" />

@@ -28,6 +28,8 @@
     'views/ndt/rebound_hammer.xml',
     'views/ndt/acil_upv.xml', 
     'views/ndt/upv.xml',
+    'views/mechanical/cement_normal_consistency.xml',
+    'views/mechanical/cement_setting_time.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_cement_normalconsistency" model="ir.ui.view">
+        <field name="name">mechanical.cement.normalconsistency.form</field>
+        <field name="model">mechanical.cement.normalconsistency</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                            <field name="temp_percent"/>
+                            <field name="humidity_percent"/>
+                    </group>
+                    <group>
+                        <label for="wt_of_cement_trial1" string="Wt. of Cement(g)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_of_cement_trial1" string="Trial 1" />
+                            <field  name="wt_of_cement_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="wt_of_cement_trial2" string="Trial 2" />
+                            <field  name="wt_of_cement_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline">
+                            <label for="wt_of_cement_trial3" string="Trial 3" />
+                            <field  name="wt_of_cement_trial3" colspan="3" nolabel="1"/>
+                          </group>
+                          <!--<field  name="wt_of_cement_trial2" style="width: 33%"/>-->
+                          <!--<field  name="wt_of_cement_trial3" style="width: 33%"/>-->
+                        </div>
+                    </group>
+                    <group>
+                        <label for="wt_of_water_req_trial1" string="Wt.of water required (g)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_of_water_req_trial1" string="" />
+                            <field  name="wt_of_water_req_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="wt_of_water_req_trial2" string="" />
+                            <field  name="wt_of_water_req_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline">
+                            <label for="wt_of_water_req_trial3" string="" />
+                            <field  name="wt_of_water_req_trial3" colspan="3" nolabel="1"/>
+                          </group>
+                          <!--<field  name="wt_of_cement_trial2" style="width: 33%"/>-->
+                          <!--<field  name="wt_of_cement_trial3" style="width: 33%"/>-->
+                        </div>
+                    </group>
+                    <group>
+                        <label for="penetration_of_vicat_plunger_trial1" string="Penetraion of vicat's Plunger (mm)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="penetration_of_vicat_plunger_trial1" string="" />
+                            <field  name="penetration_of_vicat_plunger_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="penetration_of_vicat_plunger_trial2" string="" />
+                            <field  name="penetration_of_vicat_plunger_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline">
+                            <label for="penetration_of_vicat_plunger_trial3" string="" />
+                            <field  name="penetration_of_vicat_plunger_trial3" colspan="3" nolabel="1"/>
+                          </group>
+                          <!--<field  name="wt_of_cement_trial2" style="width: 33%"/>-->
+                          <!--<field  name="wt_of_cement_trial3" style="width: 33%"/>-->
+                        </div>
+                    </group>
+                    <group>
+                        <label for="normal_consistency_trial1" string="Normal Consistency (%)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="normal_consistency_trial1" string="" />
+                            <field  name="normal_consistency_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="normal_consistency_trial2" string="" />
+                            <field  name="normal_consistency_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline">
+                            <label for="normal_consistency_trial3" string="" />
+                            <field  name="normal_consistency_trial3" colspan="3" nolabel="1"/>
+                          </group>
+                          <!--<field  name="wt_of_cement_trial2" style="width: 33%"/>-->
+                          <!--<field  name="wt_of_cement_trial3" style="width: 33%"/>-->
+                        </div>
+                    </group>
+                   
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

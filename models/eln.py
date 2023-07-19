@@ -415,6 +415,7 @@ class ELNParametersResult(models.Model):
     eln_id = fields.Many2one('lerm.eln',string="ELN ID")
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
     unit = fields.Many2one('uom.uom',string="Unit")
+    context_data = fields.Text("Context Data")
     calculated = fields.Boolean("Calculated")
     calculation_type = fields.Selection([('parameter_based', 'Parameter Based'), ('form_based', 'Form Based')],compute='_compute_calculation_type',string='Calculation Type')
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
