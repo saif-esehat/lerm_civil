@@ -13,6 +13,9 @@ from . import data_sheets_report
 from .mechanical import sieve_analysis
 from .mechanical import split_tensile_strength
 from .mechanical import coupler
+from .mechanical import tensile_splitting_strength
+from .mechanical import free_swell_index
+from .mechanical import soil_cbr
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
@@ -22,3 +25,6 @@ from .ndt import concrete_core
 from .ndt import crackdepth
 from .ndt import acil_upv
 from .ndt import upv
+from .mechanical import cement_normal_consistency
+from .mechanical import cement_setting_time
+

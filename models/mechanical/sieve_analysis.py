@@ -7,11 +7,11 @@ class SieveAnalysis(models.Model):
     _inherit = "lerm.eln"
     _rec_name = "name"
 
-    name = fields.Char("Name", default="Sieve Analysis")
-    parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
-    child_lines = fields.One2many('mechanical.sieve.analysis.line', 'parent_id', string="Parameter")
-    total = fields.Integer(string="Total", compute="_compute_total")
-    cumulative = fields.Float(string="Cumulative")
+    name = fields.Char("Name",default="Sieve Analysis")
+    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    child_lines = fields.One2many('mechanical.sieve.analysis.line','parent_id',string="Parameter")
+    total = fields.Integer(string="Total",compute="_compute_total")
+    
 
     @api.model
     def create(self, vals):
@@ -55,11 +55,11 @@ class SieveAnalysisLine(models.Model):
         for record in self:
             record.total = record.parent_id.total
 
-    @api.depends('wt_retained', 'parent_id.cumulative')
-    def _compute_cumulative_retained(self):
-        for record in self:
-            record.cumulative_retained = 0
-            # record.get_previous_record()
+    # @api.depends('wt_retained', 'parent_id.cumulative')
+    # def _compute_cumulative_retained(self):
+    #     for record in self:
+    #         record.cumulative_retained = 0
+    #         # record.get_previous_record()
             
 
     
@@ -86,3 +86,19 @@ class SieveAnalysisLine(models.Model):
                 record.percent_retained = record.wt_retained / record.total * 100
             except ZeroDivisionError:
                 record.percent_retained = 0
+
+
+    @api.depends('parent_id.child_lines.cumulative_retained')
+    def _compute_cumulative_retained(self):
+        sorted_lines = self.sorted(lambda r: r.id)
+        cumulative_retained = 0.0
+        for line in sorted_lines:
+            line.cumulative_retained = cumulative_retained + line.percent_retained
+            cumulative_retained = line.cumulative_retained
+
+
+
+            
+                
+
+
