@@ -22,6 +22,7 @@
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
+                                <field name="serial_no"/>
                                 <field name='sieve_size'/>
                                 <field name='wt_retained'/>
                                 <field name='percent_retained'/>
