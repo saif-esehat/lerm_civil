@@ -23,6 +23,7 @@
     'views/mechanical/tensile_splitting_strength.xml',
     'views/mechanical/free_swell_index.xml',
     'views/mechanical/soil_cbr.xml',
+    'views/mechanical/soundness.xml',
     'views/ndt/crack_depth.xml',
     'views/ndt/acil_crack_depth.xml',
     'views/ndt/cover_meter.xml',

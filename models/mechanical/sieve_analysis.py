@@ -11,6 +11,7 @@ class SieveAnalysis(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('mechanical.sieve.analysis.line','parent_id',string="Parameter")
     total = fields.Integer(string="Total",compute="_compute_total")
+    cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
     
 
     @api.model
@@ -22,22 +23,20 @@ class SieveAnalysis(models.Model):
     @api.depends('child_lines.wt_retained')
     def _compute_total(self):
         for record in self:
+            print("recordd",record)
             record.total = sum(record.child_lines.mapped('wt_retained'))
 
-    @api.onchange('total')
-    def _compute_cumulative(self):
-        last_cumulative = False
-        if self.child_lines:
-            last_record = self.child_lines[-1]
-            last_cumulative = last_record.cumulative_retained
-            self.cumulative = last_cumulative
-        print("Last cumulative value:", last_cumulative)
+    # @api.onchange('child_lines.wt_retained')
+    # def _compute_cumulative(self):
+    #     for record in self:
+    #         record.total = sum(record.child_lines.mapped('wt_retained'))
+
 
     @api.onchange('total')
     def _onchange_total(self):
         for line in self.child_lines:
             line._compute_percent_retained()
-            line._compute_cumulative_retained()
+            # line._compute_cumulative_retained()
 
 class SieveAnalysisLine(models.Model):
     _name = "mechanical.sieve.analysis.line"
@@ -48,55 +47,29 @@ class SieveAnalysisLine(models.Model):
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
     cumulative_retained = fields.Float(string="Cum. Retained %", compute="_compute_cumulative_retained", store=True)
     passing_percent = fields.Float(string="Passing %", compute="_compute_passing_percent")
-    total = fields.Integer(string='Total', compute='_compute_parent_value', store=True)
 
-    @api.depends('parent_id.total')
-    def _compute_parent_value(self):
-        for record in self:
-            record.total = record.parent_id.total
-
-    # @api.depends('wt_retained', 'parent_id.cumulative')
-    # def _compute_cumulative_retained(self):
-    #     for record in self:
-    #         record.cumulative_retained = 0
-    #         # record.get_previous_record()
-            
-
-    
-
-    def get_previous_record(self):
-        sorted_children = self.parent_id.child_lines.sorted(key=lambda r: r.id)
-        # current_index = sorted_children.index(self)
-        print("sorted",sorted_children)
-        # print("current",current_index)
+   
 
 
-        # if current_index > 0:
-        #     previous_record = sorted_children[current_index - 1]
-        #     print("previous",previous_record)           
-        #     return previous_record
-
-        # return False
-
-
-    @api.depends('wt_retained', 'total')
+    @api.depends('wt_retained', 'parent_id.total')
     def _compute_percent_retained(self):
         for record in self:
             try:
-                record.percent_retained = record.wt_retained / record.total * 100
+                record.percent_retained = record.wt_retained / self.parent_id.total * 100
             except ZeroDivisionError:
                 record.percent_retained = 0
 
+    # @api.depends('passing_percent','parent_id.total')
+    # def _compute_cumulative(self):
+    #     for record in self:
+    #         try:
+    #             record.cumulative_retained = record.wt_retained / self.parent_id.total * 100
+    #         except:
+    #             record.cumulative_retained = 0
 
-    @api.depends('parent_id.child_lines.cumulative_retained')
-    def _compute_cumulative_retained(self):
-        sorted_lines = self.sorted(lambda r: r.id)
-        cumulative_retained = 0.0
-        for line in sorted_lines:
-            line.cumulative_retained = cumulative_retained + line.percent_retained
-            cumulative_retained = line.cumulative_retained
 
 
+   
 
             
                 
