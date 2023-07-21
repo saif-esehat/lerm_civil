@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="mechanical_tensile_splitting_strength_view" model="ir.ui.view">
-        <field name="name">mechanical.tensile.splitting.strength.form</field>
-        <field name="model">mechanical.tensile.splitting.strength</field>
+        <record id="mechanical_pavel_block_view" model="ir.ui.view">
+        <field name="name">mechanical.pavel.block.form</field>
+        <field name="model">mechanical.pavel.block</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>

@@ -2,20 +2,20 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import math
 
-class TensileSplittingStrength(models.Model):
-    _name = "mechanical.tensile.splitting.strength"
+class PavelBlock(models.Model):
+    _name = "mechanical.pavel.block"
     _inherit = "lerm.eln"
     _rec_name = "name"
 
     name = fields.Char("Name",default="Tensile Splitting Strength")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines = fields.One2many('mechanical.tensile.splitting.strength.line','parent_id',string="Parameter")
+    child_lines = fields.One2many('mechanical.pavel.block.line','parent_id',string="Parameter")
     average_tensile = fields.Float(string="Average Tensile Splitting Strength", compute="_compute_average_tensile")  
 
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()
-        record = super(TensileSplittingStrength, self).create(vals)
+        record = super(PavelBlock, self).create(vals)
         record.parameter_id.write({'model_id':record.id})
         return record
 
@@ -34,9 +34,9 @@ class TensileSplittingStrength(models.Model):
 
 
 
-class TensileSplittingStrengthLine(models.Model):
-    _name = "mechanical.tensile.splitting.strength.line"
-    parent_id = fields.Many2one('mechanical.tensile.splitting.strength',string="Parent Id")
+class PavelBlockthLine(models.Model):
+    _name = "mechanical.pavel.block.line"
+    parent_id = fields.Many2one('mechanical.pavel.block',string="Parent Id")
 
     length = fields.Float(string="Mean of failure Length in mm (l)")
     thickness = fields.Float(string="Mean of failure Thickness in mm (t)")
