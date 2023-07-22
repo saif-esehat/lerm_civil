@@ -18,7 +18,13 @@
     'views/eln.xml',
     'views/contractor.xml',
     'views/mechanical/sieve_analysis.xml',
+<<<<<<< HEAD
     'views/mechanical/pavel_block.xml',
+=======
+    'views/mechanical/coupler.xml',
+    'views/mechanical/split_tensile_strength.xml',
+    'views/mechanical/tensile_splitting_strength.xml',
+>>>>>>> 6b95b1fc7e4d21e0461dc1262fee897e12cc96f2
     'views/mechanical/free_swell_index.xml',
     'views/mechanical/soil_cbr.xml',
     'views/mechanical/heavy_ligth_compaction.xml',
@@ -31,6 +37,8 @@
     'views/ndt/rebound_hammer.xml',
     'views/ndt/acil_upv.xml', 
     'views/ndt/upv.xml',
+    'views/mechanical/cement_normal_consistency.xml',
+    'views/mechanical/cement_setting_time.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',

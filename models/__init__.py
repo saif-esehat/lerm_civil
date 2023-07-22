@@ -23,3 +23,6 @@ from .ndt import concrete_core
 from .ndt import crackdepth
 from .ndt import acil_upv
 from .ndt import upv
+from .mechanical import cement_normal_consistency
+from .mechanical import cement_setting_time
+

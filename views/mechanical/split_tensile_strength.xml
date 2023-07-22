@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="mechanical_sieve_analysis_view" model="ir.ui.view">
-        <field name="name">mechanical.sieve.analysis.form</field>
-        <field name="model">mechanical.sieve.analysis</field>
+        <record id="split_tensile_strength_view" model="ir.ui.view">
+        <field name="name">mechanical.split.tensile.strength.form</field>
+        <field name="model">mechanical.split.tensile.strength</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -12,8 +12,6 @@
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" invisible="1" />
                         <field name="parameter_id"/>
-                        <field name="total"/>
-                        
                     </group>
                     <group>
                         <h1>
@@ -22,14 +20,16 @@
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
-                                <field name='sieve_size'/>
-                                <field name='wt_retained'/>
-                                <field name='percent_retained'/>
-                                <field name='cumulative_retained' context="{'default_cumulative_retained': cumulative_retained}"/>
-                                <field name='passing_percent'/>
-                                <field name='total' context="{'default_total': total}"/>
+                                <field name='weight'/>
+                                <field name='height'/>
+                                <field name='diameter'/>
+                                <field name='breaking_load'/>
+                                <field name='split_tensile'/>
                             </tree>
                     </field>
+                    <group>
+                        <field name='average'/>
+                    </group>
                 </sheet>
             </form>
         </field>
