@@ -20,6 +20,9 @@
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
+                    <div>
+                        <button string="Calculate" type="object" name="calculate" class="oe_highlight"/>
+                    </div>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="serial_no"/>
@@ -31,6 +34,7 @@
                                 
                             </tree>
                     </field>
+                    
                 </sheet>
             </form>
         </field>

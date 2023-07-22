@@ -12,6 +12,23 @@ class SieveAnalysis(models.Model):
     child_lines = fields.One2many('mechanical.sieve.analysis.line','parent_id',string="Parameter")
     total = fields.Integer(string="Total",compute="_compute_total")
     cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
+
+
+    def calculate(self):
+        for record in self:
+            for line in record.child_lines:
+                print("Rows",str(line.percent_retained))
+                previous_line = line.serial_no - 1
+                if previous_line == 0:
+                    line.write({'cumulative_retained': line.percent_retained})
+                else:
+                    previous_line_record = self.env['mechanical.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+                    line.write({'cumulative_retained': previous_line_record + line.percent_retained})
+                    line.write({'passing_percent': 100-(previous_line_record + line.percent_retained)})
+                    print("Previous Cumulative",previous_line_record)
+                    
+
+                
     
 
     @api.model
