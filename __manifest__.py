@@ -24,6 +24,7 @@
     'views/mechanical/heavy_ligth_compaction.xml',
     'views/mechanical/plastic_limit.xml',
     'views/mechanical/liquid_limit.xml',
+    'views/mechanical/compressive_strength_solid.xml',
     'views/ndt/crack_depth.xml',
     'views/ndt/acil_crack_depth.xml',
     'views/ndt/cover_meter.xml',
