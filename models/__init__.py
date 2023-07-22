@@ -11,9 +11,7 @@ from . import sample_report
 from . import contractor
 from . import data_sheets_report
 from .mechanical import sieve_analysis
-from .mechanical import split_tensile_strength
-from .mechanical import coupler
-from .mechanical import tensile_splitting_strength
+from .mechanical import pavel_block
 from .mechanical import free_swell_index
 from .mechanical import soil_cbr
 from .mechanical import soundness

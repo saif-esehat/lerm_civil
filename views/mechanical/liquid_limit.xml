@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_liquid_limit_view" model="ir.ui.view">
+        <field name="name">mechanical.liquid.limit.form</field>
+        <field name="model">mechanical.liquid.limit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+               
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id"/>
+                        <field name="liquid_limit" width="50%" />
+                        <field name="are_child_lines_filled" invisible="1"/>
+                        <button string="Calculate" name="liquid_calculation" type="object" class="oe_highlight" 
+                                attrs="{'invisible': [('are_child_lines_filled', '=', False)]}" />
+                    </group>
+                     
+                        
+                        
+                        
+                
+    
+                      
+
+                 
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='container_no'/>
+                                <field name="blwo_no"/>
+                                <field name='mass_of_wet'/>
+                                <field name='mass_of_dry'/>
+                                <field name='mass_of_container'/>
+                                <field name='mass_of_moisture'/>
+                                <field name='mass_of_dry_sample'/>
+                                <field name='moisture'/>
+                                <!-- <field name='wt_of_container_dry'/>
+                                <field name='wt_of_dry_sample'/>
+                               -->
+                            </tree>
+                    </field>
+                  
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>
