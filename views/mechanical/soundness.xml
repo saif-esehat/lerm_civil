@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="mechanical_sieve_analysis_view" model="ir.ui.view">
-        <field name="name">mechanical.sieve.analysis.form</field>
-        <field name="model">mechanical.sieve.analysis</field>
+        <record id="mechanical_soundness_view" model="ir.ui.view">
+        <field name="name">mechanical.soundness.form</field>
+        <field name="model">mechanical.soundness</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -12,8 +12,6 @@
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" invisible="1" />
                         <field name="parameter_id"/>
-                        <field name="total"/>
-                        
                     </group>
                     <group>
                         <h1>
@@ -22,15 +20,19 @@
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
-                                <field name="serial_no"/>
-                                <field name='sieve_size'/>
-                                <field name='wt_retained'/>
-                                <field name='percent_retained'/>
-                                <field name='cumulative_retained' context="{'default_cumulative_retained': cumulative_retained}"/>
-                                <field name='passing_percent'/>
-                                
+                                <field name="sieve_size_passing"/>
+                                <field name="sieve_size_retained"/>
+                                <field name="grading_original_sample" readonly='1'/>
+                                <field name="weight_before_test"/>
+                                <field name="weight_after_test"/>
+                                <field name="passing_percent" readonly='1'/>
+                                <field name="cumulative_loss_percent"/>
                             </tree>
                     </field>
+                    <group>
+                        <field name="total"/>
+                        <field name="soundness"/>
+                    </group>
                 </sheet>
             </form>
         </field>

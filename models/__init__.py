@@ -14,6 +14,7 @@ from .mechanical import sieve_analysis
 from .mechanical import pavel_block
 from .mechanical import free_swell_index
 from .mechanical import soil_cbr
+from .mechanical import soundness
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
