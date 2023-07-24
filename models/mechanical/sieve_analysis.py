@@ -12,6 +12,23 @@ class SieveAnalysis(models.Model):
     child_lines = fields.One2many('mechanical.sieve.analysis.line','parent_id',string="Parameter")
     total = fields.Integer(string="Total",compute="_compute_total")
     cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
+
+
+    def calculate(self):
+        for record in self:
+            for line in record.child_lines:
+                print("Rows",str(line.percent_retained))
+                previous_line = line.serial_no - 1
+                if previous_line == 0:
+                    line.write({'cumulative_retained': line.percent_retained})
+                else:
+                    previous_line_record = self.env['mechanical.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+                    line.write({'cumulative_retained': previous_line_record + line.percent_retained})
+                    line.write({'passing_percent': 100-(previous_line_record + line.percent_retained)})
+                    print("Previous Cumulative",previous_line_record)
+                    
+
+                
     
 
     @api.model
@@ -40,6 +57,7 @@ class SieveAnalysis(models.Model):
 
 class SieveAnalysisLine(models.Model):
     _name = "mechanical.sieve.analysis.line"
+<<<<<<< HEAD
     parent_id = fields.Many2one('mechanical.sieve.analysis', string="Parent Id")
     
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
@@ -57,6 +75,32 @@ class SieveAnalysisLine(models.Model):
             if existing_records:
                 max_serial_no = max(existing_records.mapped('serial_no'))
                 vals['serial_no'] = max_serial_no + 1
+=======
+    _order = "sequence, id"
+    sequence = fields.Integer(string="Sequence", store=True)
+
+    parent_id = fields.Many2one('mechanical.sieve.analysis',string="Parent Id")
+    sieve_size = fields.Char(string="IS Sieve Size")
+    wt_retained = fields.Float(string="Wt. Retained in gms")
+    percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
+    cumulative_retained = fields.Float(string="Cum. Retained %" )
+    passing_percent = fields.Float(string="Passing %" )
+    total = fields.Integer(string='Total',compute='_compute_parent_value', store=True)
+
+    @api.model
+    def create(self, vals):
+        # Calculate the cumulative sum of number_1 and number_2
+        
+        if vals.get('parent_id'):
+            parent_id = self.env['mechanical.sieve.analysis'].browse(vals['parent_id'])
+            previous_child = parent_id.child_lines[-1]  # Get the previous child record
+            cumulative_sum = previous_child.cumulative_retained + self.percent_retained if previous_child else 0.0
+            vals['cumulative_retained'] += cumulative_sum
+
+        return super(SieveAnalyisLine, self).create(vals)
+
+    
+>>>>>>> e50927a (Dump)
 
         return super(SieveAnalysisLine, self).create(vals)
 
@@ -94,6 +138,15 @@ class SieveAnalysisLine(models.Model):
 
         return res
 
+    
+    # @api.depends('parent_id.child_lines')
+    # def _compute_sequence(self):
+    #     for record in self:
+    #         sorted_lines = sorted(record.parent_id.child_lines, key=lambda r: r.id)
+    #         # for index, line in enumerate(sorted_lines, start=1):
+    #         #     if line.id == record.id:
+    #         #         record.sequence = index
+    #         #         break
 
     @api.depends('wt_retained', 'parent_id.total')
     def _compute_percent_retained(self):
@@ -103,6 +156,7 @@ class SieveAnalysisLine(models.Model):
             except ZeroDivisionError:
                 record.percent_retained = 0
 
+<<<<<<< HEAD
     # @api.depends('passing_percent','parent_id.total')
     # def _compute_cumulative(self):
     #     for record in self:
@@ -115,6 +169,37 @@ class SieveAnalysisLine(models.Model):
 
    
 
+=======
+
+    @api.depends('parent_id.child_lines.cumulative_retained')
+    def _compute_cum_retained(self):
+        # self.get_previous_record()
+        self.cumulative_retained=0
+        # sorted_lines = self.sorted(lambda r: r.id)
+        # cumulative_retained = 0.0
+        # for line in sorted_lines:
+        #     line.cumulative_retained = cumulative_retained + line.percent_retained
+        #     cumulative_retained = line.cumulative_retained
+
+
+    def get_previous_record(self):
+        for record in self:
+            import wdb; wdb.set_trace()
+            sorted_lines = sorted(record.parent_id.child_lines, key=lambda r: r.id)
+            # index = sorted_lines.index(record)
+            # print("Working")
+
+
+
+        # sorted_children = self.parent_id.child_ids.sorted(key=lambda r: r.id)
+        # current_index = sorted_children.index(self)
+
+        # if current_index > 0:
+        #     previous_record = sorted_children[current_index - 1]
+        #     return previous_record
+
+        # return False
+>>>>>>> e50927a (Dump)
             
                 
 
