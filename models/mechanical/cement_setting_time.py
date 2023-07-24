@@ -8,7 +8,7 @@ class CementSettingTime(models.Model):
     _rec_name = "name"
 
 
-    name = fields.Char("Name",default="Setting Time")
+    setting_time_name = fields.Char("Name",default="Setting Time")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
 
     temp_percent = fields.Float("Temperature %")

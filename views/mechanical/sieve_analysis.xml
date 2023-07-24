@@ -25,7 +25,11 @@
                     </div>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
+<<<<<<< HEAD
                                 <field name="serial_no"/>
+=======
+                              <field name='sequence'/>
+>>>>>>> e50927a (Dump)
                                 <field name='sieve_size'/>
                                 <field name='wt_retained'/>
                                 <field name='percent_retained'/>

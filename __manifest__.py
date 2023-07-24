@@ -8,6 +8,7 @@
  'data': [
     'data/sequence.xml',
     'views/lerm.xml',
+    'dump.sql',
     'views/groups.xml',
     'views/material.xml',
     'views/srf.xml',
