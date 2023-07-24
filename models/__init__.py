@@ -27,7 +27,3 @@ from .ndt import acil_upv
 from .ndt import upv
 from .mechanical import cement_normal_consistency
 from .mechanical import cement_setting_time
-<<<<<<< HEAD
-
-=======
->>>>>>> e50927a (Dump)

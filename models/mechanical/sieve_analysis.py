@@ -57,7 +57,6 @@ class SieveAnalysis(models.Model):
 
 class SieveAnalysisLine(models.Model):
     _name = "mechanical.sieve.analysis.line"
-<<<<<<< HEAD
     parent_id = fields.Many2one('mechanical.sieve.analysis', string="Parent Id")
     
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
@@ -75,32 +74,6 @@ class SieveAnalysisLine(models.Model):
             if existing_records:
                 max_serial_no = max(existing_records.mapped('serial_no'))
                 vals['serial_no'] = max_serial_no + 1
-=======
-    _order = "sequence, id"
-    sequence = fields.Integer(string="Sequence", store=True)
-
-    parent_id = fields.Many2one('mechanical.sieve.analysis',string="Parent Id")
-    sieve_size = fields.Char(string="IS Sieve Size")
-    wt_retained = fields.Float(string="Wt. Retained in gms")
-    percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
-    cumulative_retained = fields.Float(string="Cum. Retained %" )
-    passing_percent = fields.Float(string="Passing %" )
-    total = fields.Integer(string='Total',compute='_compute_parent_value', store=True)
-
-    @api.model
-    def create(self, vals):
-        # Calculate the cumulative sum of number_1 and number_2
-        
-        if vals.get('parent_id'):
-            parent_id = self.env['mechanical.sieve.analysis'].browse(vals['parent_id'])
-            previous_child = parent_id.child_lines[-1]  # Get the previous child record
-            cumulative_sum = previous_child.cumulative_retained + self.percent_retained if previous_child else 0.0
-            vals['cumulative_retained'] += cumulative_sum
-
-        return super(SieveAnalyisLine, self).create(vals)
-
-    
->>>>>>> e50927a (Dump)
 
         return super(SieveAnalysisLine, self).create(vals)
 
@@ -156,20 +129,6 @@ class SieveAnalysisLine(models.Model):
             except ZeroDivisionError:
                 record.percent_retained = 0
 
-<<<<<<< HEAD
-    # @api.depends('passing_percent','parent_id.total')
-    # def _compute_cumulative(self):
-    #     for record in self:
-    #         try:
-    #             record.cumulative_retained = record.wt_retained / self.parent_id.total * 100
-    #         except:
-    #             record.cumulative_retained = 0
-
-
-
-   
-
-=======
 
     @api.depends('parent_id.child_lines.cumulative_retained')
     def _compute_cum_retained(self):
@@ -184,7 +143,7 @@ class SieveAnalysisLine(models.Model):
 
     def get_previous_record(self):
         for record in self:
-            import wdb; wdb.set_trace()
+            # import wdb; wdb.set_trace()
             sorted_lines = sorted(record.parent_id.child_lines, key=lambda r: r.id)
             # index = sorted_lines.index(record)
             # print("Working")
@@ -199,7 +158,6 @@ class SieveAnalysisLine(models.Model):
         #     return previous_record
 
         # return False
->>>>>>> e50927a (Dump)
             
                 
 
