@@ -190,7 +190,17 @@ class ELN(models.Model):
 
 
 
+    def print_datasheet(self):
+        eln = self
         
+        template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+        print(template_name , 'lark lark')
+        return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': template_name,
+            'report_file': template_name
+        }
 
     @api.model
     def create(self,vals):

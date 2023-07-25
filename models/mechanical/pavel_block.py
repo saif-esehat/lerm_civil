@@ -9,7 +9,7 @@ class PavelBlock(models.Model):
 
     name = fields.Char("Name",default="Tensile Splitting Strength")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines = fields.One2many('mechanical.pavel.block.line','parent_id',string="Parameter")
+    child_lines = fields.One2many('mechanical.pavel.block.line','parent_id',string="Parameter" )
     average_tensile = fields.Float(string="Average Tensile Splitting Strength", compute="_compute_average_tensile")  
 
     @api.model

@@ -20,13 +20,13 @@
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
-                    <field name="child_lines" nolabel="1" >
+                    <field name="child_lines" >
                             <tree editable="bottom">
-                                <field name='length'/>
-                                <field name='thickness'/>
-                                <field name='area'/>
-                                <field name='failure_load'/>
-                                <field name='splitting_tensile'/>
+                                <field name='length' string='Mean of failure Length in mm (l)' invisible="1"/>
+                                <field name='thickness' string='Mean of failure Thickness in mm (t)'/>
+                                <field name='area' string='Area of Failure = l x t in mm2'/>
+                                <field name='failure_load' string='Failure Load in N'/>
+                                <field name='splitting_tensile' string='Tensile Splitting Strength in N/mm2'/>
                                 <!-- <field name='average_tensile'/> -->
                             </tree>
                     </field> 

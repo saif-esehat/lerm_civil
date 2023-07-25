@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="data_sheet_header_generaltemplate">
+        <div t-attf-class="header article" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-12">
+                    <div style="text-align:left;">	
+                        FORMAT No. <![CDATA[&nbsp;]]> <span t-esc="eln.material.data_sheet_format_no.name"/>
+                    </div>
+                    <div style="text-align:center;margin-top:12px">	
+                        KNACK ENGINEERING SERVICES PVT LTD
+                    </div>
+                    <div style="text-align:center;">
+                        TEST DATA SHEET
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div t-attf-class="article" t-att-style="report_header_style">
+            <t t-out="0"/>
+        </div>
+        <div t-attf-class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <!-- <ul class="list-inline mb4">
+                    <div class="footertext">
+                        Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+                    </div>
+                    <div class="footertext">
+                        Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
+                    </div>
+                    <div class="footertext">
+                        CIN No.: U45209MH2017PTC291168
+                    </div>
+                </ul> -->
+                <div t-if="report_type == 'pdf'" class="footertext">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="datasheet_generaltemplate_report">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    <span t-field="data.parameter_id.parameter.parameter_name"/>
+                </div>
+				<div class="container_eln" style="margin-top:5px">
+					<div t-foreach="eln" t-as="o">
+						<table>
+							<tr cols="12">
+								<td colspan="6">Job no :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.eln_id"/>
+								</td>
+								<td colspan="6">Test Start Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.start_date"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Material :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.material.name"/>
+								</td>
+								<td colspan="6">Test End Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.end_date"/>
+								</td>
+							</tr>
+							<!-- <tr style="height:50px" cols="12">
+								<td colspan="4">Performed By :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.technician.name"/>
+								</td>
+								<td colspan="4">Witness Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.witness_name"/>
+								</td>
+								<td colspan="4">Witness Signature :
+									<![CDATA[&nbsp;]]>
+									<span style='padding:20px'></span>
+								</td>
+							</tr> -->
+						</table>
+					</div>
+						<table style="margin-top:30px;">
+							<thead>
+								<tr>
+									<!-- <th>
+										<div>SR.No</div>
+									</th> -->
+									<t t-foreach="tabledata" t-as="column">
+										<th>
+											<span>
+												<t t-esc="column[1]" />
+											</span>
+										</th>
+									</t>
+								</tr>
+            				</thead>
+							<tbody>
+								<t t-set="i" t-value="0"/>
+								<tr t-foreach="data.child_lines" t-as="r">
+									<!-- <td>
+										<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+										</div>
+									</td> -->
+									<t t-foreach="tabledata" t-as="row">
+										<td>
+											<span>
+												<t t-esc="r[row[0]]" />
+											</span>
+										</td>
+									</t>
+								</tr>
+							</tbody>
+						</table>
+						<div class="authorizeRowDataSheet">
+							<div>
+								<div>
+									<b>
+										Smita Pawar
+									</b>
+								</div>
+								<div>
+									<b>
+										(JR Chemist)
+									</b>
+								</div>
+								<div>
+									<b>
+										Tested By
+									</b>
+								</div>
+							</div>
+							<div style="margin-left:500px">
+								<div>
+									<b>
+										Rupali Patil
+									</b>
+								</div>
+								<div>
+									<b>
+										Chemical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+							</div>
+						</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

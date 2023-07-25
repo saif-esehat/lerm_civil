@@ -34,14 +34,14 @@
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
-                                <field name='container_no'/>
-                                <field name="blwo_no"/>
-                                <field name='mass_of_wet'/>
-                                <field name='mass_of_dry'/>
-                                <field name='mass_of_container'/>
-                                <field name='mass_of_moisture'/>
-                                <field name='mass_of_dry_sample'/>
-                                <field name='moisture'/>
+                                <field name='container_no' string="Container No"/>
+                                <field name="blwo_no" string="No.of Blows"/>
+                                <field name='mass_of_wet' string="Mass of wet sample+container (M1) in gms"/>
+                                <field name='mass_of_dry' string="Mass of dry sample+container (M2) in gms"/>
+                                <field name='mass_of_container' string="Mass of container (M3) in gms"/>
+                                <field name='mass_of_moisture' string="Mass of Moisture (M1-M2) in gms"/>
+                                <field name='mass_of_dry_sample' string="Mass of dry sample (M2-M3) in gms"/>
+                                <field name='moisture' string="% Moisture"/>
                                 <!-- <field name='wt_of_container_dry'/>
                                 <field name='wt_of_dry_sample'/>
                                -->
