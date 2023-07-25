@@ -471,7 +471,8 @@ class ELNParametersResult(models.Model):
                 'context': {
                     'default_srf_id':self.eln_id.srf_id.id,
                     'default_sample_id': self.eln_id.sample_id.id,
-                    'default_parameter_id':self.id
+                    'default_parameter_id':self.id,
+                    'default_eln_ref':self.eln_id.id
                  }
             }
         else:
@@ -483,7 +484,9 @@ class ELNParametersResult(models.Model):
                 'context': {
                     'default_srf_id':self.eln_id.srf_id.id,
                     'default_sample_id': self.eln_id.sample_id.id,
-                    'default_parameter_id':self.id
+                    'default_parameter_id':self.id,
+                    'default_eln_ref':self.eln_id.id
+
                  }
                 }
 

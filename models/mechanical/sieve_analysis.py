@@ -111,6 +111,15 @@ class SieveAnalysisLine(models.Model):
 
         return res
 
+    
+    # @api.depends('parent_id.child_lines')
+    # def _compute_sequence(self):
+    #     for record in self:
+    #         sorted_lines = sorted(record.parent_id.child_lines, key=lambda r: r.id)
+    #         # for index, line in enumerate(sorted_lines, start=1):
+    #         #     if line.id == record.id:
+    #         #         record.sequence = index
+    #         #         break
 
     @api.depends('wt_retained', 'parent_id.total')
     def _compute_percent_retained(self):
@@ -120,18 +129,35 @@ class SieveAnalysisLine(models.Model):
             except ZeroDivisionError:
                 record.percent_retained = 0
 
-    # @api.depends('passing_percent','parent_id.total')
-    # def _compute_cumulative(self):
-    #     for record in self:
-    #         try:
-    #             record.cumulative_retained = record.wt_retained / self.parent_id.total * 100
-    #         except:
-    #             record.cumulative_retained = 0
+
+    @api.depends('parent_id.child_lines.cumulative_retained')
+    def _compute_cum_retained(self):
+        # self.get_previous_record()
+        self.cumulative_retained=0
+        # sorted_lines = self.sorted(lambda r: r.id)
+        # cumulative_retained = 0.0
+        # for line in sorted_lines:
+        #     line.cumulative_retained = cumulative_retained + line.percent_retained
+        #     cumulative_retained = line.cumulative_retained
+
+
+    def get_previous_record(self):
+        for record in self:
+            # import wdb; wdb.set_trace()
+            sorted_lines = sorted(record.parent_id.child_lines, key=lambda r: r.id)
+            # index = sorted_lines.index(record)
+            # print("Working")
 
 
 
-   
+        # sorted_children = self.parent_id.child_ids.sorted(key=lambda r: r.id)
+        # current_index = sorted_children.index(self)
 
+        # if current_index > 0:
+        #     previous_record = sorted_children[current_index - 1]
+        #     return previous_record
+
+        # return False
             
                 
 

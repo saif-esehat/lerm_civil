@@ -36,6 +36,7 @@ class DataSheetReport(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
+        # import wdb; wdb.set_trace()
         eln = self.env['lerm.eln'].sudo().browse(docids)
         datasheet_data = []
         prev_data = None
