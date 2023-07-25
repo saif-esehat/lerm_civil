@@ -64,15 +64,18 @@ class UpvLine(models.Model):
     condition_concrete = fields.Selection([
         ('dry', 'Dry'),
         ('wet', 'Wet')],"Condition Of Concrete")
+    
     surface = fields.Selection([
         ('on_plaster', 'On Plaster'),
         ('wo_plaster', 'W/O Plaster')],"Surface")
+    
     quality = fields.Selection([
         ('excellent','Excellent'),
         ('good','Good'),
         ('medium','Medium'),
         ('doubtful','Doubtful')
     ],"Quality",compute="_compute_quality")
+
     method = fields.Selection([
         ('direct', 'Direct'),
         ('indirect', 'In-Direct'),
@@ -112,11 +115,18 @@ class UpvLine(models.Model):
     #     return int(numeric_part) if numeric_part else 0
     
     
-    @api.depends('dist', 'time')
+    @api.depends('dist', 'time','method')
     def _compute_velocity(self):
         for record in self:
-            if record.dist and record.time:
+            # import wdb; wdb.set_trace() 
+            if record.dist and record.time and record.method != 'indirect':
                 velocity = (record.dist / record.time) * 1000  # Convert time from μs to seconds
                 record.velocity = velocity
+            elif record.dist and record.time and record.method == 'indirect':
+                velocity = ((record.dist / record.time) * 1000)  # Convert time from μs to seconds
+                if velocity > 2:
+                    velocity = velocity + 0.5
+                record.velocity = velocity
+
             else:
                 record.velocity = 0.0

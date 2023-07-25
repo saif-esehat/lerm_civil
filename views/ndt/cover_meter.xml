@@ -22,10 +22,13 @@
                             <tree editable="bottom">
                                 <field name="member" />
                                 <field name="location" />
-                                <field name="level" />
+                                <!-- <field name="level" /> -->
                                 <field name="cover" />
                             </tree>
                     </field>
+                    <group>
+                            <field name="average" />                      
+                    </group>
                 </sheet>
             </form>
         </field>

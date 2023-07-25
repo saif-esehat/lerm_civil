@@ -21,9 +21,9 @@
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="member" />
-                                <field name="level" />
                                 <field name="location" />
-                                <field name="depth" />
+                                <field name="condition_of_concrete"  />
+                                <field name="depth" attrs="{'readonly': [('condition_of_concrete', '!=', 'carbonated')]}" />
                             </tree>
                     </field>
                 </sheet>
