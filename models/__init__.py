@@ -27,6 +27,7 @@ from .ndt import crackdepth
 from .ndt import acil_upv
 from .ndt import upv
 from .ndt import crackwidth
+from .ndt import half_cell
 from .mechanical import cement_normal_consistency
 from .mechanical import cement_setting_time
 from .mechanical import coupler
