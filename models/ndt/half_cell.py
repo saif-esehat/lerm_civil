@@ -97,12 +97,27 @@ class HalfCellLineOne(models.Model):
            ('high', 'High'),
            ('severe','Severe Corrosion')
            
-    ],string='Corrosion Condition')
+    ],string='Corrosion Condition',compute='_compute_corrosion_condition')
 
     @api.depends('r1', 'r2', 'r3', 'r4', 'r5','r6')
     def _compute_avg(self):
         for record in self:
             record.avg = (record.r1 + record.r2 + record.r3 + record.r4 + record.r5 + record.r6) / 6.0
+
+    
+    @api.depends('avg')
+    def _compute_corrosion_condition(self):
+        for record in self:
+            avg_value = record.avg
+
+            if avg_value < -500:
+                record.corrosion_condition = 'severe'
+            elif -500 <= avg_value < -350:
+                record.corrosion_condition = 'high'
+            elif -350 <= avg_value < -200:
+                record.corrosion_condition = 'uncertain'
+            else:
+                record.corrosion_condition = 'low'
 
 
 class HalfCellLineTwo(models.Model):
@@ -124,9 +139,23 @@ class HalfCellLineTwo(models.Model):
            ('high', 'High'),
            ('severe','Severe Corrosion')
            
-    ],string='Corrosion Condition')
+    ],string='Corrosion Condition',compute='_compute_corrosion_condition')
 
     @api.depends('r1', 'r2', 'r3', 'r4', 'r5','r6')
     def _compute_avg(self):
         for record in self:
             record.avg = (record.r1 + record.r2 + record.r3 + record.r4 + record.r5 + record.r6) / 6.0
+    
+    @api.depends('avg')
+    def _compute_corrosion_condition(self):
+        for record in self:
+            avg_value = record.avg
+
+            if avg_value < -500:
+                record.corrosion_condition = 'severe'
+            elif -500 <= avg_value < -350:
+                record.corrosion_condition = 'high'
+            elif -350 <= avg_value < -200:
+                record.corrosion_condition = 'uncertain'
+            else:
+                record.corrosion_condition = 'low'
