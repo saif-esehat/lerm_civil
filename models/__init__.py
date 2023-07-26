@@ -16,6 +16,7 @@ from .mechanical import free_swell_index
 from .mechanical import soil_cbr
 from .mechanical import soundness
 from .mechanical import solid_block
+from .mechanical import split_tensile_strength
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter

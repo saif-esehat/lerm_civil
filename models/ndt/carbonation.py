@@ -7,6 +7,7 @@ class CarbonationTest(models.Model):
     _inherit = "lerm.eln"
     _rec_name = "name"
 
+    
     name = fields.Char("Name",default="Carbonation Test")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.carbonation.test.line','parent_id',string="Parameter")

@@ -14,7 +14,7 @@ class SieveAnalysis(models.Model):
     cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
 
 
-    def calculate(self):
+    def calculate(self): 
         for record in self:
             for line in record.child_lines:
                 print("Rows",str(line.percent_retained))
