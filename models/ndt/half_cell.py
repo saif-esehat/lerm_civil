@@ -43,6 +43,7 @@ class HalfCell(models.Model):
             mv = correction * (-0.91)
         else:
             print("No Factor Needed")
+            return
         
         # import wdb; wdb.set_trace()
 
@@ -90,6 +91,13 @@ class HalfCellLineOne(models.Model):
     r5 = fields.Float("R5")
     r6 = fields.Float("R6")
     avg = fields.Float("AVG",compute='_compute_avg')
+    corrosion_condition = fields.Selection([
+           ('low', 'Low'),   
+           ('uncertain', 'Corrosion Activity of Reinforcing steel in that area is uncertain'),
+           ('high', 'High'),
+           ('severe','Severe Corrosion')
+           
+    ],string='Corrosion Condition')
 
     @api.depends('r1', 'r2', 'r3', 'r4', 'r5','r6')
     def _compute_avg(self):
@@ -110,6 +118,13 @@ class HalfCellLineTwo(models.Model):
     r5 = fields.Float("R5")
     r6 = fields.Float("R6")
     avg = fields.Float("AVG",compute='_compute_avg')
+    corrosion_condition = fields.Selection([
+           ('low', 'Low'),   
+           ('uncertain', 'Corrosion Activity of Reinforcing steel in that area is uncertain'),
+           ('high', 'High'),
+           ('severe','Severe Corrosion')
+           
+    ],string='Corrosion Condition')
 
     @api.depends('r1', 'r2', 'r3', 'r4', 'r5','r6')
     def _compute_avg(self):
