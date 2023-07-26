@@ -38,7 +38,7 @@ class ReboundHammer(models.Model):
 class CarbonationnLine(models.Model):
     _name = "ndt.rebound.hammer.line"
     parent_id = fields.Many2one('ndt.rebound.hammer',string="Parent Id")
-    element = fields.Char(string="Element Type")
+    element = fields.Char(string="Member / Element Type")
     location = fields.Char(string="Location")
     f1 = fields.Integer(string="1")
     f2 = fields.Integer(string="2")
