@@ -14,6 +14,14 @@ class CrackWidth(models.Model):
     min = fields.Float(string='Min', digits=(16, 2), compute='_compute_min_max')
     max = fields.Float(string='Max', digits=(16, 2), compute='_compute_min_max')
 
+
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(CrackWidth, self).create(vals)
+        record.parameter_id.write({'model_id':record.id})
+        return record
+
     @api.depends('child_lines.crack_width_mm')
     def _compute_average(self):
         for record in self:

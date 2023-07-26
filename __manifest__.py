@@ -34,6 +34,7 @@
     'views/ndt/rebound_hammer.xml',
     'views/ndt/acil_upv.xml', 
     'views/ndt/upv.xml',
+    'views/ndt/half_cell.xml',
     'views/mechanical/cement_normal_consistency.xml',
     'views/mechanical/cement_setting_time.xml',
     'reports/eln_report_action.xml',
@@ -42,7 +43,10 @@
     'reports/srf_report_action.xml',
     'reports/srf_report_template.xml',
     'security/security.xml',
+<<<<<<< HEAD
     # 'security/dump.sql',
+=======
+>>>>>>> fc09bee (Update Code)
     'security/ir.model.access.csv',
     'reports/sample_report_action.xml',
     'reports/datasheet_templates.xml',
