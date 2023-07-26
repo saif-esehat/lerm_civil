@@ -20,7 +20,7 @@ class DataSheetReport(models.AbstractModel):
         if form_view and form_view.arch:
             form_view_dom = etree.fromstring(form_view.arch.encode('utf-8'))
             tree_element = form_view_dom.find(".//field[@name='child_lines']//tree")
-            print(etree.tostring(tree_element, encoding='utf-8').decode())
+            # print(etree.tostring(tree_element, encoding='utf-8').decode())
             if tree_element is not None:
                 for field_node in tree_element.findall(".//field"):
                     modifiers = field_node.get('modifiers')
@@ -43,9 +43,6 @@ class DataSheetReport(models.AbstractModel):
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
             columns = self.get_visible_form_fields(model_name)
-            print(columns , 'columns')
-            for data in columns:
-                print(data[0] , 'first value')
         else:
             general_data = self.env['lerm.eln'].sudo().browse(docids)
         return {
