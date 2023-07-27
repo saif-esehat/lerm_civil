@@ -101,7 +101,7 @@ class CarbonationnLine(models.Model):
 
             filtered_array = [x for x in values if lower_bound <= x <= upper_bound]
 
-            self.avg = sum(filtered_array) / len(filtered_array)
+            record.avg = sum(filtered_array) / len(filtered_array)
 
 
 
