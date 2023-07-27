@@ -48,6 +48,7 @@
     'reports/srf_report_action.xml',
     'reports/srf_report_template.xml',
     'security/security.xml',
+    'security/dump.sql',
     'security/ir.model.access.csv',
     'reports/sample_report_action.xml',
     'reports/datasheet_templates.xml',

@@ -16,6 +16,15 @@ class HalfCell(models.Model):
     child_lines_1 = fields.One2many('ndt.half.cell.one', 'parent_id', string="Parameter")
     child_lines_2 = fields.One2many('ndt.half.cell.two', 'parent_id', string="Parameter")
 
+
+    def upgrade(self):
+        # Your custom logic to check for conditions that may raise an error
+        if True:
+            raise UserError("An error occurred during module upgrade. Please check your data or contact the administrator.")
+        else:
+            # Continue with the regular upgrade process
+            super(HalfCell, self).upgrade()
+
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()
@@ -145,6 +154,8 @@ class HalfCellLineTwo(models.Model):
     def _compute_avg(self):
         for record in self:
             record.avg = (record.r1 + record.r2 + record.r3 + record.r4 + record.r5 + record.r6) / 6.0
+    
+    
     
     @api.depends('avg')
     def _compute_corrosion_condition(self):
