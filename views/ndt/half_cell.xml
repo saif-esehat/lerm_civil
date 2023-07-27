@@ -37,6 +37,8 @@
                                 <field name="r5" />
                                 <field name="r6" />
                                 <field name="avg" />
+                                <field name="corrosion_condition" />
+                                
                             </tree>
                     </field>
                     <button
@@ -55,6 +57,7 @@
                                 <field name="r5" />
                                 <field name="r6" />
                                 <field name="avg" />
+                                <field name="corrosion_condition" />
                             </tree>
                     </field>
                     
