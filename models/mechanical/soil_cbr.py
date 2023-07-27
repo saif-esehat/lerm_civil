@@ -75,8 +75,6 @@ class DENSITYRELATIONUSINGHEAVYCOMPACTIONLINE(models.Model):
     dry_density = fields.Float(string="Dry density in gm/cc", compute="_compute_dry_density")
 
 
-
-
     @api.depends('wt_of_modul_compact', 'parent_id.wt_of_modul')
     def _compute_wt_of_compact(self):
         for line in self:
