@@ -30,6 +30,7 @@
     'views/mechanical/water_absorption_solid.xml',
     'views/mechanical/drying_shrinkage_solid.xml',
     'views/mechanical/moisture_movement_solid.xml',
+    'views/mechanical/flexural_strength_concrete_beam.xml',
     'views/ndt/crack_width.xml',
     'views/ndt/crack_depth.xml',
     'views/ndt/acil_crack_depth.xml',
