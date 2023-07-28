@@ -26,7 +26,4 @@ SELECT *
     RAISE EXCEPTION '%',errorMessage;
  END IF;
 
-
-
-
 END $$;

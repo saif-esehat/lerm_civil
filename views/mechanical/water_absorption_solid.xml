@@ -3,7 +3,7 @@
     <data>
 
         <record id="water_absorption_solid_views" model="ir.ui.view">
-        <field name="name">mechanical.water.absorption.solid.form</field>
+        <field name="name">mechanical.water.absorption.solid.form1</field>
         <field name="model">mechanical.water.absorption.solid</field>
         <field name="arch" type="xml">
             <form>
