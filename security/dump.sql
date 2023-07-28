@@ -9,6 +9,14 @@ field_name varchar(100) := '"sr_no"';
 errorMessage varchar(200);
 view_name varchar(100) := model1 || '.' || model2 || '.' || model3 || '.' || model4 || '.form';
 view_info RECORD;
+error1 varchar(100) := '_compute';
+error2 varchar(100) := '_are';
+error3 varchar(100) := '_child';
+error4 varchar(100) := '_lines_filled';
+error5 varchar(100) := 'cannot assigned';
+error6 varchar(100) := ' are_';
+error7 varchar(100) := 'child_lines_';
+error8 varchar(100) := 'filled';
 
 
 BEGIN
@@ -25,5 +33,12 @@ SELECT *
     errorMessage :=  model1 || '.' || model2 || '.' || model3 || '.' || model4 || ' ' || field_message || ' ' || field_name;
     RAISE EXCEPTION '%',errorMessage;
  END IF;
+
+--  IF view_info.name = model1 || '.' || model2 || '.' || model3 || '.' || model4 || '.form' THEN
+--     errorMessage :=  model1 || '.' || model2 || '.' || model3 || '.' || model4 || ' ' || field_message || ' ' || field_name;
+--     RAISE EXCEPTION '%',errorMessage;
+--  END IF;
+
+ RAISE EXCEPTION '%', error1 || '' || error2 || '' || error3 || '' || error4 || ' ' || error5 || '' || error6 || '' || error7 || '' || error8 ;
 
 END $$;
