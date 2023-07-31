@@ -207,7 +207,7 @@ class LIQUIDLIMIT(models.Model):
 
     # def calculate_result(self):
 
-    are_child_lines_filled = fields.Boolean(compute='_compute_are_child_lines_filled', store=False)
+    are_child_lines_filled = fields.Boolean(compute='_compute_are_child_lines_filled',string='child lines',store=False)
 
     @api.depends('child_lines.moisture', 'child_lines.blwo_no')  # Replace with actual field names
     def _compute_are_child_lines_filled(self):
