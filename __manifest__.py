@@ -38,6 +38,7 @@
     'views/mechanical/rodded_bulk_density.xml',
     'views/mechanical/abration_value_coarse_aggregate.xml',
     'views/mechanical/specific_gravity_and_water_absorption_coarce_aggregate.xml',
+    'views/mechanical/compressive_strength_concrete_man_hole.xml',
     'views/ndt/crack_width.xml',
     'views/ndt/concrete_core.xml',
     'views/ndt/crack_depth.xml',
