@@ -40,6 +40,7 @@
     'views/mechanical/specific_gravity_and_water_absorption_coarce_aggregate.xml',
     'views/mechanical/compressive_strength_concrete_man_hole.xml',
     'views/mechanical/moisture_content_concrete_man_hole.xml',
+    'views/mechanical/drying_shrinkage_concrete_man_hole.xml',
     'views/ndt/crack_width.xml',
     'views/ndt/concrete_core.xml',
     'views/ndt/crack_depth.xml',

@@ -138,3 +138,80 @@ class MoistureContentConcreteManHoleLine(models.Model):
         records = self.sorted('id')
         for index, record in enumerate(records):
             record.sr_no = index + 1
+
+
+from odoo import api, fields, models
+from odoo.exceptions import UserError,ValidationError
+import math
+
+
+class DryingShrinkageConcreteManHole(models.Model):
+    _name = "mechanical.drying.shrinkage.concrete.man.hole"
+    _inherit = "lerm.eln"
+    _rec_name = "name"
+
+    name = fields.Char("Name",default="Drying Shrinkage")
+    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    child_lines = fields.One2many('mechanical.drying.shrinkage.concrete.man.hole.line','parent_id',string="Parameter")
+    average_drying_shrinkage = fields.Float(string="Average",compute="_compute_average_drying_shrinkage")
+
+    @api.depends('child_lines.drying_shrinkage')
+    def _compute_average_drying_shrinkage(self):
+        for record in self:
+            total_drying_shrinkage = sum(record.child_lines.mapped('drying_shrinkage'))
+            num_lines = len(record.child_lines)
+            record.average_drying_shrinkage = total_drying_shrinkage / num_lines if num_lines else 0.0
+
+
+    
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(DryingShrinkageConcreteManHole, self).create(vals)
+        record.parameter_id.write({'model_id':record.id})
+        return record
+
+   
+
+class DryingShrinkageConcreteManHoleLine(models.Model):
+    _name = "mechanical.drying.shrinkage.concrete.man.hole.line"
+    parent_id = fields.Many2one('mechanical.drying.shrinkage.concrete.man.hole',string="Parent Id")
+   
+    sr_no = fields.Integer(string="Sr No.", readonly=True, copy=False, default=1)
+    length_specimen = fields.Integer(string="Length Of Specimen")
+    initial_length = fields.Float(string="Initial Length in mm")
+    final_length = fields.Float(string="Final Length in mm")
+    change_length = fields.Float(string="Change in Length in mm",compute="_compute_change_length")
+    drying_shrinkage = fields.Float(string="Drying Shrinkage in %",compute="_compute_drying_shrinkage")
+
+    @api.depends('initial_length', 'final_length')
+    def _compute_change_length(self):
+        for record in self:
+            record.change_length = record.initial_length - record.final_length
+
+    
+    @api.depends('change_length', 'length_specimen')
+    def _compute_drying_shrinkage(self):
+        for record in self:
+            if record.length_specimen != 0:
+                record.drying_shrinkage = (record.change_length / record.length_specimen) * 100
+            else:
+                record.drying_shrinkage = 0.0
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
+
+        return super(DryingShrinkageConcreteManHoleLine, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.sr_no = index + 1
