@@ -34,6 +34,7 @@
     'views/mechanical/compressive_strength_concrete_cube.xml',
     'views/mechanical/splitting_tensile_strength_concrete.xml',
     'views/mechanical/crushing_value_coarse_aggregate.xml',
+    'views/mechanical/impact_value_coarse_aggregate.xml',
     'views/mechanical/loose_bulk_density.xml',
     'views/mechanical/rodded_bulk_density.xml',
     'views/mechanical/abration_value_coarse_aggregate.xml',

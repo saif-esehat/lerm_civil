@@ -222,6 +222,88 @@ class SpecificGravityAndWaterAbsorptionLine(models.Model):
         for index, record in enumerate(records):
             record.sr_no = index + 1
 
+
+
+class ImpactValue(models.Model):
+    _name = "mechanical.impact.value.coarse.aggregate"
+    _inherit = "lerm.eln"
+    _rec_name = "name"
+
+    name = fields.Char("Name",default="Aggregate Impact Value")
+    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    child_lines = fields.One2many('mechanical.impact.value.coarse.aggregate.line','parent_id',string="Parameter")
+
+    average_impact_value = fields.Float(string="Average Aggregate Crushing Value", compute="_compute_average_impact_value")
+
+
+    @api.depends('child_lines.impact_value')
+    def _compute_average_impact_value(self):
+        for record in self:
+            if record.child_lines:
+                sum_impact_value = sum(record.child_lines.mapped('impact_value'))
+                record.average_impact_value = sum_impact_value / len(record.child_lines)
+            else:
+                record.average_impact_value = 0.0
+   
+
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(ImpactValue, self).create(vals)
+        record.parameter_id.write({'model_id':record.id})
+        return record
+
+class ImpactValueLine(models.Model):
+    _name = "mechanical.impact.value.coarse.aggregate.line"
+    parent_id = fields.Many2one('mechanical.impact.value.coarse.aggregate',string="Parent Id")
+
+    sample_no = fields.Integer(string="Sample", readonly=True, copy=False, default=1)
+    wt_of_cylinder = fields.Integer(string="Weight of cylindrical measure in gms")
+    total_wt_of_dried = fields.Integer(string="Total Wt. of Oven dried (4 hrs) aggregate sample + cylindrical measure in gms")
+    total_wt_aggregate = fields.Float(string="Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms", compute="_compute_total_wt_aggregate")
+    wt_of_aggregate_passing = fields.Float(string="Wt. of aggregate passing 2.36 mm sieve after the test in gms")
+    wt_of_aggregate_retained = fields.Float(string="Wt. of aggregate retained on 2.36 mm sieve after the test in gms", compute="_compute_wt_of_aggregate_retained")
+    impact_value = fields.Float(string="Aggregate Crushing value", compute="_compute_impact_value")
+
+
+    @api.depends('total_wt_of_dried', 'wt_of_cylinder')
+    def _compute_total_wt_aggregate(self):
+        for rec in self:
+            rec.total_wt_aggregate = rec.total_wt_of_dried - rec.wt_of_cylinder
+
+
+    @api.depends('total_wt_aggregate', 'wt_of_aggregate_passing')
+    def _compute_wt_of_aggregate_retained(self):
+        for rec in self:
+            rec.wt_of_aggregate_retained = rec.total_wt_aggregate - rec.wt_of_aggregate_passing
+
+
+    @api.depends('wt_of_aggregate_passing', 'total_wt_aggregate')
+    def _compute_impact_value(self):
+        for rec in self:
+            if rec.total_wt_aggregate != 0:
+                rec.impact_value = (rec.wt_of_aggregate_passing / rec.total_wt_aggregate) * 100
+            else:
+                rec.impact_value = 0.0
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sample_no'))
+                vals['sample_no'] = max_serial_no + 1
+
+        return super(CrushingValueLine, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.sample_no = index + 1
+
     
 
 
