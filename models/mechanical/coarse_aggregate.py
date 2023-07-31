@@ -152,6 +152,76 @@ class AbrasionValueCoarseAggregateLine(models.Model):
         for index, record in enumerate(records):
             record.sr_no = index + 1
 
+
+
+class SpecificGravityAndWaterAbsorption(models.Model):
+    _name = "mechanical.specific.gravity.and.water.absorption"
+    _inherit = "lerm.eln"
+    _rec_name = "name"
+
+    name = fields.Char("Name",default="Specific Gravity & Water Absorption")
+    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    child_lines = fields.One2many('mechanical.specific.gravity.and.water.absorption.line','parent_id',string="Parameter")
+   
+
+
+  
+
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(SpecificGravityAndWaterAbsorption, self).create(vals)
+        record.parameter_id.write({'model_id':record.id})
+        return record
+
+class SpecificGravityAndWaterAbsorptionLine(models.Model):
+    _name = "mechanical.specific.gravity.and.water.absorption.line"
+    parent_id = fields.Many2one('mechanical.specific.gravity.and.water.absorption',string="Parent Id")
+   
+    sr_no = fields.Integer(string="Test", readonly=True, copy=False, default=1)
+    wt_surface_dry = fields.Integer(string="Weight of saturated surface dry (SSD) sample in air in gms")
+    wt_sample_inwater = fields.Integer(string="Weight of saturated sample in water in gms")
+    oven_dried_wt = fields.Integer(string="Oven dried weight of sample in gms")
+    specific_gravity = fields.Float(string="Specific Gravity",compute="_compute_specific_gravity")
+    water_absorption = fields.Float(string="Water absorption  %",compute="_compute_water_absorption")
+
+
+    @api.depends('wt_surface_dry', 'wt_sample_inwater', 'oven_dried_wt')
+    def _compute_specific_gravity(self):
+        for line in self:
+            if line.wt_surface_dry - line.wt_sample_inwater != 0:
+                line.specific_gravity = line.oven_dried_wt / (line.wt_surface_dry - line.wt_sample_inwater)
+            else:
+                line.specific_gravity = 0.0
+
+
+
+    @api.depends('wt_surface_dry', 'oven_dried_wt')
+    def _compute_water_absorption(self):
+        for line in self:
+            if line.oven_dried_wt != 0:
+                line.water_absorption = ((line.wt_surface_dry - line.oven_dried_wt) / line.oven_dried_wt) * 100
+            else:
+                line.water_absorption = 0.0
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
+
+        return super(SpecificGravityAndWaterAbsorptionLine, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.sr_no = index + 1
+
     
 
 
