@@ -18,6 +18,11 @@ from .mechanical import soundness
 from .mechanical import solid_block
 from .mechanical import split_tensile_strength
 from .mechanical import concrete_beam
+from .mechanical import concrete_cube
+from .mechanical import concrete
+from .mechanical import coarse_aggregate
+from .mechanical import bulk_density
+from. mechanical import concrete_man_hole
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
