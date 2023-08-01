@@ -12,6 +12,9 @@ class CoverMeter(models.Model):
     child_lines = fields.One2many('ndt.cover.meter.line','parent_id',string="Parameter")
     average = fields.Float(string='Average', digits=(16, 2), compute='_compute_average')
 
+    #just Testing will remove later
+    parameters = fields.Many2many('lerm.parameter.master',string="Parameters")
+
 
     @api.depends('child_lines.cover')
     def _compute_average(self):
