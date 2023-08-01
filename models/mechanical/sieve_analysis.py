@@ -21,6 +21,8 @@ class SieveAnalysis(models.Model):
                 previous_line = line.serial_no - 1
                 if previous_line == 0:
                     line.write({'cumulative_retained': line.percent_retained})
+                    line.write({'passing_percent': 100})
+
                 else:
                     previous_line_record = self.env['mechanical.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
                     line.write({'cumulative_retained': previous_line_record + line.percent_retained})
@@ -65,6 +67,12 @@ class SieveAnalysisLine(models.Model):
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
     cumulative_retained = fields.Float(string="Cum. Retained %", compute="_compute_cumulative_retained", store=True)
     passing_percent = fields.Float(string="Passing %")
+
+    # @api.onchange('cumulative_retained')
+    # def _compute_passing_percent(self):
+    #     for record in self:
+    #         record.passing_percent = 100 - record.cumulative_retained
+
 
     @api.model
     def create(self, vals):
@@ -160,5 +168,4 @@ class SieveAnalysisLine(models.Model):
         # return False
             
                 
-
 
