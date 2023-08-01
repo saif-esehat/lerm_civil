@@ -215,3 +215,104 @@ class DryingShrinkageConcreteManHoleLine(models.Model):
         records = self.sorted('id')
         for index, record in enumerate(records):
             record.sr_no = index + 1
+
+
+
+class DimensionConcreteManHole(models.Model):
+    _name = "mechanical.dimention.concrete.man.hole"
+    _inherit = "lerm.eln"
+    _rec_name = "name"
+
+    name = fields.Char("Name",default="DIMENSION")
+    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    child_lines = fields.One2many('mechanical.dimention.concrete.man.hole.line','parent_id',string="Parameter")
+    average_length = fields.Integer(string="Average Length", compute="_compute_average_length")
+    average_hight = fields.Integer(string="Average Height", compute="_compute_average_hight")
+    average_width = fields.Integer(string="Average Width", compute="_compute_average_width")
+
+
+
+    # @api.depends('child_lines.length')
+    # def _compute_average_length(self):
+    #     for record in self:
+    #         if record.child_lines:
+    #             total_length = sum(record.child_lines.mapped('length'))
+    #             record.average_length = total_length / len(record.child_lines)
+    #         else:
+    #             record.average_length = 0.0
+
+    @api.depends('child_lines.length')
+    def _compute_average_length(self):
+        for record in self:
+            if record.child_lines:
+                rounded_lengths = [round(line.length) for line in record.child_lines]
+                record.average_length = round(sum(rounded_lengths) / len(rounded_lengths))
+
+
+    # @api.depends('child_lines.length')
+    # def _compute_average_length(self):
+    #     for record in self:
+    #         if record.child_lines:
+    #             rounded_lengths = [round(line.length) for line in record.child_lines]
+    #             record.average_length = sum(rounded_lengths) / len(rounded_lengths)
+    #         else:
+    #             record.average_length = 0.0
+
+    @api.depends('child_lines.hight')
+    def _compute_average_hight(self):
+        for record in self:
+            if record.child_lines:
+                rounded_heights = [round(line.hight) for line in record.child_lines]
+                record.average_hight = round(sum(rounded_heights) / len(rounded_heights))
+            # else:
+            #     record.average_hight = 0.0
+
+    @api.depends('child_lines.width')
+    def _compute_average_width(self):
+        for record in self:
+            if record.child_lines:
+                rounded_widths = [round(line.width) for line in record.child_lines]
+                record.average_width = round(sum(rounded_widths) / len(rounded_widths))
+            # else:
+            #     record.average_width = 0.0
+
+    
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(DimensionConcreteManHole, self).create(vals)
+        record.parameter_id.write({'model_id':record.id})
+        return record
+
+
+
+
+class DimensionConcreteManHoleLine(models.Model):
+    _name = "mechanical.dimention.concrete.man.hole.line"
+    parent_id = fields.Many2one('mechanical.dimention.concrete.man.hole',string="Parent Id")
+   
+    sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
+    length = fields.Integer(string="Length in mm")
+    hight = fields.Integer(string="Hight in mm")
+    width = fields.Integer(string="Width in mm")
+
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
+
+        return super(DimensionConcreteManHoleLine, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.sr_no = index + 1
+
+   
