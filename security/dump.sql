@@ -1,1 +1,4 @@
-KeyError: mechanical.pavel.block
+DO $$
+DECLARE
+
+END $$;

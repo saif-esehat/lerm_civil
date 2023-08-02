@@ -7,6 +7,7 @@ class CarbonationTest(models.Model):
     _inherit = "lerm.eln"
     _rec_name = "name"
 
+    
     name = fields.Char("Name",default="Carbonation Test")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.carbonation.test.line','parent_id',string="Parameter")
@@ -21,7 +22,7 @@ class CarbonationTest(models.Model):
 class CarbonationnLine(models.Model):
     _name = "ndt.carbonation.test.line"
     parent_id = fields.Many2one('ndt.carbonation.test',string="Parent Id")
-    member = fields.Char(string="Element Type")
+    member = fields.Char(string="Member / Element Type")
     level = fields.Char(string="Level")
     location = fields.Char(string="Location")
     condition_of_concrete = fields.Selection([

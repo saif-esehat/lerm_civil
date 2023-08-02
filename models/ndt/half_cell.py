@@ -16,6 +16,15 @@ class HalfCell(models.Model):
     child_lines_1 = fields.One2many('ndt.half.cell.one', 'parent_id', string="Parameter")
     child_lines_2 = fields.One2many('ndt.half.cell.two', 'parent_id', string="Parameter")
 
+
+    def upgrade(self):
+        # Your custom logic to check for conditions that may raise an error
+        if True:
+            raise UserError("An error occurred during module upgrade. Please check your data or contact the administrator.")
+        else:
+            # Continue with the regular upgrade process
+            super(HalfCell, self).upgrade()
+
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()
@@ -43,6 +52,7 @@ class HalfCell(models.Model):
             mv = correction * (-0.91)
         else:
             print("No Factor Needed")
+            return
         
         # import wdb; wdb.set_trace()
 
@@ -90,11 +100,33 @@ class HalfCellLineOne(models.Model):
     r5 = fields.Float("R5")
     r6 = fields.Float("R6")
     avg = fields.Float("AVG",compute='_compute_avg')
+    corrosion_condition = fields.Selection([
+           ('low', 'Low'),   
+           ('uncertain', 'Corrosion Activity of Reinforcing steel in that area is uncertain'),
+           ('high', 'High'),
+           ('severe','Severe Corrosion')
+           
+    ],string='Corrosion Condition',compute='_compute_corrosion_condition')
 
     @api.depends('r1', 'r2', 'r3', 'r4', 'r5','r6')
     def _compute_avg(self):
         for record in self:
             record.avg = (record.r1 + record.r2 + record.r3 + record.r4 + record.r5 + record.r6) / 6.0
+
+    
+    @api.depends('avg')
+    def _compute_corrosion_condition(self):
+        for record in self:
+            avg_value = record.avg
+
+            if avg_value < -500:
+                record.corrosion_condition = 'severe'
+            elif -500 <= avg_value < -350:
+                record.corrosion_condition = 'high'
+            elif -350 <= avg_value < -200:
+                record.corrosion_condition = 'uncertain'
+            else:
+                record.corrosion_condition = 'low'
 
 
 class HalfCellLineTwo(models.Model):
@@ -110,8 +142,31 @@ class HalfCellLineTwo(models.Model):
     r5 = fields.Float("R5")
     r6 = fields.Float("R6")
     avg = fields.Float("AVG",compute='_compute_avg')
+    corrosion_condition = fields.Selection([
+           ('low', 'Low'),   
+           ('uncertain', 'Corrosion Activity of Reinforcing steel in that area is uncertain'),
+           ('high', 'High'),
+           ('severe','Severe Corrosion')
+           
+    ],string='Corrosion Condition',compute='_compute_corrosion_condition')
 
     @api.depends('r1', 'r2', 'r3', 'r4', 'r5','r6')
     def _compute_avg(self):
         for record in self:
             record.avg = (record.r1 + record.r2 + record.r3 + record.r4 + record.r5 + record.r6) / 6.0
+    
+    
+    
+    @api.depends('avg')
+    def _compute_corrosion_condition(self):
+        for record in self:
+            avg_value = record.avg
+
+            if avg_value < -500:
+                record.corrosion_condition = 'severe'
+            elif -500 <= avg_value < -350:
+                record.corrosion_condition = 'high'
+            elif -350 <= avg_value < -200:
+                record.corrosion_condition = 'uncertain'
+            else:
+                record.corrosion_condition = 'low'

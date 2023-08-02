@@ -10,22 +10,22 @@ class ReboundHammer(models.Model):
     name = fields.Char("Name",default="Rebound Hammer")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.rebound.hammer.line','parent_id',string="Parameter")
-    average = fields.Integer(string="Average",compute="_compute_average")
-    minimum = fields.Integer(string="Minimum",compute="_compute_min_max")
-    maximum = fields.Integer(string="Maximum",compute="_compute_min_max")
+    # average = fields.Integer(string="Average",compute="_compute_average")
+    # minimum = fields.Integer(string="Minimum",compute="_compute_min_max")
+    # maximum = fields.Integer(string="Maximum",compute="_compute_min_max")
 
-    @api.depends('child_lines.avg')
-    def _compute_average(self):
-        for record in self:
-            total_value = sum(record.child_lines.mapped('avg'))
-            self.average = int(round(total_value / len(record.child_lines))) if record.child_lines else 0.0
+    # @api.depends('child_lines.avg')
+    # def _compute_average(self):
+    #     for record in self:
+    #         total_value = sum(record.child_lines.mapped('avg'))
+    #         self.average = int(round(total_value / len(record.child_lines))) if record.child_lines else 0.0
 
-    @api.depends('child_lines.avg')
-    def _compute_min_max(self):
-        for record in self:
-            values = record.child_lines.mapped('avg')
-            self.minimum = int(min(values)) if values else 0.0
-            self.maximum = int(max(values)) if values else 0.0
+    # @api.depends('child_lines.avg')
+    # def _compute_min_max(self):
+    #     for record in self:
+    #         values = record.child_lines.mapped('avg')
+    #         self.minimum = int(min(values)) if values else 0.0
+    #         self.maximum = int(max(values)) if values else 0.0
 
 
     @api.model
@@ -38,7 +38,7 @@ class ReboundHammer(models.Model):
 class CarbonationnLine(models.Model):
     _name = "ndt.rebound.hammer.line"
     parent_id = fields.Many2one('ndt.rebound.hammer',string="Parent Id")
-    element = fields.Char(string="Element Type")
+    element = fields.Char(string="Member / Element Type")
     location = fields.Char(string="Location")
     f1 = fields.Integer(string="1")
     f2 = fields.Integer(string="2")
@@ -46,6 +46,10 @@ class CarbonationnLine(models.Model):
     f4 = fields.Integer(string="4")
     f5 = fields.Integer(string="5")
     f6 = fields.Integer(string="6")
+    f7 = fields.Integer(string="7")
+    f8 = fields.Integer(string="8")
+    f9 = fields.Integer(string="9")
+    f10 = fields.Integer(string="10")
     avg = fields.Integer(string="Average" ,compute="_compute_average")
     mpa = fields.Integer(string="Mpa")
     direction = fields.Selection([
@@ -54,10 +58,54 @@ class CarbonationnLine(models.Model):
         ('vertical_down', 'Vertical Down')], string='Direction')
     
 
-    @api.depends('f1','f2','f3','f4','f5','f6')
+    @api.depends('f1','f2','f3','f4','f5','f6','f7','f8','f9','f10')
     def _compute_average(self):
         for record in self:
-            self.avg = round((self.f1 + self.f2 +self.f3 + self.f4 + self.f5 + self.f6)/6)
+            values = []
+            median = 0
+            median_first = 0
+            median_third = 0
+            values.append(record.f1)
+            values.append(record.f2)
+            values.append(record.f3)
+            values.append(record.f4)
+            values.append(record.f5)
+            values.append(record.f6)
+            values.append(record.f7)
+            values.append(record.f8)
+            values.append(record.f9)
+            values.append(record.f10)
+
+            sorted_array = sorted(values)
+            midpoint = len(sorted_array) // 2
+            if len(sorted_array) % 2 == 0:
+                median = (sorted_array[midpoint - 1] + sorted_array[midpoint]) / 2.0
+            else:
+                median = sorted_array[midpoint]
+
+            first_quartile = sorted_array[:midpoint]
+            third_quartile = sorted_array[midpoint:]
+            midpoint = len(first_quartile) // 2
+            if len(first_quartile) % 2 == 0:
+                median_first = (first_quartile[midpoint - 1] + first_quartile[midpoint]) / 2.0
+            else:
+                median_first = first_quartile[midpoint]
+            midpoint = len(third_quartile) // 2
+            if len(third_quartile) % 2 == 0:
+                median_third = (third_quartile[midpoint - 1] + third_quartile[midpoint]) / 2.0
+            else:
+                median_third = third_quartile[midpoint]
+            iqr = median_third - median_first
+            lower_bound = median_first - 1.5*iqr
+            upper_bound = median_third + 1.5*iqr
+
+            filtered_array = [x for x in values if lower_bound <= x <= upper_bound]
+
+            record.avg = sum(filtered_array) / len(filtered_array)
+
+
+
+
                 
 
 
