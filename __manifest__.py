@@ -43,10 +43,6 @@
     'reports/srf_report_action.xml',
     'reports/srf_report_template.xml',
     'security/security.xml',
-<<<<<<< HEAD
-    # 'security/dump.sql',
-=======
->>>>>>> fc09bee (Update Code)
     'security/ir.model.access.csv',
     'reports/sample_report_action.xml',
     'reports/datasheet_templates.xml',
@@ -64,6 +60,5 @@
         '/lerm_civil/static/src/xml/spreadsheet.xml'
 
     ],
-
         }
 }
