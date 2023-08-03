@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_specific_gravity_view" model="ir.ui.view">
+        <field name="name">mechanical.specific.gravity.and.water.absorption.form</field>
+        <field name="model">mechanical.specific.gravity.and.water.absorption</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id"/>
+                       
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='wt_surface_dry'/>
+                                <field name='wt_sample_inwater'/>
+                                <field name='oven_dried_wt'/>
+                                <field name='specific_gravity'/>
+                                <field name='water_absorption'/>
+                                <!-- <field name='average_tensile'/> -->
+                            </tree>
+                           
+                    </field> 
+                            <!-- <group>
+                               <field name='average_block'/>
+                            </group> -->
+                     
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+
+
+    </data>
+</odoo>

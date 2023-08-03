@@ -7,6 +7,7 @@
         <field name="report_name">lerm_civil.eln_report_template</field>
         <field name="report_file">lerm_civil.eln_report_template</field>
         <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
         <field name="binding_type">report</field>
     </record>
     <record id="datasheet_report_action" model="ir.actions.report">
@@ -16,6 +17,17 @@
         <field name="report_name">lerm_civil.datasheet_report_template</field>
         <field name="report_file">lerm_civil.datasheet_report_template</field>
         <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="binding_type">report</field>
+    </record>
+    <record id="datasheet_generaltemplate_report_action" model="ir.actions.report">
+        <field name="name">General template Data Sheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.datasheet_generaltemplate_report</field>
+        <field name="report_file">lerm_civil.datasheet_generaltemplate_report</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
     </record>
 </odoo>

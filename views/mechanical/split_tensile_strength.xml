@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="split_tensile_strength_view" model="ir.ui.view">
+        <field name="name">mechanical.split.tensile.strength.form</field>
+        <field name="model">mechanical.split.tensile.strength</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id"/>
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='weight'/>
+                                <field name='height'/>
+                                <field name='diameter'/>
+                                <field name='breaking_load'/>
+                                <field name='split_tensile'/>
+                            </tree>
+                    </field>
+                    <group>
+                        <field name='average'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

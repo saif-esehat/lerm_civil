@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_compressive_strength_view" model="ir.ui.view">
+        <field name="name">mechanical.compressive.strength.form</field>
+        <field name="model">mechanical.compressive.strength</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id"/>
+                       
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='length'/>
+                                <field name='width'/>
+                                <field name='thickness'/>
+                                <field name='area'/>
+                                <field name='load'/>
+                                <field name='compressive_strength'/>
+                                <!-- <field name='average_tensile'/> -->
+                            </tree>
+                           
+                    </field> 
+                            <group>
+                               <field name='average_strength'/>
+                            </group>
+                     
+                </sheet>
+            </form>
+        </field>
+    </record>
+   <!-- <record id="view_mechanical_compressive_strength_form" model="ir.ui.view">
+    <field name="name">mechanical.compressive.strength.form</field>
+    <field name="model">mechanical.compressive.strength</field>
+    <field name="inherit_id" ref="lerm.eln_view_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//form/sheet/group/group[@name='additional_info']" position="inside">
+            <field name="average_strength"/>
+        </xpath>
+    </field>
+    </record> -->
+
+
+    </data>
+</odoo>

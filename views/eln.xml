@@ -13,6 +13,16 @@
                     string="Confirm"
                     attrs="{'invisible': [('state', 'not in', ('1-draft','4-rejected'))]}" />      
                     <field readonly="1" name="state" widget="statusbar" statusbar_visible="1-draft,2-confirm,3-approved"/>
+                    <button
+                            type="object"
+                            name="print_datasheet"
+                            string="Print Datasheet"
+                            />
+                    <!-- <button
+                            type="object"
+                            name="print_report"
+                            string="Print Report"
+                            /> -->
                 </header>
                     <sheet>
                         <group style="width:100%">
@@ -80,6 +90,7 @@
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
                                     <field name="result" />
+                                    <field name="context_data" />
                                     <field name="calculation_type" />
                                     <field name="calculated" readonly="1"/>
                                     <field name="unit" />

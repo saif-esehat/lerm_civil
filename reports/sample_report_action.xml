@@ -11,7 +11,7 @@
     </record>
 
      <record id="sample_report_action" model="ir.actions.report">
-        <field name="name">Report</field>
+        <field name="name">10% fine </field>
         <field name="model">lerm.srf.sample</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">lerm_civil.10per_fine_coarse_agg_mechanical</field>

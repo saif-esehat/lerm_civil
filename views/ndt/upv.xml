@@ -9,16 +9,18 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="srf_id" invisible="1"/>
-                        <field name="sample_id" invisible="1" />
-                        <field name="parameter_id" invisible="1"/>
+                        <field name="srf_id"/>
+                        <field name="sample_id" />
+                        <field name="parameter_id" />
+                        <field name="eln_ref" />
+                        
                     </group>
                      <group style="width:50%">
                         <field name="structure_age"/>
                         <field name="site_temp"/>
                     </group>
                     <group style="width:50%">
-                        <field name="concrete_grade"/>
+                        <field name="grade_id" />
                         <field name="instrument"/>
                     </group>
 

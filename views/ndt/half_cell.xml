@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <record id="upv_view" model="ir.ui.view">
+        <record id="half_cell_view" model="ir.ui.view">
         <field name="name">ndt.half.cell.form</field>
         <field name="model">ndt.half.cell</field>
         <field name="arch" type="xml">
@@ -15,10 +15,9 @@
                     </group>
                      <group style="width:50%">
                         <field name="structure_age"/>
-                        <field name="site_temp"/>
+                        <field name="temp"/>
                     </group>
                     <group style="width:50%">
-                        <field name="concrete_grade"/>
                         <field name="instrument"/>
                     </group>
 
@@ -27,24 +26,41 @@
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
-                    <field name="child_lines" nolabel="1" >
+                    <field name="child_lines_1" nolabel="1" >
                             <tree editable="bottom">
-                                <field name="element_type" />
-                                <field name="level_id" />
-                                <field name="dist" />
-                                <field name="time" />
-                                <field name="velocity" />
-                                <field name="condition_concrete" />
-                                <field name="surface" />
-                                <field name="quality" />
-                                <field name="method" />
+                                <field name="member" />
+                                <field name="level" />
+                                <field name="r1" />
+                                <field name="r2" />
+                                <field name="r3" />
+                                <field name="r4" />
+                                <field name="r5" />
+                                <field name="r6" />
+                                <field name="avg" />
+                                <field name="corrosion_condition" />
+                                
                             </tree>
                     </field>
-                    <group>
-                        <field name="average" />
-                        <field name="min"  />
-                        <field name="max"/>
-                    </group>
+                    <button
+                            type="object"
+                            name="button_press_action"
+                            string="Update"
+                            />
+                    <field name="child_lines_2" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="member" />
+                                <field name="level" />
+                                <field name="r1" />
+                                <field name="r2" />
+                                <field name="r3" />
+                                <field name="r4" />
+                                <field name="r5" />
+                                <field name="r6" />
+                                <field name="avg" />
+                                <field name="corrosion_condition" />
+                            </tree>
+                    </field>
+                    
                 </sheet>
             </form>
         </field>

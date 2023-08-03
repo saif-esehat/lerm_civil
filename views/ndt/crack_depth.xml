@@ -12,6 +12,7 @@
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" invisible="1" />
                         <field name="parameter_id" invisible="1"/>
+                        
                     </group>
                     <group>
                         <h1>
@@ -20,18 +21,21 @@
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
-                                <field name="member" />
-                                <field name="location" />
-                                <field name="tc" />
-                                <field name="ts" />
-                                <field name="distance" />
-                                <field name="tc2" />
-                                <field name="ts2" />
-                                <field name="tc2_by_ts2" />
-                                <field name="sqrt_Tc2_by_Ts2minus1" />
-                                <field name="cd" />
+                                <field name="member" string="Element Type"/>
+                                <field name="location" string="Location"/>
+                                <field name="tc" string="Tc"/>
+                                <field name="ts" string="Ts"/>
+                                <field name="distance" string="Distance"/>
+                                <field name="tc2" string="Tc2"/>
+                                <field name="ts2" string="Ts2"/>
+                                <field name="tc2_by_ts2" string="Tc2/Ts2"/>
+                                <field name="sqrt_Tc2_by_Ts2minus1" string="√Tc2/Ts2-1"/>
+                                <field name="cd" string="CD=√Tc2/Ts2-1 x 200"/>
                             </tree>
                     </field>
+                     <group>
+                            <field name="average" />
+                    </group>
                 </sheet>
             </form>
         </field>

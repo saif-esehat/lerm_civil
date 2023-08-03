@@ -10,6 +10,8 @@ class CrackDepth(models.Model):
     name = fields.Char("Name",default="Crack Depth")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.crack.depth.line','parent_id',string="Parameter")
+    average = fields.Float(string='Average', digits=(16, 2), compute='_compute_average')
+
 
     @api.model
     def create(self, vals):
@@ -17,11 +19,22 @@ class CrackDepth(models.Model):
         record = super(CrackDepth, self).create(vals)
         record.parameter_id.write({'model_id':record.id})
         return record
+        
+    @api.depends('child_lines.cd')
+    def _compute_average(self):
+        for record in self:
+            total_cd = sum(record.child_lines.mapped('cd'))
+            num_records = len(record.child_lines)
+
+            if num_records > 0:
+                record.average = total_cd / num_records
+            else:
+                record.average = 0.0
 
 class CrackDepthLine(models.Model):
     _name = "ndt.crack.depth.line"
     parent_id = fields.Many2one('ndt.crack.depth',string="Parent Id")
-    member = fields.Char("Member")
+    member = fields.Char("Element Type")
     location = fields.Char("Location")
     tc = fields.Float("Tc")
     ts = fields.Float("Ts")

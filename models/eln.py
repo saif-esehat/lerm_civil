@@ -190,7 +190,17 @@ class ELN(models.Model):
 
 
 
+    def print_datasheet(self):
+        eln = self
         
+        template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+        print(template_name , 'lark lark')
+        return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': template_name,
+            'report_file': template_name
+        }
 
     @api.model
     def create(self,vals):
@@ -415,6 +425,7 @@ class ELNParametersResult(models.Model):
     eln_id = fields.Many2one('lerm.eln',string="ELN ID")
     parameter = fields.Many2one('lerm.parameter.master',string="Parameter")
     unit = fields.Many2one('uom.uom',string="Unit")
+    context_data = fields.Text("Context Data")
     calculated = fields.Boolean("Calculated")
     calculation_type = fields.Selection([('parameter_based', 'Parameter Based'), ('form_based', 'Form Based')],compute='_compute_calculation_type',string='Calculation Type')
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
@@ -460,7 +471,8 @@ class ELNParametersResult(models.Model):
                 'context': {
                     'default_srf_id':self.eln_id.srf_id.id,
                     'default_sample_id': self.eln_id.sample_id.id,
-                    'default_parameter_id':self.id
+                    'default_parameter_id':self.id,
+                    'default_eln_ref':self.eln_id.id
                  }
             }
         else:
@@ -472,7 +484,9 @@ class ELNParametersResult(models.Model):
                 'context': {
                     'default_srf_id':self.eln_id.srf_id.id,
                     'default_sample_id': self.eln_id.sample_id.id,
-                    'default_parameter_id':self.id
+                    'default_parameter_id':self.id,
+                    'default_eln_ref':self.eln_id.id
+
                  }
                 }
 
