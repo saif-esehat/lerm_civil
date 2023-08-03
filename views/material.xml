@@ -15,9 +15,13 @@
             <field name="casting_required"/>
             <label for="casting_required"/>
           </span>
+          <span class="d-inline-block">
+            <field name="is_product_based_calculation"/>
+            <label for="is_product_based_calculation"/>
+          </span>
         </xpath>
         <xpath expr="//field[@name='name']" position="attributes">
-            <attribute name="placeholder">e.g. Fly Ash</attribute>
+          <attribute name="placeholder">e.g. Fly Ash</attribute>
         </xpath>
         <xpath expr="//div[@name='options']" position="after">
           <group style="width:50%">
@@ -26,7 +30,7 @@
         </xpath>
         <xpath expr="//page[@name='general_information']" position="after">
           <page string="LERM" attrs="{'invisible': [('is_sample','=',False)]}">
-            
+
             <group style="width:50%">
               <field name="discipline"/>
               <field name="test_format_no"/>
@@ -35,11 +39,11 @@
             <group style="width:50%">
               <field name="group" domain="[('id', 'in', group_ids)]"/>
               <field name="group_ids" invisible='1'/>
-              <field name="data_sheet_format_no"/>    
+              <field name="data_sheet_format_no"/>
             </group>
             <field name='parameter_table1' options="{'no_create': True}"/>
-            
-            <!-- <field name="parameter_table" context="{'default_discipline':discipline}" nolabel="1" >
+
+            <!-- <field name="parameter_table" context="{'default_discipline':discipline}" nolabel="1">
               <tree>
                 <field name="parameter" />
                 <field name="discipline" />
@@ -47,7 +51,7 @@
               
             </field> -->
           </page>
-          <page string="Report Column Title"  attrs="{'invisible': [('is_sample','=',False)]}">
+          <page string="Report Column Title" attrs="{'invisible': [('is_sample','=',False)]}">
             <group>
               <group style="width:33%">
                 <field name="test_parameter"/>
@@ -55,12 +59,22 @@
               </group>
               <group style="width:33%">
                 <field name="method_reference"/>
-                <field name="result_remark"/>   
+                <field name="result_remark"/>
               </group>
               <group style="width:33%">
                 <field name="specifications"/>
                 <field name="unit"/>
               </group>
+            </group>
+          </page>
+          <page string="Product Based" attrs="{'invisible': [('is_product_based_calculation','=',False)]}">
+            <group>
+              <field name='product_based_calculation'>
+                <tree editable="bottom">
+                  <field name="grade"/>
+                  <field name="ir_model"/>
+                </tree>
+              </field>
             </group>
           </page>
           <page name="grade_page" string="Grade" attrs="{'invisible': [('is_sample','=',False)]}">
@@ -100,21 +114,21 @@
           </page> -->
           <page string="Datasheet" attrs="{'invisible': [('is_sample','=',False)]}">
             <field name='datasheet_table'>
-                <tree edidable="bottom">
-                    <field name="datasheet"/>
-                </tree>
-                <form>
-                  <group>
-                    <field name="datasheet"/>
-                  </group>
-                </form>
-              </field>
+              <tree edidable="bottom">
+                <field name="datasheet"/>
+              </tree>
+              <form>
+                <group>
+                  <field name="datasheet"/>
+                </group>
+              </form>
+            </field>
           </page>
         </xpath>
       </field>
     </record>
 
-     <!-- <record id="lerm_civil_parameter_line_form" model="ir.ui.view">
+    <!-- <record id="lerm_civil_parameter_line_form" model="ir.ui.view">
         <field name="name">lerm.parameter.line.form</field>
         <field name="model">lerm.parameter.line</field>
         <field name="arch" type="xml">
@@ -131,20 +145,20 @@
         </field>
       </record> -->
 
-      <record id="view_partner_inherited_form" model="ir.ui.view">
-            <field name="name">view.partner.inherited.form</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-            <xpath expr="//field[@name='vat']" position="attributes">
-                    <attribute name="string">GST</attribute>
-                </xpath>
-            </field>
-      </record>
+    <record id="view_partner_inherited_form" model="ir.ui.view">
+      <field name="name">view.partner.inherited.form</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='vat']" position="attributes">
+          <attribute name="string">GST</attribute>
+        </xpath>
+      </field>
+    </record>
 
 
   </data>
-  
-  
-  
+
+
+
 </odoo>
