@@ -286,7 +286,7 @@
             <footer>
                     <button name="reject_sample_button" string="Reject Sample" type="object" class="btn-primary"/>
                     <button name="close_reject_wizard" string="Close" type="object"/>
-                </footer>
+            </footer>
             </form>
         </field>
     </record>
