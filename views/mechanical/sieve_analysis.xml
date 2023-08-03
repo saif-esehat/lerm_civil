@@ -30,7 +30,7 @@
                                 <field name='wt_retained' string="Wt. Retained in gms"/>
                                 <field name='percent_retained' string="% Retained"/>
                                 <field name='cumulative_retained' context="{'default_cumulative_retained': cumulative_retained}" string="Cum. Retained %"/>
-                                <field name='passing_percent' string="Passing %"/>
+                                <field name='passing_percent' string="Passing %" readonly="1"/>
                                 
                             </tree>
                     </field>

@@ -112,7 +112,7 @@
 									<t t-foreach="tabledata" t-as="row">
 										<td>
 											<span>
-												<t t-esc="r[row[0]]" />
+												<t t-esc="r[row[0]]"/>
 											</span>
 										</td>
 									</t>
@@ -121,11 +121,6 @@
 						</table>
 						<div class="authorizeRowDataSheet">
 							<div>
-								<div>
-									<b>
-										Smita Pawar
-									</b>
-								</div>
 								<div>
 									<b>
 										(JR Chemist)
@@ -138,11 +133,6 @@
 								</div>
 							</div>
 							<div style="margin-left:500px">
-								<div>
-									<b>
-										Rupali Patil
-									</b>
-								</div>
 								<div>
 									<b>
 										Chemical Department (HOD)

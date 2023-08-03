@@ -13,6 +13,8 @@ class CementNormalConsistency(models.Model):
     name = fields.Char("Name",default="Cement")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
 
+    sample_parameters = fields.Many2many('eln.parameters.result',string="Parameters",compute="_compute_sample_parameters")
+
     temp_percent = fields.Float("Temperature %")
     humidity_percent = fields.Float("Humidity %")
 
@@ -440,7 +442,8 @@ class CementNormalConsistency(models.Model):
     #     # Perform additional actions or validations after update
     #     return result
 
-
+    def _compute_sample_parameters(self):
+        records = self.env['lerm.eln'].search([])
 
     def get_all_fields(self):
         record = self.env['mechanical.cement.normalconsistency'].browse(self.ids[0])
