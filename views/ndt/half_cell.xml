@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <record id="upv_view" model="ir.ui.view">
+        <record id="half_cell_view" model="ir.ui.view">
         <field name="name">ndt.half.cell.form</field>
         <field name="model">ndt.half.cell</field>
         <field name="arch" type="xml">

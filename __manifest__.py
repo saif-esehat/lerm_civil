@@ -80,6 +80,5 @@
         '/lerm_civil/static/src/xml/spreadsheet.xml'
 
     ],
-
         }
 }

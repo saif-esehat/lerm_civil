@@ -13,6 +13,8 @@ class CementNormalConsistency(models.Model):
     name = fields.Char("Name",default="Cement")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
 
+    sample_parameters = fields.Many2many('eln.parameters.result',string="Parameters",compute="_compute_sample_parameters")
+
     temp_percent = fields.Float("Temperature %")
     humidity_percent = fields.Float("Humidity %")
 
@@ -440,7 +442,8 @@ class CementNormalConsistency(models.Model):
     #     # Perform additional actions or validations after update
     #     return result
 
-
+    def _compute_sample_parameters(self):
+        records = self.env['lerm.eln'].search([])
 
     def get_all_fields(self):
         record = self.env['mechanical.cement.normalconsistency'].browse(self.ids[0])
@@ -494,7 +497,7 @@ class DrySievingLine(models.Model):
     _name = "cement.dry.sieving.line"
 
     parent_id = fields.Many2one('mechanical.cement.normalconsistency')
-    sample_weight_fineness = fields.Float("Sample Weight(g)",default=100)
+    sample_weight_fineness = fields.Float("Sample Weight(g)",default=10)
     retained_weight = fields.Float("Retained Weight on 90 mic sieve (g)")
     fineness = fields.Float("Fineness by dry sieving %",compute="_compute_fineness")
 
@@ -527,7 +530,7 @@ class Casting3DaysLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (self.crushing_load / self.crosssectional_area)*1000
+                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
             else:
                 record.compressive_strength = 0
 
