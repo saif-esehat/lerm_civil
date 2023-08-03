@@ -43,6 +43,7 @@
     'views/mechanical/moisture_content_concrete_man_hole.xml',
     'views/mechanical/drying_shrinkage_concrete_man_hole.xml',
     'views/mechanical/dimentions_concrete_man_hole.xml',
+    'views/mechanical/water_and_gravity_fine_aggregate.xml',
     'views/ndt/crack_width.xml',
     'views/ndt/concrete_core.xml',
     'views/ndt/crack_depth.xml',
