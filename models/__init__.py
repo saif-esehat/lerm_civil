@@ -24,6 +24,7 @@ from .mechanical import coarse_aggregate
 from .mechanical import bulk_density
 from. mechanical import concrete_man_hole
 from .mechanical import fine_aggregate
+from .mechanical import steel_tmt_bar
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
