@@ -324,7 +324,6 @@ class ParameteResultCalculationWizard(models.TransientModel):
     nabl_status = fields.Selection([
         ('nabl', 'NABL'),
         ('non-nabl', 'Non-NABL')
-
     ],compute="compute_nabl_status", string='NABL Status')
     conformity_status = fields.Selection([
         ('pass', 'Pass'),
@@ -431,7 +430,7 @@ class InputLines(models.TransientModel):
     is_parameter_dependent = fields.Boolean("Parameter Dependent")
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
-    value = fields.Float(string="Value",digits=(16, 10))
+    value = fields.Float(string="Value",digits=(12, 5))
     date_time = fields.Datetime("Time") 
     
     @api.onchange('value')
@@ -575,7 +574,7 @@ class ELNParametersInputs(models.Model):
     is_parameter_dependent = fields.Boolean("Parameter Dependent")
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
-    value = fields.Float(string="Value",digits=(16, 10))
+    value = fields.Float(string="Value",digits=(12, 5))
     date_time = fields.Datetime("Time") 
 
 
