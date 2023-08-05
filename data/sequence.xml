@@ -24,6 +24,15 @@
             <field name="company_id" eval="False"/>
         </record>
 
+        <record id="ulr_no_seqs" model="ir.sequence">
+            <field name="name">ULR Sequence</field>
+            <field name="code">sample.ulr.seq</field>
+            <field name="prefix">(lab_certificate_no)%(y)s(lab_location)</field>
+            <field name="suffix">F</field>
+            <field name="padding">8</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
         <record id="normal_consistency_test" model="mechanical.cement.test">
             <field name="name">Normal Consistency</field>
         </record>

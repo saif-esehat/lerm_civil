@@ -9,6 +9,7 @@
     'data/sequence.xml',
     'views/lerm.xml',
     'views/groups.xml',
+    'views/res_company.xml',
     'views/material.xml',
     'views/srf.xml',
     'views/parameter_master.xml',
