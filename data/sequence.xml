@@ -23,7 +23,7 @@
             <field name="padding">5</field>
             <field name="company_id" eval="False"/>
         </record>
-
+        <!-- cement opc  -->
         <record id="normal_consistency_test" model="mechanical.cement.test">
             <field name="name">Normal Consistency</field>
         </record>
@@ -44,23 +44,73 @@
             <field name="name">Soundness</field>   
         </record>
 
-        <record id="dry_sieving_test" model="mechanical.cement.test">
-            <field name="name">Dry Sieve</field>   
-        </record>
-
-        <record id="casting_3_days_test" model="mechanical.cement.test">
-            <field name="name">3 Days</field>   
-        </record>
-
-        <record id="casting_7_days_test" model="mechanical.cement.test">
-            <field name="name">7 Days</field>   
-        </record>
-
-        <record id="casting_28_days_test" model="mechanical.cement.test">
-            <field name="name">28 Days</field>   
+        <record id="dry_sieving_tests" model="mechanical.cement.test">
+            <field name="name">Dry Seiving</field>   
         </record>
 
         <record id="fineness_blaine_test" model="mechanical.cement.test">
+            <field name="name">Fineness (Blaine)</field>   
+        </record>
+
+        <!-- cement psc -->
+
+
+        <record id="normal_consistency_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Normal Consistency</field>
+        </record>
+        
+        <record id="cement_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Setting Time</field>    
+        </record>
+
+        <record id="density_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Density</field>   
+        </record>
+
+        <record id="compressive_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Compressive Strength</field>   
+        </record>
+
+        <record id="soundness_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Soundness</field>   
+        </record>
+
+        <record id="dry_sieving_tests_psc" model="mechanical.cement.psc.test">
+            <field name="name">Dry Seiving</field>   
+        </record>
+
+        <record id="fineness_blaine_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Fineness (Blaine)</field>   
+        </record>
+
+        <!-- cement ppc  -->
+
+
+        <record id="normal_consistency_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Normal Consistency</field>
+        </record>
+        
+        <record id="cement_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Setting Time</field>    
+        </record>
+
+        <record id="density_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Density</field>   
+        </record>
+
+        <record id="compressive_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Compressive Strength</field>   
+        </record>
+
+        <record id="soundness_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Soundness</field>   
+        </record>
+
+        <record id="dry_sieving_tests_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Dry Seiving</field>   
+        </record>
+
+        <record id="fineness_blaine_test_ppc" model="mechanical.cement.ppc.test">
             <field name="name">Fineness (Blaine)</field>   
         </record>
     </data>

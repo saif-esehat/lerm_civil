@@ -20,10 +20,10 @@
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
-                                <field name="member" />
-                                <field name="location" />
-                                <field name="condition_of_concrete"  />
-                                <field name="depth" attrs="{'readonly': [('condition_of_concrete', '!=', 'carbonated')]}" />
+                                <field name="member" string="Member / Element Type"/>
+                                <field name="location" string="Location"/>
+                                <field name="condition_of_concrete"  string="Condition of Concrete"/>
+                                <field name="depth" string="Depth of Carbonation in mm" attrs="{'readonly': [('condition_of_concrete', '!=', 'carbonated')]}" />
                             </tree>
                     </field>
                 </sheet>
