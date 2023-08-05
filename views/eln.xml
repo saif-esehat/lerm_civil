@@ -98,7 +98,9 @@
                                     <field name="specification" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="test_method" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="nabl_status" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
-                                    <field name="conformity_status" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    <field name="conformity_status" 
+                                           decoration-success="conformity_status == 'pass'" 
+                                           decoration-danger="conformity_status == 'fail'" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="model_id" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <button string="Calculation" name="open_calculation_wizard" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','form_based')] , 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <button string="Open Form" name="open_form" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','parameter_based')], 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
