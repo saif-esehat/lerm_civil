@@ -9,7 +9,7 @@ class SteelTmtBarLine(models.Model):
    
     
     Id_no = fields.Char("ID No")
-    grade = fields.Char(string="Grade")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id")
     diameter = fields.Integer(string="Dia. in mm")
     lentgh = fields.Float(string="Length in mm",digits=(10, 3))
     weight = fields.Float(string="Weight, in kg",digits=(10, 3))
@@ -23,6 +23,8 @@ class SteelTmtBarLine(models.Model):
     proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True)
     ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth")
     fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
+    eln_ref = fields.Many2one('lerm.eln',string="ELN")
+    requirment = fields.Char(string="Requirment")
     
     bend_test = fields.Selection([
         ('satisfactory', 'Satisfactory'),
@@ -69,6 +71,22 @@ class SteelTmtBarLine(models.Model):
                 record.ult_tens_strgth = record.ultimate_load / record.crossectional_area * 1000
             else:
                 record.ult_tens_strgth = 0.0
+
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(SteelTmtBarLine, self).create(vals)
+        # record.get_all_fields()
+        record.eln_ref.write({'model_id':record.id})
+        return record
+
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
+
+    
 
 
   

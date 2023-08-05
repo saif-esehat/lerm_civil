@@ -9,6 +9,7 @@
             <form>
                 <sheet>
                    <group>
+                        <field name='eln_ref' invisible="1"/>
                         <h1>
                             STEEL TMT BAR
                         </h1>
@@ -22,7 +23,10 @@
                               <group>
                                 <field name='grade'/>
                               </group>
-                              <group>
+                             
+                               <group>
+                             
+
                                 <field name='diameter'/>
                                 <field name='lentgh'/>
                                 <field name='weight'/>
@@ -30,18 +34,29 @@
                                 <field name='crossectional_area'/>
                                 <field name='gauge_length'/>
                                 <field name='elongated_gauge_length'/>
-                              </group>
-                              <group>
                                 <field name='percent_elongation'/>
                                 <field name='yeild_load'/>
                                 <field name='ultimate_load'/>
+                                <group style="width:50%">
                                 <field name='proof_yeid_stress'/>
                                 <field name='ult_tens_strgth'/>
+                                </group>
+                                </group>
+                                <group style="width:50%">
+                                 <field name='requirment'/>
+                                 </group>
+                                 <group>
+                                
                                 <field name='fracture'/>
                                 <field name='bend_test'/>
                                 <field name='re_bend_test'/>
                                </group>
+              
+                              
+                               
+                               
                           
+                            
                             </group>
                             <!-- </tree> -->
                            
