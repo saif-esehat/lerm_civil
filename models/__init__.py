@@ -9,6 +9,7 @@ from . import sample_range
 from . import srf_report
 from . import sample_report
 from . import contractor
+from . import company
 from . import data_sheets_report
 from .mechanical import sieve_analysis
 from .mechanical import pavel_block
@@ -37,6 +38,8 @@ from .ndt import upv
 from .ndt import crackwidth
 from .ndt import half_cell
 from .mechanical import cement_normal_consistency
+from .mechanical import cement_psc
+from .mechanical import cement_ppc
 from .mechanical import cement_setting_time
 from .mechanical import coupler
 from . import general_template

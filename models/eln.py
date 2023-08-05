@@ -324,7 +324,6 @@ class ParameteResultCalculationWizard(models.TransientModel):
     nabl_status = fields.Selection([
         ('nabl', 'NABL'),
         ('non-nabl', 'Non-NABL')
-
     ],compute="compute_nabl_status", string='NABL Status')
     conformity_status = fields.Selection([
         ('pass', 'Pass'),
