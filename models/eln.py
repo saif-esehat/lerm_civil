@@ -55,7 +55,48 @@ class ELN(models.Model):
     invisible_fetch_inputs = fields.Boolean(string="Fetch Inputs")
     name = fields.Char(string="Name")
     image = fields.Binary(string="Image", attachment=True)
+    is_product_based_calculation = fields.Boolean(string="Product Based Calculation",compute="_compute_product_based")
+    model_id = fields.Integer("Model ID")
 
+
+    def open_product_based_form(self):
+        model_record = self.material.product_based_calculation.filtered(lambda r: r.grade.id == self.grade_id.id)
+        model = model_record.ir_model.model
+        if self.model_id != 0:
+            # import wdb; wdb.set_trace()
+            return {
+                'view_mode': 'form',
+                'res_model': model,
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.model_id,
+                'context': {
+                    'default_srf_id':self.srf_id.id,
+                    'default_sample_id': self.sample_id.id,
+                    'default_eln_ref':self.id
+                 }
+            }
+        
+        else:
+            # import wdb; wdb.set_trace()
+            return {
+                'view_mode': 'form',
+                'res_model': model,
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'context': {
+                    'default_srf_id':self.srf_id.id,
+                    'default_sample_id': self.sample_id.id,
+                    'default_eln_ref':self.id
+                 }
+                }
+
+
+
+    @api.depends('material')
+    def _compute_product_based(self):
+        for record in self:
+            record.is_product_based_calculation = record.material.is_product_based_calculation
     # def calculate_graphs(self):
     #     import wdb; wdb.set_trace()
     #     x = [1, 2, 3, 4, 5]
@@ -283,7 +324,6 @@ class ParameteResultCalculationWizard(models.TransientModel):
     nabl_status = fields.Selection([
         ('nabl', 'NABL'),
         ('non-nabl', 'Non-NABL')
-
     ],compute="compute_nabl_status", string='NABL Status')
     conformity_status = fields.Selection([
         ('pass', 'Pass'),
@@ -390,7 +430,7 @@ class InputLines(models.TransientModel):
     is_parameter_dependent = fields.Boolean("Parameter Dependent")
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
-    value = fields.Float(string="Value",digits=(16, 10))
+    value = fields.Float(string="Value",digits=(12, 5))
     date_time = fields.Datetime("Time") 
     
     @api.onchange('value')
@@ -534,7 +574,7 @@ class ELNParametersInputs(models.Model):
     is_parameter_dependent = fields.Boolean("Parameter Dependent")
     identifier = fields.Char(string="Identifier")
     inputs = fields.Many2one('lerm.dependent.inputs',string="Inputs")
-    value = fields.Float(string="Value",digits=(16, 10))
+    value = fields.Float(string="Value",digits=(12, 5))
     date_time = fields.Datetime("Time") 
 
 
