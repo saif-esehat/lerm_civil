@@ -10,7 +10,7 @@
                 <sheet>
                    <group>
                         <h1>
-                            STEEL TMT BAR
+                            STEEL
                         </h1>
                     </group>
                          
@@ -20,18 +20,16 @@
                                 <field name='Id_no'/>
                               </group>
                               <group>
-                                <field name='grade'/>
+                                <field name='grade_id'/>
                               </group>
                               <group>
                                 <field name='diameter'/>
-                                <field name='lentgh'/>
+                                <field name='length'/>
                                 <field name='weight'/>
                                 <field name='weight_per_meter'/>
                                 <field name='crossectional_area'/>
                                 <field name='gauge_length'/>
                                 <field name='elongated_gauge_length'/>
-                              </group>
-                              <group>
                                 <field name='percent_elongation'/>
                                 <field name='yeild_load'/>
                                 <field name='ultimate_load'/>
