@@ -94,8 +94,8 @@
                     <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" context = "{'default_customer_id' : customer,'is_local': True}">
                         <tree>
                             <field name='kes_range'/>
-                            <field name="material_id_lab_name" />
-                            <field name="material_id" invisible="1" />
+                            <field name="material_id_lab_name"  invisible="1"/>
+                            <field name="material_id" />
                             <field name="discipline_id"/>
                             <field name="group_id"/>
                             <field name='parameters' options='{"always_reload": True}' context="{'test_method' : True }" widget="many2many_tags"/>
