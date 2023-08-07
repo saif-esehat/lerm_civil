@@ -27,6 +27,7 @@
                                 <field name='area'/>
                                 <field name='id_mark'/>
                                 <field name='weight_sample'/>
+                                
                                 <field name="crushing_load"/>
                                 <field name='compressive_strength'/>
                                 <!-- <field name='average_tensile'/> -->
