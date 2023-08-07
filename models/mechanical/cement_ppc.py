@@ -5,8 +5,8 @@ import math
 
 
 
-class CementNormalConsistency(models.Model):
-    _name = "mechanical.cement.normalconsistency"
+class CementPpc(models.Model):
+    _name = "mechanical.cement.ppc"
     _inherit = "lerm.eln"
     _rec_name = "name"
 
@@ -113,9 +113,9 @@ class CementNormalConsistency(models.Model):
                 record.final_setting_time_hours = time_difference
                 final_setting_time = time_difference.total_seconds() / 60
                 if final_setting_time % 5 == 0:
-                    record.final_setting_time_minutes =  final_setting_time
+                    record.final_setting_time_minutes = final_setting_time
                 else:
-                    record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
+                    record.final_setting_time_minutes = round(final_setting_time / 5) * 5
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
@@ -127,8 +127,8 @@ class CementNormalConsistency(models.Model):
     density_name = fields.Char("Name",default="Density")
     density_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
 
-    wt_of_cement_density_trial1 = fields.Float("Wt. of Cement(g)",default=64)
-    wt_of_cement_density_trial2 = fields.Float("Wt. of Cement(g)",default=64)
+    wt_of_cement_density_trial1 = fields.Float("Wt. of Cement(g)",default=55)
+    wt_of_cement_density_trial2 = fields.Float("Wt. of Cement(g)",default=55)
 
     initial_volume_kerosene_trial1 = fields.Float("Initial Volume of kerosine (ml)V1")
     initial_volume_kerosene_trial2 = fields.Float("Initial Volume of kerosine (ml)V1")
@@ -406,12 +406,12 @@ class CementNormalConsistency(models.Model):
     fineness_blaine_name = fields.Char("Name",default="Fineness By Blaine Air Permeability Method")
     fineness_blaine_visible = fields.Boolean("Fineness Blaine Visible",compute="_compute_visible")
 
-    weight_of_mercury_before_trial1 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g." ,default=83.150,digits=(16, 3))
-    weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=83.130,digits=(16, 3))
+    weight_of_mercury_before_trial1 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g." ,default=83.320,digits=(16, 3))
+    weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=83.340,digits=(16, 3))
     
 
-    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=56.730,digits=(16, 3))
-    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=56.734,digits=(16, 3))
+    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=54.000,digits=(16, 3))
+    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=53.990,digits=(16, 3))
 
     density_of_mercury = fields.Float("Density of mercury , g/cm3",default=13.53,digits=(16, 3))
 
@@ -425,14 +425,14 @@ class CementNormalConsistency(models.Model):
     density_fineness_reference = fields.Float("Density" ,compute="_compute_density_fineness")
     mass_of_sample_taken_fineness_reference = fields.Float("mass of sample taken (g)" ,compute="_compute_mass_taken_reference")
 
-    time_fineness_trial1 = fields.Float("Time(t),sec.",default=64.63)
-    time_fineness_trial2 = fields.Float("Time(t),sec.",default=64.60)
-    time_fineness_trial3 = fields.Float("Time(t),sec.",default=64.88)
+    time_fineness_trial1 = fields.Float("Time(t),sec.",default=70.81)
+    time_fineness_trial2 = fields.Float("Time(t),sec.",default=70.10)
+    time_fineness_trial3 = fields.Float("Time(t),sec.",default=70.47)
     average_time_fineness = fields.Float("Average Time(tₒ),Sec",compute="_compute_time_average_fineness")
 
-    specific_surface_of_reference_sample = fields.Float("S0 is the Specific surface of reference sample (m²/kg)",default=274) 
+    specific_surface_of_reference_sample = fields.Float("S0 is the Specific surface of reference sample (m²/kg)",default=393) 
     air_viscosity_of_three_temp = fields.Float("ɳₒ is the Air viscosity at the mean of the three temperatures",default=0.001355,digits=(16, 6))
-    density_of_reference_sample = fields.Float("ρ0 is the Density of reference sample  (g/cm3)",default=3.16)
+    density_of_reference_sample = fields.Float("ρ0 is the Density of reference sample  (g/cm3)",default=2.83)
     mean_of_three_measured_times = fields.Float("t0 is the Mean of three measured times (sec)",default=48.00)
     apparatus_constant = fields.Float("Apparatus Constant(k)",compute="_compute_apparatus_constant")
 
@@ -562,7 +562,7 @@ class CementNormalConsistency(models.Model):
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()
-        record = super(CementNormalConsistency, self).create(vals)
+        record = super(CementPpc, self).create(vals)
         record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
@@ -612,14 +612,14 @@ class CementNormalConsistency(models.Model):
     
 
 
-class CementTest(models.Model):
-    _name = "mechanical.cement.test"
+class CementTestPpc(models.Model):
+    _name = "mechanical.cement.ppc.test"
     _rec_name = "name"
     name = fields.Char("Name")
 
 
-class SoundnessCementLine(models.Model):
-    _name= "cement.soundness.line"
+class SoundnessCementLinePpc(models.Model):
+    _name= "cement.ppc.soundness.line"
 
     parent_id = fields.Many2one('mechanical.cement.normalconsistency')
     initial_distance = fields.Float("Intial distance separating the indicator points (L1).mm")
@@ -631,8 +631,8 @@ class SoundnessCementLine(models.Model):
         for record in self:
             record.expansion = record.final_distance - record.initial_distance
 
-class DrySievingLine(models.Model):
-    _name = "cement.dry.sieving.line"
+class DrySievingLinePpc(models.Model):
+    _name = "cement.ppc.dry.sieving.line"
 
     parent_id = fields.Many2one('mechanical.cement.normalconsistency')
     sample_weight_fineness = fields.Float("Sample Weight(g)",default=100)
@@ -648,8 +648,8 @@ class DrySievingLine(models.Model):
                 record.fineness = 0
 
 
-class Casting3DaysLine(models.Model):
-    _name = "cement.casting.3days.line"
+class Casting3DaysLinePpc(models.Model):
+    _name = "cement.ppc.casting.3days.line"
 
     parent_id = fields.Many2one('mechanical.cement.normalconsistency',string="Parent Id")
     length = fields.Float("Length in mm")
@@ -672,8 +672,8 @@ class Casting3DaysLine(models.Model):
             else:
                 record.compressive_strength = 0
 
-class Casting7DaysLine(models.Model):
-    _name = "cement.casting.7days.line"
+class Casting7DaysLinePpc(models.Model):
+    _name = "cement.ppc.casting.7days.line"
 
     parent_id = fields.Many2one('mechanical.cement.normalconsistency')
 
@@ -697,8 +697,8 @@ class Casting7DaysLine(models.Model):
             else:
                 record.compressive_strength = 0
 
-class Casting28DaysLine(models.Model):
-    _name = "cement.casting.28days.line"
+class Casting28DaysLinePpc(models.Model):
+    _name = "cement.ppc.casting.28days.line"
 
     parent_id = fields.Many2one('mechanical.cement.normalconsistency')
 

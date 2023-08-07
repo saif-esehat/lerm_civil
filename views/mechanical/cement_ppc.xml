@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="mechanical_cement_normalconsistency" model="ir.ui.view">
-        <field name="name">mechanical.cement.normalconsistency.form</field>
-        <field name="model">mechanical.cement.normalconsistency</field>
+        <record id="mechanical_cement_ppc" model="ir.ui.view">
+        <field name="name">mechanical.cement.ppc.form</field>
+        <field name="model">mechanical.cement.ppc</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="steel_tmt_bar_view" model="ir.ui.view">
+        <field name="name">steel.tmt.bar.form</field>
+        <field name="model">steel.tmt.bar</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group>
+                        <field name='eln_ref' invisible="1"/>
+                        <h1>
+                            STEEL TMT BAR
+                        </h1>
+                    </group>
+                         
+                            <group>
+                             
+                              <group>
+                                <field name='Id_no'/>
+                              </group>
+                              <group>
+                                <field name='grade'/>
+                              </group>
+                             
+                               <group>
+                             
+
+                                <field name='diameter'/>
+                                <field name='lentgh'/>
+                                <field name='weight'/>
+                                <field name='weight_per_meter'/>
+                                <field name='crossectional_area'/>
+                                <field name='gauge_length'/>
+                                <field name='elongated_gauge_length'/>
+                                <field name='percent_elongation'/>
+                                <field name='yeild_load'/>
+                                <field name='ultimate_load'/>
+                                <group style="width:50%">
+                                <field name='proof_yeid_stress'/>
+                                <field name='ult_tens_strgth'/>
+                                </group>
+                                </group>
+                                <group style="width:50%">
+                                 <field name='requirment'/>
+                                 </group>
+                                 <group>
+                                
+                                <field name='fracture'/>
+                                <field name='bend_test'/>
+                                <field name='re_bend_test'/>
+                               </group>
+              
+                              
+                               
+                               
+                          
+                            
+                            </group>
+                            <!-- </tree> -->
+                           
+                
+                            <!-- <group>
+                               <field name='average_compressive_strength'/>
+                            </group> -->
+                     
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+
+
+    </data>
+</odoo>

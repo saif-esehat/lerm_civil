@@ -71,6 +71,7 @@
                     </group>
                     <group style="width:50%">
                         <field name='kes_no'/>
+                        <field name='ulr_no'/>
                         <field name="group_id" domain="[('id', 'in', group_ids)]"/>
                         <!-- <field name="alias"/> -->
                         <field name="product_name"/>
@@ -215,7 +216,7 @@
         <field name="arch" type="xml">
 
 
-            <tree>
+            <tree default_order='create_date desc'>
               <header>
                     <button type="object" class="oe_highlight" name="open_sample_allotment_wizard"  string="Bulk Allotment" />
                 </header>
@@ -286,7 +287,7 @@
             <footer>
                     <button name="reject_sample_button" string="Reject Sample" type="object" class="btn-primary"/>
                     <button name="close_reject_wizard" string="Close" type="object"/>
-                </footer>
+            </footer>
             </form>
         </field>
     </record>

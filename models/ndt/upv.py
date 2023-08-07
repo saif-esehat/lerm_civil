@@ -95,9 +95,9 @@ class UpvLine(models.Model):
             # self.extract_numeric_part(string1)
             if record.velocity > 4.5:
                 record.quality = 'excellent'
-            elif numeric_part1 < numeric_part2 and 3.5 <= record.velocity <= 4.5:
+            elif numeric_part1 > numeric_part2 and 3.5 <= record.velocity <= 4.5:
                 record.quality = 'good'
-            elif numeric_part1 > numeric_part2 and 3.75 <= record.velocity <= 4.5:
+            elif numeric_part1 < numeric_part2 and 3.75 <= record.velocity <= 4.5:
                 record.quality = 'good'
             else:
                 record.quality = 'doubtful'
@@ -124,7 +124,7 @@ class UpvLine(models.Model):
                 record.velocity = velocity
             elif record.dist and record.time and record.method == 'indirect':
                 velocity = ((record.dist / record.time) * 1000)  # Convert time from μs to seconds
-                if velocity > 2:
+                if velocity > 3:
                     velocity = velocity + 0.5
                 record.velocity = velocity
 

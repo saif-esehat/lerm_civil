@@ -5,6 +5,7 @@ class Material(models.Model):
 
     is_sample = fields.Boolean(string="Is Sample?")
     casting_required = fields.Boolean(string="Casting Required")
+    is_product_based_calculation = fields.Boolean(string="Product Based Calculation")
     test_parameter = fields.Char("Test Column Title")
     results = fields.Char("Result Column Title")
     specifications = fields.Char("Specifications Column Title")
@@ -25,6 +26,7 @@ class Material(models.Model):
     parameter_table1 = fields.Many2many('lerm.parameter.master',string="Parameters")
     volume = fields.Char("Volume")
     lab_name = fields.Char(string="Lab Name")
+    product_based_calculation = fields.One2many('lerm.product.based.calculation','product_id',string="Product Based Calculation")
     # discipline2 = fields.One2many('material.discipline.line')
 
     def name_get(self):
@@ -122,3 +124,12 @@ class GradeLine(models.Model):
     
     product_id = fields.Many2one('product.template')
     grade = fields.Char("Grade")
+
+
+class ProductBasedCalculation(models.Model):
+    _name = 'lerm.product.based.calculation'
+    _rec_name = 'grade'
+    product_id = fields.Many2one('product.template')
+    grade = fields.Many2one("lerm.grade.line",string="Grade")
+    ir_model = fields.Many2one('ir.model',string="Model")
+

@@ -119,7 +119,7 @@
         <field name="name">lerm.civil.srf.tree</field>
         <field name="model">lerm.civil.srf</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree default_order='create_date desc' >
                 <field name="srf_id"/>
                 <field name="srf_date"/>
                 <field name="customer"/>

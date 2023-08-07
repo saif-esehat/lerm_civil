@@ -135,7 +135,16 @@ class SrfForm(models.Model):
             for sample in samples:
                 sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
                 kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
-                sample.write({'sample_no':sample_id,'kes_no':kes_no,'status':'2-confirmed'})
+                company =  self.env['res.company'].search([('id','=',self.env.context['allowed_company_ids'][0])])
+                lab_cert_no = company.lab_certificate_no
+                lab_loc = company.lab_location
+                ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
+                ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+                ulr_no = ulr_no.replace('(lab_location)', lab_loc)
+                # import wdb ; wdb.set_trace()
+
+                
+                sample.write({'sample_no':sample_id,'kes_no':kes_no,'status':'2-confirmed' ,'ulr_no':ulr_no})
                 self.env.cr.commit()
 
 
