@@ -34,6 +34,7 @@
     'views/mechanical/flexural_strength_concrete_beam.xml',
     'views/mechanical/compressive_strength_concrete_cube.xml',
     'views/mechanical/splitting_tensile_strength_concrete.xml',
+    'views/mechanical/act_compressive_concrete_cube.xml',
     'views/mechanical/crushing_value_coarse_aggregate.xml',
     'views/mechanical/impact_value_coarse_aggregate.xml',
     'views/mechanical/loose_bulk_density.xml',
