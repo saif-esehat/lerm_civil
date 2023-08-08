@@ -57,6 +57,8 @@
     'views/ndt/upv.xml',
     'views/ndt/half_cell.xml',
     'views/mechanical/cement_normal_consistency.xml',
+    'views/mechanical/cement_psc.xml',
+    'views/mechanical/cement_ppc.xml',
     'views/mechanical/cement_setting_time.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
