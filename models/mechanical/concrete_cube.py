@@ -74,3 +74,5 @@ class CompressiveStrengthConcreteCubeLine(models.Model):
         records = self.sorted('id')
         for index, record in enumerate(records):
             record.sr_no = index + 1
+
+
