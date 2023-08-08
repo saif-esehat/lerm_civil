@@ -17,8 +17,8 @@ class CementNormalConsistency(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    temp_percent = fields.Float("Temperature %")
-    humidity_percent = fields.Float("Humidity %")
+    temp_percent_normal = fields.Float("Temperature %")
+    humidity_percent_normal = fields.Float("Humidity %")
 
 
     ## Normal Consistency
@@ -27,6 +27,8 @@ class CementNormalConsistency(models.Model):
 
     normal_consistency_name = fields.Char("Name",default="Normal Consistency")
     normal_consistency_visible = fields.Boolean("Normal Consistency Visible",compute="_compute_visible")
+    start_date_normal = fields.Date("Start Date")
+    end_date_normal = fields.Date("End Date")
 
     wt_of_cement_trial1 = fields.Float("Wt. of Cement(g)",default=400)
     wt_of_cement_trial2 = fields.Float("Wt. of Cement(g)",default=400)
@@ -51,8 +53,10 @@ class CementNormalConsistency(models.Model):
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_percent = fields.Float("Temperature %")
-    humidity_percent = fields.Float("Humidity %")
+    temp_percent_setting = fields.Float("Temperature %")
+    humidity_percent_setting = fields.Float("Humidity %")
+    start_date_setting = fields.Date("Start Date")
+    end_date_setting = fields.Date("End Date")
 
     wt_of_cement_setting_time = fields.Float("Wt. of Cement(g)",default=400)
     wt_of_water_required_setting_time = fields.Float("Wt.of water required (g) (0.85*P%)" , compute="_compute_wt_of_water_required",store=True )
@@ -127,6 +131,11 @@ class CementNormalConsistency(models.Model):
     density_name = fields.Char("Name",default="Density")
     density_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
 
+    temp_percent_density = fields.Float("Temperature %")
+    humidity_percent_density = fields.Float("Humidity %")
+    start_date_density = fields.Date("Start Date")
+    end_date_density = fields.Date("End Date")
+
     wt_of_cement_density_trial1 = fields.Float("Wt. of Cement(g)",default=64)
     wt_of_cement_density_trial2 = fields.Float("Wt. of Cement(g)",default=64)
 
@@ -179,6 +188,11 @@ class CementNormalConsistency(models.Model):
     soundness_name = fields.Char("Name",default="Soundness")
     soundness_visible = fields.Boolean("Soundness Visible",compute="_compute_visible")
 
+    temp_percent_soundness = fields.Float("Temperature %")
+    humidity_percent_soundness = fields.Float("Humidity %")
+    start_date_soundness = fields.Date("Start Date")
+    end_date_soundness = fields.Date("End Date")
+
     wt_of_cement_soundness = fields.Float("Weight of Cement(g)",default=100)
     wt_of_water_req_soundness = fields.Float("Weight of water required(g)",compute="_compute_water_weight_soundness")
 
@@ -226,6 +240,11 @@ class CementNormalConsistency(models.Model):
     dry_sieving_name = fields.Char("Name",default="Dry Sieving")
     dry_sieving_visible = fields.Boolean("Dry Sieving Visible",compute="_compute_visible")
 
+    temp_percent_dry_sieving = fields.Float("Temperature %")
+    humidity_percent_dry_sieving = fields.Float("Humidity %")
+    start_date_dry_sieving = fields.Date("Start Date")
+    end_date_dry_sieving = fields.Date("End Date")
+
     dry_sieving_table = fields.One2many('cement.dry.sieving.line','parent_id',string="Dry Sieving")
     average_fineness = fields.Float("Average",compute="_compute_average_fineness")
     fineness_dry_sieving = fields.Float("Fineness by dry sieving %",compute="_compute_fineness_dry_sieving")
@@ -250,6 +269,11 @@ class CementNormalConsistency(models.Model):
 
     compressive_name = fields.Char("Name",default="Compressive Strength")
     compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
+
+    temp_percent_compressive = fields.Float("Temperature %")
+    humidity_percent_compressive = fields.Float("Humidity %")
+    start_date_compressive = fields.Date("Start Date")
+    end_date_compressive = fields.Date("End Date")
 
     wt_of_cement_compressive = fields.Float("Wt. of Cement(g)",default=200)
     wt_of_standard_sand_grade1 = fields.Float("Weight of Standard Sand (g) Grade-I",default=200)
@@ -406,6 +430,11 @@ class CementNormalConsistency(models.Model):
     fineness_blaine_name = fields.Char("Name",default="Fineness By Blaine Air Permeability Method")
     fineness_blaine_visible = fields.Boolean("Fineness Blaine Visible",compute="_compute_visible")
 
+    temp_percent_fineness = fields.Float("Temperature %")
+    humidity_percent_fineness = fields.Float("Humidity %")
+    start_date_fineness = fields.Date("Start Date")
+    end_date_fineness = fields.Date("End Date")
+
     weight_of_mercury_before_trial1 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g." ,default=83.150,digits=(16, 3))
     weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=83.130,digits=(16, 3))
     
@@ -433,7 +462,7 @@ class CementNormalConsistency(models.Model):
     specific_surface_of_reference_sample = fields.Float("S0 is the Specific surface of reference sample (m²/kg)",default=274) 
     air_viscosity_of_three_temp = fields.Float("ɳₒ is the Air viscosity at the mean of the three temperatures",default=0.001355,digits=(16, 6))
     density_of_reference_sample = fields.Float("ρ0 is the Density of reference sample  (g/cm3)",default=3.16)
-    mean_of_three_measured_times = fields.Float("t0 is the Mean of three measured times (sec)",default=48.00)
+    mean_of_three_measured_times = fields.Float("t0 is the Mean of three measured times (sec)",default=64.70)
     apparatus_constant = fields.Float("Apparatus Constant(k)",compute="_compute_apparatus_constant")
 
     density_fineness_calculated = fields.Float("Density",compute="_compute_density_calculated")
@@ -484,13 +513,13 @@ class CementNormalConsistency(models.Model):
     @api.depends('specific_surface_of_reference_sample','air_viscosity_of_three_temp','density_of_reference_sample','mean_of_three_measured_times')
     def _compute_apparatus_constant(self):
         if self.mean_of_three_measured_times != 0:
-            self.apparatus_constant = 1.414*self.specific_surface_of_reference_sample*self.density_of_reference_sample*((self.air_viscosity_of_three_temp)/(self.mean_of_three_measured_times**0.5))
+            self.apparatus_constant = round(1.414*self.specific_surface_of_reference_sample*self.density_of_reference_sample*((self.air_viscosity_of_three_temp)/(self.mean_of_three_measured_times**0.5)),2)
         else:
             self.apparatus_constant = 0
 
     @api.depends('average_density')
     def _compute_density_calculated(self):
-        self.density_fineness_calculated = self.average_density
+        self.density_fineness_calculated = round(self.average_density,2)
 
     @api.depends('average_bed_volume','density_fineness_calculated')
     def _compute_mass_sample_calculated(self):
@@ -502,10 +531,14 @@ class CementNormalConsistency(models.Model):
 
     @api.depends('apparatus_constant','average_sample_time','density_fineness_calculated')
     def _compute_fineness_of_sample(self):
-        if self.density_fineness_calculated != 0:
-            self.fineness_of_sample = (521.08*self.apparatus_constant*(self.average_sample_time**0.5))/self.density_fineness_calculated
-        else:
-            self.fineness_of_sample = 0
+        for record in self:
+            if record.density_fineness_calculated != 0:
+                print("Apparatus constant",record.apparatus_constant)
+                print("Average time",record.average_sample_time)
+                print("density",record.density_fineness_calculated)
+                record.fineness_of_sample = (521.08*record.apparatus_constant*math.sqrt(record.average_sample_time))/record.density_fineness_calculated
+            else:
+                record.fineness_of_sample = 0
     
     @api.depends('fineness_of_sample')
     def _compute_fineness_air_permeability(self):

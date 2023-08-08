@@ -9,8 +9,9 @@
             <form>
                 <sheet>
                    <group>
+                        <field name='eln_ref' invisible="1"/>
                         <h1>
-                            STEEL
+                            STEEL TMT BAR
                         </h1>
                     </group>
                          
@@ -20,11 +21,14 @@
                                 <field name='Id_no'/>
                               </group>
                               <group>
-                                <field name='grade_id'/>
+                                <field name='grade'/>
                               </group>
-                              <group>
+                             
+                               <group>
+                             
+
                                 <field name='diameter'/>
-                                <field name='length'/>
+                                <field name='lentgh'/>
                                 <field name='weight'/>
                                 <field name='weight_per_meter'/>
                                 <field name='crossectional_area'/>
@@ -33,13 +37,26 @@
                                 <field name='percent_elongation'/>
                                 <field name='yeild_load'/>
                                 <field name='ultimate_load'/>
+                                <group style="width:50%">
                                 <field name='proof_yeid_stress'/>
                                 <field name='ult_tens_strgth'/>
+                                </group>
+                                </group>
+                                <group style="width:50%">
+                                 <field name='requirment'/>
+                                 </group>
+                                 <group>
+                                
                                 <field name='fracture'/>
                                 <field name='bend_test'/>
                                 <field name='re_bend_test'/>
                                </group>
+              
+                              
+                               
+                               
                           
+                            
                             </group>
                             <!-- </tree> -->
                            

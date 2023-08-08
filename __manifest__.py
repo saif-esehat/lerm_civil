@@ -46,6 +46,7 @@
     'views/mechanical/dimentions_concrete_man_hole.xml',
     'views/mechanical/water_and_gravity_fine_aggregate.xml',
     'views/mechanical/steel_tmt_bar.xml',
+    'views/mechanical/stainless_steel.xml',
     'views/ndt/crack_width.xml',
     'views/ndt/concrete_core.xml',
     'views/ndt/crack_depth.xml',
