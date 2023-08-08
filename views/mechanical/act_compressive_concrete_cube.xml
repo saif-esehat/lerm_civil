@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_atc_compressive_strength_concrete_cube_view" model="ir.ui.view">
+        <field name="name">mechanical.act.compressive.form</field>
+        <field name="model">mechanical.act.compressive</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id"/>
+                       
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='length'/>
+                                <field name='width'/>
+                                <field name='area'/>
+                                <field name='id_mark'/>
+                                <field name='weight_sample'/>
+                                
+                                <field name="crushing_load"/>
+                                <field name='compressive_strength'/>
+                                <!-- <field name='average_tensile'/> -->
+                            </tree>
+                           
+                    </field> 
+                       <group>
+                            <group>
+                               <field name='average_compr_strength'/>
+                            </group>
+                             <group>
+                               <field name='act_compressive'/>
+                            </group>
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+  
+
+
+    </data>
+</odoo>

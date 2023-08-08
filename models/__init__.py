@@ -25,6 +25,7 @@ from .mechanical import coarse_aggregate
 from .mechanical import bulk_density
 from. mechanical import concrete_man_hole
 from .mechanical import fine_aggregate
+from .mechanical import act_compressive_strength
 from .mechanical import steel_tmt_bar
 from .mechanical import stainless_steel
 from .ndt import crackdepth
