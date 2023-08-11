@@ -73,6 +73,8 @@
                 <tree editable="bottom">
                   <field name="grade"/>
                   <field name="ir_model"/>
+                  <field name="main_report_template"/>
+                  <field name="datasheet_report_template"/>
                 </tree>
               </field>
             </group>

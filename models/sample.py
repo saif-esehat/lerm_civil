@@ -1,5 +1,10 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
+import logging
+
+_logger = logging.getLogger(__name__)
+
+
 
 class LermSampleForm(models.Model):
     _name = "lerm.srf.sample"
@@ -172,9 +177,33 @@ class LermSampleForm(models.Model):
             }
 
     def print_sample_report(self):
-        sample = self
-        print(self.kes_no , 'kes no of self')
-        template_name = sample.parameters_result.parameter[0].datasheet_report_template.report_name
+        eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
+        is_product_based = eln.is_product_based_calculation
+        model_record = eln.material.product_based_calculation.filtered(lambda r: r.grade.id == eln.grade_id.id)
+        
+        if is_product_based:
+            template_name = model_record.main_report_template.report_name
+            return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': template_name,
+            'report_file': template_name
+            }
+        else:
+            template_name = eln.parameters_result.parameter[0].main_report_template.report_name
+            return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': template_name,
+            'report_file': template_name
+            }
+
+
+
+        # sample = self
+        # # print(self.kes_no , 'kes no of self')
+
+        # template_name = sample.parameters_result.parameter[0].datasheet_report_template.report_name
 
         # report = self.env.ref('lerm_civil.sample_report_action')
         # report_action = report.report_action(self)
@@ -189,12 +218,12 @@ class LermSampleForm(models.Model):
 
         # report_name = f"lerm_civil.{dynamic_part}"
         
-        return {
-            'type': 'ir.actions.report',
-            'report_type': 'qweb-pdf',
-            'report_name': template_name,
-            'report_file': template_name
-        }
+        # return {
+        #     'type': 'ir.actions.report',
+        #     'report_type': 'qweb-pdf',
+        #     'report_name': template_name,
+        #     'report_file': template_name
+        # }
         # return self.env.ref('lerm_civil.sample_report_action').report_action(self)
 
     def open_sample_allotment_wizard(self):

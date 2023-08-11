@@ -131,5 +131,7 @@ class ProductBasedCalculation(models.Model):
     _rec_name = 'grade'
     product_id = fields.Many2one('product.template')
     grade = fields.Many2one("lerm.grade.line",string="Grade")
+    main_report_template = fields.Many2one('ir.actions.report',string="Main Report Template")
+    datasheet_report_template = fields.Many2one('ir.actions.report',string="DataSheet Report Template")
     ir_model = fields.Many2one('ir.model',string="Model")
 

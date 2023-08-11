@@ -93,6 +93,7 @@ class ELN(models.Model):
                  }
                 }
 
+   
 
 
     @api.depends('material')
@@ -490,7 +491,7 @@ class ELNParametersResult(models.Model):
         ('fail', 'Fail')
     ],string='Conformity Status')
     model_id = fields.Integer(string="Model Id")
-    result = fields.Float(string="Result")
+    result = fields.Float(string="Result",digits=(16,2))
 
     @api.depends('parameter.calculation_type')
     def _compute_calculation_type(self):

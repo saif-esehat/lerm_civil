@@ -43,6 +43,7 @@
                                 <field name='conformity' readonly="1"/>
                                 <field name='has_witness' readonly="1" />
                                 <field name='is_product_based_calculation'/>
+                                <!-- <field name='is_form_based_calculation'/> -->
                                 <field name='invisible_fetch_inputs' invisible="1" />
 
                             </group>
@@ -99,7 +100,7 @@
                                     <field name="result" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <!-- <field name="context_data" /> -->
                                     <field name="calculation_type" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}"  />
-                                    <field name="calculated" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    <field name="calculated" />
                                     <field name="unit" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="specification" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="test_method" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
@@ -291,8 +292,8 @@
                         <group>
                             <field name="result"/>
                             <!-- <field name="result_char"/> -->
-                            <field name="nabl_status" readonly="1" invisible="1"/>
-                            <field name="conformity_status" readonly="1"  invisible="1"/>
+                            <field name="nabl_status" readonly="1" />
+                            <field name="conformity_status" readonly="1" />
                         </group>
 
                     </page>
