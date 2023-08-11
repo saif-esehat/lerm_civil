@@ -49,6 +49,7 @@
     'views/mechanical/steel_tmt_bar.xml',
     'views/mechanical/flakiness_elongated_index.xml',
     'views/mechanical/rock.xml',
+    'views/mechanical/structural_steel.xml',
     'views/ndt/crack_width.xml',
     'views/ndt/concrete_core.xml',
     'views/ndt/crack_depth.xml',
