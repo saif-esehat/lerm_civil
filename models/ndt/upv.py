@@ -67,7 +67,7 @@ class UpvLine(models.Model):
     
     surface = fields.Selection([
         ('on_plaster', 'On Plaster'),
-        ('wo_plaster', 'W/O Plaster')],"Surface")
+        ('w/o_plaster', 'W/O Plaster')],"Surface")
     
     quality = fields.Selection([
         ('excellent','Excellent'),
@@ -81,7 +81,6 @@ class UpvLine(models.Model):
         ('indirect', 'In-Direct'),
         ('semi_direct', 'Semi-Direct')],"Method")
     
-
     @api.depends('velocity')
     def _compute_quality(self):
         for record in self:

@@ -57,6 +57,8 @@ class ELN(models.Model):
     image = fields.Binary(string="Image", attachment=True)
     is_product_based_calculation = fields.Boolean(string="Product Based Calculation",compute="_compute_product_based")
     model_id = fields.Integer("Model ID")
+    temperature = fields.Float("Temperature")
+    instrument = fields.Char("Instrument")
 
 
     def open_product_based_form(self):
@@ -234,9 +236,17 @@ class ELN(models.Model):
 
     def print_datasheet(self):
         eln = self
-        
         template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
-        print(template_name , 'lark lark')
+        return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': template_name,
+            'report_file': template_name
+        }
+        
+    def print_report(self):
+        eln = self
+        template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
@@ -347,7 +357,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
             req_max = material_table.req_max
             mu_neg = record.result - record.parameter.mu_value
             mu_pos = record.result + record.parameter.mu_value
-            if req_min <= mu_neg <= req_max and req_min <= mu_pos <= mu_pos:
+            if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"
             else:
                 record.conformity_status = "fail"
