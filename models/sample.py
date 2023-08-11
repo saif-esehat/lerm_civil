@@ -174,7 +174,6 @@ class LermSampleForm(models.Model):
     def print_sample_report(self):
         sample = self
         print(self.kes_no , 'kes no of self')
-
         template_name = sample.parameters_result.parameter[0].datasheet_report_template.report_name
 
         # report = self.env.ref('lerm_civil.sample_report_action')
