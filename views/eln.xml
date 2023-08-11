@@ -18,11 +18,11 @@
                             name="print_datasheet"
                             string="Print Datasheet"
                             />
-                    <!-- <button
+                    <button
                             type="object"
                             name="print_report"
                             string="Print Report"
-                            /> -->
+                            />
                 </header>
                     <sheet>
                         <group style="width:100%">
@@ -100,7 +100,7 @@
                                     <field name="result" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <!-- <field name="context_data" /> -->
                                     <field name="calculation_type" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}"  />
-                                    <field name="calculated"  />
+                                    <field name="calculated" />
                                     <field name="unit" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="specification" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="test_method" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
