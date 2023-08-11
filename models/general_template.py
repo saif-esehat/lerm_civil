@@ -95,7 +95,7 @@ class DataSheetReport(models.AbstractModel):
         }
     
 class GeneralReport(models.AbstractModel):
-    _name = 'report.lerm_civil.general_report_template_unique'
+    _name = 'report.lerm_civil.general_report_template'
     _description = 'General Report'
     
     
@@ -145,7 +145,9 @@ class GeneralReport(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data=None):
+        print('afzal')
         eln = self.env['lerm.eln'].sudo().browse(docids)
+        print('afzal 1')
         
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         qr.add_data(eln.kes_no)
@@ -159,9 +161,11 @@ class GeneralReport(models.AbstractModel):
 
         # Assign the base64 string to a field in the 'srf' object
         qr_code = qr_image_base64
+        print('afzal 2')
         
         model_id = eln.parameters_result.model_id
         model_name = eln.parameters_result.parameter[0].ir_model.name
+        print(model_name , 'model name ')
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
             columns = self.get_visible_table_fields(model_name)

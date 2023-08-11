@@ -16,12 +16,16 @@
                             attrs="{'invisible': [('state', 'not in', ('1-allotment_pending'))]}"
                             />
 
-                        <button
+                        <!-- <button
                             type="object"
-                            name="print_sample_report"
-                            string="Print"
-                            attrs="{'invisible': [('state', 'not in', ('3-pending_verification','4-in_report'))]}"
+                            name="print_datasheet"
+                            string="Print Datasheet"
                             />
+                        <button
+                                type="object"
+                                name="print_report"
+                                string="Print Report"
+                                /> -->
 
                         <button type="object" 
                         class="oe_highlight" 

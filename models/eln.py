@@ -245,6 +245,8 @@ class ELN(models.Model):
         }
         
     def print_report(self):
+        print('Khan 1')
+        
         eln = self
         template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {

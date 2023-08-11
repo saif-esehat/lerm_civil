@@ -166,16 +166,15 @@
 						</table>
 					</div>
 					<div style="margin-top:20px;">
-						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]> <span t-field="o.parameters_result.parameter[0].test_method.test_method"/>
+						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
+						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
 					</div>
 					
 
                     <table style="margin-top:30px;">
 							<thead>
 								<tr>
-									<!-- <th>
-										<div>SR.No</div>
-									</th> -->
+									
 									<t t-foreach="tabledata" t-as="column">
 										<th>
 											<span>
@@ -188,12 +187,7 @@
 							<tbody>
 								<t t-set="i" t-value="0"/>
 								<tr t-foreach="data.child_lines" t-as="r">
-									<!-- <td>
-										<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
-										</div>
-									</td> -->
+									
 									<t t-foreach="tabledata" t-as="row">
 										<td>
 											<span>
@@ -203,7 +197,9 @@
 									</t>
 								</tr>
 							</tbody>
-						</table>
+					</table>
+
+
 
 					<div style="margin-top:20px" class="noteContainer">
 						<div>
@@ -228,7 +224,7 @@
 							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
 						</div>
 						<div>
-							Format No. <span t-esc="o.material.data_sheet_format_no.name"/>
+							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 						</div>
 						<div>
 							<div>
