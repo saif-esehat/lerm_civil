@@ -93,8 +93,8 @@ class ParameterMaster(models.Model):
     size_ids = fields.Many2many('lerm.size.line',string="Size")
     permissable_limit = fields.Char(string="Permissable Limit")
     specification = fields.Char(string="Specification")
-    req_max = fields.Float(string="Req Max")
-    req_min = fields.Float(string="Req Min")
+    req_max = fields.Float(string="Req Max",digits=(16, 4))
+    req_min = fields.Float(string="Req Min",digits=(16, 4))
     material_ids = fields.Many2many('product.template',string="Material Ids")
 
     @api.onchange('material')

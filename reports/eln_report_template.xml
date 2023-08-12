@@ -4,7 +4,7 @@
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
 				<div class="col-12 imageContainer" >
-					<img t-attf-src="/lerm_civil_inv/static/src/img/letterhead.jpg" alt="Image"/>
+					<img t-attf-src="/lerm_civil/static/src/img/screenshot.png" alt="Image"/>
 				</div>
 			</div>
         </div>
