@@ -54,7 +54,7 @@
 								<td colspan="3">ULR NO :
 								</td>
 								<td colspan="3">
-									<span t-field="o.eln_id"/>
+									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
 						</table>
