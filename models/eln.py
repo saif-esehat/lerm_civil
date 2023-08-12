@@ -64,6 +64,10 @@ class ELN(models.Model):
     def open_product_based_form(self):
         model_record = self.material.product_based_calculation.filtered(lambda r: r.grade.id == self.grade_id.id)
         model = model_record.ir_model.model
+
+        print("material ",self.material.product_based_calculation)
+        print("model ",model)
+
         if self.model_id != 0:
             # import wdb; wdb.set_trace()
             return {
@@ -217,8 +221,6 @@ class ELN(models.Model):
         for parameter in self.parameters:
             parameters.append((0,0,{'parameter':parameter.id}))
         
-
-
         return {
             'name': "Result Update",
             'type': 'ir.actions.act_window',
@@ -230,23 +232,37 @@ class ELN(models.Model):
             'context': {
                 'default_results':parameters
             }
-            }
-
-
-
+        }
+        
+    # def print_datasheet(self):
+    #     eln = self
+    #     template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+    #     return {
+    #         'type': 'ir.actions.report',
+    #         'report_type': 'qweb-pdf',
+    #         'report_name': template_name,
+    #         'report_file': template_name
+    #     }
     def print_datasheet(self):
         eln = self
-        template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+        is_product_based = eln.is_product_based_calculation
+        if is_product_based == True:
+            template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
+        else:
+            template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
             'report_name': template_name,
             'report_file': template_name
         }
-        
     def print_report(self):
         eln = self
-        template_name = eln.parameters_result.parameter[0].main_report_template.report_name
+        is_product_based = eln.is_product_based_calculation
+        if is_product_based == True:
+            template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
+        else:
+            template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',

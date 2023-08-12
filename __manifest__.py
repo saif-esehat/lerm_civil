@@ -50,6 +50,8 @@
     'views/mechanical/flakiness_elongated_index.xml',
     'views/mechanical/rock.xml',
     'views/mechanical/structural_steel.xml',
+    'views/mechanical/bricks.xml',
+    'views/mechanical/compressive_strength_brick.xml',
     'views/ndt/crack_width.xml',
     'views/ndt/concrete_core.xml',
     'views/ndt/crack_depth.xml',

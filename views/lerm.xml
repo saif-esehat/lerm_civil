@@ -91,6 +91,16 @@
             <p class="o_view_nocontent_smiling_face">Pending Verification Sample</p>
         </field>
     </record>
+    <record id="sample_pending_approval_action" model="ir.actions.act_window">
+        <field name="name">Sample Pending Approval</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.srf.sample</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="domain">[('state','=','5-pending_approval')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Sample Pending Approval</p>
+        </field>
+    </record>
     <record id="test_sample_pending_in_report_action" model="ir.actions.act_window">
         <field name="name">Sample</field>
         <field name="type">ir.actions.act_window</field>
@@ -192,11 +202,19 @@
         parent="sample_status"
         action="sample_pending_verification_action"
         sequence="22" />
+    
+    <menuitem id="sample_status_pending_approval"
+        groups="kes_hod_access_group,kes_admin_access_group"
+        name="Pending Approval"
+        parent="sample_status"
+        action="sample_pending_approval_action"
+        sequence="23" />
+
 
     <menuitem id="sample_status_in_report"
         groups="kes_hod_access_group,kes_admin_access_group"
         name="In-Report"
         parent="sample_status"
         action="test_sample_pending_in_report_action"
-        sequence="23" />
+        sequence="24" />
 </odoo>
