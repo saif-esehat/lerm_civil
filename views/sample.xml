@@ -125,6 +125,11 @@
                    
                      <group>
                         <field name="product_or_form_based" />
+                    </group>   
+
+
+                     <group>
+                        <button name="open_form" type="object" string="Open Form" attrs="{'invisible':[('product_or_form_based','=',False)]}"/>
                     </group>    
                     
            

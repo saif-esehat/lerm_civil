@@ -108,9 +108,9 @@ class CompressiveStrengthBrickLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.area != 0:
-                record.compressive_strength = record.load / record.area * 1000
+                record.compressive_stregnth = record.load / record.area * 1000
             else:
-                record.compressive_strength = 0
+                record.compressive_stregnth = 0
 
 
 
