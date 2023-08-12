@@ -7,7 +7,7 @@ class SteelTmtBarLine(models.Model):
     _name = "steel.tmt.bar"
     _inherit = "lerm.eln"
    
-   
+    
     Id_no = fields.Char("ID No")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id")
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id")
