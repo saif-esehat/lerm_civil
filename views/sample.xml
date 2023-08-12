@@ -16,7 +16,7 @@
                             attrs="{'invisible': [('state', 'not in', ('1-allotment_pending'))]}"
                             />
 
-                        <!-- <button
+                        <button
                             type="object"
                             name="print_datasheet"
                             string="Print Datasheet"
@@ -25,7 +25,7 @@
                                 type="object"
                                 name="print_report"
                                 string="Print Report"
-                                /> -->
+                                />
 
                         <button type="object" 
                         class="oe_highlight" 

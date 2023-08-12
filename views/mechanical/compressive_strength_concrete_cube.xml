@@ -21,22 +21,21 @@
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
-                                <field name='sr_no'/>
-                                <field name='length'/>
-                                <field name='width'/>
-                                <field name='area'/>
-                                <field name='id_mark'/>
-                                <field name='wt_sample'/>
-                                <field name="crushing_load"/>
-                                <field name='compressive_strength'/>
+                                <field name='sr_no' string="Sr. NO"/>
+                                <field name='length' string="Length (mm)"/>
+                                <field name='width' string="Width (mm)"/>
+                                <field name='area' string="Area (mm²)"/>
+                                <field name='id_mark' string="ID Mark"/>
+                                <field name='wt_sample' string="Weight of Sample in kgs"/>
+                                <field name="crushing_load" string="Crushing Load in kN"/>
+                                <field name='compressive_strength' string="Compressive Strength N/mm²"/>
                                 <!-- <field name='average_tensile'/> -->
                             </tree>
                            
                     </field> 
                             <group>
-                               <field name='average_strength'/>
+                               <field name='average_strength' string="Average Compressive Strength in N/mm2" identity="result"/>
                             </group>
-                     
                 </sheet>
             </form>
         </field>
