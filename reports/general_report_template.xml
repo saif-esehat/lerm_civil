@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- <template id="custom_layout_header_footer_lerm_eln">
+    <template id="custom_layout_header_footer_lerm_eln_general">
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
 				<div class="col-12 imageContainer" >
-					<img t-attf-src="/lerm_civil_inv/static/src/img/kes_letterHead.jpg" alt="Image"/>
+					<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
 				</div>
 			</div>
         </div>
@@ -29,11 +29,11 @@
                 </div>
             </div>
         </div>
-	</template> -->
+	</template>
     <template id="general_report_template">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
-			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
+			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
 				</div>
@@ -166,16 +166,15 @@
 						</table>
 					</div>
 					<div style="margin-top:20px;">
-						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]> <span t-field="o.parameters_result.parameter[0].test_method.test_method"/>
+						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
+						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
 					</div>
 					
 
                     <table style="margin-top:30px;">
 							<thead>
 								<tr>
-									<!-- <th>
-										<div>SR.No</div>
-									</th> -->
+									
 									<t t-foreach="tabledata" t-as="column">
 										<th>
 											<span>
@@ -188,12 +187,7 @@
 							<tbody>
 								<t t-set="i" t-value="0"/>
 								<tr t-foreach="data.child_lines" t-as="r">
-									<!-- <td>
-										<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
-										</div>
-									</td> -->
+									
 									<t t-foreach="tabledata" t-as="row">
 										<td>
 											<span>
@@ -203,7 +197,9 @@
 									</t>
 								</tr>
 							</tbody>
-						</table>
+					</table>
+
+
 
 					<div style="margin-top:20px" class="noteContainer">
 						<div>
@@ -228,7 +224,7 @@
 							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
 						</div>
 						<div>
-							Format No. <span t-esc="o.material.data_sheet_format_no.name"/>
+							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 						</div>
 						<div>
 							<div>
