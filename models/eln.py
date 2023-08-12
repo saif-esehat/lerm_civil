@@ -221,8 +221,6 @@ class ELN(models.Model):
         for parameter in self.parameters:
             parameters.append((0,0,{'parameter':parameter.id}))
         
-
-
         return {
             'name': "Result Update",
             'type': 'ir.actions.act_window',
@@ -234,10 +232,8 @@ class ELN(models.Model):
             'context': {
                 'default_results':parameters
             }
-            }
-
-
-
+        }
+        
     def print_datasheet(self):
         eln = self
         template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
@@ -247,10 +243,7 @@ class ELN(models.Model):
             'report_name': template_name,
             'report_file': template_name
         }
-        
     def print_report(self):
-        print('Khan 1')
-        
         eln = self
         template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {

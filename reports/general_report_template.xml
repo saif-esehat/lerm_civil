@@ -167,10 +167,9 @@
 					</div>
 					<div style="margin-top:20px;">
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
-						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
+						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
 					</div>
 					
-
                     <table style="margin-top:30px;">
 							<thead>
 								<tr>
@@ -198,8 +197,6 @@
 								</tr>
 							</tbody>
 					</table>
-
-
 
 					<div style="margin-top:20px" class="noteContainer">
 						<div>
