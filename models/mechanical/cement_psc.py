@@ -613,7 +613,7 @@ class CementPsc(models.Model):
             print("Records",records)
 
     def get_all_fields(self):
-        record = self.env['mechanical.cement.normalconsistency'].browse(self.ids[0])
+        record = self.env['mechanical.cement.psc'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():
             field_value = record[field_name]
@@ -650,7 +650,7 @@ class CementTestPsc(models.Model):
 class SoundnessCementLinePsc(models.Model):
     _name= "cement.psc.soundness.line"
 
-    parent_id = fields.Many2one('mechanical.cement.normalconsistency')
+    parent_id = fields.Many2one('mechanical.cement.psc')
     initial_distance = fields.Float("Intial distance separating the indicator points (L1).mm")
     final_distance = fields.Float("Final distance separating the indicator points (L2).mm")
     expansion = fields.Float("Expansion",compute="_compute_expansion")
@@ -663,7 +663,7 @@ class SoundnessCementLinePsc(models.Model):
 class DrySievingLinePsc(models.Model):
     _name = "cement.psc.dry.sieving.line"
 
-    parent_id = fields.Many2one('mechanical.cement.normalconsistency')
+    parent_id = fields.Many2one('mechanical.cement.psc')
     sample_weight_fineness = fields.Float("Sample Weight(g)",default=100)
     retained_weight = fields.Float("Retained Weight on 90 mic sieve (g)")
     fineness = fields.Float("Fineness by dry sieving %",compute="_compute_fineness")
@@ -680,7 +680,7 @@ class DrySievingLinePsc(models.Model):
 class Casting3DaysLinePsc(models.Model):
     _name = "cement.psc.casting.3days.line"
 
-    parent_id = fields.Many2one('mechanical.cement.normalconsistency',string="Parent Id")
+    parent_id = fields.Many2one('mechanical.cement.psc',string="Parent Id")
     length = fields.Float("Length in mm")
     width = fields.Float("Width in mm")
     crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_crosssectional_area")
@@ -704,7 +704,7 @@ class Casting3DaysLinePsc(models.Model):
 class Casting7DaysLinePsc(models.Model):
     _name = "cement.psc.casting.7days.line"
 
-    parent_id = fields.Many2one('mechanical.cement.normalconsistency')
+    parent_id = fields.Many2one('mechanical.cement.psc')
 
     length = fields.Float("Length in mm")
     width = fields.Float("Width in mm")
@@ -729,7 +729,7 @@ class Casting7DaysLinePsc(models.Model):
 class Casting28DaysLinePsc(models.Model):
     _name = "cement.psc.casting.28days.line"
 
-    parent_id = fields.Many2one('mechanical.cement.normalconsistency')
+    parent_id = fields.Many2one('mechanical.cement.psc')
 
     length = fields.Float("Length in mm")
     width = fields.Float("Width in mm")
