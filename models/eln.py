@@ -64,6 +64,10 @@ class ELN(models.Model):
     def open_product_based_form(self):
         model_record = self.material.product_based_calculation.filtered(lambda r: r.grade.id == self.grade_id.id)
         model = model_record.ir_model.model
+
+        print("material ",self.material.product_based_calculation)
+        print("model ",model)
+
         if self.model_id != 0:
             # import wdb; wdb.set_trace()
             return {

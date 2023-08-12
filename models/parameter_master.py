@@ -5,6 +5,7 @@ class ParameterMaster(models.Model):
     _rec_name = 'parameter_name'
     
     parameter_name = fields.Char(string="Parameter Name")
+    datasheet_no = fields.Char(string="Datasheet No")
     lab_min_value = fields.Float(string="Lab min Value")
     lab_max_value = fields.Float(string="Lab max Value")
     nabl_min_value = fields.Float(string="Nabl min value")
