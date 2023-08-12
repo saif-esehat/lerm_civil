@@ -176,27 +176,55 @@ class LermSampleForm(models.Model):
             'target': 'new'
             }
 
-    def print_sample_report(self):
-        eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
-        is_product_based = eln.is_product_based_calculation
-        model_record = eln.material.product_based_calculation.filtered(lambda r: r.grade.id == eln.grade_id.id)
+
+    # def print_datasheet(self):
+    #     eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
+    #     is_product_based = eln.is_product_based_calculation
+    #     if is_product_based == True:
+    #         template_name = eln.material.product_based_calculation[0].datasheet_report_template
+    #     else:
+    #         template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+    #     return {
+    #         'type': 'ir.actions.report',
+    #         'report_type': 'qweb-pdf',
+    #         'report_name': template_name,
+    #         'report_file': template_name
+    #     }
         
-        if is_product_based:
-            template_name = model_record.main_report_template.report_name
-            return {
-            'type': 'ir.actions.report',
-            'report_type': 'qweb-pdf',
-            'report_name': template_name,
-            'report_file': template_name
-            }
-        else:
-            template_name = eln.parameters_result.parameter[0].main_report_template.report_name
-            return {
-            'type': 'ir.actions.report',
-            'report_type': 'qweb-pdf',
-            'report_name': template_name,
-            'report_file': template_name
-            }
+    # def print_report(self):
+    #     eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
+    #     is_product_based = eln.is_product_based_calculation
+    #     if is_product_based == True:
+    #         template_name = eln.material.product_based_calculation[0].main_report_template
+    #     else:
+    #         template_name = eln.parameters_result.parameter[0].main_report_template.report_name
+    #     return {
+    #         'type': 'ir.actions.report',
+    #         'report_type': 'qweb-pdf',
+    #         'report_name': template_name,
+    #         'report_file': template_name
+    #     }
+    # def print_sample_report(self):
+    #     eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
+    #     is_product_based = eln.is_product_based_calculation
+    #     model_record = eln.material.product_based_calculation.filtered(lambda r: r.grade.id == eln.grade_id.id)
+        
+    #     if is_product_based:
+    #         template_name = model_record.main_report_template.report_name
+    #         return {
+    #         'type': 'ir.actions.report',
+    #         'report_type': 'qweb-pdf',
+    #         'report_name': template_name,
+    #         'report_file': template_name
+    #         }
+    #     else:
+    #         template_name = eln.parameters_result.parameter[0].main_report_template.report_name
+    #         return {
+    #         'type': 'ir.actions.report',
+    #         'report_type': 'qweb-pdf',
+    #         'report_name': template_name,
+    #         'report_file': template_name
+    #         }
 
 
 

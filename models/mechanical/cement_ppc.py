@@ -17,8 +17,8 @@ class CementPpc(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    temp_percent = fields.Float("Temperature %")
-    humidity_percent = fields.Float("Humidity %")
+    temp_percent_normal = fields.Float("Temperature %")
+    humidity_percent_normal = fields.Float("Humidity %")
 
 
     ## Normal Consistency
@@ -27,6 +27,8 @@ class CementPpc(models.Model):
 
     normal_consistency_name = fields.Char("Name",default="Normal Consistency")
     normal_consistency_visible = fields.Boolean("Normal Consistency Visible",compute="_compute_visible")
+    start_date_normal = fields.Date("Start Date")
+    end_date_normal = fields.Date("End Date")
 
     wt_of_cement_trial1 = fields.Float("Wt. of Cement(g)",default=400)
     wt_of_cement_trial2 = fields.Float("Wt. of Cement(g)",default=400)
@@ -51,8 +53,10 @@ class CementPpc(models.Model):
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_percent = fields.Float("Temperature %")
-    humidity_percent = fields.Float("Humidity %")
+    temp_percent_setting = fields.Float("Temperature %")
+    humidity_percent_setting = fields.Float("Humidity %")
+    start_date_setting = fields.Date("Start Date")
+    end_date_setting = fields.Date("End Date")
 
     wt_of_cement_setting_time = fields.Float("Wt. of Cement(g)",default=400)
     wt_of_water_required_setting_time = fields.Float("Wt.of water required (g) (0.85*P%)" , compute="_compute_wt_of_water_required",store=True )
@@ -127,6 +131,11 @@ class CementPpc(models.Model):
     density_name = fields.Char("Name",default="Density")
     density_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
 
+    temp_percent_density = fields.Float("Temperature %")
+    humidity_percent_density = fields.Float("Humidity %")
+    start_date_density = fields.Date("Start Date")
+    end_date_density = fields.Date("End Date")
+
     wt_of_cement_density_trial1 = fields.Float("Wt. of Cement(g)",default=55)
     wt_of_cement_density_trial2 = fields.Float("Wt. of Cement(g)",default=55)
 
@@ -179,6 +188,11 @@ class CementPpc(models.Model):
     soundness_name = fields.Char("Name",default="Soundness")
     soundness_visible = fields.Boolean("Soundness Visible",compute="_compute_visible")
 
+    temp_percent_soundness = fields.Float("Temperature %")
+    humidity_percent_soundness = fields.Float("Humidity %")
+    start_date_soundness = fields.Date("Start Date")
+    end_date_soundness = fields.Date("End Date")
+
     wt_of_cement_soundness = fields.Float("Weight of Cement(g)",default=100)
     wt_of_water_req_soundness = fields.Float("Weight of water required(g)",compute="_compute_water_weight_soundness")
 
@@ -226,6 +240,11 @@ class CementPpc(models.Model):
     dry_sieving_name = fields.Char("Name",default="Dry Sieving")
     dry_sieving_visible = fields.Boolean("Dry Sieving Visible",compute="_compute_visible")
 
+    temp_percent_dry_sieving = fields.Float("Temperature %")
+    humidity_percent_dry_sieving = fields.Float("Humidity %")
+    start_date_dry_sieving = fields.Date("Start Date")
+    end_date_dry_sieving = fields.Date("End Date")
+
     dry_sieving_table = fields.One2many('cement.dry.sieving.line','parent_id',string="Dry Sieving")
     average_fineness = fields.Float("Average",compute="_compute_average_fineness")
     fineness_dry_sieving = fields.Float("Fineness by dry sieving %",compute="_compute_fineness_dry_sieving")
@@ -250,6 +269,11 @@ class CementPpc(models.Model):
 
     compressive_name = fields.Char("Name",default="Compressive Strength")
     compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
+
+    temp_percent_compressive = fields.Float("Temperature %")
+    humidity_percent_compressive = fields.Float("Humidity %")
+    start_date_compressive = fields.Date("Start Date")
+    end_date_compressive = fields.Date("End Date")
 
     wt_of_cement_compressive = fields.Float("Wt. of Cement(g)",default=200)
     wt_of_standard_sand_grade1 = fields.Float("Weight of Standard Sand (g) Grade-I",default=200)
@@ -406,6 +430,11 @@ class CementPpc(models.Model):
     fineness_blaine_name = fields.Char("Name",default="Fineness By Blaine Air Permeability Method")
     fineness_blaine_visible = fields.Boolean("Fineness Blaine Visible",compute="_compute_visible")
 
+    temp_percent_fineness = fields.Float("Temperature %")
+    humidity_percent_fineness = fields.Float("Humidity %")
+    start_date_fineness = fields.Date("Start Date")
+    end_date_fineness = fields.Date("End Date")
+
     weight_of_mercury_before_trial1 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g." ,default=83.320,digits=(16, 3))
     weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=83.340,digits=(16, 3))
     
@@ -484,7 +513,7 @@ class CementPpc(models.Model):
     @api.depends('specific_surface_of_reference_sample','air_viscosity_of_three_temp','density_of_reference_sample','mean_of_three_measured_times')
     def _compute_apparatus_constant(self):
         if self.mean_of_three_measured_times != 0:
-            self.apparatus_constant = 1.414*self.specific_surface_of_reference_sample*self.density_of_reference_sample*((self.air_viscosity_of_three_temp)/(self.mean_of_three_measured_times**0.5))
+            self.apparatus_constant = round(1.414*self.specific_surface_of_reference_sample*self.density_of_reference_sample*((self.air_viscosity_of_three_temp)/(self.mean_of_three_measured_times**0.5)),2)
         else:
             self.apparatus_constant = 0
 

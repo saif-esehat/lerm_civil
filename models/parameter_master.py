@@ -5,6 +5,7 @@ class ParameterMaster(models.Model):
     _rec_name = 'parameter_name'
     
     parameter_name = fields.Char(string="Parameter Name")
+    datasheet_no = fields.Char(string="Datasheet No")
     lab_min_value = fields.Float(string="Lab min Value")
     lab_max_value = fields.Float(string="Lab max Value")
     nabl_min_value = fields.Float(string="Nabl min value")
@@ -93,8 +94,8 @@ class ParameterMaster(models.Model):
     size_ids = fields.Many2many('lerm.size.line',string="Size")
     permissable_limit = fields.Char(string="Permissable Limit")
     specification = fields.Char(string="Specification")
-    req_max = fields.Float(string="Req Max")
-    req_min = fields.Float(string="Req Min")
+    req_max = fields.Float(string="Req Max",digits=(16, 4))
+    req_min = fields.Float(string="Req Min",digits=(16, 4))
     material_ids = fields.Many2many('product.template',string="Material Ids")
 
     @api.onchange('material')
