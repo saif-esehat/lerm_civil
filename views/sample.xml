@@ -16,7 +16,7 @@
                             attrs="{'invisible': [('state', 'not in', ('1-allotment_pending'))]}"
                             />
 
-                        <!-- <button
+                        <button
                             type="object"
                             name="print_datasheet"
                             string="Print Datasheet"
@@ -25,7 +25,7 @@
                                 type="object"
                                 name="print_report"
                                 string="Print Report"
-                                /> -->
+                                />
 
                         <button type="object" 
                         class="oe_highlight" 
@@ -123,11 +123,18 @@
                         <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
                     </group>
                    
-                    
+                     <group>
+                        <field name="product_or_form_based" />
+                    </group>   
+
+
+                     <group>
+                        <button name="open_form" type="object" string="Open Form" attrs="{'invisible':[('product_or_form_based','=',False)]}"/>
+                    </group>    
                     
            
                     <field invisible="1" name="parameters" nolabel="1" options="{'no_create': True, 'no_open': True}" />
-                    <field name="parameters_result" nolabel="1">
+                    <field name="parameters_result" nolabel="1" attrs="{'invisible':[('product_or_form_based','=',True)]}">
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
                                     <field name="result" />
@@ -137,7 +144,7 @@
                                     <field name="test_method" />
                                     <!-- <button string="Calculation" name="open_calculation_wizard" type="object" class="oe_highlight"/> -->
                                 </tree>
-                </field>
+                    </field>
                 
                     
                 </sheet>

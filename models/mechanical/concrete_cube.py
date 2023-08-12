@@ -17,7 +17,7 @@ class CompressiveStrengthConcreteCube(models.Model):
     def _compute_average_strength(self):
         for record in self:
             total_strength = sum(line.compressive_strength for line in record.child_lines)
-            record.average_stregnth = total_strength / len(record.child_lines) if len(record.child_lines) > 0 else 0.0
+            record.average_strength = total_strength / len(record.child_lines) if len(record.child_lines) > 0 else 0.0
 
 
 

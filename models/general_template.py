@@ -75,10 +75,16 @@ class DataSheetReport(models.AbstractModel):
         return visible_fields
     
     @api.model
-    def _get_report_values(self, docids, data=None):
+    def _get_report_values(self, docids, data):
+        print("working",data)
         eln = self.env['lerm.eln'].sudo().browse(docids)
+        eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_ids'][0])])
+
         model_id = eln.parameters_result.model_id
+        print("Idar pochega")
         model_name = eln.parameters_result.parameter[0].ir_model.name
+
+        print("Idar nai pochega",eln)
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
             columns = self.get_visible_table_fields(model_name)

@@ -79,10 +79,6 @@ class DependentInputs(models.Model):
     default = fields.Float(string='Default',digits=(10,6))
 
 
-
-
-
-
 class ParameterMaster(models.Model):
     _name = 'lerm.parameter.master.table'
 
