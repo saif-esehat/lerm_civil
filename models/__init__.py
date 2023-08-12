@@ -30,6 +30,7 @@ from .mechanical import steel_tmt_bar
 from .mechanical import flakiness_elongated_index
 from .mechanical import rock
 from .mechanical import structural_steel
+from .mechanical import bricks
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
