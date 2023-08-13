@@ -76,10 +76,17 @@ class DataSheetReport(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data):
+<<<<<<< HEAD
+        print("working",data)
+        eln = self.env['lerm.eln'].sudo().browse(docids)
+        # eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_ids'][0])])
+
+=======
         if 'active_id' in data['context']:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids) 
+>>>>>>> eb4b71436215266a342f37bda30e22afd330e0f2
         model_id = eln.parameters_result.model_id
         model_name = eln.parameters_result.parameter[0].ir_model.name
         if model_name:

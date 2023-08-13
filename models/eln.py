@@ -61,6 +61,12 @@ class ELN(models.Model):
     instrument = fields.Char("Instrument")
 
 
+
+    def get_product_base_calc_line(self,data):
+        line = self.env["lerm.product.based.calculation"].search([('product_id','=',data["material_id"]),('grade','=',data["grade_id"])])
+        return line
+
+
     def open_product_based_form(self):
         model_record = self.material.product_based_calculation.filtered(lambda r: r.grade.id == self.grade_id.id)
         model = model_record.ir_model.model

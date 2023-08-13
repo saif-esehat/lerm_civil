@@ -71,6 +71,7 @@
     'reports/sample_report_template.xml',
     'reports/srf_report_action.xml',
     'reports/srf_report_template.xml',
+    'reports/report_cement.xml',
     'security/security.xml',
     # 'security/dump.sql',
     'security/ir.model.access.csv',
