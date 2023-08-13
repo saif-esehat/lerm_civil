@@ -185,7 +185,7 @@ class GeneralReport(models.AbstractModel):
         }
 
 class SteelTmtBar(models.AbstractModel):
-    _name = 'report.lerm_civil.steel_tmt_bar'
+    _name = 'report.lerm_civil.steel_tmt_bar_report'
     _description = 'Steel TMT Bar'
     
     @api.model
@@ -203,7 +203,16 @@ class SteelTmtBar(models.AbstractModel):
 
         # Assign the base64 string to a field in the 'srf' object
         qr_code = qr_image_base64
+        model_id = eln.model_id
+        # differnt location for product based
+        print(eln.material , 'do not uncommnent this')
+        model_name = eln.material.product_based_calculation[0].ir_model.name 
+        if model_name:
+            general_data = self.env[model_name].sudo().browse(model_id)
+        else:
+            general_data = self.env['lerm.eln'].sudo().browse(docids)
         return {
             'eln': eln,
+            'data' : general_data,
             'qrcode': qr_code
         }
