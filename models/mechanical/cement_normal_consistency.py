@@ -100,8 +100,8 @@ class CementNormalConsistency(models.Model):
 
     final_setting_time = fields.Char("Name",default="Final Setting Time")
     time_needle_make_impression = fields.Datetime("The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3)")
-    final_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)",compute="_compute_final_setting_time")
-    final_setting_time_minutes = fields.Char("Initial Setting Time",compute="_compute_final_setting_time")
+    final_setting_time_hours = fields.Char("Final Setting Time (t2-t1) (Hours)",compute="_compute_final_setting_time")
+    final_setting_time_minutes = fields.Char("Final Setting Time",compute="_compute_final_setting_time")
 
 
 
@@ -300,6 +300,7 @@ class CementNormalConsistency(models.Model):
     casting_3_days_tables = fields.One2many('cement.casting.3days.line','parent_id',string="3 Days")
     average_casting_3days = fields.Float("Average",compute="_compute_average_3days")
     compressive_strength_3_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_3days")
+    status_3days = fields.Boolean("Done")
 
     @api.depends('casting_3_days_tables.compressive_strength')
     def _compute_average_3days(self):
@@ -344,6 +345,8 @@ class CementNormalConsistency(models.Model):
     casting_7_days_tables = fields.One2many('cement.casting.7days.line','parent_id',string="7 Days")
     average_casting_7days = fields.Float("Average",compute="_compute_average_7days")
     compressive_strength_7_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_7days")
+    status_7days = fields.Boolean("Done")
+
 
     @api.depends('casting_7_days_tables.compressive_strength')
     def _compute_average_7days(self):
@@ -389,6 +392,8 @@ class CementNormalConsistency(models.Model):
     casting_28_days_tables = fields.One2many('cement.casting.28days.line','parent_id',string="28 Days")
     average_casting_28days = fields.Float("Average",compute="_compute_average_28days")
     compressive_strength_28_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_28days")
+    status_28days = fields.Boolean("Done")
+
 
     @api.depends('casting_28_days_tables.compressive_strength')
     def _compute_average_28days(self):
