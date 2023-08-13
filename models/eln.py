@@ -266,7 +266,7 @@ class ELN(models.Model):
         eln = self
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
-            template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
+            template_name = eln.material.product_based_calculation[0].main_report_template.report_name
         else:
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {
