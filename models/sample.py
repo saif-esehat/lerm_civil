@@ -85,11 +85,59 @@ class LermSampleForm(models.Model):
     product_name = fields.Many2one('product.template',string="Product Name")
     main_name = fields.Char(string="Product Name")
     price = fields.Float(string="Price")
+    product_or_form_based = fields.Boolean("Product or Form Based",compute="compute_form_product_based")
+
+
+    @api.depends('state')
+    def compute_form_product_based(self):
+        for record in self:
+            record.product_or_form_based = False
+            if record.state != '1-allotment_pending':
+                eln_id = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+                is_product_based = eln_id.is_product_based_calculation
+                print("DATA",eln_id.parameters_result)
+                is_form_based = eln_id.parameters_result[0].calculation_type == "form_based"
+
+                if is_product_based or is_form_based:
+                    record.product_or_form_based = True
+                    record.parameters_result.write({'verified':True})
+                else:
+                    record.product_or_form_based = False
+            else:
+                record.product_or_form_based = False
 
     @api.depends('material_id')
     def compute_material_id_lab_name(self):
         for record in self:
             record.material_id_lab_name = record.material_id.lab_name
+
+    
+    def open_form(self):
+
+        eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+        if self.product_or_form_based:
+            if eln.is_product_based_calculation:
+                model_record = self.env['lerm.product.based.calculation'].search([('product_id','=',eln.material.id),('grade','=',eln.grade_id.id)])
+                model = model_record.ir_model.model
+                return {
+                        'view_mode': 'form',
+                        'res_model': model,
+                        'type': 'ir.actions.act_window',
+                        'target': 'current',
+                        'res_id': eln.model_id,
+                        }
+            else:
+                if eln.parameters_result[0].calculation_type == 'form_based':
+                    model = eln.parameters_result[0].parameter.ir_model.model
+                    print(model)
+                    return {
+                        'view_mode': 'form',
+                        'res_model': model,
+                        'type': 'ir.actions.act_window',
+                        'target': 'current',
+                        'res_id': eln.parameters_result[0].model_id,
+                        }
+                    
 
 
     def open_related_eln(self):

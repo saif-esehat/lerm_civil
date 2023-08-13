@@ -84,7 +84,10 @@ class DataSheetReport(models.AbstractModel):
             eln = self.env['lerm.eln'].sudo().browse(docids)
             print('came here')  
         model_id = eln.parameters_result.model_id
+        print("Idar pochega")
         model_name = eln.parameters_result.parameter[0].ir_model.name
+
+        print("Idar nai pochega",eln)
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
             columns = self.get_visible_table_fields(model_name)
