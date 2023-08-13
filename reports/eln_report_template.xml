@@ -106,7 +106,7 @@
 								<td colspan="3">ULR NO :
 								</td>
 								<td colspan="3">
-									<span t-field="o.eln_id"/>
+									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
 						</table>
@@ -245,6 +245,16 @@
 										Method Reference
 									</span>
 								</th>
+								<th>
+									<span>
+										NABL Status
+									</span>
+								</th>
+								<th>
+									<span>
+										Confirmity Status
+									</span>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -270,6 +280,12 @@
 								</td>
 								<td>
 									<span t-esc="r['test_method'].test_method"/>
+								</td>
+								<td>
+									<span t-esc="r['nabl_status']"/>
+								</td>
+								<td>
+									<span t-esc="r['conformity_status']"/>
 								</td>
 							</tr>
 						</tbody>

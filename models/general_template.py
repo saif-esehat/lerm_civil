@@ -75,8 +75,14 @@ class DataSheetReport(models.AbstractModel):
         return visible_fields
     
     @api.model
-    def _get_report_values(self, docids, data=None):
-        eln = self.env['lerm.eln'].sudo().browse(docids)
+    def _get_report_values(self, docids, data):
+        print(data , 'dataaaaaaaaaaaaaa')
+        if 'active_id' in data['context']:
+            print(data['context']['active_id'] , 'active id')
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        else:
+            eln = self.env['lerm.eln'].sudo().browse(docids)
+            print('came here')  
         model_id = eln.parameters_result.model_id
         model_name = eln.parameters_result.parameter[0].ir_model.name
         if model_name:
@@ -144,11 +150,8 @@ class GeneralReport(models.AbstractModel):
         return visible_fields
     
     @api.model
-    def _get_report_values(self, docids, data=None):
-        print('afzal')
+    def _get_report_values(self, docids, data):
         eln = self.env['lerm.eln'].sudo().browse(docids)
-        print('afzal 1')
-        
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         qr.add_data(eln.kes_no)
         qr.make(fit=True)
@@ -161,11 +164,9 @@ class GeneralReport(models.AbstractModel):
 
         # Assign the base64 string to a field in the 'srf' object
         qr_code = qr_image_base64
-        print('afzal 2')
         
         model_id = eln.parameters_result.model_id
         model_name = eln.parameters_result.parameter[0].ir_model.name
-        print(model_name , 'model name ')
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
             columns = self.get_visible_table_fields(model_name)
@@ -177,5 +178,29 @@ class GeneralReport(models.AbstractModel):
             'data' : general_data,
             'tabledata' : columns,
             'resultdata' : resultfields,
+            'qrcode': qr_code
+        }
+
+class SteelTmtBar(models.AbstractModel):
+    _name = 'report.lerm_civil.steel_tmt_bar'
+    _description = 'Steel TMT Bar'
+    
+    @api.model
+    def _get_report_values(self, docids, data):
+        eln = self.env['lerm.eln'].sudo().browse(docids)
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+        qr.add_data(eln.kes_no)
+        qr.make(fit=True)
+        qr_image = qr.make_image()
+
+        # Convert the QR code image to base64 string
+        buffered = BytesIO()
+        qr_image.save(buffered, format="PNG")
+        qr_image_base64 = base64.b64encode(buffered.getvalue()).decode()
+
+        # Assign the base64 string to a field in the 'srf' object
+        qr_code = qr_image_base64
+        return {
+            'eln': eln,
             'qrcode': qr_code
         }

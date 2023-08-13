@@ -184,12 +184,12 @@ class LermSampleForm(models.Model):
             template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
         else:
             template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
-        print(template_name , 'afzal khan nizamuddin')
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
             'report_name': template_name,
-            'report_file': template_name
+            'report_file': template_name,
+            'data' : {'fromsample' : True}
         }
         
     def print_report(self):
@@ -199,12 +199,12 @@ class LermSampleForm(models.Model):
             template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
         else:
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
-        print(template_name , 'afzal khan nizamuddin')
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
             'report_name': template_name,
-            'report_file': template_name
+            'report_file': template_name,
+            'data' : {'fromsample' : True}
         }
     # def print_sample_report(self):
     #     eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
