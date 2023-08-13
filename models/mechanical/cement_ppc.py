@@ -293,6 +293,8 @@ class CementPpc(models.Model):
     
     # 3 days Casting
     casting_3_name = fields.Char("Name",default="3 Days")
+    days_3_done = fields.Boolean("Done")
+
     # casting_3_visible = fields.Boolean("3 days Visible",compute="_compute_visible")
 
     casting_date_3days = fields.Date(string="Date of Casting")
@@ -338,7 +340,7 @@ class CementPpc(models.Model):
 
     casting_7_name = fields.Char("Name",default="7 Days")
     # casting_7_visible = fields.Boolean("7 days Visible",compute="_compute_visible")
-
+    days_7_done = fields.Boolean("Done")
     casting_date_7days = fields.Date(string="Date of Casting")
     testing_date_7days = fields.Date(string="Date of Testing",compute="_compute_testing_date_7days")
     casting_7_days_tables = fields.One2many('cement.casting.7days.line','parent_id',string="7 Days")
@@ -383,7 +385,7 @@ class CementPpc(models.Model):
 
     casting_28_name = fields.Char("Name",default="28 Days")
     # casting_28_visible = fields.Boolean("28 days Visible",compute="_compute_visible")
-
+    days_28_done = fields.Boolean("Done")
     casting_date_28days = fields.Date(string="Date of Casting")
     testing_date_28days = fields.Date(string="Date of Testing",compute="_compute_testing_date_28days")
     casting_28_days_tables = fields.One2many('cement.casting.28days.line','parent_id',string="28 Days")

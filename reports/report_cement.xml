@@ -186,9 +186,9 @@
 									</span>
 								</td>
 								<td>
-										<span>
-											<span t-field="cement.normal_consistency_trial1"/>
-										</span>									
+									<span>
+										<span t-field="cement.normal_consistency_trial1"/>
+									</span>									
 								</td>
 								<td>
 									<span>
@@ -197,7 +197,7 @@
 								</td>
 								<td>
 									<span>
-									-
+										-
 									</span>
 								</td>
 							</tr>
@@ -214,9 +214,9 @@
 									</span>
 								</td>
 								<td>
-										<span>
-											<span t-field="cement.initial_setting_time_minutes"/>
-										</span>									
+									<span>
+										<span t-field="cement.initial_setting_time_minutes"/>
+									</span>									
 								</td>
 								<td>
 									<span>
@@ -243,9 +243,9 @@
 									</span>
 								</td>
 								<td>
-										<span>
-											<span t-field="cement.final_setting_time_minutes"/>
-										</span>									
+									<span>
+										<span t-field="cement.final_setting_time_minutes"/>
+									</span>									
 								</td>
 								<td>
 									<span>
@@ -263,7 +263,6 @@
 									<span>
 										Fineness By (Dry seiving)
 									</span>
-									
 								</td>
 								<td>
 									<span>
@@ -271,36 +270,9 @@
 									</span>
 								</td>
 								<td>
-										<span>
-											<span t-field="cement.fineness_dry_sieving"/>
-										</span>									
-								</td>
-								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','ﬁneness by dry sieving')]).unit.name"/>
-									</span>
-								</td>
-								<td>
-									<span>
-										-	
-									</span>
-								</td>
-							</tr>
-							<tr t-if="cement.dry_sieving_visible">
-								<td>
-									<span>
-										Fineness By (Dry seiving)
-									</span>
-								</td>
-								<td>
-									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','ﬁneness by dry sieving')]).test_method.test_method"/>
-									</span>
-								</td>
-								<td>
-										<span>
-											<span t-field="cement.fineness_dry_sieving"/>
-										</span>									
+										<span t-field="cement.fineness_dry_sieving"/>
+									</span>									
 								</td>
 								<td>
 									<span>
@@ -325,9 +297,9 @@
 									</span>
 								</td>
 								<td>
-										<span>
-											<span t-field="cement.average_density"/>
-										</span>									
+									<span>
+										<span t-field="cement.average_density"/>
+									</span>									
 								</td>
 								<td>
 									<span>
@@ -352,9 +324,9 @@
 									</span>
 								</td>
 								<td>
-										<span>
-											<span t-field="cement.average_soundness"/>
-										</span>									
+									<span>
+										<span t-field="cement.average_soundness"/>
+									</span>									
 								</td>
 								<td>
 									<span>
@@ -379,9 +351,9 @@
 									</span>
 								</td>
 								<td>
-										<span>
-											<span t-field="cement.fineness_air_permeability"/>
-										</span>									
+									<span>
+										<span t-field="cement.fineness_air_permeability"/>
+									</span>									
 								</td>
 								<td>
 									<span>
@@ -391,6 +363,118 @@
 								<td>
 									<span>
 										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','ﬁneness by blain method')]).parameter.lab_min_value"/> Min
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.compressive_visible">
+								<td>
+									<span>
+										Compressive Strength
+									</span>
+								</td>
+								<td>
+									<span>
+									</span>
+								</td>
+								<td>
+									<span>
+									</span>									
+								</td>
+								<td>
+									<span>
+									</span>
+								</td>
+								<td>
+									<span>
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.compressive_visible">
+								<td>
+									<span>
+										72+-1H
+									</span>
+								</td>
+								<td>
+									<span>
+											<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<t t-if="cement.days_3_done">
+											<span t-field="cement.compressive_strength_3days"/>
+										</t>
+										<t t-else="">
+											Awaited
+										</t>
+									</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										27 Min
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.compressive_visible">
+								<td>
+									<span>
+										168+-2H
+									</span>
+								</td>
+								<td>
+									<span>
+									   <span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span>
+											Awaited
+										</span>
+									</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										37 Min
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.compressive_visible">
+								<td>
+									<span>
+										672+-4H
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span  >
+											Awaited
+										</span>
+									</span>									
+								</td>
+								<td>
+									<span>
+										53 Min
+									</span>
+								</td>
+								<td>
+									<span>
 									</span>
 								</td>
 							</tr>
@@ -428,7 +512,7 @@
 								</b>
 							</div>
 							<div style="height:20px">
-
+								
 							</div>
 							<div>
 								<b>

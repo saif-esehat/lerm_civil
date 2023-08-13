@@ -378,6 +378,8 @@
                       </field>
                       <field name="average_casting_3days"/>
                       <field name="compressive_strength_3_days"/>
+                      <field name="days_3_done"/>
+
                     </group>
 
                     <!-- 7 Days Casting  -->
@@ -405,6 +407,7 @@
                       </field>
                       <field name="average_casting_7days"/>
                       <field name="compressive_strength_7_days"/>
+                      <field name="days_7_done"/>
                     </group>
                     <!-- 28 Days Casting  -->
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
@@ -431,6 +434,8 @@
                       </field>
                       <field name="average_casting_28days"/>
                       <field name="compressive_strength_28_days"/>
+                      <field name="days_28_done"/>
+
                     </group>
                     <!-- Fineness Blaine  -->
                     <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
