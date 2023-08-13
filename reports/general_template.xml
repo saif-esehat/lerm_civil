@@ -114,20 +114,37 @@
 									</t>
 								</tr>
             				</thead>
-							<tbody>
+							<!-- <tbody>
 								<t t-set="i" t-value="0"/>
 								<tr t-foreach="data.child_lines" t-as="r">
-									<!-- <td>
+									<td>
 										<div>
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
 										</div>
-									</td> -->
+									</td>
 									<t t-foreach="tabledata" t-as="row">
 										<td>
 											<span>
 												<t t-esc="r[row[0]]"/>
 											</span>
+										</td>
+									</t>
+								</tr>
+							</tbody> -->
+
+							<tbody>
+								<tr t-foreach="data.child_lines" t-as="r">
+									<t t-foreach="tabledata" t-as="row">
+										<td>
+										<span>
+											<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+												<t t-esc="round(float(r[row[0]]),2)"/>
+											</t>
+											<t t-else="">
+												<t t-esc="r[row[0]]"/>
+											</t>
+										</span>
 										</td>
 									</t>
 								</tr>

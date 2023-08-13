@@ -111,6 +111,34 @@ class LermSampleForm(models.Model):
         for record in self:
             record.material_id_lab_name = record.material_id.lab_name
 
+    
+    def open_form(self):
+
+        eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+        if self.product_or_form_based:
+            if eln.is_product_based_calculation:
+                model_record = self.env['lerm.product.based.calculation'].search([('product_id','=',eln.material.id),('grade','=',eln.grade_id.id)])
+                model = model_record.ir_model.model
+                return {
+                        'view_mode': 'form',
+                        'res_model': model,
+                        'type': 'ir.actions.act_window',
+                        'target': 'current',
+                        'res_id': eln.model_id,
+                        }
+            else:
+                if eln.parameters_result[0].calculation_type == 'form_based':
+                    model = eln.parameters_result[0].parameter.ir_model.model
+                    print(model)
+                    return {
+                        'view_mode': 'form',
+                        'res_model': model,
+                        'type': 'ir.actions.act_window',
+                        'target': 'current',
+                        'res_id': eln.parameters_result[0].model_id,
+                        }
+                    
+
 
     def open_related_eln(self):
 
@@ -204,27 +232,30 @@ class LermSampleForm(models.Model):
             template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
         else:
             template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
-        print(template_name , 'afzal khan nizamuddin')
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
             'report_name': template_name,
-            'report_file': template_name
+            'report_file': template_name,
+            'data' : {'fromsample' : True}
         }
         
     def print_report(self):
         eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
-            template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
+            print('suffer')
+            template_name = eln.material.product_based_calculation[0].main_report_template.report_name
+            print('buffer' , template_name)
         else:
+            print('did it came here')
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
-        print(template_name , 'afzal khan nizamuddin')
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
             'report_name': template_name,
-            'report_file': template_name
+            'report_file': template_name,
+            'data' : {'fromsample' : True}
         }
     # def print_sample_report(self):
     #     eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])

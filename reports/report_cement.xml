@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	
+	<template id="lerm_cement_report">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+				<div style="text-align:center;margin-top:10px">
+					<p style="font-size:15px"><b>Test Report</b></p>
+				</div>
+				<div class="container_eln">
+					<div t-foreach="eln" t-as="o">
+						<table>
+							<tr>
+								<td colspan="3">Report no :
+								</td>
+								<td colspan="3">
+									<span t-field="o.eln_id"/>
+								</td>
+								<td colspan="3">Report Date :
+								</td>
+								<td colspan="3">
+									<span t-field="o.srf_date"/>
+								</td>
+								<td colspan="3">ULR NO :
+								</td>
+								<td colspan="3">
+									<span t-field="o.sample_id.ulr_no"/>
+								</td>
+							</tr>
+						</table>
+						<table style="margin-top:10px;">
+							<tr>
+								<td colspan="12">Customer Party Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.street"/>
+									<span t-field="o.srf_id.customer.street2"/>
+									<span t-field="o.srf_id.customer.city"/>
+									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+									<span t-field="o.srf_id.customer.state_id"/>
+									,
+									<span t-field="o.srf_id.customer.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Project / Site Address :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address.name"/>
+									<span t-field="o.srf_id.site_address.street"/>
+									<span t-field="o.srf_id.site_address.street2"/>
+									<span t-field="o.srf_id.site_address.city"/>
+									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
+									<span t-field="o.srf_id.site_address.state_id"/>
+									,
+									<span t-field="o.srf_id.site_address.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.start_date"/>
+								</td>
+								<td colspan="6">Test End Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.end_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.client_sample_id"/>
+								</td>
+								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_received_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Size :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.size_id.size"/>
+								</td>
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.grade_id.grade"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Brand :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.brand"/>
+								</td>
+								<td colspan="6">Consultant Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Client Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">Client Reference :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client_refrence"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Discipline :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.discipline.discipline"/>
+								</td>
+								<td colspan="6">Group :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.group.group"/>
+								</td>
+							</tr>
+							
+							<tr>
+								<td colspan="12">Material/Test Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.material.name"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Instrument :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.instrument"/>
+								</td>
+								<td colspan="6">Temperature :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.temperature"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div style="margin-top:20px;">
+						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
+						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
+					</div>
+					<table style="margin-top:30px;">
+						<thead>
+							<tr>
+								<th>
+									<span>
+										Name of Test
+									</span>
+								</th>
+								<th>
+									<span>
+										Test Method
+									</span>
+								</th>
+								<th>
+									<span>
+										Test Result
+									</span>
+								</th>
+								<th>
+									<span>
+										Unit
+									</span>
+								</th>
+								<th>
+									<span>
+										Limit
+									</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody >
+							<tr>
+								<td>
+									<span>
+										Normal Consistency
+									</span>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Normal Consistency Cement')]).test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+										<span>
+											<span t-field="cement.normal_consistency_trial1"/>
+										</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Normal Consistency Cement')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+									-
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.setting_time_visible">
+								<td>
+									<span>
+										Initial Setting Time
+									</span>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+										<span>
+											<span t-field="cement.initial_setting_time_minutes"/>
+										</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_min_value"/> Min	
+									</span>
+								</td>
+								
+							</tr>
+							<tr t-if="cement.setting_time_visible">
+								<td>
+									<span>
+										Final Setting Time
+									</span>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Final setting time')]).test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+										<span>
+											<span t-field="cement.final_setting_time_minutes"/>
+										</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Final setting time')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_max_value"/> Max	
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.dry_sieving_visible">
+								<td>
+									<span>
+										Fineness By (Dry seiving)
+									</span>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','ﬁneness by dry sieving')]).test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+										<span>
+											<span t-field="cement.fineness_dry_sieving"/>
+										</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','ﬁneness by dry sieving')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										-	
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.dry_sieving_visible">
+								<td>
+									<span>
+										Fineness By (Dry seiving)
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','ﬁneness by dry sieving')]).test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+										<span>
+											<span t-field="cement.fineness_dry_sieving"/>
+										</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','ﬁneness by dry sieving')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										-	
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.density_visible">
+								<td>
+									<span>
+										Density
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Density')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+										<span>
+											<span t-field="cement.average_density"/>
+										</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Density')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										-	
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.soundness_visible">
+								<td>
+									<span>
+										Soundness By (Lechatelier Method)
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Soundness By Lechatelier')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+										<span>
+											<span t-field="cement.average_soundness"/>
+										</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Soundness By Lechatelier')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Soundness By Lechatelier')]).parameter.lab_max_value"/> Max
+									</span>
+								</td>
+							</tr>
+							<tr t-if="cement.fineness_blaine_visible">
+								<td>
+									<span>
+										Fineness by (Blaine air Permability Method)
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','ﬁneness by blain method')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td>
+										<span>
+											<span t-field="cement.fineness_air_permeability"/>
+										</span>									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','ﬁneness by blain method')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','ﬁneness by blain method')]).parameter.lab_min_value"/> Min
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div style="margin-top:20px" class="noteContainer">
+						<div>
+							<b>Note :-</b>
+						</div>
+						<div>
+							<ul>
+								<li>
+									The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+								</li>
+								<li>
+									Sample(s) was/were not drawn by laboratory.
+								</li>
+								<li>
+									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="signatureContainer girdgird">
+						<div>
+							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
+						</div>
+						<div>
+							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
+						</div>
+						<div>
+							<div>
+								<b>
+									Approved By
+								</b>
+							</div>
+							<div style="height:20px">
+
+							</div>
+							<div>
+								<b>
+									Chemical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									(Authorized Signatory)
+								</b>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</t>
+		</t>
+	</template>
+</odoo>
