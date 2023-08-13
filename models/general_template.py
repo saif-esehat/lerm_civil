@@ -78,7 +78,7 @@ class DataSheetReport(models.AbstractModel):
     def _get_report_values(self, docids, data):
         print("working",data)
         eln = self.env['lerm.eln'].sudo().browse(docids)
-        eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_ids'][0])])
+        # eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_ids'][0])])
 
         model_id = eln.parameters_result.model_id
         print("Idar pochega")
