@@ -1274,4 +1274,244 @@
 			</t>
 		</t>
 	</template>
+
+
+	<template id="cement_datasheet">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    Cement
+                </div>
+				<div class="container_eln" style="margin-top:5px">
+					<div t-if="data.normal_consistency_visible">
+						<div style="text-align:center;font-size:18px">
+							Normal Consistency
+						</div>
+						<table>
+							<tr cols="12">
+								<td colspan="6">Temperature :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="data.eln_id"/> -->
+								</td>
+								<td colspan="6">Test Start Date :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="data.start_date"/> -->
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Humidity :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="data.material.name"/> -->
+								</td>
+								<td colspan="6">Test End Date :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="data.end_date"/> -->
+								</td>
+							</tr>
+						</table>
+				
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Temperature :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.temp_percent_normal"/>
+								</td>
+								<td colspan="6">Test Start Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.start_date_normal"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Humidity :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.humidity_percent_normal"/>
+								</td>
+								<td colspan="6">Test End Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.end_date_normal"/>
+								</td>
+							</tr>
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Weight of Cement(g) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_of_cement_trial1"/>
+									
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Weight of Water Required(g) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_of_water_req_trial1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Penetraion of vicat's Plunger (mm) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.penetration_of_vicat_plunger_trial1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Normal Consistency (%) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.normal_consistency_trial1"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div t-if="data.setting_time_visible">
+						<div style="text-align:center;font-size:18px">
+							Setting Time
+						</div>
+						<table>
+							<tr cols="12">
+								<td colspan="6">Temperature :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.temp_percent_setting"/>
+								</td>
+								<td colspan="6">Test Start Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.start_date_setting"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Humidity :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.humidity_percent_setting"/>
+								</td>
+								<td colspan="6">Test End Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.end_date_setting"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Weight of Cement(g) :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="data.material.name"/> -->
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_of_cement_setting_time"/>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="12">
+									<h6>
+										<span t-field="data.initial_setting_time"/>
+									</h6>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="6">The Time When water is added to cement (t1) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.time_water_added"/>
+								</td>
+							</tr>
+							
+
+							<tr cols="12">
+								<td colspan="6">The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.time_needle_fails"/>
+								</td>
+							</tr>
+							
+							<tr cols="12">
+								<td colspan="6">Initial Setting Time (t2-t1) (Hours) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.initial_setting_time_hours"/>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="6">Initial Setting Time :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.initial_setting_time_minutes"/>
+								</td>
+							</tr>
+						</table>
+						<table>
+							<tr cols="12">
+								<td colspan="12">
+									<h6>
+										<span t-field="data.final_setting_time"/>
+									</h6>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="6">The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.time_needle_make_impression"/>
+								</td>
+							</tr>
+							
+
+							<tr cols="12">
+								<td colspan="6">Final Setting Time (t2-t1) (Hours) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.final_setting_time_hours"/>
+								</td>
+							</tr>
+							
+							<tr cols="12">
+								<td colspan="6">Final Setting Time :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.final_setting_time_minutes"/>
+								</td>
+							</tr>
+
+							
+						</table>
+					</div>
+
+
+
+					<div class="authorizeRowDataSheet">
+						<div>
+							<div>
+								<b>
+									(JR Chemist)
+								</b>
+							</div>
+							<div>
+								<b>
+									Tested By
+								</b>
+							</div>
+						</div>
+						<div style="margin-left:500px">
+							<div>
+								<b>
+									Chemical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
 </odoo>
