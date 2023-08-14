@@ -37,7 +37,6 @@ class DryDensitySandReplacement(models.Model):
     def create(self, vals):
         # import wdb;wdb.set_trace()
         record = super(DryDensitySandReplacement, self).create(vals)
-        record.parameter_id.write({'model_id':record.id})
         return record
 
 
@@ -51,7 +50,7 @@ class DryDensitySandReplacement(models.Model):
     def _compute_volume_of_hole(self):
         for record in self:
             if record.density_of_sand != 0:  # Avoid division by zero
-                record.volume_of_hole = record.wt_of_sand_hole / record.density_of_sand
+                record.volume_of_hole = record.density_of_sand / record.wt_of_sand_hole
             else:
                 record.volume_of_hole = 0.0
 
