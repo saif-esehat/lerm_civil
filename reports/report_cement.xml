@@ -402,8 +402,8 @@
 								</td>
 								<td>
 									<span>
-										<t t-if="cement.days_3_done">
-											<span t-field="cement.compressive_strength_3days"/>
+										<t t-if="cement.status_3days">
+											<span t-field="cement.compressive_strength_3_days"/>
 										</t>
 										<t t-else="">
 											Awaited
@@ -432,11 +432,15 @@
 									   <span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
 									</span>
 								</td>
+								
 								<td>
 									<span>
-										<span>
+										<t t-if="cement.status_7days">
+											<span t-field="cement.compressive_strength_7_days"/>
+										</t>
+										<t t-else="">
 											Awaited
-										</span>
+										</t>
 									</span>									
 								</td>
 								<td>
@@ -463,18 +467,22 @@
 								</td>
 								<td>
 									<span>
-										<span  >
+										<t t-if="cement.status_28days">
+											<span t-field="cement.compressive_strength_28_days"/>
+										</t>
+										<t t-else="">
 											Awaited
-										</span>
+										</t>
 									</span>									
 								</td>
 								<td>
 									<span>
-										53 Min
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.unit.name"/>
 									</span>
 								</td>
 								<td>
 									<span>
+										53 Min
 									</span>
 								</td>
 							</tr>
@@ -498,11 +506,11 @@
 							</ul>
 						</div>
 					</div>
-					<div class="signatureContainer girdgird">
+					<div class="signatureContainer girdgird" style="margin-top:50px">
 						<div>
 							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
 						</div>
-						<div>
+						<div >
 							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 						</div>
 						<div>
