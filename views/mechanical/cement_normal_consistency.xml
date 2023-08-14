@@ -23,6 +23,7 @@
                       <field name="sample_parameters">
                         <tree>
                           <field name="parameter_name"/>
+                          <field name="test_method"/>
                         </tree>
                       </field>
                     </group>
@@ -39,7 +40,7 @@
                             <field name="normal_consistency_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_normal"/>
                       <field name="humidity_percent_normal"/>
@@ -137,7 +138,7 @@
                         </h1>
                     </group>
                     <group>
-                    <group>
+                    <group attrs="{'invisible': [('setting_time_visible', '=', False)]}">
                       <field name="temp_percent_setting"/>
                       <field name="humidity_percent_setting"/>
                     </group>
