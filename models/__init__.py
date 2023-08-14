@@ -32,6 +32,7 @@ from .mechanical import flakiness_elongated_index
 from .mechanical import rock
 from .mechanical import structural_steel
 from .mechanical import bricks
+from .mechanical import dry_density_sand_replacment
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
