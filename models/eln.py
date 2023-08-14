@@ -61,6 +61,12 @@ class ELN(models.Model):
     instrument = fields.Char("Instrument")
 
 
+
+    def get_product_base_calc_line(self,data):
+        line = self.env["lerm.product.based.calculation"].search([('product_id','=',data["material_id"]),('grade','=',data["grade_id"])])
+        return line
+
+
     def open_product_based_form(self):
         model_record = self.material.product_based_calculation.filtered(lambda r: r.grade.id == self.grade_id.id)
         model = model_record.ir_model.model
@@ -260,7 +266,7 @@ class ELN(models.Model):
         eln = self
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
-            template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
+            template_name = eln.material.product_based_calculation[0].main_report_template.report_name
         else:
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {

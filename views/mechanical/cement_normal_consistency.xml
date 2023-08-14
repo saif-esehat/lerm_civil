@@ -360,6 +360,9 @@
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
                     </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                            <field name="status_3days"/>
+                    </group>
                     
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
 
@@ -385,8 +388,13 @@
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
                         <h1>
                             <field name="casting_7_name" readonly="1" nolabel="1"/>
+
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
+                    </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                            <field name="status_7days"/>
+                      
                     </group>
                     
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
@@ -411,8 +419,13 @@
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
                         <h1>
                             <field name="casting_28_name" readonly="1" nolabel="1"/>
+
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
+                    </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                            <field name="status_28days"/>
+                      
                     </group>
                     
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">

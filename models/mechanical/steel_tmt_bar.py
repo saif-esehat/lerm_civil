@@ -286,7 +286,8 @@ class SteelTmtBarLine(models.Model):
     def _compute_crossectional_area(self):
         for record in self:
             if record.lentgh != 0:
-                record.crossectional_area = record.weight / (0.00785 * record.lentgh)
+                record.crossectional_area = round((record.weight / (0.00785 * record.lentgh),2))
+                
             else:
                 record.crossectional_area = 0.0
 
