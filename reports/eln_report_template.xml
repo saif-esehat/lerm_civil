@@ -2310,9 +2310,17 @@
 							<tr cols="12">
 								<td colspan="6">Fineness of Sample :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
 									<span t-field="data.fineness_of_sample"/>
 								</td>
-								<td colspan="6">Fineness By Blaine Air Permeability Method (m2/kg)
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Fineness By Blaine Air Permeability Method (m2/kg) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.fineness_air_permeability"/>
 								</td>
