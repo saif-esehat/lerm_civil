@@ -91,7 +91,7 @@
                             <field name="sample_description"/>                           
                         </tree>
                     </field>
-                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" context = "{'default_customer_id' : customer,'is_local': True}">
+                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" readonly="1" context = "{'default_customer_id' : customer,'is_local': True}">
                         <tree>
                             <field name='kes_range'/>
                             <field name="material_id_lab_name"  invisible="1"/>
