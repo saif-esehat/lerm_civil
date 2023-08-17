@@ -78,12 +78,12 @@ class SteelTmtBarLine(models.Model):
     @api.depends('weight_per_meter','eln_ref','size')
     def _compute_weight_per_meter_nabl(self):
         for record in self:
-            print("Steel Size",record.size)
+            # print("Steel Size",record.size)
             record.weight_per_meter_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')])
             materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
             for material in materials:
-                print("Materials size",material.size.id)
+                # print("Materials size",material.size.id)
                 if material.size.id == record.size.id:
                     req_min = material.req_min
                     req_max = material.req_max
@@ -156,6 +156,7 @@ class SteelTmtBarLine(models.Model):
             #     else:
             #         record.requirement_utl = 0
             materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Ultimate tensile Strength (TMT Steel)')]).parameter_table
+            print("sadsdsadsdasdasdsadadsdsds",materials)
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -227,11 +228,14 @@ class SteelTmtBarLine(models.Model):
     @api.depends('eln_ref','grade')
     def _compute_requirement_yield(self):
         for record in self:
+            print("Saifsdadddddddddd")
             # record.requirement_yield = 0
             # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
             # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
             materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Yield Stress (TMT)')]).parameter_table
+            
             for material in materials:
+                print("DATA ", material)
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     record.requirement_yield = req_min
@@ -286,7 +290,8 @@ class SteelTmtBarLine(models.Model):
     def _compute_crossectional_area(self):
         for record in self:
             if record.lentgh != 0:
-                record.crossectional_area = round((record.weight / (0.00785 * record.lentgh),2))
+                # print(record.weight / (0.00785 * record.lentgh))
+                record.crossectional_area = round((record.weight / (0.00785 * record.lentgh)),2)
                 
             else:
                 record.crossectional_area = 0.0
