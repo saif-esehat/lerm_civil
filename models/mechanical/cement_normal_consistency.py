@@ -1,6 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
-from datetime import datetime , timedelta
+from datetime import timedelta
 import math
 
 
@@ -68,11 +68,11 @@ class CementNormalConsistency(models.Model):
 
     #Initial setting Time
 
-    initial_setting_time = fields.Char("Name",default="Initial Setting Time")
+    initial_setting_time = fields.Char("Name", default="Initial Setting Time")
     time_water_added = fields.Datetime("The Time When water is added to cement (t1)")
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
-    initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)",compute="_compute_initial_setting_time")
-    initial_setting_time_minutes = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
+    initial_setting_time_hours = fields.Float("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
+    initial_setting_time_minutes = fields.Float("Initial Setting Time", compute="_compute_initial_setting_time")
 
     @api.depends('time_water_added', 'time_needle_fails')
     def _compute_initial_setting_time(self):
@@ -82,14 +82,14 @@ class CementNormalConsistency(models.Model):
                 t2 = record.time_needle_fails
                 time_difference = t2 - t1
 
-                # hours = time_difference.total_seconds() / 3600
+                # Convert time difference to seconds and then to minutes
+                time_difference_minutes = time_difference.total_seconds() / 60
 
-                record.initial_setting_time_hours = time_difference
-                initial_setting_time_minutes = time_difference.total_seconds() / 60
-                if initial_setting_time_minutes % 5 == 0:
-                    record.initial_setting_time_minutes = initial_setting_time_minutes
+                record.initial_setting_time_hours = time_difference.total_seconds() / 3600
+                if time_difference_minutes % 5 == 0:
+                    record.initial_setting_time_minutes = time_difference_minutes
                 else:
-                    record.initial_setting_time_minutes = round(initial_setting_time_minutes / 5) * 5
+                    record.initial_setting_time_minutes = round(time_difference_minutes / 5) * 5
 
             else:
                 record.initial_setting_time_hours = False
