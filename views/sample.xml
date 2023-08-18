@@ -30,18 +30,18 @@
                         <button type="object" 
                         class="oe_highlight" 
                         name="approve_sample" 
-                        string="Approve Sample" 
+                        string="Approve " 
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification'))]}"/>
 
                         <button type="object" 
                         class="oe_highlight" 
                         name="approve_pending_sample" 
-                        string="Approve Sample" 
+                        string="Approve" 
                         attrs="{'invisible': [('state', 'not in', ('5-pending_approval'))]}"/>
 
                         <button type="object" 
                         name="reject_sample" 
-                        string="Reject Sample" 
+                        string="Reject" 
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification','5-pending_approval'))]}"/>
 
                         

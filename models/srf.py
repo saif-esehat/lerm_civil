@@ -432,6 +432,8 @@ class CreateSampleWizard(models.TransientModel):
    
 
     def add_sample(self):
+
+
         group_id =  self.group_id.id
         alias = self.alias
         material_id = self.material_id.id
@@ -455,6 +457,9 @@ class CreateSampleWizard(models.TransientModel):
         conformity = self.conformity
         volume = self.volume
         product_name = self.product_name
+
+        if not parameters:
+            raise UserError("Add atleast one Parameter")
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):

@@ -293,6 +293,8 @@ class CementPpc(models.Model):
     
     # 3 days Casting
     casting_3_name = fields.Char("Name",default="3 Days")
+    days_3_done = fields.Boolean("Done")
+
     # casting_3_visible = fields.Boolean("3 days Visible",compute="_compute_visible")
 
     casting_date_3days = fields.Date(string="Date of Casting")
@@ -340,7 +342,7 @@ class CementPpc(models.Model):
 
     casting_7_name = fields.Char("Name",default="7 Days")
     # casting_7_visible = fields.Boolean("7 days Visible",compute="_compute_visible")
-
+    days_7_done = fields.Boolean("Done")
     casting_date_7days = fields.Date(string="Date of Casting")
     testing_date_7days = fields.Date(string="Date of Testing",compute="_compute_testing_date_7days")
     casting_7_days_tables = fields.One2many('cement.casting.7days.line','parent_id',string="7 Days")
@@ -387,7 +389,7 @@ class CementPpc(models.Model):
 
     casting_28_name = fields.Char("Name",default="28 Days")
     # casting_28_visible = fields.Boolean("28 days Visible",compute="_compute_visible")
-
+    days_28_done = fields.Boolean("Done")
     casting_date_28days = fields.Date(string="Date of Casting")
     testing_date_28days = fields.Date(string="Date of Testing",compute="_compute_testing_date_28days")
     casting_28_days_tables = fields.One2many('cement.casting.28days.line','parent_id',string="28 Days")
@@ -468,7 +470,7 @@ class CementPpc(models.Model):
     specific_surface_of_reference_sample = fields.Float("S0 is the Specific surface of reference sample (m²/kg)",default=393) 
     air_viscosity_of_three_temp = fields.Float("ɳₒ is the Air viscosity at the mean of the three temperatures",default=0.001355,digits=(16, 6))
     density_of_reference_sample = fields.Float("ρ0 is the Density of reference sample  (g/cm3)",default=2.83)
-    mean_of_three_measured_times = fields.Float("t0 is the Mean of three measured times (sec)",default=48.00)
+    mean_of_three_measured_times = fields.Float("t0 is the Mean of three measured times (sec)",compute="_compute_mean_measured_time")
     apparatus_constant = fields.Float("Apparatus Constant(k)",compute="_compute_apparatus_constant")
 
     density_fineness_calculated = fields.Float("Density",compute="_compute_density_calculated")
@@ -546,6 +548,11 @@ class CementPpc(models.Model):
     def _compute_fineness_air_permeability(self):
         for record in self:
             record.fineness_air_permeability = math.ceil(record.fineness_of_sample)
+
+    @api.depends('average_time_fineness')
+    def _compute_mean_measured_time(self):
+        for record in self:
+            record.mean_of_three_measured_times = record.average_time_fineness
 
 
             

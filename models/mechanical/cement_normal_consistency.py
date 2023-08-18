@@ -467,7 +467,7 @@ class CementNormalConsistency(models.Model):
     specific_surface_of_reference_sample = fields.Float("S0 is the Specific surface of reference sample (m²/kg)",default=274) 
     air_viscosity_of_three_temp = fields.Float("ɳₒ is the Air viscosity at the mean of the three temperatures",default=0.001355,digits=(16, 6))
     density_of_reference_sample = fields.Float("ρ0 is the Density of reference sample  (g/cm3)",default=3.16)
-    mean_of_three_measured_times = fields.Float("t0 is the Mean of three measured times (sec)",default=64.70)
+    mean_of_three_measured_times = fields.Float("t0 is the Mean of three measured times (sec)",compute="_compute_mean_measured_time")
     apparatus_constant = fields.Float("Apparatus Constant(k)",compute="_compute_apparatus_constant")
 
     density_fineness_calculated = fields.Float("Density",compute="_compute_density_calculated")
@@ -550,6 +550,10 @@ class CementNormalConsistency(models.Model):
         for record in self:
             record.fineness_air_permeability = math.ceil(record.fineness_of_sample)
 
+    @api.depends('average_time_fineness')
+    def _compute_mean_measured_time(self):
+        for record in self:
+            record.mean_of_three_measured_times = record.average_time_fineness
 
             
     ### Compute Visible
