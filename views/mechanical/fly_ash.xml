@@ -30,7 +30,7 @@
                     
                     <group >
                             
-                            <field name="tests" widget="many2many_tags"/>
+                            <field name="tests" widget="many2many_tags" options="{'no_create':True,'no_open': True}"/>
                     </group>
                     <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
                         <h1>
@@ -38,7 +38,7 @@
                             <field name="normal_consistency_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group>
+                     <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_normal"/>
                       <field name="humidity_percent_normal"/>
@@ -56,6 +56,10 @@
                             <label for="specific_gravity_fly1" string="Trial 1" />
                             <field  name="specific_gravity_fly1"  colspan="3"  nolabel="1"/>
                           </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="specific_gravity_fly2" string="Trial 2" />
+                            <field  name="specific_gravity_fly2"  colspan="3"  nolabel="1"/>
+                          </group>
                         </div>
                     </group>
                     <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
@@ -65,6 +69,10 @@
                           <group colspan="1"  class="oe_inline">
                             <label for="specific_gravity_cement1" string="Trial 1" />
                             <field  name="specific_gravity_cement1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="specific_gravity_cement2" string="Trial 2" />
+                            <field  name="specific_gravity_cement2"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
                     </group>
@@ -76,6 +84,10 @@
                             <label for="n1" string="Trial 1" />
                             <field  name="n1"  colspan="3"  nolabel="1"/>
                           </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="n2" string="Trial 2" />
+                            <field  name="n2"  colspan="3"  nolabel="1"/>
+                          </group>
                         </div>
                     </group>
                      <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
@@ -85,6 +97,10 @@
                           <group colspan="1"  class="oe_inline">
                             <label for="wt_of_flyash" string="Trial 1" />
                             <field  name="wt_of_flyash"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1"  class="oe_inline">
+                            <label for="wt_of_flyash2" string="Trial 2" />
+                            <field  name="wt_of_flyash2"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
                     </group>
@@ -96,6 +112,10 @@
                             <label for="wt_of_cement" string="Trial 1" />
                             <field  name="wt_of_cement"  colspan="3"  nolabel="1"/>
                           </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_of_cement2" string="Trial 2" />
+                            <field  name="wt_of_cement2"  colspan="3"  nolabel="1"/>
+                          </group>
                         </div>
                     </group>
                      <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
@@ -106,14 +126,22 @@
                             <label for="total_wt_of_sample" string="Trial 1" />
                             <field  name="total_wt_of_sample"  colspan="3"  nolabel="1"/>
                           </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="total_wt_of_sample2" string="Trial 2" />
+                            <field  name="total_wt_of_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
                         </div>
                     </group>
                      <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
                         <label for="wt_of_water_req_trial1" string="Wt.of water required (g)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
-                            <label for="wt_of_water_req_trial1" string="" />
+                            <label for="wt_of_water_req_trial1" string="Trial 1" />
                             <field  name="wt_of_water_req_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_of_water_req_trial2" string="Trial 2" />
+                            <field  name="wt_of_water_req_trial2"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
                     </group>
@@ -121,8 +149,12 @@
                         <label for="penetration_of_vicat_plunger_trial1" string="Penetraion of vicat's Plunger (mm)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
-                            <label for="penetration_of_vicat_plunger_trial1" string="" />
+                            <label for="penetration_of_vicat_plunger_trial1" string="Trial 1" />
                             <field  name="penetration_of_vicat_plunger_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="penetration_of_vicat_plunger_trial2" string="Trial 2" />
+                            <field  name="penetration_of_vicat_plunger_trial2"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
                     </group>
@@ -130,8 +162,12 @@
                         <label for="normal_consistency_trial1" string="Normal Consistency (%)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
-                            <label for="normal_consistency_trial1" string="" />
+                            <label for="normal_consistency_trial1" string="Trial 1" />
                             <field  name="normal_consistency_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="normal_consistency_trial2" string="Trial 2" />
+                            <field  name="normal_consistency_trial2"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
                     </group>
@@ -142,7 +178,7 @@
                             <field name="setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         </h1>
                     </group>
-                    <group>
+                    <group  attrs="{'invisible': [('setting_time_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_setting"/>
                       <field name="humidity_percent_setting"/>
@@ -188,14 +224,15 @@
                             <field name="particles_retained_visible" invisible="1"/>
                         </h1>
                     </group>
+                    
+                    <group attrs="{'invisible': [('particles_retained_visible', '=', False)]}">
                     <group>
-                    <group>
-                      <field name="temp_percent_soundness"/>
-                      <field name="humidity_percent_soundness"/>
+                      <field name="temp_percent_retained"/>
+                      <field name="humidity_percent_retained"/>
                     </group>
                     <group>
-                      <field name="start_date_soundness"/>
-                      <field name="end_date_soundness"/>
+                      <field name="start_date_retained"/>
+                      <field name="end_date_retained"/>
                     </group>
                     </group>
                     <group attrs="{'invisible': [('particles_retained_visible', '=', False)]}">
@@ -217,7 +254,7 @@
                             <field name="soundness_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': [('soundness_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_soundness"/>
                       <field name="humidity_percent_soundness"/>
@@ -252,7 +289,7 @@
                             <field name="specigic_gravity_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': [('specigic_gravity_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_specific"/>
                       <field name="humidity_percent_specific"/>
@@ -329,7 +366,7 @@
                         </div>
                     </group>
                     <group>
-                    <group class="oe_inline oe_center">
+                    <group class="oe_inline oe_center" attrs="{'invisible': [('specigic_gravity_visible', '=', False)]}">
                         <label for="average_specific_gravity" string="Average" />
                         <field name="average_specific_gravity" nolabel="1" class="oe_center" />
                     </group>
@@ -341,7 +378,7 @@
                             <field name="compressive_visible" invisible="1"/>
                         </h1>
                     </group>
-           
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_compressive"/>
                       <field name="humidity_percent_compressive"/>
@@ -349,6 +386,7 @@
                     <group>
                       <field name="start_date_compressive"/>
                       <field name="end_date_compressive"/>
+                    </group>
                     </group>
                   
                   
@@ -493,7 +531,7 @@
                       </field>
                       <field name="average_casting_28dayss"/>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
                     <field name="compressive_strength_of_sample"/>
                     </group>
                     <!-- Lime Reactivity -->
@@ -503,7 +541,7 @@
                             <field name="lime_reactivity_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group>
+                    <group  attrs="{'invisible': [('lime_reactivity_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_lime"/>
                       <field name="humidity_percent_lime"/>
@@ -590,7 +628,7 @@
                             <field name="fineness_blaine_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_fineness"/>
                       <field name="humidity_percent_fineness"/>
@@ -700,6 +738,40 @@
                           <group >
                             <field  name="mass_of_sample_fineness"  colspan="6"/>
                           </group>
+                    </group>
+
+                     <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
+                        <label for="time_sample_trial1" string="Time(t),sec." />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="time_sample_trial1" string="1" />
+                            <field  name="time_sample_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="time_sample_trial2" string="2" />
+                            <field  name="time_sample_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="time_sample_trial3" string="3" />
+                            <field  name="time_sample_trial3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">                        
+                          <group >
+                            <field  name="average_sample_time"  colspan="6"/>
+                            <!-- <field  name="fineness_of_sample"  colspan="6"/>
+                            <field  name="fineness_air_permeability"  colspan="6"/> -->
+                          </group>
+                    </group>
+                    <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">                        
+                          <field name="ss"/>
+                          <field name="ps"/>
+                          <field name="p"/>
+                          <field name="ts"/>
+                          <field name="t"/>
+                          <field name="specific_surface"/>
+                          <field name="fineness_air_permeability"/>
                     </group>
                     
 

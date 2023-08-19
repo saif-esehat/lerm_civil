@@ -555,6 +555,8 @@ class CementNormalConsistency(models.Model):
         for record in self:
             record.mean_of_three_measured_times = record.average_time_fineness
 
+    
+
             
     ### Compute Visible
     @api.depends('tests')

@@ -71,6 +71,47 @@ class FlyaschNormalConsistency(models.Model):
             else:
                 record.normal_consistency_trial1 = 0.0
 
+    specific_gravity_fly2 = fields.Float("Specific Gravity of Flyash")
+    specific_gravity_cement2 = fields.Float("Specific Gravity of Cement")
+    n2 = fields.Float("N",compute="_compute_n2")
+
+    wt_of_flyash2 = fields.Float(string="Wt. of Flyash",compute="_compute_flyash2")
+    wt_of_cement2 = fields.Float(string="Wt. of  Cement",default=0.8*400)
+    total_wt_of_sample2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_of_sample2")
+
+    wt_of_water_req_trial2 = fields.Float("Wt.of water required (g)")
+    penetration_of_vicat_plunger_trial2 = fields.Float("Penetraion of vicat's Plunger (mm)")
+
+    normal_consistency_trial2 = fields.Float("Normal Consistency (%)",compute="_compute_normal_consistency2",store=True)
+
+    @api.depends('specific_gravity_fly2','specific_gravity_cement2')
+    def _compute_n2(self):
+        for record in self:
+            if record.specific_gravity_cement2 != 0:
+                record.n2 = record.specific_gravity_fly2 / record.specific_gravity_cement2
+            else:
+                record.n2 = 0.0
+
+    @api.depends('n2')
+    def _compute_flyash2(self):
+        for record in self:
+            record.wt_of_flyash2 = 0.2 * record.n2 * 400
+
+    @api.depends('wt_of_flyash2','wt_of_cement2')
+    def _compute_of_sample2(self):
+        for record in self:
+            record.total_wt_of_sample2 = record.wt_of_flyash2 + record.wt_of_cement2
+
+
+    @api.depends('wt_of_water_req_trial2','total_wt_of_sample2')
+    def _compute_normal_consistency2(self):
+        for record in self:
+            if record.total_wt_of_sample2 != 0:
+                record.normal_consistency_trial2 = (record.wt_of_water_req_trial2 / record.total_wt_of_sample2) * 100
+            else:
+                record.normal_consistency_trial2 = 0.0
+
+    
 
 
     # Setting Time
@@ -158,10 +199,10 @@ class FlyaschNormalConsistency(models.Model):
     particles_retained = fields.Char("Name",default=" Particles retained on 45 micron IS sieve (wet sieving)")
     particles_retained_visible = fields.Boolean("Particles retained Visible",compute="_compute_visible")
 
-    temp_percent_soundness = fields.Float("Temperature %")
-    humidity_percent_soundness = fields.Float("Humidity %")
-    start_date_soundness = fields.Date("Start Date")
-    end_date_soundness = fields.Date("End Date")
+    temp_percent_retained = fields.Float("Temperature %")
+    humidity_percent_retained = fields.Float("Humidity %")
+    start_date_retained = fields.Date("Start Date")
+    end_date_retained = fields.Date("End Date")
 
 
     particles_retained_table = fields.One2many('particles.retained.line','parent_id',string="Particles Retained")
@@ -674,6 +715,20 @@ class FlyaschNormalConsistency(models.Model):
     specific_gravity_fineness = fields.Float(string="Specific Gravity",compute="_compute_specific_gravity_fineness")
     mass_of_sample_fineness = fields.Float(string="mass of sample taken (g)",compute="_compute_mass_of_sample_fineness")
 
+    time_sample_trial1 = fields.Float("Time(t),sec.")
+    time_sample_trial2 = fields.Float("Time(t),sec.")
+    time_sample_trial3 = fields.Float("Time(t),sec.")
+    average_sample_time = fields.Float("Average Time(tₒ),Sec",compute="_compute_average_sample_time")
+
+    ss = fields.Float(string="Sₛ is the Specific surface of Standard Sample (m²/kg)",default=333)
+    ps = fields.Float(string="ρₛ is the Density of Standard sample",default=2.23)
+    p = fields.Float(string="ρ is the Density of Test sample",compute="_compute_specific_gravity_p")
+    ts = fields.Float(string="√Ƭₛ is the Mean of three measured times of Standard Sample",compute="_compute_ts")
+    t = fields.Float(string="√Ƭ is the Mean of three measured times of Test sample",compute="_compute_t")
+    specific_surface = fields.Float("S is the Specific surface of Test sample (m²/kg)",compute="_compute_specific_surface")
+    fineness_air_permeability = fields.Float("Fineness By Blaine Air Permeability Method (m2/kg)",compute="_compute_fineness_air_permeability")
+
+
 
 
     @api.depends('weight_of_mercury_before_trial1','weight_of_mercury_after_trail1','density_of_mercury')
@@ -718,6 +773,57 @@ class FlyaschNormalConsistency(models.Model):
     def _compute_mass_of_sample_fineness(self):
         for record in self:
             record.mass_of_sample_fineness = 0.5 * record.specific_gravity_fineness * record.average_bed_volume
+
+
+    @api.depends('time_sample_trial1','time_sample_trial2','time_sample_trial3')
+    def _compute_average_sample_time(self):
+        self.average_sample_time = (self.time_sample_trial1 + self.time_sample_trial2 + self.time_sample_trial3)/3
+
+
+
+    @api.depends('average_specific_gravity')
+    def _compute_specific_gravity_p(self):
+        for record in self:
+            record.p = record.average_specific_gravity
+
+
+    @api.depends('average_time_fineness')
+    def _compute_ts(self):
+        for record in self:
+            if record.average_time_fineness:
+                record.ts = record.average_time_fineness ** 0.5
+            else:
+                record.ts = 0.0
+
+    @api.depends('average_sample_time')
+    def _compute_t(self):
+        for record in self:
+            if record.average_sample_time:
+                record.t = record.average_sample_time ** 0.5
+            else:
+                record.t = 0.0
+
+
+    @api.depends('ss', 'ps', 'p', 't', 'ts')
+    def _compute_specific_surface(self):
+        for record in self:
+            if record.ss and record.ps and record.p and record.t and record.ts:
+                specific_surface_value = (record.ss * record.ps * record.t) / (record.p * record.ts)
+                record.specific_surface = round(specific_surface_value, 2)
+            else:
+                record.specific_surface = 0.0
+
+    @api.depends('specific_surface')
+    def _compute_fineness_air_permeability(self):
+        for record in self:
+            if record.specific_surface:
+                rounded_specific_surface = round(record.specific_surface, 0)  # Round to nearest integer
+                record.fineness_air_permeability = max(360.0, rounded_specific_surface)  # Ensure value is at least 360
+            else:
+                record.fineness_air_permeability = 0.0
+
+    
+
 
 
 
@@ -832,7 +938,7 @@ class FlyaschNormalConsistency(models.Model):
 
 
 class CementTest(models.Model):
-    _name = "mechanical.flyash.test"
+    _name = "mechanical.cement.test"
     _rec_name = "name"
     name = fields.Char("Name")
 
