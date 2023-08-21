@@ -251,7 +251,7 @@
                      <!-- Soundness Test -->
                     <group attrs="{'invisible': [('soundness_visible', '=', False)]}">
                         <h1>
-                            <field name="soundness_name" readonly="1" nolabel="1"/>
+                            <field name="soundness_name_fly" readonly="1" nolabel="1"/>
                             <field name="soundness_visible" invisible="1"/>
                         </h1>
                     </group>
