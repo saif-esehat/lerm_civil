@@ -8,10 +8,10 @@ import math
 class FlyaschNormalConsistency(models.Model):
     _name = "mechanical.flyasch.normalconsistency"
     _inherit = "lerm.eln"
-    _rec_name = "name"
+    _rec_name = "name_fly"
 
 
-    name = fields.Char("Name",default="Fly Asch")
+    name_fly = fields.Char("Name",default="Fly Ash")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
