@@ -31,7 +31,7 @@
                     
                     <group >
                             
-                            <field name="tests" widget="many2many_tags" options="{'no_create':True,'no_open': True}"/>
+                            <field name="tests" widget="many2many_tags"/>
                     </group>
                     <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
                         <h1>
