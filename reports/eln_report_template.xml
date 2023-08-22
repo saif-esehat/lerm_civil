@@ -2394,9 +2394,89 @@
 									<span t-field="data.end_date_normal"/>
 								</td>
 							</tr>
+							<tr cols="12">
+								<td colspan="6">Specific Gravity of Flyash :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.gravity_of_flyash1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Specific Gravity of Cement :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.gravity_of_cement1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">N :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.fly_ash_n1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Wt. of  Flyash :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_of_flash_1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Wt. of  Cement :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_of_cement_1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Total Weight of Sample(g) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.total_wt_of_sample_fly_1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Wt.of water required (g) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_of_water_required_fly_1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Penetraion of vicat's Plunger (mm) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.penetration_planger_fly_1"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Normal Consistency % :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.normal_consistency_fly_1"/>
+								</td>
+							</tr>
 							
 						</table>
                 </div>
+				<div class="authorizeRowDataSheet">
+						<div>
+							<div>
+								<b>
+									(JR Chemist)
+								</b>
+							</div>
+							<div>
+								<b>
+									Tested By
+								</b>
+							</div>
+						</div>
+						<div style="margin-left:500px">
+							<div>
+								<b>
+									Chemical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+						</div>
+					</div>
             </div>
         </t>
     </t>
