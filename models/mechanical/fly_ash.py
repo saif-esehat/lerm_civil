@@ -30,88 +30,89 @@ class FlyaschNormalConsistency(models.Model):
     end_date_normal = fields.Date("End Date")
 
 
+    gravity_of_flyash1 = fields.Float(string="Specific Gravity of Flyash")
+    gravity_of_flyash2 = fields.Float(string="Specific Gravity of Flyash")
 
-    specific_gravity_fly1 = fields.Float("Specific Gravity of Flyash")
-    specific_gravity_cement1 = fields.Float("Specific Gravity of Cement")
-    n1 = fields.Float("N",compute="_compute_n",store=True)
-    
-    wt_of_flyash = fields.Float(string="Wt. of Flyash",compute="_compute_flyash")
-    wt_of_cement = fields.Float(string="Wt. of  Cement",default=0.8*400)
-    total_wt_of_sample = fields.Float(string="Total Weight of Sample(g)",compute="_compute_of_sample")
+    gravity_of_cement1 = fields.Float(string="Specific Gravity of Cement")
+    gravity_of_cement2 = fields.Float(string="Specific Gravity of Cement")
 
-    wt_of_water_req_trial1 = fields.Float("Wt.of water required (g)")
-    penetration_of_vicat_plunger_trial1 = fields.Float("Penetraion of vicat's Plunger (mm)")
 
-    normal_consistency_trial1 = fields.Float("Normal Consistency (%)",compute="_compute_normal_consistency",store=True)
+    fly_ash_n1 = fields.Float(string="N",compute="_compute_fly_ash_n1")
+    fly_ash_n2 = fields.Float(string="N",compute="_compute_fly_ash_n2")
 
-    @api.depends('specific_gravity_fly1','specific_gravity_cement1')
-    def _compute_n(self):
+    wt_of_flash_1 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_1")
+    wt_of_flash_2 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_2")
+
+    wt_of_cement_1 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
+    wt_of_cement_2 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
+
+    total_wt_of_sample_fly_1 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_1")
+    total_wt_of_sample_fly_2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_2")
+
+    wt_of_water_required_fly_1 = fields.Float(string="Wt.of water required (g)")
+    wt_of_water_required_fly_2 = fields.Float(string="Wt.of water required (g)")
+
+    penetration_planger_fly_1 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
+    penetration_planger_fly_2 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
+
+    normal_consistency_fly_1 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_1")
+    normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
+
+    @api.depends('gravity_of_flyash1', 'gravity_of_cement1')
+    def _compute_fly_ash_n1(self):
         for record in self:
-            if record.specific_gravity_cement1 != 0:
-                record.n1 = record.specific_gravity_fly1 / record.specific_gravity_cement1
+            if record.gravity_of_cement1 != 0:
+                record.fly_ash_n1 = record.gravity_of_flyash1 / record.gravity_of_cement1
             else:
-                record.n1 = 0.0
+                record.fly_ash_n1 = 0.
+                
 
-
-    @api.depends('n1')
-    def _compute_flyash(self):
+    @api.depends('gravity_of_flyash2', 'gravity_of_cement2')
+    def _compute_fly_ash_n2(self):
         for record in self:
-            record.wt_of_flyash = 0.2 * record.n1 * 400
-
-    @api.depends('wt_of_cement','wt_of_flyash')
-    def _compute_of_sample(self):
-        for record in self:
-            record.total_wt_of_sample = record.wt_of_cement + record.wt_of_flyash
-
-    @api.depends('wt_of_water_req_trial1','total_wt_of_sample')
-    def _compute_normal_consistency(self):
-        for record in self:
-            if record.total_wt_of_sample != 0:
-                record.normal_consistency_trial1 = (record.wt_of_water_req_trial1 / record.total_wt_of_sample) * 100
+            if record.gravity_of_cement2 != 0:
+                record.fly_ash_n2 = record.gravity_of_flyash2 / record.gravity_of_cement2
             else:
-                record.normal_consistency_trial1 = 0.0
+                record.fly_ash_n2 = 0.0
 
-    specific_gravity_fly2 = fields.Float("Specific Gravity of Flyash")
-    specific_gravity_cement2 = fields.Float("Specific Gravity of Cement")
-    n2 = fields.Float("N",compute="_compute_n2")
-
-    wt_of_flyash2 = fields.Float(string="Wt. of Flyash",compute="_compute_flyash2")
-    wt_of_cement2 = fields.Float(string="Wt. of  Cement",default=0.8*400)
-    total_wt_of_sample2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_of_sample2")
-
-    wt_of_water_req_trial2 = fields.Float("Wt.of water required (g)")
-    penetration_of_vicat_plunger_trial2 = fields.Float("Penetraion of vicat's Plunger (mm)")
-
-    normal_consistency_trial2 = fields.Float("Normal Consistency (%)",compute="_compute_normal_consistency2",store=True)
-
-    @api.depends('specific_gravity_fly2','specific_gravity_cement2')
-    def _compute_n2(self):
+    @api.depends('fly_ash_n1')
+    def _compute_wt_of_flash_1(self):
         for record in self:
-            if record.specific_gravity_cement2 != 0:
-                record.n2 = record.specific_gravity_fly2 / record.specific_gravity_cement2
+            record.wt_of_flash_1 = 0.2 * record.fly_ash_n1 * 400
+
+    @api.depends('fly_ash_n2')
+    def _compute_wt_of_flash_2(self):
+        for record in self:
+            record.wt_of_flash_2 = 0.2 * record.fly_ash_n2 * 400
+
+    @api.depends('wt_of_cement_1','wt_of_flash_1')
+    def _compute_wt_of_sample_fly_1(self):
+        for record in self:
+            record.total_wt_of_sample_fly_1 = record.wt_of_cement_1 + record.wt_of_flash_1
+
+    @api.depends('wt_of_cement_2','wt_of_flash_2')
+    def _compute_wt_of_sample_fly_2(self):
+        for record in self:
+            record.total_wt_of_sample_fly_2 = record.wt_of_cement_2 + record.wt_of_flash_2
+
+    @api.depends('wt_of_water_required_fly_1', 'total_wt_of_sample_fly_1')
+    def _compute_normal_consistency_fly_1(self):
+        for record in self:
+            if record.total_wt_of_sample_fly_1 != 0:
+                record.normal_consistency_fly_1 = (record.wt_of_water_required_fly_1 / record.total_wt_of_sample_fly_1) * 100
             else:
-                record.n2 = 0.0
+                record.normal_consistency_fly_1 = 0.0
 
-    @api.depends('n2')
-    def _compute_flyash2(self):
+
+    @api.depends('wt_of_water_required_fly_2', 'total_wt_of_sample_fly_2')
+    def _compute_normal_consistency_fly_2(self):
         for record in self:
-            record.wt_of_flyash2 = 0.2 * record.n2 * 400
-
-    @api.depends('wt_of_flyash2','wt_of_cement2')
-    def _compute_of_sample2(self):
-        for record in self:
-            record.total_wt_of_sample2 = record.wt_of_flyash2 + record.wt_of_cement2
-
-
-    @api.depends('wt_of_water_req_trial2','total_wt_of_sample2')
-    def _compute_normal_consistency2(self):
-        for record in self:
-            if record.total_wt_of_sample2 != 0:
-                record.normal_consistency_trial2 = (record.wt_of_water_req_trial2 / record.total_wt_of_sample2) * 100
+            if record.total_wt_of_sample_fly_2 != 0:
+                record.normal_consistency_fly_2 = (record.wt_of_water_required_fly_2 / record.total_wt_of_sample_fly_2) * 100
             else:
-                record.normal_consistency_trial2 = 0.0
+                record.normal_consistency_fly_2 = 0.0
 
-    
+
 
 
     # Setting Time
@@ -127,22 +128,25 @@ class FlyaschNormalConsistency(models.Model):
     wt_of_water_required_setting_time = fields.Float("Wt.of water required (g)",compute="_compute_wt_of_water_required",store=True)
 
 
-    @api.depends('total_wt_of_sample')
+    @api.depends('total_wt_of_sample_fly_1')
     def _compute_total_wt_of_sample_setting_time(self):
         for record in self:
-            record.total_wt_of_sample_setting_time = record.total_wt_of_sample
+            record.total_wt_of_sample_setting_time = record.total_wt_of_sample_fly_1
 
-    @api.depends('normal_consistency_trial1','total_wt_of_sample_setting_time')
+    @api.depends('normal_consistency_fly_1','total_wt_of_sample_setting_time')
     def _compute_wt_of_water_required(self):
         for record in self:
-            record.wt_of_water_required_setting_time =  (0.85 * record.normal_consistency_trial1 * record.total_wt_of_sample_setting_time) / 100
+            record.wt_of_water_required_setting_time =  (0.85 * record.normal_consistency_fly_1 * record.total_wt_of_sample_setting_time) / 100
 
 
     initial_setting_time = fields.Char("Name", default="Initial Setting Time")
     time_water_added = fields.Datetime("The Time When water is added to cement (t1)")
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
-    initial_setting_time_hours = fields.Float("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
+    initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
     initial_setting_time_minutes = fields.Float("Initial Setting Time", compute="_compute_initial_setting_time")
+
+   
+    
 
     @api.depends('time_water_added', 'time_needle_fails')
     def _compute_initial_setting_time(self):
@@ -152,18 +156,33 @@ class FlyaschNormalConsistency(models.Model):
                 t2 = record.time_needle_fails
                 time_difference = t2 - t1
 
-                # Convert time difference to seconds and then to minutes
-                time_difference_minutes = time_difference.total_seconds() / 60
+                # Calculate the time difference in hours and minutes
+                total_minutes = time_difference.total_seconds() / 60
+                hours = int(total_minutes // 60)
+                minutes = int(total_minutes % 60)
 
-                record.initial_setting_time_hours = time_difference.total_seconds() / 3600
-                if time_difference_minutes % 5 == 0:
-                    record.initial_setting_time_minutes = time_difference_minutes
-                else:
-                    record.initial_setting_time_minutes = round(time_difference_minutes / 5) * 5
+                # Round minutes
+                rounded_minutes = round(minutes)
+                
+                # Convert hours and minutes to total minutes
+                total_minutes = hours * 60 + rounded_minutes
 
+                # Format the time as hours:minutes
+                formatted_time = f"{hours}:{minutes:02}"
+
+                # Store the formatted time in the initial_setting_time_hours field
+                record.initial_setting_time_hours = formatted_time
+
+                # Store the total rounded minutes in the initial_setting_time_minutes field
+                record.initial_setting_time_minutes = total_minutes
             else:
-                record.initial_setting_time_hours = False
-                record.initial_setting_time_minutes = False
+                record.initial_setting_time_hours = "0:00"
+                record.initial_setting_time_minutes = 0.0
+
+   
+
+
+
 
 
      #Final setting Time
@@ -247,21 +266,21 @@ class FlyaschNormalConsistency(models.Model):
     total_wt_sample_soundness = fields.Float(string="Total Weight of Sample(g)",compute="_compute_total_wt_sample_soundness")
     wt_of_water_req_soundness = fields.Float(string="Wt.of water required (g)",compute="_compute_wt_of_water_req_soundness")
 
-    @api.depends('n1')
+    @api.depends('fly_ash_n1')
     def _compute_wt_of_flyash_soundness(self):
         for record in self:
-            record.wt_of_flyash_soundness = (0.2 * record.n1 * 100)
+            record.wt_of_flyash_soundness = (0.2 * record.fly_ash_n1 * 100)
 
     @api.depends('wt_of_flyash_soundness','wt_of_cement_soundness')
     def _compute_total_wt_sample_soundness(self):
         for record in self:
             record.total_wt_sample_soundness = record.wt_of_flyash_soundness + record.wt_of_cement_soundness
 
-    @api.depends('normal_consistency_trial1', 'total_wt_sample_soundness')
+    @api.depends('normal_consistency_fly_1', 'total_wt_sample_soundness')
     def _compute_wt_of_water_req_soundness(self):
       for record in self:
         if record.total_wt_sample_soundness != 0:
-            record.wt_of_water_req_soundness = (0.78 * record.normal_consistency_trial1 / 100) * record.total_wt_sample_soundness
+            record.wt_of_water_req_soundness = (0.78 * record.normal_consistency_fly_1 / 100) * record.total_wt_sample_soundness
         else:
             record.wt_of_water_req_soundness = 0.0
 
@@ -292,7 +311,7 @@ class FlyaschNormalConsistency(models.Model):
                 record.expansion_soundness = 0
     
     #  Specigic Gravity
-    specigic_gravity = fields.Char("Name",default="Specigic Gravity")
+    specigic_gravity_fly = fields.Char("Name",default="Specific Gravity")
     specigic_gravity_visible = fields.Boolean("Specigic Gravity Visible",compute="_compute_visible")
 
     temp_percent_specific = fields.Float("Temperature %")
@@ -382,10 +401,10 @@ class FlyaschNormalConsistency(models.Model):
         for record in self:
             record.specific_garavity_flyash = record.average_specific_gravity
 
-    @api.depends('specific_gravity_cement1')
+    @api.depends('gravity_of_cement1')
     def _compute_specific_gravity_cement(self):
         for record in self:
-            record.specific_gravity_cement = record.specific_gravity_cement1
+            record.specific_gravity_cement = record.gravity_of_cement1
 
     @api.depends('specific_garavity_flyash', 'specific_gravity_cement')
     def _compute_n2(self):
@@ -580,10 +599,10 @@ class FlyaschNormalConsistency(models.Model):
         for record in self:
             record.specific_gravity_fly_lime = record.average_specific_gravity
 
-    @api.depends('specific_gravity_cement1')
+    @api.depends('gravity_of_cement1')
     def _compute_specific_gravity_lime(self):
         for record in self:
-            record.specific_gravity_of_lime = record.specific_gravity_cement1
+            record.specific_gravity_of_lime = record.gravity_of_cement1
 
     @api.depends('specific_gravity_fly_lime','specific_gravity_of_lime')
     def _compute_m(self):
@@ -857,7 +876,7 @@ class FlyaschNormalConsistency(models.Model):
         setting_time_test = self.env['mechanical.cement.test'].search([('name', '=', 'Setting Time')])
         particles_retained_test = self.env['mechanical.cement.test'].search([('name', '=', 'Particles retained on 45 micron IS sieve (wet sieving)')])
         soundness_test = self.env['mechanical.cement.test'].search([('name', '=', 'Soundness')])
-        specific_gravity_test = self.env['mechanical.cement.test'].search([('name', '=', 'Specigic Gravity')])
+        specific_gravity_test = self.env['mechanical.cement.test'].search([('name', '=', 'Specific Gravity')])
         compressive_test = self.env['mechanical.cement.test'].search([('name', '=', 'Compressive Strength')])
         lime_reactivity_test = self.env['mechanical.cement.test'].search([('name', '=', 'Lime Reactivity')])
         # # casting_3days_test = self.env['mechanical.cement.test'].search([('name', '=', '3 Days')])
@@ -874,6 +893,9 @@ class FlyaschNormalConsistency(models.Model):
             record.compressive_visible = False
             record.lime_reactivity_visible = False
             record.fineness_blaine_visible = False
+
+            if normal_consistency_test in record.tests:
+                record.normal_consistency_visible = True
 
             if setting_time_test in record.tests:
                 record.normal_consistency_visible = True
