@@ -67,6 +67,7 @@
     'views/mechanical/cement_psc.xml',
     'views/mechanical/cement_ppc.xml',
     'views/mechanical/cement_setting_time.xml',
+    'views/mechanical/ggbs.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',

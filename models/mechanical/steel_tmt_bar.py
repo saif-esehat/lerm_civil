@@ -26,7 +26,7 @@ class SteelTmtBarLine(models.Model):
     fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
     ts_ys_ratio = fields.Float(string="TS/YS Ratio",compute="_compute_ts_ys_ratio")
-    weight_per_meter = fields.Float(string="Weight per meter",compute="_compute_weight_per_meter")
+    # weight_per_meter = fields.Float(string="Weight per meter",compute="_compute_weight_per_meter")
     variation = fields.Float(string="Variation")
 
     requirement_utl = fields.Float(string="Requirement",compute="_compute_requirement_utl")
@@ -286,7 +286,7 @@ class SteelTmtBarLine(models.Model):
     def _compute_crossectional_area(self):
         for record in self:
             if record.lentgh != 0:
-                record.crossectional_area = round((record.weight / (0.00785 * record.lentgh),2))
+                record.crossectional_area = round((record.weight / (0.00785 * record.lentgh)),2)
                 
             else:
                 record.crossectional_area = 0.0
@@ -294,7 +294,7 @@ class SteelTmtBarLine(models.Model):
     @api.depends('crossectional_area')
     def _compute_gauge_length(self):
         for record in self:
-            record.gauge_length = round(5.65 * math.sqrt(record.crossectional_area))
+            record.gauge_length = round((5.65 * math.sqrt(record.crossectional_area)),2)
 
 
     @api.depends('yeild_load','crossectional_area')

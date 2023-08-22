@@ -36,9 +36,9 @@
                             <group style="width:51%">
                                 <field name='weight'/>
                             </group>
-                            <group style="width:51%">
+                            <!-- <group style="width:51%">
                                 <field name='weight_per_meter'/>
-                            </group>
+                            </group> -->
                             <group style="width:51%">
                                 <field name='crossectional_area'/>
                             </group>
