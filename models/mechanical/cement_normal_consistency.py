@@ -185,7 +185,7 @@ class CementNormalConsistency(models.Model):
     # Density End  
 
     # Soundness Test
-    soundness_name = fields.Char("Name",default="Soundness")
+    soundness_name = fields.Char("Name",default="Soundness by le-chatelier")
     soundness_visible = fields.Boolean("Soundness Visible",compute="_compute_visible")
 
     temp_percent_soundness = fields.Float("Temperature %")
