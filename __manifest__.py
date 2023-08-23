@@ -68,6 +68,7 @@
     'views/mechanical/cement_ppc.xml',
     'views/mechanical/cement_setting_time.xml',
     'views/mechanical/ggbs.xml',
+    'views/mechanical/fly_ash.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',
@@ -80,7 +81,8 @@
     'reports/sample_report_action.xml',
     'reports/datasheet_templates.xml',
     'reports/general_template.xml',
-    'reports/general_report_template.xml'
+    'reports/general_report_template.xml',
+    
     ],
         'assets': {
     'web.assets_backend':[

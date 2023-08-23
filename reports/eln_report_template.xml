@@ -237,7 +237,7 @@
 								</th>
 								<th>
 									<span>
-										Specification as per IS 1786:2008(RA 2018)
+										Specification as per IS 15456:2000(RA 2016)
 									</span>
 								</th>
 								<th>
@@ -1285,6 +1285,8 @@
                 </div>
 				<div class="container_eln" style="margin-top:5px">
 					<div t-if="data.normal_consistency_visible">
+					
+
 						<div style="text-align:center;font-size:18px">
 							Normal Consistency
 						</div>
@@ -2359,4 +2361,46 @@
 			</t>
 		</t>
 	</template>
+
+<template id="flyash_datasheet">
+    <t t-call="web.html_container">
+        <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+            <div style="text-align:center;font-size:18px">
+                Fly Ash
+            </div>
+            <div class="container_eln" style="margin-top:5px">
+                <div>
+                    <div style="text-align:center;font-size:18px">
+                        Normal Consistency
+                    </div>
+                   <table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Temperature :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.temp_percent_normal"/>
+								</td>
+								<td colspan="6">Test Start Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.start_date_normal"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Humidity :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.humidity_percent_normal"/>
+								</td>
+								<td colspan="6">Test End Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.end_date_normal"/>
+								</td>
+							</tr>
+							
+						</table>
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+
+
 </odoo>
