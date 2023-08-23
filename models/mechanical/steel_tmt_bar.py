@@ -9,8 +9,8 @@ class SteelTmtBarLine(models.Model):
    
     
     Id_no = fields.Char("ID No")
-    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id")
-    size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+    size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
     diameter = fields.Integer(string="Dia. in mm")
     lentgh = fields.Float(string="Length in mm",digits=(10, 3))
     weight = fields.Float(string="Weight, in kg",digits=(10, 3))
@@ -18,53 +18,53 @@ class SteelTmtBarLine(models.Model):
     crossectional_area = fields.Float(string="Cross sectional Area, mm²",compute="_compute_crossectional_area",store=True)
     gauge_length = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
     elongated_gauge_length = fields.Float(string="Elongated Gauge Length, mm")
-    percent_elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent")
+    percent_elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True)
     yeild_load = fields.Float(string="Yield Load  KN")
     ultimate_load = fields.Float(string="Ultimate Load, Kn")
     proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True)
-    ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth")
+    ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True)
     fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
-    ts_ys_ratio = fields.Float(string="TS/YS Ratio",compute="_compute_ts_ys_ratio")
-    weight_per_meter = fields.Float(string="Weight per meter",compute="_compute_weight_per_meter")
+    ts_ys_ratio = fields.Float(string="TS/YS Ratio",compute="_compute_ts_ys_ratio",store=True)
+    weight_per_meter = fields.Float(string="Weight per meter",compute="_compute_weight_per_meter",store=True)
     variation = fields.Float(string="Variation")
 
-    requirement_utl = fields.Float(string="Requirement",compute="_compute_requirement_utl")
-    requirement_yield = fields.Float(string="Requirement",compute="_compute_requirement_yield")
-    requirement_ts_ys = fields.Float(string="Requirement",compute="_compute_requirement_ts_ys")
-    requirement_elongation = fields.Float(string="Requirement",compute="_compute_requirement_elongation")
-    requirement_weight_per_meter = fields.Float(string="Requirement",compute="_compute_requirement_weight_per_meter",digits=(16, 4))
+    requirement_utl = fields.Float(string="Requirement",compute="_compute_requirement_utl",store=True)
+    requirement_yield = fields.Float(string="Requirement",compute="_compute_requirement_yield",store=True)
+    requirement_ts_ys = fields.Float(string="Requirement",compute="_compute_requirement_ts_ys",store=True)
+    requirement_elongation = fields.Float(string="Requirement",compute="_compute_requirement_elongation",store=True)
+    requirement_weight_per_meter = fields.Float(string="Requirement",compute="_compute_requirement_weight_per_meter",digits=(16, 4),store=True)
 
 
     
     bend_test = fields.Selection([
         ('satisfactory', 'Satisfactory'),
-        ('non-satisfactory', 'Non-Satisfactory')],"Bend Test")
+        ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
     
     re_bend_test = fields.Selection([
         ('satisfactory', 'Satisfactory'),
-        ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test")
+        ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
 
 
     uts_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_uts_nabl")
+        ('fail', 'Fail')],string="NABL",compute="_compute_uts_nabl",store=True)
 
     yield_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_yield_nabl")
+        ('fail', 'Fail')],string="NABL",compute="_compute_yield_nabl",store=True)
 
     elongation_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_elongation_nabl")
+        ('fail', 'Fail')],string="NABL",compute="_compute_elongation_nabl",store=True)
 
     ts_ys_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_ts_ys_nabl")
+        ('fail', 'Fail')],string="NABL",compute="_compute_ts_ys_nabl",store=True)
 
     weight_per_meter_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_weight_per_meter_nabl")
+        ('fail', 'Fail')],string="NABL",compute="_compute_weight_per_meter_nabl",store=True)
 
 
     @api.depends('weight','lentgh')
@@ -78,12 +78,12 @@ class SteelTmtBarLine(models.Model):
     @api.depends('weight_per_meter','eln_ref','size')
     def _compute_weight_per_meter_nabl(self):
         for record in self:
-            print("Steel Size",record.size)
+            # print("Steel Size",record.size)
             record.weight_per_meter_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')])
             materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
             for material in materials:
-                print("Materials size",material.size.id)
+                # print("Materials size",material.size.id)
                 if material.size.id == record.size.id:
                     req_min = material.req_min
                     req_max = material.req_max
@@ -156,6 +156,7 @@ class SteelTmtBarLine(models.Model):
             #     else:
             #         record.requirement_utl = 0
             materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Ultimate tensile Strength (TMT Steel)')]).parameter_table
+            print("sadsdsadsdasdasdsadadsdsds",materials)
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -227,11 +228,14 @@ class SteelTmtBarLine(models.Model):
     @api.depends('eln_ref','grade')
     def _compute_requirement_yield(self):
         for record in self:
+            print("Saifsdadddddddddd")
             # record.requirement_yield = 0
             # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
             # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
             materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Yield Stress (TMT)')]).parameter_table
+            
             for material in materials:
+                print("DATA ", material)
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     record.requirement_yield = req_min
@@ -286,7 +290,8 @@ class SteelTmtBarLine(models.Model):
     def _compute_crossectional_area(self):
         for record in self:
             if record.lentgh != 0:
-                record.crossectional_area = round((record.weight / (0.00785 * record.lentgh),2))
+                # print(record.weight / (0.00785 * record.lentgh))
+                record.crossectional_area = round((record.weight / (0.00785 * record.lentgh)),2)
                 
             else:
                 record.crossectional_area = 0.0

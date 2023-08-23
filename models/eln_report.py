@@ -43,15 +43,10 @@ class DataSheetReport(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data):
-        print(data , 'dataaaaaaaaaaaaaa')
         if 'active_id' in data['context']:
-            print(data['context']['active_id'] , 'active id')
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids)
-            print('came here')
-        # import wdb; wdb.set_trace()
-        # eln = self.env['lerm.eln'].sudo().browse(docids)
         datasheet_data = []
         prev_data = None
         for i, input_data in enumerate(eln.parameters_input):
@@ -68,3 +63,4 @@ class DataSheetReport(models.AbstractModel):
             'eln': eln,
             'datasheet' : datasheet_data
         }
+        

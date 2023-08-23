@@ -17,7 +17,7 @@ class CompressiveStrengthConcreteCube(models.Model):
     def _compute_average_strength(self):
         for record in self:
             total_strength = sum(line.compressive_strength for line in record.child_lines)
-            record.average_strength = total_strength / len(record.child_lines) if len(record.child_lines) > 0 else 0.0
+            record.average_strentgh = total_strentgh / len(record.child_lines) if len(record.child_lines) > 0 else 0.0
 
 
 
@@ -35,19 +35,11 @@ class CompressiveStrengthConcreteCubeLine(models.Model):
     sr_no = fields.Integer(string="Sr.No.",readonly=True, copy=False, default=1)
     length = fields.Float(string="Length (mm)")
     width = fields.Float(string="Width (mm)")
-<<<<<<< HEAD
     area = fields.Float(string="Area (mm²)",compute="_compute_area" ,digits=(12,4))
     id_mark = fields.Integer(string="ID Mark")
     wt_sample = fields.Float(string="Weight of Sample in kgs")
     crushing_load = fields.Float(string="Crushing Load in kN")
     compressive_strength = fields.Float(string="Compressive Strength N/mm²",compute="_compute_compressive_strength" ,digits=(12,4))
-=======
-    area = fields.Float(string="Area (mm²)",compute="_compute_area",digits=(12,4))
-    id_mark = fields.Integer(string="ID Mark")
-    wt_sample = fields.Float(string="Weight of Sample in kgs")
-    crushing_load = fields.Float(string="Crushing Load in kN")
-    compressive_strength = fields.Float(string="Compressive Strength N/mm²",compute="_compute_compressive_strength",digits=(12,4))
->>>>>>> eb4b71436215266a342f37bda30e22afd330e0f2
    
 
 

@@ -52,6 +52,7 @@
     'views/mechanical/structural_steel.xml',
     'views/mechanical/bricks.xml',
     'views/mechanical/compressive_strength_brick.xml',
+    'views/mechanical/dry_density_sand_replacement.xml',
     'views/ndt/crack_width.xml',
     'views/ndt/concrete_core.xml',
     'views/ndt/crack_depth.xml',
@@ -66,6 +67,7 @@
     'views/mechanical/cement_psc.xml',
     'views/mechanical/cement_ppc.xml',
     'views/mechanical/cement_setting_time.xml',
+    'views/mechanical/fly_ash.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',
@@ -78,7 +80,8 @@
     'reports/sample_report_action.xml',
     'reports/datasheet_templates.xml',
     'reports/general_template.xml',
-    'reports/general_report_template.xml'
+    'reports/general_report_template.xml',
+    
     ],
         'assets': {
     'web.assets_backend':[

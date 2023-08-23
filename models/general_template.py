@@ -240,3 +240,51 @@ class SteelTmtBarDataSheet(models.AbstractModel):
             'eln': eln,
             'data' : general_data
         }
+
+class CementDataSheet(models.AbstractModel):
+    _name = 'report.lerm_civil.cement_datasheet'
+    _description = 'Cement DataSheet'
+    
+    @api.model
+    def _get_report_values(self, docids, data):
+        if 'active_id' in data['context']:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        else:
+            eln = self.env['lerm.eln'].sudo().browse(docids) 
+        model_id = eln.model_id
+        # differnt location for product based
+        # model_name = eln.material.product_based_calculation[0].ir_model.name 
+        model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
+        if model_name:
+            general_data = self.env[model_name].sudo().browse(model_id)
+        else:
+            general_data = self.env['lerm.eln'].sudo().browse(docids)
+        return {
+            'eln': eln,
+            'data' : general_data
+        }
+
+
+
+class FlyashDatasheet(models.AbstractModel):
+    _name = 'report.lerm_civil.flyash_datasheet'
+    _description = 'Fly Ash DataSheet'
+    
+    @api.model
+    def _get_report_values(self, docids, data):
+        if 'active_id' in data['context']:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        else:
+            eln = self.env['lerm.eln'].sudo().browse(docids) 
+        model_id = eln.model_id
+        # differnt location for product based
+        # model_name = eln.material.product_based_calculation[0].ir_model.name 
+        model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
+        if model_name:
+            general_data = self.env[model_name].sudo().browse(model_id)
+        else:
+            general_data = self.env['lerm.eln'].sudo().browse(docids)
+        return {
+            'eln': eln,
+            'data' : general_data
+        }
