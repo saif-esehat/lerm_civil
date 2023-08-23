@@ -1284,8 +1284,8 @@
                     Cement
                 </div>
 				<div class="container_eln" style="margin-top:5px">
-					<!-- <div t-if="data.normal_consistency_visible"> -->
-					<div>
+					<div t-if="data.normal_consistency_visible">
+					<!-- <div> -->
 
 						<div style="text-align:center;font-size:18px">
 							Normal Consistency
