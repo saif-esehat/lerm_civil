@@ -123,5 +123,20 @@
         <record id="fineness_blaine_test_ppc" model="mechanical.cement.ppc.test">
             <field name="name">Fineness (Blaine)</field>   
         </record>
+
+        <!-- GGBS  -->
+
+        <record id="normal_consistency_test_ggbs" model="mechanical.ggbs.test">
+            <field name="name">Normal Consistency</field>
+        </record>
+        <record id="specific_gravity_test_ggbs" model="mechanical.ggbs.test">
+            <field name="name">Specific Gravity</field>
+        </record>
+        <record id="slag_activity_test_ggbs" model="mechanical.ggbs.test">
+            <field name="name">Slag Activity Index</field>
+        </record>
+        <record id="fineness_test_ggbs" model="mechanical.ggbs.test">
+            <field name="name">Fineness by Blaine</field>
+        </record>
     </data>
 </odoo>
