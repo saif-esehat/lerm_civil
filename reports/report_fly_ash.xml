@@ -1,36 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<template id="sample_report_template">
+	
+	
+	<template id="lerm_flyash_report">
 		<t t-call="web.html_container">
-			<!-- <t t-call="web.basic_layout">
-								<div class="imageContainer" style="padding-bottom:8px">
-								<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" class="company_logo" alt="Image" />
-								</div>
-								<div class="container_eln">
-								<table>
-								<thead>
-								<tr>
-								<th t-foreach="data_mock[0]['columns']" t-as="column">
-								<span t-esc="column['name']"/>
-								</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr t-foreach="data_mock[1]['rows']" t-as="r">
-								<td t-foreach="r['row']" t-as="row">
-								<span t-esc="row['value']"/>
-								</td>
-								</tr>
-								</tbody>
-								</table>
-								</div>
-								</t> -->
+			<!-- <t t-call="web.basic_layout"> -->
 			
-			<!-- uncomment this -->
-			<t t-call="web.basic_layout">
-				<div class="imageContainer" style="padding-bottom:8px">
-					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" class="company_logo" alt="Image" />
-				</div>
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
 				</div>
@@ -38,21 +14,26 @@
 					<div t-foreach="eln" t-as="o">
 						<table>
 							<tr>
-								<td colspan="4">Report no :
-									<![CDATA[&nbsp;]]>
+								<td colspan="3">Report no :
+								</td>
+								<td colspan="3">
 									<span t-field="o.eln_id"/>
 								</td>
-								<td colspan="4">Report Date :
-									<![CDATA[&nbsp;]]>
+								<td colspan="3">Report Date :
+								</td>
+								<td colspan="3">
 									<span t-field="o.srf_date"/>
 								</td>
-								<td colspan="4">ULR NO :
-									<![CDATA[&nbsp;]]>
-									
+								<td colspan="3">ULR NO :
+								</td>
+								<td colspan="3">
+									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
+						</table>
+						<table style="margin-top:10px;">
 							<tr>
-								<td colspan="12">Customer Name :
+								<td colspan="12">Customer Party Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.customer.name"/>
 									<span t-field="o.srf_id.customer.street"/>
@@ -60,7 +41,7 @@
 									<span t-field="o.srf_id.customer.city"/>
 									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
 									<span t-field="o.srf_id.customer.state_id"/>
-											,
+									,
 									<span t-field="o.srf_id.customer.country_id"/>
 								</td>
 							</tr>
@@ -73,20 +54,31 @@
 									<span t-field="o.srf_id.site_address.city"/>
 									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
 									<span t-field="o.srf_id.site_address.state_id"/>
-											,
+									,
 									<span t-field="o.srf_id.site_address.country_id"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Sample Description :
-									<![CDATA[&nbsp;]]>
+								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
 							</tr>
+						</table>
+						<table>
 							<tr>
-								<td colspan="12">Sample Id :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.sample_no"/>
+								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.start_date"/>
+								</td>
+								<td colspan="6">Test End Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.end_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.client_sample_id"/>
+								</td>
+								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_received_date"/>
 								</td>
 							</tr>
 							<tr>
@@ -96,7 +88,7 @@
 								</td>
 								<td colspan="6">Grade :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.grade_id.grade"/>
+									<span t-field="o.grade_id.grade"/>
 								</td>
 							</tr>
 							<tr>
@@ -127,62 +119,35 @@
 									<span t-field="o.group.group"/>
 								</td>
 							</tr>
-
+							
 							<tr>
 								<td colspan="12">Material/Test Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
+							<tr>
+								<td colspan="6">Instrument :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.instrument"/>
+								</td>
+								<td colspan="6">Temperature :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.temperature"/>
+								</td>
+							</tr>
 						</table>
 					</div>
-					<table style="margin-top:30px;">
-						<thead>
-							<tr>
-								
-								<th>
-									<span>
-										Parameter
-									</span>
-								</th>
-								
-								<th>
-									<span>
-										Result
-									</span>
-								</th>
-
-								<th>
-									<span>
-										Requirement as per IS 1786 2008 (RA:2018)
-									</span>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr t-foreach="eln.parameters" t-as="r">
-								<td>
-									<span t-esc="r['parameter'].parameter_name"/>
-								</td>
-								<td>
-									<span t-esc="r['result']"/>
-								</td>
-								<td>
-									<span t-esc="r['specification']"/>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<div style="margin-top:20px;">
+						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
+						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
+					</div>
+					
+					
+					
 				</div>
+				
 			</t>
-
-			<!-- uncomment this  -->
-
-
-		<!-- remove this -->
-	<!-- <div style="text-align:center;margin-top:10px">
-					<p style="font-size:15px"><b>Test Report</b></p>
-				</div> -->
 		</t>
 	</template>
 </odoo>
