@@ -122,10 +122,6 @@
         </field>
 
     </record>
-<<<<<<< HEAD
-=======
-
->>>>>>> 8700526130eb90c34d125b917b2239c464e2cd84
     <record id="lerm_product_action" model="ir.actions.act_window">
             <field name="name">Product</field>
             <field name="type">ir.actions.act_window</field>
@@ -153,6 +149,14 @@
         groups="kes_technician_access_group,kes_admin_access_group"
         parent="lerm_root"
         sequence="20"  />
+
+    <menuitem id="lerm_product_item_param_master"
+        parent="lerm_menu"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group"
+        name="Product"
+        action="lerm_product_action"
+        sequence="11" />
+    
 
     <menuitem id="discipline"
         name="Discipline"
