@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <template id="data_sheet_header_generaltemplate">
         <div t-attf-class="header article" t-att-style="report_header_style">
             <div class="row">
@@ -85,6 +84,21 @@
 							</tr> -->
 						</table>
 					</div>
+
+					<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="extradata and len(extradata) &gt; 0">
+						<tr cols="12">
+							<td colspan="6" t-foreach="extradata" t-as="result">
+								<span>
+									<t t-esc="result[1]"/>
+								</span> : 
+								<![CDATA[&nbsp;]]>
+								<span>
+									<t t-esc="formdata[result[0]]" />
+								</span>
+							</td>
+						</tr>
+					</table>
+
 						<table style="margin-top:30px;">
 							<thead>
 								<tr>
@@ -100,15 +114,15 @@
 									</t>
 								</tr>
             				</thead>
-							<tbody>
+							<!-- <tbody>
 								<t t-set="i" t-value="0"/>
 								<tr t-foreach="data.child_lines" t-as="r">
-									<!-- <td>
+									<td>
 										<div>
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
 										</div>
-									</td> -->
+									</td>
 									<t t-foreach="tabledata" t-as="row">
 										<td>
 											<span>
@@ -117,7 +131,38 @@
 										</td>
 									</t>
 								</tr>
+							</tbody> -->
+
+							<tbody>
+								<tr t-foreach="data.child_lines" t-as="r">
+									<t t-foreach="tabledata" t-as="row">
+										<td>
+										<span>
+											<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+												<t t-esc="round(float(r[row[0]]),2)"/>
+											</t>
+											<t t-else="">
+												<t t-esc="r[row[0]]"/>
+											</t>
+										</span>
+										</td>
+									</t>
+								</tr>
 							</tbody>
+						</table>
+
+						<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="resultdata and len(resultdata) &gt; 0">
+							<tr cols="12">
+								<td colspan="6" t-foreach="resultdata" t-as="result">
+									<span>
+										<t t-esc="result[1]"/>
+									</span> : 
+									<![CDATA[&nbsp;]]>
+									<span>
+										<t t-esc="formdata[result[0]]" />
+									</span>
+								</td>
+							</tr>
 						</table>
 						<div class="authorizeRowDataSheet">
 							<div>

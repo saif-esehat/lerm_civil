@@ -18,26 +18,30 @@
 
                         <button
                             type="object"
-                            name="print_sample_report"
-                            string="Print"
-                            attrs="{'invisible': [('state', 'not in', ('3-pending_verification','4-in_report'))]}"
+                            name="print_datasheet"
+                            string="Print Datasheet"
                             />
+                        <button
+                                type="object"
+                                name="print_report"
+                                string="Print Report"
+                                />
 
                         <button type="object" 
                         class="oe_highlight" 
                         name="approve_sample" 
-                        string="Approve Sample" 
+                        string="Approve " 
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification'))]}"/>
 
                         <button type="object" 
                         class="oe_highlight" 
                         name="approve_pending_sample" 
-                        string="Approve Sample" 
+                        string="Approve" 
                         attrs="{'invisible': [('state', 'not in', ('5-pending_approval'))]}"/>
 
                         <button type="object" 
                         name="reject_sample" 
-                        string="Reject Sample" 
+                        string="Reject" 
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification','5-pending_approval'))]}"/>
 
                         
@@ -119,11 +123,18 @@
                         <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
                     </group>
                    
-                    
+                     <group>
+                        <field name="product_or_form_based" />
+                    </group>   
+
+
+                     <group>
+                        <button name="open_form" type="object" string="Open Form" attrs="{'invisible':[('product_or_form_based','=',False)]}"/>
+                    </group>    
                     
            
                     <field invisible="1" name="parameters" nolabel="1" options="{'no_create': True, 'no_open': True}" />
-                    <field name="parameters_result" nolabel="1">
+                    <field name="parameters_result" nolabel="1" attrs="{'invisible':[('product_or_form_based','=',True)]}">
                                 <tree editable="bottom" >
                                     <field name="parameter"/>
                                     <field name="result" />
@@ -133,7 +144,7 @@
                                     <field name="test_method" />
                                     <!-- <button string="Calculation" name="open_calculation_wizard" type="object" class="oe_highlight"/> -->
                                 </tree>
-                </field>
+                    </field>
                 
                     
                 </sheet>

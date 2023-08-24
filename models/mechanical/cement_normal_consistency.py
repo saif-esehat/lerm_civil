@@ -1,6 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
-from datetime import datetime , timedelta
+from datetime import timedelta
 import math
 
 
@@ -68,11 +68,11 @@ class CementNormalConsistency(models.Model):
 
     #Initial setting Time
 
-    initial_setting_time = fields.Char("Name",default="Initial Setting Time")
+    initial_setting_time = fields.Char("Name", default="Initial Setting Time")
     time_water_added = fields.Datetime("The Time When water is added to cement (t1)")
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
-    initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)",compute="_compute_initial_setting_time")
-    initial_setting_time_minutes = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
+    initial_setting_time_hours = fields.Float("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
+    initial_setting_time_minutes = fields.Float("Initial Setting Time", compute="_compute_initial_setting_time")
 
     @api.depends('time_water_added', 'time_needle_fails')
     def _compute_initial_setting_time(self):
@@ -82,14 +82,14 @@ class CementNormalConsistency(models.Model):
                 t2 = record.time_needle_fails
                 time_difference = t2 - t1
 
-                # hours = time_difference.total_seconds() / 3600
+                # Convert time difference to seconds and then to minutes
+                time_difference_minutes = time_difference.total_seconds() / 60
 
-                record.initial_setting_time_hours = time_difference
-                initial_setting_time_minutes = time_difference.total_seconds() / 60
-                if initial_setting_time_minutes % 5 == 0:
-                    record.initial_setting_time_minutes = initial_setting_time_minutes
+                record.initial_setting_time_hours = time_difference.total_seconds() / 3600
+                if time_difference_minutes % 5 == 0:
+                    record.initial_setting_time_minutes = time_difference_minutes
                 else:
-                    record.initial_setting_time_minutes = round(initial_setting_time_minutes / 5) * 5
+                    record.initial_setting_time_minutes = round(time_difference_minutes / 5) * 5
 
             else:
                 record.initial_setting_time_hours = False
@@ -100,8 +100,8 @@ class CementNormalConsistency(models.Model):
 
     final_setting_time = fields.Char("Name",default="Final Setting Time")
     time_needle_make_impression = fields.Datetime("The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3)")
-    final_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)",compute="_compute_final_setting_time")
-    final_setting_time_minutes = fields.Char("Initial Setting Time",compute="_compute_final_setting_time")
+    final_setting_time_hours = fields.Char("Final Setting Time (t2-t1) (Hours)",compute="_compute_final_setting_time")
+    final_setting_time_minutes = fields.Char("Final Setting Time",compute="_compute_final_setting_time")
 
 
 
@@ -185,7 +185,7 @@ class CementNormalConsistency(models.Model):
     # Density End  
 
     # Soundness Test
-    soundness_name = fields.Char("Name",default="Soundness")
+    soundness_name = fields.Char("Name",default="Soundness by le-chatelier")
     soundness_visible = fields.Boolean("Soundness Visible",compute="_compute_visible")
 
     temp_percent_soundness = fields.Float("Temperature %")
@@ -300,6 +300,7 @@ class CementNormalConsistency(models.Model):
     casting_3_days_tables = fields.One2many('cement.casting.3days.line','parent_id',string="3 Days")
     average_casting_3days = fields.Float("Average",compute="_compute_average_3days")
     compressive_strength_3_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_3days")
+    status_3days = fields.Boolean("Done")
 
     @api.depends('casting_3_days_tables.compressive_strength')
     def _compute_average_3days(self):
@@ -344,6 +345,8 @@ class CementNormalConsistency(models.Model):
     casting_7_days_tables = fields.One2many('cement.casting.7days.line','parent_id',string="7 Days")
     average_casting_7days = fields.Float("Average",compute="_compute_average_7days")
     compressive_strength_7_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_7days")
+    status_7days = fields.Boolean("Done")
+
 
     @api.depends('casting_7_days_tables.compressive_strength')
     def _compute_average_7days(self):
@@ -389,6 +392,8 @@ class CementNormalConsistency(models.Model):
     casting_28_days_tables = fields.One2many('cement.casting.28days.line','parent_id',string="28 Days")
     average_casting_28days = fields.Float("Average",compute="_compute_average_28days")
     compressive_strength_28_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_28days")
+    status_28days = fields.Boolean("Done")
+
 
     @api.depends('casting_28_days_tables.compressive_strength')
     def _compute_average_28days(self):
@@ -462,7 +467,7 @@ class CementNormalConsistency(models.Model):
     specific_surface_of_reference_sample = fields.Float("S0 is the Specific surface of reference sample (m²/kg)",default=274) 
     air_viscosity_of_three_temp = fields.Float("ɳₒ is the Air viscosity at the mean of the three temperatures",default=0.001355,digits=(16, 6))
     density_of_reference_sample = fields.Float("ρ0 is the Density of reference sample  (g/cm3)",default=3.16)
-    mean_of_three_measured_times = fields.Float("t0 is the Mean of three measured times (sec)",default=64.70)
+    mean_of_three_measured_times = fields.Float("t0 is the Mean of three measured times (sec)",compute="_compute_mean_measured_time")
     apparatus_constant = fields.Float("Apparatus Constant(k)",compute="_compute_apparatus_constant")
 
     density_fineness_calculated = fields.Float("Density",compute="_compute_density_calculated")
@@ -545,6 +550,12 @@ class CementNormalConsistency(models.Model):
         for record in self:
             record.fineness_air_permeability = math.ceil(record.fineness_of_sample)
 
+    @api.depends('average_time_fineness')
+    def _compute_mean_measured_time(self):
+        for record in self:
+            record.mean_of_three_measured_times = record.average_time_fineness
+
+    
 
             
     ### Compute Visible

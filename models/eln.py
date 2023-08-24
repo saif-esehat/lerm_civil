@@ -57,11 +57,23 @@ class ELN(models.Model):
     image = fields.Binary(string="Image", attachment=True)
     is_product_based_calculation = fields.Boolean(string="Product Based Calculation",compute="_compute_product_based")
     model_id = fields.Integer("Model ID")
+    temperature = fields.Float("Temperature")
+    instrument = fields.Char("Instrument")
+
+
+
+    def get_product_base_calc_line(self,data):
+        line = self.env["lerm.product.based.calculation"].search([('product_id','=',data["material_id"]),('grade','=',data["grade_id"])])
+        return line
 
 
     def open_product_based_form(self):
         model_record = self.material.product_based_calculation.filtered(lambda r: r.grade.id == self.grade_id.id)
         model = model_record.ir_model.model
+
+        print("material ",self.material.product_based_calculation)
+        print("model ",model)
+
         if self.model_id != 0:
             # import wdb; wdb.set_trace()
             return {
@@ -215,8 +227,6 @@ class ELN(models.Model):
         for parameter in self.parameters:
             parameters.append((0,0,{'parameter':parameter.id}))
         
-
-
         return {
             'name': "Result Update",
             'type': 'ir.actions.act_window',
@@ -228,15 +238,37 @@ class ELN(models.Model):
             'context': {
                 'default_results':parameters
             }
-            }
-
-
-
+        }
+        
+    # def print_datasheet(self):
+    #     eln = self
+    #     template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+    #     return {
+    #         'type': 'ir.actions.report',
+    #         'report_type': 'qweb-pdf',
+    #         'report_name': template_name,
+    #         'report_file': template_name
+    #     }
     def print_datasheet(self):
         eln = self
-        
-        template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
-        print(template_name , 'lark lark')
+        is_product_based = eln.is_product_based_calculation
+        if is_product_based == True:
+            template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
+        else:
+            template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+        return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': template_name,
+            'report_file': template_name
+        }
+    def print_report(self):
+        eln = self
+        is_product_based = eln.is_product_based_calculation
+        if is_product_based == True:
+            template_name = eln.material.product_based_calculation[0].main_report_template.report_name
+        else:
+            template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
@@ -347,7 +379,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
             req_max = material_table.req_max
             mu_neg = record.result - record.parameter.mu_value
             mu_pos = record.result + record.parameter.mu_value
-            if req_min <= mu_neg <= req_max and req_min <= mu_pos <= mu_pos:
+            if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"
             else:
                 record.conformity_status = "fail"

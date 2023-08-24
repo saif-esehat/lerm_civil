@@ -11,6 +11,7 @@ from . import sample_report
 from . import contractor
 from . import company
 from . import data_sheets_report
+from .report import cement_report
 from .mechanical import sieve_analysis
 from .mechanical import pavel_block
 from .mechanical import free_swell_index
@@ -27,8 +28,14 @@ from. mechanical import concrete_man_hole
 from .mechanical import fine_aggregate
 from .mechanical import act_compressive_strength
 from .mechanical import steel_tmt_bar
+from .mechanical import stainless_steel
 from .mechanical import flakiness_elongated_index
 from .mechanical import rock
+from .mechanical import ggbs
+from .mechanical import structural_steel
+from .mechanical import bricks
+from .mechanical import dry_density_sand_replacment
+from .mechanical import fly_ash
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter

@@ -10,14 +10,14 @@ class CompressiveStrengthConcreteCube(models.Model):
     name = fields.Char("Name",default="Compressive Strength of Concrete Cube")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('mechanical.compressive.strength.concrete.cube.line','parent_id',string="Parameter")
-    average_strength = fields.Float(string="Average Compressive Strength in N/mm2", compute="_compute_average_strength")
+    average_strength = fields.Float(string="Average Compressive Strength in N/mm2", compute="_compute_average_strength",digits=(12,4))
 
 
     @api.depends('child_lines.compressive_strength')
     def _compute_average_strength(self):
         for record in self:
             total_strength = sum(line.compressive_strength for line in record.child_lines)
-            record.average_strength = total_strength / len(record.child_lines) if len(record.child_lines) > 0 else 0.0
+            record.average_strentgh = total_strentgh / len(record.child_lines) if len(record.child_lines) > 0 else 0.0
 
 
 
@@ -35,18 +35,18 @@ class CompressiveStrengthConcreteCubeLine(models.Model):
     sr_no = fields.Integer(string="Sr.No.",readonly=True, copy=False, default=1)
     length = fields.Float(string="Length (mm)")
     width = fields.Float(string="Width (mm)")
-    area = fields.Float(string="Area (mm²)",compute="_compute_area")
+    area = fields.Float(string="Area (mm²)",compute="_compute_area" ,digits=(12,4))
     id_mark = fields.Integer(string="ID Mark")
     wt_sample = fields.Float(string="Weight of Sample in kgs")
     crushing_load = fields.Float(string="Crushing Load in kN")
-    compressive_strength = fields.Float(string="Compressive Strength N/mm²",compute="_compute_compressive_strength")
+    compressive_strength = fields.Float(string="Compressive Strength N/mm²",compute="_compute_compressive_strength" ,digits=(12,4))
    
 
 
     @api.depends('length', 'width')
     def _compute_area(self):
         for record in self:
-            record.area = record.length * record.width
+            record.area = round((record.length * record.width) , 4)
 
 
     @api.depends('crushing_load', 'area')

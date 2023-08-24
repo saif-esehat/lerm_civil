@@ -23,6 +23,7 @@
                       <field name="sample_parameters">
                         <tree>
                           <field name="parameter_name"/>
+                          <field name="test_method"/>
                         </tree>
                       </field>
                     </group>
@@ -30,8 +31,7 @@
                     <!-- Normal Consistency Start -->
                     
                     <group >
-                            <field name="temp_percent"/>
-                            <field name="humidity_percent"/> 
+                            
                             <field name="tests" widget="many2many_tags" options="{'no_create':True,'no_open': True}"/>
                     </group>
                     <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
@@ -40,8 +40,19 @@
                             <field name="normal_consistency_visible" invisible="1"/>
                         </h1>
                     </group>
+                    <group>
+                    <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
+                      <field name="temp_percent_normal"/>
+                      <field name="humidity_percent_normal"/>
+                    </group>
+                    <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
+                      <field name="start_date_normal"/>
+                      <field name="end_date_normal"/>
+                    </group>
+                    </group>
                     <!-- attrs="{'invisible': [('normal_consistency_visible', '=', False)]}"  -->
                     <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
+                        
                         <label for="wt_of_cement_trial1" string="Wt. of Cement(g)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
@@ -127,6 +138,17 @@
                         </h1>
                     </group>
                     <group>
+                    <group attrs="{'invisible': [('setting_time_visible', '=', False)]}">
+                      <field name="temp_percent_setting"/>
+                      <field name="humidity_percent_setting"/>
+                    </group>
+                    <group attrs="{'invisible': [('setting_time_visible', '=', False)]}">
+                      <field name="start_date_setting"/>
+                      <field name="end_date_setting"/>
+                    </group>
+                    </group>
+                    <group>
+                        
                         <field name="wt_of_cement_setting_time" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         <field name="wt_of_water_required_setting_time" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                     </group>
@@ -160,6 +182,16 @@
                             <field name="density_name" readonly="1" nolabel="1"/>
                             <field name="density_visible" invisible="1"/>
                         </h1>
+                    </group>
+                    <group>
+                    <group attrs="{'invisible': [('density_visible', '=', False)]}"> 
+                      <field name="temp_percent_density"/>
+                      <field name="humidity_percent_density"/>
+                    </group>
+                    <group attrs="{'invisible': [('density_visible', '=', False)]}">
+                      <field name="start_date_density"/>
+                      <field name="end_date_density"/>
+                    </group>
                     </group>
                     
                     <group attrs="{'invisible': [('density_visible', '=', False)]}">
@@ -233,12 +265,21 @@
                     </group>
                     <!--Density End -->
                     <!-- Soundness  -->
-
                     <group attrs="{'invisible': [('soundness_visible', '=', False)]}">
                         <h1>
                             <field name="soundness_name" readonly="1" nolabel="1"/>
                             <field name="soundness_visible" invisible="1"/>
                         </h1>
+                    </group>
+                    <group>
+                    <group attrs="{'invisible': [('soundness_visible', '=', False)]}">
+                      <field name="temp_percent_soundness"/>
+                      <field name="humidity_percent_soundness"/>
+                    </group>
+                    <group attrs="{'invisible': [('soundness_visible', '=', False)]}">
+                      <field name="start_date_soundness"/>
+                      <field name="end_date_soundness"/>
+                    </group>
                     </group>
                     <group attrs="{'invisible': [('soundness_visible', '=', False)]}">
                       <field name="wt_of_cement_soundness"/>
@@ -263,6 +304,16 @@
                             <field name="dry_sieving_visible" invisible="1"/>
                         </h1>
                     </group>
+                    <group>
+                    <group attrs="{'invisible': [('dry_sieving_visible', '=', False)]}">
+                      <field name="temp_percent_dry_sieving"/>
+                      <field name="humidity_percent_dry_sieving"/>
+                    </group>
+                    <group attrs="{'invisible': [('dry_sieving_visible', '=', False)]}">
+                      <field name="start_date_dry_sieving"/>
+                      <field name="end_date_dry_sieving"/>
+                    </group>
+                    </group>
                     <group attrs="{'invisible': [('dry_sieving_visible', '=', False)]}">
                       
                       <field name="dry_sieving_table">
@@ -283,6 +334,16 @@
                             <field name="compressive_visible" invisible="1"/>
                         </h1>
                     </group>
+                    <group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                      <field name="temp_percent_compressive"/>
+                      <field name="humidity_percent_compressive"/>
+                    </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                      <field name="start_date_compressive"/>
+                      <field name="end_date_compressive"/>
+                    </group>
+                    </group>
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}" style="width:40%">
                       <field  name="wt_of_cement_compressive"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1"  colspan="3" />
@@ -296,8 +357,13 @@
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
                         <h1>
                             <field name="casting_3_name" readonly="1" nolabel="1"/>
+
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
+                    </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                            <field name="status_3days"/>
+                      
                     </group>
                     
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
@@ -318,14 +384,20 @@
                       </field>
                       <field name="average_casting_3days"/>
                       <field name="compressive_strength_3_days"/>
+
                     </group>
 
                     <!-- 7 Days Casting  -->
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
                         <h1>
                             <field name="casting_7_name" readonly="1" nolabel="1"/>
+
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
+                    </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                            <field name="status_7days"/>
+                      
                     </group>
                     
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
@@ -353,6 +425,10 @@
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
                     </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                            <field name="status_28days"/>
+                      
+                    </group>
                     
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
 
@@ -371,6 +447,7 @@
                       </field>
                       <field name="average_casting_28days"/>
                       <field name="compressive_strength_28_days"/>
+
                     </group>
                     <!-- Fineness Blaine  -->
                     <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
@@ -378,6 +455,16 @@
                             <field name="fineness_blaine_name" readonly="1" nolabel="1"/>
                             <field name="fineness_blaine_visible" invisible="1"/>
                         </h1>
+                    </group>
+                    <group>
+                    <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
+                      <field name="temp_percent_fineness"/>
+                      <field name="humidity_percent_fineness"/>
+                    </group>
+                    <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
+                      <field name="start_date_fineness"/>
+                      <field name="end_date_fineness"/>
+                    </group>
                     </group>
 
                     <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
