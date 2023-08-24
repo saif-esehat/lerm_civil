@@ -122,11 +122,21 @@
         </field>
 
     </record>
+    <record id="lerm_product_action" model="ir.actions.act_window">
+            <field name="name">Product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Product</p>
+            </field>
+    </record>
     
     <menuitem id="lerm_root"
         groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group"
         name="LERM CIVIL"
-        sequence="10" />
+        sequence="10" 
+        web_icon="lerm_civil,static/description/icon.png"/>
 
     <menuitem id="lerm_menu"
         name="Master Data"
