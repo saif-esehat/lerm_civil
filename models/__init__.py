@@ -37,6 +37,7 @@ from .mechanical import structural_steel
 from .mechanical import bricks
 from .mechanical import dry_density_sand_replacment
 from .mechanical import fly_ash
+from .mechanical import microsilica
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter

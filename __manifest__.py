@@ -69,6 +69,7 @@
     'views/mechanical/cement_setting_time.xml',
     'views/mechanical/ggbs.xml',
     'views/mechanical/fly_ash.xml',
+    'views/mechanical/microsilica.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',
