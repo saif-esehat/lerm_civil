@@ -138,5 +138,19 @@
         <record id="fineness_test_ggbs" model="mechanical.ggbs.test">
             <field name="name">Fineness by Blaine</field>
         </record>
+
+        <!-- Tmt Steel  -->
+
+        <record id="fracture_test_tmt" model="mechanical.tmt.test">
+            <field name="name">Fracture</field>
+        </record>
+        <record id="bend_test_tmt" model="mechanical.tmt.test">
+            <field name="name">Bend Test</field>
+        </record>
+        <record id="rebend_test_tmt" model="mechanical.tmt.test">
+            <field name="name">Rebend Test</field>
+        </record>
+
+
     </data>
 </odoo>

@@ -17,7 +17,7 @@ class CementPpc(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    temp_percent_normal = fields.Float("Temperature %")
+    temp_percent_normal = fields.Float("Temperature °C")
     humidity_percent_normal = fields.Float("Humidity %")
 
 
@@ -53,7 +53,7 @@ class CementPpc(models.Model):
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_percent_setting = fields.Float("Temperature %")
+    temp_percent_setting = fields.Float("Temperature °C")
     humidity_percent_setting = fields.Float("Humidity %")
     start_date_setting = fields.Date("Start Date")
     end_date_setting = fields.Date("End Date")
@@ -72,7 +72,9 @@ class CementPpc(models.Model):
     time_water_added = fields.Datetime("The Time When water is added to cement (t1)")
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
     initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)",compute="_compute_initial_setting_time")
-    initial_setting_time_minutes = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
+    initial_setting_time_minutes = fields.Char("Initial Setting Time Rounded",compute="_compute_initial_setting_time")
+    initial_setting_time_minutes_unrounded = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
+
 
     @api.depends('time_water_added', 'time_needle_fails')
     def _compute_initial_setting_time(self):
@@ -91,6 +93,8 @@ class CementPpc(models.Model):
                 else:
                     record.initial_setting_time_minutes = round(initial_setting_time_minutes / 5) * 5
 
+                record.initial_setting_time_minutes_unrounded = initial_setting_time_minutes
+
             else:
                 record.initial_setting_time_hours = False
                 record.initial_setting_time_minutes = False
@@ -101,7 +105,8 @@ class CementPpc(models.Model):
     final_setting_time = fields.Char("Name",default="Final Setting Time")
     time_needle_make_impression = fields.Datetime("The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3)")
     final_setting_time_hours = fields.Char("Final Setting Time (t2-t1) (Hours)",compute="_compute_final_setting_time")
-    final_setting_time_minutes = fields.Char("Final Setting Time",compute="_compute_final_setting_time")
+    final_setting_time_minutes = fields.Char("Final Setting Time Rounded",compute="_compute_final_setting_time")
+    final_setting_time_minutes_unrounded = fields.Char("Final Setting Time",compute="_compute_final_setting_time")
 
 
 
@@ -120,6 +125,8 @@ class CementPpc(models.Model):
                     record.final_setting_time_minutes = final_setting_time
                 else:
                     record.final_setting_time_minutes = round(final_setting_time / 5) * 5
+
+                record.final_setting_time_minutes_unrounded = final_setting_time
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
@@ -131,7 +138,7 @@ class CementPpc(models.Model):
     density_name = fields.Char("Name",default="Density")
     density_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
 
-    temp_percent_density = fields.Float("Temperature %")
+    temp_percent_density = fields.Float("Temperature °C")
     humidity_percent_density = fields.Float("Humidity %")
     start_date_density = fields.Date("Start Date")
     end_date_density = fields.Date("End Date")
@@ -188,7 +195,7 @@ class CementPpc(models.Model):
     soundness_name = fields.Char("Name",default="Soundness by le-chatelier")
     soundness_visible = fields.Boolean("Soundness Visible",compute="_compute_visible")
 
-    temp_percent_soundness = fields.Float("Temperature %")
+    temp_percent_soundness = fields.Float("Temperature °C")
     humidity_percent_soundness = fields.Float("Humidity %")
     start_date_soundness = fields.Date("Start Date")
     end_date_soundness = fields.Date("End Date")
@@ -240,7 +247,7 @@ class CementPpc(models.Model):
     dry_sieving_name = fields.Char("Name",default="Dry Sieving")
     dry_sieving_visible = fields.Boolean("Dry Sieving Visible",compute="_compute_visible")
 
-    temp_percent_dry_sieving = fields.Float("Temperature %")
+    temp_percent_dry_sieving = fields.Float("Temperature °C")
     humidity_percent_dry_sieving = fields.Float("Humidity %")
     start_date_dry_sieving = fields.Date("Start Date")
     end_date_dry_sieving = fields.Date("End Date")
@@ -270,7 +277,7 @@ class CementPpc(models.Model):
     compressive_name = fields.Char("Name",default="Compressive Strength")
     compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
-    temp_percent_compressive = fields.Float("Temperature %")
+    temp_percent_compressive = fields.Float("Temperature °C")
     humidity_percent_compressive = fields.Float("Humidity %")
     start_date_compressive = fields.Date("Start Date")
     end_date_compressive = fields.Date("End Date")
@@ -438,7 +445,7 @@ class CementPpc(models.Model):
     fineness_blaine_name = fields.Char("Name",default="Fineness By Blaine Air Permeability Method")
     fineness_blaine_visible = fields.Boolean("Fineness Blaine Visible",compute="_compute_visible")
 
-    temp_percent_fineness = fields.Float("Temperature %")
+    temp_percent_fineness = fields.Float("Temperature °C")
     humidity_percent_fineness = fields.Float("Humidity %")
     start_date_fineness = fields.Date("Start Date")
     end_date_fineness = fields.Date("End Date")

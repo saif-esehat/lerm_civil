@@ -25,6 +25,18 @@
                                 <group>
                                     <field name='size'/>
                                 </group>
+                                
+                            </group>
+                            <group>
+                                <field name="sample_parameters">
+                                    <tree>
+                                        <field name="parameter_name"/>
+                                        <field name="test_method"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                    <field name='tests' options="{'no_create':True}"/>
                             </group>
 
                             <group style="width:51%"> 
@@ -112,14 +124,18 @@
                                 <field name='ts_ys_nabl'/>
                                 </group>
                             </group>
-                            <group style="width:51%">
-                                <field name='fracture'/>
-                            </group>
-                            <group style="width:51%">
+                            
+                            <group style="width:51%" attrs="{'invisible': [('bend_visible', '=', False)]}">
+                                <field name="bend_visible" invisible="1"/>
                                 <field name='bend_test'/>
                             </group>
-                            <group style="width:51%">
+                            <group style="width:51%" attrs="{'invisible': [('rebend_visible', '=', False)]}">
+                                <field name="rebend_visible" invisible="1"/>
                                 <field name='re_bend_test'/>
+                            </group>
+                            <group style="width:51%" attrs="{'invisible': [('fracture_visible', '=', False)]}">
+                                <field name="fracture_visible" invisible="1"/>
+                                <field name='fracture'/>
                             </group>
               
 
