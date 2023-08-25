@@ -8,18 +8,18 @@
 			
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
 				<div style="text-align:center;margin-top:10px">
-					<p style="font-size:15px"><b>Test Report</b></p>
+					<p style="font-size:15px"><b>Test Report On Fly Ash Mechanical</b></p>
 				</div>
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						<table>
 							<tr>
-								<td colspan="3">Report no :
+								<td colspan="3">Test Report No :
 								</td>
 								<td colspan="3">
 									<span t-field="o.eln_id"/>
 								</td>
-								<td colspan="3">Report Date :
+								<td colspan="3">Report Issue Date :
 								</td>
 								<td colspan="3">
 									<span t-field="o.srf_date"/>
@@ -31,120 +31,9 @@
 								</td>
 							</tr>
 						</table>
-						<table style="margin-top:10px;">
-							<tr>
-								<td colspan="12">Customer Party Name :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.customer.name"/>
-									<span t-field="o.srf_id.customer.street"/>
-									<span t-field="o.srf_id.customer.street2"/>
-									<span t-field="o.srf_id.customer.city"/>
-									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
-									<span t-field="o.srf_id.customer.state_id"/>
-									,
-									<span t-field="o.srf_id.customer.country_id"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="12">Project / Site Address :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.site_address.name"/>
-									<span t-field="o.srf_id.site_address.street"/>
-									<span t-field="o.srf_id.site_address.street2"/>
-									<span t-field="o.srf_id.site_address.city"/>
-									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
-									<span t-field="o.srf_id.site_address.state_id"/>
-									,
-									<span t-field="o.srf_id.site_address.country_id"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.sample_description"/>
-								</td>
-							</tr>
-						</table>
-						<table>
-							<tr>
-								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
-									<span t-field="o.start_date"/>
-								</td>
-								<td colspan="6">Test End Date :<![CDATA[&nbsp;]]>
-									<span t-field="o.end_date"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.client_sample_id"/>
-								</td>
-								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.sample_received_date"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Size :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.size_id.size"/>
-								</td>
-								<td colspan="6">Grade :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.grade_id.grade"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Brand :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.brand"/>
-								</td>
-								<td colspan="6">Consultant Name :
-									<![CDATA[&nbsp;]]>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Client Name :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="6">Client Reference :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.client_refrence"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Discipline :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.discipline.discipline"/>
-								</td>
-								<td colspan="6">Group :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.group.group"/>
-								</td>
-							</tr>
 							
-							<tr>
-								<td colspan="12">Material/Test Name :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.material.name"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Instrument :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.instrument"/>
-								</td>
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.temperature"/>
-								</td>
-							</tr>
-						</table>
 					</div>
-					<div style="margin-top:20px;">
-						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
-						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
-					</div>
-					
-					
-					
+							
 				</div>
 				
 			</t>

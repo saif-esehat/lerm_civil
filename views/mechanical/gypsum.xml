@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_gypsum_form" model="ir.ui.view">
+        <field name="name">mechanical.gypsum.form</field>
+        <field name="model">mechanical.gypsum</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                <group >
+                    <h1>
+                        <field name="name" readonly="1" nolabel="1"/>
+                    </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" />
+                        <field name="eln_ref"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+                    
+                    <!-- Normal Consistency Start -->
+
+                    <group>
+                        <h1>
+                            <field name="normal_consistency_name" readonly="1" nolabel="1"/>
+                            <field name="normal_consistency_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <group>
+                        <field name="temp_normal"/>
+                        <field name="humidity_normal"/>
+                        </group>
+                        <group>
+                        <field name="start_date_normal"/>
+                        <field name="end_date_normal"/>
+                        </group>
+                    </group>
+                    <group style="width:50%">
+                        <field name="wt_gypsum_plaster"/>
+                        <field name="wt_water_req"/>
+                        <field name="penetration_vicat"/>
+                        <field name="normal_consistency"/>
+
+                    </group>
+
+                    <!-- Setting Time  -->
+
+                    <group>
+                        <h1>
+                            <field name="setting_time_name" readonly="1" nolabel="1"/>
+                            <field name="setting_time_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <group>
+                        <field name="temp_setting"/>
+                        <field name="humidity_setting"/>
+                        </group>
+                        <group>
+                        <field name="start_date_setting"/>
+                        <field name="end_date_setting"/>
+                        </group>
+                    </group>
+                    <group style="width:50%">
+                        <field name="time_water_added"/>
+                        <field name="time_needle_penetrate"/>
+                        <field name="setting_time_minutes"/>
+
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+        </record>
+    </data>
+</odoo>
