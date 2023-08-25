@@ -270,8 +270,8 @@
 									<span t-esc="r['parameter'].parameter_name"/>
 								</td>
 								<td>
-									<!-- <span t-esc="r['result']"/> -->
-									<span t-esc="round(r['result'], r['parameter'].decimal)"/>
+									<!-- <span t-esc="round(r['result'], r['parameter'].decimal)"/> -->
+									 <span t-esc="'{:.{}f}'.format(r['result'], r['parameter'].decimal)"/>
 								</td>
 								<td>
 									<span t-esc="r['unit'].name"/>
@@ -426,7 +426,8 @@
 										<span t-esc="r['inputs']"/>
 									</td>
 									<td>
-										<span t-esc="r['value']"/>
+										<!-- <span t-esc="r['value']"/> -->
+										 <span t-esc="'{:.{}f}'.format(r['value'], r['decimal'])"/>
 									</td>
 								</tr>
 							</tbody>

@@ -150,5 +150,7 @@
         <record id="rebend_test_tmt" model="mechanical.tmt.test">
             <field name="name">Rebend Test</field>
         </record>
+
+
     </data>
 </odoo>
