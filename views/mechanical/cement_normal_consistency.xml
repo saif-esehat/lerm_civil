@@ -160,6 +160,7 @@
                         <field name="time_water_added" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         <field name="time_needle_fails" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         <field name="initial_setting_time_hours" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_minutes_unrounded" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         <field name="initial_setting_time_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
 
                     </group>
@@ -171,6 +172,7 @@
                    
                         <field name="time_needle_make_impression" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_hours" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_minutes_unrounded" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
 
                     </group>

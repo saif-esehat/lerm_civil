@@ -12,7 +12,7 @@ class SteelTmtBarLine(models.Model):
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
     diameter = fields.Integer(string="Dia. in mm")
-    lentgh = fields.Float(string="Length in mm",digits=(10, 3))
+    lentgh = fields.Float(string="Length in meter",digits=(10, 3))
     weight = fields.Float(string="Weight, in kg",digits=(10, 3))
     weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
     crossectional_area = fields.Float(string="Cross sectional Area, mm²",compute="_compute_crossectional_area",store=True)
@@ -34,6 +34,12 @@ class SteelTmtBarLine(models.Model):
     requirement_ts_ys = fields.Float(string="Requirement",compute="_compute_requirement_ts_ys",store=True)
     requirement_elongation = fields.Float(string="Requirement",compute="_compute_requirement_elongation",store=True)
     requirement_weight_per_meter = fields.Float(string="Requirement",compute="_compute_requirement_weight_per_meter",digits=(16, 4),store=True)
+
+    sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
+    tests = fields.Many2many("mechanical.tmt.test",string="Tests")
+    fracture_visible = fields.Boolean("Fracture visible",compute="_compute_visible",store=True)
+    bend_visible = fields.Boolean("Bend visible",compute="_compute_visible",store=True)
+    rebend_visible = fields.Boolean("Rebend visible",compute="_compute_visible",store=True)
 
 
     
@@ -351,5 +357,36 @@ class SteelTmtBarLine(models.Model):
     
 
 
-  
-          
+    @api.depends('tests')
+    def _compute_visible(self):
+        fracture_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Fracture')])
+        bend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Bend Test')])
+        rebend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Rebend Test')])
+
+
+        for record in self:
+            record.fracture_visible = False
+            record.bend_visible  = False  
+            record.rebend_visible = False
+            
+            if fracture_test in record.tests:
+                record.fracture_visible = True
+            if bend_test in record.tests:
+                record.bend_visible = True
+            if rebend_test in record.tests:
+                record.rebend_visible = True
+
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)
+            
+
+
+
+class MechanicalTmtTest(models.Model):
+    _name = "mechanical.tmt.test"
+    _rec_name = "name"
+    name = fields.Char("Name")
