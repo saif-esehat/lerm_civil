@@ -12,6 +12,7 @@ from . import contractor
 from . import company
 from . import data_sheets_report
 from .report import cement_report
+from .report import flyash_report
 from .mechanical import sieve_analysis
 from .mechanical import pavel_block
 from .mechanical import free_swell_index
@@ -37,6 +38,7 @@ from .mechanical import structural_steel
 from .mechanical import bricks
 from .mechanical import dry_density_sand_replacment
 from .mechanical import fly_ash
+from .mechanical import microsilica
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter

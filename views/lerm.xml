@@ -122,17 +122,41 @@
         </field>
 
     </record>
+    <record id="lerm_product_action" model="ir.actions.act_window">
+            <field name="name">Product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Product</p>
+            </field>
+    </record>
     
     <menuitem id="lerm_root"
         groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group"
         name="LERM CIVIL"
-        sequence="10" />
+        sequence="10" 
+        web_icon="lerm_civil,static/description/icon.png"/>
+
+    <menuitem id="lerm_product_item"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group"
+        name="Product"
+        action="lerm_product_action"
+        sequence="11" />
 
     <menuitem id="lerm_menu"
         name="Master Data"
         groups="kes_technician_access_group,kes_admin_access_group"
         parent="lerm_root"
         sequence="20"  />
+
+    <menuitem id="lerm_product_item_param_master"
+        parent="lerm_menu"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group"
+        name="Product"
+        action="lerm_product_action"
+        sequence="11" />
+    
 
     <menuitem id="discipline"
         name="Discipline"

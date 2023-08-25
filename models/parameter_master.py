@@ -4,6 +4,8 @@ class ParameterMaster(models.Model):
     _name = 'lerm.parameter.master'
     _rec_name = 'parameter_name'
     
+
+    internal_id = fields.Char(string="Internal ID")
     parameter_name = fields.Char(string="Parameter Name")
     datasheet_no = fields.Char(string="Datasheet No")
     lab_min_value = fields.Float(string="Lab min Value")
