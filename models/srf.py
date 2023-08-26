@@ -503,7 +503,8 @@ class CreateSampleWizard(models.TransientModel):
                 'volume':volume,
                 'product_name':product_name.id,
                 'main_name':self.main_name,
-                'price':self.price
+                'price':self.price,
+                'date_casting':self.date_casting
 
             })
             for i in range(self.sample_qty):
@@ -536,7 +537,8 @@ class CreateSampleWizard(models.TransientModel):
                     'volume':volume,
                     'product_name':product_name.id,
                     'main_name':self.main_name,
-                    'price':self.price
+                    'price':self.price,
+                    'date_casting':self.date_casting
 
                 })
 
