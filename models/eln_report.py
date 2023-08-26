@@ -50,12 +50,12 @@ class DataSheetReport(models.AbstractModel):
         datasheet_data = []
         prev_data = None
         for i, input_data in enumerate(eln.parameters_input):
-            datasheet_data.append({'parameter_name': input_data.parameter_result.parameter.parameter_name, 'identifier': input_data.identifier, 'inputs' : input_data.inputs.label ,'value': input_data.value})
+            datasheet_data.append({'parameter_name': input_data.parameter_result.parameter.parameter_name, 'identifier': input_data.identifier, 'inputs' : input_data.inputs.label ,'value': input_data.value , 'decimal': input_data.parameter_result.parameter.parameter_name})
             if i > 0 and input_data.parameter_result.parameter.parameter_name != prev_data:
-                index = datasheet_data.index({'parameter_name': input_data.parameter_result.parameter.parameter_name, 'identifier': input_data.identifier,'inputs' : input_data.inputs.label ,'value': input_data.value})
-                datasheet_data.insert(index,{'parameter_name': prev_data, 'identifier': 'Formula', 'inputs': prev_formula , 'value' : prev_result})
+                index = datasheet_data.index({'parameter_name': input_data.parameter_result.parameter.parameter_name, 'identifier': input_data.identifier,'inputs' : input_data.inputs.label ,'value': input_data.value , 'decimal': input_data.parameter_result.parameter.parameter_name})
+                datasheet_data.insert(index,{'parameter_name': prev_data, 'identifier': 'Formula', 'inputs': prev_formula , 'value' : prev_result , 'decimal': input_data.parameter_result.parameter.parameter_name})
             if i == (len(eln.parameters_input) - 1):
-                datasheet_data.append({'parameter_name': input_data.parameter_result.parameter.parameter_name, 'identifier': 'Formula', 'inputs': input_data.parameter_result.parameter.formula , 'value' : input_data.parameter_result.result})
+                datasheet_data.append({'parameter_name': input_data.parameter_result.parameter.parameter_name, 'identifier': 'Formula', 'inputs': input_data.parameter_result.parameter.formula , 'value' : input_data.parameter_result.result , 'decimal': input_data.parameter_result.parameter.parameter_name})
             prev_data = input_data.parameter_result.parameter.parameter_name
             prev_formula = input_data.parameter_result.parameter.formula
             prev_result = input_data.parameter_result.result

@@ -362,7 +362,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
         ('pass', 'Pass'),
         ('fail', 'Fail')
     ],compute="compute_conformity_status",string='Conformity Status')
-    result = fields.Float(string="Result",compute="compute_result",digits=(16, 3))
+    result = fields.Float(string="Result",compute="compute_result",digits=(16, 5))
     # result_char = fields.Char(string="Result")
 
     @api.depends('parameter')
@@ -501,8 +501,8 @@ class ELNParametersResult(models.Model):
     context_data = fields.Text("Context Data")
     calculated = fields.Boolean("Calculated")
     calculation_type = fields.Selection([('parameter_based', 'Parameter Based'), ('form_based', 'Form Based')],compute='_compute_calculation_type',string='Calculation Type')
-    test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
-    specification = fields.Text(string="Specification", compute='_compute_specification')
+    test_method = fields.Many2one('lerm_civil.test_method',string="Specification")
+    specification = fields.Text(string="Test Method", compute='_compute_specification')
     nabl_status = fields.Selection([
         ('nabl', 'NABL'),
         ('non-nabl', 'Non-NABL')
@@ -513,7 +513,7 @@ class ELNParametersResult(models.Model):
         ('fail', 'Fail')
     ],string='Conformity Status')
     model_id = fields.Integer(string="Model Id")
-    result = fields.Float(string="Result",digits=(16,2))
+    result = fields.Float(string="Result",digits=(16,5))
 
     @api.depends('parameter.calculation_type')
     def _compute_calculation_type(self):

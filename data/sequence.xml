@@ -138,5 +138,34 @@
         <record id="fineness_test_ggbs" model="mechanical.ggbs.test">
             <field name="name">Fineness by Blaine</field>
         </record>
+
+        <!-- Tmt Steel  -->
+
+        <record id="fracture_test_tmt" model="mechanical.tmt.test">
+            <field name="name">Fracture</field>
+        </record>
+        <record id="bend_test_tmt" model="mechanical.tmt.test">
+            <field name="name">Bend Test</field>
+        </record>
+        <record id="rebend_test_tmt" model="mechanical.tmt.test">
+            <field name="name">Rebend Test</field>
+        </record>
+
+        <!-- Gypsum  -->
+        <record id="normal_consistency_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Normal Consistency</field>
+        </record>
+        <record id="setting_time_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Setting Time</field>
+        </record>
+        <record id="dry_bulk_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Dry Bulk Density</field>
+        </record>
+        <record id="coarse_particle_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Free From Coarse Particle</field>
+        </record>
+        <record id="compressive_strength_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Compressive Strength</field>
+        </record>
     </data>
 </odoo>
