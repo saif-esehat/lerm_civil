@@ -436,7 +436,7 @@ class GgbsMechanical(models.Model):
 
         
     def get_all_fields(self):
-        record = self.env['mechanical.cement.normalconsistency'].browse(self.ids[0])
+        record = self.env['mechanical.ggbs'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():
             field_value = record[field_name]
