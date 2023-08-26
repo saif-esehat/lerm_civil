@@ -138,11 +138,6 @@
         sequence="10" 
         web_icon="lerm_civil,static/description/icon.png"/>
 
-    <menuitem id="lerm_product_item"
-        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group"
-        name="Product"
-        action="lerm_product_action"
-        sequence="11" />
 
     <menuitem id="lerm_menu"
         name="Master Data"

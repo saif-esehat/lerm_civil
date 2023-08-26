@@ -362,7 +362,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
         ('pass', 'Pass'),
         ('fail', 'Fail')
     ],compute="compute_conformity_status",string='Conformity Status')
-    result = fields.Float(string="Result",compute="compute_result",digits=(16, 3))
+    result = fields.Float(string="Result",compute="compute_result",digits=(16, 5))
     # result_char = fields.Char(string="Result")
 
     @api.depends('parameter')
@@ -513,7 +513,7 @@ class ELNParametersResult(models.Model):
         ('fail', 'Fail')
     ],string='Conformity Status')
     model_id = fields.Integer(string="Model Id")
-    result = fields.Float(string="Result",digits=(16,2))
+    result = fields.Float(string="Result",digits=(16,5))
 
     @api.depends('parameter.calculation_type')
     def _compute_calculation_type(self):
