@@ -53,6 +53,7 @@
     'views/mechanical/bricks.xml',
     'views/mechanical/compressive_strength_brick.xml',
     'views/mechanical/dry_density_sand_replacement.xml',
+    'views/mechanical/cement_compatablity.xml',
     'views/ndt/crack_width.xml',
     'views/ndt/concrete_core.xml',
     'views/ndt/crack_depth.xml',

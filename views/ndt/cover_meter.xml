@@ -20,14 +20,14 @@
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
-                                <field name="member" />
-                                <field name="location" />
+                                <field name="member" string="Member"/>
+                                <field name="location" string="Location"/>
                                 <!-- <field name="level" /> -->
-                                <field name="cover" />
+                                <field name="cover" string="Cover"/>
                             </tree>
                     </field>
                     <group>
-                            <field name="average" />                      
+                            <field name="average" string="Average" identity="result"/>                      
                     </group>
                 </sheet>
             </form>

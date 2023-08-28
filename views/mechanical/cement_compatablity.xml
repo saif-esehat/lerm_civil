@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_mechanical_cement_compat_form" model="ir.ui.view">
+            <field name="name">mechanical.cement.compatiblity.form</field>
+            <field name="model">mechanical.cement.compatiblity</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="eln_ref"/>
+                                <group style="width:50%">
+                                    <field name="temp_percent_normal"/>
+                                    <field name="humidity_percent_normal"/>
+                                </group>
+                                <group style="width:50%">
+                                    <field name="start_date_normal"/>
+                                    <field name="end_date_normal"/>
+                                </group>
+                            </group>
+                        </group>
+
+                        <field name="child_lines" widget="one2many_list">
+                            <tree editable="bottom">
+                                <field name="water_cement_ratio"/>
+                                <field name="admixture_dosage_percent"/>
+                                <field name="wt_of_cement"/>
+                                <field name="wt_of_water"/>
+                                <field name="wt_of_admixture"/>
+                                <field name="flow_sec"/>
+                                <field name="flow_30_min"/>
+                                <field name="flow_60_min"/>
+                            </tree>
+                        </field>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
