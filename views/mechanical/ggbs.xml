@@ -334,7 +334,7 @@
                       </field>
                       <field name="average_28days_slag_opc"/>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
                       <field name="slag_activity_index_7days"/>
                       <field name="slag_activity_index_28days"/>
 
