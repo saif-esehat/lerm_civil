@@ -38,10 +38,10 @@ class FlyashReport(models.AbstractModel):
             "grade_id":eln.grade_id.id
         }
         model = eln.get_product_base_calc_line(data).ir_model.model
-        cement_data = self.env[model].search([("id","=",eln.model_id)])
-        print(cement_data.normal_consistency_fly_1)
+        flyash_data = self.env[model].search([("id","=",eln.model_id)])
+        print(flyash_data.normal_consistency_fly_1)
         return {
             'eln': eln,
-            'cement': cement_data,
+            'flyash': flyash_data,
             'qrcode': qr_code
         }
