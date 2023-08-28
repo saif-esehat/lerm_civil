@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="microsilica_datasheet">
+    <t t-call="web.html_container">
+	<t t-call="lerm_civil.data_sheet_header_generaltemplate">
+		<div style="text-align:center;font-size:18px">
+			Microsilica
+		</div>
+		<div class="container_eln" style="margin-top:5px">
+				<!--1 Accelerated pozzolanic activity index with portland cement , 7 Days in % -->
+
+			<div t-if="data.compressive_visible" style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+						Accelerated pozzolanic activity index with portland cement , 7 Days in %
+				</div>
+				
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Temperature :
+								<![CDATA[&nbsp;]]>
+								<span t-field="data.temp_percent_compressive"/>
+							</td>
+							<td colspan="6">Test Start Date :
+								<![CDATA[&nbsp;]]>
+								<span t-field="data.start_date_compressive"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Humidity :
+								<![CDATA[&nbsp;]]>
+								<span t-field="data.humidity_percent_compressive"/>
+							</td>
+							<td colspan="6">Test End Date :
+								<![CDATA[&nbsp;]]>
+								<span t-field="data.end_date_compressive"/>
+							</td>
+						</tr>
+							
+					</table>
+					<table style="margin-top: 20px">
+							
+						
+						<tr>
+							<td colspan="2" style="text-align: center; font-size: 18px;">
+								Compressive Strength of Test Mixture
+
+							</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">High Range water reducer (g)</td>
+							<td style="text-align: center;"><span t-field="data.high_range_compressive"/></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Weight of Microsilica (g)</td>
+							<td style="text-align: center;"><span t-field="data.wt_of_microsilica"/></td>
+						</tr>
+						
+						<tr>
+							<td style="font-weight: bold;">Weight of Cement (g)</td>
+							<td style="text-align: center;"><span t-field="data.wt_of_cement_compressive"/></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Weight of Standard Sand (g) Grade-I</td>
+							<td style="text-align: center;"><span t-field="data.wt_of_standerd_comp1"/></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Weight of Standard Sand (g) Grade-II</td>
+							<td style="text-align: center;"><span t-field="data.wt_of_standerd_comp2"/></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Weight of Standard Sand (g) Grade-III</td>
+							<td style="text-align: center;"><span t-field="data.wt_of_standerd_comp3"/></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Quantity of Water (g)</td>
+							<td style="text-align: center;"><span t-field="data.quantity_water"/></td>
+						</tr>
+					</table>
+
+					<table style="margin-top: 20px">
+						<tr>
+							<td colspan="2" style="text-align: center; font-size: 18px;">
+								Calculation of Flow (Acceptable : 100 to 115 %)
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">Sr. No.</td>
+							<td style="text-align: center; font-weight: bold;">Measured Values</td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">1</td>
+							<td style="text-align: center;"><span t-field="data.measured_value1"/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">2</td>
+							<td style="text-align: center;"><span t-field="data.measured_value2"/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">3</td>
+							<td style="text-align: center;"><span t-field="data.measured_value3"/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">4</td>
+							<td style="text-align: center;"><span t-field="data.measured_value4"/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">Average</td>
+							<td style="text-align: center;"><span t-field="data.average_measured" t-options='{"widget": "float", "precision": 2}'/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">% Flow</td>
+							<td style="text-align: center;"><span t-field="data.percent_flow" t-options='{"widget": "float", "precision": 2}'/></td>
+						</tr>
+					</table>
+
+					<!-- 7 Days  -->
+
+					<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.status_7days">
+						7 Days
+					</div>
+					<table style="margin-top:20px" t-if="data.status_7days">
+					<tr cols="12">
+							<td colspan="6">Date of Casting :
+								<![CDATA[&nbsp;]]>
+								<span t-field="data.casting_date_7days"/>
+							</td>
+							<td colspan="6">Date of Testing :
+								<![CDATA[&nbsp;]]>
+								<span t-field="data.testing_date_7days"/>
+							</td>
+						</tr>
+					</table>
+							
+					<table style="margin-top:20px" t-if="data.status_7days">
+						<tr cols="12">
+							<td colspan="1">Sr no 
+							</td>
+							<td colspan="1">Length in mm 
+							</td>
+							<td colspan="1">Width in mm
+							</td>
+							<td colspan="2">Crosssectional Area
+							</td>
+							<td colspan="2">wt of Cement Cube in gm
+							</td>
+							<td colspan="2">Crushing Load in KN
+							</td>
+							<td colspan="3">Compressive Strength (N/mm²)
+							</td>
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.casting_7_days_tables" t-as="r">
+							<td colspan="1" style="text-align: center;">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="1" style="text-align: center;">
+								<span t-esc="r['length']"/>
+							</td>
+							<td colspan="1" style="text-align: center;">
+								<span t-esc="r['width']"/>
+							</td>
+							<td colspan="2" style="text-align: center;">
+								<span t-esc="r['crosssectional_area']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="2" style="text-align: center;">
+								<span t-esc="r['wt_of_cement_cube']"/>
+							</td>
+							<td colspan="2" style="text-align: center;">
+								<span t-esc="r['crushing_load']"/>
+							</td>
+							<td colspan="3" style="text-align: center;">
+								<span t-esc="r['compressive_strength']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+						</tr>
+					</table>
+								
+					<table style="margin-top: 20px">
+						<tr>
+							<td style="font-weight: bold;">Average</td>
+							<td style="text-align: center;"><span t-field="data.average_casting_7days" t-options='{"widget": "float", "precision": 2}'/></td>
+						</tr>
+					</table>
+					<table style="margin-top: 20px">
+					
+				
+						<tr>
+							<td colspan="2" style="text-align: center; font-size: 18px;">
+								Compressive Strength of control Sample
+
+							</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Weight of Cement (g)</td>
+							<td style="text-align: center;"><span t-field="data.wt_of_cement"/></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Weight of Standard Sand (g)Grade-I</td>
+							<td style="text-align: center;"><span t-field="data.wt_of_sand1"/></td>
+						</tr>
+						
+						<tr>
+							<td style="font-weight: bold;">Weight of Standard Sand (g)Grade-II</td>
+							<td style="text-align: center;"><span t-field="data.wt_of_sand2"/></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Weight of Standard Sand (g)Grade-III</td>
+							<td style="text-align: center;"><span t-field="data.wt_of_sand3"/></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Quantity of Water (g)</td>
+							<td style="text-align: center;"><span t-field="data.quanity_of_water"/></td>
+						</tr>
+					</table>
+					<table style="margin-top: 20px">
+						<tr>
+							<td colspan="2" style="text-align: center; font-size: 18px;">
+								Calculation of Flow (Acceptable : 100 to 115 %)
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">Sr. No.</td>
+							<td style="text-align: center; font-weight: bold;">Measured Values</td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">1</td>
+							<td style="text-align: center;"><span t-field="data.sample_measured_value1"/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">2</td>
+							<td style="text-align: center;"><span t-field="data.sample_measured_value2"/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">3</td>
+							<td style="text-align: center;"><span t-field="data.sample_measured_value3"/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">4</td>
+							<td style="text-align: center;"><span t-field="data.sample_measured_value4"/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">Average</td>
+							<td style="text-align: center;"><span t-field="data.sample_average_measured" t-options='{"widget": "float", "precision": 2}'/></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;">% Flow</td>
+							<td style="text-align: center;"><span t-field="data.sample_percent_flow" t-options='{"widget": "float", "precision": 2}'/></td>
+						</tr>
+					</table>
+
+					<!-- 7 Days  -->
+
+					<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.control_status_7days">
+						7 Days
+					</div>
+					<table style="margin-top:20px" t-if="data.control_status_7days">
+					<tr cols="12">
+							<td colspan="6">Date of Casting :
+								<![CDATA[&nbsp;]]>
+								<span t-field="data.control_casting_date_7days"/>
+							</td>
+							<td colspan="6">Date of Testing :
+								<![CDATA[&nbsp;]]>
+								<span t-field="data.control_testing_date_7days"/>
+							</td>
+						</tr>
+					</table>
+					<table style="margin-top:20px" t-if="data.control_status_7days">
+						<tr cols="12">
+							<td colspan="1">Sr no 
+							</td>
+							<td colspan="1">Length in mm 
+							</td>
+							<td colspan="1">Width in mm
+							</td>
+							<td colspan="2">Crosssectional Area
+							</td>
+							<td colspan="2">wt of Cement Cube in gm
+							</td>
+							<td colspan="2">Crushing Load in KN
+							</td>
+							<td colspan="3">Compressive Strength (N/mm²)
+							</td>
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.control_casting_7_days_tables" t-as="r">
+							<td colspan="1" style="text-align: center;">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="1" style="text-align: center;">
+								<span t-esc="r['control_length']"/>
+							</td>
+							<td colspan="1" style="text-align: center;">
+								<span t-esc="r['control_width']"/>
+							</td>
+							<td colspan="2" style="text-align: center;">
+								<span t-esc="r['control_crosssectional_area']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="2" style="text-align: center;">
+								<span t-esc="r['control_wt_of_cement_cube']"/>
+							</td>
+							<td colspan="2" style="text-align: center;">
+								<span t-esc="r['control_crushing_load']"/>
+							</td>
+							<td colspan="3" style="text-align: center;">
+								<span t-esc="r['control_compressive_strength']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+						</tr>
+					</table>
+					<table style="margin-top: 20px">
+						<tr>
+							<td style="font-weight: bold;">Average</td>
+							<td style="text-align: center;"><span t-field="data.control_average_casting_7days" t-options='{"widget": "float", "precision": 2}'/></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Compressive Strength of  Sample (%)</td>
+							<td style="text-align: center;"><span t-field="data.control_compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/></td>
+						</tr>
+					</table>
+			</div>
+
+				<!--2 Oversize % Retained on 45 Micron IS sieve -->
+			<div t-if="data.oversize_retain_visible" style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+						Oversize % Retained on 45 Micron IS sieve
+				</div>
+				<table>
+					<tr cols="12">
+						<td colspan="6">Temperature :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.temp_percent_oversize"/>
+						</td>
+						<td colspan="6">Test Start Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.start_date_oversize"/>
+						</td>
+					</tr>
+					<tr cols="12">
+						<td colspan="6">Humidity :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.humidity_percent_oversize"/>
+						</td>
+						<td colspan="6">Test End Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.end_date_oversize"/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top:20px">
+
+					<tr cols="12">
+						<td colspan="3">Sr no 
+						</td>
+						<td colspan="3">Sample Weight(g) 
+						</td>
+						<td colspan="3">Retained Weight on 45 Micron Sieve (g)
+						</td>
+						<td colspan="3">% Weight Retained
+						</td>
+					</tr>
+
+					<t t-set="i" t-value="0"/>
+					<tr t-foreach="data.oversize_retained_tables" t-as="r">
+						<td colspan="3" style="text-align: center;">
+							<div>
+								<span t-esc="i + 1" />
+								<t t-set="i" t-value="i+1"/>
+							</div>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['wt_sample']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['wt_retain']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['retained_percent_wt']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top: 20px">
+					<tr>
+						<td style="font-weight: bold;">Average</td>
+						<td style="text-align: center;"><span t-field="data.retain_wt_avrg" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">% Weight Retained</td>
+						<td style="text-align: center;"><span t-field="data.retain_wt_rounded"/></td>
+					</tr>
+				</table>
+			</div>
+
+				<!--3 Specific Gravity -->
+
+			<div t-if="data.specific_gravity_visible" style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+						Specific Gravity
+				</div>
+				<table>
+					<tr cols="12">
+						<td colspan="6">Temperature :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.temp_percent_specific"/>
+						</td>
+						<td colspan="6">Test Start Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.start_date_specific"/>
+						</td>
+					</tr>
+					<tr cols="12">
+						<td colspan="6">Humidity :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.humidity_percent_specific"/>
+						</td>
+						<td colspan="6">Test End Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.end_date_specific"/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top:20px">
+
+					<tr cols="12">
+						<td colspan="3">Trial 
+						</td>
+						<td colspan="3">Mass of Micrsilica (g)
+						</td>
+						<td colspan="3">Initial Volume of kerosine (ml)V1
+						</td>
+						<td colspan="3">Final Volume of kerosine and Cement (After immersion in constant water bath) (ml) V2
+						</td>
+						<td colspan="3">Displaced volume (cm³)
+						</td>
+						<td colspan="3">Specific gravity
+						</td>
+					</tr>
+
+					<t t-set="i" t-value="0"/>
+					<tr t-foreach="data.specific_gravity_tables" t-as="r">
+						<td colspan="3" style="text-align: center;">
+							<div>
+								<span t-esc="i + 1" />
+								<t t-set="i" t-value="i+1"/>
+							</div>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['mass_of_microsilica']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['initial_vol_kerosine']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['final_vol_kero_cement']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['displaced_volume']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['spe_gravt_microsilica']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top: 20px">
+					<tr>
+						<td style="font-weight: bold;">Average</td>
+						<td style="text-align: center;"><span t-field="data.specific_gravity_avrg" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+				</table>	
+			</div>
+
+				<!--4 Compressive Strength -->
+
+			<div t-if="data.compressive_strength_visible" style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+					Compressive Strength	
+				</div>
+				<table>
+					<tr cols="12">
+						<td colspan="6">Temperature :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.temp_percent_cmp_strngth"/>
+						</td>
+						<td colspan="6">Test Start Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.start_date_cmp_strngth"/>
+						</td>
+					</tr>
+					<tr cols="12">
+						<td colspan="6">Humidity :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.humidity_percent_cmp_strngth"/>
+						</td>
+						<td colspan="6">Test End Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.end_date_cmp_strngth"/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top: 20px">
+							
+						
+					<tr>
+						<td colspan="2" style="text-align: center; font-size: 18px;">
+							Compressive Strength of Test Mortar
+
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">N (as per IS 15388)</td>
+						<td style="text-align: center;"><span t-field="data.n_is"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Weight of Microsilica (100*N)</td>
+						<td style="text-align: center;"><span t-field="data.microsilica_wt"/></td>
+					</tr>
+					
+					<tr>
+						<td style="font-weight: bold;">Weight of Cement (g)</td>
+						<td style="text-align: center;"><span t-field="data.cement_wt"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Weight of Standard Sand (g) Grade-I</td>
+						<td style="text-align: center;"><span t-field="data.wt_of_standerd_sand1"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Weight of Standard Sand (g) Grade-II</td>
+						<td style="text-align: center;"><span t-field="data.wt_of_standerd_sand2"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Weight of Standard Sand (g) Grade-III</td>
+						<td style="text-align: center;"><span t-field="data.wt_of_standerd_sand3"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Quantity of Water (g)</td>
+						<td style="text-align: center;"><span t-field="data.water_quantity"/></td>
+					</tr>
+				</table>
+				<table style="margin-top: 20px">
+					<tr>
+						<td colspan="2" style="text-align: center; font-size: 18px;">
+							Calculation of Flow (Acceptable : 105 ± 5 %)
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">Sr. No.</td>
+						<td style="text-align: center; font-weight: bold;">Measured Values</td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">1</td>
+						<td style="text-align: center;"><span t-field="data.comp_measured_value1"/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">2</td>
+						<td style="text-align: center;"><span t-field="data.comp_measured_value2"/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">3</td>
+						<td style="text-align: center;"><span t-field="data.comp_measured_value3"/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">4</td>
+						<td style="text-align: center;"><span t-field="data.comp_measured_value4"/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">Average</td>
+						<td style="text-align: center;"><span t-field="data.comp_average_measured" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">% Flow</td>
+						<td style="text-align: center;"><span t-field="data.comp_percent_flow" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+				</table>
+				<!-- 7 Days  -->
+
+				<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.comp_status_7days">
+					7 Days
+				</div>
+				<table style="margin-top:20px" t-if="data.comp_status_7days">
+				<tr cols="12">
+						<td colspan="6">Date of Casting :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.comp_casting_date_7days"/>
+						</td>
+						<td colspan="6">Date of Testing :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.comp_testing_date_7days"/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top:20px" t-if="data.comp_status_7days">
+					<tr cols="12">
+						<td colspan="1">Sr no 
+						</td>
+						<td colspan="1">Length in mm 
+						</td>
+						<td colspan="1">Width in mm
+						</td>
+						<td colspan="2">Crosssectional Area
+						</td>
+						<td colspan="2">wt of Cement Cube in gm
+						</td>
+						<td colspan="2">Crushing Load in KN
+						</td>
+						<td colspan="3">Compressive Strength (N/mm²)
+						</td>
+					</tr>
+
+					<t t-set="i" t-value="0"/>
+					<tr t-foreach="data.comp_casting_7_days_tables" t-as="r">
+						<td colspan="1">
+							<div>
+								<span t-esc="i + 1" />
+								<t t-set="i" t-value="i+1"/>
+							</div>
+						</td>
+						<td colspan="1" style="text-align: center;">
+							<span t-esc="r['compressive_length']"/>
+						</td>
+						<td colspan="1" style="text-align: center;">
+							<span t-esc="r['compressive_width']"/>
+						</td>
+						<td colspan="2" style="text-align: center;">
+							<span t-esc="r['compressive_crosssectional_area']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+						<td colspan="2" style="text-align: center;">
+							<span t-esc="r['compressive_wt_of_cement_cube']"/>
+						</td>
+						<td colspan="2" style="text-align: center;">
+							<span t-esc="r['compressive_crushing_load']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['comp_strength']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top: 20px">
+					<tr>
+						<td style="font-weight: bold;">Average</td>
+						<td style="text-align: center;"><span t-field="data.comp_average_casting_7days" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+				</table>
+
+					<!-- Compressive Strength of control Sample -->
+
+				<table style="margin-top: 20px">
+							
+						
+					<tr>
+						<td colspan="2" style="text-align: center; font-size: 18px;">
+							Compressive Strength of control Sample
+
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Weight of Cement (g)</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_cement_wt"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Weight of Standard Sand (g) Grade-I</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_wt_of_standerd_sand1"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Weight of Standard Sand (g) Grade-II</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_wt_standerd_sand2"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Weight of Standard Sand (g) Grade-III</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_wt_standerd_sand3"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Total Weight (g)</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_total_wt"/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Quantity of Water (g)</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_water_quantity"/></td>
+					</tr>
+				</table>
+				<table style="margin-top: 20px">
+					<tr>
+						<td colspan="2" style="text-align: center; font-size: 18px;">
+							Calculation of Flow (Acceptable : 105 ± 5 %)
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">Sr. No.</td>
+						<td style="text-align: center; font-weight: bold;">Measured Values</td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">1</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_measured_value1"/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">2</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_measured_value2"/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">3</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_measured_value3"/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">4</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_measured_value4"/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">Average</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_average_measured" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">% Flow</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_percent_flow" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+				</table>
+
+				<!-- 7 Days  -->
+
+				<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.comp_control_status_7days">
+					7 Days
+				</div>
+				<table style="margin-top:20px" t-if="data.comp_control_status_7days">
+				<tr cols="12">
+						<td colspan="6">Date of Casting :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.comp_control_castingdate_7days"/>
+						</td>
+						<td colspan="6">Date of Testing :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.comp_control_testingdate_7days"/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top:20px" t-if="data.comp_control_status_7days">
+					<tr cols="12">
+						<td colspan="1">Sr no 
+						</td>
+						<td colspan="1">Length in mm 
+						</td>
+						<td colspan="1">Width in mm
+						</td>
+						<td colspan="2">Crosssectional Area
+						</td>
+						<td colspan="2">wt of Cement Cube in gm
+						</td>
+						<td colspan="2">Crushing Load in KN
+						</td>
+						<td colspan="3">Compressive Strength (N/mm²)
+						</td>
+					</tr>
+
+					<t t-set="i" t-value="0"/>
+					<tr t-foreach="data.comp_control_casting_7days_tables" t-as="r">
+						<td colspan="1" style="text-align: center;">
+							<div>
+								<span t-esc="i + 1" />
+								<t t-set="i" t-value="i+1"/>
+							</div>
+						</td>
+						<td colspan="1" style="text-align: center;">
+							<span t-esc="r['comp_control_length']"/>
+						</td>
+						<td colspan="1" style="text-align: center;">
+							<span t-esc="r['comp_control_width']"/>
+						</td>
+						<td colspan="2" style="text-align: center;">
+							<span t-esc="r['comp_control_crosssectional_area']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+						<td colspan="2" style="text-align: center;">
+							<span t-esc="r['comp_control_wt_cement_cube']"/>
+						</td>
+						<td colspan="2" style="text-align: center;">
+							<span t-esc="r['comp_control_crushing_load']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['comp_control_strength']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top: 20px">
+					<tr>
+						<td style="font-weight: bold;">Average</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_average_casting_7days" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Compressive Strength of  Sample (%)</td>
+						<td style="text-align: center;"><span t-field="data.comp_control_strngth_7_days" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+				</table>
+			</div>
+
+				<!--5 Oversize Percent Retained on 45 Micron IS sieve variation from Avg. % -->
+
+			<div t-if="data.oversize_percent_retain_visible" style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+						Oversize Percent Retained on 45 Micron IS sieve variation from Avg. %
+				</div>
+				<table>
+					<tr cols="12">
+						<td colspan="6">Temperature :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.oversize_temp_percent"/>
+						</td>
+						<td colspan="6">Test Start Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.oversize_start_date_specific"/>
+						</td>
+					</tr>
+					<tr cols="12">
+						<td colspan="6">Humidity :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.oversize_humidity_percent_specific"/>
+						</td>
+						<td colspan="6">Test End Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.oversize_end_date_specific"/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top:20px">
+
+					<tr cols="12">
+						<td colspan="3">S.No 
+						</td>
+						<td colspan="3">Sample Weight (g)
+						</td>
+						<td colspan="3">Retained Weight on 45 Micron Sieve (g)
+						</td>
+						<td colspan="3">% Retained Weight 
+						</td>
+						<td colspan="3">Variation from Avg. %
+						</td>
+					</tr>
+
+					<t t-set="i" t-value="0"/>
+					<tr t-foreach="data.oversize_percent_tables" t-as="r">
+						<td colspan="3" style="text-align: center;">
+							<div>
+								<span t-esc="i + 1" />
+								<t t-set="i" t-value="i+1"/>
+							</div>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['sample_wt_g']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['retain_wt_45micron']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['retain_wt_percent']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['variation_from_avrg']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top: 20px">
+					<tr>
+						<td style="font-weight: bold;">Average</td>
+						<td style="text-align: center;"><span t-field="data.avrg_oversize_percent"/></td>
+					</tr>
+				</table>	
+			</div>
+
+			  <!--6 Dry Loose Bulk Density -->
+
+			<div t-if="data.bulk_density_visible" style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+						Dry Loose Bulk Density
+				</div>
+				<table>
+					<tr cols="12">
+						<td colspan="6">Temperature :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.bulk_density_temp_percent"/>
+						</td>
+						<td colspan="6">Test Start Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.bulk_density_start_date"/>
+						</td>
+					</tr>
+					<tr cols="12">
+						<td colspan="6">Humidity :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.bulk_density_humidity_percent"/>
+						</td>
+						<td colspan="6">Test End Date :
+							<![CDATA[&nbsp;]]>
+							<span t-field="data.bulk_density_end_date"/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top:20px">
+
+					<tr cols="12">
+						<td colspan="3">S.No 
+						</td>
+						<td colspan="3">Weight of empty Cylinder (w1) (gm)
+						</td>
+						<td colspan="3">Weight of empty Cylinder  + Microsilica (w2) (gm)
+						</td>
+						<td colspan="3">weight of the microsilica (w3) (gm) 
+						</td>
+						<td colspan="3">Volume of Cylinder (m³)
+						</td>
+						<td colspan="3">Dry Loose Bulk Density (kg/m³)
+						</td>
+					</tr>
+
+					<t t-set="i" t-value="0"/>
+					<tr t-foreach="data.bulk_density_tables" t-as="r">
+						<td colspan="3" style="text-align: center;">
+							<div>
+								<span t-esc="i + 1" />
+								<t t-set="i" t-value="i+1"/>
+							</div>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['wt_empty_cylinder_dry_density']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['wt_cylinder_microsilica_dry_density']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['wt_microsilica_dry_density']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['vlm_of_cylinder']"/>
+						</td>
+						<td colspan="3" style="text-align: center;">
+							<span t-esc="r['dryloose_bulk_density']" t-options='{"widget": "float", "precision": 2}'/>
+						</td>
+					</tr>
+				</table>
+				<table style="margin-top: 20px">
+					<tr>
+						<td style="font-weight: bold;">Average Dry Loose Bulk Density (kg/m³)</td>
+						<td style="text-align: center;"><span t-field="data.avrg_bulk_density" t-options='{"widget": "float", "precision": 2}'/></td>
+					</tr>
+				</table>
+					
+			</div>
+
+				<!-- authorizeRowDataSheet -->
+				
+			<div class="authorizeRowDataSheet">
+				<div>
+					<div>
+						<b>
+							(JR Chemist)
+						</b>
+					</div>
+					<div>
+						<b>
+							Tested By
+						</b>
+					</div>
+				</div>
+				<div style="margin-left:500px">
+					<div>
+						<b>
+							Mechanical Department (HOD)
+						</b>
+					</div>
+					<div>
+						<b>
+							Checked By
+						</b>
+					</div>
+				</div>
+			</div>
+
+
+			
+
+		</div>
+	</t>
+</t>
+</template>
+</odoo>

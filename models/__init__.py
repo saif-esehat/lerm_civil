@@ -56,5 +56,6 @@ from .mechanical import cement_psc
 from .mechanical import cement_ppc
 from .mechanical import cement_setting_time
 from .mechanical import coupler
+from .mechanical import cement_compatablity
 from . import general_template
 
