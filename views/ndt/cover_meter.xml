@@ -27,7 +27,9 @@
                             </tree>
                     </field>
                     <group>
-                            <field name="average" string="Average" identity="result"/>                      
+                            <field name="average" string="Average" identity="result"/> 
+                            <field name="average_min" string="Average Min" identity="result"/>         
+                            <field name="average_max" string="Average Max" identity="result"/>                      
                     </group>
                 </sheet>
             </form>
