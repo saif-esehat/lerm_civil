@@ -149,6 +149,13 @@
 				<div class="container_eln" style="margin-top:5px">
 					<div t-foreach="eln" t-as="o">
 						<table style="margin-top:20px">
+						<tr cols="12">
+								<td colspan="6">Job No :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.job_no.kes_no"/>
+								</td>
+							
+							</tr>
 							<tr cols="12">
 								<td colspan="6">Temperature °C :
 									<![CDATA[&nbsp;]]>

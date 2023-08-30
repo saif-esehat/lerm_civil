@@ -80,6 +80,7 @@
     'reports/srf_report_template.xml',
     'reports/report_cement.xml',
     'reports/microsilica_datasheet.xml',
+    'reports/gypsum_report.xml',
     'security/security.xml',
     # 'security/dump.sql',
     'security/ir.model.access.csv',

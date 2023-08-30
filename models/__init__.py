@@ -13,6 +13,7 @@ from . import company
 from . import data_sheets_report
 from .report import cement_report
 from .report import flyash_report
+from .report import gypsum_report
 from .mechanical import sieve_analysis
 from .mechanical import pavel_block
 from .mechanical import free_swell_index

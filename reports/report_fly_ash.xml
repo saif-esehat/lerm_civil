@@ -116,7 +116,7 @@
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="3">
-									<span t-field="o.sample_id.size_id.size"/>
+									<span t-field="o.size_id.size"/>
 								</td>
 								<td colspan="3" style="font-weight: bold;">Grade :
 									<![CDATA[&nbsp;]]>
