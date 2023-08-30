@@ -88,6 +88,8 @@
     'security/ir.model.access.csv',
     'reports/sample_report_action.xml',
     'reports/datasheet_templates.xml',
+    'reports/compatiblity_datasheet.xml',
+    'reports/compatiblity_report.xml',
     'reports/general_template.xml',
     'reports/ggbs_datasheet.xml',
     'reports/gypsum_datasheet.xml',

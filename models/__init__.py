@@ -16,6 +16,7 @@ from .report import flyash_report
 from .report import gypsum_report
 from .report import wpt_report
 from .report import microsilica_report
+from .report import cement_compatiblity
 from .mechanical import sieve_analysis
 from .mechanical import pavel_block
 from .mechanical import free_swell_index
