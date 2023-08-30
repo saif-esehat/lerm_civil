@@ -66,7 +66,6 @@ class UpvLine(models.Model):
         ('wet', 'Wet')],"Condition Of Concrete")
     
     surface = fields.Selection([
-        ('on_plaster', 'On Plaster'),
         ('w/o_plaster', 'W/O Plaster')],"Surface")
     
     quality = fields.Selection([

@@ -7,7 +7,8 @@ class ParameterMaster(models.Model):
 
     internal_id = fields.Char(string="Internal ID")
     parameter_name = fields.Char(string="Parameter Name")
-    datasheet_no = fields.Char(string="Datasheet No")
+    datasheet_no = fields.Char(string="Datasheet Format No")
+    report_format_no = fields.Char(string="Report Format No")
     lab_min_value = fields.Float(string="Lab min Value")
     lab_max_value = fields.Float(string="Lab max Value")
     nabl_min_value = fields.Float(string="Nabl min value")

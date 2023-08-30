@@ -31,9 +31,590 @@
 								</td>
 							</tr>
 						</table>
+							<table>
+								<tr>
+									<!-- Left Side -->
+									<td colspan="12" style="width: 50%; vertical-align: top;">
+										<table>
+											<tr>
+												<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
+													Customer/Party Name :
+												</td>
+												<td colspan="3">
+												<span t-field="o.srf_id.customer.name"/>
+												<span t-field="o.srf_id.customer.street"/>
+												<span t-field="o.srf_id.customer.street2"/>
+												<span t-field="o.srf_id.customer.city"/>
+												<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+												<span t-field="o.srf_id.customer.state_id"/>
+												,
+												<span t-field="o.srf_id.customer.country_id"/>
+									           </td>
+											</tr>
+											
+										</table>
+									</td>
+									<!-- Right Side -->
+									<td colspan="12" style="width: 30%; vertical-align: top;">
+										<table>
+											<tr>
+											    <td colspan="3" style="font-weight: bold;" >
+													Sample Receipt Date :
+												</td>
+												<td colspan="3">
+													<span t-field="o.sample_id.sample_received_date"/>
+												</td>
+											</tr>
+											<tr>
+											    <td colspan="3" style="font-weight: bold;" >
+													Test Start Date :
+												</td>
+												<td colspan="3">
+													<span t-field="o.start_date"/>
+												</td>
+											</tr>
+											<tr>
+											    <td colspan="3" style="font-weight: bold;" >
+													Test End Date :
+												</td>
+												<td colspan="3">
+													<span t-field="o.end_date"/>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
 							
+
+						</table>
+						<table>
+						   <tr>
+								<td colspan="12" style="font-weight: bold;">Project / Site Address :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address.name"/>
+									<span t-field="o.srf_id.site_address.street"/>
+									<span t-field="o.srf_id.site_address.street2"/>
+									<span t-field="o.srf_id.site_address.city"/>
+									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
+									<span t-field="o.srf_id.site_address.state_id"/>
+									,
+									<span t-field="o.srf_id.site_address.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12" style="font-weight: bold;">Sample Description : <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12" style="font-weight: bold;">Sample Id Mark: <![CDATA[&nbsp;]]>
+										<span t-field="o.sample_id.client_sample_id"/>
+								</td>
+							</tr>
+							<tr>
+							   <td colspan="3" style="font-weight: bold;">Quantity :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="o.sample_id.size_id.size"/>
+								</td>
+								<td colspan="3" style="font-weight: bold;">Grade :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td>
+									<span t-field="o.grade_id.grade"/>
+								</td>
+							</tr>
+							<tr>
+							    <td colspan="3" style="font-weight: bold;">Brand :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="o.sample_id.brand"/>
+								</td>
+								<td colspan="3" style="font-weight: bold;">Consultant Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+							    <td colspan="3" style="font-weight: bold;">Client Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3"></td>
+								<td colspan="3" style="font-weight: bold;">Client Reference :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td>
+									<span t-field="o.srf_id.client_refrence"/>
+								</td>
+							</tr>
+							<tr>
+							    <td colspan="3" style="font-weight: bold;">Discipline :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="o.discipline.discipline"/>
+								</td>
+								<td colspan="3" style="font-weight: bold;">Group :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="o.group.group"/>
+								</td>
+							</tr>
+							<tr>
+							    <td colspan="3" style="font-weight: bold;">Material/Test Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="12">
+									<span t-field="o.material.name"/>
+								</td>
+							</tr>
+							<tr>
+							    <td colspan="3" style="font-weight: bold;">Room Temp :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									
+								</td>
+								<td colspan="3" style="font-weight: bold;">Room RH :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									
+								</td>
+							</tr>
+
+						</table>
 					</div>
+					<div style="margin-top:20px;">
+						<p><strong>Results</strong>:<![CDATA[&nbsp;]]></p>
+						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
+					</div>
+					<table style="margin-top:30px;">
+						<thead>
+							<tr>
+							   
+								<th style="text-align: center;">
+									<span style="font-weight: bold;">
+										Name of Test
+									</span>
+								</th>
+								<th style="text-align: center;">
+									<span style="font-weight: bold;">
+										Test Method
+									</span>
+								</th>
+								<th style="text-align: center;">
+									<span style="font-weight: bold;">
+										Test Result
+									</span>
+								</th>
+								<th style="text-align: center;">
+									<span style="font-weight: bold;">
+										Unit
+									</span>
+								</th>
+								<th style="text-align: center;">
+									<span colspan="3" style="font-weight: bold;">
+										Limits IS 3812 : 2013 (Part 1)
+									</span>
+								</th>
+							</tr>
+						</thead>
+					<tbody >
+						  <tr>
+						        
+								<td style="text-align: center;">
+									<span style="text-align: center;">
+										Normal Consistency
+									</span>
+									
+								</td>
+								<td style="text-align: center;">
+									<span style="text-align: center;">
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Normal Consistency FA')]).test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span style="text-align: center;" >
+										<span t-field="flyash.normal_consistency_fly_1" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span style="text-align: center;" >
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Normal Consistency FA')]).unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span style="text-align: center;" >
+										-
+									</span>
+								</td>
+							</tr>
+							<tr t-if="flyash.setting_time_visible">
+								<td style="text-align: center;">
+									<span>
+										Initial Setting Time
+									</span>
+									
+								</td >
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Initial Setting Time FA')]).test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="flyash.initial_setting_time_minutes"/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Initial Setting Time FA')]).unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										 -	
+									</span>
+								</td>
+								
+							</tr>
+							<tr t-if="flyash.setting_time_visible">
+								<td style="text-align: center;">
+									<span>
+										Final Setting Time
+									</span>
+									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Final Setting Time FA')]).test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="flyash.final_setting_time_minutes"/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Final Setting Time FA')]).unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+		                                   -
+									</span>
+								</td>
+							</tr>
+							<tr t-if="flyash.particles_retained_visible">
+								<td style="text-align: center;">
+									<span>
+										Particle Retained on 45 Micron IS Sieve ( Wet Sieving)
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Particles retained on 45 micron IS sieve (wet sieving) FA')]).test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="flyash.prcent_retaind" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Particles retained on 45 micron IS sieve (wet sieving) FA')]).unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Soundness by Le-Chatelier Method FA')]).parameter.lab_max_value"/> Max	
+									</span>
+								</td>
+							</tr>
+							<tr t-if="flyash.soundness_visible">
+								<td style="text-align: center;">
+									<span>
+										Soundness by Lechatelier Method
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span >
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Soundness by Le-Chatelier Method FA')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="flyash.average_soundness" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Soundness by Le-Chatelier Method FA')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										 -
+									</span>
+								</td>
+							</tr>
+							<tr t-if="flyash.specigic_gravity_visible">
+								<td style="text-align: center;">
+									<span>
+										Specific Gravity
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span >
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Specific Gravity FA')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="flyash.average_specific_gravity" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										-
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										 -
+									</span>
+								</td>
+							</tr>
+							<tr t-if="flyash.fineness_blaine_visible">
+								<td style="text-align: center;">
+									<span>
+										Fineness by Blaine Air Permeability Method
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Fineness By Blaine Air Permeability Method FA')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="flyash.fineness_air_permeability" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Fineness By Blaine Air Permeability Method FA')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Fineness By Blaine Air Permeability Method FA')]).parameter.lab_min_value"/> Min
+									</span>
+								</td>
+							</tr>
+							<tr t-if="flyash.lime_reactivity_visible">
+								<td style="text-align: center;">
+									<span>
+										Lime Reactivity
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Lime reactivity FA')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-if="flyash.status_28daysss">
+											<span t-field="flyash.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+										</t>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Lime reactivity FA')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Lime reactivity FA')]).parameter.lab_min_value"/> Min
+									</span>
+								</td>
+							</tr>
+							<tr t-if="flyash.compressive_visible">
+								<td style="text-align: center;">
+									<span>
+										Compressive Strength of Flyash Sample 28 days
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+											<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','compressive strength FA')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-if="flyash.status_28days">
+											<span t-field="flyash.average_casting_28days" t-options='{"widget": "float", "precision": 2}'/>
+										</t>
+										<t t-else="">
+											Awaited
+										</t>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','compressive strength FA')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										
+                                    Not less then 80% 
+									corresponding plain 
+									cement mortor cube
+
+									</span>
+								</td>
+							</tr>
+							<tr t-if="flyash.compressive_visible">
+								<td style="text-align: center;">
+									<span>
+										Compressive Strength of control Sample 28 days
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+											<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','compressive strength FA')]).parameter.test_method.test_method"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-if="flyash.status_28dayss">
+											<span t-field="flyash.average_casting_28dayss" t-options='{"widget": "float", "precision": 2}'/>
+										</t>
+										<t t-else="">
+											Awaited
+										</t>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','compressive strength FA')]).parameter.unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										
+                                    Not less then 80% 
+									corresponding plain 
+									cement mortor cube
+
+									</span>
+								</td>
+							</tr>
 							
+							<tr t-if="flyash.status_28days and flyash.status_28dayss">
+										<td style="text-align: center;">
+											<span>
+												In Percent
+											</span>
+										</td>
+										<td style="text-align: center;">
+											<span>
+												<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','compressive strength FA')]).parameter.test_method.test_method"/>
+											</span>
+										</td>
+										<td style="text-align: center;">
+											<span>
+												<t t-if="flyash.status_28days and flyash.status_28dayss">
+													<t t-if="flyash.compressive_strength_of_sample">
+														<span t-field="flyash.compressive_strength_of_sample" t-options='{"widget": "float", "precision": 2}'/>
+													</t>
+													<t t-else="">
+														Awaited
+													</t>
+												</t>
+												<t t-else="">
+													<!-- Handle the case when status conditions are not met -->
+												</t>
+											</span>
+										</td>
+										<td style="text-align: center;">
+											<span>
+												<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','compressive strength FA')]).parameter.unit.name"/>
+											</span>
+										</td>
+										<td style="text-align: center;">
+											<span>
+												Not less than 80% 
+												corresponding plain 
+												cement mortar cube
+											</span>
+										</td>
+									</tr>
+
+						</tbody >
+					</table>
+					<div style="margin-top:20px" class="noteContainer">
+						<div>
+							<b>Remarks: -</b>
+						</div>
+						<div>
+							<ul>
+								<li>
+									The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+								</li>
+								<li>
+									Sample(s) was/were not drawn by laboratory.
+								</li>
+								<li>
+									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="signatureContainer girdgird" style="margin-top:50px">
+						<div>
+							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
+						</div>
+						<div >
+							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
+						</div>
+						<div>
+							<div>
+								<b>
+									Approved By
+								</b>
+							</div>
+							<div style="height:20px">
+								
+							</div>
+							<div>
+								<b>
+									Technical Manager
+								</b>
+							</div>
+							<div>
+								<b>
+									(Authorized Signatory)
+								</b>
+							</div>
+						</div>
+					</div>
+					<div style="margin-top: 50px; text-align: center;">
+						<p style="border-top: 1px dashed #000; padding-top: 10px;">
+							...... End Of Report......
+						</p>
+					</div>
+												
 				</div>
 				
 			</t>

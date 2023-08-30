@@ -31,13 +31,13 @@
                     <group>
                         <group>
                             
-                            <field name="casting_date" string="Date of Casting"/>
-                            <field name="grade" string="Grade"/>
+                            <field name="casting_date" exception="casting_date"  string="Date of Casting" identity="extra"/>
+                            <field name="grade"  exception="grade" string="Grade" identity="extra"/>
                         </group>
 
                         <group>
-                            <field name="quantity" string="Quantity"/>
-                            <field name="size" string="Specimen Size (mm)"/>
+                            <field name="quantity"  exception="quantity" string="Quantity" identity="extra"/>
+                            <field name="size" exception="size" string="Specimen Size (mm)" identity="extra"/>
                         </group>
                     </group>
                     <group>

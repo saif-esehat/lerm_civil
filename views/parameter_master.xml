@@ -12,7 +12,7 @@
                             <field name="parameter_name"/>
                         </group>
                         <group>
-                            <group>
+                            <group style="width:50%">
                                 <field name="material"/>
                                 <field name="lab_min_value"/>
                                 <field name="datasheet_no"/>
@@ -29,9 +29,10 @@
                                 <field name="discipline"/>
                                 <field name="sheets"/>
                             </group>
-                            <group>
+                            <group style="width:50%">
                                 <field name="group"/>
                                 <field name="lab_max_value"/>
+                                <field name="report_format_no"/>
                                 <field name="mu_value" widget="percentage"/>
                                 <field name="nabl_max_value" invisible="1"/>
                                 <field name="client_max_value" invisible="1"/>

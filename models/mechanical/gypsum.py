@@ -323,7 +323,7 @@ class Casting1DaysLineGypsum(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
             else:
                 record.compressive_strength = 0
 

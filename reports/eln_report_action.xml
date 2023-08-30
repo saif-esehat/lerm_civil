@@ -117,12 +117,34 @@
         <field name="binding_type">report</field>
     </record>
 
-    <record id="ggbs_datasheet_action" model="ir.actions.report">
+    <!-- <record id="ggbs_datasheet_action" model="ir.actions.report">
         <field name="name">GGBS Datasheet</field>
         <field name="model">lerm.eln</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">lerm_civil.ggbs_datasheet</field>
         <field name="report_file">lerm_civil.ggbs_datasheet</field>
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record> -->
+
+    
+    <record id="microsilica_datasheet_action" model="ir.actions.report">
+        <field name="name">Microsilica Datasheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.microsilica_datasheet</field>
+        <field name="report_file">lerm_civil.microsilica_datasheet</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="wpt_datasheet_action" model="ir.actions.report">
+        <field name="name">WPT Datasheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.wpt_datasheet</field>
+        <field name="report_file">lerm_civil.wpt_datasheet</field>
         <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
