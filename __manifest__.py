@@ -89,6 +89,9 @@
     'reports/sample_report_action.xml',
     'reports/datasheet_templates.xml',
     'reports/general_template.xml',
+    'reports/ggbs_datasheet.xml',
+    'reports/gypsum_datasheet.xml',
+    'reports/wpt_datasheet.xml',
     'reports/general_report_template.xml',
     
     ],

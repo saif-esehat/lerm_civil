@@ -101,7 +101,7 @@ class GgbsMechanical(models.Model):
 
 
     wt_of_cement_slag = fields.Float("Wt. of Cement(g)",default=100)
-    wt_of_ggbs_slag = fields.Float("Wt. of Cement(g)",default=100)
+    wt_of_ggbs_slag = fields.Float("Wt. of GGBS(g)",default=100)
     wt_of_standard_sand_grade1 = fields.Float("Weight of Standard Sand (g) Grade-I",default=200)
     wt_of_standard_sand_grade2 = fields.Float("Weight of Standard Sand (g) Grade-II",default=200)
     wt_of_standard_sand_grade3 = fields.Float("Weight of Standard Sand (g) Grade-III",default=200)
@@ -205,8 +205,8 @@ class GgbsMechanical(models.Model):
     def _compute_average_7days_opc(self):
         for record in self:
             try:
-                record.average_7days_slag_opc = sum(record.slag_7days_table_opc.mapped('compressive_strength')) / len(
-                    record.slag_7days_table_opc)
+                record.average_7days_slag_opc = round((sum(record.slag_7days_table_opc.mapped('compressive_strength')) / len(
+                    record.slag_7days_table_opc)),3)
             except:
                 record.average_7days_slag_opc = 0
 
@@ -214,8 +214,8 @@ class GgbsMechanical(models.Model):
     def _compute_average_28days_opc(self):
         for record in self:
             try:
-                record.average_28days_slag_opc = sum(record.slag_28days_table_opc.mapped('compressive_strength')) / len(
-                    record.slag_28days_table_opc)
+                record.average_28days_slag_opc = round((sum(record.slag_28days_table_opc.mapped('compressive_strength')) / len(
+                    record.slag_28days_table_opc)),3)
             except:
                 record.average_28days_slag_opc = 0
 
@@ -259,7 +259,7 @@ class GgbsMechanical(models.Model):
     def _compute_slag_index_7days(self):
         for record in self:
             if self.average_7days_slag_opc != 0:
-                record.slag_activity_index_7days = (record.average_7days_slag/record.average_7days_slag_opc)*100
+                record.slag_activity_index_7days = round(((record.average_7days_slag/record.average_7days_slag_opc)*100),3)
             else:
                 record.slag_activity_index_7days = 0
 
@@ -268,7 +268,7 @@ class GgbsMechanical(models.Model):
     def _compute_slag_index_28days(self):
         for record in self:
             if self.average_28days_slag_opc != 0:
-                record.slag_activity_index_28days = (record.average_28days_slag/record.average_28days_slag_opc)*100
+                record.slag_activity_index_28days = round(((record.average_28days_slag/record.average_28days_slag_opc)*100),3)
             else:
                 record.slag_activity_index_28days = 0
 
@@ -471,7 +471,7 @@ class GgbsSlag7DaysLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
             else:
                 record.compressive_strength = 0
 
@@ -497,7 +497,7 @@ class GgbsSlag28DaysLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
             else:
                 record.compressive_strength = 0
 
@@ -523,7 +523,7 @@ class GgbsSlagOpc7DaysLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
             else:
                 record.compressive_strength = 0
 
@@ -549,6 +549,6 @@ class GgbsSlagOpc28DaysLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
             else:
                 record.compressive_strength = 0
