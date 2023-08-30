@@ -8,19 +8,23 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <group>
-                            <group>
-                                <field name="eln_ref"/>
-                                <group style="width:50%">
-                                    <field name="temp_percent_normal"/>
-                                    <field name="humidity_percent_normal"/>
-                                </group>
-                                <group style="width:50%">
-                                    <field name="start_date_normal"/>
-                                    <field name="end_date_normal"/>
-                                </group>
-                            </group>
+                        <group style="width:100%">
+                            <field name="eln_ref" invisible="1"/>
+                        </group >
+                         <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                        
+                        <group style="width:50%">
+                            <field name="temp_percent_normal"/>
+                            <field name="humidity_percent_normal"/>
                         </group>
+
+                        <group style="width:50%">
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+
 
                         <field name="child_lines" widget="one2many_list">
                             <tree editable="bottom">
@@ -34,6 +38,10 @@
                                 <field name="flow_60_min"/>
                             </tree>
                         </field>
+
+                        <group>
+                            <field name="chart_image" widget="image" readonly="1"/>
+                        </group>
 
                     </sheet>
                 </form>

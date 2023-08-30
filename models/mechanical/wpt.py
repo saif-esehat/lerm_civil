@@ -25,6 +25,7 @@ class WptMechanical(models.Model):
     size = fields.Many2one('lerm.size.line',string="Specimen Size (mm)",compute="_compute_size",store=True)
 
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    job_no = fields.Many2one('lerm.srf.sample',compute="_compute_job_no",string="Job No")
 
     @api.model
     def create(self, vals):
@@ -33,6 +34,11 @@ class WptMechanical(models.Model):
         record.parameter_id.write({'model_id':record.id})
         record.eln_ref.write({'model_id':record.id})
         return record
+
+    @api.depends('eln_ref')
+    def _compute_job_no(self):
+        for record in self:
+            record.job_no = record.eln_ref.sample_id
 
     @api.depends('eln_ref')
     def _compute_size(self):

@@ -10,44 +10,47 @@
                 <sheet>
                     <group>
                         <h1>
-                        <field name="name" readonly="1"/>
+                        <field name="name" readonly="1" string="Water Permeability Test"/>
                         </h1>
                     </group>
                     <group>
+                        <field name="job_no"/>
+                    </group>
+                    <group>
                         <group>
-                            <field name="temp_percent_wpt"/>
-                            <field name="humidity_percent_wpt"/>
+                            <field name="temp_percent_wpt" string="Temperature °C"/>
+                            <field name="humidity_percent_wpt" string="Humidity %"/>
                         </group>
 
                         <group>
-                            <field name="start_date_wpt"/>
-                            <field name="end_date_wpt"/>
+                            <field name="start_date_wpt" string="Start Date"/>
+                            <field name="end_date_wpt" string="End Date"/>
                         </group>
                     </group>
                     <group>
-                        <field name="eln_ref" invisible="1"/>
+                        <field name="eln_ref" invisible="1" />
                     </group>
 
                     <group>
                         <group>
                             
-                            <field name="casting_date"/>
-                            <field name="grade"/>
+                            <field name="casting_date" exception="casting_date"  string="Date of Casting" identity="extra"/>
+                            <field name="grade"  exception="grade" string="Grade" identity="extra"/>
                         </group>
 
                         <group>
-                            <field name="quantity"/>
-                            <field name="size"/>
+                            <field name="quantity"  exception="quantity" string="Quantity" identity="extra"/>
+                            <field name="size" exception="size" string="Specimen Size (mm)" identity="extra"/>
                         </group>
                     </group>
                     <group>
                         <field name="child_lines">
                         <tree editable="bottom">
-                            <field name="sample"/>
-                            <field name="depth1"/>
-                            <field name="depth2"/>
-                            <field name="depth3"/>
-                            <field name="average"/>
+                            <field name="sample" string="Sample"/>
+                            <field name="depth1" string="Depth of Penetration 1"/>
+                            <field name="depth2" string="Depth of Penetration 2"/>
+                            <field name="depth3" string="Depth of Penetration 3"/>
+                            <field name="average" string="Average"/>
                         </tree>
                         </field>
                     </group>
