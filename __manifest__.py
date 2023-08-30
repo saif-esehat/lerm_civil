@@ -85,6 +85,7 @@
     'reports/cement_datasheet.xml',
     'reports/flyash_datasheet.xml',
     'reports/microsilica_datasheet.xml',
+    'reports/gypsum_report.xml',
     'security/security.xml',
     # 'security/dump.sql',
     'security/ir.model.access.csv',

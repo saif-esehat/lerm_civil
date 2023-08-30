@@ -116,6 +116,16 @@
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
     </record>
+    <record id="gypsum_report_action" model="ir.actions.report">
+        <field name="name">Gypsum Report</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.gypsum_report</field>
+        <field name="report_file">lerm_civil.gypsum_report</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
 
     <record id="microsilica_datasheet_action" model="ir.actions.report">
         <field name="name">Microsilica Datasheet</field>
