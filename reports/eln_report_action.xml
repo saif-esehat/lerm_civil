@@ -137,4 +137,25 @@
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
     </record>
+    <record id="report_fly_ash_action" model="ir.actions.report">
+        <field name="name">Report Microsilica</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.lerm_microsilica_report</field>
+        <field name="report_file">lerm_civil.lerm_microsilica_report</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="wpt_report_action" model="ir.actions.report">
+        <field name="name">WPT Report</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.wpt_report</field>
+        <field name="report_file">lerm_civil.wpt_report</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>
