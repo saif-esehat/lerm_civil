@@ -127,8 +127,8 @@ class GgbsMechanical(models.Model):
     def _compute_average_7days(self):
         for record in self:
             try:
-                record.average_7days_slag = sum(record.slag_7days_table.mapped('compressive_strength')) / len(
-                    record.slag_7days_table)
+                record.average_7days_slag = round((sum(record.slag_7days_table.mapped('compressive_strength')) / len(
+                    record.slag_7days_table)),2)
             except:
                 record.average_7days_slag = 0
 
@@ -136,8 +136,8 @@ class GgbsMechanical(models.Model):
     def _compute_average_28days(self):
         for record in self:
             try:
-                record.average_28days_slag = sum(record.slag_28days_table.mapped('compressive_strength')) / len(
-                    record.slag_28days_table)
+                record.average_28days_slag = round((sum(record.slag_28days_table.mapped('compressive_strength')) / len(
+                    record.slag_28days_table)),2)
             except:
                 record.average_28days_slag = 0
 
@@ -206,7 +206,7 @@ class GgbsMechanical(models.Model):
         for record in self:
             try:
                 record.average_7days_slag_opc = round((sum(record.slag_7days_table_opc.mapped('compressive_strength')) / len(
-                    record.slag_7days_table_opc)),3)
+                    record.slag_7days_table_opc)),2)
             except:
                 record.average_7days_slag_opc = 0
 
@@ -215,7 +215,7 @@ class GgbsMechanical(models.Model):
         for record in self:
             try:
                 record.average_28days_slag_opc = round((sum(record.slag_28days_table_opc.mapped('compressive_strength')) / len(
-                    record.slag_28days_table_opc)),3)
+                    record.slag_28days_table_opc)),2)
             except:
                 record.average_28days_slag_opc = 0
 
@@ -259,7 +259,7 @@ class GgbsMechanical(models.Model):
     def _compute_slag_index_7days(self):
         for record in self:
             if self.average_7days_slag_opc != 0:
-                record.slag_activity_index_7days = round(((record.average_7days_slag/record.average_7days_slag_opc)*100),3)
+                record.slag_activity_index_7days = round(((record.average_7days_slag/record.average_7days_slag_opc)*100),2)
             else:
                 record.slag_activity_index_7days = 0
 
@@ -268,7 +268,7 @@ class GgbsMechanical(models.Model):
     def _compute_slag_index_28days(self):
         for record in self:
             if self.average_28days_slag_opc != 0:
-                record.slag_activity_index_28days = round(((record.average_28days_slag/record.average_28days_slag_opc)*100),3)
+                record.slag_activity_index_28days = round(((record.average_28days_slag/record.average_28days_slag_opc)*100),2)
             else:
                 record.slag_activity_index_28days = 0
 
@@ -433,6 +433,14 @@ class GgbsMechanical(models.Model):
         record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
+
+
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)
 
         
     def get_all_fields(self):

@@ -15,6 +15,7 @@ from .report import cement_report
 from .report import flyash_report
 from .report import gypsum_report
 from .report import wpt_report
+from .report import ggbs_report
 from .report import microsilica_report
 from .report import cement_compatiblity
 from .mechanical import sieve_analysis

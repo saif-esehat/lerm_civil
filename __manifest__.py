@@ -83,6 +83,7 @@
     'reports/gypsum_report.xml',
     'reports/wpt_report.xml',
     'reports/microsilica_report.xml',
+    'reports/ggbs_report.xml',
     'security/security.xml',
     # 'security/dump.sql',
     'security/ir.model.access.csv',
