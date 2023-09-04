@@ -235,7 +235,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','initial setting time')]).test_method.test_method"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')]).test_method.test_method"/>
 									</span>
 								</td>
 								
@@ -256,12 +256,12 @@
 								</td>
 								<td>
 									<span>
-										Fineness by (Blaine air Permability Method)
+										Fineness by Blaine air Permability 
 									</span>
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','ﬁneness by blain method')]).parameter.unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).unit.name"/>
 									</span>
 								</td>
 								<td>
@@ -271,12 +271,12 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','ﬁneness by blain method')]).parameter.test_method.test_method"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).test_method.test_method"/>
 									</span>
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','ﬁneness by blain method')]).parameter.lab_min_value"/> Min
+										320 Min
 									</span>
 								</td>
 							</tr>
@@ -295,7 +295,7 @@
 
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
 								</td>
 
@@ -312,7 +312,7 @@
 
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/>
 									</span>
 								</td>
 
@@ -325,18 +325,18 @@
 							</tr>
 							<tr t-if="ggbs.slag_activity_visible">
 
-								<td style="border-right:none">
+								<td >
 									<span></span>
 									
 								</td>
-								<td tyle="border-left:none">
+								<td >
 									<span>
 										Control Sample 7 days
 									</span>
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
 								</td>
 								<td>
@@ -351,7 +351,8 @@
 								</td>
 								<td>
 									<span>
-									   <span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
+									   <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
+										-
 									</span>
 								</td>
 								
@@ -363,18 +364,18 @@
 							</tr>
 
 							<tr t-if="ggbs.slag_activity_visible">
-								<td>
+								<td > 
 									<span></span>
 									
 								</td>
-								<td>
+								<td >
 									<span>
 										In Percent
 									</span>
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
 								</td>
 								<td>
@@ -389,7 +390,8 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
+										-
+										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
 								</td>
 								
@@ -407,18 +409,18 @@
 							
 							
 							<tr t-if="ggbs.slag_activity_visible">
-								<td>
+								<td >
 									<span></span>
 									
 								</td>
-								<td>
-									<span style="padding-left:20px">
+								<td > 
+									<span >
 										Slag Activity Index 28 Days
 									</span>
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
 								</td>
 								<td>
@@ -434,7 +436,8 @@
 
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
+										-
+										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
 								</td>
 
@@ -446,18 +449,18 @@
 								
 							</tr>
 							<tr t-if="ggbs.slag_activity_visible">
-								<td>
+								<td >
 									<span></span>
 									
 								</td>
-								<td>
+								<td >
 									<span>
 										Control Sample 28 days
 									</span>
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
 								</td>
 								<td>
@@ -472,7 +475,8 @@
 								</td>
 								<td>
 									<span>
-									   <span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
+										-
+									   <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
 								</td>
 
@@ -484,18 +488,18 @@
 							</tr>
 
 							<tr t-if="ggbs.slag_activity_visible">
-								<td>
+								<td >
 									<span></span>
 									
 								</td>
-								<td>
+								<td >
 									<span>
 										In Percent
 									</span>
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
 								</td>
 								<td>
@@ -510,7 +514,8 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Compressive strength Cement')]).parameter.test_method.test_method"/>
+										-
+										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
 								</td>
 								

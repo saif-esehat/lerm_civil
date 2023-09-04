@@ -65,11 +65,11 @@ class WptMechanicalLine(models.Model):
     _name = "mechanical.wpt.line"
     parent_id = fields.Many2one('mechanical.wpt',string="Parent Id")
 
-    sample = fields.Char("Sample")
-    depth1 = fields.Float("Depth of Penetration 1")
-    depth2 = fields.Float("Depth of Penetration 2")
-    depth3 = fields.Float("Depth of Penetration 3")
-    average = fields.Float("Average",compute="_compute_average")
+    sample = fields.Char(string="Sample")
+    depth1 = fields.Float(string="Specimen 1")
+    depth2 = fields.Float(string="Specimen 2")
+    depth3 = fields.Float(string="Specimen 3")
+    average = fields.Float(string="Average",compute="_compute_average")
 
     @api.depends('depth1','depth2','depth3')
     def _compute_average(self):

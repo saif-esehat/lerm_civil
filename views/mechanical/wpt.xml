@@ -47,9 +47,9 @@
                         <field name="child_lines">
                         <tree editable="bottom">
                             <field name="sample" string="Sample"/>
-                            <field name="depth1" string="Depth of Penetration 1"/>
-                            <field name="depth2" string="Depth of Penetration 2"/>
-                            <field name="depth3" string="Depth of Penetration 3"/>
+                            <field name="depth1" string="Specimen 1"/>
+                            <field name="depth2" string="Specimen 2"/>
+                            <field name="depth3" string="Specimen 3"/>
                             <field name="average" string="Average"/>
                         </tree>
                         </field>
