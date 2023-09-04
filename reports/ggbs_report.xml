@@ -180,7 +180,7 @@
 							</tr>
 						</thead>
 						<tbody >
-							<tr t-if="ggbs.normal_consistency_visible">
+							<!-- <tr t-if="ggbs.normal_consistency_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -211,7 +211,7 @@
 								<td>
 									-
 								</td>
-							</tr>
+							</tr> -->
 							<tr t-if="ggbs.specific_gravity_visible">
 								<td>
 									<span t-esc="i + 1" />
