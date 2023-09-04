@@ -149,7 +149,10 @@ class GeneralReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
+        print(data['context'])
         if 'active_id' in data['context']:
+            # stamp = data['context']['inreport']
+            # print(stamp , 'stamp value')
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids) 
@@ -218,7 +221,6 @@ class SteelTmtBar(models.AbstractModel):
             'qrcode': qr_code
         }
 
-
 class SteelTmtBarDataSheet(models.AbstractModel):
     _name = 'report.lerm_civil.steel_tmt_bar_datasheet'
     _description = 'Steel TMT Bar DataSheet'
@@ -264,8 +266,6 @@ class CementDataSheet(models.AbstractModel):
             'data' : general_data
         }
 
-
-
 class GypsumDataSheet(models.AbstractModel):
     _name = 'report.lerm_civil.gypsum_datasheet'
     _description = 'Gypsum DataSheet'
@@ -289,7 +289,6 @@ class GypsumDataSheet(models.AbstractModel):
             'data' : general_data
         }
 
-
 class FlyashDatasheet(models.AbstractModel):
     _name = 'report.lerm_civil.flyash_datasheet'
     _description = 'Fly Ash DataSheet'
@@ -312,7 +311,6 @@ class FlyashDatasheet(models.AbstractModel):
             'eln': eln,
             'data' : general_data
         }
-
 
 class GgbsDataSheet(models.AbstractModel):
     _name = 'report.lerm_civil.ggbs_datasheet'
@@ -359,7 +357,6 @@ class MicrosilicaDatasheet(models.AbstractModel):
                 'eln': eln,
                 'data' : general_data
             }
-
 
 class WptDataSheet(models.AbstractModel):
     _name = 'report.lerm_civil.wpt_datasheet'

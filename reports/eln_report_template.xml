@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
 	<template id="custom_layout_header_footer_lerm_eln">
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
-				<div class="col-12 imageContainer" >
+				<div t-if="eln.sample_id.scope == 'nabl'" class="col-12 imageContainer" >
 					<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
+				</div>
+				<div t-if="eln.sample_id.scope == 'non_nabl'" class="col-12 imageContainer" >
+					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
 				</div>
 			</div>
         </div>
@@ -258,12 +262,11 @@
 										NABL Status
 									</span>
 								</th> -->
-								<!-- <th>
+								<th t-if="eln.conformity">
 									<span>
 										Confirmity Status
-										if confirmity is ticked then only i hhave to show confirmity
 									</span>
-								</th> -->
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -271,7 +274,7 @@
 							<tr t-foreach="eln.parameters_result" t-as="r">
 								<td>
 									<div>
-										<span t-esc="i + 1" />
+										<span t-esc="i + 1"/>
 										<t t-set="i" t-value="i+1"/>
 									</div>
                   				</td>
@@ -294,56 +297,62 @@
 								<!-- <td>
 									<span t-esc="r['nabl_status']"/>
 								</td> -->
-								<!-- <td>
+								<td t-if="eln.conformity">
 									<span t-esc="r['conformity_status']"/>
-								</td> -->
+								</td>
 							</tr>
 						</tbody>
 					</table>
+					<div style="page-break-inside: avoid;">
+						<div style="margin-top:20px" class="noteContainer">
+							<div>
+								<b>Note :-</b>
+							</div>
+							<div>
+								<ul>
+									<li>
+										The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+									</li>
+									<li>
+										Sample(s) was/were not drawn by laboratory.
+									</li>
+									<li>
+										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="signatureContainer girdgird">
+							<div>
+								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
+							</div>
+							<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By
+									</b>
+								</div>
+								<div style="height:20px">
 
-					<div style="margin-top:20px" class="noteContainer">
-						<div>
-							<b>Note :-</b>
-						</div>
-						<div>
-							<ul>
-								<li>
-									The Test Report(s) is/are valid only to the sample submitted to the laboratory.
-								</li>
-								<li>
-									Sample(s) was/were not drawn by laboratory.
-								</li>
-								<li>
-									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="signatureContainer girdgird">
-						<div>
-							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-						</div>
-						<div>
-							Format No. <span t-esc="eln.material.test_format_no"/>
-						</div>
-						<div>
-							<div>
-								<b>
-									Approved By
-								</b>
-							</div>
-							<div style="height:20px">
-
-							</div>
-							<div>
-								<b>
-									Chemical Department (HOD)
-								</b>
-							</div>
-							<div>
-								<b>
-									(Authorized Signatory)
-								</b>
+								</div>
+								<div>
+									<b>
+										Chemical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -899,8 +908,16 @@
 						<div>
 							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
 						</div>
-						<div>
+						<!-- <div>
 							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
+						</div> -->
+						<div>
+							<div t-if="stamp.inreport == '4-in_report'">
+								<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+							</div>
+							<div style="padding-top:5px">
+								Format No. <span t-esc="eln.material.test_format_no"/>
+							</div>
 						</div>
 						<div>
 							<div>
@@ -4613,8 +4630,7 @@
 
 			</div>
 		</t>
-
-	</t>
+		</t>
 	</template>
 	
 </odoo>

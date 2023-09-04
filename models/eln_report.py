@@ -12,13 +12,15 @@ class ElnReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
+        inreport_value = data.get('inreport', None)
         print(data , 'dataaaaaaaaaaaaaa')
+        # stamp = data['inreport']
         if 'active_id' in data['context']:
-            print(data['context']['active_id'] , 'active id')
+            # stamp = data['inreport']
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids)
-            print('came here')
+        print()
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         qr.add_data(eln.kes_no)
         qr.make(fit=True)
@@ -33,7 +35,8 @@ class ElnReport(models.AbstractModel):
         qr_code = qr_image_base64
         return {
             'eln': eln,
-            'qrcode': qr_code
+            'qrcode': qr_code,
+            'stamp' : inreport_value
         }
 
 
@@ -44,6 +47,7 @@ class DataSheetReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         if 'active_id' in data['context']:
+            stamp = data['context']['stamp']
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids)
@@ -61,6 +65,7 @@ class DataSheetReport(models.AbstractModel):
             prev_result = input_data.parameter_result.result
         return {
             'eln': eln,
-            'datasheet' : datasheet_data
+            'datasheet' : datasheet_data,
+            'stamp' : stamp
         }
         
