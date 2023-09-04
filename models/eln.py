@@ -377,8 +377,9 @@ class ParameteResultCalculationWizard(models.TransientModel):
             material_table = self.parameter.parameter_table.filtered(lambda rec: rec.grade.id == self.env.context.get('grade_id') and rec.material.id == self.env.context.get('material_id') and rec.size.id == self.env.context.get('size_id'))
             req_min = material_table.req_min
             req_max = material_table.req_max
-            mu_neg = record.result - record.parameter.mu_value
-            mu_pos = record.result + record.parameter.mu_value
+            mu_neg = record.result - record.result*record.parameter.mu_value
+            mu_pos = record.result + record.result*record.parameter.mu_value
+      
             if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"
             else:

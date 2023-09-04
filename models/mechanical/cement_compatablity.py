@@ -56,9 +56,12 @@ class CementCompatablity(models.Model):
     
     @api.depends('child_lines')
     def _compute_chart_image(self):
-        for record in self:
-            chart_image = record.generate_line_chart()
-            record.chart_image = chart_image
+        try:
+            for record in self:
+                chart_image = record.generate_line_chart()
+                record.chart_image = chart_image
+        except:
+            pass        
 
 
 class CementCompatablityLines(models.Model):
