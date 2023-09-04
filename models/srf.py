@@ -6,6 +6,7 @@ class Discipline(models.Model):
     _description = "Lerm Discipline"
     _rec_name = 'discipline'
 
+    internal_id = fields.Char(string="Internal ID")
     discipline = fields.Char(string="Discipline", required=True)
     hod = fields.Many2one('res.users',string="Head of Department")
 
@@ -460,6 +461,12 @@ class CreateSampleWizard(models.TransientModel):
 
         if not parameters:
             raise UserError("Add atleast one Parameter")
+        
+        if discipline_id.internal_id == '742c99ff-c484-4806-bb68-11b4271d6147':
+            if len(parameters) > 1:
+                 raise UserError("Only one Parameter is allowed in Non Destructive Testing")
+
+        
 
         srf_ids = []
         #     for i in range(1, self.qty_id + 1):
@@ -496,7 +503,8 @@ class CreateSampleWizard(models.TransientModel):
                 'volume':volume,
                 'product_name':product_name.id,
                 'main_name':self.main_name,
-                'price':self.price
+                'price':self.price,
+                'date_casting':self.date_casting
 
             })
             for i in range(self.sample_qty):
@@ -529,7 +537,8 @@ class CreateSampleWizard(models.TransientModel):
                     'volume':volume,
                     'product_name':product_name.id,
                     'main_name':self.main_name,
-                    'price':self.price
+                    'price':self.price,
+                    'date_casting':self.date_casting
 
                 })
 

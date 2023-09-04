@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="wpt_datasheet">
+		<!-- <t t-call="web.html_container">
+			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    Water Permeability Test
+                </div>
+				<div class="container_eln" style="margin-top:5px">
+					<div >
+
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Temperature °C :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.temp_percent_wpt"/>
+								</td>
+								<td colspan="6">Start Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.start_date_wpt"/>
+								</td>
+								
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Humidity % :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.humidity_percent_wpt"/>
+								</td>
+								<td colspan="6">End Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.end_date_wpt"/>
+								</td>
+								
+							</tr>
+						</table>
+
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Date of Casting :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.casting_date"/>
+								</td>
+								<td colspan="6">Quantity :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.quantity"/>
+								</td>
+								
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.grade.grade"/>
+								</td>
+								<td colspan="6">Specimen Size (mm) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.size.size"/>
+								</td>
+								
+							</tr>
+						</table>
+						
+						
+					</div>
+
+						
+						<table style="margin-top:20px" >
+							<tr cols="12">
+								<td colspan="1">Sr no 
+								</td>
+								<td colspan="1">Sample 
+								</td>
+								<td colspan="1">Depth of Penetration 1
+								</td>
+								<td colspan="2">Depth of Penetration 2
+								</td>
+								<td colspan="2">Depth of Penetration 3
+								</td>
+								<td colspan="2">Average
+								</td>
+								
+							</tr>
+
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.child_lines" t-as="r">
+								<td colspan="1">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</div>
+                  				</td>
+								<td colspan="1">
+									<span t-esc="r['sample']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['depth1']"/>
+								</td>
+								<td colspan="2">
+									<span t-esc="r['depth2']"/>
+								</td>
+								<td colspan="2">
+									<span t-esc="r['depth3']"/>
+								</td>
+								<td colspan="2">
+									<span t-esc="r['average']"/>
+								</td>
+								
+							</tr>
+						</table>
+						
+
+
+
+					<div class="authorizeRowDataSheet">
+						<div>
+							<div>
+								<b>
+									(JR Chemist)
+								</b>
+							</div>
+							<div>
+								<b>
+									Tested By
+								</b>
+							</div>
+						</div>
+						<div style="margin-left:500px">
+							<div>
+								<b>
+									Chemical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t> -->
+
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    <span t-field="data.parameter_id.parameter.parameter_name"/>
+                </div>
+				<div class="container_eln" style="margin-top:5px">
+					<div t-foreach="eln" t-as="o">
+						<table style="margin-top:20px">
+						<tr cols="12">
+								<td colspan="6">Job No :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.job_no.kes_no"/>
+								</td>
+							
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Temperature °C :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.temp_percent_wpt"/>
+								</td>
+								<td colspan="6">Start Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.start_date_wpt"/>
+								</td>
+								
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Humidity % :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.humidity_percent_wpt"/>
+								</td>
+								<td colspan="6">End Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.end_date_wpt"/>
+								</td>
+								
+							</tr>
+						</table>
+					</div>
+
+					<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Date of Casting :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.casting_date"/>
+								</td>
+								<td colspan="6">Quantity :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.quantity"/>
+								</td>
+								
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.grade.grade"/>
+								</td>
+								<td colspan="6">Specimen Size (mm) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.size.size"/>
+								</td>
+								
+							</tr>
+						</table>
+
+						<table style="margin-top:30px;">
+							<thead>
+								<tr>
+									<!-- <th>
+										<div>SR.No</div>
+									</th> -->
+									<t t-foreach="tabledata" t-as="column">
+										<th>
+											<span>
+												<t t-esc="column[1]" />
+											</span>
+										</th>
+									</t>
+								</tr>
+            				</thead>
+							<!-- <tbody>
+								<t t-set="i" t-value="0"/>
+								<tr t-foreach="data.child_lines" t-as="r">
+									<td>
+										<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+										</div>
+									</td>
+									<t t-foreach="tabledata" t-as="row">
+										<td>
+											<span>
+												<t t-esc="r[row[0]]"/>
+											</span>
+										</td>
+									</t>
+								</tr>
+							</tbody> -->
+
+							<tbody>
+								<tr t-foreach="data.child_lines" t-as="r">
+									<t t-foreach="tabledata" t-as="row">
+										<td>
+										<span>
+											<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+												<t t-esc="round(float(r[row[0]]),2)"/>
+											</t>
+											<t t-else="">
+												<t t-esc="r[row[0]]"/>
+											</t>
+										</span>
+										</td>
+									</t>
+								</tr>
+							</tbody>
+						</table>
+
+						<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="resultdata and len(resultdata) &gt; 0">
+							<tr cols="12">
+								<td colspan="6" t-foreach="resultdata" t-as="result">
+									<span>
+										<t t-esc="result[1]"/>
+									</span> : 
+									<![CDATA[&nbsp;]]>
+									<span>
+										<t t-esc="formdata[result[0]]" />
+									</span>
+								</td>
+							</tr>
+						</table>
+						<div class="authorizeRowDataSheet">
+							<div>
+								<div>
+									<b>
+										(JR Chemist)
+									</b>
+								</div>
+								<div>
+									<b>
+										Tested By
+									</b>
+								</div>
+							</div>
+							<div style="margin-left:500px">
+								<div>
+									<b>
+										Mechanical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+							</div>
+						</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

@@ -57,6 +57,7 @@ class SampleRangeLine(models.Model):
         ('14', '14 Days'),
         ('28', '28 Days'),
     ], string='Days of casting', default='3')
+    date_casting = fields.Date("Date of Casting")
     casting = fields.Boolean(string="Casting")
     client_sample_id = fields.Char(string="Client Sample Id")
     conformity = fields.Boolean(string='Conformity')

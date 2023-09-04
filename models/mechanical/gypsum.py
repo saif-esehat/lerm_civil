@@ -11,7 +11,7 @@ class GypsumMechanical(models.Model):
     _rec_name = "name"
 
 
-    name = fields.Char("Name",default="GGBS")
+    name = fields.Char("Name",default="Gypsum")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",store=True)
@@ -21,7 +21,7 @@ class GypsumMechanical(models.Model):
     # Normal Consistency
 
     normal_consistency_name = fields.Char("Name",default="Normal Consistency")
-    normal_consistency_visible = fields.Boolean("Normal Consistency Visible")
+    normal_consistency_visible = fields.Boolean("Normal Consistency Visible",compute="_compute_visible")
 
     temp_normal = fields.Float("Temperature")
     humidity_normal = fields.Float("Humidity")
@@ -45,7 +45,7 @@ class GypsumMechanical(models.Model):
 
     # Setting Time 
 
-    setting_time_visible = fields.Boolean("Setting Time Visible")
+    setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
     temp_setting = fields.Float("Temperature %")
@@ -83,13 +83,13 @@ class GypsumMechanical(models.Model):
 
     # Dry Bulk Density 
 
-    dry_bulk_visible = fields.Boolean("Setting Time Visible")
-    dry_bulk_name = fields.Char("Name",default="Setting Time")
+    dry_bulk_visible = fields.Boolean("Dry Bulk Density Visible",compute="_compute_visible")
+    dry_bulk_name = fields.Char("Name",default="Dry Bulk Density")
 
-    temp_dry_flex = fields.Float("Temperature %")
-    humidity_dry_flex = fields.Float("Humidity %")
-    start_date_dry_flex = fields.Date("Start Date")
-    end_date_dry_flex = fields.Date("End Date")
+    temp_dry_bulk = fields.Float("Temperature %")
+    humidity_dry_bulk = fields.Float("Humidity %")
+    start_date_dry_bulk = fields.Date("Start Date")
+    end_date_dry_bulk = fields.Date("End Date")
 
     wt_empty_cylinder_trial1 = fields.Float("Wt of Empty Cylinder w1")
     wt_empty_cylinder_trial2 = fields.Float("Wt of Empty Cylinder w1")
@@ -99,20 +99,236 @@ class GypsumMechanical(models.Model):
     wt_empty_gypsum_trial2 = fields.Float("Wt of Empty Gypsum w1")
     wt_empty_gypsum_trial3 = fields.Float("Wt of Empty Gypsum w1")
 
-    wt_empty_cylinder_gypsum_trial1 = fields.Float("Weight of empty Cylinder  + Gypsum (w2")
-    wt_empty_cylinder_gypsum_trial2 = fields.Float("Weight of empty Cylinder  + Gypsum (w2")
-    wt_empty_cylinder_gypsum_trial3 = fields.Float("Weight of empty Cylinder  + Gypsum (w2")
+    wt_empty_cylinder_gypsum_trial1 = fields.Float("Weight of empty Cylinder  + Gypsum (w2)")
+    wt_empty_cylinder_gypsum_trial2 = fields.Float("Weight of empty Cylinder  + Gypsum (w2)")
+    wt_empty_cylinder_gypsum_trial3 = fields.Float("Weight of empty Cylinder  + Gypsum (w2)")
 
-    volume_of_cylinder_trial1 = fields.Float("Volume of Cylinder")
-    volume_of_cylinder_trial2 = fields.Float("Volume of Cylinder")
-    volume_of_cylinder_trial3 = fields.Float("Volume of Cylinder")
+    volume_of_cylinder_trial1 = fields.Float("Volume of Cylinder",digits=(16,5),default=0.00025)
+    volume_of_cylinder_trial2 = fields.Float("Volume of Cylinder",digits=(16,5),default=0.00025)
+    volume_of_cylinder_trial3 = fields.Float("Volume of Cylinder",digits=(16,5),default=0.00025)
 
-    dry_loose_bulf_density_trial1 = fields.Float("Dry Loose Bulk Density (kg/m³)")
-    dry_loose_bulf_density_trial2 = fields.Float("Dry Loose Bulk Density (kg/m³)")
-    dry_loose_bulf_density_trial3 = fields.Float("Dry Loose Bulk Density (kg/m³)")
+    dry_loose_bulf_density_trial1 = fields.Float("Dry Loose Bulk Density (kg/m³)",compute="_compute_bulk_density_trial1")
+    dry_loose_bulf_density_trial2 = fields.Float("Dry Loose Bulk Density (kg/m³)",compute="_compute_bulk_density_trial2")
+    dry_loose_bulf_density_trial3 = fields.Float("Dry Loose Bulk Density (kg/m³)",compute="_compute_bulk_density_trial3")
 
-    average_dry_loose_bulk_density = fields.Float("Average Dry Loose Bulk Density (kg/m³)")
+    average_dry_loose_bulk_density = fields.Float("Average Dry Loose Bulk Density (kg/m³)",compute="_compute_average_bulk_density")
+
+
+    @api.depends('wt_empty_cylinder_gypsum_trial1','volume_of_cylinder_trial1')
+    def _compute_bulk_density_trial1(self):
+        for record in self:
+            if record.volume_of_cylinder_trial1 != 0:
+                record.dry_loose_bulf_density_trial1 =  (record.wt_empty_cylinder_gypsum_trial1 / record.volume_of_cylinder_trial1)/1000
+            else:
+                record.dry_loose_bulf_density_trial1 = 0
+
+    @api.depends('wt_empty_cylinder_gypsum_trial2','volume_of_cylinder_trial2')
+    def _compute_bulk_density_trial2(self):
+        for record in self:
+            if record.volume_of_cylinder_trial2 != 0:
+                record.dry_loose_bulf_density_trial2 =  (record.wt_empty_cylinder_gypsum_trial2 / record.volume_of_cylinder_trial2)/1000
+            else:
+                record.dry_loose_bulf_density_trial2 = 0
+
+    @api.depends('wt_empty_cylinder_gypsum_trial3','volume_of_cylinder_trial3')
+    def _compute_bulk_density_trial3(self):
+        for record in self:
+            if record.volume_of_cylinder_trial3 != 0:
+                record.dry_loose_bulf_density_trial3 =  (record.wt_empty_cylinder_gypsum_trial3 / record.volume_of_cylinder_trial3)/1000
+            else:
+                record.dry_loose_bulf_density_trial3 = 0
 
 
 
+    @api.depends('dry_loose_bulf_density_trial1','dry_loose_bulf_density_trial2','dry_loose_bulf_density_trial3')
+    def _compute_average_bulk_density(self):
+        for record in self:
+            record.average_dry_loose_bulk_density = (record.dry_loose_bulf_density_trial1 + record.dry_loose_bulf_density_trial2 + record.dry_loose_bulf_density_trial3)/3
+
+
+
+    # Free From Coarse Particle
+
+    coarse_particle_visible = fields.Boolean("Free From Coarse Particle Visible",compute="_compute_visible")
+    coarse_particle_name = fields.Char("Name",default="Free From Coarse Particle")
+
+    temp_coarse_particle = fields.Float("Temperature %")
+    humidity_coarse_particle = fields.Float("Humidity %")
+    start_date_coarse_particle = fields.Date("Start Date")
+    end_date_coarse_particle = fields.Date("End Date")
+
+    coarse_particle_table = fields.One2many('mechanical.coarse.particle.line','parent_id',string="Coarse Particle Table")
+    average_coarse_particle = fields.Float("Average",compute="_compute_average_coarse")
+
+    @api.depends('coarse_particle_table.coarse_particle')
+    def _compute_average_coarse(self):
+        for record in self:
+            try:
+                record.average_coarse_particle = sum(record.coarse_particle_table.mapped('coarse_particle'))/len(record.coarse_particle_table)
+            except:
+                record.average_coarse_particle = 0
+
+
+
+    # Compressive Strength 
+
+    compressive_name = fields.Char("Name",default="Compressive Strength")
+    compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
+
+    temp_percent_compressive = fields.Float("Temperature °C")
+    humidity_percent_compressive = fields.Float("Humidity %")
+    start_date_compressive = fields.Date("Start Date")
+    end_date_compressive = fields.Date("End Date")
+
+    wt_of_gypsum_compressive = fields.Float("Wt. of Gypsum(g)",default=50)
+    wt_of_standard_sand_grade1 = fields.Float("Weight of Standard Sand (g) Grade-I",default=80)
+    wt_of_standard_sand_grade2 = fields.Float("Weight of Standard Sand (g) Grade-II",default=80)
+    wt_of_standard_sand_grade3 = fields.Float("Weight of Standard Sand (g) Grade-III",default=80)
+    total_weight = fields.Float("Total Weight",compute="compute_total_weight_compressive")
+    quantity_of_water = fields.Float("Quantity of Water",compute="_compute_quantity_of_water")
+
+    @api.depends('wt_of_gypsum_compressive','wt_of_standard_sand_grade1','wt_of_standard_sand_grade2','wt_of_standard_sand_grade3')
+    def compute_total_weight_compressive(self):
+        self.total_weight = self.wt_of_gypsum_compressive + self.wt_of_standard_sand_grade1 + self.wt_of_standard_sand_grade2 + self.wt_of_standard_sand_grade3 
+
+    @api.depends('normal_consistency','total_weight')
+    def _compute_quantity_of_water(self):
+        self.quantity_of_water = ((self.normal_consistency/4 +3)/100)*self.total_weight
+
+
+    # 1 days Casting
+    casting_1_name = fields.Char("Name",default="1 Days")
+    days_1_done = fields.Boolean("Done")
+
+    # casting_3_visible = fields.Boolean("3 days Visible",compute="_compute_visible")
+
+    casting_date_1days = fields.Date(string="Date of Casting")
+    testing_date_1days = fields.Date(string="Date of Testing",compute="_compute_testing_date_1days")
+    casting_1_days_tables = fields.One2many('gypsum.casting.1days.line','parent_id',string="1 Days")
+    average_casting_1days = fields.Float("Average",compute="_compute_average_1days")
+    compressive_strength_1_days = fields.Float("Compressive Strength")
+    status_1days = fields.Boolean("Done")
+
+
+    @api.depends('casting_1_days_tables.compressive_strength')
+    def _compute_average_1days(self):
+        for record in self:
+            try:
+                record.average_casting_1days = sum(record.casting_1_days_tables.mapped('compressive_strength'))/len(record.casting_1_days_tables)
+            except:
+                record.average_casting_1days = 0
     
+    @api.depends('casting_date_1days')
+    def _compute_testing_date_1days(self):
+        for record in self:
+            if record.casting_date_1days:
+                cast_date = fields.Datetime.from_string(record.casting_date_1days)
+                testing_date = cast_date + timedelta(days=1)
+                record.testing_date_1days = fields.Datetime.to_string(testing_date)
+            else:
+                record.testing_date_1days = False
+
+
+    @api.depends('tests')
+    def _compute_visible(self):
+        normal_consistency_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Normal Consistency')])
+        setting_time_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Setting Time')])
+        bulk_density_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Dry Bulk Density')])
+        coarse_particle_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Free From Coarse Particle')])
+        compressive_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Compressive Strength')])
+
+
+
+        for record in self:
+            record.normal_consistency_visible = False
+            record.setting_time_visible  = False  
+            record.dry_bulk_visible = False
+            record.coarse_particle_visible = False
+            record.compressive_visible = False
+
+
+            
+            if normal_consistency_test in record.tests:
+                record.normal_consistency_visible = True
+            if setting_time_test in record.tests:
+                record.setting_time_visible = True
+            if bulk_density_test in record.tests:
+                record.dry_bulk_visible = True
+            if coarse_particle_test in record.tests:
+                record.coarse_particle_visible = True
+            if compressive_test in record.tests:
+                record.compressive_visible = True
+                record.normal_consistency_visible = True
+
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(GypsumMechanical, self).create(vals)
+        record.get_all_fields()
+        record.eln_ref.write({'model_id':record.id})
+        return record
+
+    def get_all_fields(self):
+        record = self.env['mechanical.gypsum'].browse(self.ids[0])
+        field_values = {}
+        for field_name, field in record._fields.items():
+            field_value = record[field_name]
+            field_values[field_name] = field_value
+
+        return field_values
+
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)
+
+class CoarseParticleTable(models.Model):
+    _name= "mechanical.coarse.particle.line"
+
+    parent_id = fields.Many2one('mechanical.gypsum')
+
+    sample_weight = fields.Float("Sample Weight",default=100)
+    retained_weight = fields.Float("Retained Weight on 150 mic sieve (g)")
+    coarse_particle = fields.Float("Free From Coarse Particle %",compute="_compute_coarse_particle")
+
+    @api.depends('sample_weight','retained_weight')
+    def _compute_coarse_particle(self):
+        for record in self:
+            if record.retained_weight != 0:
+                record.coarse_particle = (record.retained_weight / record.sample_weight)*100
+            else:
+                record.coarse_particle = 0
+
+
+class Casting1DaysLineGypsum(models.Model):
+    _name = "gypsum.casting.1days.line"
+
+    parent_id = fields.Many2one('mechanical.gypsum',string="Parent Id")
+    length = fields.Float("Length in mm")
+    width = fields.Float("Width in mm")
+    crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_crosssectional_area")
+    wt_of_cement_cube = fields.Float("wt of Cement Cube in gm")
+    crushing_load = fields.Float("Crushing Load in KN")
+    compressive_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_compressive_strength")
+
+    @api.depends('length','width')
+    def _compute_crosssectional_area(self):
+        for record in self:
+            record.crosssectional_area = record.length * record.width
+
+    @api.depends('crosssectional_area','crushing_load')
+    def _compute_compressive_strength(self):
+        for record in self:
+            if record.crosssectional_area != 0:
+                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
+            else:
+                record.compressive_strength = 0
+
+
+class MechanicalTmtTest(models.Model):
+    _name = "mechanical.gypsum.test"
+    _rec_name = "name"
+    name = fields.Char("Name")

@@ -8,6 +8,7 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="internal_id"/>
                             <field name="discipline"/>
                             <field name="hod"/>
                         </group>

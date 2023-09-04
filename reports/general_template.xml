@@ -63,7 +63,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
-								<td colspan="6">Test End Date :
+							<td colspan="6">Test End Date :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.end_date"/>
 								</td>

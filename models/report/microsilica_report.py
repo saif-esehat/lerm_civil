@@ -8,9 +8,9 @@ from lxml import etree
 
 
 
-class FlyashReport(models.AbstractModel):
-    _name = 'report.lerm_civil.lerm_flyash_report'
-    _description = 'Cement Report'
+class MicrosilicaReport(models.AbstractModel):
+    _name = 'report.lerm_civil.lerm_microsilica_report'
+    _description = 'Microsilica Report'
     
     @api.model
     def _get_report_values(self, docids, data):
@@ -38,10 +38,10 @@ class FlyashReport(models.AbstractModel):
             "grade_id":eln.grade_id.id
         }
         model = eln.get_product_base_calc_line(data).ir_model.model
-        flyash_data = self.env[model].search([("id","=",eln.model_id)])
-        print(flyash_data.normal_consistency_fly_1)
+        microsilica_data = self.env[model].search([("id","=",eln.model_id)])
+        print(microsilica_data.control_compressive_strength_7_days)
         return {
             'eln': eln,
-            'flyash': flyash_data,
+            'microsilica': microsilica_data,
             'qrcode': qr_code
         }

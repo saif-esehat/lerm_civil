@@ -28,16 +28,19 @@
                         </tree>
                       </field>
                     </group>
+                    <group >
+                          <field name="tests" widget="many2many_tags" options="{'no_create':True,'no_open': True}"/>
+                    </group>
                     
                     <!-- Normal Consistency Start -->
 
-                    <group>
+                    <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
                         <h1>
                             <field name="normal_consistency_name" readonly="1" nolabel="1"/>
                             <field name="normal_consistency_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
                         <group>
                         <field name="temp_normal"/>
                         <field name="humidity_normal"/>
@@ -47,7 +50,7 @@
                         <field name="end_date_normal"/>
                         </group>
                     </group>
-                    <group style="width:50%">
+                    <group style="width:50%" attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
                         <field name="wt_gypsum_plaster"/>
                         <field name="wt_water_req"/>
                         <field name="penetration_vicat"/>
@@ -57,13 +60,13 @@
 
                     <!-- Setting Time  -->
 
-                    <group>
+                    <group attrs="{'invisible': [('setting_time_visible', '=', False)]}">
                         <h1>
                             <field name="setting_time_name" readonly="1" nolabel="1"/>
                             <field name="setting_time_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': [('setting_time_visible', '=', False)]}">
                         <group>
                         <field name="temp_setting"/>
                         <field name="humidity_setting"/>
@@ -73,10 +76,222 @@
                         <field name="end_date_setting"/>
                         </group>
                     </group>
-                    <group style="width:50%">
+                    <group style="width:50%" attrs="{'invisible': [('setting_time_visible', '=', False)]}">
                         <field name="time_water_added"/>
                         <field name="time_needle_penetrate"/>
                         <field name="setting_time_minutes"/>
+
+                    </group>
+
+                    <!-- Dry Bulk Density  -->
+                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
+                        <h1>
+                            <field name="dry_bulk_name" readonly="1" nolabel="1"/>
+                            <field name="dry_bulk_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
+                        <group>
+                        <field name="temp_dry_bulk"/>
+                        <field name="humidity_dry_bulk"/>
+                        </group>
+                        <group>
+                        <field name="start_date_dry_bulk"/>
+                        <field name="end_date_dry_bulk"/>
+                        </group>
+                    </group>
+
+                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
+                        <label for="wt_empty_cylinder_trial1" string="Wt of Empty Cylinder w1" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_cylinder_trial1" string="Trial 1" />
+                            <field  name="wt_empty_cylinder_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_cylinder_trial2" string="Trial 2" />
+                            <field  name="wt_empty_cylinder_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_cylinder_trial3" string="Trial 3" />
+                            <field  name="wt_empty_cylinder_trial3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>    
+                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
+                        <label for="wt_empty_gypsum_trial1" string="Wt of Empty Gypsum w1" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_gypsum_trial1" string="" />
+                            <field  name="wt_empty_gypsum_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_gypsum_trial2" string="" />
+                            <field  name="wt_empty_gypsum_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_gypsum_trial3" string="" />
+                            <field  name="wt_empty_gypsum_trial3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
+                        <label for="wt_empty_cylinder_gypsum_trial1" string="Weight of empty Cylinder  + Gypsum (w2)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_cylinder_gypsum_trial1" string="" />
+                            <field  name="wt_empty_cylinder_gypsum_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_cylinder_gypsum_trial2" string="" />
+                            <field  name="wt_empty_cylinder_gypsum_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_cylinder_gypsum_trial3" string="" />
+                            <field  name="wt_empty_cylinder_gypsum_trial3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
+                        <label for="volume_of_cylinder_trial1" string="Volume of Cylinder" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="volume_of_cylinder_trial1" string="" />
+                            <field  name="volume_of_cylinder_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="volume_of_cylinder_trial2" string="" />
+                            <field  name="volume_of_cylinder_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="volume_of_cylinder_trial3" string="" />
+                            <field  name="volume_of_cylinder_trial3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
+                        <label for="dry_loose_bulf_density_trial1" string="Dry Loose Bulk Density (kg/m³)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="dry_loose_bulf_density_trial1" string="" />
+                            <field  name="dry_loose_bulf_density_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="dry_loose_bulf_density_trial2" string="" />
+                            <field  name="dry_loose_bulf_density_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="dry_loose_bulf_density_trial3" string="" />
+                            <field  name="dry_loose_bulf_density_trial3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
+                        <label for="average_dry_loose_bulk_density" string="Average Dry Loose Bulk Density (kg/m³)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="average_dry_loose_bulk_density" string="" />
+                            <field  name="average_dry_loose_bulk_density"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div> 
+                    </group>
+
+                    <!-- Free From Coarse Particles  -->
+
+                    <group attrs="{'invisible': [('coarse_particle_visible', '=', False)]}">
+                        <h1>
+                            <field name="coarse_particle_name" readonly="1" nolabel="1"/>
+                            <field name="coarse_particle_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('coarse_particle_visible', '=', False)]}">
+                        <group>
+                        <field name="temp_coarse_particle"/>
+                        <field name="humidity_coarse_particle"/>
+                        </group>
+                        <group>
+                        <field name="start_date_coarse_particle"/>
+                        <field name="end_date_coarse_particle"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('coarse_particle_visible', '=', False)]}">
+                      <field name="coarse_particle_table">
+                      <tree editable="bottom">
+                        <field name="sample_weight"/>
+                        <field name="retained_weight"/>
+                        <field name="coarse_particle"/>
+                      </tree>
+                      </field>
+                    </group>
+                    <group style="width:50%" attrs="{'invisible': [('coarse_particle_visible', '=', False)]}">
+                      <field name="average_coarse_particle"/>
+                    </group>
+
+                    <!-- Compressive Strength  -->
+
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <h1>
+                            <field name="compressive_name" readonly="1" nolabel="1"/>
+                            <field name="compressive_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                      <field name="temp_percent_compressive"/>
+                      <field name="humidity_percent_compressive"/>
+                    </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                      <field name="start_date_compressive"/>
+                      <field name="end_date_compressive"/>
+                    </group>
+                    </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}" style="width:40%">
+                      <field  name="wt_of_gypsum_compressive"  colspan="3" />
+                      <field  name="wt_of_standard_sand_grade1"  colspan="3" />
+                      <field  name="wt_of_standard_sand_grade2"  colspan="3" />
+                      <field  name="wt_of_standard_sand_grade1"  colspan="3" />
+                      <field  name="total_weight"  colspan="3" />
+                      <field  name="quantity_of_water"  colspan="3" />
+
+                    </group>
+
+                    <!-- Casting 1 days  -->
+
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <h1>
+                            <field name="casting_1_name" readonly="1" nolabel="1"/>
+
+                            
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                            <field name="status_1days"/>
+                      
+                    </group>
+                    
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+
+
+                      <field name="casting_date_1days"/>
+                      <field name="testing_date_1days"/>
+                      
+                      <field name="casting_1_days_tables">
+                        <tree editable="bottom">
+                          <field name="length"/>
+                          <field name="width"/>
+                          <field name="crosssectional_area"/>
+                          <field name="wt_of_cement_cube"/>
+                          <field name="crushing_load" />
+                          <field name="compressive_strength" />
+                        </tree>
+                      </field>
+                      <field name="average_casting_1days"/>
+                      
 
                     </group>
 

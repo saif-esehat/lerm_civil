@@ -11,6 +11,8 @@ class CoverMeter(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.cover.meter.line','parent_id',string="Parameter")
     average = fields.Float(string='Average', digits=(16, 2), compute='_compute_average')
+    average_min = fields.Float(string='Average Min', digits=(16, 2), compute='_compute_average')
+    average_max = fields.Float(string='Average Max', digits=(16, 2), compute='_compute_average')
 
     #just Testing will remove later
     parameters = fields.Many2many('lerm.parameter.master',string="Parameters")
@@ -24,8 +26,14 @@ class CoverMeter(models.Model):
 
             if num_records > 0:
                 record.average = total_cover / num_records
+                cover_values = record.child_lines.mapped('cover')
+                record.average_min = min(cover_values)
+                record.average_max = max(cover_values)
             else:
                 record.average = 0.0
+                record.average_min = 0.0
+                record.average_max = 0.0
+
 
 
     @api.model

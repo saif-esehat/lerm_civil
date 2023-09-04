@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="steel_tmt_bar_report">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
+				<div style="text-align:center;margin-top:10px">
+					<p style="font-size:15px"><b>Test Report</b></p>
+				</div>
+				<div class="container_eln">
+					<div t-foreach="eln" t-as="o">
+						<table>
+							<tr>
+								<td colspan="3">Report no :
+								</td>
+								<td colspan="3">
+									<span t-field="o.eln_id"/>
+								</td>
+								<td colspan="3">Report Date :
+								</td>
+								<td colspan="3">
+									<span t-field="o.srf_date"/>
+								</td>
+								<td colspan="3">ULR NO :
+								</td>
+								<td colspan="3">
+									<span t-field="o.sample_id.ulr_no"/>
+								</td>
+							</tr>
+						</table>
+						<table style="margin-top:10px;">
+							<tr>
+								<td colspan="12">Customer Party Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.street"/>
+									<span t-field="o.srf_id.customer.street2"/>
+									<span t-field="o.srf_id.customer.city"/>
+									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+									<span t-field="o.srf_id.customer.state_id"/>
+											,
+									<span t-field="o.srf_id.customer.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Project / Site Address :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address.name"/>
+									<span t-field="o.srf_id.site_address.street"/>
+									<span t-field="o.srf_id.site_address.street2"/>
+									<span t-field="o.srf_id.site_address.city"/>
+									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
+									<span t-field="o.srf_id.site_address.state_id"/>
+											,
+									<span t-field="o.srf_id.site_address.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.start_date"/>
+								</td>
+								<td colspan="6">Test End Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.end_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.client_sample_id"/>
+								</td>
+								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_received_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Size :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.size_id.size"/>
+								</td>
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.grade_id.grade"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Brand :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.brand"/>
+								</td>
+								<td colspan="6">Consultant Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Client Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">Client Reference :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client_refrence"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Discipline :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.discipline.discipline"/>
+								</td>
+								<td colspan="6">Group :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.group.group"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td colspan="12">Material/Test Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.material.name"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div style="margin-top:20px;">
+						<u>Protocol</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
+						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>
+									<span>
+										Parameter
+									</span>
+								</th>
+								
+								<th>
+									<span>
+										Observation-1
+									</span>
+								</th>
+								<th>
+									<span>
+										Requirement as per IS 1786:2008(RA 2018)
+									</span>
+								</th>
+								<th>
+									<span>
+										Confirmity Status
+									</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									Dia , mm
+								</td>
+								<td>
+									<span t-esc="data.diameter"/>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Weight, Kg									
+								</td>
+								<td>
+									<span t-esc="data.weight"/>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Length, meter																		
+								</td>
+								<td>
+									<span t-esc="data.lentgh"/>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Area, mm2																											
+								</td>
+								<td>
+									<span t-esc="round(data.crossectional_area, 2)"/>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Gauge Length, mm																																				
+								</td>
+								<td>
+									<span t-esc="round(data.gauge_length ,2)"/>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Final Length, mm																																				
+								</td>
+								<td>
+									<span t-esc="round(data.elongated_gauge_length , 2)"/>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+
+
+							<tr>
+								<td>
+									0.2% Proof Load / Yield Load, KN																																				
+								</td>
+								<td>
+									<span t-esc="round(data.yeild_load,2)"/>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+
+
+							<tr>
+								<td>
+									Ultimate Load, KN																																				
+								</td>
+								<td>
+									<span t-esc="round(data.ultimate_load , 2)"/>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Yield Stress N/mm2																																				
+								</td>
+								<td>
+									<span t-esc="round(data.proof_yeid_stress , 2)"/>
+								</td>
+								<td>
+									<span t-esc="data.requirement_yield"/>
+								</td>
+								<td>
+									<span t-esc="data.yield_nabl"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Ultimate Tensile Strength, N/mm2																									
+								</td>
+								<td>
+									<span t-esc="round(data.ult_tens_strgth, 2)"/>
+								</td>
+								<td>
+									<span t-esc="data.requirement_utl"/>
+								</td>
+								<td>
+									<span t-esc="data.uts_nabl"/>
+								</td>
+							</tr>
+
+
+							<tr>
+								<td>
+									TS/YS Ratio																									
+								</td>
+								<td>
+									<span t-esc="round(data.ts_ys_ratio , 2)"/>
+								</td>
+								<td>
+									<span t-esc="data.requirement_ts_ys"/>
+								</td>
+								<td>
+									<span t-esc="data.ts_ys_nabl"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									% Elongation																																		
+								</td>
+								<td>
+									<span t-esc="round(data.percent_elongation , 2)"/>
+								</td>
+								<td>
+									<span t-esc="data.requirement_elongation"/>
+								</td>
+								<td>
+									<span t-esc="data.elongation_nabl"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Weight Per Meter, Kg/m																																		
+								</td>
+								<td>
+									<span t-esc="round(data.weight_per_meter , 2)"/>
+								</td>
+								<td>
+									<span t-esc="data.requirement_weight_per_meter"/>
+								</td>
+								<td>
+									<span t-esc="data.weight_per_meter_nabl"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Rebend Test 																																		
+								</td>
+								<td>
+									<span t-esc="data.re_bend_test"/>
+								</td>
+								<td>
+									Statisfactory
+								</td>
+								<td>
+									<span t-esc="data.re_bend_test"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Bend Test																																		
+								</td>
+								<td>
+									<span t-esc="data.bend_test"/>
+								</td>
+								<td>
+									Statisfactory
+								</td>
+								<td>
+									<span t-esc="data.bend_test"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Fracture																																		
+								</td>
+								<td>
+									<span t-esc="data.fracture"/>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div style="margin-top:20px" class="noteContainer">
+						<div>
+							<b>Note :-</b>
+						</div>
+						<div>
+							<ul>
+								<li>
+									The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+								</li>
+								<li>
+									Sample(s) was/were not drawn by laboratory.
+								</li>
+								<li>
+									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="signatureContainer girdgird">
+						<div>
+							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
+						</div>
+						<div>
+							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
+						</div>
+						<div>
+							<div>
+								<b>
+									Approved By
+								</b>
+							</div>
+							<div style="height:20px">
+
+							</div>
+							<div>
+								<b>
+									Chemical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									(Authorized Signatory)
+								</b>
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>
