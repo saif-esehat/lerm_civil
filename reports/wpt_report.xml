@@ -175,6 +175,22 @@
 							
 
 						</table>
+						<table>
+						 <thead>
+								<tr>
+									<th>Parameter</th>
+									<th>Observation</th>
+									<!-- Add more columns as needed -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr t-foreach="doc.related_records" t-as="related_record">
+									<td><span t-esc="related_record.sample"/></td>
+									<td><span t-esc="related_record.average"/></td>
+									<!-- Add more columns as needed -->
+								</tr>
+							</tbody>
+						</table>
 					</div>
 					
 					
