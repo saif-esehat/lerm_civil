@@ -93,6 +93,51 @@
                     </group>
 
 
+                    <!-- Normal Consistency Cement  -->
+                    <group attrs="{'invisible': [('normal_consistency_cement_visible', '=', False)]}">
+                        <h1>
+                            <field name="normal_consistency_cement_name" readonly="1" nolabel="1"/>
+                            <field name="normal_consistency_cement_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('normal_consistency_cement_visible', '=', False)]}">
+                        
+                        <label for="wt_cement" string="Wt. of Cement(g)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_cement" string="Trial 1" />
+                            <field  name="wt_cement"  colspan="3"  nolabel="1"/>
+                          </group>
+                          
+                        </div>
+                    </group>
+                    
+                   
+                    <group attrs="{'invisible': [('normal_consistency_cement_visible', '=', False)]}">
+                       
+                          <group >
+                            <field  name="wt_water_req_cement"  colspan="3"  />
+                          </group>
+                          
+                    </group>
+                    <group attrs="{'invisible': [('normal_consistency_cement_visible', '=', False)]}">
+                        
+                          <group >
+                            
+                            <field  name="penetration_vicat_cement"  colspan="3"  />
+                          </group>
+                         
+                    </group>
+                    <group attrs="{'invisible': [('normal_consistency_cement_visible', '=', False)]}">
+                        
+                          <group >
+                            <field  name="normal_consistency_cement"  colspan="3"  />
+                          </group>
+                          
+                    </group>
+
+
                     <!-- Specific Gravity -->
                     <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
                         <h1>
@@ -261,7 +306,6 @@
                     </group>
                     <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}" style="width:40%">
                       <field  name="wt_of_cement_slag_opc"  colspan="3" />
-                      <field  name="wt_of_ggbs_slag_opc"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1_opc"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade2_opc"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1"  colspan="3" />
@@ -436,7 +480,7 @@
                         </div>
                     </group>
                     <group attrs="{'invisible': [('fineness_visible', '=', False)]}">
-                        <label for="temp_fineness_trial1" string="Time(t),sec." />
+                        <label for="temp_fineness_trial1" string="Temp °C" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="temp_fineness_trial1" string="1" />
@@ -498,7 +542,7 @@
                         </div>
                     </group>
                     <group attrs="{'invisible': [('fineness_visible', '=', False)]}">
-                        <label for="temp_fineness_calculated_trial1" string="Time(t),sec." />
+                        <label for="temp_fineness_calculated_trial1" string="Temp °C" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="temp_fineness_calculated_trial1" string="1" />

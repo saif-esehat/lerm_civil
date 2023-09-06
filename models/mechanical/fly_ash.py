@@ -17,7 +17,7 @@ class FlyaschNormalConsistency(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    temp_percent_normal = fields.Float("Temperature %")
+    temp_percent_normal = fields.Float("Temperature °c")
     humidity_percent_normal = fields.Float("Humidity %")
 
      ## Normal Consistency
@@ -64,7 +64,7 @@ class FlyaschNormalConsistency(models.Model):
             if record.gravity_of_cement1 != 0:
                 record.fly_ash_n1 = record.gravity_of_flyash1 / record.gravity_of_cement1
             else:
-                record.fly_ash_n1 = 0.
+                record.fly_ash_n1 = 0.0
                 
 
     @api.depends('gravity_of_flyash2', 'gravity_of_cement2')
@@ -119,7 +119,7 @@ class FlyaschNormalConsistency(models.Model):
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_percent_setting = fields.Float("Temperature %")
+    temp_percent_setting = fields.Float("Temperature °c")
     humidity_percent_setting = fields.Float("Humidity %")
     start_date_setting = fields.Date("Start Date")
     end_date_setting = fields.Date("End Date")
@@ -218,7 +218,7 @@ class FlyaschNormalConsistency(models.Model):
     particles_retained = fields.Char("Name",default=" Particles retained on 45 micron IS sieve (wet sieving)")
     particles_retained_visible = fields.Boolean("Particles retained Visible",compute="_compute_visible")
 
-    temp_percent_retained = fields.Float("Temperature %")
+    temp_percent_retained = fields.Float("Temperature °c")
     humidity_percent_retained = fields.Float("Humidity %")
     start_date_retained = fields.Date("Start Date")
     end_date_retained = fields.Date("End Date")
@@ -255,7 +255,7 @@ class FlyaschNormalConsistency(models.Model):
     soundness_name_fly = fields.Char("Name",default="Soundness by Le-Chatelier Method")
     soundness_visible = fields.Boolean("Soundness Visible",compute="_compute_visible")
 
-    temp_percent_soundness = fields.Float("Temperature %")
+    temp_percent_soundness = fields.Float("Temperature °c")
     humidity_percent_soundness = fields.Float("Humidity %")
     start_date_soundness = fields.Date("Start Date")
     end_date_soundness = fields.Date("End Date")
@@ -314,7 +314,7 @@ class FlyaschNormalConsistency(models.Model):
     specigic_gravity_fly = fields.Char("Name",default="Specific Gravity")
     specigic_gravity_visible = fields.Boolean("Specigic Gravity Visible",compute="_compute_visible")
 
-    temp_percent_specific = fields.Float("Temperature %")
+    temp_percent_specific = fields.Float("Temperature °c")
     humidity_percent_specific = fields.Float("Humidity %")
     start_date_specific = fields.Date("Start Date")
     end_date_specific = fields.Date("End Date")
@@ -380,7 +380,7 @@ class FlyaschNormalConsistency(models.Model):
     compressive_name = fields.Char("Name",default="Compressive Strength")
     compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
-    temp_percent_compressive = fields.Float("Temperature %")
+    temp_percent_compressive = fields.Float("Temperature °c")
     humidity_percent_compressive = fields.Float("Humidity %")
     start_date_compressive = fields.Date("Start Date")
     end_date_compressive = fields.Date("End Date")
@@ -576,7 +576,7 @@ class FlyaschNormalConsistency(models.Model):
     lime_reactivity = fields.Char("Name",default="Lime Reactivity")
     lime_reactivity_visible = fields.Boolean("Lime Visible",compute="_compute_visible")
 
-    temp_percent_lime = fields.Float("Temperature %")
+    temp_percent_lime = fields.Float("Temperature °c")
     humidity_percent_lime = fields.Float("Humidity %")
     start_date_lime = fields.Date("Start Date")
     end_date_lime = fields.Date("End Date")
@@ -703,7 +703,7 @@ class FlyaschNormalConsistency(models.Model):
     fineness_blaine_name = fields.Char("Name",default="Fineness By Blaine Air Permeability Method")
     fineness_blaine_visible = fields.Boolean("Fineness Blaine Visible",compute="_compute_visible")
 
-    temp_percent_fineness = fields.Float("Temperature %")
+    temp_percent_fineness = fields.Float("Temperature °c")
     humidity_percent_fineness = fields.Float("Humidity %")
     start_date_fineness = fields.Date("Start Date")
     end_date_fineness = fields.Date("End Date")

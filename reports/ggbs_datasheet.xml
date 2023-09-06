@@ -12,7 +12,7 @@
 					
 
 						<div style="text-align:center;font-size:18px">
-							Normal Consistency
+							Normal Consistency of GGBS
 						</div>
 						<table>
 							<tr cols="12">
@@ -79,10 +79,57 @@
 								</td>
 							</tr>
 						</table>
+
+						
+
+
 					</div>
 
 					
+					<!-- Normal Consistency Cement  -->
 
+					<div t-if="data.normal_consistency_cement_visible">
+					
+
+						<div style="text-align:center;font-size:18px">
+							Normal Consistency of Cement
+						</div>
+						
+						<table style="margin-top:20px">
+							
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Weight of Cement(g) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_cement"/>
+									
+								</td>
+							</tr>
+                            
+							<tr cols="12">
+								<td colspan="6">Weight of Water Required(g) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_water_req_cement"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Penetraion of vicat's Plunger (mm) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.penetration_vicat_cement"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Normal Consistency (%) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.normal_consistency_cement"/>
+								</td>
+							</tr>
+						</table>
+
+
+					</div>
+
+						
+						
 					<!-- Specific Gravity  -->
 					<div t-if="data.specific_gravity_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
@@ -396,15 +443,7 @@
 								</td>
 								
 							</tr>
-                            <tr cols="12">
-								<td colspan="6">Wt. of GGBS(g) :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="6">
-									<span t-field="data.wt_of_ggbs_slag_opc"/>
-								</td>
-								
-							</tr>
+                            
 							<tr cols="12">
 								<td colspan="6">Weight of Standard Sand (g) Grade-I :
 									<![CDATA[&nbsp;]]>

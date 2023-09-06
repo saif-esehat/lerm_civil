@@ -106,16 +106,19 @@
         <field name="binding_type">report</field>
     </record>
 
-    <record id="report_fly_ash_action" model="ir.actions.report">
+    <record id="report_fly_action" model="ir.actions.report">
         <field name="name">Report Fly Ash</field>
         <field name="model">lerm.eln</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">lerm_civil.lerm_flyash_report</field>
-        <field name="report_file">lerm_civil.lerm_flyash_report</field>
-        <field name="binding_model_id" ref="model_lerm_eln"/>
-        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="report_name">lerm_civil.lerm_fly_report</field>
+        <field name="report_file">lerm_civil.lerm_fly_report</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
     </record>
+
+
+   
 
     <record id="gypsum_datasheet_action" model="ir.actions.report">
         <field name="name">Gypsum Datasheet</field>
@@ -216,7 +219,27 @@
     </record>
 
 
+    <record id="half_cell_datasheet_action" model="ir.actions.report">
+        <field name="name">Half Cell Datasheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.half_cell_datasheet</field>
+        <field name="report_file">lerm_civil.half_cell_datasheet</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
 
+      <record id="half_cell_report_action" model="ir.actions.report">
+        <field name="name">Half Cell Report</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.half_cell_report</field>
+        <field name="report_file">lerm_civil.half_cell_report</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
 
 
 </odoo>
