@@ -1,5 +1,8 @@
 from odoo import api, fields, models
 from decimal import Decimal
+import matplotlib.pyplot as plt
+import io
+import base64
 
 
 class CementCompatablity(models.Model):
@@ -13,9 +16,10 @@ class CementCompatablity(models.Model):
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
     temp_percent_normal = fields.Float("Temperature °C")
     humidity_percent_normal = fields.Float("Humidity %")
-    start_date_normal = fields.Date("Start Date")
-    end_date_normal = fields.Date("End Date")
+    start_date = fields.Date("Start Date")
+    end_date = fields.Date("End Date")
     child_lines = fields.One2many('mechanical.cement.compatiblity.lines','parent_id',string="Parameters")
+    chart_image = fields.Binary("Line Chart", compute="_compute_chart_image", store=True)
 
     @api.model
     def create(self, vals):
@@ -23,6 +27,41 @@ class CementCompatablity(models.Model):
         record = super(CementCompatablity, self).create(vals)
         record.eln_ref.write({'model_id':record.id})
         return record
+    
+    def generate_line_chart(self):
+        # Prepare data for the chart
+        x_values = []
+        y_values = []
+        for line in self.child_lines:
+            x_values.append(line.admixture_dosage_percent)
+            y_values.append(line.flow_60_min)
+        
+        # Create the line chart
+        plt.plot(x_values, y_values, marker='o')
+        plt.xlabel('Admixture Dosage %')
+        plt.ylabel('Flow at 60 Min (Sec)')
+        plt.title('Admixture Dosage % vs Flow at 60 Min')
+
+
+        plt.ylim(bottom=0, top=max(y_values) + 10)
+        
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()  # Close the figure to free up resources
+        buffer.seek(0)
+    
+        # Convert the chart image to base64
+        chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
+        return chart_image
+    
+    @api.depends('child_lines')
+    def _compute_chart_image(self):
+        try:
+            for record in self:
+                chart_image = record.generate_line_chart()
+                record.chart_image = chart_image
+        except:
+            pass        
 
 
 class CementCompatablityLines(models.Model):
@@ -46,12 +85,13 @@ class CementCompatablityLines(models.Model):
                 record.water_cement_ratio = Decimal(record.wt_of_water) / Decimal(record.wt_of_cement)
             else:
                 record.water_cement_ratio = 0
+        
 
     @api.depends('admixture_dosage_percent', 'wt_of_cement')
     def _compute_wt_of_admixture(self):
         for record in self:
             if record.admixture_dosage_percent != 0:
-                record.wt_of_admixture = Decimal(record.wt_of_cement) / (Decimal(record.admixture_dosage_percent) * 100)
+                record.wt_of_admixture = (Decimal(record.wt_of_cement) * Decimal(record.admixture_dosage_percent)) / 100
             else:
                 record.wt_of_admixture = 0
     

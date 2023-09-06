@@ -228,7 +228,7 @@
 								</th>
 							</tr>
 						</thead>
-					<tbody >
+					<tbody>
 
 							<!--1 Accelerated pozzolanic activity index with portland cement , 7 Days in % -->
 
@@ -260,7 +260,8 @@
 							</td>
 							<td style="text-align: center;">
 								<span style="text-align: center;">
-									<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Accelerated pozzolanic activity index with portland cement')]).test_method.test_method"/>
+									In Construction / Please Ignore
+									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Accelerated pozzolanic activity index with portland cement')]).test_method.test_method"/> -->
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
@@ -295,7 +296,8 @@
 							</td>
 							<td style="text-align: center;">
 								<span style="text-align: center;">
-									<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Oversize % Retained on 45 Micron IS sieve')]).test_method.test_method"/>
+								In Construction / Please Ignore
+									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Oversize % Retained on 45 Micron IS sieve')]).test_method.test_method"/> -->
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
@@ -331,7 +333,8 @@
 							</td>
 							<td style="text-align: center;">
 								<span style="text-align: center;">
-									<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Specific Gravity')]).test_method.test_method"/>
+								In Construction / Please Ignore
+									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Specific Gravity')]).test_method.test_method"/> -->
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
@@ -395,7 +398,8 @@
 							</td>
 							<td style="text-align: center;min-height:30px">
 								<span style="text-align: center; display: block;">
-									<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Compressive Strength')]).test_method.test_method"/>
+								In Construction / Please Ignore
+									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Compressive Strength')]).test_method.test_method"/> -->
 								</span>
 							</td>
 
@@ -432,7 +436,8 @@
 							</td>
 							<td style="text-align: center;">
 								<span style="text-align: center;">
-									<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Oversize Percent Retained on 45 Micron IS sieve variation from Avg. %')]).test_method.test_method"/>
+								In Construction / Please Ignore
+									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Oversize Percent Retained on 45 Micron IS sieve variation from Avg. %')]).test_method.test_method"/> -->
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
@@ -468,7 +473,8 @@
 							</td>
 							<td style="text-align: center;">
 								<span style="text-align: center;">
-									<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Dry Loose Bulk Density')]).test_method.test_method"/>
+								In Construction / Please Ignore
+									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Dry Loose Bulk Density')]).test_method.test_method"/> -->
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
@@ -477,7 +483,7 @@
 								</span>
 							</td>
 						</tr>
-					</tbody >
+					</tbody>
 				</table>
 				<div>
 

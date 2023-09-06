@@ -10,6 +10,7 @@
                         <group style="width:100%">
                             <field name="internal_id"/>
                             <field name="parameter_name"/>
+                         
                         </group>
                         <group>
                             <group style="width:50%">
