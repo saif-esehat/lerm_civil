@@ -65,12 +65,12 @@ class HalfCell(models.Model):
             if corresponding_line2:
                 # Update the existing record in child_lines_2
                 corresponding_line2.write({
-                    'r1': line1.r1 + mv,
-                    'r2': line1.r2 + mv,
-                    'r3': line1.r3 + mv,
-                    'r4': line1.r4 + mv,
-                    'r5': line1.r5 + mv,
-                    'r6': line1.r6 + mv,
+                    'r1': round((line1.r1 + mv),2),
+                    'r2': round((line1.r2 + mv),2),
+                    'r3': round((line1.r3 + mv),2),
+                    'r4': round((line1.r4 + mv),2),
+                    'r5': round((line1.r5 + mv),2),
+                    'r6': round((line1.r6 + mv),2),
                 })
             else:
                 # Create a new record in child_lines_2
@@ -79,12 +79,12 @@ class HalfCell(models.Model):
                     'member': line1.member,
                     'location': line1.location,
                     'level': line1.level,
-                    'r1': line1.r1 + mv,
-                    'r2': line1.r2 + mv,
-                    'r3': line1.r3 + mv,
-                    'r4': line1.r4 + mv,
-                    'r5': line1.r5 + mv,
-                    'r6': line1.r6 + mv,
+                    'r1': round((line1.r1 + mv),2),
+                    'r2': round((line1.r2 + mv),2),
+                    'r3': round((line1.r3 + mv),2),
+                    'r4': round((line1.r4 + mv),2),
+                    'r5': round((line1.r5 + mv),2),
+                    'r6': round((line1.r6 + mv),2),
                 })            
 
 class HalfCellLineOne(models.Model):

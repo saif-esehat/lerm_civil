@@ -95,6 +95,8 @@
     'reports/ggbs_datasheet.xml',
     'reports/gypsum_datasheet.xml',
     'reports/wpt_datasheet.xml',
+    'reports/half_cell_datasheet.xml',
+    'reports/half_cell_report.xml',
     'reports/general_report_template.xml',
     
     ],
