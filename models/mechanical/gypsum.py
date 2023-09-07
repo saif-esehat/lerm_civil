@@ -80,7 +80,7 @@ class GypsumMechanical(models.Model):
     dry_bulk_visible = fields.Boolean("Dry Bulk Density Visible",compute="_compute_visible")
     dry_bulk_name = fields.Char("Name",default="Dry Bulk Density")
 
-    temp_dry_bulk = fields.Float("Temperature %")
+    temp_dry_bulk = fields.Float("Temperature °C")
     humidity_dry_bulk = fields.Float("Humidity %")
     start_date_dry_bulk = fields.Date("Start Date")
     end_date_dry_bulk = fields.Date("End Date")
@@ -146,7 +146,7 @@ class GypsumMechanical(models.Model):
     coarse_particle_visible = fields.Boolean("Free From Coarse Particle Visible",compute="_compute_visible")
     coarse_particle_name = fields.Char("Name",default="Free From Coarse Particle")
 
-    temp_coarse_particle = fields.Float("Temperature %")
+    temp_coarse_particle = fields.Float("Temperature °C")
     humidity_coarse_particle = fields.Float("Humidity %")
     start_date_coarse_particle = fields.Date("Start Date")
     end_date_coarse_particle = fields.Date("End Date")
