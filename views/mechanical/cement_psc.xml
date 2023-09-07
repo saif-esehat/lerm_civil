@@ -481,7 +481,7 @@
                         </div>
                     </group>
                     <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
-                        <label for="weight_of_mercury_after_trail1" string="Weight of mercury after palcing the sample in the permeability cell  (m₂),g." />
+                        <label for="weight_of_mercury_after_trail1" string="Weight of mercury after placing the sample in the permeability cell  (m₂),g." />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="weight_of_mercury_after_trail1" string="" />
