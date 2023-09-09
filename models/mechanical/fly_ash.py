@@ -712,8 +712,8 @@ class FlyaschNormalConsistency(models.Model):
     weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=84.140,digits=(16, 3))
     
 
-    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=51.740,digits=(16, 3))
-    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=51.760,digits=(16, 3))
+    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=51.740,digits=(16, 3))
+    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=51.760,digits=(16, 3))
 
     density_of_mercury = fields.Float("Density of mercury , g/cm3",default=13.53)
 
