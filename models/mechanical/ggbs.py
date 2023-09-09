@@ -22,7 +22,7 @@ class GgbsMechanical(models.Model):
     ## Normal Consistency
 
 
-    normal_consistency_name = fields.Char("Name",default="Normal Consistency")
+    normal_consistency_name = fields.Char("Name",default="Normal Consistency of GGBS")
     normal_consistency_visible = fields.Boolean("Normal Consistency Visible",compute="_compute_visible")
 
 
@@ -44,6 +44,33 @@ class GgbsMechanical(models.Model):
         for record in self:
             if record.total_wt_sample != 0:
                 record.normal_consistency = (record.wt_water_req / record.total_wt_sample ) *100
+
+
+
+    # Normal Consistency Cement
+
+    normal_consistency_cement_name = fields.Char("Name",default="Normal Consistency Cement")
+    normal_consistency_cement_visible = fields.Boolean("Normal Consistency Visible",compute="_compute_visible")
+
+    temp_normal_cement = fields.Float("Temperature °C")
+    humidity_normal_cement = fields.Float("Humidity")
+    start_date_normal_cement = fields.Date("Start Date")
+    end_date_normal_cement = fields.Date("End Date")
+
+
+    wt_cement = fields.Float("Wt. of  Cement (g)",default=400)
+    wt_water_req_cement = fields.Float("Wt.of water required (g)")
+    penetration_vicat_cement = fields.Float("Penetraion of vicat's Plunger (mm)")
+    normal_consistency_cement = fields.Float("Normal Consistency %",compute="compute_normal_consistency_cement",store=True)
+
+    @api.depends('wt_cement','wt_water_req_cement')
+    def compute_normal_consistency_cement(self):
+        for record in self:
+            if record.wt_cement != 0:
+                record.normal_consistency_cement = (record.wt_water_req_cement / record.wt_cement)*100
+            else:
+                record.normal_consistency_cement = 0
+
 
 # Specific Gravity
 
@@ -96,7 +123,7 @@ class GgbsMechanical(models.Model):
 
     # Slag Activity Index
 
-    slag_activity_name = fields.Char("Name",default="Slag Activity")
+    slag_activity_name = fields.Char("Name",default="Slag Activity Index (SAI)")
     slag_activity_visible = fields.Boolean("Slag Activity Visible",compute="_compute_visible")
 
 
@@ -177,8 +204,7 @@ class GgbsMechanical(models.Model):
 
 
     # opc mortar cube 
-    wt_of_cement_slag_opc = fields.Float("Wt. of Cement(g)",default=100)
-    wt_of_ggbs_slag_opc = fields.Float("Wt. of Cement(g)",default=100)
+    wt_of_cement_slag_opc = fields.Float("Wt. of Cement(g)",default=200)
     wt_of_standard_sand_grade1_opc = fields.Float("Weight of Standard Sand (g) Grade-I",default=200)
     wt_of_standard_sand_grade2_opc = fields.Float("Weight of Standard Sand (g) Grade-II",default=200)
     wt_of_standard_sand_grade3_opc = fields.Float("Weight of Standard Sand (g) Grade-III",default=200)
@@ -221,15 +247,15 @@ class GgbsMechanical(models.Model):
 
 
 
-    @api.depends('wt_of_cement_slag_opc','wt_of_ggbs_slag_opc','wt_of_standard_sand_grade1_opc','wt_of_standard_sand_grade2_opc','wt_of_standard_sand_grade3_opc')
+    @api.depends('wt_of_cement_slag_opc','wt_of_standard_sand_grade1_opc','wt_of_standard_sand_grade2_opc','wt_of_standard_sand_grade3_opc')
     def compute_total_weight_sand_opc(self):
         for record in self:
-            record.total_weight_sand_opc = record.wt_of_cement_slag_opc + record.wt_of_ggbs_slag_opc + record.wt_of_standard_sand_grade1_opc + record.wt_of_standard_sand_grade2_opc + record.wt_of_standard_sand_grade3_opc
+            record.total_weight_sand_opc = record.wt_of_cement_slag_opc + record.wt_of_standard_sand_grade1_opc + record.wt_of_standard_sand_grade2_opc + record.wt_of_standard_sand_grade3_opc
 
-    @api.depends('normal_consistency','total_weight_sand_opc')
+    @api.depends('normal_consistency_cement','total_weight_sand_opc')
     def _compute_quantity_of_water_opc(self):
         for record in self:
-            record.quantity_of_water_opc = (((record.normal_consistency/4)+3)/100)*record.total_weight_sand_opc
+            record.quantity_of_water_opc = (((record.normal_consistency_cement/4)+3)/100)*record.total_weight_sand_opc
 
     @api.depends('casting_date_28days_opc')
     def _compute_testing_date_28days_opc(self):
@@ -253,7 +279,7 @@ class GgbsMechanical(models.Model):
 
     
     slag_activity_index_7days = fields.Float("Slag Activity Index (SAI) 7 days",compute="_compute_slag_index_7days")
-    slag_activity_index_28days = fields.Float("Slag Activity Index (SAI) 7 days",compute="_compute_slag_index_28days")
+    slag_activity_index_28days = fields.Float("Slag Activity Index (SAI) 28 days",compute="_compute_slag_index_28days")
 
     @api.depends('average_7days_slag_opc','average_7days_slag')
     def _compute_slag_index_7days(self):
@@ -283,8 +309,8 @@ class GgbsMechanical(models.Model):
     weight_of_mercury_before_trial1 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g." ,default=83.700,digits=(16, 3))
     weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=83.680,digits=(16, 3))
     
-    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=50.710,digits=(16, 3))
-    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=50.714,digits=(16, 3))
+    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=50.710,digits=(16, 3))
+    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=50.714,digits=(16, 3))
 
     density_of_mercury = fields.Float("Density of mercury , g/cm3",default=13.52,digits=(16, 3))
 
@@ -412,19 +438,37 @@ class GgbsMechanical(models.Model):
 
         for record in self:
             record.normal_consistency_visible = False
+            record.normal_consistency_cement_visible = False
             record.specific_gravity_visible = False
             record.slag_activity_visible = False
             record.fineness_visible = False
 
             if normal_consistency_test in record.tests:
                 record.normal_consistency_visible = True
+                record.normal_consistency_cement_visible = True
             if specific_gravity_test in record.tests:
                 record.specific_gravity_visible = True
             if slag_activity_test in record.tests:
                 record.slag_activity_visible = True
+                record.normal_consistency_visible = True
+                record.normal_consistency_cement_visible = True
             if fineness_test in record.tests:
                 record.specific_gravity_visible = True
                 record.fineness_visible = True
+            
+            # for sample in record.sample_parameters:
+            #     print("Samples internal id",sample.internal_id)
+            #     if sample.internal_id == '84946eb6-b44a-48cc-9d41-198f55346af0':
+            #         record.normal_consistency_visible = True
+            #     if sample.internal_id == '10071b15-baa4-466f-a6a7-044da708f265':
+            #         record.specific_gravity_visible = True
+            #     if sample.internal_id == '55b3df61-8e67-4e94-86ea-98d9472f5c71':
+            #         record.slag_activity_visible = True
+            #     if sample.internal_id == 'ca17d450-c526-4092-a3a7-6b0ff7e69c0a':
+            #         record.specific_gravity_visible = True
+            #         record.fineness_visible = True
+
+        
 
     @api.model
     def create(self, vals):

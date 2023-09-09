@@ -15,7 +15,6 @@ class SoilCBR(models.Model):
     def create(self, vals):
         # import wdb;wdb.set_trace()
         record = super(SoilCBR, self).create(vals)
-        record.parameter_id.write({'model_id':record.id})
         return record
 
 
@@ -32,7 +31,7 @@ class SoilCBRLine(models.Model):
     @api.depends('proving_reading')
     def _compute_load(self):
         for record in self:
-            record.load = record.proving_reading * 6.96
+            record.load = record.proving_reading 
 
 
 
@@ -51,7 +50,6 @@ class DENSITYRELATIONUSINGHEAVYCOMPACTION(models.Model):
     def create(self, vals):
         # import wdb;wdb.set_trace()
         record = super(DENSITYRELATIONUSINGHEAVYCOMPACTION, self).create(vals)
-        record.parameter_id.write({'model_id':record.id})
         return record
 
 
@@ -151,7 +149,6 @@ class PLASTICLIMIT(models.Model):
     def create(self, vals):
         # import wdb;wdb.set_trace()
         record = super(PLASTICLIMIT, self).create(vals)
-        record.parameter_id.write({'model_id':record.id})
         return record
 
 
@@ -209,10 +206,10 @@ class LIQUIDLIMIT(models.Model):
 
     are_child_lines_filled = fields.Boolean(compute='_compute_are_child_lines_filled',string='child lines',store=False)
 
-    @api.depends('child_lines.moisture', 'child_lines.blwo_no')  # Replace with actual field names
+    @api.depends('child_lines.moisture', 'child_lines.mass_of_dry_sample')  # Replace with actual field names
     def _compute_are_child_lines_filled(self):
         for record in self:
-            all_lines_filled = all(line.moisture and line.blwo_no for line in record.child_lines)
+            all_lines_filled = all(line.moisture and line.mass_of_dry_sample for line in record.child_lines)
             record.are_child_lines_filled = all_lines_filled
 
        
@@ -237,8 +234,6 @@ class LIQUIDLIMIT(models.Model):
     def create(self, vals):
         # import wdb;wdb.set_trace()
         record = super(LIQUIDLIMIT, self).create(vals)
-        record.parameter_id.write({'model_id':record.id})
-        print('value orubbbbb')
         return record
 
     # def liquid_calculation(self):

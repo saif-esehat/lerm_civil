@@ -14,16 +14,16 @@ class GypsumMechanical(models.Model):
     name = fields.Char("Name",default="Gypsum")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
 
-    sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",store=True)
+    sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
     tests = fields.Many2many("mechanical.gypsum.test",string="Tests")
 
-    # Normal Consistency
+    # Normal Consistency 
 
-    normal_consistency_name = fields.Char("Name",default="Normal Consistency")
+    normal_consistency_name = fields.Char("Name",default="Normal Consistency GGBS")
     normal_consistency_visible = fields.Boolean("Normal Consistency Visible",compute="_compute_visible")
 
-    temp_normal = fields.Float("Temperature")
+    temp_normal = fields.Float("Temperature °C")
     humidity_normal = fields.Float("Humidity")
     start_date_normal = fields.Date("Start Date")
     end_date_normal = fields.Date("End Date")
@@ -35,20 +35,14 @@ class GypsumMechanical(models.Model):
     penetration_vicat = fields.Float("Penetraion of vicat's Plunger (mm)")
     normal_consistency = fields.Float("Normal Consistency %",compute="compute_normal_consistency",store=True)
 
-    @api.depends('wt_gypsum_plaster','wt_water_req')
-    def compute_normal_consistency(self):
-        for record in self:
-            if record.wt_gypsum_plaster != 0:
-                record.normal_consistency = (record.wt_water_req / record.wt_gypsum_plaster)*100
-            else:
-                record.normal_consistency = 0
 
+    
     # Setting Time 
 
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_setting = fields.Float("Temperature %")
+    temp_setting = fields.Float("Temperature °C")
     humidity_setting = fields.Float("Humidity %")
     start_date_setting = fields.Date("Start Date")
     end_date_setting = fields.Date("End Date")
@@ -86,7 +80,7 @@ class GypsumMechanical(models.Model):
     dry_bulk_visible = fields.Boolean("Dry Bulk Density Visible",compute="_compute_visible")
     dry_bulk_name = fields.Char("Name",default="Dry Bulk Density")
 
-    temp_dry_bulk = fields.Float("Temperature %")
+    temp_dry_bulk = fields.Float("Temperature °C")
     humidity_dry_bulk = fields.Float("Humidity %")
     start_date_dry_bulk = fields.Date("Start Date")
     end_date_dry_bulk = fields.Date("End Date")
@@ -152,7 +146,7 @@ class GypsumMechanical(models.Model):
     coarse_particle_visible = fields.Boolean("Free From Coarse Particle Visible",compute="_compute_visible")
     coarse_particle_name = fields.Char("Name",default="Free From Coarse Particle")
 
-    temp_coarse_particle = fields.Float("Temperature %")
+    temp_coarse_particle = fields.Float("Temperature °C")
     humidity_coarse_particle = fields.Float("Humidity %")
     start_date_coarse_particle = fields.Date("Start Date")
     end_date_coarse_particle = fields.Date("End Date")
@@ -185,7 +179,7 @@ class GypsumMechanical(models.Model):
     wt_of_standard_sand_grade2 = fields.Float("Weight of Standard Sand (g) Grade-II",default=80)
     wt_of_standard_sand_grade3 = fields.Float("Weight of Standard Sand (g) Grade-III",default=80)
     total_weight = fields.Float("Total Weight",compute="compute_total_weight_compressive")
-    quantity_of_water = fields.Float("Quantity of Water",compute="_compute_quantity_of_water")
+    quantity_of_water = fields.Float("Quantity of Water")
 
     @api.depends('wt_of_gypsum_compressive','wt_of_standard_sand_grade1','wt_of_standard_sand_grade2','wt_of_standard_sand_grade3')
     def compute_total_weight_compressive(self):
@@ -267,6 +261,13 @@ class GypsumMechanical(models.Model):
         record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
+
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)
 
     def get_all_fields(self):
         record = self.env['mechanical.gypsum'].browse(self.ids[0])

@@ -18,6 +18,7 @@ from .report import wpt_report
 from .report import ggbs_report
 from .report import microsilica_report
 from .report import cement_compatiblity
+from .report import half_cell_report
 from .mechanical import sieve_analysis
 from .mechanical import pavel_block
 from .mechanical import free_swell_index

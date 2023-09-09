@@ -8,7 +8,7 @@ from lxml import etree
 
 
 
-class GypsumReport(models.AbstractModel):
+class WptReport(models.AbstractModel):
     _name = 'report.lerm_civil.wpt_report'
     _description = 'WPT Report'
     

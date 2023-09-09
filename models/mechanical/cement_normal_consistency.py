@@ -98,6 +98,8 @@ class CementNormalConsistency(models.Model):
             else:
                 record.initial_setting_time_hours = False
                 record.initial_setting_time_minutes = False
+                record.initial_setting_time_minutes_unrounded = False
+
 
 
     #Final setting Time
@@ -133,6 +135,8 @@ class CementNormalConsistency(models.Model):
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
+                record.final_setting_time_minutes_unrounded = False
+
 
 
     #Density
@@ -296,9 +300,9 @@ class CementNormalConsistency(models.Model):
     def compute_total_weight_compressive(self):
         self.total_weight = self.wt_of_cement_compressive + self.wt_of_standard_sand_grade1 + self.wt_of_standard_sand_grade2 + self.wt_of_standard_sand_grade3 
 
-    @api.depends('normal_consistency_trial1','total_weight')
+    @api.depends('normal_consistency_trial1')
     def _compute_quantity_of_water(self):
-        self.quantity_of_water = ((self.normal_consistency_trial1/4 +3)/100)*self.total_weight
+        self.quantity_of_water = ((self.normal_consistency_trial1/4 +3)*8)
 
     
     # 3 days Casting
@@ -454,8 +458,8 @@ class CementNormalConsistency(models.Model):
     weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=83.130,digits=(16, 3))
     
 
-    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=56.730,digits=(16, 3))
-    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=56.734,digits=(16, 3))
+    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=56.730,digits=(16, 3))
+    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=56.734,digits=(16, 3))
 
     density_of_mercury = fields.Float("Density of mercury , g/cm3",default=13.53,digits=(16, 3))
 
