@@ -191,8 +191,8 @@ class PtGrout(models.Model):
     compressive_strength_visible = fields.Boolean("Compressive Strength Visible",compute="_compute_visible")
     start_date_compressive_strength = fields.Date("Start Date")
     end_date_compressive_strength = fields.Date("End Date")
-    temp_percent_compressive = fields.Date("Temperature °c")
-    humidity_percent_compressive = fields.Date("Humidity %")
+    temp_percent_compressive = fields.Float("Temperature °c")
+    humidity_percent_compressive = fields.Float("Humidity %")
 
 
     water_cement_ratio_1 = fields.Float(string="Water Cement Ratio (w/c)",compute="_compute_ratio_1")

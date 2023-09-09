@@ -32,7 +32,7 @@
 										<span t-field="data.end_date_normal"/>
 									</td>
 								</tr>
-								<table>
+							    	<table>
 											<tr>
 												<th></th>
 												<th style="text-align: center; font-weight: bold;">Trial 1</th>

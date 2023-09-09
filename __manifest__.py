@@ -98,6 +98,7 @@
     'reports/gypsum_datasheet.xml',
     'reports/wpt_datasheet.xml',
     'reports/general_report_template.xml',
+    'reports/pt_grput_datasheet.xml'
     
     ],
         'assets': {

@@ -465,8 +465,8 @@ class FlyaschNormalConsistency(models.Model):
     def _compute_average_28days(self):
         for record in self:
             try:
-                record.average_casting_28days = sum(record.casting_28_days_tables.mapped('compressive_strength')) / len(
-                    record.casting_28_days_tables)
+                record.average_casting_28days = round((sum(record.casting_28_days_tables.mapped('compressive_strength')) / len(
+                    record.casting_28_days_tables)),2)
             except:
                 record.average_casting_28days = 0
 
@@ -542,8 +542,8 @@ class FlyaschNormalConsistency(models.Model):
     def _compute_average_28dayss(self):
         for record in self:
             try:
-                record.average_casting_28dayss = sum(record.casting_28_dayss_tables.mapped('compressive_strengths')) / len(
-                    record.casting_28_dayss_tables)
+                record.average_casting_28dayss = round((sum(record.casting_28_dayss_tables.mapped('compressive_strengths')) / len(
+                    record.casting_28_dayss_tables)),2)
             except:
                 record.average_casting_28dayss = 0
 
@@ -566,7 +566,7 @@ class FlyaschNormalConsistency(models.Model):
     def _compute_compressive_strength_of_sample(self):
         for record in self:
             if record.average_casting_28dayss != 0:
-                record.compressive_strength_of_sample = (record.average_casting_28days / record.average_casting_28dayss) * 100
+                record.compressive_strength_of_sample = round(((record.average_casting_28days / record.average_casting_28dayss) * 100),2)
             else:
                 record.compressive_strength_of_sample = 0.0
 

@@ -184,6 +184,9 @@
 							<td style="text-align: center;"><span t-field="data.average_casting_7days" t-options='{"widget": "float", "precision": 2}'/></td>
 						</tr>
 					</table>
+
+							<!-- Compressive Strength of control Sample -->
+
 					<table style="margin-top: 20px">
 					
 				
@@ -192,6 +195,10 @@
 								Compressive Strength of control Sample
 
 							</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">High Range water reducer (g)</td>
+							<td style="text-align: center;"><span t-field="data.high_range_control_comp"/></td>
 						</tr>
 						<tr>
 							<td style="font-weight: bold;">Weight of Cement (g)</td>
@@ -979,6 +986,7 @@
 			
 
 		</div>
+
 	</t>
 </t>
 </template>

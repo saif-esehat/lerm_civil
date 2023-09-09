@@ -247,6 +247,11 @@
                       <field  name="grout_temperature_1"  colspan="3" />
                     </group>
                      <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
+                            <field name="status_7days"/>
+                      
+                    </group>
+                     <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
+                     
 
                       <field name="casting_date_7days"/>
                       <field name="testing_date_7days"/>
