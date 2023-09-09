@@ -80,7 +80,7 @@ class GypsumMechanical(models.Model):
     dry_bulk_visible = fields.Boolean("Dry Bulk Density Visible",compute="_compute_visible")
     dry_bulk_name = fields.Char("Name",default="Dry Bulk Density")
 
-    temp_dry_bulk = fields.Float("Temperature %")
+    temp_dry_bulk = fields.Float("Temperature °C")
     humidity_dry_bulk = fields.Float("Humidity %")
     start_date_dry_bulk = fields.Date("Start Date")
     end_date_dry_bulk = fields.Date("End Date")
@@ -146,7 +146,7 @@ class GypsumMechanical(models.Model):
     coarse_particle_visible = fields.Boolean("Free From Coarse Particle Visible",compute="_compute_visible")
     coarse_particle_name = fields.Char("Name",default="Free From Coarse Particle")
 
-    temp_coarse_particle = fields.Float("Temperature %")
+    temp_coarse_particle = fields.Float("Temperature °C")
     humidity_coarse_particle = fields.Float("Humidity %")
     start_date_coarse_particle = fields.Date("Start Date")
     end_date_coarse_particle = fields.Date("End Date")
@@ -179,7 +179,7 @@ class GypsumMechanical(models.Model):
     wt_of_standard_sand_grade2 = fields.Float("Weight of Standard Sand (g) Grade-II",default=80)
     wt_of_standard_sand_grade3 = fields.Float("Weight of Standard Sand (g) Grade-III",default=80)
     total_weight = fields.Float("Total Weight",compute="compute_total_weight_compressive")
-    quantity_of_water = fields.Float("Quantity of Water",compute="_compute_quantity_of_water")
+    quantity_of_water = fields.Float("Quantity of Water")
 
     @api.depends('wt_of_gypsum_compressive','wt_of_standard_sand_grade1','wt_of_standard_sand_grade2','wt_of_standard_sand_grade3')
     def compute_total_weight_compressive(self):

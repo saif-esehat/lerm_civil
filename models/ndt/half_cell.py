@@ -111,7 +111,7 @@ class HalfCellLineOne(models.Model):
     @api.depends('r1', 'r2', 'r3', 'r4', 'r5','r6')
     def _compute_avg(self):
         for record in self:
-            record.avg = (record.r1 + record.r2 + record.r3 + record.r4 + record.r5 + record.r6) / 6.0
+            record.avg = round(((record.r1 + record.r2 + record.r3 + record.r4 + record.r5 + record.r6) / 6.0),2)
 
     
     @api.depends('avg')
@@ -153,7 +153,7 @@ class HalfCellLineTwo(models.Model):
     @api.depends('r1', 'r2', 'r3', 'r4', 'r5','r6')
     def _compute_avg(self):
         for record in self:
-            record.avg = (record.r1 + record.r2 + record.r3 + record.r4 + record.r5 + record.r6) / 6.0
+            record.avg = round(((record.r1 + record.r2 + record.r3 + record.r4 + record.r5 + record.r6) / 6.0),2)
     
     
     

@@ -351,7 +351,7 @@
                       <field  name="wt_of_cement_compressive"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade2"  colspan="3" />
-                      <field  name="wt_of_standard_sand_grade1"  colspan="3" />
+                      <field  name="wt_of_standard_sand_grade3"  colspan="3" />
                       <field  name="total_weight"  colspan="3" />
                       <field  name="quantity_of_water"  colspan="3" />
 

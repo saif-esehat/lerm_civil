@@ -98,6 +98,8 @@ class CementNormalConsistency(models.Model):
             else:
                 record.initial_setting_time_hours = False
                 record.initial_setting_time_minutes = False
+                record.initial_setting_time_minutes_unrounded = False
+
 
 
     #Final setting Time
@@ -133,6 +135,8 @@ class CementNormalConsistency(models.Model):
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
+                record.final_setting_time_minutes_unrounded = False
+
 
 
     #Density
@@ -296,9 +300,9 @@ class CementNormalConsistency(models.Model):
     def compute_total_weight_compressive(self):
         self.total_weight = self.wt_of_cement_compressive + self.wt_of_standard_sand_grade1 + self.wt_of_standard_sand_grade2 + self.wt_of_standard_sand_grade3 
 
-    @api.depends('normal_consistency_trial1','total_weight')
+    @api.depends('normal_consistency_trial1')
     def _compute_quantity_of_water(self):
-        self.quantity_of_water = ((self.normal_consistency_trial1/4 +3)/100)*self.total_weight
+        self.quantity_of_water = ((self.normal_consistency_trial1/4 +3)*8)
 
     
     # 3 days Casting
