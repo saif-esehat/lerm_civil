@@ -224,8 +224,13 @@
                             <field name="slag_activity_name" readonly="1" nolabel="1"/>
                             <field name="slag_activity_visible" invisible="1"/>
                         </h1>
+
+                    </group>
+                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                     <h5>Compressive Strength of the mortar cube using GGBS</h5>
                     </group>
                     <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}" style="width:40%">
+
                       <field  name="wt_of_cement_slag"  colspan="3" />
                       <field  name="wt_of_ggbs_slag"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1"  colspan="3" />

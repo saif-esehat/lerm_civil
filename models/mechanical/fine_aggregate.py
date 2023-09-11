@@ -59,11 +59,11 @@ class SpecificAndWaterLine(models.Model):
                 line.specific_gravity = 0.0
 
 
-    @api.depends('wt_of_saturated_surface_dry', 'wt_of_oven_dried')
+    @api.depends('wt_of_empty_pycnometer', 'wt_of_oven_dried')
     def _compute_water_absorption(self):
         for line in self:
             if line.wt_of_oven_dried:
-                line.water_absorption = ((line.wt_of_saturated_surface_dry - line.wt_of_oven_dried) / line.wt_of_oven_dried) * 100
+                line.water_absorption = ((line.wt_of_empty_pycnometer - line.wt_of_oven_dried) / line.wt_of_oven_dried) * 100
             else:
                 line.water_absorption = 0.0
 

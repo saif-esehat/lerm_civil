@@ -42,7 +42,7 @@ class MechanicalRockLine(models.Model):
     def _compute_porosity(self):
         for record in self:
             if record.ssd_weight and record.wt_sample_water != record.ssd_weight:
-                record.porosity = (record.ssd_weight - record.oven_dry_wt) / (record.ssd_weight - record.wt_sample_water) * 100
+                record.porosity = (record.ssd_weight - record.wt_sample_water) / (record.ssd_weight - record.wt_sample_water) * 100
             else:
                 record.porosity = 0
 
@@ -51,11 +51,11 @@ class MechanicalRockLine(models.Model):
     def _compute_water_absorption(self):
         for record in self:
             if record.oven_dry_wt:
-                record.water_absorption = ((record.ssd_weight - record.oven_dry_wt) / record.oven_dry_wt) * 100
+                record.water_absorption = ((record.ssd_weight - record.oven_dry_wt) / record.ssd_weight) * 100
             else:
                 record.water_absorption = 0
 
-    @api.depends('ssd_weight', 'wt_sample_water', 'oven_dry_wt')
+    @api.depends('wt_sample_water', 'wt_sample_water', 'oven_dry_wt')
     def _compute_dry_density(self):
         for record in self:
             if record.ssd_weight and record.wt_sample_water and record.oven_dry_wt:
@@ -78,7 +78,7 @@ class MechanicalRockLine(models.Model):
             existing_records = self.search([('parent_id', '=', vals['parent_id'])])
             if existing_records:
                 max_serial_no = max(existing_records.mapped('sr_no'))
-                vals['sr_no'] = max_serial_no + 1
+                
 
         return super(MechanicalRockLine, self).create(vals)
 

@@ -123,7 +123,7 @@ class GgbsMechanical(models.Model):
 
     # Slag Activity Index
 
-    slag_activity_name = fields.Char("Name",default="Slag Activity")
+    slag_activity_name = fields.Char("Name",default="Slag Activity Index (SAI)")
     slag_activity_visible = fields.Boolean("Slag Activity Visible",compute="_compute_visible")
 
 
@@ -279,7 +279,7 @@ class GgbsMechanical(models.Model):
 
     
     slag_activity_index_7days = fields.Float("Slag Activity Index (SAI) 7 days",compute="_compute_slag_index_7days")
-    slag_activity_index_28days = fields.Float("Slag Activity Index (SAI) 7 days",compute="_compute_slag_index_28days")
+    slag_activity_index_28days = fields.Float("Slag Activity Index (SAI) 28 days",compute="_compute_slag_index_28days")
 
     @api.depends('average_7days_slag_opc','average_7days_slag')
     def _compute_slag_index_7days(self):

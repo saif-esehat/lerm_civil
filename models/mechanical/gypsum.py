@@ -179,7 +179,7 @@ class GypsumMechanical(models.Model):
     wt_of_standard_sand_grade2 = fields.Float("Weight of Standard Sand (g) Grade-II",default=80)
     wt_of_standard_sand_grade3 = fields.Float("Weight of Standard Sand (g) Grade-III",default=80)
     total_weight = fields.Float("Total Weight",compute="compute_total_weight_compressive")
-    quantity_of_water = fields.Float("Quantity of Water",compute="_compute_quantity_of_water")
+    quantity_of_water = fields.Float("Quantity of Water")
 
     @api.depends('wt_of_gypsum_compressive','wt_of_standard_sand_grade1','wt_of_standard_sand_grade2','wt_of_standard_sand_grade3')
     def compute_total_weight_compressive(self):

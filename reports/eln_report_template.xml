@@ -445,8 +445,8 @@
 										<span t-esc="r['inputs']"/>
 									</td>
 									<td>
-										<!-- <span t-esc="r['value']"/> -->
-										 <span t-esc="'{:.{}f}'.format(r['value'], r['decimal'])"/>
+										<span t-esc="r['value']"/>
+										 <!-- <span t-esc="'{:.{}f}'.format(r['value'], r['decimal'])"/> -->
 									</td>
 								</tr>
 							</tbody>
