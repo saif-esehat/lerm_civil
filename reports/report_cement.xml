@@ -127,11 +127,8 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Instrument :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.instrument"/>
-								</td>
-								<td colspan="6">Temperature :
+								
+								<td colspan="12">Temperature :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.temperature"/>
 								</td>
@@ -140,11 +137,17 @@
 					</div>
 					<div style="margin-top:20px;">
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
-						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
+						<span>Relative Humidity</span>
 					</div>
 					<table style="margin-top:30px;">
+					<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
+								<th>
+									<span>
+										Sr. No
+									</span>
+								</th>
 								<th>
 									<span>
 										Name of Test
@@ -175,6 +178,10 @@
 						<tbody >
 							<tr>
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
 										Normal Consistency
 									</span>
@@ -202,6 +209,10 @@
 								</td>
 							</tr>
 							<tr t-if="cement.setting_time_visible">
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
 								<td>
 									<span>
 										Initial Setting Time
@@ -232,6 +243,10 @@
 							</tr>
 							<tr t-if="cement.setting_time_visible">
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
 										Final Setting Time
 									</span>
@@ -260,8 +275,12 @@
 							</tr>
 							<tr t-if="cement.dry_sieving_visible">
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
-										Fineness By (Dry seiving)
+										Fineness By (Dry Seiving)
 									</span>
 								</td>
 								<td>
@@ -286,6 +305,11 @@
 								</td>
 							</tr>
 							<tr t-if="cement.density_visible">
+
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
 								<td>
 									<span>
 										Density
@@ -314,8 +338,12 @@
 							</tr>
 							<tr t-if="cement.soundness_visible">
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
-										Soundness By (Lechatelier Method)
+										Soundness By (Le-Chatelier Method)
 									</span>
 								</td>
 								<td>
@@ -341,8 +369,12 @@
 							</tr>
 							<tr t-if="cement.fineness_blaine_visible">
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
-										Fineness by (Blaine air Permability Method)
+										Fineness by (Blaine Air Permability Method)
 									</span>
 								</td>
 								<td>
@@ -368,6 +400,10 @@
 							</tr>
 							<tr t-if="cement.compressive_visible">
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
 										Compressive Strength
 									</span>
@@ -391,8 +427,11 @@
 							</tr>
 							<tr t-if="cement.compressive_visible">
 								<td>
+									<span>a</span>
+								</td>
+								<td>
 									<span>
-										72+-1H
+										72±1H
 									</span>
 								</td>
 								<td>
@@ -423,8 +462,11 @@
 							</tr>
 							<tr t-if="cement.compressive_visible">
 								<td>
+									<span>b</span>
+								</td>
+								<td>
 									<span>
-										168+-2H
+										168±2H
 									</span>
 								</td>
 								<td>
@@ -456,8 +498,11 @@
 							</tr>
 							<tr t-if="cement.compressive_visible">
 								<td>
+									<span>c</span>
+								</td>
+								<td>
 									<span>
-										672+-4H
+										672±4H
 									</span>
 								</td>
 								<td>

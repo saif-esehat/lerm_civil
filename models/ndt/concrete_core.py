@@ -35,13 +35,13 @@ class ConcreteCoreLine(models.Model):
     length = fields.Float(string="length h mm")
     ld = fields.Float(string="L/D",compute="_compute_ld")
     area = fields.Float(string="Area mm2")
-    dry = fields.Float(string="Dry wt kg")
+    dry = fields.Float(string="Dry wt kg",digits=(16,3))
     failure_load = fields.Float(string="Failure Load kN")
     measured_comp_str = fields.Float(string="Measured compressive strength, Mpa")
     core_factor_ld = fields.Float(string="Corr Factor as per IS-516(If L/D ratio ≤ Two)")
     core_factor_dia = fields.Float(string="Corr Factor as per IS-516(If Dia is 75±5 MM Or <70MM)")
     core_factor_cube = fields.Float(string="Corr Factor for Eqv.150 mm Cube Strength, as per IS 516",default=1.25)
-    final_cube_strength = fields.Float(string="Final Eqv.150 mm Cube Strength, Mpa")
+    final_cube_strength = fields.Float(string="Final Eqv.150 mm Cube Strength, Mpa",compute="_compute_final_cube_strength")
     
     @api.onchange('dia')
     def _compute_area(self):
@@ -83,8 +83,8 @@ class ConcreteCoreLine(models.Model):
             else:
                 record.core_factor_dia = 1.0
 
-    @api.onchange('core_factor_ld','core_factor_dia','measured_comp_str')
+    @api.onchange('core_factor_ld','core_factor_dia','measured_comp_str','core_factor_cube')
     def _compute_final_cube_strength(self):
         for record in self:
-            record.final_cube_strength = record.measured_comp_str*record.core_factor_dia*record.core_factor_ld
+            record.final_cube_strength = record.measured_comp_str*record.core_factor_dia*record.core_factor_ld*record.core_factor_cube
 
