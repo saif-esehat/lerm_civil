@@ -906,7 +906,7 @@ class FlyaschNormalConsistency(models.Model):
                 record.normal_consistency_visible = True
                 record.soundness_visible = True
             if specific_gravity_test in record.tests:
-                 record.specigic_gravity_visible = True
+                record.specigic_gravity_visible = True
             if compressive_test in record.tests:
                 record.specigic_gravity_visible = True
                 record.normal_consistency_visible = True
@@ -918,6 +918,39 @@ class FlyaschNormalConsistency(models.Model):
             #     record.dry_sieving_visible = True
             if fineness_blaine in record.tests:
                 record.fineness_blaine_visible = True
+
+
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                # Normal consistency
+                if sample.internal_id == 'df1f22bb-1b3c-43ae-9c20-5421b6d6edf9':
+                    record.normal_consistency_visible = True
+                # setting time
+                if sample.internal_id == 'dd22e8dc-6526-4fcc-a5ec-18cc1ae10857':
+                    record.normal_consistency_visible = True
+                    record.setting_time_visible  = True
+                # particles retained
+                if sample.internal_id == '53dc6524-0da6-4ec4-a91e-d41c44f5edb5':
+                    record.particles_retained_visible = True
+                # soundness
+                if sample.internal_id == '84b0584b-91b0-4153-87ef-11b6954a9837':
+                    record.normal_consistency_visible = True
+                    record.soundness_visible = True
+                # specific gravity
+                if sample.internal_id == 'ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e':
+                    record.specigic_gravity_visible = True
+                # compressive strength
+                if sample.internal_id == 'c35093e4-98f0-419e-94cd-1844af4393f5':
+                    record.specigic_gravity_visible = True
+                    record.normal_consistency_visible = True
+                    record.compressive_visible = True
+                # lime reactivity
+                if sample.internal_id == '842b2aec-c97d-4d83-a9f2-2eb112eae116':
+                    record.normal_consistency_visible = True
+                    record.lime_reactivity_visible = True
+                # fineness
+                if sample.internal_id == '97be6095-6047-4781-9885-0b8b29050fda':
+                    record.fineness_blaine_visible = True
                
 
 

@@ -516,6 +516,17 @@ class ELNParametersResult(models.Model):
     model_id = fields.Integer(string="Model Id")
     result = fields.Float(string="Result",digits=(16,5))
 
+
+    # @api.depends('result')
+    # def compute_nabl_status(self):
+    #     for record in self:
+    #         if record.parameter.lab_min_value <= record.result <= record.parameter.lab_max_value:
+    #             record.nabl_status = 'nabl'
+    #         elif record.parameter.lab_min_value <= record.result and record.parameter.lab_max_value == 0:
+    #             record.nabl_status = 'nabl'
+    #         else:
+    #             record.nabl_status = 'non-nabl'
+
     @api.depends('parameter.calculation_type')
     def _compute_calculation_type(self):
         for record in self:
