@@ -456,17 +456,18 @@ class GgbsMechanical(models.Model):
                 record.specific_gravity_visible = True
                 record.fineness_visible = True
             
-            # for sample in record.sample_parameters:
-            #     print("Samples internal id",sample.internal_id)
-            #     if sample.internal_id == '84946eb6-b44a-48cc-9d41-198f55346af0':
-            #         record.normal_consistency_visible = True
-            #     if sample.internal_id == '10071b15-baa4-466f-a6a7-044da708f265':
-            #         record.specific_gravity_visible = True
-            #     if sample.internal_id == '55b3df61-8e67-4e94-86ea-98d9472f5c71':
-            #         record.slag_activity_visible = True
-            #     if sample.internal_id == 'ca17d450-c526-4092-a3a7-6b0ff7e69c0a':
-            #         record.specific_gravity_visible = True
-            #         record.fineness_visible = True
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                if sample.internal_id == '84946eb6-b44a-48cc-9d41-198f55346af0':
+                    record.normal_consistency_visible = True
+                    record.normal_consistency_cement_visible = True
+                if sample.internal_id == '10071b15-baa4-466f-a6a7-044da708f265':
+                    record.specific_gravity_visible = True
+                if sample.internal_id == '55b3df61-8e67-4e94-86ea-98d9472f5c71':
+                    record.slag_activity_visible = True
+                if sample.internal_id == 'ca17d450-c526-4092-a3a7-6b0ff7e69c0a':
+                    record.specific_gravity_visible = True
+                    record.fineness_visible = True
 
         
 

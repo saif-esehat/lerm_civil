@@ -254,6 +254,21 @@ class GypsumMechanical(models.Model):
                 record.compressive_visible = True
                 record.normal_consistency_visible = True
 
+
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                if sample.internal_id == '04efc0bd-63e2-4e23-9436-51cde4fe2c57':
+                    record.normal_consistency_visible = True
+                if sample.internal_id == '8e7282a0-3e80-4cee-b520-128b5a5f2015':
+                    record.setting_time_visible = True
+                if sample.internal_id == '2d915d3b-0324-40f1-a2b9-e385a7cdc90d':
+                    record.dry_bulk_visible = True
+                if sample.internal_id == 'ec5fa471-0e2a-411a-b1de-72cc41aed2d5':
+                    record.coarse_particle_visible = True
+                if sample.internal_id == '65321ea8-98e6-4d73-8941-5ac65d2504a9':
+                    record.compressive_visible = True
+                    record.normal_consistency_visible = True
+
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()
