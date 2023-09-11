@@ -30,12 +30,12 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
-						</table>
-							<table>
+
+						<table>
 								<tr>
 									<!-- Left Side -->
-									<td colspan="12" style="width: 50%; vertical-align: top;">
-										<table>
+									<!-- <td colspan="12" style="width: 50%; vertical-align: top;"> -->
+										<!-- <table> -->
 											<tr>
 												<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
 													Customer/Party Name :
@@ -52,11 +52,11 @@
 									           </td>
 											</tr>
 											
-										</table>
-									</td>
+										<!-- </table> -->
+									<!-- </td> -->
 									<!-- Right Side -->
-									<td colspan="12" style="width: 30%; vertical-align: top;">
-										<table>
+									<!-- <td colspan="12" style="width: 30%; vertical-align: top;"> -->
+										<!-- <table> -->
 											<tr>
 											    <td colspan="3" style="font-weight: bold;" >
 													Sample Receipt Date :
@@ -81,12 +81,14 @@
 													<span t-field="o.end_date"/>
 												</td>
 											</tr>
-										</table>
-									</td>
+										<!-- </table> -->
+									<!-- </td> -->
 								</tr>
 							
 
 						</table>
+						</table>
+							
 						<table>
 						   <tr>
 								<td colspan="12" style="font-weight: bold;">Project / Site Address :
@@ -228,7 +230,7 @@
 								</th>
 							</tr>
 						</thead>
-					<tbody>
+					<tbody >
 
 							<!--1 Accelerated pozzolanic activity index with portland cement , 7 Days in % -->
 
@@ -259,9 +261,8 @@
 								</span>									
 							</td>
 							<td style="text-align: center;">
-								<span style="text-align: center;">
-									In Construction / Please Ignore
-									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Accelerated pozzolanic activity index with portland cement')]).test_method.test_method"/> -->
+								<span style="text-align: center;min-height:100px">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a654bce5-97e3-463b-a9a6-0c36a1a57793')]).test_method.test_method"/>
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
@@ -295,9 +296,8 @@
 								</span>									
 							</td>
 							<td style="text-align: center;">
-								<span style="text-align: center;">
-								In Construction / Please Ignore
-									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Oversize % Retained on 45 Micron IS sieve')]).test_method.test_method"/> -->
+								<span style="text-align: center;min-height:100px">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d7ae8408-d86e-40de-8455-7cf20a91be40')]).test_method.test_method"/>
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
@@ -322,7 +322,7 @@
 							
 							<td style="text-align: center;max-width:100px">
 								<span style="text-align: center;" >
-									-
+									---
 									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Specific Gravity')]).unit.name"/> -->
 								</span>
 							</td>
@@ -332,14 +332,13 @@
 								</span>									
 							</td>
 							<td style="text-align: center;">
-								<span style="text-align: center;">
-								In Construction / Please Ignore
-									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Specific Gravity')]).test_method.test_method"/> -->
+								<span style="text-align: center;min-height:100px">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','30668c27-9b52-467b-802c-e2bca97ac440')]).test_method.test_method"/>
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
 								<span style="text-align: center;" >
-									-
+									---
 								</span>
 							</td>
 						</tr>
@@ -351,29 +350,27 @@
 								</div>
 							</td>
 							<td style="text-align: center;padding:0px;max-width:200px">
-								<div style="text-align: center; border-bottom:1px solid black;min-height:40px">
+								<div style="text-align: center; border-bottom:1px solid black;min-height:50px">
 									Compressive Strength of Microsilica Sample 7 days
 								</div>
-								<div style="text-align: center; border-bottom:1px solid black;min-height:30px">
+								<div style="text-align: center; border-bottom:1px solid black;min-height:25px">
 									Compressive Strength of control Sample 7 days
 								</div>
-								<div style="text-align: center;min-height:30px">
+								<div style="text-align: center;min-height:25px">
 									In Percent
 								</div>	
 							</td>
 
 							<td style="text-align: center;padding:0px;max-width:100px">
-								<div style="text-align: center; border-bottom:1px solid black;min-height:40px">
+								<div style="text-align: center; border-bottom:1px solid black;min-height:50px">
 									<!-- MPA -->
-									<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Compressive Strength')]).unit.name"/>
-
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ea28bdbd-5180-4913-b1f4-3753ef27e98b')]).unit.name"/>
 								</div>
-								<div style="text-align: center; border-bottom:1px solid black;min-height:30px">
-									<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Compressive Strength')]).unit.name"/>
-
+								<div style="text-align: center; border-bottom:1px solid black;min-height:25px">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ea28bdbd-5180-4913-b1f4-3753ef27e98b')]).unit.name"/>
 									<!-- MPA -->
 								</div>
-								<div style="text-align: center;min-height:30px">
+								<div style="text-align: center;min-height:25px">
 									%
 								</div>	
 							</td>
@@ -386,20 +383,19 @@
 
 							
 							<td style="text-align: center; padding: 0px">
-								<div style="text-align: center; border-bottom: 1px solid black;min-height:40px">
+								<div style="text-align: center; border-bottom: 1px solid black;min-height:50px">
 									<span t-field="microsilica.comp_average_casting_7days" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
-								<div style="text-align: center; border-bottom: 1px solid black;min-height:30px">
+								<div style="text-align: center; border-bottom: 1px solid black;min-height:25px">
 									<span t-field="microsilica.comp_control_average_casting_7days" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
-								<div style="text-align: center;min-height:30px">
+								<div style="text-align: center;min-height:25px">
 									<span t-field="microsilica.comp_control_strngth_7_days" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
 							</td>
-							<td style="text-align: center;min-height:30px">
-								<span style="text-align: center; display: block;">
-								In Construction / Please Ignore
-									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Compressive Strength')]).test_method.test_method"/> -->
+							<td style="text-align: center;max-width:200px">
+								<span style="text-align: center; display: block;min-height:100px">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ea28bdbd-5180-4913-b1f4-3753ef27e98b')]).test_method.test_method"/>
 								</span>
 							</td>
 
@@ -435,9 +431,8 @@
 								</span>									
 							</td>
 							<td style="text-align: center;">
-								<span style="text-align: center;">
-								In Construction / Please Ignore
-									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Oversize Percent Retained on 45 Micron IS sieve variation from Avg. %')]).test_method.test_method"/> -->
+								<span style="text-align: center;min-height:100px">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f3ad659e-7a0e-4dff-a6e1-77fea81aedfa')]).test_method.test_method"/>
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
@@ -472,9 +467,8 @@
 								</span>									
 							</td>
 							<td style="text-align: center;">
-								<span style="text-align: center;">
-								In Construction / Please Ignore
-									<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Dry Loose Bulk Density')]).test_method.test_method"/> -->
+								<span style="text-align: center;min-height:100px">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','68d0550d-ee78-43e4-a41d-b847087138cd')]).test_method.test_method"/>
 								</span>
 							</td>
 							<td style="text-align: center;max-width:150px">
@@ -483,7 +477,7 @@
 								</span>
 							</td>
 						</tr>
-					</tbody>
+					</tbody >
 				</table>
 				<div>
 

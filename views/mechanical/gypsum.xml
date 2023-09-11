@@ -138,8 +138,9 @@
                         </div>
                     </group>
 
+
                     <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
-                        <label for="wt_empty_gypsum_trial1" string="Wt of Empty Gypsum (w3)(gm)" />
+                        <label for="wt_empty_gypsum_trial1" string="Wt of Empty Gypsum w3 (gm)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="wt_empty_gypsum_trial1" string="" />
@@ -156,6 +157,7 @@
                         </div>
                     </group>
 
+                    
 
                     <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
                         <label for="volume_of_cylinder_trial1" string="Volume of Cylinder (m3)" />

@@ -100,6 +100,7 @@
     'reports/half_cell_datasheet.xml',
     'reports/half_cell_report.xml',
     'reports/general_report_template.xml',
+    'reports/pt_grput_datasheet.xml'
     
     ],
         'assets': {
