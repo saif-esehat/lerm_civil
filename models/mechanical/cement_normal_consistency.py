@@ -99,12 +99,6 @@ class CementNormalConsistency(models.Model):
                 record.initial_setting_time_hours = False
                 record.initial_setting_time_minutes = False
                 record.initial_setting_time_minutes_unrounded = False
-<<<<<<< HEAD
-=======
-
->>>>>>> 6e4d1027be113c1fbe088bd60064e2f266ed600a
-
-
     #Final setting Time
 
     final_setting_time = fields.Char("Name",default="Final Setting Time")
@@ -139,10 +133,6 @@ class CementNormalConsistency(models.Model):
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
                 record.final_setting_time_minutes_unrounded = False
-<<<<<<< HEAD
-=======
-
->>>>>>> 6e4d1027be113c1fbe088bd60064e2f266ed600a
 
 
     #Density
