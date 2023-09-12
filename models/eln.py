@@ -379,7 +379,11 @@ class ParameteResultCalculationWizard(models.TransientModel):
             req_max = material_table.req_max
             mu_neg = record.result - record.result*record.parameter.mu_value
             mu_pos = record.result + record.result*record.parameter.mu_value
+<<<<<<< HEAD
       
+=======
+        
+>>>>>>> 6a09d1b (Data)
             if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"
             else:
@@ -515,6 +519,17 @@ class ELNParametersResult(models.Model):
     ],string='Conformity Status')
     model_id = fields.Integer(string="Model Id")
     result = fields.Float(string="Result",digits=(16,5))
+
+
+    # @api.depends('result')
+    # def compute_nabl_status(self):
+    #     for record in self:
+    #         if record.parameter.lab_min_value <= record.result <= record.parameter.lab_max_value:
+    #             record.nabl_status = 'nabl'
+    #         elif record.parameter.lab_min_value <= record.result and record.parameter.lab_max_value == 0:
+    #             record.nabl_status = 'nabl'
+    #         else:
+    #             record.nabl_status = 'non-nabl'
 
     @api.depends('parameter.calculation_type')
     def _compute_calculation_type(self):

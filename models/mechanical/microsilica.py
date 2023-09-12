@@ -518,7 +518,7 @@ class Microsilica(models.Model):
             if compressive_test in record.tests:
                 record.compressive_visible = True
             if oversize_retain_test in record.tests:
-                record.oversize_retain_visible = True
+                record.compressive_visible = True
             if specific_gravity_test in record.tests:
                 record.specific_gravity_visible = True
             if compressive_strength_test in record.tests:
@@ -527,6 +527,28 @@ class Microsilica(models.Model):
                 record.oversize_percent_retain_visible = True
             if bulk_density_test in record.tests:
                 record.bulk_density_visible = True
+
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                # accelerated 
+                if sample.internal_id == 'a3df1095-19f0-48b6-8e09-e7076a4b04b5':
+                    record.compressive_visible = True
+                # oversize % 
+                if sample.internal_id == 'b9c80b7f-5f8c-44a2-984b-6ad2a17d250c':
+                    record.oversize_retain_visible = True
+                # specific gravity
+                if sample.internal_id == 'e3d938f3-80ef-4de0-96ba-a279f27b9ede':
+                    record.specific_gravity_visible = True
+                # compressive strength
+                if sample.internal_id == '8211b72d-889b-477c-a355-0476f6bcd0d7':
+                    record.compressive_strength_visible = True
+                # oversize percent retained
+                if sample.internal_id == '3c5d3687-bfaf-4667-aca6-b69c321af63bb':
+                    record.oversize_percent_retain_visible = True
+                # bulk density
+                if sample.internal_id == 'a1feec77-42b6-4d86-9ac7-a2758b3f4e5a':
+                    record.bulk_density_visible = True
+                
              
                         
     @api.model

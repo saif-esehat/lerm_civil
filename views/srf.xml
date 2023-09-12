@@ -164,8 +164,9 @@
                         <field name="sample_received_date"/>
                         <field name="location"/>
                         <field name="casting" />
+                        <field name="grade_required" />
                         <field name="group_ids" invisible='1'/>
-                         <field name="size_ids" invisible='1'/>
+                        <field name="size_ids" invisible='1'/>
                         <!-- <field name="size_ids" invisible='1'/>
                         <field name="qty_ids" invisible='1'/> -->
                     </group>
