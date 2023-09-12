@@ -17,6 +17,7 @@ from .report import gypsum_report
 from .report import wpt_report
 from .report import ggbs_report
 from .report import microsilica_report
+from .report import pt_grout_report
 from .report import cement_compatiblity
 from .report import half_cell_report
 from .mechanical import sieve_analysis
@@ -47,6 +48,7 @@ from .mechanical import fly_ash
 from .mechanical import microsilica
 from .mechanical import wpt
 from .mechanical import pt_grout
+from .mechanical import soil
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
