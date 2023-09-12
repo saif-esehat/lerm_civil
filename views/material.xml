@@ -68,7 +68,7 @@
             </group>
           </page>
           <page string="Product Based" attrs="{'invisible': [('is_product_based_calculation','=',False)]}">
-            <group>
+    
               <field name='product_based_calculation'>
                 <tree editable="bottom">
                   <field name="grade"/>
@@ -77,7 +77,6 @@
                   <field name="datasheet_report_template"/>
                 </tree>
               </field>
-            </group>
           </page>
           <page name="grade_page" string="Grade" attrs="{'invisible': [('is_sample','=',False)]}">
             <field name="grade_table">
