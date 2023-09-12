@@ -114,27 +114,27 @@ class GypsumMechanical(models.Model):
     average_dry_loose_bulk_density = fields.Float("Average Dry Bulk Density (kg/m³)",compute="_compute_average_bulk_density")
 
 
-    @api.depends('wt_empty_cylinder_gypsum_trial1','volume_of_cylinder_trial1')
+    @api.depends('wt_empty_gypsum_trial1','volume_of_cylinder_trial1')
     def _compute_bulk_density_trial1(self):
         for record in self:
             if record.volume_of_cylinder_trial1 != 0:
-                record.dry_loose_bulf_density_trial1 =  (record.wt_empty_cylinder_gypsum_trial1 / record.volume_of_cylinder_trial1)/1000
+                record.dry_loose_bulf_density_trial1 =  (record.wt_empty_gypsum_trial1 / record.volume_of_cylinder_trial1)/1000
             else:
                 record.dry_loose_bulf_density_trial1 = 0
 
-    @api.depends('wt_empty_cylinder_gypsum_trial2','volume_of_cylinder_trial2')
+    @api.depends('wt_empty_gypsum_trial2','volume_of_cylinder_trial2')
     def _compute_bulk_density_trial2(self):
         for record in self:
             if record.volume_of_cylinder_trial2 != 0:
-                record.dry_loose_bulf_density_trial2 =  (record.wt_empty_cylinder_gypsum_trial2 / record.volume_of_cylinder_trial2)/1000
+                record.dry_loose_bulf_density_trial2 =  (record.wt_empty_gypsum_trial2 / record.volume_of_cylinder_trial2)/1000
             else:
                 record.dry_loose_bulf_density_trial2 = 0
 
-    @api.depends('wt_empty_cylinder_gypsum_trial3','volume_of_cylinder_trial3')
+    @api.depends('wt_empty_gypsum_trial3','volume_of_cylinder_trial3')
     def _compute_bulk_density_trial3(self):
         for record in self:
             if record.volume_of_cylinder_trial3 != 0:
-                record.dry_loose_bulf_density_trial3 =  (record.wt_empty_cylinder_gypsum_trial3 / record.volume_of_cylinder_trial3)/1000
+                record.dry_loose_bulf_density_trial3 =  (record.wt_empty_gypsum_trial3 / record.volume_of_cylinder_trial3)/1000
             else:
                 record.dry_loose_bulf_density_trial3 = 0
 
