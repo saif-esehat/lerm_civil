@@ -20,7 +20,7 @@ class GypsumMechanical(models.Model):
 
     # Normal Consistency 
 
-    normal_consistency_name = fields.Char("Name",default="Normal Consistency GGBS")
+    normal_consistency_name = fields.Char("Name",default="Normal Consistency")
     normal_consistency_visible = fields.Boolean("Normal Consistency Visible",compute="_compute_visible")
 
     temp_normal = fields.Float("Temperature °C")
@@ -34,6 +34,12 @@ class GypsumMechanical(models.Model):
     wt_water_req = fields.Float("Wt.of water required (g)")
     penetration_vicat = fields.Float("Penetraion of vicat's Plunger (mm)")
     normal_consistency = fields.Float("Normal Consistency %",compute="compute_normal_consistency",store=True)
+
+    @api.depends('wt_gypsum_plaster','wt_water_req')
+    def compute_normal_consistency(self):
+        for record in self:
+            record.normal_consistency = record.wt_water_req / record.wt_gypsum_plaster *100
+
 
 
     
@@ -89,9 +95,9 @@ class GypsumMechanical(models.Model):
     wt_empty_cylinder_trial2 = fields.Float("Wt of Empty Cylinder w1")
     wt_empty_cylinder_trial3 = fields.Float("Wt of Empty Cylinder w1")
 
-    wt_empty_gypsum_trial1 = fields.Float("Wt of Empty Gypsum w1")
-    wt_empty_gypsum_trial2 = fields.Float("Wt of Empty Gypsum w1")
-    wt_empty_gypsum_trial3 = fields.Float("Wt of Empty Gypsum w1")
+    wt_empty_gypsum_trial1 = fields.Float("Wt of Gypsum w1")
+    wt_empty_gypsum_trial2 = fields.Float("Wt of Gypsum w1")
+    wt_empty_gypsum_trial3 = fields.Float("Wt of Gypsum w1")
 
     wt_empty_cylinder_gypsum_trial1 = fields.Float("Weight of empty Cylinder  + Gypsum (w2)")
     wt_empty_cylinder_gypsum_trial2 = fields.Float("Weight of empty Cylinder  + Gypsum (w2)")
@@ -101,11 +107,11 @@ class GypsumMechanical(models.Model):
     volume_of_cylinder_trial2 = fields.Float("Volume of Cylinder",digits=(16,5),default=0.00025)
     volume_of_cylinder_trial3 = fields.Float("Volume of Cylinder",digits=(16,5),default=0.00025)
 
-    dry_loose_bulf_density_trial1 = fields.Float("Dry Loose Bulk Density (kg/m³)",compute="_compute_bulk_density_trial1")
-    dry_loose_bulf_density_trial2 = fields.Float("Dry Loose Bulk Density (kg/m³)",compute="_compute_bulk_density_trial2")
-    dry_loose_bulf_density_trial3 = fields.Float("Dry Loose Bulk Density (kg/m³)",compute="_compute_bulk_density_trial3")
+    dry_loose_bulf_density_trial1 = fields.Float("Dry Bulk Density (kg/m³)",compute="_compute_bulk_density_trial1")
+    dry_loose_bulf_density_trial2 = fields.Float("Dry Bulk Density (kg/m³)",compute="_compute_bulk_density_trial2")
+    dry_loose_bulf_density_trial3 = fields.Float("Dry Bulk Density (kg/m³)",compute="_compute_bulk_density_trial3")
 
-    average_dry_loose_bulk_density = fields.Float("Average Dry Loose Bulk Density (kg/m³)",compute="_compute_average_bulk_density")
+    average_dry_loose_bulk_density = fields.Float("Average Dry Bulk Density (kg/m³)",compute="_compute_average_bulk_density")
 
 
     @api.depends('wt_empty_cylinder_gypsum_trial1','volume_of_cylinder_trial1')
