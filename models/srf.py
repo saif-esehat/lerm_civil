@@ -315,9 +315,10 @@ class CreateSampleWizard(models.TransientModel):
     size_id = fields.Many2one('lerm.size.line',string="Size")
     size_ids = fields.Many2many('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
+    
     grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
-    # qty_id = fields.Many2one('lerm.qty.line',string="Quantity")
-    # qty_id = fields.Integer(string="Sample Quantity")
+    grade_required = fields.Boolean(string="Grade Required",compute="compute_grade_required")
+
     sample_qty = fields.Integer(string="Sample Quantity",default=1)
     received_by_id = fields.Many2one('res.users',string="Received By",default=lambda self: self.env.user)
     sample_received_date = fields.Date(string="Sample Received Date")
@@ -368,6 +369,15 @@ class CreateSampleWizard(models.TransientModel):
             # record.main_name = record.product_name.name
             record.price = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).fixed_price
 
+    @api.onchange('material_id')
+    def compute_grade_required(self):
+        for record in self:
+            for material in record.material_id:
+                # import wdb; wdb.set_trace()
+                if len(material.grade_table) > 0:
+                    record.grade_required = True
+                else:
+                    record.grade_required = False
 
 
     @api.onchange('material_id')
@@ -458,6 +468,12 @@ class CreateSampleWizard(models.TransientModel):
         conformity = self.conformity
         volume = self.volume
         product_name = self.product_name
+
+
+        if self.grade_required:
+            if not self.grade_id:
+                raise UserError("Grade is Required")
+            
 
         if not parameters:
             raise UserError("Add atleast one Parameter")

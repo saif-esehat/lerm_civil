@@ -42,7 +42,10 @@ class ConcreteCoreLine(models.Model):
     core_factor_dia = fields.Float(string="Corr Factor as per IS-516(If Dia is 75±5 MM Or <70MM)")
     core_factor_cube = fields.Float(string="Corr Factor for Eqv.150 mm Cube Strength, as per IS 516",default=1.25)
     final_cube_strength = fields.Float(string="Final Eqv.150 mm Cube Strength, Mpa")
+
     
+
+
     @api.onchange('dia')
     def _compute_area(self):
         for record in self:

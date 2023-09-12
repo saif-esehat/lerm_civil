@@ -23,6 +23,9 @@
                             name="print_report"
                             string="Print Report"
                             />
+
+
+
                 </header>
                     <sheet>
                         <group style="width:100%">
@@ -40,6 +43,7 @@
                                 <field name='witness_description'/>
                                 <field name='casting_date'/>
                                 <field name='remarks'/>
+                              
                                 <field name='conformity' readonly="1"/>
                                 <field name='has_witness' readonly="1" />
                                 <field name='is_product_based_calculation'/>
@@ -107,7 +111,10 @@
                                     <field name="nabl_status" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="conformity_status" 
                                            decoration-success="conformity_status == 'pass'" 
-                                           decoration-danger="conformity_status == 'fail'" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                           decoration-danger="conformity_status == 'fail'" 
+                                           readonly="1" 
+                                           attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" 
+                                           />
                                     <field name="model_id" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <button string="Calculation" name="open_calculation_wizard" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','form_based')] , 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <button string="Open Form" name="open_form" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','parameter_based')], 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
