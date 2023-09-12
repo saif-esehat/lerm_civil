@@ -27,7 +27,7 @@ class Soil(models.Model):
     material_soil = fields.Char(String="Material")
     start_date_soil = fields.Date("Start Date")
     end_date_soil = fields.Date("End Date")
-    soil_table = fields.One2many('mechanical.soil.cbr.line','parent_id',string="CBR")
+    soil_table = fields.One2many('mechanical.soils.cbr.line','parent_id',string="CBR")
 
     # FSI
 
@@ -411,7 +411,7 @@ class SoilTest(models.Model):
 
 
 class SoilCBRLine(models.Model):
-    _name = "mechanical.soil.cbr.line"
+    _name = "mechanical.soils.cbr.line"
     parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
 
     penetration = fields.Float(string="Penetration in mm")
@@ -456,7 +456,7 @@ class FreeSwellIndexLine(models.Model):
             else:
                 record.fsi = 0.0
 
-class SieveAnalysisLine(models.Model):
+class SoilSieveAnalysisLine(models.Model):
     _name = "mechanical.soil.sieve.analysis.line"
     parent_id = fields.Many2one('mechanical.soil', string="Parent Id")
     
@@ -482,7 +482,7 @@ class SieveAnalysisLine(models.Model):
                 max_serial_no = max(existing_records.mapped('serial_no'))
                 vals['serial_no'] = max_serial_no + 1
 
-        return super(SieveAnalysisLine, self).create(vals)
+        return super(SoilSieveAnalysisLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -497,7 +497,7 @@ class SieveAnalysisLine(models.Model):
                 if record.parent_id and record.parent_id == vals.get('parent_id') and 'wt_retained' in vals:
                     record.percent_retained = vals['wt_retained'] / record.parent_id.total * 100 if record.parent_id.total else 0
 
-            new_self = super(SieveAnalysisLine, self).write(vals)
+            new_self = super(SoilSieveAnalysisLine, self).write(vals)
 
             if 'wt_retained' in vals:
                 for record in self:
@@ -505,13 +505,13 @@ class SieveAnalysisLine(models.Model):
 
             return new_self
 
-        return super(SieveAnalysisLine, self).write(vals)
+        return super(SoilSieveAnalysisLine, self).write(vals)
 
     def unlink(self):
         # Get the parent_id before the deletion
         parent_id = self[0].parent_id
 
-        res = super(SieveAnalysisLine, self).unlink()
+        res = super(SoilSieveAnalysisLine, self).unlink()
 
         if parent_id:
             parent_id.child_lines._reorder_serial_numbers()
