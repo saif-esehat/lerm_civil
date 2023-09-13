@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <record id="mechanical_flyasch_normalconsistency" model="ir.ui.view">
+        <record id="mechanical_flyash_normalconsistency" model="ir.ui.view">
         <field name="name">mechanical.flyasch.normalconsistency.form</field>
         <field name="model">mechanical.flyasch.normalconsistency</field>
         <field name="arch" type="xml">
