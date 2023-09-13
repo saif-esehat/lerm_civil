@@ -18,6 +18,7 @@ from .report import wpt_report
 from .report import ggbs_report
 from .report import microsilica_report
 from .report import pt_grout_report
+from .report import ptgrout_non_nabl_report
 from .report import cement_compatiblity
 from .report import half_cell_report
 from .mechanical import sieve_analysis
