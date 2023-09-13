@@ -13,6 +13,7 @@ class ElnReport(models.AbstractModel):
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
         inreport_value = data.get('inreport', None)
+        nabl = data.get('nabl')
         print(data , 'dataaaaaaaaaaaaaa')
         # stamp = data['inreport']
         if 'active_id' in data['context']:
@@ -36,7 +37,8 @@ class ElnReport(models.AbstractModel):
         return {
             'eln': eln,
             'qrcode': qr_code,
-            'stamp' : inreport_value
+            'stamp' : inreport_value,
+            'nabl' : nabl
         }
 
 

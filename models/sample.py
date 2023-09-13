@@ -241,7 +241,7 @@ class LermSampleForm(models.Model):
             'data' : {'fromsample' : True}
         }
         
-    def print_report(self):
+    def print_nabl_report(self):
         inreport = self.state
         eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
         is_product_based = eln.is_product_based_calculation
@@ -254,7 +254,22 @@ class LermSampleForm(models.Model):
             'report_type': 'qweb-pdf',
             'report_name': template_name,
             'report_file': template_name,
-            'data' : {'fromsample' : True , 'inreport' : inreport}
+            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : True}
+        }
+    def print_non_nabl_report(self):
+        inreport = self.state
+        eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
+        is_product_based = eln.is_product_based_calculation
+        if is_product_based == True:
+            template_name = eln.material.product_based_calculation[0].main_report_template.report_name
+        else:
+            template_name = eln.parameters_result.parameter[0].main_report_template.report_name
+        return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': template_name,
+            'report_file': template_name,
+            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : False}
         }
     # def print_sample_report(self):
     #     eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])

@@ -95,9 +95,9 @@ class GypsumMechanical(models.Model):
     wt_empty_cylinder_trial2 = fields.Float("Wt of Empty Cylinder w1")
     wt_empty_cylinder_trial3 = fields.Float("Wt of Empty Cylinder w1")
 
-    wt_empty_gypsum_trial1 = fields.Float("Wt of Gypsum w1")
-    wt_empty_gypsum_trial2 = fields.Float("Wt of Gypsum w1")
-    wt_empty_gypsum_trial3 = fields.Float("Wt of Gypsum w1")
+    wt_empty_gypsum_trial1 = fields.Float("Wt of Gypsum w1" ,compute="_compute_wt_empty_cylinder1")
+    wt_empty_gypsum_trial2 = fields.Float("Wt of Gypsum w1",compute="_compute_wt_empty_cylinder2")
+    wt_empty_gypsum_trial3 = fields.Float("Wt of Gypsum w1",compute="_compute_wt_empty_cylinder3")
 
     wt_empty_cylinder_gypsum_trial1 = fields.Float("Weight of empty Cylinder  + Gypsum (w2)")
     wt_empty_cylinder_gypsum_trial2 = fields.Float("Weight of empty Cylinder  + Gypsum (w2)")
@@ -138,7 +138,22 @@ class GypsumMechanical(models.Model):
             else:
                 record.dry_loose_bulf_density_trial3 = 0
 
+    @api.depends('wt_empty_cylinder_trial1','wt_empty_cylinder_gypsum_trial1')
+    def _compute_wt_empty_cylinder1(self):
+        for record in self:
+            record.wt_empty_gypsum_trial1 = record.wt_empty_cylinder_gypsum_trial1 - record.wt_empty_cylinder_trial1
 
+
+    @api.depends('wt_empty_cylinder_trial2','wt_empty_cylinder_gypsum_trial2')
+    def _compute_wt_empty_cylinder2(self):
+        for record in self:
+            record.wt_empty_gypsum_trial2 = record.wt_empty_cylinder_gypsum_trial2 - record.wt_empty_cylinder_trial2
+
+
+    @api.depends('wt_empty_cylinder_trial3','wt_empty_cylinder_gypsum_trial3')
+    def _compute_wt_empty_cylinder3(self):
+        for record in self:
+            record.wt_empty_gypsum_trial3 = record.wt_empty_cylinder_gypsum_trial3 - record.wt_empty_cylinder_trial3
 
     @api.depends('dry_loose_bulf_density_trial1','dry_loose_bulf_density_trial2','dry_loose_bulf_density_trial3')
     def _compute_average_bulk_density(self):
