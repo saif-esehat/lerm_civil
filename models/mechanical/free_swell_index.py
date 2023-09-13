@@ -9,7 +9,7 @@ class FreeSwellIndex(models.Model):
 
     name = fields.Char("Name",default="Free Swell Index")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines = fields.One2many('mechanical.free.swell.index.line','parent_id',string="Parameter")
+    child_lines = fields.One2many('mechanical.soil.free.swell.index.line','parent_id',string="Parameter")
 
     @api.model
     def create(self, vals):
@@ -21,7 +21,7 @@ class FreeSwellIndex(models.Model):
 
 
 class TensileSplittingStrengthLine(models.Model):
-    _name = "mechanical.free.swell.index.line"
+    _name = "mechanical.soil.free.swell.index.line"
     parent_id = fields.Many2one('mechanical.free.swell.index',string="Parent Id")
 
     wt_sample = fields.Float(string="Mass of wet sample")
