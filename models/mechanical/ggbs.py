@@ -81,8 +81,8 @@ class GgbsMechanical(models.Model):
     wt_of_ggbs_sg_trial2 = fields.Float("Wt. of GGBS(g)")
     initial_volume_kerosine_trial1 = fields.Float("Initial Volume of kerosine (ml)V1")
     initial_volume_kerosine_trial2 = fields.Float("Initial Volume of kerosine (ml)V1)")
-    final_volume_kerosine_trial1 = fields.Float("Final Volume of kerosine and Cement (After immersion in constant water bath)(ml) V2")
-    final_volume_kerosine_trial2 = fields.Float("Final Volume of kerosine and Cement (After immersion in constant water bath)(ml) V2")
+    final_volume_kerosine_trial1 = fields.Float("Final Volume of kerosine and GGBS (After immersion in constant water bath)(ml) V2")
+    final_volume_kerosine_trial2 = fields.Float("Final Volume of kerosine and GGBS (After immersion in constant water bath)(ml) V2")
     displaced_volume_trial1 = fields.Float("Displaced Volume (cm³)",compute="_compute_displaced_volume_trail1",store=True)
     displaced_volume_trial2 = fields.Float("Displaced Volume (cm³)",compute="_compute_displaced_volume_trail2",store=True)
     specific_gravity_trial1 = fields.Float("Specific Gravity",compute="_compute_specific_gravity_trail1",store=True)
@@ -511,7 +511,7 @@ class GgbsSlag7DaysLine(models.Model):
     length = fields.Float("Length in mm")
     width = fields.Float("Width in mm")
     crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_crosssectional_area")
-    wt_of_cement_cube = fields.Float("wt of Cement Cube in gm")
+    wt_of_cement_cube = fields.Float("wt of Cube in gm")
     crushing_load = fields.Float("Crushing Load in KN")
     compressive_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_compressive_strength")
 
@@ -537,7 +537,7 @@ class GgbsSlag28DaysLine(models.Model):
     length = fields.Float("Length in mm")
     width = fields.Float("Width in mm")
     crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_crosssectional_area")
-    wt_of_cement_cube = fields.Float("wt of Cement Cube in gm")
+    wt_of_cement_cube = fields.Float("wt of Cube in gm")
     crushing_load = fields.Float("Crushing Load in KN")
     compressive_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_compressive_strength")
 
@@ -563,7 +563,7 @@ class GgbsSlagOpc7DaysLine(models.Model):
     length = fields.Float("Length in mm")
     width = fields.Float("Width in mm")
     crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_crosssectional_area")
-    wt_of_cement_cube = fields.Float("wt of Cement Cube in gm")
+    wt_of_cement_cube = fields.Float("wt of Cube in gm")
     crushing_load = fields.Float("Crushing Load in KN")
     compressive_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_compressive_strength")
 
@@ -589,7 +589,7 @@ class GgbsSlagOpc28DaysLine(models.Model):
     length = fields.Float("Length in mm")
     width = fields.Float("Width in mm")
     crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_crosssectional_area")
-    wt_of_cement_cube = fields.Float("wt of Cement Cube in gm")
+    wt_of_cement_cube = fields.Float("wt of Cube in gm")
     crushing_load = fields.Float("Crushing Load in KN")
     compressive_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_compressive_strength")
 

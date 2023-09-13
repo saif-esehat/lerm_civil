@@ -8,18 +8,18 @@
 			
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
 				<div style="text-align:center;margin-top:10px">
-					<p style="font-size:15px"><b>Test Report On WPT</b></p>
+					<p style="font-size:15px"><b>Test Report on Half Cell Potential</b></p>
 				</div>
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						<table>
 							<tr>
-								<td colspan="3">Test Report No :
+								<td colspan="3">Report no :
 								</td>
 								<td colspan="3">
 									<span t-field="o.eln_id"/>
 								</td>
-								<td colspan="3">Report Issue Date :
+								<td colspan="3">Report Date :
 								</td>
 								<td colspan="3">
 									<span t-field="o.srf_date"/>
@@ -31,65 +31,22 @@
 								</td>
 							</tr>
 						</table>
-							<table>
-								<tr>
-									<!-- Left Side -->
-									<td colspan="12" style="width: 50%; vertical-align: top;">
-										<table>
-											<tr>
-												<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
-													Customer/Party Name :
-												</td>
-												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/>
-												<span t-field="o.srf_id.customer.street"/>
-												<span t-field="o.srf_id.customer.street2"/>
-												<span t-field="o.srf_id.customer.city"/>
-												<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
-												<span t-field="o.srf_id.customer.state_id"/>
-												,
-												<span t-field="o.srf_id.customer.country_id"/>
-									           </td>
-											</tr>
-											
-										</table>
-									</td>
-									<!-- Right Side -->
-									<td colspan="12" style="width: 30%; vertical-align: top;">
-										<table>
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Sample Receipt Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.sample_id.sample_received_date"/>
-												</td>
-											</tr>
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Test Start Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.start_date"/>
-												</td>
-											</tr>
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Test End Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.end_date"/>
-												</td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-							
-
-						</table>
-						<table>
-						   <tr>
-								<td colspan="12" style="font-weight: bold;">Project / Site Address :
+						<table style="margin-top:10px;">
+							<tr>
+								<td colspan="12">Customer Party Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.street"/>
+									<span t-field="o.srf_id.customer.street2"/>
+									<span t-field="o.srf_id.customer.city"/>
+									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+									<span t-field="o.srf_id.customer.state_id"/>
+									,
+									<span t-field="o.srf_id.customer.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Project / Site Address :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.site_address.name"/>
 									<span t-field="o.srf_id.site_address.street"/>
@@ -101,149 +58,452 @@
 									<span t-field="o.srf_id.site_address.country_id"/>
 								</td>
 							</tr>
+							
+						</table>
+						<table>
 							<tr>
-								<td colspan="12" style="font-weight: bold;">Sample Description : <![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.sample_description"/>
+								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.start_date"/>
+								</td>
+								<td colspan="6">Test End Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.end_date"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12" style="font-weight: bold;">Sample Id Mark: <![CDATA[&nbsp;]]>
-										<span t-field="o.sample_id.client_sample_id"/>
+								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.client_sample_id"/>
+								</td>
+								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_received_date"/>
 								</td>
 							</tr>
 							<tr>
-							   <td colspan="3" style="font-weight: bold;">Size :
+								<td colspan="6">Size :
 									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.size_id.size"/>
 								</td>
-								<td colspan="3">
-									<span t-field="o.size_id.size"/>
-								</td>
-								<td colspan="3" style="font-weight: bold;">Grade :
+								<td colspan="6">Grade :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
 									<span t-field="o.grade_id.grade"/>
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Brand :
+								<td colspan="6">Brand :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="o.sample_id.brand"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Consultant Name :
+								<td colspan="6">Consultant Name :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Client Name :
+								<td colspan="6">Client Name :
 									<![CDATA[&nbsp;]]>
 								</td>
-								<td colspan="3"></td>
-								<td colspan="3" style="font-weight: bold;">Client Reference :
+								<td colspan="6">Client Reference :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
 									<span t-field="o.srf_id.client_refrence"/>
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Discipline :
+								<td colspan="6">Discipline :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="o.discipline.discipline"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Group :
+								<td colspan="6">Group :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="o.group.group"/>
 								</td>
 							</tr>
+							
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Material/Test Name :
+								<td colspan="12">Material/Test Name :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="12">
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
+							<tr>
+								<td colspan="6">Instrument :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.instrument"/>
+								</td>
+								<td colspan="6">Temperature :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.temperature"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Year of Construction :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.structure_age"/>
+								</td>
+								<td colspan="6">Half Cell Potential Reading (Cu/CuSO4) :
+									<![CDATA[&nbsp;]]>
+									<span>Probability of active Corrosion</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">More positive than -200mV :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="1">
+									<span>No Corrosion</span>
+								</td>
+								<td colspan="3">Between -200mV to -350mV:
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="1">
+									<span>Uncertainity</span>
+								</td>
+								<td colspan="3">More negative than -350mV :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="1">
+									<span>90%</span>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div style="margin-top:20px;">
+						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
+						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
+					</div>
+
+					<div style="margin-top:20px">
+						<table style="margin-top:20px">
+
+							<tr cols="12">
+								<td colspan="1" style="border-bottom:none">
+								</td>
+								<td colspan="3" style="border-bottom:none">
+								</td>
+								<td colspan="2" style="border-bottom:none">
+								</td>
+								<td colspan="6">Potential mV (milli volts)
+								</td>
+								
+							</tr>
+
+							<tr cols="12">
+								<td colspan="1" style="border-top:none">Sr no 
+								</td>
+								<td colspan="3" style="border-top:none">Member
+								</td>
+								<td colspan="2" style="border-top:none">Location
+								</td>
+								<td colspan="1">R1
+								</td>
+								<td colspan="1">R2
+								</td>
+								<td colspan="1">R3
+								</td>
+								<td colspan="1">R4
+								</td>
+								<td colspan="1">R5
+								</td>
+								<td colspan="1">R6
+								</td>
+								
+							</tr>
+
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.child_lines_1" t-as="r">
+								<td colspan="1">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</div>
+                  				</td>
+								<td colspan="3">
+									<span t-esc="r['member']"/>
+								</td>
+								<td colspan="2">
+									<span t-esc="r['level']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r1']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r2']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r3']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r4']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r5']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r6']"/>
+								</td>
+								
+							</tr>
+							<t t-set="j" t-value="0"/>
+							<tr t-if="j == 0" cols="12" t-foreach="data.child_lines_1" t-as="r">
+								<td colspan="6">Average :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-esc="r['avg']"/>
+									<t t-set="j" t-value="i+1"/>
+								</td>
+								
+							</tr>
+						</table>
+					</div>
+
+					<div style="margin-top:20px">
+						<table style="margin-top:20px">
+
+							<tr cols="12">
+								<td colspan="1" style="border-bottom:none">
+								</td>
+								<td colspan="3" style="border-bottom:none">
+								</td>
+								<td colspan="2" style="border-bottom:none">
+								</td>
+								<td colspan="6">Potential mV (milli volts)
+								</td>
+								
+							</tr>
+
+							<tr cols="12">
+								<td colspan="1" style="border-top:none">Sr no 
+								</td>
+								<td colspan="3" style="border-top:none">Member
+								</td>
+								<td colspan="2" style="border-top:none">Location
+								</td>
+								<td colspan="1">R1
+								</td>
+								<td colspan="1">R2
+								</td>
+								<td colspan="1">R3
+								</td>
+								<td colspan="1">R4
+								</td>
+								<td colspan="1">R5
+								</td>
+								<td colspan="1">R6
+								</td>
+								
+							</tr>
 							
 
-						</table>
-						<table>
-						 <thead>
-								<tr>
-									<th>Parameter</th>
-									<th>Observation</th>
-									<!-- Add more columns as needed -->
-								</tr>
-							</thead>
-							<tbody>
-								<tr t-foreach="doc.related_records" t-as="related_record">
-									<td><span t-esc="related_record.sample"/></td>
-									<td><span t-esc="related_record.average"/></td>
-									<!-- Add more columns as needed -->
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					
-					
-		
-					<div style="margin-top:20px" class="noteContainer">
-						<div>
-							<b>Note: -</b>
-						</div>
-						<div>
-							<ul>
-								<li>
-									The Test Report(s) is/are valid only to the sample submitted to the laboratory.
-								</li>
-								<li>
-									Sample(s) was/were not drawn by laboratory.
-								</li>
-								<li>
-									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="signatureContainer girdgird" style="margin-top:50px">
-						<div>
-							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-						</div>
-						<div >
-							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-						</div>
-						<div>
-							<div>
-								<b>
-									Approved By
-								</b>
-							</div>
-							<div style="height:20px">
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.child_lines_2" t-as="r">
+								<td colspan="1">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</div>
+                  				</td>
+								<td colspan="3">
+									<span t-esc="r['member']"/>
+								</td>
+								<td colspan="2">
+									<span t-esc="r['level']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r1']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r2']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r3']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r4']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r5']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r6']"/>
+								</td>
 								
+							</tr>
+							<t t-set="j" t-value="0"/>
+							<tr t-if="j == 0" cols="12" t-foreach="data.child_lines_2" t-as="r">
+								<td colspan="6">Average :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-esc="r['avg']"/>
+									<t t-set="j" t-value="i+1"/>
+								</td>
+								
+							</tr>
+						</table>
+					</div>
+					<div style="margin-top:20px;page-break-inside: avoid">
+						<h4 >Criteria for Corrosion of Rebar in Concrete for Different Half-Cells</h4>
+						<b style="text-align:center">(Clauses 4 and 6.11)</b>
+					
+					<table style="margin-top:20px">
+						<thead >
+							<tr cols="12">
+								<td colspan="1">
+									<span><b>Sr. No</b></span>
+								</td>
+
+								<td colspan="3">
+									<span><b>Cu/CuSO4 Electrode</b></span>
+								</td>
+
+								<td colspan="2">
+									<span><b>Hg/HgCl2 Electrode</b></span>
+								</td>
+
+								<td colspan="2">
+									<span><b>Ag/AgCl Electrode</b></span>
+								</td>
+
+								<td colspan="4">
+									<span><b>Likely Corrosion Condition</b></span>
+								</td>
+							</tr>
+						</thead>
+						<tr cols="12">
+							<td colspan="1">
+								<span>1</span>
+							</td>
+							<td colspan="3">
+								<span> &gt;-200 mV or less negative than -200 mV</span>
+							</td>
+							<td colspan="2">
+								<span> &gt;-126 mV</span>
+							</td>
+							<td colspan="2">
+								<span> &gt;-106 mV</span>
+							</td>
+							<td colspan="4">
+								<span>Low (there is a greater than 90 percent probability that no reinforcing steel corrosion is occuring in that area at the time of measurement)</span>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="1">
+								<span>2</span>
+							</td>
+							<td colspan="3">
+								<span>-200 mV to -350 mV</span>
+							</td>
+							<td colspan="2">
+								<span> &gt;-126 mV to -276 mV</span>
+							</td>
+							<td colspan="2">
+								<span> &gt;-106 mV to -256 mV</span>
+							</td>
+							<td colspan="4">
+								<span>Corrosion activity of the reinforcing steel in that area is uncertain</span>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="1">
+								<span>3</span>
+							</td>
+							<td colspan="3">
+								<span> less than -350 mV or more negative than -350 mV</span>
+							</td>
+							<td colspan="2">
+								<span> less than -276 mV</span>
+							</td>
+							<td colspan="2">
+								<span> less than -276 mV</span>
+							</td>
+							<td colspan="4">
+								<span>Low (there is a greater than 90 percent probability that reinforcing steel corrosion is occuring in that area at the time of measurement)</span>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="1">
+								<span>4</span>
+							</td>
+							<td colspan="3">
+								<span> less than -500 mV </span>
+							</td>
+							<td colspan="2">
+								<span> less than -426 mV</span>
+							</td>
+							<td colspan="2">
+								<span> less than -406 mV</span>
+							</td>
+							<td colspan="4">
+								<span>Severe Corrosion</span>
+							</td>
+						</tr>
+					</table>
+					</div>
+					
+					<div style="page-break-inside: avoid;">
+						<div style="margin-top:20px" class="noteContainer">
+							<div>
+								<b>Note :-</b>
 							</div>
 							<div>
-								<b>
-									Technical Manager
-								</b>
+								<ol>
+									<li>
+										The Test Report(s) shall not be reproduced except in full, without written approval of the laboratory
+									</li>
+									<li>
+										We do not undertake any responsibility for any involvement in any type of litigation arising out of result submitted by Knack Engineering Services Pvt Ltd
+									</li>
+									<li>
+										Correction Factor calculation :-
+										<ul>
+											<li>
+												Ideal Temperature for test is 22.2 ± 5.5°C
+											</li>
+											<li>
+												Site temperature = 31.6 °C
+											</li>
+											<li>
+												Variation in temperature = 3.9 °C
+											</li>
+											<li>
+												0.91 mV will increase per 1 °C after ideal temperature 22.2 ± 5.5°C
+											</li>
+											<li>
+												Hence -3.54 mV will add in observed readings
+											</li>
+										</ul>
+									</li>
+								</ol>
+							</div>
+						</div>
+						<div class="signatureContainer girdgird" style="margin-top:50px">
+							<div>
+								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
+							</div>
+							<div >
+								Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 							</div>
 							<div>
-								<b>
-									(Authorized Signatory)
-								</b>
+								<div>
+									<b>
+										Approved By
+									</b>
+								</div>
+								<div style="height:20px">
+									
+								</div>
+								<div>
+									<b>
+										Mechanical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
 							</div>
 						</div>
 					</div>
-										
 				</div>
-				
 			</t>
 		</t>
 	</template>

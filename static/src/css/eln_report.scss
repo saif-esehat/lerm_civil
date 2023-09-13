@@ -169,3 +169,10 @@
     -webkit-align-items: center;
     align-items: center;
   }
+
+  .footerQR{
+    display: -webkit-flex;
+    display: flex;
+    // -webkit-box-pack: justify;
+    // -webkit-justify-content: space-between;
+  }

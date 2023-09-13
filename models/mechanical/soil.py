@@ -27,7 +27,7 @@ class Soil(models.Model):
     material_soil = fields.Char(String="Material")
     start_date_soil = fields.Date("Start Date")
     end_date_soil = fields.Date("End Date")
-    soil_table = fields.One2many('mechanical.soil.cbr.line','parent_id',string="CBR")
+    soil_table = fields.One2many('mechanical.soils.cbr.line','parent_id',string="CBR")
 
     # FSI
 
@@ -37,7 +37,7 @@ class Soil(models.Model):
     material_fsi = fields.Char(String="Material")
     start_date_fsi = fields.Date("Start Date")
     end_date_fsi = fields.Date("End Date")
-    fsi_table = fields.One2many('mechanical.free.swell.index.line','parent_id',string="FSI")
+    fsi_table = fields.One2many('mechanical.soil.free.swell.index.line','parent_id',string="FSI")
 
     # Sieve Analysis
     sieve_name = fields.Char("Name",default="Sieve Analysis")
@@ -46,7 +46,7 @@ class Soil(models.Model):
     material_sieve = fields.Char(String="Material")
     start_date_sieve = fields.Date("Start Date")
     end_date_sieve = fields.Date("End Date")
-    child_lines = fields.One2many('mechanical.sieve.analysis.line','parent_id',string="Sieve Analysis")
+    child_lines = fields.One2many('mechanical.soil.sieve.analysis.line','parent_id',string="Sieve Analysis")
     total = fields.Integer(string="Total",compute="_compute_total")
     # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
 
@@ -61,7 +61,7 @@ class Soil(models.Model):
                     line.write({'passing_percent': 100})
 
                 else:
-                    previous_line_record = self.env['mechanical.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+                    previous_line_record = self.env['mechanical.soil.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
                     line.write({'cumulative_retained': previous_line_record + line.percent_retained})
                     line.write({'passing_percent': 100-(previous_line_record + line.percent_retained)})
                     print("Previous Cumulative",previous_line_record)
@@ -144,7 +144,7 @@ class Soil(models.Model):
     material_liquid_limit = fields.Char(String="Material")
     start_date_liquid_limit = fields.Date("Start Date")
     end_date_liquid_limit = fields.Date("End Date")
-    child_liness = fields.One2many('mechanical.liquid.limit.line','parent_id',string="Liquid Limit")
+    child_liness = fields.One2many('mechanical.liquid.limits.line','parent_id',string="Liquid Limit")
 
     liquid_limit = fields.Float('Liquid Limit')
 
@@ -411,7 +411,7 @@ class SoilTest(models.Model):
 
 
 class SoilCBRLine(models.Model):
-    _name = "mechanical.soil.cbr.line"
+    _name = "mechanical.soils.cbr.line"
     parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
 
     penetration = fields.Float(string="Penetration in mm")
@@ -426,7 +426,7 @@ class SoilCBRLine(models.Model):
 
 
 class FreeSwellIndexLine(models.Model):
-    _name = "mechanical.free.swell.index.line"
+    _name = "mechanical.soil.free.swell.index.line"
     parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
 
     wt_sample = fields.Float(string="Mass of wet sample")
@@ -456,8 +456,8 @@ class FreeSwellIndexLine(models.Model):
             else:
                 record.fsi = 0.0
 
-class SieveAnalysisLine(models.Model):
-    _name = "mechanical.sieve.analysis.line"
+class SoilSieveAnalysisLine(models.Model):
+    _name = "mechanical.soil.sieve.analysis.line"
     parent_id = fields.Many2one('mechanical.soil', string="Parent Id")
     
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
@@ -482,7 +482,7 @@ class SieveAnalysisLine(models.Model):
                 max_serial_no = max(existing_records.mapped('serial_no'))
                 vals['serial_no'] = max_serial_no + 1
 
-        return super(SieveAnalysisLine, self).create(vals)
+        return super(SoilSieveAnalysisLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -497,7 +497,7 @@ class SieveAnalysisLine(models.Model):
                 if record.parent_id and record.parent_id == vals.get('parent_id') and 'wt_retained' in vals:
                     record.percent_retained = vals['wt_retained'] / record.parent_id.total * 100 if record.parent_id.total else 0
 
-            new_self = super(SieveAnalysisLine, self).write(vals)
+            new_self = super(SoilSieveAnalysisLine, self).write(vals)
 
             if 'wt_retained' in vals:
                 for record in self:
@@ -505,13 +505,13 @@ class SieveAnalysisLine(models.Model):
 
             return new_self
 
-        return super(SieveAnalysisLine, self).write(vals)
+        return super(SoilSieveAnalysisLine, self).write(vals)
 
     def unlink(self):
         # Get the parent_id before the deletion
         parent_id = self[0].parent_id
 
-        res = super(SieveAnalysisLine, self).unlink()
+        res = super(SoilSieveAnalysisLine, self).unlink()
 
         if parent_id:
             parent_id.child_lines._reorder_serial_numbers()
@@ -794,7 +794,7 @@ class LIGHTMDDCOMPACTIONLINE(models.Model):
 
 
 class LIQUIDLIMITLINE(models.Model):
-    _name = "mechanical.liquid.limit.line"
+    _name = "mechanical.liquid.limits.line"
     parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
 
 
