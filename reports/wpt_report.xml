@@ -122,7 +122,7 @@
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td colspan="6">Instrument :
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.instrument"/>
@@ -131,83 +131,37 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.temperature"/>
 								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Year of Construction :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.structure_age"/>
-								</td>
-								<td colspan="6">Half Cell Potential Reading (Cu/CuSO4) :
-									<![CDATA[&nbsp;]]>
-									<span>Probability of active Corrosion</span>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3">More positive than -200mV :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="1">
-									<span>No Corrosion</span>
-								</td>
-								<td colspan="3">Between -200mV to -350mV:
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="1">
-									<span>Uncertainity</span>
-								</td>
-								<td colspan="3">More negative than -350mV :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="1">
-									<span>90%</span>
-								</td>
-							</tr>
+							</tr> -->
+							
 						</table>
 					</div>
 					<div style="margin-top:20px;">
-						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
+						<u>Protocol</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
+						<span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).unit.name"/>
+
 						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
 					</div>
 
 					<div style="margin-top:20px">
 						<table style="margin-top:20px">
 
-							<tr cols="12">
-								<td colspan="1" style="border-bottom:none">
-								</td>
-								<td colspan="3" style="border-bottom:none">
-								</td>
-								<td colspan="2" style="border-bottom:none">
-								</td>
-								<td colspan="6">Potential mV (milli volts)
-								</td>
-								
-							</tr>
+							
 
 							<tr cols="12">
-								<td colspan="1" style="border-top:none">Sr no 
+								<td colspan="1">Sr no 
 								</td>
-								<td colspan="3" style="border-top:none">Member
+								<td colspan="3">Sample Id Mark
 								</td>
-								<td colspan="2" style="border-top:none">Location
+								<td colspan="3">Observation
 								</td>
-								<td colspan="1">R1
+								<td colspan="5">Requirement
 								</td>
-								<td colspan="1">R2
-								</td>
-								<td colspan="1">R3
-								</td>
-								<td colspan="1">R4
-								</td>
-								<td colspan="1">R5
-								</td>
-								<td colspan="1">R6
-								</td>
+								
 								
 							</tr>
 
 							<t t-set="i" t-value="0"/>
-							<tr t-foreach="data.child_lines_1" t-as="r">
+							<tr t-foreach="data.child_lines" t-as="r">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -215,228 +169,22 @@
 									</div>
                   				</td>
 								<td colspan="3">
-									<span t-esc="r['member']"/>
+									<span t-esc="r['sample']"/>
 								</td>
-								<td colspan="2">
-									<span t-esc="r['level']"/>
+								<td colspan="3">
+									<span t-esc="r['average']"/>
 								</td>
-								<td colspan="1">
-									<span t-esc="r['r1']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r2']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r3']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r4']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r5']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r6']"/>
+								<td colspan="5">
+									<span>maximum permissible limit as per MORTH - 2013 5th Edition cl is 25mm</span>
 								</td>
 								
-							</tr>
-							<t t-set="j" t-value="0"/>
-							<tr t-if="j == 0" cols="12" t-foreach="data.child_lines_1" t-as="r">
-								<td colspan="6">Average :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="6">
-									<span t-esc="r['avg']"/>
-									<t t-set="j" t-value="i+1"/>
-								</td>
-								
-							</tr>
-						</table>
-					</div>
-
-					<div style="margin-top:20px">
-						<table style="margin-top:20px">
-
-							<tr cols="12">
-								<td colspan="1" style="border-bottom:none">
-								</td>
-								<td colspan="3" style="border-bottom:none">
-								</td>
-								<td colspan="2" style="border-bottom:none">
-								</td>
-								<td colspan="6">Potential mV (milli volts)
-								</td>
-								
-							</tr>
-
-							<tr cols="12">
-								<td colspan="1" style="border-top:none">Sr no 
-								</td>
-								<td colspan="3" style="border-top:none">Member
-								</td>
-								<td colspan="2" style="border-top:none">Location
-								</td>
-								<td colspan="1">R1
-								</td>
-								<td colspan="1">R2
-								</td>
-								<td colspan="1">R3
-								</td>
-								<td colspan="1">R4
-								</td>
-								<td colspan="1">R5
-								</td>
-								<td colspan="1">R6
-								</td>
 								
 							</tr>
 							
-
-							<t t-set="i" t-value="0"/>
-							<tr t-foreach="data.child_lines_2" t-as="r">
-								<td colspan="1">
-									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
-									</div>
-                  				</td>
-								<td colspan="3">
-									<span t-esc="r['member']"/>
-								</td>
-								<td colspan="2">
-									<span t-esc="r['level']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r1']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r2']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r3']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r4']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r5']"/>
-								</td>
-								<td colspan="1">
-									<span t-esc="r['r6']"/>
-								</td>
-								
-							</tr>
-							<t t-set="j" t-value="0"/>
-							<tr t-if="j == 0" cols="12" t-foreach="data.child_lines_2" t-as="r">
-								<td colspan="6">Average :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="6">
-									<span t-esc="r['avg']"/>
-									<t t-set="j" t-value="i+1"/>
-								</td>
-								
-							</tr>
 						</table>
 					</div>
-					<div style="margin-top:20px;page-break-inside: avoid">
-						<h4 >Criteria for Corrosion of Rebar in Concrete for Different Half-Cells</h4>
-						<b style="text-align:center">(Clauses 4 and 6.11)</b>
+
 					
-					<table style="margin-top:20px">
-						<thead >
-							<tr cols="12">
-								<td colspan="1">
-									<span><b>Sr. No</b></span>
-								</td>
-
-								<td colspan="3">
-									<span><b>Cu/CuSO4 Electrode</b></span>
-								</td>
-
-								<td colspan="2">
-									<span><b>Hg/HgCl2 Electrode</b></span>
-								</td>
-
-								<td colspan="2">
-									<span><b>Ag/AgCl Electrode</b></span>
-								</td>
-
-								<td colspan="4">
-									<span><b>Likely Corrosion Condition</b></span>
-								</td>
-							</tr>
-						</thead>
-						<tr cols="12">
-							<td colspan="1">
-								<span>1</span>
-							</td>
-							<td colspan="3">
-								<span> &gt;-200 mV or less negative than -200 mV</span>
-							</td>
-							<td colspan="2">
-								<span> &gt;-126 mV</span>
-							</td>
-							<td colspan="2">
-								<span> &gt;-106 mV</span>
-							</td>
-							<td colspan="4">
-								<span>Low (there is a greater than 90 percent probability that no reinforcing steel corrosion is occuring in that area at the time of measurement)</span>
-							</td>
-						</tr>
-						<tr cols="12">
-							<td colspan="1">
-								<span>2</span>
-							</td>
-							<td colspan="3">
-								<span>-200 mV to -350 mV</span>
-							</td>
-							<td colspan="2">
-								<span> &gt;-126 mV to -276 mV</span>
-							</td>
-							<td colspan="2">
-								<span> &gt;-106 mV to -256 mV</span>
-							</td>
-							<td colspan="4">
-								<span>Corrosion activity of the reinforcing steel in that area is uncertain</span>
-							</td>
-						</tr>
-						<tr cols="12">
-							<td colspan="1">
-								<span>3</span>
-							</td>
-							<td colspan="3">
-								<span> less than -350 mV or more negative than -350 mV</span>
-							</td>
-							<td colspan="2">
-								<span> less than -276 mV</span>
-							</td>
-							<td colspan="2">
-								<span> less than -276 mV</span>
-							</td>
-							<td colspan="4">
-								<span>Low (there is a greater than 90 percent probability that reinforcing steel corrosion is occuring in that area at the time of measurement)</span>
-							</td>
-						</tr>
-						<tr cols="12">
-							<td colspan="1">
-								<span>4</span>
-							</td>
-							<td colspan="3">
-								<span> less than -500 mV </span>
-							</td>
-							<td colspan="2">
-								<span> less than -426 mV</span>
-							</td>
-							<td colspan="2">
-								<span> less than -406 mV</span>
-							</td>
-							<td colspan="4">
-								<span>Severe Corrosion</span>
-							</td>
-						</tr>
-					</table>
-					</div>
 					
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
@@ -446,30 +194,13 @@
 							<div>
 								<ol>
 									<li>
-										The Test Report(s) shall not be reproduced except in full, without written approval of the laboratory
+										The Test Report(s) is/are valid only to the sample submitted to the laboratory.
 									</li>
 									<li>
-										We do not undertake any responsibility for any involvement in any type of litigation arising out of result submitted by Knack Engineering Services Pvt Ltd
+										Sample(s) was/were not drawn by laboratory
 									</li>
 									<li>
-										Correction Factor calculation :-
-										<ul>
-											<li>
-												Ideal Temperature for test is 22.2 ± 5.5°C
-											</li>
-											<li>
-												Site temperature = 31.6 °C
-											</li>
-											<li>
-												Variation in temperature = 3.9 °C
-											</li>
-											<li>
-												0.91 mV will increase per 1 °C after ideal temperature 22.2 ± 5.5°C
-											</li>
-											<li>
-												Hence -3.54 mV will add in observed readings
-											</li>
-										</ul>
+										This Report may not br reproduced in except full/ part without the permission of the Lab Head of the Laboratory
 									</li>
 								</ol>
 							</div>

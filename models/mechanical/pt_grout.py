@@ -15,6 +15,17 @@ class PtGrout(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
+
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # print("records",records)
+        # self.sample_parameters = records
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)
+
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
     temp_percent_fluidity = fields.Float("Temperature °c")

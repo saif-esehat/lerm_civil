@@ -9,7 +9,7 @@ class SoilCBR(models.Model):
 
     name = fields.Char("Name",default="California Bearing Ratio")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines = fields.One2many('mechanical.soil.cbr.line','parent_id',string="Parameter")
+    child_lines = fields.One2many('mechanical.soils.cbr.line','parent_id',string="Parameter")
 
     @api.model
     def create(self, vals):
@@ -20,7 +20,7 @@ class SoilCBR(models.Model):
 
 
 class SoilCBRLine(models.Model):
-    _name = "mechanical.soil.cbr.line"
+    _name = "mechanical.soils.cbr.line"
     parent_id = fields.Many2one('mechanical.soil.cbr',string="Parent Id")
 
     penetration = fields.Float(string="Penetration in mm")

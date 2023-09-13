@@ -24,6 +24,19 @@
                             string="Print Report"
                             />
 
+                    <!-- <button
+                                type="object"
+                                name="print_nabl_report"
+                                string="Print NABL Report"
+                                attrs="{'invisible': [('state', 'not in', ('3-approved'))]}"
+                                />
+                    <button
+                            type="object"
+                            name="print_non_nabl_report"
+                            string="Print Non-NABL Report"
+                            attrs="{'invisible': [('state', 'not in', ('3-approved'))]}"
+                            /> -->
+
 
 
                 </header>

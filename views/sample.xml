@@ -23,8 +23,15 @@
                             />
                         <button
                                 type="object"
-                                name="print_report"
-                                string="Print Report"
+                                name="print_nabl_report"
+                                string="Print NABL Report"
+                                attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"
+                                />
+                        <button
+                                type="object"
+                                name="print_non_nabl_report"
+                                string="Print Non-NABL Report"
+                                attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"
                                 />
 
                         <button type="object" 

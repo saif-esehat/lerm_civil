@@ -282,9 +282,8 @@
 							</tr>
 							
 							<tr t-if="ggbs.slag_activity_visible">
-								<td>
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
+								<td style="border-bottom:none">
+									<span></span>
 									
 								</td>
 								<td>
@@ -294,8 +293,8 @@
 								</td>
 
 								<td>
-									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
+									<span style="border-bottom:none">
+										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/> -->
 									</span>
 								</td>
 
@@ -310,22 +309,22 @@
 									</span>									
 								</td>
 
-								<td>
+								<td style="border-bottom:none">
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/>
+										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
 								</td>
 
-								<td>
+								<td style="border-bottom:none">
 									<span>
-										Not less than 60 percent of control OPC 43 Grade cement mortor cube
+										
 									</span>
 								</td>
 								
 							</tr>
 							<tr t-if="ggbs.slag_activity_visible">
 
-								<td >
+								<td style="border-bottom:none;border-top:none">
 									<span></span>
 									
 								</td>
@@ -349,23 +348,24 @@
 										</t>
 									</span>									
 								</td>
-								<td>
-									<span>
+								<td style="border-bottom:none;border-top:none">
+									<span >
 									   <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
-										-
+										
 									</span>
 								</td>
 								
-								<td>
+								<td style="border-bottom:none;border-top:none">
 									<span>
-										-
+										Not less than 60 percent of control OPC 43 Grade cement mortor cube
 									</span>
 								</td>
 							</tr>
 
 							<tr t-if="ggbs.slag_activity_visible">
-								<td > 
-									<span></span>
+								<td style="border-bottom:none;border-top:none"> 
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
 									
 								</td>
 								<td >
@@ -388,17 +388,16 @@
 										</t>
 									</span>									
 								</td>
-								<td>
-									<span>
-										-
-										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
+								<td style="border-bottom:none;border-top:none">
+									<span >
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/>
 									</span>
 								</td>
 								
 								
-								<td>
+								<td style="border-top:none">
 									<span>
-										-
+										
 									</span>
 								</td>
 							</tr>
@@ -409,7 +408,7 @@
 							
 							
 							<tr t-if="ggbs.slag_activity_visible">
-								<td >
+								<td style="border-bottom:none;border-top:none">
 									<span></span>
 									
 								</td>
@@ -434,22 +433,21 @@
 									</span>									
 								</td>
 
-								<td>
-									<span>
-										-
+								<td style="border-bottom:none;border-top:none">
+									<span >
 										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
 								</td>
 
-								<td>
+								<td style="border-bottom:none">
 									<span>
-										Not less than 60 percent of control OPC 43 Grade cement mortor cube
+										
 									</span>
 								</td>
 								
 							</tr>
 							<tr t-if="ggbs.slag_activity_visible">
-								<td >
+								<td style="border-bottom:none;border-top:none">
 									<span></span>
 									
 								</td>
@@ -473,22 +471,22 @@
 										</t>
 									</span>									
 								</td>
-								<td>
-									<span>
-										-
+								<td style="border-bottom:none;border-top:none">
+									<span >
+										
 									   <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
 								</td>
 
-								<td>
+								<td style="border-bottom:none;border-top:none">
 									<span>
-										-
+										Not less than 60 percent of control OPC 43 Grade cement mortor cube
 									</span>
 								</td>
 							</tr>
 
 							<tr t-if="ggbs.slag_activity_visible">
-								<td >
+								<td style="border-top:none">
 									<span></span>
 									
 								</td>
@@ -512,17 +510,17 @@
 										</t>
 									</span>									
 								</td>
-								<td>
-									<span>
-										-
+								<td style="border-top:none">
+									<span >
+										
 										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
 								</td>
 								
 								
-								<td>
+								<td style="border-top:none">
 									<span>
-										-
+										
 									</span>
 								</td>
 							</tr>
