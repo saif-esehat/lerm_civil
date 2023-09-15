@@ -104,6 +104,9 @@
     'reports/general_report_template.xml',
     'reports/pt_grput_datasheet.xml',
     'reports/ptgrout_non_nabl_report.xml',
+    'reports/cement_psc_report.xml',
+    'reports/cement_ppc_report.xml',
+
     
     ],
         'assets': {
