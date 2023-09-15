@@ -102,7 +102,8 @@
     'reports/half_cell_datasheet.xml',
     'reports/half_cell_report.xml',
     'reports/general_report_template.xml',
-    'reports/pt_grput_datasheet.xml'
+    'reports/pt_grput_datasheet.xml',
+    'reports/ptgrout_non_nabl_report.xml',
     
     ],
         'assets': {

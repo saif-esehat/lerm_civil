@@ -347,7 +347,7 @@ class Casting1DaysLineGypsum(models.Model):
     length = fields.Float("Length in mm")
     width = fields.Float("Width in mm")
     crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_crosssectional_area")
-    wt_of_cement_cube = fields.Float("wt of Cement Cube in gm")
+    wt_of_cement_cube = fields.Float("wt of Cube in gm")
     crushing_load = fields.Float("Crushing Load in KN")
     compressive_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_compressive_strength")
 

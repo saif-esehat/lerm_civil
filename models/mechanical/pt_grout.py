@@ -356,7 +356,24 @@ class PtGrout(models.Model):
             if compressive_strength_test in record.tests:
                 record.compressive_strength_visible = True
                
-
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                # Fluidity 
+                if sample.internal_id == '1e31d717-331a-4e71-8887-ef37cf38c7dd':
+                    record.fludity_visible = True
+                # Setting Time 
+                if sample.internal_id == 'a76295ce-2066-42ae-8dc8-a5ddf1e71cd1':
+                    record.setting_time_visible = True
+                # Bleeding 
+                if sample.internal_id == '950eafa7-9b4f-4025-b34c-75a33149cc6f':
+                    record.bleeding_visible = True
+                # Volume Change 
+                if sample.internal_id == 'd8d143f8-2c21-4a5d-beb8-366c6a3e4b93':
+                    record.volume_change_visible = True
+                # Compressive Strength 
+                if sample.internal_id == 'a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e':
+                    record.compressive_strength_visible = True
+                
 
 
 
