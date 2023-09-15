@@ -2,7 +2,7 @@
 <odoo>
 	
 	
-	<template id="lerm_cement_report">
+	<template id="lerm_cement_report_psc">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
@@ -170,7 +170,7 @@
 								</th>
 								<th>
 									<span>
-										Limits IS 269:2015 (Reaffirmed 2020) (Clause -7)
+										Limits IS 455 : 2015 (Reaffirmed 2020) (clause -7)
 									</span>
 								</th>
 							</tr>
@@ -265,13 +265,13 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Final setting time')]).unit.name"/>
+										600 Max
+										<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Final setting time')]).unit.name"/> -->
 									</span>
 								</td>
 								<td>
 									<span>
-										600 Max.
-										<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_max_value"/> Max	 -->
+										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_max_value"/> Max	
 									</span>
 								</td>
 							</tr>
@@ -460,7 +460,7 @@
 								</td>
 								<td>
 									<span>
-										27 Min
+										16 Min
 									</span>
 								</td>
 							</tr>
@@ -496,7 +496,7 @@
 								</td>
 								<td>
 									<span>
-										37 Min
+										22 Min
 									</span>
 								</td>
 							</tr>
@@ -531,7 +531,7 @@
 								</td>
 								<td>
 									<span>
-										53 Min
+										33 Min
 									</span>
 								</td>
 							</tr>

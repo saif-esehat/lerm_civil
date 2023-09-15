@@ -195,11 +195,8 @@
         <field name="binding_type">report</field>
     </record>
 
-<<<<<<< HEAD
     
     
-=======
->>>>>>> 06e62ee5b403faec528a41ddae318011c5668d10
     <record id="compatiblity_datasheet_action" model="ir.actions.report">
         <field name="name">Compatablity Datasheet</field>
         <field name="model">lerm.eln</field>
@@ -279,4 +276,26 @@
     </record>
 
 
+
+    <record id="report_cement_43_action" model="ir.actions.report">
+        <field name="name">Report Cement OPC 43</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.lerm_cement_report_psc</field>
+        <field name="report_file">lerm_civil.lerm_cement_report_psc</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="report_cement_33_action" model="ir.actions.report">
+        <field name="name">Report Cement OPC 43</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.lerm_cement_report_opc_33</field>
+        <field name="report_file">lerm_civil.lerm_cement_report_opc_33</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="binding_type">report</field>
+    </record>
 </odoo>

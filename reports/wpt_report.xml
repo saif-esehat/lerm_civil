@@ -137,8 +137,8 @@
 					</div>
 					<div style="margin-top:20px;">
 						<u>Protocol</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
-						<span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).unit.name"/>
-
+						<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).unit.name"/> -->
+						IS 516(Part2 / Sec1)<![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>2018
 						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
 					</div>
 
