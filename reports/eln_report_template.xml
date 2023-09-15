@@ -18,23 +18,30 @@
 		<div t-attf-class="footer o_standard_footer">
             <div class="text-center" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4 footerQR">
-					<div>
-						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 70px; height: 70px;"/>
-					</div>
+					<!-- <div style="border-top: 1px solid black;">
+						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
+					</div> -->
 					<div>
 						<div class="footertext">
 							Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
 						</div>
-						<div class="footerQR">
+						<div>
 							<!-- <div>
 								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 70px; height: 70px;"/>
 							</div> -->
-							<div style="margin-left:12%">
-								<div class="footertext">
-									Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
+							<div class="footerQR">
+								<div style="padding-right : 20px">
+									<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
 								</div>
-								<div class="footertext">
-									CIN No.: U45209MH2017PTC291168
+								<div style="margin-left:90px">
+									<div class="footertext">
+										<span>
+											Email : sales@knackengineeringservices.com <span style="padding-left:10px">Website :  www.knackengineeringservices.com</span> 
+										</span>
+									</div>
+									<div class="footertext">
+										CIN No.: U45209MH2017PTC291168
+									</div>
 								</div>
 							</div>
 						</div>
@@ -369,7 +376,24 @@
 						</div>
 						<div class="signatureContainer girdgird">
 							<div>
-								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										Chemical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
 							</div>
 							<div>
 								<div t-if="stamp and stamp == '4-in_report'">

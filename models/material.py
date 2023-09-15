@@ -23,11 +23,13 @@ class Material(models.Model):
     grade_table = fields.One2many('lerm.grade.line','product_id',string="Grade")
     alias_table = fields.One2many('lerm.alias.line','product_id',string="Alias")
     datasheet_table = fields.One2many('lerm.material.datasheet.line','product_id',string="Datasheet Table")
-    parameter_table1 = fields.Many2many('lerm.parameter.master',string="Parameters")
+    parameter_master_ids = fields.Many2many('lerm.parameter.master',string="Parameter Master IDS",compute="compute_parameter_master_ids")
+    parameter_table1 = fields.Many2many('lerm.parameter.master',string="Parameters",)
     volume = fields.Char("Volume")
     lab_name = fields.Char(string="Lab Name")
     product_based_calculation = fields.One2many('lerm.product.based.calculation','product_id',string="Product Based Calculation")
     # discipline2 = fields.One2many('material.discipline.line')
+
 
     def name_get(self):
         res = []
@@ -57,6 +59,11 @@ class Material(models.Model):
                 res.append((product.id, name))
         return res
 
+    @api.depends('discipline')
+    def compute_parameter_master_ids(self):
+        for record in self:
+            parameter_master_ids = self.env['lerm.parameter.master'].search([('discipline', '=', record.discipline.id)])
+            record.parameter_master_ids = parameter_master_ids
 
     @api.depends('discipline')
     def compute_group_ids(self):
@@ -130,8 +137,22 @@ class ProductBasedCalculation(models.Model):
     _name = 'lerm.product.based.calculation'
     _rec_name = 'grade'
     product_id = fields.Many2one('product.template')
+    grade_ids = fields.Many2many("lerm.grade.line",string="Grade IDs",compute="compute_grade_table")
     grade = fields.Many2one("lerm.grade.line",string="Grade")
     main_report_template = fields.Many2one('ir.actions.report',string="Main Report Template")
     datasheet_report_template = fields.Many2one('ir.actions.report',string="DataSheet Report Template")
     ir_model = fields.Many2one('ir.model',string="Model")
+
+    @api.depends('product_id','product_id.grade_table')
+    def compute_grade_table(self):
+        for rec in self:
+            table_data = self.env.context.get("grade_table_datas")
+            print(self.env.context)
+            grade_ids = []
+            for data in table_data:
+                grade_ids.append(data[1])
+            print(grade_ids)
+            grade_ids = self.env["lerm.grade.line"].search([("id","in",grade_ids)])
+            print(grade_ids)
+            rec.grade_ids = grade_ids
 
