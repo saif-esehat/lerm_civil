@@ -88,7 +88,7 @@ class ParameterMaster(models.Model):
     parameter_id = fields.Many2one('lerm.parameter.master',string="Material Table")
     material = fields.Many2one('product.template' , string="Material")
     grade = fields.Many2one('lerm.grade.line' , string="Grade")
-    grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
+    grade_ids = fields.Many2many('lerm.grade.line',string="Grades",compute="compute_grade")
     size = fields.Many2one('lerm.size.line' , string="Size")
     size_ids = fields.Many2many('lerm.size.line',string="Size")
     permissable_limit = fields.Char(string="Permissable Limit")

@@ -406,8 +406,10 @@ class ParameteResultCalculationWizard(models.TransientModel):
             req_min = material_table.req_min
             req_max = material_table.req_max
             mu_neg = record.result - record.result*record.parameter.mu_value
+            print(mu_neg)
             mu_pos = record.result + record.result*record.parameter.mu_value
-      
+            print(mu_pos)
+
         
             if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"
@@ -571,6 +573,8 @@ class ELNParametersResult(models.Model):
             size_id = record.eln_id.size_id.id
             parameter_id = record.parameter.id
             specification = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+            print("specsi")
+            print(specification)
             record.specification = specification
 
     def open_form(self):
