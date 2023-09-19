@@ -89,6 +89,7 @@
     'reports/report_fly_ash.xml',
     'reports/ggbs_report.xml',
     'reports/pt_grout_report.xml',
+    'reports/fine_aggregate_chemical_datasheet.xml',
     'security/security.xml',
     # 'security/dump.sql',
     'security/ir.model.access.csv',

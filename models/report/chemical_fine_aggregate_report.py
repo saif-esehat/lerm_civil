@@ -8,7 +8,7 @@ from lxml import etree
 
 
 class ChemicalFineAggregateDatasheet(models.AbstractModel):
-    _name = 'report.lerm_civil.chemical.fine_aggregate'
+    _name = 'report.lerm_civil.chemical_fine_aggregate'
     _description = 'Fine Aggregate Chemical Datasheet'
     
     @api.model
