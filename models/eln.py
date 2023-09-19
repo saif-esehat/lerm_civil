@@ -250,6 +250,8 @@ class ELN(models.Model):
     #         'report_file': template_name
     #     }
     def print_datasheet(self):
+        
+        
         eln = self
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
