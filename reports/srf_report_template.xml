@@ -128,7 +128,7 @@
 							<tr>
 								<th>
 									<span>
-										Kes No
+										ID
 									</span>
 								</th>
 								
@@ -139,38 +139,64 @@
 								</th>
 								<th>
 									<span>
-										Discipline
+										Sample Condition
 									</span>
 								</th>
 								<th>
 									<span>
-										Group
+										Sample Des.
 									</span>
 								</th>
 								<th>
 									<span>
-										Parameter
+										Witness
 									</span>
 								</th>
 								<th>
 									<span>
-										Casting
+										Size
 									</span>
 								</th>
 								<th>
 									<span>
-										Sample Received date
+										Grade
 									</span>
 								</th>
 								<th>
 									<span>
-										Sample Description
+										Brand
+									</span>
+								</th>
+								<th>
+									<span>
+										Date of casting
+									</span>
+								</th>
+								<th>
+									<span>
+										Identification Mark
+									</span>
+								</th>
+								<th>
+									<span>
+										Quantity
+									</span>
+								</th>
+
+								<th>
+									<span>
+										Test to be done
+									</span>
+								</th>
+								<th>
+									<span>
+										Test Method
 									</span>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr t-foreach="srf.samples" t-as="r">
+							<tr t-foreach="sample" t-as="r">
 								<td>
 									<span t-esc="r.kes_no"/>
 								</td>
