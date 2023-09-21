@@ -18,6 +18,12 @@ class ChemicalFineAggregate(models.Model):
     ph_1_percent_a = fields.Float("pH of 1 % Solution in water")
     ph_1_percent_b = fields.Float("pH of 1 % Solution in water")
     ph_1_percent_c = fields.Float("pH of 1 % Solution in water")
+    ph_average = fields.Float("Average",compute="_compute_ph_average")
+
+    @api.depends("ph_1_percent_a",'ph_1_percent_b','ph_1_percent_c')
+    def _compute_ph_average(self):
+        for record in self:
+            record.ph_average = (record.ph_1_percent_a + record.ph_1_percent_b + record.ph_1_percent_c)/3
 
     #Dissolved Silica
 
