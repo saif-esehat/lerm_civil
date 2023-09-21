@@ -18,18 +18,24 @@ class ChemicalFineAggregate(models.Model):
     ph_1_percent_a = fields.Float("pH of 1 % Solution in water")
     ph_1_percent_b = fields.Float("pH of 1 % Solution in water")
     ph_1_percent_c = fields.Float("pH of 1 % Solution in water")
+    ph_average = fields.Float("Average",compute="_compute_ph_average")
+
+    @api.depends("ph_1_percent_a",'ph_1_percent_b','ph_1_percent_c')
+    def _compute_ph_average(self):
+        for record in self:
+            record.ph_average = (record.ph_1_percent_a + record.ph_1_percent_b + record.ph_1_percent_c)/3
 
     #Dissolved Silica
 
     alkali_aggregate_reactivity_dissolved_name = fields.Char("Name",default="Alkali Aggregate Reactivity ( Dissolved Silica)")
-    alkali_aggregate__dissolved_visible = fields.Boolean("Alkali Aggregate",compute="_compute_visible")
+    alkali_aggregate_dissolved_visible = fields.Boolean("Alkali Aggregate",compute="_compute_visible")
 
     wt_blank_crucible_after_ignition = fields.Float("Wt of Crucible + Blank residue after igniation (gm) (A)",digits=(16, 4))
     wt_blank_crucible_after_hf = fields.Float("Wt of  Cruciable +Blank residue after HF (gm) (B)",digits=(16, 4))
     diff_in_wt_of_silica_blank = fields.Float("Diff. in Wt of silica in Blank (gm)  = A - B ",compute="_compute_diff_in_wt_of_silica_blank",digits=(16, 4))
 
     # alkali_aggregate_reactivity_alkalinity_name = fields.Char("Name",default="Alkali Aggregate Reactivity (Reduction in Alkalinity)")
-    alkali_aggregate_alkalinity_visible = fields.Boolean("Alkali Aggregate",compute="_compute_visible")
+    # alkali_aggregate_alkalinity_visible = fields.Boolean("Alkali Aggregate",compute="_compute_visible")
 
     wt_crucible_after_ignition_a = fields.Float("Wt of Crucible + Sample residue after igniation (gm) (A)",digits=(16, 4))
     wt_crucible_after_hf_a = fields.Float("Wt of  Cruciable +Sample residue after HF (gm) (B)",digits=(16, 4))
@@ -224,7 +230,7 @@ class ChemicalFineAggregate(models.Model):
             record.sulphate_visible = False
             record.alkali_aggregate_alkalinity_visible = False
             record.ph_visible = False
-            record.alkali_aggregate__dissolved_visible = False
+            record.alkali_aggregate_dissolved_visible = False
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
                 if sample.internal_id == '628cf04d-645d-4794-a0fd-3daabff4b044':
@@ -236,7 +242,7 @@ class ChemicalFineAggregate(models.Model):
                 if sample.internal_id == '0437ea07-5283-4248-9430-e5d89866d3c5':
                     record.alkali_aggregate_alkalinity_visible = True
                 if sample.internal_id == 'fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a':
-                    record.alkali_aggregate__dissolved_visible = True
+                    record.alkali_aggregate_dissolved_visible = True
                     	
             
 

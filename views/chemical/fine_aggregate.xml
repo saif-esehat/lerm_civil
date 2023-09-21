@@ -51,23 +51,26 @@
                             <field  name="ph_1_percent_c"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
-                    </group>    
+                    </group> 
+                    <group attrs="{'invisible': [('ph_visible', '=', False)]}">
+                      <field name="ph_average"/>
+                    </group>   
 
                     <!-- Dissolved Silica  -->
-                    <group attrs="{'invisible': [('alkali_aggregate__dissolved_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
                         <h1>
                             <field name="alkali_aggregate_reactivity_dissolved_name" readonly="1" nolabel="1"/>
-                            <field name="alkali_aggregate__dissolved_visible" invisible="1"/>
+                            <field name="alkali_aggregate_dissolved_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('alkali_aggregate__dissolved_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
                         <field name="wt_blank_crucible_after_ignition"/>
                         <field name="wt_blank_crucible_after_hf"/>
                         <field name="diff_in_wt_of_silica_blank"/>
 
                     </group>
 
-                    <group attrs="{'invisible': [('alkali_aggregate__dissolved_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
                         <label for="wt_crucible_after_ignition_a" string="Wt of Crucible + Sample residue after igniation (gm) (A)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
@@ -85,7 +88,7 @@
                         </div>
                     </group>
 
-                    <group attrs="{'invisible': [('alkali_aggregate__dissolved_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
                         <label for="wt_crucible_after_hf_a" string="Wt of  Cruciable +Sample residue after HF (gm) (B)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
@@ -103,7 +106,7 @@
                         </div>
                     </group>    
 
-                    <group attrs="{'invisible': [('alkali_aggregate__dissolved_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
                         <label for="diff_in_wt_of_silica_a" string="Diff. in Wt of silica in Sample (gm)  = A - B" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
@@ -121,7 +124,7 @@
                         </div>
                     </group>          
 
-                    <group attrs="{'invisible': [('alkali_aggregate__dissolved_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
 
                         <label for="dissolved_silica_a" string="Dissolved Silica" />
                         <div class="address_format " cols='12' >
@@ -139,7 +142,7 @@
                           </group>
                         </div>
                     </group>  
-                    <group attrs="{'invisible': [('alkali_aggregate__dissolved_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
                       <field name="average_dissolved_silica"/>
                     </group>      
                   <!-- Reduction in Alkalinity  -->

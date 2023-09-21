@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="chemical_fine_aggregate">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    Fine Aggregate
+                </div>
+				<div class="container_eln" style="margin-top:5px">
+                <!-- ph of 1%  -->
+					<div t-if="data.ph_visible">
+					
+
+						<div style="text-align:center;font-size:18px">
+							pH of 1% solution in Water
+						</div>
+						
+				
+						<table style="margin-top:20px">
+							
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">pH of 1 % Solution in water :
+									<![CDATA[&nbsp;]]>
+								
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.ph_1_percent_a"/>
+								</td>
+                                <td colspan="2">
+									<span t-field="data.ph_1_percent_b"/>
+								</td>
+                                <td colspan="2">
+									<span t-field="data.ph_1_percent_c"/>
+								</td>
+
+							</tr>
+                            
+						</table>
+
+						
+
+
+					</div>
+
+					
+					<!-- Dissolved Silica  -->
+
+					<div t-if="data.alkali_aggregate_dissolved_visible">
+					
+
+						<div style="text-align:center;font-size:18px">
+							Alkali Aggregate Reactivity ( Dissolved Silica)
+						</div>
+						
+						<table style="margin-top:20px">
+							
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt of Crucible + Blank residue after igniation (gm) (A) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.wt_blank_crucible_after_ignition"/>
+									
+								</td>
+							</tr>
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt of  Cruciable +Blank residue after HF (gm) (B) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.wt_blank_crucible_after_hf"/>
+									
+								</td>
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Diff. in Wt of silica in Blank (gm)  = A - B :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.diff_in_wt_of_silica_blank"/>
+									
+								</td>
+							</tr>
+                            
+							
+						</table>
+
+                        <table style="margin-top:20px">
+							
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt of Crucible + Sample residue after igniation (gm) (A) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.wt_crucible_after_ignition_a"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.wt_crucible_after_ignition_b"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.wt_crucible_after_ignition_c"/>	
+								</td>
+							</tr>
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt of  Cruciable +Sample residue after HF (gm) (B) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.wt_crucible_after_hf_a"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.wt_crucible_after_hf_b"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.wt_crucible_after_hf_c"/>	
+								</td>
+							</tr>
+                            
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Diff. in Wt of silica in Sample (gm)  = A - B :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.diff_in_wt_of_silica_a"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.diff_in_wt_of_silica_b"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.diff_in_wt_of_silica_c"/>	
+								</td>
+							</tr>
+
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Dissolved Silica :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.dissolved_silica_a"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.dissolved_silica_b"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.dissolved_silica_c"/>	
+								</td>
+							</tr>
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Average :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.average_dissolved_silica"/>	
+								</td>
+                                
+							</tr>
+                            
+							
+						</table>
+
+
+					</div>
+
+						
+						
+					<!-- Reduction in Alkalinity  -->
+					<div t-if="data.alkali_aggregate_alkalinity_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							Alkali Aggregate Reactivity (Reduction in Alkalinity)
+						</div>
+						
+						<table style="margin-top:20px">
+							
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Blank Reading (ml) (A) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.blank_reading1"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.blank_reading2"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.blank_reading3"/>	
+								</td>
+							</tr>
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Burette Reading (sample) (ml) (B) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.burette_reading1"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.burette_reading2"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.burette_reading3"/>	
+								</td>
+							</tr>
+                            
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Diff in Reading (ml) (A-B) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.diff_in_reading1"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.diff_in_reading2"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.diff_in_reading3"/>	
+								</td>
+							</tr>
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Normality of 0.05N HCL :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.normality1"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.normality2"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.normality3"/>	
+								</td>
+							</tr>
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Reduction in Alkalinity :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="2">
+									<span t-field="data.reduction_in_alkalinity1"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.reduction_in_alkalinity2"/>	
+								</td>
+                                <td colspan="2">
+									<span t-field="data.reduction_in_alkalinity3"/>	
+								</td>
+							</tr>
+
+
+
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Average :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.average_reduction_alkalinity"/>	
+								</td>
+                                
+							</tr>
+                            
+							
+						</table>
+					</div>
+
+
+				<!-- Chloride  -->
+
+                <div t-if="data.chloride_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							Chloride
+						</div>
+
+                        <table style="margin-top:20px">
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Sample Wt :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.sample_wt_chloride"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Volume make Upto :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.volume_make_upto_chloride"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Aliqote taken :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.aliqote_taken_chloride"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Volume of silver nitrate added :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.volume_silver_nitrate_added"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Volume of ammonia thiocynate for (Blank) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.volume_ammonia_blank"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Volume of ammonia thiocynate for (Sample) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.volume_ammonia_sample"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Volume of ammonia thiocynate consumed :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.volume_ammonia_consumed"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Normality of ammonia thiocynate (0.1) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.normality_of_ammonia"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Chloride % :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.chloride_percent"/>	
+								</td>
+                                
+							</tr>
+                        </table>
+                </div>
+
+                <!-- Sulphate  -->
+
+
+                <div t-if="data.sulphate_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							SO3
+						</div>
+
+                        <table style="margin-top:20px">
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Sample Wt :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.sample_wt_sulphate"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Volume make Upto :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.volume_make_upto_sulphate"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Aliqote taken :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.aliqote_taken_sulphate"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt. of empty crucible+residue after ignition :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.wt_empty_crucible_after_ignition"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Weight of empty crucible :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.wt_empty_crucible"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Difference in Weight :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.difference_in_wt_sulphate"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">SO3 % :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.sulphate_percent"/>	
+								</td>
+                                
+							</tr>
+                            
+                        </table>
+                </div>
+						
+
+					<div class="authorizeRowDataSheet">
+						<div>
+							<div>
+								<b>
+									(JR Chemist)
+								</b>
+							</div>
+							<div>
+								<b>
+									Tested By
+								</b>
+							</div>
+						</div>
+						<div style="margin-left:500px">
+							<div>
+								<b>
+									Chemical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>
