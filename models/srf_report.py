@@ -12,6 +12,7 @@ class SrfReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         # srf = self.env['lerm.civil.srf'].sudo().browse(srf_id)
         srf = self.env['lerm.civil.srf'].sudo().browse(docids)
+        sample = self.env["lerm.srf.sample"].search([('srf_id','=', self.id)])
         # qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         # qr.add_data(srf.kes_number)
         # qr.make(fit=True)
