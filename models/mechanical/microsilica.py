@@ -29,7 +29,7 @@ class Microsilica(models.Model):
     compressive_name = fields.Char("Name",default="Accelerated pozzolanic activity index with portland cement")
     compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
-    temp_percent_compressive = fields.Float("Temperature %")
+    temp_percent_compressive = fields.Float("Temperature °c")
     humidity_percent_compressive = fields.Float("Humidity %")
     start_date_compressive = fields.Date("Start Date")
     end_date_compressive = fields.Date("End Date")
@@ -89,7 +89,7 @@ class Microsilica(models.Model):
     def _compute_average_7days(self):
         for record in self:
             try:
-                record.average_casting_7days = sum(record.casting_7_days_tables.mapped('compressive_strength'))/len(record.casting_7_days_tables)
+                record.average_casting_7days = round((sum(record.casting_7_days_tables.mapped('compressive_strength'))/len(record.casting_7_days_tables)),2)
             except:
                 record.average_casting_7days = 0
 
@@ -120,6 +120,7 @@ class Microsilica(models.Model):
                 
     # Compressive Strength of control Sample
     
+    high_range_control_comp = fields.Integer(string="High Range water reducer (g)")
     wt_of_cement = fields.Integer(string="Weight of Cement (g)",default=500)
     wt_of_sand1 = fields.Float(string="Weight of Standard Sand (g)Grade-I",default=458.33)
     wt_of_sand2 = fields.Float(string="Weight of Standard Sand (g)Grade-II",default=458.33)
@@ -165,7 +166,7 @@ class Microsilica(models.Model):
     control_testing_date_7days = fields.Date(string="Date of Testing",compute="compute_controltesting_date_7days")
     control_casting_7_days_tables = fields.One2many('microsilica.control.casting.7days.line','parent_id',string="7 Days")
     control_average_casting_7days = fields.Float("Average",compute="_compute_control_average_casting_7days")
-    control_compressive_strength_7_days = fields.Float("Compressive Strength of  Sample (%)",compute="_compute_control_compressive_strength_7_days")
+    control_compressive_strength_7_days = fields.Float("Accelerated pozzolanic activity index with portland cement , 7 Days in %",compute="_compute_control_compressive_strength_7_days")
     control_status_7days = fields.Boolean("Done")
 
 
@@ -173,7 +174,7 @@ class Microsilica(models.Model):
     def _compute_control_average_casting_7days(self):
         for record in self:
             try:
-                record.control_average_casting_7days = sum(record.control_casting_7_days_tables.mapped('control_compressive_strength'))/len(record.control_casting_7_days_tables)
+                record.control_average_casting_7days = round((sum(record.control_casting_7_days_tables.mapped('control_compressive_strength'))/len(record.control_casting_7_days_tables)),2)
             except:
                 record.control_average_casting_7days = 0
 
@@ -191,7 +192,7 @@ class Microsilica(models.Model):
     def _compute_control_compressive_strength_7_days(self):
         for record in self:
             try:
-                record.control_compressive_strength_7_days = (record.average_casting_7days/record.control_average_casting_7days)*100
+                record.control_compressive_strength_7_days = round(((record.average_casting_7days/record.control_average_casting_7days)*100),2)
             except:
                 record.control_compressive_strength_7_days = 0
 
@@ -202,7 +203,7 @@ class Microsilica(models.Model):
     oversize_name = fields.Char("Name",default="Oversize % Retained on 45 Micron IS sieve")
     oversize_retain_visible = fields.Boolean("Oversize Visible",compute="_compute_visible")
 
-    temp_percent_oversize = fields.Float("Temperature %")
+    temp_percent_oversize = fields.Float("Temperature °c")
     humidity_percent_oversize = fields.Float("Humidity %")
     start_date_oversize = fields.Date("Start Date")
     end_date_oversize = fields.Date("End Date")
@@ -240,7 +241,7 @@ class Microsilica(models.Model):
     specific_gravity_name = fields.Char("Name",default="Specific Gravity")
     specific_gravity_visible = fields.Boolean("Specific Visible",compute="_compute_visible")
 
-    temp_percent_specific = fields.Float("Temperature %")
+    temp_percent_specific = fields.Float("Temperature °c")
     humidity_percent_specific = fields.Float("Humidity %")
     start_date_specific = fields.Date("Start Date")
     end_date_specific = fields.Date("End Date")
@@ -266,7 +267,7 @@ class Microsilica(models.Model):
     compressive_strength_name = fields.Char("Name",default="Compressive Strength")
     compressive_strength_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
-    temp_percent_cmp_strngth = fields.Float("Temperature %")
+    temp_percent_cmp_strngth = fields.Float("Temperature °c")
     humidity_percent_cmp_strngth = fields.Float("Humidity %")
     start_date_cmp_strngth = fields.Date("Start Date")
     end_date_cmp_strngth = fields.Date("End Date")
@@ -326,7 +327,7 @@ class Microsilica(models.Model):
     def _compute_comp_average_casting_7days(self):
         for record in self:
             try:
-                record.comp_average_casting_7days = sum(record.comp_casting_7_days_tables.mapped('comp_strength'))/len(record.comp_casting_7_days_tables)
+                record.comp_average_casting_7days = round((sum(record.comp_casting_7_days_tables.mapped('comp_strength'))/len(record.comp_casting_7_days_tables)),2)
             except:
                 record.comp_average_casting_7days = 0
 
@@ -414,7 +415,7 @@ class Microsilica(models.Model):
     def _compute_comp_control_average_casting_7days(self):
         for record in self:
             try:
-                record.comp_control_average_casting_7days = sum(record.comp_control_casting_7days_tables.mapped('comp_control_strength'))/len(record.comp_control_casting_7days_tables)
+                record.comp_control_average_casting_7days = round((sum(record.comp_control_casting_7days_tables.mapped('comp_control_strength'))/len(record.comp_control_casting_7days_tables)),2)
             except:
                 record.comp_control_average_casting_7days = 0
 
@@ -433,7 +434,7 @@ class Microsilica(models.Model):
     def _compute_strength_7_days(self):
         for record in self:
             if record.comp_control_average_casting_7days != 0:
-                record.comp_control_strngth_7_days = (record.comp_average_casting_7days / record.comp_control_average_casting_7days)*100
+                record.comp_control_strngth_7_days = round(((record.comp_average_casting_7days / record.comp_control_average_casting_7days)*100),2)
             else:
                 record.comp_control_strngth_7_days = 0
                 
@@ -445,7 +446,7 @@ class Microsilica(models.Model):
     oversize_percent_name = fields.Char("Name",default="Oversize Percent Retained on 45 Micron IS sieve variation from Avg. %")
     oversize_percent_retain_visible = fields.Boolean("Oversize Percent Visible",compute="_compute_visible")
 
-    oversize_temp_percent = fields.Float("Temperature %")
+    oversize_temp_percent = fields.Float("Temperature °c")
     oversize_humidity_percent_specific = fields.Float("Humidity %")
     oversize_start_date_specific = fields.Date("Start Date")
     oversize_end_date_specific = fields.Date("End Date")
@@ -469,7 +470,7 @@ class Microsilica(models.Model):
     bulk_density_name = fields.Char("Name",default="Dry Loose Bulk Density")
     bulk_density_visible = fields.Boolean("Dry Bulk Density Visible",compute="_compute_visible")
 
-    bulk_density_temp_percent = fields.Float("Temperature %")
+    bulk_density_temp_percent = fields.Float("Temperature °c")
     bulk_density_humidity_percent = fields.Float("Humidity %")
     bulk_density_start_date = fields.Date("Start Date")
     bulk_density_end_date = fields.Date("End Date")
@@ -517,7 +518,7 @@ class Microsilica(models.Model):
             if compressive_test in record.tests:
                 record.compressive_visible = True
             if oversize_retain_test in record.tests:
-                record.oversize_retain_visible = True
+                record.compressive_visible = True
             if specific_gravity_test in record.tests:
                 record.specific_gravity_visible = True
             if compressive_strength_test in record.tests:
@@ -526,6 +527,29 @@ class Microsilica(models.Model):
                 record.oversize_percent_retain_visible = True
             if bulk_density_test in record.tests:
                 record.bulk_density_visible = True
+
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                # accelerated 
+                if sample.internal_id == 'a3df1095-19f0-48b6-8e09-e7076a4b04b5':
+                    record.compressive_visible = True
+                # oversize % 
+                if sample.internal_id == 'b9c80b7f-5f8c-44a2-984b-6ad2a17d250c':
+                    record.oversize_retain_visible = True
+                # specific gravity
+                if sample.internal_id == 'e3d938f3-80ef-4de0-96ba-a279f27b9ede':
+                    record.specific_gravity_visible = True
+                # compressive strength
+                if sample.internal_id == '8211b72d-889b-477c-a355-0476f6bcd0d7':
+                    record.compressive_strength_visible = True
+                # oversize percent retained
+                if sample.internal_id == '3c5d3687-bfaf-4667-aca6-b69c321af63b':
+                    record.oversize_percent_retain_visible = True
+                    print("oversize percent retained",record.oversize_percent_retain_visible)
+                # bulk density
+                if sample.internal_id == 'a1feec77-42b6-4d86-9ac7-a2758b3f4e5a':
+                    record.bulk_density_visible = True
+                
              
                         
     @api.model
@@ -572,7 +596,7 @@ class Casting7DaysLine(models.Model):
     length = fields.Float("Length in mm")
     width = fields.Float("Width in mm")
     crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_crosssectional_area")
-    wt_of_cement_cube = fields.Float("wt of Cement Cube in gm")
+    wt_of_cement_cube = fields.Float("wt of Cube in gm")
     crushing_load = fields.Float("Crushing Load in KN")
     compressive_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_compressive_strength")
 
@@ -598,7 +622,7 @@ class ControlCasting7DaysLine(models.Model):
     control_length = fields.Float("Length in mm")
     control_width = fields.Float("Width in mm")
     control_crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_control_crosssectional_area")
-    control_wt_of_cement_cube = fields.Float("wt of Cement Cube in gm")
+    control_wt_of_cement_cube = fields.Float("wt of Cube in gm")
     control_crushing_load = fields.Float("Crushing Load in KN")
     control_compressive_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_control_compressive_strength")
 
@@ -710,7 +734,7 @@ class CompressiveCasting7DaysLine(models.Model):
     compressive_length = fields.Float("Length in mm")
     compressive_width = fields.Float("Width in mm")
     compressive_crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_compressive_crosssectional_area")
-    compressive_wt_of_cement_cube = fields.Float("wt of Cement Cube in gm")
+    compressive_wt_of_cement_cube = fields.Float("wt of Cube in gm")
     compressive_crushing_load = fields.Float("Crushing Load in KN")
     comp_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_compr_strngth")
 
@@ -735,7 +759,7 @@ class CompControlCasting7DaysLine(models.Model):
     comp_control_length = fields.Float("Length in mm")
     comp_control_width = fields.Float("Width in mm")
     comp_control_crosssectional_area = fields.Float("Crosssectional Area",compute="_compute_comp_control_crosssectional_area")
-    comp_control_wt_cement_cube = fields.Float("wt of Cement Cube in gm")
+    comp_control_wt_cement_cube = fields.Float("wt of Cube in gm")
     comp_control_crushing_load = fields.Float("Crushing Load in KN")
     comp_control_strength = fields.Float("Compressive Strength (N/mm²)",compute="_compute_compr_strngth")
 

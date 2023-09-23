@@ -250,6 +250,8 @@ class ELN(models.Model):
     #         'report_file': template_name
     #     }
     def print_datasheet(self):
+        
+        
         eln = self
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
@@ -274,6 +276,34 @@ class ELN(models.Model):
             'report_type': 'qweb-pdf',
             'report_name': template_name,
             'report_file': template_name
+        }
+    def print_nabl_report(self):
+        eln = self
+        is_product_based = eln.is_product_based_calculation
+        if is_product_based == True:
+            template_name = eln.material.product_based_calculation[0].main_report_template.report_name
+        else:
+            template_name = eln.parameters_result.parameter[0].main_report_template.report_name
+        return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': template_name,
+            'report_file': template_name,
+            'data' : {'nabl' : True}
+        }
+    def print_non_nabl_report(self):
+        eln = self
+        is_product_based = eln.is_product_based_calculation
+        if is_product_based == True:
+            template_name = eln.material.product_based_calculation[0].main_report_template.report_name
+        else:
+            template_name = eln.parameters_result.parameter[0].main_report_template.report_name
+        return {
+            'type': 'ir.actions.report',
+            'report_type': 'qweb-pdf',
+            'report_name': template_name,
+            'report_file': template_name,
+            'data' : {'nabl' : False}
         }
 
     @api.model
@@ -380,6 +410,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
             mu_neg = record.result - record.result*record.parameter.mu_value
             mu_pos = record.result + record.result*record.parameter.mu_value
       
+        
             if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"
             else:
@@ -515,6 +546,17 @@ class ELNParametersResult(models.Model):
     ],string='Conformity Status')
     model_id = fields.Integer(string="Model Id")
     result = fields.Float(string="Result",digits=(16,5))
+
+
+    # @api.depends('result')
+    # def compute_nabl_status(self):
+    #     for record in self:
+    #         if record.parameter.lab_min_value <= record.result <= record.parameter.lab_max_value:
+    #             record.nabl_status = 'nabl'
+    #         elif record.parameter.lab_min_value <= record.result and record.parameter.lab_max_value == 0:
+    #             record.nabl_status = 'nabl'
+    #         else:
+    #             record.nabl_status = 'non-nabl'
 
     @api.depends('parameter.calculation_type')
     def _compute_calculation_type(self):

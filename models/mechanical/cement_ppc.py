@@ -130,6 +130,8 @@ class CementPpc(models.Model):
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
+                record.final_setting_time_minutes_unrounded = False
+
 
 
     #Density
@@ -293,9 +295,9 @@ class CementPpc(models.Model):
     def compute_total_weight_compressive(self):
         self.total_weight = self.wt_of_cement_compressive + self.wt_of_standard_sand_grade1 + self.wt_of_standard_sand_grade2 + self.wt_of_standard_sand_grade3 
 
-    @api.depends('normal_consistency_trial1','total_weight')
+    @api.depends('normal_consistency_trial1')
     def _compute_quantity_of_water(self):
-        self.quantity_of_water = ((self.normal_consistency_trial1/4 +3)/100)*self.total_weight
+        self.quantity_of_water = ((self.normal_consistency_trial1/4 +3)*8)
 
     
     # 3 days Casting
@@ -454,10 +456,10 @@ class CementPpc(models.Model):
     weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=83.340,digits=(16, 3))
     
 
-    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=54.000,digits=(16, 3))
-    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=53.990,digits=(16, 3))
+    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=54.000,digits=(16, 3))
+    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=53.990,digits=(16, 3))
 
-    density_of_mercury = fields.Float("Density of mercury , g/cm3",default=13.53,digits=(16, 3))
+    density_of_mercury = fields.Float("Density of mercury , g/cm3",default=13.530,digits=(16, 3))
 
     bed_volume_trial1 = fields.Float("Bed Volume (V=m₂-m₁/D),cm3.",compute="_compute_bed_volume_trial1",digits=(16, 3))
     bed_volume_trial2 = fields.Float("Bed Volume (V=m₂-m₁/D),cm3.",compute="_compute_bed_volume_trial2",digits=(16, 3))
@@ -605,6 +607,28 @@ class CementPpc(models.Model):
             if fineness_blaine in record.tests:
                 record.fineness_blaine_visible = True
                 record.density_visible = True
+
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                if sample.internal_id == 'a9e97cea-372f-4775-9bcb-e9dd70e6e6df':
+                    record.normal_consistency_visible = True
+                if sample.internal_id == 'd339933c-5e9c-4335-9ea2-2d87624c3061':
+                    record.normal_consistency_visible = True
+                    record.setting_time_visible  = True
+                if sample.internal_id == '8fcf78c9-dd02-4664-bba4-b887a64a6952':
+                    record.density_visible = True
+                if sample.internal_id == '5d2e505d-1d50-48aa-a8c8-9f70fe4b421b':
+                    record.normal_consistency_visible = True
+                    record.soundness_visible = True
+                if sample.internal_id == 'd28f09b0-de43-4ab8-bc97-90d5447b344b':
+                    record.normal_consistency_visible = True
+                    record.compressive_visible = True
+                if sample.internal_id == 'ed89d6b3-783f-4044-aef7-d2dd847d3cce':
+                    record.dry_sieving_visible = True
+                if sample.internal_id == '97ca92ab-492a-44a2-8245-0c3a2d40e313':
+                    record.fineness_blaine_visible = True
+                    record.density_visible = True
+
 
 
 

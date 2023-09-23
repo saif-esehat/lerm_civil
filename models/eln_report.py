@@ -13,6 +13,7 @@ class ElnReport(models.AbstractModel):
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
         inreport_value = data.get('inreport', None)
+        nabl = data.get('nabl')
         print(data , 'dataaaaaaaaaaaaaa')
         # stamp = data['inreport']
         if 'active_id' in data['context']:
@@ -36,7 +37,8 @@ class ElnReport(models.AbstractModel):
         return {
             'eln': eln,
             'qrcode': qr_code,
-            'stamp' : inreport_value
+            'stamp' : inreport_value,
+            'nabl' : nabl
         }
 
 
@@ -47,7 +49,6 @@ class DataSheetReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         if 'active_id' in data['context']:
-            stamp = data['context']['stamp']
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids)
@@ -65,7 +66,6 @@ class DataSheetReport(models.AbstractModel):
             prev_result = input_data.parameter_result.result
         return {
             'eln': eln,
-            'datasheet' : datasheet_data,
-            'stamp' : stamp
+            'datasheet' : datasheet_data
         }
         

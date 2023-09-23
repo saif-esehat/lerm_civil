@@ -10,6 +10,7 @@
                         <group style="width:100%">
                             <field name="internal_id"/>
                             <field name="parameter_name"/>
+                         
                         </group>
                         <group>
                             <group style="width:50%">
@@ -113,6 +114,7 @@
                 <tree>
                     <field name="parameter_name" optional="show"/>
                     <field name="group" optional="show"/>
+                    <field name="material" optional="show"/>
                     <field name="lab_min_value" optional="show"/>
                     <field name="nabl_min_value" optional="show"/>
                     <field name="client_min_value" optional="show"/>

@@ -102,7 +102,7 @@
                     </group>
 
                     <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
-                        <label for="wt_empty_cylinder_trial1" string="Wt of Empty Cylinder w1" />
+                        <label for="wt_empty_cylinder_trial1" string="Wt of Empty Cylinder w1 (gm)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="wt_empty_cylinder_trial1" string="Trial 1" />
@@ -118,26 +118,10 @@
                           </group>
                         </div>
                     </group>    
-                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
-                        <label for="wt_empty_gypsum_trial1" string="Wt of Empty Gypsum w1" />
-                        <div class="address_format " >
-                          <group colspan="1"  class="oe_inline">
-                            <label for="wt_empty_gypsum_trial1" string="" />
-                            <field  name="wt_empty_gypsum_trial1"  colspan="3"  nolabel="1"/>
-                          </group>
-                          <group colspan="1"  class="oe_inline">
-                            <label for="wt_empty_gypsum_trial2" string="" />
-                            <field  name="wt_empty_gypsum_trial2"  colspan="3"  nolabel="1"/>
-                          </group>
-                          <group colspan="1"  class="oe_inline">
-                            <label for="wt_empty_gypsum_trial3" string="" />
-                            <field  name="wt_empty_gypsum_trial3"  colspan="3"  nolabel="1"/>
-                          </group>
-                        </div>
-                    </group>
+                    
 
                     <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
-                        <label for="wt_empty_cylinder_gypsum_trial1" string="Weight of empty Cylinder  + Gypsum (w2)" />
+                        <label for="wt_empty_cylinder_gypsum_trial1" string="Weight of empty Cylinder  + Gypsum (w2)(gm)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="wt_empty_cylinder_gypsum_trial1" string="" />
@@ -156,7 +140,27 @@
 
 
                     <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
-                        <label for="volume_of_cylinder_trial1" string="Volume of Cylinder" />
+                        <label for="wt_empty_gypsum_trial1" string="Wt of Gypsum w3 (gm)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_gypsum_trial1" string="" />
+                            <field  name="wt_empty_gypsum_trial1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_gypsum_trial2" string="" />
+                            <field  name="wt_empty_gypsum_trial2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_empty_gypsum_trial3" string="" />
+                            <field  name="wt_empty_gypsum_trial3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    
+
+                    <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
+                        <label for="volume_of_cylinder_trial1" string="Volume of Cylinder (m3)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="volume_of_cylinder_trial1" string="" />
@@ -174,7 +178,7 @@
                     </group>
 
                     <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
-                        <label for="dry_loose_bulf_density_trial1" string="Dry Loose Bulk Density (kg/m³)" />
+                        <label for="dry_loose_bulf_density_trial1" string="Dry Bulk Density (kg/m³)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="dry_loose_bulf_density_trial1" string="" />
@@ -192,7 +196,7 @@
                     </group>
 
                     <group attrs="{'invisible': [('dry_bulk_visible', '=', False)]}">
-                        <label for="average_dry_loose_bulk_density" string="Average Dry Loose Bulk Density (kg/m³)" />
+                        <label for="average_dry_loose_bulk_density" string="Average Dry Bulk Density (kg/m³)" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="average_dry_loose_bulk_density" string="" />
@@ -254,7 +258,7 @@
                       <field  name="wt_of_gypsum_compressive"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade2"  colspan="3" />
-                      <field  name="wt_of_standard_sand_grade1"  colspan="3" />
+                      <field  name="wt_of_standard_sand_grade3"  colspan="3" />
                       <field  name="total_weight"  colspan="3" />
                       <field  name="quantity_of_water"  colspan="3" />
 

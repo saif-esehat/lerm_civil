@@ -127,11 +127,8 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Instrument :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.instrument"/>
-								</td>
-								<td colspan="6">Temperature :
+								
+								<td colspan="12">Temperature :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.temperature"/>
 								</td>
@@ -140,11 +137,17 @@
 					</div>
 					<div style="margin-top:20px;">
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
-						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
+						<span>Relative Humidity</span>
 					</div>
 					<table style="margin-top:30px;">
+					<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
+								<th>
+									<span>
+										Sr. No
+									</span>
+								</th>
 								<th>
 									<span>
 										Name of Test
@@ -167,13 +170,17 @@
 								</th>
 								<th>
 									<span>
-										Limit
+										Limits IS 269:2015 (Reaffirmed 2020) (Clause -7)
 									</span>
 								</th>
 							</tr>
 						</thead>
 						<tbody >
 							<tr>
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
 								<td>
 									<span>
 										Normal Consistency
@@ -203,6 +210,10 @@
 							</tr>
 							<tr t-if="cement.setting_time_visible">
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
 										Initial Setting Time
 									</span>
@@ -225,12 +236,17 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_min_value"/> Min	
+										30 Min.
+										<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_min_value"/> Min	 -->
 									</span>
 								</td>
 								
 							</tr>
 							<tr t-if="cement.setting_time_visible">
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
 								<td>
 									<span>
 										Final Setting Time
@@ -254,14 +270,19 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_max_value"/> Max	
+										600 Max.
+										<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_max_value"/> Max	 -->
 									</span>
 								</td>
 							</tr>
 							<tr t-if="cement.dry_sieving_visible">
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
-										Fineness By (Dry seiving)
+										Fineness By (Dry Seiving)
 									</span>
 								</td>
 								<td>
@@ -286,6 +307,11 @@
 								</td>
 							</tr>
 							<tr t-if="cement.density_visible">
+
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
 								<td>
 									<span>
 										Density
@@ -314,8 +340,12 @@
 							</tr>
 							<tr t-if="cement.soundness_visible">
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
-										Soundness By (Lechatelier Method)
+										Soundness By (Le-Chatelier Method)
 									</span>
 								</td>
 								<td>
@@ -335,14 +365,19 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Soundness By Lechatelier')]).parameter.lab_max_value"/> Max
+										10 Max.
+										<!-- <span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Soundness By Lechatelier')]).parameter.lab_max_value"/> Max -->
 									</span>
 								</td>
 							</tr>
 							<tr t-if="cement.fineness_blaine_visible">
 								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td>
 									<span>
-										Fineness by (Blaine air Permability Method)
+										Fineness by (Blaine Air Permability Method)
 									</span>
 								</td>
 								<td>
@@ -362,11 +397,16 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','ﬁneness by blain method')]).parameter.lab_min_value"/> Min
+										225 Min.
+										<!-- <span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','ﬁneness by blain method')]).parameter.lab_min_value"/> Min -->
 									</span>
 								</td>
 							</tr>
 							<tr t-if="cement.compressive_visible">
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
 								<td>
 									<span>
 										Compressive Strength
@@ -391,8 +431,11 @@
 							</tr>
 							<tr t-if="cement.compressive_visible">
 								<td>
+									<span>a</span>
+								</td>
+								<td>
 									<span>
-										72+-1H
+										72±1H
 									</span>
 								</td>
 								<td>
@@ -423,8 +466,11 @@
 							</tr>
 							<tr t-if="cement.compressive_visible">
 								<td>
+									<span>b</span>
+								</td>
+								<td>
 									<span>
-										168+-2H
+										168±2H
 									</span>
 								</td>
 								<td>
@@ -456,8 +502,11 @@
 							</tr>
 							<tr t-if="cement.compressive_visible">
 								<td>
+									<span>c</span>
+								</td>
+								<td>
 									<span>
-										672+-4H
+										672±4H
 									</span>
 								</td>
 								<td>

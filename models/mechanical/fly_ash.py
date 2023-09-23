@@ -17,7 +17,7 @@ class FlyaschNormalConsistency(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    temp_percent_normal = fields.Float("Temperature %")
+    temp_percent_normal = fields.Float("Temperature °c")
     humidity_percent_normal = fields.Float("Humidity %")
 
      ## Normal Consistency
@@ -31,32 +31,32 @@ class FlyaschNormalConsistency(models.Model):
 
 
     gravity_of_flyash1 = fields.Float(string="Specific Gravity of Flyash")
-    gravity_of_flyash2 = fields.Float(string="Specific Gravity of Flyash")
+    # gravity_of_flyash2 = fields.Float(string="Specific Gravity of Flyash")
 
     gravity_of_cement1 = fields.Float(string="Specific Gravity of Cement")
-    gravity_of_cement2 = fields.Float(string="Specific Gravity of Cement")
+    # gravity_of_cement2 = fields.Float(string="Specific Gravity of Cement")
 
 
     fly_ash_n1 = fields.Float(string="N",compute="_compute_fly_ash_n1")
-    fly_ash_n2 = fields.Float(string="N",compute="_compute_fly_ash_n2")
+    # fly_ash_n2 = fields.Float(string="N",compute="_compute_fly_ash_n2")
 
     wt_of_flash_1 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_1")
-    wt_of_flash_2 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_2")
+    # wt_of_flash_2 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_2")
 
     wt_of_cement_1 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
-    wt_of_cement_2 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
+    # wt_of_cement_2 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
 
     total_wt_of_sample_fly_1 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_1")
-    total_wt_of_sample_fly_2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_2")
+    # total_wt_of_sample_fly_2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_2")
 
     wt_of_water_required_fly_1 = fields.Float(string="Wt.of water required (g)")
-    wt_of_water_required_fly_2 = fields.Float(string="Wt.of water required (g)")
+    # wt_of_water_required_fly_2 = fields.Float(string="Wt.of water required (g)")
 
     penetration_planger_fly_1 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
-    penetration_planger_fly_2 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
+    # penetration_planger_fly_2 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
 
     normal_consistency_fly_1 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_1")
-    normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
+    # normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
 
     @api.depends('gravity_of_flyash1', 'gravity_of_cement1')
     def _compute_fly_ash_n1(self):
@@ -64,7 +64,7 @@ class FlyaschNormalConsistency(models.Model):
             if record.gravity_of_cement1 != 0:
                 record.fly_ash_n1 = record.gravity_of_flyash1 / record.gravity_of_cement1
             else:
-                record.fly_ash_n1 = 0.
+                record.fly_ash_n1 = 0.0
                 
 
     @api.depends('gravity_of_flyash2', 'gravity_of_cement2')
@@ -119,7 +119,7 @@ class FlyaschNormalConsistency(models.Model):
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_percent_setting = fields.Float("Temperature %")
+    temp_percent_setting = fields.Float("Temperature °c")
     humidity_percent_setting = fields.Float("Humidity %")
     start_date_setting = fields.Date("Start Date")
     end_date_setting = fields.Date("End Date")
@@ -144,40 +144,63 @@ class FlyaschNormalConsistency(models.Model):
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
     initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
     initial_setting_time_minutes = fields.Float("Initial Setting Time", compute="_compute_initial_setting_time")
+    initial_setting_time_minutes_unrounded = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
 
    
     
 
     @api.depends('time_water_added', 'time_needle_fails')
     def _compute_initial_setting_time(self):
+        # for record in self:
+        #     if record.time_water_added and record.time_needle_fails:
+        #         t1 = record.time_water_added
+        #         t2 = record.time_needle_fails
+        #         time_difference = t2 - t1
+
+        #         # Calculate the time difference in hours and minutes
+        #         total_minutes = time_difference.total_seconds() / 60
+        #         hours = int(total_minutes // 60)
+        #         minutes = int(total_minutes % 60)
+
+        #         # Round minutes
+        #         rounded_minutes = round(minutes)
+                
+        #         # Convert hours and minutes to total minutes
+        #         total_minutes = hours * 60 + rounded_minutes
+
+        #         # Format the time as hours:minutes
+        #         formatted_time = f"{hours}:{minutes:02}"
+
+        #         # Store the formatted time in the initial_setting_time_hours field
+        #         record.initial_setting_time_hours = formatted_time
+
+        #         # Store the total rounded minutes in the initial_setting_time_minutes field
+        #         record.initial_setting_time_minutes = total_minutes
+        #     else:
+        #         record.initial_setting_time_hours = "0:00"
+        #         record.initial_setting_time_minutes = 0.0
+
         for record in self:
             if record.time_water_added and record.time_needle_fails:
                 t1 = record.time_water_added
                 t2 = record.time_needle_fails
                 time_difference = t2 - t1
 
-                # Calculate the time difference in hours and minutes
-                total_minutes = time_difference.total_seconds() / 60
-                hours = int(total_minutes // 60)
-                minutes = int(total_minutes % 60)
+                # Convert time difference to seconds and then to minutes
+                time_difference_minutes = time_difference.total_seconds() / 60
 
-                # Round minutes
-                rounded_minutes = round(minutes)
-                
-                # Convert hours and minutes to total minutes
-                total_minutes = hours * 60 + rounded_minutes
+                record.initial_setting_time_hours = time_difference.total_seconds() / 3600
+                if time_difference_minutes % 5 == 0:
+                    record.initial_setting_time_minutes = time_difference_minutes
+                else:
+                    record.initial_setting_time_minutes = round(time_difference_minutes / 5) * 5
 
-                # Format the time as hours:minutes
-                formatted_time = f"{hours}:{minutes:02}"
+                record.initial_setting_time_minutes_unrounded = time_difference_minutes
 
-                # Store the formatted time in the initial_setting_time_hours field
-                record.initial_setting_time_hours = formatted_time
-
-                # Store the total rounded minutes in the initial_setting_time_minutes field
-                record.initial_setting_time_minutes = total_minutes
             else:
-                record.initial_setting_time_hours = "0:00"
-                record.initial_setting_time_minutes = 0.0
+                record.initial_setting_time_hours = False
+                record.initial_setting_time_minutes = False
+                record.initial_setting_time_minutes_unrounded = False
 
    
 
@@ -191,17 +214,35 @@ class FlyaschNormalConsistency(models.Model):
     time_needle_make_impression = fields.Datetime("The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3)")
     final_setting_time_hours = fields.Char("Final Setting Time (t3-t1) (Hours)",compute="_compute_final_setting_time")
     final_setting_time_minutes = fields.Char("Final Setting Time",compute="_compute_final_setting_time")
+    final_setting_time_minutes_unrounded = fields.Char("Final Setting Time Unrounded",compute="_compute_final_setting_time")
 
 
 
 
     @api.depends('time_needle_make_impression')
     def _compute_final_setting_time(self):
+        # for record in self:
+        #     if record.time_needle_make_impression and record.time_water_added:
+        #         t1 = record.time_water_added
+        #         t2 = record.time_needle_make_impression
+        #         time_difference = t2 - t1
+
+        #         record.final_setting_time_hours = time_difference
+        #         final_setting_time = time_difference.total_seconds() / 60
+        #         if final_setting_time % 5 == 0:
+        #             record.final_setting_time_minutes =  final_setting_time
+        #         else:
+        #             record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
+        #     else:
+        #         record.final_setting_time_hours = False
+        #         record.final_setting_time_minutes = False
+
         for record in self:
             if record.time_needle_make_impression and record.time_water_added:
                 t1 = record.time_water_added
                 t2 = record.time_needle_make_impression
                 time_difference = t2 - t1
+                record.final_setting_time_minutes = time_difference
 
                 record.final_setting_time_hours = time_difference
                 final_setting_time = time_difference.total_seconds() / 60
@@ -209,16 +250,24 @@ class FlyaschNormalConsistency(models.Model):
                     record.final_setting_time_minutes =  final_setting_time
                 else:
                     record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
+
+                record.final_setting_time_minutes_unrounded = final_setting_time
+                
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
+                record.final_setting_time_minutes_unrounded = False
+
+
+        
+
 
      #  Particles retained on 45 micron IS sieve (wet sieving) 
 
     particles_retained = fields.Char("Name",default=" Particles retained on 45 micron IS sieve (wet sieving)")
     particles_retained_visible = fields.Boolean("Particles retained Visible",compute="_compute_visible")
 
-    temp_percent_retained = fields.Float("Temperature %")
+    temp_percent_retained = fields.Float("Temperature °c")
     humidity_percent_retained = fields.Float("Humidity %")
     start_date_retained = fields.Date("Start Date")
     end_date_retained = fields.Date("End Date")
@@ -240,22 +289,23 @@ class FlyaschNormalConsistency(models.Model):
     @api.depends('average_weight_retained')
     def _compute_prcent_retaind(self):
         for record in self:
-            integer_part = math.floor(record.average_weight_retained)
-            fractional_part = record.average_weight_retained - integer_part
-            if fractional_part > 0 and fractional_part <= 0.25:
-                record.prcent_retaind = integer_part
-            elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.prcent_retaind = integer_part + 0.5
-            elif fractional_part > 0.75 and fractional_part <= 1:
-                record.prcent_retaind = integer_part + 1
-            else:
-                record.prcent_retaind = 0
+            # integer_part = math.floor(record.average_weight_retained)
+            # fractional_part = record.average_weight_retained - integer_part
+            # if fractional_part > 0 and fractional_part <= 0.25:
+            #     record.prcent_retaind = integer_part
+            # elif fractional_part > 0.25 and fractional_part <= 0.75:
+            #     record.prcent_retaind = integer_part + 0.5
+            # elif fractional_part > 0.75 and fractional_part <= 1:
+            #     record.prcent_retaind = integer_part + 1
+            # else:
+            #     record.prcent_retaind = 0
+            record.prcent_retaind = round(record.average_weight_retained,2)
 
     # Soundness Test
     soundness_name_fly = fields.Char("Name",default="Soundness by Le-Chatelier Method")
     soundness_visible = fields.Boolean("Soundness Visible",compute="_compute_visible")
 
-    temp_percent_soundness = fields.Float("Temperature %")
+    temp_percent_soundness = fields.Float("Temperature °c")
     humidity_percent_soundness = fields.Float("Humidity %")
     start_date_soundness = fields.Date("Start Date")
     end_date_soundness = fields.Date("End Date")
@@ -314,7 +364,7 @@ class FlyaschNormalConsistency(models.Model):
     specigic_gravity_fly = fields.Char("Name",default="Specific Gravity")
     specigic_gravity_visible = fields.Boolean("Specigic Gravity Visible",compute="_compute_visible")
 
-    temp_percent_specific = fields.Float("Temperature %")
+    temp_percent_specific = fields.Float("Temperature °c")
     humidity_percent_specific = fields.Float("Humidity %")
     start_date_specific = fields.Date("Start Date")
     end_date_specific = fields.Date("End Date")
@@ -380,7 +430,7 @@ class FlyaschNormalConsistency(models.Model):
     compressive_name = fields.Char("Name",default="Compressive Strength")
     compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
-    temp_percent_compressive = fields.Float("Temperature %")
+    temp_percent_compressive = fields.Float("Temperature °c")
     humidity_percent_compressive = fields.Float("Humidity %")
     start_date_compressive = fields.Date("Start Date")
     end_date_compressive = fields.Date("End Date")
@@ -465,8 +515,8 @@ class FlyaschNormalConsistency(models.Model):
     def _compute_average_28days(self):
         for record in self:
             try:
-                record.average_casting_28days = sum(record.casting_28_days_tables.mapped('compressive_strength')) / len(
-                    record.casting_28_days_tables)
+                record.average_casting_28days = round((sum(record.casting_28_days_tables.mapped('compressive_strength')) / len(
+                    record.casting_28_days_tables)),2)
             except:
                 record.average_casting_28days = 0
 
@@ -542,8 +592,8 @@ class FlyaschNormalConsistency(models.Model):
     def _compute_average_28dayss(self):
         for record in self:
             try:
-                record.average_casting_28dayss = sum(record.casting_28_dayss_tables.mapped('compressive_strengths')) / len(
-                    record.casting_28_dayss_tables)
+                record.average_casting_28dayss = round((sum(record.casting_28_dayss_tables.mapped('compressive_strengths')) / len(
+                    record.casting_28_dayss_tables)),2)
             except:
                 record.average_casting_28dayss = 0
 
@@ -566,7 +616,7 @@ class FlyaschNormalConsistency(models.Model):
     def _compute_compressive_strength_of_sample(self):
         for record in self:
             if record.average_casting_28dayss != 0:
-                record.compressive_strength_of_sample = (record.average_casting_28days / record.average_casting_28dayss) * 100
+                record.compressive_strength_of_sample = round(((record.average_casting_28days / record.average_casting_28dayss) * 100),2)
             else:
                 record.compressive_strength_of_sample = 0.0
 
@@ -576,7 +626,7 @@ class FlyaschNormalConsistency(models.Model):
     lime_reactivity = fields.Char("Name",default="Lime Reactivity")
     lime_reactivity_visible = fields.Boolean("Lime Visible",compute="_compute_visible")
 
-    temp_percent_lime = fields.Float("Temperature %")
+    temp_percent_lime = fields.Float("Temperature °c")
     humidity_percent_lime = fields.Float("Humidity %")
     start_date_lime = fields.Date("Start Date")
     end_date_lime = fields.Date("End Date")
@@ -703,7 +753,7 @@ class FlyaschNormalConsistency(models.Model):
     fineness_blaine_name = fields.Char("Name",default="Fineness By Blaine Air Permeability Method")
     fineness_blaine_visible = fields.Boolean("Fineness Blaine Visible",compute="_compute_visible")
 
-    temp_percent_fineness = fields.Float("Temperature %")
+    temp_percent_fineness = fields.Float("Temperature °c")
     humidity_percent_fineness = fields.Float("Humidity %")
     start_date_fineness = fields.Date("Start Date")
     end_date_fineness = fields.Date("End Date")
@@ -712,8 +762,8 @@ class FlyaschNormalConsistency(models.Model):
     weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=84.140,digits=(16, 3))
     
 
-    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=51.740,digits=(16, 3))
-    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after palcing the sample in the permeability cell  (m₂),g.",default=51.760,digits=(16, 3))
+    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=51.740,digits=(16, 3))
+    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=51.760,digits=(16, 3))
 
     density_of_mercury = fields.Float("Density of mercury , g/cm3",default=13.53)
 
@@ -906,7 +956,7 @@ class FlyaschNormalConsistency(models.Model):
                 record.normal_consistency_visible = True
                 record.soundness_visible = True
             if specific_gravity_test in record.tests:
-                 record.specigic_gravity_visible = True
+                record.specigic_gravity_visible = True
             if compressive_test in record.tests:
                 record.specigic_gravity_visible = True
                 record.normal_consistency_visible = True
@@ -918,6 +968,39 @@ class FlyaschNormalConsistency(models.Model):
             #     record.dry_sieving_visible = True
             if fineness_blaine in record.tests:
                 record.fineness_blaine_visible = True
+
+
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                # Normal consistency
+                if sample.internal_id == 'df1f22bb-1b3c-43ae-9c20-5421b6d6edf9':
+                    record.normal_consistency_visible = True
+                # setting time
+                if sample.internal_id == 'dd22e8dc-6526-4fcc-a5ec-18cc1ae10857':
+                    record.normal_consistency_visible = True
+                    record.setting_time_visible  = True
+                # particles retained
+                if sample.internal_id == '53dc6524-0da6-4ec4-a91e-d41c44f5edb5':
+                    record.particles_retained_visible = True
+                # soundness
+                if sample.internal_id == '84b0584b-91b0-4153-87ef-11b6954a9837':
+                    record.normal_consistency_visible = True
+                    record.soundness_visible = True
+                # specific gravity
+                if sample.internal_id == 'ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e':
+                    record.specigic_gravity_visible = True
+                # compressive strength
+                if sample.internal_id == 'c35093e4-98f0-419e-94cd-1844af4393f5':
+                    record.specigic_gravity_visible = True
+                    record.normal_consistency_visible = True
+                    record.compressive_visible = True
+                # lime reactivity
+                if sample.internal_id == '842b2aec-c97d-4d83-a9f2-2eb112eae116':
+                    record.normal_consistency_visible = True
+                    record.lime_reactivity_visible = True
+                # fineness
+                if sample.internal_id == '97be6095-6047-4781-9885-0b8b29050fda':
+                    record.fineness_blaine_visible = True
                
 
 

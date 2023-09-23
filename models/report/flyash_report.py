@@ -9,8 +9,8 @@ from lxml import etree
 
 
 class FlyashReport(models.AbstractModel):
-    _name = 'report.lerm_civil.lerm_flyash_report'
-    _description = 'Cement Report'
+    _name = 'report.lerm_civil.lerm_fly_report'
+    _description = 'Fly Ash Report'
     
     @api.model
     def _get_report_values(self, docids, data):

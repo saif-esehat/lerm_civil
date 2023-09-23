@@ -123,6 +123,7 @@
                      <group>
                      <group attrs="{'invisible': [('compressive_visible', '=', False)]}" style="width:50%" class="center-group">
                      <h4 class="center-heading">Compressive Strength of control Sample</h4>
+                      <field  name="high_range_control_comp"  colspan="3" />
                       <field  name="wt_of_cement"  colspan="3" />
                       <field  name="wt_of_sand1"  colspan="3" />
                       <field  name="wt_of_sand2"  colspan="3" />

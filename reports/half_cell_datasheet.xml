@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="half_cell_datasheet">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    Half Cell Potential Datasheet
+                </div>
+				<div class="container_eln" style="margin-top:5px">
+					
+                    <table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Year of Construction :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.structure_age"/>
+								</td>
+								<td colspan="6">Instrument :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.instrument"/>
+								</td>
+								
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Temp :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.temp"/>
+								</td>	
+							</tr>
+						</table>
+
+						<table style="margin-top:20px">
+
+							<tr cols="12">
+								<td colspan="1">Sr no 
+								</td>
+								<td colspan="2">Member
+								</td>
+								<td colspan="1">Location
+								</td>
+								<td colspan="1">R1
+								</td>
+								<td colspan="1">R2
+								</td>
+								<td colspan="1">R3
+								</td>
+								<td colspan="1">R4
+								</td>
+								<td colspan="1">R5
+								</td>
+								<td colspan="1">R6
+								</td>
+								<td colspan="1">Average
+								</td>
+								<td colspan="1">Corrosion Condition
+								</td>
+							</tr>
+
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.child_lines_1" t-as="r">
+								<td colspan="1">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</div>
+                  				</td>
+								<td colspan="2">
+									<span t-esc="r['member']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['location']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r1']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r2']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r3']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r4']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r5']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r6']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['avg']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['corrosion_condition']"/>
+								</td>
+							</tr>
+						</table>
+
+						<table style="margin-top:20px">
+
+							<tr cols="12">
+								<td colspan="1">Sr no 
+								</td>
+								<td colspan="2">Member
+								</td>
+								<td colspan="1">Location
+								</td>
+								<td colspan="1">R1
+								</td>
+								<td colspan="1">R2
+								</td>
+								<td colspan="1">R3
+								</td>
+								<td colspan="1">R4
+								</td>
+								<td colspan="1">R5
+								</td>
+								<td colspan="1">R6
+								</td>
+								<td colspan="1">Average
+								</td>
+								<td colspan="1">Corrosion Condition
+								</td>
+							</tr>
+
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.child_lines_2" t-as="r">
+								<td colspan="1">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</div>
+                  				</td>
+								<td colspan="2">
+									<span t-esc="r['member']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['location']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r1']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r2']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r3']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r4']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r5']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['r6']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['avg']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['corrosion_condition']"/>
+								</td>
+							</tr>
+						</table>
+
+					<div class="authorizeRowDataSheet">
+						<div>
+							<div>
+								<b>
+									(JR Chemist)
+								</b>
+							</div>
+							<div>
+								<b>
+									Tested By
+								</b>
+							</div>
+						</div>
+						<div style="margin-left:500px">
+							<div>
+								<b>
+									Mechanical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>
