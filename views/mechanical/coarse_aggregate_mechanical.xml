@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_coarse_aggregate_form" model="ir.ui.view">
+        <field name="name">mechanical.coarse.aggregate.form</field>
+        <field name="model">mechanical.coarse.aggregate</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group >
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" />
+                        <field name="eln_ref" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="sample_parameters">
+                            <tree>
+                            <field name="parameter_name"/>
+                            <field name="test_method"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <!-- Crushing Value  -->
+                    <group >
+                        <h1>
+                            <field name="crushing_value_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+
+                    <field name="crushing_value_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sample_no'/>
+                                <field name='wt_of_cylinder'/>
+                                <field name='total_wt_of_dried'/>
+                                <field name='total_wt_aggregate'/>
+                                <field name='wt_of_aggregate_passing'/>
+                                <field name='wt_of_aggregate_retained'/>
+                                <field name='crushing_value'/>
+                              
+                            </tree>
+                           
+                    </field> 
+                    <group>
+                        <field name='average_crushing_value'/>
+                    </group>
+
+                    <!-- Specific Gravity and Water Absorbtion  -->
+
+                    <group >
+                        <h1>
+                            <field name="specific_gravity_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="specific_gravity_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='wt_surface_dry'/>
+                                <field name='wt_sample_inwater'/>
+                                <field name='oven_dried_wt'/>
+                                <field name='specific_gravity'/>
+                                <field name='water_absorption'/>
+                                <!-- <field name='average_tensile'/> -->
+                            </tree>
+                           
+                    </field> 
+
+                    <!-- Impact Value  -->
+                    <group>
+                        <h1>
+                            <field name="impact_value_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="impact_value_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sample_no'/>
+                                <field name='wt_of_cylinder'/>
+                                <field name='total_wt_of_dried'/>
+                                <field name='total_wt_aggregate'/>
+                                <field name='wt_of_aggregate_passing'/>
+                                <field name='wt_of_aggregate_retained'/>
+                                <field name='impact_value'/>
+                            </tree>
+                           
+                    </field> 
+                            <group>
+                               <field name='average_impact_value'/>
+                            </group>
+                     
+
+                <!-- Abrasion Value  -->
+                <group>
+                        <h1>
+                            <field name="abrasion_value_name" readonly="1" nolabel="1"/>
+                        </h1>
+                </group>
+                    <field name="abrasion_value_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='total_weight_sample'/>
+                                <field name='weight_passing_sample'/>
+                                <field name='weight_retain_sample'/>
+                                <field name='abrasion_value_percentage'/>
+                                <!-- <field name='average_tensile'/> -->
+                            </tree>
+                           
+                    </field> 
+
+                <!-- 10% fine value  -->
+                <group>
+                    <h1>
+                        <field name="name_10fine" readonly="1" nolabel="1"/>
+                    </h1>
+                </group>
+                <group style="width:50%">
+                    <field name="wt_sample_10fine"/>
+                    <field name="wt_sample_passing_10fine"/>
+                    <field name="percent_of_fines"/>
+                    <field name="load_applied_10fine"/>
+                    <field name="load_10percent_fine_values"/>
+
+                </group>
+
+                <!-- Surface Moisture -->
+                <!-- <group>
+                    <h1>
+                        <field name="name_surface_moisture" readonly="1" nolabel="1"/>
+                    </h1>
+                </group>
+                <group>
+                    <field name="wt_container_filled_water"/>
+                    <field name="wt_sample_surface_moisture"/>
+                    <field name="wt_container_filled_sample"/>
+                    <field name="vs_surface_moisture"/>
+                    <field name="md_surface_moisture"/>
+                    <field name="vd_surface_moisture"/>
+                    <field name="moisture_content"/>
+
+                </group> -->
+
+                <!-- Soundness Na2So4  -->
+                <group>
+                        <h1>
+                            <field name="soundness_na2so4_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="soundness_na2so4_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="sieve_size_passing"/>
+                                <field name="sieve_size_retained"/>
+                                <field name="grading_original_sample" readonly='1'/>
+                                <field name="weight_before_test"/>
+                                <field name="weight_after_test"/>
+                                <field name="passing_percent" readonly='1'/>
+                                <field name="cumulative_loss_percent"/>
+                            </tree>
+                    </field>
+                    <group>
+                        <field name="total_na2so4"/>
+                        <field name="soundness_na2so4"/>
+                    </group>
+
+                    <!-- Soundness Mgso4  -->
+                <group>
+                        <h1>
+                            <field name="soundness_mgso4_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="soundness_na2so4_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="sieve_size_passing"/>
+                                <field name="sieve_size_retained"/>
+                                <field name="grading_original_sample" readonly='1'/>
+                                <field name="weight_before_test"/>
+                                <field name="weight_after_test"/>
+                                <field name="passing_percent" readonly='1'/>
+                                <field name="cumulative_loss_percent"/>
+                            </tree>
+                    </field>
+                    <group>
+                        <field name="total_na2so4"/>
+                        <field name="soundness_mgso4"/>
+                    </group>
+
+                     <!-- Elongation  Index  -->
+                    <group>
+                        <h1>
+                            <field name="elongation_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="elongation_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='sieve_size'/>
+                                <field name='wt_retained'/>
+                                <field name='elongated_retain'/>
+                            </tree>
+                           
+                    </field> 
+                    <group>
+                        <group style="width:30%">
+                               <field name='wt_retained_total_elongation'/>
+                            </group>
+                            <group style="width:30%">
+                               <field name='elongated_retain_total'/>
+                            </group>
+                            <group style="width:30%">
+                               <field name='aggregate_elongation'/>
+                            </group>
+                    </group>
+                    <!-- Flakiness Index  -->
+                    <group>
+                        <h1>
+                            <field name="flakiness_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="flakiness_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='sieve_size'/>
+                                <field name='wt_retained'/>
+                                <field name='flaky_passing'/>
+                            </tree>
+                           
+                    </field> 
+                    <group>
+                            <group style="width:30%">
+                               <field name='wt_retained_total_flakiness'/>
+                            </group>
+                            <group style="width:30%">
+                               <field name='flaky_passing_total'/>
+                            </group>
+                            <group style="width:30%">
+                               <field name='aggregate_flakiness'/>
+                            </group>
+                    </group>
+                               
+                        <group style="width:30%"> 
+                            <field name='combine_elongation_flakiness'/>
+                        </group>
+
+                    <!-- Deleterious Material -->
+                    <group>
+                        <h1>
+                            <field name="name_finer75" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group style="width:50%">
+                        <field name='wt_sample_finer75'/>
+                        <field name='wt_dry_sample_finer75'/>
+                        <field name='material_finer75'/>
+                    </group>
+
+
+                    <group>
+                        <h1>
+                            <field name="name_clay_lumps" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group style="width:50%">
+                        <field name='wt_sample_clay_lumps'/>
+                        <field name='wt_dry_sample_clay_lumps'/>
+                        <field name='clay_lumps_percent'/>
+                    </group>
+
+
+                    <group>
+                        <h1>
+                            <field name="name_light_weight" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group style="width:50%">
+                        <field name='wt_sample_light_weight'/>
+                        <field name='wt_dry_sample_light_weight'/>
+                        <field name='light_weight_percent'/>
+                    </group>
+
+
+                    <!-- Bulk Density  -->
+                    <group>
+                        <h1>
+                            <field name="loose_bulk_density_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="loose_bulk_density_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='weight_empty_bucket'/>
+                                <field name='volume_of_bucket'/>
+                                <field name='sample_plus_bucket'/>
+                                <field name='sample_weight'/>
+                                <field name='loose_bulk_density'/>
+                                <!-- <field name='average_tensile'/> -->
+                            </tree>
+                           
+                    </field> 
+
+
+                    <group>
+                        <h1>
+                            <field name="rodded_bulk_density_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="rodded_bulk_density_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='weight_empty_bucket'/>
+                                <field name='volume_of_bucket'/>
+                                <field name='sample_plus_bucket'/>
+                                <field name='sample_weight'/>
+                                <field name='rodded_bulk_density'/>
+                                <!-- <field name='average_tensile'/> -->
+                            </tree>
+                           
+                    </field> 
+
+                    <!-- Sieve Alanysis  -->
+                    <group>
+                        <h1>
+                            <field name="sieve_analysis_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <div>
+                        <button string="Calculate" type="object" name="calculate_sieve" class="oe_highlight"/>
+                    </div>
+                    <field name="sieve_analysis_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="serial_no" string="Sr.No"/>
+                                <field name='sieve_size' string="IS Sieve Size"/>
+                                <field name='wt_retained' string="Wt. Retained in gms"/>
+                                <field name='percent_retained' string="% Retained"/>
+                                <field name='cumulative_retained' context="{'default_cumulative_retained': cumulative_retained}" string="Cum. Retained %"/>
+                                <field name='passing_percent' string="Passing %" readonly="1"/>
+                                
+                            </tree>
+                    </field>
+                    <group>
+                        <field name="total_sieve_analysis"/>
+                    </group>
+
+
+                <!-- Aggregate Grading  -->
+                    <group>
+                        <h1>
+                            <field name="aggregate_grading_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <div>
+                        <button string="Calculate" type="object" name="calculate_aggregate" class="oe_highlight"/>
+                    </div>
+                    <field name="aggregate_grading_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="serial_no" string="Sr.No"/>
+                                <field name='sieve_size' string="IS Sieve Size"/>
+                                <field name='wt_retained' string="Wt. Retained in gms"/>
+                                <field name='percent_retained' string="% Retained"/>
+                                <field name='cumulative_retained' context="{'default_cumulative_retained': cumulative_retained}" string="Cum. Retained %"/>
+                                <field name='passing_percent' string="Passing %" readonly="1"/>
+                                
+                            </tree>
+                    </field>
+                    <group>
+                        <field name="total_aggregate_grading"/>
+                    </group>
+
+                    <!-- Angularity Number  -->
+                    <!-- <group>
+                        <h1>
+                            <field name="angularity_name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group style="width:50%"> 
+                        <field name="mean_wt_aggregate"/>
+                        <field name="wt_water_required_angularity"/>
+                        <field name="specific_gravity_aggregate_angularity"/>
+                        <field name="angularity_number"/>
+                    </group> -->
+
+                </sheet>
+            </form>
+        </field>
+        </record>
+    </data>
+</odoo>
