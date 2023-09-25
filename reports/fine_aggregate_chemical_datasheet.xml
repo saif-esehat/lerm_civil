@@ -36,6 +36,16 @@
 								</td>
 
 							</tr>
+							
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Average :
+									<![CDATA[&nbsp;]]>								
+								</td>
+                                <td colspan="6">
+									<span t-field="data.ph_average"/>
+								</td>
+                                
+							</tr>
                             
 						</table>
 

@@ -75,8 +75,8 @@
 										</div>
 										<div style="text-align:center;">
 												<span t-foreach="eln.parameters_result" t-as="r">
-													<span t-if="r['test_method'].test_method != '--' and r['test_method'].test_method">
-														<span t-esc="r['test_method'].test_method"/> <![CDATA[&nbsp;]]>,<![CDATA[&nbsp;]]>
+													<span t-if="r['specification'] != '--' and r['specification']">
+														<span t-esc="r['specification']"/> <![CDATA[&nbsp;]]>,<![CDATA[&nbsp;]]>
 													</span>
 												</span>
 												
@@ -990,17 +990,17 @@
 						<div>
 							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
 						</div>
-						<!-- <div>
-							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-						</div> -->
 						<div>
+							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
+						</div>
+						<!-- <div>
 							<div t-if="stamp.inreport == '4-in_report'">
 								<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 							</div>
 							<div style="padding-top:5px">
 								Format No. <span t-esc="eln.material.test_format_no"/>
 							</div>
-						</div>
+						</div> -->
 						<div>
 							<div>
 								<b>
