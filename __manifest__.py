@@ -77,6 +77,7 @@
     'views/mechanical/pt_grout.xml',
     'views/mechanical/soil.xml',
     'views/mechanical/coarse_aggregate_mechanical.xml',
+    'views/mechanical/aggregate_fine.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',
