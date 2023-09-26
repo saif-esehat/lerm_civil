@@ -5,8 +5,8 @@
 
 
 
-# class AggregateFine(models.Model):
-#     _name = "mechanical.aggregate.fine"
+# class FineAggregate(models.Model):
+#     _name = "mechanical.fine.aggregate"
 #     _inherit = "lerm.eln"
 #     _rec_name = "name_aggregate"
 
@@ -17,7 +17,7 @@
 #     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
 #     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-#     tests = fields.Many2many("mechanical.aggregate.fine.test",string="Tests")
+#     tests = fields.Many2many("mechanical.fine.aggregate.test",string="Tests")
 
 #     # Loose Bulk Density (LBD)
 
@@ -31,7 +31,7 @@
 #     ### Compute Visible
 #     @api.depends('tests')
 #     def _compute_visible(self):
-#         loose_bulk_test = self.env['mechanical.aggregate.fine.test'].search([('name', '=', 'Loose Bulk Density (LBD)')])
+#         loose_bulk_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Loose Bulk Density (LBD)')])
         
 #         for record in self:
 #             record.loose_bulk_visible = False
@@ -50,7 +50,7 @@
 #     @api.model
 #     def create(self, vals):
 #         # import wdb;wdb.set_trace()
-#         record = super(AggregateFine, self).create(vals)
+#         record = super(FineAggregate, self).create(vals)
 #         record.get_all_fields()
 #         record.eln_ref.write({'model_id':record.id})
 #         return record
@@ -74,7 +74,7 @@
 
 
 #     def get_all_fields(self):
-#         record = self.env['mechanical.soil'].browse(self.ids[0])
+#         record = self.env['mechanical.fine.aggregate'].browse(self.ids[0])
 #         field_values = {}
 #         for field_name, field in record._fields.items():
 #             field_value = record[field_name]
@@ -86,6 +86,6 @@
 
 
 # class AggregateFineTest(models.Model):
-#     _name = "mechanical.aggregate.fine.test"
+#     _name = "mechanical.fine.aggregate.test"
 #     _rec_name = "name"
 #     name = fields.Char("Name")

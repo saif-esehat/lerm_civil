@@ -511,7 +511,7 @@ class PaverBlock(models.Model):
 
 
     def get_all_fields(self):
-        record = self.env['mechanical.soil'].browse(self.ids[0])
+        record = self.env['mechanical.paver.block'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():
             field_value = record[field_name]
