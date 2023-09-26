@@ -19,7 +19,6 @@
     'views/eln.xml',
     'views/contractor.xml',
     # 'views/mechanical/sieve_analysis.xml',
-    'views/mechanical/pavel_block.xml',
     'views/mechanical/free_swell_index.xml',
     'views/mechanical/soil_cbr.xml',
     'views/mechanical/heavy_ligth_compaction.xml',
