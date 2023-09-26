@@ -452,20 +452,20 @@ class coarseAggregateMechanical(models.Model):
 
 
     # Angularity 
-    # angularity_name = fields.Char("Name",default="Angularity Number")
-    # angularity_visible = fields.Boolean("Angularity",compute="_compute_visible")
-    # mean_wt_aggregate = fields.Float("Mean weight of the aggregate in the cylinder in gm , W")
-    # wt_water_required_angularity = fields.Float("Weight of water required to fill the cylinder in gm, C")
-    # specific_gravity_aggregate_angularity = fields.Float("Specific gravity of aggregate, GA")
-    # angularity_number = fields.Float("Angularity number",compute="_compute_angularity_number")
+    angularity_name = fields.Char("Name",default="Angularity Number")
+    angularity_visible = fields.Boolean("Angularity",compute="_compute_visible")
+    mean_wt_aggregate = fields.Float("Mean weight of the aggregate in the cylinder in gm , W")
+    wt_water_required_angularity = fields.Float("Weight of water required to fill the cylinder in gm, C")
+    specific_gravity_aggregate_angularity = fields.Float("Specific gravity of aggregate, GA")
+    angularity_number = fields.Float("Angularity number",compute="_compute_angularity_number")
 
-    # @api.depends('mean_wt_aggregate','wt_water_required_angularity','specific_gravity_aggregate_angularity')
-    # def _compute_angularity_number(self):
-    #     for record in self:
-    #         if (record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity) != 0:
-    #             record.angularity_number = 67 - (100 * record.mean_wt_aggregate)/(record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity)
-    #         else:
-    #             record.angularity_number = 0
+    @api.depends('mean_wt_aggregate','wt_water_required_angularity','specific_gravity_aggregate_angularity')
+    def _compute_angularity_number(self):
+        for record in self:
+            if (record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity) != 0:
+                record.angularity_number = 67 - (100 * record.mean_wt_aggregate)/(record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity)
+            else:
+                record.angularity_number = 0
 
     @api.depends('eln_ref')
     def _compute_visible(self):
@@ -486,6 +486,8 @@ class coarseAggregateMechanical(models.Model):
             record.rodded_bulk_visible = False
             record.sieve_visible = False
             record.aggregate_grading_visible = False
+            record.angularity_visible = False
+
 
 
 
@@ -523,6 +525,8 @@ class coarseAggregateMechanical(models.Model):
                     record.sieve_visible = True
                 if sample.internal_id == '6976f6b5-5756-4ef7-a680-50b0c0dbccc8':
                     record.aggregate_grading_visible = True
+                if sample.internal_id == '5c163fc2-c88c-4233-921e-1eae56c3ba23':
+                    record.angularity_visible = True
                 
 
 
