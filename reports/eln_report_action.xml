@@ -195,11 +195,8 @@
         <field name="binding_type">report</field>
     </record>
 
-<<<<<<< HEAD
     
     
-=======
->>>>>>> 06e62ee5b403faec528a41ddae318011c5668d10
     <record id="compatiblity_datasheet_action" model="ir.actions.report">
         <field name="name">Compatablity Datasheet</field>
         <field name="model">lerm.eln</field>
