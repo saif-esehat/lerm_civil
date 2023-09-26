@@ -31,32 +31,32 @@ class FlyaschNormalConsistency(models.Model):
 
 
     gravity_of_flyash1 = fields.Float(string="Specific Gravity of Flyash")
-    gravity_of_flyash2 = fields.Float(string="Specific Gravity of Flyash")
+    # gravity_of_flyash2 = fields.Float(string="Specific Gravity of Flyash")
 
     gravity_of_cement1 = fields.Float(string="Specific Gravity of Cement")
-    gravity_of_cement2 = fields.Float(string="Specific Gravity of Cement")
+    # gravity_of_cement2 = fields.Float(string="Specific Gravity of Cement")
 
 
     fly_ash_n1 = fields.Float(string="N",compute="_compute_fly_ash_n1")
-    fly_ash_n2 = fields.Float(string="N",compute="_compute_fly_ash_n2")
+    # fly_ash_n2 = fields.Float(string="N",compute="_compute_fly_ash_n2")
 
     wt_of_flash_1 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_1")
-    wt_of_flash_2 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_2")
+    # wt_of_flash_2 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_2")
 
     wt_of_cement_1 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
-    wt_of_cement_2 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
+    # wt_of_cement_2 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
 
     total_wt_of_sample_fly_1 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_1")
-    total_wt_of_sample_fly_2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_2")
+    # total_wt_of_sample_fly_2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_2")
 
     wt_of_water_required_fly_1 = fields.Float(string="Wt.of water required (g)")
-    wt_of_water_required_fly_2 = fields.Float(string="Wt.of water required (g)")
+    # wt_of_water_required_fly_2 = fields.Float(string="Wt.of water required (g)")
 
     penetration_planger_fly_1 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
-    penetration_planger_fly_2 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
+    # penetration_planger_fly_2 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
 
     normal_consistency_fly_1 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_1")
-    normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
+    # normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
 
     @api.depends('gravity_of_flyash1', 'gravity_of_cement1')
     def _compute_fly_ash_n1(self):
@@ -144,40 +144,63 @@ class FlyaschNormalConsistency(models.Model):
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
     initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
     initial_setting_time_minutes = fields.Float("Initial Setting Time", compute="_compute_initial_setting_time")
+    initial_setting_time_minutes_unrounded = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
 
    
     
 
     @api.depends('time_water_added', 'time_needle_fails')
     def _compute_initial_setting_time(self):
+        # for record in self:
+        #     if record.time_water_added and record.time_needle_fails:
+        #         t1 = record.time_water_added
+        #         t2 = record.time_needle_fails
+        #         time_difference = t2 - t1
+
+        #         # Calculate the time difference in hours and minutes
+        #         total_minutes = time_difference.total_seconds() / 60
+        #         hours = int(total_minutes // 60)
+        #         minutes = int(total_minutes % 60)
+
+        #         # Round minutes
+        #         rounded_minutes = round(minutes)
+                
+        #         # Convert hours and minutes to total minutes
+        #         total_minutes = hours * 60 + rounded_minutes
+
+        #         # Format the time as hours:minutes
+        #         formatted_time = f"{hours}:{minutes:02}"
+
+        #         # Store the formatted time in the initial_setting_time_hours field
+        #         record.initial_setting_time_hours = formatted_time
+
+        #         # Store the total rounded minutes in the initial_setting_time_minutes field
+        #         record.initial_setting_time_minutes = total_minutes
+        #     else:
+        #         record.initial_setting_time_hours = "0:00"
+        #         record.initial_setting_time_minutes = 0.0
+
         for record in self:
             if record.time_water_added and record.time_needle_fails:
                 t1 = record.time_water_added
                 t2 = record.time_needle_fails
                 time_difference = t2 - t1
 
-                # Calculate the time difference in hours and minutes
-                total_minutes = time_difference.total_seconds() / 60
-                hours = int(total_minutes // 60)
-                minutes = int(total_minutes % 60)
+                # Convert time difference to seconds and then to minutes
+                time_difference_minutes = time_difference.total_seconds() / 60
 
-                # Round minutes
-                rounded_minutes = round(minutes)
-                
-                # Convert hours and minutes to total minutes
-                total_minutes = hours * 60 + rounded_minutes
+                record.initial_setting_time_hours = time_difference.total_seconds() / 3600
+                if time_difference_minutes % 5 == 0:
+                    record.initial_setting_time_minutes = time_difference_minutes
+                else:
+                    record.initial_setting_time_minutes = round(time_difference_minutes / 5) * 5
 
-                # Format the time as hours:minutes
-                formatted_time = f"{hours}:{minutes:02}"
+                record.initial_setting_time_minutes_unrounded = time_difference_minutes
 
-                # Store the formatted time in the initial_setting_time_hours field
-                record.initial_setting_time_hours = formatted_time
-
-                # Store the total rounded minutes in the initial_setting_time_minutes field
-                record.initial_setting_time_minutes = total_minutes
             else:
-                record.initial_setting_time_hours = "0:00"
-                record.initial_setting_time_minutes = 0.0
+                record.initial_setting_time_hours = False
+                record.initial_setting_time_minutes = False
+                record.initial_setting_time_minutes_unrounded = False
 
    
 
@@ -191,17 +214,35 @@ class FlyaschNormalConsistency(models.Model):
     time_needle_make_impression = fields.Datetime("The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3)")
     final_setting_time_hours = fields.Char("Final Setting Time (t3-t1) (Hours)",compute="_compute_final_setting_time")
     final_setting_time_minutes = fields.Char("Final Setting Time",compute="_compute_final_setting_time")
+    final_setting_time_minutes_unrounded = fields.Char("Final Setting Time Unrounded",compute="_compute_final_setting_time")
 
 
 
 
     @api.depends('time_needle_make_impression')
     def _compute_final_setting_time(self):
+        # for record in self:
+        #     if record.time_needle_make_impression and record.time_water_added:
+        #         t1 = record.time_water_added
+        #         t2 = record.time_needle_make_impression
+        #         time_difference = t2 - t1
+
+        #         record.final_setting_time_hours = time_difference
+        #         final_setting_time = time_difference.total_seconds() / 60
+        #         if final_setting_time % 5 == 0:
+        #             record.final_setting_time_minutes =  final_setting_time
+        #         else:
+        #             record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
+        #     else:
+        #         record.final_setting_time_hours = False
+        #         record.final_setting_time_minutes = False
+
         for record in self:
             if record.time_needle_make_impression and record.time_water_added:
                 t1 = record.time_water_added
                 t2 = record.time_needle_make_impression
                 time_difference = t2 - t1
+                record.final_setting_time_minutes = time_difference
 
                 record.final_setting_time_hours = time_difference
                 final_setting_time = time_difference.total_seconds() / 60
@@ -209,9 +250,17 @@ class FlyaschNormalConsistency(models.Model):
                     record.final_setting_time_minutes =  final_setting_time
                 else:
                     record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
+
+                record.final_setting_time_minutes_unrounded = final_setting_time
+                
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
+                record.final_setting_time_minutes_unrounded = False
+
+
+        
+
 
      #  Particles retained on 45 micron IS sieve (wet sieving) 
 
@@ -240,16 +289,17 @@ class FlyaschNormalConsistency(models.Model):
     @api.depends('average_weight_retained')
     def _compute_prcent_retaind(self):
         for record in self:
-            integer_part = math.floor(record.average_weight_retained)
-            fractional_part = record.average_weight_retained - integer_part
-            if fractional_part > 0 and fractional_part <= 0.25:
-                record.prcent_retaind = integer_part
-            elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.prcent_retaind = integer_part + 0.5
-            elif fractional_part > 0.75 and fractional_part <= 1:
-                record.prcent_retaind = integer_part + 1
-            else:
-                record.prcent_retaind = 0
+            # integer_part = math.floor(record.average_weight_retained)
+            # fractional_part = record.average_weight_retained - integer_part
+            # if fractional_part > 0 and fractional_part <= 0.25:
+            #     record.prcent_retaind = integer_part
+            # elif fractional_part > 0.25 and fractional_part <= 0.75:
+            #     record.prcent_retaind = integer_part + 0.5
+            # elif fractional_part > 0.75 and fractional_part <= 1:
+            #     record.prcent_retaind = integer_part + 1
+            # else:
+            #     record.prcent_retaind = 0
+            record.prcent_retaind = round(record.average_weight_retained,2)
 
     # Soundness Test
     soundness_name_fly = fields.Char("Name",default="Soundness by Le-Chatelier Method")

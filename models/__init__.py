@@ -21,7 +21,8 @@ from .report import pt_grout_report
 from .report import ptgrout_non_nabl_report
 from .report import cement_compatiblity
 from .report import half_cell_report
-from .mechanical import sieve_analysis
+from .report import chemical_fine_aggregate_report
+# from .mechanical import sieve_analysis
 from .mechanical import pavel_block
 from .mechanical import free_swell_index
 from .mechanical import soil_cbr
@@ -50,7 +51,7 @@ from .mechanical import microsilica
 from .mechanical import wpt
 from .mechanical import pt_grout
 from .mechanical import soil
-from .mechanical import pever_block
+from .mechanical import paver_block
 # from .mechanical import aggregate_fine
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
@@ -69,5 +70,7 @@ from .mechanical import cement_ppc
 from .mechanical import cement_setting_time
 from .mechanical import coupler
 from .mechanical import cement_compatablity
+from .chemical import fine_aggregate
+
 from . import general_template
 

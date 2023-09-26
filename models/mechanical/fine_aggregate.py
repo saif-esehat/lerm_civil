@@ -19,7 +19,7 @@ class SpecificAndWater(models.Model):
         record.parameter_id.write({'model_id':record.id})
         return record
 
-
+    
 
 class SpecificAndWaterLine(models.Model):
     _name = "mechanical.specific.and.water.fine.aggregate.line"

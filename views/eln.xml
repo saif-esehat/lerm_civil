@@ -18,11 +18,11 @@
                             name="print_datasheet"
                             string="Print Datasheet"
                             />
-                    <!-- <button
+                    <button
                             type="object"
                             name="print_report"
                             string="Print Report"
-                            /> -->
+                            />
 
                     <!-- <button
                                 type="object"

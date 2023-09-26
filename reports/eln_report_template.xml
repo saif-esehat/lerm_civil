@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
 	<template id="custom_layout_header_footer_lerm_eln">
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
@@ -18,23 +17,30 @@
 		<div t-attf-class="footer o_standard_footer">
             <div class="text-center" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4 footerQR">
-					<div>
-						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 70px; height: 70px;"/>
-					</div>
+					<!-- <div style="border-top: 1px solid black;">
+						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
+					</div> -->
 					<div>
 						<div class="footertext">
 							Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
 						</div>
-						<div class="footerQR">
+						<div>
 							<!-- <div>
 								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 70px; height: 70px;"/>
 							</div> -->
-							<div style="margin-left:12%">
-								<div class="footertext">
-									Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
+							<div class="footerQR">
+								<div style="padding-right : 20px">
+									<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
 								</div>
-								<div class="footertext">
-									CIN No.: U45209MH2017PTC291168
+								<div style="margin-left:90px">
+									<div class="footertext">
+										<span>
+											Email : sales@knackengineeringservices.com <span style="padding-left:10px">Website :  www.knackengineeringservices.com</span> 
+										</span>
+									</div>
+									<div class="footertext">
+										CIN No.: U45209MH2017PTC291168
+									</div>
 								</div>
 							</div>
 						</div>
@@ -68,7 +74,12 @@
 											<span t-esc="eln.group.group"/> <![CDATA[&nbsp;]]> (<span t-esc="eln.material.name"/>)
 										</div>
 										<div style="text-align:center;">
-											IS- 228 ( part 2 ):1987 (RA )2018, IS - 228( part 1 ): 1987 (RA 2018), IS- 228 (part 9):1989 (RA 2019), IS - 228 (part 3 ) :1987 (RA2018 ), By Calculation, 
+												<span t-foreach="eln.parameters_result" t-as="r">
+													<span t-if="r['specification'] != '--' and r['specification']">
+														<span t-esc="r['specification']"/> <![CDATA[&nbsp;]]>,<![CDATA[&nbsp;]]>
+													</span>
+												</span>
+												
 										</div>
 									</td>
 								</tr>
@@ -364,12 +375,32 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
+									<li t-if="eln.remarks">
+										<span t-esc="eln.remarks"/>
+									</li>
 								</ul>
 							</div>
 						</div>
 						<div class="signatureContainer girdgird">
 							<div>
-								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										Chemical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
 							</div>
 							<div>
 								<div t-if="stamp and stamp == '4-in_report'">
@@ -399,6 +430,9 @@
 									</b>
 								</div>
 							</div>
+						</div>
+						<div style="text-align:center;margin-top:25px">
+							......End of Report......
 						</div>
 					</div>
 				</div>
@@ -946,6 +980,9 @@
 								<li>
 									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 								</li>
+								<li t-if="eln.remarks">
+									<span t-esc="eln.remarks"/>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -953,17 +990,17 @@
 						<div>
 							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
 						</div>
-						<!-- <div>
-							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-						</div> -->
 						<div>
+							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
+						</div>
+						<!-- <div>
 							<div t-if="stamp.inreport == '4-in_report'">
 								<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 							</div>
 							<div style="padding-top:5px">
 								Format No. <span t-esc="eln.material.test_format_no"/>
 							</div>
-						</div>
+						</div> -->
 						<div>
 							<div>
 								<b>

@@ -276,4 +276,48 @@
     </record>
 
 
+
+    <record id="report_cement_psc_action" model="ir.actions.report">
+        <field name="name">Report Cement PSC</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.lerm_cement_report_psc</field>
+        <field name="report_file">lerm_civil.lerm_cement_report_psc</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="report_cement_ppc_action" model="ir.actions.report">
+        <field name="name">Report Cement PPC</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.lerm_cement_report_ppc</field>
+        <field name="report_file">lerm_civil.lerm_cement_report_ppc</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="datasheet_fine_aggregate_chemical_action" model="ir.actions.report">
+        <field name="name">Fine Aggregate Chemical Datasheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.chemical_fine_aggregate</field>
+        <field name="report_file">lerm_civil.chemical_fine_aggregate</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="report_fine_aggregate_chemical_action" model="ir.actions.report">
+        <field name="name">Fine Aggregate Chemical Report</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.fine_aggregate_chemical_report</field>
+        <field name="report_file">lerm_civil.fine_aggregate_chemical_report</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="binding_type">report</field>
+    </record>
 </odoo>

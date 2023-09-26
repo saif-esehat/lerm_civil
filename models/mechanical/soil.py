@@ -346,11 +346,11 @@ class Soil(models.Model):
             if heavy_test in record.tests:
                 record.heavy_visible = True
             if heavy_omc_test in record.tests:
-                 record.heavy_omc_visible = True
+                record.heavy_omc_visible = True
             if light_omc_test in record.tests:
-                 record.light_omc_visible = True
+                record.light_omc_visible = True
             if light_mdd_test in record.tests:
-                 record.light_mdd_visible = True
+                record.light_mdd_visible = True
             if liquid_limit_test in record.tests:
                 record.liquid_limit_visible = True
             if plastic_limit_test in record.tests:
@@ -363,7 +363,40 @@ class Soil(models.Model):
                 record.moisture_content_visible = True
             # if fineness_blaine in record.tests:
             #     record.fineness_blaine_visible = True
+
+
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                if sample.internal_id == '47ba9d28-2065-4532-814a-3a4c1e884305':
+                    record.soil_visible = True
+                if sample.internal_id == 'a2ae0d2c-ca64-44dd-b0ae-228aacf04998':
+                    record.fsi_visible = True
+                if sample.internal_id == '5a0ac62b-5c56-475b-9a89-93a59c9ee3a2':
+                    record.sieve_visible = True
+
+                if sample.internal_id == 'd5ccc1b6-20fb-4843-aa0e-2ee981be0d7c':
+                    record.heavy_visible = True
+
+                if sample.internal_id == 'bfc0b682-0c28-4c8b-924f-7e6988a658ee':
+                    record.heavy_omc_visible = True
+
+                if sample.internal_id == '7485d907-d8ad-4000-9376-439ef2a64c70':
+                    record.light_omc_visible = True
+
+                if sample.internal_id == '0eb532a8-7683-42b3-b9b2-36904ae2cd15':
+                    record.light_mdd_visible = True
+
+                if sample.internal_id == '8fc72243-7202-4d62-864b-8efa58b6b61f':
+                    record.liquid_limit_visible = True
                
+                if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
+                    record.plastic_limit_visible = True
+
+                # if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
+                #     record.dry_density_visible = True
+
+                if sample.internal_id == 'a59bdedd-72cb-40e8-be97-e17fc20ff3fa':
+                    record.moisture_content_visible = True
 
 
     @api.model
@@ -874,8 +907,8 @@ class MoistureContentLine(models.Model):
     parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
    
     sr_no = fields.Integer(string="SR NO.", readonly=True, copy=False, default=1)
-    wt_of_sample = fields.Integer(string="Weight of sample W1 in gm")
-    oven_dry_wt = fields.Integer(string="Oven dry Weight of sample W in gm")
+    wt_of_sample = fields.Float(string="Weight of sample W1 in gm")
+    oven_dry_wt = fields.Float(string="Oven dry Weight of sample W in gm")
     moisture_content = fields.Float(string="% Moisture Content",compute="_compute_moisture_content")
 
 

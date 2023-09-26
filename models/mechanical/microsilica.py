@@ -543,8 +543,9 @@ class Microsilica(models.Model):
                 if sample.internal_id == '8211b72d-889b-477c-a355-0476f6bcd0d7':
                     record.compressive_strength_visible = True
                 # oversize percent retained
-                if sample.internal_id == '3c5d3687-bfaf-4667-aca6-b69c321af63bb':
+                if sample.internal_id == '3c5d3687-bfaf-4667-aca6-b69c321af63b':
                     record.oversize_percent_retain_visible = True
+                    print("oversize percent retained",record.oversize_percent_retain_visible)
                 # bulk density
                 if sample.internal_id == 'a1feec77-42b6-4d86-9ac7-a2758b3f4e5a':
                     record.bulk_density_visible = True
