@@ -229,8 +229,8 @@
                                 <field name='wt_retained'/>
                                 <field name='elongated_retain'/>
                             </tree>
-                    </group>    
                     </field> 
+                    </group>    
                     <group attrs="{'invisible': [('elongation_visible', '=', False)]}">
                         <group style="width:30%">
                                <field name='wt_retained_total_elongation'/>
@@ -250,6 +250,7 @@
 
                         </h1>
                     </group>
+                    <group attrs="{'invisible': [('flakiness_visible', '=', False)]}">
                     <field name="flakiness_child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
@@ -259,6 +260,7 @@
                             </tree>
                            
                     </field> 
+                    </group>
                     <group attrs="{'invisible': [('flakiness_visible', '=', False)]}">
                             <group style="width:30%">
                                <field name='wt_retained_total_flakiness'/>
@@ -269,9 +271,9 @@
                             <group style="width:30%">
                                <field name='aggregate_flakiness'/>
                             </group>
-                    </group attrs="{'invisible': [('flakiness_visible', '=', False)]}">
+                    </group>
                                
-                        <group style="width:30%"> 
+                        <group style="width:30%" attrs="{'invisible': [('flakiness_visible', '=', False)]}"> 
                             <field name='combine_elongation_flakiness'/>
                         </group>
 
@@ -326,6 +328,7 @@
 
                         </h1>
                     </group>
+                    <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}">
                     <field name="loose_bulk_density_child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
@@ -338,6 +341,7 @@
                             </tree>
                            
                     </field> 
+                    </group>
 
 
                     <group attrs="{'invisible': [('rodded_bulk_visible', '=', False)]}">
@@ -347,6 +351,7 @@
 
                         </h1>
                     </group>
+                    <group attrs="{'invisible': [('rodded_bulk_visible', '=', False)]}">
                     <field name="rodded_bulk_density_child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
@@ -359,6 +364,7 @@
                             </tree>
                            
                     </field> 
+                    </group>
 
                     <!-- Sieve Alanysis  -->
                     <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
@@ -371,6 +377,7 @@
                     <div attrs="{'invisible': [('sieve_visible', '=', False)]}">
                         <button string="Calculate" type="object" name="calculate_sieve" class="oe_highlight"/>
                     </div>
+                    <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
                     <field name="sieve_analysis_child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="serial_no" string="Sr.No"/>
@@ -382,6 +389,7 @@
                                 
                             </tree>
                     </field>
+                    </group>
                     <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
                         <field name="total_sieve_analysis"/>
                     </group>
@@ -398,6 +406,7 @@
                     <div attrs="{'invisible': [('aggregate_grading_visible', '=', False)]}">
                         <button string="Calculate" type="object" name="calculate_aggregate" class="oe_highlight"/>
                     </div>
+                    <group attrs="{'invisible': [('aggregate_grading_visible', '=', False)]}">
                     <field name="aggregate_grading_child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="serial_no" string="Sr.No"/>
@@ -409,22 +418,24 @@
                                 
                             </tree>
                     </field>
+                    </group>
                     <group attrs="{'invisible': [('aggregate_grading_visible', '=', False)]}">
                         <field name="total_aggregate_grading"/>
                     </group>
 
                     <!-- Angularity Number  -->
-                    <!-- <group>
+                    <group attrs="{'invisible': [('angularity_visible', '=', False)]}">
                         <h1>
                             <field name="angularity_name" readonly="1" nolabel="1"/>
+                            <field name="angularity_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group style="width:50%"> 
+                    <group style="width:50%" attrs="{'invisible': [('angularity_visible', '=', False)]}"> 
                         <field name="mean_wt_aggregate"/>
                         <field name="wt_water_required_angularity"/>
                         <field name="specific_gravity_aggregate_angularity"/>
                         <field name="angularity_number"/>
-                    </group> -->
+                    </group>
 
                 </sheet>
             </form>
