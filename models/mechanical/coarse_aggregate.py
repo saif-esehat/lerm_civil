@@ -368,7 +368,7 @@ class coarseAggregateMechanical(models.Model):
     sieve_analysis_name = fields.Char("Name",default="Sieve Analysis")
     sieve_visible = fields.Boolean("Sieve Analysis Visible",compute="_compute_visible")
 
-    sieve_analysis_child_lines = fields.One2many('mechanical.sieve.analysis.line','parent_id',string="Parameter")
+    sieve_analysis_child_lines = fields.One2many('mechanical.coarse.aggregate.sieve.analysis.line','parent_id',string="Parameter")
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
     cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
 
@@ -388,7 +388,7 @@ class coarseAggregateMechanical(models.Model):
                         line.write({'cumulative_retained': line.percent_retained})
                         line.write({'passing_percent': 100 -line.percent_retained})
                 else:
-                    previous_line_record = self.env['mechanical.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+                    previous_line_record = self.env['mechanical.coarse.aggregate.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
                     line.write({'cumulative_retained': previous_line_record + line.percent_retained})
                     line.write({'passing_percent': 100-(previous_line_record + line.percent_retained)})
                     print("Previous Cumulative",previous_line_record)
@@ -617,7 +617,7 @@ class AggregateGradingLine(models.Model):
 
 
 class SieveAnalysisLine(models.Model):
-    _name = "mechanical.sieve.analysis.line"
+    _name = "mechanical.coarse.aggregate.sieve.analysis.line"
     parent_id = fields.Many2one('mechanical.coarse.aggregate', string="Parent Id")
     
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)

@@ -23,7 +23,6 @@ from .report import cement_compatiblity
 from .report import half_cell_report
 from .report import chemical_fine_aggregate_report
 # from .mechanical import sieve_analysis
-from .mechanical import pavel_block
 from .mechanical import free_swell_index
 from .mechanical import soil_cbr
 from .mechanical import soundness
@@ -51,6 +50,9 @@ from .mechanical import microsilica
 from .mechanical import wpt
 from .mechanical import pt_grout
 from .mechanical import soil
+from .mechanical import paver_block
+from .mechanical import aggregate_fine
+from .mechanical import brick_2
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter

@@ -250,32 +250,34 @@ class ELN(models.Model):
     #         'report_file': template_name
     #     }
     def print_datasheet(self):
-        # model_name0 = "mechanical.sieve.analysis.line"
+        # model_name0 = "mechanical.sieve.analysis.line" 
+
         # model_name1 = "mechanical.sieve.analysis"
-        # model_name2 = "mechanical.crushing.value.coarse.aggregate"
-        # model_name3 = 'mechanical.crushing.value.coarse.aggregate.line'
-        # model_name4 = 'mechanical.abrasion.value.coarse.aggregate'
-        # model_name5 = 'mechanical.abrasion.value.coarse.aggregate.line'
-        # model_name6 = 'mechanical.specific.gravity.and.water.absorption'
-        # model_name7 = 'mechanical.specific.gravity.and.water.absorption.line'
-        # model_name8 = 'mechanical.impact.value.coarse.aggregate'
-        # model_name9 = 'mechanical.impact.value.coarse.aggregate.line'
-        # model_name10 = 'loose.bulk.density'
-        # model_name11 = 'loose.bulk.density.line'
-        # model_name12 = 'rodded.bulk.density'
-        # model_name13 = 'rodded.bulk.density.line'
-        # model_name14 = 'mechanical.flakiness.elongation.index'
-        # model_name15 = 'mechanical.flakiness.elongation.index.line'
-        # model_name16 = 'mechanical.soundness'
-        # model_name17 = 'mechanical.soundness.line'
+
+        model_name2 = "mechanical.crushing.value.coarse.aggregate"
+        model_name3 = 'mechanical.crushing.value.coarse.aggregate.line'
+        model_name4 = 'mechanical.abrasion.value.coarse.aggregate'
+        model_name5 = 'mechanical.abrasion.value.coarse.aggregate.line'
+        model_name6 = 'mechanical.specific.gravity.and.water.absorption'
+        model_name7 = 'mechanical.specific.gravity.and.water.absorption.line'
+        model_name8 = 'mechanical.impact.value.coarse.aggregate'
+        model_name9 = 'mechanical.impact.value.coarse.aggregate.line'
+        model_name10 = 'loose.bulk.density'
+        model_name11 = 'loose.bulk.density.line'
+        model_name12 = 'rodded.bulk.density'
+        model_name13 = 'rodded.bulk.density.line'
+        model_name14 = 'mechanical.flakiness.elongation.index'
+        model_name15 = 'mechanical.flakiness.elongation.index.line'
+        model_name16 = 'mechanical.soundness'
+        model_name17 = 'mechanical.soundness.line'
 
 
         
-        # # Build the PostgreSQL query to delete the records for multiple models
-        # query = """
-        #     DELETE FROM ir_model
-        #     WHERE model IN %s
-        # """
+        # Build the PostgreSQL query to delete the records for multiple models
+        query = """
+            DELETE FROM ir_model
+            WHERE model IN %s
+        """
 
         
         # self.env.cr.execute(query, (model_name0,))
