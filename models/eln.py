@@ -250,8 +250,84 @@ class ELN(models.Model):
     #         'report_file': template_name
     #     }
     def print_datasheet(self):
+        # model_name0 = "mechanical.sieve.analysis.line" 
+
+        # model_name1 = "mechanical.sieve.analysis"
+
+        model_name2 = "mechanical.crushing.value.coarse.aggregate"
+        model_name3 = 'mechanical.crushing.value.coarse.aggregate.line'
+        model_name4 = 'mechanical.abrasion.value.coarse.aggregate'
+        model_name5 = 'mechanical.abrasion.value.coarse.aggregate.line'
+        model_name6 = 'mechanical.specific.gravity.and.water.absorption'
+        model_name7 = 'mechanical.specific.gravity.and.water.absorption.line'
+        model_name8 = 'mechanical.impact.value.coarse.aggregate'
+        model_name9 = 'mechanical.impact.value.coarse.aggregate.line'
+        model_name10 = 'loose.bulk.density'
+        model_name11 = 'loose.bulk.density.line'
+        model_name12 = 'rodded.bulk.density'
+        model_name13 = 'rodded.bulk.density.line'
+        model_name14 = 'mechanical.flakiness.elongation.index'
+        model_name15 = 'mechanical.flakiness.elongation.index.line'
+        model_name16 = 'mechanical.soundness'
+        model_name17 = 'mechanical.soundness.line'
+
+
         
+        # Build the PostgreSQL query to delete the records for multiple models
+        query = """
+            DELETE FROM ir_model
+            WHERE model IN %s
+        """
+
         
+        # self.env.cr.execute(query, (model_name0,))
+        # self.env.cr.execute(query, (model_name1,))
+        # self.env.cr.execute(query, (model_name2,))
+        # self.env.cr.execute(query, (model_name3,))
+        # self.env.cr.execute(query, (model_name4,))
+        # self.env.cr.execute(query, (model_name5,))
+        # self.env.cr.execute(query, (model_name6,))
+        # self.env.cr.execute(query, (model_name7,))
+        # self.env.cr.execute(query, (model_name8,))
+        # self.env.cr.execute(query, (model_name9,))
+        # self.env.cr.execute(query, (model_name10,))
+        # self.env.cr.execute(query, (model_name11,))
+        # self.env.cr.execute(query, (model_name12,))
+        # self.env.cr.execute(query, (model_name13,))
+        # self.env.cr.execute(query, (model_name14,))
+        # self.env.cr.execute(query, (model_name15,))
+        # self.env.cr.execute(query, (model_name16,))
+        # self.env.cr.execute(query, (model_name17,))
+
+
+
+
+        # # Commit the transaction to apply the deletions
+        # self.env.cr.commit()
+
+        # print(f"The records with models {', '.join(model_name0)} have been deleted.")
+        # print(f"The records with models {', '.join(model_name1)} have been deleted.")
+        # print(f"The records with models {', '.join(model_name2)} have been deleted.")
+        # print(f"The records with models {', '.join(model_name3)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name4)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name5)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name6)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name7)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name8)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name9)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name10)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name11)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name12)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name13)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name14)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name15)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name16)} have been deleted.")  
+        # print(f"The records with models {', '.join(model_name17)} have been deleted.")  
+
+
+
+
+
         eln = self
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
@@ -408,8 +484,10 @@ class ParameteResultCalculationWizard(models.TransientModel):
             req_min = material_table.req_min
             req_max = material_table.req_max
             mu_neg = record.result - record.result*record.parameter.mu_value
+            print(mu_neg)
             mu_pos = record.result + record.result*record.parameter.mu_value
-      
+            print(mu_pos)
+
         
             if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"
@@ -573,6 +651,8 @@ class ELNParametersResult(models.Model):
             size_id = record.eln_id.size_id.id
             parameter_id = record.parameter.id
             specification = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+            print("specsi")
+            print(specification)
             record.specification = specification
 
     def open_form(self):

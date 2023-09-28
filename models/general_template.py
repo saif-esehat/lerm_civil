@@ -149,6 +149,7 @@ class GeneralReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
+        inreport_value = data.get('inreport', None)
         print(data['context'])
         if 'active_id' in data['context']:
             # stamp = data['context']['inreport']
@@ -182,7 +183,8 @@ class GeneralReport(models.AbstractModel):
             'data' : general_data,
             'tabledata' : columns,
             'resultdata' : resultfields,
-            'qrcode': qr_code
+            'qrcode': qr_code,
+            'stamp' : inreport_value,
         }
 
 class SteelTmtBar(models.AbstractModel):
@@ -192,6 +194,7 @@ class SteelTmtBar(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
+        inreport_value = data.get('inreport', None)
         if 'active_id' in data['context']:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
@@ -218,7 +221,8 @@ class SteelTmtBar(models.AbstractModel):
         return {
             'eln': eln,
             'data' : general_data,
-            'qrcode': qr_code
+            'qrcode': qr_code,
+            'stamp' : inreport_value,
         }
 
 class SteelTmtBarDataSheet(models.AbstractModel):

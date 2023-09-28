@@ -75,58 +75,7 @@
         </t>
 
     </template>
-    <template id="data_sheet_header">
-        <div t-attf-class="header article" t-att-style="report_header_style">
-			<div class="row">
-				<div class="col-12">
-					<div style="text-align:left;">	
-						FORMAT No. <![CDATA[&nbsp;]]> <span t-esc="eln.material.data_sheet_format_no.name"/>
-					</div>
-					<div style="text-align:center;margin-top:12px">	
-						KNACK ENGINEERING SERVICES PVT LTD
-					</div>
-					<div style="text-align:center;">
-						TEST DATA SHEET
-					</div>
-					<div class="container_eln">
-						<table>
-								<tr>
-									<td colspan="12">
-										<div style="text-align:center;">
-											<span t-esc="eln.group.group"/> <![CDATA[&nbsp;]]> (<span t-esc="eln.material.name"/>)
-										</div>
-										<div style="text-align:center;">
-											IS- 228 ( part 2 ):1987 (RA )2018, IS - 228( part 1 ): 1987 (RA 2018), IS- 228 (part 9):1989 (RA 2019), IS - 228 (part 3 ) :1987 (RA2018 ), By Calculation, 
-										</div>
-									</td>
-								</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-        </div>
-        <div t-attf-class="article" t-att-style="report_header_style">
-            <t t-out="0"/>
-        </div>
-		<div t-attf-class="footer o_standard_footer">
-            <div class="text-center" style="border-top: 1px solid black;">
-                <!-- <ul class="list-inline mb4">
-                    <div class="footertext">
-						Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
-					</div>
-					<div class="footertext">
-						Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
-					</div>
-					<div class="footertext">
-						CIN No.: U45209MH2017PTC291168
-					</div>
-                </ul> -->
-                <div t-if="report_type == 'pdf'" class="footertext">
-                    Page: <span class="page"/> / <span class="topage"/>
-                </div>
-            </div>
-        </div>
-	</template>
+    
 </odoo>
 
 

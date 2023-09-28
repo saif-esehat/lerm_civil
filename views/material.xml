@@ -39,9 +39,10 @@
             <group style="width:50%">
               <field name="group" domain="[('id', 'in', group_ids)]"/>
               <field name="group_ids" invisible='1'/>
+              <field name="parameter_master_ids" invisible='1'/>
               <field name="data_sheet_format_no"/>
             </group>
-            <field name='parameter_table1' options="{'no_create': True}"/>
+            <field name='parameter_table1' options="{'no_create': True}" domain="[('id', 'in', parameter_master_ids)]" />
 
             <!-- <field name="parameter_table" context="{'default_discipline':discipline}" nolabel="1">
               <tree>
@@ -69,9 +70,11 @@
           </page>
           <page string="Product Based" attrs="{'invisible': [('is_product_based_calculation','=',False)]}">
     
-              <field name='product_based_calculation'>
+              <field name='product_based_calculation' context="{'grade_table_datas':grade_table, 'product_id':active_id}">
                 <tree editable="bottom">
-                  <field name="grade"/>
+                  <field name="product_id" invisible="1" />
+                  <field name="grade_ids" invisible="1" />
+                  <field name="grade" domain="[('id', 'in', grade_ids)]"/>
                   <field name="ir_model"/>
                   <field name="main_report_template"/>
                   <field name="datasheet_report_template"/>

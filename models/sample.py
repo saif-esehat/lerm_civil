@@ -453,4 +453,4 @@ class SampleParametersResult(models.Model):
     test_method = fields.Many2one('lerm_civil.test_method',string="Test Method")
     specification = fields.Text(string="Specification")
     verified = fields.Boolean("Verified")
-    result = fields.Float(string="Result",digits=(16, 10))
+    result = fields.Float(string="Result",digits=(12, 5))

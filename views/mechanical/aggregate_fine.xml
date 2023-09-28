@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_fine_aggregate" model="ir.ui.view">
+        <field name="name">mechanical.fine.aggregate.form</field>
+        <field name="model">mechanical.fine.aggregate</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group >
+                        <h1>
+                            <field name="name_aggregate" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" />
+                        <field name="eln_ref"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+                  
+                    
+                    <group >
+                            
+                            <field name="tests" widget="many2many_tags"/>
+                    </group>
+
+                     <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}">
+                        <h1>
+                            <field name="loose_bulk_name" readonly="1" nolabel="1"/>
+                            <field name="loose_bulk_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                   
+                     <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}">
+                        <label for="weight_empty_bucket" string="Weight of Empty Bucket in kg" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="weight_empty_bucket" string="" />
+                            <field  name="weight_empty_bucket"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}">
+                        <label for="volume_of_bucket" string="Volume of Bucket in cubic meter" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="volume_of_bucket" string=""/>
+                            <field  name="volume_of_bucket"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}">
+                        <label for="sample_plus_bucket" string="Sample Weight + Bucket  Weight in kg" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="sample_plus_bucket" string="" />
+                            <field  name="sample_plus_bucket"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                     <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}">
+                        <label for="sample_weight" string="Sample Weight in kg" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="sample_weight" string="" />
+                            <field  name="sample_weight"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                     <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}">
+                        <label for="loose_bulk_density" string="Loose Bulk Density in kg per cubic meter" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="loose_bulk_density" string=""/>
+                            <field  name="loose_bulk_density"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                        <!-- Rodded Bulk Density (RBD) -->
+                      <group attrs="{'invisible': [('rodded_bulk_visible', '=', False)]}">
+                        <h1>
+                            <field name="rodded_bulk_name" readonly="1" nolabel="1"/>
+                            <field name="rodded_bulk_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                   
+                     <group attrs="{'invisible': [('rodded_bulk_visible', '=', False)]}">
+                        <label for="weight_empty_bucket1" string="Weight of Empty Bucket in kg" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="weight_empty_bucket1" string="" />
+                            <field  name="weight_empty_bucket1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('rodded_bulk_visible', '=', False)]}">
+                        <label for="volume_of_bucket1" string="Volume of Bucket in cubic meter" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="volume_of_bucket1" string=""/>
+                            <field  name="volume_of_bucket1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('rodded_bulk_visible', '=', False)]}">
+                        <label for="sample_plus_bucket1" string="Sample Weight + Bucket  Weight in kg" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="sample_plus_bucket1" string="" />
+                            <field  name="sample_plus_bucket1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                     <group attrs="{'invisible': [('rodded_bulk_visible', '=', False)]}">
+                        <label for="sample_weight1" string="Sample Weight in kg" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="sample_weight1" string="" />
+                            <field  name="sample_weight1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                     <group attrs="{'invisible': [('rodded_bulk_visible', '=', False)]}">
+                        <label for="rodded_bulk_density1" string="Rodded Bulk Density in kg per cubic meter" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="rodded_bulk_density1" string=""/>
+                            <field  name="rodded_bulk_density1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                           <!--  Specific Gravity -->
+
+
+                    <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <h1>
+                            <field name="specific_gravity_name" readonly="1" nolabel="1"/>
+                            <field name="specific_gravity_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                   
+                     <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <label for="wt_of_empty_pycnometer" string="Weight of empty Pycnometer in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_empty_pycnometer" string="" />
+                            <field  name="wt_of_empty_pycnometer"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <label for="wt_of_pycnometer" string="Weight of Pycnometer with full of water in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_pycnometer" string=""/>
+                            <field  name="wt_of_pycnometer"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <label for="wt_of_pycnometer_surface_dry" string="Weight of Pycnometer + Saturated surface dry Aggregate in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_pycnometer_surface_dry" string="" />
+                            <field  name="wt_of_pycnometer_surface_dry"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                     <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <label for="wt_of_pycnometer_surface_dry_water" string="Weight of Pycnometer + Saturated surface dry Aggregate + Water in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_pycnometer_surface_dry_water" string="" />
+                            <field  name="wt_of_pycnometer_surface_dry_water"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                     <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <label for="wt_of_saturated_surface_dry" string="Weight of Saturated surface dry Aggregate in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_saturated_surface_dry" string=""/>
+                            <field  name="wt_of_saturated_surface_dry"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <label for="wt_of_oven_dried" string="Weight of Oven dried Aggregate in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_oven_dried" string=""/>
+                            <field  name="wt_of_oven_dried"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <label for="volume_of_water" string="Volume of water displaced by saturated surface dry aggregate" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="volume_of_water" string=""/>
+                            <field  name="volume_of_water"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <label for="specific_gravity" string="SPECIFIC GRAVITY" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="specific_gravity" string=""/>
+                            <field  name="specific_gravity"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                        <label for="water_absorption" string="Water Absorption %" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="water_absorption" string=""/>
+                            <field  name="water_absorption"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                   <!-- Water Absorption -->
+
+
+                    <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <h1>
+                            <field name="water_absorption_name" readonly="1" nolabel="1"/>
+                            <field name="water_absorption_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                   
+                     <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <label for="wt_of_empty_pycnometer1" string="Weight of empty Pycnometer in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_empty_pycnometer1" string="" />
+                            <field  name="wt_of_empty_pycnometer1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <label for="wt_of_pycnometer1" string="Weight of Pycnometer with full of water in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_pycnometer1" string=""/>
+                            <field  name="wt_of_pycnometer1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <label for="wt_of_pycnometer_surface_dry1" string="Weight of Pycnometer + Saturated surface dry Aggregate in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_pycnometer_surface_dry1" string="" />
+                            <field  name="wt_of_pycnometer_surface_dry1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                     <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <label for="wt_of_pycnometer_surface_dry_water1" string="Weight of Pycnometer + Saturated surface dry Aggregate + Water in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_pycnometer_surface_dry_water1" string="" />
+                            <field  name="wt_of_pycnometer_surface_dry_water1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+                     <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <label for="wt_of_saturated_surface_dry1" string="Weight of Saturated surface dry Aggregate in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_saturated_surface_dry1" string=""/>
+                            <field  name="wt_of_saturated_surface_dry1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <label for="wt_of_oven_dried1" string="Weight of Oven dried Aggregate in gms" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="wt_of_oven_dried1" string=""/>
+                            <field  name="wt_of_oven_dried1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <label for="volume_of_water1" string="Volume of water displaced by saturated surface dry aggregate" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="volume_of_water1" string=""/>
+                            <field  name="volume_of_water1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <label for="specific_gravity1" string="SPECIFIC GRAVITY" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="specific_gravity1" string=""/>
+                            <field  name="specific_gravity1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
+                        <label for="water_absorption1" string="Water Absorption %" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="water_absorption1" string=""/>
+                            <field  name="water_absorption1"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                        </div>
+                    </group>
+
+
+                    <!-- Sieve Alanysis  -->
+                    <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
+                        <h1>
+                            <field name="sieve_analysis_name" readonly="1" nolabel="1"/>
+                            <field name="sieve_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+                    <div attrs="{'invisible': [('sieve_visible', '=', False)]}">
+                        <button string="Calculate" type="object" name="calculate_sieve" class="oe_highlight"/>
+                    </div>
+                    <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
+                    <field name="sieve_analysis_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="serial_no" string="Sr.No"/>
+                                <field name='sieve_size' string="IS Sieve Size"/>
+                                <field name='wt_retained' string="Wt. Retained in gms"/>
+                                <field name='percent_retained' string="% Retained"/>
+                                <field name='cumulative_retained' context="{'default_cumulative_retained': cumulative_retained}" string="Cum. Retained %"/>
+                                <field name='passing_percent' string="Passing %" readonly="1"/>
+                                
+                            </tree>
+                    </field>
+                    </group>
+                    <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
+                        <field name="total_sieve_analysis"/>
+                    </group>
+
+              
+              
+
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>
