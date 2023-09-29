@@ -29,10 +29,10 @@
                     </group>
                   
                     
-                    <group >
+                    <!-- <group >
                             
                             <field name="tests" widget="many2many_tags"/>
-                    </group>
+                    </group> -->
 
                      <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}">
                         <h1>
@@ -389,6 +389,125 @@
                     <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
                         <field name="total_sieve_analysis"/>
                     </group>
+
+                     <!-- Soundness Na2So4  -->
+                <group attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                        <h1>
+                            <field name="soundness_na2so4_name" readonly="1" nolabel="1"/>
+                            <field name="soundness_na2so4_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                    <field name="soundness_na2so4_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="sieve_size_passing"/>
+                                <field name="sieve_size_retained"/>
+                                <field name="grading_original_sample" readonly='1'/>
+                                <field name="weight_before_test"/>
+                                <field name="weight_after_test"/>
+                                <field name="passing_percent" readonly='1'/>
+                                <field name="cumulative_loss_percent"/>
+                            </tree>
+                    </field>
+                    </group>
+                    <group attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                        <field name="total_na2so4"/>
+                        <field name="soundness_na2so4"/>
+                    </group>
+
+                       <!-- Soundness Mgso4  -->
+                <group attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                        <h1>
+                            <field name="soundness_mgso4_name" readonly="1" nolabel="1"/>
+                            <field name="soundness_mgso4_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                    <field name="soundness_mgso4_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="sieve_size_passing"/>
+                                <field name="sieve_size_retained"/>
+                                <field name="grading_original_sample" readonly='1'/>
+                                <field name="weight_before_test"/>
+                                <field name="weight_after_test"/>
+                                <field name="passing_percent" readonly='1'/>
+                                <field name="cumulative_loss_percent"/>
+                            </tree>
+                    </field>
+                    </group>
+                    <group attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                        <field name="total_mgso4"/>
+                        <field name="soundness_mgso4"/>
+                    </group>
+
+
+                     <!-- Deleterious Material -->
+                    <group attrs="{'invisible': [('finer75_visible', '=', False)]}">
+                        <h1>
+                            <field name="name_finer75" readonly="1" nolabel="1"/>
+                            <field name="finer75_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+                    <group style="width:50%" attrs="{'invisible': [('finer75_visible', '=', False)]}">
+                        <field name='wt_sample_finer75'/>
+                        <field name='wt_dry_sample_finer75'/>
+                        <field name='material_finer75'/>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('clay_lump_visible', '=', False)]}">
+                        <h1>
+                            <field name="name_clay_lumps" readonly="1" nolabel="1"/>
+                            <field name="clay_lump_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+                    <group style="width:50%" attrs="{'invisible': [('clay_lump_visible', '=', False)]}">
+                        <field name='wt_sample_clay_lumps'/>
+                        <field name='wt_dry_sample_clay_lumps'/>
+                        <field name='clay_lumps_percent'/>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('light_weight_visible', '=', False)]}">
+                        <h1>
+                            <field name="name_light_weight" readonly="1" nolabel="1"/>
+                            <field name="light_weight_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+                    <group style="width:50%" attrs="{'invisible': [('light_weight_visible', '=', False)]}">
+                        <field name='wt_sample_light_weight'/>
+                        <field name='wt_dry_sample_light_weight'/>
+                        <field name='light_weight_percent'/>
+                    </group>
+                    
+                    <!-- Moisture Content -->
+
+                    <group attrs="{'invisible': [('moisture_content_visible', '=', False)]}">
+                        <h1>
+                            <field name="moisture_content_name" readonly="1" nolabel="1"/>
+                            <field name="moisture_content_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+                    <group style="width:50%" attrs="{'invisible': [('moisture_content_visible', '=', False)]}">
+                        <field name='wt_in_container'/>
+                        <field name='wt_in_sample'/>
+                        <field name='wt_in_sample_and_container'/>
+                        <field name='vs'/>
+                        <field name='md'/>
+                        <field name='vd'/>
+                        <field name='vdd'/>
+                    </group>
+
+
+
+
+
 
               
               

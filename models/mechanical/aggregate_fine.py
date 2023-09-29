@@ -17,7 +17,7 @@ class FineAggregate(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    tests = fields.Many2many("mechanical.fine.aggregate.test",string="Tests")
+    # tests = fields.Many2many("mechanical.fine.aggregate.test",string="Tests")
 
     # Loose Bulk Density (LBD)
 
@@ -176,7 +176,7 @@ class FineAggregate(models.Model):
 
     sieve_analysis_child_lines = fields.One2many('mechanical.fine.aggregate.sieve.analysis.line','parent_id',string="Parameter")
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
-    cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
+    # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
 
 
     def calculate_sieve(self): 
@@ -210,6 +210,202 @@ class FineAggregate(models.Model):
 
 
 
+    # Soundness Na2SO4
+    soundness_na2so4_name = fields.Char("Name",default="Soundness Na2SO4")
+    soundness_na2so4_visible = fields.Boolean("Soundness Na2SO4 Visible",compute="_compute_visible")
+
+    soundness_na2so4_child_lines = fields.One2many('mechanical.soundnesss.na2so4.line','parent_id',string="Parameter")
+    total_na2so4 = fields.Integer(string="Total",compute="_compute_total_na2so4")
+    soundness_na2so4 = fields.Float(string="Soundness",compute="_compute_soundness_na2so4")
+    
+
+    @api.depends('soundness_na2so4_child_lines.weight_before_test')
+    def _compute_total_na2so4(self):
+        for record in self:
+            record.total_na2so4 = sum(record.soundness_na2so4_child_lines.mapped('weight_before_test'))
+    
+
+    @api.depends('soundness_na2so4_child_lines.cumulative_loss_percent')
+    def _compute_soundness_na2so4(self):
+        for record in self:
+            record.soundness_na2so4 = sum(record.soundness_na2so4_child_lines.mapped('cumulative_loss_percent'))
+
+
+    # Soundness MgSO4
+    soundness_mgso4_name = fields.Char("Name",default="Soundness MgSO4")
+    soundness_mgso4_visible = fields.Boolean("Soundness MgSO4 Visible",compute="_compute_visible")
+
+    soundness_mgso4_child_lines = fields.One2many('mechanical.soundnesss.mgso4.line','parent_id',string="Parameter")
+    total_mgso4 = fields.Integer(string="Total",compute="_compute_total_mgso4")
+    soundness_mgso4 = fields.Float(string="Soundness",compute="_compute_soundness_mgso4")
+    
+    
+
+    @api.depends('soundness_mgso4_child_lines.weight_before_test')
+    def _compute_total_mgso4(self):
+        for record in self:
+            record.total_mgso4 = sum(record.soundness_mgso4_child_lines.mapped('weight_before_test'))
+    
+
+    @api.depends('soundness_mgso4_child_lines.cumulative_loss_percent')
+    def _compute_soundness_mgso4(self):
+        for record in self:
+            record.soundness_mgso4 = sum(record.soundness_mgso4_child_lines.mapped('cumulative_loss_percent'))
+
+
+      # Deleterious Content
+
+    name_finer75 = fields.Char("Name",default="Finer than 75 micron")
+    finer75_visible = fields.Boolean("Finer than 75 micron Visible",compute="_compute_visible")
+
+    wt_sample_finer75 = fields.Float("Weight of Sample in gms")
+    wt_dry_sample_finer75 = fields.Float("Weight of dry sample after retained in 75 microns")
+    material_finer75 = fields.Float("Material finer than 75 micron in %",compute="_compute_finer75")
+
+    @api.depends('wt_sample_finer75','wt_dry_sample_finer75')
+    def _compute_finer75(self):
+        for record in self:
+            if record.wt_sample_finer75 != 0:
+                record.material_finer75 = (record.wt_sample_finer75 - record.wt_dry_sample_finer75)/record.wt_sample_finer75 * 100
+            else:
+                record.material_finer75 = 0
+
+    
+    name_clay_lumps = fields.Char("Name",default="Deleterious content (Clay Lumps)")
+    clay_lump_visible = fields.Boolean("Clay Lump Visible",compute="_compute_visible")
+
+    wt_sample_clay_lumps = fields.Float("Weight of Sample in gms")
+    wt_dry_sample_clay_lumps = fields.Float("Weight of sample after Removal of Clay Lumps")
+    clay_lumps_percent = fields.Float("Clay Lumps in %",compute="_compute_clay_lumps")
+
+    @api.depends('wt_sample_clay_lumps','wt_dry_sample_clay_lumps')
+    def _compute_clay_lumps(self):
+        for record in self:
+            if record.wt_sample_clay_lumps != 0:
+                record.clay_lumps_percent = (record.wt_sample_clay_lumps - record.wt_dry_sample_clay_lumps)/record.wt_sample_clay_lumps * 100
+            else:
+                record.clay_lumps_percent = 0
+
+
+    name_light_weight = fields.Char("Name",default="Deleterious content (Light weight Particles)")
+    light_weight_visible = fields.Boolean("Light Weight Visible",compute="_compute_visible")
+
+    wt_sample_light_weight = fields.Float("Weight of Sample in gms")
+    wt_dry_sample_light_weight = fields.Float("Weight of Decanted sample (Light weight particle)")
+    light_weight_percent = fields.Float("Light Weight Particle in %",compute="_compute_light_weight")
+
+    @api.depends('wt_sample_light_weight','wt_dry_sample_light_weight')
+    def _compute_light_weight(self):
+        for record in self:
+            if record.wt_sample_light_weight != 0:
+                record.light_weight_percent = record.wt_dry_sample_light_weight / record.wt_sample_light_weight * 100
+            else:
+                record.light_weight_percent = 0
+
+
+
+    # Moisture Content
+
+    moisture_content_name = fields.Char("Name",default="Moisture Content")
+    moisture_content_visible = fields.Boolean("Moisture Content Visible",compute="_compute_visible")
+    
+    wt_in_container = fields.Integer(string="Me = weight in g of container filled up to the mark with water")
+    wt_in_sample = fields.Integer(string="Ms = weight in g of the sample")
+    wt_in_sample_and_container = fields.Integer(string="M = weight in g of the sample and container filled to the mark with water")
+    vs = fields.Integer(string="Vs = (Me + Ms) - M",compute="_compute_vs")
+    md = fields.Float(string="Md = Specific Gravity")
+    vd = fields.Integer(string="Vd = Ms / Md",compute="_compute_vd")
+    vdd = fields.Float(string="Vd = (Vs-Vd) / (Ms-Vd)*100",compute="_compute_vdd")
+
+
+    @api.depends('wt_in_container', 'wt_in_sample', 'wt_in_sample_and_container')
+    def _compute_vs(self):
+        for record in self:
+            record.vs = record.wt_in_container + record.wt_in_sample - record.wt_in_sample_and_container
+
+
+    @api.depends('wt_in_sample', 'md')
+    def _compute_vd(self):
+        for record in self:
+            if record.md != 0:  # Avoid division by zero
+                record.vd = record.wt_in_sample / record.md
+            else:
+                record.vd = 0.0
+
+
+
+    @api.depends('vs', 'vd', 'wt_in_sample')
+    def _compute_vdd(self):
+        for record in self:
+            if record.wt_in_sample != record.vd:  # Avoid division by zero
+                record.vdd = ((record.vs - record.vd) / (record.wt_in_sample - record.vd)) * 100
+            else:
+                record.vdd = 0.0
+
+
+     ### Compute Visible
+    @api.depends('sample_parameters')
+    def _compute_visible(self):
+        
+        for record in self:
+            record.loose_bulk_visible = False
+            record.rodded_bulk_visible = False
+            record.specific_gravity_visible = False
+            record.water_absorption_visible = False
+            record.sieve_visible = False
+            record.soundness_na2so4_visible = False
+            record.soundness_mgso4_visible = False
+
+            record.finer75_visible = False
+            record.clay_lump_visible = False
+            record.light_weight_visible = False
+            record.moisture_content_visible = False
+
+
+            for sample in record.sample_parameters:
+                print("Internal Ids",sample.internal_id)
+                if sample.internal_id == "a90cdbd7-3fa3-4b83-ae31-9d281767188c":
+                    record.loose_bulk_visible = True
+
+                if sample.internal_id == "769b7052-d658-4d14-a5cc-c21dbedeb760":
+                    record.rodded_bulk_visible = True
+
+                if sample.internal_id == "7f3b339f-4d39-4c11-94c3-7029e238b76b":
+                    record.specific_gravity_visible = True
+
+                if sample.internal_id == "f8088f5b-226c-42ce-a78a-572391879ab4":
+                    record.water_absorption_visible = True
+
+                if sample.internal_id == "318d72a1-7188-4086-b132-62b50e63f5d1":
+                    record.sieve_visible = True
+
+                if sample.internal_id == "7b921a25-4dc4-4752-a247-d8a223ffbec0":
+                    record.soundness_na2so4_visible = True
+
+                if sample.internal_id == "a0e7aaf3-68ff-4e75-830d-91ae04c98f32":
+                    record.soundness_mgso4_visible = True
+
+
+                if sample.internal_id == "237ca3ca-3db7-4782-b863-1dc33be92bc2":
+                    record.finer75_visible = True
+
+                if sample.internal_id == "02d32c6b-9881-4152-9e79-9a660e2dda39":
+                    record.clay_lump_visible = True
+
+                if sample.internal_id == "c0340cb7-3f4a-4c15-a453-d63694b71f1d":
+                    record.light_weight_visible = True
+
+                if sample.internal_id == "d77f5a84-a7b2-47c9-852a-1289ac09ef23":
+                    record.moisture_content_visible = True
+
+
+
+
+
+
+
+
+
 
 
 
@@ -220,37 +416,72 @@ class FineAggregate(models.Model):
 
 
 
-    ### Compute Visible
-    @api.depends('tests')
-    def _compute_visible(self):
-        loose_bulk_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Loose Bulk Density (LBD)')])
-        rodded_bulk_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Rodded Bulk Density (RBD)')])
-        specific_gravity_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Specific Gravity')])
-        water_absorption_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Water Absorption')])
-        sieve_analysis_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Sieve Analysis')])
+    # ### Compute Visible
+    # @api.depends('tests')
+    # def _compute_visible(self):
+    #     loose_bulk_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Loose Bulk Density (LBD)')])
+    #     rodded_bulk_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Rodded Bulk Density (RBD)')])
+    #     specific_gravity_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Specific Gravity')])
+    #     water_absorption_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Water Absorption')])
+    #     sieve_analysis_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Sieve Analysis')])
+    #     soundness_na2so4_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Soundness Na2SO4')])
+    #     soundness_mgso4_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Soundness MgSO4')])
+    #     finer75_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Finer than 75 micron')])
+    #     clay_lump_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Deleterious content (Clay Lumps)')])
+    #     light_weight_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Deleterious content (Light weight Particles)')])
+    #     moisture_content_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Moisture Content')])
+       
         
-        for record in self:
-            record.loose_bulk_visible = False
-            record.rodded_bulk_visible = False
-            record.specific_gravity_visible = False
-            record.water_absorption_visible = False
-            record.sieve_visible = False
+    #     for record in self:
+    #         record.loose_bulk_visible = False
+    #         record.rodded_bulk_visible = False
+    #         record.specific_gravity_visible = False
+    #         record.water_absorption_visible = False
+    #         record.sieve_visible = False
+    #         record.soundness_na2so4_visible = False
+    #         record.soundness_mgso4_visible = False
+    #         record.finer75_visible = False
+    #         record.clay_lump_visible = False
+    #         record.light_weight_visible = False
+    #         record.moisture_content_visible = False
+           
            
             
-            if loose_bulk_test in record.tests:
-                record.loose_bulk_visible = True
+    #         if loose_bulk_test in record.tests:
+    #             record.loose_bulk_visible = True
 
-            if rodded_bulk_test in record.tests:
-                record.rodded_bulk_visible = True
+    #         if rodded_bulk_test in record.tests:
+    #             record.rodded_bulk_visible = True
 
-            if specific_gravity_test in record.tests:
-                record.specific_gravity_visible = True
+    #         if specific_gravity_test in record.tests:
+    #             record.specific_gravity_visible = True
 
-            if water_absorption_test in record.tests:
-                record.water_absorption_visible = True
+    #         if water_absorption_test in record.tests:
+    #             record.water_absorption_visible = True
 
-            if sieve_analysis_test in record.tests:
-                record.sieve_visible = True
+    #         if sieve_analysis_test in record.tests:
+    #             record.sieve_visible = True
+
+    #         if soundness_na2so4_test in record.tests:
+    #             record.soundness_na2so4_visible = True
+
+    #         if soundness_mgso4_test in record.tests:
+    #             record.soundness_mgso4_visible = True
+
+    #         if finer75_test in record.tests:
+    #             record.finer75_visible = True
+
+    #         if clay_lump_test in record.tests:
+    #             record.clay_lump_visible = True
+            
+    #         if light_weight_test in record.tests:
+    #             record.light_weight_visible = True
+
+    #         if moisture_content_test in record.tests:
+    #             record.moisture_content_visible = True
+
+           
+
 
             
 
@@ -385,6 +616,82 @@ class SieveAnalysisLine(models.Model):
             sorted_lines = sorted(record.parent_id.sieve_analysis_child_lines, key=lambda r: r.id)
             # index = sorted_lines.index(record)
             # print("Working")
+
+
+class SoundnessNa2Line(models.Model):
+    _name = "mechanical.soundnesss.na2so4.line"
+    parent_id = fields.Many2one('mechanical.fine.aggregate', string="Parent Id")
+    
+    sieve_size_passing = fields.Char(string="Sieve Size Passing")
+    sieve_size_retained = fields.Char(string="Sieve Size Retained")
+    weight_before_test = fields.Float(string="Weight of test fraction before test in gm.")
+    weight_after_test = fields.Float(string="Weight of test feaction Passing Finer Sieve After test")
+    grading_original_sample = fields.Float(string="Grading of Original sample in %", compute="_compute_grading")
+    passing_percent = fields.Float(string="Percentage Passing Finer Sieve After test (Percentage Loss)",compute="_compute_passing_percent")
+    cumulative_loss_percent = fields.Float(string="Commulative percentage Loss",compute="_compute_cumulative1")
+    
+    @api.depends('parent_id.total_na2so4','weight_before_test')
+    def _compute_grading(self):
+        for record in self:
+            try:
+                record.grading_original_sample = (record.weight_before_test/record.parent_id.total_na2so4)*100
+            except ZeroDivisionError:
+                record.grading_original_sample = 0
+
+    @api.depends('weight_before_test','weight_after_test')
+    def _compute_passing_percent(self):
+        for record in self:
+            try:
+                record.passing_percent = (record.weight_after_test / record.weight_before_test)*100
+            except:
+                record.passing_percent = 0
+
+    @api.depends('weight_after_test', 'parent_id.total_na2so4')
+    def _compute_cumulative1(self):
+        for record in self:
+            try:
+                record.cumulative_loss_percent = (record.weight_after_test / record.parent_id.total_na2so4) * 100
+            except:
+                record.cumulative_loss_percent = 0
+
+
+class SoundnessMgLine(models.Model):
+    _name = "mechanical.soundnesss.mgso4.line"
+    parent_id = fields.Many2one('mechanical.fine.aggregate', string="Parent Id")
+    
+    sieve_size_passing = fields.Char(string="Sieve Size Passing")
+    sieve_size_retained = fields.Char(string="Sieve Size Retained")
+    weight_before_test = fields.Float(string="Weight of test fraction before test in gm.")
+    weight_after_test = fields.Float(string="Weight of test feaction Passing Finer Sieve After test")
+    grading_original_sample = fields.Float(string="Grading of Original sample in %", compute="_compute_grading")
+    passing_percent = fields.Float(string="Percentage Passing Finer Sieve After test (Percentage Loss)",compute="_compute_passing_percent")
+    cumulative_loss_percent = fields.Float(string="Commulative percentage Loss",compute="_compute_cumulative")
+    
+    @api.depends('parent_id.total_mgso4','weight_before_test')
+    def _compute_grading(self):
+        for record in self:
+            try:
+                record.grading_original_sample = (record.weight_before_test/record.parent_id.total_mgso4)*100
+            except ZeroDivisionError:
+                record.grading_original_sample = 0
+
+    @api.depends('weight_before_test','weight_after_test')
+    def _compute_passing_percent(self):
+        for record in self:
+            try:
+                record.passing_percent = (record.weight_after_test / record.weight_before_test)*100
+            except:
+                record.passing_percent = 0
+
+    @api.depends('weight_after_test', 'parent_id.total_mgso4')
+    def _compute_cumulative(self):
+        for record in self:
+            try:
+                record.cumulative_loss_percent = (record.weight_after_test / record.parent_id.total_mgso4) * 100
+            except:
+                record.cumulative_loss_percent = 0
+
+
 
 
 
