@@ -42,6 +42,9 @@
 							<tr cols="12" style="margin-top:20px">
 								<td colspan="6">Weight of Cement(g) :
 									<![CDATA[&nbsp;]]>
+									
+								</td>
+								<td colspan="6">
 									<span t-field="data.wt_of_cement_trial1"/>
 									
 								</td>
@@ -49,13 +52,18 @@
                             <tr cols="12" style="margin-top:20px">
 								<td colspan="6">Wt. of GGBS(g) :
 									<![CDATA[&nbsp;]]>
+									
+								</td>
+								<td colspan="6">
 									<span t-field="data.wt_of_ggbs_trial1"/>
 									
 								</td>
 							</tr>
                             <tr cols="12" style="margin-top:20px">
 								<td colspan="6">Total Wt. of Sample :
-									<![CDATA[&nbsp;]]>
+									<![CDATA[&nbsp;]]>									
+								</td>
+								<td colspan="6">
 									<span t-field="data.total_wt_sample"/>
 									
 								</td>
@@ -63,18 +71,24 @@
 							<tr cols="12">
 								<td colspan="6">Weight of Water Required(g) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.wt_water_req"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Penetraion of vicat's Plunger (mm) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.penetration_vicat"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Normal Consistency (%) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.normal_consistency"/>
 								</td>
 							</tr>
@@ -100,6 +114,9 @@
 							<tr cols="12" style="margin-top:20px">
 								<td colspan="6">Weight of Cement(g) :
 									<![CDATA[&nbsp;]]>
+									
+								</td>
+								<td colspan="6">
 									<span t-field="data.wt_cement"/>
 									
 								</td>
@@ -108,18 +125,24 @@
 							<tr cols="12">
 								<td colspan="6">Weight of Water Required(g) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.wt_water_req_cement"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Penetraion of vicat's Plunger (mm) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.penetration_vicat_cement"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Normal Consistency (%) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.normal_consistency_cement"/>
 								</td>
 							</tr>
@@ -138,58 +161,65 @@
 						
 						<table style="margin-top:20px">
 							<tr cols="12">
-								<td colspan="6">Trial 1
+								<td colspan="6">Parameters
 								</td>
-								<td colspan="6">Trial 2
+								<td colspan="3">Trial 1
+								</td>
+								<td colspan="3">Trial 2
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Wt. of GGBS(g) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
 									<span t-field="data.wt_of_ggbs_sg_trial1"/>
 								</td>
-								<td colspan="6">Wt. of GGBS(g) :
-									<![CDATA[&nbsp;]]>
+								<td colspan="3">
 									<span t-field="data.wt_of_ggbs_sg_trial2"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Initial Volume of kerosine (ml)V1 :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
 									<span t-field="data.initial_volume_kerosine_trial1"/>
 								</td>
-								<td colspan="6">Initial Volume of kerosine (ml)V1 :
-									<![CDATA[&nbsp;]]>
+								<td colspan="3">
 									<span t-field="data.initial_volume_kerosine_trial2"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Final Volume of kerosine and Cement (After immersion in constant water bath) (ml) V2 :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
 									<span t-field="data.final_volume_kerosine_trial1"/>
 								</td>
-								<td colspan="6">Final Volume of kerosine and Cement (After immersion in constant water bath) (ml) V2 :
-									<![CDATA[&nbsp;]]>
+								<td colspan="3">
 									<span t-field="data.final_volume_kerosine_trial2"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Displaced volume (cm³) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
 									<span t-field="data.displaced_volume_trial1"/>
 								</td>
-								<td colspan="6">Displaced volume (cm³) :
-									<![CDATA[&nbsp;]]>
+								<td colspan="3">
 									<span t-field="data.displaced_volume_trial2"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Specific Gravity :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
 									<span t-field="data.specific_gravity_trial1"/>
 								</td>
-								<td colspan="6">Specific Gravity :
-									<![CDATA[&nbsp;]]>
+								<td colspan="3">
 									<span t-field="data.specific_gravity_trial2"/>
 								</td>
 							</tr>
@@ -350,6 +380,8 @@
 							<tr cols="12">
 								<td colspan="6">Average :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.average_7days_slag"/>
 								</td>
 								
@@ -425,6 +457,8 @@
 							<tr cols="12">
 								<td colspan="6">Average :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.average_28days_slag"/>
 								</td>
 								
@@ -559,6 +593,8 @@
 							<tr cols="12">
 								<td colspan="6">Average :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.average_7days_slag_opc"/>
 								</td>
 								
@@ -634,6 +670,8 @@
 							<tr cols="12">
 								<td colspan="6">Average :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.average_28days_slag_opc"/>
 								</td>
 								
@@ -643,6 +681,8 @@
 							<tr cols="12">
 								<td colspan="6">Slag Activity Index(SAI) 7 Days :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.slag_activity_index_7days"/>
 								</td>
 								
@@ -650,6 +690,8 @@
                             <tr cols="12">
 								<td colspan="6">Slag Activity Index(SAI) 28 Days :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.slag_activity_index_28days"/>
 								</td>
 								

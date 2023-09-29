@@ -143,16 +143,20 @@ class ProductBasedCalculation(models.Model):
     datasheet_report_template = fields.Many2one('ir.actions.report',string="DataSheet Report Template")
     ir_model = fields.Many2one('ir.model',string="Model")
 
-    @api.depends('product_id','product_id.grade_table')
+    @api.depends('product_id.grade_table')
     def compute_grade_table(self):
         for rec in self:
             table_data = self.env.context.get("grade_table_datas")
             print(self.env.context)
             grade_ids = []
-            for data in table_data:
-                grade_ids.append(data[1])
-            print(grade_ids)
-            grade_ids = self.env["lerm.grade.line"].search([("id","in",grade_ids)])
-            print(grade_ids)
-            rec.grade_ids = grade_ids
+            if table_data:
+                for data in table_data:
+                    grade_ids.append(data[1])
+                print(grade_ids)
+                grade_ids = self.env["lerm.grade.line"].search([("id","in",grade_ids)])
+                print(grade_ids)
+                rec.grade_ids = grade_ids
+            else:
+                rec.grade_ids = []
+                
 

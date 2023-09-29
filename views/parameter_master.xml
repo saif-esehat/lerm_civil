@@ -116,7 +116,7 @@
                     <field name="group" optional="show"/>
                     <field name="material" optional="show"/>
                     <field name="lab_min_value" optional="show"/>
-                    <field name="nabl_min_value" optional="show"/>
+                    <!-- <field name="nabl_min_value" optional="show"/> -->
                     <field name="client_min_value" optional="show"/>
                     <field name="test_method" optional="show"/>
                     <field name="calculated" optional="show"/>
@@ -124,7 +124,7 @@
                     <field name="sheets" optional="show"/>
                     <field name="mu_value" optional="show"/>
                     <field name="lab_max_value" optional="show"/>
-                    <field name="nabl_max_value" optional="show"/>
+                    <!-- <field name="nabl_max_value" optional="show"/> -->
                     <field name="client_max_value" optional="show"/>
                     <field name="unit" optional="show"/>
                     <field name='nabl_select' optional="show"/>

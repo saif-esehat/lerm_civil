@@ -53,6 +53,7 @@ from .mechanical import soil
 from .mechanical import paver_block
 from .mechanical import aggregate_fine
 from .mechanical import brick_2
+from .mechanical import concrete_cube2
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
