@@ -11,6 +11,7 @@ class DataSheetReport(models.AbstractModel):
     
     
     def get_visible_table_fields(self, model_name):
+        print(model_name , 'Afzal Test')
         form_view = self.env['ir.ui.view'].sudo().search([
             ('model', '=', model_name),
             ('type', '=', 'form')
@@ -82,6 +83,7 @@ class DataSheetReport(models.AbstractModel):
             eln = self.env['lerm.eln'].sudo().browse(docids) 
         model_id = eln.parameters_result.model_id
         model_name = eln.parameters_result.parameter[0].ir_model.name
+        print(model_name , 'ajay')
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
             columns = self.get_visible_table_fields(model_name)
@@ -89,6 +91,7 @@ class DataSheetReport(models.AbstractModel):
             extrafields = self.get_visible_additonal_fields(model_name)
         else:
             general_data = self.env['lerm.eln'].sudo().browse(docids)
+        print(columns , 'columns data')
         return {
             'eln': eln,
             'data' : general_data,
