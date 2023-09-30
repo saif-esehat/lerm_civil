@@ -22,6 +22,7 @@ from .report import ptgrout_non_nabl_report
 from .report import cement_compatiblity
 from .report import half_cell_report
 from .report import chemical_fine_aggregate_report
+from .report import coarse_aggregate_mechanical
 # from .mechanical import sieve_analysis
 from .mechanical import free_swell_index
 from .mechanical import soil_cbr
