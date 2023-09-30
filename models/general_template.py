@@ -92,6 +92,8 @@ class DataSheetReport(models.AbstractModel):
         else:
             general_data = self.env['lerm.eln'].sudo().browse(docids)
         print(columns , 'columns data')
+        print(extrafields , 'extrafields')
+        print(resultfields , 'result fie;ds')
         return {
             'eln': eln,
             'data' : general_data,
