@@ -34,7 +34,7 @@ class coarseAggregateMechanical(models.Model):
 
 
     # Crushing Value
-    crushing_value_name = fields.Char("Name",default="Compressive Strength of Concrete Cube")
+    crushing_value_name = fields.Char("Name",default="Crushing Value")
     crushing_visible = fields.Boolean("Crushing Visible",compute="_compute_visible")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     crushing_value_child_lines = fields.One2many('mechanical.crushing.value.coarse.aggregate.line','parent_id',string="Parameter")
@@ -123,42 +123,7 @@ class coarseAggregateMechanical(models.Model):
             else:
                 record.load_10percent_fine_values = 0
 
-    # Surface moisture
-    # name_surface_moisture = fields.Char(default="Surface Moisture")
-    # surface_visible = fields.Boolean("Surface Moisture Visible",compute="_compute_visible")
-
-    # wt_container_filled_water = fields.Float("Me = weight in g of container filled up to the mark with water")
-    # wt_sample_surface_moisture = fields.Float("Ms = Weight in g of the sample")
-    # wt_container_filled_sample = fields.Float("M = Weight in g of the sample and container filled to the mark with water")
-    # vs_surface_moisture = fields.Float("Vs = (Me + Ms) - M",compute="_compute_vs_surface_moisture")
-    # md_surface_moisture = fields.Float("Md =  Specific Gravity")
-    # vd_surface_moisture = fields.Float("Vd = Ms / Md",compute="_compute_vd_surface_moisture")
-    # moisture_content = fields.Float("Moisture Content = (Vs-Vd) / (Ms-Vd)*100",compute="_compute_moisture_content")
-
-    # @api.depends('wt_container_filled_water','wt_sample_surface_moisture','wt_container_filled_sample')
-    # def _compute_vs_surface_moisture(self):
-    #     for record in self:
-    #         record.vs_surface_moisture = record.wt_container_filled_water + record.wt_sample_surface_moisture - record.wt_container_filled_sample
     
-
-    # @api.depends('wt_sample_surface_moisture','md_surface_moisture')
-    # def _compute_vd_surface_moisture(self):
-    #     for record in self:
-    #         if record.md_surface_moisture != 0:
-    #             record.vd_surface_moisture = (record.wt_sample_surface_moisture / record.md_surface_moisture)
-    #         else:
-    #             record.vd_surface_moisture = 0
-
-
-
-    # @api.depends('wt_container_filled_water','vs_surface_moisture','vd_surface_moisture')
-    # def _compute_moisture_content(self):
-    #     for record in self:
-    #         if (record.wt_sample_surface_moisture - record.vd_surface_moisture) != 0:
-    #             record.moisture_content = (record.vs_surface_moisture - record.vd_surface_moisture) / (record.wt_sample_surface_moisture - record.vd_surface_moisture) *100
-    #         else:
-    #             record.moisture_content = 0
-
     
 
     # Soundness Na2SO4
@@ -213,8 +178,8 @@ class coarseAggregateMechanical(models.Model):
     wt_retained_total_elongation = fields.Float(string="Wt Retained Total",compute="_compute_wt_retained_total_elongation")
     elongated_retain_total = fields.Float(string="Elongated Retained Total",compute="_compute_elongated_retain")
     flaky_passing_total = fields.Float(string="Flaky Passing Total",compute="_compute_flaky_passing")
-    aggregate_elongation = fields.Float(string="aggregate Elongation Value in %",compute="_compute_aggregate_elongation")
-    aggregate_flakiness = fields.Float(string="aggregate Flakiness Value in %",compute="_compute_aggregate_flakiness")
+    aggregate_elongation = fields.Float(string="Aggregate Elongation Value in %",compute="_compute_aggregate_elongation")
+    aggregate_flakiness = fields.Float(string="Aggregate Flakiness Value in %",compute="_compute_aggregate_flakiness")
     # combine_elongation_flakiness = fields.Float(string="Combine Elongation & Flakiness Value in %",compute="_compute_combine_elongation_flakiness")
 
 
@@ -756,7 +721,7 @@ class RoddedBulkDensityLine(models.Model):
     volume_of_bucket = fields.Float(string="Volume of Bucket in cubic meter")
     sample_plus_bucket = fields.Float(string="[Sample Weight + Bucket  Weight] in kg")
     sample_weight = fields.Float(string="Sample Weight in kg",compute="_compute_sample_weight")
-    rodded_bulk_density = fields.Float(string="Loose Bulk Density in kg per cubic meter",compute="_compute_roddede_bulk_density")
+    rodded_bulk_density = fields.Float(string="Rodded Bulk Density in kg per cubic meter",compute="_compute_roddede_bulk_density")
 
 
     @api.depends('sample_plus_bucket', 'weight_empty_bucket')
@@ -942,7 +907,7 @@ class ImpactValueLine(models.Model):
     total_wt_aggregate = fields.Float(string="Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms", compute="_compute_total_wt_aggregate")
     wt_of_aggregate_passing = fields.Float(string="Wt. of aggregate passing 2.36 mm sieve after the test in gms")
     wt_of_aggregate_retained = fields.Float(string="Wt. of aggregate retained on 2.36 mm sieve after the test in gms", compute="_compute_wt_of_aggregate_retained")
-    impact_value = fields.Float(string="Aggregate Crushing value", compute="_compute_impact_value")
+    impact_value = fields.Float(string="Aggregate Impact value", compute="_compute_impact_value")
 
 
     @api.depends('total_wt_of_dried', 'wt_of_cylinder')
