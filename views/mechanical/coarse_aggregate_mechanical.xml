@@ -209,7 +209,7 @@
                     </field>
                     </group>
                     <group attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
-                        <field name="total_na2so4"/>
+                        <field name="total_mgso4"/>
                         <field name="soundness_mgso4"/>
                     </group>
 
