@@ -137,26 +137,25 @@ class ProductBasedCalculation(models.Model):
     _name = 'lerm.product.based.calculation'
     _rec_name = 'grade'
     product_id = fields.Many2one('product.template')
-    grade_ids = fields.Many2many("lerm.grade.line",string="Grade IDs",compute="compute_grade_table")
-    grade = fields.Many2one("lerm.grade.line",string="Grade")
+    grade_ids = fields.Many2many("lerm.grade.line",string="Grade IDs")
+    grade = fields.Many2one("lerm.grade.line",string="Grade",domain="[('product_id', '=', product_id)]")
     main_report_template = fields.Many2one('ir.actions.report',string="Main Report Template")
     datasheet_report_template = fields.Many2one('ir.actions.report',string="DataSheet Report Template")
     ir_model = fields.Many2one('ir.model',string="Model")
 
-    @api.depends('product_id.grade_table')
-    def compute_grade_table(self):
-        for rec in self:
-            table_data = self.env.context.get("grade_table_datas")
-            print(self.env.context)
-            grade_ids = []
-            if table_data:
-                for data in table_data:
-                    grade_ids.append(data[1])
-                print(grade_ids)
-                grade_ids = self.env["lerm.grade.line"].search([("id","in",grade_ids)])
-                print(grade_ids)
-                rec.grade_ids = grade_ids
-            else:
-                rec.grade_ids = []
+    # @api.depends('product_id','product_id.grade_table')
+    # def compute_grade_table(self):
+    #     for rec in self:
+    #         table_data = self.env.context.get("grade_table_datas")
+    #         print(self.env.context)
+    #         grade_ids = []
+    #         if table_data:          
+    #             for data in table_data:
+    #                 grade_ids.append(data[1])
+    #         print(grade_ids)
+    #         grade_ids = self.env["lerm.grade.line"].search([("id","in",grade_ids)])
+    #         print(grade_ids)
+    #         rec.grade_ids = grade_ids
+            
                 
 
