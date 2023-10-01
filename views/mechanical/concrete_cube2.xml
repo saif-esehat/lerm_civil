@@ -47,6 +47,7 @@
                     </field> 
                         <group>
                             <field name='average_strength' string="Average Compressive Strength in N/mm2" identity="result"/>
+                            <field name="confirmity"/>
                         </group>
                 </sheet>
             </form>

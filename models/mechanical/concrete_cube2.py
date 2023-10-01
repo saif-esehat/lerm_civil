@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import math
+from datetime import datetime , timedelta
+
 
 class MechanicalConcreteCube(models.Model):
     _name = "mechanical.concrete.cube"
@@ -14,10 +16,82 @@ class MechanicalConcreteCube(models.Model):
     average_strength = fields.Float(string="Average Compressive Strength in N/mm2", compute="_compute_average_strength",digits=(12,2))
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
-    age_of_days = fields.Integer(string="Age of Test, Days : ")
+    age_of_days = fields.Selection([
+        ('3days', '3 Days'),
+        ('7days', '7 Days'),
+        ('14days', '14 Days'),
+        ('28days', '28 Days'),
+    ], string='Age', default='28days')
     date_of_casting = fields.Date(string="Date of Casting")
-    date_of_testing = fields.Date(string="Date of Testing")
+    date_of_testing = fields.Date(string="Date of Testing",compute="_compute_testing_date")
+    confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_confirmity")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+    
+    @api.depends('date_of_casting','age_of_days')
+    def _compute_testing_date(self):
+        for record in self:
+            if record.date_of_casting:
+                if record.age_of_days == "3days":
+                    cast_date = fields.Datetime.from_string(record.date_of_casting)
+                    testing_date = cast_date + timedelta(days=3)
+                    record.date_of_testing = fields.Datetime.to_string(testing_date)
+                if record.age_of_days == "7days":
+                    cast_date = fields.Datetime.from_string(record.date_of_casting)
+                    testing_date = cast_date + timedelta(days=7)
+                    record.date_of_testing = fields.Datetime.to_string(testing_date)
+                if record.age_of_days == "14days":
+                    cast_date = fields.Datetime.from_string(record.date_of_casting)
+                    testing_date = cast_date + timedelta(days=14)
+                    record.date_of_testing = fields.Datetime.to_string(testing_date)
+                if record.age_of_days == "28days":
+                    cast_date = fields.Datetime.from_string(record.date_of_casting)
+                    testing_date = cast_date + timedelta(days=28)
+                    record.date_of_testing = fields.Datetime.to_string(testing_date)
+                else:
+                    record.date_of_testing = False
+            else:
+                record.date_of_testing = False
+            
 
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
+
+
+    @api.depends('average_strength','eln_ref','grade','age_of_days')
+    def _compute_confirmity(self):
+        for record in self:
+            record.confirmity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    if record.age_of_days == "3days":
+                        req_min = req_min * 0.5
+                        req_max = req_max* 0.5
+                    if record.age_of_days == "7days":
+                        req_min = req_min * 0.7
+                        req_max = req_max* 0.7
+                    if record.age_of_days == "14days":
+                        req_min = req_min * 0.9
+                        req_max = req_max* 0.9
+                    lower = record.average_strength - record.average_strength*mu_value
+                    upper = record.average_strength + record.average_strength*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.confirmity = 'pass'
+                        break
+                    else:
+                        record.confirmity = 'fail'
+
+
+    
 
     @api.depends('child_lines.compressive_strength')
     def _compute_average_strength(self):
