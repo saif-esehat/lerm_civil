@@ -521,8 +521,8 @@ class ConcreteCubeCompresiveReport(models.AbstractModel):
         }
         
 class ConcreteCubeCompresiveDatasheet(models.AbstractModel):
-    _name = 'report.lerm_civil.steel_tmt_bar_datasheet'
-    _description = 'Steel TMT Bar DataSheet'
+    _name = 'report.lerm_civil.compresive_concrete_cube_datasheet'
+    _description = 'Compresive strength Cube DataSheet'
     
     @api.model
     def _get_report_values(self, docids, data):
