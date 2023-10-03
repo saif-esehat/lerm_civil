@@ -34,12 +34,12 @@
 								</td>
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="a" t-value="0"/>
 							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="a + 1" />
+										<t t-set="a" t-value="a+1"/>
 									</div>
                   				</td>
 								<td colspan="1">
@@ -63,6 +63,7 @@
                                 <td colspan="z">
 									<span t-esc="r['crushing_value']"/>
 								</td>
+						</tr>
 						</table>
                         <table style="margin-top:5px">
                         <tr cols="12">
@@ -81,7 +82,6 @@
 
 					<!-- Specific Gravity and Water Absorbtion  -->
 
-					<div class="container_eln" style="margin-top:5px">
 					<div t-if="data.specific_gravity_visible">
 
 
@@ -106,12 +106,12 @@
 								</td>
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="b" t-value="0"/>
 							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="b + 1" />
+										<t t-set="b" t-value="b+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -132,7 +132,7 @@
                                 <td colspan="2">
 									<span t-esc="r['water_absorption']"/>
 								</td>
-                                
+                             </tr>   
 						</table>
                         
 						
@@ -152,7 +152,7 @@
 								</td>
                                 <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample + cylindrical measure in gms
 								</td>
-                                <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms", compute="_compute_total_wt_aggregate
+                                <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms
 								</td>
                                 <td colspan="2">Wt. of aggregate passing 2.36 mm sieve after the test in gms
 								</td>
@@ -162,12 +162,12 @@
 								</td>
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="c" t-value="0"/>
 							<tr t-foreach="data.impact_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="c + 1" />
+										<t t-set="c" t-value="c+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -191,6 +191,7 @@
                                 <td colspan="2">
 									<span t-esc="r['impact_value']"/>
 								</td>
+							</tr>
                                 
 						</table>
                         <table style="margin-top:5px">
@@ -234,12 +235,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="d" t-value="0"/>
 							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="d + 1" />
+										<t t-set="d" t-value="d+1"/>
 									</div>
                   				</td>
 								<td colspan="3">
@@ -257,6 +258,7 @@
                                 <td colspan="2">
 									<span t-esc="r['abrasion_value_percentage']"/>
 								</td>  
+							</tr>
 						</table>
 					</div>
 
@@ -343,12 +345,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="e" t-value="0"/>
 							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="e + 1" />
+										<t t-set="e" t-value="e+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -372,6 +374,7 @@
                                 <td colspan="1">
 									<span t-esc="r['cumulative_loss_percent']"/>
 								</td>   
+							</tr>
 						</table>
 
                         <table style="margin-top:5px">
@@ -424,12 +427,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="f" t-value="0"/>
 							<tr t-foreach="data.soundness_mgso4_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="f + 1" />
+										<t t-set="f" t-value="f+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -452,7 +455,8 @@
 								</td>
                                 <td colspan="1">
 									<span t-esc="r['cumulative_loss_percent']"/>
-								</td>   
+								</td> 
+							</tr>  
 						</table>
                         <table style="margin-top:5px">
                             <tr cols="12">
@@ -496,12 +500,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="g" t-value="0"/>
 							<tr t-foreach="data.elongation_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="g + 1" />
+										<t t-set="g" t-value="g+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -513,6 +517,7 @@
 								<td colspan="2">
 									<span t-esc="r['elongated_retain']"/>
 								</td>
+							</tr>
                                   
 						</table>
                         <table style="margin-top:20px">
@@ -565,12 +570,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="h" t-value="0"/>
 							<tr t-foreach="data.flakiness_child_lines" t-as="r">
 								<td colspan="2">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="h + 1" />
+										<t t-set="h" t-value="h+1"/>
 									</div>
                   				</td>
 								<td colspan="4">
@@ -582,6 +587,7 @@
 								<td colspan="3">
 									<span t-esc="r['elongated_retain']"/>
 								</td>
+							</tr>
                                   
 						</table>
                         
@@ -783,7 +789,7 @@
 								<td colspan="2">
 									<span t-esc="r['loose_bulk_density']"/>
 								</td>
-                                  
+                            </tr>
 						</table>
 					</div>
 
@@ -810,12 +816,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="j" t-value="0"/>
 							<tr t-foreach="data.rodded_bulk_density_child_lines" t-as="r">
 								<td colspan="2">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="j + 1" />
+										<t t-set="j" t-value="j+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -833,7 +839,7 @@
 								<td colspan="2">
 									<span t-esc="r['rodded_bulk_density']"/>
 								</td>
-                                  
+                            </tr>
 						</table>
 					</div>
 
@@ -860,12 +866,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="k" t-value="0"/>
 							<tr t-foreach="data.sieve_analysis_child_lines" t-as="r">
 								<td colspan="2">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="k + 1" />
+										<t t-set="k" t-value="k+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -883,7 +889,7 @@
 								<td colspan="2">
 									<span t-esc="r['passing_percent']"/>
 								</td>
-                                  
+							</tr>
 						</table>
                         <table style="margin-top:20px">
                             <tr cols="12">
@@ -921,12 +927,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="l" t-value="0"/>
 							<tr t-foreach="data.aggregate_grading_child_lines" t-as="r">
 								<td colspan="2">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="l + 1" />
+										<t t-set="l" t-value="l+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -944,6 +950,7 @@
 								<td colspan="2">
 									<span t-esc="r['passing_percent']"/>
 								</td>
+							</tr>
                                   
 						</table>
                         <table style="margin-top:20px">
