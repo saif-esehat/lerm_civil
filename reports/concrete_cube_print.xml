@@ -201,7 +201,7 @@
 						<tbody>
 							<!-- <t t-set="i" t-value="0"/> -->
 							<!-- non nabl -->
-							<tr t-foreach="data.child_lines" t-as="r">
+							<tr t-foreach="data.child_lines" t-as="r" t-if="data.confirmity == 'fail' and not nabl">
 								<!-- <td>
 									<div>
 										<span t-esc="i + 1"/>
@@ -235,34 +235,36 @@
 							</tr>
 
 							<!-- nabl -->
-							<tr t-foreach="eln.parameters_result" t-as="r" t-if="r['nabl_status'] == 'nabl' and nabl">
-								<td>
+							<tr t-foreach="data.child_lines" t-as="r" t-if="data.confirmity == 'pass' and nabl">
+								<!-- <td>
 									<div>
 										<span t-esc="i + 1"/>
 										<t t-set="i" t-value="i+1"/>
 									</div>
-                  				</td>
+                  				</td> -->
 								<td>
-									<span t-esc="r['parameter'].parameter_name"/>
-								</td>
-								<td>
-									<!-- <span t-esc="round(r['result'], r['parameter'].decimal)"/> -->
-									 <span t-esc="'{:.{}f}'.format(r['result'], r['parameter'].decimal)"/>
+									<span t-esc="r.sr_no"/>
 								</td>
 								<td>
-									<span t-esc="r['unit'].name"/>
+									<span t-esc="r.id_mark"/>
 								</td>
-								<td style="max-width: 250px;">
-									<span t-esc="r['test_method'].test_method"/>
+								<td>
+									<span t-esc="r.length"/>
 								</td>
-								<td style="max-width: 250px;">
-									<span t-esc="r['specification']"/>
+								<td>
+									<span t-esc="r.width"/>
 								</td>
-								<!-- <td>
-									<span t-esc="r['nabl_status']"/>
-								</td> -->
-								<td t-if="eln.conformity">
-									<span t-esc="r['conformity_status']"/>
+								<td>
+									<span t-esc="r.area"/>
+								</td>
+								<td>
+									<span t-esc="r.wt_sample"/>
+								</td>
+								<td>
+									<span t-esc="r.crushing_load"/>
+								</td>
+								<td>
+									<span t-esc="r.compressive_strength"/>
 								</td>
 							</tr>
 						</tbody>
@@ -270,11 +272,12 @@
 
 					<div style="margin-top:10px">
 						<table>
-							<tr>
+							<tr t-if="data.confirmity == 'pass' and nabl"> 
 								<td colspan="12">Avg. Compresive Strength :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
 							</tr>
+							
 						</table>
 					</div>
 					<div style="page-break-inside: avoid;">
