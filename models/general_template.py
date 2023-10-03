@@ -479,3 +479,63 @@ class PTGroutDatasheet(models.AbstractModel):
             'eln': eln,
             'data' : general_data
         }
+        
+class ConcreteCubeCompresiveReport(models.AbstractModel):
+    _name = 'report.lerm_civil.compresive_concrete_cube_report'
+    _description = 'Cube Compresive Report'
+    
+    @api.model
+    def _get_report_values(self, docids, data):
+        # eln = self.env['lerm.eln'].sudo().browse(docids)
+        inreport_value = data.get('inreport', None)
+        if 'active_id' in data['context']:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        else:
+            eln = self.env['lerm.eln'].sudo().browse(docids) 
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+        qr.add_data(eln.kes_no)
+        qr.make(fit=True)
+        qr_image = qr.make_image()
+
+        # Convert the QR code image to base64 string
+        buffered = BytesIO()
+        qr_image.save(buffered, format="PNG")
+        qr_image_base64 = base64.b64encode(buffered.getvalue()).decode()
+
+        # Assign the base64 string to a field in the 'srf' object
+        qr_code = qr_image_base64
+        model_id = eln.model_id
+        # differnt location for product based
+        model_name = eln.material.product_based_calculation[0].ir_model.name 
+        if model_name:
+            general_data = self.env[model_name].sudo().browse(model_id)
+        else:
+            general_data = self.env['lerm.eln'].sudo().browse(docids)
+        return {
+            'eln': eln,
+            'data' : general_data,
+            'qrcode': qr_code,
+            'stamp' : inreport_value,
+        }
+        
+class ConcreteCubeCompresiveDatasheet(models.AbstractModel):
+    _name = 'report.lerm_civil.steel_tmt_bar_datasheet'
+    _description = 'Steel TMT Bar DataSheet'
+    
+    @api.model
+    def _get_report_values(self, docids, data):
+        if 'active_id' in data['context']:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        else:
+            eln = self.env['lerm.eln'].sudo().browse(docids) 
+        model_id = eln.model_id
+        # differnt location for product based
+        model_name = eln.material.product_based_calculation[0].ir_model.name 
+        if model_name:
+            general_data = self.env[model_name].sudo().browse(model_id)
+        else:
+            general_data = self.env['lerm.eln'].sudo().browse(docids)
+        return {
+            'eln': eln,
+            'data' : general_data
+        }

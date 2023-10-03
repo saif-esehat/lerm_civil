@@ -3,7 +3,7 @@ from odoo.tools.safe_eval import safe_eval
 from odoo.exceptions import ValidationError
 from datetime import datetime
 import math
-# from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 # import io
 # from PIL import Image
 # import base64
