@@ -13,9 +13,7 @@
                         <field name="sample_id" invisible="1" />
                         <field name="parameter_id"/>
                         <field name="eln_ref"/>
-                        <field name="grade" exception="grade"  string="Grade" identity="extra"/>
-                        
-                       
+                        <field name="grade" exception="grade"  string="Grade" identity="extra"/>   
                     </group>
                     <group>
                         <h1>
@@ -24,10 +22,10 @@
                     </group>
                     <group>
                         <group>
-                            <field name="date_of_casting" exception="date_of_casting"  string="Date of Casting" identity="extra"/>
+                            <field name="date_of_casting"  string="Date of Casting" identity="extra"/>
                         </group>
                         <group>
-                            <field name="date_of_testing" exception="date_of_testing"  string="Date of Testing" identity="extra"/>
+                            <field name="date_of_testing"  string="Date of Testing" identity="extra"/>
                         </group>
                         <group>
                             <field name="age_of_days"/>
@@ -47,9 +45,10 @@
                             </tree>
                            
                     </field> 
-                            <group>
-                               <field name='average_strength' string="Average Compressive Strength in N/mm2" identity="result"/>
-                            </group>
+                        <group>
+                            <field name='average_strength' string="Average Compressive Strength in N/mm2" identity="result"/>
+                            <field name="confirmity"/>
+                        </group>
                 </sheet>
             </form>
         </field>

@@ -31,7 +31,7 @@
     'views/mechanical/drying_shrinkage_solid.xml',
     'views/mechanical/moisture_movement_solid.xml',
     'views/mechanical/flexural_strength_concrete_beam.xml',
-    'views/mechanical/compressive_strength_concrete_cube.xml',
+    # 'views/mechanical/compressive_strength_concrete_cube.xml',
     'views/mechanical/splitting_tensile_strength_concrete.xml',
     'views/mechanical/act_compressive_concrete_cube.xml',
     # 'views/mechanical/crushing_value_coarse_aggregate.xml',
@@ -112,7 +112,9 @@
     'reports/ptgrout_non_nabl_report.xml',
     'reports/cement_psc_report.xml',
     'reports/cement_ppc_report.xml',
-    'reports/concrete_cube_print.xml'
+    'reports/concrete_cube_print.xml',
+    'reports/coarse_aggregate_mech_datasheet.xml',
+
 
     
     ],

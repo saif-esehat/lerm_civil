@@ -3,7 +3,7 @@ from odoo.exceptions import UserError,ValidationError
 import math
 
 
-class coarseAggregateMechanical(models.Model):
+class CoarseAggregateMechanical(models.Model):
     _name = "mechanical.coarse.aggregate"
     _inherit = "lerm.eln"
     _rec_name = "name"
@@ -90,12 +90,12 @@ class coarseAggregateMechanical(models.Model):
             else:
                 record.average_impact_value = 0.0
 
-    @api.model
-    def create(self, vals):
-        # import wdb;wdb.set_trace()
-        record = super(coarseAggregateMechanical, self).create(vals)
-        record.parameter_id.write({'model_id':record.id})
-        return record
+    # @api.model
+    # def create(self, vals):
+    #     # import wdb;wdb.set_trace()
+    #     record = super(coarseAggregateMechanical, self).create(vals)
+    #     record.parameter_id.write({'model_id':record.id})
+    #     return record
    
     # !0% Fine Value
     name_10fine = fields.Char(default="10% Fine Value")
@@ -335,7 +335,7 @@ class coarseAggregateMechanical(models.Model):
 
     sieve_analysis_child_lines = fields.One2many('mechanical.coarse.aggregate.sieve.analysis.line','parent_id',string="Parameter")
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
-    cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
+    # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative_sieve")
 
 
     def calculate_sieve(self): 
@@ -368,6 +368,13 @@ class coarseAggregateMechanical(models.Model):
             record.total_sieve_analysis = sum(record.sieve_analysis_child_lines.mapped('wt_retained'))
 
 
+    # @api.depends('sieve_analysis_child_lines.wt_retained')
+    # def _compute_cumulative_sieve(self):
+    #     for record in self:
+    #         print("recordd",record)
+    #         record.cumulative = sum(record.sieve_analysis_child_lines.mapped('wt_retained'))
+
+
     # Aggregate grading  
 
     aggregate_grading_name = fields.Char("Name",default="All in Aggregate Grading")
@@ -375,7 +382,7 @@ class coarseAggregateMechanical(models.Model):
 
     aggregate_grading_child_lines = fields.One2many('mechanical.aggregate.grading.line','parent_id',string="Parameter")
     total_aggregate_grading = fields.Integer(string="Total",compute="_compute_total_aggregate_grading")
-    cumulative_aggregate_grading = fields.Float(string="Cumulative",compute="_compute_cumulative_aggregate_grading")
+    # cumulative_aggregate_grading = fields.Float(string="Cumulative",compute="_compute_cumulative_aggregate_grading")
 
 
     def calculate_aggregate(self): 
@@ -401,11 +408,11 @@ class coarseAggregateMechanical(models.Model):
 
  
 
-    @api.depends('aggregate_grading_child_lines.wt_retained')
-    def _compute_cumulative_aggregate_grading(self):
-        for record in self:
-            print("recordd",record)
-            record.total_aggregate_grading = sum(record.aggregate_grading_child_lines.mapped('wt_retained'))
+    # @api.depends('aggregate_grading_child_lines.wt_retained')
+    # def _compute_cumulative_aggregate_grading(self):
+    #     for record in self:
+    #         print("recordd",record)
+    #         record.cumulative_aggregate_grading = sum(record.aggregate_grading_child_lines.mapped('wt_retained'))
 
 
     @api.depends('aggregate_grading_child_lines.wt_retained')
@@ -493,7 +500,30 @@ class coarseAggregateMechanical(models.Model):
                     record.angularity_visible = True
                 
 
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(CoarseAggregateMechanical, self).create(vals)
+        record.get_all_fields()
+        record.eln_ref.write({'model_id':record.id})
+        return record
 
+   
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)
+
+    def get_all_fields(self):
+        record = self.env['mechanical.coarse.aggregate'].browse(self.ids[0])
+        field_values = {}
+        for field_name, field in record._fields.items():
+            field_value = record[field_name]
+            field_values[field_name] = field_value
+
+        return field_values
 
 class AggregateGradingLine(models.Model):
     _name = "mechanical.aggregate.grading.line"
@@ -695,16 +725,16 @@ class LooseBulkDensityLine(models.Model):
                 record.loose_bulk_density = 0.0
 
 
-    @api.model
-    def create(self, vals):
-        # Set the serial_no based on the existing records for the same parent
-        if vals.get('parent_id'):
-            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
-            if existing_records:
-                max_serial_no = max(existing_records.mapped('sr_no'))
-                vals['sr_no'] = max_serial_no + 1
+    # @api.model
+    # def create(self, vals):
+    #     # Set the serial_no based on the existing records for the same parent
+    #     if vals.get('parent_id'):
+    #         existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+    #         if existing_records:
+    #             max_serial_no = max(existing_records.mapped('sr_no'))
+    #             vals['sr_no'] = max_serial_no + 1
 
-        return super(LooseBulkDensityLine, self).create(vals)
+    #     return super(LooseBulkDensityLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -741,16 +771,16 @@ class RoddedBulkDensityLine(models.Model):
 
 
 
-    @api.model
-    def create(self, vals):
-        # Set the serial_no based on the existing records for the same parent
-        if vals.get('parent_id'):
-            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
-            if existing_records:
-                max_serial_no = max(existing_records.mapped('sr_no'))
-                vals['sr_no'] = max_serial_no + 1
+    # @api.model
+    # def create(self, vals):
+    #     # Set the serial_no based on the existing records for the same parent
+    #     if vals.get('parent_id'):
+    #         existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+    #         if existing_records:
+    #             max_serial_no = max(existing_records.mapped('sr_no'))
+    #             vals['sr_no'] = max_serial_no + 1
 
-        return super(RoddedBulkDensityLine, self).create(vals)
+    #     return super(RoddedBulkDensityLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -771,16 +801,16 @@ class ElongationIndexLine(models.Model):
 
     
 
-    @api.model
-    def create(self, vals):
-        # Set the serial_no based on the existing records for the same parent
-        if vals.get('parent_id'):
-            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
-            if existing_records:
-                max_serial_no = max(existing_records.mapped('sr_no'))
-                vals['sr_no'] = max_serial_no + 1
+    # @api.model
+    # def create(self, vals):
+    #     # Set the serial_no based on the existing records for the same parent
+    #     if vals.get('parent_id'):
+    #         existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+    #         if existing_records:
+    #             max_serial_no = max(existing_records.mapped('sr_no'))
+    #             vals['sr_no'] = max_serial_no + 1
 
-        return super(FlakinessElongationIndexLine, self).create(vals)
+    #     return super(FlakinessElongationIndexLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -801,16 +831,16 @@ class FlakinessIndexLine(models.Model):
 
     
 
-    @api.model
-    def create(self, vals):
-        # Set the serial_no based on the existing records for the same parent
-        if vals.get('parent_id'):
-            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
-            if existing_records:
-                max_serial_no = max(existing_records.mapped('sr_no'))
-                vals['sr_no'] = max_serial_no + 1
+    # @api.model
+    # def create(self, vals):
+    #     # Set the serial_no based on the existing records for the same parent
+    #     if vals.get('parent_id'):
+    #         existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+    #         if existing_records:
+    #             max_serial_no = max(existing_records.mapped('sr_no'))
+    #             vals['sr_no'] = max_serial_no + 1
 
-        return super(FlakinessElongationIndexLine, self).create(vals)
+    #     return super(FlakinessElongationIndexLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -828,7 +858,7 @@ class SoundnessNa2Line(models.Model):
     weight_after_test = fields.Float(string="Weight of test feaction Passing Finer Sieve After test")
     grading_original_sample = fields.Float(string="Grading of Original sample in %", compute="_compute_grading")
     passing_percent = fields.Float(string="Percentage Passing Finer Sieve After test (Percentage Loss)",compute="_compute_passing_percent")
-    cumulative_loss_percent = fields.Float(string="Commulative percentage Loss",compute="_compute_cumulative")
+    cumulative_loss_percent = fields.Float(string="Commulative percentage Loss",compute="_compute_cumulative_na2so4")
     
     @api.depends('parent_id.total_na2so4','weight_before_test')
     def _compute_grading(self):
@@ -847,7 +877,7 @@ class SoundnessNa2Line(models.Model):
                 record.passing_percent = 0
 
     @api.depends('weight_after_test', 'parent_id.total_na2so4')
-    def _compute_cumulative(self):
+    def _compute_cumulative_na2so4(self):
         for record in self:
             try:
                 record.cumulative_loss_percent = (record.weight_after_test / record.parent_id.total_na2so4) * 100
@@ -868,7 +898,7 @@ class SoundnessMgLine(models.Model):
     weight_after_test = fields.Float(string="Weight of test feaction Passing Finer Sieve After test")
     grading_original_sample = fields.Float(string="Grading of Original sample in %", compute="_compute_grading")
     passing_percent = fields.Float(string="Percentage Passing Finer Sieve After test (Percentage Loss)",compute="_compute_passing_percent")
-    cumulative_loss_percent = fields.Float(string="Commulative percentage Loss",compute="_compute_cumulative")
+    cumulative_loss_percent = fields.Float(string="Commulative percentage Loss",compute="_compute_cumulative_mgso4")
     
     @api.depends('parent_id.total_mgso4','weight_before_test')
     def _compute_grading(self):
@@ -887,7 +917,7 @@ class SoundnessMgLine(models.Model):
                 record.passing_percent = 0
 
     @api.depends('weight_after_test', 'parent_id.total_mgso4')
-    def _compute_cumulative(self):
+    def _compute_cumulative_mgso4(self):
         for record in self:
             try:
                 record.cumulative_loss_percent = (record.weight_after_test / record.parent_id.total_mgso4) * 100
@@ -985,16 +1015,16 @@ class CrushingValueLine(models.Model):
                 rec.crushing_value = 0.0
 
 
-    @api.model
-    def create(self, vals):
-        # Set the serial_no based on the existing records for the same parent
-        if vals.get('parent_id'):
-            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
-            if existing_records:
-                max_serial_no = max(existing_records.mapped('sample_no'))
-                vals['sample_no'] = max_serial_no + 1
+    # @api.model
+    # def create(self, vals):
+    #     # Set the serial_no based on the existing records for the same parent
+    #     if vals.get('parent_id'):
+    #         existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+    #         if existing_records:
+    #             max_serial_no = max(existing_records.mapped('sample_no'))
+    #             vals['sample_no'] = max_serial_no + 1
 
-        return super(CrushingValueLine, self).create(vals)
+    #     return super(CrushingValueLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines

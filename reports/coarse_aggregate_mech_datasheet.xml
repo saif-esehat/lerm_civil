@@ -63,6 +63,7 @@
                                 <td colspan="z">
 									<span t-esc="r['crushing_value']"/>
 								</td>
+						</tr>
 						</table>
                         <table style="margin-top:5px">
                         <tr cols="12">
@@ -81,7 +82,6 @@
 
 					<!-- Specific Gravity and Water Absorbtion  -->
 
-					<div class="container_eln" style="margin-top:5px">
 					<div t-if="data.specific_gravity_visible">
 
 
@@ -132,7 +132,7 @@
                                 <td colspan="2">
 									<span t-esc="r['water_absorption']"/>
 								</td>
-                                
+                             </tr>   
 						</table>
                         
 						
@@ -152,7 +152,7 @@
 								</td>
                                 <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample + cylindrical measure in gms
 								</td>
-                                <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms", compute="_compute_total_wt_aggregate
+                                <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms
 								</td>
                                 <td colspan="2">Wt. of aggregate passing 2.36 mm sieve after the test in gms
 								</td>
@@ -191,6 +191,7 @@
                                 <td colspan="2">
 									<span t-esc="r['impact_value']"/>
 								</td>
+							</tr>
                                 
 						</table>
                         <table style="margin-top:5px">
@@ -257,6 +258,7 @@
                                 <td colspan="2">
 									<span t-esc="r['abrasion_value_percentage']"/>
 								</td>  
+							</tr>
 						</table>
 					</div>
 
@@ -372,6 +374,7 @@
                                 <td colspan="1">
 									<span t-esc="r['cumulative_loss_percent']"/>
 								</td>   
+							</tr>
 						</table>
 
                         <table style="margin-top:5px">
@@ -452,7 +455,8 @@
 								</td>
                                 <td colspan="1">
 									<span t-esc="r['cumulative_loss_percent']"/>
-								</td>   
+								</td> 
+							</tr>  
 						</table>
                         <table style="margin-top:5px">
                             <tr cols="12">
@@ -513,6 +517,7 @@
 								<td colspan="2">
 									<span t-esc="r['elongated_retain']"/>
 								</td>
+							</tr>
                                   
 						</table>
                         <table style="margin-top:20px">
@@ -582,6 +587,7 @@
 								<td colspan="3">
 									<span t-esc="r['elongated_retain']"/>
 								</td>
+							</tr>
                                   
 						</table>
                         
@@ -783,7 +789,7 @@
 								<td colspan="2">
 									<span t-esc="r['loose_bulk_density']"/>
 								</td>
-                                  
+                            </tr>
 						</table>
 					</div>
 
@@ -833,7 +839,7 @@
 								<td colspan="2">
 									<span t-esc="r['rodded_bulk_density']"/>
 								</td>
-                                  
+                            </tr>
 						</table>
 					</div>
 
@@ -883,7 +889,7 @@
 								<td colspan="2">
 									<span t-esc="r['passing_percent']"/>
 								</td>
-                                  
+							</tr>
 						</table>
                         <table style="margin-top:20px">
                             <tr cols="12">
@@ -944,6 +950,7 @@
 								<td colspan="2">
 									<span t-esc="r['passing_percent']"/>
 								</td>
+							</tr>
                                   
 						</table>
                         <table style="margin-top:20px">
