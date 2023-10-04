@@ -99,97 +99,97 @@
 						</tr>
 					</table>
 
-						<table style="margin-top:30px;">
-							<thead>
-								<tr>
-									<!-- <th>
-										<div>SR.No</div>
-									</th> -->
-									<t t-foreach="tabledata" t-as="column">
-										<th>
-											<span>
-												<t t-esc="column[1]" />
-											</span>
-										</th>
-									</t>
-								</tr>
-            				</thead>
-							<!-- <tbody>
-								<t t-set="i" t-value="0"/>
-								<tr t-foreach="data.child_lines" t-as="r">
-									<td>
-										<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
-										</div>
-									</td>
-									<t t-foreach="tabledata" t-as="row">
-										<td>
-											<span>
-												<t t-esc="r[row[0]]"/>
-											</span>
-										</td>
-									</t>
-								</tr>
-							</tbody> -->
-
-							<tbody>
-								<tr t-foreach="data.child_lines" t-as="r">
-									<t t-foreach="tabledata" t-as="row">
-										<td>
+					<table style="margin-top:30px;">
+						<thead>
+							<tr>
+								<!-- <th>
+									<div>SR.No</div>
+								</th> -->
+								<t t-foreach="tabledata" t-as="column">
+									<th>
 										<span>
-											<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-												<t t-esc="round(float(r[row[0]]),2)"/>
-											</t>
-											<t t-else="">
-												<t t-esc="r[row[0]]"/>
-											</t>
+											<t t-esc="column[1]" />
 										</span>
-										</td>
-									</t>
-								</tr>
-							</tbody>
-						</table>
-
-						<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="resultdata and len(resultdata) &gt; 0">
-							<tr cols="12">
-								<td colspan="6" t-foreach="resultdata" t-as="result">
-									<span>
-										<t t-esc="result[1]"/>
-									</span> : 
-									<![CDATA[&nbsp;]]>
-									<span>
-										<t t-esc="formdata[result[0]]" />
-									</span>
-								</td>
+									</th>
+								</t>
 							</tr>
-						</table>
-						<div class="authorizeRowDataSheet">
+						</thead>
+						<!-- <tbody>
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.child_lines" t-as="r">
+								<td>
+									<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+									</div>
+								</td>
+								<t t-foreach="tabledata" t-as="row">
+									<td>
+										<span>
+											<t t-esc="r[row[0]]"/>
+										</span>
+									</td>
+								</t>
+							</tr>
+						</tbody> -->
+
+						<tbody>
+							<tr t-foreach="data.child_lines" t-as="r">
+								<t t-foreach="tabledata" t-as="row">
+									<td>
+									<span>
+										<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+											<t t-esc="round(float(r[row[0]]),2)"/>
+										</t>
+										<t t-else="">
+											<t t-esc="r[row[0]]"/>
+										</t>
+									</span>
+									</td>
+								</t>
+							</tr>
+						</tbody>
+					</table>
+
+					<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="resultdata and len(resultdata) &gt; 0">
+						<tr cols="12">
+							<td colspan="6" t-foreach="resultdata" t-as="result">
+								<span>
+									<t t-esc="result[1]"/>
+								</span> : 
+								<![CDATA[&nbsp;]]>
+								<span>
+									<t t-esc="formdata[result[0]]" />
+								</span>
+							</td>
+						</tr>
+					</table>
+					<div class="authorizeRowDataSheet">
+						<div>
 							<div>
-								<div>
-									<b>
-										(JR Chemist)
-									</b>
-								</div>
-								<div>
-									<b>
-										Tested By
-									</b>
-								</div>
+								<b>
+									(JR Chemist)
+								</b>
 							</div>
-							<div style="margin-left:500px">
-								<div>
-									<b>
-										Chemical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
+							<div>
+								<b>
+									Tested By
+								</b>
 							</div>
 						</div>
+						<div style="margin-left:500px">
+							<div>
+								<b>
+									Chemical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+						</div>
+					</div>
 				</div>
 			</t>
 		</t>

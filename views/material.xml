@@ -72,9 +72,8 @@
           </page>
           <page string="Product Based" attrs="{'invisible': [('is_product_based_calculation','=',False)]}">
             
-            <field name='product_based_calculation' context="{'default_product_id':active_id}" >
+            <field name='product_based_calculation'  >
               <tree>
-                <field name="product_id"  />
                 <field name="grade_ids" invisible="1" />
                 <field name="grade"/>
                 <field name="ir_model"/>
@@ -168,7 +167,7 @@
       <field name="arch" type="xml">
         <form >
         <group>
-          <field name="product_id"/>
+          <field name="product_id" invisible="1"/>
           <field name="grade"/>
           <field name="main_report_template"/>
           <field name="datasheet_report_template"/>

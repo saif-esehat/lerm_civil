@@ -22,6 +22,7 @@ from .report import ptgrout_non_nabl_report
 from .report import cement_compatiblity
 from .report import half_cell_report
 from .report import chemical_fine_aggregate_report
+from .report import coarse_aggregate_mechanical
 # from .mechanical import sieve_analysis
 from .mechanical import free_swell_index
 from .mechanical import soil_cbr
@@ -29,7 +30,7 @@ from .mechanical import soundness
 from .mechanical import solid_block
 from .mechanical import split_tensile_strength
 from .mechanical import concrete_beam
-from .mechanical import concrete_cube
+# from .mechanical import concrete_cube
 from .mechanical import concrete
 from .mechanical import coarse_aggregate
 from .mechanical import bulk_density
@@ -53,6 +54,7 @@ from .mechanical import soil
 from .mechanical import paver_block
 from .mechanical import aggregate_fine
 from .mechanical import brick_2
+from .mechanical import concrete_cube2
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter

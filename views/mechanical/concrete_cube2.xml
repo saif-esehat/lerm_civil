@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_concrete_cube_view" model="ir.ui.view">
+        <field name="name">mechanical.concrete.cube.form</field>
+        <field name="model">mechanical.concrete.cube</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id"/>
+                        <field name="eln_ref"/>
+                        <field name="grade" exception="grade"  string="Grade" identity="extra"/>   
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="date_of_casting"  string="Date of Casting" identity="extra"/>
+                        </group>
+                        <group>
+                            <field name="date_of_testing"  string="Date of Testing" identity="extra"/>
+                        </group>
+                        <group>
+                            <field name="age_of_days"/>
+                        </group>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no' string="Sr. NO"/>
+                                <field name='length' string="Length (mm)"/>
+                                <field name='width' string="Width (mm)"/>
+                                <field name='area' string="Area (mm²)"/>
+                                <field name='id_mark' string="ID Mark"/>
+                                <field name='wt_sample' string="Weight of Sample in kgs"/>
+                                <field name="crushing_load" string="Crushing Load in kN"/>
+                                <field name='compressive_strength' string="Compressive Strength N/mm²"/>
+                                <!-- <field name='average_tensile'/> -->
+                            </tree>
+                           
+                    </field> 
+                        <group>
+                            <field name='average_strength' string="Average Compressive Strength in N/mm2" identity="result"/>
+                            <field name="confirmity"/>
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+  
+
+
+    </data>
+</odoo>

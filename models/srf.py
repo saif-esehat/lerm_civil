@@ -442,7 +442,7 @@ class CreateSampleWizard(models.TransientModel):
        
    
 
-    def add_sample(self,data):
+    def add_sample(self,data=False):
 
         if data:
             
@@ -590,13 +590,6 @@ class CreateSampleWizard(models.TransientModel):
                         'date_casting':self.date_casting
 
                     })
-
-                
-
-            
-
-
-                print("Parameters "+ str(self.parameters))
 
                 return {'type': 'ir.actions.act_window_close'}
             else:
