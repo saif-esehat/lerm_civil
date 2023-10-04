@@ -112,6 +112,7 @@
     'reports/ptgrout_non_nabl_report.xml',
     'reports/cement_psc_report.xml',
     'reports/cement_ppc_report.xml',
+    'reports/concrete_cube_print.xml',
     'reports/coarse_aggregate_mech_datasheet.xml',
 
 

@@ -34,12 +34,12 @@
 								</td>
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="a" t-value="0"/>
 							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="a + 1" />
+										<t t-set="a" t-value="a+1"/>
 									</div>
                   				</td>
 								<td colspan="1">
@@ -106,12 +106,12 @@
 								</td>
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="b" t-value="0"/>
 							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="b + 1" />
+										<t t-set="b" t-value="b+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -162,12 +162,12 @@
 								</td>
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="c" t-value="0"/>
 							<tr t-foreach="data.impact_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="c + 1" />
+										<t t-set="c" t-value="c+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -235,12 +235,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="d" t-value="0"/>
 							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="d + 1" />
+										<t t-set="d" t-value="d+1"/>
 									</div>
                   				</td>
 								<td colspan="3">
@@ -345,12 +345,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="e" t-value="0"/>
 							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="e + 1" />
+										<t t-set="e" t-value="e+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -427,12 +427,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="f" t-value="0"/>
 							<tr t-foreach="data.soundness_mgso4_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="f + 1" />
+										<t t-set="f" t-value="f+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -500,12 +500,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="g" t-value="0"/>
 							<tr t-foreach="data.elongation_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="g + 1" />
+										<t t-set="g" t-value="g+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -570,12 +570,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="h" t-value="0"/>
 							<tr t-foreach="data.flakiness_child_lines" t-as="r">
 								<td colspan="2">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="h + 1" />
+										<t t-set="h" t-value="h+1"/>
 									</div>
                   				</td>
 								<td colspan="4">
@@ -816,12 +816,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="j" t-value="0"/>
 							<tr t-foreach="data.rodded_bulk_density_child_lines" t-as="r">
 								<td colspan="2">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="j + 1" />
+										<t t-set="j" t-value="j+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -866,12 +866,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="k" t-value="0"/>
 							<tr t-foreach="data.sieve_analysis_child_lines" t-as="r">
 								<td colspan="2">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="k + 1" />
+										<t t-set="k" t-value="k+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
@@ -927,12 +927,12 @@
                                
                             </tr>
                             
-							<t t-set="i" t-value="0"/>
+							<t t-set="l" t-value="0"/>
 							<tr t-foreach="data.aggregate_grading_child_lines" t-as="r">
 								<td colspan="2">
 									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
+										<span t-esc="l + 1" />
+										<t t-set="l" t-value="l+1"/>
 									</div>
                   				</td>
 								<td colspan="2">
