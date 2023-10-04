@@ -11,7 +11,7 @@
                     <group>
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" invisible="1" />
-                        <field name="parameter_id"/>
+                        <field name="parameter_id" invisible="1"/>
                         <field name="eln_ref"/>
                         <field name="grade" exception="grade"  string="Grade" identity="extra"/>   
                     </group>
