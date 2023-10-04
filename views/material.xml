@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
   <data>
+    
+    
     <record id="product_template_form_inherited" model ="ir.ui.view">
       <field name="name">product.template.form</field>
       <field name="model">product.template</field>
@@ -30,7 +32,7 @@
         </xpath>
         <xpath expr="//page[@name='general_information']" position="after">
           <page string="LERM" attrs="{'invisible': [('is_sample','=',False)]}">
-
+            
             <group style="width:50%">
               <field name="discipline"/>
               <field name="test_format_no"/>
@@ -43,15 +45,15 @@
               <field name="data_sheet_format_no"/>
             </group>
             <field name='parameter_table1' options="{'no_create': True}" domain="[('id', 'in', parameter_master_ids)]" />
-
+            
             <!-- <field name="parameter_table" context="{'default_discipline':discipline}" nolabel="1">
-              <tree>
-                <field name="parameter" />
-                <field name="discipline" />
-              </tree>
-              
-            </field> -->
-          </page>
+                 <tree>
+                 <field name="parameter" />
+                 <field name="discipline" />
+                 </tree>
+                 
+                 </field> -->
+             </page>
           <page string="Report Column Title" attrs="{'invisible': [('is_sample','=',False)]}">
             <group>
               <group style="width:33%">
@@ -69,17 +71,16 @@
             </group>
           </page>
           <page string="Product Based" attrs="{'invisible': [('is_product_based_calculation','=',False)]}">
-    
-              <field name='product_based_calculation' context="{'grade_table_datas':grade_table, 'product_id':active_id}">
-                <tree editable="bottom">
-                  <field name="product_id" invisible="1" />
-                  <field name="grade_ids" invisible="1" />
-                  <field name="grade" domain="[('id', 'in', grade_ids)]"/>
-                  <field name="ir_model"/>
-                  <field name="main_report_template"/>
-                  <field name="datasheet_report_template"/>
-                </tree>
-              </field>
+            
+            <field name='product_based_calculation'  >
+              <tree>
+                <field name="grade_ids" invisible="1" />
+                <field name="grade"/>
+                <field name="ir_model"/>
+                <field name="main_report_template"/>
+                <field name="datasheet_report_template"/>
+              </tree>
+            </field>
           </page>
           <page name="grade_page" string="Grade" attrs="{'invisible': [('is_sample','=',False)]}">
             <field name="grade_table">
@@ -96,26 +97,26 @@
             </field>
           </page>
           <!-- <page name="qty_page" string="Qty" attrs="{'invisible': [('is_sample','=',False)]}">
-            <field name="qty_table">
-              <tree editable="bottom">
-                <field name="qty"/>
-              </tree>
-            </field>
-          </page> -->
+               <field name="qty_table">
+               <tree editable="bottom">
+               <field name="qty"/>
+               </tree>
+               </field>
+               </page> -->
           <!-- <page string="Alias" attrs="{'invisible': [('is_sample','=',False)]}">
-            <field name='alias_table'>
-                <tree edidable="bottom">
-                    <field name="alias"/>
-                    <field name="customer"/>
-                </tree>
-                <form>
-                  <group>
-                    <field name="alias"/>
-                    <field name="customer"/>
-                  </group>
-                </form>
-              </field>
-          </page> -->
+               <field name='alias_table'>
+               <tree edidable="bottom">
+               <field name="alias"/>
+               <field name="customer"/>
+               </tree>
+               <form>
+               <group>
+               <field name="alias"/>
+               <field name="customer"/>
+               </group>
+               </form>
+               </field>
+               </page> -->
           <page string="Datasheet" attrs="{'invisible': [('is_sample','=',False)]}">
             <field name='datasheet_table'>
               <tree edidable="bottom">
@@ -131,24 +132,24 @@
         </xpath>
       </field>
     </record>
-
+    
     <!-- <record id="lerm_civil_parameter_line_form" model="ir.ui.view">
-        <field name="name">lerm.parameter.line.form</field>
-        <field name="model">lerm.parameter.line</field>
-        <field name="arch" type="xml">
+         <field name="name">lerm.parameter.line.form</field>
+         <field name="model">lerm.parameter.line</field>
+         <field name="arch" type="xml">
          <form>
-          <sheet>
-                      <group style="width:33%">
-                        <field name="parameter" />
-                        <field name="discipline"/>
-                        <field name="parameters_ids" domain="[('discipline', '=', discipline)]"/>
-                      </group>
-                      
-          </sheet>
-          </form>
-        </field>
-      </record> -->
-
+         <sheet>
+         <group style="width:33%">
+         <field name="parameter" />
+         <field name="discipline"/>
+         <field name="parameters_ids" domain="[('discipline', '=', discipline)]"/>
+         </group>
+         
+         </sheet>
+         </form>
+         </field>
+         </record> -->
+    
     <record id="view_partner_inherited_form" model="ir.ui.view">
       <field name="name">view.partner.inherited.form</field>
       <field name="model">res.partner</field>
@@ -159,10 +160,26 @@
         </xpath>
       </field>
     </record>
-
-
+    
+    <record id="lerm_product_based_calculation_form" model="ir.ui.view">
+      <field name="name">lerm.product.based.calculation.form</field>
+      <field name="model">lerm.product.based.calculation</field>
+      <field name="arch" type="xml">
+        <form >
+        <group>
+          <field name="product_id" invisible="1"/>
+          <field name="grade"/>
+          <field name="main_report_template"/>
+          <field name="datasheet_report_template"/>
+          <field name="ir_model"/>
+        </group>
+        </form>
+      </field>
+    </record>
+    
+    
   </data>
-
-
-
+  
+  
+  
 </odoo>

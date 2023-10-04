@@ -523,8 +523,8 @@ class ConcreteCubeCompresiveReport(models.AbstractModel):
         }
         
 class ConcreteCubeCompresiveDatasheet(models.AbstractModel):
-    _name = 'report.lerm_civil.steel_tmt_bar_datasheet'
-    _description = 'Steel TMT Bar DataSheet'
+    _name = 'report.lerm_civil.compresive_concrete_cube_datasheet'
+    _description = 'Compresive strength Cube DataSheet'
     
     @api.model
     def _get_report_values(self, docids, data):
@@ -534,6 +534,8 @@ class ConcreteCubeCompresiveDatasheet(models.AbstractModel):
             eln = self.env['lerm.eln'].sudo().browse(docids) 
         model_id = eln.model_id
         # differnt location for product based
+        print(eln.material.parameter_table1[0].parameter_name , 'parameter')
+        parameter_data = self.env['lerm.parameter.master'].sudo().search([('internal_id','=',eln.material.parameter_table1[0].internal_id)])
         model_name = eln.material.product_based_calculation[0].ir_model.name 
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
@@ -541,5 +543,6 @@ class ConcreteCubeCompresiveDatasheet(models.AbstractModel):
             general_data = self.env['lerm.eln'].sudo().browse(docids)
         return {
             'eln': eln,
-            'data' : general_data
+            'data' : general_data,
+            'parameter' : parameter_data
         }

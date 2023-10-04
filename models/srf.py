@@ -442,89 +442,90 @@ class CreateSampleWizard(models.TransientModel):
        
    
 
-    def add_sample(self):
+    def add_sample(self,data=False):
+
+        if data:
+            
+            discipline_id = data['discipline_id']
+            group_id =  data['group_id']
+            material_id = data['material_id']
+            grade_id = data['grade_id']
+            srf_id  = data['srf_id']
+            parameters = data['parameter']
+            sample_range = self.env['sample.range.line'].create({
+                
+                'srf_id': srf_id,
+                'group_id':group_id,
+                'discipline_id' : discipline_id,
+                'grade_id' : grade_id,
+                'sample_qty':1,
+                'parameters':parameters
+            })
+            
+            srf = self.env["lerm.srf.sample"].create({
+                'srf_id':srf_id,
+                'discipline_id': discipline_id,
+                'group_id':group_id,
+                'material_id' : self.material_id.id,
+                'grade_id' : grade_id,
+                'parameters':parameters,
+                'sample_range_id':sample_range.id,
+            })
+            
+        
+        
+        else:
+            # print("From else")
+          
+
+            group_id =  self.group_id.id
+            alias = self.alias
+            material_id = self.material_id.id
+            size_id = self.size_id.id
+            brand = self.brand
+            grade_id = self.grade_id.id
+            sample_received_date = self.sample_received_date
+            location = self.location
+            sample_condition = self.sample_condition
+            sample_reject_reason = self.sample_reject_reason
+            has_witness = self.has_witness
+            witness = self.witness
+            discipline_id = self.discipline_id.id
+            scope = self.scope
+            sample_description =self.sample_description
+            parameters = self.parameters
+            discipline_id = self.discipline_id
+            casting = self.casting
+            sample_qty = self.sample_qty
+            client_sample_id = self.client_sample_id
+            conformity = self.conformity
+            volume = self.volume
+            product_name = self.product_name
 
 
-        group_id =  self.group_id.id
-        alias = self.alias
-        material_id = self.material_id.id
-        size_id = self.size_id.id
-        brand = self.brand
-        grade_id = self.grade_id.id
-        sample_received_date = self.sample_received_date
-        location = self.location
-        sample_condition = self.sample_condition
-        sample_reject_reason = self.sample_reject_reason
-        has_witness = self.has_witness
-        witness = self.witness
-        discipline_id = self.discipline_id.id
-        scope = self.scope
-        sample_description =self.sample_description
-        parameters = self.parameters
-        discipline_id = self.discipline_id
-        casting = self.casting
-        sample_qty = self.sample_qty
-        client_sample_id = self.client_sample_id
-        conformity = self.conformity
-        volume = self.volume
-        product_name = self.product_name
+            if self.grade_required:
+                if not self.grade_id:
+                    raise UserError("Grade is Required")
+                
 
+            if not parameters:
+                raise UserError("Add atleast one Parameter")
+            
+            if discipline_id.internal_id == '742c99ff-c484-4806-bb68-11b4271d6147':
+                if len(parameters) > 1:
+                    raise UserError("Only one Parameter is allowed in Non Destructive Testing")
 
-        if self.grade_required:
-            if not self.grade_id:
-                raise UserError("Grade is Required")
             
 
-        if not parameters:
-            raise UserError("Add atleast one Parameter")
-        
-        if discipline_id.internal_id == '742c99ff-c484-4806-bb68-11b4271d6147':
-            if len(parameters) > 1:
-                 raise UserError("Only one Parameter is allowed in Non Destructive Testing")
+            srf_ids = []
+            #     for i in range(1, self.qty_id + 1):
+            #         srf_number = str(i).zfill(4)  # Pad the number with leading zeros
+            #         srf_id = f"SRF/{srf_number}-{str(self.qty_id).zfill(4)}"
+            #         srf_ids.append(srf_id)
 
-        
+            if self.sample_qty > 0:
 
-        srf_ids = []
-        #     for i in range(1, self.qty_id + 1):
-        #         srf_number = str(i).zfill(4)  # Pad the number with leading zeros
-        #         srf_id = f"SRF/{srf_number}-{str(self.qty_id).zfill(4)}"
-        #         srf_ids.append(srf_id)
-
-        if self.sample_qty > 0:
-
-            sample_range = self.env['sample.range.line'].create({
-                'srf_id': self.env.context.get('active_id'),
-                'group_id':group_id,
-                'alias':alias,
-                'discipline_id': discipline_id,
-                'material_id' : self.material_id.id,
-                'size_id':size_id,
-                'brand':brand,
-                'grade_id':grade_id,
-                'sample_received_date':sample_received_date,
-                'location':location,
-                'sample_condition':sample_condition,
-                'sample_reject_reason':sample_reject_reason,
-                'has_witness':has_witness,
-                'witness':witness,
-                'conformity':conformity,
-                'scope':scope,
-                'sample_description':sample_description,
-                'parameters':parameters,
-                'discipline_id':discipline_id.id,
-                'casting':casting,
-                'sample_qty':sample_qty,
-                'client_sample_id':client_sample_id,
-                'casting_date':self.date_casting,
-                'volume':volume,
-                'product_name':product_name.id,
-                'main_name':self.main_name,
-                'price':self.price,
-                'date_casting':self.date_casting
-
-            })
-            for i in range(self.sample_qty):
-                self.env["lerm.srf.sample"].create({
+                sample_range = self.env['sample.range.line'].create({
                     'srf_id': self.env.context.get('active_id'),
                     'group_id':group_id,
                     'alias':alias,
@@ -545,11 +546,9 @@ class CreateSampleWizard(models.TransientModel):
                     'parameters':parameters,
                     'discipline_id':discipline_id.id,
                     'casting':casting,
-                    'sample_range_id':sample_range.id,
+                    'sample_qty':sample_qty,
                     'client_sample_id':client_sample_id,
                     'casting_date':self.date_casting,
-                    'days_casting':self.days_casting,
-                    'casting':self.casting,
                     'volume':volume,
                     'product_name':product_name.id,
                     'main_name':self.main_name,
@@ -557,17 +556,44 @@ class CreateSampleWizard(models.TransientModel):
                     'date_casting':self.date_casting
 
                 })
+                for i in range(self.sample_qty):
+                    self.env["lerm.srf.sample"].create({
+                        'srf_id': self.env.context.get('active_id'),
+                        'group_id':group_id,
+                        'alias':alias,
+                        'discipline_id': discipline_id,
+                        'material_id' : self.material_id.id,
+                        'size_id':size_id,
+                        'brand':brand,
+                        'grade_id':grade_id,
+                        'sample_received_date':sample_received_date,
+                        'location':location,
+                        'sample_condition':sample_condition,
+                        'sample_reject_reason':sample_reject_reason,
+                        'has_witness':has_witness,
+                        'witness':witness,
+                        'conformity':conformity,
+                        'scope':scope,
+                        'sample_description':sample_description,
+                        'parameters':parameters,
+                        'discipline_id':discipline_id.id,
+                        'casting':casting,
+                        'sample_range_id':sample_range.id,
+                        'client_sample_id':client_sample_id,
+                        'casting_date':self.date_casting,
+                        'days_casting':self.days_casting,
+                        'casting':self.casting,
+                        'volume':volume,
+                        'product_name':product_name.id,
+                        'main_name':self.main_name,
+                        'price':self.price,
+                        'date_casting':self.date_casting
 
-            
+                    })
 
-        
-
-
-            print("Parameters "+ str(self.parameters))
-
-            return {'type': 'ir.actions.act_window_close'}
-        else:
-            raise UserError("Sample Quantity Must be Greater Than Zero")
+                return {'type': 'ir.actions.act_window_close'}
+            else:
+                raise UserError("Sample Quantity Must be Greater Than Zero")
 
     def close_sample_wizard(self):
         return {'type': 'ir.actions.act_window_close'}

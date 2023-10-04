@@ -21,7 +21,7 @@ class MechanicalConcreteCube(models.Model):
         ('7days', '7 Days'),
         ('14days', '14 Days'),
         ('28days', '28 Days'),
-    ], string='Age', default='28days')
+    ], string='Age', default='28days',required=True)
     date_of_casting = fields.Date(string="Date of Casting")
     date_of_testing = fields.Date(string="Date of Testing",compute="_compute_testing_date")
     confirmity = fields.Selection([
@@ -38,15 +38,15 @@ class MechanicalConcreteCube(models.Model):
                     cast_date = fields.Datetime.from_string(record.date_of_casting)
                     testing_date = cast_date + timedelta(days=3)
                     record.date_of_testing = fields.Datetime.to_string(testing_date)
-                if record.age_of_days == "7days":
+                elif record.age_of_days == "7days":
                     cast_date = fields.Datetime.from_string(record.date_of_casting)
                     testing_date = cast_date + timedelta(days=7)
                     record.date_of_testing = fields.Datetime.to_string(testing_date)
-                if record.age_of_days == "14days":
+                elif record.age_of_days == "14days":
                     cast_date = fields.Datetime.from_string(record.date_of_casting)
                     testing_date = cast_date + timedelta(days=14)
                     record.date_of_testing = fields.Datetime.to_string(testing_date)
-                if record.age_of_days == "28days":
+                elif record.age_of_days == "28days":
                     cast_date = fields.Datetime.from_string(record.date_of_casting)
                     testing_date = cast_date + timedelta(days=28)
                     record.date_of_testing = fields.Datetime.to_string(testing_date)
