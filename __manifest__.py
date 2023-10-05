@@ -79,6 +79,7 @@
     'views/mechanical/coarse_aggregate_mechanical.xml',
     'views/mechanical/aggregate_fine.xml',
     'views/mechanical/concrete_cube2.xml',
+    'views/product_grade_wizard.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',
