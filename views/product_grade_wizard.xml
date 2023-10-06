@@ -29,6 +29,6 @@
             <field name="view_id" ref="view_product_grade_wizard_form"/>
             <field name="target">new</field>
         </record>
-        <menuitem id="menu_product_grade_wizard" name="Add Grade Line"  action="action_product_grade_wizard"/>
+        <!-- <menuitem id="menu_product_grade_wizard" name="Add Grade Line"  action="action_product_grade_wizard"/> -->
     </data>
 </odoo>
