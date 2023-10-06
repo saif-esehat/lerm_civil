@@ -28,6 +28,8 @@ class Material(models.Model):
     volume = fields.Char("Volume")
     lab_name = fields.Char(string="Lab Name")
     product_based_calculation = fields.One2many('lerm.product.based.calculation','product_id',string="Product Based Calculation")
+    sop = fields.Html(string='SOP')
+
     # discipline2 = fields.One2many('material.discipline.line')
 
 

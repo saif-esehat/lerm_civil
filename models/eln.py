@@ -59,6 +59,13 @@ class ELN(models.Model):
     model_id = fields.Integer("Model ID")
     temperature = fields.Float("Temperature")
     instrument = fields.Char("Instrument")
+    sop = fields.Html(string='SOP',compute="comput_sop")
+    
+    
+    @api.depends("material")
+    def comput_sop(self):
+        for rec in self:
+            rec.sop = rec.material.sop
 
 
 
@@ -258,7 +265,7 @@ class ELN(models.Model):
             template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
         return {
             'type': 'ir.actions.report',
-            'report_type': 'qweb-pdf',
+            'report_type': 'qweb-html',
             'report_name': template_name,
             'report_file': template_name
         }
@@ -271,7 +278,7 @@ class ELN(models.Model):
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {
             'type': 'ir.actions.report',
-            'report_type': 'qweb-pdf',
+            'report_type': 'qweb-html',
             'report_name': template_name,
             'report_file': template_name
         }
@@ -534,6 +541,7 @@ class ELNParametersResult(models.Model):
     calculated = fields.Boolean("Calculated")
     calculation_type = fields.Selection([('parameter_based', 'Parameter Based'), ('form_based', 'Form Based')],compute='_compute_calculation_type',string='Calculation Type')
     test_method = fields.Many2one('lerm_civil.test_method',string="Specification")
+    specification_permissible_limit = fields.Text(string="Specification",compute='_compute_specification')
     specification = fields.Text(string="Test Method", compute='_compute_specification')
     nabl_status = fields.Selection([
         ('nabl', 'NABL'),
@@ -575,7 +583,9 @@ class ELNParametersResult(models.Model):
             specification = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
             print("specsi")
             print(specification)
+            table_record = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])
             record.specification = specification
+            record.specification_permissible_limit = table_record.permissable_limit
 
     def open_form(self):
         # import wdb; wdb.set_trace()
