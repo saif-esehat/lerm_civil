@@ -71,6 +71,8 @@
             </group>
           </page>
           <page string="Product Based" attrs="{'invisible': [('is_product_based_calculation','=',False)]}">
+          
+          <button name="action_open_product_grade_wizard" string="Add Grade Line" type="object" class="oe_highlight"/>
             
             <field name='product_based_calculation'  >
               <tree>
