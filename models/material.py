@@ -33,6 +33,17 @@ class Material(models.Model):
     # discipline2 = fields.One2many('material.discipline.line')
 
 
+    def action_open_product_grade_wizard(self):
+        wizard_action = self.env.ref('lerm_civil.action_product_grade_wizard')
+        return {
+            'name': 'Add Grade Line',
+            'type': 'ir.actions.act_window',
+            'res_model': 'product.grade.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_product_id': self.id},
+        }
+
     def name_get(self):
         res = []
         for product in self:
@@ -74,6 +85,8 @@ class Material(models.Model):
             group_ids = self.env['lerm_civil.group'].search([('discipline', '=', record.discipline.id)])
             record.group_ids = group_ids
 
+    
+
 class DatasheetLine(models.Model):
     _name = 'lerm.material.datasheet.line'
 
@@ -112,6 +125,9 @@ class ParameterMasterAliasLine(models.Model):
     #     for rec in self:
     #         parameters_ids = self.env['lerm.parameter.master'].search(['discipline','=',rec.discipline.id])
     #         rec.parameters_ids = parameters_ids
+
+           
+    
 
 class SizeLine(models.Model):
     _name = 'lerm.size.line'
@@ -161,3 +177,39 @@ class ProductBasedCalculation(models.Model):
             
                 
 
+class ProductGradeWizard(models.TransientModel):
+    _name = 'product.grade.wizard'
+    _description = 'Product Grade Wizard'
+
+    product_id = fields.Many2one('product.template', string="Product")
+    grade = fields.Many2one("lerm.grade.line", string="Grade")
+    main_report_template = fields.Many2one('ir.actions.report', string="Main Report Template")
+    datasheet_report_template = fields.Many2one('ir.actions.report', string="DataSheet Report Template")
+    ir_model = fields.Many2one('ir.model', string="Model")
+
+    def add_grade_line(self):
+        product_template = self.product_id
+        grade_line_data = {
+            'product_id': product_template.id,
+            'grade': self.grade.id,
+            'main_report_template': self.main_report_template.id,
+            'datasheet_report_template': self.datasheet_report_template.id,
+            'ir_model': self.ir_model.id,
+        }
+        product_template.write({'grade_ids': [(0, 0, grade_line_data)]})
+        return {'type': 'ir.actions.act_window_close'}      
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    def action_open_product_grade_wizard(self):
+        wizard_action = self.env.ref('lerm_civil.action_product_grade_wizard')
+        return {
+            'name': 'Add Grade Line',
+            'type': 'ir.actions.act_window',
+            'res_model': 'product.grade.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_product_id': self.id},
+        }

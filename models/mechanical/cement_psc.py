@@ -95,11 +95,10 @@ class CementPsc(models.Model):
                     record.initial_setting_time_minutes = round(initial_setting_time_minutes / 5) * 5
 
                 record.initial_setting_time_minutes_unrounded = initial_setting_time_minutes
+
             else:
                 record.initial_setting_time_hours = False
                 record.initial_setting_time_minutes = False
-                record.final_setting_time_minutes_unrounded = False
-
 
 
     #Final setting Time
@@ -128,11 +127,12 @@ class CementPsc(models.Model):
                     record.final_setting_time_minutes = final_setting_time
                 else:
                     record.final_setting_time_minutes = round(final_setting_time / 5) * 5
-                
+
                 record.final_setting_time_minutes_unrounded = final_setting_time
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
+                record.final_setting_time_minutes_unrounded = False
 
 
     #Density

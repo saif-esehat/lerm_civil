@@ -35,7 +35,7 @@
                             </tr>
                             
 							<t t-set="a" t-value="0"/>
-							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
+							<tr t-foreach="data.crushing_value_child_lines" t-as="r1">
 								<td colspan="1">
 									<div>
 										<span t-esc="a + 1" />
@@ -43,25 +43,25 @@
 									</div>
                   				</td>
 								<td colspan="1">
-									<span t-esc="r['sample_no']"/>
+									<span t-esc="r1['sample_no']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['wt_of_cylinder']"/>
+									<span t-esc="r1['wt_of_cylinder']"/>
 								</td>
 								<td colspan="2">
-									<span t-esc="r['total_wt_of_dried']"/>
+									<span t-esc="r1['total_wt_of_dried']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['total_wt_aggregate']"/>
+									<span t-esc="r1['total_wt_aggregate']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['wt_of_aggregate_passing']"/>
+									<span t-esc="r1['wt_of_aggregate_passing']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['wt_of_aggregate_retained']"/>
+									<span t-esc="r1['wt_of_aggregate_retained']"/>
 								</td>
                                 <td colspan="z">
-									<span t-esc="r['crushing_value']"/>
+									<span t-esc="r1['crushing_value']"/>
 								</td>
 						</tr>
 						</table>
@@ -92,11 +92,9 @@
 							<tr cols="12">
                                 <td colspan="1">Sr No.
                                 </td>
-                                <td colspan="2">Test
+                                <td colspan="2">Weight of saturated surface dry (SSD) sample in air in gms
 								</td>
-                                <td colspan="1">Weight of saturated surface dry (SSD) sample in air in gms
-								</td>
-                                <td colspan="2">Weight of saturated sample in water in gms
+                                <td colspan="3">Weight of saturated sample in water in gms
 								</td>
                                 <td colspan="2">Oven dried weight of sample in gms
 								</td>
@@ -107,30 +105,28 @@
                             </tr>
                             
 							<t t-set="b" t-value="0"/>
-							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
+							<tr t-foreach="data.specific_gravity_child_lines" t-as="r2">
 								<td colspan="1">
 									<div>
 										<span t-esc="b + 1" />
 										<t t-set="b" t-value="b+1"/>
 									</div>
                   				</td>
+								
 								<td colspan="2">
-									<span t-esc="r['sr_no']"/>
+									<span t-esc="r2['wt_surface_dry']"/>
 								</td>
-								<td colspan="1">
-									<span t-esc="r['wt_surface_dry']"/>
-								</td>
-								<td colspan="2">
-									<span t-esc="r['wt_sample_inwater']"/>
+								<td colspan="3">
+									<span t-esc="r2['wt_sample_inwater']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['oven_dried_wt']"/>
+									<span t-esc="r2['oven_dried_wt']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['specific_gravity']"/>
+									<span t-esc="r2['specific_gravity']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['water_absorption']"/>
+									<span t-esc="r2['water_absorption']"/>
 								</td>
                              </tr>   
 						</table>
@@ -163,7 +159,7 @@
                             </tr>
                             
 							<t t-set="c" t-value="0"/>
-							<tr t-foreach="data.impact_value_child_lines" t-as="r">
+							<tr t-foreach="data.impact_value_child_lines" t-as="r3">
 								<td colspan="1">
 									<div>
 										<span t-esc="c + 1" />
@@ -171,25 +167,25 @@
 									</div>
                   				</td>
 								<td colspan="2">
-									<span t-esc="r['sample_no']"/>
+									<span t-esc="r3['sample_no']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['wt_of_cylinder']"/>
+									<span t-esc="r3['wt_of_cylinder']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['total_wt_of_dried']"/>
+									<span t-esc="r3['total_wt_of_dried']"/>
 								</td>
                                 <td colspan="1">
-									<span t-esc="r['total_wt_aggregate']"/>
+									<span t-esc="r3['total_wt_aggregate']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['wt_of_aggregate_passing']"/>
+									<span t-esc="r3['wt_of_aggregate_passing']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['wt_of_aggregate_retained']"/>
+									<span t-esc="r3['wt_of_aggregate_retained']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['impact_value']"/>
+									<span t-esc="r3['impact_value']"/>
 								</td>
 							</tr>
                                 
@@ -222,11 +218,9 @@
 							<tr cols="12">
                                 <td colspan="1">Sr No.
                                 </td>
-                                <td colspan="3">Test
+                                <td colspan="3">Total weight of Sample in gms
 								</td>
-                                <td colspan="2">Total weight of Sample in gms
-								</td>
-                                <td colspan="2">Weight of Passing sample in 1.70 mm IS sieve in gms
+                                <td colspan="3">Weight of Passing sample in 1.70 mm IS sieve in gms
 								</td>
                                 <td colspan="2">Weight of Retain sample in 1.70 mm IS sieve in gms
 								</td>
@@ -236,20 +230,18 @@
                             </tr>
                             
 							<t t-set="d" t-value="0"/>
-							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
+							<tr t-foreach="data.abrasion_value_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
 										<span t-esc="d + 1" />
 										<t t-set="d" t-value="d+1"/>
 									</div>
                   				</td>
+								
 								<td colspan="3">
-									<span t-esc="r['sr_no']"/>
-								</td>
-								<td colspan="2">
 									<span t-esc="r['total_weight_sample']"/>
 								</td>
-								<td colspan="2">
+								<td colspan="3">
 									<span t-esc="r['weight_passing_sample']"/>
 								</td>
                                 <td colspan="2">
@@ -346,7 +338,7 @@
                             </tr>
                             
 							<t t-set="e" t-value="0"/>
-							<tr t-foreach="data.crushing_value_child_lines" t-as="r">
+							<tr t-foreach="data.soundness_na2so4_child_lines" t-as="r">
 								<td colspan="1">
 									<div>
 										<span t-esc="e + 1" />
@@ -585,7 +577,7 @@
 									<span t-esc="r['wt_retained']"/>
 								</td>
 								<td colspan="3">
-									<span t-esc="r['elongated_retain']"/>
+									<span t-esc="r['flaky_passing']"/>
 								</td>
 							</tr>
                                   

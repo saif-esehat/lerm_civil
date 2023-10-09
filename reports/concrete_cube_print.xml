@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
+	<template id="mechanical_data_sheet_header">
+        <div t-attf-class="header article" t-att-style="report_header_style">
+			<div class="row">
+				<div class="col-12">
+					<div style="text-align:left;">	
+						FORMAT No. <![CDATA[&nbsp;]]> <span t-esc="parameter.datasheet_no"/>
+					</div>
+					<div style="text-align:center;margin-top:12px">	
+						KNACK ENGINEERING SERVICES PVT LTD
+					</div>
+					<div style="text-align:center;">
+						TEST DATA SHEET
+					</div>
+					<div class="container_eln">
+						<table>
+								<tr>
+									<td colspan="12">
+										<div style="text-align:center;">
+											<span t-esc="eln.group.group"/> <![CDATA[&nbsp;]]> (<span t-esc="eln.material.name"/>)
+										</div>
+										<div style="text-align:center;">
+												<span t-foreach="eln.parameters_result" t-as="r">
+													<span t-if="r['specification'] != '--' and r['specification']">
+														<span t-esc="r['specification']"/> <![CDATA[&nbsp;]]>,<![CDATA[&nbsp;]]>
+													</span>
+												</span>
+										</div>
+									</td>
+								</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div t-attf-class="article" t-att-style="report_header_style">
+            <t t-out="0"/>
+        </div>
+		<div t-attf-class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <!-- <ul class="list-inline mb4">
+                    <div class="footertext">
+						Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+					</div>
+					<div class="footertext">
+						Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
+					</div>
+					<div class="footertext">
+						CIN No.: U45209MH2017PTC291168
+					</div>
+                </ul> -->
+                <div t-if="report_type == 'pdf'" class="footertext">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+	</template>
     <template id="compresive_concrete_cube_report">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
@@ -137,7 +192,7 @@
 						</table>
 					</div>
 					<div style="margin-top:20px;">
-						<u>Protocol</u>
+						<u>Protocol : <span t-esc="o.material.test_parameter"/></u>
 					</div>
 					<table>
 						<thead>
@@ -152,13 +207,11 @@
 										ID MARK/Location
 									</span>
 								</th>
-								
 								<th>
 									<span>
 										Length in mm
 									</span>
 								</th>
-
 								<th>
 									<span>
 										Width in mm
@@ -364,7 +417,7 @@
 	<template id="compresive_concrete_cube_datasheet">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
-			 <t t-call="lerm_civil.data_sheet_header">
+			 <t t-call="lerm_civil.mechanical_data_sheet_header">
 				<!-- <div style="text-align:center;">
 					<p style="font-size:15px"><b>Test Data Sheet</b></p>
 				</div> -->
