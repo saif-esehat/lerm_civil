@@ -65,6 +65,17 @@ class SrfForm(models.Model):
     sample_range_table = fields.One2many('sample.range.line','srf_id',string="Sample Range")
     contractor = fields.Many2one('lerm.contractor.line',string="Contractor")
     contractor_ids = fields.Many2many('lerm.contractor.line')
+    casting = fields.Boolean(string="Casting")
+    
+    days_casting = fields.Selection([
+        ('3', '3 Days'),
+        ('7', '7 Days'),
+        ('14', '14 Days'),
+        ('28', '28 Days'),
+    ], string='Days of casting', default='3')
+    
+    date_casting = fields.Date(string="Date of Casting")
+
 
 
 
@@ -446,31 +457,46 @@ class CreateSampleWizard(models.TransientModel):
     def add_sample(self,data=False):
 
         if data:
-            
+            print(data)
             discipline_id = data['discipline_id']
             group_id =  data['group_id']
             material_id = data['material_id']
             grade_id = data['grade_id']
             srf_id  = data['srf_id']
             parameters = data['parameter']
+            sample_description = data['sample_description']
+            size_id = data['size_id']
+            casting = data["casting"]
+            days_casting = data["days_casting"]
+            date_casting = data["date_casting"]
             sample_range = self.env['sample.range.line'].create({
-                
                 'srf_id': srf_id,
                 'group_id':group_id,
                 'discipline_id' : discipline_id,
+                'material_id' : material_id,
                 'grade_id' : grade_id,
                 'sample_qty':1,
-                'parameters':parameters
+                'parameters':parameters,
+                'size_id':size_id,
+                'sample_description':sample_description,
+                'casting':casting,
+                'date_casting':date_casting,
+                'days_casting':days_casting
             })
             
             srf = self.env["lerm.srf.sample"].create({
                 'srf_id':srf_id,
                 'discipline_id': discipline_id,
                 'group_id':group_id,
-                'material_id' : self.material_id.id,
+                'material_id' : material_id,
                 'grade_id' : grade_id,
                 'parameters':parameters,
                 'sample_range_id':sample_range.id,
+                'size_id':size_id,
+                'sample_description':sample_description,
+                'casting':casting,
+                'date_casting':date_casting,
+                'days_casting':days_casting
             })
             
         

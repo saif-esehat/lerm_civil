@@ -113,7 +113,7 @@ class Soil(models.Model):
     vl_of_modul_heavy_omc = fields.Integer(string="Volume of Mould in cc")
 
    
-     # Light Compaction-OMC
+    # Light Compaction-OMC
     light_omc_name = fields.Char("Name",default="Light Compaction-OMC")
     light_omc_visible = fields.Boolean("Light Compaction-OMC Visible",compute="_compute_visible")
     job_no_light_omc = fields.Char(string="Job No")
@@ -145,11 +145,9 @@ class Soil(models.Model):
     start_date_liquid_limit = fields.Date("Start Date")
     end_date_liquid_limit = fields.Date("End Date")
     child_liness = fields.One2many('mechanical.liquid.limits.line','parent_id',string="Liquid Limit")
-
     liquid_limit = fields.Float('Liquid Limit')
-
+    
     # def calculate_result(self):
-
     are_child_lines_filled = fields.Boolean(compute='_compute_are_child_lines_filled',string='child lines',store=False)
 
     @api.depends('child_liness.moisture', 'child_liness.mass_of_dry_sample')  # Replace with actual field names
@@ -158,7 +156,7 @@ class Soil(models.Model):
             all_lines_filled = all(line.moisture and line.mass_of_dry_sample for line in record.child_liness)
             record.are_child_lines_filled = all_lines_filled
 
-       
+    
 
     def liquid_calculation(self):
         print('<<<<<<<<<<<<')
@@ -292,21 +290,6 @@ class Soil(models.Model):
             num_lines = len(record.moisture_content_table)
             record.average_block = total_moisture_content / num_lines if num_lines else 0.0
 
-
-																	
-
-    
-
-
-
-
-
-
-
-
-
-
-
      ### Compute Visible
     @api.depends('tests')
     def _compute_visible(self):
@@ -392,8 +375,8 @@ class Soil(models.Model):
                 if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
                     record.plastic_limit_visible = True
 
-                # if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
-                #     record.dry_density_visible = True
+                if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
+                    record.dry_density_visible = True
 
                 if sample.internal_id == 'a59bdedd-72cb-40e8-be97-e17fc20ff3fa':
                     record.moisture_content_visible = True
@@ -598,7 +581,6 @@ class HEAVYCOMPACTIONLINE(models.Model):
     wt_of_moisture = fields.Float(string="Weight of moisture in gm", compute="_compute_wt_of_moisture")
     moisture = fields.Float(string="% Moisture", compute="_compute_moisture")
     dry_density = fields.Float(string="Dry density in gm/cc", compute="_compute_dry_density")
-
 
     @api.depends('wt_of_modul_compact', 'parent_id.wt_of_modul')
     def _compute_wt_of_compact(self):

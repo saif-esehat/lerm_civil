@@ -98,7 +98,7 @@ class CementPpc(models.Model):
             else:
                 record.initial_setting_time_hours = False
                 record.initial_setting_time_minutes = False
-
+                record.initial_setting_time_minutes_unrounded = False
 
     #Final setting Time
 

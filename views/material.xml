@@ -98,6 +98,9 @@
               </tree>
             </field>
           </page>
+          <page name="sop_page" string="SOP" attrs="{'invisible': [('is_sample','=',False)]}">
+              <field name="sop" widget="html"/>
+          </page>
           <!-- <page name="qty_page" string="Qty" attrs="{'invisible': [('is_sample','=',False)]}">
                <field name="qty_table">
                <tree editable="bottom">
