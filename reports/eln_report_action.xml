@@ -354,5 +354,28 @@
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
     </record>
+
+
+        <record id="soil_report_action" model="ir.actions.report">
+        <field name="name">Soil Report</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.soil_report</field>
+        <field name="report_file">lerm_civil.soil_report</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="soil_datasheet_action" model="ir.actions.report">
+        <field name="name">Soil Data Sheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.soil_datasheet</field>
+        <field name="report_file">lerm_civil.soil_datasheet</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/> 
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
     
 </odoo>
