@@ -413,10 +413,21 @@ class ParameteResultCalculationWizard(models.TransientModel):
             req_min = material_table.req_min
             req_max = material_table.req_max
             mu_neg = record.result - record.result*record.parameter.mu_value
+            print("mu_val")
+            print(record.parameter.mu_value)
+            print("req_min")
+            print(req_min)
+            print("req_max")
+            print(req_max)
+            print("mu_neg")
             print(mu_neg)
             mu_pos = record.result + record.result*record.parameter.mu_value
+            print("mu_pos")
             print(mu_pos)
-
+            print("req_min <= mu_neg <= req_max")
+            print(req_min <= mu_neg <= req_max)
+            print("req_min <= mu_pos <= req_max")
+            print(req_min <= mu_pos <= req_max)
         
             if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"

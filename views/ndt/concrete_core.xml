@@ -21,6 +21,7 @@
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="member" string="Member / Element Type"/>
+                                <field name="date_testing" string="Date of Testing"/>
                                 <field name="dia" string="dia d mm"/>
                                 <field name="length" string="length h mm"/>
                                 <field name="ld" string="L/D" readonly='1'/>
