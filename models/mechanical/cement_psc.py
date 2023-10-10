@@ -17,7 +17,7 @@ class CementPsc(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    temp_percent_normal = fields.Float("Temperature °C")
+    temp_percent_normal = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_normal = fields.Float("Humidity %")
 
 
@@ -53,7 +53,7 @@ class CementPsc(models.Model):
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_percent_setting = fields.Float("Temperature °C")
+    temp_percent_setting = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_setting = fields.Float("Humidity %")
     start_date_setting = fields.Date("Start Date")
     end_date_setting = fields.Date("End Date")
@@ -193,7 +193,7 @@ class CementPsc(models.Model):
 
     @api.depends('density_trial1','density_trial2')
     def _compute_density_average(self):
-        self.average_density = (self.density_trial1 + self.density_trial2)/2
+        self.average_density = round((self.density_trial1 + self.density_trial2)/2,2)
 
     # Density End  
 
@@ -670,7 +670,7 @@ class CementPsc(models.Model):
     def _compute_normal_consistency(self):
         for record in self:
             if record.wt_of_water_req_trial1 and record.wt_of_cement_trial1:
-                record.normal_consistency_trial1 = (record.wt_of_water_req_trial1/record.wt_of_cement_trial1) * 100
+                record.normal_consistency_trial1 = round((record.wt_of_water_req_trial1/record.wt_of_cement_trial1) * 100,2)
             else:
                 record.normal_consistency_trial1 = 0
             
@@ -703,7 +703,7 @@ class SoundnessCementLinePsc(models.Model):
     @api.depends('initial_distance','final_distance')
     def _compute_expansion(self):
         for record in self:
-            record.expansion = record.final_distance - record.initial_distance
+            record.expansion = round(record.final_distance - record.initial_distance,2)
 
 class DrySievingLinePsc(models.Model):
     _name = "cement.psc.dry.sieving.line"
@@ -717,7 +717,7 @@ class DrySievingLinePsc(models.Model):
     def _compute_fineness(self):
         for record in self:
             if record.sample_weight_fineness != 0:
-                record.fineness = (record.retained_weight / record.sample_weight_fineness )*100
+                record.fineness = round((record.retained_weight / record.sample_weight_fineness )*100,2)
             else:
                 record.fineness = 0
 
@@ -736,13 +736,13 @@ class Casting3DaysLinePsc(models.Model):
     @api.depends('length','width')
     def _compute_crosssectional_area(self):
         for record in self:
-            record.crosssectional_area = record.length * record.width
+            record.crosssectional_area = round(record.length * record.width,2)
 
     @api.depends('crosssectional_area','crushing_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round((record.crushing_load / record.crosssectional_area)*1000,2)
             else:
                 record.compressive_strength = 0
 
@@ -761,13 +761,13 @@ class Casting7DaysLinePsc(models.Model):
     @api.depends('length','width')
     def _compute_crosssectional_area(self):
         for record in self:
-            record.crosssectional_area = record.length * record.width
+            record.crosssectional_area = round(record.length * record.width,2)
 
     @api.depends('crosssectional_area','crushing_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round((record.crushing_load / record.crosssectional_area)*1000,2)
             else:
                 record.compressive_strength = 0
 
@@ -786,13 +786,13 @@ class Casting28DaysLinePsc(models.Model):
     @api.depends('length','width')
     def _compute_crosssectional_area(self):
         for record in self:
-            record.crosssectional_area = record.length * record.width
+            record.crosssectional_area = round(record.length * record.width,2)
 
     @api.depends('crosssectional_area', 'crushing_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area) * 1000
+                record.compressive_strength = round((record.crushing_load / record.crosssectional_area) * 1000,2)
             else:
                 record.compressive_strength = 0
 
