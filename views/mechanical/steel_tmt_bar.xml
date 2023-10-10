@@ -61,28 +61,34 @@
                                 <field name='elongated_gauge_length'/>
                             </group>
                             <group >
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='percent_elongation'/>
                                 </group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='requirement_elongation'/>
                                 </group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='elongation_nabl'/>
+                                </group>
+                                <group style="width:25%">
+                                <field name="elongation_conformity"/>
                                 </group>
                             </group>
                             <group>
-                                <group style="width:25%">
+                                <group style="width:20%">
                                 <field name='weight_per_meter'/>
                                 </group>
-                                <group style="width:25%">
+                                <group style="width:20%">
                                 <field name='variation'/>
                                 </group>
-                                <group style="width:25%">
+                                <group style="width:20%">
                                 <field name='requirement_weight_per_meter'/>
                                 </group>
-                                <group style="width:25%">
+                                <group style="width:20%">
                                 <field name='weight_per_meter_nabl'/>
+                                </group>
+                                <group style="width:20%">
+                                <field name='weight_per_meter_conformity'/>
                                 </group>
                             </group>
                             <group style="width:51%">
@@ -92,36 +98,45 @@
                                 <field name='ultimate_load'/>
                             </group>
                             <group >
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='proof_yeid_stress'/>
                                 </group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='requirement_yield'/>
                                 </group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='yield_nabl'/>
                                 </group>
+                                <group style="width:25%">
+                                <field name='yield_conformity'/>
+                                </group>
                             </group>
                             <group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='ult_tens_strgth'/>
                                 </group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='requirement_utl'/>
                                 </group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='uts_nabl'/>
+                                </group>
+                                <group style="width:25%">
+                                <field name='uts_conformity'/>
                                 </group>
                             </group>
                             <group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='ts_ys_ratio'/>
                                 </group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='requirement_ts_ys'/>
                                 </group>
-                                <group style="width:33%">
+                                <group style="width:25%">
                                 <field name='ts_ys_nabl'/>
+                                </group>
+                                <group style="width:25%">
+                                <field name='ts_ys_conformity'/>
                                 </group>
                             </group>
                             

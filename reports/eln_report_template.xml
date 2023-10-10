@@ -845,7 +845,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<tr t-if="data.yield_nabl == 'pass' and nabl">
 								<td>
 									Yield Stress N/mm2																																				
 								</td>
@@ -866,7 +866,7 @@
 									<span t-esc="data.yield_nabl"/>
 								</td>
 							</tr>
-							<tr>
+							<tr t-if="data.uts_nabl == 'pass' and nabl">
 								<td>
 									Ultimate Tensile Strength, N/mm2																									
 								</td>
@@ -889,7 +889,7 @@
 							</tr>
 
 
-							<tr>
+							<tr t-if="data.ts_ys_nabl == 'pass' and nabl">
 								<td>
 									TS/YS Ratio																									
 								</td>
@@ -911,7 +911,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<tr t-if="data.elongation_nabl == 'pass' and nabl">
 								<td>
 									% Elongation																																		
 								</td>
@@ -933,7 +933,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<tr t-if="data.weight_per_meter_nabl == 'pass' and nabl">
 								<td>
 									Weight Per Meter, Kg/m																																		
 								</td>
@@ -954,6 +954,118 @@
 									<span t-esc="data.weight_per_meter_nabl"/>
 								</td>
 							</tr>
+
+
+							<tr t-if="data.yield_nabl == 'fail' and not nabl">
+								<td>
+									Yield Stress N/mm2																																				
+								</td>
+								<td>
+									<span t-esc="round(data.proof_yeid_stress , 2)"/>
+								</td>
+								<td>
+									<!-- <span t-esc="data.requirement_yield"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-esc="data.yield_nabl"/>
+								</td>
+							</tr>
+							<tr t-if="data.uts_nabl == 'fail' and not nabl">
+								<td>
+									Ultimate Tensile Strength, N/mm2																									
+								</td>
+								<td>
+									<span t-esc="round(data.ult_tens_strgth, 2)"/>
+								</td>
+								<td>
+									<!-- <span t-esc="data.requirement_utl"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-esc="data.uts_nabl"/>
+								</td>
+							</tr>
+
+
+							<tr t-if="data.ts_ys_nabl == 'fail' and not nabl">
+								<td>
+									TS/YS Ratio																									
+								</td>
+								<td>
+									<span t-esc="round(data.ts_ys_ratio , 2)"/>
+								</td>
+								<td>
+									<!-- <span t-esc="data.requirement_ts_ys"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-esc="data.ts_ys_nabl"/>
+								</td>
+							</tr>
+
+							<tr t-if="data.elongation_nabl == 'fail' and not nabl">
+								<td>
+									% Elongation																																		
+								</td>
+								<td>
+									<span t-esc="round(data.percent_elongation , 2)"/>
+								</td>
+								<td>
+									<!-- <span t-esc="data.requirement_elongation"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-esc="data.elongation_nabl"/>
+								</td>
+							</tr>
+
+							<tr t-if="data.weight_per_meter_nabl == 'fail' and not nabl">
+								<td>
+									Weight Per Meter, Kg/m																																		
+								</td>
+								<td>
+									<span t-esc="round(data.weight_per_meter , 2)"/>
+								</td>
+								<td>
+									<!-- <span t-esc="data.requirement_weight_per_meter"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.size.id == eln.size_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-esc="data.weight_per_meter_nabl"/>
+								</td>
+							</tr>
+
 
 							<tr>
 								<td>
