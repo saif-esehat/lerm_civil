@@ -130,10 +130,7 @@
 						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
 					</div>
 					
-<<<<<<< HEAD
-=======
-					
->>>>>>> 9882a6ca902db98f8a332e33edf1c113ec136ce4
+
 					<table>
 						<thead>
 							<tr>

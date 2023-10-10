@@ -17,7 +17,7 @@ class CementNormalConsistency(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    temp_percent_normal = fields.Float("Temperature °C")
+    temp_percent_normal = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_normal = fields.Float("Humidity %")
 
 
@@ -53,7 +53,7 @@ class CementNormalConsistency(models.Model):
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_percent_setting = fields.Float("Temperature °C")
+    temp_percent_setting = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_setting = fields.Float("Humidity %")
     start_date_setting = fields.Date("Start Date")
     end_date_setting = fields.Date("End Date")
@@ -139,7 +139,7 @@ class CementNormalConsistency(models.Model):
     density_name = fields.Char("Name",default="Density")
     density_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
 
-    temp_percent_density = fields.Float("Temperature °C")
+    temp_percent_density = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_density = fields.Float("Humidity %")
     start_date_density = fields.Date("Start Date")
     end_date_density = fields.Date("End Date")
@@ -196,7 +196,7 @@ class CementNormalConsistency(models.Model):
     soundness_name = fields.Char("Name",default="Soundness by le-chatelier")
     soundness_visible = fields.Boolean("Soundness Visible",compute="_compute_visible")
 
-    temp_percent_soundness = fields.Float("Temperature °C")
+    temp_percent_soundness = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_soundness = fields.Float("Humidity %")
     start_date_soundness = fields.Date("Start Date")
     end_date_soundness = fields.Date("End Date")
@@ -248,7 +248,7 @@ class CementNormalConsistency(models.Model):
     dry_sieving_name = fields.Char("Name",default="Dry Sieving")
     dry_sieving_visible = fields.Boolean("Dry Sieving Visible",compute="_compute_visible")
 
-    temp_percent_dry_sieving = fields.Float("Temperature °C")
+    temp_percent_dry_sieving = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_dry_sieving = fields.Float("Humidity %")
     start_date_dry_sieving = fields.Date("Start Date")
     end_date_dry_sieving = fields.Date("End Date")
@@ -278,7 +278,7 @@ class CementNormalConsistency(models.Model):
     compressive_name = fields.Char("Name",default="Compressive Strength")
     compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
-    temp_percent_compressive = fields.Float("Temperature °C")
+    temp_percent_compressive = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_compressive = fields.Float("Humidity %")
     start_date_compressive = fields.Date("Start Date")
     end_date_compressive = fields.Date("End Date")
@@ -443,7 +443,7 @@ class CementNormalConsistency(models.Model):
     fineness_blaine_name = fields.Char("Name",default="Fineness By Blaine Air Permeability Method")
     fineness_blaine_visible = fields.Boolean("Fineness Blaine Visible",compute="_compute_visible")
 
-    temp_percent_fineness = fields.Float("Temperature °C")
+    temp_percent_fineness = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_fineness = fields.Float("Humidity %")
     start_date_fineness = fields.Date("Start Date")
     end_date_fineness = fields.Date("End Date")
@@ -549,7 +549,7 @@ class CementNormalConsistency(models.Model):
                 print("Apparatus constant",record.apparatus_constant)
                 print("Average time",record.average_sample_time)
                 print("density",record.density_fineness_calculated)
-                record.fineness_of_sample = (521.08*record.apparatus_constant*math.sqrt(record.average_sample_time))/record.density_fineness_calculated
+                record.fineness_of_sample = round((521.08*record.apparatus_constant*math.sqrt(record.average_sample_time))/record.density_fineness_calculated,2)
             else:
                 record.fineness_of_sample = 0
     
