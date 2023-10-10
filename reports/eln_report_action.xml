@@ -65,11 +65,11 @@
         <field name="binding_type">report</field>
     </record>
     <record id="steel_tmt_bar_action" model="ir.actions.report">
-        <field name="name">Steel TMT Bar Report</field>
+        <field name="name">Steel TMT Bar Report New</field>
         <field name="model">lerm.eln</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">lerm_civil.steel_tmt_bar_report</field>
-        <field name="report_file">lerm_civil.steel_tmt_bar_report</field>
+        <field name="report_name">lerm_civil.steel_tmt_bar_report1</field>
+        <field name="report_file">lerm_civil.steel_tmt_bar_report1</field>
         <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>

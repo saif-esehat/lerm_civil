@@ -14,6 +14,7 @@ class ProductGradeWizard(models.TransientModel):
     datasheet_report_template = fields.Many2one('ir.actions.report', string="DataSheet Report Template")
     ir_model = fields.Many2one('ir.model', string="Model")
 
+
     @api.depends('product_id','product_id.grade_table')
     def compute_grade_table(self):
         for rec in self:

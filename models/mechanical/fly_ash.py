@@ -151,35 +151,6 @@ class FlyaschNormalConsistency(models.Model):
 
     @api.depends('time_water_added', 'time_needle_fails')
     def _compute_initial_setting_time(self):
-        # for record in self:
-        #     if record.time_water_added and record.time_needle_fails:
-        #         t1 = record.time_water_added
-        #         t2 = record.time_needle_fails
-        #         time_difference = t2 - t1
-
-        #         # Calculate the time difference in hours and minutes
-        #         total_minutes = time_difference.total_seconds() / 60
-        #         hours = int(total_minutes // 60)
-        #         minutes = int(total_minutes % 60)
-
-        #         # Round minutes
-        #         rounded_minutes = round(minutes)
-                
-        #         # Convert hours and minutes to total minutes
-        #         total_minutes = hours * 60 + rounded_minutes
-
-        #         # Format the time as hours:minutes
-        #         formatted_time = f"{hours}:{minutes:02}"
-
-        #         # Store the formatted time in the initial_setting_time_hours field
-        #         record.initial_setting_time_hours = formatted_time
-
-        #         # Store the total rounded minutes in the initial_setting_time_minutes field
-        #         record.initial_setting_time_minutes = total_minutes
-        #     else:
-        #         record.initial_setting_time_hours = "0:00"
-        #         record.initial_setting_time_minutes = 0.0
-
         for record in self:
             if record.time_water_added and record.time_needle_fails:
                 t1 = record.time_water_added
@@ -189,7 +160,9 @@ class FlyaschNormalConsistency(models.Model):
                 # Convert time difference to seconds and then to minutes
                 time_difference_minutes = time_difference.total_seconds() / 60
 
-                record.initial_setting_time_hours = time_difference.total_seconds() / 3600
+                initial_setting_time_hours = time_difference.total_seconds() / 3600
+                time_delta = timedelta(hours=initial_setting_time_hours)
+                record.initial_setting_time_hours = "{:0}:{:02}".format(int(time_delta.total_seconds() // 3600), int((time_delta.total_seconds() % 3600) // 60))
                 if time_difference_minutes % 5 == 0:
                     record.initial_setting_time_minutes = time_difference_minutes
                 else:
@@ -204,10 +177,6 @@ class FlyaschNormalConsistency(models.Model):
 
    
 
-
-
-
-
      #Final setting Time
 
     final_setting_time = fields.Char("Name",default="Final Setting Time")
@@ -221,38 +190,20 @@ class FlyaschNormalConsistency(models.Model):
 
     @api.depends('time_needle_make_impression')
     def _compute_final_setting_time(self):
-        # for record in self:
-        #     if record.time_needle_make_impression and record.time_water_added:
-        #         t1 = record.time_water_added
-        #         t2 = record.time_needle_make_impression
-        #         time_difference = t2 - t1
-
-        #         record.final_setting_time_hours = time_difference
-        #         final_setting_time = time_difference.total_seconds() / 60
-        #         if final_setting_time % 5 == 0:
-        #             record.final_setting_time_minutes =  final_setting_time
-        #         else:
-        #             record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
-        #     else:
-        #         record.final_setting_time_hours = False
-        #         record.final_setting_time_minutes = False
-
         for record in self:
             if record.time_needle_make_impression and record.time_water_added:
                 t1 = record.time_water_added
                 t2 = record.time_needle_make_impression
                 time_difference = t2 - t1
-                record.final_setting_time_minutes = time_difference
 
                 record.final_setting_time_hours = time_difference
                 final_setting_time = time_difference.total_seconds() / 60
                 if final_setting_time % 5 == 0:
-                    record.final_setting_time_minutes =  final_setting_time
+                    record.final_setting_time_minutes = final_setting_time
                 else:
-                    record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
+                    record.final_setting_time_minutes = round(final_setting_time / 5) * 5
 
                 record.final_setting_time_minutes_unrounded = final_setting_time
-                
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False

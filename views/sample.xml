@@ -110,8 +110,18 @@
                         <field name="sample_description"/>
                     </group>
                     <group style="width:50%">
+                     <field name="casting"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
+                    </group>
+                    <group style="width:50%">
+                        <field name="date_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
+                    </group>
+                    <group style="width:50%">
                         <field name="filled_by"/>
                     </group>
+                    
                     <group style="width:50%">
                         <field name="check_by"/>
                     </group>
@@ -125,9 +135,6 @@
                         <field name="sample_no" invisible="1"/>
                         <field name="customer_id" invisible='1'/>
                         <field name="casting" invisible='1'/>
-                    </group>
-                    <group style="width:50%">
-                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
                     </group>
                    
                      <group>

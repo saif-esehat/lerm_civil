@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<template id="steel_tmt_bar_report">
+<template id="steel_tmt_bar_report1">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
@@ -130,6 +130,10 @@
 						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
 					</div>
 					
+<<<<<<< HEAD
+=======
+					
+>>>>>>> 9882a6ca902db98f8a332e33edf1c113ec136ce4
 					<table>
 						<thead>
 							<tr>
@@ -481,4 +485,6 @@
 			</t>
 		</t>
 	</template>
+
+
 </odoo>

@@ -85,21 +85,23 @@ class CementPsc(models.Model):
                 t2 = record.time_needle_fails
                 time_difference = t2 - t1
 
-                # hours = time_difference.total_seconds() / 3600
+                # Convert time difference to seconds and then to minutes
+                time_difference_minutes = time_difference.total_seconds() / 60
 
-                record.initial_setting_time_hours = time_difference
-                initial_setting_time_minutes = time_difference.total_seconds() / 60
-                if initial_setting_time_minutes % 5 == 0:
-                    record.initial_setting_time_minutes = initial_setting_time_minutes
+                initial_setting_time_hours = time_difference.total_seconds() / 3600
+                time_delta = timedelta(hours=initial_setting_time_hours)
+                record.initial_setting_time_hours = "{:0}:{:02}".format(int(time_delta.total_seconds() // 3600), int((time_delta.total_seconds() % 3600) // 60))
+                if time_difference_minutes % 5 == 0:
+                    record.initial_setting_time_minutes = time_difference_minutes
                 else:
-                    record.initial_setting_time_minutes = round(initial_setting_time_minutes / 5) * 5
+                    record.initial_setting_time_minutes = round(time_difference_minutes / 5) * 5
 
-                record.initial_setting_time_minutes_unrounded = initial_setting_time_minutes
+                record.initial_setting_time_minutes_unrounded = time_difference_minutes
+
             else:
                 record.initial_setting_time_hours = False
                 record.initial_setting_time_minutes = False
-                record.final_setting_time_minutes_unrounded = False
-
+                record.initial_setting_time_minutes_unrounded = False
 
 
     #Final setting Time
@@ -128,11 +130,12 @@ class CementPsc(models.Model):
                     record.final_setting_time_minutes = final_setting_time
                 else:
                     record.final_setting_time_minutes = round(final_setting_time / 5) * 5
-                
+
                 record.final_setting_time_minutes_unrounded = final_setting_time
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
+                record.final_setting_time_minutes_unrounded = False
 
 
     #Density
