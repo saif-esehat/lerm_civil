@@ -257,13 +257,6 @@ class ChemicalFineAggregate(models.Model):
         return record
 
 
-    @api.depends('eln_ref')
-    def _compute_sample_parameters(self):
-        for record in self:
-            records = record.eln_ref.parameters_result.parameter.ids
-            record.sample_parameters = records
-            print("Records",records)
-
         
     def get_all_fields(self):
         record = self.env['chemical.fine.aggregate'].browse(self.ids[0])
@@ -273,3 +266,12 @@ class ChemicalFineAggregate(models.Model):
             field_values[field_name] = field_value
 
         return field_values
+    
+
+
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)

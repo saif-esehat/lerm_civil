@@ -31,6 +31,7 @@ class ConcreteCoreLine(models.Model):
     _name = "ndt.concrete.core.line"
     parent_id = fields.Many2one('ndt.concrete.core',string="Parent Id")
     member = fields.Char(string="Member / Element Type")
+    date_testing = fields.Date(string="Date of Testing")
     dia = fields.Float(string="dia d mm")
     length = fields.Float(string="length h mm")
     ld = fields.Float(string="L/D",compute="_compute_ld")

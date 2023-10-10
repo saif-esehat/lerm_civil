@@ -71,7 +71,7 @@ class CementNormalConsistency(models.Model):
     initial_setting_time = fields.Char("Name", default="Initial Setting Time")
     time_water_added = fields.Datetime("The Time When water is added to cement (t1)")
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
-    initial_setting_time_hours = fields.Float("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
+    initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
     initial_setting_time_minutes = fields.Float("Initial Setting Time Rounded", compute="_compute_initial_setting_time")
     initial_setting_time_minutes_unrounded = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
 
@@ -87,7 +87,9 @@ class CementNormalConsistency(models.Model):
                 # Convert time difference to seconds and then to minutes
                 time_difference_minutes = time_difference.total_seconds() / 60
 
-                record.initial_setting_time_hours = time_difference.total_seconds() / 3600
+                initial_setting_time_hours = time_difference.total_seconds() / 3600
+                time_delta = timedelta(hours=initial_setting_time_hours)
+                record.initial_setting_time_hours = "{:0}:{:02}".format(int(time_delta.total_seconds() // 3600), int((time_delta.total_seconds() % 3600) // 60))
                 if time_difference_minutes % 5 == 0:
                     record.initial_setting_time_minutes = time_difference_minutes
                 else:
@@ -109,8 +111,6 @@ class CementNormalConsistency(models.Model):
 
 
 
-
-
     @api.depends('time_needle_make_impression')
     def _compute_final_setting_time(self):
         for record in self:
@@ -118,17 +118,15 @@ class CementNormalConsistency(models.Model):
                 t1 = record.time_water_added
                 t2 = record.time_needle_make_impression
                 time_difference = t2 - t1
-                record.final_setting_time_minutes = time_difference
 
                 record.final_setting_time_hours = time_difference
                 final_setting_time = time_difference.total_seconds() / 60
                 if final_setting_time % 5 == 0:
-                    record.final_setting_time_minutes =  final_setting_time
+                    record.final_setting_time_minutes = final_setting_time
                 else:
-                    record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
+                    record.final_setting_time_minutes = round(final_setting_time / 5) * 5
 
                 record.final_setting_time_minutes_unrounded = final_setting_time
-                
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
@@ -175,14 +173,14 @@ class CementNormalConsistency(models.Model):
     @api.depends('wt_of_cement_density_trial1','displaced_volume_trial1')
     def _compute_density_trial1(self):
         try:
-            self.density_trial1 = self.wt_of_cement_density_trial1 / self.displaced_volume_trial1
+            self.density_trial1 = round(self.wt_of_cement_density_trial1 / self.displaced_volume_trial1,2)
         except:
             self.density_trial1 = 0
 
     @api.depends('wt_of_cement_density_trial2','displaced_volume_trial2')
     def _compute_density_trial2(self):
         try:
-            self.density_trial2 = self.wt_of_cement_density_trial2 / self.displaced_volume_trial2
+            self.density_trial2 = round(self.wt_of_cement_density_trial2 / self.displaced_volume_trial2,2)
         except:
             self.density_trial2 = 0
 
@@ -704,7 +702,7 @@ class SoundnessCementLine(models.Model):
     @api.depends('initial_distance','final_distance')
     def _compute_expansion(self):
         for record in self:
-            record.expansion = record.final_distance - record.initial_distance
+            record.expansion = round(record.final_distance - record.initial_distance,2)
 
 class DrySievingLine(models.Model):
     _name = "cement.dry.sieving.line"
@@ -718,7 +716,7 @@ class DrySievingLine(models.Model):
     def _compute_fineness(self):
         for record in self:
             if record.sample_weight_fineness != 0:
-                record.fineness = (record.retained_weight / record.sample_weight_fineness )*100
+                record.fineness = round((record.retained_weight / record.sample_weight_fineness )*100,2)
             else:
                 record.fineness = 0
 
@@ -737,13 +735,13 @@ class Casting3DaysLine(models.Model):
     @api.depends('length','width')
     def _compute_crosssectional_area(self):
         for record in self:
-            record.crosssectional_area = record.length * record.width
+            record.crosssectional_area = round(record.length * record.width,2)
 
     @api.depends('crosssectional_area','crushing_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round((record.crushing_load / record.crosssectional_area)*1000,2)
             else:
                 record.compressive_strength = 0
 
@@ -762,13 +760,13 @@ class Casting7DaysLine(models.Model):
     @api.depends('length','width')
     def _compute_crosssectional_area(self):
         for record in self:
-            record.crosssectional_area = record.length * record.width
+            record.crosssectional_area = round(record.length * record.width,2)
 
     @api.depends('crosssectional_area','crushing_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round((record.crushing_load / record.crosssectional_area)*1000,2)
             else:
                 record.compressive_strength = 0
 
@@ -787,13 +785,13 @@ class Casting28DaysLine(models.Model):
     @api.depends('length','width')
     def _compute_crosssectional_area(self):
         for record in self:
-            record.crosssectional_area = record.length * record.width
+            record.crosssectional_area = round(record.length * record.width,2)
 
     @api.depends('crosssectional_area', 'crushing_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area) * 1000
+                record.compressive_strength = round((record.crushing_load / record.crosssectional_area) * 1000,2)
             else:
                 record.compressive_strength = 0
 
