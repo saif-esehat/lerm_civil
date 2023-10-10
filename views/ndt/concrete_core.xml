@@ -36,7 +36,7 @@
                             </tree>
                     </field>
                     <group>
-                        <field name='average' string="Average Compressive Strength in Mpa"/>
+                        <field name='average' string="Average Compressive Strength in Mpa" identity="result"/>
                     </group>
                 </sheet>
             </form>

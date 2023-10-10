@@ -113,6 +113,25 @@ class SteelTmtBarLine(models.Model):
                 if sample.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
                     record.rebend_visible = True
 
+    fracture_visible = fields.Boolean("Fracture",compute="_compute_visible")
+    bend_visible = fields.Boolean("Bend Test",compute="_compute_visible")
+    rebend_visible = fields.Boolean("Rebend Test",compute="_compute_visible")
+
+    @api.depends('eln_ref','sample_parameters')
+    def _compute_visible(self):
+        for record in self:
+            record.fracture_visible = False
+            record.bend_visible  = False  
+            record.rebend_visible = False
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                if sample.internal_id == '9156ec17-ae78-4f98-987f-af5d39e407f2':
+                    record.fracture_visible = True
+                if sample.internal_id == 'addd0c61-adb6-447d-b668-1fba0744680f':
+                    record.bend_visible = True
+                if sample.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
+                    record.rebend_visible = True
+
 
     @api.depends('weight','lentgh')
     def _compute_weight_per_meter(self):
@@ -124,6 +143,28 @@ class SteelTmtBarLine(models.Model):
 
     @api.depends('weight_per_meter','eln_ref','size')
     def _compute_weight_per_meter_nabl(self):
+        # for record in self:
+        #     # print("Steel Size",record.size)
+        #     record.weight_per_meter_nabl = 'fail'
+        #     line = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')])
+        #     materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
+        #     for material in materials:
+        #         # print("Materials size",material.size.id)
+        #         if material.size.id == record.size.id:
+        #             req_min = material.req_min
+        #             req_max = material.req_max
+        #             mu_value = line.mu_value
+                    
+        #             lower = record.weight_per_meter - record.weight_per_meter*mu_value
+        #             upper = record.weight_per_meter + record.weight_per_meter*mu_value
+                    
+        #             if lower >= req_min and upper <= req_max:
+        #                 record.weight_per_meter_nabl = 'pass'
+        #                 break
+        #             else:
+        #                 record.weight_per_meter_nabl = 'fail'
+
+
         for record in self:
             record.weight_per_meter_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')])

@@ -17,7 +17,7 @@ class ConcreteCore(models.Model):
     def _compute_average(self):
         for record in self:
             total_value = sum(record.child_lines.mapped('final_cube_strength'))
-            record.average = total_value / len(record.child_lines) if record.child_lines else 0.0
+            record.average = round((total_value / len(record.child_lines) if record.child_lines else 0.0),2)
 
 
     @api.model
@@ -39,7 +39,7 @@ class ConcreteCoreLine(models.Model):
     dry = fields.Float(string="Dry wt kg",digits=(16,3))
     failure_load = fields.Float(string="Failure Load kN")
     measured_comp_str = fields.Float(string="Measured compressive strength, Mpa",compute="_compute_measured_compressive_strength")
-    core_factor_ld = fields.Float(string="Corr Factor as per IS-516(If L/D ratio ≤ Two)",compute="_compute_core_ld")
+    core_factor_ld = fields.Float(string="Corr Factor as per IS-516(If L/D ratio ≤ Two)",compute="_compute_core_ld",digits=(16,3))
     core_factor_dia = fields.Float(string="Corr Factor as per IS-516(If Dia is 75±5 MM Or <70MM)",compute="_compute_core_dia")
     core_factor_cube = fields.Float(string="Corr Factor for Eqv.150 mm Cube Strength, as per IS 516",default=1.25)
     final_cube_strength = fields.Float(string="Final Eqv.150 mm Cube Strength, Mpa",compute="_compute_final_cube_strength",store=True)
@@ -77,7 +77,7 @@ class ConcreteCoreLine(models.Model):
     @api.depends('ld')
     def _compute_core_ld(self):
         for record in self:
-            record.core_factor_ld = 0.110*record.ld  + 0.780
+            record.core_factor_ld = 0.11*record.ld  + 0.78
 
     @api.depends('dia')
     def _compute_core_dia(self):
