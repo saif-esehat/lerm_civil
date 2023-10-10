@@ -129,6 +129,7 @@
 						<u>Protocol</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
 					</div>
+					
 					<table>
 						<thead>
 							<tr>
@@ -148,7 +149,7 @@
 										Requirement as per IS 1786:2008(RA 2018)
 									</span>
 								</th>
-								<th>
+								<th t-if="eln.conformity">
 									<span>
 										Confirmity Status
 									</span>
@@ -166,7 +167,7 @@
 								<td>
 									
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									
 								</td>
 							</tr>
@@ -180,7 +181,7 @@
 								<td>
 									
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									
 								</td>
 							</tr>
@@ -194,7 +195,7 @@
 								<td>
 									
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									
 								</td>
 							</tr>
@@ -208,7 +209,7 @@
 								<td>
 									
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									
 								</td>
 							</tr>
@@ -223,7 +224,7 @@
 								<td>
 									
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									
 								</td>
 							</tr>
@@ -238,7 +239,7 @@
 								<td>
 									
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									
 								</td>
 							</tr>
@@ -254,7 +255,7 @@
 								<td>
 									
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									
 								</td>
 							</tr>
@@ -270,7 +271,7 @@
 								<td>
 									
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									
 								</td>
 							</tr>
@@ -283,9 +284,16 @@
 									<span t-esc="round(data.proof_yeid_stress , 2)"/>
 								</td>
 								<td>
-									<span t-esc="data.requirement_yield"/>
+									<!-- <span t-esc="data.requirement_yield"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									<span t-esc="data.yield_nabl"/>
 								</td>
 							</tr>
@@ -297,9 +305,16 @@
 									<span t-esc="round(data.ult_tens_strgth, 2)"/>
 								</td>
 								<td>
-									<span t-esc="data.requirement_utl"/>
+									<!-- <span t-esc="data.requirement_utl"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									<span t-esc="data.uts_nabl"/>
 								</td>
 							</tr>
@@ -313,9 +328,16 @@
 									<span t-esc="round(data.ts_ys_ratio , 2)"/>
 								</td>
 								<td>
-									<span t-esc="data.requirement_ts_ys"/>
+									<!-- <span t-esc="data.requirement_ts_ys"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									<span t-esc="data.ts_ys_nabl"/>
 								</td>
 							</tr>
@@ -328,9 +350,16 @@
 									<span t-esc="round(data.percent_elongation , 2)"/>
 								</td>
 								<td>
-									<span t-esc="data.requirement_elongation"/>
+									<!-- <span t-esc="data.requirement_elongation"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									<span t-esc="data.elongation_nabl"/>
 								</td>
 							</tr>
@@ -343,9 +372,16 @@
 									<span t-esc="round(data.weight_per_meter , 2)"/>
 								</td>
 								<td>
-									<span t-esc="data.requirement_weight_per_meter"/>
+									<!-- <span t-esc="data.requirement_weight_per_meter"/> -->
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.size.id == eln.size.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									<span t-esc="data.weight_per_meter_nabl"/>
 								</td>
 							</tr>
@@ -360,7 +396,7 @@
 								<td>
 									Statisfactory
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									<span t-esc="data.re_bend_test"/>
 								</td>
 							</tr>
@@ -375,7 +411,7 @@
 								<td>
 									Statisfactory
 								</td>
-								<td>
+								<td t-if="eln.conformity">
 									<span t-esc="data.bend_test"/>
 								</td>
 							</tr>
@@ -389,13 +425,12 @@
 								<td>
 									
 								</td>
-								<td>
+								<td t-if="eln.conformity"> 
 									
 								</td>
 							</tr>
 						</tbody>
 					</table>
-
 					<div style="margin-top:20px" class="noteContainer">
 						<div>
 							<b>Note :-</b>

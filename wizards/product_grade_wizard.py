@@ -29,6 +29,8 @@ class ProductGradeWizard(models.TransientModel):
             if rec.product_id:
                 grade_ids = rec.product_id.grade_table.ids
                 rec.grade_ids = [(6, 0, grade_ids)]
+            else:
+                rec.grade_ids = []
 
 
     def add_grade_line(self):
