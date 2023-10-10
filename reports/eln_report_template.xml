@@ -1536,28 +1536,7 @@
 						<div style="text-align:center;font-size:18px">
 							Normal Consistency
 						</div>
-						<table>
-							<tr cols="12">
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<!-- <span t-field="data.eln_id"/> -->
-								</td>
-								<td colspan="6">Test Start Date :
-									<![CDATA[&nbsp;]]>
-									<!-- <span t-field="data.start_date"/> -->
-								</td>
-							</tr>
-							<tr cols="12">
-								<td colspan="6">Humidity :
-									<![CDATA[&nbsp;]]>
-									<!-- <span t-field="data.material.name"/> -->
-								</td>
-								<td colspan="6">Test End Date :
-									<![CDATA[&nbsp;]]>
-									<!-- <span t-field="data.end_date"/> -->
-								</td>
-							</tr>
-						</table>
+						
 				
 						<table style="margin-top:20px">
 							<tr cols="12">
