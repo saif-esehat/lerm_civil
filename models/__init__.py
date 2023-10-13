@@ -23,6 +23,10 @@ from .report import cement_compatiblity
 from .report import half_cell_report
 from .report import chemical_fine_aggregate_report
 from .report import coarse_aggregate_mechanical
+from .report import paver_block_report
+from .report import fine_aggregate_ds_report
+from .report import bricks2_ds_report
+from .report import concrete_beam_ds_report
 # from .mechanical import sieve_analysis
 from .mechanical import free_swell_index
 from .mechanical import soil_cbr

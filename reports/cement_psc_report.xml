@@ -126,13 +126,7 @@
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
-							<tr>
-								
-								<td colspan="12">Temperature :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.temperature"/>
-								</td>
-							</tr>
+							
 						</table>
 					</div>
 					<div style="margin-top:20px;">

@@ -27,12 +27,12 @@
                         </tree>
                       </field>
                     </group>
-                      <!-- Normal Consistency Start -->
+                   
                     
-                    <group >
+                    <!-- <group >
                             
                             <field name="tests" widget="many2many_tags"/>
-                    </group>
+                    </group> -->
                     <group attrs="{'invisible': [('paver_visible', '=', False)]}">
                         <h1>
                             <field name="paver_name" readonly="1" nolabel="1"/>
