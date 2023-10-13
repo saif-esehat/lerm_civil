@@ -121,8 +121,7 @@
     'reports/bricks2_datasheet.xml',
     'reports/bricks2_report.xml',
     'reports/concrete_beam_datasheet.xml',
-
-
+    'reports/coarse_aggregate_mech_report.xml',
 
 
     
