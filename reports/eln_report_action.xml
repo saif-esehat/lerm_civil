@@ -162,6 +162,7 @@
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
     </record>
+
     <record id="report_microsilica_action" model="ir.actions.report">
         <field name="name">Report Microsilica</field>
         <field name="model">lerm.eln</field>
@@ -374,6 +375,28 @@
         <field name="report_name">lerm_civil.soil_datasheet</field>
         <field name="report_file">lerm_civil.soil_datasheet</field>
         <field name="binding_model_id" ref="model_lerm_eln"/> 
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="paver_block_datasheet_action" model="ir.actions.report">
+        <field name="name">Paver Block Datasheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.lerm_paver_block_datasheet</field>
+        <field name="report_file">lerm_civil.lerm_paver_block_datasheet</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
+     <record id="fine_aggregate_datasheet_action" model="ir.actions.report">
+        <field name="name">Fine Aggregate Datasheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.lerm_fine_aggregate_datasheet</field>
+        <field name="report_file">lerm_civil.lerm_fine_aggregate_datasheet</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
     </record>

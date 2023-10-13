@@ -17,9 +17,9 @@ class PaverBlock(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    tests = fields.Many2many("mechanical.pever.block.test",string="Tests")
+    # tests = fields.Many2many("mechanical.pever.block.test",string="Tests")
 
-    # CBR
+    
 
     paver_name = fields.Char("Name",default="Tensile Splitting Strength")
     paver_visible = fields.Boolean("Tensile Splitting Strength Visible",compute="_compute_visible")
@@ -459,25 +459,26 @@ class PaverBlock(models.Model):
 
 
  ### Compute Visible
-    @api.depends('tests')
+    @api.depends('sample_parameters')
     def _compute_visible(self):
-        split_test = self.env['mechanical.pever.block.test'].search([('name', '=', 'Tensile Splitting Strength')])
-        compressive_test = self.env['mechanical.pever.block.test'].search([('name', '=', 'Compressive Strength')])
-        absorption_test = self.env['mechanical.pever.block.test'].search([('name', '=', 'Water Absorption')])
-        # heavy_test = self.env['mechanical.soil.test'].search([('name', '=', 'Heavy Compaction-MDD')])
-       
+        
         for record in self:
             record.paver_visible = False
             record.commpressive_visible = False
             record.water_absorption_visible = False
             
-            if split_test in record.tests:
-                record.paver_visible = True
+            for sample in record.sample_parameters:
+                print("Internal Ids",sample.internal_id)
 
-            if compressive_test in record.tests:
-                record.commpressive_visible = True
-            if absorption_test in record.tests:
-                record.water_absorption_visible = True
+                if sample.internal_id == "938992f7-199c-497a-b3a7-45023c604673":
+                    record.paver_visible = True
+
+                if sample.internal_id == "4d2b88f2-5dc9-4a2a-8bf0-1281d1865a11":
+                    record.commpressive_visible = True
+                
+                if sample.internal_id == "56859103-eba3-4f15-b33d-679b39f7372e":
+                    record.water_absorption_visible = True
+
 
 
 

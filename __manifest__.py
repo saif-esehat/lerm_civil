@@ -116,6 +116,8 @@
     'reports/concrete_cube_print.xml',
     'reports/coarse_aggregate_mech_datasheet.xml',
     'reports/soil_print.xml',
+    'reports/paver_block_report.xml',
+    'reports/fine_aggregate_mech_datasheet.xml',
 
 
     
