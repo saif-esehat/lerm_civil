@@ -11,31 +11,46 @@
                     <group>
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" invisible="1" />
-                        <field name="parameter_id"/>
-                        <field name='length'/>
+                        <field name="eln_ref"/>
+                        <!-- <field name="parameter_id"/> -->
+                        <field name="grade"/>
                     </group>
                     <group>
                         <h1>
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
+
+                    <group>
+                        <group>
+                            <field name="date_of_casting"/>
+                        </group>
+                        <group>
+                            <field name="date_of_testing"/>
+                        </group>
+                        <group>
+                            <field name="age_of_days"/>
+                        </group>
+                    </group>
+
+
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
+                                <field name='id_mark'/>
+                                <field name='length'/>
                                 <field name='depth'/>
                                 <field name='width'/>
                                 <field name='wt_of_sample'/>
                                 <field name='fracture_distance'/>
                                 <field name='failure_load'/>
-                                <field name='flexural_strength'  attrs="{'invisible': [('sr_no', '=', 3)]}"/>
-                                <field name="flexural_strength_3" attrs="{'invisible': [('sr_no', '!=', 3)]}"/>
+                                <field name='flexural_strength'/>
+                                
                             </tree>
                     </field>
                     <group>
                         <field name='average_flexural_strength'/>
-                        <field name="are_child_lines_filled" invisible="1"/>
-                        <button string="Calculate" name="average_flexural_calculation" type="object" class="oe_highlight" 
-                                attrs="{'invisible': [('are_child_lines_filled', '=', False)]}" />
+                        <field name="confirmity"/>
                     </group>
                 </sheet>
             </form>
