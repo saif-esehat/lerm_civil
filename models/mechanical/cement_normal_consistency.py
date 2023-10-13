@@ -53,7 +53,7 @@ class CementNormalConsistency(models.Model):
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_percent_setting = fields.Float("Temperature °C" ,digits=(16,1))
+    temp_percent_setting = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_setting = fields.Float("Humidity %")
     start_date_setting = fields.Date("Start Date")
     end_date_setting = fields.Date("End Date")
@@ -549,7 +549,7 @@ class CementNormalConsistency(models.Model):
                 print("Apparatus constant",record.apparatus_constant)
                 print("Average time",record.average_sample_time)
                 print("density",record.density_fineness_calculated)
-                record.fineness_of_sample = (521.08*record.apparatus_constant*math.sqrt(record.average_sample_time))/record.density_fineness_calculated
+                record.fineness_of_sample = round((521.08*record.apparatus_constant*math.sqrt(record.average_sample_time))/record.density_fineness_calculated,2)
             else:
                 record.fineness_of_sample = 0
     
