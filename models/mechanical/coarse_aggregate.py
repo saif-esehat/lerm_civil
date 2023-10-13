@@ -12,7 +12,7 @@ class CoarseAggregateMechanical(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
-    size = fields.Many2One('lerm.size.line',compute="_compute_size")
+    size = fields.Many2one('lerm.size.line',compute="_compute_size")
 
     @api.depends("eln_ref")
     def _compute_size(self):
