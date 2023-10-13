@@ -88,49 +88,54 @@
 						<div style="text-align:center;font-size:18px">
 							Specific Gravity and Water Absorption
 						</div>
-						<table>
+						
+                        <table style="margin-top:20px">
 							<tr cols="12">
-                                <td colspan="1">Sr No.
-                                </td>
-                                <td colspan="2">Weight of saturated surface dry (SSD) sample in air in gms
+								<td colspan="6">Weight of saturated surface dry (SSD) sample in air in gms :
+									<![CDATA[&nbsp;]]>
 								</td>
-                                <td colspan="3">Weight of saturated sample in water in gms
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_surface_dry"/>
 								</td>
-                                <td colspan="2">Oven dried weight of sample in gms
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Weight of saturated sample in water in gms :
+									<![CDATA[&nbsp;]]>
 								</td>
-                                <td colspan="2">Specific Gravity
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_sample_inwater"/>
 								</td>
-                                <td colspan="2">Water absorption %
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Oven dried weight of sample in gms :
+									<![CDATA[&nbsp;]]>
 								</td>
-                            </tr>
-                            
-							<t t-set="b" t-value="0"/>
-							<tr t-foreach="data.specific_gravity_child_lines" t-as="r2">
-								<td colspan="1">
-									<div>
-										<span t-esc="b + 1" />
-										<t t-set="b" t-value="b+1"/>
-									</div>
-                  				</td>
-								
-								<td colspan="2">
-									<span t-esc="r2['wt_surface_dry']"/>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.oven_dried_wt"/>
 								</td>
-								<td colspan="3">
-									<span t-esc="r2['wt_sample_inwater']"/>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Specific Gravity :
+									<![CDATA[&nbsp;]]>
 								</td>
-                                <td colspan="2">
-									<span t-esc="r2['oven_dried_wt']"/>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.specific_gravity"/>
 								</td>
-                                <td colspan="2">
-									<span t-esc="r2['specific_gravity']"/>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Water absorption % :
+									<![CDATA[&nbsp;]]>
 								</td>
-                                <td colspan="2">
-									<span t-esc="r2['water_absorption']"/>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.water_absorption"/>
 								</td>
-                             </tr>   
+							</tr>
 						</table>
-                        
 						
 					</div>
 
@@ -214,43 +219,44 @@
 						<div style="text-align:center;font-size:18px">
 							Los Angeles Abrasion Value
 						</div>
-						<table>
+						<table style="margin-top:20px">
 							<tr cols="12">
-                                <td colspan="1">Sr No.
-                                </td>
-                                <td colspan="3">Total weight of Sample in gms
+								<td colspan="6">Total weight of Sample in gms :
+									<![CDATA[&nbsp;]]>
 								</td>
-                                <td colspan="3">Weight of Passing sample in 1.70 mm IS sieve in gms
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.total_weight_sample_abrasion"/>
 								</td>
-                                <td colspan="2">Weight of Retain sample in 1.70 mm IS sieve in gms
-								</td>
-                                <td colspan="2">Abrasion Value (in %)
-								</td>
-                               
-                            </tr>
-                            
-							<t t-set="d" t-value="0"/>
-							<tr t-foreach="data.abrasion_value_child_lines" t-as="r">
-								<td colspan="1">
-									<div>
-										<span t-esc="d + 1" />
-										<t t-set="d" t-value="d+1"/>
-									</div>
-                  				</td>
-								
-								<td colspan="3">
-									<span t-esc="r['total_weight_sample']"/>
-								</td>
-								<td colspan="3">
-									<span t-esc="r['weight_passing_sample']"/>
-								</td>
-                                <td colspan="2">
-									<span t-esc="r['weight_retain_sample']"/>
-								</td>
-                                <td colspan="2">
-									<span t-esc="r['abrasion_value_percentage']"/>
-								</td>  
 							</tr>
+                            <tr cols="12">
+								<td colspan="6">Weight of Passing sample in 1.70 mm IS sieve in gms :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.weight_passing_sample_abrasion"/>
+								</td>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Weight of Retain sample in 1.70 mm IS sieve in gms :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.weight_retain_sample_abrasion"/>
+								</td>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Abrasion Value (%) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.abrasion_value_percentage"/>
+								</td>
+							</tr>
+                            
 						</table>
 					</div>
 
@@ -740,48 +746,52 @@
 						<div style="text-align:center;font-size:18px">
 							Loose Bulk Density (LBD)
 						</div>
-						<table>
+						<table style="margin-top:20px">
 							<tr cols="12">
-                                <td colspan="2">Sr No.
-                                </td>
-                                <td colspan="2">Weight of Empty Bucket in kg
+								<td colspan="6">Weight of Empty Bucket in kg :
+									<![CDATA[&nbsp;]]>
 								</td>
-                                <td colspan="2">Volume of Bucket in cubic meter
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.weight_empty_bucket_loose"/>
 								</td>
-                                <td colspan="2">[Sample Weight + Bucket  Weight] in kg
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Volume of Bucket in cubic meter :
+									<![CDATA[&nbsp;]]>
 								</td>
-                                <td colspan="2">Sample Weight in kg
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.volume_of_bucket_loose"/>
 								</td>
-                                <td colspan="2">Loose Bulk Density in kg per cubic meter
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">[Sample Weight + Bucket  Weight] in kg :
+									<![CDATA[&nbsp;]]>
 								</td>
-                               
-                               
-                            </tr>
-                            
-							<t t-set="i" t-value="0"/>
-							<tr t-foreach="data.loose_bulk_density_child_lines" t-as="r">
-								<td colspan="2">
-									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
-									</div>
-                  				</td>
-								<td colspan="2">
-									<span t-esc="r['weight_empty_bucket']"/>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.sample_plus_bucket_loose"/>
 								</td>
-								<td colspan="2">
-									<span t-esc="r['volume_of_bucket']"/>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Sample Weight in kg :
+									<![CDATA[&nbsp;]]>
 								</td>
-								<td colspan="2">
-									<span t-esc="r['sample_plus_bucket']"/>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.sample_weight_loose"/>
 								</td>
-                                <td colspan="2">
-									<span t-esc="r['sample_weight']"/>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Loose Bulk Density in kg per cubic meter :
+									<![CDATA[&nbsp;]]>
 								</td>
-								<td colspan="2">
-									<span t-esc="r['loose_bulk_density']"/>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.loose_bulk_density"/>
 								</td>
-                            </tr>
+							</tr>
 						</table>
 					</div>
 
@@ -790,48 +800,52 @@
 						<div style="text-align:center;font-size:18px">
 							Loose Bulk Density (LBD)
 						</div>
-						<table>
+						<table style="margin-top:20px">
 							<tr cols="12">
-                                <td colspan="2">Sr No.
-                                </td>
-                                <td colspan="2">Weight of Empty Bucket in kg
+								<td colspan="6">Weight of Empty Bucket in kg :
+									<![CDATA[&nbsp;]]>
 								</td>
-                                <td colspan="2">Volume of Bucket in cubic meter
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.weight_empty_bucket_rodded"/>
 								</td>
-                                <td colspan="2">[Sample Weight + Bucket  Weight] in kg
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Volume of Bucket in cubic meter :
+									<![CDATA[&nbsp;]]>
 								</td>
-                                <td colspan="2">Sample Weight in kg
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.volume_of_bucket_rodded"/>
 								</td>
-                                <td colspan="2">Loose Bulk Density in kg per cubic meter
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">[Sample Weight + Bucket  Weight] in kg :
+									<![CDATA[&nbsp;]]>
 								</td>
-                               
-                               
-                            </tr>
-                            
-							<t t-set="j" t-value="0"/>
-							<tr t-foreach="data.rodded_bulk_density_child_lines" t-as="r">
-								<td colspan="2">
-									<div>
-										<span t-esc="j + 1" />
-										<t t-set="j" t-value="j+1"/>
-									</div>
-                  				</td>
-								<td colspan="2">
-									<span t-esc="r['weight_empty_bucket']"/>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.sample_plus_bucket_rodded"/>
 								</td>
-								<td colspan="2">
-									<span t-esc="r['volume_of_bucket']"/>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Sample Weight in kg :
+									<![CDATA[&nbsp;]]>
 								</td>
-								<td colspan="2">
-									<span t-esc="r['sample_plus_bucket']"/>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.sample_weight_rodded"/>
 								</td>
-                                <td colspan="2">
-									<span t-esc="r['sample_weight']"/>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Rodded Bulk Density in kg per cubic meter :
+									<![CDATA[&nbsp;]]>
 								</td>
-								<td colspan="2">
-									<span t-esc="r['rodded_bulk_density']"/>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.rodded_bulk_density"/>
 								</td>
-                            </tr>
+							</tr>
 						</table>
 					</div>
 

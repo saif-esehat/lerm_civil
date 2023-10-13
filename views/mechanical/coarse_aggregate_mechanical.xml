@@ -64,7 +64,7 @@
                         </h1>
                     </group>
                     <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
-                    <field name="specific_gravity_child_lines" nolabel="1" >
+                    <!-- <field name="specific_gravity_child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
                                 <field name='wt_surface_dry'/>
@@ -72,10 +72,15 @@
                                 <field name='oven_dried_wt'/>
                                 <field name='specific_gravity'/>
                                 <field name='water_absorption'/>
-                                <!-- <field name='average_tensile'/> -->
                             </tree>
                            
-                    </field> 
+                    </field>  -->
+                    <field name="wt_surface_dry"/>
+                    <field name="wt_sample_inwater"/>
+                    <field name="oven_dried_wt"/>
+                    <field name="specific_gravity"/>
+                    <field name="water_absorption"/>
+
                     </group>
 
                     <!-- Impact Value  -->
@@ -114,17 +119,10 @@
                         </h1>
                 </group>
                 <group attrs="{'invisible': [('abrasion_visible', '=', False)]}">
-                    <field name="abrasion_value_child_lines" nolabel="1" >
-                            <tree editable="bottom">
-                                <field name='sr_no'/>
-                                <field name='total_weight_sample'/>
-                                <field name='weight_passing_sample'/>
-                                <field name='weight_retain_sample'/>
-                                <field name='abrasion_value_percentage'/>
-                                <!-- <field name='average_tensile'/> -->
-                            </tree>
-                           
-                    </field> 
+                    <field name="total_weight_sample_abrasion"/>
+                    <field name="weight_passing_sample_abrasion"/>
+                    <field name="weight_retain_sample_abrasion"/>
+                    <field name="abrasion_value_percentage"/>
                 </group>
 
                 <!-- 10% fine value  -->
@@ -329,7 +327,7 @@
                         </h1>
                     </group>
                     <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}">
-                    <field name="loose_bulk_density_child_lines" nolabel="1" >
+                    <!-- <field name="loose_bulk_density_child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
                                 <field name='weight_empty_bucket'/>
@@ -337,10 +335,14 @@
                                 <field name='sample_plus_bucket'/>
                                 <field name='sample_weight'/>
                                 <field name='loose_bulk_density'/>
-                                <!-- <field name='average_tensile'/> -->
                             </tree>
                            
-                    </field> 
+                    </field>  -->
+                    <field name="weight_empty_bucket_loose"/>
+                    <field name="volume_of_bucket_loose"/>
+                    <field name="sample_plus_bucket_loose"/>
+                    <field name="sample_weight_loose"/>
+                    <field name="loose_bulk_density"/>
                     </group>
 
 
@@ -352,7 +354,7 @@
                         </h1>
                     </group>
                     <group attrs="{'invisible': [('rodded_bulk_visible', '=', False)]}">
-                    <field name="rodded_bulk_density_child_lines" nolabel="1" >
+                    <!-- <field name="rodded_bulk_density_child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
                                 <field name='weight_empty_bucket'/>
@@ -360,10 +362,14 @@
                                 <field name='sample_plus_bucket'/>
                                 <field name='sample_weight'/>
                                 <field name='rodded_bulk_density'/>
-                                <!-- <field name='average_tensile'/> -->
                             </tree>
                            
-                    </field> 
+                    </field>  -->
+                    <field name="weight_empty_bucket_rodded"/>
+                    <field name="volume_of_bucket_rodded"/>
+                    <field name="sample_plus_bucket_rodded"/>
+                    <field name="sample_weight_rodded"/>
+                    <field name="rodded_bulk_density"/>
                     </group>
 
                     <!-- Sieve Alanysis  -->
