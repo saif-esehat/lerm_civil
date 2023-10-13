@@ -643,7 +643,7 @@
 										<span t-esc="round(float(r.serial_no))"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.sieve_size))"/>
+										<span t-esc="r.sieve_size"/>
 									</td>
 									<td>
 										<span t-esc="round(float(r.wt_retained))"/>
@@ -1381,9 +1381,6 @@
 										<span t-esc="round(float(r.mass_of_dry_sample))"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_dry_sample))"/>
-									</td>
-									<td>
 										<span t-esc="round(float(r.moisture),2)"/>
 									</td>
 								</tr>
@@ -1660,37 +1657,17 @@
 									</th>
 									<th>
 										<span>
-											Container No
+											Weight of sample W1 in gm
 										</span>
 									</th>
 									<th>
 										<span>
-											Mass of wet sample+container (M1) in gms
+											Oven dry Weight of sample W in gm
 										</span>
 									</th>
 									<th>
 										<span>
-											Mass of dry sample+container (M2) in gms
-										</span>
-									</th>
-									<th>
-										<span>
-											Mass of container (M3) in gms
-										</span>
-									</th>
-									<th>
-										<span>
-											Mass of Moisture (M1-M2) in gms
-										</span>
-									</th>
-									<th>
-										<span>
-											Mass of dry sample (M2-M3) in gms
-										</span>
-									</th>
-									<th>
-										<span>
-											% Moisture
+											% Moisture Content
 										</span>
 									</th>
 								</tr>

@@ -8,7 +8,7 @@
                 <form string="Add Grade Line">
                     <group>
                         <field name="product_id" required="1"/>
-                        <field name="grade" required="1" domain="[('id', 'in', grade_ids)]"/>
+                        <field name="grade" domain="[('id', 'in', grade_ids)]"/>
                         <field name="grade_ids" invisible="1"/>
                         <field name="main_report_template"/>
                         <field name="datasheet_report_template"/>

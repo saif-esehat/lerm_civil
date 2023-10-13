@@ -37,9 +37,9 @@ class SteelTmtBarLine(models.Model):
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     tests = fields.Many2many("mechanical.tmt.test",string="Tests")
-    fracture_visible = fields.Boolean("Fracture visible",compute="_compute_visible",store=True)
-    bend_visible = fields.Boolean("Bend visible",compute="_compute_visible",store=True)
-    rebend_visible = fields.Boolean("Rebend visible",compute="_compute_visible",store=True)
+    # fracture_visible = fields.Boolean("Fracture visible",compute="_compute_visible",store=True)
+    # bend_visible = fields.Boolean("Bend visible",compute="_compute_visible",store=True)
+    # rebend_visible = fields.Boolean("Rebend visible",compute="_compute_visible",store=True)
 
 
     
@@ -52,25 +52,85 @@ class SteelTmtBarLine(models.Model):
         ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
 
 
+    uts_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="Conformity",compute="_compute_uts_conformity",store=True)
+
+    yield_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="Conformity",compute="_compute_yield_conformity",store=True)
+
+    elongation_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="Conformity",compute="_compute_elongation_conformity",store=True)
+
+    ts_ys_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="Conformity",compute="_compute_ts_ys_conformity",store=True)
+
+    weight_per_meter_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="Conformity",compute="_compute_weight_per_meter_conformity",store=True)
+
+    fracture_visible = fields.Boolean("Fracture",compute="_compute_visible")
+    bend_visible = fields.Boolean("Bend Test",compute="_compute_visible")
+    rebend_visible = fields.Boolean("Rebend Test",compute="_compute_visible")
+
     uts_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_uts_nabl",store=True)
+        ('fail', 'Fail')],string="Conformity",compute="_compute_uts_nabl",store=True)
 
     yield_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_yield_nabl",store=True)
+        ('fail', 'Fail')],string="Conformity",compute="_compute_yield_nabl",store=True)
 
     elongation_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_elongation_nabl",store=True)
+        ('fail', 'Fail')],string="Conformity",compute="_compute_elongation_nabl",store=True)
 
     ts_ys_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_ts_ys_nabl",store=True)
+        ('fail', 'Fail')],string="Conformity",compute="_compute_ts_ys_nabl",store=True)
 
     weight_per_meter_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_weight_per_meter_nabl",store=True)
+        ('fail', 'Fail')],string="Conformity",compute="_compute_weight_per_meter_nabl",store=True)
+
+    
+
+    @api.depends('eln_ref','sample_parameters')
+    def _compute_visible(self):
+        for record in self:
+            record.fracture_visible = False
+            record.bend_visible  = False  
+            record.rebend_visible = False
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                if sample.internal_id == '9156ec17-ae78-4f98-987f-af5d39e407f2':
+                    record.fracture_visible = True
+                if sample.internal_id == 'addd0c61-adb6-447d-b668-1fba0744680f':
+                    record.bend_visible = True
+                if sample.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
+                    record.rebend_visible = True
+
+    fracture_visible = fields.Boolean("Fracture",compute="_compute_visible")
+    bend_visible = fields.Boolean("Bend Test",compute="_compute_visible")
+    rebend_visible = fields.Boolean("Rebend Test",compute="_compute_visible")
+
+    @api.depends('eln_ref','sample_parameters')
+    def _compute_visible(self):
+        for record in self:
+            record.fracture_visible = False
+            record.bend_visible  = False  
+            record.rebend_visible = False
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                if sample.internal_id == '9156ec17-ae78-4f98-987f-af5d39e407f2':
+                    record.fracture_visible = True
+                if sample.internal_id == 'addd0c61-adb6-447d-b668-1fba0744680f':
+                    record.bend_visible = True
+                if sample.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
+                    record.rebend_visible = True
 
 
     @api.depends('weight','lentgh')
@@ -83,13 +143,53 @@ class SteelTmtBarLine(models.Model):
 
     @api.depends('weight_per_meter','eln_ref','size')
     def _compute_weight_per_meter_nabl(self):
+        # for record in self:
+        #     # print("Steel Size",record.size)
+        #     record.weight_per_meter_nabl = 'fail'
+        #     line = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')])
+        #     materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
+        #     for material in materials:
+        #         # print("Materials size",material.size.id)
+        #         if material.size.id == record.size.id:
+        #             req_min = material.req_min
+        #             req_max = material.req_max
+        #             mu_value = line.mu_value
+                    
+        #             lower = record.weight_per_meter - record.weight_per_meter*mu_value
+        #             upper = record.weight_per_meter + record.weight_per_meter*mu_value
+                    
+        #             if lower >= req_min and upper <= req_max:
+        #                 record.weight_per_meter_nabl = 'pass'
+        #                 break
+        #             else:
+        #                 record.weight_per_meter_nabl = 'fail'
+
+
         for record in self:
-            # print("Steel Size",record.size)
             record.weight_per_meter_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')])
-            materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
             for material in materials:
-                # print("Materials size",material.size.id)
+                if material.size.id == record.size.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.weight_per_meter - record.weight_per_meter*mu_value
+                    upper = record.weight_per_meter + record.weight_per_meter*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.weight_per_meter_nabl = 'pass'
+                        break
+                    else:
+                        record.weight_per_meter_nabl = 'fail'
+
+    @api.depends('weight_per_meter','eln_ref','size')
+    def _compute_weight_per_meter_conformity(self):
+        for record in self:
+            record.weight_per_meter_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
+            for material in materials:
                 if material.size.id == record.size.id:
                     req_min = material.req_min
                     req_max = material.req_max
@@ -97,12 +197,11 @@ class SteelTmtBarLine(models.Model):
                     
                     lower = record.weight_per_meter - record.weight_per_meter*mu_value
                     upper = record.weight_per_meter + record.weight_per_meter*mu_value
-                    
                     if lower >= req_min and upper <= req_max:
-                        record.weight_per_meter_nabl = 'pass'
+                        record.weight_per_meter_conformity = 'pass'
                         break
                     else:
-                        record.weight_per_meter_nabl = 'fail'
+                        record.weight_per_meter_conformity = 'fail'
 
     @api.depends('eln_ref','size')
     def _compute_requirement_weight_per_meter(self):
@@ -110,7 +209,7 @@ class SteelTmtBarLine(models.Model):
             # record.requirement_yield = 0
             # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
             # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
             for material in materials:
                 if material.size.id == record.size.id:
                     req_min = material.req_min
@@ -129,20 +228,42 @@ class SteelTmtBarLine(models.Model):
 
 
     @api.depends('ult_tens_strgth','eln_ref','grade')
-    def _compute_uts_nabl(self):
+    def _compute_uts_conformity(self):
+        
         for record in self:
-            
-            # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Ultimate tensile Strength (TMT Steel)')]).parameter
-            line = self.env['lerm.parameter.master'].search([('parameter_name','=','Ultimate tensile Strength (TMT Steel)')])
-            materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
+            record.uts_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
-                    lab_max = line.lab_max_value
+                    req_max = material.req_max
                     mu_value = line.mu_value
+                    
                     lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
                     upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
-                    if lower >= req_min and upper <= lab_max:
+                    if lower >= req_min and upper <= req_max:
+                        record.uts_conformity = 'pass'
+                        break
+                    else:
+                        record.uts_conformity = 'fail'
+
+    @api.depends('ult_tens_strgth','eln_ref','grade')
+    def _compute_uts_nabl(self):
+        
+        for record in self:
+            record.uts_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lav_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
+                    upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
+                    if lower >= lab_min and upper <= lab_max:
                         record.uts_nabl = 'pass'
                         break
                     else:
@@ -151,17 +272,7 @@ class SteelTmtBarLine(models.Model):
     @api.depends('eln_ref','grade')
     def _compute_requirement_utl(self):
         for record in self:
-            # record.requirement_utl = 0
-            # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Ultimate tensile Strength (TMT Steel)')]).parameter
-            # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            # for material in materials:
-            #     if material.grade.id == record.grade.id:
-            #         req_min = material.req_min
-            #         print("REQ_MIN",req_min)
-            #         record.requirement_utl = req_min
-            #     else:
-            #         record.requirement_utl = 0
-            materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Ultimate tensile Strength (TMT Steel)')]).parameter_table
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -173,21 +284,42 @@ class SteelTmtBarLine(models.Model):
 
 
     @api.depends('percent_elongation','eln_ref','grade')
-    def _compute_elongation_nabl(self):
+    def _compute_elongation_conformity(self):
+       
         for record in self:
-            record.elongation_nabl = 'fail'
-            # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','% Elongation (TMT)')]).parameter
-            # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            line = self.env['lerm.parameter.master'].search([('parameter_name','=','% Elongation (TMT)')])
-            materials = self.env['lerm.parameter.master'].search([('parameter_name','=','% Elongation (TMT)')]).parameter_table
+            record.elongation_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
-                    lab_max = line.lab_max_value
+                    req_max = material.req_max
                     mu_value = line.mu_value
+                    
                     lower = record.percent_elongation - record.percent_elongation*mu_value
                     upper = record.percent_elongation + record.percent_elongation*mu_value
-                    if lower >= req_min and upper <= lab_max:
+                    if lower >= req_min and upper <= req_max:
+                        record.elongation_conformity = 'pass'
+                        break
+                    else:
+                        record.elongation_conformity = 'fail'
+
+    @api.depends('percent_elongation','eln_ref','grade')
+    def _compute_elongation_nabl(self):
+       
+        for record in self:
+            record.elongation_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.percent_elongation - record.percent_elongation*mu_value
+                    upper = record.percent_elongation + record.percent_elongation*mu_value
+                    if lower >= lab_min and upper <= lab_max:
                         record.elongation_nabl = 'pass'
                         break
                     else:
@@ -199,7 +331,7 @@ class SteelTmtBarLine(models.Model):
             # record.requirement_elongation = 0
             # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','% Elongation (TMT)')]).parameter
             # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            materials = self.env['lerm.parameter.master'].search([('parameter_name','=','% Elongation (TMT)')]).parameter_table
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -210,25 +342,47 @@ class SteelTmtBarLine(models.Model):
 
 
     @api.depends('proof_yeid_stress','eln_ref','grade')
-    def _compute_yield_nabl(self):
+    def _compute_yield_conformity(self):
+    
         for record in self:
-            record.yield_nabl = 'fail'
-            # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
-            # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            line = self.env['lerm.parameter.master'].search([('parameter_name','=','Yield Stress (TMT)')])
-            materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Yield Stress (TMT)')]).parameter_table
+            record.yield_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
-                    lab_max = line.lab_max_value
+                    req_max = material.req_max
                     mu_value = line.mu_value
+                    
                     lower = record.proof_yeid_stress - record.proof_yeid_stress*mu_value
                     upper = record.proof_yeid_stress + record.proof_yeid_stress*mu_value
-                    if lower >= req_min and upper <= lab_max:
+                    if lower >= req_min and upper <= req_max:
+                        record.yield_conformity = 'pass'
+                        break
+                    else:
+                        record.yield_conformity = 'fail'
+
+    @api.depends('proof_yeid_stress','eln_ref','grade')
+    def _compute_yield_nabl(self):
+    
+        for record in self:
+            record.yield_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.proof_yeid_stress - record.proof_yeid_stress*mu_value
+                    upper = record.proof_yeid_stress + record.proof_yeid_stress*mu_value
+                    if lower >= lab_min and upper <= lab_max:
                         record.yield_nabl = 'pass'
                         break
                     else:
                         record.yield_nabl = 'fail'
+
 
     @api.depends('eln_ref','grade')
     def _compute_requirement_yield(self):
@@ -236,7 +390,7 @@ class SteelTmtBarLine(models.Model):
             # record.requirement_yield = 0
             # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
             # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Yield Stress (TMT)')]).parameter_table
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')]).parameter_table
             
             for material in materials:
                 print("DATA ", material)
@@ -248,22 +402,47 @@ class SteelTmtBarLine(models.Model):
                     record.requirement_yield = 0
         
     @api.depends('ts_ys_ratio','eln_ref','grade')
-    def _compute_ts_ys_nabl(self):
+    def _compute_ts_ys_conformity(self):
+
         for record in self:
-            record.ts_ys_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('parameter_name','=','TS / YS Ratio (TMT)')])
-            materials = self.env['lerm.parameter.master'].search([('parameter_name','=','TS / YS Ratio (TMT)')]).parameter_table
+            record.ts_ys_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
             for material in materials:
+                if material.grade.id == record.grade.id:
                     req_min = material.req_min
-                    lab_max = line.lab_max_value
+                    req_max = material.req_max
                     mu_value = line.mu_value
-                    lower = record.ts_ys_ratio - record.ts_ys_ratio*mu_value
-                    upper = record.ts_ys_ratio + record.ts_ys_ratio*mu_value
-                    if lower >= req_min:
-                        record.ts_ys_nabl = 'pass'
+                    
+                    lower = record.proof_yeid_stress - record.proof_yeid_stress*mu_value
+                    upper = record.proof_yeid_stress + record.proof_yeid_stress*mu_value
+                    if lower >= req_min :
+                        record.ts_ys_conformity = 'pass'
                         break
                     else:
-                        record.ts_ys_nabl = 'fail'
+                        record.ts_ys_conformity = 'fail'
+
+
+    @api.depends('ts_ys_ratio','eln_ref','grade')
+    def _compute_ts_ys_conformity(self):
+
+        for record in self:
+            record.ts_ys_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    req_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.proof_yeid_stress - record.proof_yeid_stress*mu_value
+                    upper = record.proof_yeid_stress + record.proof_yeid_stress*mu_value
+                    if lower >= lab_min :
+                        record.ts_ys_conformity = 'pass'
+                        break
+                    else:
+                        record.ts_ys_conformity = 'fail'
 
     @api.depends('eln_ref','grade')
     def _compute_requirement_ts_ys(self):
@@ -271,7 +450,7 @@ class SteelTmtBarLine(models.Model):
             # record.requirement_yield = 0
             # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
             # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            materials = self.env['lerm.parameter.master'].search([('parameter_name','=','TS / YS Ratio (TMT)')]).parameter_table
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -355,24 +534,24 @@ class SteelTmtBarLine(models.Model):
     
 
 
-    @api.depends('tests')
-    def _compute_visible(self):
-        fracture_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Fracture')])
-        bend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Bend Test')])
-        rebend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Rebend Test')])
+    # @api.depends('tests')
+    # def _compute_visible(self):
+    #     fracture_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Fracture')])
+    #     bend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Bend Test')])
+    #     rebend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Rebend Test')])
 
 
-        for record in self:
-            record.fracture_visible = False
-            record.bend_visible  = False  
-            record.rebend_visible = False
+    #     for record in self:
+    #         record.fracture_visible = False
+    #         record.bend_visible  = False  
+    #         record.rebend_visible = False
             
-            if fracture_test in record.tests:
-                record.fracture_visible = True
-            if bend_test in record.tests:
-                record.bend_visible = True
-            if rebend_test in record.tests:
-                record.rebend_visible = True
+    #         if fracture_test in record.tests:
+    #             record.fracture_visible = True
+    #         if bend_test in record.tests:
+    #             record.bend_visible = True
+    #         if rebend_test in record.tests:
+    #             record.rebend_visible = True
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):

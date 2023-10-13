@@ -175,7 +175,13 @@
 									<span t-esc="r['average']"/>
 								</td>
 								<td colspan="5">
-									<span>maximum permissible limit as per MORTH - 2013 5th Edition cl is 25mm</span>
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade_id.id == eln.grade.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
 								</td>
 								
 								

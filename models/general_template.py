@@ -193,13 +193,15 @@ class GeneralReport(models.AbstractModel):
         }
 
 class SteelTmtBar(models.AbstractModel):
-    _name = 'report.lerm_civil.steel_tmt_bar_report'
+    _name = 'report.lerm_civil.steel_tmt_bar_report1'
     _description = 'Steel TMT Bar'
     
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
         inreport_value = data.get('inreport', None)
+        nabl = data.get('nabl')
+
         if 'active_id' in data['context']:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
@@ -228,7 +230,11 @@ class SteelTmtBar(models.AbstractModel):
             'data' : general_data,
             'qrcode': qr_code,
             'stamp' : inreport_value,
+            'nabl' : nabl
+
         }
+
+    
 
 class SteelTmtBarDataSheet(models.AbstractModel):
     _name = 'report.lerm_civil.steel_tmt_bar_datasheet'

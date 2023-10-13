@@ -216,6 +216,21 @@
 							</tbody>
 
 					</table>
+
+
+					<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="resultdata and len(resultdata) &gt; 0">
+						<tr cols="12">
+							<td colspan="6" t-foreach="resultdata" t-as="result">
+								<span>
+									<t t-esc="result[1]"/>
+								</span> : 
+								<![CDATA[&nbsp;]]>
+								<span>
+									<t t-esc="formdata[result[0]]" />
+								</span>
+							</td>
+						</tr>
+					</table>
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
 							<div>
@@ -276,4 +291,5 @@
 			</t>
 		</t>
 	</template>
+	
 </odoo>
