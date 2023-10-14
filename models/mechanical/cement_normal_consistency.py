@@ -4,12 +4,10 @@ from datetime import timedelta
 import math
 
 
-
 class CementNormalConsistency(models.Model):
     _name = "mechanical.cement.normalconsistency"
     _inherit = "lerm.eln"
     _rec_name = "name"
-
 
     name = fields.Char("Name",default="Cement")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
@@ -131,7 +129,6 @@ class CementNormalConsistency(models.Model):
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
                 record.final_setting_time_minutes_unrounded = False
-
 
     #Density
 
@@ -662,7 +659,6 @@ class CementNormalConsistency(models.Model):
         for field_name, field in record._fields.items():
             field_value = record[field_name]
             field_values[field_name] = field_value
-
         return field_values
 
     @api.depends("wt_of_cement_trial1","wt_of_cement_trial2","wt_of_cement_trial3","wt_of_water_req_trial1","wt_of_water_req_trial2","wt_of_water_req_trial3")
@@ -672,7 +668,6 @@ class CementNormalConsistency(models.Model):
                 record.normal_consistency_trial1 = (record.wt_of_water_req_trial1/record.wt_of_cement_trial1) * 100
             else:
                 record.normal_consistency_trial1 = 0
-            
             # if record.wt_of_water_req_trial2 and record.wt_of_cement_trial2:
             #     record.normal_consistency_trial2 = (record.wt_of_water_req_trial2/record.wt_of_cement_trial2) * 100
             # else:
@@ -719,7 +714,6 @@ class DrySievingLine(models.Model):
                 record.fineness = round((record.retained_weight / record.sample_weight_fineness )*100,2)
             else:
                 record.fineness = 0
-
 
 class Casting3DaysLine(models.Model):
     _name = "cement.casting.3days.line"

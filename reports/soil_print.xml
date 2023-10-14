@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
 	<template id="soil_data_sheet_header">
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
