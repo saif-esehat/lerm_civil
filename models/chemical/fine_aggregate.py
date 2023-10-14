@@ -70,17 +70,17 @@ class ChemicalFineAggregate(models.Model):
     @api.depends('diff_in_wt_of_silica_blank','diff_in_wt_of_silica_a')
     def _compute_dissolved_silica_a(self):
         for record in self:
-            record.dissolved_silica_a = (record.diff_in_wt_of_silica_a - record.diff_in_wt_of_silica_blank) * 3300
+            record.dissolved_silica_a = (record.diff_in_wt_of_silica_a - record.diff_in_wt_of_silica_blank) * 3330
 
     @api.depends('diff_in_wt_of_silica_blank','diff_in_wt_of_silica_b')
     def _compute_dissolved_silica_b(self):
         for record in self:
-            record.dissolved_silica_b = (record.diff_in_wt_of_silica_b - record.diff_in_wt_of_silica_blank) * 3300
+            record.dissolved_silica_b = (record.diff_in_wt_of_silica_b - record.diff_in_wt_of_silica_blank) * 3330
 
     @api.depends('diff_in_wt_of_silica_blank','diff_in_wt_of_silica_c')
     def _compute_dissolved_silica_c(self):
         for record in self:
-            record.dissolved_silica_c = (record.diff_in_wt_of_silica_c - record.diff_in_wt_of_silica_blank) * 3300
+            record.dissolved_silica_c = (record.diff_in_wt_of_silica_c - record.diff_in_wt_of_silica_blank) * 3330
     
     
     @api.depends('dissolved_silica_a','dissolved_silica_b','dissolved_silica_b')

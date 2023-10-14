@@ -64,9 +64,11 @@
     'views/ndt/rebound_hammer.xml',
     'views/ndt/acil_upv.xml', 
     'views/ndt/upv.xml',
+    
     'views/ndt/half_cell.xml',
     'views/mechanical/cement_normal_consistency.xml',
     'views/mechanical/cement_psc.xml',
+    'views/mechanical/brick_2.xml',
     'views/mechanical/cement_ppc.xml',
     'views/mechanical/cement_setting_time.xml',
     'views/mechanical/ggbs.xml',
