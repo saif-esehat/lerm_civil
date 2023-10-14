@@ -10,6 +10,7 @@ lerm.qty.line,lerm_qty_line,model_lerm_qty_line,lerm_civil.kes_hod_access_group,
 sample.allotment.wizard,sample_allotment_wizard,model_sample_allotment_wizard,lerm_civil.kes_hod_access_group,1,1,1,0
 lerm_civil.test_method.hod,lerm_civil_test_method,model_lerm_civil_test_method,lerm_civil.kes_hod_access_group,1,0,0,0
 sample.parameters.result.hod,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_hod_access_group,1,1,1,0
+lerm.product.based.calculation.hod,lerm_product_based_calculation,lerm_civil.model_lerm_product_based_calculation,lerm_civil.kes_hod_access_group,1,1,1,1
 lerm.eln.hod,lerm_eln,model_lerm_eln,lerm_civil.kes_hod_access_group,1,0,0,0
 eln.spreadsheets.hod,eln_spreadsheets,model_eln_spreadsheets,lerm_civil.kes_hod_access_group,1,0,0,0
 eln.parameters.hod,eln_parameters,model_eln_parameters,lerm_civil.kes_hod_access_group,1,0,0,0

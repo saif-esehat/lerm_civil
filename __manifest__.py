@@ -53,6 +53,7 @@
     'views/mechanical/compressive_strength_brick.xml',
     'views/mechanical/dry_density_sand_replacement.xml',
     'views/mechanical/cement_compatablity.xml',
+    'views/mechanical/brick_2.xml',
     'views/chemical/fine_aggregate.xml',
     'views/mechanical/paver_block.xml',
     'views/ndt/crack_width.xml',
@@ -123,8 +124,7 @@
     'reports/bricks2_datasheet.xml',
     'reports/bricks2_report.xml',
     'reports/concrete_beam_datasheet.xml',
-
-
+    'reports/coarse_aggregate_mech_report.xml',
 
 
     

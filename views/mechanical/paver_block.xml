@@ -499,6 +499,36 @@
                     <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
                        <field name="average_water"/>
                     </group>
+
+
+                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
+                        <h1>
+                            <field name="dimension_name1" readonly="1" nolabel="1"/>
+                            <field name="dimension_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
+                        <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='length'/>
+                                <field name='width'/>
+                                <field name='hight'/>
+                                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
+                        <field name='average_length' col="4"/>
+                        <field name='average_width'  col="4"/> 
+                        <field name='average_hight' col="4"/>
+                        <field name='plan_area' col="4"/>
+                    </group>
                     
                      
 

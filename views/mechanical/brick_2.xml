@@ -207,6 +207,7 @@
 
                     <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                       <field name="avrg_compressive_strength"/>
+                      <!-- <field name="comp_strngth_confirmity"/> -->
                     </group>
 
                           <!-- visual_observation -->
