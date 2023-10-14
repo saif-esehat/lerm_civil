@@ -458,16 +458,16 @@ class CoarseAggregateMechanical(models.Model):
                 if previous_line == 0:
                     if line.percent_retained == 0:
                         # print("Percent retained 0",line.percent_retained)
-                        line.write({'cumulative_retained': line.percent_retained})
+                        line.write({'cumulative_retained': round(line.percent_retained,2)})
                         line.write({'passing_percent': 100 })
                     else:
                         # print("Percent retained else",line.percent_retained)
-                        line.write({'cumulative_retained': line.percent_retained})
-                        line.write({'passing_percent': 100 -line.percent_retained})
+                        line.write({'cumulative_retained': round(line.percent_retained,2)})
+                        line.write({'passing_percent': round(100 -line.percent_retained,2)})
                 else:
                     previous_line_record = self.env['mechanical.coarse.aggregate.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
-                    line.write({'cumulative_retained': previous_line_record + line.percent_retained})
-                    line.write({'passing_percent': 100-(previous_line_record + line.percent_retained)})
+                    line.write({'cumulative_retained': round(previous_line_record + line.percent_retained,2)})
+                    line.write({'passing_percent': round(100-(previous_line_record + line.percent_retained),2)})
                     print("Previous Cumulative",previous_line_record)
                     
 
