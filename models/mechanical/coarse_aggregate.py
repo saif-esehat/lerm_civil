@@ -1,7 +1,7 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import math
-
+import re
 
 class CoarseAggregateMechanical(models.Model):
     _name = "mechanical.coarse.aggregate"
@@ -12,13 +12,13 @@ class CoarseAggregateMechanical(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
-    size = fields.Many2one('lerm.size.line',compute="_compute_size")
+    size_id = fields.Many2one('lerm.size.line',compute="_compute_size_id")
 
     @api.depends("eln_ref")
-    def _compute_size(self):
+    def _compute_size_id(self):
         for record in self:
             print("Size iD",record.eln_ref.size_id)
-            record.size = record.eln_ref.size_id.id
+            record.size_id = record.eln_ref.size_id.id
 
 
     @api.depends('eln_ref')
@@ -425,7 +425,7 @@ class CoarseAggregateMechanical(models.Model):
     sieve_analysis_child_lines = fields.One2many('mechanical.coarse.aggregate.sieve.analysis.line','parent_id',string="Parameter")
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
 
-
+    @api.depends('eln_ref')
     def default_get(self, fields):
         print("From Default Value")
         res = super(CoarseAggregateMechanical, self).default_get(fields)
@@ -434,29 +434,40 @@ class CoarseAggregateMechanical(models.Model):
         coarse_sieve_20mm = ['12.5 mm', '10 mm', '4.75 mm', '2.36 mm', 'pan']
 
         default_sieve_sizes = []
+        eln_ref = res['eln_ref']
+
+        size_id = self.env['lerm.eln'].search([('id','=',eln_ref)]).size_id.size
+
+        print("Size",size_id)
+        pattern = r'\d+'
+        match = re.search(pattern, size_id)
+        if match:
+            number = int(match.group())
+            print("Number",number)
+            if number == 10:
+                    for i in range(5):  # You can change the number of default lines as needed
+                        size = {
+                            'sieve_size': coarse_sieve_10mm[i] # Set the default product
+                            # Set the default quantity
+                        }
+                        default_sieve_sizes.append((0, 0, size))
+                    res['sieve_analysis_child_lines'] = default_sieve_sizes
+            elif number == 20:
+                for i in range(5):  # You can change the number of default lines as needed
+                    size = {
+                        'sieve_size': coarse_sieve_20mm[i] # Set the default product
+                        # Set the default quantity
+                    }
+                    default_sieve_sizes.append((0, 0, size))
+                res['sieve_analysis_child_lines'] = default_sieve_sizes
+            else :
+                res['sieve_analysis_child_lines'] = default_sieve_sizes
+
+
+        else:
+            pass
         
-        
-        for i in range(5):  # You can change the number of default lines as needed
-            size = {
-                'sieve_size': coarse_sieve_10mm[i] # Set the default product
-                  # Set the default quantity
-            }
-            default_sieve_sizes.append((0, 0, size))
-        # print("SIZE",self.size)
-        # if self.size == '10':
-        #     for size in coarse_sieve_10mm:
-        #         default_sieve_sizes.append((0, 0, {
-        #             'sieve_size': size,
-        #         }))
-        # elif self.size == '20':
-        #     for size in coarse_sieve_20mm:
-        #         default_sieve_sizes.append((0, 0, {
-        #             'sieve_size': size,
-        #         }))
-        
-        res['sieve_analysis_child_lines'] = default_sieve_sizes
         return res
-    # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative_sieve")
 
 
     def calculate_sieve(self): 
@@ -480,7 +491,8 @@ class CoarseAggregateMechanical(models.Model):
                     print("Previous Cumulative",previous_line_record)
                     
 
- 
+    
+
 
     @api.depends('sieve_analysis_child_lines.wt_retained')
     def _compute_total_sieve(self):

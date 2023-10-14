@@ -11,7 +11,6 @@ class DataSheetReport(models.AbstractModel):
     
     
     def get_visible_table_fields(self, model_name):
-        print(model_name , 'Afzal Test')
         form_view = self.env['ir.ui.view'].sudo().search([
             ('model', '=', model_name),
             ('type', '=', 'form')
