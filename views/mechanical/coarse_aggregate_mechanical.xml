@@ -18,6 +18,7 @@
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" />
                         <field name="eln_ref" readonly="1"/>
+                        <field name="size_id"/>
                         <field name="parameter_id" invisible="1"/>
                     </group>
                     <group>
@@ -386,7 +387,7 @@
                     <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
                     <field name="sieve_analysis_child_lines" nolabel="1" >
                             <tree editable="bottom">
-                                <field name="serial_no" string="Sr.No"/>
+                                <!-- <field name="serial_no" string="Sr.No"/> -->
                                 <field name='sieve_size' string="IS Sieve Size"/>
                                 <field name='wt_retained' string="Wt. Retained in gms"/>
                                 <field name='percent_retained' string="% Retained"/>

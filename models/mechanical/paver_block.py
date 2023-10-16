@@ -458,6 +458,70 @@ class PaverBlock(models.Model):
 
 
 
+   # Dimension
+
+    dimension_name1 = fields.Char("Name",default="Dimension")
+    dimension_visible = fields.Boolean("Dimension Visible",compute="_compute_visible")   
+
+    # name = fields.Char("Name",default="DIMENSION")
+    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    child_lines = fields.One2many('mechanical.dimension.paver.block.line','parent_id',string="Parameter")
+    average_length = fields.Float(string="Average Length", compute="_compute_average_length",digits=(16,1))
+    average_hight = fields.Float(string="Average Height",compute="_compute_average_hight", digits=(16, 1))
+    average_width = fields.Float(string="Average Width", compute="_compute_average_width",digits=(16,1))
+    plan_area = fields.Float(string="Plan Area", compute="_compute_plan_area", digits=(16, 1))
+
+
+
+
+   
+
+    @api.depends('child_lines.length')
+    def _compute_average_length(self):
+        for record in self:
+            if record.child_lines:
+                lengths = [line.length for line in record.child_lines]
+                record.average_length = sum(lengths) / len(lengths)
+            else:
+                record.average_length = 0.0
+
+                
+    @api.depends('child_lines.hight')
+    def _compute_average_hight(self):
+        for record in self:
+            if record.child_lines:
+                heights = [line.hight for line in record.child_lines]
+                record.average_hight = sum(heights) / len(heights)
+            else:
+                record.average_hight = 0.0
+
+  
+   
+
+    @api.depends('child_lines.width')
+    def _compute_average_width(self):
+        for record in self:
+            if record.child_lines:
+                widths = [line.width for line in record.child_lines]
+                record.average_width = sum(widths) / len(widths)
+            else:
+                record.average_width = 0.0
+
+    @api.depends('average_length', 'average_width')
+    def _compute_plan_area(self):
+        for record in self:
+            record.plan_area = record.average_length * record.average_width
+
+
+
+    
+   
+
+
+
+
+
+
  ### Compute Visible
     @api.depends('sample_parameters')
     def _compute_visible(self):
@@ -466,6 +530,7 @@ class PaverBlock(models.Model):
             record.paver_visible = False
             record.commpressive_visible = False
             record.water_absorption_visible = False
+            record.dimension_visible = False
             
             for sample in record.sample_parameters:
                 print("Internal Ids",sample.internal_id)
@@ -478,6 +543,9 @@ class PaverBlock(models.Model):
                 
                 if sample.internal_id == "56859103-eba3-4f15-b33d-679b39f7372e":
                     record.water_absorption_visible = True
+
+                if sample.internal_id == "95fc46f1-ccb9-41c2-9ae2-c8b4610622a1":
+                    record.dimension_visible = True
 
 
 
@@ -527,3 +595,34 @@ class PaverBlockTest(models.Model):
     _name = "mechanical.pever.block.test"
     _rec_name = "name"
     name = fields.Char("Name")
+
+
+
+class DimensionPaverBlock(models.Model):
+    _name = "mechanical.dimension.paver.block.line"
+    parent_id = fields.Many2one('mechanical.paver.block',string="Parent Id")
+   
+    sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
+    length = fields.Float(string="Length in mm")
+    hight = fields.Float(string="Thickness in mm")
+    width = fields.Float(string="Width in mm")
+
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
+
+        return super(DimensionPaverBlock, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.sr_no = index + 1
+

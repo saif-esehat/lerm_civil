@@ -8,6 +8,7 @@ class MechanicalBricks(models.Model):
     _inherit = "lerm.eln"
     _rec_name = "name"
 
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     name = fields.Char("Name",default="Brick")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
@@ -17,15 +18,8 @@ class MechanicalBricks(models.Model):
     test_end_date = fields.Date("Test End Date")
    
 
-    @api.model
-    def create(self, vals):
-        # import wdb;wdb.set_trace()
-        record = super(MechanicalBricks, self).create(vals)
-        record.parameter_id.write({'model_id':record.id})
-        return record
-
-
         #1------------ Compressive Strength
+
     compressive_strength_visible = fields.Boolean("Compressive Strengt Visible",compute="_compute_visible")
     compressive_strength_name = fields.Char("Name",default="Compressive Strength")
     length = fields.Float(string="Length mm")
@@ -60,6 +54,9 @@ class MechanicalBricks(models.Model):
     comp_strength_5 = fields.Float(string="Compressive strength MPa",compute="_compute_comp_strength_5")
     
     avrg_compressive_strength = fields.Float(string="Average Compressive Strength",compute="_compute_avrg_compressive_strength")
+
+    
+
     
 
     @api.depends('comp_strength_1', 'comp_strength_2', 'comp_strength_3', 'comp_strength_4', 'comp_strength_5')
@@ -146,8 +143,10 @@ class MechanicalBricks(models.Model):
             else:
                 record.comp_strength_5 = 0.0
 
+    
 
-        # Visual Observation
+
+        #-2---------- Visual Observation
 
     visual_observation_name = fields.Char("Name",default="Efflorence")
     visual_observation_1 = fields.Selection([('like', 'Like'), ('nil', 'Nil'), ('slight', 'Slight'), ('moderate', 'Moderate'), ('heavy', 'Heavy'), ('serious', 'Serious')],string='Visual observation')
@@ -157,7 +156,7 @@ class MechanicalBricks(models.Model):
     visual_observation_5 = fields.Selection([('like', 'Like'), ('nil', 'Nil'), ('slight', 'Slight'), ('moderate', 'Moderate'), ('heavy', 'Heavy'), ('serious', 'Serious')],string='Visual observation')
 
 
-         #  Dimension As per IS: IS : 1077 -1992 
+         #-3----------  Dimension As per IS: IS : 1077 -1992 
 
     dimension_name = fields.Char("Name",default="Dimension")
     avrg_length = fields.Float(string="Average length", compute="_compute_avrg_length")
@@ -220,7 +219,7 @@ class MechanicalBricks(models.Model):
             record.avrg_height = average_height
 
 
-    #2------  Water Absorption
+    #-4--------------  Water Absorption
 
     water_absorbtion_visible = fields.Boolean("Water Absorption Visible",compute="_compute_visible")
     wt_absorption_name = fields.Char("Name",default="Water Absorption")
@@ -303,6 +302,11 @@ class MechanicalBricks(models.Model):
             else:
                 record.water_absorption_5 = 0
 
+    confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail')
+
 
     ### Compute Visible
     @api.depends('sample_parameters')
@@ -317,7 +321,25 @@ class MechanicalBricks(models.Model):
                 if sample.internal_id == "b0eecb4f-9287-48c7-a607-bf1b64a8115d":
                     record.compressive_strength_visible = True
                 if sample.internal_id == "537e20c5-f3ab-4b19-af25-91a4671baf5f":
-                    record.water_absorbtion_visible = True
+                    record.water_absorbtion_visible = True 
+    # In Brick Form total 4 parameter But 2 parameters Visual Observation and Dimension are depend on Compressive Strength
+    # so visible condition only taked on Compressive Strength. 
+
+    
+
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(MechanicalBricks, self).create(vals)
+        record.get_all_fields()
+        record.eln_ref.write({'model_id':record.id})
+        return record
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
+    
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):

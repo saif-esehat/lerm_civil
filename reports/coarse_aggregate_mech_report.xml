@@ -160,16 +160,16 @@
 								<td colspan="2">
 									<span t-esc="r['passing_percent']"/>
 								</td>
-								<td colspan="2" t-if="k == 0">
+								<td colspan="2" t-if="k == 1">
 									<span>100%</span>
 								</td>
-								<td colspan="2" t-if="k == 1">
+								<td colspan="2" t-if="k == 2">
 									<span>85% - 100%</span>
 								</td>
-								<td colspan="2" t-if="k == 2">
+								<td colspan="2" t-if="k == 3">
 									<span>0% - 20%</span>
 								</td>
-								<td colspan="2" t-if="k == 3">
+								<td colspan="2" t-if="k == 4">
 									<span>0% - 5%</span>
 								</td>
 							</tr>
