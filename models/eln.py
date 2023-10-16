@@ -452,7 +452,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
         result_id = self.env.context.get('result_id')
         result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
-        self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
+        self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
         for input in self.inputs_lines:
             # import wdb; wdb.set_trace()
             self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
@@ -460,7 +460,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
 
 
 
-        result_id.write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
+        result_id.sudo().write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
 
         return {'type': 'ir.actions.act_window_close'}
 
