@@ -15,6 +15,11 @@
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
 
+        <record model="res.groups" id="kes_access_srf">
+            <field name="name">SRF</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
         
 
         <record model="res.groups" id="kes_srf_backdate_creation_group">

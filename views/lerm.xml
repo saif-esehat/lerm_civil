@@ -134,7 +134,7 @@
     </record>
     
     <menuitem id="lerm_root"
-        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf"
         name="LERM CIVIL"
         sequence="10" 
         web_icon="lerm_civil,static/description/icon.png"/>
@@ -170,7 +170,7 @@
 
     <menuitem id="lerm_transaction_data"
         name="Lab Operations"
-        groups="kes_technician_access_group,kes_hod_access_group,kes_admin_access_group"
+        groups="kes_technician_access_group,kes_hod_access_group,kes_admin_access_group,lerm_civil.kes_access_srf"
         parent="lerm_root"
         sequence="10" />
 
