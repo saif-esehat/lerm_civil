@@ -148,7 +148,7 @@
 
     <menuitem id="lerm_product_item_param_master"
         parent="lerm_menu"
-        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group"
         name="Product"
         action="lerm_product_action"
         sequence="11" />

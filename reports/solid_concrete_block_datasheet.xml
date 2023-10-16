@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="lerm_solid_block_datasheet">
+    <t t-call="web.html_container">
+	<t t-call="lerm_civil.data_sheet_header_generaltemplate">
+		<div style="text-align:center;font-size:18px;font-weight: bold">
+			Solid Concrete Block
+		</div>
+		<div class="container_eln" style="margin-top:5px">
+				
+
+           <table style="margin-top:20px">
+				<tr cols="12">
+					
+					<td colspan="6">Job No :
+                        <![CDATA[&nbsp;]]>
+                         <span t-field="eln.kes_no"></span>
+                    </td>
+					<td colspan="6">Test Start Date: 
+                        <![CDATA[&nbsp;]]>
+                        <span t-field="eln.start_date"></span>
+                    </td>
+				</tr>
+                <tr>
+                  <td colspan="6">Material: <span t-field="eln.material"></span>
+                </td>
+                 <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                </td>
+                </tr>
+			</table>
+              <!-- Block Density  -->
+
+                   <div t-if="data.block_density_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Block Density</b>
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Length mm</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Height mm</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Thickness mm</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Volume Cm3</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Initial Weight of the Specimenkg</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Final Weight of the Specimen after Oven Dry kg</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Block Density kg/M³</b></td>
+                               
+                            </tr>
+                            <t t-set="f" t-value="0"/>
+                                <tr t-foreach="data.child_lines" t-as="r">
+                                    <td colspan="1" style="text-align: center;">
+                                        <div>
+                                            <span t-esc="f + 1" />
+                                            <t t-set="f" t-value="f + 1"/>
+                                        </div>
+                                    </td>
+                                    <td colspan="2" style="text-align: center;">
+                                        <span t-esc="r['length']"/>
+                                    </td>
+                                    <td colspan="1" style="text-align: center;">
+                                        <span t-esc="r['heigth']"/>
+                                    </td>
+                                    <td colspan="2" style="text-align: center;">
+                                        <span t-esc="r['thickness']"/>
+                                    </td>
+
+                                    <td colspan="1" style="text-align: center;">
+                                        <span t-esc="r['volume']" t-options='{"widget": "float", "precision": 1}'/>
+                                    </td>
+                                    <td colspan="1" style="text-align: center;">
+                                        <span t-esc="r['intial_wt']"/>
+                                    </td>
+                                    <td colspan="1" style="text-align: center;">
+                                        <span t-esc="r['final_wt']"/>
+                                    </td>
+                                    <td colspan="1" style="text-align: center;">
+                                        <span t-esc="r['block_density']" t-options='{"widget": "float", "precision": 1}'/>
+                                    </td>
+                            </tr>
+                        </table>
+                        <table style="margin-top:5px">
+                            <tr cols="12">
+                                <td colspan="6"><b>Average Length :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_length" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Average Height :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_hight" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Average Thickness :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_thickness" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                             <tr cols="12">
+                                <td colspan="6"><b>Average Block Density :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_block" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+                   <!-- Moisture Movement -->
+                    <div t-if="data.moisture_movment_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Moisture Movement</b>
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Dry Length of the Block</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Wet Length of the Block</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Moisture Movement %</b></td>
+                                
+                               
+                            </tr>
+                            <t t-set="f" t-value="0"/>
+                                <tr t-foreach="data.child_lines1" t-as="r">
+                                    <td colspan="1" style="text-align: center;">
+                                        <div>
+                                            <span t-esc="f + 1" />
+                                            <t t-set="f" t-value="f + 1"/>
+                                        </div>
+                                    </td>
+                                    <td colspan="2" style="text-align: center;">
+                                        <span t-esc="r['dry_length']"/>
+                                    </td>
+                                    <td colspan="1" style="text-align: center;">
+                                        <span t-esc="r['wet_length']"/>
+                                    </td>
+                                    <td colspan="2" style="text-align: center;">
+                                        <span t-esc="r['moisture_movment']" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+
+                                   
+                            </tr>
+                        </table>
+                        <table style="margin-top:5px">
+                            <tr cols="12">
+                                <td colspan="6"><b>Average :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_moisture_movment" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                           
+                        </table>
+                    </div>
+
+
+
+                     <!-- Drying Shrinkage -->
+                    <div t-if="data.drying_shrinkage_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Drying Shrinkage </b>
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Wet measuremet of the Block</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Dry Measurement of the Block</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Dry Lenth</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Drying Shrinkage %</b></td>
+                                
+                               
+                            </tr>
+                            <t t-set="f" t-value="0"/>
+                                <tr t-foreach="data.child_lines2" t-as="r">
+                                    <td colspan="1" style="text-align: center;">
+                                        <div>
+                                            <span t-esc="f + 1" />
+                                            <t t-set="f" t-value="f + 1"/>
+                                        </div>
+                                    </td>
+                                    <td colspan="2" style="text-align: center;">
+                                        <span t-esc="r['wet_measurment']"/>
+                                    </td>
+                                    <td colspan="1" style="text-align: center;">
+                                        <span t-esc="r['dry_measurment']"/>
+                                    </td>
+                                    <td colspan="2" style="text-align: center;">
+                                        <span t-esc="r['dry_lengths']" />
+                                    </td>
+
+                                    <td colspan="2" style="text-align: center;">
+                                        <span t-esc="r['drying_shrinkage']" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+
+                                   
+                            </tr>
+                        </table>
+                        <table style="margin-top:5px">
+                            <tr cols="12">
+                                <td colspan="6"><b>Average :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_drying_shrinkage" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                           
+                        </table>
+                    </div>
+
+
+
+                     <!-- Water Absorption -->
+                    <div t-if="data.water_absorption_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Water Absorption </b>
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Wet Mass of the Block (kg)</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Dry Mass of the Block (kg)</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Water Absorption %</b></td>
+                                
+                               
+                            </tr>
+                            <t t-set="f" t-value="0"/>
+                                <tr t-foreach="data.child_lines3" t-as="r">
+                                    <td colspan="1" style="text-align: center;">
+                                        <div>
+                                            <span t-esc="f + 1" />
+                                            <t t-set="f" t-value="f + 1"/>
+                                        </div>
+                                    </td>
+                                    <td colspan="2" style="text-align: center;">
+                                        <span t-esc="r['wet_mass']"/>
+                                    </td>
+                                    <td colspan="1" style="text-align: center;">
+                                        <span t-esc="r['dry_mass']"/>
+                                    </td>
+                                  
+                                    <td colspan="2" style="text-align: center;">
+                                        <span t-esc="r['water_absorption']" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+
+                                   
+                            </tr>
+                        </table>
+                        <table style="margin-top:5px">
+                            <tr cols="12">
+                                <td colspan="6"><b>Average :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_water_absorption" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                           
+                        </table>
+                    </div>
+
+
+
+
+
+				<!-- authorizeRowDataSheet -->
+				
+			<div class="authorizeRowDataSheet">
+				<div>
+					<div>
+						<b>
+							(JR Chemist)
+						</b>
+					</div>
+					<div>
+						<b>
+							Tested By
+						</b>
+					</div>
+				</div>
+				<div style="margin-left:500px">
+					<div>
+						<b>
+							Mechanical Department (HOD)
+						</b>
+					</div>
+					<div>
+						<b>
+							Checked By
+						</b>
+					</div>
+				</div>
+			</div>
+
+
+			
+
+		</div>
+
+	</t>
+</t>
+</template>
+</odoo>
