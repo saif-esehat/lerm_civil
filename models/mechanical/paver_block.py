@@ -467,7 +467,7 @@ class PaverBlock(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('mechanical.dimension.paver.block.line','parent_id',string="Parameter")
     average_length = fields.Float(string="Average Length", compute="_compute_average_length",digits=(16,1))
-    average_hight = fields.Float(string="Average Height",compute="_compute_average_hight", digits=(16, 1))
+    average_hight = fields.Float(string="Average Thickness",compute="_compute_average_hight", digits=(16, 1))
     average_width = fields.Float(string="Average Width", compute="_compute_average_width",digits=(16,1))
     plan_area = fields.Float(string="Plan Area", compute="_compute_plan_area", digits=(16, 1))
 
