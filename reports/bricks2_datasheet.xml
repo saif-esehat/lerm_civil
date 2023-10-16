@@ -9,18 +9,25 @@
 		<div class="container_eln" style="margin-top:5px">
 				
 
-            <table style="margin-top:20px">
-                <tr cols="12">
-                    <td colspan="6">Test Start Date :
+           <table style="margin-top:20px">
+				<tr cols="12">
+					
+					<td colspan="6">Job No :
                         <![CDATA[&nbsp;]]>
-                        <span t-field="data.test_start_date"/>
+                         <span t-field="eln.kes_no"></span>
                     </td>
-					<td colspan="6">Test End Date :
+					<td colspan="6">Test Start Date: 
                         <![CDATA[&nbsp;]]>
-                        <span t-field="data.test_end_date"/>
+                        <span t-field="eln.start_date"></span>
                     </td>
-                </tr>        
-            </table>
+				</tr>
+                <tr>
+                  <td colspan="6">Material: <span t-field="eln.material"></span>
+                </td>
+                 <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                </td>
+                </tr>
+			</table>
                 <!-- Compressive Strength -->
 
             <div t-if="data.compressive_strength_visible" style="margin-top:20px">

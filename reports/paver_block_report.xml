@@ -79,6 +79,12 @@
                                     <span t-field="data.average_hight" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
                             </tr>
+                             <tr cols="12">
+                                <td colspan="6"><b>Plan Area :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.plan_area" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
                         </table>
                     </div>
 
