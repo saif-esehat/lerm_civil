@@ -192,7 +192,7 @@ class GeneralReport(models.AbstractModel):
         }
 
 class SteelTmtBar(models.AbstractModel):
-    _name = 'report.lerm_civil.steel_tmt_bar_report1'
+    _name = 'report.lerm_civil.steel_tmt_bar_report'
     _description = 'Steel TMT Bar'
     
     @api.model

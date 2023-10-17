@@ -29,15 +29,15 @@ class AacBlockMechanical(models.Model):
 
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
-                if sample.internal_id == '04efc0bd-63e2-4e23-9436-51cde4fe2c57':
+                if sample.internal_id == '6a8fbf6a-ac79-4102-aeda-622dc0f973f6':
                     record.dimension_visible = True
-                if sample.internal_id == '8e7282a0-3e80-4cee-b520-128b5a5f2015':
+                if sample.internal_id == '0fc481e6-8097-4275-b80f-48ebdbcfe244':
                     record.moisture_visible = True
-                if sample.internal_id == '2d915d3b-0324-40f1-a2b9-e385a7cdc90d':
+                if sample.internal_id == '6af641b7-4ef4-4e51-abeb-57dd2abe29a4':
                     record.density_visible = True
-                if sample.internal_id == 'ec5fa471-0e2a-411a-b1de-72cc41aed2d5':
+                if sample.internal_id == '73b3be25-b1a2-4dac-b8cb-e077770af52f':
                     record.drying_shrinkage_visible = True
-                if sample.internal_id == '65321ea8-98e6-4d73-8941-5ac65d2504a9':
+                if sample.internal_id == 'b20eeeca-cb61-45db-91c5-0167b27a9ab5':
                     record.compressive_strength_visible = True
 
     @api.model
@@ -128,7 +128,7 @@ class AacBlockMechanical(models.Model):
                 record.average_moisture_content = 0
 
     # Density 
-    density_name = fields.Char(default="Density Content")
+    density_name = fields.Char(default="Density")
     density_visible = fields.Boolean(compute="_compute_visible")
 
     density_table = fields.One2many('mech.aac.density.line','parent_id',string="Density")
@@ -210,7 +210,7 @@ class AacDensityLine(models.Model):
     height = fields.Float('Height of Sample before Drying',digits=(16,3))
     volume = fields.Float('Volume of Sample',compute="_compute_volume",digits=(16,7))
     wt_sample = fields.Float("Weight of Sample after Drying",digits=(16,3))
-    density = fields.Float("Density of Sample",compute="Compute_density",digits=(16,3))
+    density = fields.Float("Density of Sample",compute="Compute_density",digits=(16,1))
 
     @api.depends('length','width','height')
     def _compute_volume(self):
@@ -221,7 +221,7 @@ class AacDensityLine(models.Model):
     def Compute_density(self):
         for record in self:
             if record.volume != 0:
-                record.density = rounnd((record.wt_sample / record.volume),3)
+                record.density = round((record.wt_sample / record.volume),1)
             else:
                 record.density = 0
 
@@ -255,13 +255,13 @@ class AacCompressiveStrengthLine(models.Model):
     parent_id = fields.Many2one('mechanical.aac.block', string="Parent Id")
 
     crosssectional_area = fields.Float('Crosssectional Area')
-    load = fields.Float('Load (p) kN')
+    aac_load = fields.Float('Load (p) kN')
     compressive_strength = fields.Float('Compressive Strength',compute="_compute_compressive_strength")
 
 
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = round((record.load/record.crosssectional_area)*1000,2)
+                record.compressive_strength = round((record.aac_load/record.crosssectional_area)*1000,2)
             else:
                 record.compressive_strength = 0

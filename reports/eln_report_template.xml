@@ -569,9 +569,8 @@
 		</t>
 	</template>
 	
-	<template id="steel_tmt_bar_report">
+	<!-- <template id="steel_tmt_bar_report">
 		<t t-call="web.html_container">
-			<!-- <t t-call="web.basic_layout"> -->
 			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
@@ -852,7 +851,6 @@
 									<span t-esc="round(data.proof_yeid_stress , 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_yield"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -873,7 +871,6 @@
 									<span t-esc="round(data.proof_yeid_stress , 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_yield"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -894,7 +891,6 @@
 									<span t-esc="round(data.ult_tens_strgth, 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_utl"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -916,7 +912,6 @@
 									<span t-esc="round(data.ult_tens_strgth, 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_utl"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -939,7 +934,6 @@
 									<span t-esc="round(data.ts_ys_ratio , 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_ts_ys"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -961,7 +955,6 @@
 									<span t-esc="round(data.ts_ys_ratio , 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_ts_ys"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -983,7 +976,6 @@
 									<span t-esc="round(data.percent_elongation , 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_elongation"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -1005,7 +997,6 @@
 									<span t-esc="round(data.percent_elongation , 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_elongation"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -1028,7 +1019,6 @@
 									<span t-esc="round(data.weight_per_meter , 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_weight_per_meter"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.size.id == eln.size_id.id">
@@ -1050,7 +1040,6 @@
 									<span t-esc="round(data.weight_per_meter , 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_weight_per_meter"/> -->
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.size.id == eln.size_id.id">
@@ -1159,7 +1148,7 @@
 				</div>
 			</t>
 		</t>
-	</template>
+	</template> -->
 
 
 

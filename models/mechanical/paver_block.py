@@ -399,14 +399,14 @@ class PaverBlock(models.Model):
     water_absorption_name = fields.Char("Name",default="Water Absorption")
     water_absorption_visible = fields.Boolean("Water Absorption Visible",compute="_compute_visible")      
 
-    initial_wt1 = fields.Integer(string="Initial Weight (wt. after 24 hour emersion in water)")   
-    initial_wt2 = fields.Integer(string="Initial Weight (wt. after 24 hour emersion in water)") 
-    initial_wt3 = fields.Integer(string="Initial Weight (wt. after 24 hour emersion in water)")   
+    initial_wt1 = fields.Float(string="Initial Weight (wt. after 24 hour emersion in water)")   
+    initial_wt2 = fields.Float(string="Initial Weight (wt. after 24 hour emersion in water)") 
+    initial_wt3 = fields.Float(string="Initial Weight (wt. after 24 hour emersion in water)")   
 
 
-    dry_wt1 = fields.Integer(string="Dry Weight (after 24 hour in oven)")  
-    dry_wt2 = fields.Integer(string="Dry Weight (after 24 hour in oven)")
-    dry_wt3 = fields.Integer(string="Dry Weight (after 24 hour in oven)") 
+    dry_wt1 = fields.Float(string="Dry Weight (after 24 hour in oven)")  
+    dry_wt2 = fields.Float(string="Dry Weight (after 24 hour in oven)")
+    dry_wt3 = fields.Float(string="Dry Weight (after 24 hour in oven)") 
 
     water_absorption1 = fields.Float(string="Water Absorption %",compute="_compute_water_absorption1")
     water_absorption2 = fields.Float(string="Water Absorption %",compute="_compute_water_absorption2")
@@ -422,17 +422,25 @@ class PaverBlock(models.Model):
     @api.depends('initial_wt1', 'dry_wt1')
     def _compute_water_absorption1(self):
         for record in self:
+            print("_compute_water_absorption1 before if ")
             if record.dry_wt1 != 0:
+                print("_compute_water_absorption1 in if ")
                 record.water_absorption1 = ((record.initial_wt1 - record.dry_wt1) / record.dry_wt1) * 100
             else:
+                
+                print("_compute_water_absorption1 in else ")
                 record.water_absorption1 = 0.0
 
     @api.depends('initial_wt2', 'dry_wt2')
     def _compute_water_absorption2(self):
+        print("_compute_water_absorption2 before if ")
         for record in self:
             if record.dry_wt2 != 0:
+                print("_compute_water_absorption2 in if ")        
                 record.water_absorption2 = ((record.initial_wt2 - record.dry_wt2) / record.dry_wt2) * 100
             else:
+                print("_compute_water_absorption2 in else ")        
+
                 record.water_absorption2 = 0.0
 
     @api.depends('initial_wt3', 'dry_wt3')
