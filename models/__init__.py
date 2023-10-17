@@ -81,4 +81,5 @@ from .mechanical import cement_compatablity
 from .chemical import fine_aggregate
 
 from . import general_template
+from .mechanical import aac_block
 

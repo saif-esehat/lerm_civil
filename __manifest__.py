@@ -79,6 +79,7 @@
     'views/mechanical/microsilica.xml',
     'views/mechanical/pt_grout.xml',
     'views/mechanical/soil.xml',
+    'views/mechanical/aac_block.xml',
     'views/mechanical/coarse_aggregate_mechanical.xml',
     'views/mechanical/aggregate_fine.xml',
     'views/mechanical/concrete_cube2.xml',
@@ -128,6 +129,7 @@
     'views/mechanical/solid_concrete_block.xml',
     'reports/solid_concrete_block_datasheet.xml',
     'reports/concrete_beam_report.xml',
+    'reports/steel_tmt_bar_report.xml'
 
 
     

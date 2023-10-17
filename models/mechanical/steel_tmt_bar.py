@@ -258,7 +258,7 @@ class SteelTmtBarLine(models.Model):
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
-                    lab_max = line.lav_max_value
+                    lab_max = line.lab_max_value
                     mu_value = line.mu_value
                     
                     lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
