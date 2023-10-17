@@ -83,4 +83,5 @@ from .mechanical import concrete_splite_tensile_strength
 from .report import concrete_split_tensile_ds_report
 
 from . import general_template
+from .mechanical import aac_block
 

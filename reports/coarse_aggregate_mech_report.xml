@@ -151,13 +151,13 @@
 
                             </tr>
 							<t t-set="k" t-value="0"/>
-							<tr t-foreach="data.sieve_analysis_child_lines" t-as="r">
+							<tr t-foreach="data.sieve_analysis_child_lines" t-as="r" t-if="'pan' not in r['sieve_size']">
 								
-								<td colspan="2">
+								<td colspan="2" >
 									<t t-set="k" t-value="k+1"/>
 									<span t-esc="r['sieve_size']"/>
 								</td>
-								<td colspan="2">
+								<td colspan="2" >
 									<span t-esc="r['passing_percent']"/>
 								</td>
 								<td colspan="2" t-if="k == 1">
@@ -211,7 +211,7 @@
 							</tr>
 						</thead>
 						<tbody >
-							<tr>
+							<tr t-if="data.specific_gravity_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -246,7 +246,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr>
+							<tr t-if="data.specific_gravity_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -281,7 +281,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr>
+							<tr t-if="data.loose_bulk_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -316,7 +316,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr>
+							<tr t-if="data.rodded_bulk_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -351,7 +351,7 @@
 									</span>
 								</td>
 							</tr>
-                            <tr>
+                            <tr t-if="data.impact_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -386,7 +386,7 @@
 									</span>
 								</td>
 							</tr>
-                            <tr>
+                            <tr t-if="data.crushing_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -421,7 +421,7 @@
 									</span>
 								</td>
 							</tr>
-                            <tr>
+                            <tr t-if="data.elongation_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -456,7 +456,7 @@
 									</span>
 								</td>
 							</tr>
-                            <tr>
+                            <tr t-if="data.flakiness_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -491,7 +491,7 @@
 									</span>
 								</td>
 							</tr>
-                            <tr>
+                            <tr t-if="data.abrasion_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -526,7 +526,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr>
+							<tr t-if="data.fine10_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -561,7 +561,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr>
+							<tr t-if="data.soundness_mgso4_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -596,7 +596,7 @@
 									</span>
 								</td>
 							</tr>
-                            <tr>
+                            <tr t-if="data.soundness_na2so4_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -631,7 +631,7 @@
 									</span>
 								</td>
 							</tr>
-                            <tr>
+                            <tr t-if="data.finer75_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -666,7 +666,7 @@
 									</span>
 								</td>
 							</tr>   
-                            <tr>
+                            <tr t-if="data.clay_lump_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -701,7 +701,7 @@
 									</span>
 								</td>
 							</tr>   
-                            <tr>
+                            <tr t-if="data.light_weight_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -736,7 +736,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr>
+							<tr t-if="data.angularity_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>

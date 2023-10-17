@@ -6,7 +6,11 @@
  'version': '13.0.1', 
  'depends':['base' , 'contacts','stock','product' , 'mail','documents','documents_spreadsheet','lerm_civil_inv'],
  'data': [
+<<<<<<< HEAD
          'security/security.xml',
+=======
+    'security/security.xml',
+>>>>>>> 145c00ad09a66bcaf6fefbd99752f691a0a22a92
     'data/sequence.xml',
     'views/lerm.xml',
     'views/groups.xml',
@@ -80,6 +84,7 @@
     'views/mechanical/microsilica.xml',
     'views/mechanical/pt_grout.xml',
     'views/mechanical/soil.xml',
+    # 'views/mechanical/aac_block.xml',
     'views/mechanical/coarse_aggregate_mechanical.xml',
     'views/mechanical/aggregate_fine.xml',
     'views/mechanical/concrete_cube2.xml',
@@ -128,9 +133,13 @@
     'views/mechanical/solid_concrete_block.xml',
     'reports/solid_concrete_block_datasheet.xml',
     'reports/concrete_beam_report.xml',
+<<<<<<< HEAD
     'views/mechanical/concrete_splite_tensile_strength.xml',
     'reports/concrete_split_tensile_datasheet.xml',
     
+=======
+    'reports/steel_tmt_bar_report.xml'
+>>>>>>> 145c00ad09a66bcaf6fefbd99752f691a0a22a92
 
 
     

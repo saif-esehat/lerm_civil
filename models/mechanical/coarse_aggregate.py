@@ -54,7 +54,7 @@ class CoarseAggregateMechanical(models.Model):
         for record in self:
             if record.crushing_value_child_lines:
                 sum_crushing_values = sum(record.crushing_value_child_lines.mapped('crushing_value'))
-                record.average_crushing_value = sum_crushing_values / len(record.crushing_value_child_lines)
+                record.average_crushing_value = round((sum_crushing_values / len(record.crushing_value_child_lines)),1)
             else:
                 record.average_crushing_value = 0.0
    
@@ -106,7 +106,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_specific_gravity(self):
         for line in self:
             if line.wt_surface_dry - line.wt_sample_inwater != 0:
-                line.specific_gravity = line.oven_dried_wt / (line.wt_surface_dry - line.wt_sample_inwater)
+                line.specific_gravity = round((line.oven_dried_wt / (line.wt_surface_dry - line.wt_sample_inwater)),2)
             else:
                 line.specific_gravity = 0.0
 
@@ -116,7 +116,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_water_absorption(self):
         for line in self:
             if line.oven_dried_wt != 0:
-                line.water_absorption = ((line.wt_surface_dry - line.oven_dried_wt) / line.oven_dried_wt) * 100
+                line.water_absorption = round((((line.wt_surface_dry - line.oven_dried_wt) / line.oven_dried_wt) * 100),2)
             else:
                 line.water_absorption = 0.0
 
@@ -135,7 +135,7 @@ class CoarseAggregateMechanical(models.Model):
         for record in self:
             if record.impact_value_child_lines:
                 sum_impact_value = sum(record.impact_value_child_lines.mapped('impact_value'))
-                record.average_impact_value = sum_impact_value / len(record.impact_value_child_lines)
+                record.average_impact_value = round((sum_impact_value / len(record.impact_value_child_lines)),1)
             else:
                 record.average_impact_value = 0.0
 
@@ -168,7 +168,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_load_10percent_fine_values(self):
         for record in self:
             if record.percent_of_fines != 0:
-                record.load_10percent_fine_values = 14 * record.load_applied_10fine/record.percent_of_fines + 4
+                record.load_10percent_fine_values = round((14 * record.load_applied_10fine/record.percent_of_fines + 4),1)
             else:
                 record.load_10percent_fine_values = 0
 
@@ -193,7 +193,7 @@ class CoarseAggregateMechanical(models.Model):
     @api.depends('soundness_na2so4_child_lines.cumulative_loss_percent')
     def _compute_soundness_na2so4(self):
         for record in self:
-            record.soundness_na2so4 = sum(record.soundness_na2so4_child_lines.mapped('cumulative_loss_percent'))
+            record.soundness_na2so4 = round((sum(record.soundness_na2so4_child_lines.mapped('cumulative_loss_percent'))),2)
 
 
     # Soundness MgSO4
@@ -215,7 +215,7 @@ class CoarseAggregateMechanical(models.Model):
     @api.depends('soundness_mgso4_child_lines.cumulative_loss_percent')
     def _compute_soundness_mgso4(self):
         for record in self:
-            record.soundness_mgso4 = sum(record.soundness_mgso4_child_lines.mapped('cumulative_loss_percent'))
+            record.soundness_mgso4 = round((sum(record.soundness_mgso4_child_lines.mapped('cumulative_loss_percent'))),2)
 
 
     #Elongation Index
@@ -251,7 +251,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_aggregate_elongation(self):
         for record in self:
             if record.elongated_retain_total != 0:
-                record.aggregate_elongation = record.elongated_retain_total / record.wt_retained_total_elongation * 100
+                record.aggregate_elongation = round((record.elongated_retain_total / record.wt_retained_total_elongation * 100),1)
             else:
                 record.aggregate_elongation = 0.0
 
@@ -301,7 +301,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_aggregate_flakiness(self):
         for record in self:
             if record.flaky_passing_total != 0:
-                record.aggregate_flakiness = record.flaky_passing_total / record.wt_retained_total_flakiness * 100
+                record.aggregate_flakiness = round((record.flaky_passing_total / record.wt_retained_total_flakiness * 100),1)
             else:
                 record.aggregate_flakiness = 0.0
 
@@ -326,7 +326,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_finer75(self):
         for record in self:
             if record.wt_sample_finer75 != 0:
-                record.material_finer75 = (record.wt_sample_finer75 - record.wt_dry_sample_finer75)/record.wt_sample_finer75 * 100
+                record.material_finer75 = round(((record.wt_sample_finer75 - record.wt_dry_sample_finer75)/record.wt_sample_finer75 * 100),1)
             else:
                 record.material_finer75 = 0
 
@@ -342,7 +342,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_clay_lumps(self):
         for record in self:
             if record.wt_sample_clay_lumps != 0:
-                record.clay_lumps_percent = (record.wt_sample_clay_lumps - record.wt_dry_sample_clay_lumps)/record.wt_sample_clay_lumps * 100
+                record.clay_lumps_percent = round(((record.wt_sample_clay_lumps - record.wt_dry_sample_clay_lumps)/record.wt_sample_clay_lumps * 100),1)
             else:
                 record.clay_lumps_percent = 0
 
@@ -358,7 +358,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_light_weight(self):
         for record in self:
             if record.wt_sample_light_weight != 0:
-                record.light_weight_percent = (record.wt_sample_light_weight - record.wt_dry_sample_light_weight)/record.wt_sample_light_weight * 100
+                record.light_weight_percent = round(((record.wt_sample_light_weight - record.wt_dry_sample_light_weight)/record.wt_sample_light_weight * 100),1)
             else:
                 record.light_weight_percent = 0
 
@@ -388,7 +388,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_loose_bulk_density(self):
         for record in self:
             if record.volume_of_bucket_loose:
-                record.loose_bulk_density = record.sample_weight_loose / record.volume_of_bucket_loose
+                record.loose_bulk_density = round((record.sample_weight_loose / record.volume_of_bucket_loose),2)
             else:
                 record.loose_bulk_density = 0.0
 
@@ -414,7 +414,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_rodded_bulk_density(self):
         for record in self:
             if record.volume_of_bucket_rodded:
-                record.rodded_bulk_density = record.sample_weight_rodded / record.volume_of_bucket_rodded
+                record.rodded_bulk_density = round((record.sample_weight_rodded / record.volume_of_bucket_rodded),2)
             else:
                 record.rodded_bulk_density = 0.0
 
@@ -425,13 +425,13 @@ class CoarseAggregateMechanical(models.Model):
     sieve_analysis_child_lines = fields.One2many('mechanical.coarse.aggregate.sieve.analysis.line','parent_id',string="Parameter")
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
 
-    @api.depends('eln_ref')
+
     def default_get(self, fields):
         print("From Default Value")
         res = super(CoarseAggregateMechanical, self).default_get(fields)
 
-        coarse_sieve_10mm = ['40 mm', '20 mm', '10 mm', '4.75 mm', 'pan']
-        coarse_sieve_20mm = ['12.5 mm', '10 mm', '4.75 mm', '2.36 mm', 'pan']
+        coarse_sieve_20mm = ['40 mm', '20 mm', '10 mm', '4.75 mm', 'pan']
+        coarse_sieve_10mm = ['12.5 mm', '10 mm', '4.75 mm', '2.36 mm', 'pan']
 
         default_sieve_sizes = []
         eln_ref = res['eln_ref']
@@ -445,13 +445,13 @@ class CoarseAggregateMechanical(models.Model):
             number = int(match.group())
             print("Number",number)
             if number == 10:
-                    for i in range(5):  # You can change the number of default lines as needed
-                        size = {
-                            'sieve_size': coarse_sieve_10mm[i] # Set the default product
-                            # Set the default quantity
-                        }
-                        default_sieve_sizes.append((0, 0, size))
-                    res['sieve_analysis_child_lines'] = default_sieve_sizes
+                for i in range(5):  # You can change the number of default lines as needed
+                    size = {
+                        'sieve_size': coarse_sieve_10mm[i] # Set the default product
+                        # Set the default quantity
+                    }
+                    default_sieve_sizes.append((0, 0, size))
+                res['sieve_analysis_child_lines'] = default_sieve_sizes
             elif number == 20:
                 for i in range(5):  # You can change the number of default lines as needed
                     size = {
@@ -568,7 +568,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_angularity_number(self):
         for record in self:
             if (record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity) != 0:
-                record.angularity_number = 67 - (100 * record.mean_wt_aggregate)/(record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity)
+                record.angularity_number = round((67 - (100 * record.mean_wt_aggregate)/(record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity)),2)
             else:
                 record.angularity_number = 0
 

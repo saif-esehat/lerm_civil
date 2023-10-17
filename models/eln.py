@@ -461,7 +461,6 @@ class ParameteResultCalculationWizard(models.TransientModel):
 
 
         result_id.sudo().write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
-
         return {'type': 'ir.actions.act_window_close'}
 
     # def calculate(self):
