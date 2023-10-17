@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <template id="custom_layout_header_footer_fine">
+        <div t-attf-class="header article" t-att-style="report_header_style">
+			<div class="row">
+				<!-- <div t-if="eln.sample_id.scope == 'nabl' and nabl" class="col-12 imageContainer" >
+					<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
+				</div>
+				<div t-if="eln.sample_id.scope == 'non_nabl' or not nabl" class="col-12 imageContainer" >
+					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
+				</div> -->
+			</div>
+        </div>
+        <div t-attf-class="article" t-att-style="report_header_style">
+            <t t-out="0"/>
+        </div>
+		<div t-attf-class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4 footerQR">
+					<!-- <div style="border-top: 1px solid black;">
+						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
+					</div> -->
+					<div>
+						<div class="footertext">
+							Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+						</div>
+						<div>
+							<!-- <div>
+								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 70px; height: 70px;"/>
+							</div> -->
+							<div class="footerQR">
+								<div style="padding-right : 20px">
+									<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
+								</div>
+								<div style="margin-left:90px">
+									<div class="footertext">
+										<span>
+											Email : sales@knackengineeringservices.com <span style="padding-left:10px">Website :  www.knackengineeringservices.com</span> 
+										</span>
+									</div>
+									<div class="footertext">
+										CIN No.: U45209MH2017PTC291168
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                </ul>
+                <div t-if="report_type == 'pdf'" class="footertext">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>	
+        </div>
+	</template>
+
     <template id="lerm_fine_aggregate_datasheet">
         <t t-call="web.html_container">
             <t t-call="lerm_civil.data_sheet_header_generaltemplate">
@@ -1203,10 +1257,10 @@
         </t>
     </template>
 
-      <template id="fine_agg_mech_report">
+    <template id="fine_agg_mech_report">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
-			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
+			 <t t-call="lerm_civil.custom_layout_header_footer_fine">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
 				</div>
@@ -1515,167 +1569,7 @@
 						</tr>
                     </table>
                     
-                    <table style="margin-top:10px;">
-                        <tr>
-                            <td colspan="12">Average : <![CDATA[&nbsp;]]>
-                                <span t-field="data.average1"/>
-                            </td>
-                        </tr>
-					</table>
 
-                    <div style="margin-top:10px;">
-						<!-- <span t-field="data.dimension_name1"/> -->
-                        Plan Area
-					</div>
-
-                    <table>
-                        <tr>
-                            <td></td>
-                            <td>Unit</td>
-                            <td>Result</td>
-                            <td>Test Method</td>
-						</tr>
-                        <tr>
-                            <td>Average Area</td>
-                            <td>mm2</td>
-                            <td>
-							    <span t-field="data.plan_area"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                    </table>
-                    
-                    <div style="margin-top:10px;">
-						<!-- <span t-field="data.dimension_name1"/> -->
-                        Split Tensile Strength
-					</div>
-
-                    <table>
-                        <tr>
-                            <td></td>
-                            <td>Unit</td>
-                            <td>Result</td>
-                            <td>Test Method</td>
-						</tr>
-                        <tr>
-                            <td>Sample 1</td>
-                            <td>N/mm2</td>
-                            <td>
-							    <span t-field="data.split_tensile1"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                        <tr>
-                            <td>Sample 2</td>
-                            <td>N/mm2</td>
-                            <td>
-							    <span t-field="data.split_tensile2"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                        <tr>
-                            <td>Sample 3</td>
-                            <td>N/mm2</td>
-                            <td>
-							    <span t-field="data.split_tensile3"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                        <tr>
-                            <td>Sample 4</td>
-                            <td>N/mm2</td>
-                            <td>
-							    <span t-field="data.split_tensile4"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                        <tr>
-                            <td>Sample 5</td>
-                            <td>N/mm2</td>
-                            <td>
-							    <span t-field="data.split_tensile5"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                        <tr>
-                            <td>Sample 6</td>
-                            <td>N/mm2</td>
-                            <td>
-							    <span t-field="data.split_tensile6"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                        <tr>
-                            <td>Sample 7</td>
-                            <td>N/mm2</td>
-                            <td>
-							    <span t-field="data.split_tensile7"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                        <tr>
-                            <td>Sample 8</td>
-                            <td>N/mm2</td>
-                            <td>
-							    <span t-field="data.split_tensile8"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                    </table>
-                    
-                    <table style="margin-top:10px;">
-                        <tr>
-                            <td colspan="12">Average : <![CDATA[&nbsp;]]>
-                                <span t-field="data.average"/>
-                            </td>
-                        </tr>
-					</table>
-
-                    <div style="margin-top:10px;">
-						<!-- <span t-field="data.dimension_name1"/> -->
-                        Water Absorption
-					</div>
-
-                    <table>
-                        <tr>
-                            <td></td>
-                            <td>Unit</td>
-                            <td>Result</td>
-                            <td>Test Method</td>
-						</tr>
-                        <tr>
-                            <td>Sample 1</td>
-                            <td>%</td>
-                            <td>
-                                 <span t-field="data.water_absorption1"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                        <tr>
-                            <td>Sample 2</td>
-                            <td>%</td>
-                            <td>
-                                 <span t-field="data.water_absorption2"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                        <tr>
-                            <td>Sample 3</td>
-                            <td>%</td>
-                            <td>
-                                 <span t-field="data.water_absorption3"/>
-                            </td>
-                            <td>IS : 15658-2022</td>
-						</tr>
-                    </table>
-                    
-                    <table style="margin-top:10px;">
-                        <tr>
-                            <td colspan="12">Average : <![CDATA[&nbsp;]]>
-                                <span t-field="data.average_water"/>
-                            </td>
-                        </tr>
-					</table>
 
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
@@ -1693,9 +1587,9 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li t-if="eln.remarks">
+									<!-- <li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</div>
@@ -1725,7 +1619,8 @@
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
-									Format No. <span t-esc="eln.material.test_format_no"/>
+									Format No. 
+                                    <!-- <span t-esc="eln.material.test_format_no"/> -->
 								</div>
 							</div>
 							<div>

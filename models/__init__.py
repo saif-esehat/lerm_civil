@@ -27,6 +27,7 @@ from .report import paver_block_report
 from .report import fine_aggregate_ds_report
 from .report import bricks2_ds_report
 from .report import concrete_beam_ds_report
+from .report import solid_concrete_block_ds_report
 # from .mechanical import sieve_analysis
 from .mechanical import free_swell_index
 from .mechanical import soil_cbr
@@ -59,6 +60,7 @@ from .mechanical import paver_block
 from .mechanical import aggregate_fine
 from .mechanical import brick_2
 from .mechanical import concrete_cube2
+from .mechanical import soild_concrete_block
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
@@ -79,4 +81,5 @@ from .mechanical import cement_compatablity
 from .chemical import fine_aggregate
 
 from . import general_template
+from .mechanical import aac_block
 

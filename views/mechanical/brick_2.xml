@@ -33,10 +33,10 @@
                         </tree>
                       </field>
                     </group>
-                    <group>
+                    <!-- <group>
                       <field name="test_start_date"/>
                       <field name="test_end_date"/>
-                    </group>
+                    </group> -->
 
                         <!-- compressive Strength -->
 

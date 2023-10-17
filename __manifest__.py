@@ -6,6 +6,7 @@
  'version': '13.0.1', 
  'depends':['base' , 'contacts','stock','product' , 'mail','documents','documents_spreadsheet','lerm_civil_inv'],
  'data': [
+    'security/security.xml',
     'data/sequence.xml',
     'views/lerm.xml',
     'views/groups.xml',
@@ -65,9 +66,11 @@
     'views/ndt/rebound_hammer.xml',
     'views/ndt/acil_upv.xml', 
     'views/ndt/upv.xml',
+    
     'views/ndt/half_cell.xml',
     'views/mechanical/cement_normal_consistency.xml',
     'views/mechanical/cement_psc.xml',
+    'views/mechanical/brick_2.xml',
     'views/mechanical/cement_ppc.xml',
     'views/mechanical/cement_setting_time.xml',
     'views/mechanical/ggbs.xml',
@@ -77,6 +80,7 @@
     'views/mechanical/microsilica.xml',
     'views/mechanical/pt_grout.xml',
     'views/mechanical/soil.xml',
+    # 'views/mechanical/aac_block.xml',
     'views/mechanical/coarse_aggregate_mechanical.xml',
     'views/mechanical/aggregate_fine.xml',
     'views/mechanical/concrete_cube2.xml',
@@ -96,7 +100,6 @@
     'reports/pt_grout_report.xml',
     'reports/fine_aggregate_chemical_datasheet.xml',
     'reports/fine_aggregate_chemical_report.xml',
-    'security/security.xml',
     # 'security/dump.sql',
     'security/ir.model.access.csv',
     'reports/sample_report_action.xml',
@@ -123,6 +126,9 @@
     'reports/bricks2_report.xml',
     'reports/concrete_beam_datasheet.xml',
     'reports/coarse_aggregate_mech_report.xml',
+    'views/mechanical/solid_concrete_block.xml',
+    'reports/solid_concrete_block_datasheet.xml',
+    'reports/concrete_beam_report.xml',
 
 
     
