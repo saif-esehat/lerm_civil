@@ -6,6 +6,7 @@
  'version': '13.0.1', 
  'depends':['base' , 'contacts','stock','product' , 'mail','documents','documents_spreadsheet','lerm_civil_inv'],
  'data': [
+         'security/security.xml',
     'data/sequence.xml',
     'views/lerm.xml',
     'views/groups.xml',
@@ -98,7 +99,6 @@
     'reports/pt_grout_report.xml',
     'reports/fine_aggregate_chemical_datasheet.xml',
     'reports/fine_aggregate_chemical_report.xml',
-    'security/security.xml',
     # 'security/dump.sql',
     'security/ir.model.access.csv',
     'reports/sample_report_action.xml',
@@ -128,6 +128,9 @@
     'views/mechanical/solid_concrete_block.xml',
     'reports/solid_concrete_block_datasheet.xml',
     'reports/concrete_beam_report.xml',
+    'views/mechanical/concrete_splite_tensile_strength.xml',
+    'reports/concrete_split_tensile_datasheet.xml',
+    
 
 
     
