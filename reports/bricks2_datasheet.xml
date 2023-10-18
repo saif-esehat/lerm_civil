@@ -7,9 +7,7 @@
 			Brick
 		</div>
 		<div class="container_eln" style="margin-top:5px">
-				
-
-           <table style="margin-top:20px">
+            <table style="margin-top:20px">
 				<tr cols="12">
 					
 					<td colspan="6">Job No :
@@ -396,7 +394,10 @@
 
             <div t-if="data.compressive_strength_visible" style="margin-top:20px">
 				<div style="text-align:center;font-size:18px;font-weight: bold">
-						Dimension
+						Dimension (mm) 
+				</div>
+                <div style="text-align:center;font-size:18px;font-weight: bold">
+                        20 Bricks 
 				</div>
                 <table style="margin-top:30px;">
                 
@@ -619,8 +620,6 @@
 				</table>	
 			</div>
                 
-
-
 				<!-- authorizeRowDataSheet -->
 				
 			<div class="authorizeRowDataSheet">
@@ -649,9 +648,6 @@
 					</div>
 				</div>
 			</div>
-
-
-			
 
 		</div>
 

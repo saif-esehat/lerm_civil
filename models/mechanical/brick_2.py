@@ -55,6 +55,32 @@ class MechanicalBricks(models.Model):
     
     avrg_compressive_strength = fields.Float(string="Average Compressive Strength",compute="_compute_avrg_compressive_strength")
 
+    comp_strength_confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_comp_strength_conformity")
+
+
+    @api.depends('avrg_compressive_strength','eln_ref')
+    def _compute_comp_strength_conformity(self):
+        for record in self:
+            record.comp_strength_confirmity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.avrg_compressive_strength - record.avrg_compressive_strength*mu_value
+                    upper = record.avrg_compressive_strength + record.avrg_compressive_strength*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.comp_strength_confirmity = 'pass'
+                        break
+                    else:
+                        record.comp_strength_confirmity = 'fail'
+
     
 
     
@@ -158,66 +184,12 @@ class MechanicalBricks(models.Model):
 
          #-3----------  Dimension As per IS: IS : 1077 -1992 
 
-    dimension_name = fields.Char("Name",default="Dimension")
-    avrg_length = fields.Float(string="Average length", compute="_compute_avrg_length")
-    avrg_width = fields.Float(string="Average Width", compute="_compute_avrg_width")
-    avrg_height = fields.Float(string="Average Height", compute="_compute_avrg_height")
+    dimension_name1 = fields.Char("Name",default="Dimension (mm)")
+    avrg_length = fields.Float(string="Average length")
+    avrg_width = fields.Float(string="Average Width")
+    avrg_height = fields.Float(string="Average Height")
 
-    @api.depends('length', 'length_2', 'length_3', 'length_4', 'length_5')
-    def _compute_avrg_length(self):
-        for record in self:
-            lengths = [
-                record.length,
-                record.length_2,
-                record.length_3,
-                record.length_4,
-                record.length_5,
-            ]
-            # Filter out None values and calculate the average
-            non_empty_lengths = [length for length in lengths if length is not None]
-            if non_empty_lengths:
-                average_length = sum(non_empty_lengths) / len(non_empty_lengths)
-            else:
-                average_length = 0.0
-            record.avrg_length = average_length
-
-
-    @api.depends('width', 'width_2', 'width_3', 'width_4', 'width_5')
-    def _compute_avrg_width(self):
-        for record in self:
-            widths = [
-                record.width,
-                record.width_2,
-                record.width_3,
-                record.width_4,
-                record.width_5,
-            ]
-            # Filter out None values and calculate the average
-            non_empty_widths = [width for width in widths if width is not None]
-            if non_empty_widths:
-                average_width = sum(non_empty_widths) / len(non_empty_widths)
-            else:
-                average_width = 0.0
-            record.avrg_width = average_width
-
-    @api.depends('height', 'height_2', 'height_3', 'height_4', 'height_5')
-    def _compute_avrg_height(self):
-        for record in self:
-            heights = [
-                record.height,
-                record.height_2,
-                record.height_3,
-                record.height_4,
-                record.height_5,
-            ]
-            # Filter out None values and calculate the average
-            non_empty_heights = [height for height in heights if height is not None]
-            if non_empty_heights:
-                average_height = sum(non_empty_heights) / len(non_empty_heights)
-            else:
-                average_height = 0.0
-            record.avrg_height = average_height
-
+    
 
     #-4--------------  Water Absorption
 
@@ -239,6 +211,32 @@ class MechanicalBricks(models.Model):
     water_absorption_4 = fields.Float(string="Water Absorption %", compute="_compute_water_absorption_4")
     water_absorption_5 = fields.Float(string="Water Absorption %", compute="_compute_water_absorption_5")
     avrg_water_absorption = fields.Float(string="Average Water Absorption, %", compute="_compute_avrg_water_absorption")
+
+    water_absorption_confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_water_absorption_confirmity")
+
+
+    @api.depends('avrg_water_absorption','eln_ref')
+    def _compute_water_absorption_confirmity(self):
+        for record in self:
+            record.water_absorption_confirmity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.avrg_water_absorption - record.avrg_water_absorption*mu_value
+                    upper = record.avrg_water_absorption + record.avrg_water_absorption*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.water_absorption_confirmity = 'pass'
+                        break
+                    else:
+                        record.water_absorption_confirmity = 'fail'
 
     @api.depends('water_absorption', 'water_absorption_2', 'water_absorption_3', 'water_absorption_4', 'water_absorption_5')
     def _compute_avrg_water_absorption(self):
