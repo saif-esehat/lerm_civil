@@ -564,6 +564,7 @@ class ELNParametersResult(models.Model):
     ],string='Conformity Status')
     model_id = fields.Integer(string="Model Id")
     result = fields.Float(string="Result",digits=(16,5))
+    sequence = fields.Char("Sequence")
 
 
     # @api.depends('result')

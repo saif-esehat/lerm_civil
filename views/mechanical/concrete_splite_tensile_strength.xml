@@ -40,6 +40,7 @@
                         <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
+                                <field name='id_mark'/>
                                 <field name='wt_of_cylender'/>
                                 <field name='height'/>
                                 <field name='diameter'/>
