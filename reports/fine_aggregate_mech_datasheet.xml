@@ -1,59 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="custom_layout_header_footer_fine">
-        <div t-attf-class="header article" t-att-style="report_header_style">
-			<div class="row">
-				<!-- <div t-if="eln.sample_id.scope == 'nabl' and nabl" class="col-12 imageContainer" >
-					<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
-				</div>
-				<div t-if="eln.sample_id.scope == 'non_nabl' or not nabl" class="col-12 imageContainer" >
-					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
-				</div> -->
-			</div>
-        </div>
-        <div t-attf-class="article" t-att-style="report_header_style">
-            <t t-out="0"/>
-        </div>
-		<div t-attf-class="footer o_standard_footer">
-            <div class="text-center" style="border-top: 1px solid black;">
-                <ul class="list-inline mb4 footerQR">
-					<!-- <div style="border-top: 1px solid black;">
-						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
-					</div> -->
-					<div>
-						<div class="footertext">
-							Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
-						</div>
-						<div>
-							<!-- <div>
-								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 70px; height: 70px;"/>
-							</div> -->
-							<div class="footerQR">
-								<div style="padding-right : 20px">
-									<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
-								</div>
-								<div style="margin-left:90px">
-									<div class="footertext">
-										<span>
-											Email : sales@knackengineeringservices.com <span style="padding-left:10px">Website :  www.knackengineeringservices.com</span> 
-										</span>
-									</div>
-									<div class="footertext">
-										CIN No.: U45209MH2017PTC291168
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-                </ul>
-                <div t-if="report_type == 'pdf'" class="footertext">
-                    Page: <span class="page"/> / <span class="topage"/>
-                </div>
-            </div>	
-        </div>
-	</template>
-
     <template id="lerm_fine_aggregate_datasheet">
         <t t-call="web.html_container">
             <t t-call="lerm_civil.data_sheet_header_generaltemplate">
@@ -1257,10 +1204,10 @@
         </t>
     </template>
 
-    <template id="fine_agg_mech_report">
+    <template id="fine_aggregte_mech_report">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
-			 <t t-call="lerm_civil.custom_layout_header_footer_fine">
+			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
 				</div>
@@ -1407,6 +1354,7 @@
                             <td></td>
                             <td>100</td>
 						</tr>
+
                         <tr>
                             <td>4.75 mm</td>
                             <td></td>
@@ -1453,7 +1401,7 @@
                             <td>1</td>
                             <td>Fineness Modulus</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/> -->
                             </td>
                             <td></td>
                             <td>--</td>
@@ -1472,90 +1420,110 @@
                             <td>1</td>
                             <td>Specific Gravity</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.specific_gravity"/>
+                            </td>
                             <td>2.1 to 3.2</td>
 						</tr>
                         <tr>
                             <td>2</td>
                             <td>Water Absorbtion (%)</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.water_absorption"/>
+                            </td>
                             <td>MAX 5%</td>
 						</tr>
                         <tr>
                             <td>3</td>
                             <td>Loose Bulk Density (kg/litre)</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.loose_bulk_density"/>
+                            </td>
                             <td>--</td>
 						</tr>
                         <tr>
                             <td>4</td>
                             <td>Rodded Bulk Density (kg/litre)</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.rodded_bulk_density1"/>
+                            </td>
                             <td>--</td>
 						</tr>
                         <tr>
                             <td>5</td>
                             <td>Moisture Content (%)</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.vdd"/>
+                            </td>
                             <td>--</td>
 						</tr>
                         <tr>
                             <td>6</td>
                             <td>Soundness by MgSO4</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.soundness_mgso4"/>
+                            </td>
                             <td>MAX 15%</td>
 						</tr>
                         <tr>
                             <td>7</td>
                             <td>Soundness by Na2SO4</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.soundness_na2so4"/>
+                            </td>
                             <td>MAX 10%</td>
 						</tr>
                         <tr>
                             <td>8</td>
                             <td>Deleterious content (Clay Lumps)</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.clay_lumps_percent"/>
+                            </td>
                             <td>MAX 1%</td>
 						</tr>
                         <tr>
                             <td>9</td>
                             <td>Finer than 75 micron</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.material_finer75"/>
+                            </td>
                             <td>MAX 15%</td>
 						</tr>
                         <tr>
                             <td>10</td>
                             <td>Deleterious content (Light weight Particles)</td>
                             <td>
-						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.light_weight_percent"/>
+                            </td>
                             <td>MAX 1%</td>
 						</tr>
                         <tr>
@@ -1564,7 +1532,9 @@
                             <td>
 						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
                             </td>
-                            <td></td>
+                            <td>
+						        <span t-field="data.specific_gravity"/>
+                            </td>
                             <td>Limit as Per IS:382 : 2016</td>
 						</tr>
                     </table>
@@ -1587,9 +1557,9 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<!-- <li t-if="eln.remarks">
+									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
-									</li> -->
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -1620,7 +1590,7 @@
 								</div>
 								<div style="padding-top:5px">
 									Format No. 
-                                    <!-- <span t-esc="eln.material.test_format_no"/> -->
+                                    <span t-esc="eln.material.test_format_no"/>
 								</div>
 							</div>
 							<div>

@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import math
+import re
+
 
 
 class SteelTmtBarLine(models.Model):
@@ -11,7 +13,7 @@ class SteelTmtBarLine(models.Model):
     Id_no = fields.Char("ID No")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
-    diameter = fields.Integer(string="Dia. in mm")
+    diameter = fields.Integer(string="Dia. in mm",compute="_compute_dia")
     lentgh = fields.Float(string="Length in meter",digits=(10, 3))
     weight = fields.Float(string="Weight, in kg",digits=(10, 3))
     weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
@@ -530,6 +532,21 @@ class SteelTmtBarLine(models.Model):
     def _compute_size_id(self):
         if self.eln_ref:
             self.size = self.eln_ref.size_id.id
+
+    @api.depends('eln_ref')
+    def _compute_dia(self):
+        for record in self:
+            pattern = r'\d+'
+            match = re.search(pattern, str(record.eln_ref.size_id.size))
+            if match:
+                dia = int(match.group())
+                record.diameter = int(match.group())
+            else:
+                record.diameter = 0
+                 
+
+
+    
 
     
 
