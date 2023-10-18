@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_concrete_split_tensile" model="ir.ui.view">
+        <field name="name">mechanical.concrete.split.tensile.form</field>
+        <field name="model">mechanical.concrete.split.tensile</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group >
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" />
+                        <field name="eln_ref"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+                    
+                    <!-- Splite Tensile -->
+                    <group attrs="{'invisible': [('splite_tensile_visible', '=', False)]}">
+                        <h1>
+                            <field name="splite_tensile_name" readonly="1" nolabel="1"/>
+                            <field name="splite_tensile_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('splite_tensile_visible', '=', False)]}">
+                        <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='wt_of_cylender'/>
+                                <field name='height'/>
+                                <field name='diameter'/>
+                                <field name='breaking_load'/>
+                                <field name='split_strength'/>
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('splite_tensile_visible', '=', False)]}">
+                        <field name='average_split_tensile'  col="12"/> 
+                       
+                         <!-- <tr cols="12">
+                            <td colspan="6"><b>Average Block Density</b></td>
+                            
+                            <td><field name='average_block' col="4"/></td>
+                        </tr> -->
+                    </group>
+                   
+
+               
+            
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

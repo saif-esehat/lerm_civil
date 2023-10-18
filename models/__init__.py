@@ -79,6 +79,8 @@ from .mechanical import cement_setting_time
 from .mechanical import coupler
 from .mechanical import cement_compatablity
 from .chemical import fine_aggregate
+from .mechanical import concrete_splite_tensile_strength
+from .report import concrete_split_tensile_ds_report
 
 from . import general_template
 from .mechanical import aac_block

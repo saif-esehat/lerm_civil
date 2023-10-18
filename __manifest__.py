@@ -132,6 +132,10 @@
     'reports/steel_tmt_bar_report.xml',
     'reports/aac_block_datasheet.xml',
 
+    'views/mechanical/concrete_splite_tensile_strength.xml',
+    'reports/concrete_split_tensile_datasheet.xml',
+    
+    'reports/steel_tmt_bar_report.xml'
 
 
     
