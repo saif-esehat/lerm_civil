@@ -113,6 +113,7 @@
                         
                             <field name="parameters_result" nolabel="1">
                                 <tree editable="bottom" >
+                                    <field name="sequence" string="Sequence" widget="handle" />
                                     <field name="parameter"/>
                                     <field name="result" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <!-- <field name="context_data" /> -->
