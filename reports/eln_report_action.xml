@@ -488,21 +488,23 @@
         <field name="binding_type">report</field>
     </record>
 
-<<<<<<< HEAD
     <record id="solid_concrete_mech_report_action" model="ir.actions.report">
         <field name="name">Solid Concrete report</field>
         <field name="model">lerm.eln</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">lerm_civil.solid_concrete_mech_report</field>
         <field name="report_file">lerm_civil.solid_concrete_mech_report</field>
-=======
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <!-- <field name="binding_model_id" eval="False"/> -->
+        <field name="binding_type">report</field>
+    </record>
+
     <record id="concrete_split_tensile_action" model="ir.actions.report">
         <field name="name">Concrete Split Tensile Strength Datasheet</field>
         <field name="model">lerm.eln</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">lerm_civil.lerm_concrete_splite_tensile_datasheet</field>
         <field name="report_file">lerm_civil.lerm_concrete_splite_tensile_datasheet</field>
->>>>>>> db019dc5336e70ab399ccdc299f0866b4b17695f
         <field name="binding_model_id" ref="model_lerm_eln"/>
         <!-- <field name="binding_model_id" eval="False"/> -->
         <field name="binding_type">report</field>

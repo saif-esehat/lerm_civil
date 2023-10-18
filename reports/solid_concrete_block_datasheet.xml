@@ -442,7 +442,7 @@
                         <tr>
                             <td>1</td>
                             <td>Length in mm</td>
-                            <td rowspan="7">IS 2185 Part-1 : 2005</td>
+                            <td rowspan="8">IS 2185 Part-1 : 2005</td>
                             <td></td>
                             <td>390 ± 5mm</td>
                         </tr>
@@ -450,21 +450,44 @@
                             <td>2</td>
                             <td>Width in mm</td>
                             <td></td>
-                            <td>390 5mm</td>
+                            <td>190 ± 5mm</td>
                         </tr>
                          <tr>
                             <td>3</td>
                             <td>Height in mm</td>
                             <td></td>
-                            <td>390 5mm</td>
+                            <td>100 ± 5mm</td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>4</td>
                             <td>Compresive Stregth , N/mm2</td>
                             <td></td>
-                            <td>390 5mm</td>
+                            <td>3.2 N/mm2 Min</td>
                         </tr>
-                        
+                        <tr>
+                            <td>5</td>
+                            <td>Density , kg/m3</td>
+                            <td></td>
+                            <td>1800 Min</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Water Absorbtion %</td>
+                            <td></td>
+                            <td>10 Max</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Drying Shrinkage %</td>
+                            <td></td>
+                            <td>0.06 Max</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Moisture Movement %</td>
+                            <td></td>
+                            <td>0.09 Max</td>
+                        </tr>
                     </table>
                     
 					<div style="page-break-inside: avoid;">
