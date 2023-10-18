@@ -80,23 +80,23 @@ class SteelTmtBarLine(models.Model):
 
     uts_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_uts_nabl",store=True)
+        ('fail', 'Fail')],string="NABL",compute="_compute_uts_nabl",store=True)
 
     yield_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_yield_nabl",store=True)
+        ('fail', 'Fail')],string="NABL",compute="_compute_yield_nabl",store=True)
 
     elongation_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_elongation_nabl",store=True)
+        ('fail', 'Fail')],string="NABL",compute="_compute_elongation_nabl",store=True)
 
     ts_ys_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_ts_ys_nabl",store=True)
+        ('fail', 'Fail')],string="NABL",compute="_compute_ts_ys_nabl",store=True)
 
     weight_per_meter_nabl = fields.Selection([
         ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_weight_per_meter_nabl",store=True)
+        ('fail', 'Fail')],string="NABL",compute="_compute_weight_per_meter_nabl",store=True)
 
     
 
