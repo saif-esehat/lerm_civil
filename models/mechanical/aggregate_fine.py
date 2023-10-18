@@ -174,9 +174,23 @@ class FineAggregate(models.Model):
     sieve_analysis_name = fields.Char("Name",default="Sieve Analysis")
     sieve_visible = fields.Boolean("Sieve Analysis Visible",compute="_compute_visible")
 
-    sieve_analysis_child_lines = fields.One2many('mechanical.fine.aggregate.sieve.analysis.line','parent_id',string="Parameter")
+    sieve_analysis_child_lines = fields.One2many('mechanical.fine.aggregate.sieve.analysis.line','parent_id',string="Parameter",
+                                                  default=lambda self: self._default_sieve_analysis_child_lines())
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
     # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
+
+    @api.model
+    def _default_sieve_analysis_child_lines(self):
+        default_lines = [
+            (0, 0, {'sieve_size': '10 mm'}),
+            (0, 0, {'sieve_size': '4.75 mm'}),
+            (0, 0, {'sieve_size': '2.36 mm'}),
+            (0, 0, {'sieve_size': '1.18 mm'}),
+            (0, 0, {'sieve_size': '600 µm'}),
+            (0, 0, {'sieve_size': '300 µm'}),
+            (0, 0, {'sieve_size': '150 µm'})
+        ]
+        return default_lines
 
 
     def calculate_sieve(self): 
@@ -455,7 +469,7 @@ class SieveAnalysisLine(models.Model):
     sieve_size = fields.Char(string="IS Sieve Size")
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
-    cumulative_retained = fields.Float(string="Cum. Retained %", compute="_compute_cumulative_retained", store=True)
+    cumulative_retained = fields.Float(string="Cum. Retained %", store=True)
     passing_percent = fields.Float(string="Passing %")
 
 
@@ -488,7 +502,8 @@ class SieveAnalysisLine(models.Model):
 
             if 'wt_retained' in vals:
                 for record in self:
-                    record.parent_id._compute_total()
+                    # record.parent_id._compute_total()
+                    pass
 
             return new_self
 
