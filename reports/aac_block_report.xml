@@ -2,7 +2,7 @@
 <odoo>
 	
 	
-	<template id="gypsum_report">
+	<template id="aac_block_mech_report">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
