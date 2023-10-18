@@ -28,6 +28,120 @@
                 </td>
                 </tr>
 			</table>
+
+            <!-- Dimension  -->
+                    
+                    <div t-if="data.dimension_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Dimension</b>
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Length in mm</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Width in mm</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Thickness in mm</b></td>
+                            </tr>
+                            <t t-set="f" t-value="0"/>
+                            <tr t-foreach="data.child_lines4" t-as="r">
+                                <td colspan="1" style="text-align: center;">
+                                    <div>
+                                        <span t-esc="f + 1" />
+                                        <t t-set="f" t-value="f + 1"/>
+                                    </div>
+                                </td>
+                                <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['length']"/>
+                                </td>
+                                <td colspan="1" style="text-align: center;">
+                                    <span t-esc="r['width']"/>
+                                </td>
+                                <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['hight']"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="margin-top:5px">
+                            <tr cols="12">
+                                <td colspan="6"><b>Average Length :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_length" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Average Width :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_width" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Average Height :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_hight" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+
+
+
+                    <!-- Compressive Strength -->
+                    
+                    <div t-if="data.compressive_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Compressive Strength</b>
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Length (mm)</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Widhe (mm)</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Thickness (mm)</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Area (mm²)</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Load (N)</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Compressive StrengthN/mm²</b></td>
+                                
+                            </tr>
+                            <t t-set="f" t-value="0"/>
+                            <tr t-foreach="data.child_lines5" t-as="r">
+                                <td colspan="1" style="text-align: center;">
+                                    <div>
+                                        <span t-esc="f + 1" />
+                                        <t t-set="f" t-value="f + 1"/>
+                                    </div>
+                                </td>
+                                <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['length']"/>
+                                </td>
+                                <td colspan="1" style="text-align: center;">
+                                    <span t-esc="r['width']"/>
+                                </td>
+                                <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['hight']"/>
+                                </td>
+                                 <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['area']" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td colspan="1" style="text-align: center;">
+                                    <span t-esc="r['load']"/>
+                                </td>
+                                <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['compressiv_strength']" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="margin-top:5px">
+                            <tr cols="12">
+                                <td colspan="6"><b>Average :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.avg_compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                           
+                            
+                        </table>
+                    </div>
               <!-- Block Density  -->
 
                    <div t-if="data.block_density_visible" style="margin-top:20px">
