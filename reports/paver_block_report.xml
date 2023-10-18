@@ -513,13 +513,13 @@
                                     </td>
                                     <td style="text-align: center;max-width:200px">
                                         <span style="text-align: center;" >
-                                            <span t-field="data.mean_of_lenght1"/>
+                                            <span t-field="round(data.mean_of_lenght1 , 2)"/>
                                         </span>	
                                     </td>
                                     
                                     <td style="text-align: center;max-width:100px">
                                         <span style="text-align: center;" >
-                                            <span t-field="data.mean_thickness1"/>
+                                            <span t-field="round(data.mean_thickness1 , 2)"/>
                                         </span>
                                     </td>
                                     <td style="text-align: center;">
@@ -530,12 +530,12 @@
                                     
                                     <td style="text-align: center;">
                                         <span style="text-align: center;" >
-                                            <span t-field="data.failure_load1"/>
+                                            <span t-field="round(data.failure_load1 , 2)"/>
                                         </span>									
                                     </td>
                                     <td style="text-align: center;">
                                         <span style="text-align: center;" >
-                                            <span t-field="data.split_tensile1" t-options='{"widget": "float", "precision": 2}'/>
+                                            <span t-field="round(data.split_tensile1,2)" t-options='{"widget": "float", "precision": 2}'/>
                                         </span>									
                                     </td>
                                 </tr>
@@ -546,13 +546,13 @@
                                     </td>
                                     <td style="text-align: center;max-width:200px">
                                         <span style="text-align: center;" >
-                                            <span t-field="data.mean_of_lenght2"/>
+                                            <span t-field="round(data.mean_of_lenght2 , 2)"/>
                                         </span>	
                                     </td>
                                     
                                     <td style="text-align: center;max-width:100px">
                                         <span style="text-align: center;" >
-                                            <span t-field="data.mean_thickness2"/>
+                                            <span t-field="round(data.mean_thickness2 , 2)"/>
                                         </span>
                                     </td>
                                     <td style="text-align: center;">
@@ -1092,7 +1092,7 @@
                             <td>Length</td>
                             <td>mm</td>
                             <td>
-							    <span t-field="data.average_length"/>
+							    <span t-field="round(data.average_length , 2)"/>
                             </td>
                             <td></td>
 						</tr>
@@ -1100,7 +1100,7 @@
                             <td>Width</td>
                             <td>mm</td>
                             <td>
-							    <span t-field="data.average_width"/>
+							    <span t-field="round(data.average_width , 2)"/>
                             </td>
                             <td></td>
 						</tr>
@@ -1108,7 +1108,7 @@
                             <td>Thickness</td>
                             <td>mm</td>
                             <td>
-							    <span t-field="data.average_hight"/>
+							    <span t-field="round(data.average_hight,2)"/>
                             </td>
                             <td></td>
 						</tr>
@@ -1131,7 +1131,7 @@
                             <td>Sample 1</td>
                             <td>N/mm2</td>
                             <td>
-							    <span t-field="data.correct_compressive1"/>
+							    <span t-field="round(data.correct_compressive1,2)"/>
                             </td>
                             <td>IS : 15658-2022</td>
 						</tr>
@@ -1139,7 +1139,7 @@
                             <td>Sample 2</td>
                             <td>N/mm2</td>
                             <td>
-							    <span t-field="data.correct_compressive2"/>
+							    <span t-field="round(data.correct_compressive2,2)"/>
                             </td>
                             <td>IS : 15658-2022</td>
 						</tr>
@@ -1163,7 +1163,7 @@
                             <td>Sample 5</td>
                             <td>N/mm2</td>
                             <td>
-							    <span t-field="data.correct_compressive5"/>
+							    <span t-field="round(data.correct_compressive5,2)"/>
                             </td>
                             <td>IS : 15658-2022</td>
 						</tr>
@@ -1171,7 +1171,7 @@
                             <td>Sample 6</td>
                             <td>N/mm2</td>
                             <td>
-							    <span t-field="data.correct_compressive6"/>
+							    <span t-field="round(data.correct_compressive6 , 2)"/>
                             </td>
                             <td>IS : 15658-2022</td>
 						</tr>
@@ -1179,7 +1179,7 @@
                             <td>Sample 7</td>
                             <td>N/mm2</td>
                             <td>
-							    <span t-field="data.correct_compressive7"/>
+							    <span t-field="round(data.correct_compressive7,2)"/>
                             </td>
                             <td>IS : 15658-2022</td>
 						</tr>
@@ -1187,7 +1187,7 @@
                             <td>Sample 8</td>
                             <td>N/mm2</td>
                             <td>
-							    <span t-field="data.correct_compressive8"/>
+							    <span t-field="round(data.correct_compressive8,2)"/>
                             </td>
                             <td>IS : 15658-2022</td>
 						</tr>
@@ -1196,7 +1196,7 @@
                     <table style="margin-top:10px;">
                         <tr>
                             <td colspan="12">Average : <![CDATA[&nbsp;]]>
-                                <span t-field="data.average1"/>
+                                <span t-field="round(data.average1 , 2)"/>
                             </td>
                         </tr>
 					</table>
@@ -1217,7 +1217,7 @@
                             <td>Average Area</td>
                             <td>mm2</td>
                             <td>
-							    <span t-field="data.plan_area"/>
+							    <span t-field="round(data.plan_area , 2)"/>
                             </td>
                             <td>IS : 15658-2022</td>
 						</tr>
