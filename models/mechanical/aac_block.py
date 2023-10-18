@@ -85,8 +85,8 @@ class AacBlockMechanical(models.Model):
     def _compute_average_length(self):
         for record in self:
             try:
-                record.average_length = sum(record.dimension_table.mapped('length')) / len(
-                    record.dimension_table)
+                record.average_length = round(sum(record.dimension_table.mapped('length')) / len(
+                    record.dimension_table),2)
             except:
                 record.average_length = 0
 
@@ -95,8 +95,8 @@ class AacBlockMechanical(models.Model):
     def _compute_average_width(self):
         for record in self:
             try:
-                record.average_width = sum(record.dimension_table.mapped('width')) / len(
-                    record.dimension_table)
+                record.average_width = round(sum(record.dimension_table.mapped('width')) / len(
+                    record.dimension_table),2)
             except:
                 record.average_width = 0
 
@@ -105,8 +105,8 @@ class AacBlockMechanical(models.Model):
     def _compute_average_height(self):
         for record in self:
             try:
-                record.average_height = sum(record.dimension_table.mapped('height')) / len(
-                    record.dimension_table)
+                record.average_height = round(sum(record.dimension_table.mapped('height')) / len(
+                    record.dimension_table),2)
             except:
                 record.average_height = 0
 
@@ -122,8 +122,8 @@ class AacBlockMechanical(models.Model):
     def _compute_average_moisture_content(self):
         for record in self:
             try:
-                record.average_moisture_content = sum(record.moisture_content_table.mapped('moisture_content')) / len(
-                    record.moisture_content_table)
+                record.average_moisture_content = round(sum(record.moisture_content_table.mapped('moisture_content')) / len(
+                    record.moisture_content_table),2)
             except:
                 record.average_moisture_content = 0
 
@@ -138,8 +138,8 @@ class AacBlockMechanical(models.Model):
     def _compute_average_density(self):
         for record in self:
             try:
-                record.average_density = sum(record.density_table.mapped('density')) / len(
-                    record.density_table)
+                record.average_density = round(sum(record.density_table.mapped('density')) / len(
+                    record.density_table),2)
             except:
                 record.average_density = 0
 
@@ -154,8 +154,8 @@ class AacBlockMechanical(models.Model):
     def _compute_average_drying_shrinkage(self):
         for record in self:
             try:
-                record.average_drying_shrinkage = sum(record.drying_shrinkage_table.mapped('drying_shrinkage')) / len(
-                    record.drying_shrinkage_table)
+                record.average_drying_shrinkage = round(sum(record.drying_shrinkage_table.mapped('drying_shrinkage')) / len(
+                    record.drying_shrinkage_table),2)
             except:
                 record.average_drying_shrinkage = 0
 
@@ -171,8 +171,9 @@ class AacBlockMechanical(models.Model):
     def _compute_average_compressive_strength(self):
         for record in self:
             try:
-                record.average_compressive_strength = sum(record.compressive_strength_table.mapped('compressive_strength')) / len(
+                average_compressive_strength = sum(record.compressive_strength_table.mapped('compressive_strength')) / len(
                     record.compressive_strength_table)
+                    record.average_compressive_strength = round(average_compressive_strength,2)
             except:
                 record.average_compressive_strength = 0
 
@@ -245,7 +246,7 @@ class AacDryingShrinkageLine(models.Model):
     def _compute_drying_shrinkage(self):
         for record in self:
             if record.length != 0:
-                record.drying_shrinkage = record.change_length / record.length * 100
+                record.drying_shrinkage = round(record.change_length / record.length * 100,2)
             else:
                 record.drying_shrinkage = 0
 
