@@ -27,7 +27,7 @@ class SolidConcreteBlock(models.Model):
 
     average_length = fields.Float(string="Average Length", compute="_compute_average_length",digits=(16,1))
     average_hight = fields.Float(string="Average Height",compute="_compute_average_hight", digits=(16, 1))
-    average_thickness = fields.Float(string="Average Thickness", compute="_compute_average_width",digits=(16,1))
+    average_thickness = fields.Float(string="Average Thickness", compute="_compute_average_width1",digits=(16,1))
 
 
     @api.depends('child_lines.block_density')
@@ -63,7 +63,7 @@ class SolidConcreteBlock(models.Model):
    
 
     @api.depends('child_lines.thickness')
-    def _compute_average_width(self):
+    def _compute_average_width1(self):
         for record in self:
             if record.child_lines:
                 thicknesss = [line.thickness for line in record.child_lines]
@@ -122,6 +122,72 @@ class SolidConcreteBlock(models.Model):
             record.average_water_absorption = total_water_absorption / count_lines if count_lines else 0.0
 
 
+    # Dimension
+
+    dimension_name1 = fields.Char("Name",default="Dimension")
+    dimension_visible = fields.Boolean("Dimension Visible",compute="_compute_visible")   
+
+    # name = fields.Char("Name",default="DIMENSION")
+    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    child_lines4 = fields.One2many('mechanical.dimension.line','parent_id',string="Parameter")
+    average_length = fields.Float(string="Average Length", compute="_compute_average_length",digits=(16,1))
+    average_hight = fields.Float(string="Average Thickness",compute="_compute_average_hight", digits=(16, 1))
+    average_width = fields.Float(string="Average Width", compute="_compute_average_width",digits=(16,1))
+    
+
+    @api.depends('child_lines4.length')
+    def _compute_average_length(self):
+        for record in self:
+            if record.child_lines4:
+                lengths = [line.length for line in record.child_lines4]
+                record.average_length = sum(lengths) / len(lengths)
+            else:
+                record.average_length = 0.0
+
+                
+    @api.depends('child_lines4.hight')
+    def _compute_average_hight(self):
+        for record in self:
+            if record.child_lines4:
+                heights = [line.hight for line in record.child_lines4]
+                record.average_hight = sum(heights) / len(heights)
+            else:
+                record.average_hight = 0.0
+
+  
+   
+
+    @api.depends('child_lines4.width')
+    def _compute_average_width(self):
+        for record in self:
+            if record.child_lines4:
+                widths = [line.width for line in record.child_lines4]
+                record.average_width = sum(widths) / len(widths)
+            else:
+                record.average_width = 0.0
+
+
+
+     # Compressive Strength
+
+    compressive_name = fields.Char("Name",default="Compressive Strength")
+    compressive_visible = fields.Boolean("Compressive Strength Visible",compute="_compute_visible")   
+
+    # name = fields.Char("Name",default="DIMENSION")
+    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    child_lines5 = fields.One2many('mechanical.compressive.strength.line','parent_id',string="Parameter")
+    avg_compressive_strength = fields.Float(string="Average",compute="compute_avg_compressive_strength",digits=(16,2))
+
+
+    @api.depends('child_lines5.compressiv_strength')
+    def compute_avg_compressive_strength(self):
+        for record in self:
+            total_strength = sum(line.compressiv_strength for line in record.child_lines5)
+            num_lines = len(record.child_lines5)
+            record.avg_compressive_strength = total_strength / num_lines if num_lines > 0 else 0.0
+
+
+
 
 
 
@@ -135,6 +201,8 @@ class SolidConcreteBlock(models.Model):
             record.moisture_movment_visible = False
             record.drying_shrinkage_visible = False
             record.water_absorption_visible = False
+            record.dimension_visible = False
+            record.compressive_visible = False
            
             
             for sample in record.sample_parameters:
@@ -151,6 +219,14 @@ class SolidConcreteBlock(models.Model):
 
                 if sample.internal_id == "0faf6556-4902-4926-a6bd-ed0024dc5929":
                     record.water_absorption_visible = True
+
+                if sample.internal_id == "68e3da78-7440-44b3-8f19-2f7e3c0de618":
+                    record.dimension_visible = True
+
+                if sample.internal_id == "3402d345-b96e-4ed1-a545-dd5b2a6e259a":
+                    record.compressive_visible = True
+
+
 
 
 
@@ -363,6 +439,87 @@ class WaterAbsorptionLine(models.Model):
         records = self.sorted('id')
         for index, record in enumerate(records):
             record.sr_no = index + 1
+
+
+
+
+class DimensionSolidBlock(models.Model):
+    _name = "mechanical.dimension.line"
+    parent_id = fields.Many2one('mechanical.solid.concrete.block',string="Parent Id")
+   
+    sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
+    length = fields.Float(string="Length in mm")
+    hight = fields.Float(string="Thickness in mm")
+    width = fields.Float(string="Width in mm")
+
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
+
+        return super(DimensionSolidBlock, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.sr_no = index + 1
+
+
+
+class CompressiveStrengthSolidBlock(models.Model):
+    _name = "mechanical.compressive.strength.line"
+    parent_id = fields.Many2one('mechanical.solid.concrete.block',string="Parent Id")
+   
+    sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
+    length = fields.Float(string="Length in mm")
+    width = fields.Float(string="Width in mm")
+    hight = fields.Float(string="Thickness in mm")
+    area = fields.Float(string="Area (mm²)",compute="compute_area")
+    load = fields.Float(string="Load (N)")
+    compressiv_strength = fields.Float(string="Compressive Strength N/mm²",compute="compute_compressive_strength")
+
+
+    @api.depends('width','hight')
+    def compute_area(self):
+        for record in self:
+            record.area = record.width * record.hight
+    
+
+    @api.depends('load', 'area')
+    def compute_compressive_strength(self):
+        for record in self:
+            if record.area != 0:
+                record.compressiv_strength = (record.load / record.area) * 1000
+            else:
+                record.compressiv_strength = 0.0
+
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
+
+        return super(CompressiveStrengthSolidBlock, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.sr_no = index + 1
+
+
 
 
 

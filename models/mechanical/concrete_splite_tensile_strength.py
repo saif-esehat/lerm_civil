@@ -100,6 +100,7 @@ class ConcreteSplitTensileStrengthLine(models.Model):
     parent_id = fields.Many2one('mechanical.concrete.split.tensile',string="Parent Id")
 
     sr_no = fields.Integer(string="Sr.No.",readonly=True, copy=False, default=1)
+    id_mark = fields.Char(string="ID MARK/ Location")
     wt_of_cylender = fields.Float(string="Weight of Cylinder Kg")
     height = fields.Float(string="Height mm")
     diameter = fields.Float(string="Diameter mm")
