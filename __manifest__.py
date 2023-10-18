@@ -129,6 +129,9 @@
     'views/mechanical/solid_concrete_block.xml',
     'reports/solid_concrete_block_datasheet.xml',
     'reports/concrete_beam_report.xml',
+    'reports/steel_tmt_bar_report.xml',
+    'reports/aac_block_datasheet.xml',
+
     'views/mechanical/concrete_splite_tensile_strength.xml',
     'reports/concrete_split_tensile_datasheet.xml',
     

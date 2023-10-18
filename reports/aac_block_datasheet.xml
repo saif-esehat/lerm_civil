@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="aac_block_datasheet">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    AAC Block
+                </div>
+				<!-- Dimension -->
+                <div t-if="data.dimension_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							Dimension
+						</div>
+						
+
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="1">Sr no 
+								</td>
+								<td colspan="4">Length in mm 
+								</td>
+								<td colspan="4">Height in mm
+								</td>
+								<td colspan="3">Width in mm
+								</td>
+								
+							</tr>
+
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.dimension_table" t-as="r">
+								<td colspan="1">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</div>
+                  				</td>
+								<td colspan="4">
+									<span t-esc="r['length']"/>
+								</td>
+								<td colspan="4">
+									<span t-esc="r['height']"/>
+								</td>
+								<td colspan="3">
+									<span t-esc="r['width']"/>
+								</td>
+								
+							</tr>
+						</table>
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Average Length :
+									<![CDATA[&nbsp;]]>
+								</td>
+                                <td colspan="6">
+									<span t-field="data.average_length"/>
+								</td>
+								
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Average Height :
+									<![CDATA[&nbsp;]]>
+								</td>
+                                <td colspan="6">
+									<span t-field="data.average_height"/>
+								</td>
+								
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Average Width :
+									<![CDATA[&nbsp;]]>
+								</td>
+                                <td colspan="6">
+									<span t-field="data.average_width"/>
+								</td>
+								
+							</tr>
+						</table>
+
+				</div>
+
+                <!-- Moisture Content  -->
+				<div t-if="data.moisture_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Moisture Content
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="1">Sr no 
+							</td>
+							<td colspan="4">Weight of sample W1 in gm
+							</td>
+							<td colspan="4">Oven dry Weight of sample W in gm
+							</td>
+							<td colspan="3">Moisture Content %
+							</td>
+							
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.moisture_content_table" t-as="r">
+							<td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="4">
+								<span t-esc="r['wt_sample']"/>
+							</td>
+							<td colspan="4">
+								<span t-esc="r['oven_wt']"/>
+							</td>
+							<td colspan="3">
+								<span t-esc="r['moisture_content']"/>
+							</td>
+							
+						</tr>
+					</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Average Moisture Content :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.average_moisture_content"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+
+				</div>
+
+				<!-- Block Density  -->
+				<div t-if="data.moisture_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						DS Block Density
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="1">Sr no 
+							</td>
+							<td colspan="1">Length of Sample before Drying
+							</td>
+							<td colspan="2">Width of Sample before Drying
+							</td>
+							<td colspan="2">Height of Sample before Drying
+							</td>
+							<td colspan="2">Volume of Sample
+							</td>
+							<td colspan="2">Weight of Sample after Drying
+							</td>
+							<td colspan="2">Density of Sample
+							</td>
+							
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.density_table" t-as="r">
+							<td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['length']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['width']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['height']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['volume']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['wt_sample']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['density']"/>
+							</td>
+							
+						</tr>
+					</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Average Density :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.average_density"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+
+				</div>
+
+				<!-- Drying Shrinkage  -->
+				<div t-if="data.drying_shrinkage_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Drying Shrinkage
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="2">Sr no 
+							</td>
+							<td colspan="2">Length of Specimen
+							</td>
+							<td colspan="2">Initial Length L1 in mm
+							</td>
+							<td colspan="2">Final Length L2 in mm
+							</td>
+							<td colspan="2">Change in Length in mm
+							</td>
+							<td colspan="2">Drying Shrinkage in %
+							</td>
+							
+							
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.drying_shrinkage_table" t-as="r">
+							<td colspan="2">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['length']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['initial_length']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['final_length']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['change_length']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['drying_shrinkage']"/>
+							</td>
+							
+							
+						</tr>
+					</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Average Drying Shrinkage :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.average_drying_shrinkage"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+
+				</div>
+
+				<!-- Compressive Strength  -->
+				<div t-if="data.drying_shrinkage_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Compressive Strength
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="2">Sr no 
+							</td>
+							<td colspan="4">Crosssectional Area
+							</td>
+							<td colspan="3">Load (p) kN
+							</td>
+							<td colspan="3">Compressive Strength
+							</td>
+
+							
+							
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.compressive_strength_table" t-as="r">
+							<td colspan="2">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="4">
+								<span t-esc="r['crosssectional_area']"/>
+							</td>
+							<td colspan="3">
+								<span t-esc="r['aac_load']"/>
+							</td>
+							<td colspan="3">
+								<span t-esc="r['compressive_strength']"/>
+							</td>
+							
+							
+						</tr>
+					</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Average Drying Shrinkage :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.average_drying_shrinkage"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+
+				</div>
+
+
+				<div class="authorizeRowDataSheet">
+					<div>
+						<div>
+							<b>
+								(JR Chemist)
+							</b>
+						</div>
+						<div>
+							<b>
+								Tested By
+							</b>
+						</div>
+					</div>
+					<div style="margin-left:500px">
+						<div>
+							<b>
+								Chemical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								Checked By
+							</b>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>
