@@ -127,7 +127,7 @@ class CoarseAggregateMechanical(models.Model):
 
     impact_value_child_lines = fields.One2many('mechanical.impact.value.coarse.aggregate.line','parent_id',string="Parameter")
 
-    average_impact_value = fields.Float(string="Average Aggregate Crushing Value", compute="_compute_average_impact_value")
+    average_impact_value = fields.Float(string="Average Aggregate Impact Value", compute="_compute_average_impact_value")
 
 
     @api.depends('impact_value_child_lines.impact_value')

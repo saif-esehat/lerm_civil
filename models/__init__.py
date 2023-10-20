@@ -78,6 +78,7 @@ from .mechanical import cement_ppc
 from .mechanical import cement_setting_time
 from .mechanical import coupler
 from .mechanical import cement_compatablity
+from .mechanical import wmm
 from .chemical import fine_aggregate
 from .mechanical import concrete_splite_tensile_strength
 from .report import concrete_split_tensile_ds_report
