@@ -192,29 +192,29 @@
                             
                             <td style="text-align: center;">
                                 <span style="text-align: center;" >
-                                    <span t-field="data.area" />
+                                    <span t-field="data.area" t-options='{"widget": "float", "precision": 2}' />
                                 </span>									
                             </td>
 
                             <td style="text-align: center;">
                                 <span style="text-align: center;" >
-                                    <span t-field="data.area_2" />
+                                    <span t-field="data.area_2" t-options='{"widget": "float", "precision": 2}' />
                                 </span>									
                             </td>
 
                             <td style="text-align: center;">
                                 <span style="text-align: center;" >
-                                    <span t-field="data.area_3" />
+                                    <span t-field="data.area_3" t-options='{"widget": "float", "precision": 2}'/>
                                 </span>									
                             </td>
                             <td style="text-align: center;">
                                 <span style="text-align: center;" >
-                                    <span t-field="data.area_4" />
+                                    <span t-field="data.area_4" t-options='{"widget": "float", "precision": 2}'/>
                                 </span>									
                             </td>
                             <td style="text-align: center;">
                                 <span style="text-align: center;" >
-                                    <span t-field="data.area_5" />
+                                    <span t-field="data.area_5" t-options='{"widget": "float", "precision": 2}'/>
                                 </span>									
                             </td>
                             
