@@ -133,8 +133,14 @@ class PtGrout(models.Model):
                 t1 = record.time_water_added
                 t2 = record.time_needle_make_impression
                 time_difference = t2 - t1
+                # import wdb;wdb.set_trace()
+                hours = time_difference.days * 24 + time_difference.seconds // 3600
+                minutes = (time_difference.seconds % 3600) // 60
 
-                record.final_setting_time_hours = time_difference
+                # Format as "hh:mm"
+                formatted_time = f"{hours:02}:{minutes:02}"
+                # time_hours = time_difference.days * 24 + time_difference.seconds / 3600
+                record.final_setting_time_hours = formatted_time
                 final_setting_time = time_difference.total_seconds() / 60
                 if final_setting_time % 5 == 0:
                     record.final_setting_time_minutes =  final_setting_time
@@ -181,7 +187,7 @@ class PtGrout(models.Model):
     humidity_percent_volume_change = fields.Float("Humidity %")
     start_date_volume_change = fields.Date("Start Date")
     end_date_volume_change = fields.Date("End Date")
-
+    thickness_of_glass_plate = fields.Float("Thickness of Glass Plate")
     volume_change_table = fields.One2many('volume.change.line','parent_id',string="Height Change")
 
     height_change_average = fields.Float("Average Height Change", compute="_compute_height_change_average")
@@ -438,11 +444,11 @@ class VolumeChangeLine(models.Model):
     height = fields.Float("H = Height 152 mm")
     height_change = fields.Float("V= Height Change",compute="_compute_height_change")
 
-    @api.depends('initial_reading', 'days_28', 'height')
+    @api.depends('initial_reading', 'days_28', 'height','parent_id.thickness_of_glass_plate')
     def _compute_height_change(self):
         for record in self:
             if record.height != 0:
-                height_change = ((record.initial_reading - record.days_28) / record.height) * 100
+                height_change = ((record.parent_id.thickness_of_glass_plate + record.initial_reading - record.days_28) / record.height) * 100
                 record.height_change = height_change
             else:
                 record.height_change = 0.0

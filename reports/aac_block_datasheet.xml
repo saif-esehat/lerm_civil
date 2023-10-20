@@ -28,20 +28,20 @@
 							</tr>
 
 							<t t-set="i" t-value="0"/>
-							<tr t-foreach="data.moisture_visible" t-as="r">
+							<tr t-foreach="data.dimension_table" t-as="r">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
 									</div>
                   				</td>
-								<td colspan="1">
+								<td colspan="4">
 									<span t-esc="r['length']"/>
 								</td>
-								<td colspan="1">
+								<td colspan="4">
 									<span t-esc="r['height']"/>
 								</td>
-								<td colspan="2">
+								<td colspan="3">
 									<span t-esc="r['width']"/>
 								</td>
 								
@@ -82,7 +82,7 @@
                 <!-- Moisture Content  -->
 				<div t-if="data.moisture_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
-						Dimension
+						Moisture Content
 					</div>
 					
 
@@ -161,7 +161,7 @@
 						</tr>
 
 						<t t-set="i" t-value="0"/>
-						<tr t-foreach="data.moisture_content_table" t-as="r">
+						<tr t-foreach="data.density_table" t-as="r">
 							<td colspan="1">
 								<div>
 									<span t-esc="i + 1" />
@@ -207,7 +207,7 @@
 				<!-- Drying Shrinkage  -->
 				<div t-if="data.drying_shrinkage_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
-						DS Block Density
+						Drying Shrinkage
 					</div>
 					
 
@@ -231,13 +231,13 @@
 
 						<t t-set="i" t-value="0"/>
 						<tr t-foreach="data.drying_shrinkage_table" t-as="r">
-							<td colspan="1">
+							<td colspan="2">
 								<div>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</div>
 							</td>
-							<td colspan="1">
+							<td colspan="2">
 								<span t-esc="r['length']"/>
 							</td>
 							<td colspan="2">
@@ -274,7 +274,7 @@
 				<!-- Compressive Strength  -->
 				<div t-if="data.drying_shrinkage_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
-						DS Block Density
+						Compressive Strength
 					</div>
 					
 

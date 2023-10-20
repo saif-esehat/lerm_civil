@@ -19,19 +19,7 @@ class SoilCBR(models.Model):
 
 
 
-class SoilCBRLine(models.Model):
-    _name = "mechanical.soils.cbr.line"
-    parent_id = fields.Many2one('mechanical.soil.cbr',string="Parent Id")
 
-    penetration = fields.Float(string="Penetration in mm")
-    proving_reading = fields.Float(string="Proving Ring Reading")
-    load = fields.Float(string="Load in Kg", compute="_compute_load")
-
-
-    @api.depends('proving_reading')
-    def _compute_load(self):
-        for record in self:
-            record.load = record.proving_reading 
 
 
 
