@@ -208,6 +208,7 @@
                     </group>
                     
                      <group attrs="{'invisible': [('volume_change_visible', '=', False)]}">
+                      <field name="thickness_of_glass_plate"/>
                       <field name="volume_change_table">
                         <tree editable="bottom">
                           <field name="initial_reading"/>
