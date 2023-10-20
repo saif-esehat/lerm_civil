@@ -36,7 +36,7 @@ class WmmMechanical(models.Model):
             print("Records",records)
 
     def get_all_fields(self):
-        record = self.env['mechanical.aac.block'].browse(self.ids[0])
+        record = self.env['mechanical.wmm'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():
             field_value = record[field_name]
@@ -140,11 +140,11 @@ class WmmMechanical(models.Model):
 
         default_dry_sieve_sizes = []
         default_elongated_sieve_sizes = []
-        dry_sieve_sizes = ['75 mm', '53 mm', '26.5 mm', '9.50 mm', '4.75 mm','2.36 mm','425 micron','75 micron']
+        dry_sieve_sizes = ['75 mm', '53 mm', '26.5 mm', '9.50 mm', '4.75 mm','2.36 mm','425 micron','75 micron','pan']
         elongation_sieve_sizes = ['63 mm', '50 mm', '40 mm', '31.5 mm', '25 mm','20 mm','16 mm','12.5 mm','10 mm','6.3 mm']
 
 
-        for i in range(8):  # You can change the number of default lines as needed
+        for i in range(9):  # You can change the number of default lines as needed
             size = {
                 'sieve_size': dry_sieve_sizes[i] # Set the default product
                 # Set the default quantity
@@ -577,9 +577,10 @@ class DryGradationLine(models.Model):
 
             new_self = super(SieveAnalysisLine, self).write(vals)
 
-            if 'wt_retained' in vals:
-                for record in self:
-                    record.parent_id._compute_total()
+            # if 'wt_retained' in vals:
+                # for record in self:
+                    # record.parent_id._compute_total()
+                    # pass
 
             return new_self
 
