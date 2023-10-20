@@ -116,14 +116,13 @@ class CementNormalConsistency(models.Model):
                 t1 = record.time_water_added
                 t2 = record.time_needle_make_impression
                 time_difference = t2 - t1
-
+                record.final_setting_time_minutes = time_difference
                 record.final_setting_time_hours = time_difference
                 final_setting_time = time_difference.total_seconds() / 60
                 if final_setting_time % 5 == 0:
                     record.final_setting_time_minutes = final_setting_time
                 else:
-                    record.final_setting_time_minutes = round(final_setting_time / 5) * 5
-
+                    record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
                 record.final_setting_time_minutes_unrounded = final_setting_time
             else:
                 record.final_setting_time_hours = False
