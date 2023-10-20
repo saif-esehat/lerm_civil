@@ -55,17 +55,17 @@ class WmmMechanical(models.Model):
     @api.depends('eln_ref','sample_parameters')
     def _compute_visible(self):
         for record in self:
-            record.dry_gradation_visible = True
-            record.water_absorbtion_visible  = True  
-            record.elongation_visible = True
-            record.flakiness_visible = True
-            record.abrasion_visible = True
-            record.impact_visible = True
-            record.plastic_visible = True
-            record.liquid_limit_visible = True
-            record.plasticity_index_visible = True
-            record.density_relation_visible = True
-            record.cbr_visible = True
+            record.dry_gradation_visible = False
+            record.water_absorbtion_visible  = False  
+            record.elongation_visible = False
+            record.flakiness_visible = False
+            record.abrasion_visible = False
+            record.impact_visible = False
+            record.plastic_visible = False
+            record.liquid_limit_visible = False
+            record.plasticity_index_visible = False
+            record.density_relation_visible = False
+            record.cbr_visible = False
 
 
             for sample in record.sample_parameters:
@@ -112,12 +112,12 @@ class WmmMechanical(models.Model):
                 if previous_line == 0:
                     if line.percent_retained == 0:
                         # print("Percent retained 0",line.percent_retained)
-                        line.write({'cumulative_retained': round(line.percent_retained,2)})
+                        line.write({'cumulative_retained': round(line.percent_retained + line.percent_retained,2)})
                         line.write({'passing_percent': 100 })
                     else:
                         # print("Percent retained else",line.percent_retained)
-                        line.write({'cumulative_retained': round(line.percent_retained,2)})
-                        line.write({'passing_percent': round(100 -line.percent_retained,2)})
+                        line.write({'cumulative_retained': round(line.percent_retained + line.percent_retained,2)})
+                        line.write({'passing_percent': round(100 -line.percent_retained - line.percent_retained,2)})
                 else:
                     previous_line_record = self.env['mech.dry.gradation.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
                     line.write({'cumulative_retained': round(previous_line_record + line.percent_retained,2)})
@@ -311,9 +311,9 @@ class WmmMechanical(models.Model):
         # Prepare data for the chart
         x_values = []
         y_values = []
-        for line in self.cbr_table:
-            x_values.append(line.penetration)
-            y_values.append(line.load)
+        for line in self.density_relation_table:
+            x_values.append(line.moisture)
+            y_values.append(line.dry_density)
         
         # Create the line chart
         plt.plot(x_values, y_values, marker='o')
@@ -333,7 +333,7 @@ class WmmMechanical(models.Model):
         chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
         return chart_image
     
-    @api.depends('cbr_table')
+    @api.depends('density_relation_table')
     def _compute_chart_image_density(self):
         try:
             for record in self:
@@ -560,7 +560,7 @@ class DryGradationLine(models.Model):
                 max_serial_no = max(existing_records.mapped('serial_no'))
                 vals['serial_no'] = max_serial_no + 1
 
-        return super(SieveAnalysisLine, self).create(vals)
+        return super(DryGradationLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -575,7 +575,7 @@ class DryGradationLine(models.Model):
                 if record.parent_id and record.parent_id == vals.get('parent_id') and 'wt_retained' in vals:
                     record.percent_retained = round((vals['wt_retained'] / record.parent_id.total * 100),2) if record.parent_id.total else 0
 
-            new_self = super(SieveAnalysisLine, self).write(vals)
+            new_self = super(DryGradationLine, self).write(vals)
 
             # if 'wt_retained' in vals:
                 # for record in self:
@@ -584,13 +584,13 @@ class DryGradationLine(models.Model):
 
             return new_self
 
-        return super(SieveAnalysisLine, self).write(vals)
+        return super(DryGradationLine, self).write(vals)
 
     def unlink(self):
         # Get the parent_id before the deletion
         parent_id = self[0].parent_id
 
-        res = super(SieveAnalysisLine, self).unlink()
+        res = super(DryGradationLine, self).unlink()
 
         if parent_id:
             parent_id.sieve_analysis_child_lines._reorder_serial_numbers()
