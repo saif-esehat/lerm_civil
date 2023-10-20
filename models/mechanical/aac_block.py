@@ -172,8 +172,8 @@ class AacBlockMechanical(models.Model):
         for record in self:
             try:
                 average_compressive_strength = sum(record.compressive_strength_table.mapped('compressive_strength')) / len(
-                    record.compressive_strength_table)
-                    record.average_compressive_strength = round(average_compressive_strength,2)
+                record.compressive_strength_table)
+                record.average_compressive_strength = round(average_compressive_strength,2)
             except:
                 record.average_compressive_strength = 0
 
