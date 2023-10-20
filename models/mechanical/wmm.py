@@ -36,7 +36,7 @@ class WmmMechanical(models.Model):
             print("Records",records)
 
     def get_all_fields(self):
-        record = self.env['mechanical.aac.block'].browse(self.ids[0])
+        record = self.env['mechanical.wmm'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():
             field_value = record[field_name]
@@ -112,7 +112,7 @@ class WmmMechanical(models.Model):
                 if previous_line == 0:
                     if line.percent_retained == 0:
                         # print("Percent retained 0",line.percent_retained)
-                        line.write({'cumulative_retained': round(line.percent_retained,2)})
+                        line.write({'cumulative_retained': round(line.percent_retained + line.percent_retained,2)})
                         line.write({'passing_percent': 100 })
                     else:
                         # print("Percent retained else",line.percent_retained)
@@ -140,11 +140,11 @@ class WmmMechanical(models.Model):
 
         default_dry_sieve_sizes = []
         default_elongated_sieve_sizes = []
-        dry_sieve_sizes = ['75 mm', '53 mm', '26.5 mm', '9.50 mm', '4.75 mm','2.36 mm','425 micron','75 micron']
+        dry_sieve_sizes = ['75 mm', '53 mm', '26.5 mm', '9.50 mm', '4.75 mm','2.36 mm','425 micron','75 micron','pan']
         elongation_sieve_sizes = ['63 mm', '50 mm', '40 mm', '31.5 mm', '25 mm','20 mm','16 mm','12.5 mm','10 mm','6.3 mm']
 
 
-        for i in range(8):  # You can change the number of default lines as needed
+        for i in range(9):  # You can change the number of default lines as needed
             size = {
                 'sieve_size': dry_sieve_sizes[i] # Set the default product
                 # Set the default quantity
@@ -311,9 +311,9 @@ class WmmMechanical(models.Model):
         # Prepare data for the chart
         x_values = []
         y_values = []
-        for line in self.cbr_table:
-            x_values.append(line.penetration)
-            y_values.append(line.load)
+        for line in self.density_relation_table:
+            x_values.append(line.moisture)
+            y_values.append(line.dry_density)
         
         # Create the line chart
         plt.plot(x_values, y_values, marker='o')
@@ -333,7 +333,7 @@ class WmmMechanical(models.Model):
         chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
         return chart_image
     
-    @api.depends('cbr_table')
+    @api.depends('density_relation_table')
     def _compute_chart_image_density(self):
         try:
             for record in self:
@@ -560,7 +560,7 @@ class DryGradationLine(models.Model):
                 max_serial_no = max(existing_records.mapped('serial_no'))
                 vals['serial_no'] = max_serial_no + 1
 
-        return super(SieveAnalysisLine, self).create(vals)
+        return super(DryGradationLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -575,7 +575,7 @@ class DryGradationLine(models.Model):
                 if record.parent_id and record.parent_id == vals.get('parent_id') and 'wt_retained' in vals:
                     record.percent_retained = round((vals['wt_retained'] / record.parent_id.total * 100),2) if record.parent_id.total else 0
 
-            new_self = super(SieveAnalysisLine, self).write(vals)
+            new_self = super(DryGradationLine, self).write(vals)
 
             if 'wt_retained' in vals:
                 for record in self:
@@ -583,13 +583,13 @@ class DryGradationLine(models.Model):
 
             return new_self
 
-        return super(SieveAnalysisLine, self).write(vals)
+        return super(DryGradationLine, self).write(vals)
 
     def unlink(self):
         # Get the parent_id before the deletion
         parent_id = self[0].parent_id
 
-        res = super(SieveAnalysisLine, self).unlink()
+        res = super(DryGradationLine, self).unlink()
 
         if parent_id:
             parent_id.sieve_analysis_child_lines._reorder_serial_numbers()

@@ -37,14 +37,17 @@
                             <field name="dry_gradation_visible" invisible="1"/>
                         </h1>
                     </group>
+                    <div attrs="{'invisible': [('dry_gradation_visible', '=', False)]}">
+                        <button string="Calculate" type="object" name="calculate_sieve" class="oe_highlight"/>
+                    </div>
                     <group attrs="{'invisible': [('dry_gradation_visible', '=', False)]}">
                         <field name="dry_gradation_table">
                         <tree editable="bottom">
-                          <field name="sieve_size"/>
+                          <field name="sieve_size"  readonly="1" />
                           <field name="wt_retained"/>
                           <field name="percent_retained"/>
-                          <field name="cumulative_retained"/>
-                          <field name="passing_percent"/>
+                          <field name="cumulative_retained" readonly="1"/>
+                          <field name="passing_percent" readonly="1"/>
                         </tree>
                         </field>
                     </group>
@@ -242,6 +245,10 @@
                         </h1>
                 </group>
                 <group attrs="{'invisible': [('density_relation_visible', '=', False)]}">
+                    <field name="wt_of_modul" />
+                    <field name="vl_of_modul" />
+                </group>
+                <group attrs="{'invisible': [('density_relation_visible', '=', False)]}">
                     <field name="density_relation_table" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='determination_no'/>
@@ -258,14 +265,12 @@
                                 <field name='dry_density'/>
 
                             </tree>
-                           
-                    </field> 
-                </group>
                 <group attrs="{'invisible': [('density_relation_visible', '=', False)]}">
-                    <field name="wt_of_modul" />
-                    <field name="vl_of_modul" />
                     <field name="chart_image_density" widget="image" readonly="1"/>
                 </group>
+                    </field> 
+                </group>
+                
 
 
                 <!-- CBR -->
