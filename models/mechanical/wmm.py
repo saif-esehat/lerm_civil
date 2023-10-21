@@ -240,12 +240,12 @@ class WmmMechanical(models.Model):
                 line.abrasion_value_percentage = 0.0
 
     # Impact Value 
-    impact_value_name = fields.Char("Name",default="Aggregate Impact Value")
+    impact_value_name = fields.Char("Name",default="Impact Value")
     impact_visible = fields.Boolean("Impact Visible",compute="_compute_visible")
 
     impact_value_child_lines = fields.One2many('mech.wmm.impact.line','parent_id',string="Parameter")
 
-    average_impact_value = fields.Float(string="Average Aggregate Impact Value", compute="_compute_average_impact_value")
+    average_impact_value = fields.Float(string="Average Impact Value", compute="_compute_average_impact_value")
 
     
 
@@ -491,7 +491,7 @@ class WmmLiquidLimitLine(models.Model):
 
 
     @api.depends('mass_dry_sample_container','mass_container')
-    def _compute_mass_moisture(self):
+    def _compute_mass_dry_sample(self):
         for record in self:
             record.mass_dry_sample = record.mass_dry_sample_container - record.mass_container
 
@@ -525,7 +525,7 @@ class WmmPlasticLimitLine(models.Model):
 
 
     @api.depends('mass_dry_sample_container','mass_container')
-    def _compute_mass_moisture(self):
+    def _compute_mass_dry_sample(self):
         for record in self:
             record.mass_dry_sample = record.mass_dry_sample_container - record.mass_container
 
@@ -635,7 +635,7 @@ class ImpactValueLine(models.Model):
     total_wt_aggregate = fields.Float(string="Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms", compute="_compute_total_wt_aggregate")
     wt_of_aggregate_passing = fields.Float(string="Wt. of aggregate passing 2.36 mm sieve after the test in gms")
     wt_of_aggregate_retained = fields.Float(string="Wt. of aggregate retained on 2.36 mm sieve after the test in gms", compute="_compute_wt_of_aggregate_retained")
-    impact_value = fields.Float(string="Aggregate Impact value", compute="_compute_impact_value")
+    impact_value = fields.Float(string="Impact value", compute="_compute_impact_value")
 
 
     @api.depends('total_wt_of_dried', 'wt_of_cylinder')
