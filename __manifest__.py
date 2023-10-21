@@ -80,7 +80,7 @@
     'views/mechanical/microsilica.xml',
     'views/mechanical/pt_grout.xml',
     'views/mechanical/soil.xml',
-    # 'views/mechanical/aac_block.xml',
+    'views/mechanical/aac_block.xml',
     'views/mechanical/coarse_aggregate_mechanical.xml',
     'views/mechanical/aggregate_fine.xml',
     'views/mechanical/concrete_cube2.xml',
@@ -137,7 +137,9 @@
     'views/mechanical/concrete_splite_tensile_strength.xml',
     'reports/concrete_split_tensile_datasheet.xml',
     
-    'reports/steel_tmt_bar_report.xml'
+    'reports/steel_tmt_bar_report.xml',
+    'reports/wmm_datasheet.xml',
+
 
 
     

@@ -423,6 +423,7 @@ class WmmDensityRelationLine(models.Model):
                 line.bulk_density = 0.0
 
 
+
     @api.depends('wt_of_container_dry', 'wt_of_container')
     def _compute_wt_of_dry_sample(self):
         for line in self:
