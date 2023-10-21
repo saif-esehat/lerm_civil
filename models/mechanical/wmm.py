@@ -140,7 +140,7 @@ class WmmMechanical(models.Model):
 
         default_dry_sieve_sizes = []
         default_elongated_sieve_sizes = []
-        dry_sieve_sizes = ['75 mm', '53 mm', '26.5 mm', '9.50 mm', '4.75 mm','2.36 mm','425 micron','75 micron','pan']
+        dry_sieve_sizes = ['53 mm', '45 mm','22.4 mm', '11.2 mm', '4.75 mm','2.36 mm','600 micron','75 micron','pan']
         elongation_sieve_sizes = ['63 mm', '50 mm', '40 mm', '31.5 mm', '25 mm','20 mm','16 mm','12.5 mm','10 mm','6.3 mm']
 
 
@@ -189,9 +189,9 @@ class WmmMechanical(models.Model):
     elongation_table = fields.One2many('mech.elongation.line','parent_id',string="Elongation Index")
     flakiness_table = fields.One2many('mech.flakiness.line','parent_id',string="Flakiness Index")
 
-    total_wt_retained_fl_el = fields.Float('Total')
-    total_elongated_retained = fields.Float('Total Elongation')
-    total_flakiness_retained = fields.Float('Total Flakiness')
+    total_wt_retained_fl_el = fields.Float('Total',compute="_compute_total_el_fl")
+    total_elongated_retained = fields.Float('Total Elongation',compute="_compute_total_elongation")
+    total_flakiness_retained = fields.Float('Total Flakiness',compute="_compute_total_flakiness")
 
     aggregate_elongation = fields.Float('Aggregate Elongation Value in %')
     aggregate_flakiness = fields.Float('Aggregate Flakiness Value in %')
@@ -206,7 +206,7 @@ class WmmMechanical(models.Model):
     @api.depends('elongation_table.elongated_retained')
     def _compute_total_elongation(self):
         for record in self:
-            record.total_elongation_retained = sum(record.elongation_table.mapped('elongated_retained'))
+            record.total_elongated_retained = sum(record.elongation_table.mapped('elongated_retained'))
 
     @api.depends('flakiness_table.flakiness_retained')
     def _compute_total_flakiness(self):
@@ -543,7 +543,7 @@ class DryGradationLine(models.Model):
     parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
     
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
-    sieve_size = fields.Char(string="IS Sieve Size")
+    sieve_size = fields.Char(string="IS Sieve Size" ,readonly=True)
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
     cumulative_retained = fields.Float(string="Cum. Retained %", store=True)

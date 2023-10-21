@@ -43,7 +43,7 @@
                     <group attrs="{'invisible': [('dry_gradation_visible', '=', False)]}">
                         <field name="dry_gradation_table">
                         <tree editable="bottom">
-                          <field name="sieve_size"  readonly="1" />
+                          <field name="sieve_size"  />
                           <field name="wt_retained"/>
                           <field name="percent_retained"/>
                           <field name="cumulative_retained" readonly="1"/>
