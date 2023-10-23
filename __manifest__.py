@@ -141,6 +141,9 @@
     'views/mechanical/admixture_mechanical.xml',
     'views/mechanical/rcmt_mechanical.xml',
     'reports/wmm_datasheet.xml',
+    'views/mechanical/fusion_bound_coated_steel.xml',
+    'reports/fusion_bond_datasheet.xml',
+    'reports/fusion_bond_report.xml',
 
 
 
