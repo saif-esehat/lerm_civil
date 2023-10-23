@@ -86,4 +86,6 @@ from .report import aac_block_ds_report
 
 from . import general_template
 from .mechanical import aac_block
+from .mechanical import admixture_mechanical
+from .mechanical import rcmt_mechanical
 
