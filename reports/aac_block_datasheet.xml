@@ -7,6 +7,8 @@
                 <div style="text-align:center;font-size:18px">
                     AAC Block
                 </div>
+                <div class="container_eln" style="margin-top:5px">
+
 				<!-- Dimension -->
                 <div t-if="data.dimension_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
@@ -328,7 +330,7 @@
 					</table>
 
 				</div>
-
+				</div>
 
 				<div class="authorizeRowDataSheet">
 					<div>
