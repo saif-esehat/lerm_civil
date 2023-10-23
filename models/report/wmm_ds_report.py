@@ -8,9 +8,9 @@ from lxml import etree
 
 
 
-class AacBlockReport(models.AbstractModel):
-    _name = 'report.lerm_civil.aac_block_mech_report'
-    _description = 'AAC Block Report'
+class WmmReport(models.AbstractModel):
+    _name = 'report.lerm_civil.wmm_mech_report'
+    _description = 'WMM Report'
     
     @api.model
     def _get_report_values(self, docids, data):
@@ -38,16 +38,17 @@ class AacBlockReport(models.AbstractModel):
             "grade_id":eln.grade_id.id
         }
         model = eln.get_product_base_calc_line(data).ir_model.model
-        aac_data = self.env[model].search([("id","=",eln.model_id)])
+        wmm_data = self.env[model].search([("id","=",eln.model_id)])
+        print(wmm_data.normal_consistency)
         return {
             'eln': eln,
-            'data': aac_data,
+            'data': wmm_data,
             'qrcode': qr_code
         }
 
-class AacDatasheet(models.AbstractModel):
-    _name = 'report.lerm_civil.aac_block_datasheet'
-    _description = 'AAC Block DataSheet'
+class WmmDatasheet(models.AbstractModel):
+    _name = 'report.lerm_civil.wmm_mech_datasheet'
+    _description = 'WMM DataSheet'
     
     @api.model
     def _get_report_values(self, docids, data):

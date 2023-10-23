@@ -80,10 +80,12 @@
     'views/mechanical/microsilica.xml',
     'views/mechanical/pt_grout.xml',
     'views/mechanical/soil.xml',
-    # 'views/mechanical/aac_block.xml',
+    'views/mechanical/aac_block.xml',
     'views/mechanical/coarse_aggregate_mechanical.xml',
     'views/mechanical/aggregate_fine.xml',
     'views/mechanical/concrete_cube2.xml',
+    'views/mechanical/wmm.xml',
+
     'views/product_grade_wizard.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
@@ -131,13 +133,15 @@
     'reports/concrete_beam_report.xml',
     'reports/steel_tmt_bar_report.xml',
     'reports/aac_block_datasheet.xml',
-
+    'reports/aac_block_report.xml',
     'views/mechanical/concrete_splite_tensile_strength.xml',
     'reports/concrete_split_tensile_datasheet.xml',
     
     'reports/steel_tmt_bar_report.xml',
     'views/mechanical/admixture_mechanical.xml',
     'views/mechanical/rcmt_mechanical.xml',
+    'reports/wmm_datasheet.xml',
+
 
 
     
