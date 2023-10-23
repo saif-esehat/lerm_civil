@@ -426,7 +426,7 @@
 							<td colspan="1">
 								<span t-esc="r['mass_dry_sample_container']"/>
 							</td>
-                            <td colspan="1">
+                            <td colspan="2">
 								<span t-esc="r['mass_container']"/>
 							</td>
 							<td colspan="2">
@@ -636,34 +636,34 @@
 							<td colspan="1">
 								<span t-esc="r['wt_of_modul_compact']"/>
 							</td>
-							<td colspan="2">
+							<td colspan="1">
 								<span t-esc="r['wt_of_compact']"/>
 							</td>
-                            <td colspan="2">
+                            <td colspan="1">
 								<span t-esc="r['bulk_density']"/>
 							</td>
-							<td colspan="2">
+							<td colspan="1">
 								<span t-esc="r['container_no']"/>
 							</td>
-							<td colspan="2">
+							<td colspan="1">
 								<span t-esc="r['wt_of_container']"/>
 							</td>
-							<td colspan="2">
+							<td colspan="1">
 								<span t-esc="r['wt_of_container_wet']"/>
 							</td>
-                            <td colspan="2">
+                            <td colspan="1">
 								<span t-esc="r['wt_of_container_dry']"/>
 							</td>
-                            <td colspan="2">
+                            <td colspan="1">
 								<span t-esc="r['wt_of_dry_sample']"/>
 							</td>
-							<td colspan="2">
+							<td colspan="1">
 								<span t-esc="r['wt_of_moisture']"/>
 							</td>
-							<td colspan="2">
+							<td colspan="1">
 								<span t-esc="r['moisture']"/>
 							</td>
-							<td colspan="2">
+							<td colspan="1">
 								<span t-esc="r['dry_density']"/>
 							</td>
 							

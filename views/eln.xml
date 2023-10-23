@@ -281,6 +281,34 @@
             <field name="view_id" ref="lerm_civil.eln_result_update_wizard"/>
             <field name="target">new</field>
         </record>
+
+        <record id="lerm_civil_eln_search_view" model="ir.ui.view">
+        <field name="name">lerm.eln.search.view</field>
+        <field name="model">lerm.eln</field>
+        <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="eln_id" string="ELN ID" />
+                    <field name="srf_id" string="SRF ID" />
+                    <field name="technician" string="Technicians" />
+                    <field name="casting_date" string="Casting Date" />
+                    <field name="discipline" string="Discipline" />
+                    <field name="group" string="Group" />
+                    <field name="material" string="Material" />
+                    <field name="state" string="State" />
+                    <filter string="In-Test" name="state_in_test" domain="[('state', '=', '1-draft')]" />
+                    <filter string="In-Check" name="state_in_check" domain="[('state', '=', '2-confirm')]" />
+                    <filter string="Approved" name="state_approved" domain="[('state', '=', '3-approved')]" />
+                    <filter string="Rejected" name="state_rejected" domain="[('state', '=', '4-rejected')]" />
+                    <field name="start_date" string="Start Date" />
+                    <field name="end_date" string="End Date" />
+                    <field name="conformity" string="Conformity" />
+                    <field name="has_witness" string="Witness" />
+                    </search>
+                </field>
+            </record>
+
+
 <!-- 
         <record id="parameter_calculation_wizard_action" model="ir.actions.act_window">
             <field name="name">Calculation Wizard</field>
