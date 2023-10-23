@@ -6,6 +6,7 @@
  'version': '13.0.1', 
  'depends':['base' , 'contacts','stock','product' , 'mail','documents','documents_spreadsheet','lerm_civil_inv'],
  'data': [
+    'security/security.xml',
     'data/sequence.xml',
     'views/lerm.xml',
     'views/groups.xml',
@@ -53,6 +54,7 @@
     'views/mechanical/compressive_strength_brick.xml',
     'views/mechanical/dry_density_sand_replacement.xml',
     'views/mechanical/cement_compatablity.xml',
+    'views/mechanical/brick_2.xml',
     'views/chemical/fine_aggregate.xml',
     'views/mechanical/paver_block.xml',
     'views/ndt/crack_width.xml',
@@ -64,9 +66,11 @@
     'views/ndt/rebound_hammer.xml',
     'views/ndt/acil_upv.xml', 
     'views/ndt/upv.xml',
+    
     'views/ndt/half_cell.xml',
     'views/mechanical/cement_normal_consistency.xml',
     'views/mechanical/cement_psc.xml',
+    'views/mechanical/brick_2.xml',
     'views/mechanical/cement_ppc.xml',
     'views/mechanical/cement_setting_time.xml',
     'views/mechanical/ggbs.xml',
@@ -76,9 +80,12 @@
     'views/mechanical/microsilica.xml',
     'views/mechanical/pt_grout.xml',
     'views/mechanical/soil.xml',
+    'views/mechanical/aac_block.xml',
     'views/mechanical/coarse_aggregate_mechanical.xml',
     'views/mechanical/aggregate_fine.xml',
     'views/mechanical/concrete_cube2.xml',
+    'views/mechanical/wmm.xml',
+
     'views/product_grade_wizard.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
@@ -95,7 +102,6 @@
     'reports/pt_grout_report.xml',
     'reports/fine_aggregate_chemical_datasheet.xml',
     'reports/fine_aggregate_chemical_report.xml',
-    'security/security.xml',
     # 'security/dump.sql',
     'security/ir.model.access.csv',
     'reports/sample_report_action.xml',
@@ -116,6 +122,24 @@
     'reports/concrete_cube_print.xml',
     'reports/coarse_aggregate_mech_datasheet.xml',
     'reports/soil_print.xml',
+    'reports/paver_block_report.xml',
+    'reports/fine_aggregate_mech_datasheet.xml',
+    'reports/bricks2_datasheet.xml',
+    'reports/bricks2_report.xml',
+    'reports/concrete_beam_datasheet.xml',
+    'reports/coarse_aggregate_mech_report.xml',
+    'views/mechanical/solid_concrete_block.xml',
+    'reports/solid_concrete_block_datasheet.xml',
+    'reports/concrete_beam_report.xml',
+    'reports/steel_tmt_bar_report.xml',
+    'reports/aac_block_datasheet.xml',
+    'reports/aac_block_report.xml',
+    'views/mechanical/concrete_splite_tensile_strength.xml',
+    'reports/concrete_split_tensile_datasheet.xml',
+    
+    'reports/steel_tmt_bar_report.xml',
+    'reports/wmm_datasheet.xml',
+
 
 
     

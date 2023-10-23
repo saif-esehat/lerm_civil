@@ -70,17 +70,17 @@ class ChemicalFineAggregate(models.Model):
     @api.depends('diff_in_wt_of_silica_blank','diff_in_wt_of_silica_a')
     def _compute_dissolved_silica_a(self):
         for record in self:
-            record.dissolved_silica_a = (record.diff_in_wt_of_silica_a - record.diff_in_wt_of_silica_blank) * 3300
+            record.dissolved_silica_a = (record.diff_in_wt_of_silica_a - record.diff_in_wt_of_silica_blank) * 3330
 
     @api.depends('diff_in_wt_of_silica_blank','diff_in_wt_of_silica_b')
     def _compute_dissolved_silica_b(self):
         for record in self:
-            record.dissolved_silica_b = (record.diff_in_wt_of_silica_b - record.diff_in_wt_of_silica_blank) * 3300
+            record.dissolved_silica_b = (record.diff_in_wt_of_silica_b - record.diff_in_wt_of_silica_blank) * 3330
 
     @api.depends('diff_in_wt_of_silica_blank','diff_in_wt_of_silica_c')
     def _compute_dissolved_silica_c(self):
         for record in self:
-            record.dissolved_silica_c = (record.diff_in_wt_of_silica_c - record.diff_in_wt_of_silica_blank) * 3300
+            record.dissolved_silica_c = (record.diff_in_wt_of_silica_c - record.diff_in_wt_of_silica_blank) * 3330
     
     
     @api.depends('dissolved_silica_a','dissolved_silica_b','dissolved_silica_b')
@@ -244,7 +244,9 @@ class ChemicalFineAggregate(models.Model):
                 if sample.internal_id == 'fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a':
                     record.alkali_aggregate_dissolved_visible = True
                     	
-            
+
+    
+          
 
     @api.model
     def create(self, vals):
@@ -255,13 +257,6 @@ class ChemicalFineAggregate(models.Model):
         return record
 
 
-    @api.depends('eln_ref')
-    def _compute_sample_parameters(self):
-        for record in self:
-            records = record.eln_ref.parameters_result.parameter.ids
-            record.sample_parameters = records
-            print("Records",records)
-
         
     def get_all_fields(self):
         record = self.env['chemical.fine.aggregate'].browse(self.ids[0])
@@ -271,3 +266,12 @@ class ChemicalFineAggregate(models.Model):
             field_values[field_name] = field_value
 
         return field_values
+    
+
+
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)

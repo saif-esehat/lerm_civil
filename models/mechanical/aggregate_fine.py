@@ -24,8 +24,8 @@ class FineAggregate(models.Model):
     loose_bulk_name = fields.Char("Name",default="Loose Bulk Density (LBD)")
     loose_bulk_visible = fields.Boolean("Loose Bulk Density (LBD) Visible",compute="_compute_visible")
 
-    weight_empty_bucket = fields.Float(string="Weight of Empty Bucket in kg")
-    volume_of_bucket = fields.Float(string="Volume of Bucket in cubic meter")
+    weight_empty_bucket = fields.Float(string="Weight of Empty Bucket in kg",digits=(16,3))
+    volume_of_bucket = fields.Float(string="Volume of Bucket in cubic meter",digits=(16,3))
     sample_plus_bucket = fields.Float(string="[Sample Weight + Bucket  Weight] in kg")
     sample_weight = fields.Float(string="Sample Weight in kg",compute="_compute_sample_weight")
     loose_bulk_density = fields.Float(string="Loose Bulk Density in kg per cubic meter",compute="_compute_loose_bulk_density")
@@ -51,10 +51,10 @@ class FineAggregate(models.Model):
     rodded_bulk_name = fields.Char("Name",default="Rodded Bulk Density (RBD)")
     rodded_bulk_visible = fields.Boolean("Loose Bulk Density (LBD) Visible",compute="_compute_visible")
 
-    weight_empty_bucket1 = fields.Float(string="Weight of Empty Bucket in kg")
-    volume_of_bucket1 = fields.Float(string="Volume of Bucket in cubic meter")
-    sample_plus_bucket1 = fields.Float(string="[Sample Weight + Bucket  Weight] in kg")
-    sample_weight1 = fields.Float(string="Sample Weight in kg",compute="_compute_sample_weight1")
+    weight_empty_bucket1 = fields.Float(string="Weight of Empty Bucket in kg",digits=(16,3))
+    volume_of_bucket1 = fields.Float(string="Volume of Bucket in cubic meter",digits=(16,3))
+    sample_plus_bucket1 = fields.Float(string="[Sample Weight + Bucket  Weight] in kg",digits=(16,3))
+    sample_weight1 = fields.Float(string="Sample Weight in kg",compute="_compute_sample_weight1",digits=(16,3))
     rodded_bulk_density1 = fields.Float(string="Rodded Bulk Density in kg per cubic meter",compute="_compute_rodded_bulk_density")
 
 
@@ -174,9 +174,23 @@ class FineAggregate(models.Model):
     sieve_analysis_name = fields.Char("Name",default="Sieve Analysis")
     sieve_visible = fields.Boolean("Sieve Analysis Visible",compute="_compute_visible")
 
-    sieve_analysis_child_lines = fields.One2many('mechanical.fine.aggregate.sieve.analysis.line','parent_id',string="Parameter")
+    sieve_analysis_child_lines = fields.One2many('mechanical.fine.aggregate.sieve.analysis.line','parent_id',string="Parameter",
+                                                  default=lambda self: self._default_sieve_analysis_child_lines())
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
     # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
+
+    @api.model
+    def _default_sieve_analysis_child_lines(self):
+        default_lines = [
+            (0, 0, {'sieve_size': '10 mm'}),
+            (0, 0, {'sieve_size': '4.75 mm'}),
+            (0, 0, {'sieve_size': '2.36 mm'}),
+            (0, 0, {'sieve_size': '1.18 mm'}),
+            (0, 0, {'sieve_size': '600 µm'}),
+            (0, 0, {'sieve_size': '300 µm'}),
+            (0, 0, {'sieve_size': '150 µm'})
+        ]
+        return default_lines
 
 
     def calculate_sieve(self): 
@@ -198,6 +212,8 @@ class FineAggregate(models.Model):
                     line.write({'cumulative_retained': previous_line_record + line.percent_retained})
                     line.write({'passing_percent': 100-(previous_line_record + line.percent_retained)})
                     print("Previous Cumulative",previous_line_record)
+
+    
                     
 
  
@@ -400,97 +416,6 @@ class FineAggregate(models.Model):
 
 
 
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-    # ### Compute Visible
-    # @api.depends('tests')
-    # def _compute_visible(self):
-    #     loose_bulk_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Loose Bulk Density (LBD)')])
-    #     rodded_bulk_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Rodded Bulk Density (RBD)')])
-    #     specific_gravity_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Specific Gravity')])
-    #     water_absorption_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Water Absorption')])
-    #     sieve_analysis_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Sieve Analysis')])
-    #     soundness_na2so4_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Soundness Na2SO4')])
-    #     soundness_mgso4_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Soundness MgSO4')])
-    #     finer75_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Finer than 75 micron')])
-    #     clay_lump_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Deleterious content (Clay Lumps)')])
-    #     light_weight_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Deleterious content (Light weight Particles)')])
-    #     moisture_content_test = self.env['mechanical.fine.aggregate.test'].search([('name', '=', 'Moisture Content')])
-       
-        
-    #     for record in self:
-    #         record.loose_bulk_visible = False
-    #         record.rodded_bulk_visible = False
-    #         record.specific_gravity_visible = False
-    #         record.water_absorption_visible = False
-    #         record.sieve_visible = False
-    #         record.soundness_na2so4_visible = False
-    #         record.soundness_mgso4_visible = False
-    #         record.finer75_visible = False
-    #         record.clay_lump_visible = False
-    #         record.light_weight_visible = False
-    #         record.moisture_content_visible = False
-           
-           
-            
-    #         if loose_bulk_test in record.tests:
-    #             record.loose_bulk_visible = True
-
-    #         if rodded_bulk_test in record.tests:
-    #             record.rodded_bulk_visible = True
-
-    #         if specific_gravity_test in record.tests:
-    #             record.specific_gravity_visible = True
-
-    #         if water_absorption_test in record.tests:
-    #             record.water_absorption_visible = True
-
-    #         if sieve_analysis_test in record.tests:
-    #             record.sieve_visible = True
-
-    #         if soundness_na2so4_test in record.tests:
-    #             record.soundness_na2so4_visible = True
-
-    #         if soundness_mgso4_test in record.tests:
-    #             record.soundness_mgso4_visible = True
-
-    #         if finer75_test in record.tests:
-    #             record.finer75_visible = True
-
-    #         if clay_lump_test in record.tests:
-    #             record.clay_lump_visible = True
-            
-    #         if light_weight_test in record.tests:
-    #             record.light_weight_visible = True
-
-    #         if moisture_content_test in record.tests:
-    #             record.moisture_content_visible = True
-
-           
-
-
-            
-
-
-
-
-               
-
-
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()
@@ -544,7 +469,7 @@ class SieveAnalysisLine(models.Model):
     sieve_size = fields.Char(string="IS Sieve Size")
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
-    cumulative_retained = fields.Float(string="Cum. Retained %", compute="_compute_cumulative_retained", store=True)
+    cumulative_retained = fields.Float(string="Cum. Retained %", store=True)
     passing_percent = fields.Float(string="Passing %")
 
 
@@ -577,7 +502,8 @@ class SieveAnalysisLine(models.Model):
 
             if 'wt_retained' in vals:
                 for record in self:
-                    record.parent_id._compute_total()
+                    # record.parent_id._compute_total()
+                    pass
 
             return new_self
 

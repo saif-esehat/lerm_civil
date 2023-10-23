@@ -52,7 +52,7 @@
                                 <field name='discipline'/>
                                 <field name='material'/>
                                 <field name='size_id'/>
-                                <field name='start_date'/>
+                                <field name='start_date' required="1"/>
                                 <field name='witness_description'/>
                                 <field name='casting_date'/>
                                 <field name='remarks'/>
@@ -70,7 +70,7 @@
                                 <field name='group'/>
                                 <field name='witness_name'/>
                                 <field name='grade_id'/>
-                                <field name='end_date'/>
+                                <field name='end_date' required="1"/>
                                 <field name="witness_photo" filename='witness_photo_name'/>
                                 <field name='witness_photo_name' invisible='1'/>
                                 <field name='attachment' filename='attachment_name'/>
@@ -113,14 +113,16 @@
                         
                             <field name="parameters_result" nolabel="1">
                                 <tree editable="bottom" >
+                                    <field name="sequence" string="Sequence" widget="handle" />
                                     <field name="parameter"/>
                                     <field name="result" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <!-- <field name="context_data" /> -->
                                     <field name="calculation_type" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}"  />
                                     <field name="calculated" />
                                     <field name="unit" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    <field name="test_method" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" string="Parameter Test Method" />
+                                    <field name="specification_permissible_limit" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />                                    
                                     <field name="specification" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
-                                    <field name="test_method" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="nabl_status" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <field name="conformity_status" 
                                            decoration-success="conformity_status == 'pass'" 
@@ -133,6 +135,8 @@
                                     <button string="Open Form" name="open_form" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','parameter_based')], 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                 </tree>
                             </field>
+
+                            <field  name="sop" />
                         
 
                         <!-- <button string="Calculate Graph" name="calculate_graphs"  type="object"/> -->
@@ -277,6 +281,34 @@
             <field name="view_id" ref="lerm_civil.eln_result_update_wizard"/>
             <field name="target">new</field>
         </record>
+
+        <record id="lerm_civil_eln_search_view" model="ir.ui.view">
+        <field name="name">lerm.eln.search.view</field>
+        <field name="model">lerm.eln</field>
+        <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="eln_id" string="ELN ID" />
+                    <field name="srf_id" string="SRF ID" />
+                    <field name="technician" string="Technicians" />
+                    <field name="casting_date" string="Casting Date" />
+                    <field name="discipline" string="Discipline" />
+                    <field name="group" string="Group" />
+                    <field name="material" string="Material" />
+                    <field name="state" string="State" />
+                    <filter string="In-Test" name="state_in_test" domain="[('state', '=', '1-draft')]" />
+                    <filter string="In-Check" name="state_in_check" domain="[('state', '=', '2-confirm')]" />
+                    <filter string="Approved" name="state_approved" domain="[('state', '=', '3-approved')]" />
+                    <filter string="Rejected" name="state_rejected" domain="[('state', '=', '4-rejected')]" />
+                    <field name="start_date" string="Start Date" />
+                    <field name="end_date" string="End Date" />
+                    <field name="conformity" string="Conformity" />
+                    <field name="has_witness" string="Witness" />
+                    </search>
+                </field>
+            </record>
+
+
 <!-- 
         <record id="parameter_calculation_wizard_action" model="ir.actions.act_window">
             <field name="name">Calculation Wizard</field>

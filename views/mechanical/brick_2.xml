@@ -8,12 +8,7 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                   <!-- <group>
-                        <field name="srf_id" invisible="1"/>
-                        <field name="sample_id" invisible="1" />
-                        <field name="parameter_id"/>
-                       
-                    </group> -->
+
                     <group >
                         <h1>
                             <field name="name" readonly="1" nolabel="1"/>
@@ -33,10 +28,10 @@
                         </tree>
                       </field>
                     </group>
-                    <group>
+                    <!-- <group>
                       <field name="test_start_date"/>
                       <field name="test_end_date"/>
-                    </group>
+                    </group> -->
 
                         <!-- compressive Strength -->
 
@@ -207,6 +202,7 @@
 
                     <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                       <field name="avrg_compressive_strength"/>
+                      <field name="comp_strength_confirmity"/>
                     </group>
 
                           <!-- visual_observation -->
@@ -249,7 +245,10 @@
 
                     <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                         <h1>
-                            <field name="dimension_name" readonly="1" nolabel="1"/>
+                            <field name="dimension_name1" readonly="1" nolabel="1"/>
+                          <h1>
+                            20 Bricks
+                          </h1>
                             <field name="compressive_strength_visible" invisible='1'/>
                         </h1>
                     </group>
@@ -368,12 +367,9 @@
                     
                     <group attrs="{'invisible': [('water_absorbtion_visible', '=', False)]}">
                       <field name="avrg_water_absorption"/>
+                      <field name="water_absorption_confirmity"/>
                     </group>
-                  
-                    
-                     
-
-
+                 
                 </sheet>
             </form>
         </field>

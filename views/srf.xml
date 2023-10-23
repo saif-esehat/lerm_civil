@@ -9,7 +9,8 @@
             <p class="o_view_nocontent_smiling_face">Test Method</p>
         </field> -->
     </record>
-    <menuitem id="srf_form" groups="kes_hod_access_group,kes_admin_access_group" name="SRF" parent="lerm_transaction_data" action="srf_form_id" sequence="10" />
+    <!-- <menuitem id="srf_form" groups="kes_hod_access_group,kes_admin_access_group,lerm_civil.kes_access_srf" name="SRF" parent="lerm_transaction_data" action="srf_form_id" sequence="10" /> -->
+    <menuitem id="srf_form" name="SRF" parent="lerm_transaction_data" action="srf_form_id" sequence="10" />
 
     <record id="lerm_civil_srf_form" model="ir.ui.view">
         <field name="name">lerm.civil.srf.form</field>
@@ -128,6 +129,35 @@
                 <field name="name_work"/>
                 <field name="client_refrence"/>
             </tree>
+        </field>
+    </record>
+
+    <record id="lerm_civil_srf_search_view" model="ir.ui.view">
+    <field name="name">lerm.civil.srf.search.view</field>
+    <field name="model">lerm.civil.srf</field>
+    <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="srf_id" string="SRF ID" />
+                <field name="kes_number" string="KES No" />
+                <field name="srf_date" string="SRF Date" />
+                <field name="job_date" string="JOB Date" />
+                <field name="customer" string="Customer" />
+                <field name="billing_customer" string="Billing Customer" />
+                <field name="contact_person" string="Contact Person" />
+                <field name="client" string="Client" />
+                <field name="site_address" string="Site Address" />
+                <field name="name_work" string="Name of Work" />
+                <field name="client_refrence" string="Client Reference Letter" />
+                <field name="state" string="State" />
+                <filter string="Draft" name="state_draft" domain="[('state', '=', '1-draft')]" />
+                <filter string="Confirm" name="state_confirm" domain="[('state', '=', '2-confirm')]" />
+                <field name="sample_count" string="Sample Count" />
+                <field name="eln_count" string="ELN Count" />
+                <field name="casting" string="Casting" />
+                <filter string="Casting" name="casting_true" domain="[('casting', '=', True)]" />
+                <filter string="Not Casting" name="casting_false" domain="[('casting', '=', False)]" />
+            </search>
         </field>
     </record>
     

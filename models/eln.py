@@ -59,6 +59,13 @@ class ELN(models.Model):
     model_id = fields.Integer("Model ID")
     temperature = fields.Float("Temperature")
     instrument = fields.Char("Instrument")
+    sop = fields.Html(string='SOP',compute="comput_sop")
+    
+    
+    @api.depends("material")
+    def comput_sop(self):
+        for rec in self:
+            rec.sop = rec.material.sop
 
 
 
@@ -258,7 +265,7 @@ class ELN(models.Model):
             template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
         return {
             'type': 'ir.actions.report',
-            'report_type': 'qweb-pdf',
+            'report_type': 'qweb-html',
             'report_name': template_name,
             'report_file': template_name
         }
@@ -271,7 +278,7 @@ class ELN(models.Model):
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {
             'type': 'ir.actions.report',
-            'report_type': 'qweb-pdf',
+            'report_type': 'qweb-html',
             'report_name': template_name,
             'report_file': template_name
         }
@@ -406,10 +413,21 @@ class ParameteResultCalculationWizard(models.TransientModel):
             req_min = material_table.req_min
             req_max = material_table.req_max
             mu_neg = record.result - record.result*record.parameter.mu_value
+            print("mu_val")
+            print(record.parameter.mu_value)
+            print("req_min")
+            print(req_min)
+            print("req_max")
+            print(req_max)
+            print("mu_neg")
             print(mu_neg)
             mu_pos = record.result + record.result*record.parameter.mu_value
+            print("mu_pos")
             print(mu_pos)
-
+            print("req_min <= mu_neg <= req_max")
+            print(req_min <= mu_neg <= req_max)
+            print("req_min <= mu_pos <= req_max")
+            print(req_min <= mu_pos <= req_max)
         
             if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"
@@ -434,7 +452,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
         result_id = self.env.context.get('result_id')
         result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
-        self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
+        self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
         for input in self.inputs_lines:
             # import wdb; wdb.set_trace()
             self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
@@ -442,8 +460,7 @@ class ParameteResultCalculationWizard(models.TransientModel):
 
 
 
-        result_id.write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
-
+        result_id.sudo().write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
         return {'type': 'ir.actions.act_window_close'}
 
     # def calculate(self):
@@ -534,6 +551,7 @@ class ELNParametersResult(models.Model):
     calculated = fields.Boolean("Calculated")
     calculation_type = fields.Selection([('parameter_based', 'Parameter Based'), ('form_based', 'Form Based')],compute='_compute_calculation_type',string='Calculation Type')
     test_method = fields.Many2one('lerm_civil.test_method',string="Specification")
+    specification_permissible_limit = fields.Text(string="Specification",compute='_compute_specification')
     specification = fields.Text(string="Test Method", compute='_compute_specification')
     nabl_status = fields.Selection([
         ('nabl', 'NABL'),
@@ -546,6 +564,7 @@ class ELNParametersResult(models.Model):
     ],string='Conformity Status')
     model_id = fields.Integer(string="Model Id")
     result = fields.Float(string="Result",digits=(16,5))
+    sequence = fields.Char("Sequence")
 
 
     # @api.depends('result')
@@ -575,7 +594,9 @@ class ELNParametersResult(models.Model):
             specification = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
             print("specsi")
             print(specification)
+            table_record = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])
             record.specification = specification
+            record.specification_permissible_limit = table_record.permissable_limit
 
     def open_form(self):
         # import wdb; wdb.set_trace()

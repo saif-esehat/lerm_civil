@@ -1,0 +1,1626 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="lerm_fine_aggregate_datasheet">
+        <t t-call="web.html_container">
+            <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px;font-weight: bold">
+                    
+                    Fine Aggregate
+                </div>
+                
+                
+                
+                
+                <div class="container_eln" style="margin-top:5px">
+                    <table style="margin-top:20px">
+                        <tr cols="12">
+                            
+                            <td colspan="6">Job No :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.kes_no"></span>
+                            </td>
+                            <td colspan="6">Test Start Date: 
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.start_date"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Material: <span t-field="eln.material"></span>
+                            </td>
+                            <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <div t-if="data.specific_gravity_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px;font-weight: bold">
+                            Specific Gravity
+                        </div>
+                        <table style="margin-top:30px;">
+                            
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;max-width:100px ">
+                                        <span style="font-weight: bold;">
+                                            Particulars
+                                        </span>
+                                    </th>
+                                    <th style="text-align: center;max-width:100px">
+                                        <span style="font-weight: bold;">
+                                            Result
+                                        </span>
+                                    </th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of empty Pycnometer in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_empty_pycnometer" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of Pycnometer with full of water in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_pycnometer" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            [Weight of Pycnometer + Saturated surface dry Aggregate] in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_pycnometer_surface_dry"/>
+                                        </span>									
+                                    </td>
+                                    
+                                    
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            [Weight of Pycnometer + Saturated surface dry Aggregate + Water] in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_pycnometer_surface_dry_water"/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of Saturated surface dry Aggregate in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_saturated_surface_dry" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of Oven dried Aggregate in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_oven_dried" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Volume of water displaced by saturated surface dry aggregate 		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.volume_of_water" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            SPECIFIC GRAVITY 			 		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.specific_gravity"  t-options='{"widget": "float", "precision": 2}'/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Water absorption %		 		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.water_absorption"  t-options='{"widget": "float", "precision": 2}'/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                    
+                    <div t-if="data.water_absorption_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px;font-weight: bold">
+                            Water Absorption (%)
+                        </div>
+                        <table style="margin-top:30px;">
+                            
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;max-width:100px ">
+                                        <span style="font-weight: bold;">
+                                            Particulars
+                                        </span>
+                                    </th>
+                                    <th style="text-align: center;max-width:100px">
+                                        <span style="font-weight: bold;">
+                                            Result
+                                        </span>
+                                    </th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of empty Pycnometer in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_empty_pycnometer1" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of Pycnometer with full of water in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_pycnometer1" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            [Weight of Pycnometer + Saturated surface dry Aggregate] in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_pycnometer_surface_dry1"/>
+                                        </span>									
+                                    </td>
+                                    
+                                    
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            [Weight of Pycnometer + Saturated surface dry Aggregate + Water] in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_pycnometer_surface_dry_water1"/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of Saturated surface dry Aggregate in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_saturated_surface_dry1" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of Oven dried Aggregate in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_of_oven_dried1" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Volume of water displaced by saturated surface dry aggregate 		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.volume_of_water1" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            SPECIFIC GRAVITY 			 		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.specific_gravity1"  t-options='{"widget": "float", "precision": 2}'/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Water absorption %		 		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.water_absorption1"  t-options='{"widget": "float", "precision": 2}'/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                    
+                    
+                    <div t-if="data.loose_bulk_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px;font-weight: bold">
+                            Loose Bulk Density (LBD)						
+                        </div>
+                        <table style="margin-top:30px;">
+                            
+                            <tbody>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of Empty Bucket in kg
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.weight_empty_bucket" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Volume of Bucket in cubic meter
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.volume_of_bucket" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            [Sample Weight + Bucket Empty Weight] in kg
+                                            
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.sample_plus_bucket"/>
+                                        </span>									
+                                    </td>
+                                    
+                                    
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Sample Weight in kg
+                                            
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.sample_weight"/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Loose Bulk Density in kg per cubic meter
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.loose_bulk_density"  t-options='{"widget": "float", "precision": 2}'/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                    
+                    <div t-if="data.rodded_bulk_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px;font-weight: bold">
+                            Rodded Bulk Density (RBD)														
+                        </div>
+                        <table style="margin-top:30px;">
+                            
+                            <tbody>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of Empty Bucket in kg
+                                            
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.weight_empty_bucket1" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Volume of Bucket in cubic meter
+                                            
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.volume_of_bucket1" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            [S[Sample Weight + Bucket Empty Weight] in kg
+                                            
+                                            
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.sample_plus_bucket1"/>
+                                        </span>									
+                                    </td>
+                                    
+                                    
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Sample Weight in kg
+                                            
+                                            
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.sample_weight1"/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Rodded Bulk Density in kg per cubic meter
+                                            
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.rodded_bulk_density1"  t-options='{"widget": "float", "precision": 2}' />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div t-if="data.moisture_content_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px;font-weight: bold">
+                            Moisture Content (%)
+                        </div>
+                        <table style="margin-top:30px;">
+                            
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;max-width:100px ">
+                                        <span style="font-weight: bold;">
+                                            Particulars
+                                        </span>
+                                    </th>
+                                    <th style="text-align: center;max-width:100px">
+                                        <span style="font-weight: bold;">
+                                            Result
+                                        </span>
+                                    </th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Me = weight in g of container filled up to the mark with water
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_in_container" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Ms = weight in g of the sample
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_in_sample" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            M = weight in g of the sample and container filled to the mark with water
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_in_sample_and_container"/>
+                                        </span>									
+                                    </td>
+                                    
+                                    
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Vs = (Me + Ms) - M	
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.vs"/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Md =  Specific Gravity
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.md" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Vd = Ms / Md		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.vd" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Vd = (Vs-Vd) / (Ms-Vd)*100 			 		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.vdd"  t-options='{"widget": "float", "precision": 2}'/>
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                    
+                    
+                    <div t-if="data.finer75_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px;font-weight: bold">
+                            Finer than 75 micron
+                        </div>
+                        <table style="margin-top:30px;">
+                            
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;max-width:100px ">
+                                        <span style="font-weight: bold;">
+                                            Particulars
+                                        </span>
+                                    </th>
+                                    <th style="text-align: center;max-width:100px">
+                                        <span style="font-weight: bold;">
+                                            Observation
+                                        </span>
+                                    </th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            weight of sample in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_sample_finer75" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of dry sample after retained in 75 microns		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_dry_sample_finer75" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Material finer than 75 micron		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.material_finer75"/>
+                                        </span>									
+                                    </td>
+                                </tr>
+                                
+                                
+                                
+                                
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                    
+                    
+                    <div t-if="data.clay_lump_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px;font-weight: bold">
+                            Deleterious content (Clay Lumps)
+                        </div>
+                        <table style="margin-top:30px;">
+                            
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;max-width:100px ">
+                                        <span style="font-weight: bold;">
+                                            Particulars
+                                        </span>
+                                    </th>
+                                    <th style="text-align: center;max-width:100px">
+                                        <span style="font-weight: bold;">
+                                            Observation
+                                        </span>
+                                    </th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            weight of sample in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_sample_clay_lumps" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of sample after Removal of Clay Lumps		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_dry_sample_clay_lumps" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Clay Lumps in %		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.clay_lumps_percent"/>
+                                        </span>									
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                    
+                    
+                    <div t-if="data.light_weight_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px;font-weight: bold">
+                            Deleterious content (Light weight Particles)
+                        </div>
+                        <table style="margin-top:30px;">
+                            
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;max-width:100px ">
+                                        <span style="font-weight: bold;">
+                                            Particulars
+                                        </span>
+                                    </th>
+                                    <th style="text-align: center;max-width:100px">
+                                        <span style="font-weight: bold;">
+                                            Observation
+                                        </span>
+                                    </th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            weight of sample in gms
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_sample_light_weight" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Weight of Decanted sample (Light weight particle)		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.wt_dry_sample_light_weight" />
+                                        </span>									
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: ">
+                                        <span style="text-align: center;">
+                                            Light Weight Particle in % 		
+                                        </span>    
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        <span style="text-align: center;" >
+                                            <span t-field="data.light_weight_percent"  t-options='{"widget": "float", "precision": 2}'/>
+                                        </span>									
+                                    </td>
+                                </tr>
+                                
+                                
+                                
+                                
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                    
+                    <!-- Soundness Na2SO4  -->
+                    
+                    <div t-if="data.soundness_na2so4_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            Soundness Na2SO4
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1">Sr No.
+                                </td>
+                                <td colspan="2">Sieve Size Passing
+                                </td>
+                                <td colspan="1">Sieve Size Retained
+                                </td>
+                                <td colspan="2">Weight of test fraction before test in gm.
+                                </td>
+                                <td colspan="2">Weight of test feaction Passing Finer Sieve After test
+                                </td>
+                                <td colspan="2">Grading of Original sample in %
+                                </td>
+                                <td colspan="1">Percentage Passing Finer Sieve After test (Percentage Loss)
+                                </td>
+                                <td colspan="1">Commulative percentage Loss
+                                </td>
+                                
+                            </tr>
+                            
+                            <t t-set="e" t-value="0"/>
+                            <tr t-foreach="data.soundness_na2so4_child_lines" t-as="r">
+                                <td colspan="1">
+                                    <div>
+                                        <span t-esc="e + 1" />
+                                        <t t-set="e" t-value="e+1"/>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['sieve_size_passing']"/>
+                                </td>
+                                <td colspan="1">
+                                    <span t-esc="r['sieve_size_retained']"/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['weight_before_test']"/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['weight_after_test']"/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['grading_original_sample']"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td> 
+                                <td colspan="1">
+                                    <span t-esc="r['passing_percent']"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td colspan="1">
+                                    <span t-esc="r['cumulative_loss_percent']"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td>   
+                            </tr>
+                        </table>
+                        
+                        <table style="margin-top:5px">
+                            <tr cols="12">
+                                <td colspan="6">Total :
+                                    <![CDATA[&nbsp;]]>
+                                </td>
+                                <td colspan="6">
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="data.total_na2so4"/>
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6">Soundness :
+                                    <![CDATA[&nbsp;]]>
+                                </td>
+                                <td colspan="6">
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="data.soundness_na2so4"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    
+                    <!-- Soundness MgSO4  -->
+                    
+                    <div t-if="data.soundness_mgso4_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            Soundness MgSO4
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1">Sr No.
+                                </td>
+                                <td colspan="2">Sieve Size Passing
+                                </td>
+                                <td colspan="1">Sieve Size Retained
+                                </td>
+                                <td colspan="2">Weight of test fraction before test in gm.
+                                </td>
+                                <td colspan="2">Weight of test feaction Passing Finer Sieve After test
+                                </td>
+                                <td colspan="2">Grading of Original sample in %
+                                </td>
+                                <td colspan="1">Percentage Passing Finer Sieve After test (Percentage Loss)
+                                </td>
+                                <td colspan="1">Commulative percentage Loss
+                                </td>
+                                
+                            </tr>
+                            
+                            <t t-set="f" t-value="0"/>
+                            <tr t-foreach="data.soundness_mgso4_child_lines" t-as="r">
+                                <td colspan="1">
+                                    <div>
+                                        <span t-esc="f + 1" />
+                                        <t t-set="f" t-value="f+1"/>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['sieve_size_passing']"/>
+                                </td>
+                                <td colspan="1">
+                                    <span t-esc="r['sieve_size_retained']"/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['weight_before_test']"/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['weight_after_test']"/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['grading_original_sample']"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td> 
+                                <td colspan="1">
+                                    <span t-esc="r['passing_percent']"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td colspan="1">
+                                    <span t-esc="r['cumulative_loss_percent']"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td> 
+                            </tr>  
+                        </table>
+                        <table style="margin-top:5px">
+                            <tr cols="12">
+                                <td colspan="6">Total :
+                                    <![CDATA[&nbsp;]]>
+                                </td>
+                                <td colspan="6">
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="data.total_mgso4"/>
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6">Soundness :
+                                    <![CDATA[&nbsp;]]>
+                                </td>
+                                <td colspan="6">
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="data.soundness_mgso4"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    
+                    <!-- Sieve Analysis  -->
+                    <div t-if="data.sieve_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            Sieve Analysis
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="2">Sr No.
+                                </td>
+                                <td colspan="2">IS Sieve Size
+                                </td>
+                                <td colspan="2">Wt. Retained in gms
+                                </td>
+                                <td colspan="2">% Retained
+                                </td>
+                                <td colspan="2">Cum. Retained %
+                                </td>
+                                <td colspan="2">Passing %
+                                </td>
+                                
+                                
+                            </tr>
+                            
+                            <t t-set="k" t-value="0"/>
+                            <tr t-foreach="data.sieve_analysis_child_lines" t-as="r">
+                                <td colspan="2">
+                                    <div>
+                                        <span t-esc="k + 1" />
+                                        <t t-set="k" t-value="k+1"/>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['sieve_size']"/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['wt_retained']"/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['percent_retained']"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['cumulative_retained']"  t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="r['passing_percent']" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="margin-top:20px">
+                            <tr cols="12">
+                                <td colspan="6">Total :
+                                    <![CDATA[&nbsp;]]>
+                                </td>
+                                <td colspan="6">
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="data.total_sieve_analysis"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    
+                    <!-- authorizeRowDataSheet -->
+                    
+                    <div class="authorizeRowDataSheet">
+                        <div>
+                            <div>
+                                <b>
+                                    (JR Chemist)
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    Tested By
+                                </b>
+                            </div>
+                        </div>
+                        <div style="margin-left:500px">
+                            <div>
+                                <b>
+                                    Mechanical Department (HOD)
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    Checked By
+                                </b>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                </div>
+                
+            </t>
+        </t>
+    </template>
+
+    <template id="fine_aggregte_mech_report">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
+				<div style="text-align:center;margin-top:10px">
+					<p style="font-size:15px"><b>Test Report</b></p>
+				</div>
+
+				<div class="container_eln">
+					<div t-foreach="eln" t-as="o">
+						<table>
+							<tr>
+								<td colspan="3">Report no :
+								</td>
+								<td colspan="3">
+									<span t-field="o.eln_id"/>
+								</td>
+								<td colspan="3">Report Date :
+								</td>
+								<td colspan="3">
+									<span t-field="o.srf_date"/>
+								</td>
+								<td colspan="3">ULR NO :
+								</td>
+								<td colspan="3">
+									<span t-field="o.sample_id.ulr_no"/>
+								</td>
+							</tr>
+						</table>
+						<table style="margin-top:10px;">
+							<tr>
+								<td colspan="12">Customer Party Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.street"/>
+									<span t-field="o.srf_id.customer.street2"/>
+									<span t-field="o.srf_id.customer.city"/>
+									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+									<span t-field="o.srf_id.customer.state_id"/>
+											,
+									<span t-field="o.srf_id.customer.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Project / Site Address :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address.name"/>
+									<span t-field="o.srf_id.site_address.street"/>
+									<span t-field="o.srf_id.site_address.street2"/>
+									<span t-field="o.srf_id.site_address.city"/>
+									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
+									<span t-field="o.srf_id.site_address.state_id"/>
+											,
+									<span t-field="o.srf_id.site_address.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.start_date"/>
+								</td>
+								<td colspan="6">Test End Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.end_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.client_sample_id"/>
+								</td>
+								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_received_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Size :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.size_id.size"/>
+								</td>
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.grade_id.grade"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Brand :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.brand"/>
+								</td>
+								<td colspan="6">Consultant Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Client Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">Client Reference :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client_refrence"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Discipline :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.discipline.discipline"/>
+								</td>
+								<td colspan="6">Group :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.group.group"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td colspan="12">Material/Test Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.material.name"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div style="margin-top:10px;">
+						<!-- <span t-field="data.dimension_name1"/> -->
+                        Results
+					</div>
+					<div style="margin-top:10px;">
+						<!-- <span t-field="data.dimension_name1"/> -->
+                        1. Sieve Analysis (Gradation) :- <![CDATA[&nbsp;]]> 
+						<span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+					</div>
+
+
+                    <table style="margin-top:10px;">
+                        <tr>
+                            <td>IS Seive</td>
+                            <td>% of wt passing</td>
+                            <td>Requirement as per IS:383:2016 Zone II</td>
+						</tr>
+
+                        <tr>
+                            <td>10 mm</td>
+                            <td></td>
+                            <td>100</td>
+						</tr>
+
+                        <tr>
+                            <td>4.75 mm</td>
+                            <td></td>
+                            <td>90 - 100</td>
+						</tr>
+                        <tr>
+                            <td>2.36 mm</td>
+                            <td></td>
+                            <td>75 - 100</td>
+						</tr>
+                        <tr>
+                            <td>1.18 mm</td>
+                            <td></td>
+                            <td>55 - 90</td>
+						</tr>
+                        <tr>
+                            <td>600 μm</td>
+                            <td></td>
+                            <td>35 - 59</td>
+						</tr>
+                        <tr>
+                            <td>300 μm</td>
+                            <td></td>
+                            <td>8 - 30</td>
+						</tr>
+                        <tr>
+                            <td>150 μm</td>
+                            <td></td>
+                            <td>0 - 10</td>
+						</tr>
+                       
+                    </table>
+
+                    <table style="margin-top:10px;">
+                        <tr>
+                            <td>Sr No</td>
+                            <td>Name of Test</td>
+                            <td>Test Method</td>
+                            <td>Test result</td>
+                            <td>Limit as Per IS:383 : 2016</td>
+						</tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Fineness Modulus</td>
+                            <td>
+						        <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/> -->
+                            </td>
+                            <td></td>
+                            <td>--</td>
+						</tr>
+                    </table>
+
+                    <table style="margin-top:10px;">
+                        <tr>
+                            <td>Sr No</td>
+                            <td>Name of Test</td>
+                            <td>Test Method</td>
+                            <td>Test Result</td>
+                            <td>Limit as Per IS:382 : 2016</td>
+						</tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Specific Gravity</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.specific_gravity"/>
+                            </td>
+                            <td>2.1 to 3.2</td>
+						</tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Water Absorbtion (%)</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.water_absorption"/>
+                            </td>
+                            <td>MAX 5%</td>
+						</tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Loose Bulk Density (kg/litre)</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.loose_bulk_density"/>
+                            </td>
+                            <td>--</td>
+						</tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Rodded Bulk Density (kg/litre)</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.rodded_bulk_density1"/>
+                            </td>
+                            <td>--</td>
+						</tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Moisture Content (%)</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.vdd"/>
+                            </td>
+                            <td>--</td>
+						</tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Soundness by MgSO4</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.soundness_mgso4"/>
+                            </td>
+                            <td>MAX 15%</td>
+						</tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Soundness by Na2SO4</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.soundness_na2so4"/>
+                            </td>
+                            <td>MAX 10%</td>
+						</tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Deleterious content (Clay Lumps)</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.clay_lumps_percent"/>
+                            </td>
+                            <td>MAX 1%</td>
+						</tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Finer than 75 micron</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.material_finer75"/>
+                            </td>
+                            <td>MAX 15%</td>
+						</tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Deleterious content (Light weight Particles)</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.light_weight_percent"/>
+                            </td>
+                            <td>MAX 1%</td>
+						</tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Name of Test</td>
+                            <td>
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
+                            </td>
+                            <td>
+						        <span t-field="data.specific_gravity"/>
+                            </td>
+                            <td>Limit as Per IS:382 : 2016</td>
+						</tr>
+                    </table>
+                    
+
+
+					<div style="page-break-inside: avoid;">
+						<div style="margin-top:20px" class="noteContainer">
+							<div>
+								<b>Note :-</b>
+							</div>
+							<div>
+								<ul>
+									<li>
+										The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+									</li>
+									<li>
+										Sample(s) was/were not drawn by laboratory.
+									</li>
+									<li>
+										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+									</li>
+									<li t-if="eln.remarks">
+										<span t-esc="eln.remarks"/>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="signatureContainer girdgird">
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										Chemical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+							<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. 
+                                    <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										Chemical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+						</div>
+						<div style="text-align:center;margin-top:25px">
+							......End of Report......
+						</div>
+					</div>
+
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

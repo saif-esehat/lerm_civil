@@ -1,7 +1,7 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import math
-
+import re
 
 class CoarseAggregateMechanical(models.Model):
     _name = "mechanical.coarse.aggregate"
@@ -12,6 +12,13 @@ class CoarseAggregateMechanical(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    size_id = fields.Many2one('lerm.size.line',compute="_compute_size_id")
+
+    @api.depends("eln_ref")
+    def _compute_size_id(self):
+        for record in self:
+            print("Size iD",record.eln_ref.size_id)
+            record.size_id = record.eln_ref.size_id.id
 
 
     @api.depends('eln_ref')
@@ -47,7 +54,7 @@ class CoarseAggregateMechanical(models.Model):
         for record in self:
             if record.crushing_value_child_lines:
                 sum_crushing_values = sum(record.crushing_value_child_lines.mapped('crushing_value'))
-                record.average_crushing_value = sum_crushing_values / len(record.crushing_value_child_lines)
+                record.average_crushing_value = round((sum_crushing_values / len(record.crushing_value_child_lines)),1)
             else:
                 record.average_crushing_value = 0.0
    
@@ -59,26 +66,68 @@ class CoarseAggregateMechanical(models.Model):
     abrasion_visible = fields.Boolean("Abrasion Visible",compute="_compute_visible")
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    abrasion_value_child_lines = fields.One2many('mechanical.abrasion.value.coarse.aggregate.line','parent_id',string="Parameter")
-   
+    # abrasion_value_child_lines = fields.One2many('mechanical.abrasion.value.coarse.aggregate.line','parent_id',string="Parameter")
+    total_weight_sample_abrasion = fields.Integer(string="Total weight of Sample in gms")
+    weight_passing_sample_abrasion = fields.Integer(string="Weight of Passing sample in 1.70 mm IS sieve in gms")
+    weight_retain_sample_abrasion = fields.Integer(string="Weight of Retain sample in 1.70 mm IS sieve in gms",compute="_compute_weight_retain_sample_abrasion")
+    abrasion_value_percentage = fields.Float(string="Abrasion Value (%)",compute="_compute_sample_weight")
+
+
+    @api.depends('total_weight_sample_abrasion', 'weight_passing_sample_abrasion')
+    def _compute_weight_retain_sample_abrasion(self):
+        for line in self:
+            line.weight_retain_sample_abrasion = line.total_weight_sample_abrasion - line.weight_passing_sample_abrasion
+
+
+    @api.depends('total_weight_sample_abrasion', 'weight_passing_sample_abrasion')
+    def _compute_sample_weight(self):
+        for line in self:
+            if line.total_weight_sample_abrasion != 0:
+                line.abrasion_value_percentage = (line.weight_passing_sample_abrasion / line.total_weight_sample_abrasion) * 100
+            else:
+                line.abrasion_value_percentage = 0.0
 
 
     # Specific Gravety 
     specific_gravity_name = fields.Char("Name",default="Specific Gravity & Water Absorption")
     specific_gravity_visible = fields.Boolean("Specific Gravity Visible",compute="_compute_visible")
 
-    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    specific_gravity_child_lines = fields.One2many('mechanical.specific.gravity.and.water.absorption.line','parent_id',string="Parameter")
-   
+    # specific_gravity_child_lines = fields.One2many('mechanical.specific.gravity.and.water.absorption.line','parent_id',string="Parameter")
+    
+
+    wt_surface_dry = fields.Integer(string="Weight of saturated surface dry (SSD) sample in air in gms")
+    wt_sample_inwater = fields.Integer(string="Weight of saturated sample in water in gms")
+    oven_dried_wt = fields.Integer(string="Oven dried weight of sample in gms")
+    specific_gravity = fields.Float(string="Specific Gravity",compute="_compute_specific_gravity")
+    water_absorption = fields.Float(string="Water absorption  %",compute="_compute_water_absorption")
+
+
+    @api.depends('wt_surface_dry', 'wt_sample_inwater', 'oven_dried_wt')
+    def _compute_specific_gravity(self):
+        for line in self:
+            if line.wt_surface_dry - line.wt_sample_inwater != 0:
+                line.specific_gravity = round((line.oven_dried_wt / (line.wt_surface_dry - line.wt_sample_inwater)),2)
+            else:
+                line.specific_gravity = 0.0
+
+
+
+    @api.depends('wt_surface_dry', 'oven_dried_wt')
+    def _compute_water_absorption(self):
+        for line in self:
+            if line.oven_dried_wt != 0:
+                line.water_absorption = round((((line.wt_surface_dry - line.oven_dried_wt) / line.oven_dried_wt) * 100),2)
+            else:
+                line.water_absorption = 0.0
+
 
     # Impact Value 
     impact_value_name = fields.Char("Name",default="Aggregate Impact Value")
     impact_visible = fields.Boolean("Impact Visible",compute="_compute_visible")
 
-    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     impact_value_child_lines = fields.One2many('mechanical.impact.value.coarse.aggregate.line','parent_id',string="Parameter")
 
-    average_impact_value = fields.Float(string="Average Aggregate Crushing Value", compute="_compute_average_impact_value")
+    average_impact_value = fields.Float(string="Average Aggregate Impact Value", compute="_compute_average_impact_value")
 
 
     @api.depends('impact_value_child_lines.impact_value')
@@ -86,7 +135,7 @@ class CoarseAggregateMechanical(models.Model):
         for record in self:
             if record.impact_value_child_lines:
                 sum_impact_value = sum(record.impact_value_child_lines.mapped('impact_value'))
-                record.average_impact_value = sum_impact_value / len(record.impact_value_child_lines)
+                record.average_impact_value = round((sum_impact_value / len(record.impact_value_child_lines)),1)
             else:
                 record.average_impact_value = 0.0
 
@@ -119,7 +168,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_load_10percent_fine_values(self):
         for record in self:
             if record.percent_of_fines != 0:
-                record.load_10percent_fine_values = 14 * record.load_applied_10fine/record.percent_of_fines + 4
+                record.load_10percent_fine_values = round((14 * record.load_applied_10fine/record.percent_of_fines + 4),1)
             else:
                 record.load_10percent_fine_values = 0
 
@@ -144,7 +193,7 @@ class CoarseAggregateMechanical(models.Model):
     @api.depends('soundness_na2so4_child_lines.cumulative_loss_percent')
     def _compute_soundness_na2so4(self):
         for record in self:
-            record.soundness_na2so4 = sum(record.soundness_na2so4_child_lines.mapped('cumulative_loss_percent'))
+            record.soundness_na2so4 = round((sum(record.soundness_na2so4_child_lines.mapped('cumulative_loss_percent'))),2)
 
 
     # Soundness MgSO4
@@ -166,7 +215,7 @@ class CoarseAggregateMechanical(models.Model):
     @api.depends('soundness_mgso4_child_lines.cumulative_loss_percent')
     def _compute_soundness_mgso4(self):
         for record in self:
-            record.soundness_mgso4 = sum(record.soundness_mgso4_child_lines.mapped('cumulative_loss_percent'))
+            record.soundness_mgso4 = round((sum(record.soundness_mgso4_child_lines.mapped('cumulative_loss_percent'))),2)
 
 
     #Elongation Index
@@ -202,7 +251,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_aggregate_elongation(self):
         for record in self:
             if record.elongated_retain_total != 0:
-                record.aggregate_elongation = record.elongated_retain_total / record.wt_retained_total_elongation * 100
+                record.aggregate_elongation = round((record.elongated_retain_total / record.wt_retained_total_elongation * 100),1)
             else:
                 record.aggregate_elongation = 0.0
 
@@ -232,7 +281,7 @@ class CoarseAggregateMechanical(models.Model):
     flakiness_child_lines = fields.One2many('mechanical.flakiness.index.line','parent_id',string="Parameter")
     wt_retained_total_flakiness = fields.Float(string="Wt Retained Total",compute="_compute_wt_retained_total_flakiness")
     flaky_passing_total = fields.Float(string="Flaky Passing Total",compute="_compute_flaky_passing")
-    aggregate_flakiness = fields.Float(string="aggregate Flakiness Value in %",compute="_compute_aggregate_flakiness")
+    aggregate_flakiness = fields.Float(string="Aggregate Flakiness Value in %",compute="_compute_aggregate_flakiness")
     combine_elongation_flakiness = fields.Float(string="Combine Elongation & Flakiness Value in %",compute="_compute_combine_elongation_flakiness")
     # elongated_retain_total = fields.Float(string="Elongated Retained Total",compute="_compute_elongated_retain")
     # aggregate_elongation = fields.Float(string="aggregate Elongation Value in %",compute="_compute_aggregate_elongation")
@@ -252,7 +301,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_aggregate_flakiness(self):
         for record in self:
             if record.flaky_passing_total != 0:
-                record.aggregate_flakiness = record.flaky_passing_total / record.wt_retained_total_flakiness * 100
+                record.aggregate_flakiness = round((record.flaky_passing_total / record.wt_retained_total_flakiness * 100),1)
             else:
                 record.aggregate_flakiness = 0.0
 
@@ -277,7 +326,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_finer75(self):
         for record in self:
             if record.wt_sample_finer75 != 0:
-                record.material_finer75 = (record.wt_sample_finer75 - record.wt_dry_sample_finer75)/record.wt_sample_finer75 * 100
+                record.material_finer75 = round(((record.wt_sample_finer75 - record.wt_dry_sample_finer75)/record.wt_sample_finer75 * 100),1)
             else:
                 record.material_finer75 = 0
 
@@ -293,7 +342,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_clay_lumps(self):
         for record in self:
             if record.wt_sample_clay_lumps != 0:
-                record.clay_lumps_percent = (record.wt_sample_clay_lumps - record.wt_dry_sample_clay_lumps)/record.wt_sample_clay_lumps * 100
+                record.clay_lumps_percent = round(((record.wt_sample_clay_lumps - record.wt_dry_sample_clay_lumps)/record.wt_sample_clay_lumps * 100),1)
             else:
                 record.clay_lumps_percent = 0
 
@@ -309,7 +358,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_light_weight(self):
         for record in self:
             if record.wt_sample_light_weight != 0:
-                record.light_weight_percent = (record.wt_sample_light_weight - record.wt_dry_sample_light_weight)/record.wt_sample_light_weight * 100
+                record.light_weight_percent = round(((record.wt_sample_light_weight - record.wt_dry_sample_light_weight)/record.wt_sample_light_weight * 100),1)
             else:
                 record.light_weight_percent = 0
 
@@ -320,14 +369,54 @@ class CoarseAggregateMechanical(models.Model):
     loose_bulk_density_name = fields.Char("Name",default="Loose Bulk Density (LBD)")
     loose_bulk_visible = fields.Boolean("Loose Bulk Density Visible",compute="_compute_visible")
 
-    loose_bulk_density_child_lines = fields.One2many('coarse.aggregate.loose.bulk.density.line','parent_id',string="Parameter")
+    # loose_bulk_density_child_lines = fields.One2many('coarse.aggregate.loose.bulk.density.line','parent_id',string="Parameter")
+    weight_empty_bucket_loose = fields.Float(string="Weight of Empty Bucket in kg")
+    volume_of_bucket_loose = fields.Float(string="Volume of Bucket in cubic meter")
+    sample_plus_bucket_loose = fields.Float(string="[Sample Weight + Bucket  Weight] in kg")
+    sample_weight_loose = fields.Float(string="Sample Weight in kg",compute="_compute_sample_weight_loose")
+    loose_bulk_density = fields.Float(string="Loose Bulk Density in kg per cubic meter",compute="_compute_loose_bulk_density")
 
+
+    @api.depends('sample_plus_bucket_loose', 'weight_empty_bucket_loose')
+    def _compute_sample_weight_loose(self):
+        for record in self:
+            record.sample_weight_loose = record.sample_plus_bucket_loose - record.weight_empty_bucket_loose
+
+    
+
+    @api.depends('sample_weight_loose', 'volume_of_bucket_loose')
+    def _compute_loose_bulk_density(self):
+        for record in self:
+            if record.volume_of_bucket_loose:
+                record.loose_bulk_density = round((record.sample_weight_loose / record.volume_of_bucket_loose),2)
+            else:
+                record.loose_bulk_density = 0.0
 
     rodded_bulk_density_name = fields.Char("Name",default="Rodded Bulk Density (RBD)")
     rodded_bulk_visible = fields.Boolean("Rodded Bulk Density Visible",compute="_compute_visible")
 
-    rodded_bulk_density_child_lines = fields.One2many('coarse.aggregate.rodded.bulk.density.line','parent_id',string="Parameter")
+    # rodded_bulk_density_child_lines = fields.One2many('coarse.aggregate.rodded.bulk.density.line','parent_id',string="Parameter")
+    weight_empty_bucket_rodded = fields.Float(string="Weight of Empty Bucket in kg")
+    volume_of_bucket_rodded = fields.Float(string="Volume of Bucket in cubic meter")
+    sample_plus_bucket_rodded = fields.Float(string="[Sample Weight + Bucket  Weight] in kg")
+    sample_weight_rodded = fields.Float(string="Sample Weight in kg",compute="_compute_sample_weight_rodded")
+    rodded_bulk_density = fields.Float(string="Rodded Bulk Density in kg per cubic meter",compute="_compute_rodded_bulk_density")
 
+
+    @api.depends('sample_plus_bucket_rodded', 'weight_empty_bucket_rodded')
+    def _compute_sample_weight_rodded(self):
+        for record in self:
+            record.sample_weight_rodded = record.sample_plus_bucket_rodded - record.weight_empty_bucket_rodded
+
+    
+
+    @api.depends('sample_weight_rodded', 'volume_of_bucket_rodded')
+    def _compute_rodded_bulk_density(self):
+        for record in self:
+            if record.volume_of_bucket_rodded:
+                record.rodded_bulk_density = round((record.sample_weight_rodded / record.volume_of_bucket_rodded),2)
+            else:
+                record.rodded_bulk_density = 0.0
 
     # Sieve Analysis 
     sieve_analysis_name = fields.Char("Name",default="Sieve Analysis")
@@ -335,7 +424,50 @@ class CoarseAggregateMechanical(models.Model):
 
     sieve_analysis_child_lines = fields.One2many('mechanical.coarse.aggregate.sieve.analysis.line','parent_id',string="Parameter")
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
-    # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative_sieve")
+
+
+    def default_get(self, fields):
+        print("From Default Value")
+        res = super(CoarseAggregateMechanical, self).default_get(fields)
+
+        coarse_sieve_20mm = ['40 mm', '20 mm', '10 mm', '4.75 mm', 'pan']
+        coarse_sieve_10mm = ['12.5 mm', '10 mm', '4.75 mm', '2.36 mm', 'pan']
+
+        default_sieve_sizes = []
+        eln_ref = res['eln_ref']
+
+        size_id = self.env['lerm.eln'].search([('id','=',eln_ref)]).size_id.size
+
+        print("Size",size_id)
+        pattern = r'\d+'
+        match = re.search(pattern, size_id)
+        if match:
+            number = int(match.group())
+            print("Number",number)
+            if number == 10:
+                for i in range(5):  # You can change the number of default lines as needed
+                    size = {
+                        'sieve_size': coarse_sieve_10mm[i] # Set the default product
+                        # Set the default quantity
+                    }
+                    default_sieve_sizes.append((0, 0, size))
+                res['sieve_analysis_child_lines'] = default_sieve_sizes
+            elif number == 20:
+                for i in range(5):  # You can change the number of default lines as needed
+                    size = {
+                        'sieve_size': coarse_sieve_20mm[i] # Set the default product
+                        # Set the default quantity
+                    }
+                    default_sieve_sizes.append((0, 0, size))
+                res['sieve_analysis_child_lines'] = default_sieve_sizes
+            else :
+                res['sieve_analysis_child_lines'] = default_sieve_sizes
+
+
+        else:
+            pass
+        
+        return res
 
 
     def calculate_sieve(self): 
@@ -346,20 +478,21 @@ class CoarseAggregateMechanical(models.Model):
                 if previous_line == 0:
                     if line.percent_retained == 0:
                         # print("Percent retained 0",line.percent_retained)
-                        line.write({'cumulative_retained': line.percent_retained})
+                        line.write({'cumulative_retained': round(line.percent_retained,2)})
                         line.write({'passing_percent': 100 })
                     else:
                         # print("Percent retained else",line.percent_retained)
-                        line.write({'cumulative_retained': line.percent_retained})
-                        line.write({'passing_percent': 100 -line.percent_retained})
+                        line.write({'cumulative_retained': round(line.percent_retained,2)})
+                        line.write({'passing_percent': round(100 -line.percent_retained,2)})
                 else:
                     previous_line_record = self.env['mechanical.coarse.aggregate.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
-                    line.write({'cumulative_retained': previous_line_record + line.percent_retained})
-                    line.write({'passing_percent': 100-(previous_line_record + line.percent_retained)})
+                    line.write({'cumulative_retained': round(previous_line_record + line.percent_retained,2)})
+                    line.write({'passing_percent': round(100-(previous_line_record + line.percent_retained),2)})
                     print("Previous Cumulative",previous_line_record)
                     
 
- 
+    
+
 
     @api.depends('sieve_analysis_child_lines.wt_retained')
     def _compute_total_sieve(self):
@@ -435,7 +568,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_angularity_number(self):
         for record in self:
             if (record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity) != 0:
-                record.angularity_number = 67 - (100 * record.mean_wt_aggregate)/(record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity)
+                record.angularity_number = round((67 - (100 * record.mean_wt_aggregate)/(record.wt_water_required_angularity * record.specific_gravity_aggregate_angularity)),2)
             else:
                 record.angularity_number = 0
 
@@ -533,7 +666,7 @@ class AggregateGradingLine(models.Model):
     sieve_size = fields.Char(string="IS Sieve Size")
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
-    cumulative_retained = fields.Float(string="Cum. Retained %", compute="_compute_cumulative_retained", store=True)
+    cumulative_retained = fields.Float(string="Cum. Retained %", store=True)
     passing_percent = fields.Float(string="Passing %")
 
 
@@ -619,7 +752,7 @@ class SieveAnalysisLine(models.Model):
     sieve_size = fields.Char(string="IS Sieve Size")
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
-    cumulative_retained = fields.Float(string="Cum. Retained %", compute="_compute_cumulative_retained", store=True)
+    cumulative_retained = fields.Float(string="Cum. Retained %", store=True)
     passing_percent = fields.Float(string="Passing %")
 
 
@@ -646,7 +779,7 @@ class SieveAnalysisLine(models.Model):
         if 'parent_id' in vals or 'wt_retained' in vals:
             for record in self:
                 if record.parent_id and record.parent_id == vals.get('parent_id') and 'wt_retained' in vals:
-                    record.percent_retained = vals['wt_retained'] / record.parent_id.total * 100 if record.parent_id.total else 0
+                    record.percent_retained = round((vals['wt_retained'] / record.parent_id.total * 100),2) if record.parent_id.total else 0
 
             new_self = super(SieveAnalysisLine, self).write(vals)
 
@@ -697,32 +830,32 @@ class SieveAnalysisLine(models.Model):
        
 
 
-class LooseBulkDensityLine(models.Model):
-    _name = "coarse.aggregate.loose.bulk.density.line"
-    parent_id = fields.Many2one('mechanical.coarse.aggregate',string="Parent Id")
+# class LooseBulkDensityLine(models.Model):
+#     _name = "coarse.aggregate.loose.bulk.density.line"
+#     parent_id = fields.Many2one('mechanical.coarse.aggregate',string="Parent Id")
    
-    sr_no = fields.Integer(string="Sr.No.", readonly=True, copy=False, default=1)
-    weight_empty_bucket = fields.Float(string="Weight of Empty Bucket in kg")
-    volume_of_bucket = fields.Float(string="Volume of Bucket in cubic meter")
-    sample_plus_bucket = fields.Float(string="[Sample Weight + Bucket  Weight] in kg")
-    sample_weight = fields.Float(string="Sample Weight in kg",compute="_compute_sample_weight")
-    loose_bulk_density = fields.Float(string="Loose Bulk Density in kg per cubic meter",compute="_compute_loose_bulk_density")
+#     sr_no = fields.Integer(string="Sr.No.", readonly=True, copy=False, default=1)
+    # weight_empty_bucket = fields.Float(string="Weight of Empty Bucket in kg")
+    # volume_of_bucket = fields.Float(string="Volume of Bucket in cubic meter")
+    # sample_plus_bucket = fields.Float(string="[Sample Weight + Bucket  Weight] in kg")
+    # sample_weight = fields.Float(string="Sample Weight in kg",compute="_compute_sample_weight")
+    # loose_bulk_density = fields.Float(string="Loose Bulk Density in kg per cubic meter",compute="_compute_loose_bulk_density")
 
 
-    @api.depends('sample_plus_bucket', 'weight_empty_bucket')
-    def _compute_sample_weight(self):
-        for record in self:
-            record.sample_weight = record.sample_plus_bucket - record.weight_empty_bucket
+    # @api.depends('sample_plus_bucket', 'weight_empty_bucket')
+    # def _compute_sample_weight(self):
+    #     for record in self:
+    #         record.sample_weight = record.sample_plus_bucket - record.weight_empty_bucket
 
     
 
-    @api.depends('sample_weight', 'volume_of_bucket')
-    def _compute_loose_bulk_density(self):
-        for record in self:
-            if record.volume_of_bucket:
-                record.loose_bulk_density = record.sample_weight / record.volume_of_bucket
-            else:
-                record.loose_bulk_density = 0.0
+    # @api.depends('sample_weight', 'volume_of_bucket')
+    # def _compute_loose_bulk_density(self):
+    #     for record in self:
+    #         if record.volume_of_bucket:
+    #             record.loose_bulk_density = record.sample_weight / record.volume_of_bucket
+    #         else:
+    #             record.loose_bulk_density = 0.0
 
 
     # @api.model
@@ -736,11 +869,11 @@ class LooseBulkDensityLine(models.Model):
 
     #     return super(LooseBulkDensityLine, self).create(vals)
 
-    def _reorder_serial_numbers(self):
-        # Reorder the serial numbers based on the positions of the records in child_lines
-        records = self.sorted('id')
-        for index, record in enumerate(records):
-            record.sr_no = index + 1
+    # def _reorder_serial_numbers(self):
+    #     # Reorder the serial numbers based on the positions of the records in child_lines
+    #     records = self.sorted('id')
+    #     for index, record in enumerate(records):
+    #         record.sr_no = index + 1
 
 class RoddedBulkDensityLine(models.Model):
     _name = "coarse.aggregate.rodded.bulk.density.line"
@@ -1034,35 +1167,36 @@ class CrushingValueLine(models.Model):
 
 
 
-class SpecificGravityAndWaterAbsorptionLine(models.Model):
-    _name = "mechanical.specific.gravity.and.water.absorption.line"
-    parent_id = fields.Many2one('mechanical.coarse.aggregate',string="Parent Id")
+# class SpecificGravityAndWaterAbsorptionLine(models.Model):
+#     _name = "mechanical.specific.gravity.and.water.absorption.line"
+#     parent_id = fields.Many2one('mechanical.coarse.aggregate',string="Parent Id")
    
-    sr_no = fields.Integer(string="Test", readonly=True, copy=False, default=1)
-    wt_surface_dry = fields.Integer(string="Weight of saturated surface dry (SSD) sample in air in gms")
-    wt_sample_inwater = fields.Integer(string="Weight of saturated sample in water in gms")
-    oven_dried_wt = fields.Integer(string="Oven dried weight of sample in gms")
-    specific_gravity = fields.Float(string="Specific Gravity",compute="_compute_specific_gravity")
-    water_absorption = fields.Float(string="Water absorption  %",compute="_compute_water_absorption")
+#     sr_no = fields.Integer(string="Test", readonly=True, copy=False, default=1)
+#     wt_surface_dry = fields.Integer(string="Weight of saturated surface dry (SSD) sample in air in gms")
+#     wt_sample_inwater = fields.Integer(string="Weight of saturated sample in water in gms")
+#     oven_dried_wt = fields.Integer(string="Oven dried weight of sample in gms")
+#     specific_gravity = fields.Float(string="Specific Gravity",compute="_compute_specific_gravity")
+#     water_absorption = fields.Float(string="Water absorption  %",compute="_compute_water_absorption")
 
 
-    @api.depends('wt_surface_dry', 'wt_sample_inwater', 'oven_dried_wt')
-    def _compute_specific_gravity(self):
-        for line in self:
-            if line.wt_surface_dry - line.wt_sample_inwater != 0:
-                line.specific_gravity = line.oven_dried_wt / (line.wt_surface_dry - line.wt_sample_inwater)
-            else:
-                line.specific_gravity = 0.0
+#     @api.depends('wt_surface_dry', 'wt_sample_inwater', 'oven_dried_wt')
+#     def _compute_specific_gravity(self):
+#         for line in self:
+#             if line.wt_surface_dry - line.wt_sample_inwater != 0:
+#                 line.specific_gravity = line.oven_dried_wt / (line.wt_surface_dry - line.wt_sample_inwater)
+#             else:
+#                 line.specific_gravity = 0.0
 
 
 
-    @api.depends('wt_surface_dry', 'oven_dried_wt')
-    def _compute_water_absorption(self):
-        for line in self:
-            if line.oven_dried_wt != 0:
-                line.water_absorption = ((line.wt_surface_dry - line.oven_dried_wt) / line.oven_dried_wt) * 100
-            else:
-                line.water_absorption = 0.0
+#     @api.depends('wt_surface_dry', 'oven_dried_wt')
+#     def _compute_water_absorption(self):
+#         for line in self:
+#             if line.oven_dried_wt != 0:
+#                 line.water_absorption = ((line.wt_surface_dry - line.oven_dried_wt) / line.oven_dried_wt) * 100
+#             else:
+#                 line.water_absorption = 0.0
+
 
 
     # @api.model
@@ -1086,36 +1220,30 @@ class SpecificGravityAndWaterAbsorptionLine(models.Model):
 
 
 
-class AbrasionValueCoarseAggregateLine(models.Model):
-    _name = "mechanical.abrasion.value.coarse.aggregate.line"
-    parent_id = fields.Many2one('mechanical.coarse.aggregate',string="Parent Id")
+# class AbrasionValueCoarseAggregateLine(models.Model):
+#     _name = "mechanical.abrasion.value.coarse.aggregate.line"
+#     parent_id = fields.Many2one('mechanical.coarse.aggregate',string="Parent Id")
    
-    sr_no = fields.Integer(string="Test", readonly=True, copy=False, default=1)
-    total_weight_sample = fields.Integer(string="Total weight of Sample in gms")
-    weight_passing_sample = fields.Integer(string="Weight of Passing sample in 1.70 mm IS sieve in gms")
-    weight_retain_sample = fields.Integer(string="Weight of Retain sample in 1.70 mm IS sieve in gms",compute="_compute_weight_retain_sample")
-    abrasion_value_percentage = fields.Float(string="Abrasion Value (in %)",compute="_compute_sample_weight")
+#     sr_no = fields.Integer(string="Test", readonly=True, copy=False, default=1)
+#     total_weight_sample = fields.Integer(string="Total weight of Sample in gms")
+#     weight_passing_sample = fields.Integer(string="Weight of Passing sample in 1.70 mm IS sieve in gms")
+#     weight_retain_sample = fields.Integer(string="Weight of Retain sample in 1.70 mm IS sieve in gms",compute="_compute_weight_retain_sample")
+#     abrasion_value_percentage = fields.Float(string="Abrasion Value (in %)",compute="_compute_sample_weight")
 
 
-    @api.depends('total_weight_sample', 'weight_passing_sample')
-    def _compute_weight_retain_sample(self):
-        for line in self:
-            line.weight_retain_sample = line.total_weight_sample - line.weight_passing_sample
-
-    # @api.depends('total_weight_sample')
-    # def _compute_sample_weight(self):
-    #     for line in self:
-    #         # Your computation logic for abrasion_value_percentage here
-    #         pass
+#     @api.depends('total_weight_sample', 'weight_passing_sample')
+#     def _compute_weight_retain_sample(self):
+#         for line in self:
+#             line.weight_retain_sample = line.total_weight_sample - line.weight_passing_sample
 
 
-    @api.depends('total_weight_sample', 'weight_passing_sample')
-    def _compute_sample_weight(self):
-        for line in self:
-            if line.total_weight_sample != 0:
-                line.abrasion_value_percentage = (line.weight_passing_sample / line.total_weight_sample) * 100
-            else:
-                line.abrasion_value_percentage = 0.0
+#     @api.depends('total_weight_sample', 'weight_passing_sample')
+#     def _compute_sample_weight(self):
+#         for line in self:
+#             if line.total_weight_sample != 0:
+#                 line.abrasion_value_percentage = (line.weight_passing_sample / line.total_weight_sample) * 100
+#             else:
+#                 line.abrasion_value_percentage = 0.0
 
 
     # @api.model

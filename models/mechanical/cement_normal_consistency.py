@@ -4,12 +4,10 @@ from datetime import timedelta
 import math
 
 
-
 class CementNormalConsistency(models.Model):
     _name = "mechanical.cement.normalconsistency"
     _inherit = "lerm.eln"
     _rec_name = "name"
-
 
     name = fields.Char("Name",default="Cement")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
@@ -17,7 +15,7 @@ class CementNormalConsistency(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    temp_percent_normal = fields.Float("Temperature °C")
+    temp_percent_normal = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_normal = fields.Float("Humidity %")
 
 
@@ -53,7 +51,7 @@ class CementNormalConsistency(models.Model):
     setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
     setting_time_name = fields.Char("Name",default="Setting Time")
 
-    temp_percent_setting = fields.Float("Temperature °C")
+    temp_percent_setting = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_setting = fields.Float("Humidity %")
     start_date_setting = fields.Date("Start Date")
     end_date_setting = fields.Date("End Date")
@@ -71,7 +69,7 @@ class CementNormalConsistency(models.Model):
     initial_setting_time = fields.Char("Name", default="Initial Setting Time")
     time_water_added = fields.Datetime("The Time When water is added to cement (t1)")
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
-    initial_setting_time_hours = fields.Float("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
+    initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
     initial_setting_time_minutes = fields.Float("Initial Setting Time Rounded", compute="_compute_initial_setting_time")
     initial_setting_time_minutes_unrounded = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
 
@@ -87,7 +85,9 @@ class CementNormalConsistency(models.Model):
                 # Convert time difference to seconds and then to minutes
                 time_difference_minutes = time_difference.total_seconds() / 60
 
-                record.initial_setting_time_hours = time_difference.total_seconds() / 3600
+                initial_setting_time_hours = time_difference.total_seconds() / 3600
+                time_delta = timedelta(hours=initial_setting_time_hours)
+                record.initial_setting_time_hours = "{:0}:{:02}".format(int(time_delta.total_seconds() // 3600), int((time_delta.total_seconds() % 3600) // 60))
                 if time_difference_minutes % 5 == 0:
                     record.initial_setting_time_minutes = time_difference_minutes
                 else:
@@ -109,8 +109,6 @@ class CementNormalConsistency(models.Model):
 
 
 
-
-
     @api.depends('time_needle_make_impression')
     def _compute_final_setting_time(self):
         for record in self:
@@ -119,21 +117,17 @@ class CementNormalConsistency(models.Model):
                 t2 = record.time_needle_make_impression
                 time_difference = t2 - t1
                 record.final_setting_time_minutes = time_difference
-
                 record.final_setting_time_hours = time_difference
                 final_setting_time = time_difference.total_seconds() / 60
                 if final_setting_time % 5 == 0:
-                    record.final_setting_time_minutes =  final_setting_time
+                    record.final_setting_time_minutes = final_setting_time
                 else:
                     record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
-
                 record.final_setting_time_minutes_unrounded = final_setting_time
-                
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
                 record.final_setting_time_minutes_unrounded = False
-
 
     #Density
 
@@ -141,7 +135,7 @@ class CementNormalConsistency(models.Model):
     density_name = fields.Char("Name",default="Density")
     density_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
 
-    temp_percent_density = fields.Float("Temperature °C")
+    temp_percent_density = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_density = fields.Float("Humidity %")
     start_date_density = fields.Date("Start Date")
     end_date_density = fields.Date("End Date")
@@ -175,14 +169,14 @@ class CementNormalConsistency(models.Model):
     @api.depends('wt_of_cement_density_trial1','displaced_volume_trial1')
     def _compute_density_trial1(self):
         try:
-            self.density_trial1 = self.wt_of_cement_density_trial1 / self.displaced_volume_trial1
+            self.density_trial1 = round(self.wt_of_cement_density_trial1 / self.displaced_volume_trial1,2)
         except:
             self.density_trial1 = 0
 
     @api.depends('wt_of_cement_density_trial2','displaced_volume_trial2')
     def _compute_density_trial2(self):
         try:
-            self.density_trial2 = self.wt_of_cement_density_trial2 / self.displaced_volume_trial2
+            self.density_trial2 = round(self.wt_of_cement_density_trial2 / self.displaced_volume_trial2,2)
         except:
             self.density_trial2 = 0
 
@@ -198,7 +192,7 @@ class CementNormalConsistency(models.Model):
     soundness_name = fields.Char("Name",default="Soundness by le-chatelier")
     soundness_visible = fields.Boolean("Soundness Visible",compute="_compute_visible")
 
-    temp_percent_soundness = fields.Float("Temperature °C")
+    temp_percent_soundness = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_soundness = fields.Float("Humidity %")
     start_date_soundness = fields.Date("Start Date")
     end_date_soundness = fields.Date("End Date")
@@ -250,7 +244,7 @@ class CementNormalConsistency(models.Model):
     dry_sieving_name = fields.Char("Name",default="Dry Sieving")
     dry_sieving_visible = fields.Boolean("Dry Sieving Visible",compute="_compute_visible")
 
-    temp_percent_dry_sieving = fields.Float("Temperature °C")
+    temp_percent_dry_sieving = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_dry_sieving = fields.Float("Humidity %")
     start_date_dry_sieving = fields.Date("Start Date")
     end_date_dry_sieving = fields.Date("End Date")
@@ -280,7 +274,7 @@ class CementNormalConsistency(models.Model):
     compressive_name = fields.Char("Name",default="Compressive Strength")
     compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
-    temp_percent_compressive = fields.Float("Temperature °C")
+    temp_percent_compressive = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_compressive = fields.Float("Humidity %")
     start_date_compressive = fields.Date("Start Date")
     end_date_compressive = fields.Date("End Date")
@@ -445,7 +439,7 @@ class CementNormalConsistency(models.Model):
     fineness_blaine_name = fields.Char("Name",default="Fineness By Blaine Air Permeability Method")
     fineness_blaine_visible = fields.Boolean("Fineness Blaine Visible",compute="_compute_visible")
 
-    temp_percent_fineness = fields.Float("Temperature °C")
+    temp_percent_fineness = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_fineness = fields.Float("Humidity %")
     start_date_fineness = fields.Date("Start Date")
     end_date_fineness = fields.Date("End Date")
@@ -551,7 +545,7 @@ class CementNormalConsistency(models.Model):
                 print("Apparatus constant",record.apparatus_constant)
                 print("Average time",record.average_sample_time)
                 print("density",record.density_fineness_calculated)
-                record.fineness_of_sample = (521.08*record.apparatus_constant*math.sqrt(record.average_sample_time))/record.density_fineness_calculated
+                record.fineness_of_sample = round((521.08*record.apparatus_constant*math.sqrt(record.average_sample_time))/record.density_fineness_calculated,2)
             else:
                 record.fineness_of_sample = 0
     
@@ -664,7 +658,6 @@ class CementNormalConsistency(models.Model):
         for field_name, field in record._fields.items():
             field_value = record[field_name]
             field_values[field_name] = field_value
-
         return field_values
 
     @api.depends("wt_of_cement_trial1","wt_of_cement_trial2","wt_of_cement_trial3","wt_of_water_req_trial1","wt_of_water_req_trial2","wt_of_water_req_trial3")
@@ -674,7 +667,6 @@ class CementNormalConsistency(models.Model):
                 record.normal_consistency_trial1 = (record.wt_of_water_req_trial1/record.wt_of_cement_trial1) * 100
             else:
                 record.normal_consistency_trial1 = 0
-            
             # if record.wt_of_water_req_trial2 and record.wt_of_cement_trial2:
             #     record.normal_consistency_trial2 = (record.wt_of_water_req_trial2/record.wt_of_cement_trial2) * 100
             # else:
@@ -704,7 +696,7 @@ class SoundnessCementLine(models.Model):
     @api.depends('initial_distance','final_distance')
     def _compute_expansion(self):
         for record in self:
-            record.expansion = record.final_distance - record.initial_distance
+            record.expansion = round(record.final_distance - record.initial_distance,2)
 
 class DrySievingLine(models.Model):
     _name = "cement.dry.sieving.line"
@@ -718,10 +710,9 @@ class DrySievingLine(models.Model):
     def _compute_fineness(self):
         for record in self:
             if record.sample_weight_fineness != 0:
-                record.fineness = (record.retained_weight / record.sample_weight_fineness )*100
+                record.fineness = round((record.retained_weight / record.sample_weight_fineness )*100,2)
             else:
                 record.fineness = 0
-
 
 class Casting3DaysLine(models.Model):
     _name = "cement.casting.3days.line"
@@ -737,13 +728,13 @@ class Casting3DaysLine(models.Model):
     @api.depends('length','width')
     def _compute_crosssectional_area(self):
         for record in self:
-            record.crosssectional_area = record.length * record.width
+            record.crosssectional_area = round(record.length * record.width,2)
 
     @api.depends('crosssectional_area','crushing_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round((record.crushing_load / record.crosssectional_area)*1000,2)
             else:
                 record.compressive_strength = 0
 
@@ -762,13 +753,13 @@ class Casting7DaysLine(models.Model):
     @api.depends('length','width')
     def _compute_crosssectional_area(self):
         for record in self:
-            record.crosssectional_area = record.length * record.width
+            record.crosssectional_area = round(record.length * record.width,2)
 
     @api.depends('crosssectional_area','crushing_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area)*1000
+                record.compressive_strength = round((record.crushing_load / record.crosssectional_area)*1000,2)
             else:
                 record.compressive_strength = 0
 
@@ -787,13 +778,13 @@ class Casting28DaysLine(models.Model):
     @api.depends('length','width')
     def _compute_crosssectional_area(self):
         for record in self:
-            record.crosssectional_area = record.length * record.width
+            record.crosssectional_area = round(record.length * record.width,2)
 
     @api.depends('crosssectional_area', 'crushing_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = (record.crushing_load / record.crosssectional_area) * 1000
+                record.compressive_strength = round((record.crushing_load / record.crosssectional_area) * 1000,2)
             else:
                 record.compressive_strength = 0
 
