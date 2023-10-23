@@ -159,7 +159,6 @@ class WmmMechanical(models.Model):
             default_elongated_sieve_sizes.append((0, 0, size))
         res['dry_gradation_table'] = default_dry_sieve_sizes
         res['elongation_table'] = default_elongated_sieve_sizes
-        res['flakiness_table'] = default_elongated_sieve_sizes
 
         return res
 
@@ -180,22 +179,21 @@ class WmmMechanical(models.Model):
                 record.water_absorbtion = 0
 
     # Flakiness and Elongation 
-    elongation_name = fields.Char(default=" Elongation Index")
+    elongation_name = fields.Char(default="Elongation and Flakiness Index")
     elongation_visible = fields.Boolean(compute="_compute_visible")
 
     flakiness_name = fields.Char(default=" Flakiness Index")
     flakiness_visible = fields.Boolean(compute="_compute_visible")
 
-    elongation_table = fields.One2many('mech.elongation.line','parent_id',string="Elongation Index")
-    flakiness_table = fields.One2many('mech.flakiness.line','parent_id',string="Flakiness Index")
+    elongation_table = fields.One2many('mech.elongation.flakiness.line','parent_id',string="Elongation Flakiness Index")
 
     total_wt_retained_fl_el = fields.Float('Total',compute="_compute_total_el_fl")
     total_elongated_retained = fields.Float('Total Elongation',compute="_compute_total_elongation")
     total_flakiness_retained = fields.Float('Total Flakiness',compute="_compute_total_flakiness")
 
-    aggregate_elongation = fields.Float('Aggregate Elongation Value in %')
-    aggregate_flakiness = fields.Float('Aggregate Flakiness Value in %')
-    aggregate_combine = fields.Float('Aggregate Elongation & Flakiness Value in %')
+    aggregate_elongation = fields.Float('Aggregate Elongation Value in %',compute="_compute_aggregate_elongation")
+    aggregate_flakiness = fields.Float('Aggregate Flakiness Value in %' ,compute="_compute_aggregate_flakiness")
+    aggregate_combine = fields.Float('Aggregate Elongation & Flakiness Value in %',compute="_compute_aggregate_combine")
 
 
     @api.depends('elongation_table.wt_retained')
@@ -208,10 +206,32 @@ class WmmMechanical(models.Model):
         for record in self:
             record.total_elongated_retained = sum(record.elongation_table.mapped('elongated_retained'))
 
-    @api.depends('flakiness_table.flakiness_retained')
+    @api.depends('elongation_table.flakiness_retained')
     def _compute_total_flakiness(self):
         for record in self:
-            record.total_flakiness_retained = sum(record.flakiness_table.mapped('flakiness_retained'))
+            record.total_flakiness_retained = sum(record.elongation_table.mapped('flakiness_retained'))
+
+    @api.depends('total_wt_retained_fl_el','total_elongated_retained')
+    def _compute_aggregate_elongation(self):
+        for record in self:
+            if record.total_wt_retained_fl_el != 0:
+                record.aggregate_elongation = round(record.total_wt_retained_fl_el/record.total_elongated_retained,2)
+            else:
+                record.aggregate_elongation = 0
+
+    @api.depends('total_wt_retained_fl_el','total_flakiness_retained')
+    def _compute_aggregate_flakiness(self):
+        for record in self:
+            if record.total_wt_retained_fl_el != 0:
+                record.aggregate_flakiness = round(record.total_wt_retained_fl_el/record.total_flakiness_retained,2)
+            else:
+                record.aggregate_flakiness = 0
+
+    @api.depends('total_wt_retained_fl_el','total_flakiness_retained')
+    def _compute_aggregate_combine(self):
+        for record in self:
+            record.aggregate_combine = round(record.aggregate_elongation+record.aggregate_flakiness,2)
+            
 
 
 
@@ -410,7 +430,7 @@ class WmmDensityRelationLine(models.Model):
     @api.depends('wt_of_modul_compact', 'parent_id.wt_of_modul')
     def _compute_wt_of_compact(self):
         for line in self:
-            line.wt_of_compact = line.wt_of_modul_compact - line.parent_id.wt_of_modul
+            line.wt_of_compact = round(line.wt_of_modul_compact - line.parent_id.wt_of_modul,2)
 
 
 
@@ -418,7 +438,7 @@ class WmmDensityRelationLine(models.Model):
     def _compute_bulk_density(self):
         for line in self:
             if line.parent_id.vl_of_modul != 0:
-                line.bulk_density = line.wt_of_compact / line.parent_id.vl_of_modul
+                line.bulk_density = round(line.wt_of_compact / line.parent_id.vl_of_modul,2)
             else:
                 line.bulk_density = 0.0
 
@@ -427,20 +447,20 @@ class WmmDensityRelationLine(models.Model):
     @api.depends('wt_of_container_dry', 'wt_of_container')
     def _compute_wt_of_dry_sample(self):
         for line in self:
-            line.wt_of_dry_sample = line.wt_of_container_dry - line.wt_of_container
+            line.wt_of_dry_sample = round(line.wt_of_container_dry - line.wt_of_container,2)
 
 
-    @api.depends('wt_of_container_wet', 'wt_of_container_dry')
+    @api.depends('wt_of_container_wet','wt_of_container_dry')
     def _compute_wt_of_moisture(self):
-        for line in self:
-            line.wt_of_moisture = line.wt_of_container_wet - line.wt_of_container_dry
+        for record in self:
+            record.wt_of_moisture = round((record.wt_of_container_wet - record.wt_of_container_dry),2)
 
 
     @api.depends('wt_of_moisture', 'wt_of_dry_sample')
     def _compute_moisture(self):
         for line in self:
             if line.wt_of_dry_sample != 0:
-                line.moisture = line.wt_of_moisture / line.wt_of_dry_sample * 100
+                line.moisture = round(line.wt_of_moisture / line.wt_of_dry_sample * 100,2)
             else:
                 line.moisture = 0.0
 
@@ -448,7 +468,7 @@ class WmmDensityRelationLine(models.Model):
     @api.depends('bulk_density', 'moisture')
     def _compute_dry_density(self):
         for line in self:
-            line.dry_density = (100 * line.bulk_density) / (100 + line.moisture)
+            line.dry_density = round((100 * line.bulk_density) / (100 + line.moisture),2)
 
 
  
@@ -609,21 +629,23 @@ class DryGradationLine(models.Model):
 
 
 class ElongationLine(models.Model):
-    _name = "mech.elongation.line"
+    _name = "mech.elongation.flakiness.line"
     parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
 
     sieve_size = fields.Char(string="IS Sieve Size")
     wt_retained = fields.Float(string="Wt. Retained in gms")
     elongated_retained = fields.Float(string="Elongated Retained in gms")
-
-
-class FlakinessLine(models.Model):
-    _name = "mech.flakiness.line"
-    parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
-
-    sieve_size = fields.Char(string="IS Sieve Size")
-    wt_retained = fields.Float(string="Wt. Retained in gms")
     flakiness_retained = fields.Float(string="Flakiness Retained in gms")
+
+
+
+# class FlakinessLine(models.Model):
+#     _name = "mech.flakiness.line"
+#     parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
+
+#     sieve_size = fields.Char(string="IS Sieve Size")
+#     wt_retained = fields.Float(string="Wt. Retained in gms")
+#     flakiness_retained = fields.Float(string="Flakiness Retained in gms")
 
 
 class ImpactValueLine(models.Model):
