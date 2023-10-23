@@ -37,6 +37,7 @@
 					<p style="font-size:15px"><b>Test Report</b></p>
 				</div>
 				<div class="container_eln">
+				
 					<div t-foreach="eln" t-as="o">
 						<table>
 							<tr>
@@ -57,6 +58,7 @@
 								</td>
 							</tr>
 						</table>
+
 						<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
@@ -89,7 +91,9 @@
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
 							</tr>
+
 						</table>
+
 						<table>
 							<tr>
 								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
@@ -145,30 +149,21 @@
 									<span t-field="o.group.group"/>
 								</td>
 							</tr>
-
 							<tr>
-								<td colspan="12">Material/Test Name :
+								<td colspan="6">Material/Test Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Age in Days :
+								<td colspan="6">Job Ref No :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.age_of_days"/>
-								</td>
-								<td colspan="6">Date of Casting :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.date_of_casting"/>
+									<span t-field="o.kes_no"/>
 								</td>
 							</tr>
 						</table>
 					</div>
-					<div style="margin-top:20px;">
-						<u>Protocol : <span t-esc="o.material.test_parameter"/></u>
-					</div>
-					<table>
-						<thead>
+
+					<table style="margin-top:15px">
+
 							<tr>
 								<th>
 									<span>
@@ -177,135 +172,589 @@
 								</th>
 								<th>
 									<span>
-										ID MARK/Location
+										Test Parameter
 									</span>
 								</th>
 								<th>
 									<span>
-										Length in mm
+										Protocol
 									</span>
 								</th>
 								<th>
 									<span>
-										Width in mm
+										Result Observed
 									</span>
 								</th>
 								<th>
 									<span>
-										Area in mm
+										Limit as per MORTH Specification
 									</span>
 								</th>
-								
-								<th>
-									<span>
-										Weight of sample in kgs
-									</span>
-								</th>
-
-								<th>
-									<span>
-										Crushing load in KN
-									</span>
-								</th>
-								<th>
-									<span>
-										Compresive stringth in n/mm2
-									</span>
-								</th>
-								<!-- <th>
-									<span>
-										NABL Status
-									</span>
-								</th> -->
-								<!-- <th t-if="eln.conformity">
-									<span>
-										Confirmity Status
-									</span>
-								</th> -->
-							</tr>
-						</thead>
-						<tbody>
-							<!-- <t t-set="i" t-value="0"/> -->
-							<!-- non nabl -->
-							<tr t-foreach="data.child_lines" t-as="r" t-if="data.confirmity == 'fail' and not nabl">
-								<!-- <td>
-									<div>
-										<span t-esc="i + 1"/>
-										<t t-set="i" t-value="i+1"/>
-									</div>
-                  				</td> -->
-								<td>
-									<span t-esc="r.sr_no"/>
-								</td>
-								<td>
-									<span t-esc="r.id_mark"/>
-								</td>
-								<td>
-									<span t-esc="r.length"/>
-								</td>
-								<td>
-									<span t-esc="r.width"/>
-								</td>
-								<td>
-									<span t-esc="r.area"/>
-								</td>
-								<td>
-									<span t-esc="r.wt_sample"/>
-								</td>
-								<td>
-									<span t-esc="r.crushing_load"/>
-								</td>
-								<td>
-									<span t-esc="r.compressive_strength"/>
-								</td>
 							</tr>
 
-							<!-- nabl -->
-							<tr t-foreach="data.child_lines" t-as="r" t-if="data.confirmity == 'pass' and nabl">
-								<!-- <td>
+							<tr class="mulipleRowsInColumn"> 
+								<td>
+									<span>1</span>
+								</td>
+								<td>
 									<div>
-										<span t-esc="i + 1"/>
-										<t t-set="i" t-value="i+1"/>
+										Seive Analysis % Passing
 									</div>
-                  				</td> -->
-								<td>
-									<span t-esc="r.sr_no"/>
+									<div>
+										IS SEIVE
+									</div>
+									<div>
+										75 mm
+									</div>
+									<div>
+										19 mm
+									</div>
+									<div>
+										4.75 mm
+									</div>
+									<div>
+										2mm
+									</div>
+									<div>
+										425 mic
+									</div>
+									<div>
+										75 mic
+									</div>
 								</td>
 								<td>
-									<span t-esc="r.id_mark"/>
+									<div>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).test_method.test_method"/>
+									</div>
 								</td>
 								<td>
-									<span t-esc="r.length"/>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
 								</td>
 								<td>
-									<span t-esc="r.width"/>
-								</td>
-								<td>
-									<span t-esc="r.area"/>
-								</td>
-								<td>
-									<span t-esc="r.wt_sample"/>
-								</td>
-								<td>
-									<span t-esc="r.crushing_load"/>
-								</td>
-								<td>
-									<span t-esc="r.compressive_strength"/>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
+									<div>
+										
+									</div>
 								</td>
 							</tr>
-						</tbody>
+
+							<tr>
+								<td>
+									<span>2</span>
+								</td>
+								<td>
+									<div>
+										Liquid Limit
+									</div>
+								</td>
+								<td style="align-items : center">
+									<div  style="align-items : center">
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).test_method.test_method"/>
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>3</span>
+								</td>
+								<td>
+									<div>
+										Plastic Limit
+									</div>
+								</td>
+								<td>
+									<div >
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).test_method.test_method"/>
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>4</span>
+								</td>
+								<td>
+									<div>
+										Plasticity Index
+									</div>
+								</td>
+								<td>
+									<div >
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).test_method.test_method"/>
+									</div>
+								</td>
+								<td>
+									<div>
+										<span t-field="data.plasticity_index"/>
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>5</span>
+								</td>
+								<td>
+									<div>
+										Free Swell Index
+									</div>
+								</td>
+								<td>
+									<div >
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).test_method.test_method"/>
+									</div>
+								</td>
+								<td>
+									<div>
+
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>6</span>
+								</td>
+								<td>
+									<div>
+										Maximum Dry Density (MDD)
+									</div>
+								</td>
+								<td>
+									<div >
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0f07dab7cd87')]).test_method.test_method"/>
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>7</span>
+								</td>
+								<td>
+									<div>
+										Optimium Moisture Content (OMC)
+									</div>
+								</td>
+								<td>
+									<div >
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).test_method.test_method"/>
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>8</span>
+								</td>
+								<td>
+									<div>
+										Optimium Moisture Content (OMC)
+									</div>
+								</td>
+								<td>
+									<div>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).test_method.test_method"/>
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>9</span>
+								</td>
+								<td>
+									<div>
+										California Bearing Ratio (CBR) At 2.55 mm Penetration
+									</div>
+								</td>
+								<td>
+									<div>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','47ba9d28-2065-4532-814a-3a4c1e884305')]).test_method.test_method"/>
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+								<td>
+									<div>
+										
+									</div>
+								</td>
+							</tr>
+
 					</table>
+					
+					<div style="page-break-inside: avoid;margin-top:20px">
 
-					<div style="margin-top:10px">
 						<table>
-							<tr t-if="data.confirmity == 'pass' and nabl"> 
-								<td colspan="12">Avg. Compresive Strength :<![CDATA[&nbsp;]]>
-									<span t-field="data.average_strength"/>
-								</td>
+							<tr>
+								<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
+									<div>
+										DETERMINATION OF WATER CONTENT-DRY 
+									</div>
+									<div>
+										DENSITY RELATION USING HEAVY COMPACTION : 
+										<span> 
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).test_method.test_method"/>
+										</span>
+									</div>
+								</div>
 							</tr>
-							
+
+							<table style="margin-top:30px;">
+							<thead>
+								<tr>
+									<th>
+										<span>
+											Determination No
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Mould + Compacted sample in gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of compacted sample in gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Bulk Density of sample in gm/cc
+										</span>
+									</th>
+									<th>
+										<span>
+											Container No
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Container in gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Container + wet sample in gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Container + dry sample in gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of dry sample in gm
+										</span>
+									</th>
+									<th>
+										<span>
+											% Moisture
+										</span>
+									</th>
+									<th>
+										<span>
+											Dry density in gm/cc
+										</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr t-foreach="data.heavy_table" t-as="r">
+									<td>
+										<span t-esc="round(float(r.determination_no))"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.wt_of_modul_compact))"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.wt_of_compact))"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.bulk_density))"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.container_no))"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.wt_of_container_wet),2)"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.wt_of_container_dry))"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.wt_of_dry_sample))"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.wt_of_moisture),2)"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.moisture))"/>
+									</td>
+									<td>
+										<span t-esc="round(float(r.dry_density))"/>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+							<table style="margin-top : 10px">
+								<tr>
+									<td colspan="3">Weight of Mould in gm :
+									</td>
+									<td colspan="3">
+										<span t-field="data.wt_of_modul"/>
+									</td>
+									<td colspan="3">Volume of Mould in cc :
+									</td>
+									<td colspan="3">
+										<span t-field="data.vl_of_modul"/>
+									</td>
+								</tr>
+							</table>
 						</table>
 					</div>
+
+					<div t-if="graphHeavy" style="margin-top: 20px;">
+							<img t-att-src="'data:image/png;base64,'+str(graphHeavy)" style="max-width: 100%;"/>
+					</div>
+
+					<div  style="margin-top: 10px;">
+						From Graph 
+					</div>
+
+					<table style="margin-top: 10px;">
+						<tr>
+							<td colspan="3">MDD :</td>
+							<td colspan="3">
+								<span t-esc="mdd"/> <![CDATA[&nbsp;]]> gm/cc
+							</td>
+							<td colspan="3">OMC :</td>
+							<td colspan="3">
+								<span t-esc="omc"/> <![CDATA[&nbsp;]]> %
+							</td>
+						</tr>
+					</table>	
+					
+					<div  style="page-break-inside: avoid;margin-top:20px">
+						<table>
+								<tr>
+									<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
+										<div>
+											LABORATORY DETERMINATION OF CBR : Test Method  : <![CDATA[&nbsp;]]> <span t-field="env['lerm.parameter.master'].search([('internal_id','=','47ba9d28-2065-4532-814a-3a4c1e884305')]).test_method.test_method"/>
+
+										</div>
+										<div>
+											CONDITION SOAKED 1 Div. = 6.96kg
+										</div>
+									</div>
+								</tr>
+						</table>
+
+						<table style="margin-top:20px;">
+								<thead>
+									<tr>
+										<th>
+											<span>
+												Sr. No
+											</span>
+										</th>
+										<th>
+											<span>
+												Penetration in mm
+											</span>
+										</th>
+
+										<th>
+											<span>
+												Penetration in mm
+											</span>
+										</th>
+
+										<th>
+											<span>
+												Load in Kg
+											</span>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-set="i" t-value="0"/>
+									<tr t-foreach="data.soil_table" t-as="r">
+										<td>
+											<div>
+												<span t-esc="i + 1" />
+												<t t-set="i" t-value="i+1"/>
+											</div>
+										</td>
+										<td>
+											<span t-esc="r.penetration"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading"/>
+										</td>
+										<td>
+											<span t-esc="r.load"/>
+										</td>
+									</tr>
+								</tbody>
+						</table>
+					</div>
+
+					<div t-if="graphCbr" style="margin-top: 20px;">
+							<img t-att-src="'data:image/png;base64,'+str(graphCbr)" style="max-width: 100%;"/>
+					</div>
+
+					<div  style="margin-top: 10px;">
+						CBR From Graph 
+					</div>
+					
+					<div style="margin-top: 5px;" class="cbrformula">
+
+						<div>
+							<div>
+								CBR at 2.5mm Penetration = (PT/PS) X 100
+							</div>
+							<div>
+								From Graph PT = <span t-esc="load2"/>
+							</div>
+							<div>
+								PS = 1370
+							</div>
+							<div>
+								CBR = <span t-esc="round(load2 / 1370 * 100 , 2)"/>
+							</div>
+						</div>
+
+						<div>
+							<div>
+								CBR at 5mm Penetration = (PT/PS) X 100
+							</div>
+							<div>
+								From Graph PT = <span t-esc="load5"/>
+							</div>
+							<div>
+								PS = 2055
+							</div>
+							<div>
+								CBR = <span t-esc="round(load5 / 2055 * 100 , 2)"/>
+							</div>
+						</div>
+					</div>
+					
+					<div  style="margin-top: 10px;">
+						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load2 / 1370 * 100 , 2)"/></b>
+					</div>
+
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
 							<div>
@@ -382,10 +831,12 @@
 							......End of Report......
 						</div>
 					</div>
+					
 				</div>
 			</t>
 		</t>
 	</template>
+
 
 	<template id="soil_datasheet">
 		<t t-call="web.html_container">
@@ -1621,7 +2072,7 @@
 								</tr>
 						</table>
 					</div>
-					
+
 					<div>
 						<div style="margin-top:20px">
 							<div style="text-align:center;">

@@ -2,7 +2,9 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 from datetime import timedelta
 import math
-
+import matplotlib.pyplot as plt
+import io
+import base64
 
 
 class Soil(models.Model):
@@ -112,6 +114,7 @@ class Soil(models.Model):
     wt_of_modul_heavy_omc = fields.Integer(string="Weight of Mould in gm")
     vl_of_modul_heavy_omc = fields.Integer(string="Volume of Mould in cc")
 
+
    
     # Light Compaction-OMC
     light_omc_name = fields.Char("Name",default="Light Compaction-OMC")
@@ -146,6 +149,7 @@ class Soil(models.Model):
     end_date_liquid_limit = fields.Date("End Date")
     child_liness = fields.One2many('mechanical.liquid.limits.line','parent_id',string="Liquid Limit")
     liquid_limit = fields.Float('Liquid Limit')
+    
     
     # def calculate_result(self):
     are_child_lines_filled = fields.Boolean(compute='_compute_are_child_lines_filled',string='child lines',store=False)
@@ -375,7 +379,7 @@ class Soil(models.Model):
                 if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
                     record.plastic_limit_visible = True
 
-                if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
+                if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0f07dab7cd87':
                     record.dry_density_visible = True
 
                 if sample.internal_id == 'a59bdedd-72cb-40e8-be97-e17fc20ff3fa':
@@ -416,9 +420,6 @@ class Soil(models.Model):
             field_values[field_name] = field_value
 
         return field_values
-
-
-
 
 class SoilTest(models.Model):
     _name = "mechanical.soil.test"
