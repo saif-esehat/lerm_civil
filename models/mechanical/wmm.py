@@ -410,7 +410,7 @@ class WmmDensityRelationLine(models.Model):
     @api.depends('wt_of_modul_compact', 'parent_id.wt_of_modul')
     def _compute_wt_of_compact(self):
         for line in self:
-            line.wt_of_compact = line.wt_of_modul_compact - line.parent_id.wt_of_modul
+            line.wt_of_compact = round(line.wt_of_modul_compact - line.parent_id.wt_of_modul,2)
 
 
 
@@ -418,7 +418,7 @@ class WmmDensityRelationLine(models.Model):
     def _compute_bulk_density(self):
         for line in self:
             if line.parent_id.vl_of_modul != 0:
-                line.bulk_density = line.wt_of_compact / line.parent_id.vl_of_modul
+                line.bulk_density = round(line.wt_of_compact / line.parent_id.vl_of_modul,2)
             else:
                 line.bulk_density = 0.0
 
@@ -426,20 +426,20 @@ class WmmDensityRelationLine(models.Model):
     @api.depends('wt_of_container_dry', 'wt_of_container')
     def _compute_wt_of_dry_sample(self):
         for line in self:
-            line.wt_of_dry_sample = line.wt_of_container_dry - line.wt_of_container
+            line.wt_of_dry_sample = round(line.wt_of_container_dry - line.wt_of_container,2)
 
 
-    @api.depends('wt_of_container_wet', 'wt_of_container_dry')
+    @api.depends('wt_of_container_wet','wt_of_container_dry')
     def _compute_wt_of_moisture(self):
-        for line in self:
-            line.wt_of_moisture = line.wt_of_container_wet - line.wt_of_container_dry
+        for record in self:
+            record.wt_of_moisture = round((record.wt_of_container_wet - record.wt_of_container_dry),2)
 
 
     @api.depends('wt_of_moisture', 'wt_of_dry_sample')
     def _compute_moisture(self):
         for line in self:
             if line.wt_of_dry_sample != 0:
-                line.moisture = line.wt_of_moisture / line.wt_of_dry_sample * 100
+                line.moisture = round(line.wt_of_moisture / line.wt_of_dry_sample * 100,2)
             else:
                 line.moisture = 0.0
 
@@ -447,7 +447,7 @@ class WmmDensityRelationLine(models.Model):
     @api.depends('bulk_density', 'moisture')
     def _compute_dry_density(self):
         for line in self:
-            line.dry_density = (100 * line.bulk_density) / (100 + line.moisture)
+            line.dry_density = round((100 * line.bulk_density) / (100 + line.moisture),2)
 
 
  
