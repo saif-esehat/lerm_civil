@@ -10,7 +10,7 @@
                         <group style="width:100%">
                             <field name="internal_id"/>
                             <field name="parameter_name"/>
-                         
+                            
                         </group>
                         <group>
                             <group style="width:50%">
@@ -70,7 +70,7 @@
                                 </form>
                             </field>
                         </group>
-
+                        
                         <field name="dependent_inputs">
                             <tree editable="bottom">
                                 <field name="is_parameter_dependent"/>
@@ -84,29 +84,29 @@
                         <group>
                             <field name="formula" widget="ace" options="{'mode': 'python'}" />
                         </group>
-
+                        
                         <!-- <notebook>
-                        <page string="Alias">
-                            <field name='alias_table'>
-                                <tree edidable="bottom">
-                                    <field name="alias"/>
-                                    <field name="customer"/>
-                                </tree>
-                                <form>
-                                    <group>
-                                        <field name="alias"/>
-                                        <field name="customer"/>
-                                    </group>
-                                </form>
-                            </field>
-                        </page>
-                    </notebook> -->
-                    </sheet>
+                             <page string="Alias">
+                             <field name='alias_table'>
+                             <tree edidable="bottom">
+                             <field name="alias"/>
+                             <field name="customer"/>
+                             </tree>
+                             <form>
+                             <group>
+                             <field name="alias"/>
+                             <field name="customer"/>
+                             </group>
+                             </form>
+                             </field>
+                             </page>
+                             </notebook> -->
+                     </sheet>
                 </form>
             </field>
         </record>
-
-
+        
+        
         <record id="lerm_parameter_master_tree" model="ir.ui.view">
             <field name="name">lerm.parameter.master.tree</field>
             <field name="model">lerm.parameter.master</field>
@@ -134,7 +134,34 @@
                 </tree>
             </field>
         </record>
-
+        
+        <record id="lerm_civil_parameter_master_search" model="ir.ui.view">
+            <field name="name">lerm.parameter.master.search.view</field>
+            <field name="model">lerm.parameter.master</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="internal_id" string="Internal ID" />
+                    <field name="parameter_name" string="Parameter Name" />
+                    <field name="datasheet_no" string="Datasheet Format No" />
+                    <field name="lab_min_value" string="Lab min Value" />
+                    <field name="lab_max_value" string="Lab max Value" />
+                    <field name="nabl_min_value" string="Nabl min value" />
+                    <field name="nabl_max_value" string="Nabl max value" />
+                    <field name="client_min_value" string="Client min Value" />
+                    <field name="client_max_value" string="Client max Value" />
+                    <field name="time_based" string="Time Based" />
+                    <field name="unit" string="Unit" />
+                    <field name="calculated" string="Pseudo Parameter" />
+                    <field name="calculation_type" string="Calculation Type" />
+                    <field name="test_method" string="Parameter Test Method" />
+                    <field name="nabl_select" string="NABL" />
+                    <field name="group" string="Group" />
+                    <field name="material" string="Material" />
+                </search>
+            </field>
+        </record>
+        
         
     </data>
 </odoo>
