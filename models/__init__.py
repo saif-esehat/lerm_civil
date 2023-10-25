@@ -88,4 +88,8 @@ from .report import wmm_ds_report
 
 from . import general_template
 from .mechanical import aac_block
+from .mechanical import admixture_mechanical
+from .mechanical import rcmt_mechanical
+from .mechanical import fusion_bond_coated_steel
+from .report import fusion_bond_ds_report
 

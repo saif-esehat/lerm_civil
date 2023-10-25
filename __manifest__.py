@@ -138,9 +138,14 @@
     'reports/concrete_split_tensile_datasheet.xml',
     
     'reports/steel_tmt_bar_report.xml',
+    'views/mechanical/admixture_mechanical.xml',
+    'views/mechanical/rcmt_mechanical.xml',
     'reports/wmm_datasheet.xml',
     'reports/wmm_report.xml',
 
+    'views/mechanical/fusion_bound_coated_steel.xml',
+    'reports/fusion_bond_datasheet.xml',
+    'reports/fusion_bond_report.xml',
 
 
 

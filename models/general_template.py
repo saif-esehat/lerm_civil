@@ -7,8 +7,8 @@ from lxml import etree
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
-from scipy.interpolate import CubicSpline
-from scipy.optimize import minimize_scalar
+# from scipy.interpolate import CubicSpline
+# from scipy.optimize import minimize_scalar
 
 class DataSheetReport(models.AbstractModel):
     _name = 'report.lerm_civil.datasheet_generaltemplate_report'

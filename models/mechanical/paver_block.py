@@ -481,7 +481,7 @@ class PaverBlock(models.Model):
 
 
 
-
+   
    
 
     @api.depends('child_lines.length')
