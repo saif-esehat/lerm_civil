@@ -144,6 +144,13 @@
         sequence="10" 
         web_icon="lerm_civil,static/description/icon.png"/> -->
 
+    <menuitem id="enviroment_register_menu"
+        name="Environment Register"
+        parent="lerm_root"
+        action="action_enviroment_register_tree"
+        sequence="20"  />
+
+
 
     <menuitem id="lerm_menu"
         name="Master Data"
