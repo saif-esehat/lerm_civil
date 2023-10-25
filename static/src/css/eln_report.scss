@@ -176,3 +176,22 @@
     // -webkit-box-pack: justify;
     // -webkit-justify-content: space-between;
   }
+
+
+  .mulipleRowsInColumn{
+    td{
+      div{
+        border-bottom: 1px solid black;
+        min-height: 26px;
+      }
+    }
+  }
+
+  .cbrformula{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+  }

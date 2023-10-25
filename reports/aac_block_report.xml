@@ -172,91 +172,10 @@
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
-							<tr>
-							    <td colspan="3" style="font-weight: bold;">Room Temp :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
-									
-								</td>
-								<td colspan="3" style="font-weight: bold;">Room RH :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
-									
-								</td>
-							</tr>
 
 						</table>
 					</div>
-					<table style="margin-top:30px;">
-						<t t-set="i" t-value="0"/>
-						<thead>
-							<tr>
-                                <th style="text-align: center;">
-									<span style="font-weight: bold;">
-										Sr No
-									</span>
-								</th>
-							   
-								<th style="text-align: center;">
-									<span style="font-weight: bold;">
-										Test Parameters
-									</span>
-								</th>
-								<th style="text-align: center;">
-									<span style="font-weight: bold;">
-										Unit
-									</span>
-								</th>
-								<th style="text-align: center;">
-									<span style="font-weight: bold;">
-										Test Method
-									</span>
-								</th>
-								<th style="text-align: center;">
-									<span style="font-weight: bold;">
-										Test Result
-									</span>
-								</th>
-								<th style="text-align: center;">
-									<span style="font-weight: bold;">
-										Limits as per IS 2185 ( Part 3 ) : 1984 RA 2015 
-									</span>
-								</th>
-							</tr>
-						</thead>
-					<tbody >
-						  <tr>
-								<td>
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
-								</td>
-								<td>
-									<span>
-										Dimension 24 Blocks
-									</span>
-									
-								</td>
-								<td>
-									<span>
-									</span>
-								</td>
-								<td>
-									<span>
-									</span>									
-								</td>
-								<td>
-									<span>
-									</span>
-								</td>
-								<td>
-									<span>
-									</span>
-								</td>
-							</tr>
-					</tbody>
-					</table>
+
 		
 					<div style="margin-top:20px" class="noteContainer">
 						<div>

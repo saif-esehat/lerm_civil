@@ -73,57 +73,46 @@
                     </group>
 
                     <!-- Elongation and Flakiness  -->
-                    <group attrs="{'invisible': [('elongation_visible', '=', False)]}">
+                    <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                         <h1>
                             <field name="elongation_name" readonly="1" nolabel="1"/>
                             <field name="elongation_visible" invisible="1"/>
+                            <field name="flakiness_visible" invisible="1"/>
+
 
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('elongation_visible', '=', False)]}">
+                    <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                         <field name="elongation_table">
                         <tree editable="bottom">
                           <field name="sieve_size"/>
                           <field name="wt_retained"/>
                           <field name="elongated_retained"/>
+                          <field name="flakiness_retained"/>
                         </tree>
                         </field>
                     </group>
                     
-                    <group attrs="{'invisible': [('elongation_visible', '=', False)]}">
+                    <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                             
                         <group style="width:33%">
                             <field name="total_wt_retained_fl_el"/>
                         </group>
-                        <group style="width:33%" attrs="{'invisible': [('elongation_visible', '=', False)]}">
+                        <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                             <field name="total_elongated_retained"/>
                         </group>
-                        
-                     <group attrs="{'invisible': [('flakiness_visible', '=', False)]}">
-                        <h1>
-                            <field name="flakiness_name" readonly="1" nolabel="1"/>
-                            <field name="flakiness_visible" invisible="1"/>
-                        </h1>
-                    </group>
-                    </group>
-                    <group attrs="{'invisible': [('flakiness_visible', '=', False)]}">
-                        <field name="flakiness_table">
-                        <tree editable="bottom">
-                          <field name="sieve_size"/>
-                          <field name="wt_retained"/>
-                          <field name="flakiness_retained"/>
-                        </tree>
-                        </field>
-                    </group> 
-                    <group style="width:33%" attrs="{'invisible': [('flakiness_visible', '=', False)]}">
+                        <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                             <field name="total_flakiness_retained"/>
+                        </group>
+                        
                     </group>
+                     
                     <group style="width:100%">
                         
-                        <group style="width:33%" attrs="{'invisible': [('elongation_visible', '=', False)]}">
+                        <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                             <field name="aggregate_elongation"/>
                         </group>
-                        <group style="width:33%" attrs="{'invisible': [('flakiness_visible', '=', False)]}">
+                        <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                             <field name="aggregate_flakiness"/>
                         </group>
                         <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">

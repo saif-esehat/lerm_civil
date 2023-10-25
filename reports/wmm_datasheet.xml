@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<template id="wmm_datasheet">
+<template id="wmm_mech_datasheet">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
@@ -75,10 +75,10 @@
 
 				</div>
 
-				<!-- Elongation Index  -->
-				<div t-if="data.elongation_visible" style="margin-top:20px">
+				<!-- Elongation and Flakiness Index  -->
+				<div t-if="data.elongation_visible | data.flakiness_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
-						Elongation Index
+						Elongation and Flakiness Index
 					</div>
 					
 
@@ -86,11 +86,13 @@
 						<tr cols="12">
 							<td colspan="2">Sr no 
 							</td>
-							<td colspan="4">IS Sieve Size
+							<td colspan="3">IS Sieve Size
 							</td>
 							<td colspan="3">Wt. Retained in gms
 							</td>
-							<td colspan="3">Elongated Retained in gms
+							<td colspan="2">Elongated Retained in gms
+							</td>
+							<td colspan="2">Flakiness Retained in gms
 							</td>
 						</tr>
 
@@ -102,87 +104,17 @@
 									<t t-set="i" t-value="i+1"/>
 								</div>
 							</td>
-							<td colspan="4">
+							<td colspan="3">
 								<span t-esc="r['sieve_size']"/>
 							</td>
 							<td colspan="3">
 								<span t-esc="r['wt_retained']"/>
 							</td>
-							<td colspan="3">
-								<span t-esc="r['elongated_retained']"/>
-							</td>	
-							
-						</tr>
-					</table>
-					<table style="margin-top:20px">
-						<tr cols="12">
-							<td colspan="6">Total :
-								<![CDATA[&nbsp;]]>
-							</td>
-							<td colspan="6">
-								<span t-field="data.total_wt_retained_fl_el"/>
-							</td>
-							
-						</tr>
-                        <tr cols="12">
-							<td colspan="6">Total Elongation :
-								<![CDATA[&nbsp;]]>
-							</td>
-							<td colspan="6">
-								<span t-field="data.total_elongated_retained"/>
-							</td>
-							
-						</tr>
-                        <tr cols="12">
-							<td colspan="6">Aggregate Elongation Value in % :
-								<![CDATA[&nbsp;]]>
-							</td>
-							<td colspan="6">
-								<span t-field="data.aggregate_elongation"/>
-							</td>
-							
-						</tr>
-						
-					</table>
-
-				</div>
-
-
-                <!-- Flakiness Index  -->
-				<div t-if="data.flakiness_visible" style="margin-top:20px">
-					<div style="text-align:center;font-size:18px">
-						Flakiness Index
-					</div>
-					
-
-					<table style="margin-top:20px">
-						<tr cols="12">
-							<td colspan="2">Sr no 
-							</td>
-							<td colspan="4">IS Sieve Size
-							</td>
-							<td colspan="3">Wt. Retained in gms
-							</td>
-							<td colspan="3">Flakiness Retained in gms
-							</td>
-						</tr>
-
-						<t t-set="i" t-value="0"/>
-						<tr t-foreach="data.flakiness_table" t-as="r">
 							<td colspan="2">
-								<div>
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
-								</div>
-							</td>
-							<td colspan="4">
-								<span t-esc="r['sieve_size']"/>
-							</td>
-							<td colspan="3">
-								<span t-esc="r['wt_retained']"/>
-							</td>
-							<td colspan="3">
 								<span t-esc="r['elongated_retained']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['flakiness_retained']"/>
 							</td>	
 							
 						</tr>
@@ -207,11 +139,39 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Aggregate Elongation Value in % :
+							<td colspan="6">Total Flakiness :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.total_flakiness_retained"/>
+							</td>
+							
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Aggregate Elongation :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
 								<span t-field="data.aggregate_elongation"/>
+							</td>
+							
+						</tr>
+                        <tr cols="12">
+							<td colspan="6">Aggregate Flakiness :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.aggregate_flakiness"/>
+							</td>
+							
+						</tr>
+                        <tr cols="12">
+							<td colspan="6">Aggregate Combined :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.aggregate_combine"/>
 							</td>
 							
 						</tr>
@@ -220,6 +180,9 @@
 
 				</div>
 
+
+
+         
 				<!-- Impact Value  -->
 				<div t-if="data.impact_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">

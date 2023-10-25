@@ -39,7 +39,6 @@ class AacBlockReport(models.AbstractModel):
         }
         model = eln.get_product_base_calc_line(data).ir_model.model
         aac_data = self.env[model].search([("id","=",eln.model_id)])
-        print(aac_data.normal_consistency)
         return {
             'eln': eln,
             'data': aac_data,

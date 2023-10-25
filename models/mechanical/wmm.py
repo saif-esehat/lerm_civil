@@ -159,7 +159,6 @@ class WmmMechanical(models.Model):
             default_elongated_sieve_sizes.append((0, 0, size))
         res['dry_gradation_table'] = default_dry_sieve_sizes
         res['elongation_table'] = default_elongated_sieve_sizes
-        res['flakiness_table'] = default_elongated_sieve_sizes
 
         return res
 
@@ -175,27 +174,26 @@ class WmmMechanical(models.Model):
     def _compute_water_absorbtion(self):
         for record in self:
             if record.oven_dried_wt != 0:
-                record.water_absorbtion = (record.wt_ssd_sample - record.oven_dried_wt)/record.oven_dried_wt * 100
+                record.water_absorbtion = round((record.wt_ssd_sample - record.oven_dried_wt)/record.oven_dried_wt * 100,2)
             else:
                 record.water_absorbtion = 0
 
     # Flakiness and Elongation 
-    elongation_name = fields.Char(default=" Elongation Index")
+    elongation_name = fields.Char(default="Elongation and Flakiness Index")
     elongation_visible = fields.Boolean(compute="_compute_visible")
 
     flakiness_name = fields.Char(default=" Flakiness Index")
     flakiness_visible = fields.Boolean(compute="_compute_visible")
 
-    elongation_table = fields.One2many('mech.elongation.line','parent_id',string="Elongation Index")
-    flakiness_table = fields.One2many('mech.flakiness.line','parent_id',string="Flakiness Index")
+    elongation_table = fields.One2many('mech.elongation.flakiness.line','parent_id',string="Elongation Flakiness Index")
 
     total_wt_retained_fl_el = fields.Float('Total',compute="_compute_total_el_fl")
     total_elongated_retained = fields.Float('Total Elongation',compute="_compute_total_elongation")
     total_flakiness_retained = fields.Float('Total Flakiness',compute="_compute_total_flakiness")
 
-    aggregate_elongation = fields.Float('Aggregate Elongation Value in %')
-    aggregate_flakiness = fields.Float('Aggregate Flakiness Value in %')
-    aggregate_combine = fields.Float('Aggregate Elongation & Flakiness Value in %')
+    aggregate_elongation = fields.Float('Aggregate Elongation Value in %',compute="_compute_aggregate_elongation")
+    aggregate_flakiness = fields.Float('Aggregate Flakiness Value in %' ,compute="_compute_aggregate_flakiness")
+    aggregate_combine = fields.Float('Aggregate Elongation & Flakiness Value in %',compute="_compute_aggregate_combine")
 
 
     @api.depends('elongation_table.wt_retained')
@@ -208,10 +206,32 @@ class WmmMechanical(models.Model):
         for record in self:
             record.total_elongated_retained = sum(record.elongation_table.mapped('elongated_retained'))
 
-    @api.depends('flakiness_table.flakiness_retained')
+    @api.depends('elongation_table.flakiness_retained')
     def _compute_total_flakiness(self):
         for record in self:
-            record.total_flakiness_retained = sum(record.flakiness_table.mapped('flakiness_retained'))
+            record.total_flakiness_retained = sum(record.elongation_table.mapped('flakiness_retained'))
+
+    @api.depends('total_wt_retained_fl_el','total_elongated_retained')
+    def _compute_aggregate_elongation(self):
+        for record in self:
+            if record.total_elongated_retained != 0:
+                record.aggregate_elongation = round(record.total_wt_retained_fl_el/record.total_elongated_retained,2)
+            else:
+                record.aggregate_elongation = 0
+
+    @api.depends('total_wt_retained_fl_el','total_flakiness_retained')
+    def _compute_aggregate_flakiness(self):
+        for record in self:
+            if record.total_flakiness_retained != 0:
+                record.aggregate_flakiness = round(record.total_wt_retained_fl_el/record.total_flakiness_retained,2)
+            else:
+                record.aggregate_flakiness = 0
+
+    @api.depends('total_wt_retained_fl_el','total_flakiness_retained')
+    def _compute_aggregate_combine(self):
+        for record in self:
+            record.aggregate_combine = round(record.aggregate_elongation+record.aggregate_flakiness,2)
+            
 
 
 
@@ -235,7 +255,7 @@ class WmmMechanical(models.Model):
     def _compute_sample_weight(self):
         for line in self:
             if line.total_weight_sample_abrasion != 0:
-                line.abrasion_value_percentage = (line.weight_passing_sample_abrasion / line.total_weight_sample_abrasion) * 100
+                line.abrasion_value_percentage = round((line.weight_passing_sample_abrasion / line.total_weight_sample_abrasion) * 100,2)
             else:
                 line.abrasion_value_percentage = 0.0
 
@@ -264,7 +284,9 @@ class WmmMechanical(models.Model):
 
     liquid_limit_table = fields.One2many('mech.wmm.liquid.limit.line','parent_id',string="Liquid Limit")
     liquid_limit = fields.Float("Liquid Limit")
-    remarks_liquid_limit = fields.Char("Remarks")
+    remarks_liquid_limit = fields.Selection([
+        ('plastic', 'Plastic'),
+        ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
 
 
     # Plastic Limit
@@ -273,7 +295,9 @@ class WmmMechanical(models.Model):
 
     plastic_table = fields.One2many('mech.wmm.plastic.limit.line','parent_id',string="Plastic Limit")
     average_plastic_moisture = fields.Float("Average",compute="_compute_plastic_average")
-    remarks_plastic = fields.Char("Remarks")
+    remarks_plastic = fields.Selection([
+        ('plastic', 'Plastic'),
+        ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
 
    
 
@@ -423,6 +447,7 @@ class WmmDensityRelationLine(models.Model):
                 line.bulk_density = 0.0
 
 
+
     @api.depends('wt_of_container_dry', 'wt_of_container')
     def _compute_wt_of_dry_sample(self):
         for line in self:
@@ -543,7 +568,7 @@ class DryGradationLine(models.Model):
     parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
     
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
-    sieve_size = fields.Char(string="IS Sieve Size" ,readonly=True)
+    sieve_size = fields.Char(string="IS Sieve Size" )
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
     cumulative_retained = fields.Float(string="Cum. Retained %", store=True)
@@ -577,10 +602,9 @@ class DryGradationLine(models.Model):
 
             new_self = super(DryGradationLine, self).write(vals)
 
-            # if 'wt_retained' in vals:
-                # for record in self:
-                    # record.parent_id._compute_total()
-                    # pass
+            if 'wt_retained' in vals:
+                for record in self:
+                    record.parent_id._compute_total_sieve()
 
             return new_self
 
@@ -608,21 +632,23 @@ class DryGradationLine(models.Model):
 
 
 class ElongationLine(models.Model):
-    _name = "mech.elongation.line"
+    _name = "mech.elongation.flakiness.line"
     parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
 
     sieve_size = fields.Char(string="IS Sieve Size")
     wt_retained = fields.Float(string="Wt. Retained in gms")
     elongated_retained = fields.Float(string="Elongated Retained in gms")
-
-
-class FlakinessLine(models.Model):
-    _name = "mech.flakiness.line"
-    parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
-
-    sieve_size = fields.Char(string="IS Sieve Size")
-    wt_retained = fields.Float(string="Wt. Retained in gms")
     flakiness_retained = fields.Float(string="Flakiness Retained in gms")
+
+
+
+# class FlakinessLine(models.Model):
+#     _name = "mech.flakiness.line"
+#     parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
+
+#     sieve_size = fields.Char(string="IS Sieve Size")
+#     wt_retained = fields.Float(string="Wt. Retained in gms")
+#     flakiness_retained = fields.Float(string="Flakiness Retained in gms")
 
 
 class ImpactValueLine(models.Model):
