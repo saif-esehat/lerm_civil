@@ -8,6 +8,7 @@
  'data': [
     'security/security.xml',
     'data/sequence.xml',
+    'views/enviroment_register.xml',
     'views/lerm.xml',
     'views/groups.xml',
     'views/res_company.xml',
@@ -32,6 +33,7 @@
     'views/mechanical/drying_shrinkage_solid.xml',
     'views/mechanical/moisture_movement_solid.xml',
     'views/mechanical/flexural_strength_concrete_beam.xml',
+
     # 'views/mechanical/compressive_strength_concrete_cube.xml',
     'views/mechanical/splitting_tensile_strength_concrete.xml',
     'views/mechanical/act_compressive_concrete_cube.xml',
@@ -150,6 +152,7 @@
     'views/mechanical/fusion_bound_coated_steel.xml',
     'reports/fusion_bond_datasheet.xml',
     'reports/fusion_bond_report.xml',
+    'reports/rock_print.xml'
     'views/mechanical/rcpt.xml',
 
 
@@ -166,7 +169,6 @@
         ],
     'web.assets_qweb': [
         '/lerm_civil/static/src/xml/spreadsheet.xml'
-
     ],
         }
 }

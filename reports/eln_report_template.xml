@@ -79,7 +79,6 @@
 														<span t-esc="r['specification']"/> <![CDATA[&nbsp;]]>,<![CDATA[&nbsp;]]>
 													</span>
 												</span>
-												
 										</div>
 									</td>
 								</tr>

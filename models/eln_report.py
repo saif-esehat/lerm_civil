@@ -38,7 +38,8 @@ class ElnReport(models.AbstractModel):
             'eln': eln,
             'qrcode': qr_code,
             'stamp' : inreport_value,
-            'nabl' : nabl
+            'nabl' : nabl,
+            'report_name' : 'Afzal'
         }
 
 
@@ -66,6 +67,7 @@ class DataSheetReport(models.AbstractModel):
             prev_result = input_data.parameter_result.result
         return {
             'eln': eln,
-            'datasheet' : datasheet_data
+            'datasheet' : datasheet_data,
+            'datasheet_name' : 'Afzal'
         }
         

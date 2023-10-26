@@ -251,7 +251,7 @@ class LermSampleForm(models.Model):
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {
             'type': 'ir.actions.report',
-            'report_type': 'qweb-pdf',
+            'report_type': 'qweb-html',
             'report_name': template_name,
             'report_file': template_name,
             'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : True}
