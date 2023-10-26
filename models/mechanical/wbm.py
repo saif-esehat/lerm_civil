@@ -70,30 +70,30 @@ class WbmMechanical(models.Model):
 
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
-                if sample.internal_id == '89e321d5-560e-41f9-9f7e-3455c9b2925d':
+                if sample.internal_id == '48b74892-3497-4b7f-819a-a26f25c9848':
                     record.dry_gradation_visible = True
-                if sample.internal_id == 'd9bdbd78-4e73-44ca-93ed-442f74cd1e9b':
+                if sample.internal_id == '247b2e3e-6974-4a89-9a32-2375ca190815':
                     record.water_absorbtion_visible  = True  
-                if sample.internal_id == '9588ef56-599e-4569-8cd2-48e1dc120714':
+                if sample.internal_id == '5429fe61-638d-4e6f-b258-df8a2fc0ea5c':
                     record.elongation_visible = True
                     record.flakiness_visible = True
-                if sample.internal_id == '06308898-70fb-4c47-baec-9880be12d765':
+                if sample.internal_id == '8d2a4700-8125-4f5f-aa7c-f82d1416d5eb':
                     record.flakiness_visible = True
                     record.elongation_visible = True
-                if sample.internal_id == '3c23309f-3f1c-4aca-ac94-3c2bb0f034e2':
+                if sample.internal_id == 'ded398c1-9ee6-4115-a8db-015d7cb6d5c7':
                     record.abrasion_visible = True
-                if sample.internal_id == 'df2105e2-a55f-47ac-aee6-9f37d733ccca':
+                if sample.internal_id == 'e9e985d1-e282-488c-9dbb-16e9f14b065b':
                     record.impact_visible = True
-                if sample.internal_id == '6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed':
+                if sample.internal_id == '0eff3fc4-d228-42f5-9927-69ca7dadbcee':
                     record.plastic_visible  = True  
-                if sample.internal_id == 'b9d7a9f7-3ed1-4021-90a2-47651f0ed81d':
+                if sample.internal_id == '07bc2253-d02d-43fd-b4a7-dd5a6c6cd36e':
                     record.liquid_limit_visible = True
-                if sample.internal_id == 'c6c06cf6-1611-4790-9410-ef5db6233932':
+                if sample.internal_id == '3a650086-0d26-4a6c-8bff-0269dde01d2a':
                     record.liquid_limit_visible = True
                     record.plasticity_index_visible = True
-                if sample.internal_id == '5cfd20e8-0579-4221-8a82-bbfadcd3131f':
+                if sample.internal_id == '9b21943c-b50a-42ec-8489-75e615e51466':
                     record.density_relation_visible = True
-                if sample.internal_id == 'f1046910-b27e-48c6-81b8-900521446761':
+                if sample.internal_id == 'e042cfd0-6461-4137-ba6a-381d0229b973':
                     record.cbr_visible = True
                 
 
