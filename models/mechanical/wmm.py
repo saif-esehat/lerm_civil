@@ -174,7 +174,7 @@ class WmmMechanical(models.Model):
     def _compute_water_absorbtion(self):
         for record in self:
             if record.oven_dried_wt != 0:
-                record.water_absorbtion = (record.wt_ssd_sample - record.oven_dried_wt)/record.oven_dried_wt * 100
+                record.water_absorbtion = round((record.wt_ssd_sample - record.oven_dried_wt)/record.oven_dried_wt * 100,2)
             else:
                 record.water_absorbtion = 0
 
@@ -214,7 +214,7 @@ class WmmMechanical(models.Model):
     @api.depends('total_wt_retained_fl_el','total_elongated_retained')
     def _compute_aggregate_elongation(self):
         for record in self:
-            if record.total_wt_retained_fl_el != 0:
+            if record.total_elongated_retained != 0:
                 record.aggregate_elongation = round(record.total_wt_retained_fl_el/record.total_elongated_retained,2)
             else:
                 record.aggregate_elongation = 0
@@ -222,7 +222,7 @@ class WmmMechanical(models.Model):
     @api.depends('total_wt_retained_fl_el','total_flakiness_retained')
     def _compute_aggregate_flakiness(self):
         for record in self:
-            if record.total_wt_retained_fl_el != 0:
+            if record.total_flakiness_retained != 0:
                 record.aggregate_flakiness = round(record.total_wt_retained_fl_el/record.total_flakiness_retained,2)
             else:
                 record.aggregate_flakiness = 0
@@ -255,7 +255,7 @@ class WmmMechanical(models.Model):
     def _compute_sample_weight(self):
         for line in self:
             if line.total_weight_sample_abrasion != 0:
-                line.abrasion_value_percentage = (line.weight_passing_sample_abrasion / line.total_weight_sample_abrasion) * 100
+                line.abrasion_value_percentage = round((line.weight_passing_sample_abrasion / line.total_weight_sample_abrasion) * 100,2)
             else:
                 line.abrasion_value_percentage = 0.0
 
@@ -284,7 +284,9 @@ class WmmMechanical(models.Model):
 
     liquid_limit_table = fields.One2many('mech.wmm.liquid.limit.line','parent_id',string="Liquid Limit")
     liquid_limit = fields.Float("Liquid Limit")
-    remarks_liquid_limit = fields.Char("Remarks")
+    remarks_liquid_limit = fields.Selection([
+        ('plastic', 'Plastic'),
+        ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
 
 
     # Plastic Limit
@@ -293,7 +295,9 @@ class WmmMechanical(models.Model):
 
     plastic_table = fields.One2many('mech.wmm.plastic.limit.line','parent_id',string="Plastic Limit")
     average_plastic_moisture = fields.Float("Average",compute="_compute_plastic_average")
-    remarks_plastic = fields.Char("Remarks")
+    remarks_plastic = fields.Selection([
+        ('plastic', 'Plastic'),
+        ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
 
    
 
@@ -564,7 +568,7 @@ class DryGradationLine(models.Model):
     parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
     
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
-    sieve_size = fields.Char(string="IS Sieve Size" ,readonly=True)
+    sieve_size = fields.Char(string="IS Sieve Size" )
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
     cumulative_retained = fields.Float(string="Cum. Retained %", store=True)
@@ -598,10 +602,9 @@ class DryGradationLine(models.Model):
 
             new_self = super(DryGradationLine, self).write(vals)
 
-            # if 'wt_retained' in vals:
-                # for record in self:
-                    # record.parent_id._compute_total()
-                    # pass
+            if 'wt_retained' in vals:
+                for record in self:
+                    record.parent_id._compute_total_sieve()
 
             return new_self
 

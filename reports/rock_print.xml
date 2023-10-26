@@ -10,71 +10,8 @@
                 <!-- Dimension -->
                 <div t-if="data.dimension_visible" style="margin-top:20px">
                     <div style="text-align:center;font-size:18px">
-                        Dimension
+                        <!-- Dimension -->
                     </div>
-                    
-                    <table style="margin-top:20px">
-                        <tr cols="12">
-                            <td colspan="1">Sr no 
-                            </td>
-                            <td colspan="4">Length in mm 
-                            </td>
-                            <td colspan="4">Height in mm
-                            </td>
-                            <td colspan="3">Width in mm
-                            </td>
-                            
-                        </tr>
-                        
-                        <t t-set="i" t-value="0"/>
-                        <tr t-foreach="data.dimension_table" t-as="r">
-                            <td colspan="1">
-                                <div>
-                                    <span t-esc="i + 1" />
-                                    <t t-set="i" t-value="i+1"/>
-                                </div>
-                            </td>
-                            <td colspan="4">
-                                <span t-esc="r['length']"/>
-                            </td>
-                            <td colspan="4">
-                                <span t-esc="r['height']"/>
-                            </td>
-                            <td colspan="3">
-                                <span t-esc="r['width']"/>
-                            </td>
-                            
-                        </tr>
-                    </table>
-                    <table style="margin-top:20px">
-                        <tr cols="12">
-                            <td colspan="6">Average Length :
-                                <![CDATA[&nbsp;]]>
-                            </td>
-                            <td colspan="6">
-                                <span t-field="data.average_length"/>
-                            </td>
-                            
-                        </tr>
-                        <tr cols="12">
-                            <td colspan="6">Average Height :
-                                <![CDATA[&nbsp;]]>
-                            </td>
-                            <td colspan="6">
-                                <span t-field="data.average_height"/>
-                            </td>
-                            
-                        </tr>
-                        <tr cols="12">
-                            <td colspan="6">Average Width :
-                                <![CDATA[&nbsp;]]>
-                            </td>
-                            <td colspan="6">
-                                <span t-field="data.average_width"/>
-                            </td>
-                            
-                        </tr>
-                    </table>
                     
                 </div>
                 
@@ -108,7 +45,6 @@
             </t>
         </t>
     </template>
-
 
     <template id="rock_report">
 		<t t-call="web.html_container">
@@ -242,8 +178,43 @@
                             <td>Sr No</td>
                             <td>Particulars</td>
                             <td>Unit</td>
+                            <td>Result</td>
                             <td>Test Method</td>
-                            <td>Test Result</td>
+						</tr>
+						<tr>
+                            <td>1</td>
+                            <td>Porosity</td>
+                            <td>%</td>
+                            <td><span t-field="data.avg_porosity"/></td>
+                            <td>IS : 9143-1979 RA 2012</td>
+						</tr>
+						<tr>
+                            <td>2</td>
+                            <td>Water Absorption</td>
+                            <td>%</td>
+                            <td><span t-field="data.avg_water_absorption"/></td>
+                            <td>IS : 9143-1979 RA 2013</td>
+						</tr>
+						<tr>
+                            <td>3</td>
+                            <td>Dry Density</td>
+                            <td>gm/cc</td>
+                            <td><span t-field="data.avg_dry_density"/></td>
+                            <td>IS : 9143-1979 RA 2014</td>
+						</tr>
+						<tr>
+                            <td>4</td>
+                            <td>Saturated Specific Gravity</td>
+                            <td>mm</td>
+                            <td><span t-field="data.avg_saturated_spc_gravity"/></td>
+                            <td>IS : 9143-1979 RA 2015</td>
+						</tr>
+						<tr>
+                            <td>5</td>
+                            <td>UCS</td>
+                            <td>N/mm2</td>
+                            <td><span t-field="data.avg_usc"/></td>
+                            <td>IS : 9143-1979 RA 2016</td>
 						</tr>
                     </table>
 
