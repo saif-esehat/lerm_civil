@@ -85,6 +85,8 @@
     'views/mechanical/aggregate_fine.xml',
     'views/mechanical/concrete_cube2.xml',
     'views/mechanical/wmm.xml',
+    'views/mechanical/gsb.xml',
+
 
     'views/product_grade_wizard.xml',
     'reports/eln_report_action.xml',
@@ -142,6 +144,8 @@
     'views/mechanical/rcmt_mechanical.xml',
     'reports/wmm_datasheet.xml',
     'reports/wmm_report.xml',
+    'reports/gsb_datasheet.xml',
+    'reports/gsb_report.xml',
 
     'views/mechanical/fusion_bound_coated_steel.xml',
     'reports/fusion_bond_datasheet.xml',
