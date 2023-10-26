@@ -11,7 +11,7 @@
 
                     <group >
                         <h1>
-                            <field name="name" readonly="1" nolabel="1"/>
+                            <field name="name_admixture" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
                     <group>
@@ -20,9 +20,33 @@
                         <field name="eln_ref"/>
                         <field name="parameter_id" invisible="1"/>
                     </group>
+
+                    <group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="water_content_max1"/>
+                                <field name="water_content_max2"/>
+                                <field name="water_content_max3"/>
+                                <field name="water_content_max4"/>
+                                
+                                <field name="water_content_max5"/>
+                                <field name="water_content_max6"/>
+                                <field name="water_content_max7"/>
+                                <field name="water_content_max8"/>
+
+                                <field name="water_content_max9"/>
+                                <!-- <field name="water_content_max1"/>
+                                <field name="water_content_max1"/> -->
+
+                                <!-- <field name="bleeding"/>
+                                <field name="air_content"/> -->
+                            </tree>
+                    </field>
+                    </group>
                    
 
                  
+                        
 
                 </sheet>
             </form>
