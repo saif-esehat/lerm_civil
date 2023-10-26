@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="wbm_mech_datasheet">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    WBM
+                </div>
+				
+                <div class="container_eln" style="margin-top:5px">
+				<!-- Dry Gradation  -->
+				<div t-if="data.dry_gradation_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Dry Gradation
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="1">Sr no 
+							</td>
+							<td colspan="3">IS Sieve Size
+							</td>
+							<td colspan="2">Wt. Retained in gms
+							</td>
+							<td colspan="2">% Retained
+							</td>
+							<td colspan="2">Cum. Retained %
+							</td>
+							<td colspan="2">Passing %
+							</td>
+							
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.dry_gradation_table" t-as="r">
+							<td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="3">
+								<span t-esc="r['sieve_size']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['wt_retained']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['percent_retained']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['cumulative_retained']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['passing_percent']"/>
+							</td>
+
+							
+						</tr>
+					</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Total :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.total_sieve_analysis"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+
+				</div>
+
+				<!-- Elongation and Flakiness Index  -->
+				<div t-if="data.elongation_visible | data.flakiness_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Elongation and Flakiness Index
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="2">Sr no 
+							</td>
+							<td colspan="3">IS Sieve Size
+							</td>
+							<td colspan="3">Wt. Retained in gms
+							</td>
+							<td colspan="2">Elongated Retained in gms
+							</td>
+							<td colspan="2">Flakiness Retained in gms
+							</td>
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.elongation_table" t-as="r">
+							<td colspan="2">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="3">
+								<span t-esc="r['sieve_size']"/>
+							</td>
+							<td colspan="3">
+								<span t-esc="r['wt_retained']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['elongated_retained']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['flakiness_retained']"/>
+							</td>	
+							
+						</tr>
+					</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Total :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.total_wt_retained_fl_el"/>
+							</td>
+							
+						</tr>
+                        <tr cols="12">
+							<td colspan="6">Total Elongation :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.total_elongated_retained"/>
+							</td>
+							
+						</tr>
+                        <tr cols="12">
+							<td colspan="6">Total Flakiness :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.total_flakiness_retained"/>
+							</td>
+							
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Aggregate Elongation :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.aggregate_elongation"/>
+							</td>
+							
+						</tr>
+                        <tr cols="12">
+							<td colspan="6">Aggregate Flakiness :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.aggregate_flakiness"/>
+							</td>
+							
+						</tr>
+                        <tr cols="12">
+							<td colspan="6">Aggregate Combined :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.aggregate_combine"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+
+				</div>
+
+
+
+         
+				<!-- Impact Value  -->
+				<div t-if="data.impact_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Impact Value
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="1">Sr no 
+							</td>
+							<td colspan="1">Weight of cylindrical measure in gms
+							</td>
+							<td colspan="2">Total Wt. of Oven dried (4 hrs) aggregate sample + cylindrical measure in gms
+							</td>
+							<td colspan="2">Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms
+							</td>
+                            <td colspan="2">Wt. of aggregate passing 2.36 mm sieve after the test in gms
+							</td>
+							<td colspan="2">Wt. of aggregate retained on 2.36 mm sieve after the test in gms
+							</td>
+							<td colspan="2">Impact value
+							</td>
+
+							
+							
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.impact_value_child_lines" t-as="r">
+							<td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['wt_of_cylinder']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['total_wt_of_dried']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['total_wt_aggregate']"/>
+							</td>
+                            <td colspan="2">
+								<span t-esc="r['wt_of_aggregate_passing']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['wt_of_aggregate_retained']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['impact_value']"/>
+							</td>
+							
+							
+						</tr>
+					</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Average Impact Value :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.average_impact_value"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+
+				</div>
+
+                <!-- Abrasion Value  -->
+
+                <div t-if="data.abrasion_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							Abrasion Value
+						</div>
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Total weight of Sample in gms :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.total_weight_sample_abrasion"/>
+								</td>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Weight of Passing sample in 1.70 mm IS sieve in gms :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.weight_passing_sample_abrasion"/>
+								</td>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Weight of Retain sample in 1.70 mm IS sieve in gms :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.weight_retain_sample_abrasion"/>
+								</td>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Abrasion Value (%) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.abrasion_value_percentage"/>
+								</td>
+							</tr>
+                            
+						</table>
+					</div>
+
+
+                <!-- Water Absorbtion  -->
+
+                <div t-if="data.water_absorbtion_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							Water Absorbtion
+						</div>
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Weight of saturated surface dry (SSD) sample in air in gms, A :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_ssd_sample"/>
+								</td>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Oven dried weight of sample in gms, C :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.oven_dried_wt"/>
+								</td>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Water absorption % :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.water_absorbtion"/>
+								</td>
+							</tr>
+                            
+                            
+						</table>
+					</div>
+
+
+
+                <!-- Liquid Limit -->
+				<div t-if="data.liquid_limit_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Liquid Limit
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="1">Container No.
+							</td>
+							<td colspan="1">No of Blows
+							</td>
+							<td colspan="1">Mass of wet sample+container, (M1) in gms
+							</td>
+                            <td colspan="1">Mass of dry sample+container, (M2) in gms
+							</td>
+							<td colspan="2">Mass of container, (M3) in gms
+							</td>
+							<td colspan="2">Mass of Moisture, (M1-M2) in gms
+							</td>
+                            <td colspan="2">Mass of dry sample, (M2-M3) in gms
+							</td>
+                            <td colspan="2">% Moisture
+							</td>
+
+							
+							
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.liquid_limit_table" t-as="r">
+							<td colspan="1">
+								<span t-esc="r['container_no']"/>
+							</td>
+                            <td colspan="1">
+								<span t-esc="r['blows']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['mass_wet_sample_container']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['mass_dry_sample_container']"/>
+							</td>
+                            <td colspan="2">
+								<span t-esc="r['mass_container']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['mass_moisture']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['mass_dry_sample']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['moisture_percent']"/>
+							</td>
+							
+						</tr>
+					</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Liquid Limit :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.liquid_limit"/>
+							</td>
+							
+						</tr>
+                        <tr cols="12">
+							<td colspan="6">Remarks :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.remarks_liquid_limit"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+
+				</div>
+
+                <!-- Plastic Limit  -->
+
+                <div t-if="data.plastic_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Plastic Limit
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="1">Container No.
+							</td>
+							<td colspan="1">Mass of wet sample+container, (M1) in gms
+							</td>
+                            <td colspan="2">Mass of dry sample+container, (M2) in gms
+							</td>
+							<td colspan="2">Mass of container, (M3) in gms
+							</td>
+							<td colspan="2">Mass of Moisture, (M1-M2) in gms
+							</td>
+                            <td colspan="2">Mass of dry sample, (M2-M3) in gms
+							</td>
+                            <td colspan="2">% Moisture
+							</td>
+
+							
+							
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.plastic_table" t-as="r">
+							<td colspan="1">
+								<span t-esc="r['container_no']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['mass_wet_sample_container']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['mass_dry_sample_container']"/>
+							</td>
+                            <td colspan="2">
+								<span t-esc="r['mass_container']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['mass_moisture']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['mass_dry_sample']"/>
+							</td>
+							<td colspan="2">
+								<span t-esc="r['moisture_percent']"/>
+							</td>
+							
+						</tr>
+					</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Average :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.average_plastic_moisture"/>
+							</td>
+							
+						</tr>
+                        <tr cols="12">
+							<td colspan="6">Remarks :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.remarks_plastic"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+
+				</div>
+
+                <!-- Plasticity Index  -->
+
+                <div t-if="data.plasticity_index_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Plasticity Index
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Plasticity Index :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.plasticity_index"/>
+							</td>
+							
+						</tr>
+                        
+					</table>
+
+				</div>
+
+                <!-- Density Relation Using Heavy Compaction  -->
+
+                <div t-if="data.density_relation_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						Density Relation Using Heavy Compaction
+					</div>
+
+                    <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Weight of Mould in gm :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.wt_of_modul"/>
+							</td>
+							
+						</tr>
+                        <tr cols="12">
+							<td colspan="6">Volume of Mould in cc :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.vl_of_modul"/>
+							</td>
+							
+						</tr>
+						
+					</table>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="1">Determination No
+							</td>
+							<td colspan="1">Weight of Mould + Compacted sample in gm
+							</td>
+                            <td colspan="1">Weight of compacted sample in gm
+							</td>
+							<td colspan="1">Bulk Density of sample in gm/cc
+							</td>
+							<td colspan="1">Container No
+							</td>
+                            <td colspan="1">Weight of Container in gm
+							</td>
+                            <td colspan="1">Weight of Container + wet sample in gm
+							</td>
+                            <td colspan="1">Weight of Container + dry sample in gm
+							</td>
+							<td colspan="1">Weight of dry sample in gm
+							</td>
+							<td colspan="1">Weight of moisture in gm
+							</td>
+                            <td colspan="1">% Moisture
+							</td>
+                            <td colspan="1">Dry density in gm/cc
+							</td>
+
+							
+							
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.density_relation_table" t-as="r">
+							<td colspan="1">
+								<span t-esc="r['determination_no']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['wt_of_modul_compact']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['wt_of_compact']"/>
+							</td>
+                            <td colspan="1">
+								<span t-esc="r['bulk_density']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['container_no']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['wt_of_container']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['wt_of_container_wet']"/>
+							</td>
+                            <td colspan="1">
+								<span t-esc="r['wt_of_container_dry']"/>
+							</td>
+                            <td colspan="1">
+								<span t-esc="r['wt_of_dry_sample']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['wt_of_moisture']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['moisture']"/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['dry_density']"/>
+							</td>
+							
+						</tr>
+					</table>
+					<div t-if="data.chart_image_density" style="margin-top: 20px;">
+                        <img t-att-src="'data:image/png;base64,' + data.chart_image_density.decode('utf-8')" style="max-width: 100%;"/>
+                    </div>
+
+				</div>
+
+
+                <!-- CBR  -->
+                <div t-if="data.cbr_visible" style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+						CBR
+					</div>
+					
+
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="2">Sr no 
+							</td>
+							<td colspan="4">Penetration in mm
+							</td>
+							<td colspan="3">Proving Ring Reading
+							</td>
+							<td colspan="3">Load in Kg
+							</td>
+						</tr>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.cbr_table" t-as="r">
+							<td colspan="2">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="4">
+								<span t-esc="r['penetration']"/>
+							</td>
+							<td colspan="3">
+								<span t-esc="r['proving_reading']"/>
+							</td>
+							<td colspan="3">
+								<span t-esc="r['load']"/>
+							</td>	
+							
+						</tr>
+					</table>
+					<div t-if="data.chart_image_cbr" style="margin-top: 20px;">
+                        <img t-att-src="'data:image/png;base64,' + data.chart_image_cbr.decode('utf-8')" style="max-width: 100%;"/>
+                    </div>
+
+				</div>
+				</div>
+
+				<div class="authorizeRowDataSheet">
+					<div>
+						<div>
+							<b>
+								(JR Chemist)
+							</b>
+						</div>
+						<div>
+							<b>
+								Tested By
+							</b>
+						</div>
+					</div>
+					<div style="margin-left:500px">
+						<div>
+							<b>
+								Chemical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								Checked By
+							</b>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

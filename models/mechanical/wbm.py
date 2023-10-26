@@ -7,13 +7,13 @@ import matplotlib.pyplot as plt
 import io
 import base64
 
-class WmmMechanical(models.Model):
-    _name = "mechanical.wmm"
+class WbmMechanical(models.Model):
+    _name = "mechanical.wbm"
     _inherit = "lerm.eln"
     _rec_name = "name"
 
 
-    name = fields.Char("Name",default="WMM")
+    name = fields.Char("Name",default="WBM")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
@@ -23,7 +23,7 @@ class WmmMechanical(models.Model):
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()
-        record = super(WmmMechanical, self).create(vals)
+        record = super(WbmMechanical, self).create(vals)
         record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
@@ -36,7 +36,7 @@ class WmmMechanical(models.Model):
             print("Records",records)
 
     def get_all_fields(self):
-        record = self.env['mechanical.wmm'].browse(self.ids[0])
+        record = self.env['mechanical.wbm'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():
             field_value = record[field_name]
@@ -70,30 +70,30 @@ class WmmMechanical(models.Model):
 
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
-                if sample.internal_id == '64fecdf5-6741-4817-95f4-5e53a0676c5f':
+                if sample.internal_id == '89e321d5-560e-41f9-9f7e-3455c9b2925d':
                     record.dry_gradation_visible = True
-                if sample.internal_id == '51e6dcfa-6d14-468e-8488-6d100818e924':
+                if sample.internal_id == 'd9bdbd78-4e73-44ca-93ed-442f74cd1e9b':
                     record.water_absorbtion_visible  = True  
-                if sample.internal_id == 'f1a27ee1-3e7e-4fff-b912-f7b046f5099c':
+                if sample.internal_id == '9588ef56-599e-4569-8cd2-48e1dc120714':
                     record.elongation_visible = True
                     record.flakiness_visible = True
-                if sample.internal_id == 'b8390baa-2d4b-47f4-b9ee-7a4a5b176b97':
-                    record.elongation_visible = True
+                if sample.internal_id == '06308898-70fb-4c47-baec-9880be12d765':
                     record.flakiness_visible = True
-                if sample.internal_id == '7edace9a-a4ae-451c-a4cf-36d2c042ed7d':
+                    record.elongation_visible = True
+                if sample.internal_id == '3c23309f-3f1c-4aca-ac94-3c2bb0f034e2':
                     record.abrasion_visible = True
-                if sample.internal_id == 'aaea4989-7446-446e-a018-8a5f9dcfd549':
+                if sample.internal_id == 'df2105e2-a55f-47ac-aee6-9f37d733ccca':
                     record.impact_visible = True
-                if sample.internal_id == 'ed625cc1-4295-4d00-977f-205b7a508363':
+                if sample.internal_id == '6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed':
                     record.plastic_visible  = True  
-                if sample.internal_id == '88627a7b-c438-4d13-bfde-330ee0005734':
+                if sample.internal_id == 'b9d7a9f7-3ed1-4021-90a2-47651f0ed81d':
                     record.liquid_limit_visible = True
-                if sample.internal_id == '6fd54acc-61fd-478f-9bcf-6817965312f1':
+                if sample.internal_id == 'c6c06cf6-1611-4790-9410-ef5db6233932':
                     record.liquid_limit_visible = True
                     record.plasticity_index_visible = True
-                if sample.internal_id == 'fc19b116-3cb1-448a-8bb0-8f48657ae86b':
+                if sample.internal_id == '5cfd20e8-0579-4221-8a82-bbfadcd3131f':
                     record.density_relation_visible = True
-                if sample.internal_id == '6c0014d9-12d3-45ea-bc23-5b35ec6ffd24':
+                if sample.internal_id == 'f1046910-b27e-48c6-81b8-900521446761':
                     record.cbr_visible = True
                 
 
@@ -101,7 +101,7 @@ class WmmMechanical(models.Model):
     dry_gradation_name = fields.Char(default="Dry Gradation")
     dry_gradation_visible = fields.Boolean(compute="_compute_visible")
 
-    dry_gradation_table = fields.One2many('mech.dry.gradation.line','parent_id',string="Dry Gradation")
+    dry_gradation_table = fields.One2many('mech.wbm.dry.gradation.line','parent_id',string="Dry Gradation")
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
     
 
@@ -138,11 +138,11 @@ class WmmMechanical(models.Model):
 
     def default_get(self, fields):
         print("From Default Value")
-        res = super(WmmMechanical, self).default_get(fields)
+        res = super(WbmMechanical, self).default_get(fields)
 
         default_dry_sieve_sizes = []
         default_elongated_sieve_sizes = []
-        dry_sieve_sizes = ['53 mm', '45 mm','22.4 mm', '11.2 mm', '4.75 mm','2.36 mm','600 micron','75 micron','pan']
+        dry_sieve_sizes = ['53 mm','45 mm','22.4 mm', '11.2 mm', '4.75 mm','2.36 mm','600 micron','75 micron','pan']
         elongation_sieve_sizes = ['63 mm', '50 mm', '40 mm', '31.5 mm', '25 mm','20 mm','16 mm','12.5 mm','10 mm','6.3 mm']
 
 
@@ -187,7 +187,7 @@ class WmmMechanical(models.Model):
     flakiness_name = fields.Char(default=" Flakiness Index")
     flakiness_visible = fields.Boolean(compute="_compute_visible")
 
-    elongation_table = fields.One2many('mech.elongation.flakiness.line','parent_id',string="Elongation Flakiness Index")
+    elongation_table = fields.One2many('mech.wbm.elongation.flakiness.line','parent_id',string="Elongation Flakiness Index")
 
     total_wt_retained_fl_el = fields.Float('Total',compute="_compute_total_el_fl")
     total_elongated_retained = fields.Float('Total Elongation',compute="_compute_total_elongation")
@@ -265,7 +265,7 @@ class WmmMechanical(models.Model):
     impact_value_name = fields.Char("Name",default="Impact Value")
     impact_visible = fields.Boolean("Impact Visible",compute="_compute_visible")
 
-    impact_value_child_lines = fields.One2many('mech.wmm.impact.line','parent_id',string="Parameter")
+    impact_value_child_lines = fields.One2many('mech.wbm.impact.line','parent_id',string="Parameter")
 
     average_impact_value = fields.Float(string="Average Impact Value", compute="_compute_average_impact_value")
 
@@ -284,7 +284,7 @@ class WmmMechanical(models.Model):
     liquid_limit_name = fields.Char("Name",default="Liquid Limit")
     liquid_limit_visible = fields.Boolean("Liquid Limit Visible",compute="_compute_visible")
 
-    liquid_limit_table = fields.One2many('mech.wmm.liquid.limit.line','parent_id',string="Liquid Limit")
+    liquid_limit_table = fields.One2many('mech.wbm.liquid.limit.line','parent_id',string="Liquid Limit")
     liquid_limit = fields.Float("Liquid Limit")
     remarks_liquid_limit = fields.Selection([
         ('plastic', 'Plastic'),
@@ -295,7 +295,7 @@ class WmmMechanical(models.Model):
     plastic_name = fields.Char("Name",default="Plastic Limit")
     plastic_visible = fields.Boolean("Plastic Limit Visible",compute="_compute_visible")
 
-    plastic_table = fields.One2many('mech.wmm.plastic.limit.line','parent_id',string="Plastic Limit")
+    plastic_table = fields.One2many('mech.wbm.plastic.limit.line','parent_id',string="Plastic Limit")
     average_plastic_moisture = fields.Float("Average",compute="_compute_plastic_average")
     remarks_plastic = fields.Selection([
         ('plastic', 'Plastic'),
@@ -326,7 +326,7 @@ class WmmMechanical(models.Model):
     density_relation_name = fields.Char("Name",default="Density Relation Using Heavy Compaction")
     density_relation_visible = fields.Boolean("Density Relation Visible",compute="_compute_visible")
 
-    density_relation_table = fields.One2many('mech.wmm.density.relation.line','parent_id',string="Density Relation")
+    density_relation_table = fields.One2many('mech.wbm.density.relation.line','parent_id',string="Density Relation")
     wt_of_modul = fields.Float('Weight of Mould in gm')
     vl_of_modul = fields.Float('Volume of Mould in cc')
     chart_image_density = fields.Binary("Line Chart", compute="_compute_chart_image_density", store=True)
@@ -374,7 +374,7 @@ class WmmMechanical(models.Model):
     cbr_name = fields.Char("Name",default="CBR")
     cbr_visible = fields.Boolean("CBR Visible",compute="_compute_visible")
 
-    cbr_table = fields.One2many('mechanical.wmm.cbr.line','parent_id',string="CBR")
+    cbr_table = fields.One2many('mechanical.wbm.cbr.line','parent_id',string="CBR")
     chart_image_cbr = fields.Binary("Line Chart", compute="_compute_chart_image_cbr", store=True)
 
 
@@ -415,9 +415,9 @@ class WmmMechanical(models.Model):
 
 
 
-class WmmDensityRelationLine(models.Model):
-    _name = "mech.wmm.density.relation.line"
-    parent_id = fields.Many2one('mechanical.wmm',string="Parent Id")
+class WbmDensityRelationLine(models.Model):
+    _name = "mech.wbm.density.relation.line"
+    parent_id = fields.Many2one('mechanical.wbm',string="Parent Id")
 
     determination_no = fields.Float(string="Determination No")
     wt_of_modul_compact = fields.Integer(string="Weight of Mould + Compacted sample in gm")
@@ -481,9 +481,9 @@ class WmmDensityRelationLine(models.Model):
 
 
 
-class WmmCBRLine(models.Model):
-    _name = "mechanical.wmm.cbr.line"
-    parent_id = fields.Many2one('mechanical.wmm',string="Parent Id")
+class WbmCBRLine(models.Model):
+    _name = "mechanical.wbm.cbr.line"
+    parent_id = fields.Many2one('mechanical.wbm',string="Parent Id")
 
     penetration = fields.Float(string="Penetration in mm")
     proving_reading = fields.Float(string="Proving Ring Reading")
@@ -497,9 +497,9 @@ class WmmCBRLine(models.Model):
 
 
 
-class WmmLiquidLimitLine(models.Model):
-    _name = "mech.wmm.liquid.limit.line"
-    parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
+class WbmLiquidLimitLine(models.Model):
+    _name = "mech.wbm.liquid.limit.line"
+    parent_id = fields.Many2one('mechanical.wbm', string="Parent Id")
     
     container_no = fields.Char("Container No.")
     blows = fields.Integer(string="No of Blows")
@@ -532,9 +532,9 @@ class WmmLiquidLimitLine(models.Model):
 
 
 
-class WmmPlasticLimitLine(models.Model):
-    _name = "mech.wmm.plastic.limit.line"
-    parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
+class WbmPlasticLimitLine(models.Model):
+    _name = "mech.wbm.plastic.limit.line"
+    parent_id = fields.Many2one('mechanical.wbm', string="Parent Id")
     
     container_no = fields.Char("Container No.")
     mass_wet_sample_container = fields.Float(string="Mass of wet sample+container, (M1) in gms")
@@ -565,9 +565,9 @@ class WmmPlasticLimitLine(models.Model):
                 record.moisture_percent = 0
 
 
-class DryGradationLine(models.Model):
-    _name = "mech.dry.gradation.line"
-    parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
+class WbmDryGradationLine(models.Model):
+    _name = "mech.wbm.dry.gradation.line"
+    parent_id = fields.Many2one('mechanical.wbm', string="Parent Id")
     
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
     sieve_size = fields.Char(string="IS Sieve Size" )
@@ -633,9 +633,9 @@ class DryGradationLine(models.Model):
                 record.percent_retained = 0
 
 
-class ElongationLine(models.Model):
-    _name = "mech.elongation.flakiness.line"
-    parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
+class WbmElongationLine(models.Model):
+    _name = "mech.wbm.elongation.flakiness.line"
+    parent_id = fields.Many2one('mechanical.wbm', string="Parent Id")
 
     sieve_size = fields.Char(string="IS Sieve Size")
     wt_retained = fields.Float(string="Wt. Retained in gms")
@@ -646,16 +646,16 @@ class ElongationLine(models.Model):
 
 # class FlakinessLine(models.Model):
 #     _name = "mech.flakiness.line"
-#     parent_id = fields.Many2one('mechanical.wmm', string="Parent Id")
+#     parent_id = fields.Many2one('mechanical.wbm', string="Parent Id")
 
 #     sieve_size = fields.Char(string="IS Sieve Size")
 #     wt_retained = fields.Float(string="Wt. Retained in gms")
 #     flakiness_retained = fields.Float(string="Flakiness Retained in gms")
 
 
-class ImpactValueLine(models.Model):
-    _name = "mech.wmm.impact.line"
-    parent_id = fields.Many2one('mechanical.wmm',string="Parent Id")
+class WbmImpactValueLine(models.Model):
+    _name = "mech.wbm.impact.line"
+    parent_id = fields.Many2one('mechanical.wbm',string="Parent Id")
 
     sample_no = fields.Integer(string="Sample", readonly=True, copy=False, default=1)
     wt_of_cylinder = fields.Integer(string="Weight of cylindrical measure in gms")

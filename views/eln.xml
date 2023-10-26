@@ -13,7 +13,7 @@
                     string="Confirm"
                     attrs="{'invisible': [('state', 'not in', ('1-draft','4-rejected'))]}" />      
                     <field readonly="1" name="state" widget="statusbar" statusbar_visible="1-draft,2-confirm,3-approved"/>
-                    <button
+                    <!-- <button
                             type="object"
                             name="print_datasheet"
                             string="Print Datasheet"
@@ -22,8 +22,7 @@
                             type="object"
                             name="print_report"
                             string="Print Report"
-                            />
-
+                            /> -->
                     <!-- <button
                                 type="object"
                                 name="print_nabl_report"

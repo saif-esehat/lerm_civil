@@ -8,6 +8,7 @@
  'data': [
     'security/security.xml',
     'data/sequence.xml',
+    'views/enviroment_register.xml',
     'views/lerm.xml',
     'views/groups.xml',
     'views/res_company.xml',
@@ -32,6 +33,7 @@
     'views/mechanical/drying_shrinkage_solid.xml',
     'views/mechanical/moisture_movement_solid.xml',
     'views/mechanical/flexural_strength_concrete_beam.xml',
+
     # 'views/mechanical/compressive_strength_concrete_cube.xml',
     'views/mechanical/splitting_tensile_strength_concrete.xml',
     'views/mechanical/act_compressive_concrete_cube.xml',
@@ -85,6 +87,10 @@
     'views/mechanical/aggregate_fine.xml',
     'views/mechanical/concrete_cube2.xml',
     'views/mechanical/wmm.xml',
+    'views/mechanical/gsb.xml',
+    'views/mechanical/wbm.xml',
+
+
 
     'views/product_grade_wizard.xml',
     'reports/eln_report_action.xml',
@@ -142,10 +148,15 @@
     'views/mechanical/rcmt_mechanical.xml',
     'reports/wmm_datasheet.xml',
     'reports/wmm_report.xml',
+    'reports/gsb_datasheet.xml',
+    'reports/gsb_report.xml',
+    'reports/wbm_datasheet.xml',
+    'reports/wbm_report.xml',
 
     'views/mechanical/fusion_bound_coated_steel.xml',
     'reports/fusion_bond_datasheet.xml',
     'reports/fusion_bond_report.xml',
+    'reports/rock_print.xml',
     'views/mechanical/rcpt.xml',
     'views/miscellaneous.xml',
 
@@ -163,7 +174,6 @@
         ],
     'web.assets_qweb': [
         '/lerm_civil/static/src/xml/spreadsheet.xml'
-
     ],
         }
 }
