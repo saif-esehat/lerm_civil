@@ -147,6 +147,7 @@
     'reports/fusion_bond_datasheet.xml',
     'reports/fusion_bond_report.xml',
     'views/mechanical/rcpt.xml',
+    'views/miscellaneous.xml',
 
 
 
