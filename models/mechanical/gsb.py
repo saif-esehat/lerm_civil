@@ -215,7 +215,7 @@ class GsbMechanical(models.Model):
     def _compute_aggregate_elongation(self):
         for record in self:
             if record.total_elongated_retained != 0:
-                record.aggregate_elongation = round(record.total_wt_retained_fl_el/record.total_elongated_retained,2)
+                record.aggregate_elongation = round(record.total_elongated_retained/record.total_wt_retained_fl_el,2)
             else:
                 record.aggregate_elongation = 0
 
@@ -223,7 +223,7 @@ class GsbMechanical(models.Model):
     def _compute_aggregate_flakiness(self):
         for record in self:
             if record.total_flakiness_retained != 0:
-                record.aggregate_flakiness = round(record.total_wt_retained_fl_el/record.total_flakiness_retained,2)
+                record.aggregate_flakiness = round(record.total_flakiness_retained/record.total_wt_retained_fl_el,2)
             else:
                 record.aggregate_flakiness = 0
 
