@@ -8,7 +8,7 @@
                     WMM
                 </div>
 				
-                
+                <div class="container_eln" style="margin-top:5px">
 				<!-- Dry Gradation  -->
 				<div t-if="data.dry_gradation_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
@@ -682,6 +682,7 @@
                         <img t-att-src="'data:image/png;base64,' + data.chart_image_cbr.decode('utf-8')" style="max-width: 100%;"/>
                     </div>
 
+				</div>
 				</div>
 
 				<div class="authorizeRowDataSheet">
