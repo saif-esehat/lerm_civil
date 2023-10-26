@@ -150,6 +150,7 @@
     'views/mechanical/fusion_bound_coated_steel.xml',
     'reports/fusion_bond_datasheet.xml',
     'reports/fusion_bond_report.xml',
+    'views/mechanical/rcpt.xml',
 
 
 
