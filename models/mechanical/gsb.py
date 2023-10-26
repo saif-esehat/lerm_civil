@@ -136,7 +136,7 @@ class GsbMechanical(models.Model):
 
     def default_get(self, fields):
         print("From Default Value")
-        res = super(WmmMechanical, self).default_get(fields)
+        res = super(GsbMechanical, self).default_get(fields)
 
         default_dry_sieve_sizes = []
         default_elongated_sieve_sizes = []
@@ -413,8 +413,8 @@ class GsbMechanical(models.Model):
 
 
 
-class WmmDensityRelationLine(models.Model):
-    _name = "mech.wmm.density.relation.line"
+class GsbDensityRelationLine(models.Model):
+    _name = "mech.gsb.density.relation.line"
     parent_id = fields.Many2one('mechanical.gsb',string="Parent Id")
 
     determination_no = fields.Float(string="Determination No")
@@ -479,7 +479,7 @@ class WmmDensityRelationLine(models.Model):
 
 
 
-class WmmCBRLine(models.Model):
+class GsbCBRLine(models.Model):
     _name = "mechanical.gsb.cbr.line"
     parent_id = fields.Many2one('mechanical.gsb',string="Parent Id")
 
@@ -495,8 +495,8 @@ class WmmCBRLine(models.Model):
 
 
 
-class WmmLiquidLimitLine(models.Model):
-    _name = "mech.wmm.liquid.limit.line"
+class GsbLiquidLimitLine(models.Model):
+    _name = "mech.gsb.liquid.limit.line"
     parent_id = fields.Many2one('mechanical.gsb', string="Parent Id")
     
     container_no = fields.Char("Container No.")
@@ -530,7 +530,7 @@ class WmmLiquidLimitLine(models.Model):
 
 
 
-class WmmPlasticLimitLine(models.Model):
+class GsbPlasticLimitLine(models.Model):
     _name = "mech.gsb.plastic.limit.line"
     parent_id = fields.Many2one('mechanical.gsb', string="Parent Id")
     
@@ -563,7 +563,7 @@ class WmmPlasticLimitLine(models.Model):
                 record.moisture_percent = 0
 
 
-class DryGradationLine(models.Model):
+class GsbDryGradationLine(models.Model):
     _name = "mech.gsb.dry.gradation.line"
     parent_id = fields.Many2one('mechanical.gsb', string="Parent Id")
     
@@ -631,7 +631,7 @@ class DryGradationLine(models.Model):
                 record.percent_retained = 0
 
 
-class ElongationLine(models.Model):
+class GsbElongationLine(models.Model):
     _name = "mech.gsb.elongation.flakiness.line"
     parent_id = fields.Many2one('mechanical.gsb', string="Parent Id")
 
@@ -651,7 +651,7 @@ class ElongationLine(models.Model):
 #     flakiness_retained = fields.Float(string="Flakiness Retained in gms")
 
 
-class ImpactValueLine(models.Model):
+class GsbImpactValueLine(models.Model):
     _name = "mech.gsb.impact.line"
     parent_id = fields.Many2one('mechanical.gsb',string="Parent Id")
 
