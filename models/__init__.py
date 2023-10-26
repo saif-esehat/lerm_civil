@@ -81,13 +81,15 @@ from .mechanical import cement_setting_time
 from .mechanical import coupler
 from .mechanical import cement_compatablity
 from .mechanical import wmm
-# from .mechanical import gsb
+from .mechanical import gsb
+from .mechanical import wbm
 from .chemical import fine_aggregate
 from .mechanical import concrete_splite_tensile_strength
 from .report import concrete_split_tensile_ds_report
 from .report import aac_block_ds_report
 from .report import wmm_ds_report
 from .report import gsb_ds_report
+from .report import wbm_ds_report
 
 
 from . import general_template

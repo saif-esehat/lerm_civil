@@ -629,4 +629,25 @@
         <field name="binding_type">report</field>
     </record>
 
+    <record id="wbm_mec_report_action" model="ir.actions.report">
+        <field name="name">WBM Report</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.wbm_mec_report</field>
+        <field name="report_file">lerm_civil.wbm_mec_report</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+     <record id="wbm_datasheet_action" model="ir.actions.report">
+        <field name="name">WBM Datasheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.wbm_mech_datasheet</field>
+        <field name="report_file">lerm_civil.wbm_mech_datasheet</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
 </odoo>
