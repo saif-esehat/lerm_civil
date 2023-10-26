@@ -198,6 +198,9 @@ class AacMoistureLine(models.Model):
     def _compute_moisture_content(self):
         for record in self:
             if record.oven_wt != 0:
+                demo = ((record.wt_sample - record.oven_wt)/record.oven_wt) *100
+                print("Demo",demo)
+                # print("Rounded Demo",round(demo))
                 record.moisture_content = round(((record.wt_sample - record.oven_wt)/record.oven_wt *100),2)
             else:
                 record.moisture_content = 0

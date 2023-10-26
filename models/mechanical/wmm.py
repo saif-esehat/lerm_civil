@@ -76,7 +76,9 @@ class WmmMechanical(models.Model):
                     record.water_absorbtion_visible  = True  
                 if sample.internal_id == 'f1a27ee1-3e7e-4fff-b912-f7b046f5099c':
                     record.elongation_visible = True
+                    record.flakiness_visible = True
                 if sample.internal_id == 'b8390baa-2d4b-47f4-b9ee-7a4a5b176b97':
+                    record.elongation_visible = True
                     record.flakiness_visible = True
                 if sample.internal_id == '7edace9a-a4ae-451c-a4cf-36d2c042ed7d':
                     record.abrasion_visible = True

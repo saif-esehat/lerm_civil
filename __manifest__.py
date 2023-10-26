@@ -88,6 +88,8 @@
     'views/mechanical/concrete_cube2.xml',
     'views/mechanical/wmm.xml',
     'views/mechanical/gsb.xml',
+    'views/mechanical/wbm.xml',
+
 
 
     'views/product_grade_wizard.xml',
@@ -148,11 +150,13 @@
     'reports/wmm_report.xml',
     'reports/gsb_datasheet.xml',
     'reports/gsb_report.xml',
+    'reports/wbm_datasheet.xml',
+    'reports/wbm_report.xml',
 
     'views/mechanical/fusion_bound_coated_steel.xml',
     'reports/fusion_bond_datasheet.xml',
     'reports/fusion_bond_report.xml',
-    'reports/rock_print.xml'
+    'reports/rock_print.xml',
     'views/mechanical/rcpt.xml',
 
 
