@@ -99,4 +99,5 @@ from .mechanical import rcmt_mechanical
 from .mechanical import fusion_bond_coated_steel
 from .report import fusion_bond_ds_report
 from .mechanical import rcpt
+from . import miscellaneous
 

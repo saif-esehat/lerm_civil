@@ -156,8 +156,9 @@
     'views/mechanical/fusion_bound_coated_steel.xml',
     'reports/fusion_bond_datasheet.xml',
     'reports/fusion_bond_report.xml',
-    'reports/rock_print.xml'
+    'reports/rock_print.xml',
     'views/mechanical/rcpt.xml',
+    'views/miscellaneous.xml',
 
 
 
