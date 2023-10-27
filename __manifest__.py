@@ -158,6 +158,7 @@
     'reports/fusion_bond_report.xml',
     'reports/rock_print.xml',
     'views/mechanical/rcpt.xml',
+    'views/miscellaneous.xml',
 
 
 
