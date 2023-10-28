@@ -161,6 +161,7 @@
     'views/miscellaneous.xml',
     'views/mechanical/ferrous_structural_steel.xml',
     'reports/ferrous_structural_steel_datasheet.xml',
+    'reports/ferrous_structural_steel.xml',
 
 
 
