@@ -198,10 +198,8 @@ class AacMoistureLine(models.Model):
     def _compute_moisture_content(self):
         for record in self:
             if record.oven_wt != 0:
-                demo = ((record.wt_sample - record.oven_wt)/record.oven_wt) *100
-                print("Demo",demo)
-                # print("Rounded Demo",round(demo))
-                record.moisture_content = round(((record.wt_sample - record.oven_wt)/record.oven_wt *100),2)
+                moisture = (record.wt_sample - record.oven_wt)/record.oven_wt *100
+                record.moisture_content = round(moisture,2)
             else:
                 record.moisture_content = 0
 
@@ -225,7 +223,8 @@ class AacDensityLine(models.Model):
     def Compute_density(self):
         for record in self:
             if record.volume != 0:
-                record.density = round((record.wt_sample / record.volume),1)
+                density = record.wt_sample / record.volume
+                record.density = round(density,1)
             else:
                 record.density = 0
 
@@ -263,9 +262,11 @@ class AacCompressiveStrengthLine(models.Model):
     compressive_strength = fields.Float('Compressive Strength',compute="_compute_compressive_strength")
 
 
+    @api.depends('crosssectional_area','aac_load')
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = round((record.aac_load/record.crosssectional_area)*1000,2)
+                compressive_strength = (record.aac_load/record.crosssectional_area)*1000
+                record.compressive_strength = round(compressive_strength,2)
             else:
                 record.compressive_strength = 0
