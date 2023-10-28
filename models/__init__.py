@@ -100,4 +100,6 @@ from .mechanical import fusion_bond_coated_steel
 from .report import fusion_bond_ds_report
 from .mechanical import rcpt
 from . import miscellaneous
+from . mechanical import ferrous_structural_steel
+from . report import ferrous_structural_steel_ds_report
 

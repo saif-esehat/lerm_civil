@@ -159,6 +159,8 @@
     'reports/rock_print.xml',
     'views/mechanical/rcpt.xml',
     'views/miscellaneous.xml',
+    'views/mechanical/ferrous_structural_steel.xml',
+    'reports/ferrous_structural_steel_datasheet.xml',
 
 
 
