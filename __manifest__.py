@@ -89,7 +89,7 @@
     'views/mechanical/wmm.xml',
     'views/mechanical/gsb.xml',
     'views/mechanical/wbm.xml',
-
+    'views/mechanical/isat.xml',
 
 
     'views/product_grade_wizard.xml',
