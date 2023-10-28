@@ -56,8 +56,8 @@
                     </group>
 
                     <group attrs="{'invisible': [('block_density_visible', '=', False)]}">
-                        <field name='average_length'  col="12"/> 
-                        <field name='average_hight' col="4"/>
+                        <field name='average_length1'  col="12"/> 
+                        <field name='averag_height1' col="4"/>
                         <field name='average_thickness' col="4"/>
                         <field name='average_block' col="4"/>
                          
@@ -178,7 +178,7 @@
                     <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
                         <field name='average_length' col="4"/>
                         <field name='average_width'  col="4"/> 
-                        <field name='average_hight' col="4"/>
+                        <field name='avreage_height2' col="4"/>
                         
                     </group>
 

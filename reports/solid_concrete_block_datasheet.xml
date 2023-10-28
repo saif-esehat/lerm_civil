@@ -77,7 +77,7 @@
                             <tr cols="12">
                                 <td colspan="6"><b>Average Height :</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_hight" t-options='{"widget": "float", "precision": 1}'/>
+                                    <span t-field="data.avreage_height2" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
                             </tr>
                             
@@ -196,13 +196,13 @@
                             <tr cols="12">
                                 <td colspan="6"><b>Average Length :</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_length" t-options='{"widget": "float", "precision": 1}'/>
+                                    <span t-field="data.average_length1" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
                                 <td colspan="6"><b>Average Height :</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_hight" t-options='{"widget": "float", "precision": 1}'/>
+                                    <span t-field="data.averag_height1" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
                             </tr>
                             <tr cols="12">

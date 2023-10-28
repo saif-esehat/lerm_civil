@@ -25,8 +25,8 @@ class SolidConcreteBlock(models.Model):
     child_lines = fields.One2many('mechanical.block.density.line','parent_id',string="Parameter")
     average_block = fields.Float(string="Average Block Density", compute="_compute_average_block",digits=(16,1))
 
-    average_length = fields.Float(string="Average Length", compute="_compute_average_length",digits=(16,1))
-    average_hight = fields.Float(string="Average Height",compute="_compute_average_hight", digits=(16, 1))
+    average_length1 = fields.Float(string="Average Length", compute="_compute_average_length1",digits=(16,1))
+    averag_height1 = fields.Float(string="Average Height",compute="_compute_average_hight1", digits=(16, 1))
     average_thickness = fields.Float(string="Average Thickness", compute="_compute_average_width1",digits=(16,1))
 
 
@@ -41,23 +41,23 @@ class SolidConcreteBlock(models.Model):
 
 
     @api.depends('child_lines.length')
-    def _compute_average_length(self):
+    def _compute_average_length1(self):
         for record in self:
             if record.child_lines:
                 lengths = [line.length for line in record.child_lines]
-                record.average_length = sum(lengths) / len(lengths)
+                record.average_length1 = sum(lengths) / len(lengths)
             else:
-                record.average_length = 0.0
+                record.average_length1 = 0.0
 
                 
     @api.depends('child_lines.heigth')
-    def _compute_average_hight(self):
+    def _compute_average_hight1(self):
         for record in self:
             if record.child_lines:
                 heights = [line.heigth for line in record.child_lines]
-                record.average_hight = sum(heights) / len(heights)
+                record.averag_height1 = sum(heights) / len(heights)
             else:
-                record.average_hight = 0.0
+                record.averag_height1 = 0.0
 
   
    
@@ -131,7 +131,7 @@ class SolidConcreteBlock(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines4 = fields.One2many('mechanical.dimension.line','parent_id',string="Parameter")
     average_length = fields.Float(string="Average Length", compute="_compute_average_length",digits=(16,1))
-    average_hight = fields.Float(string="Average Thickness",compute="_compute_average_hight", digits=(16, 1))
+    avreage_height2 = fields.Float(string="Average Thickness",compute="_compute_average_hight", digits=(16, 1))
     average_width = fields.Float(string="Average Width", compute="_compute_average_width",digits=(16,1))
     
 
@@ -150,9 +150,9 @@ class SolidConcreteBlock(models.Model):
         for record in self:
             if record.child_lines4:
                 heights = [line.hight for line in record.child_lines4]
-                record.average_hight = sum(heights) / len(heights)
+                record.avreage_height2 = sum(heights) / len(heights)
             else:
-                record.average_hight = 0.0
+                record.avreage_height2 = 0.0
 
   
    
