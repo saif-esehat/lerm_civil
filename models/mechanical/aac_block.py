@@ -223,9 +223,8 @@ class AacDensityLine(models.Model):
     def compute_density(self):
         for record in self:
             if record.volume != 0:
-                density = round((record.wt_sample / record.volume),2)
-                print("Density",density)
-                record.density = round((record.wt_sample / record.volume),1)
+                density = record.wt_sample / record.volume
+                record.density = round(density,1)
             else:
                 record.density = 0
 
