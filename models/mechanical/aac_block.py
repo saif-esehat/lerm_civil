@@ -212,7 +212,7 @@ class AacDensityLine(models.Model):
     height = fields.Float('Height of Sample before Drying',digits=(16,3))
     volume = fields.Float('Volume of Sample',compute="_compute_volume",digits=(16,7))
     wt_sample = fields.Float("Weight of Sample after Drying",digits=(16,3))
-    density = fields.Float("Density of Sample",compute="Compute_density",digits=(16,1))
+    density = fields.Float("Density of Sample",compute="compute_density",digits=(16,1))
 
     @api.depends('length','width','height')
     def _compute_volume(self):
@@ -220,7 +220,7 @@ class AacDensityLine(models.Model):
             record.volume = round((record.length * record.width * record.height),7)
 
     @api.depends('volume','wt_sample')
-    def Compute_density(self):
+    def compute_density(self):
         for record in self:
             if record.volume != 0:
                 density = record.wt_sample / record.volume
@@ -265,6 +265,7 @@ class AacCompressiveStrengthLine(models.Model):
     @api.depends('crosssectional_area','aac_load')
     def _compute_compressive_strength(self):
         for record in self:
+            print("CrossSectional",record.crosssectional_area)
             if record.crosssectional_area != 0:
                 compressive_strength = (record.aac_load/record.crosssectional_area)*1000
                 record.compressive_strength = round(compressive_strength,2)
