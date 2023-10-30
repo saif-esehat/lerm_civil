@@ -785,7 +785,7 @@ class SieveAnalysisLine(models.Model):
 
             if 'wt_retained' in vals:
                 for record in self:
-                    record.parent_id._compute_total()
+                    record.parent_id._compute_total_sieve()
 
             return new_self
 
