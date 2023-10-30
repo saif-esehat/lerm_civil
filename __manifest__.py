@@ -162,6 +162,8 @@
     'views/mechanical/ferrous_structural_steel.xml',
     'reports/ferrous_structural_steel_datasheet.xml',
     'reports/ferrous_structural_steel.xml',
+    'reports/rcmt_datasheet.xml',
+    'reports/rcmt_report.xml',
 
 
 
