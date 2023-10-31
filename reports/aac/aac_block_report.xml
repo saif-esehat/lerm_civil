@@ -133,19 +133,29 @@
 					</div>
 					
                     <table style="margin-top:15px">
+
                         <tr>
                             <td rowspan="2" >Sr No</td>
                             <td rowspan="2" >Test Parameters</td>
                             <td rowspan="2" >Unit</td>
                             <td rowspan="2" >Test Method</td>
                             <td rowspan="2"> Test Result</td>
-                            <td rowspan="1"> Limit As per IS 2185 (Part 3) : 1984 RA 2015</td>
+                            <td rowspan="1"> Limit As per
+								<span t-field="eln.material.specifications"></span>
+							</td>
 						</tr>
                         <tr>
                             <td rowspan="1">Grade-1</td>
 						</tr>
+						<t t-set="i" t-value="0"/>
+
 						<tr t-if="data.dimension_visible">
-                            <td>1</td>
+							<td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+                  			</td>
                             <td>Dimension 24 blocks</td>
                             <td colspan="2"></td>
                             <td></td>
@@ -184,7 +194,12 @@
                             <td>± 3 mm</td>
 						</tr>
 						<tr t-if="data.moisture_visible">
-                            <td>2</td>
+                            <td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+                  			</td>
                             <td>Moisture Content</td>
                             <td>%</td>
                             <td></td>
@@ -194,7 +209,12 @@
                             <td>----</td>
 						</tr>
 						<tr t-if="data.density_visible">
-                            <td>3</td>
+                            <td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+                  			</td>
 							<td>Density</td>
                             <td>kg/m3</td>
                             <td></td>
@@ -204,7 +224,12 @@
                             <td>451 to 1000 Kg/m3</td>
 						</tr>
 						<tr t-if="data.drying_shrinkage_visible">
-                            <td>4</td>
+                            <td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+                  			</td>
                             <td>Drying Shrinkage</td>
                             <td>%</td>
                             <td></td>
@@ -214,7 +239,12 @@
                             <td>Max 0.05%</td>
 						</tr>
 						<tr t-if="data.compressive_strength_visible">
-                            <td>5</td>
+                            <td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+                  			</td>
                             <td>Compresive Strength</td>
                             <td>N/mm2</td>
                             <td></td>

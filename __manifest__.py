@@ -177,13 +177,14 @@
 
     
     ],
-        'assets': {
+    'assets': {
     'web.assets_backend':[
         '/lerm_civil/static/src/js/spreadsheet.js'
     ],
     'web.report_assets_common': [
             '/lerm_civil/static/src/css/eln_report.scss',
             '/lerm_civil/static/src/css/data_sheet_styles.scss',
+
         ],
     'web.assets_qweb': [
         '/lerm_civil/static/src/xml/spreadsheet.xml'
