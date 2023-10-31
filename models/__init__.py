@@ -92,6 +92,8 @@ from .report import wmm_ds_report
 from .report import gsb_ds_report
 from .report import wbm_ds_report
 from .report import isat_ds_report
+from .report import admixture_ds_report
+
 
 
 from . import general_template
@@ -102,6 +104,7 @@ from .mechanical import fusion_bond_coated_steel
 from .report import fusion_bond_ds_report
 from .mechanical import rcpt
 from . import miscellaneous
-from . mechanical import ferrous_structural_steel
-from . report import ferrous_structural_steel_ds_report
+from .mechanical import ferrous_structural_steel
+from .report import ferrous_structural_steel_ds_report
+from .report import rcmt_ds_report
 

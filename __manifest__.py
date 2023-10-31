@@ -165,8 +165,13 @@
     'reports/ferrous_structural_steel.xml',
     'reports/isat_datasheet.xml',
     'reports/isat_report.xml',
+    'reports/admixture/admixture_datasheet.xml',
+    'reports/admixture/admixture_report.xml',
 
 
+
+    'reports/rcmt_datasheet.xml',
+    'reports/rcmt_report.xml',
 
 
 
