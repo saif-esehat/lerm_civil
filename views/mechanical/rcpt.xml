@@ -16,7 +16,7 @@
                     </group>
                     <group>
                         <h1>
-                            <field name="name" readonly="1" nolabel="1"/>
+                            <field name="name1" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
                     <field name="child_lines" nolabel="1" >
@@ -41,70 +41,265 @@
                                 <field name="i360" string="I360"/>
                                 <field name="qx" string="QX"/>
                                 <field name="qs" string="QS"/>
-                                <!-- <field name="observe_value" string="Observed Sample Value"/> -->
-                                
                             </tree>
                     </field>
                     <group>
                     
                     </group>
-                    <group>
+                     <group><h1>Observed value</h1></group>
+                     <group>
+                        <label for="io_sample1" string="Current" />
                         <div class="address_format " >
-
-                          <group colspan="18"  class="oe_inline">
-                            <label for="io_sample1" string="Observed Value Sample-01" />
-                            <field  name="io_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i30_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i60_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i90_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i120_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i150_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i180_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i210_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i240_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i270_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="i300_sample1"  colspan="3"  nolabel="1"/>
-                            <field  name="sample1_i330"  colspan="3"  nolabel="1"/>
-                            
-                            <field  name="i360_sample1"  colspan="3"  nolabel="1"/>
-                           
+                          <group colspan="1"  class="oe_inline">
+                            <label for="io_sample1" string="Sample-01" />
+                            <!-- <field  name="io_sample1"  colspan="3"  nolabel="1"/> -->
                           </group>
                           <group colspan="1" class="oe_inline"  >
-                            <label for="io_sample2" string="Observed Value Sample-02" />
+                            <label for="io_sample2" string="Sample-02" />
+                            <!-- <field  name="io_sample2"  colspan="3"  nolabel="1"/> -->
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="io_sample3" string="Sample-03" />
+                            <!-- <field  name="io_sample3"  colspan="3"  nolabel="1"/> -->
+                          </group>
+                        </div>
+                    </group>
+
+                   
+          
+                    <group>
+                        <label for="io_sample1" string="I0" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="io_sample1" string="" />
+                            <field  name="io_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="io_sample2" string="" />
                             <field  name="io_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="io_sample3" string="" />
+                            <field  name="io_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+                     <group>
+                        <label for="i30_sample1" string="I30" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i30_sample1" string="" />
+                            <field  name="i30_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i30_sample2" string="" />
                             <field  name="i30_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i30_sample3" string="" />
+                            <field  name="i30_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="i60_sample1" string="I60" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i60_sample1" string="" />
+                            <field  name="i60_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i60_sample2" string="" />
                             <field  name="i60_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i60_sample3" string="" />
+                            <field  name="i60_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                     <group>
+                        <label for="i90_sample1" string="I90" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i90_sample1" string="" />
+                            <field  name="i90_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i90_sample2" string="" />
                             <field  name="i90_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i90_sample3" string="" />
+                            <field  name="i90_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                     <group>
+                        <label for="i120_sample1" string="I120" />
+                        <div class="address_format" >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i120_sample1" string="" />
+                            <field  name="i120_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i120_sample2" string="" />
                             <field  name="i120_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i120_sample3" string="" />
+                            <field  name="i120_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="i150_sample1" string="I150" />
+                        <div class="address_format" >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i150_sample1" string="" />
+                            <field  name="i150_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i150_sample2" string="" />
                             <field  name="i150_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i150_sample3" string="" />
+                            <field  name="i150_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="i180_sample1" string="I180" />
+                        <div class="address_format" >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i180_sample1" string="" />
+                            <field  name="i180_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i180_sample2" string="" />
                             <field  name="i180_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i180_sample3" string="" />
+                            <field  name="i180_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="i210_sample1" string="I210" />
+                        <div class="address_format" >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i210_sample1" string="" />
+                            <field  name="i210_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i210_sample2" string="" />
                             <field  name="i210_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i210_sample3" string="" />
+                            <field  name="i210_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="i240_sample1" string="I240" />
+                        <div class="address_format" >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i240_sample1" string="" />
+                            <field  name="i240_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i240_sample2" string="" />
                             <field  name="i240_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i240_sample3" string="" />
+                            <field  name="i240_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="i270_sample1" string="I270" />
+                        <div class="address_format" >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i270_sample1" string="" />
+                            <field  name="i270_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i270_sample2" string="" />
                             <field  name="i270_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i270_sample3" string="" />
+                            <field  name="i270_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="i300_sample1" string="I300" />
+                        <div class="address_format" >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i300_sample1" string="" />
+                            <field  name="i300_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i300_sample2" string="" />
                             <field  name="i300_sample2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i300_sample3" string="" />
+                            <field  name="i300_sample3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="sample1_i330" string="I330" />
+                        <div class="address_format" >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="sample1_i330" string="" />
+                            <field  name="sample1_i330"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="sample2_i330" string="" />
                             <field  name="sample2_i330"  colspan="3"  nolabel="1"/>
-                           
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="sample3_i330" string="" />
+                            <field  name="sample3_i330"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="i360_sample1" string="I330" />
+                        <div class="address_format" >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="i360_sample1" string="" />
+                            <field  name="i360_sample1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="i360_sample2" string="" />
                             <field  name="i360_sample2"  colspan="3"  nolabel="1"/>
                           </group>
-                          <group colspan="1"  class="oe_inline">
-                            <label for="io_sample3" string="Observed Value Sample-03" />
-                            <field  name="io_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i30_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i60_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i90_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i120_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i150_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i180_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i210_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i240_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i270_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="i300_sample3"  colspan="3"  nolabel="1"/>
-                            <field  name="sample3_i330"  colspan="3"  nolabel="1"/>
-                            
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="i360_sample3" string="" />
                             <field  name="i360_sample3"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
                     </group>
+
                 </sheet>
             </form>
         </field>

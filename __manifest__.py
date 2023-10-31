@@ -164,6 +164,8 @@
     'reports/ferrous_structural_steel.xml',
     'reports/rcmt_datasheet.xml',
     'reports/rcmt_report.xml',
+    'reports/rcpt/rcpt_datasheet.xml',
+    'reports/rcpt/rcpt_report.xml',
 
 
 

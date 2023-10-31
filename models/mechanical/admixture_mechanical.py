@@ -70,7 +70,7 @@ class MechanicalAdmixture(models.Model):
 
 
     def get_all_fields(self):
-        record = self.env['mechanical.fine.aggregate'].browse(self.ids[0])
+        record = self.env['mechanical.admixture'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():
             field_value = record[field_name]
