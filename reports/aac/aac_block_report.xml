@@ -144,14 +144,14 @@
                         <tr>
                             <td rowspan="1">Grade-1</td>
 						</tr>
-						<tr>
+						<tr t-if="data.dimension_visible">
                             <td>1</td>
                             <td>Dimension 24 blocks</td>
                             <td colspan="2"></td>
                             <td></td>
                             <td></td>
 						</tr>
-						<tr>
+						<tr t-if="data.dimension_visible">
                             <td>a</td>
                             <td>Length</td>
                             <td>mm</td>
@@ -163,7 +163,7 @@
 							</td>
                             <td>± 5 mm</td>
 						</tr>
-						<tr>
+						<tr t-if="data.dimension_visible">
                             <td>b</td>
                             <td>Width</td>
                             <td>mm</td>
@@ -173,7 +173,7 @@
 							</td>
                             <td>± 3 mm</td>
 						</tr>
-						<tr>
+						<tr t-if="data.dimension_visible">
                             <td>c</td>
                             <td>Height</td>
                             <td>mm</td>
@@ -183,7 +183,7 @@
 							</td>
                             <td>± 3 mm</td>
 						</tr>
-						<tr>
+						<tr t-if="data.moisture_visible">
                             <td>2</td>
                             <td>Moisture Content</td>
                             <td>%</td>
@@ -193,17 +193,17 @@
 							</td>
                             <td>----</td>
 						</tr>
-						<tr>
+						<tr t-if="data.density_visible">
                             <td>3</td>
+							<td>Density</td>
                             <td>kg/m3</td>
-                            <td>mm</td>
                             <td></td>
                             <td>
 								<span t-field="data.average_density"/>
 							</td>
                             <td>451 to 1000 Kg/m3</td>
 						</tr>
-						<tr>
+						<tr t-if="data.drying_shrinkage_visible">
                             <td>4</td>
                             <td>Drying Shrinkage</td>
                             <td>%</td>
@@ -213,7 +213,7 @@
 							</td>
                             <td>Max 0.05%</td>
 						</tr>
-						<tr>
+						<tr t-if="data.compressive_strength_visible">
                             <td>5</td>
                             <td>Compresive Strength</td>
                             <td>N/mm2</td>

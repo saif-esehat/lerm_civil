@@ -133,7 +133,7 @@ class AacBlockMechanical(models.Model):
 
     density_unit = fields.Char("Unit",default="mm",readonly=True)
 
-    density_table = fields.One2many('mech.aac.density.line','parent_id',string="Density")
+    density_table = fields.One2many('mech.aac.density.line','parent_id')
     average_density = fields.Float("Average Density",compute="_compute_average_density")
 
     @api.depends('density_table.density')
@@ -259,9 +259,9 @@ class AacCompressiveStrengthLine(models.Model):
     _name = "mech.aac.compressive.strength.line"
     parent_id = fields.Many2one('mechanical.aac.block', string="Parent Id")
 
-    crosssectional_area = fields.Float('Crosssectional Area')
+    crosssectional_area = fields.Float('Crosssectional Area Sqmm')
     aac_load = fields.Float('Load (p) kN')
-    compressive_strength = fields.Float('Compressive Strength',compute="_compute_compressive_strength")
+    compressive_strength = fields.Float('Compressive Strength MPa',compute="_compute_compressive_strength")
 
 
     @api.depends('crosssectional_area','aac_load')

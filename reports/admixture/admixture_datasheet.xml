@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="aac_block_datasheet">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    Admixture
+                </div>
+                <div class="container_eln" style="margin-top:5px">
+
+				<!-- Dimension -->
+                <div t-if="data.dimension_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							Dimension
+						</div>
+						
+
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="1">Sr no 
+								</td>
+								<td colspan="4">Length in mm 
+								</td>
+								<td colspan="4">Height in mm
+								</td>
+								<td colspan="3">Width in mm
+								</td>
+								
+							</tr>
+
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.dimension_table" t-as="r">
+								<td colspan="1">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</div>
+                  				</td>
+								<td colspan="4">
+									<span t-esc="r['length']"/>
+								</td>
+								<td colspan="4">
+									<span t-esc="r['height']"/>
+								</td>
+								<td colspan="3">
+									<span t-esc="r['width']"/>
+								</td>
+								
+							</tr>
+						</table>
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Average Length :
+									<![CDATA[&nbsp;]]>
+								</td>
+                                <td colspan="6">
+									<span t-field="data.average_length"/>
+								</td>
+								
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Average Height :
+									<![CDATA[&nbsp;]]>
+								</td>
+                                <td colspan="6">
+									<span t-field="data.average_height"/>
+								</td>
+								
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Average Width :
+									<![CDATA[&nbsp;]]>
+								</td>
+                                <td colspan="6">
+									<span t-field="data.average_width"/>
+								</td>
+								
+							</tr>
+						</table>
+
+				</div>
+
+               
+				
+				</div>
+
+				<div class="authorizeRowDataSheet">
+					<div>
+						<div>
+							<b>
+								(JR Chemist)
+							</b>
+						</div>
+						<div>
+							<b>
+								Tested By
+							</b>
+						</div>
+					</div>
+					<div style="margin-left:500px">
+						<div>
+							<b>
+								Chemical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								Checked By
+							</b>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>
