@@ -98,7 +98,7 @@
     'reports/sample_report_template.xml',
     'reports/srf_report_action.xml',
     'reports/srf_report_template.xml',
-    'reports/report_cement.xml',
+    'reports/cement/report_cement.xml',
     'reports/microsilica_datasheet.xml',
     'reports/gypsum_report.xml',
     'reports/wpt_report.xml',
@@ -123,23 +123,24 @@
     'reports/general_report_template.xml',
     'reports/pt_grput_datasheet.xml',
     'reports/ptgrout_non_nabl_report.xml',
-    'reports/cement_psc_report.xml',
-    'reports/cement_ppc_report.xml',
+    'reports/cement/cement_psc_report.xml',
+    'reports/cement/cement_ppc_report.xml',
+    'reports/cement/cement_datasheet.xml',
     'reports/concrete_cube_print.xml',
     'reports/coarse_aggregate_mech_datasheet.xml',
     'reports/soil_print.xml',
     'reports/paver_block_report.xml',
     'reports/fine_aggregate_mech_datasheet.xml',
-    'reports/bricks2_datasheet.xml',
-    'reports/bricks2_report.xml',
+    'reports/bricks/bricks2_datasheet.xml',
+    'reports/bricks/bricks2_report.xml',
     'reports/concrete_beam_datasheet.xml',
     'reports/coarse_aggregate_mech_report.xml',
     'views/mechanical/solid_concrete_block.xml',
     'reports/solid_concrete_block_datasheet.xml',
     'reports/concrete_beam_report.xml',
     'reports/steel_tmt_bar_report.xml',
-    'reports/aac_block_datasheet.xml',
-    'reports/aac_block_report.xml',
+    'reports/aac/aac_block_datasheet.xml',
+    'reports/aac/aac_block_report.xml',
     'views/mechanical/concrete_splite_tensile_strength.xml',
     'reports/concrete_split_tensile_datasheet.xml',
     
@@ -162,6 +163,13 @@
     'views/mechanical/ferrous_structural_steel.xml',
     'reports/ferrous_structural_steel_datasheet.xml',
     'reports/ferrous_structural_steel.xml',
+    'reports/isat_datasheet.xml',
+    'reports/isat_report.xml',
+    'reports/admixture/admixture_datasheet.xml',
+    'reports/admixture/admixture_report.xml',
+
+
+
     'reports/rcmt_datasheet.xml',
     'reports/rcmt_report.xml',
     'reports/rcpt/rcpt_datasheet.xml',
@@ -171,13 +179,14 @@
 
     
     ],
-        'assets': {
+    'assets': {
     'web.assets_backend':[
         '/lerm_civil/static/src/js/spreadsheet.js'
     ],
     'web.report_assets_common': [
             '/lerm_civil/static/src/css/eln_report.scss',
             '/lerm_civil/static/src/css/data_sheet_styles.scss',
+
         ],
     'web.assets_qweb': [
         '/lerm_civil/static/src/xml/spreadsheet.xml'

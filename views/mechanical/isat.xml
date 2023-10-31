@@ -20,7 +20,10 @@
                     </group>
                     <group>
                         <field name="isat_child_lines" nolabel="1"/>
+                        
+
                     </group>
+                    
 
                 </sheet>
             </form>
@@ -34,9 +37,9 @@
             <form>
                 <sheet>
                     <group>
-                    <field name='sample_id'/>
-                    <field name='age_days'/>
-                    <field name='time_hrs'/>
+                    <field name='sample_id' style="width:30%"/>
+                    <field name='age_days' style="width:30%"/>
+                    <field name='time_hrs' style="width:30%"/>
                     <field name='child_lines' >
                         <tree editable="bottom">
                             <field name="elapsed_time"/>
@@ -49,6 +52,10 @@
                             <field name="isat_corrected"/>
                         </tree>
                     </field>
+
+                    </group>
+                    <group>
+                        <field name="comments"/>
                     </group>
                 </sheet>
             </form>
@@ -61,9 +68,9 @@
         <field name="arch" type="xml">
             <tree>
                 <field name='sample_id'/>
-                    <field name='age_days'/>
-                    <field name='time_hrs'/>
-                    <field name='child_lines'/>
+                <field name='age_days'/>
+                <field name='time_hrs'/>
+                <field name='child_lines'/>
             </tree>
         </field>
     </record>

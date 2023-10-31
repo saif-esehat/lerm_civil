@@ -91,6 +91,9 @@ from .report import aac_block_ds_report
 from .report import wmm_ds_report
 from .report import gsb_ds_report
 from .report import wbm_ds_report
+from .report import isat_ds_report
+from .report import admixture_ds_report
+
 
 
 from . import general_template

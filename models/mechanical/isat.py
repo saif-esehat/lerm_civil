@@ -17,6 +17,20 @@ class IsatMechanical(models.Model):
 
 
     isat_child_lines = fields.One2many('mech.isat.line', 'parent_id')
+    
+    average_10min = fields.Float("Average 10 mins",compute="_compute_avg_10mins")
+
+    @api.depends('isat_child_lines')
+    def _compute_avg_10mins(self):
+        for record in self:
+            if record.isat_child_lines:
+                isat_10min_values = []
+                for line in record.isat_child_lines:
+                    isat_10min_values.append(line.child_lines[1].isat_corrected)
+                average_10min = sum(isat_10min_values)/len(record.isat_child_lines)
+                record.average_10min = round(average_10min,2)       
+            else:
+                record.average_10min = 0
 
     @api.model
     def create(self, vals):
@@ -55,6 +69,7 @@ class IsatChildLine(models.Model):
     age_days = fields.Integer('Age days')
     time_hrs = fields.Integer("Time Hrs")
     child_lines = fields.One2many('mech.isat.nested.line', 'parent_id',string="ISAT Table")
+    comments = fields.Char("Comments")
 
 
     def default_get(self, fields):

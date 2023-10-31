@@ -76,7 +76,7 @@ class AacBlockMechanical(models.Model):
     dimension_name = fields.Char(default="Dimension")
     dimension_visible = fields.Boolean(compute="_compute_visible")
 
-    dimension_table = fields.One2many('mech.aac.dimension.line','parent_id',string="Dimension")
+    dimension_table = fields.One2many('mech.aac.dimension.line','parent_id')
     average_length = fields.Float('Average Length',compute="_compute_average_length")
     average_width = fields.Float('Average Width',compute="_compute_average_width")
     average_height = fields.Float('Average Height',compute="_compute_average_height")
@@ -114,7 +114,7 @@ class AacBlockMechanical(models.Model):
     moisture_name = fields.Char(default="Moisture Content")
     moisture_visible = fields.Boolean(compute="_compute_visible")
 
-    moisture_content_table = fields.One2many('mech.aac.moisture.line','parent_id',string="Moisture Content")
+    moisture_content_table = fields.One2many('mech.aac.moisture.line','parent_id')
     average_moisture_content = fields.Float("Average Moisture Content %",compute="_compute_average_moisture_content")
 
 
@@ -133,7 +133,7 @@ class AacBlockMechanical(models.Model):
 
     density_unit = fields.Char("Unit",default="mm",readonly=True)
 
-    density_table = fields.One2many('mech.aac.density.line','parent_id',string="Density")
+    density_table = fields.One2many('mech.aac.density.line','parent_id')
     average_density = fields.Float("Average Density",compute="_compute_average_density")
 
     @api.depends('density_table.density')
@@ -149,7 +149,7 @@ class AacBlockMechanical(models.Model):
     drying_shrinkage_name = fields.Char(default="Drying Shrinkage")
     drying_shrinkage_visible = fields.Boolean(compute="_compute_visible")
 
-    drying_shrinkage_table = fields.One2many('mech.aac.drying.shrinkage.line','parent_id',string="Density")
+    drying_shrinkage_table = fields.One2many('mech.aac.drying.shrinkage.line','parent_id')
     average_drying_shrinkage = fields.Float("Average Drying Shrinkage",compute="_compute_average_drying_shrinkage")
 
     @api.depends('drying_shrinkage_table.drying_shrinkage')
@@ -166,7 +166,7 @@ class AacBlockMechanical(models.Model):
     compressive_strength_name = fields.Char(default="Compressive Strength")
     compressive_strength_visible = fields.Boolean(compute="_compute_visible")
 
-    compressive_strength_table = fields.One2many('mech.aac.compressive.strength.line','parent_id',string="Compressive Strength")
+    compressive_strength_table = fields.One2many('mech.aac.compressive.strength.line','parent_id')
     average_compressive_strength = fields.Float("Average Compressive Strength",compute="_compute_average_compressive_strength")
     
     @api.depends('compressive_strength_table.compressive_strength')
@@ -209,12 +209,14 @@ class AacDensityLine(models.Model):
     _name = "mech.aac.density.line"
     parent_id = fields.Many2one('mechanical.aac.block', string="Parent Id")
 
-    length = fields.Float('Length of Sample before Drying in mm',digits=(16,3))
-    width = fields.Float('Width of Sample before Drying in mm',digits=(16,3))
-    height = fields.Float('Height of Sample before Drying in mm',digits=(16,3))
-    volume = fields.Float('Volume of Sample mm3',compute="_compute_volume",digits=(16,7))
-    wt_sample = fields.Float("Weight of Sample after Drying in g",digits=(16,3))
-    density = fields.Float("Density of Sample Kg/mm3",compute="Compute_density",digits=(16,1))
+    length = fields.Float(string='Length of Sample before Drying in mm', digits=(16, 3))
+    width = fields.Float(string='Width of Sample before Drying in mm', digits=(16, 3))
+    height = fields.Float(string='Height of Sample before Drying in mm', digits=(16, 3))
+    volume = fields.Float(string='Volume of Sample mm3', compute="_compute_volume", digits=(16, 7))
+    wt_sample = fields.Float(string='Weight of Sample after Drying in g', digits=(16, 3))
+    density = fields.Float(string='Density of Sample Kg/mm3', compute="compute_density", digits=(16, 1))
+
+    
 
     @api.depends('length','width','height')
     def _compute_volume(self):
@@ -259,9 +261,9 @@ class AacCompressiveStrengthLine(models.Model):
     _name = "mech.aac.compressive.strength.line"
     parent_id = fields.Many2one('mechanical.aac.block', string="Parent Id")
 
-    crosssectional_area = fields.Float('Crosssectional Area')
+    crosssectional_area = fields.Float('Crosssectional Area Sqmm')
     aac_load = fields.Float('Load (p) kN')
-    compressive_strength = fields.Float('Compressive Strength',compute="_compute_compressive_strength")
+    compressive_strength = fields.Float('Compressive Strength MPa',compute="_compute_compressive_strength")
 
 
     @api.depends('crosssectional_area','aac_load')
