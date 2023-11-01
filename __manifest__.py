@@ -33,6 +33,8 @@
     'views/mechanical/drying_shrinkage_solid.xml',
     'views/mechanical/moisture_movement_solid.xml',
     'views/mechanical/flexural_strength_concrete_beam.xml',
+    'views/mechanical/precast_kerb_stone.xml',
+
 
     # 'views/mechanical/compressive_strength_concrete_cube.xml',
     'views/mechanical/splitting_tensile_strength_concrete.xml',
@@ -167,6 +169,10 @@
     'reports/isat_report.xml',
     'reports/admixture/admixture_datasheet.xml',
     'reports/admixture/admixture_report.xml',
+    'reports/precast_kerb/precast_kerb_datasheet.xml',
+    'reports/precast_kerb/precast_kerb_report.xml',
+
+
 
 
 
