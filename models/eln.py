@@ -208,6 +208,11 @@ class ELN(models.Model):
         self.sample_id.write({'state':'3-pending_verification'})
         # import wdb;wdb.set_trace();
         self.sample_id.parameters_result.unlink()
+        self.end_date = datetime.now().date()
+        if self.srf_date:
+            if self.start_date < self.srf_date:
+                raise ValidationError("Start Date cannot be less than SRF Date")
+
         for result in self.parameters_result:
             if not result.calculated:
                 raise ValidationError("Not all parameters are calculated. Please ensure all parameters are calculated before proceeding.")
@@ -564,6 +569,11 @@ class ELNParametersResult(models.Model):
     ],string='Conformity Status')
     model_id = fields.Integer(string="Model Id")
     result = fields.Float(string="Result",digits=(16,5))
+    result_type = fields.Selection([
+        ('char', 'Character'),
+        ('number', 'Number')
+    ],string='Result Type',default="number")
+    result_char = fields.Char("Result")
     sequence = fields.Char("Sequence")
 
 

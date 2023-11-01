@@ -114,6 +114,8 @@
                                 <tree editable="bottom" >
                                     <field name="sequence" string="Sequence" widget="handle" />
                                     <field name="parameter"/>
+                                    <field name="result_type"/>
+                                    <field name="result_char" attrs="{'readonly': [('result_type', '=', 'char')]}"/>
                                     <field name="result" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <!-- <field name="context_data" /> -->
                                     <field name="calculation_type" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}"  />
