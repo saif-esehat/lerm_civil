@@ -167,6 +167,7 @@
     'reports/isat_report.xml',
     'reports/admixture/admixture_datasheet.xml',
     'reports/admixture/admixture_report.xml',
+    'reports/flyash_chemical/flyash_report.xml',
 
 
 
