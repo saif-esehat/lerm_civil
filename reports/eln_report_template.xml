@@ -340,11 +340,11 @@
 								<td>
 									<span t-esc="r['parameter'].parameter_name"/>
 								</td>
-								<td t-if="r[result_type] == 'number'">
+								<td t-if="r['result_type'] == 'number'">
 									<!-- <span t-esc="round(r['result'], r['parameter'].decimal)"/> -->
 									 <span t-esc="'{:.{}f}'.format(r['result'], r['parameter'].decimal)"/>
 								</td>
-								<td t-if="r[result_type] == 'char'">
+								<td t-if="r['result_type'] == 'char'">
 									<!-- <span t-esc="round(r['result'], r['parameter'].decimal)"/> -->
 									 <span t-esc="r[result_char]"/>
 								</td>
