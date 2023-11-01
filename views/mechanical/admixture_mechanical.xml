@@ -20,6 +20,14 @@
                         <field name="eln_ref"/>
                         <field name="parameter_id" invisible="1"/>
                     </group>
+                    <group>
+                    <group>
+                     <field name="room_temp"/>
+                    </group>
+                    <group>
+                     <field name="room_rh"/>
+                    </group>
+                    </group>
 
                     <group>
                     <field name="child_lines" nolabel="1" >

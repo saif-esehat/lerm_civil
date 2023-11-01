@@ -18,6 +18,15 @@ class RCMT(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
+    age_of_days = fields.Selection([
+        ('3', '3'),
+        ('7', '7'),
+        ('14', '14'),
+        ('28', '28'),
+    ], string='Age at Test')
+
+    sample_condition = fields.Char(string="Sample Conditioning")
+
 
     dimension_name = fields.Char("Name",default="Core sample and its dimension")
     child_lines = fields.One2many('mechanical.dimension.rcmt.line','parent_id',string="Parameter")
@@ -25,11 +34,11 @@ class RCMT(models.Model):
   
 
     observed_value_name = fields.Char("Name",default="Observed  Value")
-    specimen1_ov1 = fields.Float()
-    specimen1_ov2 = fields.Float()
-    specimen1_ov3 = fields.Float()
+    specimen1_ov1 = fields.Float(string="Average Value of anolye solution °C")
+    specimen1_ov2 = fields.Float(string="Absolute Value of applied Voltage V")
+    specimen1_ov3 = fields.Float(string="Thickness of specimen mm (L)")
 
-    specimen2_ov1 = fields.Float()
+    specimen2_ov1 = fields.Float(string="Average Value of Penetration depth mm (dx)")
     specimen2_ov2 = fields.Float()
     specimen2_ov3 = fields.Float()
 

@@ -154,7 +154,7 @@ class CoarseAggregateMechanical(models.Model):
     wt_sample_passing_10fine = fields.Float("Weight of sample passing 2.36 mm IS sieve after applying load in 10 min, B")
     percent_of_fines = fields.Float("Percentage of Fines",compute="_compute_percent_fines")
     load_applied_10fine = fields.Float("Load applied in 10 min, X kN")
-    load_10percent_fine_values = fields.Float("Load for 10 percent fines value",compute="_compute_load_10percent_fine_values")
+    load_10percent_fine_values = fields.Integer("Load for 10 percent fines value",compute="_compute_load_10percent_fine_values")
 
     @api.depends('wt_sample_10fine','wt_sample_passing_10fine')
     def _compute_percent_fines(self):
@@ -562,7 +562,7 @@ class CoarseAggregateMechanical(models.Model):
     mean_wt_aggregate = fields.Float("Mean weight of the aggregate in the cylinder in gm , W")
     wt_water_required_angularity = fields.Float("Weight of water required to fill the cylinder in gm, C")
     specific_gravity_aggregate_angularity = fields.Float("Specific gravity of aggregate, GA")
-    angularity_number = fields.Float("Angularity number",compute="_compute_angularity_number")
+    angularity_number = fields.Integer("Angularity number",compute="_compute_angularity_number")
 
     @api.depends('mean_wt_aggregate','wt_water_required_angularity','specific_gravity_aggregate_angularity')
     def _compute_angularity_number(self):
@@ -749,7 +749,7 @@ class SieveAnalysisLine(models.Model):
     parent_id = fields.Many2one('mechanical.coarse.aggregate', string="Parent Id")
     
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
-    sieve_size = fields.Char(string="IS Sieve Size")
+    sieve_size = fields.Char(string="IS Sieve Size mm")
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
     cumulative_retained = fields.Float(string="Cum. Retained %", store=True)

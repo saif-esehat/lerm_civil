@@ -29,7 +29,16 @@
                     </group> -->
                    
                     
+                    <group>
+                       <group>
+                       <field name='age_of_days'/>
+                       </group>
+                        <group>
+                         <field name='sample_condition'/>
+                        </group>
+                    </group>
                    
+
 
 
                    <group>
@@ -38,8 +47,8 @@
                         
                         </h1>
                     </group>
-                   
 
+                   
                     <group>
                         <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
@@ -293,40 +302,114 @@
                     </group>
                    
 
+                   
+
                     <group>
-                        <!-- <label for="gravity_of_flyash1" string="Specific Gravity of Flyash" /> -->
+                        <label for="specimen1_ov1" string="Average Value of anolye solution °C" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="specimen1_ov1" string="Specimen 1" />
                             <field  name="specimen1_ov1"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen1_ov2"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen2"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen1_depth1"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen1_ov3"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen1_ov_avg1"  colspan="3"  nolabel="1"/>
-                           
                           </group>
                           <group colspan="1" class="oe_inline"  >
                             <label for="specimen2_ov1" string="Specimen 2" />
                             <field  name="specimen2_ov1"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen2_ov2"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen3"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen2_depth2"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen2_ov3"  colspan="3"  nolabel="1"/>
-                            <field  name="specimen2_ov_avg2"  colspan="3"  nolabel="1"/>
                           </group>
-                          <group colspan="1"  class="oe_inline">
+                          <group colspan="1" class="oe_inline"  >
                             <label for="specimen3_ov1" string="Specimen 3" />
                             <field  name="specimen3_ov1"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+                     <group>
+                        <label for="specimen1_ov2" string="Absolute Value of applied Voltage V" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="specimen1_ov2" string="" />
+                            <field  name="specimen1_ov2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="specimen2_ov2" string="" />
+                            <field  name="specimen2_ov2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="specimen3_ov2" string="" />
                             <field  name="specimen3_ov2"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group>
+                        <label for="specimen2" string="Thickness of specimen mm (L)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="specimen2" string="" />
+                            <field  name="specimen2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="specimen3" string="" />
+                            <field  name="specimen3"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="specimen4" string="" />
                             <field  name="specimen4"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                     <group>
+                        <label for="specimen1_depth1" string="Average Value of Penetration depth mm (dx)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="specimen1_depth1" string="" />
+                            <field  name="specimen1_depth1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="specimen2_depth2" string="" />
+                            <field  name="specimen2_depth2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="specimen3_depth3" string="" />
                             <field  name="specimen3_depth3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                     <group>
+                        <label for="specimen1_ov3" string="Test Duration Hour (t)" />
+                        <div class="specimen1_ov3 " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="specimen1_ov3" string="" />
+                            <field  name="specimen1_ov3"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="specimen2_ov3" string="" />
+                            <field  name="specimen2_ov3"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="specimen3_ov3" string="" />
                             <field  name="specimen3_ov3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                     <group>
+                        <label for="specimen1_ov_avg1" string="Non-steady State migration Coefficient m2/s" />
+                        <div class="specimen1_ov_avg1 " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="specimen1_ov_avg1" string="" />
+                            <field  name="specimen1_ov_avg1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="specimen2_ov_avg2" string="" />
+                            <field  name="specimen2_ov_avg2"  colspan="3"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="specimen3_ov_avg3" string="" />
                             <field  name="specimen3_ov_avg3"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
                     </group>
-                  
 
                 </sheet>
             </form>

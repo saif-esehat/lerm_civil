@@ -17,7 +17,8 @@ class MechanicalAdmixture(models.Model):
 
 
 
-   
+    room_temp = fields.Char(string="Room Temp")
+    room_rh = fields.Char(string="Room RH")
     child_lines = fields.One2many('mechanical.admixture.line', 'parent_id', string="Parameter", default=lambda self: self._default_sieve_analysis_child_lines())
 
     @api.model
@@ -69,7 +70,7 @@ class MechanicalAdmixture(models.Model):
 
 
     def get_all_fields(self):
-        record = self.env['mechanical.fine.aggregate'].browse(self.ids[0])
+        record = self.env['mechanical.admixture'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():
             field_value = record[field_name]
