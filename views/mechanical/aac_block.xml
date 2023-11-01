@@ -93,6 +93,7 @@
                         </h1>
                     </group>
                     <group attrs="{'invisible': [('density_visible', '=', False)]}">
+                        <field name="density_unit"/>
                         <field name="density_table">
                         <tree editable="bottom">
                           <field name="length"/>

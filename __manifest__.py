@@ -89,7 +89,7 @@
     'views/mechanical/wmm.xml',
     'views/mechanical/gsb.xml',
     'views/mechanical/wbm.xml',
-
+    'views/mechanical/isat.xml',
 
 
     'views/product_grade_wizard.xml',
@@ -161,6 +161,7 @@
     'views/miscellaneous.xml',
     'views/mechanical/ferrous_structural_steel.xml',
     'reports/ferrous_structural_steel_datasheet.xml',
+    'reports/ferrous_structural_steel.xml',
 
 
 

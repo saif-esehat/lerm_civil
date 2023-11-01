@@ -131,6 +131,8 @@ class AacBlockMechanical(models.Model):
     density_name = fields.Char(default="Density")
     density_visible = fields.Boolean(compute="_compute_visible")
 
+    density_unit = fields.Char("Unit",default="mm",readonly=True)
+
     density_table = fields.One2many('mech.aac.density.line','parent_id',string="Density")
     average_density = fields.Float("Average Density",compute="_compute_average_density")
 
@@ -207,12 +209,12 @@ class AacDensityLine(models.Model):
     _name = "mech.aac.density.line"
     parent_id = fields.Many2one('mechanical.aac.block', string="Parent Id")
 
-    length = fields.Float('Length of Sample before Drying',digits=(16,3))
-    width = fields.Float('Width of Sample before Drying',digits=(16,3))
-    height = fields.Float('Height of Sample before Drying',digits=(16,3))
-    volume = fields.Float('Volume of Sample',compute="_compute_volume",digits=(16,7))
-    wt_sample = fields.Float("Weight of Sample after Drying",digits=(16,3))
-    density = fields.Float("Density of Sample",compute="compute_density",digits=(16,1))
+    length = fields.Float('Length of Sample before Drying in mm',digits=(16,3))
+    width = fields.Float('Width of Sample before Drying in mm',digits=(16,3))
+    height = fields.Float('Height of Sample before Drying in mm',digits=(16,3))
+    volume = fields.Float('Volume of Sample mm3',compute="_compute_volume",digits=(16,7))
+    wt_sample = fields.Float("Weight of Sample after Drying in g",digits=(16,3))
+    density = fields.Float("Density of Sample Kg/mm3",compute="Compute_density",digits=(16,1))
 
     @api.depends('length','width','height')
     def _compute_volume(self):
@@ -223,7 +225,7 @@ class AacDensityLine(models.Model):
     def compute_density(self):
         for record in self:
             if record.volume != 0:
-                density = record.wt_sample / record.volume
+                density = (record.wt_sample / record.volume) * 1000000
                 record.density = round(density,1)
             else:
                 record.density = 0
