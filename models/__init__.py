@@ -108,4 +108,6 @@ from . import miscellaneous
 from .mechanical import ferrous_structural_steel
 from .report import ferrous_structural_steel_ds_report
 from .report import rcmt_ds_report
+from .report import rcpt_ds_report
+from .report import flyash_chemical_report
 

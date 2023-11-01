@@ -8,7 +8,7 @@ class RcptConcreteCube(models.Model):
     _inherit = "lerm.eln"
     _rec_name = "name"
 
-    name = fields.Char("Name",default="RCPT Concrete Cube")
+    name1 = fields.Char("Name",default="Concrete RCPT")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
@@ -578,7 +578,7 @@ class RcptConcreteCubeLine(models.Model):
    
     sr_no = fields.Integer(string="Sample No", readonly=True, copy=False, default=1)
     undefined=fields.Float(string="Undefined")
-    dia_core = fields.Integer(string="Dia Of Core")
+    dia_core = fields.Float(string="Dia Of Core")
     identification_mark = fields.Char(string="Identification Mark")
     io = fields.Float(string="Io", digits=(16,4))
     i30 = fields.Float(string="I30", digits=(16,4))
