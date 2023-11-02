@@ -129,57 +129,9 @@
 						<u>Results</u>
 					</div>
 					<table>
+					<t t-set="i" t-value="0"/>
 						<thead>
-							<!-- <tr>
-								<th>
-									<span>
-										Sr. No
-									</span>
-								</th>
-								<th>
-									<span>
-										Test Parameters
-									</span>
-								</th>
-								
-								<th>
-									<span>
-										Results
-									</span>
-								</th> -->
-
-								<!-- <th>
-									<span>
-										Units
-									</span>
-								</th>
-								<th style="max-width: 250px;">
-									<span>
-										Specification
-
-										Specification as per IS 15456:2000(RA 2016)
-										<span t-esc="eln.material.specifications"/>
-									</span>
-								</th>
-								<th style="max-width: 200px;">
-									<span>
-										<span t-esc="eln.material.method_reference"/>
-										<span t-esc="r['parameter'].parameter_name"/>
-										<span t-esc="r['parameter'].parameter_name"/>
-
-									</span>
-								</th> -->
-								<!-- <th>
-									<span>
-										NABL Status
-									</span>
-								</th> -->
-								<!-- <th t-if="eln.conformity">
-									<span>
-										Confirmity Status
-									</span>
-								</th>
-							</tr> -->
+							
 
                             <tr cols="12">
 								<td colspan="1" style="border-top:none;border-bottom:none;text-align: center;">Sr no 
@@ -206,78 +158,8 @@
 							</tr>
 						</thead>
 						<tbody>
-							<t t-set="i" t-value="0"/>
-							<!-- non nabl -->
-							<tr t-foreach="eln.parameters_result" t-as="r" t-if="r['nabl_status'] == 'non-nabl' and not nabl and '(depend)' not in r['parameter'].parameter_name">
-								<td style="text-align: center;">
-									<div>
-										<span t-esc="i + 1"/>
-										<t t-set="i" t-value="i+1"/>
-									</div>
-                  				</td>
-								<td colspan="2" style="text-align: center;">
-									<span t-esc="r['parameter'].parameter_name"/>
-								</td>
-								<td colspan="1" style="text-align: center;">
-									<!-- <span t-esc="round(r['result'], r['parameter'].decimal)"/> -->
-									 <span t-esc="'{:.{}f}'.format(r['result'], r['parameter'].decimal)"/>
-								</td>
-								<!-- <td>
-									<span t-esc="r['unit'].name"/>
-								</td> -->
-								<!-- <td style="max-width: 250px;">
-									<span t-esc="r['specification_permissible_limit']"/>
-								</td> -->
-								<td colspan="1" style="max-width: 250px;text-align: center">
-									<span t-esc="r['test_method'].test_method"/>
-								</td>
-
-								<td colspan="2" style="max-width: 250px;text-align: center">
-									<span t-esc="r['test_method'].test_method"/>
-								</td>
-								<!-- <td>
-									<span t-esc="r['nabl_status']"/>
-								</td> -->
-								<td t-if="eln.conformity">
-									<span t-esc="r['conformity_status']"/>
-								</td>
-							</tr>
-
-							<!-- nabl -->
-							<tr t-foreach="eln.parameters_result" t-as="r" t-if="r['nabl_status'] == 'nabl' and nabl and '(depend)' not in r['parameter'].parameter_name" >
-								<td style="text-align: center;">
-									<div>
-										<span t-esc="i + 1"/>
-										<t t-set="i" t-value="i+1"/>
-									</div>
-                  				</td>
-								<td colspan="2" style="text-align: center;">
-									<span t-esc="r['parameter'].parameter_name"/>
-								</td>
-								<td colspan="1" style="text-align: center;">
-									<!-- <span t-esc="round(r['result'], r['parameter'].decimal)"/> -->
-									 <span t-esc="'{:.{}f}'.format(r['result'], r['parameter'].decimal)"/>
-								</td>
-								<!-- <td>
-									<span t-esc="r['unit'].name"/>
-								</td> -->
-								<!-- <td style="max-width: 250px;">
-									<span t-esc="r['specification_permissible_limit']"/>
-								</td> -->
-								<td colspan="1" style="max-width: 250px; text-align: center">
-									<span t-esc="r['test_method'].test_method"/>
-								</td>
-
-								<td colspan="2" style="max-width: 250px; text-align: center">
-									<span t-esc="r['test_method'].test_method"/>
-								</td>
-								<!-- <td>
-									<span t-esc="r['nabl_status']"/>
-								</td> -->
-								<td t-if="eln.conformity">
-									<span t-esc="r['conformity_status']"/>
-								</td>
-							</tr>
+						
+							
 						</tbody>
 					</table>
 					<div style="page-break-inside: avoid;">
