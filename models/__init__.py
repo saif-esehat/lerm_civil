@@ -84,6 +84,7 @@ from .mechanical import wmm
 from .mechanical import gsb
 from .mechanical import wbm
 from .mechanical import isat
+from .mechanical import precast_kerb_stone
 from .chemical import fine_aggregate
 from .mechanical import concrete_splite_tensile_strength
 from .report import concrete_split_tensile_ds_report
@@ -93,7 +94,7 @@ from .report import gsb_ds_report
 from .report import wbm_ds_report
 from .report import isat_ds_report
 from .report import admixture_ds_report
-
+from .report import precast_ds_report
 
 
 from . import general_template
