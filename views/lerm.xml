@@ -161,13 +161,13 @@
     <menuitem id="lerm_product_item_param_master"
         parent="lerm_menu"
         groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group"
-        name="Product"
+        name="Product Master"
         action="lerm_product_action"
         sequence="11" />
     
 
     <menuitem id="discipline"
-        name="Discipline"
+        name="Discipline Master"
         parent="lerm_menu"
         action="lerm_discipline_action"
         groups="kes_admin_access_group"

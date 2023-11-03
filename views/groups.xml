@@ -77,7 +77,7 @@
 
 
     <menuitem id="lerm_civil_group"
-        name="Group"
+        name="Group Master"
         parent="lerm_menu"
         action="lerm_civil_group_action"
         sequence="10" />
