@@ -24,8 +24,8 @@
 								<td colspan="3">
 									<span t-field="o.srf_date"/>
 								</td>
-								<td colspan="3">ULR NO :
-								</td>
+								<!-- <td colspan="3">ULR NO :
+								</td> -->
 								<td colspan="3">
 									---
 									<!-- <span t-field="o.sample_id.ulr_no"/> -->

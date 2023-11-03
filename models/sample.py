@@ -250,6 +250,7 @@ class LermSampleForm(models.Model):
         else:
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {
+            # 'name':str(self.kes_no),
             'type': 'ir.actions.report',
             'report_type': 'qweb-html',
             'report_name': template_name,
