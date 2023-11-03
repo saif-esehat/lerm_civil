@@ -24,14 +24,18 @@ class FlexuralStrengthConcreteBeam(models.Model):
         ('14days', '14 Days'),
         ('28days', '28 Days'),
     ], string='Age', default='28days',required=True)
+    age_of_test = fields.Integer("Age of Test, days",compute="compute_date_of_casting")
     date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
-    date_of_testing = fields.Date(string="Date of Testing",compute="_compute_testing_date")
+    date_of_testing = fields.Date(string="Date of Testing")
     confirmity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_average_flexural_strength_conformity")
 
-
+    @api.depends('date_of_testing','date_of_casting')
+    def compute_date_of_casting(self):
+        for record in self:
+            record.age_of_test = record.date_of_testing - record.date_of_casting
 
     @api.onchange('eln_ref')
     def compute_date_of_casting(self):
@@ -145,13 +149,13 @@ class FlexuralStrengthConcreteBeamLine(models.Model):
     parent_id = fields.Many2one('mechanical.flexural.strength.concrete.beam',string="Parent Id")
 
     sr_no = fields.Integer(string="Sr No", readonly=True, copy=False, default=1)
-    id_mark = fields.Integer(string="ID MARK/ Location")
+    id_mark = fields.Char(string="ID MARK/ Location")
     length = fields.Integer(string="Length of span ( L ) in mm")
     depth = fields.Float(string="Depth (d) in mm")
     width = fields.Float(string="Width (mm)")
     wt_of_sample = fields.Float(string="Weight of Sample in kgs")
     fracture_distance = fields.Float(string="Fracture Distance from neaere support in Cm")
-    failure_load  = fields.Float(string="Failure Load in kN")
+    failure_load  = fields.Float(string="Failure Load in kN(p)")
     flexural_strength = fields.Float(string="Flexural Strength in N/mm2", compute="_compute_flexural_strength")
     # flexural_strength_3 = fields.Float(string="Flexural Strength in N/mm2", compute="_compute_flexural_strength_three")
 
