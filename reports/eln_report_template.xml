@@ -318,8 +318,11 @@
 								<td style="max-width: 250px;">
 									<span t-esc="r['specification_permissible_limit']"/>
 								</td>
-								<td style="max-width: 250px;">
+								<!-- <td style="max-width: 250px;">
 									<span t-esc="r['test_method'].test_method"/>
+								</td> -->
+								<td style="max-width: 250px;">
+									<span t-esc="r['specification']"/>
 								</td>
 								<!-- <td>
 									<span t-esc="r['nabl_status']"/>
@@ -354,8 +357,11 @@
 								<td style="max-width: 250px;">
 									<span t-esc="r['specification_permissible_limit']"/>
 								</td>
-								<td style="max-width: 250px;">
+								<!-- <td style="max-width: 250px;">
 									<span t-esc="r['test_method'].test_method"/>
+								</td> -->
+								<td style="max-width: 250px;">
+									<span t-esc="r['specification']"/>
 								</td>
 								<!-- <td>
 									<span t-esc="r['nabl_status']"/>
