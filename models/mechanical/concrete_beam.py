@@ -24,12 +24,23 @@ class FlexuralStrengthConcreteBeam(models.Model):
         ('14days', '14 Days'),
         ('28days', '28 Days'),
     ], string='Age', default='28days',required=True)
-    date_of_casting = fields.Date(string="Date of Casting")
+    date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
     date_of_testing = fields.Date(string="Date of Testing",compute="_compute_testing_date")
     confirmity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_average_flexural_strength_conformity")
+
+
+
+    @api.onchange('eln_ref')
+    def compute_date_of_casting(self):
+        for record in self:
+            if record.eln_ref.sample_id:
+                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).date_casting
+                record.date_of_casting = sample_record
+            else:
+                record.date_of_casting = None
 
 
     @api.depends('date_of_casting','age_of_days')
