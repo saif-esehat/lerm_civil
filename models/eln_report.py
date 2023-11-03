@@ -39,7 +39,6 @@ class ElnReport(models.AbstractModel):
             'qrcode': qr_code,
             'stamp' : inreport_value,
             'nabl' : nabl,
-            'report_name' : 'Afzal'
         }
 
 

@@ -8,7 +8,7 @@ from lxml import etree
 
 
 
-class PrecastkReport(models.AbstractModel):
+class PrecastReport(models.AbstractModel):
     _name = 'report.lerm_civil.precast_mech_report'
     _description = 'Precast Report'
     
