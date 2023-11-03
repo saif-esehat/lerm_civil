@@ -264,7 +264,7 @@
 								<div style="padding-top:5px">
 									Format No. 
 									<!-- <span t-esc="eln.material.test_format_no"/> -->
-									<span t-esc="tabledata[0].report_format_no"/>
+									<span t-esc="eln.parameters_result[0].parameter.report_format_no"/>
 
 								</div>
 							</div>
