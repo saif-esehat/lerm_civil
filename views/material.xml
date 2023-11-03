@@ -74,7 +74,7 @@
           
           <button name="action_open_product_grade_wizard" string="Add Grade Line" type="object" class="oe_highlight"/>
             
-            <field name='product_based_calculation'>
+            <field name='product_based_calculation'  options="{'no_create': True}">
               <tree>
                 <field name="grade_ids" invisible="1" />
                 <field name="grade"/>
