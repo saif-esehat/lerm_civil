@@ -45,7 +45,7 @@
 								<td colspan="3">Report no :
 								</td>
 								<td colspan="3">
-									<span t-field="o.eln_id"/>
+									<span t-field="o.kes_no"/>
 								</td>
 								<td colspan="3">Report Date :
 								</td>
@@ -262,7 +262,10 @@
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
-									Format No. <span t-esc="eln.material.test_format_no"/>
+									Format No. 
+									<!-- <span t-esc="eln.material.test_format_no"/> -->
+									<span t-esc="eln.parameters_result[0].parameter.report_format_no"/>
+
 								</div>
 							</div>
 							<div>

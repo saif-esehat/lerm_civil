@@ -60,6 +60,12 @@ class ELN(models.Model):
     temperature = fields.Float("Temperature")
     instrument = fields.Char("Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
+
+
+    def get_dynamic_report_name(self):
+        # Implement your logic to generate the dynamic report name based on the field value.
+        # You can access the current record's field values using `self`.
+        return "Report " + self.sample_id 
     
     
     @api.depends("material")
@@ -295,6 +301,7 @@ class ELN(models.Model):
         else:
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         return {
+            'name':self.kes_no,
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
             'report_name': template_name,

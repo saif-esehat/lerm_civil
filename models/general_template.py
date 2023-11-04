@@ -187,6 +187,8 @@ class GeneralReport(models.AbstractModel):
             resultfields = self.get_visible_result_fields(model_name)
         else:
             general_data = self.env['lerm.eln'].sudo().browse(docids)
+        print('columns dataa',resultfields)
+
         return {
             'eln': eln,
             'data' : general_data,
