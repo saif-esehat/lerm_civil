@@ -158,8 +158,285 @@
 							</tr>
 						</thead>
 						<tbody>
-						
+
+						    <tr t-if="data.combined_percentage_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td colspan="2" style="text-align: center;">
+									<span>
+									SiO2 + Al2O3 + Fe2O3 %
+									</span>
+									
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.combined_percentage"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous15"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous15"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+							<tr t-if="data.Silica_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td colspan="2" style="text-align: center;">
+									<span>
+										Silica (SiO2)
+									</span>
+									
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.Silica"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous1"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous1"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+							<tr t-if="data.magnesium_oxide_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td colspan="2" style="text-align: center;">
+									<span>
+										Magnesium Oxide % 
+									</span>
+									
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.magnesium_oxide"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous8"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous8"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+
 							
+
+							<tr t-if="data.chloride_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td colspan="2" style="text-align: center;">
+									<span>
+										Total Chloride (CI) 
+									</span>
+									
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.chloride"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous14"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous14"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+
+							<tr t-if="data.loi_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td colspan="2" style="text-align: center;">
+									<span>
+										Loss on Ignition % 
+									</span>
+									
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.loi"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous10"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous10"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+
+							<tr t-if="data.alumina1_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td colspan="2" style="text-align: center;">
+									<span>
+										Alumina (Al2o3) %
+									</span>
+									
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.alumina"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous4"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous4"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+							<tr t-if="data.ferric_oxide_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td colspan="2" style="text-align: center;">
+									<span>
+									 Ferric Oxide (FeO3)
+									</span>
+									
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.ferric_oxide"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous3"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous3"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+							<tr t-if="data.so3_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td colspan="2" style="text-align: center;">
+									<span>
+									 Sulphur trioxide (SO3) %
+									</span>
+									
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.so3"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous9"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous9"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+							
+							
+						
 						</tbody>
 					</table>
 					<div style="page-break-inside: avoid;">

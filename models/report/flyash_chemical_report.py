@@ -5,23 +5,46 @@ import qrcode
 from io import BytesIO
 
 
+
+
+class ChemicalFlyAshDatasheet(models.AbstractModel):
+    _name = 'report.lerm_civil.flyash_chem_datasheet'
+    _description = 'Fly Ash Chemical Datasheet'
+    
+    @api.model
+    def _get_report_values(self, docids, data):
+        if 'active_id' in data['context']:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        else:
+            eln = self.env['lerm.eln'].sudo().browse(docids) 
+        model_id = eln.model_id
+        # differnt location for product based
+        # model_name = eln.material.product_based_calculation[0].ir_model.name 
+        model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
+        if model_name:
+            general_data = self.env[model_name].sudo().browse(model_id)
+        else:
+            general_data = self.env['lerm.eln'].sudo().browse(docids)
+        return {
+            'eln': eln,
+            'data' : general_data
+        }
+
+
+
+
 class FlyAshChemicalReport(models.AbstractModel):
     _name = 'report.lerm_civil.flyash_chemical_report'
-    _description = 'ELN Report'
-
+    _description = 'Fly Ash Report'
+    
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
-        inreport_value = data.get('inreport', None)
-        nabl = data.get('nabl')
-        print(data , 'dataaaaaaaaaaaaaa')
-        # stamp = data['inreport']
         if 'active_id' in data['context']:
-            # stamp = data['inreport']
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids)
-        print()
+        
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         qr.add_data(eln.kes_no)
         qr.make(fit=True)
@@ -34,10 +57,16 @@ class FlyAshChemicalReport(models.AbstractModel):
 
         # Assign the base64 string to a field in the 'srf' object
         qr_code = qr_image_base64
+            
+        data = {
+            "material_id":eln.material.id,
+            "grade_id":eln.grade_id.id
+        }
+        model = eln.get_product_base_calc_line(data).ir_model.model
+        flyash_data = self.env[model].search([("id","=",eln.model_id)])
+        # print(flyash_data.normal_consistency_fly_1)
         return {
             'eln': eln,
-            'qrcode': qr_code,
-            'stamp' : inreport_value,
-            'nabl' : nabl,
-            'report_name' : 'Afzal'
+            'data': flyash_data,
+            'qrcode': qr_code
         }

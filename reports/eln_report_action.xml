@@ -760,7 +760,7 @@
         <field name="binding_type">report</field>
     </record>
 
-     <record id="precast_kerb_mech_datasheet_action" model="ir.actions.report">
+    <record id="precast_kerb_mech_datasheet_action" model="ir.actions.report">
         <field name="name">Precast Kerb Stone Datasheet</field>
         <field name="model">lerm.eln</field>
         <field name="report_type">qweb-pdf</field>
@@ -792,5 +792,17 @@
         <field name="binding_type">report</field>
         <field name="print_report_name">report_name</field>
     </record>
+
+    <record id="flyash_chemical_datasheet_action" model="ir.actions.report">
+        <field name="name">Fly Ash Chemical Datasheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.flyash_chem_datasheet</field>
+        <field name="report_file">lerm_civil.flyash_chem_datasheet</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
 
 </odoo>
