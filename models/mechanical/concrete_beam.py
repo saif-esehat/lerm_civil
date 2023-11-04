@@ -24,7 +24,7 @@ class FlexuralStrengthConcreteBeam(models.Model):
         ('14days', '14 Days'),
         ('28days', '28 Days'),
     ], string='Age', default='28days',required=True)
-    age_of_test = fields.Integer("Age of Test, days",compute="compute_date_of_casting")
+    age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
     date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
     date_of_testing = fields.Date(string="Date of Testing")
     confirmity = fields.Selection([
@@ -33,9 +33,15 @@ class FlexuralStrengthConcreteBeam(models.Model):
     ], string='Confirmity', default='fail',compute="_compute_average_flexural_strength_conformity")
 
     @api.depends('date_of_testing','date_of_casting')
-    def compute_date_of_casting(self):
+    def compute_age_of_test(self):
         for record in self:
-            record.age_of_test = record.date_of_testing - record.date_of_casting
+            if record.date_of_casting and record.date_of_testing:
+                date1 = fields.Date.from_string(record.date_of_casting)
+                date2 = fields.Date.from_string(record.date_of_testing)
+                date_difference = (date2 - date1).days
+                record.age_of_test = date_difference
+            else:
+                record.age_of_test = 0
 
     @api.onchange('eln_ref')
     def compute_date_of_casting(self):
