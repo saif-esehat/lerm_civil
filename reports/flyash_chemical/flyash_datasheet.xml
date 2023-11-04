@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="flyash_chem_datasheet">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+                <div style="text-align:center;font-size:18px">
+                    Fly Ash Chemical
+                </div>
+				<div class="container_eln" style="margin-top:5px">
+                <!-- % Silica -->
+					<div t-if="data.Silica_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							% Silica
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td> Wt of sample taken (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_sample"/>
+									</td>
+								</tr>
+								<tr>
+								 <td> Wt of two residue and paper after ignition at 1100˚C (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_two_rp"/>
+									</td>
+								</tr>
+								<tr>
+								   <td> Weight of residues in crucible after HF at 1100˚C (gm)</td>
+                                    <td><span t-field="data.wt_of_two_r"/></td>
+								</tr>
+								<tr>
+								    <td>Difference in weight = (B - C)</td>
+
+                                    <td><span t-field="data.difference_in_wt"/></td>
+								</tr>
+								<tr>
+								    <td>SiO₂ = D x 100/A</td>
+                                    <td><span t-field="data.Silica" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+						
+
+
+					</div>
+
+					<div t-if="data.r2o3_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							Combined Ferric Oxide and Alumina
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td> Wt of empty crucible (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_empty_combine"/>
+									</td>
+								</tr>
+								<tr>
+								 <td> Wt of  empty  crucible + residue (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_cr_combine"/>
+									</td>
+								</tr>
+								<tr>
+								   <td> Wt of sample (gm)</td>
+                                    <td><span t-field="data.wt_of_sample_combine"/></td>
+								</tr>
+								<tr>
+								    <td>Difference in weight = (B - A)</td>
+
+                                    <td><span t-field="data.difference_in_wt_combaine"/></td>
+								</tr>
+								<tr>
+								    <td>Combined Ferric Oxide and Alumina (R2O3) = D x 100/C</td>
+                                    <td><span t-field="data.r2o3" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+					<div t-if="data.ferric_oxide_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							% Ferric Oxide
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td> Wt of sample (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_sample_ferric_oxide"/>
+									</td>
+								</tr>
+								<tr>
+								 <td> Burette reading of KMnO4 for sampl (ml)</td>
+                                    <td>
+									<span t-field="data.burette_ferric_oxide"/>
+									</td>
+								</tr>
+								<tr>
+								   <td> Normality of KMnO4</td>
+                                    <td><span t-field="data.normality_ferric_oxide"/></td>
+								</tr>
+								
+								<tr>
+								    <td>Ferric Oxide = B x Cx 0.05585 x 1.43 x 100/A</td>
+                                    <td><span t-field="data.ferric_oxide" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+						
+
+
+					</div>
+
+
+					<div t-if="data.alumina1_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							% Alumina
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td> Alumina = R2O3 - Ferric oxide</td>
+                                    <td>
+									<span t-field="data.alumina"/>
+									</td>
+								</tr>
+								
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+					<div t-if="data.cao_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							CaO
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td> Wt of sample (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_sample_cao"/>
+									</td>
+								</tr>
+								<tr>
+								 <td> BR of 0.01N EDTA</td>
+                                    <td>
+									<span t-field="data.burette_cao"/>
+									</td>
+								</tr>
+								<tr>
+								   <td> Normality OF EDTA</td>
+                                    <td><span t-field="data.normality_cao"/></td>
+								</tr>
+								<tr>
+								    <td>Dilution</td>
+
+                                    <td><span t-field="data.dilution_cao"/></td>
+								</tr>
+								<tr>
+								    <td>BR*N*0.04032*25*100/S.wt</td>
+                                    <td><span t-field="data.cao" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+					<div t-if="data.mgo_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							MgO
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>Wt of sample (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_sample_cao"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>BR of 0.01N EDTA</td>
+                                    <td>
+									<span t-field="data.burette_cao"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>Normality OF EDTA</td>
+                                    <td><span t-field="data.normality_cao"/></td>
+								</tr>
+								<tr>
+								    <td>Dilution</td>
+
+                                    <td><span t-field="data.dilution_cao"/></td>
+								</tr>
+								<tr>
+								    <td>BR*N*0.04032*25*100/S.wt</td>
+                                    <td><span t-field="data.cao" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+					<div t-if="data.calicum_oxide_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							% Calicum Oxide
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>sample wt (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_sample_calicum_oxide"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>wt of crucible + residue (gm)</td>
+                                    <td>
+									<span t-field="data.wt_cr_calicum_oxide"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>wt of empty crucible (gm)</td>
+                                    <td><span t-field="data.wt_empty_calicum_oxide"/></td>
+								</tr>
+								<tr>
+								    <td>Difference = ( B - C ) gm</td>
+
+                                    <td><span t-field="data.difference_calicum_oxide"/></td>
+								</tr>
+								<tr>
+								    <td>% CaO = D  x 100/A</td>
+                                    <td><span t-field="data.calicum_oxide" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+
+					<div t-if="data.magnesium_oxide_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							% Magnesium Oxide
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>sample wt (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_sample_magnesium_oxide"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>wt of crucible + residue (gm)</td>
+                                    <td>
+									<span t-field="data.wt_cr_magnesium_oxide"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>wt of empty crucible (gm)</td>
+                                    <td><span t-field="data.wt_empty_magnesium_oxide"/></td>
+								</tr>
+								<tr>
+								    <td>Difference = ( B - C ) gm</td>
+
+                                    <td><span t-field="data.difference_magnesium_oxide"/></td>
+								</tr>
+								<tr>
+								    <td>% MgO = D x 0.3621 x 100/A</td>
+                                    <td><span t-field="data.magnesium_oxide" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+
+					<div t-if="data.so3_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							% Sulphur trioxide (SO3)
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>sample wt (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_sample_so3"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>wt of crucible + residue (gm)</td>
+                                    <td>
+									<span t-field="data.wt_cr_so3"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>wt of empty crucible (gm)</td>
+                                    <td><span t-field="data.wt_empty_co3"/></td>
+								</tr>
+								<tr>
+								    <td>Residue weight = (B - C) gm</td>
+
+                                    <td><span t-field="data.difference_co3"/></td>
+								</tr>
+								<tr>
+								    <td>% Sulphur trioxide (SO3)</td>
+                                    <td><span t-field="data.so3" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+
+					<div t-if="data.loi_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							% Loss on Ignition
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>wt of empty crucible (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_empty_loi"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>wt of empty crucible + sample before ignition gm</td>
+                                    <td>
+									<span t-field="data.wt_empty_cs_loi"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>wt of crucible + sample after ignition gm</td>
+                                    <td><span t-field="data.wt_cs_loi"/></td>
+								</tr>
+								<tr>
+								    <td>Wt of sample gm = B - C</td>
+
+                                    <td><span t-field="data.wt_of_sample_loi"/></td>
+								</tr>
+								<tr>
+								    <td>Loss in weight = B - A</td>
+
+                                    <td><span t-field="data.loi_in_wt"/></td>
+								</tr>
+								<tr>
+								    <td>Loss on ignition = E x 100/ D</td>
+                                    <td><span t-field="data.loi" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+					<div t-if="data.na2o_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							Alkali as Na₂O
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>Weight of sample taken</td>
+                                    <td>
+									<span t-field="data.wt_of_sample_na2o"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>Dilution</td>
+                                    <td>
+									<span t-field="data.dilution_na2o"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>Sodium reading</td>
+                                    <td><span t-field="data.sodium_reading_na2o"/></td>
+								</tr>
+								<tr>
+								    <td>Factor from graph</td>
+
+                                    <td><span t-field="data.ffg_na2o"/></td>
+								</tr>
+								<tr>
+								    <td>Dilution *Reading* factor *100/10000*wt of sample*A4</td>
+
+                                    <td><span t-field="data.na2o_calculation"/></td>
+								</tr>
+								<tr>
+								    <td>Na * 1.3480</td>
+                                    <td><span t-field="data.na2o_round" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+
+					<div t-if="data.k2o_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							Alkali as K₂O
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>Weight of sample taken</td>
+                                    <td>
+									<span t-field="data.wt_of_sample_k2o"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>Dilution</td>
+                                    <td>
+									<span t-field="data.dilution_k2o"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>Potasium reading</td>
+                                    <td><span t-field="data.potasium_reading_k2o"/></td>
+								</tr>
+								<tr>
+								    <td>Factor from graph</td>
+
+                                    <td><span t-field="data.ffg_k2o"/></td>
+								</tr>
+								<tr>
+								    <td>Dilution *Reading* factor *100/10000*wt of sample*A4</td>
+
+                                    <td><span t-field="data.k2o_calculation"/></td>
+								</tr>
+								<tr>
+								    <td>K *1.20</td>
+                                    <td><span t-field="data.k2o_round" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+					<div t-if="data.available_alkalis_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							Available alkalis
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>Available alkalis  % = A+B (0.65)</td>
+                                    <td>
+									<span t-field="data.available_alkalis"/>
+									</td>
+								</tr>
+								
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+
+
+					<div t-if="data.chloride_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							Chloride
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>Burette reading for Blank</td>
+                                    <td>
+									<span t-field="data.burette_reading_chloride"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>Burette reading  for sample (ml)</td>
+                                    <td>
+									<span t-field="data.burette_reading_sample_chloride"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>Diff. in Burette readings = (A - B )</td>
+                                    <td><span t-field="data.diff_chloride"/></td>
+								</tr>
+								<tr>
+								    <td>Normarility of 0.025N NH₄SCN</td>
+
+                                    <td><span t-field="data.normality_chloride"/></td>
+								</tr>
+								<tr>
+								    <td>weight of sample (gm)</td>
+
+                                    <td><span t-field="data.wt_of_sample_chloride"/></td>
+								</tr>
+								<tr>
+								    <td>Chloride % = C x D x 0.03545 x 100 / E</td>
+                                    <td><span t-field="data.chloride" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+
+
+
+					
+					
+						
+
+					<div class="authorizeRowDataSheet">
+						<div>
+							<div>
+								<b>
+									(JR Chemist)
+								</b>
+							</div>
+							<div>
+								<b>
+									Tested By
+								</b>
+							</div>
+						</div>
+						<div style="margin-left:500px">
+							<div>
+								<b>
+									Chemical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

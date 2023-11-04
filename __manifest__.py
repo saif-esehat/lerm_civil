@@ -172,15 +172,14 @@
     'reports/precast_kerb/precast_kerb_datasheet.xml',
     'reports/precast_kerb/precast_kerb_report.xml',
 
-
     'reports/flyash_chemical/flyash_report.xml',
-
-
 
     'reports/rcmt_datasheet.xml',
     'reports/rcmt_report.xml',
     'reports/rcpt/rcpt_datasheet.xml',
     'reports/rcpt/rcpt_report.xml',
+    'views/chemical/flyash.xml',
+    'reports/flyash_chemical/flyash_datasheet.xml',
 
 
 
