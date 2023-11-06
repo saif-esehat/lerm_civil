@@ -34,6 +34,11 @@ class MechanicalConcreteCube(models.Model):
     difference = fields.Integer("Difference",compute="compute_difference")
 
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+    nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+
+    ], string='NABL', default='fail',compute="_compute_nabl")
 
 
     @api.depends('age_of_test','age_of_days')
@@ -127,33 +132,26 @@ class MechanicalConcreteCube(models.Model):
             self.grade = self.eln_ref.grade_id.id
 
 
-    # @api.depends('average_strength','eln_ref','grade','age_of_days')
-    # def _compute_confirmity(self):
-    #     for record in self:
-    #         record.confirmity = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table
-    #         for material in materials:
-    #             if material.grade.id == record.grade.id:
-    #                 req_min = material.req_min
-    #                 req_max = material.req_max
-    #                 mu_value = line.mu_value
-    #                 if record.age_of_days == "3days":
-    #                     req_min = req_min * 0.5
-    #                     req_max = req_max* 0.5
-    #                 if record.age_of_days == "7days":
-    #                     req_min = req_min * 0.7
-    #                     req_max = req_max* 0.7
-    #                 if record.age_of_days == "14days":
-    #                     req_min = req_min * 0.9
-    #                     req_max = req_max* 0.9
-    #                 lower = record.average_strength - record.average_strength*mu_value
-    #                 upper = record.average_strength + record.average_strength*mu_value
-    #                 if lower >= req_min and upper <= req_max:
-    #                     record.confirmity = 'pass'
-    #                     break
-    #                 else:
-    #                     record.confirmity = 'fail'
+    @api.depends('average_strength','eln_ref','grade')
+    def _compute_nabl(self):
+        
+        for record in self:
+            record.nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_strength - record.average_strength*mu_value
+                    upper = record.average_strength + record.average_strength*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.nabl = 'pass'
+                        break
+                    else:
+                        record.nabl = 'fail'
 
 
     @api.depends('average_strength','eln_ref','grade','age_of_days','difference')

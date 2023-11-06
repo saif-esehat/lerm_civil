@@ -239,22 +239,13 @@
 										Compresive stringth in n/mm2
 									</span>
 								</th>
-								<!-- <th>
-									<span>
-										NABL Status
-									</span>
-								</th> -->
-								<!-- <th t-if="eln.conformity">
-									<span>
-										Confirmity Status
-									</span>
-								</th> -->
+								
 							</tr>
 						</thead>
 						<tbody>
 							<!-- <t t-set="i" t-value="0"/> -->
 							<!-- non nabl -->
-							<tr t-foreach="data.child_lines" t-as="r" t-if="data.confirmity == 'fail' and not nabl">
+							<tr t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'fail' and not nabl">
 								<!-- <td>
 									<div>
 										<span t-esc="i + 1"/>
@@ -288,7 +279,7 @@
 							</tr>
 
 							<!-- nabl -->
-							<tr t-foreach="data.child_lines" t-as="r" t-if="data.confirmity == 'pass' and nabl">
+							<tr t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'pass' and nabl">
 								<!-- <td>
 									<div>
 										<span t-esc="i + 1"/>
@@ -325,7 +316,12 @@
 
 					<div style="margin-top:10px">
 						<table>
-							<tr t-if="data.confirmity == 'pass' and nabl"> 
+							<tr t-if="data.nabl == 'pass' and nabl"> 
+								<td colspan="12">Avg. Compresive Strength :<![CDATA[&nbsp;]]>
+									<span t-field="data.average_strength"/>
+								</td>
+							</tr>
+							<tr t-if="data.nabl == 'fail' and not nabl"> 
 								<td colspan="12">Avg. Compresive Strength :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
@@ -349,9 +345,13 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
+									<li>
+										<u>Test witnessed by : <span t-esc="eln.witness_name"/></u>
+									</li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
 									</li>
+
 								</ul>
 							</div>
 						</div>
