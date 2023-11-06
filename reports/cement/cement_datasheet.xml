@@ -775,7 +775,7 @@
 					<!-- Fineness By Blaine Air Permeability Method -->
 					<div t-if="data.fineness_blaine_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
-							Fineness By Blaine Air Permeability Method
+							Fineness By Blaine Air Permeability Method (m²/kg)
 						</div>
 						<table>
 							<tr cols="12">
