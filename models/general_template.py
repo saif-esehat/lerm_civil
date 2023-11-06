@@ -160,6 +160,7 @@ class GeneralReport(models.AbstractModel):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
         inreport_value = data.get('inreport', None)
         print(data['context'])
+        nabl = data.get('nabl')
         if 'active_id' in data['context']:
             # stamp = data['context']['inreport']
             # print(stamp , 'stamp value')
@@ -195,6 +196,7 @@ class GeneralReport(models.AbstractModel):
             'tabledata' : columns,
             'resultdata' : resultfields,
             'qrcode': qr_code,
+            'nabl':nabl,
             'stamp' : inreport_value,
         }
 
