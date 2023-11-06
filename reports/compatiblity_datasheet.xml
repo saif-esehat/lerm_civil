@@ -92,6 +92,9 @@
                         <div t-if="data.chart_image" style="margin-top: 20px;">
                             <img t-att-src="'data:image/png;base64,' + data.chart_image.decode('utf-8')" style="max-width: 100%;"/>
                         </div>
+                        <div style="margin-top:10px">
+							<span t-field="data.comment"/>
+						</div>
 
                     </div>
                 </div>
