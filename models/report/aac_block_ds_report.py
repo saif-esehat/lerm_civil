@@ -15,6 +15,7 @@ class AacBlockReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
+        nabl = data.get('nabl')
         if 'active_id' in data['context']:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
@@ -42,7 +43,8 @@ class AacBlockReport(models.AbstractModel):
         return {
             'eln': eln,
             'data': aac_data,
-            'qrcode': qr_code
+            'qrcode': qr_code,
+            'nabl' : nabl
         }
 
 class AacDatasheet(models.AbstractModel):
