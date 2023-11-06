@@ -18,8 +18,8 @@ class ChemicalFlyAsh(models.Model):
     Silica_name = fields.Char("Name",default="% Silica")
     Silica_visible = fields.Boolean("% Silica",compute="_compute_visible")
 
-    siliceous1 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous1 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous1 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="35.0 Min")
+    calcareous1 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="25.0 Min")
 
     wt_of_sample = fields.Float("Wt of sample taken W1 (gm)")
     wt_of_two_rp = fields.Float("Wt of two residue and paper after ignition at 1100˚C in crucible gm")
@@ -77,8 +77,8 @@ class ChemicalFlyAsh(models.Model):
     ferric_oxide_name = fields.Char("Name",default="% Ferric Oxide")
     ferric_oxide_visible = fields.Boolean("% Ferric Oxide",compute="_compute_visible")
 
-    siliceous3 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous3 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous3 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="--")
+    calcareous3 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="--")
 
     wt_of_sample_ferric_oxide = fields.Float("Wt of sample (gm)")
     burette_ferric_oxide  = fields.Float("Burette reading of KMnO4 for sampl (ml)")
@@ -99,8 +99,8 @@ class ChemicalFlyAsh(models.Model):
     alumina_name = fields.Char("Name",default="% Alumina")
     alumina1_visible = fields.Boolean("% Alumina",compute="_compute_visible")
 
-    siliceous4 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous4 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous4 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="--")
+    calcareous4 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="--")
 
     alumina = fields.Float(string="Alumina = R2O3 - Ferric oxide",compute="_compute_alumina")
 
@@ -196,8 +196,8 @@ class ChemicalFlyAsh(models.Model):
     magnesium_oxide_name = fields.Char("Name", default="% Magnesium Oxide")
     magnesium_oxide_visible = fields.Boolean("MgO", compute="_compute_visible")
 
-    siliceous8 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous8 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous8 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="0.5 Max")
+    calcareous8 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="0.5 Max")
 
     wt_of_sample_magnesium_oxide = fields.Float("sample wt (gm)")
     wt_cr_magnesium_oxide = fields.Float("wt of crucible + residue (gm)")
@@ -222,8 +222,8 @@ class ChemicalFlyAsh(models.Model):
     so3_name = fields.Char("Name", default="% Sulphur trioxide (SO3)")
     so3_visible = fields.Boolean("SO3", compute="_compute_visible")
 
-    siliceous9 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous9 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous9 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="3 Max")
+    calcareous9 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="1.5 Max")
 
     wt_of_sample_so3 = fields.Float("sample wt (gm)")
     wt_cr_so3 = fields.Float("wt of crucible + residue (gm)")
@@ -248,8 +248,8 @@ class ChemicalFlyAsh(models.Model):
     loi_name = fields.Char("Name", default="% Loss on Ignition")
     loi_visible = fields.Boolean("% Loss on Ignition", compute="_compute_visible")
 
-    siliceous10 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous10 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous10 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="7.0 Max")
+    calcareous10 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="7.0 Max")
 
     wt_of_empty_loi = fields.Float("wt of empty crucible (gm)")
     wt_empty_cs_loi = fields.Float("wt of empty crucible + sample before ignition gm")
@@ -363,8 +363,8 @@ class ChemicalFlyAsh(models.Model):
     chloride_name = fields.Char("Name",default="Chloride")
     chloride_visible = fields.Boolean("Chloride",compute="_compute_visible")
 
-    siliceous14 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous14 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous14 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="0.05 Max")
+    calcareous14 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="0.05 Max")
 
     burette_reading_chloride = fields.Float("Burette reading for Blank")
     burette_reading_sample_chloride = fields.Float("Burette reading  for sample (ml)")
@@ -392,8 +392,8 @@ class ChemicalFlyAsh(models.Model):
     combined_percentage_name = fields.Char("Name",default="SiO2 + Al2O3 + Fe2O3 %")
     combined_percentage_visible = fields.Boolean("SiO2 + Al2O3 + Fe2O3 %",compute="_compute_visible")
 
-    siliceous15 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous15 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous15 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="70.0 Min")
+    calcareous15 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="50.0 Min")
 
     combined_percentage = fields.Float("SiO2 + Al2O3 + Fe2O3 %", compute="_compute_combined_percentage")
 
