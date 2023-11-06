@@ -17,7 +17,6 @@ class FlexuralStrengthConcreteBeam(models.Model):
     
     average_flexural_strength = fields.Float(string="Average Flexural Strength in N/mm2",compute="_compute_average_flexural_strength")
 
-
     age_of_days = fields.Selection([
         ('3days', '3 Days'),
         ('7days', '7 Days'),

@@ -13,7 +13,7 @@ class LermSampleForm(models.Model):
     _description = "Sample"
     _rec_name = 'kes_no'
     
-    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" )
+    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,tracking=True)
     sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
@@ -59,7 +59,7 @@ class LermSampleForm(models.Model):
     alias = fields.Char(string="Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
-    kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New')
+    kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New' ,tracking=True)
     casting_date = fields.Date(string="Casting Date")
     client_sample_id = fields.Char(string='Client Sample ID')
     filled_by = fields.Many2one('res.users',string="Filled By")

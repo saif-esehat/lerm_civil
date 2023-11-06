@@ -395,7 +395,7 @@
 							<tr t-if="flyash.fineness_blaine_visible">
 								<td style="text-align: center;">
 									<span>
-										Fineness by Blaine Air Permeability Method
+										Fineness by Blaine Air Permeability Method (m²/kg)
 									</span>
 								</td>
 								<td style="text-align: center;">
