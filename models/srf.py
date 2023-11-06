@@ -7,7 +7,7 @@ class Discipline(models.Model):
     _rec_name = 'discipline'
 
     internal_id = fields.Char(string="Internal ID")
-    discipline = fields.Char(string="Discipline", required=True)
+    discipline = fields.Char(string="Discipline", required=True,tracking=True)
     hod = fields.Many2one('res.users',string="Head of Department")
 
     def __str__(self):

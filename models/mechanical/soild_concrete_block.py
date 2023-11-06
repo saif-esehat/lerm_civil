@@ -380,7 +380,7 @@ class DryingShrinkageLine(models.Model):
     def _compute_drying_shrinkage(self):
         for record in self:
             if record.dry_lengths != 0:
-                record.drying_shrinkage = record.dry_measurment - (record.wet_measurment / record.dry_lengths * 100)
+                record.drying_shrinkage = (record.wet_measurment - record.dry_measurment) / record.dry_lengths * 100
             else:
                 record.drying_shrinkage = 0.0
 
@@ -480,16 +480,16 @@ class CompressiveStrengthSolidBlock(models.Model):
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
     length = fields.Float(string="Length in mm")
     width = fields.Float(string="Width in mm")
-    hight = fields.Float(string="Thickness in mm")
+    # hight = fields.Float(string="Thickness in mm")
     area = fields.Float(string="Area (mm²)",compute="compute_area")
     load = fields.Float(string="Load (N)")
     compressiv_strength = fields.Float(string="Compressive Strength N/mm²",compute="compute_compressive_strength")
 
 
-    @api.depends('width','hight')
+    @api.depends('length','width')
     def compute_area(self):
         for record in self:
-            record.area = record.width * record.hight
+            record.area = record.length * record.width
     
 
     @api.depends('load', 'area')

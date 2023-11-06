@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <record id="steel_tmt_bar_view" model="ir.ui.view">
+        <record id="ferrous_structural_steel_view" model="ir.ui.view">
         <field name="name">ferrous.structural.steel.form</field>
         <field name="model">ferrous.structural.steel</field>
         <field name="arch" type="xml">
