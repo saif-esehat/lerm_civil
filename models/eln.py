@@ -17,13 +17,13 @@ class ELN(models.Model):
     _name = 'lerm.eln'
     _inherit = ['mail.thread','mail.activity.mixin']
     _rec_name = 'eln_id'
-    eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New')
+    eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New',tracking=True)
     srf_id = fields.Many2one('lerm.civil.srf',string="SRF ID")
-    technician = fields.Many2one('res.users',string="Technicians")
-    sample_id = fields.Many2one('lerm.srf.sample',string='Sample ID')
-    srf_date = fields.Date(string='SRF Date')
-    kes_no = fields.Char(string="KES NO")
-    discipline = fields.Many2one('lerm_civil.discipline',string="Discipline")
+    technician = fields.Many2one('res.users',string="Technicians",tracking=25)
+    sample_id = fields.Many2one('lerm.srf.sample',string='Sample ID',tracking=True)
+    srf_date = fields.Date(string='SRF Date',tracking=True)
+    kes_no = fields.Char(string="KES NO",tracking=True)
+    discipline = fields.Many2one('lerm_civil.discipline',string="Discipline",tracking=True)
     group = fields.Many2one('lerm_civil.group',string="Group")
     material = fields.Many2one('product.template',string='Material')
     witness_name = fields.Char(string="Witness Name")

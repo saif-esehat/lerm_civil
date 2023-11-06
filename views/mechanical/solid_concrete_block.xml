@@ -197,7 +197,7 @@
                                 <field name='sr_no'/>
                                 <field name='length'/>
                                 <field name='width'/>
-                                <field name='hight'/>
+                                <!-- <field name='hight'/> -->
                                 <field name='area'/>
                                 <field name='load'/>
                                 <field name='compressiv_strength'/>
