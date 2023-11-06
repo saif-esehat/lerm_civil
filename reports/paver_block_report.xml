@@ -971,9 +971,9 @@
 								<td colspan="3">
 									<span t-field="o.srf_date"/>
 								</td>
-								<td colspan="3">ULR NO :
+								<td colspan="3"  t-if="nabl">ULR NO :
 								</td>
-								<td colspan="3">
+								<td colspan="3" t-if="nabl">
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
