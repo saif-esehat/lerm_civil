@@ -53,7 +53,6 @@
                     </field>
                     <group>
                         <field name='average_flexural_strength'/>
-                        <field name="confirmity"/>
                     </group>
                 </sheet>
             </form>
