@@ -471,6 +471,9 @@
 											</li>
 										</ul>
 									</li>
+									<li>
+										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									</li>
 								</ol>
 							</div>
 						</div>

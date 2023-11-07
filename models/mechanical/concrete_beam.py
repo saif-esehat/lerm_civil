@@ -26,10 +26,10 @@ class FlexuralStrengthConcreteBeam(models.Model):
     age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
     date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
     date_of_testing = fields.Date(string="Date of Testing")
-    confirmity = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_average_flexural_strength_conformity")
+    # confirmity = fields.Selection([
+    #     ('pass', 'Pass'),
+    #     ('fail', 'Fail'),
+    # ], string='Confirmity', default='fail',compute="_compute_average_flexural_strength_conformity")
 
     @api.depends('date_of_testing','date_of_casting')
     def compute_age_of_test(self):
@@ -77,25 +77,25 @@ class FlexuralStrengthConcreteBeam(models.Model):
             else:
                 record.date_of_testing = False
 
-    @api.depends('average_flexural_strength','eln_ref')
-    def _compute_average_flexural_strength_conformity(self):
-        for record in self:
-            record.confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_table
-            for material in materials:
+    # @api.depends('average_flexural_strength','eln_ref')
+    # def _compute_average_flexural_strength_conformity(self):
+    #     for record in self:
+    #         record.confirmity = 'fail'
+    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')])
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_table
+    #         for material in materials:
                 
-                    req_min = material.req_min
-                    req_max = material.req_max
-                    mu_value = line.mu_value
+    #                 req_min = material.req_min
+    #                 req_max = material.req_max
+    #                 mu_value = line.mu_value
                     
-                    lower = record.average_flexural_strength - record.average_flexural_strength*mu_value
-                    upper = record.average_flexural_strength + record.average_flexural_strength*mu_value
-                    if lower >= req_min and upper <= req_max:
-                        record.confirmity = 'pass'
-                        break
-                    else:
-                        record.confirmity = 'fail'
+    #                 lower = record.average_flexural_strength - record.average_flexural_strength*mu_value
+    #                 upper = record.average_flexural_strength + record.average_flexural_strength*mu_value
+    #                 if lower >= req_min and upper <= req_max:
+    #                     record.confirmity = 'pass'
+    #                     break
+    #                 else:
+    #                     record.confirmity = 'fail'
 
 
     @api.depends('eln_ref')
