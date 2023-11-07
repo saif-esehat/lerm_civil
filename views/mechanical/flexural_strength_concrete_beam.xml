@@ -31,6 +31,9 @@
                         <group>
                             <field name="age_of_days"/>
                         </group>
+                        <group>
+                            <field name="age_of_test"/>
+                        </group>
                     </group>
 
 

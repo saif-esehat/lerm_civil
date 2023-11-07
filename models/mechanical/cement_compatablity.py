@@ -20,6 +20,7 @@ class CementCompatablity(models.Model):
     end_date = fields.Date("End Date")
     child_lines = fields.One2many('mechanical.cement.compatiblity.lines','parent_id',string="Parameters")
     chart_image = fields.Binary("Line Chart", compute="_compute_chart_image", store=True)
+    comment = fields.Char("Comment")
 
     @api.model
     def create(self, vals):

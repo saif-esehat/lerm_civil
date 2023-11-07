@@ -195,7 +195,7 @@
 							<img t-att-src="'data:image/png;base64,' + compatability.chart_image.decode('utf-8')" style="max-width: 100%;"/>
 						</div>
 						<div style="margin-top:10px">
-							<b>Optimum Dosage as per graph 0.8 to 1.0 % are suitable for Cement OPC53 with Admixture ASIAN PAINT SC MAXIMOLAST PC 300.</b>
+							<span t-field="compatability.comment"/>
 						</div>
 
 						<div style="margin-top:20px" class="noteContainer">

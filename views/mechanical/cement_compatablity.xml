@@ -42,6 +42,9 @@
                         <group>
                             <field name="chart_image" widget="image" readonly="1"/>
                         </group>
+                        <group>
+                            <field name="comment" />
+                        </group>
 
                     </sheet>
                 </form>
