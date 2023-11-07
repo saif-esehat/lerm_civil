@@ -179,7 +179,7 @@
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="3">
-									<span t-field="concrete_beam.age_of_days"/>
+									<span t-field="concrete_beam.age_of_test"/>
 								</td>
 								<td colspan="3" style="font-weight: bold;">Date of Casting :
 									<![CDATA[&nbsp;]]>
@@ -301,6 +301,9 @@
 							</li>
 							<li>
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+							</li>
+							<li>
+								<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 							</li>
 						</ul>
 					</div>

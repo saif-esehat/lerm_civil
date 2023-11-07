@@ -208,6 +208,9 @@
 									<li>
 										This Report may not br reproduced in except full/ part without the permission of the Lab Head of the Laboratory
 									</li>
+									<li>
+										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									</li>
 								</ol>
 							</div>
 						</div>
