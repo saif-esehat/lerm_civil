@@ -132,6 +132,14 @@ class SolidConcreteBlock(models.Model):
     child_lines1 = fields.One2many('mechanical.moisture.movement.line','parent_id',string="Parameter")
     average_moisture_movment = fields.Float(string="Average",compute="_compute_average_moisture_movment", digits=(12, 2))
 
+    moisture_movment_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="Conformity",compute="_compute_moisture_movment_conformity",store=True)
+
+    moisture_movment_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_moisture_movment_nabl",store=True)
+
 
     
     @api.depends('child_lines1.moisture_movment')
@@ -139,6 +147,50 @@ class SolidConcreteBlock(models.Model):
         for record in self:
             moisture_movments = record.child_lines1.mapped('moisture_movment')
             record.average_moisture_movment = sum(moisture_movments) / len(moisture_movments) if len(moisture_movments) > 0 else 0.0
+
+    @api.depends('average_moisture_movment','eln_ref','grade')
+    def _compute_moisture_movment_conformity(self):
+        
+        for record in self:
+            record.moisture_movment_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_moisture_movment - record.average_moisture_movment*mu_value
+                    upper = record.average_moisture_movment + record.average_moisture_movment*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.moisture_movment_conformity = 'pass'
+                        break
+                    else:
+                        record.moisture_movment_conformity = 'fail'
+
+
+    @api.depends('average_moisture_movment','eln_ref','grade')
+    def _compute_moisture_movment_nabl(self):
+        
+        for record in self:
+            record.moisture_movment_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_moisture_movment - record.average_moisture_movment*mu_value
+                    upper = record.average_moisture_movment + record.average_moisture_movment*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.moisture_movment_nabl = 'pass'
+                        break
+                    else:
+                        record.moisture_movment_nabl = 'fail'
+
 
      
     # Drying shrinkage
@@ -148,6 +200,15 @@ class SolidConcreteBlock(models.Model):
     child_lines2 = fields.One2many('mechanical.drying.shrinkage.line','parent_id',string="Parameter")
     average_drying_shrinkage = fields.Float(string="Average", compute="_compute_average_drying_shrinkage")
 
+    drying_shrinkage_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="Conformity",compute="_compute_drying_shrinkage_conformity",store=True)
+
+    drying_shrinkage_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_drying_shrinkage_nabl",store=True)
+
+
     @api.depends('child_lines2.drying_shrinkage')
     def _compute_average_drying_shrinkage(self):
         for record in self:
@@ -155,14 +216,62 @@ class SolidConcreteBlock(models.Model):
             count_lines = len(record.child_lines2)
             record.average_drying_shrinkage = total_drying_shrinkage / count_lines if count_lines else 0.0
 
+    @api.depends('average_drying_shrinkage','eln_ref','grade')
+    def _compute_drying_shrinkage_conformity(self):
+        
+        for record in self:
+            record.drying_shrinkage_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_drying_shrinkage - record.average_drying_shrinkage*mu_value
+                    upper = record.average_drying_shrinkage + record.average_drying_shrinkage*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.drying_shrinkage_conformity = 'pass'
+                        break
+                    else:
+                        record.drying_shrinkage_conformity = 'fail'
+
+
+    @api.depends('average_drying_shrinkage','eln_ref','grade')
+    def _compute_drying_shrinkage_nabl(self):
+        
+        for record in self:
+            record.drying_shrinkage_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_drying_shrinkage - record.average_drying_shrinkage*mu_value
+                    upper = record.average_drying_shrinkage + record.average_drying_shrinkage*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.drying_shrinkage_nabl = 'pass'
+                        break
+                    else:
+                        record.drying_shrinkage_nabl = 'fail'
+
 
     
 
-    water_absorption_name = fields.Char("Name",default="Water Absorption")
-    water_absorption_visible = fields.Boolean("Water Absorption Visible",compute="_compute_visible")
-    child_lines3 = fields.One2many('mechanical.water.absorption.line','parent_id',string="Parameter")
-    average_water_absorption = fields.Float(string="Average", compute="_compute_average_water_absorption")
-
+    water_absorption_name = fields.Char("Name", default="Water Absorption")
+    water_absorption_visible = fields.Boolean("Water Absorption Visible", compute="_compute_visible")
+    child_lines3 = fields.One2many('mechanical.water.absorption.line', 'parent_id', string="Parameter")
+    average_water_absorption = fields.Float(string="Average", compute="_compute_average_water_absorption", store=True)
+    water_absorption_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="Conformity", compute="_compute_water_absorption_conformity", store=True)
+    water_absorption_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_water_absorption_nabl", store=True)
 
     @api.depends('child_lines3.water_absorption')
     def _compute_average_water_absorption(self):
@@ -173,6 +282,46 @@ class SolidConcreteBlock(models.Model):
                 total_water_absorption += line.water_absorption
             record.average_water_absorption = total_water_absorption / count_lines if count_lines else 0.0
 
+    @api.depends('average_water_absorption', 'eln_ref', 'grade')
+    def _compute_water_absorption_conformity(self):
+        for record in self:
+            record.water_absorption_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_water_absorption - record.average_water_absorption * mu_value
+                    upper = record.average_water_absorption + record.average_water_absorption * mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.water_absorption_conformity = 'pass'
+                        break
+                    else:
+                        record.water_absorption_conformity = 'fail'
+
+    @api.depends('average_water_absorption', 'eln_ref', 'grade')
+    def _compute_water_absorption_nabl(self):
+        for record in self:
+            record.water_absorption_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_water_absorption - record.average_water_absorption * mu_value
+                    upper = record.average_water_absorption + record.average_water_absorption * mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.water_absorption_nabl = 'pass'
+                        break
+                    else:
+                        record.water_absorption_nabl = 'fail'
+
 
     # Dimension
 
@@ -182,7 +331,10 @@ class SolidConcreteBlock(models.Model):
     # name = fields.Char("Name",default="DIMENSION")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines4 = fields.One2many('mechanical.dimension.line','parent_id',string="Parameter")
+
+    # average_length_visible = fields.Boolean("Dimension Visible",compute="_compute_visible") 
     average_length = fields.Float(string="Average Length", compute="_compute_average_length",digits=(16,1))
+
     avreage_height2 = fields.Float(string="Average Thickness",compute="_compute_average_hight", digits=(16, 1))
     average_width = fields.Float(string="Average Width", compute="_compute_average_width",digits=(16,1))
     
@@ -230,6 +382,16 @@ class SolidConcreteBlock(models.Model):
     child_lines5 = fields.One2many('mechanical.compressive.strength.line','parent_id',string="Parameter")
     avg_compressive_strength = fields.Float(string="Average",compute="compute_avg_compressive_strength",digits=(16,2))
 
+    compressive_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="Conformity",compute="_compressive_conformity",store=True)
+
+    compressive_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_compressive_nabl",store=True)
+
+
+
 
     @api.depends('child_lines5.compressiv_strength')
     def compute_avg_compressive_strength(self):
@@ -237,6 +399,49 @@ class SolidConcreteBlock(models.Model):
             total_strength = sum(line.compressiv_strength for line in record.child_lines5)
             num_lines = len(record.child_lines5)
             record.avg_compressive_strength = total_strength / num_lines if num_lines > 0 else 0.0
+
+    @api.depends('avg_compressive_strength','eln_ref','grade')
+    def _compressive_conformity(self):
+        
+        for record in self:
+            record.compressive_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.avg_compressive_strength - record.avg_compressive_strength*mu_value
+                    upper = record.avg_compressive_strength + record.avg_compressive_strength*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.compressive_conformity = 'pass'
+                        break
+                    else:
+                        record.compressive_conformity = 'fail'
+
+
+    @api.depends('avg_compressive_strength','eln_ref','grade')
+    def _compute_compressive_nabl(self):
+        
+        for record in self:
+            record.compressive_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.avg_compressive_strength - record.avg_compressive_strength*mu_value
+                    upper = record.avg_compressive_strength + record.avg_compressive_strength*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.compressive_nabl = 'pass'
+                        break
+                    else:
+                        record.compressive_nabl = 'fail'
 
 
 
@@ -255,6 +460,7 @@ class SolidConcreteBlock(models.Model):
             record.water_absorption_visible = False
             record.dimension_visible = False
             record.compressive_visible = False
+            # record.average_length_visible = False
            
             
             for sample in record.sample_parameters:
@@ -274,6 +480,9 @@ class SolidConcreteBlock(models.Model):
 
                 if sample.internal_id == "68e3da78-7440-44b3-8f19-2f7e3c0de618":
                     record.dimension_visible = True
+
+                # if sample.internal_id == "085e1df4-a0fd-40bc-ac92-b6118328c2e8":
+                #     record.average_length_visible = True
 
                 if sample.internal_id == "3402d345-b96e-4ed1-a545-dd5b2a6e259a":
                     record.compressive_visible = True

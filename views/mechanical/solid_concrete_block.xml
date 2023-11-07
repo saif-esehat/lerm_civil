@@ -98,7 +98,10 @@
                     </group>
 
                     <group attrs="{'invisible': [('moisture_movment_visible', '=', False)]}">
-                        <field name='average_moisture_movment'  col="12"/> 
+                        <field name='average_moisture_movment'  col="12"/>
+                        <br></br> 
+                        <field name='moisture_movment_conformity' col="4"/>
+                        <field name='moisture_movment_nabl' col="4"/>
                     </group>
 
                      
@@ -128,6 +131,9 @@
 
                     <group attrs="{'invisible': [('drying_shrinkage_visible', '=', False)]}">
                         <field name='average_drying_shrinkage'  col="12"/> 
+                        <br></br> 
+                        <field name='drying_shrinkage_conformity' col="4"/>
+                        <field name='drying_shrinkage_nabl' col="4"/>
                     </group>
 
                     <!-- Water Absorption -->
@@ -156,6 +162,8 @@
 
                     <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
                         <field name='average_water_absorption'  col="12"/> 
+                        <field name='water_absorption_conformity' col="4"/>
+                        <field name='water_absorption_nabl' col="4"/>
                     </group>
 
 
@@ -182,10 +190,12 @@
                        
                     </group>
 
-                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
-                        <field name='average_length' col="4"/>
-                        <field name='average_width'  col="4"/> 
-                        <field name='avreage_height2' col="4"/>
+                    <group>
+                        
+                        <field name='average_length' attrs="{'invisible': [('dimension_visible', '=', False)]}" col="4"/>
+                        <field name='avreage_height2' attrs="{'invisible': [('dimension_visible', '=', False)]}" col="4"/> 
+                        <field name='average_width' attrs="{'invisible': [('dimension_visible', '=', False)]}" col="4"/>  
+                        <!-- <field name='avreage_height2' col="4"/> -->
                         
                     </group>
 
@@ -218,6 +228,8 @@
 
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
                         <field name='avg_compressive_strength' col="4"/>
+                        <field name='compressive_conformity' col="4"/>
+                        <field name='compressive_nabl' col="4"/>
                        
                         
                     </group>
