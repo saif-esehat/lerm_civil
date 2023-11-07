@@ -14,6 +14,9 @@
                         </h1>
                     </group>
                     <group>
+                        <field name='grade'/>
+                    </group>
+                    <group>
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" />
                         <field name="eln_ref"/>
@@ -60,6 +63,10 @@
                         <field name='averag_height1' col="4"/>
                         <field name='average_thickness' col="4"/>
                         <field name='average_block' col="4"/>
+                        
+                        <field name='block_density_conformity' col="4"/>
+                        <field name='block_density_nabl' col="4"/>
+                       
                          
                          <!-- <tr cols="12">
                             <td colspan="6"><b>Average Block Density</b></td>

@@ -16,6 +16,7 @@ class SolidConcreteBlock(models.Model):
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
 
     
     # Block Density
@@ -28,6 +29,14 @@ class SolidConcreteBlock(models.Model):
     average_length1 = fields.Float(string="Average Length", compute="_compute_average_length1",digits=(16,1))
     averag_height1 = fields.Float(string="Average Height",compute="_compute_average_hight1", digits=(16, 1))
     average_thickness = fields.Float(string="Average Thickness", compute="_compute_average_width1",digits=(16,1))
+
+    block_density_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="Conformity",compute="_compute_block_conformity",store=True)
+
+    block_density_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_block_density_nabl",store=True)
 
 
     @api.depends('child_lines.block_density')
@@ -70,6 +79,49 @@ class SolidConcreteBlock(models.Model):
                 record.average_thickness = sum(thicknesss) / len(thicknesss)
             else:
                 record.average_thickness = 0.0
+
+    @api.depends('average_block','eln_ref','grade')
+    def _compute_block_conformity(self):
+        
+        for record in self:
+            record.block_density_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_block - record.average_block*mu_value
+                    upper = record.average_block + record.average_block*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.block_density_conformity = 'pass'
+                        break
+                    else:
+                        record.block_density_conformity = 'fail'
+
+
+    @api.depends('average_block','eln_ref','grade')
+    def _compute_block_density_nabl(self):
+        
+        for record in self:
+            record.block_density_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_block - record.average_block*mu_value
+                    upper = record.average_block + record.average_block*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.block_density_nabl = 'pass'
+                        break
+                    else:
+                        record.block_density_nabl = 'fail'
 
 
     
@@ -272,6 +324,12 @@ class SolidConcreteBlock(models.Model):
             field_values[field_name] = field_value
 
         return field_values
+    
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
     
 
 
