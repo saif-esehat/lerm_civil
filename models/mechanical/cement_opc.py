@@ -272,7 +272,6 @@ class CementNormalConsistency(models.Model):
     # Compressive Strength 
 
     compressive_name = fields.Char("Name",default="Compressive Strength")
-    compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
     temp_percent_compressive = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_compressive = fields.Float("Humidity %")
@@ -297,7 +296,7 @@ class CementNormalConsistency(models.Model):
     
     # 3 days Casting
     casting_3_name = fields.Char("Name",default="3 Days")
-    # casting_3_visible = fields.Boolean("3 days Visible",compute="_compute_visible")
+    compressive_3_visible = fields.Boolean("3 days Visible",compute="_compute_visible")
 
     casting_date_3days = fields.Date(string="Date of Casting")
     testing_date_3days = fields.Date(string="Date of Testing",compute="_compute_testing_date_3days")
@@ -342,7 +341,7 @@ class CementNormalConsistency(models.Model):
     # 7 Days Casting
 
     casting_7_name = fields.Char("Name",default="7 Days")
-    # casting_7_visible = fields.Boolean("7 days Visible",compute="_compute_visible")
+    compressive_7_visible = fields.Boolean("7 days Visible",compute="_compute_visible")
 
     casting_date_7days = fields.Date(string="Date of Casting")
     testing_date_7days = fields.Date(string="Date of Testing",compute="_compute_testing_date_7days")
@@ -389,7 +388,7 @@ class CementNormalConsistency(models.Model):
     #28 days Casting
 
     casting_28_name = fields.Char("Name",default="28 Days")
-    # casting_28_visible = fields.Boolean("28 days Visible",compute="_compute_visible")
+    compressive_28_visible = fields.Boolean("28 days Visible",compute="_compute_visible")
 
     casting_date_28days = fields.Date(string="Date of Casting")
     testing_date_28days = fields.Date(string="Date of Testing",compute="_compute_testing_date_28days")
@@ -563,47 +562,20 @@ class CementNormalConsistency(models.Model):
 
             
     ### Compute Visible
-    @api.depends('tests')
+    @api.depends('eln_ref','sample_parameters')
     def _compute_visible(self):
-        normal_consistency_test = self.env['mechanical.cement.test'].search([('name', '=', 'Normal Consistency')])
-        setting_time_test = self.env['mechanical.cement.test'].search([('name', '=', 'Setting Time')])
-        density_test = self.env['mechanical.cement.test'].search([('name', '=', 'Density')])
-        compressive_test = self.env['mechanical.cement.test'].search([('name', '=', 'Compressive Strength')])
-        soundness_test = self.env['mechanical.cement.test'].search([('name', '=', 'Soundness')])
-        dry_sieving_test = self.env['mechanical.cement.test'].search([('name', '=', 'Dry Seiving')])
-        # casting_3days_test = self.env['mechanical.cement.test'].search([('name', '=', '3 Days')])
-        # casting_7days_test = self.env['mechanical.cement.test'].search([('name', '=', '7 Days')])
-        # casting_28days_test = self.env['mechanical.cement.test'].search([('name', '=', '28 Days')])
-        fineness_blaine = self.env['mechanical.cement.test'].search([('name', '=', 'Fineness (Blaine)')])
- 
         for record in self:
             record.normal_consistency_visible = False
             record.setting_time_visible  = False  
             record.density_visible = False
-            record.compressive_visible = False
             record.soundness_visible = False
             record.dry_sieving_visible = False
             record.fineness_blaine_visible = False
+            record.compressive_3_visible = False
+            record.compressive_7_visible = False
+            record.compressive_28_visible = False
 
-            if setting_time_test in record.tests:
-                record.normal_consistency_visible = True
-                record.setting_time_visible  = True
-            if setting_time_test in record.tests:
-                record.normal_consistency_visible = True
-                record.setting_time_visible = True
-            if density_test in record.tests:
-                record.density_visible = True
-            if soundness_test in record.tests:
-                record.normal_consistency_visible = True
-                record.soundness_visible = True
-            if compressive_test in record.tests:
-                record.normal_consistency_visible = True
-                record.compressive_visible = True
-            if dry_sieving_test in record.tests:
-                record.dry_sieving_visible = True
-            if fineness_blaine in record.tests:
-                record.fineness_blaine_visible = True
-                record.density_visible = True
+            
 
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
@@ -617,9 +589,18 @@ class CementNormalConsistency(models.Model):
                 if sample.internal_id == '5d2e505d-1d50-48aa-a8c8-9f70fe4b421b':
                     record.normal_consistency_visible = True
                     record.soundness_visible = True
-                if sample.internal_id == 'd28f09b0-de43-4ab8-bc97-90d5447b344b':
+                if sample.internal_id == '8ff8bce6-fb91-4673-8789-557cf91c3449':
                     record.normal_consistency_visible = True
-                    record.compressive_visible = True
+                    record.compressive_3_visible = True
+                if sample.internal_id == 'a267dec2-59df-4c9d-827b-69778c31c29b':
+                    record.normal_consistency_visible = True
+                    record.compressive_3_visible = True
+                    record.compressive_7_visible = True
+                if sample.internal_id == '6a0229a9-ba1d-4fc9-b2fa-3383699d3464':
+                    record.normal_consistency_visible = True
+                    record.compressive_3_visible = True
+                    record.compressive_7_visible = True
+                    record.compressive_28_visible = True
                 if sample.internal_id == 'ed89d6b3-783f-4044-aef7-d2dd847d3cce':
                     record.dry_sieving_visible = True
                 if sample.internal_id == '97ca92ab-492a-44a2-8245-0c3a2d40e313':

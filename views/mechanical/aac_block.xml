@@ -87,6 +87,9 @@
                         <group style="width:33%">
                             <field name="moisture_confirmity"/>
                         </group>
+                        <group style="width:33%">
+                            <field name="moisture_nabl"/>
+                        </group>
                     </group>
                     
 
@@ -119,6 +122,9 @@
                         <group style="width:33%">
                             <field name="density_confirmity"/>
                         </group>
+                        <group style="width:33%">
+                            <field name="density_nabl"/>
+                        </group>
                     </group>
 
                     <!-- Drying Shrinkage  -->
@@ -146,6 +152,9 @@
                         <group style="width:33%">
                             <field name="drying_shrinkage_confirmity"/>
                         </group>
+                       <group style="width:33%">
+                            <field name="drying_shrinkage_aac_nabl"/>
+                        </group>
                     </group>
                     
 
@@ -172,6 +181,9 @@
                         </group>
                         <group style="width:33%">
                             <field name="compressive_strength_confirmity"/>
+                        </group>
+                        <group style="width:33%">
+                            <field name="compressive_strength_nabl"/>
                         </group>
                     </group>
 

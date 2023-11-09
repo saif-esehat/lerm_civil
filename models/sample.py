@@ -199,6 +199,7 @@ class LermSampleForm(models.Model):
                 raise ValidationError("Not all parameters are verified. Please ensure all parameters are verified before proceeding.")
         self.write({'state': '4-in_report'})
         eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+        approved_by = self.env.user
         eln.write({'state':'3-approved'})
     
 

@@ -448,25 +448,48 @@
 								</ul>
 							</div>
 						</div>
-						<div class="signatureContainer girdgird" style="margin-top:50px">
-							<div>
-								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-							</div>
-							<div >
-								Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-							</div>
+						<div class="signatureContainer girdgird">
 							<div>
 								<div>
 									<b>
-										Approved By
+										Checked By
 									</b>
 								</div>
 								<div style="height:20px">
-									
+
 								</div>
 								<div>
 									<b>
-										Mechanical Department (HOD)
+										<span t-esc="eln.technician.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+							<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By 
+									</b>
+									
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
 								<div>
