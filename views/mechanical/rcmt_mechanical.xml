@@ -18,22 +18,34 @@
                         <field name="sample_id" />
                         <field name="eln_ref"/>
                         <field name="parameter_id" invisible="1"/>
+                        <field name="grade" exception="grade"  string="Grade" identity="extra"/> 
                     </group>
+                  
                     <!-- <group>
-                      <field name="sample_parameters">
-                        <tree>
-                          <field name="parameter_name"/>
-                          <field name="test_method"/>
-                        </tree>
-                      </field>
-                    </group> -->
-                   
-                    
-                    <group>
                        <group>
                        <field name='age_of_days'/>
                        </group>
                         <group>
+                         <field name='sample_condition'/>
+                        </group>
+                    </group> -->
+                    <group>
+                        <group>
+                            <field name="date_of_casting"  string="Date of Casting" identity="extra"/>
+                        </group>
+                        <group>
+                            <field name="date_of_testing"  string="Date of Testing" identity="extra"/>
+                        </group>
+                        <group>
+                            <field name="age_of_days"/>
+                        </group>
+                        <group>
+                            <field name="age_of_test"/>
+                        </group>
+                        <group>
+                            <field name="difference"/>
+                        </group>
+                         <group>
                          <field name='sample_condition'/>
                         </group>
                     </group>
@@ -409,6 +421,9 @@
                             <field  name="specimen3_ov_avg3"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
+                    </group>
+                    <group>
+                      <field name="rcmt_nabl"/>
                     </group>
 
                 </sheet>
