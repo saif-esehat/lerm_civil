@@ -17,6 +17,13 @@ class GgbsMechanical(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
     tests = fields.Many2many("mechanical.ggbs.test",string="Tests")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
 
 
     ## Normal Consistency
@@ -88,6 +95,30 @@ class GgbsMechanical(models.Model):
     specific_gravity_trial1 = fields.Float("Specific Gravity",compute="_compute_specific_gravity_trail1",store=True)
     specific_gravity_trial2 = fields.Float("Specific Gravity",compute="_compute_specific_gravity_trail2",store=True)
     average_specific_gravity = fields.Float("Average",compute="_compute_sg_average",store=True)
+    specific_gravity_confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_specific_gravity_confirmity")
+
+
+    @api.depends('average_specific_gravity','eln_ref','grade')
+    def _compute_specific_gravity_confirmity(self):
+        for record in self:
+            record.specific_gravity_confirmity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    lower = record.average_specific_gravity - record.average_specific_gravity*mu_value
+                    upper = record.average_specific_gravity + record.average_specific_gravity*mu_value
+                    if lower >= req_min and upper <= req_max :
+                        record.specific_gravity_confirmity = 'pass'
+                        break
+                    else:
+                        record.specific_gravity_confirmity = 'fail'
 
     @api.depends('initial_volume_kerosine_trial1','final_volume_kerosine_trial1')
     def _compute_displaced_volume_trail1(self):
@@ -355,6 +386,29 @@ class GgbsMechanical(models.Model):
     fineness_of_sample = fields.Float("Fineness of Sample",compute="_compute_fineness_of_sample")
     fineness_air_permeability = fields.Float("Fineness By Blaine Air Permeability Method (m2/kg)",compute="_compute_fineness_air_permeability")
 
+    fineness_confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_fineness_confirmity")
+
+    @api.depends('fineness_air_permeability','eln_ref','grade')
+    def _compute_fineness_confirmity(self):
+        for record in self:
+            record.fineness_confirmity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
+                    upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
+                    if lower >= req_min and upper <= req_max :
+                        record.fineness_confirmity = 'pass'
+                        break
+                    else:
+                        record.fineness_confirmity = 'fail'
 
     @api.depends('weight_of_mercury_before_trial1','weight_of_mercury_after_trail1','density_of_mercury')
     def _compute_bed_volume_trial1(self):

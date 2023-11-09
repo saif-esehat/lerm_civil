@@ -833,6 +833,7 @@
 								</ul>
 							</div>
 						</div>
+						
 						<div class="signatureContainer girdgird">
 							<div>
 								<div>
@@ -845,7 +846,7 @@
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										<span t-esc="eln.technician.name"/>
 									</b>
 								</div>
 								<div>
@@ -865,15 +866,16 @@
 							<div>
 								<div>
 									<b>
-										Approved By
+										Approved By 
 									</b>
+									
 								</div>
 								<div style="height:20px">
 
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
 								<div>

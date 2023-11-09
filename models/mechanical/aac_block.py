@@ -130,6 +130,10 @@ class AacBlockMechanical(models.Model):
         ('pass', 'Pass'),
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_moisture_confirmity")
+    moisture_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'NON NABL'),
+    ], string='NABL', default='fail',compute="_compute_moisture_nabl")
 
 
     @api.depends('average_moisture_content','eln_ref','grade')
@@ -151,6 +155,26 @@ class AacBlockMechanical(models.Model):
                     else:
                         record.moisture_confirmity = 'fail'
 
+    @api.depends('average_moisture_content','eln_ref','grade')
+    def _compute_moisture_nabl(self):
+        
+        for record in self:
+            record.moisture_nabl = 'pass'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_moisture_content - record.average_moisture_content*mu_value
+                    upper = record.average_moisture_content + record.average_moisture_content*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.moisture_nabl = 'pass'
+                        break
+                    else:
+                        record.moisture_nabl = 'fail'
 
     @api.depends('moisture_content_table.moisture_content')
     def _compute_average_moisture_content(self):
@@ -174,6 +198,10 @@ class AacBlockMechanical(models.Model):
         ('pass', 'Pass'),
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_density_confirmity")
+    density_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'NON NABL'),
+    ], string='NABL', default='fail',compute="_compute_density_nabl")
 
 
     @api.depends('average_density','eln_ref','grade')
@@ -195,6 +223,27 @@ class AacBlockMechanical(models.Model):
                     else:
                         record.density_confirmity = 'fail'
 
+    @api.depends('average_density','eln_ref','grade')
+    def _compute_density_nabl(self):
+        
+        for record in self:
+            record.density_nabl = 'pass'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_density - record.average_density*mu_value
+                    upper = record.average_density + record.average_density*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.density_nabl = 'pass'
+                        break
+                    else:
+                        record.density_nabl = 'fail'
+
     @api.depends('density_table.density')
     def _compute_average_density(self):
         for record in self:
@@ -214,6 +263,12 @@ class AacBlockMechanical(models.Model):
         ('pass', 'Pass'),
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_drying_shrinkage_confirmity")
+    
+
+    drying_shrinkage_aac_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'NON NABL'),
+    ], string='NABL', default='fail',compute="_compute_drying_shrinkage_nabl")
 
 
     @api.depends('average_drying_shrinkage','eln_ref','grade')
@@ -235,6 +290,28 @@ class AacBlockMechanical(models.Model):
                     else:
                         record.drying_shrinkage_confirmity = 'fail'
 
+
+    @api.depends('average_drying_shrinkage','eln_ref','grade')
+    def _compute_drying_shrinkage_nabl(self):
+        
+        for record in self:
+            record.drying_shrinkage_aac_nabl = 'pass'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_drying_shrinkage - record.average_drying_shrinkage*mu_value
+                    upper = record.average_drying_shrinkage + record.average_drying_shrinkage*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.drying_shrinkage_aac_nabl = 'pass'
+                        break
+                    else:
+                        record.drying_shrinkage_aac_nabl = 'fail'
+
     @api.depends('drying_shrinkage_table.drying_shrinkage')
     def _compute_average_drying_shrinkage(self):
         for record in self:
@@ -255,6 +332,10 @@ class AacBlockMechanical(models.Model):
         ('pass', 'Pass'),
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_compressive_strength_confirmity")
+    compressive_strength_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'NON NABL'),
+    ], string='NABL', default='fail',compute="_compute_compressive_strength_nabl")
 
 
     @api.depends('average_compressive_strength','eln_ref','grade')
@@ -275,6 +356,27 @@ class AacBlockMechanical(models.Model):
                         break
                     else:
                         record.compressive_strength_confirmity = 'fail'
+
+    @api.depends('average_compressive_strength','eln_ref','grade')
+    def _compute_compressive_strength_nabl(self):
+        
+        for record in self:
+            record.compressive_strength_nabl = 'pass'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_compressive_strength - record.average_compressive_strength*mu_value
+                    upper = record.average_compressive_strength + record.average_compressive_strength*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.compressive_strength_nabl = 'pass'
+                        break
+                    else:
+                        record.compressive_strength_nabl = 'fail'
 
     
     @api.depends('compressive_strength_table.compressive_strength')
