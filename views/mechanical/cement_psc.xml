@@ -330,13 +330,13 @@
                     </group>
 
                     <!-- compressive strength -->
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <group attrs="{'invisible': ['|', '|', ('compressive_28_visible', '=', False), ('compressive_7_visible', '=', False), ('compressive_3_visible', '=', False)]}">
                         <h1>
                             <field name="compressive_name" readonly="1" nolabel="1"/>
                             <field name="compressive_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <group attrs="{'invisible': ['|', '|', ('compressive_28_visible', '=', False), ('compressive_7_visible', '=', False), ('compressive_3_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_compressive"/>
                       <field name="humidity_percent_compressive"/>
@@ -346,7 +346,7 @@
                       <field name="end_date_compressive"/>
                     </group>
                     </group>
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}" style="width:40%">
+                    <group attrs="{'invisible': ['|', '|', ('compressive_28_visible', '=', False), ('compressive_7_visible', '=', False), ('compressive_3_visible', '=', False)]}" style="width:40%">
                       <field  name="wt_of_cement_compressive"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade2"  colspan="3" />
@@ -356,19 +356,19 @@
 
                     </group>
                     <!-- Casting 3 days  -->
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('compressive_3_visible', '=', False)]}">
                         <h1>
                             <field name="casting_3_name" readonly="1" nolabel="1"/>
 
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('compressive_3_visible', '=', False)]}">
                             <field name="status_3days"/>
                       
                     </group>
                     
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('compressive_3_visible', '=', False)]}">
 
 
                       <field name="casting_date_3days"/>
@@ -389,19 +389,19 @@
                     </group>
 
                     <!-- 7 Days Casting  -->
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('compressive_7_visible', '=', False)]}">
                         <h1>
                             <field name="casting_7_name" readonly="1" nolabel="1"/>
 
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('compressive_7_visible', '=', False)]}">
                             <field name="status_7days"/>
                       
                     </group>
                     
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('compressive_7_visible', '=', False)]}">
 
                       <field name="casting_date_7days"/>
                       <field name="testing_date_7days"/>
