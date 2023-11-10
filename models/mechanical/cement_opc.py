@@ -54,7 +54,7 @@ class CementNormalConsistency(models.Model):
     normal_consistency_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_normal_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_normal_conformity")
 
     normal_consistency_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -63,7 +63,7 @@ class CementNormalConsistency(models.Model):
     ], string='NABL', default='fail',compute="_compute_normal_consistency_nabl")
 
     @api.depends('normal_consistency_trial1','eln_ref','grade')
-    def _compute_normal_confirmity(self):
+    def _compute_normal_conformity(self):
         for record in self:
             record.normal_consistency_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','a9e97cea-372f-4775-9bcb-e9dd70e6e6df')])
@@ -135,7 +135,7 @@ class CementNormalConsistency(models.Model):
     initial_setting_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_initial_setting_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_initial_setting_conformity")
 
     initial_setting_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -144,7 +144,7 @@ class CementNormalConsistency(models.Model):
 
 
     @api.depends('initial_setting_time_minutes_unrounded','eln_ref','grade')
-    def _compute_initial_setting_confirmity(self):
+    def _compute_initial_setting_conformity(self):
         for record in self:
             record.initial_setting_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')])
@@ -224,7 +224,7 @@ class CementNormalConsistency(models.Model):
     final_setting_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_final_setting_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_final_setting_conformity")
 
     final_setting_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -233,7 +233,7 @@ class CementNormalConsistency(models.Model):
 
 
     @api.depends('final_setting_time_minutes_unrounded','eln_ref','grade')
-    def _compute_final_setting_confirmity(self):
+    def _compute_final_setting_conformity(self):
         for record in self:
             record.final_setting_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')])
@@ -325,7 +325,7 @@ class CementNormalConsistency(models.Model):
     density_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_density_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_density_conformity")
 
     density_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -334,7 +334,7 @@ class CementNormalConsistency(models.Model):
 
 
     @api.depends('average_density','eln_ref','grade')
-    def _compute_density_confirmity(self):
+    def _compute_density_conformity(self):
         for record in self:
             record.density_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','8fcf78c9-dd02-4664-bba4-b887a64a6952')])
@@ -425,7 +425,7 @@ class CementNormalConsistency(models.Model):
     soundness_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_soundness_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_soundness_conformity")
 
     soundness_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -434,7 +434,7 @@ class CementNormalConsistency(models.Model):
 
 
     @api.depends('expansion_soundness','eln_ref','grade')
-    def _compute_soundness_confirmity(self):
+    def _compute_soundness_conformity(self):
         for record in self:
             record.soundness_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','5d2e505d-1d50-48aa-a8c8-9f70fe4b421b')])
@@ -526,7 +526,7 @@ class CementNormalConsistency(models.Model):
     dry_seiving_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_dry_seiving_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_dry_seiving_conformity")
 
     dry_seiving_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -535,7 +535,7 @@ class CementNormalConsistency(models.Model):
 
 
     @api.depends('fineness_dry_sieving','eln_ref','grade')
-    def _compute_dry_seiving_confirmity(self):
+    def _compute_dry_seiving_conformity(self):
         for record in self:
             record.dry_seiving_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','ed89d6b3-783f-4044-aef7-d2dd847d3cce')])
@@ -629,7 +629,7 @@ class CementNormalConsistency(models.Model):
     compressive_3days_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_compressive_3days_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_compressive_3days_conformity")
 
     compressive_3days_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -638,7 +638,7 @@ class CementNormalConsistency(models.Model):
 
 
     @api.depends('compressive_strength_3_days','eln_ref','grade')
-    def _compute_compressive_3days_confirmity(self):
+    def _compute_compressive_3days_conformity(self):
         for record in self:
             record.compressive_3days_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')])
@@ -725,7 +725,7 @@ class CementNormalConsistency(models.Model):
     compressive_7days_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_compressive_7days_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_compressive_7days_conformity")
 
     compressive_7days_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -734,7 +734,7 @@ class CementNormalConsistency(models.Model):
 
 
     @api.depends('compressive_strength_7_days','eln_ref','grade')
-    def _compute_compressive_7days_confirmity(self):
+    def _compute_compressive_7days_conformity(self):
         for record in self:
             record.compressive_7days_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
@@ -824,7 +824,7 @@ class CementNormalConsistency(models.Model):
     compressive_28days_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_compressive_28days_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_compressive_28days_conformity")
 
     compressive_28days_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -833,7 +833,7 @@ class CementNormalConsistency(models.Model):
 
 
     @api.depends('compressive_strength_28_days','eln_ref','grade')
-    def _compute_compressive_28days_confirmity(self):
+    def _compute_compressive_28days_conformity(self):
         for record in self:
             record.compressive_28days_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')])
@@ -961,7 +961,7 @@ class CementNormalConsistency(models.Model):
     fineness_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_fineness_confirmity")
+    ], string='Conformity', default='fail',compute="_compute_fineness_conformity")
 
     fineness_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -969,9 +969,9 @@ class CementNormalConsistency(models.Model):
     ], string='NABL', default='fail',compute="_compute_fineness_nabl")
 
     @api.depends('fineness_air_permeability','eln_ref','grade')
-    def _compute_fineness_confirmity(self):
+    def _compute_fineness_conformity(self):
         for record in self:
-            record.fineness_confirmity = 'fail'
+            record.fineness_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_table
             for material in materials:
@@ -982,10 +982,10 @@ class CementNormalConsistency(models.Model):
                     lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
                     upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
                     if lower >= req_min and upper <= req_max :
-                        record.fineness_confirmity = 'pass'
+                        record.fineness_conformity = 'pass'
                         break
                     else:
-                        record.fineness_confirmity = 'fail'
+                        record.fineness_conformity = 'fail'
 
     @api.depends('fineness_air_permeability','eln_ref','grade')
     def _compute_fineness_nabl(self):
