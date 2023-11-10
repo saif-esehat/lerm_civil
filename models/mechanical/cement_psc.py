@@ -16,9 +16,16 @@ class CementPsc(models.Model):
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+
 
     temp_percent_normal = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_normal = fields.Float("Humidity %")
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
 
 
     ## Normal Consistency

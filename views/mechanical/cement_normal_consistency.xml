@@ -59,16 +59,7 @@
                             <label for="wt_of_cement_trial1" string="Trial 1" />
                             <field  name="wt_of_cement_trial1"  colspan="3"  nolabel="1"/>
                           </group>
-                          <!-- <group colspan="1" class="oe_inline"  >
-                            <label for="wt_of_cement_trial2" string="Trial 2" />
-                            <field  name="wt_of_cement_trial2"  colspan="3"  nolabel="1"/>
-                          </group>
-                          <group colspan="1" class="oe_inline">
-                            <label for="wt_of_cement_trial3" string="Trial 3" />
-                            <field  name="wt_of_cement_trial3" colspan="3" nolabel="1"/>
-                          </group> -->
-                          <!--<field  name="wt_of_cement_trial2" style="width: 33%"/>-->
-                          <!--<field  name="wt_of_cement_trial3" style="width: 33%"/>-->
+                          
                         </div>
                     </group>
                     <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
@@ -78,16 +69,7 @@
                             <label for="wt_of_water_req_trial1" string="" />
                             <field  name="wt_of_water_req_trial1"  colspan="3"  nolabel="1"/>
                           </group>
-                          <!-- <group colspan="1" class="oe_inline"  >
-                            <label for="wt_of_water_req_trial2" string="" />
-                            <field  name="wt_of_water_req_trial2"  colspan="3"  nolabel="1"/>
-                          </group>
-                          <group colspan="1" class="oe_inline">
-                            <label for="wt_of_water_req_trial3" string="" />
-                            <field  name="wt_of_water_req_trial3" colspan="3" nolabel="1"/>
-                          </group> -->
-                          <!--<field  name="wt_of_cement_trial2" style="width: 33%"/>-->
-                          <!--<field  name="wt_of_cement_trial3" style="width: 33%"/>-->
+                          
                         </div>
                     </group>
                     <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
@@ -97,16 +79,7 @@
                             <label for="penetration_of_vicat_plunger_trial1" string="" />
                             <field  name="penetration_of_vicat_plunger_trial1"  colspan="3"  nolabel="1"/>
                           </group>
-                          <!-- <group colspan="1" class="oe_inline"  >
-                            <label for="penetration_of_vicat_plunger_trial2" string="" />
-                            <field  name="penetration_of_vicat_plunger_trial2"  colspan="3"  nolabel="1"/>
-                          </group>
-                          <group colspan="1" class="oe_inline">
-                            <label for="penetration_of_vicat_plunger_trial3" string="" />
-                            <field  name="penetration_of_vicat_plunger_trial3" colspan="3" nolabel="1"/>
-                          </group> -->
-                          <!--<field  name="wt_of_cement_trial2" style="width: 33%"/>-->
-                          <!--<field  name="wt_of_cement_trial3" style="width: 33%"/>-->
+                          
                         </div>
                     </group>
                     <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
@@ -116,29 +89,21 @@
                             <label for="normal_consistency_trial1" string="" />
                             <field  name="normal_consistency_trial1"  colspan="3"  nolabel="1"/>
                           </group>
-                          <!-- <group colspan="1" class="oe_inline"  >
-                            <label for="normal_consistency_trial2" string="" />
-                            <field  name="normal_consistency_trial2"  colspan="3"  nolabel="1"/>
-                          </group>
-                          <group colspan="1" class="oe_inline">
-                            <label for="normal_consistency_trial3" string="" />
-                            <field  name="normal_consistency_trial3" colspan="3" nolabel="1"/>
-                          </group> -->
-                          <!--<field  name="wt_of_cement_trial2" style="width: 33%"/>-->
-                          <!--<field  name="wt_of_cement_trial3" style="width: 33%"/>-->
+                          
                         </div>
                     </group>
                     <!-- Normal Consistency End -->
 
                     <!-- Setting Time Start -->
                     <group>
-                        <field name="setting_time_visible" readonly="1" invisible="1" />
+                        <field name="initial_setting_time_visible" readonly="1" invisible="1" />
+                        <field name="final_setting_time_visible" readonly="1" invisible="1" />
                         <h1>
-                            <field name="setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
+                            <field name="setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': ['|', ('initial_setting_time_visible', '=', False), ('final_setting_time_visible', '=', False)]}"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('setting_time_visible', '=', False)]}">
-                    <group attrs="{'invisible': [('setting_time_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}">
                       <field name="temp_percent_setting"/>
                       <field name="humidity_percent_setting"/>
                     </group>
@@ -149,31 +114,33 @@
                     </group>
                     <group>
                         
-                        <field name="wt_of_cement_setting_time" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="wt_of_water_required_setting_time" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
+                        <field name="wt_of_cement_setting_time" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="wt_of_water_required_setting_time" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
                     </group>
                     <group style="width:50%">
                         <h3>
-                            <field name="initial_setting_time" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
+                            <field name="initial_setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
                         </h3>
                    
-                        <field name="time_water_added" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="time_needle_fails" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="initial_setting_time_hours" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="initial_setting_time_minutes_unrounded" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="initial_setting_time_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
+                        <field name="time_water_added" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="time_needle_fails" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_hours" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_minutes_unrounded" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_minutes" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
 
                     </group>
 
                     <group style="width:50%">
-                        <h3>
-                            <field name="final_setting_time" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        </h3>
+                        
+                        <field name="final_setting_time_visible" readonly="1" invisible="1" />
+                        <h1>
+                            <field name="initial_setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        </h1>
                    
-                        <field name="time_needle_make_impression" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="final_setting_time_hours" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="final_setting_time_minutes_unrounded" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="final_setting_time_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
+                        <field name="time_needle_make_impression" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_hours" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_minutes_unrounded" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_minutes" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
 
                     </group>
 

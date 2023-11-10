@@ -210,7 +210,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr t-if="cement.setting_time_visible">
+							<tr t-if="cement.initial_setting_time_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -223,7 +223,11 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).test_method.test_method"/>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								<td>
@@ -233,18 +237,21 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')]).unit.name"/>
 									</span>
 								</td>
 								<td>
 									<span>
-										30 Min.
-										<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_min_value"/> Min	 -->
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								
 							</tr>
-							<tr t-if="cement.setting_time_visible">
+							<tr t-if="cement.final_setting_time_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -257,7 +264,11 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Final setting time')]).test_method.test_method"/>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								<td>
@@ -267,13 +278,16 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Final setting time')]).unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')]).unit.name"/>
 									</span>
 								</td>
 								<td>
 									<span>
-										600 Max.
-										<!-- <span t-field="env['lerm.parameter.master'].search([('parameter_name','=','initial setting time')]).lab_max_value"/> Max	 -->
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 							</tr>
@@ -420,7 +434,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr t-if="cement.compressive_visible">
+							<tr t-if="cement.compressive_28_visible || cement.compressive_7_visible || cement.compressive_3_visible">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -447,7 +461,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr t-if="cement.compressive_visible">
+							<tr t-if="cement.compressive_3_visible">
 								<td>
 									<span>a</span>
 								</td>
@@ -482,7 +496,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr t-if="cement.compressive_visible">
+							<tr t-if="cement.compressive_7_visible">
 								<td>
 									<span>b</span>
 								</td>
@@ -518,7 +532,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr t-if="cement.compressive_visible">
+							<tr t-if="cement.compressive_28_visible">
 								<td>
 									<span>c</span>
 								</td>
