@@ -5,15 +5,9 @@
             <!-- <t t-call="web.basic_layout"> -->
             <t t-call="lerm_civil.data_sheet_header_generaltemplate">
                 <div style="text-align:center;font-size:18px">
-                    AAC Block
+                    Rock
                 </div>
-                <!-- Dimension -->
-                <div t-if="data.dimension_visible" style="margin-top:20px">
-                    <div style="text-align:center;font-size:18px">
-                        <!-- Dimension -->
-                    </div>
-                    
-                </div>
+                
                 
                 
                 <div class="authorizeRowDataSheet">
