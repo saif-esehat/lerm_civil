@@ -128,6 +128,11 @@
                           <!--<field  name="wt_of_cement_trial3" style="width: 33%"/>-->
                         </div>
                     </group>
+                    <group style="width:50%" attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
+                      <field name="normal_consistency_conformity"/>
+                      <field name="normal_consistency_nabl"/>
+
+                    </group>
                     <!-- Normal Consistency End -->
 
                     <!-- Setting Time Start -->
@@ -165,6 +170,11 @@
                         <field name="initial_setting_time_minutes" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
 
                     </group>
+                    <group style="width:50%" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}">
+                      <field name="initial_setting_conformity"/>
+                      <field name="initial_setting_nabl"/>
+
+                    </group>
 
                     <group style="width:50%">
                         
@@ -177,6 +187,11 @@
                         <field name="final_setting_time_hours" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_minutes_unrounded" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_minutes" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+
+                    </group>
+                    <group style="width:50%" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}">
+                      <field name="final_setting_conformity"/>
+                      <field name="final_setting_nabl"/>
 
                     </group>
 
@@ -269,6 +284,11 @@
                     <group attrs="{'invisible': [('density_visible', '=', False)]}">
                       <field name="average_density" string="Average"/>
                     </group>
+                    <group style="width:50%" attrs="{'invisible': [('density_visible', '=', False)]}">
+                      <field name="density_conformity"/>
+                      <field name="density_nabl"/>
+
+                    </group>
                     <!--Density End -->
                     <!-- Soundness  -->
                     <group attrs="{'invisible': [('soundness_visible', '=', False)]}">
@@ -299,6 +319,11 @@
                       </field>
                       <field name="average_soundness"/>
                       <field name="expansion_soundness"/>
+                    </group>
+                    <group style="width:50%" attrs="{'invisible': [('soundness_visible', '=', False)]}">
+                      <field name="soundness_conformity"/>
+                      <field name="soundness_nabl"/>
+
                     </group>
 
                     <!-- Dry Sieving  -->
@@ -331,6 +356,10 @@
                       </field>
                       <field name="average_fineness"/>
                       <field name="fineness_dry_sieving"/>
+                    </group>
+                     <group style="width:50%" attrs="{'invisible': [('dry_sieving_visible', '=', False)]}">
+                      <field name="dry_seiving_conformity"/>
+                      <field name="dry_seiving_nabl"/>
                     </group>
 
                     <!-- compressive strength -->
@@ -394,6 +423,10 @@
                       <field name="compressive_strength_3_days"/>
 
                     </group>
+                    <group style="width:50%" attrs="{'invisible': [('compressive_3_visible', '=', False)]}">
+                      <field name="compressive_3days_conformity"/>
+                      <field name="compressive_3days_nabl"/>
+                    </group>
 
                     <!-- 7 Days Casting  -->
                     <group attrs="{'invisible': [('compressive_7_visible', '=', False)]}">
@@ -426,6 +459,10 @@
                       <field name="average_casting_7days"/>
                       <field name="compressive_strength_7_days"/>
                     </group>
+                    <group style="width:50%" attrs="{'invisible': [('compressive_7_visible', '=', False)]}">
+                      <field name="compressive_7days_conformity"/>
+                      <field name="compressive_7days_nabl"/>
+                    </group>
                     <!-- 28 Days Casting  -->
                     <group attrs="{'invisible': [('compressive_28_visible', '=', False)]}">
                         <h1>
@@ -456,6 +493,10 @@
                       <field name="average_casting_28days"/>
                       <field name="compressive_strength_28_days"/>
 
+                    </group>
+                    <group style="width:50%" attrs="{'invisible': [('compressive_28_visible', '=', False)]}">
+                      <field name="compressive_28days_conformity"/>
+                      <field name="compressive_28days_nabl"/>
                     </group>
                     <!-- Fineness Blaine  -->
                     <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
@@ -616,6 +657,10 @@
                             <field  name="fineness_of_sample"  colspan="6"/>
                             <field  name="fineness_air_permeability"  colspan="6"/>
                           </group>
+                    </group>
+                    <group style="width:50%" attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
+                      <field name="fineness_conformity"/>
+                      <field name="fineness_nabl"/>
                     </group>
                 </sheet>
             </form>
