@@ -132,32 +132,26 @@
                         <field name="initial_setting_time_hours" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
                         <field name="initial_setting_time_minutes_unrounded" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
                         <field name="initial_setting_time_minutes" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
-
+                        <field name="initial_setting_conformity"/>
+                        <field name="initial_setting_nabl"/>
                     </group>
-                    <group style="width:50%" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}">
-                      <field name="initial_setting_conformity"/>
-                      <field name="initial_setting_nabl"/>
-
-                    </group>
+                    
 
                     <group style="width:50%">
                         
                         <field name="final_setting_time_visible" readonly="1" invisible="1" />
                         <h1>
-                            <field name="initial_setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                            <field name="final_setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
                         </h1>
                    
                         <field name="time_needle_make_impression" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_hours" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_minutes_unrounded" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_minutes" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
-
+                        <field name="final_setting_conformity"/>
+                        <field name="final_setting_nabl"/>
                     </group>
-                    <group style="width:50%" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}">
-                      <field name="final_setting_conformity"/>
-                      <field name="final_setting_nabl"/>
-
-                    </group>
+                    
 
                     <!--Density Start -->
 
