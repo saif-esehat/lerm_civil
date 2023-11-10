@@ -33,7 +33,7 @@ class LermSampleForm(models.Model):
         ('satisfactory', 'Satisfactory'),
         ('non_satisfactory', 'Non-Satisfactory'),
     ], string='Sample Condition', default='satisfactory')
-    technicians = fields.Many2one("res.users",string="Technicians")
+    technicians = fields.Many2one("res.users",string="Technicians",tracking=5)
     location = fields.Char(string="Location")
     sample_reject_reason = fields.Char(string="Sample Reject Reason")
     has_witness = fields.Boolean(string="Witness")

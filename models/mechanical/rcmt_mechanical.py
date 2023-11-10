@@ -18,14 +18,33 @@ class RCMT(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
+    # age_of_days = fields.Selection([
+    #     ('3', '3'),
+    #     ('7', '7'),
+    #     ('14', '14'),
+    #     ('28', '28'),
+    # ], string='Age at Test')
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+   
     age_of_days = fields.Selection([
-        ('3', '3'),
-        ('7', '7'),
-        ('14', '14'),
-        ('28', '28'),
-    ], string='Age at Test')
+        ('3days', '3 Days'),
+        ('7days', '7 Days'),
+        ('14days', '14 Days'),
+        ('28days', '28 Days'),
+    ], string='Age', default='28days',required=True,compute="_compute_age_of_days")
+    date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
+    date_of_testing = fields.Date(string="Date of Testing")
+
+    age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
+    difference = fields.Integer("Difference",compute="compute_difference")
+
 
     sample_condition = fields.Char(string="Sample Conditioning")
+
+    rcmt_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_rcmt_nabl", store=True)
+
 
 
     dimension_name = fields.Char("Name",default="Core sample and its dimension")
@@ -316,6 +335,85 @@ class RCMT(models.Model):
     depth_name = fields.Char("Name",default="Measurement for Chloride Penetration depth")
     child_lines1 = fields.One2many('mechanical.penetration.depth.rcmt.line','parent_id',string="Parameter")
 
+    @api.onchange('eln_ref')
+    def _compute_age_of_days(self):
+        for record in self:
+            if record.eln_ref.sample_id:
+                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).days_casting
+                if sample_record == '3':
+                    record.age_of_days = '3days'
+                elif sample_record == '7':
+                    record.age_of_days = '7days'
+                elif sample_record == '14':
+                    record.age_of_days = '14days'
+                elif sample_record == '28':
+                    record.age_of_days = '28days'
+                else:
+                    record.age_of_days = None
+            else:
+                record.age_of_days = None
+
+    @api.depends('date_of_testing','date_of_casting')
+    def compute_age_of_test(self):
+        for record in self:
+            if record.date_of_casting and record.date_of_testing:
+                date1 = fields.Date.from_string(record.date_of_casting)
+                date2 = fields.Date.from_string(record.date_of_testing)
+                date_difference = (date2 - date1).days
+                record.age_of_test = date_difference
+            else:
+                record.age_of_test = 0
+
+    @api.depends('age_of_test','age_of_days')
+    def compute_difference(self):
+        for record in self:
+            age_of_days = 0
+            if record.age_of_days == '3days':
+                age_of_days = 3
+            elif record.age_of_days == '7days':
+                age_of_days = 7
+            elif record.age_of_days == '14days':
+                age_of_days = 14
+            elif record.age_of_days == '28days':
+                age_of_days = 28
+            else:
+                age_of_days = 0
+            record.difference = record.age_of_test - age_of_days
+
+
+
+
+    @api.onchange('eln_ref')
+    def compute_date_of_casting(self):
+        for record in self:
+            if record.eln_ref.sample_id:
+                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).date_casting
+                record.date_of_casting = sample_record
+            else:
+                record.date_of_casting = None
+
+
+    @api.depends('eln_ref', 'grade')
+    def _compute_rcmt_nabl(self):
+        for record in self:
+            record.rcmt_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id', '=', '36f86e6e-391c-4d7b-818d-28f7b75ea261')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id', '=', '36f86e6e-391c-4d7b-818d-28f7b75ea261')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+
+                    # Your logic for rcmt_nabl based on lab_min, lab_max, and mu_value
+                    if lab_min >= lab_min and lab_max <= lab_max:
+                        record.rcmt_nabl = 'pass'
+                        break
+                else:
+                    record.rcmt_nabl = 'fail'
+
+
+
    
 
     
@@ -326,6 +424,13 @@ class RCMT(models.Model):
         record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
+    
+
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
 
 
 
