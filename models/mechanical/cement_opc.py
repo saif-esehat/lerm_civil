@@ -971,7 +971,7 @@ class CementNormalConsistency(models.Model):
     @api.depends('fineness_air_permeability','eln_ref','grade')
     def _compute_fineness_confirmity(self):
         for record in self:
-            record.fineness_confirmity = 'fail'
+            record.fineness_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_table
             for material in materials:
@@ -982,10 +982,10 @@ class CementNormalConsistency(models.Model):
                     lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
                     upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
                     if lower >= req_min and upper <= req_max :
-                        record.fineness_confirmity = 'pass'
+                        record.fineness_conformity = 'pass'
                         break
                     else:
-                        record.fineness_confirmity = 'fail'
+                        record.fineness_conformity = 'fail'
 
     @api.depends('fineness_air_permeability','eln_ref','grade')
     def _compute_fineness_nabl(self):
