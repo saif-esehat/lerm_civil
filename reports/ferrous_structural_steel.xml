@@ -275,7 +275,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="data.yield_nabl == 'fail' and not nabl">
+							<tr t-if="data.yield_nabl == 'pass' and nabl or data.yield_nabl == 'fail' and not nabl">
 								<td>
 									0.2% proof Load / Yield Stress N/mm2																																				
 								</td>
@@ -296,7 +296,7 @@
 									<span t-esc="data.yield_nabl"/>
 								</td>
 							</tr>
-							<tr t-if="data.yield_nabl == 'pass' and nabl">
+							<!-- <tr t-if="data.yield_nabl == 'pass' and nabl">
 								<td>
 									0.2% proof Load / Yield Stress N/mm2																																				
 								</td>
@@ -304,7 +304,7 @@
 									<span t-esc="round(data.proof_yeid_stress , 2)"/>
 								</td>
 								<td>
-									<!-- <span t-esc="data.requirement_yield"/> -->
+									<span t-esc="data.requirement_yield"/>
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -316,7 +316,7 @@
 								<td t-if="eln.conformity">
 									<span t-esc="data.yield_nabl"/>
 								</td>
-							</tr>
+							</tr> -->
 							<tr t-if="data.uts_nabl == 'pass' and nabl">
 								<td>
 									Ultimate Tensile Strength, N/mm2																									
