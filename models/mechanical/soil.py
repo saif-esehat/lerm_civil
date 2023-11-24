@@ -25,35 +25,79 @@ class Soil(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
-    tests = fields.Many2many("mechanical.soil.test",string="Tests")
+    # tests = fields.Many2many("mechanical.soil.test",string="Tests")
 
     # CBR
 
     soil_name = fields.Char("Name",default="California Bearing Ratio")
     soil_visible = fields.Boolean("California Bearing Ratio Visible",compute="_compute_visible")
-    job_no_soil = fields.Char(string="Job No")
-    material_soil = fields.Char(String="Material")
-    start_date_soil = fields.Date("Start Date")
-    end_date_soil = fields.Date("End Date")
+    # job_no_soil = fields.Char(string="Job No")
+    # material_soil = fields.Char(String="Material")
+    # start_date_soil = fields.Date("Start Date")
+    # end_date_soil = fields.Date("End Date")
     soil_table = fields.One2many('mechanical.soils.cbr.line','parent_id',string="CBR")
+    chart_image_cbr = fields.Binary("Line Chart", compute="_compute_chart_image_cbr", store=True)
+
+
+    def generate_line_chart_cbr(self):
+        # Prepare data for the chart
+        x_values = []
+        y_values = []
+        for line in self.soil_table:
+            x_values.append(line.penetration)
+            y_values.append(line.load)
+        
+        # Create the line chart
+        plt.plot(x_values, y_values, marker='o')
+        plt.xlabel('Penetration')
+        plt.ylabel('Load')
+        plt.title('CBR')
+
+
+        plt.ylim(bottom=0, top=max(y_values) + 10)
+
+        for i in range(len(x_values)):
+            plt.plot([x_values[i], x_values[i]], [0, y_values[i]], color='black', linestyle='--', alpha=0.5)
+            if i < len(x_values) - 1:
+                plt.plot([x_values[i], x_values[i + 1]], [y_values[i], y_values[i + 1]], color='black', linestyle='-', alpha=0.5)
+
+
+        
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()  # Close the figure to free up resources
+        buffer.seek(0)
+    
+        # Convert the chart image to base64
+        chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
+        return chart_image
+    
+    @api.depends('soil_table')
+    def _compute_chart_image_cbr(self):
+        try:
+            for record in self:
+                chart_image = record.generate_line_chart_cbr()
+                record.chart_image_cbr = chart_image
+        except:
+            pass 
+
 
     # FSI
-
     fsi_name = fields.Char("Name",default="Free Swell Index")
     fsi_visible = fields.Boolean("Free Swell Index Visible",compute="_compute_visible")
-    job_no_fsi = fields.Char(string="Job No")
-    material_fsi = fields.Char(String="Material")
-    start_date_fsi = fields.Date("Start Date")
-    end_date_fsi = fields.Date("End Date")
+    # job_no_fsi = fields.Char(string="Job No")
+    # material_fsi = fields.Char(String="Material")
+    # start_date_fsi = fields.Date("Start Date")
+    # end_date_fsi = fields.Date("End Date")
     fsi_table = fields.One2many('mechanical.soil.free.swell.index.line','parent_id',string="FSI")
 
     # Sieve Analysis
     sieve_name = fields.Char("Name",default="Sieve Analysis")
     sieve_visible = fields.Boolean("Sieve Analysis Visible",compute="_compute_visible")
-    job_no_sieve = fields.Char(string="Job No")
-    material_sieve = fields.Char(String="Material")
-    start_date_sieve = fields.Date("Start Date")
-    end_date_sieve = fields.Date("End Date")
+    # job_no_sieve = fields.Char(string="Job No")
+    # material_sieve = fields.Char(String="Material")
+    # start_date_sieve = fields.Date("Start Date")
+    # end_date_sieve = fields.Date("End Date")
     child_lines = fields.One2many('mechanical.soil.sieve.analysis.line','parent_id',string="Sieve Analysis")
     total = fields.Integer(string="Total",compute="_compute_total")
     # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
@@ -282,10 +326,10 @@ class Soil(models.Model):
     # Liquid Limit
     liquid_limit_name = fields.Char("Name",default="Liquid Limit")
     liquid_limit_visible = fields.Boolean("Liquid Limit Visible",compute="_compute_visible")
-    job_no_liquid_limit = fields.Char(string="Job No")
-    material_liquid_limit = fields.Char(String="Material")
-    start_date_liquid_limit = fields.Date("Start Date")
-    end_date_liquid_limit = fields.Date("End Date")
+    # job_no_liquid_limit = fields.Char(string="Job No")
+    # material_liquid_limit = fields.Char(String="Material")
+    # start_date_liquid_limit = fields.Date("Start Date")
+    # end_date_liquid_limit = fields.Date("End Date")
     child_liness = fields.One2many('mechanical.liquid.limits.line','parent_id',string="Liquid Limit")
     liquid_limit = fields.Float('Liquid Limit')
     
@@ -321,15 +365,15 @@ class Soil(models.Model):
      # Plastic Limit
     plastic_limit_name = fields.Char("Name",default="Plastic Limit")
     plastic_limit_visible = fields.Boolean("Plastic Limit Visible",compute="_compute_visible")
-    job_no_plastic_limit = fields.Char(string="Job No")
-    material_plastic_limit = fields.Char(String="Material")
-    start_date_plastic_limit = fields.Date("Start Date")
-    end_date_plastic_limit = fields.Date("End Date")
+    # job_no_plastic_limit = fields.Char(string="Job No")
+    # material_plastic_limit = fields.Char(String="Material")
+    # start_date_plastic_limit = fields.Date("Start Date")
+    # end_date_plastic_limit = fields.Date("End Date")
 
     plastic_limit_table = fields.One2many('mechanical.plasticl.limit.line','parent_id',string="Parameter")
 
     plastic_limit = fields.Float(string="Average of % Moisture", compute="_compute_plastic_limit")
-    plasticity_index = fields.Float(string="Plasticity Index", compute="_compute_plasticity_index")
+    plasticity_index = fields.Char(string="Plasticity Index", compute="_compute_plasticity_index")
 
 
     @api.depends('plastic_limit_table.moisture')
@@ -338,20 +382,37 @@ class Soil(models.Model):
             total_moisture = sum(record.plastic_limit_table.mapped('moisture'))
             record.plastic_limit = total_moisture / len(record.plastic_limit_table) if record.plastic_limit_table else 0.0
 
+    # @api.depends('plastic_limit')
+    # def _compute_plasticity_index(self):
+    #     for record in self:
+    #         record.plasticity_index = 46.14 - record.plastic_limit
+
+    # @api.depends('plastic_limit')
+    # def _compute_plasticity_index(self):
+    #     for record in self:
+    #         if record.plastic_limit == 0.0:
+    #             record.plasticity_index = 'Null'  # Use an empty string to represent null for a character field
+    #         else:
+    #             record.plasticity_index = str(46.14 - record.plastic_limit)  # Convert the result to a string if needed
+
     @api.depends('plastic_limit')
     def _compute_plasticity_index(self):
         for record in self:
-            record.plasticity_index = 46.14 - record.plastic_limit
-
+            if record.plastic_limit == 0.0:
+                record.plasticity_index = 'Null'
+            else:
+                plasticity_value = 46.14 - record.plastic_limit
+                # Format the string representation with 2 decimal places
+                record.plasticity_index = '{:.2f}'.format(plasticity_value)
 
 
      # Dry Density by Sand Replacement method
     dry_density_name = fields.Char("Name",default="Dry Density by Sand Replacement method")
     dry_density_visible = fields.Boolean("Dry Density by Sand Replacement method Visible",compute="_compute_visible")
-    job_no_dry_density = fields.Char(string="Job No")
-    material_dry_density = fields.Char(String="Material")
-    start_date_dry_density = fields.Date("Start Date")
-    end_date_dry_density = fields.Date("End Date")
+    # job_no_dry_density = fields.Char(string="Job No")
+    # material_dry_density = fields.Char(String="Material")
+    # start_date_dry_density = fields.Date("Start Date")
+    # end_date_dry_density = fields.Date("End Date")
 
 
    
@@ -415,10 +476,10 @@ class Soil(models.Model):
 
     moisture_content_name = fields.Char("Name",default="Moisture Content")
     moisture_content_visible = fields.Boolean("Moisture Content Visible",compute="_compute_visible")
-    job_no_moisture_content = fields.Char(string="Job No")
-    material_moisture_content = fields.Char(String="Material")
-    start_date_moisture_content = fields.Date("Start Date")
-    end_date_moisture_content = fields.Date("End Date")
+    # job_no_moisture_content = fields.Char(string="Job No")
+    # material_moisture_content = fields.Char(String="Material")
+    # start_date_moisture_content = fields.Date("Start Date")
+    # end_date_moisture_content = fields.Date("End Date")
 
     moisture_content_table = fields.One2many('mechanical.moisture.content.line','parent_id',string="Parameter")
     average_block = fields.Float(string="Average",compute="_compute_average_moisture_content")
@@ -433,7 +494,7 @@ class Soil(models.Model):
             record.average_block = total_moisture_content / num_lines if num_lines else 0.0
 
      ### Compute Visible
-    @api.depends('tests')
+    @api.depends('sample_parameters')
     def _compute_visible(self):
       
         for record in self:
@@ -518,10 +579,10 @@ class Soil(models.Model):
 
         return field_values
 
-class SoilTest(models.Model):
-    _name = "mechanical.soil.test"
-    _rec_name = "name"
-    name = fields.Char("Name")
+# class SoilTest(models.Model):
+#     _name = "mechanical.soil.test"
+#     _rec_name = "name"
+#     name = fields.Char("Name")
 
 
 class SoilCBRLine(models.Model):
