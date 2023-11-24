@@ -545,15 +545,14 @@ class FerrousStructuralSteel(models.Model):
     @api.depends('eln_ref')
     def _compute_width(self):
         for record in self:
-            pattern = r'\d+'
+            pattern = r'\d+(\.\d+)?'  # Match integer or float
             match = re.search(pattern, str(record.eln_ref.size_id.size))
             if match:
-                width = int(match.group())
-                record.width = int(match.group())
+                width = float(match.group())
+                record.width = width
             else:
-                record.width = 0
-
-                    
+                record.width = 0.0
+                        
 
 
     

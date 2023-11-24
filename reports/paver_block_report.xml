@@ -34,7 +34,7 @@
 								</td>
 								<td colspan="4">Witness Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="eln.witness_name"/>
+									<span t-field="eln.witness_description"/>
 								</td>
 								<td colspan="4">Witness Signature :
 									<![CDATA[&nbsp;]]>
@@ -1733,8 +1733,8 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
-                                        <p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									<li t-if="eln.has_witness">
+                                        <p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
                                     </li>
 								</ul>
 							</div>

@@ -33,7 +33,7 @@
 								</td>
 								<td colspan="4">Witness Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="eln.witness_name"/>
+									<span t-field="eln.witness_description"/>
 								</td>
 								<td colspan="4">Witness Signature :
 									<![CDATA[&nbsp;]]>

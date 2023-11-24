@@ -138,16 +138,7 @@
                         </h1>
                     </group>
                     
-                    <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
-                    <group>
-                      <field name="job_no_heavy"/>
-                      <field name="material_heavy"/>
-                    </group>
-                    <group>
-                      <field name="start_date_heavy"/>
-                      <field name="end_date_heavy"/>
-                    </group>
-                    </group>
+                   
                     <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
                      <field name="wt_of_modul"/>
                      <field name="vl_of_modul"/>
@@ -172,71 +163,28 @@
                       </field>
                       <!-- <field name="total"/> -->
                       <!-- <! <field name="cumulative"/>> -->
+                   
                       
+                    </group>
+                    <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
+                      <field name="graph_image_density" widget="image" readonly="1"/>
                     </group>
 
-                     <!-- Heavy Compaction OMC -->
-                     <group attrs="{'invisible': [('heavy_omc_visible', '=', False)]}">
-                        <h1>
-                            <field name="heavy_omc_name" readonly="1" nolabel="1"/>
-                            <field name="heavy_omc_visible" invisible="1"/>
-                        </h1>
+                     <group>
+                     <field name='mmd'/>
+                     <field name='omc'/>
                     </group>
-                    
-                    <group attrs="{'invisible': [('heavy_omc_visible', '=', False)]}">
-                    <group>
-                      <field name="job_no_heavy_omc"/>
-                      <field name="material_heavy_omc"/>
-                    </group>
-                    <group>
-                      <field name="start_date_heavy_omc"/>
-                      <field name="end_date_heavy_omc"/>
-                    </group>
-                    </group>
-                    <group attrs="{'invisible': [('heavy_omc_visible', '=', False)]}">
-                     <field name="wt_of_modul_heavy_omc"/>
-                     <field name="vl_of_modul_heavy_omc"/>
-                    </group>
-                    <group attrs="{'invisible': [('heavy_omc_visible', '=', False)]}">
-                  
-                      <field name="heavy_omc_table">
-                        <tree editable="bottom">
-                          <field name="determination_no"/>
-                          <field name="wt_of_modul_compact"/>
-                           <field name="wt_of_compact"/>
-                          <field name="bulk_density"/>
-                          <field name="container_no"/>
-                          <field name="wt_of_container"/>
-                          <field name="wt_of_container_wet"/>
-                          <field name="wt_of_container_dry"/>
-                           <field name="wt_of_dry_sample"/>
-                          <field name="wt_of_moisture"/>
-                          <field name="moisture"/>
-                          <field name="dry_density"/>
-                        </tree>
-                      </field>
-                      <!-- <field name="total"/> -->
-                      <!-- <! <field name="cumulative"/>> -->
-                      
-                    </group>
+
+                   
                   <!-- Light Compaction OMC -->
                      <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
                         <h1>
-                            <field name="light_omc_name" readonly="1" nolabel="1"/>
+                            <field name="light_omc_name1" readonly="1" nolabel="1"/>
                             <field name="light_omc_visible" invisible="1"/>
                         </h1>
                     </group>
                     
-                    <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
-                    <group>
-                      <field name="job_no_light_omc"/>
-                      <field name="material_light_omc"/>
-                    </group>
-                    <group>
-                      <field name="start_date_light_omc"/>
-                      <field name="end_date_light_omc"/>
-                    </group>
-                    </group>
+                 
                     <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
                      <field name="wt_of_modul_light_omc"/>
                      <field name="vl_of_modul_light_omc"/>
@@ -264,50 +212,16 @@
                       
                     </group>
 
-                     <!-- Light Compaction MDD -->
-                     <group attrs="{'invisible': [('light_mdd_visible', '=', False)]}">
-                        <h1>
-                            <field name="light_mdd_name" readonly="1" nolabel="1"/>
-                            <field name="light_mdd_visible" invisible="1"/>
-                        </h1>
+                     <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
+                      <field name="graph_image_light_omc" widget="image" readonly="1"/>
                     </group>
-                    
-                    <group attrs="{'invisible': [('light_mdd_visible', '=', False)]}">
-                    <group>
-                      <field name="job_no_light_mdd"/>
-                      <field name="material_light_mdd"/>
+
+                     <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
+                     <field name='mmd_light_omc'/>
+                     <field name='omc_light_omc'/>
                     </group>
-                    <group>
-                      <field name="start_date_light_mdd"/>
-                      <field name="end_date_light_mdd"/>
-                    </group>
-                    </group>
-                    <group attrs="{'invisible': [('light_mdd_visible', '=', False)]}">
-                     <field name="wt_of_modul_light_mdd"/>
-                     <field name="vl_of_modul_light_mdd"/>
-                    </group>
-                    <group attrs="{'invisible': [('light_mdd_visible', '=', False)]}">
-                  
-                      <field name="light_mdd_table">
-                        <tree editable="bottom">
-                          <field name="determination_no"/>
-                          <field name="wt_of_modul_compact"/>
-                           <field name="wt_of_compact"/>
-                          <field name="bulk_density"/>
-                          <field name="container_no"/>
-                          <field name="wt_of_container"/>
-                          <field name="wt_of_container_wet"/>
-                          <field name="wt_of_container_dry"/>
-                           <field name="wt_of_dry_sample"/>
-                          <field name="wt_of_moisture"/>
-                          <field name="moisture"/>
-                          <field name="dry_density"/>
-                        </tree>
-                      </field>
-                      <!-- <field name="total"/> -->
-                      <!-- <! <field name="cumulative"/>> -->
-                      
-                    </group>
+
+                     
 
 
                     <!-- Liquid Limit-->
@@ -419,10 +333,7 @@
                     </group>
                     </group>
 
-                    <group>
-                     <field name='mmd'/>
-                     <field name='omc'/>
-                    </group>
+                   
                     
                     <group attrs="{'invisible': [('dry_density_visible', '=', False)]}">
                   
