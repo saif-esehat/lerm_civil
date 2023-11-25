@@ -172,9 +172,9 @@ class MechanicalBricks(models.Model):
     
 
 
-        #-2---------- Visual Observation
-
-    visual_observation_name = fields.Char("Name",default="Efflorence")
+        #-2----------Efflorescence Visual Observation 
+    efflorescence_visible = fields.Boolean("Efflorescence Visible",compute="_compute_visible")
+    visual_observation_name_efflorescence = fields.Char("Name",default="Efflorescence")
     visual_observation_1 = fields.Selection([('like', 'Like'), ('nil', 'Nil'), ('slight', 'Slight'), ('moderate', 'Moderate'), ('heavy', 'Heavy'), ('serious', 'Serious')],string='Visual observation')
     visual_observation_2 = fields.Selection([('like', 'Like'), ('nil', 'Nil'), ('slight', 'Slight'), ('moderate', 'Moderate'), ('heavy', 'Heavy'), ('serious', 'Serious')],string='Visual observation')
     visual_observation_3 = fields.Selection([('like', 'Like'), ('nil', 'Nil'), ('slight', 'Slight'), ('moderate', 'Moderate'), ('heavy', 'Heavy'), ('serious', 'Serious')],string='Visual observation')
@@ -184,6 +184,7 @@ class MechanicalBricks(models.Model):
 
          #-3----------  Dimension As per IS: IS : 1077 -1992 
 
+    dimension_visible = fields.Boolean("Efflorescence Visible",compute="_compute_visible")
     dimension_name1 = fields.Char("Name",default="Dimension (mm)")
     avrg_length = fields.Float(string="Average length")
     avrg_width = fields.Float(string="Average Width")
@@ -313,17 +314,20 @@ class MechanicalBricks(models.Model):
         for record in self:
             record.compressive_strength_visible = False
             record.water_absorbtion_visible = False
+            record.efflorescence_visible = False
+            record.dimension_visible = False
 
             for sample in record.sample_parameters:
                 print("Internal Ids",sample.internal_id)
                 if sample.internal_id == "b0eecb4f-9287-48c7-a607-bf1b64a8115d":
                     record.compressive_strength_visible = True
                 if sample.internal_id == "537e20c5-f3ab-4b19-af25-91a4671baf5f":
-                    record.water_absorbtion_visible = True 
-    # In Brick Form total 4 parameter But 2 parameters Visual Observation and Dimension are depend on Compressive Strength
-    # so visible condition only taked on Compressive Strength. 
-
-    
+                    record.water_absorbtion_visible = True
+                if sample.internal_id == "baa9df3c-d27d-4ef9-9b27-e8eb4e7ae6ac":
+                    record.efflorescence_visible = True
+                if sample.internal_id == "cf278290-8d5d-4f45-8afb-b911f9cafe41":
+                    record.dimension_visible = True 
+     
 
     @api.model
     def create(self, vals):

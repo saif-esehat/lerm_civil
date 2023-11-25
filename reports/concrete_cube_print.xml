@@ -236,7 +236,7 @@
 								</th>
 								<th>
 									<span>
-										Compresive strength in n/mm2
+										Compressive Strength in N/mm2
 									</span>
 								</th>
 								
@@ -296,10 +296,10 @@
 									<span t-esc="r.length"/>
 								</td>
 								<td>
-									<span t-esc="r.width"/>
+									<span t-esc="r.width" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td>
-									<span t-esc="r.area"/>
+									<span t-esc="r.area" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td>
 									<span t-esc="r.wt_sample"/>
@@ -317,12 +317,12 @@
 					<div style="margin-top:10px">
 						<table>
 							<tr t-if="data.nabl == 'pass' and nabl"> 
-								<td colspan="12">Avg. Compresive Strength :<![CDATA[&nbsp;]]>
+								<td colspan="12">Avg. Compressive Strength :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
 							</tr>
 							<tr t-if="data.nabl == 'fail' and not nabl"> 
-								<td colspan="12">Avg. Compresive Strength :<![CDATA[&nbsp;]]>
+								<td colspan="12">Avg. Compressive Strength :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
 							</tr>
@@ -345,8 +345,11 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
+									<!-- <li>
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									</li> -->
+									<li t-if="eln.has_witness">
+										<p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
 									</li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
@@ -449,9 +452,13 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.technician.name"/>
 								</td>
-								<td colspan="4">Witness Name :
+								<!-- <td colspan="4">Witness Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.witness_name"/>
+								</td> -->
+								<td colspan="4">Witness Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.witness_description"/>
 								</td>
 								<td colspan="4">Witness Signature :
 									<![CDATA[&nbsp;]]>
@@ -504,7 +511,7 @@
 								</th>
 								<th>
 									<span>
-										Compresive stringth in n/mm2
+										Compressive Strength in N/mm2
 									</span>
 								</th>
 							</tr>
@@ -521,19 +528,19 @@
 									<span t-esc="r.length"/>
 								</td>
 								<td>
-									<span t-esc="r.width"/>
+									<span t-esc="r.width" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td>
-									<span t-esc="r.area"/>
+									<span t-esc="r.area" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td>
 									<span t-esc="r.wt_sample"/>
 								</td>
 								<td>
-									<span t-esc="r.crushing_load"/>
+									<span t-esc="r.crushing_load" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td>
-									<span t-esc="r.compressive_strength"/>
+									<span t-esc="r.compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</tbody>
@@ -542,7 +549,7 @@
 					<div style="margin-top:10px">
 						<table>
 							<tr>
-								<td colspan="12">Avg. Compresive Strength :<![CDATA[&nbsp;]]>
+								<td colspan="12">Avg. Compressive Strength :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
 							</tr>

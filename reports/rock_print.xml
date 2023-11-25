@@ -245,23 +245,25 @@
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						<table>
-							<tr>
-								<td colspan="3">Report no :
-								</td>
-								<td colspan="3">
-									<span t-field="o.eln_id"/>
-								</td>
-								<td colspan="3">Report Date :
-								</td>
-								<td colspan="3">
-									<span t-field="o.srf_date"/>
-								</td>
-								<td colspan="3"  t-if="nabl">ULR NO :
-								</td>
-								<td colspan="3" t-if="nabl">
-									<span t-field="o.sample_id.ulr_no"/>
-								</td>
-							</tr>
+							<thead>
+								<tr>
+									<td colspan="3">Report no :
+									</td>
+									<td colspan="3">
+										<span t-field="o.eln_id"/>
+									</td>
+									<td colspan="3">Report Date :
+									</td>
+									<td colspan="3">
+										<span t-field="o.srf_date"/>
+									</td>
+									<td colspan="3"  t-if="nabl">ULR NO :
+									</td>
+									<td colspan="3" t-if="nabl">
+										<span t-field="o.sample_id.ulr_no"/>
+									</td>
+								</tr>
+							</thead>
 						</table>
 						<table style="margin-top:10px;">
 							<tr>
@@ -422,8 +424,11 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
+									<!-- <li>
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									</li> -->
+									<li t-if="eln.has_witness">
+										<p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
 									</li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
