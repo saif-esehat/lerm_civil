@@ -207,14 +207,14 @@
 
                           <!-- visual_observation -->
 
-                    <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('efflorescence_visible', '=', False)]}">
                         <h1>
-                            <field name="visual_observation_name" readonly="1" nolabel="1"/>
-                            <field name="compressive_strength_visible" invisible='1'/>
+                            <field name="visual_observation_name_efflorescence" readonly="1" nolabel="1"/>
+                            <field name="efflorescence_visible" invisible='1'/>
                         </h1>
                     </group>
 
-                    <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('efflorescence_visible', '=', False)]}">
                         <label for="visual_observation_1" string="Sr No" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
@@ -243,17 +243,17 @@
 
                       <!--Dimension -->
 
-                    <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
                         <h1>
                             <field name="dimension_name1" readonly="1" nolabel="1"/>
                           <h1>
                             20 Bricks
                           </h1>
-                            <field name="compressive_strength_visible" invisible='1'/>
+                            <field name="dimension_visible" invisible='1'/>
                         </h1>
                     </group>
 
-                    <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
                         <label for="avrg_length" string="Sr No" />
                         <div class="address_format " >
                           <group colspan="1" class="oe_inline"  >

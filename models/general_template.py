@@ -7,8 +7,10 @@ from lxml import etree
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
-from scipy.interpolate import CubicSpline
-# from scipy.optimize import minimize_scalar
+import math
+from scipy.interpolate import CubicSpline , interp1d , Akima1DInterpolator
+from scipy.optimize import minimize_scalar
+from matplotlib.ticker import MultipleLocator, StrMethodFormatter
 
 class DataSheetReport(models.AbstractModel):
     _name = 'report.lerm_civil.datasheet_generaltemplate_report'
@@ -594,26 +596,37 @@ class SoilReport(models.AbstractModel):
         else:
             general_data = self.env['lerm.eln'].sudo().browse(docids)
             
-        # Prepare data for the chart
+    
+
+         # Prepare data for the chart
         plt.figure(figsize=(12, 6))
         x_values = []
         y_values = []
         for line in general_data.heavy_table:
             x_values.append(line.moisture)
             y_values.append(line.dry_density)
+
+     
         
-       # Find the maximum y value
         max_y = max(y_values)
+        min_y = round(min(y_values),2)
         max_x = x_values[y_values.index(max_y)]
+        min_x = round(min(x_values),2)
+
 
         # Format max_y and max_x to display 2 digits after the decimal point
         max_y = round(max_y , 2)
         max_x = round(max_x, 2)
-        
+        print("Y_MAX",max_y)
+        print("X_MAX",max_x)
+#    
+
         
         # Perform cubic spline interpolation
         x_smooth = np.linspace(min(x_values), max(x_values), 100)
-        cs = CubicSpline(x_values, y_values)
+        # cs = CubicSpline(x_values, y_values,1)
+        # cs = interp1d(x_values, y_values,kind='cubic')
+        cs = Akima1DInterpolator(x_values, y_values)
 
         # Create the line chart with a connected smooth line and markers
         plt.plot(x_smooth, cs(x_smooth), color='red', label='Smooth Curve')
@@ -636,8 +649,16 @@ class SoilReport(models.AbstractModel):
         ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
 
         # Set the y-axis tick marks
-        plt.yticks([1.60, 1.62, 1.64, 1.66, 1.68, 1.70, 1.72, 1.74, 1.76, 1.78, 1.80])
-        # plt.xticks(range(0, 21, 1))
+        # plt.yticks([1.60, 1.62, 1.64, 1.66, 1.68, 1.70, 1.72, 1.74, 1.76, 1.78, 1.80])
+
+        # edit range here
+        plt.yticks(np.arange(min_y*0.99 , max_y*1.1 , max_y/100))
+
+
+        if max_x != min_x:
+         plt.xticks(np.arange(min_x, max_x + 1.0, (max_x - min_x) / 5))
+         
+       
         plt.xlabel('% Moisture')
         plt.ylabel('Dry density in gm/cc')
         plt.title('% Moisture vs Dry density in gm/cc')
@@ -650,9 +671,7 @@ class SoilReport(models.AbstractModel):
 
         # Close the Matplotlib plot to free up resources
         plt.close()
-        
-        
-        
+      
         # Prepare data for the chart
         plt.figure(figsize=(12, 6))
         cbrx_values = []
@@ -713,6 +732,8 @@ class SoilReport(models.AbstractModel):
             'load2' : cbry_values[5],
             'load5' : cbry_values[8],
         }
+
+
         
 class SoilDatasheet(models.AbstractModel):
     _name = 'report.lerm_civil.soil_datasheet'

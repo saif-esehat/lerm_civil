@@ -5,6 +5,12 @@ import math
 import matplotlib.pyplot as plt
 import io
 import base64
+import matplotlib.ticker as ticker
+import numpy as np
+import math
+from scipy.interpolate import CubicSpline , interp1d , Akima1DInterpolator
+from scipy.optimize import minimize_scalar
+from io import BytesIO
 
 
 class Soil(models.Model):
@@ -18,36 +24,145 @@ class Soil(models.Model):
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
 
-    tests = fields.Many2many("mechanical.soil.test",string="Tests")
+    # tests = fields.Many2many("mechanical.soil.test",string="Tests")
 
     # CBR
 
     soil_name = fields.Char("Name",default="California Bearing Ratio")
     soil_visible = fields.Boolean("California Bearing Ratio Visible",compute="_compute_visible")
-    job_no_soil = fields.Char(string="Job No")
-    material_soil = fields.Char(String="Material")
-    start_date_soil = fields.Date("Start Date")
-    end_date_soil = fields.Date("End Date")
+    # job_no_soil = fields.Char(string="Job No")
+    # material_soil = fields.Char(String="Material")
+    # start_date_soil = fields.Date("Start Date")
+    # end_date_soil = fields.Date("End Date")
     soil_table = fields.One2many('mechanical.soils.cbr.line','parent_id',string="CBR")
+    chart_image_cbr = fields.Binary("Line Chart", compute="_compute_chart_image_cbr", store=True)
+
+
+    def generate_line_chart_cbr(self):
+        # Prepare data for the chart
+        x_values = []
+        y_values = []
+        for line in self.soil_table:
+            x_values.append(line.penetration)
+            y_values.append(line.load)
+        
+        # Create the line chart
+        plt.plot(x_values, y_values, marker='o')
+        plt.xlabel('Penetration')
+        plt.ylabel('Load')
+        plt.title('CBR')
+
+
+        plt.ylim(bottom=0, top=max(y_values) + 10)
+
+        for i in range(len(x_values)):
+            plt.plot([x_values[i], x_values[i]], [0, y_values[i]], color='black', linestyle='--', alpha=0.5)
+            if i < len(x_values) - 1:
+                plt.plot([x_values[i], x_values[i + 1]], [y_values[i], y_values[i + 1]], color='black', linestyle='-', alpha=0.5)
+
+
+        
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()  # Close the figure to free up resources
+        buffer.seek(0)
+    
+        # Convert the chart image to base64
+        chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
+        return chart_image
+    
+    @api.depends('soil_table')
+    def _compute_chart_image_cbr(self):
+        try:
+            for record in self:
+                chart_image = record.generate_line_chart_cbr()
+                record.chart_image_cbr = chart_image
+        except:
+            pass 
+
 
     # FSI
-
     fsi_name = fields.Char("Name",default="Free Swell Index")
     fsi_visible = fields.Boolean("Free Swell Index Visible",compute="_compute_visible")
-    job_no_fsi = fields.Char(string="Job No")
-    material_fsi = fields.Char(String="Material")
-    start_date_fsi = fields.Date("Start Date")
-    end_date_fsi = fields.Date("End Date")
+    # job_no_fsi = fields.Char(string="Job No")
+    # material_fsi = fields.Char(String="Material")
+    # start_date_fsi = fields.Date("Start Date")
+    # end_date_fsi = fields.Date("End Date")
     fsi_table = fields.One2many('mechanical.soil.free.swell.index.line','parent_id',string="FSI")
+    max_fsi = fields.Float(string="Max FSI", compute="_compute_max_fsi", store=True)
+
+    @api.depends('fsi_table.fsi')
+    def _compute_max_fsi(self):
+        for record in self:
+            if record.fsi_table:
+                max_fsi = max(record.fsi_table.mapped('fsi'))
+                record.max_fsi = max_fsi
+            else:
+                record.max_fsi = 0.0
+
+    max_fsi_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_max_fsi_conformity", store=True)
+
+    @api.depends('max_fsi','eln_ref','grade')
+    def _compute_max_fsi_conformity(self):
+        
+        for record in self:
+            record.max_fsi_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.max_fsi - record.max_fsi*mu_value
+                    upper = record.max_fsi + record.max_fsi*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.max_fsi_conformity = 'pass'
+                        break
+                    else:
+                        record.max_fsi_conformity = 'fail'
+
+    max_fsi_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_max_fsi_nabl", store=True)
+
+    @api.depends('max_fsi','eln_ref','grade')
+    def _compute_max_fsi_nabl(self):
+        
+        for record in self:
+            record.max_fsi_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.max_fsi - record.max_fsi*mu_value
+                    upper = record.max_fsi + record.max_fsi*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.max_fsi_nabl = 'pass'
+                        break
+                    else:
+                        record.max_fsi_nabl = 'fail'
+    
+    
+
+    
 
     # Sieve Analysis
     sieve_name = fields.Char("Name",default="Sieve Analysis")
     sieve_visible = fields.Boolean("Sieve Analysis Visible",compute="_compute_visible")
-    job_no_sieve = fields.Char(string="Job No")
-    material_sieve = fields.Char(String="Material")
-    start_date_sieve = fields.Date("Start Date")
-    end_date_sieve = fields.Date("End Date")
+    # job_no_sieve = fields.Char(string="Job No")
+    # material_sieve = fields.Char(String="Material")
+    # start_date_sieve = fields.Date("Start Date")
+    # end_date_sieve = fields.Date("End Date")
     child_lines = fields.One2many('mechanical.soil.sieve.analysis.line','parent_id',string="Sieve Analysis")
     total = fields.Integer(string="Total",compute="_compute_total")
     # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
@@ -93,62 +208,348 @@ class Soil(models.Model):
 
 
     # Havy Compaction-MDD
-    heavy_name = fields.Char("Name",default="Heavy Compaction-MDD")
+    heavy_name = fields.Char("Name",default="Heavy Compaction OMC/MDD")
     heavy_visible = fields.Boolean("Heavy Compaction-MDD Visible",compute="_compute_visible")
-    job_no_heavy = fields.Char(string="Job No")
-    material_heavy = fields.Char(String="Material")
-    start_date_heavy = fields.Date("Start Date")
-    end_date_heavy = fields.Date("End Date")
     heavy_table = fields.One2many('mechanical.heavy.compaction.line','parent_id',string="Heavy Compaction")
     wt_of_modul = fields.Integer(string="Weight of Mould in gm")
     vl_of_modul = fields.Integer(string="Volume of Mould in cc")
+    
+    mmd = fields.Float(string="MMD gm/cc", compute="_compute_max_dry_density_heavy", store=True)
+    omc = fields.Float(string="OMC %", compute="_compute_max_omc_heavy", store=True)
 
-    # Havy Compaction-OMC
-    heavy_omc_name = fields.Char("Name",default="Heavy Compaction-OMC")
-    heavy_omc_visible = fields.Boolean("Heavy Compaction-OMC Visible",compute="_compute_visible")
-    job_no_heavy_omc = fields.Char(string="Job No")
-    material_heavy_omc = fields.Char(String="Material")
-    start_date_heavy_omc = fields.Date("Start Date")
-    end_date_heavy_omc = fields.Date("End Date")
-    heavy_omc_table = fields.One2many('mechanical.heavy.omc.compaction.line','parent_id',string="Heavy Compaction")
-    wt_of_modul_heavy_omc = fields.Integer(string="Weight of Mould in gm")
-    vl_of_modul_heavy_omc = fields.Integer(string="Volume of Mould in cc")
+    @api.depends('heavy_table.dry_density')
+    def _compute_max_dry_density_heavy(self):
+        for record in self:
+            max_dry_density_heavy = max(record.heavy_table.mapped('dry_density'), default=0.0)
+            record.mmd = max_dry_density_heavy
+
+    @api.depends('heavy_table.dry_density', 'heavy_table.moisture', 'mmd')
+    def _compute_max_omc_heavy(self):
+        for record in self:
+            max_dry_density_light_omc = record.mmd
+            corresponding_moisture_heavy = next((line.moisture for line in record.heavy_table if line.dry_density == max_dry_density_light_omc), 0.0)
+            record.omc = corresponding_moisture_heavy
 
 
-   
+    heavy_table_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_heavy_table_conformity", store=True)
+
+    @api.depends('mmd','eln_ref','grade')
+    def _compute_heavy_table_conformity(self):
+        
+        for record in self:
+            record.heavy_table_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.mmd - record.mmd*mu_value
+                    upper = record.mmd + record.mmd*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.heavy_table_conformity = 'pass'
+                        break
+                    else:
+                        record.heavy_table_conformity = 'fail'
+
+    heavy_table_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_heavy_table_nabl", store=True)
+
+    @api.depends('mmd','eln_ref','grade')
+    def _compute_heavy_table_nabl(self):
+        
+        for record in self:
+            record.heavy_table_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.mmd - record.mmd*mu_value
+                    upper = record.mmd + record.mmd*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.heavy_table_nabl = 'pass'
+                        break
+                    else:
+                        record.heavy_table_nabl = 'fail'
+    
+
+    graph_image_density = fields.Binary("Line Chart", compute="_compute_graph_image_density", store=True)
+
+
+
+    def generate_line_chart_density(self):
+        # Prepare data for the chart
+        plt.figure(figsize=(12, 6))
+        x_values = []
+        y_values = []
+        for line in self.heavy_table:
+            x_values.append(line.moisture)
+            y_values.append(line.dry_density)
+
+
+
+        plt.plot(x_values, y_values, marker='o')
+        plt.xlabel('% Moisture')
+        plt.ylabel('Dry Density')
+        plt.title('Heavy Compaction OMC/MDD')
+
+       
+        # Adjust xlim to add space on both ends of the x-axis
+        plt.xlim(left=5.0, right=max(x_values) + 1.5 )
+
+        plt.ylim(bottom=0, top=max(y_values) + 1.0)
+
+        for i in range(len(x_values)):
+            plt.plot([x_values[i], x_values[i]], [0, y_values[i]], color='black', linestyle='--', alpha=0.5)
+            if i < len(x_values) - 1:
+                plt.plot([x_values[i], x_values[i + 1]], [y_values[i], y_values[i + 1]], color='black', linestyle='-', alpha=0.5)
+
+
+
+        # Find the index of the maximum y value
+        max_y_index = y_values.index(max(y_values))
+
+        # Add a horizontal line at the maximum y value
+        plt.axhline(y=y_values[max_y_index], color='red', linestyle='--')
+
+        # Add a vertical line at the corresponding x value
+        plt.axvline(x=x_values[max_y_index], color='red', linestyle='--')
+
+
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()  # Close the figure to free up resources
+        buffer.seek(0)
+    
+        # Convert the chart image to base64
+        chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
+        return chart_image
+        plt.close()
+        
+       
+    
+
+    @api.depends('heavy_table')
+    def _compute_graph_image_density(self):
+        try:
+            for record in self:
+                chart_image = record.generate_line_chart_density()
+                record.graph_image_density = chart_image
+        except:
+            pass 
+
+
     # Light Compaction-OMC
-    light_omc_name = fields.Char("Name",default="Light Compaction-OMC")
+    light_omc_name1 = fields.Char("Name",default="Light Compaction OMC/MDD")
     light_omc_visible = fields.Boolean("Light Compaction-OMC Visible",compute="_compute_visible")
-    job_no_light_omc = fields.Char(string="Job No")
-    material_light_omc = fields.Char(String="Material")
-    start_date_light_omc = fields.Date("Start Date")
-    end_date_light_omc = fields.Date("End Date")
     light_omc_table = fields.One2many('mechanical.light.omc.compaction.line','parent_id',string="Heavy Compaction")
     wt_of_modul_light_omc = fields.Integer(string="Weight of Mould in gm")
     vl_of_modul_light_omc = fields.Integer(string="Volume of Mould in cc")
 
+    mmd_light_omc = fields.Float(string="MMD gm/cc", compute="_compute_max_dry_density", store=True)
+    omc_light_omc = fields.Float(string="OMC %", compute="_compute_max_omc", store=True)
 
-    # Light Compaction-MDD
-    light_mdd_name = fields.Char("Name",default="Light Compaction-MDD")
-    light_mdd_visible = fields.Boolean("Light Compaction-MDD Visible",compute="_compute_visible")
-    job_no_light_mdd = fields.Char(string="Job No")
-    material_light_mdd = fields.Char(String="Material")
-    start_date_light_mdd = fields.Date("Start Date")
-    end_date_light_mdd = fields.Date("End Date")
-    light_mdd_table = fields.One2many('mechanical.light.mdd.compaction.line','parent_id',string="Heavy Compaction")
-    wt_of_modul_light_mdd = fields.Integer(string="Weight of Mould in gm")
-    vl_of_modul_light_mdd = fields.Integer(string="Volume of Mould in cc")
+    light_omc_table_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_light_omc_table_conformity", store=True)
 
+    @api.depends('mmd_light_omc','eln_ref','grade')
+    def _compute_light_omc_table_conformity(self):
+        
+        for record in self:
+            record.light_omc_table_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.mmd_light_omc - record.mmd_light_omc*mu_value
+                    upper = record.mmd_light_omc + record.mmd_light_omc*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.light_omc_table_conformity = 'pass'
+                        break
+                    else:
+                        record.light_omc_table_conformity = 'fail'
+
+    light_omc_table_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_light_omc_table_nabl", store=True)
+
+    @api.depends('mmd_light_omc','eln_ref','grade')
+    def _compute_light_omc_table_nabl(self):
+        
+        for record in self:
+            record.light_omc_table_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.mmd_light_omc - record.mmd_light_omc*mu_value
+                    upper = record.mmd_light_omc + record.mmd_light_omc*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.light_omc_table_nabl = 'pass'
+                        break
+                    else:
+                        record.light_omc_table_nabl = 'fail'
+    
+
+    @api.depends('light_omc_table.dry_density')
+    def _compute_max_dry_density(self):
+        for record in self:
+            max_dry_density_light_omc = max(record.light_omc_table.mapped('dry_density'), default=0.0)
+            record.mmd_light_omc = max_dry_density_light_omc
+
+    @api.depends('light_omc_table.dry_density', 'light_omc_table.moisture')
+    def _compute_max_omc(self):
+        for record in self:
+            max_dry_density_light_omc = record.mmd_light_omc  # Using the max value from _compute_max_dry_density
+            corresponding_moisture_light_omc = next((line.moisture for line in record.light_omc_table if line.dry_density == max_dry_density_light_omc), 0.0)
+            record.omc_light_omc = corresponding_moisture_light_omc
+
+
+    graph_image_light_omc = fields.Binary("Line Chart", compute="_compute_graph_image_density_omc_light", store=True)
+
+
+
+    def generate_line_chart_light_omc (self):
+        # Prepare data for the chart
+        plt.figure(figsize=(12, 6))
+        x_value = []
+        y_value = []
+        for line in self.light_omc_table:
+            x_value.append(line.moisture)
+            y_value.append(line.dry_density)
+
+
+
+        plt.plot(x_value, y_value, marker='o')
+        plt.xlabel('% Moisture')
+        plt.ylabel('Dry Density')
+        plt.title('Light Compaction OMC/MDD')
+
+       
+        # Adjust xlim to add space on both ends of the x-axis
+        plt.xlim(left=5.0, right=max(x_value) + 1.5 )
+
+        plt.ylim(bottom=0, top=max(y_value) + 1.0)
+
+        for i in range(len(x_value)):
+            plt.plot([x_value[i], x_value[i]], [0, y_value[i]], color='black', linestyle='--', alpha=0.5)
+            if i < len(x_value) - 1:
+                plt.plot([x_value[i], x_value[i + 1]], [y_value[i], y_value[i + 1]], color='black', linestyle='-', alpha=0.5)
+
+
+
+        # Find the index of the maximum y value
+        max_y_index = y_value.index(max(y_value))
+
+        # Add a horizontal line at the maximum y value
+        plt.axhline(y=y_value[max_y_index], color='red', linestyle='--')
+
+        # Add a vertical line at the corresponding x value
+        plt.axvline(x=x_value[max_y_index], color='red', linestyle='--')
+
+
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()  # Close the figure to free up resources
+        buffer.seek(0)
+    
+        # Convert the chart image to base64
+        chart_image_light_omc = base64.b64encode(buffer.read()).decode('utf-8')  
+        return chart_image_light_omc
+        plt.close()
+        
+       
+    
+
+    @api.depends('light_omc_table')
+    def _compute_graph_image_density_omc_light(self):
+        try:
+            for record in self:
+                chart_image_light_omc = record.generate_line_chart_light_omc()
+                record.graph_image_light_omc = chart_image_light_omc
+        except:
+            pass 
+
+
+   
 
     # Liquid Limit
     liquid_limit_name = fields.Char("Name",default="Liquid Limit")
     liquid_limit_visible = fields.Boolean("Liquid Limit Visible",compute="_compute_visible")
-    job_no_liquid_limit = fields.Char(string="Job No")
-    material_liquid_limit = fields.Char(String="Material")
-    start_date_liquid_limit = fields.Date("Start Date")
-    end_date_liquid_limit = fields.Date("End Date")
+    # job_no_liquid_limit = fields.Char(string="Job No")
+    # material_liquid_limit = fields.Char(String="Material")
+    # start_date_liquid_limit = fields.Date("Start Date")
+    # end_date_liquid_limit = fields.Date("End Date")
     child_liness = fields.One2many('mechanical.liquid.limits.line','parent_id',string="Liquid Limit")
     liquid_limit = fields.Float('Liquid Limit')
+
+    liquid_limit_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
+
+    @api.depends('liquid_limit','eln_ref','grade')
+    def _compute_liquid_limit_conformity(self):
+        
+        for record in self:
+            record.liquid_limit_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.liquid_limit - record.liquid_limit*mu_value
+                    upper = record.liquid_limit + record.liquid_limit*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.liquid_limit_conformity = 'pass'
+                        break
+                    else:
+                        record.liquid_limit_conformity = 'fail'
+
+    liquid_limit_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_liquid_limit_nabl", store=True)
+
+    @api.depends('liquid_limit','eln_ref','grade')
+    def _compute_liquid_limit_nabl(self):
+        
+        for record in self:
+            record.liquid_limit_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.liquid_limit - record.liquid_limit*mu_value
+                    upper = record.liquid_limit + record.liquid_limit*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.liquid_limit_nabl = 'pass'
+                        break
+                    else:
+                        record.liquid_limit_nabl = 'fail'
     
     
     # def calculate_result(self):
@@ -182,15 +583,67 @@ class Soil(models.Model):
      # Plastic Limit
     plastic_limit_name = fields.Char("Name",default="Plastic Limit")
     plastic_limit_visible = fields.Boolean("Plastic Limit Visible",compute="_compute_visible")
-    job_no_plastic_limit = fields.Char(string="Job No")
-    material_plastic_limit = fields.Char(String="Material")
-    start_date_plastic_limit = fields.Date("Start Date")
-    end_date_plastic_limit = fields.Date("End Date")
+    # job_no_plastic_limit = fields.Char(string="Job No")
+    # material_plastic_limit = fields.Char(String="Material")
+    # start_date_plastic_limit = fields.Date("Start Date")
+    # end_date_plastic_limit = fields.Date("End Date")
 
     plastic_limit_table = fields.One2many('mechanical.plasticl.limit.line','parent_id',string="Parameter")
 
     plastic_limit = fields.Float(string="Average of % Moisture", compute="_compute_plastic_limit")
-    plasticity_index = fields.Float(string="Plasticity Index", compute="_compute_plasticity_index")
+    plasticity_index = fields.Char(string="Plasticity Index", compute="_compute_plasticity_index")
+
+    plasticity_index_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_plasticity_limit_conformity", store=True)
+
+    @api.depends('plastic_limit','eln_ref','grade')
+    def _compute_plasticity_limit_conformity(self):
+        
+        for record in self:
+            record.plasticity_index_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.plastic_limit - record.plastic_limit*mu_value
+                    upper = record.plastic_limit + record.plastic_limit*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.plasticity_index_conformity = 'pass'
+                        break
+                    else:
+                        record.plasticity_index_conformity = 'fail'
+
+    plasticity_index_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_plasticity_limi_nabl", store=True)
+
+    @api.depends('plastic_limit','eln_ref','grade')
+    def _compute_plasticity_limi_nabl(self):
+        
+        for record in self:
+            record.plasticity_index_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.plastic_limit - record.plastic_limit*mu_value
+                    upper = record.plastic_limit + record.plastic_limit*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.plasticity_index_nabl = 'pass'
+                        break
+                    else:
+                        record.plasticity_index_nabl = 'fail'
+
+
 
 
     @api.depends('plastic_limit_table.moisture')
@@ -199,24 +652,40 @@ class Soil(models.Model):
             total_moisture = sum(record.plastic_limit_table.mapped('moisture'))
             record.plastic_limit = total_moisture / len(record.plastic_limit_table) if record.plastic_limit_table else 0.0
 
+    # @api.depends('plastic_limit')
+    # def _compute_plasticity_index(self):
+    #     for record in self:
+    #         record.plasticity_index = 46.14 - record.plastic_limit
+
+    # @api.depends('plastic_limit')
+    # def _compute_plasticity_index(self):
+    #     for record in self:
+    #         if record.plastic_limit == 0.0:
+    #             record.plasticity_index = 'Null'  # Use an empty string to represent null for a character field
+    #         else:
+    #             record.plasticity_index = str(46.14 - record.plastic_limit)  # Convert the result to a string if needed
+
     @api.depends('plastic_limit')
     def _compute_plasticity_index(self):
         for record in self:
-            record.plasticity_index = 46.14 - record.plastic_limit
-
+            if record.plastic_limit == 0.0:
+                record.plasticity_index = 'Null'
+            else:
+                plasticity_value = 46.14 - record.plastic_limit
+                # Format the string representation with 2 decimal places
+                record.plasticity_index = '{:.2f}'.format(plasticity_value)
 
 
      # Dry Density by Sand Replacement method
     dry_density_name = fields.Char("Name",default="Dry Density by Sand Replacement method")
     dry_density_visible = fields.Boolean("Dry Density by Sand Replacement method Visible",compute="_compute_visible")
-    job_no_dry_density = fields.Char(string="Job No")
-    material_dry_density = fields.Char(String="Material")
-    start_date_dry_density = fields.Date("Start Date")
-    end_date_dry_density = fields.Date("End Date")
+    # job_no_dry_density = fields.Char(string="Job No")
+    # material_dry_density = fields.Char(String="Material")
+    # start_date_dry_density = fields.Date("Start Date")
+    # end_date_dry_density = fields.Date("End Date")
 
 
-    mmd = fields.Float(string="MMD gm/cc", default=1.72)
-    omc = fields.Float(string="OMC gm/cc", default=8.32)
+   
 
     determination_no = fields.Integer(string="Determination No")
     wt_of_sample = fields.Integer(string="Weight of sample gm")
@@ -230,6 +699,56 @@ class Soil(models.Model):
     bulk_density_of_sample = fields.Float(string="Bulk Density of sample gm/cc",compute="_compute_bulk_density")
     dry_density_of_sample = fields.Float(string="Dry Density of sample",compute="_compute_dry_density")
     degree_of_compaction = fields.Float(string="Degree of Compaction %",compute="_compute_degree_of_compaction")
+
+    degree_of_compaction_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_degree_of_compaction_conformity", store=True)
+
+    @api.depends('degree_of_compaction','eln_ref','grade')
+    def _compute_degree_of_compaction_conformity(self):
+        
+        for record in self:
+            record.degree_of_compaction_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.degree_of_compaction - record.degree_of_compaction*mu_value
+                    upper = record.degree_of_compaction + record.degree_of_compaction*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.degree_of_compaction_conformity = 'pass'
+                        break
+                    else:
+                        record.degree_of_compaction_conformity = 'fail'
+
+    degree_of_compaction_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_degree_of_compaction_nabl", store=True)
+
+    @api.depends('degree_of_compaction','eln_ref','grade')
+    def _compute_degree_of_compaction_nabl(self):
+        
+        for record in self:
+            record.degree_of_compaction_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.degree_of_compaction - record.degree_of_compaction*mu_value
+                    upper = record.degree_of_compaction + record.degree_of_compaction*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.degree_of_compaction_nabl = 'pass'
+                        break
+                    else:
+                        record.degree_of_compaction_nabl = 'fail'
 
 
 
@@ -277,13 +796,63 @@ class Soil(models.Model):
 
     moisture_content_name = fields.Char("Name",default="Moisture Content")
     moisture_content_visible = fields.Boolean("Moisture Content Visible",compute="_compute_visible")
-    job_no_moisture_content = fields.Char(string="Job No")
-    material_moisture_content = fields.Char(String="Material")
-    start_date_moisture_content = fields.Date("Start Date")
-    end_date_moisture_content = fields.Date("End Date")
+    # job_no_moisture_content = fields.Char(string="Job No")
+    # material_moisture_content = fields.Char(String="Material")
+    # start_date_moisture_content = fields.Date("Start Date")
+    # end_date_moisture_content = fields.Date("End Date")
 
     moisture_content_table = fields.One2many('mechanical.moisture.content.line','parent_id',string="Parameter")
     average_block = fields.Float(string="Average",compute="_compute_average_moisture_content")
+
+    moisture_content_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_moisture_contentconformity", store=True)
+
+    @api.depends('average_block','eln_ref','grade')
+    def _compute_moisture_contentconformity(self):
+        
+        for record in self:
+            record.moisture_content_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_block - record.average_block*mu_value
+                    upper = record.average_block + record.average_block*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.moisture_content_conformity = 'pass'
+                        break
+                    else:
+                        record.moisture_content_conformity = 'fail'
+
+    moisture_content_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_moisture_content_nabl", store=True)
+
+    @api.depends('average_block','eln_ref','grade')
+    def _compute_moisture_content_nabl(self):
+        
+        for record in self:
+            record.moisture_content_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_block - record.average_block*mu_value
+                    upper = record.average_block + record.average_block*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.moisture_content_nabl = 'pass'
+                        break
+                    else:
+                        record.moisture_content_nabl = 'fail'
 
 
 
@@ -295,62 +864,21 @@ class Soil(models.Model):
             record.average_block = total_moisture_content / num_lines if num_lines else 0.0
 
      ### Compute Visible
-    @api.depends('tests')
+    @api.depends('sample_parameters')
     def _compute_visible(self):
-        cbr_test = self.env['mechanical.soil.test'].search([('name', '=', 'California Bearing Ratio')])
-        fsi_test = self.env['mechanical.soil.test'].search([('name', '=', 'Free Swell Index')])
-        sieve_test = self.env['mechanical.soil.test'].search([('name', '=', 'Sieve Analysis')])
-        heavy_test = self.env['mechanical.soil.test'].search([('name', '=', 'Heavy Compaction-MDD')])
-        heavy_omc_test = self.env['mechanical.soil.test'].search([('name', '=', 'Heavy Compaction-OMC')])
-        light_omc_test = self.env['mechanical.soil.test'].search([('name', '=', 'Light Compaction-OMC')])
-        light_mdd_test = self.env['mechanical.soil.test'].search([('name', '=', 'Light Compaction-MDD')])
-        liquid_limit_test = self.env['mechanical.soil.test'].search([('name', '=', 'Liquid Limit')])
-        plastic_limit_test = self.env['mechanical.soil.test'].search([('name', '=', 'Plastic Limit')])
-        dry_density_test = self.env['mechanical.soil.test'].search([('name', '=', 'Dry Density by Sand Replacement method')])
-        moisture_content_test = self.env['mechanical.soil.test'].search([('name', '=', 'Moisture Content')])
- 
+      
         for record in self:
             record.soil_visible = False
             record.fsi_visible  = False  
             record.sieve_visible = False
             record.heavy_visible = False
-            record.heavy_omc_visible = False
+            # record.heavy_omc_visible = False
             record.light_omc_visible = False
-            record.light_mdd_visible = False
+            # record.light_mdd_visible = False
             record.liquid_limit_visible = False
             record.plastic_limit_visible = False
             record.dry_density_visible = False
             record.moisture_content_visible = False
-
-            if cbr_test in record.tests:
-                record.soil_visible = True
-
-            if fsi_test in record.tests:
-                record.fsi_visible = True
-            #     record.setting_time_visible  = True
-            if sieve_test in record.tests:
-                record.sieve_visible = True
-            if heavy_test in record.tests:
-                record.heavy_visible = True
-            if heavy_omc_test in record.tests:
-                record.heavy_omc_visible = True
-            if light_omc_test in record.tests:
-                record.light_omc_visible = True
-            if light_mdd_test in record.tests:
-                record.light_mdd_visible = True
-            if liquid_limit_test in record.tests:
-                record.liquid_limit_visible = True
-            if plastic_limit_test in record.tests:
-                record.plastic_limit_visible = True
-           
-            if dry_density_test in record.tests:
-                record.dry_density_visible = True
-           
-            if moisture_content_test in record.tests:
-                record.moisture_content_visible = True
-            # if fineness_blaine in record.tests:
-            #     record.fineness_blaine_visible = True
-
 
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
@@ -364,14 +892,14 @@ class Soil(models.Model):
                 if sample.internal_id == 'd5ccc1b6-20fb-4843-aa0e-2ee981be0d7c':
                     record.heavy_visible = True
 
-                if sample.internal_id == 'bfc0b682-0c28-4c8b-924f-7e6988a658ee':
-                    record.heavy_omc_visible = True
+                # if sample.internal_id == 'bfc0b682-0c28-4c8b-924f-7e6988a658ee':
+                #     record.heavy_omc_visible = True
 
                 if sample.internal_id == '7485d907-d8ad-4000-9376-439ef2a64c70':
                     record.light_omc_visible = True
 
-                if sample.internal_id == '0eb532a8-7683-42b3-b9b2-36904ae2cd15':
-                    record.light_mdd_visible = True
+                # if sample.internal_id == '0eb532a8-7683-42b3-b9b2-36904ae2cd15':
+                #     record.light_mdd_visible = True
 
                 if sample.internal_id == '8fc72243-7202-4d62-864b-8efa58b6b61f':
                     record.liquid_limit_visible = True
@@ -379,7 +907,7 @@ class Soil(models.Model):
                 if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
                     record.plastic_limit_visible = True
 
-                if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0f07dab7cd87':
+                if sample.internal_id == 'bfc0b682-0c28-4c8b-924f-7e6988a658ee':
                     record.dry_density_visible = True
 
                 if sample.internal_id == 'a59bdedd-72cb-40e8-be97-e17fc20ff3fa':
@@ -420,11 +948,16 @@ class Soil(models.Model):
             field_values[field_name] = field_value
 
         return field_values
+    
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
 
-class SoilTest(models.Model):
-    _name = "mechanical.soil.test"
-    _rec_name = "name"
-    name = fields.Char("Name")
+# class SoilTest(models.Model):
+#     _name = "mechanical.soil.test"
+#     _rec_name = "name"
+#     name = fields.Char("Name")
 
 
 class SoilCBRLine(models.Model):
@@ -626,70 +1159,12 @@ class HEAVYCOMPACTIONLINE(models.Model):
             line.dry_density = (100 * line.bulk_density) / (100 + line.moisture)
 
 
-class HEAVYOMCCOMPACTIONLINE(models.Model):
-    _name = "mechanical.heavy.omc.compaction.line"
-    parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
-
-    determination_no = fields.Float(string="Determination No")
-    wt_of_modul_compact = fields.Integer(string="Weight of Mould + Compacted sample in gm")
-    wt_of_compact = fields.Integer(string="Weight of compacted sample in gm", compute="_compute_wt_of_compact")
-    bulk_density = fields.Float(string="Bulk Density of sample in gm/cc", compute="_compute_bulk_density")
-    container_no = fields.Integer(string="Container No")
-    wt_of_container = fields.Float(string="Weight of Container in gm")
-    wt_of_container_wet = fields.Float(string="Weight of Container + wet sample in gm")
-    wt_of_container_dry = fields.Float(string="Weight of Container + dry sample in gm")
-    wt_of_dry_sample = fields.Float(string="Weight of dry sample in gm", compute="_compute_wt_of_dry_sample")
-    wt_of_moisture = fields.Float(string="Weight of moisture in gm", compute="_compute_wt_of_moisture")
-    moisture = fields.Float(string="% Moisture", compute="_compute_moisture")
-    dry_density = fields.Float(string="Dry density in gm/cc", compute="_compute_dry_density")
-
-
-    @api.depends('wt_of_modul_compact', 'parent_id.wt_of_modul')
-    def _compute_wt_of_compact(self):
-        for line in self:
-            line.wt_of_compact = line.wt_of_modul_compact - line.parent_id.wt_of_modul
-
-
-
-    @api.depends('wt_of_compact', 'parent_id.vl_of_modul')
-    def _compute_bulk_density(self):
-        for line in self:
-            if line.parent_id.vl_of_modul != 0:
-                line.bulk_density = line.wt_of_compact / line.parent_id.vl_of_modul
-            else:
-                line.bulk_density = 0.0
-
-
-    @api.depends('wt_of_container_dry', 'wt_of_container')
-    def _compute_wt_of_dry_sample(self):
-        for line in self:
-            line.wt_of_dry_sample = line.wt_of_container_dry - line.wt_of_container
-
-
-    @api.depends('wt_of_container_wet', 'wt_of_container_dry')
-    def _compute_wt_of_moisture(self):
-        for line in self:
-            line.wt_of_moisture = line.wt_of_container_wet - line.wt_of_container_dry
-
-
-    @api.depends('wt_of_moisture', 'wt_of_dry_sample')
-    def _compute_moisture(self):
-        for line in self:
-            if line.wt_of_dry_sample != 0:
-                line.moisture = line.wt_of_moisture / line.wt_of_dry_sample * 100
-            else:
-                line.moisture = 0.0
-
-
-    @api.depends('bulk_density', 'moisture')
-    def _compute_dry_density(self):
-        for line in self:
-            line.dry_density = (100 * line.bulk_density) / (100 + line.moisture)
 
 class LIGHTOMCCOMPACTIONLINE(models.Model):
     _name = "mechanical.light.omc.compaction.line"
     parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
 
+
     determination_no = fields.Float(string="Determination No")
     wt_of_modul_compact = fields.Integer(string="Weight of Mould + Compacted sample in gm")
     wt_of_compact = fields.Integer(string="Weight of compacted sample in gm", compute="_compute_wt_of_compact")
@@ -704,18 +1179,18 @@ class LIGHTOMCCOMPACTIONLINE(models.Model):
     dry_density = fields.Float(string="Dry density in gm/cc", compute="_compute_dry_density")
 
 
-    @api.depends('wt_of_modul_compact', 'parent_id.wt_of_modul')
+    @api.depends('wt_of_modul_compact', 'parent_id.wt_of_modul_light_omc')
     def _compute_wt_of_compact(self):
         for line in self:
-            line.wt_of_compact = line.wt_of_modul_compact - line.parent_id.wt_of_modul
+            line.wt_of_compact = line.wt_of_modul_compact - line.parent_id.wt_of_modul_light_omc
 
 
 
-    @api.depends('wt_of_compact', 'parent_id.vl_of_modul')
+    @api.depends('wt_of_compact', 'parent_id.vl_of_modul_light_omc')
     def _compute_bulk_density(self):
         for line in self:
-            if line.parent_id.vl_of_modul != 0:
-                line.bulk_density = line.wt_of_compact / line.parent_id.vl_of_modul
+            if line.parent_id.vl_of_modul_light_omc != 0:
+                line.bulk_density = line.wt_of_compact / line.parent_id.vl_of_modul_light_omc
             else:
                 line.bulk_density = 0.0
 
@@ -746,69 +1221,7 @@ class LIGHTOMCCOMPACTIONLINE(models.Model):
         for line in self:
             line.dry_density = (100 * line.bulk_density) / (100 + line.moisture)
 
-
-class LIGHTMDDCOMPACTIONLINE(models.Model):
-    _name = "mechanical.light.mdd.compaction.line"
-    parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
-
-    determination_no = fields.Float(string="Determination No")
-    wt_of_modul_compact = fields.Integer(string="Weight of Mould + Compacted sample in gm")
-    wt_of_compact = fields.Integer(string="Weight of compacted sample in gm", compute="_compute_wt_of_compact")
-    bulk_density = fields.Float(string="Bulk Density of sample in gm/cc", compute="_compute_bulk_density")
-    container_no = fields.Integer(string="Container No")
-    wt_of_container = fields.Float(string="Weight of Container in gm")
-    wt_of_container_wet = fields.Float(string="Weight of Container + wet sample in gm")
-    wt_of_container_dry = fields.Float(string="Weight of Container + dry sample in gm")
-    wt_of_dry_sample = fields.Float(string="Weight of dry sample in gm", compute="_compute_wt_of_dry_sample")
-    wt_of_moisture = fields.Float(string="Weight of moisture in gm", compute="_compute_wt_of_moisture")
-    moisture = fields.Float(string="% Moisture", compute="_compute_moisture")
-    dry_density = fields.Float(string="Dry density in gm/cc", compute="_compute_dry_density")
-
-
-    @api.depends('wt_of_modul_compact', 'parent_id.wt_of_modul')
-    def _compute_wt_of_compact(self):
-        for line in self:
-            line.wt_of_compact = line.wt_of_modul_compact - line.parent_id.wt_of_modul
-
-
-
-    @api.depends('wt_of_compact', 'parent_id.vl_of_modul')
-    def _compute_bulk_density(self):
-        for line in self:
-            if line.parent_id.vl_of_modul != 0:
-                line.bulk_density = line.wt_of_compact / line.parent_id.vl_of_modul
-            else:
-                line.bulk_density = 0.0
-
-
-    @api.depends('wt_of_container_dry', 'wt_of_container')
-    def _compute_wt_of_dry_sample(self):
-        for line in self:
-            line.wt_of_dry_sample = line.wt_of_container_dry - line.wt_of_container
-
-
-    @api.depends('wt_of_container_wet', 'wt_of_container_dry')
-    def _compute_wt_of_moisture(self):
-        for line in self:
-            line.wt_of_moisture = line.wt_of_container_wet - line.wt_of_container_dry
-
-
-    @api.depends('wt_of_moisture', 'wt_of_dry_sample')
-    def _compute_moisture(self):
-        for line in self:
-            if line.wt_of_dry_sample != 0:
-                line.moisture = line.wt_of_moisture / line.wt_of_dry_sample * 100
-            else:
-                line.moisture = 0.0
-
-
-    @api.depends('bulk_density', 'moisture')
-    def _compute_dry_density(self):
-        for line in self:
-            line.dry_density = (100 * line.bulk_density) / (100 + line.moisture)
-
-
-
+    
 class LIQUIDLIMITLINE(models.Model):
     _name = "mechanical.liquid.limits.line"
     parent_id = fields.Many2one('mechanical.soil',string="Parent Id")

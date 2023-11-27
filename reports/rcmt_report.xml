@@ -6,7 +6,7 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>TEST REPORT</b></p>
 				</div>
@@ -345,8 +345,8 @@
 							<li>
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
-							<li>
-								<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+							<li t-if="eln.has_witness">
+								<p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
 							</li>
 							
 						</ul>

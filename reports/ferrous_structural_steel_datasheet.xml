@@ -30,6 +30,20 @@
 									<span t-field="o.end_date"/>
 								</td>
 							</tr>
+							 <tr style="height:50px" cols="12">
+                            <td colspan="4">Performed By :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.technician.name"/>
+                            </td>
+                            <td colspan="4">Witness Name :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.witness_name"/>
+                            </td>
+                            <td colspan="4">Witness Signature :
+                                <![CDATA[&nbsp;]]>
+                                <span style='padding:20px'></span>
+                            </td>
+                        </tr>
 							<!-- <tr style="height:50px" cols="12">
 								<td colspan="4">Performed By :
 									<![CDATA[&nbsp;]]>

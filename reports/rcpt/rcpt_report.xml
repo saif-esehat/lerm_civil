@@ -6,7 +6,7 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>TEST REPORT</b></p>
 				</div>
@@ -309,21 +309,44 @@
 							<li>
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
-							<li>
-								<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+							<li t-if="eln.has_witness">
+								<p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
 							</li>
 						</ul>
 					</div>
 				</div>
 
 
-				<div class="signatureContainer girdgird" style="margin-top:50px;page-break-inside: avoid;">
-					<div>
-						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-					</div>
-					<div >
-						Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-					</div>
+				<div  class="signatureContainer girdgird">
+					          <div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										Mechanical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+				         	<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. 
+                                    <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
 					<div>
 						<div>
 							<b>
