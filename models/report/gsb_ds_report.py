@@ -14,7 +14,7 @@ from scipy.optimize import minimize_scalar
 
 
 class GsbReport(models.AbstractModel):
-    _name = 'report.lerm_civil.wmm_mec_report'
+    _name = 'report.lerm_civil.gsb_mec_report'
     _description = 'GSB Report'
     
     @api.model
