@@ -14,7 +14,7 @@ class FerrousStructuralSteel(models.Model):
     Id_no = fields.Char("ID No")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
-    width = fields.Float(string="Width mm",compute="_compute_dia")
+    width = fields.Float(string="Width mm",compute="_compute_width")
     thickness = fields.Float(string="Thickness mm",digits=(16, 2))
     weight = fields.Float(string="Weight, in kg",digits=(10, 2))
     weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
@@ -543,17 +543,16 @@ class FerrousStructuralSteel(models.Model):
   
 
     @api.depends('eln_ref')
-    def _compute_dia(self):
+    def _compute_width(self):
         for record in self:
-            pattern = r'\d+\.\d+'  # Pattern for a float value
+            pattern = r'\d+(\.\d+)?'  # Match integer or float
             match = re.search(pattern, str(record.eln_ref.size_id.size))
             if match:
-                dia = float(match.group())
-                record.width = dia
+                width = float(match.group())
+                record.width = width
             else:
-                record.width = 0.0  # Default value if no float value is found
-
-                    
+                record.width = 0.0
+                        
 
 
     
