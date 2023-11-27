@@ -42,16 +42,30 @@ class SteelTmtBarLine(models.Model):
     # fracture_visible = fields.Boolean("Fracture visible",compute="_compute_visible",store=True)
     # bend_visible = fields.Boolean("Bend visible",compute="_compute_visible",store=True)
     # rebend_visible = fields.Boolean("Rebend visible",compute="_compute_visible",store=True)
+    # bend_test_text = fields.Char(string="Bend Test Text", compute="_compute_bend_test_text", store=True)
 
 
     
     bend_test = fields.Selection([
-        ('satisfactory', 'Satisfactory'),
-        ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
+        ('Satisfactory', 'Satisfactory'),
+        ('Non-Satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
     
     re_bend_test = fields.Selection([
-        ('satisfactory', 'Satisfactory'),
-        ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+        ('Satisfactory', 'Satisfactory'),
+        ('Non-Satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+    
+      
+
+    # @api.depends('bend_test')
+    # def _compute_bend_test_text(self):
+    #     for record in self:
+    #         if record.bend_test == '1':
+    #             record.bend_test_text = 'Satisfactory'
+    #         elif record.bend_test == '2':
+    #             record.bend_test_text = 'Non-Satisfactory'
+    #         else:
+    #             record.bend_test_text = 'Undefined'
+    
 
 
     uts_conformity = fields.Selection([
@@ -93,6 +107,8 @@ class SteelTmtBarLine(models.Model):
     ts_ys_nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail')],string="NABL",compute="_compute_ts_ys_nabl",store=True)
+    
+    
 
     weight_per_meter_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -426,10 +442,10 @@ class SteelTmtBarLine(models.Model):
 
 
     @api.depends('ts_ys_ratio','eln_ref','grade')
-    def _compute_ts_ys_conformity(self):
+    def _compute_ts_ys_nabl(self):
 
         for record in self:
-            record.ts_ys_conformity = 'fail'
+            record.ts_ys_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
             for material in materials:
@@ -441,10 +457,10 @@ class SteelTmtBarLine(models.Model):
                     lower = record.proof_yeid_stress - record.proof_yeid_stress*mu_value
                     upper = record.proof_yeid_stress + record.proof_yeid_stress*mu_value
                     if lower >= lab_min :
-                        record.ts_ys_conformity = 'pass'
+                        record.ts_ys_nabl = 'pass'
                         break
                     else:
-                        record.ts_ys_conformity = 'fail'
+                        record.ts_ys_nabl = 'fail'
 
     @api.depends('eln_ref','grade')
     def _compute_requirement_ts_ys(self):
