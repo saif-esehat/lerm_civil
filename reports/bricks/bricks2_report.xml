@@ -179,7 +179,7 @@
 
 						<!-- 1 Compressive strength  -->
 					
-					<div t-if="brick.compressive_strength_visible" style="margin-top:20px;">
+					<div t-if="brick.compressive_strength_visible and (brick.comp_strength_nabl == 'pass' and nabl or brick.comp_strength_nabl == 'fail' and not nabl)" style="margin-top:20px;">
 					<td>
 						<span>
 							<strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]>
@@ -222,6 +222,11 @@
 									<th>
 										Test Method
 									</th>
+									<th style="text-align: center;" t-if="eln.conformity">
+									<span style="font-weight: bold;">
+										Confirmity Status
+									</span>
+							   	   </th>
 								</tr>
 							</thead>
 						<tbody >
@@ -260,6 +265,9 @@
 											<span t-field="parameter.specification"/>
 										</t>
 									</t>
+								</td>
+								<td rowspan="5" style="text-align: center; vertical-align: middle;" t-if="eln.conformity">
+									<span t-esc="brick.comp_strength_confirmity"/>
 								</td>
 							</tr>
 
@@ -574,7 +582,7 @@
 					<!-- Water Absorption -->
 				<div t-if="brick.water_absorbtion_visible" style="margin-top:20px; page-break-inside: avoid;">
 
-				<td>
+				<td t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 					<span>
 						<strong>Water Absorption As per IS:</strong><![CDATA[&nbsp;]]>
 						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')]).parameter_table" t-as="parameter">
@@ -585,7 +593,7 @@
 					</span>
 				</td>
 
-				<table style="margin-top:30px;">
+				<table style="margin-top:30px;" t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 						<t t-set="i" t-value="0"/>
 							<thead>
 								<tr>
@@ -615,11 +623,16 @@
 									<th>
 										Test Method
 									</th>
+									<th style="text-align: center;" t-if="eln.conformity">
+									<span style="font-weight: bold;">
+										Confirmity Status
+									</span>
+							   	   </th>
 								</tr>
 							</thead>
 						<tbody>
 
-							<tr t-if="brick.water_absorbtion_visible">
+							<tr t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
@@ -654,9 +667,12 @@
 										</t>
 									</t>
 								</td>
+								<td rowspan="5" style="text-align: center; vertical-align: middle;" t-if="eln.conformity">
+									<span t-esc="brick.water_absorption_confirmity"/>
+								</td>
 							</tr>
 
-							<tr t-if="brick.water_absorbtion_visible">
+							<tr t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
@@ -679,7 +695,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="brick.water_absorbtion_visible">
+							<tr t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
@@ -702,7 +718,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="brick.water_absorbtion_visible">
+							<tr t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
@@ -725,7 +741,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="brick.water_absorbtion_visible">
+							<tr t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
@@ -751,7 +767,7 @@
 						</tbody >
 				</table>
 				
-				<table style="margin-top: 20px;max-width:400px">
+				<table style="margin-top: 20px;max-width:400px" t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 					<tr>
 						<td style="font-weight: bold;">Average Water Absorption, %</td>
 						<td style="text-align: center;"><span t-field="brick.avrg_water_absorption" t-options='{"widget": "float", "precision": 2}'/></td>
@@ -777,9 +793,7 @@
 							<li>
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
-							<!-- <li>
-								<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
-							</li> -->
+							
 							<li t-if="eln.has_witness">
 								<p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
 							</li>
@@ -787,35 +801,6 @@
 					</div>
 				</div>
 
-
-				<!-- <div class="signatureContainer girdgird" style="margin-top:50px;page-break-inside: avoid;">
-					<div>
-						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-					</div>
-					<div >
-						Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-					</div>
-					<div>
-						<div>
-							<b>
-								Approved By
-							</b>
-						</div>
-						<div style="height:20px">
-							
-						</div>
-						<div>
-							<b>
-								Technical Manager
-							</b>
-						</div>
-						<div>
-							<b>
-								(Authorized Signatory)
-							</b>
-						</div>
-					</div>
-				</div> -->
 				<div class="signatureContainer girdgird">
 							<div>
 								<div>

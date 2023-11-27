@@ -167,12 +167,21 @@
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Material/Test Name :
+							    
+
+								 <td colspan="3" style="font-weight: bold;">Material/Test Name :
 									<![CDATA[&nbsp;]]>
 								</td>
-								<td colspan="12">
+								<td colspan="3">
 									<span t-field="o.material.name"/>
 								</td>
+								<td colspan="3" style="font-weight: bold;">Casting Date :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="rcpt.date_of_casting"/>
+								</td>
+								
 							</tr>
 							
 						</table>
