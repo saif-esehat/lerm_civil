@@ -954,10 +954,10 @@ class Soil(models.Model):
         if self.eln_ref:
             self.grade = self.eln_ref.grade_id.id
 
-# class SoilTest(models.Model):
-#     _name = "mechanical.soil.test"
-#     _rec_name = "name"
-#     name = fields.Char("Name")
+class SoilTest(models.Model):
+    _name = "mechanical.soil.test"
+    _rec_name = "name"
+    name = fields.Char("Name")
 
 
 class SoilCBRLine(models.Model):
