@@ -6,13 +6,17 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>TEST REPORT</b></p>
 				</div>
+				
+				
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
+						
 						<table>
+							
 							<tr>
 								<td colspan="3">Test Report No :
 								</td>
@@ -30,12 +34,10 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
-
+							
 						<table>
 								<tr>
-									<!-- Left Side -->
-									<!-- <td colspan="12" style="width: 50%; vertical-align: top;"> -->
-										<!-- <table> -->
+									
 											<tr>
 												<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
 													Customer/Party Name :
@@ -52,11 +54,7 @@
 									           </td>
 											</tr>
 											
-										<!-- </table> -->
-									<!-- </td> -->
-									<!-- Right Side -->
-									<!-- <td colspan="12" style="width: 30%; vertical-align: top;"> -->
-										<!-- <table> -->
+										
 											<tr>
 											    <td colspan="3" style="font-weight: bold;" >
 													Sample Receipt Date :
@@ -81,9 +79,9 @@
 													<span t-field="o.end_date"/>
 												</td>
 											</tr>
-										<!-- </table> -->
-									<!-- </td> -->
+										
 								</tr>
+
 							
 
 						</table>
@@ -177,9 +175,7 @@
 							
 						</table>
 					</div>
-					<!-- <div style="margin-top:20px;">
-						<p><strong>Results</strong>:<![CDATA[&nbsp;]]></p>
-					</div> -->
+					
 
 						<!-- 1 Compressive strength  -->
 					
@@ -229,10 +225,7 @@
 								</tr>
 							</thead>
 						<tbody >
-
-								
-								
-							
+			
 							<tr t-if="brick.compressive_strength_visible">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
@@ -372,11 +365,11 @@
 				</div>
 
 					<!-- Efflorence -->
-				<div t-if="brick.compressive_strength_visible" style="margin-top:50px;page-break-inside: avoid;">
+				<div t-if="brick.efflorescence_visible" style="margin-top:50px;page-break-inside: avoid;">
 
 				<td>
 					<span>
-						<strong>Efflorence As per IS:</strong><![CDATA[&nbsp;]]>
+						<strong>Efflorescence As per IS:</strong><![CDATA[&nbsp;]]>
 						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ea1b175c-251e-42dd-9f9c-ebd4230b9543')]).parameter_table" t-as="parameter">
 							<t t-if="parameter.grade.id == eln.grade_id.id">
 								<span t-field="parameter.specification"/>
@@ -418,12 +411,23 @@
 										<span style="font-weight: bold;">
 											5 Observation
 										</span>
+										
+									</th>
+									<th>
+										<span style="font-weight: bold;">
+											Specification
+										</span>
+									</th>
+									<th>
+										<span style="font-weight: bold;">
+											Test Method
+										</span>
 									</th>
 								</tr>
 							</thead>
 						<tbody >
 
-							<tr t-if="brick.compressive_strength_visible">
+							<tr t-if="brick.efflorescence_visible">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
@@ -454,6 +458,20 @@
 										<span t-field="brick.visual_observation_5"/>
 									</span>									
 								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','baa9df3c-d27d-4ef9-9b27-e8eb4e7ae6ac')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','baa9df3c-d27d-4ef9-9b27-e8eb4e7ae6ac')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
+								</td>
 							</tr>
 	
 						</tbody >
@@ -461,7 +479,7 @@
 				</div>
 
 					<!-- Dimension -->
-				<div t-if="brick.compressive_strength_visible" style="margin-top:20px; page-break-inside: avoid;">
+				<div t-if="brick.dimension_visible" style="margin-top:20px; page-break-inside: avoid;">
 				<td>
 					<span>
 						<strong>Dimension As per IS:</strong><![CDATA[&nbsp;]]>
@@ -494,14 +512,24 @@
 									</th>
 									<th style="text-align: center;">
 										<span style="font-weight: bold;">
-											Hight in mm
+											Height in mm
+										</span>
+									</th>
+									<th style="text-align: center;">
+										<span style="font-weight: bold;">
+											Specification
+										</span>
+									</th>
+									<th style="text-align: center;">
+										<span style="font-weight: bold;">
+											Test Method
 										</span>
 									</th>
 								</tr>
 							</thead>
 						<tbody >
 
-							<tr t-if="brick.compressive_strength_visible">
+							<tr t-if="brick.dimension_visible">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
@@ -522,7 +550,22 @@
 										<span t-field="brick.avrg_height"/>
 									</span>									
 								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cf278290-8d5d-4f45-8afb-b911f9cafe41')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cf278290-8d5d-4f45-8afb-b911f9cafe41')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
+								</td>
 							</tr>
+							
 	
 						</tbody >
 				</table>
@@ -734,15 +777,18 @@
 							<li>
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
-							<li>
+							<!-- <li>
 								<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+							</li> -->
+							<li t-if="eln.has_witness">
+								<p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
 							</li>
 						</ul>
 					</div>
 				</div>
 
 
-				<div class="signatureContainer girdgird" style="margin-top:50px;page-break-inside: avoid;">
+				<!-- <div class="signatureContainer girdgird" style="margin-top:50px;page-break-inside: avoid;">
 					<div>
 						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
 					</div>
@@ -769,7 +815,57 @@
 							</b>
 						</div>
 					</div>
-				</div>
+				</div> -->
+				<div class="signatureContainer girdgird">
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										Mechanical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+							<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										Mechanical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+						</div>
 
 				<div style="margin-top: 50px; text-align: center;">
 					<p style="border-top: 1px dashed #000; padding-top: 10px;">

@@ -65,7 +65,7 @@ class MechanicalRock(models.Model):
 
     
     #usc
-    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    # parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     usc_name1 = fields.Char("Name",default="USC")
     usc_visible = fields.Boolean("USC Visible",compute="_compute_visible")
     child_lines1 = fields.One2many('mechanical.usc.line','parent_id',string="Parameter")
