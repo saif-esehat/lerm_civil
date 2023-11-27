@@ -60,6 +60,11 @@ class MechanicalBricks(models.Model):
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_comp_strength_conformity")
 
+    comp_strength_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_comp_strength_nabl",store=True)
+
+
 
     @api.depends('avrg_compressive_strength','eln_ref')
     def _compute_comp_strength_conformity(self):
@@ -80,6 +85,27 @@ class MechanicalBricks(models.Model):
                         break
                     else:
                         record.comp_strength_confirmity = 'fail'
+
+    @api.depends('avrg_compressive_strength','eln_ref')
+    def _compute_comp_strength_nabl(self):
+        
+        for record in self:
+            record.comp_strength_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.avrg_compressive_strength - record.avrg_compressive_strength*mu_value
+                    upper = record.avrg_compressive_strength + record.avrg_compressive_strength*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.comp_strength_nabl = 'pass'
+                        break
+                    else:
+                        record.comp_strength_nabl = 'fail'
 
     
 
@@ -218,6 +244,10 @@ class MechanicalBricks(models.Model):
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_water_absorption_confirmity")
 
+    water_absorption_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_water_absorption_nabl",store=True)
+
 
     @api.depends('avrg_water_absorption','eln_ref')
     def _compute_water_absorption_confirmity(self):
@@ -238,6 +268,27 @@ class MechanicalBricks(models.Model):
                         break
                     else:
                         record.water_absorption_confirmity = 'fail'
+
+    @api.depends('avrg_water_absorption','eln_ref')
+    def _compute_water_absorption_nabl(self):
+        
+        for record in self:
+            record.water_absorption_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.avrg_water_absorption - record.avrg_water_absorption*mu_value
+                    upper = record.avrg_water_absorption + record.avrg_water_absorption*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.water_absorption_nabl = 'pass'
+                        break
+                    else:
+                        record.water_absorption_nabl = 'fail'
 
     @api.depends('water_absorption', 'water_absorption_2', 'water_absorption_3', 'water_absorption_4', 'water_absorption_5')
     def _compute_avrg_water_absorption(self):

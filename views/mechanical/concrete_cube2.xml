@@ -44,7 +44,7 @@
                                 <field name='length' string="Length (mm)"/>
                                 <field name='width' string="Width (mm)"/>
                                 <field name='area' string="Area (mm²)"/>
-                                <field name='wt_sample' string="Weight of Sample in kgs"/>
+                                <field name='wt_sample' string="Weight of Sample in kg"/>
                                 <field name="crushing_load" string="Crushing Load in kN"/>
                                 <field name='compressive_strength' string="Compressive Strength N/mm²"/>
                                 <!-- <field name='average_tensile'/> -->
