@@ -587,7 +587,7 @@ class GsbDryGradationLine(models.Model):
                 max_serial_no = max(existing_records.mapped('serial_no'))
                 vals['serial_no'] = max_serial_no + 1
 
-        return super(DryGradationLine, self).create(vals)
+        return super(GsbDryGradationLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -602,7 +602,7 @@ class GsbDryGradationLine(models.Model):
                 if record.parent_id and record.parent_id == vals.get('parent_id') and 'wt_retained' in vals:
                     record.percent_retained = round((vals['wt_retained'] / record.parent_id.total * 100),2) if record.parent_id.total else 0
 
-            new_self = super(DryGradationLine, self).write(vals)
+            new_self = super(GsbDryGradationLine, self).write(vals)
 
             if 'wt_retained' in vals:
                 for record in self:
@@ -610,13 +610,13 @@ class GsbDryGradationLine(models.Model):
 
             return new_self
 
-        return super(DryGradationLine, self).write(vals)
+        return super(GsbDryGradationLine, self).write(vals)
 
     def unlink(self):
         # Get the parent_id before the deletion
         parent_id = self[0].parent_id
 
-        res = super(DryGradationLine, self).unlink()
+        res = super(GsbDryGradationLine, self).unlink()
 
         if parent_id:
             parent_id.sieve_analysis_child_lines._reorder_serial_numbers()
