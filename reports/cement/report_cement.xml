@@ -1147,16 +1147,36 @@
 								<li>
 									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 								</li>
-								<li>
+								<li t-if="eln.has_witness">
 									<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 								</li>
 							</ul>
 						</div>
 					</div>
 					<div class="signatureContainer girdgird" style="margin-top:50px">
-						<div>
+						<!-- <div>
 							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-						</div>
+						</div> -->
+						<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.technician.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
 						<div >
 							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 						</div>
@@ -1171,7 +1191,7 @@
 							</div>
 							<div>
 								<b>
-									Chemical Department (HOD)
+									<span t-esc="eln.sample_id.approved_by.name"/>
 								</b>
 							</div>
 							<div>

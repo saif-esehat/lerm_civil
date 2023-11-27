@@ -610,13 +610,13 @@ class WbmDryGradationLine(models.Model):
 
             return new_self
 
-        return super(DryGradationLine, self).write(vals)
+        return super(WbmDryGradationLine, self).write(vals)
 
     def unlink(self):
         # Get the parent_id before the deletion
         parent_id = self[0].parent_id
 
-        res = super(DryGradationLine, self).unlink()
+        res = super(WbmDryGradationLine, self).unlink()
 
         if parent_id:
             parent_id.sieve_analysis_child_lines._reorder_serial_numbers()

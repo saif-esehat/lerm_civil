@@ -24,6 +24,7 @@ class Soil(models.Model):
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
 
     # tests = fields.Many2many("mechanical.soil.test",string="Tests")
 
@@ -90,6 +91,70 @@ class Soil(models.Model):
     # start_date_fsi = fields.Date("Start Date")
     # end_date_fsi = fields.Date("End Date")
     fsi_table = fields.One2many('mechanical.soil.free.swell.index.line','parent_id',string="FSI")
+    max_fsi = fields.Float(string="Max FSI", compute="_compute_max_fsi", store=True)
+
+    @api.depends('fsi_table.fsi')
+    def _compute_max_fsi(self):
+        for record in self:
+            if record.fsi_table:
+                max_fsi = max(record.fsi_table.mapped('fsi'))
+                record.max_fsi = max_fsi
+            else:
+                record.max_fsi = 0.0
+
+    max_fsi_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_max_fsi_conformity", store=True)
+
+    @api.depends('max_fsi','eln_ref','grade')
+    def _compute_max_fsi_conformity(self):
+        
+        for record in self:
+            record.max_fsi_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.max_fsi - record.max_fsi*mu_value
+                    upper = record.max_fsi + record.max_fsi*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.max_fsi_conformity = 'pass'
+                        break
+                    else:
+                        record.max_fsi_conformity = 'fail'
+
+    max_fsi_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_max_fsi_nabl", store=True)
+
+    @api.depends('max_fsi','eln_ref','grade')
+    def _compute_max_fsi_nabl(self):
+        
+        for record in self:
+            record.max_fsi_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.max_fsi - record.max_fsi*mu_value
+                    upper = record.max_fsi + record.max_fsi*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.max_fsi_nabl = 'pass'
+                        break
+                    else:
+                        record.max_fsi_nabl = 'fail'
+    
+    
+
+    
 
     # Sieve Analysis
     sieve_name = fields.Char("Name",default="Sieve Analysis")
@@ -149,21 +214,73 @@ class Soil(models.Model):
     wt_of_modul = fields.Integer(string="Weight of Mould in gm")
     vl_of_modul = fields.Integer(string="Volume of Mould in cc")
     
-    mmd = fields.Float(string="MMD gm/cc", compute="_compute_max_dry_density", store=True)
-    omc = fields.Float(string="OMC %", compute="_compute_max_omc", store=True)
+    mmd = fields.Float(string="MMD gm/cc", compute="_compute_max_dry_density_heavy", store=True)
+    omc = fields.Float(string="OMC %", compute="_compute_max_omc_heavy", store=True)
 
     @api.depends('heavy_table.dry_density')
-    def _compute_max_dry_density(self):
+    def _compute_max_dry_density_heavy(self):
         for record in self:
-            max_dry_density = max(record.heavy_table.mapped('dry_density'), default=0.0)
-            record.mmd = max_dry_density
+            max_dry_density_heavy = max(record.heavy_table.mapped('dry_density'), default=0.0)
+            record.mmd = max_dry_density_heavy
 
-    @api.depends('heavy_table.dry_density', 'heavy_table.moisture')
-    def _compute_max_omc(self):
+    @api.depends('heavy_table.dry_density', 'heavy_table.moisture', 'mmd')
+    def _compute_max_omc_heavy(self):
         for record in self:
-            max_dry_density = record.mmd  # Using the max value from _compute_max_dry_density
-            corresponding_moisture = next((line.moisture for line in record.heavy_table if line.dry_density == max_dry_density), 0.0)
-            record.omc = corresponding_moisture
+            max_dry_density_light_omc = record.mmd
+            corresponding_moisture_heavy = next((line.moisture for line in record.heavy_table if line.dry_density == max_dry_density_light_omc), 0.0)
+            record.omc = corresponding_moisture_heavy
+
+
+    heavy_table_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_heavy_table_conformity", store=True)
+
+    @api.depends('mmd','eln_ref','grade')
+    def _compute_heavy_table_conformity(self):
+        
+        for record in self:
+            record.heavy_table_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.mmd - record.mmd*mu_value
+                    upper = record.mmd + record.mmd*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.heavy_table_conformity = 'pass'
+                        break
+                    else:
+                        record.heavy_table_conformity = 'fail'
+
+    heavy_table_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_heavy_table_nabl", store=True)
+
+    @api.depends('mmd','eln_ref','grade')
+    def _compute_heavy_table_nabl(self):
+        
+        for record in self:
+            record.heavy_table_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.mmd - record.mmd*mu_value
+                    upper = record.mmd + record.mmd*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.heavy_table_nabl = 'pass'
+                        break
+                    else:
+                        record.heavy_table_nabl = 'fail'
+    
 
     graph_image_density = fields.Binary("Line Chart", compute="_compute_graph_image_density", store=True)
 
@@ -240,6 +357,57 @@ class Soil(models.Model):
 
     mmd_light_omc = fields.Float(string="MMD gm/cc", compute="_compute_max_dry_density", store=True)
     omc_light_omc = fields.Float(string="OMC %", compute="_compute_max_omc", store=True)
+
+    light_omc_table_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_light_omc_table_conformity", store=True)
+
+    @api.depends('mmd_light_omc','eln_ref','grade')
+    def _compute_light_omc_table_conformity(self):
+        
+        for record in self:
+            record.light_omc_table_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.mmd_light_omc - record.mmd_light_omc*mu_value
+                    upper = record.mmd_light_omc + record.mmd_light_omc*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.light_omc_table_conformity = 'pass'
+                        break
+                    else:
+                        record.light_omc_table_conformity = 'fail'
+
+    light_omc_table_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_light_omc_table_nabl", store=True)
+
+    @api.depends('mmd_light_omc','eln_ref','grade')
+    def _compute_light_omc_table_nabl(self):
+        
+        for record in self:
+            record.light_omc_table_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.mmd_light_omc - record.mmd_light_omc*mu_value
+                    upper = record.mmd_light_omc + record.mmd_light_omc*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.light_omc_table_nabl = 'pass'
+                        break
+                    else:
+                        record.light_omc_table_nabl = 'fail'
+    
 
     @api.depends('light_omc_table.dry_density')
     def _compute_max_dry_density(self):
@@ -332,6 +500,56 @@ class Soil(models.Model):
     # end_date_liquid_limit = fields.Date("End Date")
     child_liness = fields.One2many('mechanical.liquid.limits.line','parent_id',string="Liquid Limit")
     liquid_limit = fields.Float('Liquid Limit')
+
+    liquid_limit_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
+
+    @api.depends('liquid_limit','eln_ref','grade')
+    def _compute_liquid_limit_conformity(self):
+        
+        for record in self:
+            record.liquid_limit_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.liquid_limit - record.liquid_limit*mu_value
+                    upper = record.liquid_limit + record.liquid_limit*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.liquid_limit_conformity = 'pass'
+                        break
+                    else:
+                        record.liquid_limit_conformity = 'fail'
+
+    liquid_limit_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_liquid_limit_nabl", store=True)
+
+    @api.depends('liquid_limit','eln_ref','grade')
+    def _compute_liquid_limit_nabl(self):
+        
+        for record in self:
+            record.liquid_limit_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.liquid_limit - record.liquid_limit*mu_value
+                    upper = record.liquid_limit + record.liquid_limit*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.liquid_limit_nabl = 'pass'
+                        break
+                    else:
+                        record.liquid_limit_nabl = 'fail'
     
     
     # def calculate_result(self):
@@ -374,6 +592,58 @@ class Soil(models.Model):
 
     plastic_limit = fields.Float(string="Average of % Moisture", compute="_compute_plastic_limit")
     plasticity_index = fields.Char(string="Plasticity Index", compute="_compute_plasticity_index")
+
+    plasticity_index_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_plasticity_limit_conformity", store=True)
+
+    @api.depends('plastic_limit','eln_ref','grade')
+    def _compute_plasticity_limit_conformity(self):
+        
+        for record in self:
+            record.plasticity_index_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.plastic_limit - record.plastic_limit*mu_value
+                    upper = record.plastic_limit + record.plastic_limit*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.plasticity_index_conformity = 'pass'
+                        break
+                    else:
+                        record.plasticity_index_conformity = 'fail'
+
+    plasticity_index_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_plasticity_limi_nabl", store=True)
+
+    @api.depends('plastic_limit','eln_ref','grade')
+    def _compute_plasticity_limi_nabl(self):
+        
+        for record in self:
+            record.plasticity_index_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.plastic_limit - record.plastic_limit*mu_value
+                    upper = record.plastic_limit + record.plastic_limit*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.plasticity_index_nabl = 'pass'
+                        break
+                    else:
+                        record.plasticity_index_nabl = 'fail'
+
+
 
 
     @api.depends('plastic_limit_table.moisture')
@@ -430,6 +700,56 @@ class Soil(models.Model):
     dry_density_of_sample = fields.Float(string="Dry Density of sample",compute="_compute_dry_density")
     degree_of_compaction = fields.Float(string="Degree of Compaction %",compute="_compute_degree_of_compaction")
 
+    degree_of_compaction_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_degree_of_compaction_conformity", store=True)
+
+    @api.depends('degree_of_compaction','eln_ref','grade')
+    def _compute_degree_of_compaction_conformity(self):
+        
+        for record in self:
+            record.degree_of_compaction_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.degree_of_compaction - record.degree_of_compaction*mu_value
+                    upper = record.degree_of_compaction + record.degree_of_compaction*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.degree_of_compaction_conformity = 'pass'
+                        break
+                    else:
+                        record.degree_of_compaction_conformity = 'fail'
+
+    degree_of_compaction_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_degree_of_compaction_nabl", store=True)
+
+    @api.depends('degree_of_compaction','eln_ref','grade')
+    def _compute_degree_of_compaction_nabl(self):
+        
+        for record in self:
+            record.degree_of_compaction_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.degree_of_compaction - record.degree_of_compaction*mu_value
+                    upper = record.degree_of_compaction + record.degree_of_compaction*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.degree_of_compaction_nabl = 'pass'
+                        break
+                    else:
+                        record.degree_of_compaction_nabl = 'fail'
+
 
 
     @api.depends('wt_of_before_cylinder','wt_of_after_cylinder','wt_of_sand_cone')
@@ -484,6 +804,56 @@ class Soil(models.Model):
     moisture_content_table = fields.One2many('mechanical.moisture.content.line','parent_id',string="Parameter")
     average_block = fields.Float(string="Average",compute="_compute_average_moisture_content")
 
+    moisture_content_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_moisture_contentconformity", store=True)
+
+    @api.depends('average_block','eln_ref','grade')
+    def _compute_moisture_contentconformity(self):
+        
+        for record in self:
+            record.moisture_content_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_block - record.average_block*mu_value
+                    upper = record.average_block + record.average_block*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.moisture_content_conformity = 'pass'
+                        break
+                    else:
+                        record.moisture_content_conformity = 'fail'
+
+    moisture_content_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_moisture_content_nabl", store=True)
+
+    @api.depends('average_block','eln_ref','grade')
+    def _compute_moisture_content_nabl(self):
+        
+        for record in self:
+            record.moisture_content_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_block - record.average_block*mu_value
+                    upper = record.average_block + record.average_block*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.moisture_content_nabl = 'pass'
+                        break
+                    else:
+                        record.moisture_content_nabl = 'fail'
+
 
 
     @api.depends('moisture_content_table.moisture_content')
@@ -537,7 +907,7 @@ class Soil(models.Model):
                 if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
                     record.plastic_limit_visible = True
 
-                if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0f07dab7cd87':
+                if sample.internal_id == 'bfc0b682-0c28-4c8b-924f-7e6988a658ee':
                     record.dry_density_visible = True
 
                 if sample.internal_id == 'a59bdedd-72cb-40e8-be97-e17fc20ff3fa':
@@ -578,11 +948,16 @@ class Soil(models.Model):
             field_values[field_name] = field_value
 
         return field_values
+    
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
 
-# class SoilTest(models.Model):
-#     _name = "mechanical.soil.test"
-#     _rec_name = "name"
-#     name = fields.Char("Name")
+class SoilTest(models.Model):
+    _name = "mechanical.soil.test"
+    _rec_name = "name"
+    name = fields.Char("Name")
 
 
 class SoilCBRLine(models.Model):

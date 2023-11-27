@@ -14,6 +14,7 @@
                             string="Allotment"
                             invisible="context.get('is_local',False)"
                             attrs="{'invisible': [('state', 'not in', ('1-allotment_pending'))]}"
+                            groups="lerm_civil.kes_job_allocation,lerm_civil.kes_hod_access_group,lerm_civil.kes_verified_by,lerm_civil.kes_quality_manager"
                             />
 
                         <button
@@ -38,13 +39,15 @@
                         class="oe_highlight" 
                         name="approve_sample" 
                         string="Approve " 
-                        attrs="{'invisible': [('state', 'not in', ('3-pending_verification'))]}"/>
+                        attrs="{'invisible': [('state', 'not in', ('3-pending_verification'))]}"
+                        groups="lerm_civil.kes_checked_by,lerm_civil.kes_hod_access_group"/>
 
                         <button type="object" 
                         class="oe_highlight" 
                         name="approve_pending_sample" 
                         string="Approve" 
-                        attrs="{'invisible': [('state', 'not in', ('5-pending_approval'))]}"/>
+                        attrs="{'invisible': [('state', 'not in', ('5-pending_approval'))]}"
+                        groups="lerm_civil.kes_hod_access_group"/>
 
                         <button type="object" 
                         name="reject_sample" 
