@@ -8,6 +8,39 @@
                     AAC Block
                 </div>
                 <div class="container_eln" style="margin-top:5px">
+				 <table style="margin-top:20px">
+				<tr cols="12">
+					
+					<td colspan="6">Job No :
+                        <![CDATA[&nbsp;]]>
+                         <span t-field="eln.kes_no"></span>
+                    </td>
+					<td colspan="6">Test Start Date: 
+                        <![CDATA[&nbsp;]]>
+                        <span t-field="eln.start_date"></span>
+                    </td>
+				</tr>
+                <tr>
+                  <td colspan="6">Material: <span t-field="eln.material"></span>
+                </td>
+                 <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                </td>
+                </tr>
+                <tr style="height:50px" cols="12">
+                    <td colspan="4">Performed By :
+                        <![CDATA[&nbsp;]]>
+                        <span t-field="eln.technician.name"/>
+                    </td>
+                    <td colspan="4">Witness Name :
+                        <![CDATA[&nbsp;]]>
+                        <span t-field="eln.witness_description"/>
+                    </td>
+                    <td colspan="4">Witness Signature :
+                        <![CDATA[&nbsp;]]>
+                        <span style='padding:20px'></span>
+                    </td>
+                </tr>
+			</table>
 
 				<!-- Dimension -->
                 <div t-if="data.dimension_visible" style="margin-top:20px">
@@ -123,7 +156,7 @@
 					</table>
 					<table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">Average Moisture Content :
+							<td colspan="6">Moisture Content Avg. % :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -139,7 +172,7 @@
 				<!-- Block Density  -->
 				<div t-if="data.moisture_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
-						DS Block Density
+						Block Density
 					</div>
 					
 
@@ -186,18 +219,19 @@
 								<span t-esc="r['wt_sample']"/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['density']"/>
+								<span t-esc="r['density']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
 					</table>
 					<table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">Average Density :
+							<td colspan="6"> Block Density Avg. Kg/m³
+ :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.average_density"/>
+								<span t-field="data.average_density" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -258,7 +292,7 @@
 							
 						</tr>
 					</table>
-					<table style="margin-top:20px">
+					<table style="margin-top:20px" t-if="data.drying_shrinkage_visible">
 						<tr cols="12">
 							<td colspan="6">Average Drying Shrinkage :
 								<![CDATA[&nbsp;]]>
@@ -274,7 +308,7 @@
 				</div>
 
 				<!-- Compressive Strength  -->
-				<div t-if="data.drying_shrinkage_visible" style="margin-top:20px">
+				<div t-if="data.compressive_strength_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
 						Compressive Strength
 					</div>
@@ -316,13 +350,13 @@
 							
 						</tr>
 					</table>
-					<table style="margin-top:20px">
+					<table style="margin-top:20px" t-if="data.compressive_strength_visible">
 						<tr cols="12">
-							<td colspan="6">Average Drying Shrinkage :
+							<td colspan="6">Compressive Strength Avg. N/mm² :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.average_drying_shrinkage"/>
+								<span t-field="data.average_compressive_strength"/>
 							</td>
 							
 						</tr>

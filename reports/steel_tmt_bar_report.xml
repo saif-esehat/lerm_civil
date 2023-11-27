@@ -503,7 +503,7 @@
 									<span t-esc="data.re_bend_test"/>
 								</td>
 								<td>
-									Statisfactory
+									Rebend Satisfactory
 								</td>
 								<td t-if="eln.conformity">
 									<span t-esc="data.re_bend_test"/>
@@ -518,7 +518,7 @@
 									<span t-esc="data.bend_test"/>
 								</td>
 								<td>
-									Statisfactory
+									Bend Satisfactory
 								</td>
 								<td t-if="eln.conformity">
 									<span t-esc="data.bend_test"/>
@@ -556,16 +556,19 @@
 								<li>
 									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 								</li>
-								<li>
-									<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+								<li t-if="eln.has_witness">
+                                     <p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
+                                </li>
+								<li t-if="eln.remarks">
+									<span t-esc="eln.remarks"/>
 								</li>
 							</ul>
 						</div>
 					</div>
 					<div class="signatureContainer girdgird">
-						<div>
+						<!-- <div>
 							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-						</div>
+						</div> -->
 						<div>
 							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 						</div>
