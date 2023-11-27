@@ -22,8 +22,22 @@
                 <tr>
                   <td colspan="6">Material: <span t-field="eln.material"></span>
                 </td>
-                 <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
-                </td>
+                    <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                    </td>
+                </tr>
+                <tr style="height:50px" cols="12">
+                    <td colspan="4">Performed By :
+                        <![CDATA[&nbsp;]]>
+                        <span t-field="eln.technician.name"/>
+                    </td>
+                    <td colspan="4">Witness Name :
+                        <![CDATA[&nbsp;]]>
+                        <span t-field="eln.witness_description"/>
+                    </td>
+                    <td colspan="4">Witness Signature :
+                        <![CDATA[&nbsp;]]>
+                        <span style='padding:20px'></span>
+                    </td>
                 </tr>
 			</table>
                 <!-- Compressive Strength -->
@@ -306,9 +320,9 @@
 
                  <!-- Visual Observation -->
 
-            <div t-if="data.compressive_strength_visible" style="margin-top:20px">
+            <div t-if="data.efflorescence_visible" style="margin-top:20px">
 				<div style="text-align:center;font-size:18px;font-weight: bold">
-						Efflorence
+						Efflorescence
 				</div>
                 <table style="margin-top:30px;">
                 
@@ -392,7 +406,7 @@
 
                 <!-- Dimension -->
 
-            <div t-if="data.compressive_strength_visible" style="margin-top:20px">
+            <div t-if="data.dimension_visible" style="margin-top:20px">
 				<div style="text-align:center;font-size:18px;font-weight: bold">
 						Dimension (mm) 
 				</div>
