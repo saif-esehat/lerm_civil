@@ -147,6 +147,7 @@
 										Test Parameter
 									</span>
 								</th>
+								
 								<th colspan="2">
 									<span>
 										Test Method
@@ -160,6 +161,16 @@
 								<th colspan="2">
 									<span>
 										Limit as per MORTH Specification
+									</span>
+								</th>
+								<th colspan="2"> 
+									<span>
+										Unit
+									</span>
+								</th>
+								<th colspan="2"> 
+									<span>
+										Conformity
 									</span>
 								</th>
 							</tr>
@@ -177,7 +188,10 @@
 											</t>
 										</t>
 									</td>
-									<td colspan="2">			
+									<td colspan="2">
+									<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','64fecdf5-6741-4817-95f4-5e53a0676c5f')]).unit.name"/>
+							    	</span>			
 									</td>
 									<td colspan="2">
 									
@@ -270,6 +284,14 @@
 									</span>
 									</div>
 								</td>
+								<td colspan="2">
+									<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','88627a7b-c438-4d13-bfde-330ee0005734')]).unit.name"/>
+							    	</span>			
+								</td>
+								<!-- <td colspan="2" t-if="eln.conformity">
+								<span t-field="data.drying_shrinkage_confirmity"/>
+							</td> -->
 							</tr>
 
 							<tr>
@@ -306,6 +328,11 @@
                                         </t>
 									</span>
 									</div>
+								</td>
+								<td colspan="2">
+									<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ed625cc1-4295-4d00-977f-205b7a508363')]).unit.name"/>
+							    	</span>			
 								</td>
 							</tr>
 
@@ -344,6 +371,11 @@
 									</span>
 									</div>
 								</td>
+								<td colspan="2">
+									<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6fd54acc-61fd-478f-9bcf-6817965312f1')]).unit.name"/>
+							    	</span>			
+								</td>
 							</tr>
 
 							<tr >
@@ -380,6 +412,11 @@
                                         </t>
 									</span>
 									</div>
+								</td>
+								<td colspan="2">
+									<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','51e6dcfa-6d14-468e-8488-6d100818e924')]).unit.name"/>
+							    	</span>			
 								</td>
 							</tr>
 
@@ -418,6 +455,11 @@
 									</span>
 									</div>
 								</td>
+								<td colspan="2">
+									<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=',''7edace9a-a4ae-451c-a4cf-36d2c042ed7d')]).unit.name"/>
+							    	</span>			
+								</td>
 							</tr>
 
 							<tr>
@@ -454,6 +496,11 @@
                                         </t>
 									</span>
 									</div>
+								</td>
+								<td colspan="2">
+									<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=',''aaea4989-7446-446e-a018-8a5f9dcfd549')]).unit.name"/>
+							    	</span>			
 								</td>
 							</tr>
 
@@ -492,6 +539,11 @@
 									</span>
 									</div>
 								</td>
+								<td colspan="2">
+									<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=',''b8390baa-2d4b-47f4-b9ee-7a4a5b176b97')]).unit.name"/>
+							    	</span>			
+								</td>
 							</tr>
 
 							<tr>
@@ -528,6 +580,11 @@
                                         </t>
 									</span>
 									</div>
+								</td>
+								<td colspan="2">
+									<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=',''f1a27ee1-3e7e-4fff-b912-f7b046f5099c')]).unit.name"/>
+							    	</span>			
 								</td>
 							</tr>
 
@@ -824,9 +881,9 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
-										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
-									</li>
+									<li t-if="eln.has_witness">
+                                        <p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
+                                   </li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
 									</li>
