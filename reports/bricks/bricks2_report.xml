@@ -378,7 +378,7 @@
 				<td>
 					<span>
 						<strong>Efflorescence As per IS:</strong><![CDATA[&nbsp;]]>
-						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ea1b175c-251e-42dd-9f9c-ebd4230b9543')]).parameter_table" t-as="parameter">
+						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','baa9df3c-d27d-4ef9-9b27-e8eb4e7ae6ac')]).parameter_table" t-as="parameter">
 							<t t-if="parameter.grade.id == eln.grade_id.id">
 								<span t-field="parameter.specification"/>
 							</t>
@@ -491,7 +491,7 @@
 				<td>
 					<span>
 						<strong>Dimension As per IS:</strong><![CDATA[&nbsp;]]>
-						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0e218fde-fce3-4d66-bbfb-ff5761026020')]).parameter_table" t-as="parameter">
+						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cf278290-8d5d-4f45-8afb-b911f9cafe41')]).parameter_table" t-as="parameter">
 							<t t-if="parameter.grade.id == eln.grade_id.id">
 								<span t-field="parameter.specification"/>
 							</t>

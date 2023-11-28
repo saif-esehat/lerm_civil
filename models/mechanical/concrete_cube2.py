@@ -33,7 +33,7 @@ class MechanicalConcreteCube(models.Model):
     age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
     difference = fields.Integer("Difference",compute="compute_difference")
 
-    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+    # grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),

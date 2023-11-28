@@ -185,6 +185,8 @@
                         </tree>
                       </field>
                       <field name="final_bleeding"/>
+                      <field name="bleeding_confirmity"/>
+                      <field name="bleedin_nabl"/>
                       
                     </group>
 
