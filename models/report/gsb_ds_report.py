@@ -239,16 +239,17 @@ class GsbReport(models.AbstractModel):
         plt.close()
       
         # Prepare data for the chart
+        
         plt.figure(figsize=(12, 6))
         cbrx_values = []
         cbry_values = []
- 
         for line in general_data.cbr_table:
             cbrx_values.append(line.penetration)
             cbry_values.append(line.load)
         
+        
         # Perform cubic spline interpolation
-        cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 100)
+        cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 1000)
         cbrcs = CubicSpline(cbrx_values, cbry_values)
 
         # Create the line chart with a connected smooth line and markers
@@ -258,7 +259,6 @@ class GsbReport(models.AbstractModel):
         # Add a horizontal line with a label
         plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
         plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
-   
 
         # Add a vertical line with a label
         plt.axvline(x=2.5, color='orange', linestyle='--')
@@ -286,7 +286,6 @@ class GsbReport(models.AbstractModel):
         plt.savefig(buffer2, format='png')
         cbr_graph_image = base64.b64encode(buffer2.getvalue()).decode('utf-8')
         plt.close()
-        
         
         return {
             'eln': eln,
