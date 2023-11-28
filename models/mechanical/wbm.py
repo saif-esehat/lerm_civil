@@ -587,7 +587,7 @@ class WbmDryGradationLine(models.Model):
                 max_serial_no = max(existing_records.mapped('serial_no'))
                 vals['serial_no'] = max_serial_no + 1
 
-        return super(DryGradationLine, self).create(vals)
+        return super(WbmDryGradationLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -602,7 +602,7 @@ class WbmDryGradationLine(models.Model):
                 if record.parent_id and record.parent_id == vals.get('parent_id') and 'wt_retained' in vals:
                     record.percent_retained = round((vals['wt_retained'] / record.parent_id.total * 100),2) if record.parent_id.total else 0
 
-            new_self = super(DryGradationLine, self).write(vals)
+            new_self = super(WbmDryGradationLine, self).write(vals)
 
             if 'wt_retained' in vals:
                 for record in self:
