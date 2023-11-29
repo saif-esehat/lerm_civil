@@ -6,9 +6,9 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
-					<p style="font-size:15px"><b>Test Report on Half Cell Potential</b></p>
+					<p style="font-size:15px"><b>Test Report</b></p>
 				</div>
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
@@ -144,6 +144,9 @@
 
 					<div style="margin-top:20px">
 						<table style="margin-top:20px">
+						<div>
+						<h6>Concrete-Depth Of Penetration Of Water Under Pressure</h6>
+						</div>
 
 							
 
@@ -156,12 +159,14 @@
 								</td>
 								<td colspan="5">Requirement
 								</td>
+								<!-- <td colspan="5">Confirmity Status
+								</td> -->
 								
 								
 							</tr>
 
 							<t t-set="i" t-value="0"/>
-							<tr t-foreach="data.child_lines" t-as="r">
+							<tr t-foreach="data.child_lines" t-as="r" t-if="(data.wpt_nabl == 'pass' and nabl or data.wpt_nabl == 'fail' and not nabl)">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -175,15 +180,16 @@
 									<span t-esc="r['average']"/>
 								</td>
 								<td colspan="5">
-									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade_id.id == eln.grade.id">
+                                        <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
-									</span>
-								</td>
-								
+                                </td>
+								<!-- <td t-if="eln.conformity">
+                                        <span t-esc="data.wpt_conformity"/>
+                                </td>
+								 -->
 								
 							</tr>
 							
@@ -208,18 +214,22 @@
 									<li>
 										This Report may not br reproduced in except full/ part without the permission of the Lab Head of the Laboratory
 									</li>
-									<li>
-										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
-									</li>
+									<li t-if="eln.has_witness">
+                                        <p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+                                   </li>
 								</ol>
 							</div>
 						</div>
 						<div class="signatureContainer girdgird" style="margin-top:50px">
-							<div>
+							<!-- <div>
 								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-							</div>
+							</div> -->
+							
 							<div >
 								Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
+							</div>
+							<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 							</div>
 							<div>
 								<div>

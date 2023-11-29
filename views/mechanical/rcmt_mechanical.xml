@@ -20,6 +20,14 @@
                         <field name="parameter_id" invisible="1"/>
                         <field name="grade" exception="grade"  string="Grade" identity="extra"/> 
                     </group>
+                     <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
                   
                     <!-- <group>
                        <group>

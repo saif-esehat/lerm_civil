@@ -166,6 +166,57 @@ class PtGrout(models.Model):
 
     final_bleeding = fields.Float(string="Final Bleeding %",compute="_compute_final_bleeding")
 
+    bleeding_confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_bleeding_confirmity_confirmity")
+
+    bleedin_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_bleedin_nabl",store=True)
+
+
+    @api.depends('final_bleeding','eln_ref')
+    def _compute_bleeding_confirmity_confirmity(self):
+        for record in self:
+            record.bleeding_confirmity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.final_bleeding - record.final_bleeding*mu_value
+                    upper = record.final_bleeding + record.final_bleeding*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.bleeding_confirmity = 'pass'
+                        break
+                    else:
+                        record.bleeding_confirmity = 'fail'
+
+    @api.depends('final_bleeding','eln_ref')
+    def _compute_bleedin_nabl(self):
+        
+        for record in self:
+            record.bleedin_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.final_bleeding - record.final_bleeding*mu_value
+                    upper = record.final_bleeding + record.final_bleeding*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.bleedin_nabl = 'pass'
+                        break
+                    else:
+                        record.bleedin_nabl = 'fail'
+
     @api.depends('vl_decanted', 'vl_sample')
     def _compute_final_bleeding(self):
         for record in self:
