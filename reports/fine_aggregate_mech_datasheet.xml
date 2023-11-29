@@ -1335,21 +1335,21 @@
 						<!-- <span t-field="data.dimension_name1"/> -->
                         Results
 					</div>
-					<div style="margin-top:10px;">
-						<!-- <span t-field="data.dimension_name1"/> -->
+					<!-- <div style="margin-top:10px;">
+						<span t-field="data.dimension_name1"/>
                         1. Sieve Analysis (Gradation) :- <![CDATA[&nbsp;]]> 
 						<span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
-					</div>
+					</div> -->
 
 
-                    <table style="margin-top:10px;">
-                        <tr>
+                    <!-- <table style="margin-top:10px;"> -->
+                        <!-- <tr>
                             <td>IS Seive</td>
                             <td>% of wt passing</td>
                             <td>Requirement as per IS:383:2016 Zone II</td>
-						</tr>
+						</tr> -->
 
-                        <tr>
+                        <!-- <tr>
                             <td>10 mm</td>
                             <td></td>
                             <td>100</td>
@@ -1384,11 +1384,11 @@
                             <td>150 μm</td>
                             <td></td>
                             <td>0 - 10</td>
-						</tr>
+						</tr> -->
                        
-                    </table>
+                    <!-- </table> -->
 
-                    <table style="margin-top:10px;">
+                    <!-- <table style="margin-top:10px;">
                         <tr>
                             <td>Sr No</td>
                             <td>Name of Test</td>
@@ -1401,22 +1401,22 @@
                             <td>1</td>
                             <td>Fineness Modulus</td>
                             <td>
-						        <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/> -->
+						        <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).test_method.test_method"/>
                             </td>
                             <td></td>
-                            <td>--</td>
+                            <td></td>
 						</tr>
-                    </table>
+                    </table> -->
 
                     <table style="margin-top:10px;">
-                        <tr>
+                        <!-- <tr>
                             <td>Sr No</td>
                             <td>Name of Test</td>
                             <td>Test Method</td>
                             <td>Test Result</td>
                             <td>Limit as Per IS:382 : 2016</td>
-						</tr>
-                        <tr>
+						</tr> -->
+                        <!-- <tr>
                             <td>1</td>
                             <td>Specific Gravity</td>
                             <td>
@@ -1426,8 +1426,8 @@
 						        <span t-field="data.specific_gravity"/>
                             </td>
                             <td>2.1 to 3.2</td>
-						</tr>
-                        <tr>
+						</tr> -->
+                        <!-- <tr>
                             <td>2</td>
                             <td>Water Absorbtion (%)</td>
                             <td>
@@ -1437,8 +1437,8 @@
 						        <span t-field="data.water_absorption"/>
                             </td>
                             <td>MAX 5%</td>
-						</tr>
-                        <tr>
+						</tr> -->
+                        <!-- <tr>
                             <td>3</td>
                             <td>Loose Bulk Density (kg/litre)</td>
                             <td>
@@ -1447,9 +1447,9 @@
                             <td>
 						        <span t-field="data.loose_bulk_density"/>
                             </td>
-                            <td>--</td>
-						</tr>
-                        <tr>
+                            <td></td>
+						</tr> -->
+                        <!-- <tr>
                             <td>4</td>
                             <td>Rodded Bulk Density (kg/litre)</td>
                             <td>
@@ -1458,9 +1458,9 @@
                             <td>
 						        <span t-field="data.rodded_bulk_density1"/>
                             </td>
-                            <td>--</td>
-						</tr>
-                        <tr>
+                            <td></td>
+						</tr> -->
+                        <!-- <tr>
                             <td>5</td>
                             <td>Moisture Content (%)</td>
                             <td>
@@ -1469,9 +1469,9 @@
                             <td>
 						        <span t-field="data.vdd"/>
                             </td>
-                            <td>--</td>
-						</tr>
-                        <tr>
+                            <td></td>
+						</tr> -->
+                        <!-- <tr>
                             <td>6</td>
                             <td>Soundness by MgSO4</td>
                             <td>
@@ -1481,8 +1481,8 @@
 						        <span t-field="data.soundness_mgso4"/>
                             </td>
                             <td>MAX 15%</td>
-						</tr>
-                        <tr>
+						</tr> -->
+                        <!-- <tr>
                             <td>7</td>
                             <td>Soundness by Na2SO4</td>
                             <td>
@@ -1492,8 +1492,8 @@
 						        <span t-field="data.soundness_na2so4"/>
                             </td>
                             <td>MAX 10%</td>
-						</tr>
-                        <tr>
+						</tr> -->
+                        <!-- <tr>
                             <td>8</td>
                             <td>Deleterious content (Clay Lumps)</td>
                             <td>
@@ -1503,8 +1503,8 @@
 						        <span t-field="data.clay_lumps_percent"/>
                             </td>
                             <td>MAX 1%</td>
-						</tr>
-                        <tr>
+						</tr> -->
+                        <!-- <tr>
                             <td>9</td>
                             <td>Finer than 75 micron</td>
                             <td>
@@ -1514,8 +1514,8 @@
 						        <span t-field="data.material_finer75"/>
                             </td>
                             <td>MAX 15%</td>
-						</tr>
-                        <tr>
+						</tr> -->
+                        <!-- <tr>
                             <td>10</td>
                             <td>Deleterious content (Light weight Particles)</td>
                             <td>
@@ -1525,8 +1525,8 @@
 						        <span t-field="data.light_weight_percent"/>
                             </td>
                             <td>MAX 1%</td>
-						</tr>
-                        <tr>
+						</tr> -->
+                        <!-- <tr>
                             <td>11</td>
                             <td>Name of Test</td>
                             <td>
@@ -1536,8 +1536,8 @@
 						        <span t-field="data.specific_gravity"/>
                             </td>
                             <td>Limit as Per IS:382 : 2016</td>
-						</tr>
-                    </table>
+						</tr> -->
+                    <!-- </table> -->
                     
 
 
