@@ -354,7 +354,14 @@
                       <field name="end_date_dry_density"/>
                     </group>
                     </group> -->
-
+                      <group attrs="{'invisible': [('dry_density_visible', '=', False)]}">
+                       <group>
+                        <field name='mmd'/>
+                       </group>
+                       <group>
+                        <field name='omc'/>
+                       </group>
+                      </group>
                    
                     
                     <group attrs="{'invisible': [('dry_density_visible', '=', False)]}">
@@ -362,18 +369,28 @@
                     
                                  <group>
                                         <field name='determination_no'/>
+                                        <br></br>
                                         <field name='wt_of_sample'/>
+                                        <br></br>
                                         <field name='water_of_sample'/>
+                                        <br></br>
                                         <field name='wt_of_before_cylinder'/>
+                                        <br></br>
                                         <field name='wt_of_after_cylinder'/>
+                                        <br></br>
                                         <field name='wt_of_sand_cone'/>
                                 </group>
                                 <group>
                                         <field name='wt_of_sand_hole'/>
+                                        <br></br>
                                         <field name='density_of_sand'/>
+                                        <br></br>
                                         <field name='volume_of_hole'/>
+                                        <br></br>
                                         <field name='bulk_density_of_sample'/>
+                                        <br></br>
                                         <field name='dry_density_of_sample'/>
+                                        <br></br>
                                         <field name='degree_of_compaction'/>
                                 </group>
 

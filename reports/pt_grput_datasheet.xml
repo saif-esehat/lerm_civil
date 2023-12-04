@@ -259,7 +259,7 @@
 										<span t-esc="r['vl_of_grout']"/>
 									</td>
 									<td style="text-align: center;" colspan="3">
-										<span t-esc="r['bleeding_precent']"/>
+										<span t-esc="r['bleeding_precent']" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</table>
@@ -269,7 +269,7 @@
 										<![CDATA[&nbsp;]]>
 									</td>
 									<td style="text-align: center;">
-										<span t-field="data.final_bleeding"/>
+										<span t-field="data.final_bleeding" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									
 								</tr>
@@ -418,10 +418,10 @@
 											
 										</table>
 										<!-- 7 Days -->
-									<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.status_28days">
+									<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.compressive_strength_visible">
 										7 Days
 									</div>
-									<table style="margin-top:20px" t-if="data.status_7days">
+									<table style="margin-top:20px" t-if="data.compressive_strength_visible">
 									<tr cols="12">
 											<td colspan="6">Date of Casting :
 												<![CDATA[&nbsp;]]>
@@ -434,7 +434,7 @@
 										</tr>
 									</table>
 									
-									<table style="margin-top:20px" t-if="data.status_7days">
+									<table style="margin-top:20px" t-if="data.compressive_strength_visible">
 										<tr cols="12">
 											<td style="font-weight: bold;" colspan="1">Sr.No 
 											</td>
@@ -480,7 +480,7 @@
 											</td>
 										</tr>
 									</table>
-									<table style="margin-top:20px" t-if="data.status_28days">
+									<table style="margin-top:20px" t-if="data.compressive_strength_visible">
 										<tr cols="12">
 											<td style="font-weight: bold;" colspan="6">Average :</td>
 												<![CDATA[&nbsp;]]>
@@ -489,7 +489,7 @@
 											
 										</tr>
 									</table>
-									<table style="margin-top:20px" t-if="data.status_28days">
+									<table style="margin-top:20px" t-if="data.compressive_strength_visible">
 										<tr cols="12">
 											<td style="font-weight: bold;" colspan="6">Compressive strength (N/mm²) :</td>
 												<![CDATA[&nbsp;]]>
@@ -500,10 +500,10 @@
 									</table>
 								</div>
 								<!-- 28 days -->
-								<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.status_28days">
+								<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.compressive_strength_visible">
 										28 Days
 									</div>
-									<table style="margin-top:20px" t-if="data.status_28days">
+									<table style="margin-top:20px" t-if="data.compressive_strength_visible">
 									<tr cols="12">
 											<td colspan="6">Date of Casting :
 												<![CDATA[&nbsp;]]>
@@ -516,7 +516,7 @@
 										</tr>
 									</table>
 									
-									<table style="margin-top:20px" t-if="data.status_28days">
+									<table style="margin-top:20px" t-if="data.compressive_strength_visible">
 										<tr cols="12">
 											<td style="font-weight: bold;" colspan="1">Sr.No 
 											</td>
@@ -562,7 +562,7 @@
 											</td>
 										</tr>
 									</table>
-									<table style="margin-top:20px" t-if="data.status_28days">
+									<table style="margin-top:20px" t-if="data.compressive_strength_visible">
 										<tr cols="12">
 											<td style="font-weight: bold;" colspan="6">Average :</td>
 												<![CDATA[&nbsp;]]>
@@ -571,7 +571,7 @@
 											
 										</tr>
 									</table>
-									<table style="margin-top:20px" t-if="data.status_28days">
+									<table style="margin-top:20px" t-if="data.compressive_strength_visible">
 										<tr cols="12">
 											<td style="font-weight: bold;" colspan="6">Compressive strength (N/mm²) :</td>
 												<![CDATA[&nbsp;]]>

@@ -222,6 +222,8 @@
                         </tree>
                       </field>
                       <field name="height_change_average"/>
+                      <field name="volume_change_confirmity"/>
+                      <field name="volume_change_nabl"/>
                     </group>
 
                      <!-- compressive strength -->
@@ -271,6 +273,8 @@
                       </field>
                       <field name="average_casting_7days"/>
                       <field name="compressive_strength_7_days"/>
+                      <field name="compressive_strength_7days_confirmity"/>
+                      <field name="compressive_strength_7days_nabl"/>
                     </group>
                      <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                             <field name="status_28days"/>
@@ -294,6 +298,8 @@
                       </field>
                       <field name="average_casting_28days"/>
                       <field name="compressive_strength_28_days"/>
+                      <field name="compressive_strength_28days_confirmity"/>
+                      <field name="compressive_strength_28days_nabl"/>
                     </group>
                   
                 </sheet>
