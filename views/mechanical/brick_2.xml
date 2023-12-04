@@ -203,7 +203,9 @@
                     <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                       <field name="avrg_compressive_strength"/>
                       <field name="comp_strength_confirmity"/>
+                      <field name="comp_strength_nabl"/>
                     </group>
+                    
 
                           <!-- visual_observation -->
 
@@ -368,6 +370,7 @@
                     <group attrs="{'invisible': [('water_absorbtion_visible', '=', False)]}">
                       <field name="avrg_water_absorption"/>
                       <field name="water_absorption_confirmity"/>
+                      <field name="water_absorption_nabl"/>
                     </group>
                  
                 </sheet>

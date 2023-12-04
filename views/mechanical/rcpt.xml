@@ -14,6 +14,29 @@
                         <!-- <field name="parameter_id"/> -->
                         <field name="eln_ref"/>
                     </group>
+
+                    <group>
+                        <group>
+                            <field name="date_of_casting"  string="Date of Casting" identity="extra"/>
+                        </group>
+                        <group>
+                            <field name="date_of_testing"  string="Date of Testing" identity="extra"/>
+                        </group>
+                        <group>
+                            <field name="age_of_days"/>
+                        </group>
+                        <group>
+                            <field name="age_of_test"/>
+                        </group>
+                        <group>
+                            <field name="difference"/>
+                        </group>
+                         <!-- <group>
+                         <field name='sample_condition'/>
+                        </group> -->
+                    </group>
+                   
+
                     <group>
                         <h1>
                             <field name="name1" readonly="1" nolabel="1"/>
@@ -23,7 +46,8 @@
                             <tree editable="bottom">
                                 <field name='sr_no' string="Sample"/>
                                 <field name="identification_mark" string="Identification Mark"/>
-                                <field name='undefined' string="Undefined"/>
+                                <!-- <field name='undefined' string="Undefined"/> -->
+                                <field name='height' string="Height"/>
                                 <field name="dia_core" string="Dia Of Core"/>
                                 
                                 <field name="io" string="Io"/>

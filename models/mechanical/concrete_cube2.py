@@ -33,7 +33,7 @@ class MechanicalConcreteCube(models.Model):
     age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
     difference = fields.Integer("Difference",compute="compute_difference")
 
-    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+    # grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
@@ -243,7 +243,7 @@ class MechanicalConcreteCubeLine(models.Model):
     width = fields.Float(string="Width (mm)")
     area = fields.Float(string="Area (mm²)",compute="_compute_area" ,digits=(12,1))
     id_mark = fields.Char(string="ID Mark/Location")
-    wt_sample = fields.Float(string="Weight of Sample in kgs")
+    wt_sample = fields.Float(string="Weight of Sample in kgs",digits=(16,3))
     crushing_load = fields.Float(string="Crushing Load in kN")
     compressive_strength = fields.Float(string="Compressive Strength N/mm²",compute="_compute_compressive_strength" ,digits=(12,2))
    

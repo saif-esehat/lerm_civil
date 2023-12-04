@@ -17,13 +17,6 @@ class RCMT(models.Model):
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
-
-    # age_of_days = fields.Selection([
-    #     ('3', '3'),
-    #     ('7', '7'),
-    #     ('14', '14'),
-    #     ('28', '28'),
-    # ], string='Age at Test')
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
    
     age_of_days = fields.Selection([
@@ -150,66 +143,7 @@ class RCMT(models.Model):
     specimen2_ov_avg2 = fields.Float(string="Specimen-1 OV Avg 2",compute="_compute_specimen2_ov_avg2")
     specimen3_ov_avg3 = fields.Float(string="Specimen-1 OV Avg 3",compute="_compute_specimen3_ov_avg3")
 
-    # @api.depends('specimen1_ov1', 'specimen2_ov1', 'specimen2', 'specimen1_ov2', 'specimen1_depth1')
-    # def _compute_specimen1_ov_avg1(self):
-    #     for record in self:
-    #         if (record.specimen1_ov1  and record.specimen2 and
-    #             record.specimen1_ov2 and record.specimen1_depth1):
-                
-    #             ov1 = record.specimen1_ov1
-    #             ov2 = record.specimen1_ov2
-    #             specimen2 = record.specimen2
-    #             # ov3 = record.specimen2_ov2
-    #             depth1 = record.specimen1_depth1
-                
-    #             if ov2 != 2:
-    #                 specimen1_ov_avg1 = ((0.0239 * (273 + ov1) * (specimen2) / ((ov2 - 2) * (ov1)) * (depth1 - (0.0238) * ((273 + ov1) * specimen2 * depth1 / (ov2 - 2)) ** 0.5)))
-    #                 record.specimen1_ov_avg1 = specimen1_ov_avg1
-    #             else:
-    #                 record.specimen1_ov_avg1 = 0.0
-    #         else:
-    #             record.specimen1_ov_avg1 = 0.0
-
-    # @api.depends('specimen2_ov1', 'specimen3', 'specimen2_ov2', 'specimen2_depth2')
-    # def _compute_specimen1_ov_avg2(self):
-    #     for record in self:
-    #         if (record.specimen2_ov1  and record.specimen2 and
-    #             record.specimen1_ov2 and record.specimen1_depth1):
-                
-    #             ov1_specimen2 = record.specimen2_ov1
-    #             ov2_specimen2 = record.specimen2_ov2
-    #             specimen3 = record.specimen3
-    #             # ov3 = record.specimen2_ov2
-    #             depth2 = record.specimen2_depth2
-                
-    #             if ov2_specimen2 != 2:
-    #                 specimen2_ov_avg2 = ((0.0239 * (273 + ov1_specimen2) * (specimen3) / ((ov2_specimen2 - 2) * (ov1_specimen2)) * (depth2 - (0.0238) * ((273 + ov1_specimen2) * specimen3 * depth2 / (ov2_specimen2 - 2)) ** 0.5)))
-    #                 record.specimen2_ov_avg2 = specimen2_ov_avg2
-    #             else:
-    #                 record.specimen2_ov_avg2 = 0.0
-    #         else:
-    #             record.specimen2_ov_avg2 = 0.0
-
-
-    # @api.depends('specimen3_ov1', 'specimen4', 'specimen3_ov2', 'specimen3_depth3')
-    # def _compute_specimen1_ov_avg3(self):
-    #     for record in self:
-    #         if (record.specimen2_ov1  and record.specimen2 and
-    #             record.specimen1_ov2 and record.specimen1_depth1):
-                
-    #             ov1_specimen3 = record.specimen3_ov1
-    #             ov2_specimen3 = record.specimen3_ov2
-    #             specimen4 = record.specimen4
-    #             # ov3 = record.specimen2_ov2
-    #             depth3 = record.specimen3_depth3
-                
-    #             if ov2_specimen3 != 2:
-    #                 specimen3_ov_avg3 = ((0.0239 * (273 + ov1_specimen3) * (specimen4) / ((ov2_specimen3 - 2) * (ov1_specimen3)) * (depth3 - (0.0238) * ((273 + ov1_specimen3) * specimen4 * depth3 / (ov2_specimen3 - 2)) ** 0.5)))
-    #                 record.specimen3_ov_avg3 = specimen3_ov_avg3
-    #             else:
-    #                 record.specimen3_ov_avg3 = 0.0
-    #         else:
-    #             record.specimen3_ov_avg3 = 0.0
+   
     @api.depends('specimen1_ov1', 'specimen2_ov1', 'specimen2', 'specimen1_ov2', 'specimen1_depth1')
     def _compute_specimen1_ov_avg1(self):
         for record in self:

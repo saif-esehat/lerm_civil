@@ -17,8 +17,8 @@ class SteelTmtBarLine(models.Model):
     lentgh = fields.Float(string="Length in meter",digits=(10, 3))
     weight = fields.Float(string="Weight, in kg",digits=(10, 3))
     weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
-    crossectional_area = fields.Float(string="Cross sectional Area, mm²",compute="_compute_crossectional_area",store=True)
-    gauge_length = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
+    crossectional_area = fields.Float(string="Cross sectional Area, mm²",compute="_compute_crossectional_area")
+    gauge_length = fields.Float(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
     elongated_gauge_length = fields.Float(string="Elongated Gauge Length, mm")
     percent_elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True)
     yeild_load = fields.Float(string="Yield Load  KN")
@@ -42,16 +42,30 @@ class SteelTmtBarLine(models.Model):
     # fracture_visible = fields.Boolean("Fracture visible",compute="_compute_visible",store=True)
     # bend_visible = fields.Boolean("Bend visible",compute="_compute_visible",store=True)
     # rebend_visible = fields.Boolean("Rebend visible",compute="_compute_visible",store=True)
+    # bend_test_text = fields.Char(string="Bend Test Text", compute="_compute_bend_test_text", store=True)
 
 
     
     bend_test = fields.Selection([
-        ('satisfactory', 'Satisfactory'),
-        ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
+        ('Satisfactory', 'Satisfactory'),
+        ('Non-Satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
     
     re_bend_test = fields.Selection([
-        ('satisfactory', 'Satisfactory'),
-        ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+        ('Satisfactory', 'Satisfactory'),
+        ('Non-Satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+    
+      
+
+    # @api.depends('bend_test')
+    # def _compute_bend_test_text(self):
+    #     for record in self:
+    #         if record.bend_test == '1':
+    #             record.bend_test_text = 'Satisfactory'
+    #         elif record.bend_test == '2':
+    #             record.bend_test_text = 'Non-Satisfactory'
+    #         else:
+    #             record.bend_test_text = 'Undefined'
+    
 
 
     uts_conformity = fields.Selection([
@@ -93,6 +107,8 @@ class SteelTmtBarLine(models.Model):
     ts_ys_nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail')],string="NABL",compute="_compute_ts_ys_nabl",store=True)
+    
+    
 
     weight_per_meter_nabl = fields.Selection([
         ('pass', 'Pass'),
@@ -426,10 +442,10 @@ class SteelTmtBarLine(models.Model):
 
 
     @api.depends('ts_ys_ratio','eln_ref','grade')
-    def _compute_ts_ys_conformity(self):
+    def _compute_ts_ys_nabl(self):
 
         for record in self:
-            record.ts_ys_conformity = 'fail'
+            record.ts_ys_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
             for material in materials:
@@ -441,10 +457,10 @@ class SteelTmtBarLine(models.Model):
                     lower = record.proof_yeid_stress - record.proof_yeid_stress*mu_value
                     upper = record.proof_yeid_stress + record.proof_yeid_stress*mu_value
                     if lower >= lab_min :
-                        record.ts_ys_conformity = 'pass'
+                        record.ts_ys_nabl = 'pass'
                         break
                     else:
-                        record.ts_ys_conformity = 'fail'
+                        record.ts_ys_nabl = 'fail'
 
     @api.depends('eln_ref','grade')
     def _compute_requirement_ts_ys(self):
@@ -481,10 +497,17 @@ class SteelTmtBarLine(models.Model):
             else:
                 record.crossectional_area = 0.0
 
+    
+    # @api.depends('crossectional_area')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         record.gauge_length = ((5.65 * math.sqrt(record.crossectional_area)),2)
     @api.depends('crossectional_area')
     def _compute_gauge_length(self):
         for record in self:
-            record.gauge_length = round((5.65 * math.sqrt(record.crossectional_area)),2)
+            gauge_length = (math.sqrt(record.crossectional_area) * 5.65)
+            record.gauge_length = gauge_length
+            # record.gauge_length = round(gauge_length, 2)
 
 
     @api.depends('yeild_load','crossectional_area')

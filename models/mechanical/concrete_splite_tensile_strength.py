@@ -11,7 +11,20 @@ class ConcreteSplitTensileStrength(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+
+    age_of_days = fields.Selection([
+        ('3days', '3 Days'),
+        ('7days', '7 Days'),
+        ('14days', '14 Days'),
+        ('28days', '28 Days'),
+    ], string='Age', default='28days',required=True,compute="_compute_age_of_days")
+    date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
+    date_of_testing = fields.Date(string="Date of Testing")
+
+    age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
+    difference = fields.Integer("Difference",compute="compute_difference")
 
 
 
@@ -19,6 +32,61 @@ class ConcreteSplitTensileStrength(models.Model):
     splite_tensile_visible = fields.Boolean("Concrete Split Tensile Strength Visible",compute="_compute_visible")
     child_lines = fields.One2many('mechanical.concrete.split.tensile.line','parent_id',string="Parameter")
     average_split_tensile = fields.Float(string="Average Split Tensile Strength (N/mm2)",compute="_compute_average_split_tensile")
+
+
+    @api.onchange('eln_ref')
+    def _compute_age_of_days(self):
+        for record in self:
+            if record.eln_ref.sample_id:
+                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).days_casting
+                if sample_record == '3':
+                    record.age_of_days = '3days'
+                elif sample_record == '7':
+                    record.age_of_days = '7days'
+                elif sample_record == '14':
+                    record.age_of_days = '14days'
+                elif sample_record == '28':
+                    record.age_of_days = '28days'
+                else:
+                    record.age_of_days = None
+            else:
+                record.age_of_days = None
+
+    @api.onchange('eln_ref')
+    def compute_date_of_casting(self):
+        for record in self:
+            if record.eln_ref.sample_id:
+                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).date_casting
+                record.date_of_casting = sample_record
+            else:
+                record.date_of_casting = None
+
+    @api.depends('date_of_testing','date_of_casting')
+    def compute_age_of_test(self):
+        for record in self:
+            if record.date_of_casting and record.date_of_testing:
+                date1 = fields.Date.from_string(record.date_of_casting)
+                date2 = fields.Date.from_string(record.date_of_testing)
+                date_difference = (date2 - date1).days
+                record.age_of_test = date_difference
+            else:
+                record.age_of_test = 0
+
+    @api.depends('age_of_test','age_of_days')
+    def compute_difference(self):
+        for record in self:
+            age_of_days = 0
+            if record.age_of_days == '3days':
+                age_of_days = 3
+            elif record.age_of_days == '7days':
+                age_of_days = 7
+            elif record.age_of_days == '14days':
+                age_of_days = 14
+            elif record.age_of_days == '28days':
+                age_of_days = 28
+            else:
+                age_of_days = 0
+            record.difference = record.age_of_test - age_of_days
 
 
     @api.depends('child_lines.split_strength')
@@ -29,6 +97,11 @@ class ConcreteSplitTensileStrength(models.Model):
                 record.average_split_tensile = sum(split_strengths) / len(split_strengths)
             else:
                 record.average_split_tensile = 0.0
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
 
 
     

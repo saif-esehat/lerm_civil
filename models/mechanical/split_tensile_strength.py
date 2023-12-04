@@ -9,6 +9,8 @@ class SplitTensileStrength(models.Model):
 
     name = fields.Char("Name",default="Split Tensile Strength")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    # sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
+    # eln_ref = fields.Many2one('lerm.eln',string="Eln")
     child_lines = fields.One2many('mechanical.split.tensile.strength.line','parent_id',string="Parameter")
 
     average = fields.Float(string="Average Split Tensile Strength in (N/mm2)",compute="_compute_average")
@@ -17,6 +19,9 @@ class SplitTensileStrength(models.Model):
     def _compute_average(self):
         for record in self:
             self.average = sum(record.child_lines.mapped('split_tensile'))/3
+
+   
+
 
 
     @api.model

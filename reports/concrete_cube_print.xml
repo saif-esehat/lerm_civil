@@ -191,6 +191,7 @@
 							</tr>
 						</table>
 					</div>
+					
 					<div style="margin-top:20px;">
 						<u>Protocol : <span t-esc="o.material.test_parameter"/></u>
 					</div>
@@ -225,7 +226,7 @@
 								
 								<th>
 									<span>
-										Weight of sample in kgs
+										Weight of sample in kg
 									</span>
 								</th>
 
@@ -494,13 +495,13 @@
 								</th>
 								<th>
 									<span>
-										Area in mm
+										Area in mm²
 									</span>
 								</th>
 								
 								<th>
 									<span>
-										Weight of sample in kgs
+										Weight of sample in kg
 									</span>
 								</th>
 

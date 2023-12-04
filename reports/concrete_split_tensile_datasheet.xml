@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+		<!-- Datasheet -->
+		
     <template id="lerm_concrete_splite_tensile_datasheet">
         <t t-call="web.html_container">
             <t t-call="lerm_civil.data_sheet_header_generaltemplate">
@@ -26,6 +28,20 @@
                             <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
                             </td>
                         </tr>
+						<tr style="height:50px" cols="12">
+							<td colspan="4">Performed By :
+								<![CDATA[&nbsp;]]>
+								<span t-field="eln.technician.name"/>
+							</td>
+							<td colspan="4">Witness Name :
+								<![CDATA[&nbsp;]]>
+								<span t-field="eln.witness_description"/>
+							</td>
+							<td colspan="4">Witness Signature :
+								<![CDATA[&nbsp;]]>
+								<span style='padding:20px'></span>
+							</td>
+						</tr>
                     </table>
                     <!-- Concrete Split Tensile Strength -->
                     
@@ -121,6 +137,8 @@
             </t>
         </t>
     </template>
+
+	<!-- Report Start -->
 
     <template id="concrete_splite_tensile_report">
 		<t t-call="web.html_container">
@@ -241,47 +259,115 @@
 							</tr>
 
 							<tr>
-								<td colspan="12">Material/Test Name :
+								<td colspan="6">Material/Test Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
+								</td>
+								<td colspan="6">Casting Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.date_of_casting"/>
 								</td>
 							</tr>
 						</table>
 					</div>
+					<div></div>
 					
-                    <table>
-                        <tr>
-                            <td></td>
-                            <td>Unit</td>
-                            <td>Result</td>
-                            <td>Test Method</td>
-						</tr>
-                        <tr>
-                            <td>Length</td>
-                            <td>mm</td>
-                            <td>
-							    <!-- <span t-field="round(data.average_length , 2)"/> -->
-                            </td>
-                            <td></td>
-						</tr>
-                        <tr>
-                            <td>Width</td>
-                            <td>mm</td>
-                            <td>
-							    <!-- <span t-field="round(data.average_width , 2)"/> -->
-                            </td>
-                            <td></td>
-						</tr>
-                        <tr>
-                            <td>Thickness</td>
-                            <td>mm</td>
-                            <td>
-							    <!-- <span t-field="round(data.average_hight,2)"/> -->
-                            </td>
-                            <td></td>
-						</tr>
+					
+					<span>
+						<strong>Protocol :</strong><![CDATA[&nbsp;]]>
+						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','51ff18a6-226c-4dbf-9389-7cc72b090e66')]).parameter_table" t-as="parameter">
+							<t t-if="parameter.grade.id == eln.grade_id.id">
+								<span t-field="parameter.specification"/>
+							</t>
+						</t>
+					</span>
+					
 
-                    </table>
+					<table style="margin-top:30px;">
+							<t t-set="i" t-value="0"/>
+								<thead>
+									<tr>
+										<th style="text-align: center;">
+											<span style="font-weight: bold;">
+												Sr. No.
+											</span>
+										</th>
+										<th style="text-align: center;max-width:200px">
+											<span style="font-weight: bold;">
+												ID MARK/ Location
+											</span>
+										</th>
+										<th style="text-align: center;max-width:100px">
+											<span style="font-weight: bold;">
+												Weight of Cylinder in Kg
+											</span>
+										</th>
+										<th style="text-align: center;">
+											<span style="font-weight: bold;">
+												Height in mm
+											</span>
+										</th>
+										<th style="text-align: center;">
+											<span style="font-weight: bold;">
+												Diameter  in mm
+											</span>
+										</th>
+										<th style="text-align: center;">
+											<span style="font-weight: bold;">
+												Breaking Load in KN
+											</span>
+										</th>
+										<th style="text-align: center;">
+											<span style="font-weight: bold;">
+												Split Tensile Strength in (N/mm2)
+											</span>
+										</th>
+										
+									</tr>
+								</thead>
+							<tbody >
+
+							<t t-set="k" t-value="0"/>
+							<tr t-foreach="data.child_lines" t-as="r">
+								<td style="text-align: center;">
+									<div>
+										<span t-esc="k + 1" />
+										<t t-set="k" t-value="k+1"/>
+									</div>
+                  				</td>
+								<td style="text-align: center;">
+									<span t-esc="r['id_mark']"/>
+								</td>
+								<td style="text-align: center;">
+									<span t-esc="r['wt_of_cylender']"/>
+								</td>
+								<td style="text-align: center;">
+									<span t-esc="r['height']"/>
+								</td>
+                                <td style="text-align: center;">
+									<span t-esc="r['diameter']"/>
+								</td>
+								<td style="text-align: center;">
+									<span t-esc="r['breaking_load']"/>
+								</td>
+								<td style="text-align: center;">
+									<span t-esc="r['split_strength']" t-options='{"widget": "float", "precision": 1}'/>
+								</td>
+								
+								
+							</tr>	
+		
+							</tbody >
+					</table>
+					<table style="margin-top:5px">
+						<tr cols="12">
+							<td colspan="6"><b>Average :</b></td>
+							<td colspan="6" style="text-align: center;">
+								<span t-field="data.average_split_tensile" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+						</tr>	
+					</table>
+                    
 
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
@@ -299,6 +385,9 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
+									<li t-if="eln.has_witness">
+                                        <p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
+                                   	</li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
 									</li>
@@ -317,7 +406,7 @@
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										Mechanical Department (HOD)
 									</b>
 								</div>
 								<div>
@@ -345,7 +434,7 @@
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										Mechanical Department (HOD)
 									</b>
 								</div>
 								<div>

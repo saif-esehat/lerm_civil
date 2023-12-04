@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <template id="wpt_datasheet">
-		<!-- <t t-call="web.html_container">
+		<t t-call="web.html_container">
 			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
                 <div style="text-align:center;font-size:18px">
                     Water Permeability Test
                 </div>
 				<div class="container_eln" style="margin-top:5px">
+				     <table style="margin-top:20px">
+				<tr cols="12">
+					
+					<td colspan="6">Job No :
+                        <![CDATA[&nbsp;]]>
+                         <span t-field="eln.kes_no"></span>
+                    </td>
+					<td colspan="6">Test Start Date: 
+                        <![CDATA[&nbsp;]]>
+                        <span t-field="eln.start_date"></span>
+                    </td>
+				</tr>
+                <tr>
+                  <td colspan="6">Material: <span t-field="eln.material"></span>
+                </td>
+                 <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                </td>
+                </tr>
+                <tr style="height:50px" cols="12">
+                    <td colspan="4">Performed By :
+                        <![CDATA[&nbsp;]]>
+                        <span t-field="eln.technician.name"/>
+                    </td>
+                    <td colspan="4">Witness Name :
+                        <![CDATA[&nbsp;]]>
+                        <span t-field="eln.witness_description"/>
+                    </td>
+                    <td colspan="4">Witness Signature :
+                        <![CDATA[&nbsp;]]>
+                        <span style='padding:20px'></span>
+                    </td>
+                </tr>
+			</table>
 					<div >
 
 						<table style="margin-top:20px">
@@ -15,9 +48,9 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.temp_percent_wpt"/>
 								</td>
-								<td colspan="6">Start Date :
+								<td colspan="6">Specimen Size (mm) :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.start_date_wpt"/>
+									<span t-field="data.size.size"/>
 								</td>
 								
 							</tr>
@@ -26,9 +59,9 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.humidity_percent_wpt"/>
 								</td>
-								<td colspan="6">End Date :
+									<td colspan="6">Quantity :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.end_date_wpt"/>
+									<span t-field="data.quantity"/>
 								</td>
 								
 							</tr>
@@ -38,12 +71,9 @@
 							<tr cols="12">
 								<td colspan="6">Date of Casting :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.casting_date"/>
+									<span t-field="data.date_of_casting"/>
 								</td>
-								<td colspan="6">Quantity :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.quantity"/>
-								</td>
+								
 								
 							</tr>
 							<tr cols="12">
@@ -51,10 +81,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.grade.grade"/>
 								</td>
-								<td colspan="6">Specimen Size (mm) :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.size.size"/>
-								</td>
+								
 								
 							</tr>
 						</table>
@@ -106,6 +133,18 @@
 								
 							</tr>
 						</table>
+					<table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Average Of WPT :
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.average_of_wpt"/>
+							</td>
+							
+						</tr>
+						
+					</table>
 						
 
 
@@ -126,7 +165,7 @@
 						<div style="margin-left:500px">
 							<div>
 								<b>
-									Chemical Department (HOD)
+									Mechanical Department (HOD)
 								</b>
 							</div>
 							<div>
@@ -138,11 +177,11 @@
 					</div>
 				</div>
 			</t>
-		</t> -->
+		</t>
 
-		<t t-call="web.html_container">
+		<!-- <t t-call="web.html_container"> -->
 			<!-- <t t-call="web.basic_layout"> -->
-			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+			 <!-- <t t-call="lerm_civil.data_sheet_header_generaltemplate">
                 <div style="text-align:center;font-size:18px">
                     <span t-field="data.parameter_id.parameter.parameter_name"/>
                 </div>
@@ -208,11 +247,11 @@
 
 						<table style="margin-top:30px;">
 							<thead>
-								<tr>
+								<tr> -->
 									<!-- <th>
 										<div>SR.No</div>
 									</th> -->
-									<t t-foreach="tabledata" t-as="column">
+									<!-- <t t-foreach="tabledata" t-as="column">
 										<th>
 											<span>
 												<t t-esc="column[1]" />
@@ -220,7 +259,7 @@
 										</th>
 									</t>
 								</tr>
-            				</thead>
+            				</thead> -->
 							<!-- <tbody>
 								<t t-set="i" t-value="0"/>
 								<tr t-foreach="data.child_lines" t-as="r">
@@ -240,7 +279,7 @@
 								</tr>
 							</tbody> -->
 
-							<tbody>
+							<!-- <tbody>
 								<tr t-foreach="data.child_lines" t-as="r">
 									<t t-foreach="tabledata" t-as="row">
 										<td>
@@ -299,6 +338,6 @@
 						</div>
 				</div>
 			</t>
-		</t>
+		</t> -->
 	</template>
 </odoo>

@@ -172,6 +172,7 @@ class WmmMechanical(models.Model):
     oven_dried_wt = fields.Float('Oven dried weight of sample in gms, C')
     water_absorbtion = fields.Float('Water absorption  %',compute="_compute_water_absorbtion")
 
+
     @api.depends('wt_ssd_sample','oven_dried_wt')
     def _compute_water_absorbtion(self):
         for record in self:

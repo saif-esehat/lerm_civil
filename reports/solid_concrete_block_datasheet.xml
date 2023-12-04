@@ -54,7 +54,7 @@
                                 <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
                                 <td colspan="2" style="text-align: center;"><b>Length in mm</b></td>
                                 <td colspan="1" style="text-align: center;"><b>Width in mm</b></td>
-                                <td colspan="2" style="text-align: center;"><b>Thickness in mm</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Height in mm</b></td>
                             </tr>
                             <t t-set="f" t-value="0"/>
                             <tr t-foreach="data.child_lines4" t-as="r">
@@ -624,7 +624,7 @@
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
                                     <td style="text-align: center;">
-                                        <span style="text-align: center;">Length in mm</span>
+                                        <span style="text-align: center;">Length (Avg.)</span>
                                     </td>
                                    <td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -660,7 +660,7 @@
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
                                     <td style="text-align: center;">
-                                        <span style="text-align: center;">Width in mm</span>
+                                        <span style="text-align: center;">Width (Avg)</span>
                                     </td>
                                    <td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -696,7 +696,7 @@
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
                                     <td style="text-align: center;">
-                                        <span style="text-align: center;">Height in mm</span>
+                                        <span style="text-align: center;">Height (Avg)</span>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -733,7 +733,7 @@
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
                                     <td style="text-align: center;">
-                                        <span style="text-align: center;">Density</span>
+                                        <span style="text-align: center;">Density (Avg)</span>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <span>
@@ -769,7 +769,7 @@
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
                                     <td style="text-align: center;">
-                                        <span style="text-align: center;">Moisture Movement</span>
+                                        <span style="text-align: center;">Moisture Movement (Avg)</span>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <span>
@@ -807,7 +807,7 @@
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
                                     <td style="text-align: center;">
-                                        <span style="text-align: center;">Drying Shrinkage</span>
+                                        <span style="text-align: center;">Drying Shrinkage (Avg)</span>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <span>
@@ -845,7 +845,7 @@
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
                                     <td style="text-align: center;">
-                                        <span style="text-align: center;">Water Absorption</span>
+                                        <span style="text-align: center;">Water Absorption (Avg)</span>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <span>
@@ -882,7 +882,7 @@
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
                                     <td style="text-align: center;">
-                                        <span style="text-align: center;">Compressive Strength</span>
+                                        <span style="text-align: center;">Compressive Strength (Avg)</span>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <span>

@@ -419,9 +419,9 @@ class AacDensityLine(models.Model):
     _name = "mech.aac.density.line"
     parent_id = fields.Many2one('mechanical.aac.block', string="Parent Id")
 
-    length = fields.Float(string='Length of Sample before Drying in mm', digits=(16, 3))
-    width = fields.Float(string='Width of Sample before Drying in mm', digits=(16, 3))
-    height = fields.Float(string='Height of Sample before Drying in mm', digits=(16, 3))
+    length = fields.Float(string='Length of Sample before Drying in mm', digits=(16, 3), help='Length of Sample before Drying in millimeters')
+    width = fields.Float(string='Width of Sample before Drying in mm', digits=(16, 3),widget='text_wrap')
+    height = fields.Float(string='Height of Sample before Drying in mm', digits=(16, 3),widget='text_wrap')
     volume = fields.Float(string='Volume of Sample mm3', compute="_compute_volume", digits=(16, 7))
     wt_sample = fields.Float(string='Weight of Sample after Drying in g', digits=(16, 3))
     density = fields.Float(string='Density of Sample Kg/mm3', compute="compute_density", digits=(16, 1))

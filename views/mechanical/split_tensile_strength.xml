@@ -12,7 +12,9 @@
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" invisible="1" />
                         <field name="parameter_id"/>
+                        
                     </group>
+                    
                     <group>
                         <h1>
                             <field name="name" readonly="1" nolabel="1"/>
