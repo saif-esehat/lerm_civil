@@ -695,7 +695,7 @@ class Soil(models.Model):
     wt_of_sand_cone = fields.Integer(string="Weight of sand in cone gm")
     wt_of_sand_hole = fields.Integer(string="Weight of sand in hole gm", compute="_compute_sand_hole")
     density_of_sand = fields.Float(string="Density of sand gm/cc")
-    volume_of_hole = fields.Integer(string="Volume of hole cc", compute="_compute_volume_of_hole")
+    volume_of_hole = fields.Float(string="Volume of hole cc",compute="_compute_volume_of_hole")
     bulk_density_of_sample = fields.Float(string="Bulk Density of sample gm/cc",compute="_compute_bulk_density")
     dry_density_of_sample = fields.Float(string="Dry Density of sample",compute="_compute_dry_density")
     degree_of_compaction = fields.Float(string="Degree of Compaction %",compute="_compute_degree_of_compaction")
@@ -757,13 +757,16 @@ class Soil(models.Model):
         for record in self:
             record.wt_of_sand_hole = record.wt_of_before_cylinder - record.wt_of_after_cylinder - record.wt_of_sand_cone
 
+
     @api.depends('wt_of_sand_hole', 'density_of_sand')
     def _compute_volume_of_hole(self):
         for record in self:
-            if record.density_of_sand != 0:  # Avoid division by zero
-                record.volume_of_hole = record.density_of_sand / record.wt_of_sand_hole
+            if record.density_of_sand != 0:
+                record.volume_of_hole = record.wt_of_sand_hole / record.density_of_sand
             else:
                 record.volume_of_hole = 0.0
+
+ 
 
 
     @api.depends('wt_of_sample', 'volume_of_hole')
@@ -785,13 +788,13 @@ class Soil(models.Model):
     @api.depends('dry_density_of_sample', 'mmd')
     def _compute_degree_of_compaction(self):
         for record in self:
-            if record.mmd != 0:  # Avoid division by zero
+            if record.mmd != 0:
                 record.degree_of_compaction = (record.dry_density_of_sample / record.mmd) * 100
             else:
                 record.degree_of_compaction = 0.0
 
-
-
+    
+   
     # Moisture Content
 
     moisture_content_name = fields.Char("Name",default="Moisture Content")

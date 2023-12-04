@@ -40,7 +40,7 @@
 				<div class="container_eln">
 				
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<table t-if="report_type == 'pdf'">
 							<tr>
 								<td colspan="3">Report no :
 								</td>
@@ -48,6 +48,7 @@
 									<span t-field="o.kes_no"/>
 								</td>
 								<td colspan="3">Report Date :
+								<span t-field="o.end_date"/>
 								</td>
 								<td colspan="3">
 									<span t-field="o.srf_date"/>
@@ -59,7 +60,8 @@
 								</td>
 							</tr>
 						</table>
-
+						
+					
 						<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
@@ -521,19 +523,31 @@
 										Test Parameter
 									</span>
 								</th>
-								<th colspan="2">
+								<!-- <th colspan="2">
 									<span>
 										Test Method
 									</span>
+								</th> -->
+								<th colspan="2" style="max-width: 250px;">
+									<span>
+										<span t-esc="eln.material.specifications"/>
+									</span>
 								</th>
+								
 								<th colspan="2">
 									<span>
 										Test Result
 									</span>
 								</th>
-								<th colspan="2">
+								<!-- <th colspan="2">
 									<span>
 										Limit as per MORTH Specification
+									</span>
+								</th> -->
+								<th colspan="2" style="max-width: 200px;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
+										
 									</span>
 								</th>
 								 <th style="text-align: center;" t-if="eln.conformity">
@@ -547,8 +561,9 @@
 								<tr cols="12">
 									<td colspan="1">
 									</td>
-									<td colspan="2">IS Sieve Size (% Passing through)
-									</td>
+									<td colspan="2">
+                                            <span t-field="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).parameter_name"/>
+                                    </td>
 									<td colspan="2">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -622,10 +637,8 @@
 									</div>
 								</td>
 								<td colspan="2">
-									<div>
-										Liquid Limit
-									</div>
-								</td>
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_name"/>
+                                </td>
 								<td colspan="2">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -659,10 +672,8 @@
 									</div>
 								</td>
 								<td colspan="2">
-									<div>
-										Plastic Limit
-									</div>
-								</td>
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_name"/>
+                                </td>
 								<td colspan="2">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -700,10 +711,8 @@
 									</div>
 								</td>
 								<td colspan="2">
-									<div>
-										Plasticity Index
-									</div>
-								</td>
+                                 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_name"/>
+                                </td>
 								<td colspan="2">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -740,10 +749,8 @@
 									</div>
 								</td>
 								<td colspan="2">
-									<div>
-										Free Swell Index
-									</div>
-								</td>
+                                 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_name"/>
+                                </td>
 								<td colspan="2">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -778,10 +785,8 @@
 									</div>
 								</td>
 								<td colspan="2">
-									<div>
-										Heavy Compaction OMC/MDD
-									</div>
-								</td>
+                                 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_name"/>
+                                </td>
 								<td colspan="2">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -817,10 +822,8 @@
 									</div>
 								</td>
 								<td colspan="2">
-									<div>
-										Light Compaction OMC/MDD
-									</div>
-								</td>
+                                 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_name"/>
+                                </td>
 								<td colspan="2">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -855,10 +858,8 @@
 									</div>
 								</td>
 								<td colspan="2">
-									<div>
-										Dry Density by Sand Replacement method
-									</div>
-								</td>
+                                 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_name"/>
+                                </td>
 								<td colspan="2">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -893,10 +894,8 @@
 									</div>
 								</td>
 								<td colspan="2">
-									<div>
-										Moisture Content
-									</div>
-								</td>
+                                 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_name"/>
+                                </td>
 								<td colspan="2">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -1205,11 +1204,8 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
-										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
-									</li>
 									 <li t-if="eln.has_witness">
-                                        <p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
+                                        <p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
                                    </li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
@@ -1229,7 +1225,7 @@
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										Mechanical Department (HOD)
 									</b>
 								</div>
 								<div>
@@ -1257,7 +1253,7 @@
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										Mechanical Department (HOD)
 									</b>
 								</div>
 								<div>
@@ -1281,7 +1277,7 @@
 	<template id="soil_datasheet">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
-			 <t t-call="lerm_civil.soil_data_sheet_header">
+			 <t t-call="lerm_civil.data_sheet_header">
 				<!-- <div style="text-align:center;">
 					<p style="font-size:15px"><b>Test Data Sheet</b></p>
 				</div> -->

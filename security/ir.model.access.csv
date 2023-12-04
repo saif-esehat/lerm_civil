@@ -78,7 +78,7 @@ lerm.datasheet.line,lerm_datasheet_line,lerm_civil.model_lerm_datasheet_line,ler
 
 
 
-hod.lerm_civil.access_lerm_civil_srf_srf_access,lerm_civil_srf_srf_access,model_lerm_civil_srf,lerm_civil.kes_access_srf,1,1,1,1
+srf.lerm_civil.access_lerm_civil_srf_srf_access,lerm_civil_srf_srf_access,model_lerm_civil_srf,lerm_civil.kes_access_srf,1,1,1,1
 sample.range.line.srf,sample_range_line_srf,model_sample_range_line,lerm_civil.kes_access_srf,1,1,1,1
 lerm.srf.sample.srf,lerm_srf_sample_srf,model_lerm_srf_sample,lerm_civil.kes_access_srf,1,1,1,0
 lerm.eln.srf,lerm_eln_srf,model_lerm_eln,lerm_civil.kes_access_srf,1,0,0,0

@@ -8,6 +8,7 @@
 				</div>
 			</div>
         </div>
+	
         <div t-attf-class="article" t-att-style="report_header_style">
             <t t-out="0"/>
         </div>

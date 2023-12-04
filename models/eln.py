@@ -62,6 +62,18 @@ class ELN(models.Model):
     sop = fields.Html(string='SOP',compute="comput_sop")
 
 
+    @api.onchange('witness')
+    def update_witness_name(self):
+        if self.env.context.get('update_witness_name'):
+            self.witness_name = self.witness
+
+    @api.model
+    def create(self, values):
+        record = super(ELN, self).create(values)
+        record.update_witness_name()
+        return record
+
+
     def get_dynamic_report_name(self):
         # Implement your logic to generate the dynamic report name based on the field value.
         # You can access the current record's field values using `self`.
