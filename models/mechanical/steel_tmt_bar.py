@@ -47,12 +47,12 @@ class SteelTmtBarLine(models.Model):
 
     
     bend_test = fields.Selection([
-        ('Satisfactory', 'Satisfactory'),
-        ('Non-Satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
+        ('satisfactory', 'Satisfactory'),
+        ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
     
     re_bend_test = fields.Selection([
-        ('Satisfactory', 'Satisfactory'),
-        ('Non-Satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+        ('satisfactory', 'Satisfactory'),
+        ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
     
       
 
