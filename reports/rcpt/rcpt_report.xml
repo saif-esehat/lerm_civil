@@ -227,12 +227,11 @@
 										</span>
 									</th>
 									
-									<th style="text-align: center;">
-									 <span style="font-weight: bold;">
-										Test Method
-									 </span>
-									 
-									</th>
+									 <th  style="max-width: 250px;">
+									<span>
+										<span t-esc="eln.material.specifications"/>
+									</span>
+							     	</th>
 								</tr>
                                  <t t-set="f" t-value="0"/>
                                     <tr t-foreach="rcpt.child_lines" t-as="r">
@@ -318,9 +317,9 @@
 							<li>
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
-							<li t-if="eln.has_witness">
-								<p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
-							</li>
+							 <li t-if="eln.has_witness">
+                                <p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+                             </li>
 						</ul>
 					</div>
 				</div>
