@@ -38,12 +38,8 @@
                         </group>
                         
                     </group>
-<<<<<<< HEAD
-                    <field name="child_lines" nolabel="1" >
-=======
                     
                         <field name="child_lines" nolabel="1">
->>>>>>> e702d5a5d889b894d1630b5678b9ab12f52bdb6c
                             <tree>
                                 <field name='sr_no' string="Sr. NO"/>
                                 <field name='id_mark' string="ID Mark/Location"/>
@@ -53,7 +49,6 @@
                                 <field name='wt_sample' string="Weight of Sample in kg"/>
                                 <field name="crushing_load" string="Crushing Load in kN"/>
                                 <field name='compressive_strength' string="Compressive Strength N/mm²"/>
-                                <!-- <field name='average_tensile'/> -->
                             </tree>
                             
                         </field> 
@@ -69,7 +64,30 @@
         </field>
     </record>
   
-
+    <record id="mechanical_concrete_cube_line_view" model="ir.ui.view">
+        <field name="name">mechanical.concrete.cube.line.form</field>
+        <field name="model">mechanical.concrete.cube.line</field>
+        <field name="arch" type="xml">
+            <form>
+            <group>
+            <group>
+            <field name='sr_no' string="Sr. NO"/>
+                <field name='id_mark' string="ID Mark/Location"/>
+                <field name='length' string="Length (mm)"/>
+                <field name='width' string="Width (mm)"/>
+                <field name='area' string="Area (mm²)"/>
+            </group>
+            <group>
+                <field name='wt_sample' string="Weight of Sample in kg"/>
+                <field name="crushing_load" string="Crushing Load in kN"/>
+                <field name='compressive_strength' string="Compressive Strength N/mm²"/>
+                <field name="parent_id" invisible="1"/>
+            </group>
+            </group>
+                
+            </form>
+        </field>
+    </record>
 
     </data>
 </odoo>
