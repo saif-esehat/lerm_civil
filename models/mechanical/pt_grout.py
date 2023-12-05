@@ -204,7 +204,7 @@ class PtGrout(models.Model):
             line = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table
             for material in materials:
-                if material.grade.id == record.grade.id:
+                # if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
                     lab_max = line.lab_max_value
                     mu_value = line.mu_value
@@ -242,6 +242,57 @@ class PtGrout(models.Model):
     volume_change_table = fields.One2many('volume.change.line','parent_id',string="Height Change")
 
     height_change_average = fields.Float("Average Height Change", compute="_compute_height_change_average")
+
+    volume_change_confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_volume_change_confirmity")
+
+    volume_change_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_volume_change_nabl",store=True)
+
+
+    @api.depends('height_change_average','eln_ref')
+    def _compute_volume_change_confirmity(self):
+        for record in self:
+            record.volume_change_confirmity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.height_change_average - record.height_change_average*mu_value
+                    upper = record.height_change_average + record.height_change_average*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.volume_change_confirmity = 'pass'
+                        break
+                    else:
+                        record.volume_change_confirmity = 'fail'
+
+    @api.depends('height_change_average','eln_ref')
+    def _compute_volume_change_nabl(self):
+        
+        for record in self:
+            record.volume_change_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table
+            for material in materials:
+                # if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.height_change_average - record.height_change_average*mu_value
+                    upper = record.height_change_average + record.height_change_average*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.volume_change_nabl = 'pass'
+                        break
+                    else:
+                        record.volume_change_nabl = 'fail'
 
     @api.depends('volume_change_table.height_change')
     def _compute_height_change_average(self):
@@ -291,6 +342,57 @@ class PtGrout(models.Model):
     compressive_strength_7_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_7days")
     status_7days = fields.Boolean("Done")
 
+    compressive_strength_7days_confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_compressive_strength_7days_confirmity")
+
+    compressive_strength_7days_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_compressive_strength_7days_nabl",store=True)
+
+
+    @api.depends('compressive_strength_7_days','eln_ref')
+    def _compute_compressive_strength_7days_confirmity(self):
+        for record in self:
+            record.compressive_strength_7days_confirmity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.compressive_strength_7_days - record.compressive_strength_7_days*mu_value
+                    upper = record.compressive_strength_7_days + record.compressive_strength_7_days*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.compressive_strength_7days_confirmity = 'pass'
+                        break
+                    else:
+                        record.compressive_strength_7days_confirmity = 'fail'
+
+    @api.depends('compressive_strength_7_days','eln_ref')
+    def _compute_compressive_strength_7days_nabl(self):
+        
+        for record in self:
+            record.compressive_strength_7days_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            for material in materials:
+                # if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.compressive_strength_7_days - record.compressive_strength_7_days*mu_value
+                    upper = record.compressive_strength_7_days + record.compressive_strength_7_days*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.compressive_strength_7days_nabl = 'pass'
+                        break
+                    else:
+                        record.compressive_strength_7days_nabl = 'fail'
+
 
     @api.depends('casting_7_days_tables.compressive_strength')
     def _compute_average_7days(self):
@@ -338,6 +440,57 @@ class PtGrout(models.Model):
     average_casting_28days = fields.Float("Average",compute="_compute_average_28days")
     compressive_strength_28_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_28days")
     status_28days = fields.Boolean("Done")
+
+    compressive_strength_28days_confirmity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_compressive_strength_28days_confirmity")
+
+    compressive_strength_28days_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_compressive_strength_28days_nabl",store=True)
+
+
+    @api.depends('compressive_strength_28_days','eln_ref')
+    def _compute_compressive_strength_28days_confirmity(self):
+        for record in self:
+            record.compressive_strength_28days_confirmity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
+                    upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.compressive_strength_28days_confirmity = 'pass'
+                        break
+                    else:
+                        record.compressive_strength_28days_confirmity = 'fail'
+
+    @api.depends('compressive_strength_28_days','eln_ref')
+    def _compute_compressive_strength_28days_nabl(self):
+        
+        for record in self:
+            record.compressive_strength_28days_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            for material in materials:
+                # if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
+                    upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.compressive_strength_28days_nabl = 'pass'
+                        break
+                    else:
+                        record.compressive_strength_28days_nabl = 'fail'
 
 
     @api.depends('casting_28_days_tables.compressive_strength')
@@ -555,7 +708,3 @@ class Casting28DaysLine(models.Model):
                 record.compressive_strength = (record.crushing_load / record.crosssectional_area) * 1000
             else:
                 record.compressive_strength = 0
-
-
-
-

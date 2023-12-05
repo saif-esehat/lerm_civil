@@ -60,6 +60,19 @@ class ELN(models.Model):
     temperature = fields.Float("Temperature")
     instrument = fields.Char("Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
+    
+
+
+    @api.onchange('witness')
+    def update_witness_name(self):
+        if self.env.context.get('update_witness_name'):
+            self.witness_name = self.witness
+
+    @api.model
+    def create(self, values):
+        record = super(ELN, self).create(values)
+        record.update_witness_name()
+        return record
 
 
     def get_dynamic_report_name(self):
@@ -359,6 +372,7 @@ class ELN(models.Model):
                 record.group = sample_record
             else:
                 record.group = None
+
     
     @api.onchange('sample_id')
     def compute_material(self):

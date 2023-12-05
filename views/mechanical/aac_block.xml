@@ -7,6 +7,8 @@
         <field name="model">mechanical.aac.block</field>
         <field name="arch" type="xml">
             <form>
+
+                  
                 <sheet>
 
                 <group >
@@ -91,7 +93,8 @@
                             <field name="moisture_nabl"/>
                         </group>
                     </group>
-                    
+
+                     
 
                     <!-- Block Density  -->
                     <group attrs="{'invisible': [('density_visible', '=', False)]}">
@@ -103,10 +106,11 @@
                     <group attrs="{'invisible': [('density_visible', '=', False)]}">
                         <field name="density_unit"/>
                     </group>
+                    
                     <group attrs="{'invisible': [('density_visible', '=', False)]}">
-                        <field name="density_table" nolabel="1" class="custom-one2many-header">
+                        <field name="density_table"  style=" white-space: normal;">
                         <tree editable="bottom">
-                          <field name="length"/>
+                          <field name="length" widget="textarea" options="{'style': 'height: 60px:'}"/>
                           <field name="width"/>
                           <field name="height"/>
                           <field name="volume" />

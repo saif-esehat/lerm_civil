@@ -17,8 +17,8 @@ class SteelTmtBarLine(models.Model):
     lentgh = fields.Float(string="Length in meter",digits=(10, 3))
     weight = fields.Float(string="Weight, in kg",digits=(10, 3))
     weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
-    crossectional_area = fields.Float(string="Cross sectional Area, mm²",compute="_compute_crossectional_area",store=True)
-    gauge_length = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
+    crossectional_area = fields.Float(string="Cross sectional Area, mm²",compute="_compute_crossectional_area")
+    gauge_length = fields.Float(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
     elongated_gauge_length = fields.Float(string="Elongated Gauge Length, mm")
     percent_elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True)
     yeild_load = fields.Float(string="Yield Load  KN")
@@ -497,10 +497,17 @@ class SteelTmtBarLine(models.Model):
             else:
                 record.crossectional_area = 0.0
 
+    
+    # @api.depends('crossectional_area')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         record.gauge_length = ((5.65 * math.sqrt(record.crossectional_area)),2)
     @api.depends('crossectional_area')
     def _compute_gauge_length(self):
         for record in self:
-            record.gauge_length = round((5.65 * math.sqrt(record.crossectional_area)),2)
+            gauge_length = (math.sqrt(record.crossectional_area) * 5.65)
+            record.gauge_length = gauge_length
+            # record.gauge_length = round(gauge_length, 2)
 
 
     @api.depends('yeild_load','crossectional_area')
