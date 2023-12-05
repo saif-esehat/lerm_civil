@@ -55,8 +55,14 @@
                     
                         <group>
                             <field name='average_strength' string="Average Compressive Strength in N/mm2" identity="result"/>
-                            <field name="confirmity" options="{'colors': {'pass': 'green', 'fail': 'red'}}"/>
-                            <field name="nabl" style="background-color:green;color:white;"/>
+                            <!-- <field name="confirmity" /> -->
+                            <field name="confirmity"  style="color: green;" attrs="{'invisible': [('confirmity','!=','fail')]}"/>
+                            <field name="confirmity"  style="color: red;" attrs="{'invisible': [('confirmity','!=','fail')]}"/>
+                            <field name="confirmity"  style="color: black;" attrs="{'invisible': [('confirmity','!=','not_applicable')]}"/>
+
+                            <!-- <field name="nabl" style="background-color:green;color:white;"/> -->
+                            <field name="nabl"  style="color: red;" attrs="{'invisible': [('nabl','=','pass')]}"/>
+                            <field name="nabl"  style="color: green;" attrs="{'invisible': [('nabl','=','fail')]}"/>
                             
 
                         </group>
