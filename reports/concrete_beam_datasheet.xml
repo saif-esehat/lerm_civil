@@ -125,18 +125,28 @@
 				
 			<div class="authorizeRowDataSheet">
 				<div>
-					<div>
+					<!-- <div>
 						<b>
 							(JR Chemist)
 						</b>
-					</div>
+					</div> -->
 					<div>
 						<b>
-							Tested By
+							Checked By
 						</b>
 					</div>
 				</div>
+				
 				<div style="margin-left:500px">
+							
+					<div>
+						<b>
+							Approved By
+						</b>
+					</div>
+					<div style="height:40px">
+
+					</div>
 					<div>
 						<b>
 							Mechanical Department (HOD)
@@ -144,7 +154,7 @@
 					</div>
 					<div>
 						<b>
-							Checked By
+							(Authorized Signatory)
 						</b>
 					</div>
 				</div>
