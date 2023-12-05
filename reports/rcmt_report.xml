@@ -232,17 +232,29 @@
 											Unit
 										</span>
 									</th>
-									<th style="text-align: center;">
+									<!-- <th style="text-align: center;">
 									<span style="font-weight: bold;">
 										Requirement
 									</span>
-									</th>
-									<th style="text-align: center;">
+									</th> -->
+									<th  style="max-width: 250px;">
+									<span>
+										<span t-esc="eln.material.specifications"/>
+									</span>
+							     	</th>
+									<!-- <th style="text-align: center;">
 									 <span style="font-weight: bold;">
 										Test Method
 									 </span>
 									 
-									</th>
+									</th> -->
+									<th  style="max-width: 200px;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
+										
+									</span>
+							    	</th>
+									
 								</tr>
 							</thead>
 						<tbody >
@@ -304,7 +316,7 @@
 								
 							</tr>
 
-							<tr t-if="rcmt.rcmt_nabl == 'pass' and nabl">
+							<tr t-if="(rcmt.rcmt_nabl == 'pass' and nabl or rcmt.rcmt_nabl == 'fail' and not nabl)">
 
 							    <td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
@@ -345,9 +357,9 @@
 							<li>
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
-							<li t-if="eln.has_witness">
-								<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
-							</li>
+							 <li t-if="eln.has_witness">
+                                 <p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+                             </li>
 							
 						</ul>
 					</div>
