@@ -47,7 +47,8 @@ class SrfForm(models.Model):
     billing_customer = fields.Many2one('res.partner',string="Billing Customer")
     contact_person = fields.Many2one('res.partner',string="Contact Person")
     client = fields.Char("Client")
-    site_address = fields.Many2one('res.partner',string="Site Address")
+    # site_address = fields.Many2one('res.partner',string="Site Address")
+    site_address = fields.Char(string="Site Address",compute="_compute_site_address")
     name_work = fields.Many2one('res.partner.project',string="Name of Work")
     client_refrence = fields.Char(string="Client Reference Letter")
     samples = fields.One2many('lerm.srf.sample' , 'srf_id' , string="Samples",tracking=True)
@@ -75,6 +76,23 @@ class SrfForm(models.Model):
     ], string='Days of casting', default='3')
     
     date_casting = fields.Date(string="Date of Casting")
+
+
+    @api.depends('contact_person')
+    def _compute_site_address(self):
+        for record in self:
+            contact_person = record.contact_person
+            if(contact_person):
+                street1 = record.env['res.partner'].search([("id","=",record.contact_person.id)]).street
+                street2 = record.env['res.partner'].search([("id","=",record.contact_person.id)]).street2
+                city = record.env['res.partner'].search([("id","=",record.contact_person.id)]).city
+                state_id = record.env['res.partner'].search([("id","=",record.contact_person.id)]).state_id
+                zip = record.env['res.partner'].search([("id","=",record.contact_person.id)]).zip
+                address = str(street1) + ', ' + str(street2) + ", " + str(city) + ", " + str(state_id.name) + ", " + str(zip)
+                record.site_address = address
+            else:
+                record.site_address = ''
+
 
 
 
