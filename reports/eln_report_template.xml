@@ -122,6 +122,7 @@
 						CIN No.: U45209MH2017PTC291168
 					</div>
                 </ul> -->
+				
                 <div t-if="report_type == 'pdf'" class="footertext">
                     Page: <span class="page"/> / <span class="topage"/>
                 </div>

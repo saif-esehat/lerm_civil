@@ -132,7 +132,7 @@
                                     <span t-esc="r['width']"/>
                                 </td>
                                 <td colspan="2" style="text-align: center;">
-                                    <span t-esc="r['hight']"/>
+                                    <span></span>
                                 </td>
                                  <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['area']" t-options='{"widget": "float", "precision": 2}'/>

@@ -48,7 +48,7 @@
                             
 
                     <group style="width:50%" >
-                        <field name="srf_id"/>
+                        <field name="srf_id" readonly="1"/>
                         <field name="kes_number"  invisible="1"/>
                         <field name="srf_date" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name="contact_person" context="{'hide_reference':True}" domain="[('id', 'in', contact_contact_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
