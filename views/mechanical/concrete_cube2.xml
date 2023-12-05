@@ -55,8 +55,9 @@
                     
                         <group>
                             <field name='average_strength' string="Average Compressive Strength in N/mm2" identity="result"/>
-                            <field name="confirmity"/>
-                            <field name="nabl"/>
+                            <field name="confirmity" options="{'colors': {'pass': 'green', 'fail': 'red'}}"/>
+                            <field name="nabl" style="background-color:green;color:white;"/>
+                            
 
                         </group>
                 </sheet>

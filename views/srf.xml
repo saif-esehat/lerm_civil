@@ -192,7 +192,7 @@
                         <field name="price"   invisible="1"/>
                         <field name="size_id" domain="[('id', 'in', size_ids)]"/>
                         <field name="sample_qty" />
-                        <field name="sample_received_date"/>
+                        <field name="sample_received_date" readonly="1"/>
                         <field name="location"/>
                         <field name="casting" />
                         <field name="grade_required" />
