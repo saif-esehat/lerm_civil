@@ -144,7 +144,7 @@
                                 <field name="bend_visible" invisible="1"/>
                                 <field name='bend_test'/>
                             </group>
-                            <group style="width:51%" attrs="{'invisible': [('rebend_visible', '=', False)]}">
+                             <group style="width:51%" attrs="{'invisible': [('rebend_visible', '=', False)]}">
                                 <field name="rebend_visible" invisible="1"/>
                                 <field name='re_bend_test'/>
                             </group>
