@@ -6,7 +6,8 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			<!-- <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general"> -->
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>TEST REPORT</b></p>
 				</div>
@@ -194,9 +195,15 @@
 					<div style="margin-top:20px;">
 						<p><strong>Results</strong>:<![CDATA[&nbsp;]]></p>
 					</div>
-					<div style="margin-top:20px;font-weight: bold;">
+					<!-- <div style="margin-top:20px;font-weight: bold;">
 						<p><strong>Flexural Strength of Concrete Beam</strong>:<![CDATA[&nbsp;]]></p>
+					</div> -->
+					<div colspan="2" style="font-weight: bold;">
+						<td >
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_name"/>
+						</td>
 					</div>
+					<div></div>
 
 						
 				
@@ -225,8 +232,14 @@
 								
 								<td colspan="2" style="text-align: center;font-weight: bold;">Flexural Strength in N/mm2
 								</td>
-								<td colspan="2" style="text-align: center;font-weight: bold;">Test Method
-								</td> 
+								<!-- <td colspan="2" style="text-align: center;font-weight: bold;">Test Method
+								</td>  -->
+								<th colspan="2" style="text-align: center;font-weight: bold;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
+										
+									</span>
+								</th>
                             </tr>
                             
 							<t t-set="k" t-value="0"/>
@@ -302,7 +315,7 @@
 							<li>
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
-							<li>
+							<li t-if="eln.has_witness">
 								<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 							</li>
 						</ul>
@@ -310,12 +323,37 @@
 				</div>
 
 
-				<div class="signatureContainer girdgird" style="margin-top:50px;page-break-inside: avoid;">
+				<div class="signatureContainer girdgird">
+					
 					<div>
-						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
+						<div>
+							<b>
+								Checked By
+							</b>
+						</div>
+						<div style="height:20px">
+
+						</div>
+						<div>
+							<b>
+								Mechanical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								(Authorized Signatory)
+							</b>
+						</div>
 					</div>
-					<div >
-						Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
+					
+					<div>
+
+						<div t-if="stamp and stamp == '4-in_report'">
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							Format No. <span t-esc="eln.material.test_format_no"/>
+						</div>
 					</div>
 					<div>
 						<div>
@@ -353,6 +391,6 @@
 			</t>
 		</t>
 		
-	</template>
+</template>
 	
 </odoo>

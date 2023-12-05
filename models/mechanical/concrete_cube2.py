@@ -16,6 +16,7 @@ class MechanicalConcreteCube(models.Model):
     average_strength = fields.Float(string="Average Compressive Strength in N/mm2", compute="_compute_average_strength",digits=(12,2))
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
+    
     age_of_days = fields.Selection([
         ('3days', '3 Days'),
         ('7days', '7 Days'),

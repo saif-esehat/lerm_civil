@@ -60,6 +60,7 @@ class ELN(models.Model):
     temperature = fields.Float("Temperature")
     instrument = fields.Char("Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
+    
 
 
     @api.onchange('witness')
@@ -371,6 +372,7 @@ class ELN(models.Model):
                 record.group = sample_record
             else:
                 record.group = None
+
     
     @api.onchange('sample_id')
     def compute_material(self):

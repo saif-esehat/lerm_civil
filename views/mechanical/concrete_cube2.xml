@@ -36,8 +36,14 @@
                         <group>
                             <field name="difference"/>
                         </group>
+                        
                     </group>
+<<<<<<< HEAD
                     <field name="child_lines" nolabel="1" >
+=======
+                    
+                        <field name="child_lines" nolabel="1">
+>>>>>>> e702d5a5d889b894d1630b5678b9ab12f52bdb6c
                             <tree>
                                 <field name='sr_no' string="Sr. NO"/>
                                 <field name='id_mark' string="ID Mark/Location"/>
@@ -49,8 +55,9 @@
                                 <field name='compressive_strength' string="Compressive Strength N/mm²"/>
                                 <!-- <field name='average_tensile'/> -->
                             </tree>
-                           
-                    </field> 
+                            
+                        </field> 
+                    
                         <group>
                             <field name='average_strength' string="Average Compressive Strength in N/mm2" identity="result"/>
                             <field name="confirmity"/>
