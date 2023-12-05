@@ -10,7 +10,7 @@
         </field> -->
     </record>
     <!-- <menuitem id="srf_form" groups="kes_hod_access_group,kes_admin_access_group,lerm_civil.kes_access_srf" name="SRF" parent="lerm_transaction_data" action="srf_form_id" sequence="10" /> -->
-    <menuitem id="srf_form" name="SRF" groups="lerm_civil.kes_access_srf,kes_quality_manager" parent="lerm_transaction_data" action="srf_form_id" sequence="10"/>
+    <menuitem id="srf_form" name="SRF" groups="lerm_civil.kes_access_srf,lerm_civil.kes_quality_manager" parent="lerm_transaction_data" action="srf_form_id" sequence="10"/>
 
     <record id="lerm_civil_srf_form" model="ir.ui.view">
         <field name="name">lerm.civil.srf.form</field>
@@ -56,12 +56,12 @@
                         <field name="client_refrence" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                     </group>
                     <group style="width:50%">
-                        <field name="customer" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" groups="lerm_civil.kes_verified_by"/>
-                        <field name='client' attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"  groups="lerm_civil.kes_verified_by"/>
-                        <field name='contractor' domain="[('id', 'in', contractor_ids)]"  groups="lerm_civil.kes_verified_by"/>
+                        <field name="customer" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
+                        <field name='client' attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
+                        <field name='contractor' domain="[('id', 'in', contractor_ids)]"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
                         <field name='contractor_ids' invisible='1'/>
                         <field name="contact_other_ids" invisible='1'/>
-                        <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"  groups="lerm_civil.kes_verified_by"/>
+                        <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
                         <field name="name_work" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name="attachment" filename="attachment_name" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name='attachment_name' invisible='1'/>
