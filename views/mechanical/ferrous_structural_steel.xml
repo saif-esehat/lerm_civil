@@ -99,10 +99,14 @@
                                 <field name='requirement_yield'/>
                                 </group>
                                 <group style="width:25%">
-                                <field name='yield_nabl'/>
+                                <!-- <field name='yield_nabl'/> -->
+                                <field name="yield_nabl"  style="color: green;" attrs="{'invisible': [('yield_nabl','!=','pass')]}"/>
+                                <field name="yield_nabl"  style="color: red;" attrs="{'invisible': [('yield_nabl','!=','fail')]}"/>
                                 </group>
                                 <group style="width:25%">
-                                <field name='yield_conformity'/>
+                                <!-- <field name='yield_conformity'/> -->
+                                <field name="yield_conformity"  style="color: red;" attrs="{'invisible': [('yield_conformity','!=','fail')]}"/>
+                                <field name="yield_conformity"  style="color: green;" attrs="{'invisible': [('yield_conformity','!=','pass')]}"/>
                                 </group>
                             </group>
                             <group>
@@ -113,10 +117,14 @@
                                 <field name='requirement_utl'/>
                                 </group>
                                 <group style="width:25%">
-                                <field name='uts_nabl'/>
+                                <!-- <field name='uts_nabl'/> -->
+                                <field name="uts_nabl"  style="color: green;" attrs="{'invisible': [('uts_nabl','!=','pass')]}"/>
+                                <field name="uts_nabl"  style="color: red;" attrs="{'invisible': [('uts_nabl','!=','fail')]}"/>
                                 </group>
                                 <group style="width:25%">
-                                <field name='uts_conformity'/>
+                                <!-- <field name='uts_conformity'/> -->
+                                <field name="uts_conformity"  style="color: red;" attrs="{'invisible': [('uts_conformity','!=','fail')]}"/>
+                                <field name="uts_conformity"  style="color: green;" attrs="{'invisible': [('uts_conformity','!=','pass')]}"/>
                                 </group>
                             </group>
                              <group >
@@ -127,10 +135,14 @@
                                 <field name='requirement_elongation'/>
                                 </group>
                                 <group style="width:25%">
-                                <field name='elongation_nabl'/>
+                                <!-- <field name='elongation_nabl'/> -->
+                                <field name="elongation_nabl"  style="color: green;" attrs="{'invisible': [('elongation_nabl','!=','pass')]}"/>
+                                <field name="elongation_nabl"  style="color: red;" attrs="{'invisible': [('elongation_nabl','!=','fail')]}"/>
                                 </group>
                                 <group style="width:25%">
-                                <field name="elongation_conformity"/>
+                                <!-- <field name="elongation_conformity"/> -->
+                                <field name="elongation_conformity"  style="color: red;" attrs="{'invisible': [('elongation_conformity','!=','fail')]}"/>
+                                <field name="elongation_conformity"  style="color: green;" attrs="{'invisible': [('elongation_conformity','!=','pass')]}"/>
                                 </group>
                             </group>
                             <!-- <group>
