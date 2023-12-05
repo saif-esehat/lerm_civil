@@ -182,7 +182,7 @@
 
     <menuitem id="lerm_transaction_data"
         name="Lab Operations"
-        groups="kes_technician_access_group,kes_hod_access_group,kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by"
+        groups="lerm_civil.kes_technician_access_group,lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by"
         parent="lerm_root"
         sequence="10" />
 
@@ -193,27 +193,27 @@
 
     <menuitem id="lerm_sample"
         name="Sample"
-        groups="kes_hod_access_group,kes_admin_access_group,kes_verified_by,kes_hod_access_group,kes_checked_by,kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_verified_by,lerm_civil.kes_hod_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
         parent="lerm_transaction_data"
         action="test_sample_action"
         sequence="15" />
 
     <menuitem id="lerm_rejected_sample"
         name="Rejected Sample"
-        groups="kes_hod_access_group,kes_admin_access_group,kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_quality_manager"
         parent="lerm_transaction_data"
         action="rejected_sample_action"
         sequence="17" />
 
     <menuitem id="lerm_eln"
         name="Laboratory Notebook"
-        groups="kes_technician_access_group,kes_admin_access_group,kes_hod_access_group,lerm_civil.kes_checked_by,kes_quality_manager"
+        groups="lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_hod_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
         parent="lerm_transaction_data"
         action="test_eln_action"
         sequence="16" />
     
     <menuitem id="sample_status"
-        groups="kes_hod_access_group,kes_admin_access_group,kes_checked_by,kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
         name="Operational Status"
         parent="lerm_root"
         sequence="15" />
@@ -226,21 +226,21 @@
         sequence="20" />
     
     <menuitem id="sample_status_allotted"
-        groups="kes_hod_access_group,kes_admin_access_group,kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_quality_manager"
         name="Alloted"
         parent="sample_status"
         action="test_sample_pending_allotted_action"
         sequence="21" />
 
     <menuitem id="sample_status_pending_verification"
-        groups="kes_hod_access_group,kes_admin_access_group,kes_checked_by,kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
         name="Pending Verification"
         parent="sample_status"
         action="sample_pending_verification_action"
         sequence="22" />
     
     <menuitem id="sample_status_pending_approval"
-        groups="kes_hod_access_group,kes_admin_access_group,kes_checked_by,kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
         name="Pending Approval"
         parent="sample_status"
         action="sample_pending_approval_action"
@@ -248,7 +248,7 @@
 
 
     <menuitem id="sample_status_in_report"
-        groups="kes_hod_access_group,kes_admin_access_group,kes_checked_by,kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
         name="In-Report"
         parent="sample_status"
         action="test_sample_pending_in_report_action"
