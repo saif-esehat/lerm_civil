@@ -165,7 +165,7 @@
 									Width , mm
 								</td> -->
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','085e1df4-a0fd-40bc-ac92-b6118328c2e8')]).parameter_name"/>
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','c83e774f-f8e4-455e-b2cb-00924cb4bf2e')]).parameter_name"/>
                                 </td>
 								<td>
 									<span t-esc="data.width"/>
