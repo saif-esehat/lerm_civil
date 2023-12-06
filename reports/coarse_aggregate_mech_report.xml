@@ -54,9 +54,11 @@
 									<span t-field="o.srf_id.site_address.city"/>
 									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
 									<span t-field="o.srf_id.site_address.state_id"/>
-									,
 									<span t-field="o.srf_id.site_address.country_id"/>
 								</td> -->
+								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address"/>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>

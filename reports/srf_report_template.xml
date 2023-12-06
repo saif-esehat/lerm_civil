@@ -66,7 +66,7 @@
 							</tr>
 
 							<tr>
-								<td colspan="12">Site Address :
+								<!-- <td colspan="12">Site Address :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.site_address.name"/>
 									<span t-field="o.site_address.street"/>
@@ -76,6 +76,9 @@
 									<span t-field="o.site_address.state_id"/>
 											,
 									<span t-field="o.site_address.country_id"/>
+								</td> -->
+								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address"/>
 								</td>
 							</tr>
 							<tr>

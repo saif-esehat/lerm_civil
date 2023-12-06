@@ -57,6 +57,9 @@
 									,
 									<span t-field="o.srf_id.site_address.country_id"/>
 								</td> -->
+								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address"/>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
