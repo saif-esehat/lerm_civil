@@ -63,7 +63,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Sample Description : 									<![CDATA[&nbsp;]]>
+								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
 							</tr>

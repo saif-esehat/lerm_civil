@@ -79,7 +79,7 @@ class WptMechanical(models.Model):
 
 
 
-    temp_percent_wpt = fields.Float("Temperature °C")
+    temp_wpt = fields.Float("Temperature °C")
     humidity_percent_wpt = fields.Float("Humidity %")
     quantity = fields.Char("Quantity",compute="_compute_quantity")
     size = fields.Many2one('lerm.size.line',string="Specimen Size (mm)",compute="_compute_size",store=True)

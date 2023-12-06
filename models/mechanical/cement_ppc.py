@@ -599,7 +599,7 @@ class CementPpc(models.Model):
     # Compressive Strength 
 
     compressive_name = fields.Char("Name",default="Compressive Strength")
-    compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
+    # compressive_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
     temp_percent_compressive = fields.Float("Temperature °C",digits=(16,1))
     humidity_percent_compressive = fields.Float("Humidity %")
