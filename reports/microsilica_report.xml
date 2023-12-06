@@ -6,7 +6,7 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report On Microsilica Mechanical</b></p>
 				</div>
@@ -518,19 +518,15 @@
 								<div style="height:20px">
 
 								</div>
-								<div>
+								<!-- <div>
 									<b>
 										<span t-esc="eln.technician.name"/>
 									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
+								</div> -->
+								
 							</div>
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
@@ -549,9 +545,14 @@
 								</div>
 								<div>
 									<b>
-									<span t-esc="eln.sample_id.approved_by.name"/>
+										Mechanical Department (HOD)
 									</b>
 								</div>
+								<!-- <div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div> -->
 								<div>
 									<b>
 										(Authorized Signatory)
