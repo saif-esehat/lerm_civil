@@ -60,6 +60,28 @@ class ELN(models.Model):
     temperature = fields.Float("Temperature")
     instrument = fields.Char("Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
+
+
+    # @api.onchange('start_date','srf_date')
+    # def _start_date_validate(self):
+    #     for record in self:
+    #         if record.start_date < record.srf_date:
+    #             record.start_date = record.srf_date
+    #             raise ValidationError("Start Date cannot be before SRF creation date")
+    #         else:
+    #             pass
+
+
+    @api.onchange('start_date', 'srf_date')
+    def _start_date_validate(self):
+        for record in self:
+            if record.start_date and record.srf_date and record.start_date < record.srf_date:
+                record.start_date = record.srf_date
+                raise ValidationError("Start Date cannot be before SRF creation date")
+                # record.update({'start_date': record.srf_date})
+
+
+
     
 
 
