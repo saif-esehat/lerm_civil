@@ -173,10 +173,10 @@
                 <sheet>
                     <group style="width:50%">
                         <!-- <field name="sample_id"/> -->
-                        <field name="discipline_id"/>
-                        <field name="material_id" context="{'lab_name':True}" domain="[('id', 'in', material_ids)]"/>
+                        <field name="discipline_id"  options="{'no_create': True}"/>
+                        <field name="material_id" context="{'lab_name':True}" domain="[('id', 'in', material_ids)]"  options="{'no_create': True}"/>
                         <field name="brand"/>
-                        <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
+                        <field name="grade_id" domain="[('id', 'in', grade_ids)]"  options="{'no_create': True}"/>
                         <field name="client_sample_id"/>
                         <field name="received_by_id"/>
                         <field name="sample_condition"/>
@@ -186,13 +186,13 @@
                         <!--<field name="grade_ids" invisible='1'/> -->
                     </group>
                     <group style="width:50%">
-                        <field name="group_id" domain="[('id', 'in', group_ids)]"/>
+                        <field name="group_id" domain="[('id', 'in', group_ids)]"  options="{'no_create': True}"/>
                         <!-- <field name="alias"/> -->
                         <field name="pricelist"/>
                         <field name="product_name"  invisible="1"/>
                         <field name="main_name"   invisible="1"/>
                         <field name="price"   invisible="1"/>
-                        <field name="size_id" domain="[('id', 'in', size_ids)]"/>
+                        <field name="size_id" domain="[('id', 'in', size_ids)]"  options="{'no_create': True}"/>
                         <field name="sample_qty" />
                         <field name="sample_received_date" readonly="1"/>
                         <field name="location"/>

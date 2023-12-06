@@ -46,7 +46,7 @@
 							<tr cols="12">
 								<td colspan="6">Temperature °C :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.temp_percent_wpt"/>
+									<span t-field="data.temp_wpt"/>
 								</td>
 								<td colspan="6">Specimen Size (mm) :
 									<![CDATA[&nbsp;]]>

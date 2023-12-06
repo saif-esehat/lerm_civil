@@ -70,7 +70,13 @@ class ELN(models.Model):
     #             raise ValidationError("Start Date cannot be before SRF creation date")
     #         else:
     #             pass
-
+    # @api.depends('casting_date','sample_id')
+    # def _compute_casting_date(self):
+    #     for record in self:
+    #         if record.sample_id.casting:
+    #             record.casting_date = record.sample_id.date_casting
+    #         else:
+    #             record.casting_date = None
 
     @api.onchange('start_date', 'srf_date')
     def _start_date_validate(self):
