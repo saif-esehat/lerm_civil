@@ -517,7 +517,7 @@ class CementPsc(models.Model):
     start_date_dry_sieving = fields.Date("Start Date")
     end_date_dry_sieving = fields.Date("End Date")
 
-    dry_sieving_table = fields.One2many('cement.dry.sieving.line','parent_id',string="Dry Sieving")
+    dry_sieving_table = fields.One2many('cement.psc.dry.sieving.line','parent_id',string="Dry Sieving")
     average_fineness = fields.Float("Average",compute="_compute_average_fineness")
     fineness_dry_sieving = fields.Float("Fineness by dry sieving %",compute="_compute_fineness_dry_sieving")
 
@@ -619,7 +619,7 @@ class CementPsc(models.Model):
 
     casting_date_3days = fields.Date(string="Date of Casting")
     testing_date_3days = fields.Date(string="Date of Testing",compute="_compute_testing_date_3days")
-    casting_3_days_tables = fields.One2many('cement.casting.3days.line','parent_id',string="3 Days")
+    casting_3_days_tables = fields.One2many('cement.psc.casting.3days.line','parent_id',string="3 Days")
     average_casting_3days = fields.Float("Average",compute="_compute_average_3days")
     compressive_strength_3_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_3days")
     status_3days = fields.Boolean("Done")
@@ -716,7 +716,7 @@ class CementPsc(models.Model):
 
     casting_date_7days = fields.Date(string="Date of Casting")
     testing_date_7days = fields.Date(string="Date of Testing",compute="_compute_testing_date_7days")
-    casting_7_days_tables = fields.One2many('cement.casting.7days.line','parent_id',string="7 Days")
+    casting_7_days_tables = fields.One2many('cement.psc.casting.7days.line','parent_id',string="7 Days")
     average_casting_7days = fields.Float("Average",compute="_compute_average_7days")
     compressive_strength_7_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_7days")
     status_7days = fields.Boolean("Done")
@@ -814,7 +814,7 @@ class CementPsc(models.Model):
 
     casting_date_28days = fields.Date(string="Date of Casting")
     testing_date_28days = fields.Date(string="Date of Testing",compute="_compute_testing_date_28days")
-    casting_28_days_tables = fields.One2many('cement.casting.28days.line','parent_id',string="28 Days")
+    casting_28_days_tables = fields.One2many('cement.psc.casting.28days.line','parent_id',string="28 Days")
     average_casting_28days = fields.Float("Average",compute="_compute_average_28days")
     compressive_strength_28_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_28days")
     status_28days = fields.Boolean("Done")
