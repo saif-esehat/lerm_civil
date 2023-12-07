@@ -173,6 +173,13 @@
         groups="kes_admin_access_group"
         sequence="12" />
 
+    <menuitem id="discipline"
+        name="Size Master"
+        parent="lerm_menu"
+        action="size_master_action"
+        groups="kes_admin_access_group"
+        sequence="13" />
+
     <menuitem id="lerm_test_method"
         name="Test Method"
         parent="lerm_menu"
