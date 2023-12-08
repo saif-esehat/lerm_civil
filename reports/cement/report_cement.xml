@@ -134,7 +134,6 @@
 					</div>
 					<div style="margin-top:20px;">
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
-						<span>Relative Humidity</span>
 					</div>
 					<table style="margin-top:30px;">
 					<t t-set="i" t-value="0"/>

@@ -13,6 +13,9 @@
             <t t-out="0"/>
         </div>
 		<div t-attf-class="footer o_standard_footer">
+			<div>
+				<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
+			</div>
             <div class="text-center" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4">
                     <div class="footertext">
