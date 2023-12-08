@@ -160,15 +160,15 @@
 										Test Result
 									</span>
 								</th>
+								
+								<th rowspan="1"> Limits As per
+									<span t-field="eln.material.specifications"></span>
+								</th>
+								
 								<th>
 									<span>
 										Test Method
 									</span>
-								</th>
-								
-								
-								<th rowspan="1"> Limits As per
-								<span t-field="eln.material.specifications"></span>
 								</th>
 								<th t-if="eln.conformity">
 								</th>
