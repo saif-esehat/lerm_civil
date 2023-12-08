@@ -132,6 +132,17 @@
                 <p class="o_view_nocontent_smiling_face">Product</p>
             </field>
     </record>
+
+    <record id="size_master_action" model="ir.actions.act_window">
+        <field name="name">Size Master</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.size.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Size Master</p>
+        </field>
+
+    </record>
     
     <menuitem id="lerm_root"
         groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by"
@@ -173,7 +184,7 @@
         groups="kes_admin_access_group"
         sequence="12" />
 
-    <menuitem id="discipline"
+    <menuitem id="size_master"
         name="Size Master"
         parent="lerm_menu"
         action="size_master_action"
