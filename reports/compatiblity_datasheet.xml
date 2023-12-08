@@ -53,8 +53,7 @@
                                     <th>Wt. of Water (g)</th>
                                     <th>Wt. of Admixture (g)</th>
                                     <th>Flow (Sec)</th>
-                                    <th>Flow at 30 Min (Sec)</th>
-                                    <th>Flow at 60 Min (Sec)</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,12 +77,7 @@
                                         <td>
                                             <span t-field="line.flow_sec"/>
                                         </td>
-                                        <td>
-                                            <span t-field="line.flow_30_min"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="line.flow_60_min"/>
-                                        </td>
+                                       
                                     </tr>
                                 </t>
                             </tbody>
@@ -97,6 +91,54 @@
 						</div>
 
                     </div>
+                    <div class="authorizeRowDataSheet">
+
+                        <div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:20px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr Technician)
+                                </b>
+                            </div>
+						</div>
+
+
+                        <div>
+                            <div>
+                                <b>
+                                    Checked By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:20px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.check_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Senior Technician)
+                                </b>
+                            </div>
+						</div>
+						
+					</div>
                 </div>
             </t>
         </t>

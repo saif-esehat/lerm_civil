@@ -34,8 +34,8 @@
                                 <field name="wt_of_water"/>
                                 <field name="wt_of_admixture"/>
                                 <field name="flow_sec"/>
-                                <field name="flow_30_min"/>
-                                <field name="flow_60_min"/>
+                                <!-- <field name="flow_30_min"/> -->
+                                <!-- <field name="flow_60_min"/> -->
                             </tree>
                         </field>
 
