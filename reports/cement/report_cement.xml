@@ -164,7 +164,7 @@
 								<th rowspan="1"> Limits As per
 									<span t-field="eln.material.specifications"></span>
 								</th>
-								
+
 								<th>
 									<span>
 										Test Method
@@ -1176,7 +1176,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<div style="margin-top:20px" class="noteContainer">
+					<div  style="page-break-inside: avoid;margin-top:20px;" class="noteContainer">
 						<div>
 							<b>Note :-</b>
 						</div>
@@ -1197,7 +1197,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="signatureContainer girdgird">
+					<div class="signatureContainer girdgird" style="page-break-inside: avoid;">
 							<div>
 								<div>
 									<b>
