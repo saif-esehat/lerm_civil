@@ -160,7 +160,7 @@
 									</span>
 								</th>
 								
-								<th rowspan="1"> Limits As per
+								<th rowspan="1"> Limits
 									<span t-field="eln.material.specifications"></span>
 								</th>
 
