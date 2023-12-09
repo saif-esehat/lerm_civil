@@ -16,12 +16,12 @@
 								<td colspan="3">Report no :
 								</td>
 								<td colspan="3">
-									<span t-field="o.eln_id"/>
+									<span t-field="o.kes_no"/>
 								</td>
 								<td colspan="3">Report Date :
 								</td>
 								<td colspan="3">
-									<span t-field="o.srf_date"/>
+									<span t-field="o.end_date"/>
 								</td>
 								<td colspan="3"  t-if="nabl">ULR NO :
 								</td>
@@ -134,21 +134,29 @@
                     <!-- Transverse Strength -->
                     <div t-if="data.transverse_visible" style="margin-top:20px">
                             <div style="text-align:center;font-size:18px">
-                                Transverse Strength
+                                <!-- Transverse Strength -->
+								<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0b48abe6-07a4-4345-bcc1-30ff6e4830af')]).parameter_name"/>
+
                             </div>
                             
 
                             <table style="margin-top:20px">
                                 <tr cols="12">
-                                    <td colspan="1">Trial no 
+                                    <td colspan="1" style="text-align: center;font-weight: bold;">Trial no 
                                     </td>
-                                    <td colspan="2">Required Load in (Ton)
+                                    <td colspan="2" style="text-align: center;font-weight: bold;">Required Load in (Ton)
                                     </td>
-                                    <td colspan="2">Observed Test Result
+                                    <td colspan="2" style="text-align: center;font-weight: bold;">Observed Test Result
                                     </td>
-                                    <td colspan="4">Protocol
-                                    </td>
-                                    <td colspan="3">Requirement
+                                    <!-- <td colspan="4" style="text-align: center;font-weight: bold;">Protocol
+                                    </td> -->
+									<th colspan="4" style="text-align: center;font-weight: bold;">
+										<span>
+											<span t-esc="eln.material.test_parameter"/>
+											
+										</span>
+									</th>
+                                    <td colspan="3" style="text-align: center;font-weight: bold;">Requirement
                                     </td>
                                     
                                     
@@ -156,19 +164,19 @@
 
                                 <t t-set="i" t-value="0"/>
                                 <tr t-foreach="data.transverse_table" t-as="r">
-                                    <td colspan="1">
+                                    <td colspan="1" style="text-align: center;">
                                         <span t-esc="r['trial_no']"/>
                                     </td>
-                                    <td colspan="2">
+                                    <td colspan="2" style="text-align: center;">
                                         <span t-esc="r['required_load']"/>
                                     </td>
-                                    <td colspan="2">
+                                    <td colspan="2" style="text-align: center;">
                                         <span t-esc="r['observed_test_result']"/>
                                     </td>
-                                    <td colspan="4">
+                                    <td colspan="4" style="text-align: center;">
                                         <span t-esc="r['protocol']"/>
                                     </td>
-                                    <td colspan="3">
+                                    <td colspan="3" style="text-align: center;">
                                         <span t-esc="r['requirement']"/>
                                     </td>
                                     
@@ -180,53 +188,60 @@
                     <!-- Water Absorbtion  -->
                     <div t-if="data.water_absorbtion_visible" style="margin-top:20px">
                         <div style="text-align:center;font-size:18px">
-                            Water Absorbtion
+                            <!-- Water Absorbtion -->
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f913fc79-eeb4-4e16-a7fc-75608384d9b0')]).parameter_name"/>
                         </div>
                         
 
                         <table style="margin-top:20px">
                             <tr cols="12">
-                                <td colspan="1">Sr no 
+                                <td colspan="1" style="text-align: center;font-weight: bold;">Sr no 
                                 </td>
-                                <td colspan="1">Dry Weight (after 24 hour in oven)
+                                <td colspan="1" style="text-align: center;font-weight: bold;">Dry Weight (after 24 hour in oven)
                                 </td>
-                                <td colspan="2">Weight (wt. after 10 minutes emersion in water)
+                                <td colspan="2" style="text-align: center;font-weight: bold;">Weight (wt. after 10 minutes emersion in water)
                                 </td>
-                                <td colspan="2">Weight (wt. after 24 hour emersion in water)
+                                <td colspan="2" style="text-align: center;font-weight: bold;">Weight (wt. after 24 hour emersion in water)
                                 </td>
-                                <td colspan="2">Initial Water Absorption, %
+                                <td colspan="2" style="text-align: center;font-weight: bold;">Initial Water Absorption, %
                                 </td>
-                                <td colspan="2">Final Water Absorption, %
+                                <td colspan="2" style="text-align: center;font-weight: bold;">Final Water Absorption, %
                                 </td>
-                                <td colspan="2">Protocol
-                                </td>
+                                <!-- <td colspan="2">Protocol
+                                </td> -->
+								<th colspan="2" style="text-align: center;font-weight: bold;">
+									<span>
+										<span t-esc="eln.material.test_parameter"/>
+										
+									</span>
+								</th>
                                 
                             </tr>
 
                             <t t-set="i" t-value="0"/>
                             <tr t-foreach="data.water_absorbtion_table" t-as="r">
-                                <td colspan="1">
+                                <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
                                     </div>
                                 </td>
-                                <td colspan="1">
+                                <td colspan="1" style="text-align: center;">
                                     <span t-esc="r['dry_wt_oven']"/>
                                 </td>
-                                <td colspan="2">
+                                <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['wt_10_min']"/>
                                 </td>
-                                <td colspan="2">
+                                <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['wt_24_hr']"/>
                                 </td>
-                                <td colspan="2">
+                                <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['initial_water_absorbtion']"/>
                                 </td>
-                                <td colspan="2">
+                                <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['final_water_absorbtion']"/>
                                 </td>
-                                <td colspan="2">
+                                <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['protocol']"/>
                                 </td>
                                 
@@ -271,7 +286,7 @@
 								<div style="height:20px">
 
 								</div>
-								<div>
+								<!-- <div>
 									<b>
 										Chemical Department (HOD)
 									</b>
@@ -280,10 +295,10 @@
 									<b>
 										(Authorized Signatory)
 									</b>
-								</div>
+								</div> -->
 							</div>
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
@@ -301,7 +316,7 @@
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										Mechanical Department (HOD)
 									</b>
 								</div>
 								<div>
@@ -311,8 +326,13 @@
 								</div>
 							</div>
 						</div>
-						<div style="text-align:center;margin-top:25px">
+						<!-- <div style="text-align:center;margin-top:25px">
 							......End of Report......
+						</div> -->
+						<div style="margin-top: 50px; text-align: center;">
+							<p style="border-top: 1px dashed #000; padding-top: 10px;">
+								...... End Of Report......
+							</p>
 						</div>
 					</div>
 

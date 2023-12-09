@@ -6,7 +6,8 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			<!-- <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general"> -->
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report on GGBS Mechanical</b></p>
 				</div>
@@ -22,7 +23,7 @@
 								<td colspan="3">Report Date :
 								</td>
 								<td colspan="3">
-									<span t-field="o.srf_date"/>
+									<span t-field="o.end_date"/>
 								</td>
 								<td colspan="3"  t-if="nabl">ULR NO :
 								</td>
@@ -149,40 +150,51 @@
 					<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Sr. No
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Test Parameters
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Unit
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Result
 									</span>
 								</th>
-								<th>
+								<!-- <th>
 									<span>
 										Test Method
+										
+									</span>
+								</th> -->
+								<th  style="text-align: center;font-weight: bold;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
 									</span>
 								</th>
-								<th t-if="eln.conformity">
+								<th style="text-align: center;font-weight: bold;" t-if="eln.conformity">
 									<span>
 										Conformity
 									</span>
 								</th>
 
-								<th>
+								<!-- <th>
 									<span>
 										Limit
+									</span>
+								</th> -->
+								<th  style="text-align: center;font-weight: bold;">
+									<span>
+										<span t-esc="eln.material.specifications"/>
 									</span>
 								</th>
 							</tr>
@@ -190,40 +202,52 @@
 						<tbody >
 							
 							<tr t-if="ggbs.specific_gravity_visible">
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td>
+								<!-- <td>
 									<span>
 										Specific Gravity
 									</span>
 									
+								</td> -->
+								<td style="text-align: center;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')]).parameter_name"/>
 								</td>
-								<td>
+								<!-- <td>
 									<span>
                                         -
                                     </span>
+								</td> -->
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')]).unit.name"/>
+									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<span t-field="ggbs.average_specific_gravity"/>
 									</span>									
 								</td>
-								<td>
-									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')]).test_method.test_method"/>
-									</span>
+								
+								<td style="text-align: center;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')]).parameter_table" t-as="parameter">
+										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+											<span t-field="parameter.specification"/>
+										<!-- </t> -->
+									</t>
 								</td>
 								
-								
-								<td>
-									<span>
-                                        -
-									</span>
+								<td style="text-align: center;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')]).parameter_table" t-as="parameter">
+										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+											<span t-field="parameter.permissable_limit"/>
+										<!-- </t> -->
+									</t>
 								</td>
 
-								<td t-if="eln.conformity">
+								<td style="text-align: center;" t-if="eln.conformity">
 									<span t-field="ggbs.specific_gravity_confirmity"/>
 								</td>
 								
@@ -231,58 +255,66 @@
 							
 							
 							<tr t-if="ggbs.fineness_visible">
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td>
+								<!-- <td>
 									<span>
 										Fineness by Blaine air Permability (m²/kg)
 									</span>
+								</td> -->
+								<td style="text-align: center;" >
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_name"/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).unit.name"/>
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<span t-field="ggbs.fineness_air_permeability"/>
 									</span>									
 								</td>
-								<td>
-									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).test_method.test_method"/>
-									</span>
+								
+								<td style="text-align: center;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_table" t-as="parameter">
+										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+											<span t-field="parameter.specification"/>
+										<!-- </t> -->
+									</t>
 								</td>
-								<td>
-									<span>
-										320 Min
-									</span>
+								
+								<td style="text-align: center;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_table" t-as="parameter">
+										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+											<span t-field="parameter.permissable_limit"/>
+										<!-- </t> -->
+									</t>
 								</td>
-								<td t-if="eln.conformity">
+								<td style="text-align: center;" t-if="eln.conformity">
 									<span t-field="ggbs.fineness_confirmity"/>
 								</td>
 							</tr>
 							
 							<tr t-if="ggbs.slag_activity_visible">
-								<td style="border-bottom:none">
-									<span></span>
+								<td style="border-bottom:none;text-align: center;">
 									
 								</td>
-								<td>
+								
+								<td style="text-align: center;" >
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_name"/>
+								</td>
+
+								
+								<td rowspan="6"  style="text-align: center;vertical-align: middle;">
 									<span>
-										Slag Activity Index 7 Days
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
 								</td>
 
-								<td>
-									<span style="border-bottom:none">
-										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/> -->
-									</span>
-								</td>
-
-								<td>
+								<td  style="text-align: center;">
 									<span>
 										<t t-if="ggbs.status_7days">
 											<span t-field="ggbs.average_7days_slag"/>
@@ -293,18 +325,25 @@
 									</span>									
 								</td>
 
-								<td style="border-bottom:none">
+								<!-- <td style="border-bottom:none">
 									<span>
-										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
+								</td> -->
+								<td rowspan="6"  style="text-align: center;vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
+										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+											<span t-field="parameter.specification"/>
+										<!-- </t> -->
+									</t>
 								</td>
+								
 
 								<td style="border-bottom:none">
 									<span>
 										
 									</span>
 								</td>
-								<td t-if="eln.conformity">
+								<td style="text-align: center;" t-if="eln.conformity">
 									<!-- <span t-field="ggbs.specific_gravity_confirmity"/> -->
 								</td>
 								
@@ -315,17 +354,17 @@
 									<span></span>
 									
 								</td>
-								<td >
+								<td style="text-align: center;">
 									<span>
 										Control Sample 7 days
 									</span>
 								</td>
-								<td>
+								<!-- <td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
-								</td>
-								<td>
+								</td> -->
+								<td style="text-align: center;">
 									<span>
 										<t t-if="ggbs.status_7days">
 											<span t-field="ggbs.average_7days_slag_opc"/>
@@ -335,40 +374,47 @@
 										</t>
 									</span>									
 								</td>
-								<td style="border-bottom:none;border-top:none">
+								<!-- <td style="border-bottom:none;border-top:none">
 									<span >
-									   <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 										
 									</span>
-								</td>
+								</td> -->
 								
-								<td style="border-bottom:none;border-top:none">
+								
+								<!-- <td style="border-bottom:none;border-top:none;text-align: center;">
 									<span>
 										Not less than 60 percent of control OPC 43 Grade cement mortor cube
 									</span>
+								</td> -->
+								<td style="border-bottom:none;border-top:none;text-align: center;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
+										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+											<span t-field="parameter.permissable_limit"/>
+										<!-- </t> -->
+									</t>
 								</td>
-								<td t-if="eln.conformity">
+								<td style="text-align: center;" t-if="eln.conformity">
 									<!-- <span t-field="ggbs.specific_gravity_confirmity"/> -->
 								</td>
 							</tr>
 
 							<tr t-if="ggbs.slag_activity_visible">
-								<td style="border-bottom:none;border-top:none"> 
+								<td style="border-bottom:none;border-top:none;text-align: center;"> 
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 									
 								</td>
-								<td >
+								<td style="text-align: center;">
 									<span>
 										In Percent
 									</span>
 								</td>
-								<td>
+								<!-- <td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
-								</td>
-								<td>
+								</td> -->
+								<td style="text-align: center;">
 									<span>
 										<t t-if="ggbs.status_7days">
 											<span t-field="ggbs.slag_activity_index_7days"/>
@@ -378,11 +424,11 @@
 										</t>
 									</span>									
 								</td>
-								<td style="border-bottom:none;border-top:none">
+								<!-- <td style="border-bottom:none;border-top:none">
 									<span >
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/>
 									</span>
-								</td>
+								</td> -->
 								
 								
 								<td style="border-top:none">
@@ -405,17 +451,17 @@
 									<span></span>
 									
 								</td>
-								<td > 
+								<td style="text-align: center;"> 
 									<span >
 										Slag Activity Index 28 Days
 									</span>
 								</td>
-								<td>
+								<!-- <td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
-								</td>
-								<td>
+								</td> -->
+								<td style="text-align: center;">
 									<span>
 										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.average_28days_slag"/>
@@ -426,11 +472,10 @@
 									</span>									
 								</td>
 
-								<td style="border-bottom:none;border-top:none">
+								<!-- <td style="border-bottom:none;border-top:none">
 									<span >
-										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
-								</td>
+								</td> -->
 
 								<td style="border-bottom:none">
 									<span>
@@ -447,17 +492,17 @@
 									<span></span>
 									
 								</td>
-								<td >
+								<td style="text-align: center;">
 									<span>
 										Control Sample 28 days
 									</span>
 								</td>
-								<td>
+								<!-- <td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
-								</td>
-								<td>
+								</td> -->
+								<td style="text-align: center;">
 									<span>
 										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.average_28days_slag_opc"/>
@@ -467,19 +512,23 @@
 										</t>
 									</span>									
 								</td>
-								<td style="border-bottom:none;border-top:none">
+								<!-- <td style="border-bottom:none;border-top:none">
 									<span >
 										
-									   <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
-								</td>
+								</td> -->
 
-								<td style="border-bottom:none;border-top:none">
+								<td style="border-bottom:none;border-top:none;text-align: center;">
 									<span>
 										Not less than 60 percent of control OPC 43 Grade cement mortor cube
 									</span>
 								</td>
-								<td t-if="eln.conformity">
+								<!-- <td style="border-bottom:none;border-top:none;text-align: center;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
+											<span t-field="parameter.permissable_limit"/>
+									</t>
+								</td> -->
+								<td style="text-align: center;" t-if="eln.conformity">
 									<!-- <span t-field="ggbs.specific_gravity_confirmity"/> -->
 								</td>
 							</tr>
@@ -489,17 +538,17 @@
 									<span></span>
 									
 								</td>
-								<td >
+								<td style="text-align: center;">
 									<span>
 										In Percent
 									</span>
 								</td>
-								<td>
+								<!-- <td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).unit.name"/>
 									</span>
-								</td>
-								<td>
+								</td> -->
+								<td style="text-align: center;">
 									<span>
 										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.slag_activity_index_28days"/>
@@ -509,12 +558,11 @@
 										</t>
 									</span>									
 								</td>
-								<td style="border-top:none">
+								<!-- <td style="border-top:none">
 									<span >
 										
-										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).test_method.test_method"/> -->
 									</span>
-								</td>
+								</td> -->
 								
 								
 								<td style="border-top:none">
@@ -522,7 +570,7 @@
 										
 									</span>
 								</td>
-								<td t-if="eln.conformity">
+								<td style="text-align: center;" t-if="eln.conformity">
 									<!-- <span t-field="ggbs.specific_gravity_confirmity"/> -->
 								</td>
 							</tr>
@@ -551,7 +599,7 @@
 							</div>
 						</div>
 						
-						<div class="signatureContainer girdgird">
+						<!-- <div class="signatureContainer girdgird">
 							<div>
 								<div>
 									<b>
@@ -593,6 +641,48 @@
 								<div>
 									<b>
 									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+						</div> -->
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+					
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:70px">
+
+								</div>
+							</div>
+							
+							<div>
+								<div >
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By
+									</b>
+								</div>
+								<div style="height:20px">
+									
+								</div>
+								<div>
+									<b>
+										Mechanical Department (HOD)
 									</b>
 								</div>
 								<div>

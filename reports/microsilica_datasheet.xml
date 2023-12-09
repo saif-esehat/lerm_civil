@@ -4,16 +4,14 @@
     <t t-call="web.html_container">
 	<!-- <t t-call="lerm_civil.data_sheet_header_generaltemplate"> -->
 	<t t-call="lerm_civil.data_sheet_header">
-		<div style="text-align:center;font-size:18px">
+		<div style="text-align:center;font-size:18px;font-weight: bold;">
 			Microsilica
 		</div>
 		<div class="container_eln" style="margin-top:5px">
 				<!--1 Accelerated pozzolanic activity index with portland cement , 7 Days in % -->
 
 			<div t-if="data.compressive_visible" style="margin-top:20px">
-				<div style="text-align:center;font-size:18px">
-						Accelerated pozzolanic activity index with portland cement , 7 Days in %
-				</div>
+				
 				
 					<table style="margin-top:20px">
 						<tr cols="12">
@@ -21,23 +19,43 @@
 								<![CDATA[&nbsp;]]>
 								<span t-field="data.temp_percent_compressive"/>
 							</td>
-							<td colspan="6">Test Start Date :
-								<![CDATA[&nbsp;]]>
-								<span t-field="data.start_date_compressive"/>
-							</td>
-						</tr>
-						<tr cols="12">
 							<td colspan="6">Humidity :
 								<![CDATA[&nbsp;]]>
 								<span t-field="data.humidity_percent_compressive"/>
 							</td>
-							<td colspan="6">Test End Date :
+							
+						</tr>
+						<tr cols="12">
+							<td colspan="4">Material: <span t-field="eln.material"></span>
+							</td>
+							<td colspan="4">Test Start Date :
+								<![CDATA[&nbsp;]]>
+								<span t-field="data.start_date_compressive"/>
+							</td>
+							<td colspan="4">Test End Date :
 								<![CDATA[&nbsp;]]>
 								<span t-field="data.end_date_compressive"/>
 							</td>
 						</tr>
+						<tr style="height:50px" cols="12">
+							<td colspan="4">Performed By :
+								<![CDATA[&nbsp;]]>
+								<span t-field="eln.technician.name"/>
+							</td>
+							<td colspan="4">Witness Name :
+								<![CDATA[&nbsp;]]>
+								<span t-field="eln.witness_name"/>
+							</td>
+							<td colspan="4">Witness Signature :
+								<![CDATA[&nbsp;]]>
+								<span style='padding:20px'></span>
+							</td>
+						</tr>
 							
 					</table>
+					<div style="margin-top:20px;text-align:center;font-size:18px">
+						Accelerated pozzolanic activity index with portland cement , 7 Days in %
+					</div>
 					<table style="margin-top: 20px">
 							
 						
@@ -973,22 +991,48 @@
 				<div style="margin-left:500px">
 							
 					<div>
-						<b>
-							Approved By
-						</b>
-					</div>
-					<div style="height:40px">
+						<div>
+							<b>
+								Tested By 
+							</b>
+							
+						</div>
+						<div style="height:40px">
 
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.filled_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(Jr. Technician)
+							</b>
+						</div>
 					</div>
-					<div>
-						<b>
-							Mechanical Department (HOD)
-						</b>
-					</div>
-					<div>
-						<b>
-							(Authorized Signatory)
-						</b>
+					
+					<div style="margin-left:500px">
+								
+						<div>
+							<b>
+								Approved By
+							</b>
+						</div>
+						<div style="height:40px">
+
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.check_by.name"/>
+							</b>
+						</div>
+						
+						<div>
+							<b>
+								(Sr. Technician)
+							</b>
+						</div>
 					</div>
 				</div>
 			</div>

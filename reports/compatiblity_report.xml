@@ -3,7 +3,8 @@
 
 	<template id="compatiblity_report">
 		<t t-call="web.html_container">
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			<!-- <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general"> -->
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px">
 						<b>Test Report</b>
@@ -22,7 +23,7 @@
 								<td colspan="3">Report Date :
 								</td>
 								<td colspan="3">
-									<span t-field="o.srf_date"/>
+									<span t-field="o.end_date"/>
 								</td>
 								<td colspan="3"  t-if="nabl">ULR NO :
 								</td>
@@ -142,19 +143,19 @@
 								</td>
 							</tr>
 						</table>
-
-						<table class="table table-condensed" style="margin-top: 20px;">
+						<div style="margin-top:20px;"></div>
+						<table >
 							<thead>
 								<tr>
-									<th>Sr No.</th>
-									<th>Water Cement Ratio (w/c)</th>
-									<th>Admixture Dosage (%)</th>
-									<th>Wt. of Cement (g)</th>
-									<th>Wt. of Water (g)</th>
-									<th>Wt. of Admixture (g)</th>
-									<th>Flow (Sec)</th>
-									<th>Flow at 30 Min (Sec)</th>
-									<th>Flow at 60 Min (Sec)</th>
+									<th style="font-weight: bold;">Sr No.</th>
+									<th style="font-weight: bold;">Water Cement Ratio (w/c)</th>
+									<th style="font-weight: bold;">Admixture Dosage (%)</th>
+									<th style="font-weight: bold;">Wt. of Cement (g)</th>
+									<th style="font-weight: bold;">Wt. of Water (g)</th>
+									<th style="font-weight: bold;">Wt. of Admixture (g)</th>
+									<th style="font-weight: bold;">Flow (Sec)</th>
+									<th style="font-weight: bold;">Flow at 30 Min (Sec)</th>
+									<th style="font-weight: bold;">Flow at 60 Min (Sec)</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -223,34 +224,48 @@
 							</div>
 						</div>
 
-						<div class="signatureContainer girdgird">
-							<div>
-								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-							</div>
-							<div>
-							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-							</div>
-							<div>
-								<div>
-									<b>
-									Approved By
-									</b>
-								</div>
-								<div style="height:20px">
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+					
+					<div>
+						<div>
+							<b>
+								Checked By
+							</b>
+						</div>
+						<div style="height:70px">
 
-								</div>
-								<div>
-									<b>
-									Chemical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
+						</div>
+					</div>
+					
+			      	<div>
+						<div >
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							Format No. <span t-esc="eln.material.test_format_no"/>
+						</div>
+						</div>
+						<div>
+							<div>
+								<b>
+									Approved By
+								</b>
+							</div>
+							<div style="height:20px">
+								
+							</div>
+							<div>
+								<b>
+									Mechanical Department (HOD)
+								</b>
+							</div>
+							<div>
+								<b>
 									(Authorized Signatory)
-									</b>
-								</div>
+								</b>
 							</div>
 						</div>
+					</div>
 
 
 					</div>

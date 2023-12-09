@@ -436,13 +436,16 @@
 				<!-- <div style="text-align:center;">
 					<p style="font-size:15px"><b>Test Data Sheet</b></p>
 				</div> -->
+				<div style="text-align:center;font-size:18px">
+                    Concrete Cube
+                </div>
 				<div class="container_eln" style="margin-top:5px">
 					<div t-foreach="eln" t-as="o">
 						<table>
 							<tr cols="12">
 								<td colspan="6">Job no :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.eln_id"/>
+									<span t-field="eln.kes_no"/>
 								</td>
 								<td colspan="6">Test Start Date :
 									<![CDATA[&nbsp;]]>
@@ -470,7 +473,7 @@
 								</td> -->
 								<td colspan="4">Witness Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="eln.witness_description"/>
+									<span t-field="eln.witness_name"/>
 								</td>
 								<td colspan="4">Witness Signature :
 									<![CDATA[&nbsp;]]>
@@ -569,40 +572,49 @@
 					</div>
 					<div class="authorizeRowDataSheet">
 						<div>
-							<!-- <div>
-								<b>
-									(JR Chemist)
-								</b>
-							</div> -->
-							<div>
-								<b>
-									Checked By
-								</b>
-							</div>
-						</div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
 
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr. Technician)
+                                </b>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-left:500px">
+                                    
+                            <div>
+                                <b>
+                                    Approved By
+                                </b>
+                            </div>
+                            <div style="height:40px">
 
-						<div style="margin-left:500px">
-							
-							<div>
-								<b>
-									Approved By
-								</b>
-							</div>
-							<div style="height:40px">
-
-							</div>
-							<div>
-								<b>
-									Mechanical Department (HOD)
-								</b>
-							</div>
-							<div>
-								<b>
-									(Authorized Signatory)
-								</b>
-							</div>
-						</div>
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.check_by.name"/>
+                                </b>
+                            </div>
+                            
+                            <div>
+                                <b>
+                                    (Sr. Technician)
+                                </b>
+                            </div>
+                        </div>
 						
 					</div>
 

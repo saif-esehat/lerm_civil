@@ -1161,25 +1161,25 @@
 							<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
 						</div> -->
 						<div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										<span t-esc="eln.technician.name"/>
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
+							<div>
+								<b>
+									Checked By
+								</b>
 							</div>
+							<div style="height:20px">
+
+							</div>
+							<div>
+								<b>
+									<span t-esc="eln.technician.name"/>
+								</b>
+							</div>
+							<div>
+								<b>
+									(Authorized Signatory)
+								</b>
+							</div>
+						</div>
 						<div >
 							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 						</div>

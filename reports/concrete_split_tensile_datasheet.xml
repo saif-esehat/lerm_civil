@@ -4,7 +4,8 @@
 		
     <template id="lerm_concrete_splite_tensile_datasheet">
         <t t-call="web.html_container">
-            <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+            <!-- <t t-call="lerm_civil.data_sheet_header_generaltemplate"> -->
+			<t t-call="lerm_civil.data_sheet_header">
                 <div style="text-align:center;font-size:18px;font-weight: bold">
                     Concrete Split Tensile Strength	
                 </div>
@@ -35,7 +36,7 @@
 							</td>
 							<td colspan="4">Witness Name :
 								<![CDATA[&nbsp;]]>
-								<span t-field="eln.witness_description"/>
+								<span t-field="eln.witness_name"/>
 							</td>
 							<td colspan="4">Witness Signature :
 								<![CDATA[&nbsp;]]>
@@ -104,33 +105,53 @@
                     
                     <!-- authorizeRowDataSheet -->
                     
-                    <div class="authorizeRowDataSheet">
-                        <div>
-                            <div>
-                                <b>
-                                    (JR Chemist)
-                                </b>
-                            </div>
-                            <div>
-                                <b>
-                                    Tested By
-                                </b>
-                            </div>
-                        </div>
-                        <div style="margin-left:500px">
-                            <div>
-                                <b>
-                                    Mechanical Department (HOD)
-                                </b>
-                            </div>
-                            <div>
-                                <b>
-                                    Checked By
-                                </b>
-                            </div>
-                        </div>
-                    </div>
                     
+					<div class="authorizeRowDataSheet">
+						<div>
+							<div>
+								<b>
+									Tested By 
+								</b>
+								
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.filled_by.name"/>
+								</b>
+							</div>
+							<div>
+								<b>
+									(Jr. Technician)
+								</b>
+							</div>
+						</div>
+						<div style="margin-left:500px">
+							
+							<div>
+								<b>
+									Approved By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
+								</b>
+							</div>
+						</div>
+					</div>
+							
 
                 </div>
 
@@ -155,12 +176,12 @@
 								<td colspan="3">Report no :
 								</td>
 								<td colspan="3">
-									<span t-field="o.eln_id"/>
+									<span t-field="o.kes_no"/>
 								</td>
 								<td colspan="3">Report Date :
 								</td>
 								<td colspan="3">
-									<span t-field="o.srf_date"/>
+									<span t-field="o.end_date"/>
 								</td>
 								<td colspan="3"  t-if="nabl">ULR NO :
 								</td>
@@ -184,7 +205,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Project / Site Address :
+								<!-- <td colspan="12">Project / Site Address :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.site_address.name"/>
 									<span t-field="o.srf_id.site_address.street"/>
@@ -194,6 +215,9 @@
 									<span t-field="o.srf_id.site_address.state_id"/>
 											,
 									<span t-field="o.srf_id.site_address.country_id"/>
+								</td> -->
+								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address"/>
 								</td>
 							</tr>
 							<tr>
@@ -273,14 +297,16 @@
 					<div></div>
 					
 					
-					<span>
-						<strong>Protocol :</strong><![CDATA[&nbsp;]]>
-						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','51ff18a6-226c-4dbf-9389-7cc72b090e66')]).parameter_table" t-as="parameter">
-							<t t-if="parameter.grade.id == eln.grade_id.id">
-								<span t-field="parameter.specification"/>
+						<span style="margin-top:20px;font-weight: bold;" >
+							<!-- <strong>Protocol :</strong><![CDATA[&nbsp;]]> -->
+							<span t-esc="eln.material.test_parameter"/>:
+							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','51ff18a6-226c-4dbf-9389-7cc72b090e66')]).parameter_table" t-as="parameter">
+								<t t-if="parameter.grade.id == eln.grade_id.id">
+									<span t-field="parameter.specification"/>
+								</t>
 							</t>
-						</t>
-					</span>
+						</span>
+					
 					
 
 					<table style="margin-top:30px;">
@@ -386,7 +412,7 @@
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
 									<li t-if="eln.has_witness">
-                                        <p>Test witnessed by : <span t-esc="eln.witness_description"/></p>
+                                        <p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
                                    	</li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
@@ -401,10 +427,10 @@
 										Checked By
 									</b>
 								</div>
-								<div style="height:20px">
+								<div style="height:70px">
 
 								</div>
-								<div>
+								<!-- <div>
 									<b>
 										Mechanical Department (HOD)
 									</b>
@@ -413,7 +439,7 @@
 									<b>
 										(Authorized Signatory)
 									</b>
-								</div>
+								</div> -->
 							</div>
 							<div>
 								<div t-if="stamp and stamp == '4-in_report'">

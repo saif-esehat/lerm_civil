@@ -3,14 +3,51 @@
 <template id="precast_mech_datasheet">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
-			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
-                <div style="text-align:center;font-size:18px">
+			<!-- <t t-call="lerm_civil.data_sheet_header_generaltemplate"> -->
+            <t t-call="lerm_civil.data_sheet_header">
+                <div style="text-align:center;font-size:18px;font-weight: bold;">
                     Precast Kerb Stone
                 </div>
                 <div class="container_eln" style="margin-top:5px">
 
-                    <!-- Transverse Strength -->
+                   
                     <div t-if="data.transverse_visible" style="margin-top:20px">
+                        <table style="margin-top:20px">
+                            <tr cols="12">
+					
+                                <td colspan="6">Job No :
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="eln.kes_no"></span>
+                                </td>
+                                <td colspan="6">Test Start Date: 
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="eln.start_date"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Material: <span t-field="eln.material"></span>
+                                </td>
+                                <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                                </td>
+                            </tr>
+                            <tr style="height:50px" cols="12">
+                                <td colspan="4">Performed By :
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="eln.technician.name"/>
+                                </td>
+                                <td colspan="4">Witness Name :
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="eln.witness_name"/>
+                                </td>
+                                <td colspan="4">Witness Signature :
+                                    <![CDATA[&nbsp;]]>
+                                    <span style='padding:20px'></span>
+                                </td>
+                            </tr>
+                        </table>
+
+                            <!-- Transverse Strength -->
+
                             <div style="text-align:center;font-size:18px">
                                 Transverse Strength
                             </div>
@@ -113,35 +150,55 @@
                         
 
                     </div>
+                    <div class="authorizeRowDataSheet">
+                        <div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr. Technician)
+                                </b>
+                            </div>
+                        </div>
+                        <div style="margin-left:500px">
+                            
+                            <div>
+                                <b>
+                                    Approved By
+                                </b>
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.check_by.name"/>
+                                </b>
+                            </div>
+                            
+                            <div>
+                                <b>
+                                    (Sr. Technician)
+                                </b>
+                            </div>
+                        </div>
+                    </div>
 
 				</div>
 
-				<div class="authorizeRowDataSheet">
-					<div>
-						<div>
-							<b>
-								(JR Chemist)
-							</b>
-						</div>
-						<div>
-							<b>
-								Tested By
-							</b>
-						</div>
-					</div>
-					<div style="margin-left:500px">
-						<div>
-							<b>
-								Chemical Department (HOD)
-							</b>
-						</div>
-						<div>
-							<b>
-								Checked By
-							</b>
-						</div>
-					</div>
-				</div>
+				
 			</t>
 		</t>
 	</template>

@@ -11,31 +11,30 @@
 					<div t-if="data.normal_consistency_visible">
 					
 
-						<div style="text-align:center;font-size:18px">
-							Normal Consistency of GGBS
-						</div>
+						
 						<table>
-							<tr cols="12">
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<!-- <span t-field="data.eln_id"/> -->
+							<tr>
+								<td colspan="6">Job No  :  <span t-field="eln.kes_no"></span>
 								</td>
+								<td colspan="6">Material  :  <span t-field="eln.material"></span>
+								</td>
+								
+							</tr>
+							
+							<tr cols="12">
 								<td colspan="6">Test Start Date :
 									<![CDATA[&nbsp;]]>
-									<!-- <span t-field="data.start_date"/> -->
-								</td>
-							</tr>
-							<tr cols="12">
-								<td colspan="6">Humidity :
-									<![CDATA[&nbsp;]]>
-									<!-- <span t-field="data.material.name"/> -->
+									<span t-field="eln.start_date"/>
 								</td>
 								<td colspan="6">Test End Date :
 									<![CDATA[&nbsp;]]>
-									<!-- <span t-field="data.end_date"/> -->
+									<span t-field="eln.end_date"/>
 								</td>
 							</tr>
 						</table>
+						<div style="text-align:center;font-size:18px">
+							Normal Consistency of GGBS
+						</div>
 				
 						<table style="margin-top:20px">
 							
@@ -977,26 +976,45 @@
 
 					<div class="authorizeRowDataSheet">
 						<div>
-							<div>
-								<b>
-									(JR Chemist)
-								</b>
-							</div>
-							<div>
-								<b>
-									Tested By
-								</b>
-							</div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr. Technician)
+                                </b>
+                            </div>
 						</div>
 						<div style="margin-left:500px">
+							
 							<div>
 								<b>
-									Chemical Department (HOD)
+									Approved By
 								</b>
+							</div>
+							<div style="height:40px">
+
 							</div>
 							<div>
 								<b>
-									Checked By
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
 								</b>
 							</div>
 						</div>
