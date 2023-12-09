@@ -224,51 +224,58 @@
 							</div>
 						</div>
 
-						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
-					
-						<div>
-							<div>
-								<b>
-									Checked By
-								</b>
-							</div>
-							<div style="height:70px">
-
-							</div>
 						</div>
-						
-						<div>
-							<div >
-								<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+					<div class="signatureContainer girdgird" style="page-break-inside: avoid;">
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.sample_id.check_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Sr Technician)
+									</b>
+								</div>
 							</div>
-							<div style="padding-top:5px">
-								Format No. <span t-esc="eln.material.test_format_no"/>
-							</div>
+							<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
 							</div>
 							<div>
 								<div>
 									<b>
-										Approved By
+										Approved By 
 									</b>
+									
 								</div>
 								<div style="height:20px">
-									
+
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
 								</div>
 								<div>
 									<b>
 										Mechanical Department (HOD)
 									</b>
 								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
 							</div>
 						</div>
-
-
-					</div>
 
 
 				</div>

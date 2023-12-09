@@ -1043,9 +1043,6 @@
                                 </b>
                                 
                             </div>
-                            <div style="height:20px">
-
-                            </div>
                             <div>
                                 <b>
                                 <span t-esc="eln.sample_id.filled_by.name"/>
@@ -1053,33 +1050,32 @@
                             </div>
                             <div>
                                 <b>
-                                    (Jr Technician)
+                                    (Jr. Technician)
                                 </b>
                             </div>
-						</div>
-
-
-                        <div>
+                        </div>
+                        
+                        <div style="margin-left:600px">
+                                    
                             <div>
                                 <b>
-                                    Checked By 
+                                    Checked By
                                 </b>
-                                
                             </div>
-                            <div style="height:20px">
 
-                            </div>
                             <div>
                                 <b>
                                 <span t-esc="eln.sample_id.check_by.name"/>
                                 </b>
                             </div>
+                            
                             <div>
                                 <b>
-                                    (Senior Technician)
+                                    (Sr. Technician)
                                 </b>
                             </div>
-						</div>
+                        </div>
+						
 					</div>
 				</div>
 			</t>

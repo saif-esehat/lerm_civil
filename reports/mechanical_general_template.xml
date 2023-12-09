@@ -22,7 +22,7 @@
 						Job No. <span t-esc="eln.kes_no"/>
 					</span>
 					
-					<span style="text-align:right; display: flex; justify-content: space-between;  margin-left: 6rem;  ">
+					<span style="text-align:right; display: flex; justify-content: space-between;  margin-left: 4rem;  ">
 						Date. <span t-esc="eln.end_date"/>
 					</span>
 				
