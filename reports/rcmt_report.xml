@@ -197,16 +197,9 @@
 						<!-- 1 Compressive strength  -->
 					
 					<div t-if="rcmt" style="margin-top:20px;">
-					<td>
-						<span>
-							<strong>Results:</strong><![CDATA[&nbsp;]]>
-							<!-- <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')]).parameter_table" t-as="parameter">
-								<t t-if="parameter.grade.id == eln.grade_id.id">
-									<span t-field="parameter.specification"/>
-								</t>
-							</t> -->
-						</span>
-					</td>
+					 <div style="padding-top:5px">
+						<span t-esc="eln.material.test_parameter"/>
+					</div>
 
 					<table t-if="rcmt" style="margin-top:30px;">
 						<t t-set="i" t-value="0"/>
@@ -368,8 +361,7 @@
 					</div>
 				</div>
 
-
-				<div class="signatureContainer girdgird">
+						<!-- <div class="signatureContainer girdgird" style="page-break-inside: avoid;">
 							<div>
 								<div>
 									<b>
@@ -381,7 +373,7 @@
 								</div>
 								<div>
 									<b>
-										Mechanical Department (HOD)
+										<span t-esc="eln.sample_id.check_by.name"/>
 									</b>
 								</div>
 								<div>
@@ -401,15 +393,16 @@
 							<div>
 								<div>
 									<b>
-										Approved By
+										Approved By 
 									</b>
+									
 								</div>
 								<div style="height:20px">
 
 								</div>
 								<div>
 									<b>
-										Mechanical Department (HOD)
+									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
 								<div>
@@ -418,7 +411,64 @@
 									</b>
 								</div>
 							</div>
+						</div> -->
+				<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+					
+					<div>
+						<div>
+							<b>
+								Checked By
+							</b>
 						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(Sr. Technician)
+							</b>
+						</div>
+					</div>
+					<div>
+						<div t-if="stamp and stamp == '4-in_report'">
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							Format No. <span t-esc="eln.material.test_format_no"/>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b>
+								Approved By 
+							</b>
+							
+						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								Mechanical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								(Authorized Signatory)
+							</b>
+						</div>
+					</div>
+				</div>
 				<!-- </div> -->
 
 				<div style="margin-top: 50px; text-align: center;">
