@@ -224,14 +224,14 @@
 							</div>
 						</div>
 						</div>
-						<div class="signatureContainer girdgird" style="page-break-inside: avoid;">
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 							<div>
 								<div>
 									<b>
 										Checked By
 									</b>
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
 								</div>
 								<div>
@@ -241,7 +241,7 @@
 								</div>
 								<div>
 									<b>
-										(Sr Technician)
+										(Sr. Technician)
 									</b>
 								</div>
 							</div>
@@ -260,7 +260,7 @@
 									</b>
 									
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
 								</div>
 								<div>
@@ -273,8 +273,22 @@
 										Mechanical Department (HOD)
 									</b>
 								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
 							</div>
 						</div>
+						<!-- <div style="text-align:center;margin-top:25px">
+							......End of Report......
+						</div> -->
+						<div style="margin-top: 50px; text-align: center;">
+							<p style="border-top: 1px dashed #000; padding-top: 10px;">
+								...... End Of Report......
+							</p>
+						</div>
+					</div>
 				</div>
 			</t>
 		</t>
