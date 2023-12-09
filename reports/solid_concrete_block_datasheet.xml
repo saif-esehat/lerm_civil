@@ -2,7 +2,7 @@
 <odoo>
 <template id="lerm_solid_block_datasheet">
     <t t-call="web.html_container">
-	<t t-call="lerm_civil.data_sheet_header">
+	<t t-call="lerm_civil.mechanical_data_sheet_header">
 		<div style="text-align:center;font-size:18px;font-weight: bold">
 			Solid Concrete Block
 		</div>
@@ -34,7 +34,7 @@
                     </td>
                     <td colspan="4">Witness Name :
                         <![CDATA[&nbsp;]]>
-                        <span t-field="eln.witness_description"/>
+                        <span t-field="eln.witness_name"/>
                     </td>
                     <td colspan="4">Witness Signature :
                         <![CDATA[&nbsp;]]>
@@ -387,35 +387,54 @@
                     
                     
                     
+                    
                     <!-- authorizeRowDataSheet -->
                     
-                    <div class="authorizeRowDataSheet">
-                        <div>
+                     <div class="authorizeRowDataSheet">
+						<div>
                             <div>
                                 <b>
-                                    (JR Chemist)
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
                                 </b>
                             </div>
                             <div>
                                 <b>
-                                    Tested By
+                                    (Jr. Technician)
                                 </b>
                             </div>
-                        </div>
-                        <div style="margin-left:500px">
-                            <div>
-                                <b>
-                                    Mechanical Department (HOD)
-                                </b>
-                            </div>
-                            <div>
-                                <b>
-                                    Checked By
-                                </b>
-                            </div>
-                        </div>
-                    </div>
-                    
+						</div>
+						<div style="margin-left:500px">
+							
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
+								</b>
+							</div>
+						</div>
+					</div>
                     
                     
                     
@@ -470,7 +489,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Project / Site Address :
+								<!-- <td colspan="12">Project / Site Address :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.site_address.name"/>
 									<span t-field="o.srf_id.site_address.street"/>
@@ -480,6 +499,9 @@
 									<span t-field="o.srf_id.site_address.state_id"/>
 											,
 									<span t-field="o.srf_id.site_address.country_id"/>
+								</td> -->
+                                <td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address"/>
 								</td>
 							</tr>
 							<tr>
@@ -553,9 +575,8 @@
 						</table>
 					</div>
 
-					<div style="margin-top:10px;">
-						<!-- <span t-field="data.dimension_name1"/> -->
-                        Results
+					 <div style="padding-top:5px">
+						<span t-esc="eln.material.test_parameter"/>
 					</div>
 					
                     <!-- <table style="width:100%">
@@ -951,57 +972,63 @@
 								</ul>
 							</div>
 						</div>
-						<div class="signatureContainer girdgird">
-							<div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										Mechanical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
-							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
-									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-								</div>
-								<div style="padding-top:5px">
-									Format No. 
-                                    <span t-esc="eln.material.test_format_no"/>
-								</div>
-							</div>
-							<div>
-								<div>
-									<b>
-										Approved By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										Mechanical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+					
+					<div>
+						<div>
+							<b>
+								Checked By
+							</b>
 						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(Sr. Technician)
+							</b>
+						</div>
+					</div>
+					<div>
+						<div t-if="stamp and stamp == '4-in_report'">
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							Format No. <span t-esc="eln.material.test_format_no"/>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b>
+								Approved By 
+							</b>
+							
+						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								Mechanical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								(Authorized Signatory)
+							</b>
+						</div>
+					</div>
+				</div>
 						<div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div>

@@ -167,352 +167,10 @@
 							</tr>
 						</table>
 					</div>
-					 <!-- <div class="content">
-                            <table class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>Sieve Size</th>
-                                        <th>Percent Retained</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr t-foreach="data.child_lines" t-as="line">
-                                        <td><span t-field="line.sieve_size"/></td>
-                                        <td><span t-field="line.percent_retained"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> -->
-
-					<!-- <table style="margin-top:15px">
-
-							<tr>
-								<th>
-									<span>
-										Sr. No
-									</span>
-								</th>
-								<th>
-									<span>
-										Test Parameter
-									</span>
-								</th>
-								<th>
-									<span>
-										Protocol
-									</span>
-								</th>
-								<th>
-									<span>
-										Result Observed
-									</span>
-								</th>
-								<th>
-									<span>
-										Limit as per MORTH Specification
-									</span>
-								</th>
-							</tr>
-
-							<tr class="mulipleRowsInColumn"> 
-								<td>
-									<span>1</span>
-								</td>
-								<td>
-									<div>
-										Seive Analysis % Passing
-									</div>
-									<div>
-										IS SEIVE
-									</div>
-									<div>
-										75 mm
-									</div>
-									<div>
-										19 mm
-									</div>
-									<div>
-										4.75 mm
-									</div>
-									<div>
-										2mm
-									</div>
-									<div>
-										425 mic
-									</div>
-									<div>
-										75 mic
-									</div>
-								</td>
-								<td>
-									<div>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).test_method.test_method"/>
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-									<div>
-										
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<span>2</span>
-								</td>
-								<td>
-									<div>
-										Liquid Limit
-									</div>
-								</td>
-								<td style="align-items : center">
-									<div  style="align-items : center">
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).test_method.test_method"/>
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<span>3</span>
-								</td>
-								<td>
-									<div>
-										Plastic Limit
-									</div>
-								</td>
-								<td>
-									<div >
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).test_method.test_method"/>
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<span>4</span>
-								</td>
-								<td>
-									<div>
-										Plasticity Index
-									</div>
-								</td>
-								<td>
-									<div >
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).test_method.test_method"/>
-									</div>
-								</td>
-								<td>
-									<div>
-										<span t-field="data.plasticity_index"/>
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<span>5</span>
-								</td>
-								<td>
-									<div>
-										Free Swell Index
-									</div>
-								</td>
-								<td>
-									<div >
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).test_method.test_method"/>
-									</div>
-								</td>
-								<td>
-									<div>
-
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<span>6</span>
-								</td>
-								<td>
-									<div>
-										Maximum Dry Density (MDD)
-									</div>
-								</td>
-								<td>
-									<div >
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0f07dab7cd87')]).test_method.test_method"/>
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<span>7</span>
-								</td>
-								<td>
-									<div>
-										Optimium Moisture Content (OMC)
-									</div>
-								</td>
-								<td>
-									<div >
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).test_method.test_method"/>
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<span>8</span>
-								</td>
-								<td>
-									<div>
-										Optimium Moisture Content (OMC)
-									</div>
-								</td>
-								<td>
-									<div>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).test_method.test_method"/>
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<span>9</span>
-								</td>
-								<td>
-									<div>
-										California Bearing Ratio (CBR) At 2.55 mm Penetration
-									</div>
-								</td>
-								<td>
-									<div>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','47ba9d28-2065-4532-814a-3a4c1e884305')]).test_method.test_method"/>
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-								<td>
-									<div>
-										
-									</div>
-								</td>
-							</tr>
-
-					</table> -->
-					
+				
+					 <div style="padding-top:5px">
+						<span t-esc="eln.material.test_parameter"/>
+					</div>
 					<table style="margin-top:15px">
 
 							<tr cols="12">
@@ -1216,56 +874,63 @@
 								</ul>
 							</div>
 						</div>
-						<div class="signatureContainer girdgird">
-							<div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										Mechanical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
-							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
-									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-								</div>
-								<div style="padding-top:5px">
-									Format No. <span t-esc="eln.material.test_format_no"/>
-								</div>
-							</div>
-							<div>
-								<div>
-									<b>
-										Approved By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										Mechanical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
+					<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+					
+					<div>
+						<div>
+							<b>
+								Checked By
+							</b>
 						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(Sr. Technician)
+							</b>
+						</div>
+					</div>
+					<div>
+						<div t-if="stamp and stamp == '4-in_report'">
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							Format No. <span t-esc="eln.material.test_format_no"/>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b>
+								Approved By 
+							</b>
+							
+						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								Mechanical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								(Authorized Signatory)
+							</b>
+						</div>
+					</div>
+				</div>
 						<div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div>
@@ -1316,7 +981,7 @@
 								</td>
 								<td colspan="4">Witness Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="eln.witness_description"/>
+									<span t-field="eln.witness_name"/>
 								</td>
 								<td colspan="4">Witness Signature :
 									<![CDATA[&nbsp;]]>
@@ -2187,30 +1852,50 @@
 							</table>
 						</div>
 					</div>
-
-					<div class="authorizeRowDataSheet">
+  
+                    <!-- authorizeRowDataSheet -->
+                    
+                     <div class="authorizeRowDataSheet">
 						<div>
-							<div>
-								<b>
-									(JR Chemist)
-								</b>
-							</div>
-							<div>
-								<b>
-									Tested By
-								</b>
-							</div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr. Technician)
+                                </b>
+                            </div>
 						</div>
 						<div style="margin-left:500px">
 							
 							<div>
 								<b>
-									Chemical Department (HOD)
+									Checked By
 								</b>
+							</div>
+							<div style="height:40px">
+
 							</div>
 							<div>
 								<b>
-									Checked By
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
 								</b>
 							</div>
 						</div>
