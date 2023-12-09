@@ -254,15 +254,27 @@
 									Format No. <span t-esc="eln.material.test_format_no"/>
 								</div>
 							</div>
+						
 							<div>
 								<div>
 									<b>
 										Approved By 
 									</b>
 									
+<<<<<<< HEAD
 								</div>
 								<div style="height:20px">
 
+=======
+>>>>>>> 3420e9ca8f2a25b089e8e2c9ab2336fd55bf3462
+								</div>
+								<div style="height:30px">
+
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
 								</div>
 								<div>
 									<b>
@@ -278,6 +290,12 @@
 						</div>
 
 
+<<<<<<< HEAD
+=======
+				</div>
+
+
+>>>>>>> 3420e9ca8f2a25b089e8e2c9ab2336fd55bf3462
 				</div>
 			</t>
 		</t>

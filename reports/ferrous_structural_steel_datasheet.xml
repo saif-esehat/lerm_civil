@@ -3,7 +3,7 @@
 <template id="ferrous_steel_datasheet">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
-			 <t t-call="lerm_civil.data_sheet_header">
+			 <t t-call="lerm_civil.mechanical_data_sheet_header">
                 <div style="text-align:center;font-size:18px">
                     Ferrous Structural Steel Datasheet
                 </div>
@@ -384,33 +384,54 @@
 								</td>
 							</tr>
 						</table>
-						<div class="authorizeRowDataSheet">
+						   
+                    <!-- authorizeRowDataSheet -->
+                    
+                     <div class="authorizeRowDataSheet">
+						<div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr. Technician)
+                                </b>
+                            </div>
+						</div>
+						<div style="margin-left:500px">
+							
 							<div>
-								<!-- <div>
-									<b>
-										(JR Chemist)
-									</b>
-								</div> -->
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
+								<b>
+									Checked By
+								</b>
 							</div>
-							<div style="margin-left:500px">
-							    <div>
-									<b>
-										Approved By
-									</b>
-								</div>
-								<div>
-									<b>
-										Mechanical Department (HOD)
-									</b>
-								</div>
-								
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
+								</b>
 							</div>
 						</div>
+					</div>
 				</div>
 			</t>
 		</t>
