@@ -60,7 +60,17 @@ class ELN(models.Model):
     temperature = fields.Float("Temperature")
     instrument = fields.Char("Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
-    
+
+    # @api.onchange('srf_date')
+    # def _onchange_srf_date(self):
+    #     if self.srf_date:
+    #         self.start_date = self.srf_date
+   
+    # @api.constrains('start_date')
+    # def _check_start_date(self):
+    #     for record in self:
+    #         if record.start_date and record.srf_date and record.start_date != record.srf_date:
+    #             raise ValidationError("Start Date must match SRF Date!")
 
 
     @api.onchange('witness')

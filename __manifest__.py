@@ -180,6 +180,8 @@
     'reports/rcpt/rcpt_report.xml',
     'views/chemical/flyash.xml',
     'reports/flyash_chemical/flyash_datasheet.xml',
+    'reports/steel_tmt_bar_datasheet.xml',
+    'reports/mechanical_general_template.xml'
     
  
 
