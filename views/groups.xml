@@ -52,6 +52,8 @@
 
     </record>
 
+    
+
     <record id="lerm_grade_line_tree" model="ir.ui.view">
         <field name="name">lerm.grade.line.form</field>
         <field name="model">lerm.grade.line</field>
@@ -59,6 +61,18 @@
             <tree>
                 <field name="product_id"/>
                 <field name="grade"/>
+            </tree>
+        </field>
+
+    </record>
+
+    <record id="lerm_size_line_tree" model="ir.ui.view">
+        <field name="name">lerm.size.line.form</field>
+        <field name="model">lerm.size.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+                <field name="size"/>
             </tree>
         </field>
 

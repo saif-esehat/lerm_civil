@@ -67,7 +67,7 @@
 
 					<!-- Setting time  -->
 
-					<div t-if="data.setting_time_visible">
+					<div t-if="data.initial_setting_time_visible">
 						<div style="text-align:center;font-size:18px">
 							Setting Time
 						</div>
@@ -106,7 +106,7 @@
 							<tr cols="12">
 								<td colspan="12">
 									<h6>
-										<span t-field="data.initial_setting_time"/>
+										<span t-field="data.setting_time_name"/>
 									</h6>
 								</td>
 							</tr>
@@ -148,11 +148,11 @@
 								</td>
 							</tr>
 						</table>
-						<table>
+						<table  t-if="data.final_setting_time_visible">
 							<tr cols="12">
 								<td colspan="12">
 									<h6>
-										<span t-field="data.final_setting_time"/>
+										<span t-field="data.final_setting_time_name"/>
 									</h6>
 								</td>
 							</tr>
@@ -451,7 +451,7 @@
 
 					<!-- Compressive Strength  -->
 
-					<div t-if="data.compressive_visible" style="margin-top:20px">
+					<div t-if="data.compressive_3_visible or data.compressive_7_visible or data.compressive_27_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
 							Compressive Strength
 						</div>
@@ -1035,29 +1035,50 @@
 
 
 					<div class="authorizeRowDataSheet">
-						<div>
-							<div>
-								<b>
-									(JR Chemist)
-								</b>
-							</div>
-							<div>
-								<b>
-									Tested By
-								</b>
-							</div>
+
+                        <div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:20px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr Technician)
+                                </b>
+                            </div>
 						</div>
-						<div style="margin-left:500px">
-							<div>
-								<b>
-									Chemical Department (HOD)
-								</b>
-							</div>
-							<div>
-								<b>
-									Checked By
-								</b>
-							</div>
+
+
+                        <div>
+                            <div>
+                                <b>
+                                    Checked By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:20px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.check_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Senior Technician)
+                                </b>
+                            </div>
 						</div>
 					</div>
 				</div>

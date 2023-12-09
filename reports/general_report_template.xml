@@ -13,17 +13,26 @@
             <t t-out="0"/>
         </div>
 		<div t-attf-class="footer o_standard_footer">
+			
             <div class="text-center" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4">
-                    <div class="footertext">
+					
+					<span>
+						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
+					</span>	
+                    <span class="footertext">
 						Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
-					</div>
+					</span>
+						
 					<div class="footertext">
 						Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
 					</div>
 					<div class="footertext">
 						CIN No.: U45209MH2017PTC291168
 					</div>
+
+					
+					
                 </ul>
                 <div t-if="report_type == 'pdf'" class="footertext">
                     Page: <span class="page"/> / <span class="topage"/>

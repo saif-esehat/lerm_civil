@@ -61,16 +61,34 @@ class ELN(models.Model):
     instrument = fields.Char("Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
 
-    # @api.onchange('srf_date')
-    # def _onchange_srf_date(self):
-    #     if self.srf_date:
-    #         self.start_date = self.srf_date
-   
-    # @api.constrains('start_date')
-    # def _check_start_date(self):
+
+    # @api.onchange('start_date','srf_date')
+    # def _start_date_validate(self):
     #     for record in self:
-    #         if record.start_date and record.srf_date and record.start_date != record.srf_date:
-    #             raise ValidationError("Start Date must match SRF Date!")
+    #         if record.start_date < record.srf_date:
+    #             record.start_date = record.srf_date
+    #             raise ValidationError("Start Date cannot be before SRF creation date")
+    #         else:
+    #             pass
+    # @api.depends('casting_date','sample_id')
+    # def _compute_casting_date(self):
+    #     for record in self:
+    #         if record.sample_id.casting:
+    #             record.casting_date = record.sample_id.date_casting
+    #         else:
+    #             record.casting_date = None
+
+    @api.onchange('start_date', 'srf_date')
+    def _start_date_validate(self):
+        for record in self:
+            if record.start_date and record.srf_date and record.start_date < record.srf_date:
+                record.start_date = record.srf_date
+                raise ValidationError("Start Date cannot be before SRF creation date")
+                # record.update({'start_date': record.srf_date})
+
+
+
+    
 
 
     @api.onchange('witness')

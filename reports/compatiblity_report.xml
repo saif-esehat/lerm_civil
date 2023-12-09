@@ -63,7 +63,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Sample Description : 									<![CDATA[&nbsp;]]>
+								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
 							</tr>
@@ -153,8 +153,8 @@
 									<th>Wt. of Water (g)</th>
 									<th>Wt. of Admixture (g)</th>
 									<th>Flow (Sec)</th>
-									<th>Flow at 30 Min (Sec)</th>
-									<th>Flow at 60 Min (Sec)</th>
+									<!-- <th>Flow at 30 Min (Sec)</th>
+									<th>Flow at 60 Min (Sec)</th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -183,12 +183,12 @@
 										<td>
 											<span t-field="line.flow_sec"/>
 										</td>
-										<td>
+										<!-- <td>
 											<span t-field="line.flow_30_min"/>
 										</td>
 										<td>
 											<span t-field="line.flow_60_min"/>
-										</td>
+										</td> -->
 									</tr>
 								</t>
 							</tbody>
@@ -223,17 +223,11 @@
 							</div>
 						</div>
 
-						<div class="signatureContainer girdgird">
-							<div>
-								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-							</div>
-							<div>
-							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-							</div>
+						<div class="signatureContainer girdgird" style="page-break-inside: avoid;">
 							<div>
 								<div>
 									<b>
-									Approved By
+										Checked By
 									</b>
 								</div>
 								<div style="height:20px">
@@ -241,12 +235,41 @@
 								</div>
 								<div>
 									<b>
-									Chemical Department (HOD)
+										<span t-esc="eln.sample_id.check_by.name"/>
 									</b>
 								</div>
 								<div>
 									<b>
-									(Authorized Signatory)
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+							<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By 
+									</b>
+									
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
 									</b>
 								</div>
 							</div>

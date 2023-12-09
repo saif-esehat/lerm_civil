@@ -42,18 +42,18 @@
                     <sheet>
                         <group style="width:100%">
                             <field name='eln_id' invisible="1"/>
-                            <field name='technician'/>
+                            <field name='technician' readonly="1"/>
                         </group>
                         <group>
                             <group style="width:50%">
-                                <field name='srf_id'/>
-                                <field name='srf_date'/>
-                                <field name='discipline'/>
-                                <field name='material'/>
-                                <field name='size_id'/>
+                                <field name='srf_id' readonly="1"/>
+                                <field name='srf_date' readonly="1"/>
+                                <field name='discipline' readonly="1"/>
+                                <field name='material' readonly="1"/>
+                                <field name='size_id' readonly="1"/>
                                 <field name='start_date' required="1"/>
                                 <field name='witness_description'/>
-                                <field name='casting_date'/>
+                                <field name='casting_date' invisible="1"/>
                                 <field name='remarks'/>
                               
                                 <field name='conformity' readonly="1"/>
@@ -64,11 +64,11 @@
 
                             </group>
                             <group style="width:50%">
-                                <field name='sample_id'/>
-                                <field name='kes_no'/>
-                                <field name='group'/>
+                                <field name='sample_id' readonly="1"/>
+                                <field name='kes_no' readonly="1"/>
+                                <field name='group' readonly="1"/>
                                 <field name='witness_name'/>
-                                <field name='grade_id'/>
+                                <field name='grade_id' readonly="1"/>
                                 <field name='end_date'/>
                                 <field name="witness_photo" filename='witness_photo_name'/>
                                 <field name='witness_photo_name' invisible='1'/>

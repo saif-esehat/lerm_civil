@@ -42,7 +42,7 @@
                         <field name="child_lines" nolabel="1">
                             <tree>
                                 <field name='sr_no' string="Sr. NO"/>
-                                <field name='id_mark' string="ID Mark/Location"/>
+                                <field name='id_mark' string="ID Mark/Location" />
                                 <field name='length' string="Length (mm)"/>
                                 <field name='width' string="Width (mm)"/>
                                 <field name='area' string="Area (mm²)"/>

@@ -186,6 +186,7 @@ class LermSampleForm(models.Model):
 
     def approve_sample(self):
         for result in self.parameters_result:
+            self.check_by = self.env.user
             if not result.verified:
                 raise ValidationError("Not all parameters are verified. Please ensure all parameters are verified before proceeding.")
         self.write({'state': '5-pending_approval'})
@@ -195,6 +196,7 @@ class LermSampleForm(models.Model):
 
     def approve_pending_sample(self):
         for result in self.parameters_result:
+            self.approved_by = self.env.user
             if not result.verified:
                 raise ValidationError("Not all parameters are verified. Please ensure all parameters are verified before proceeding.")
         self.write({'state': '4-in_report'})
@@ -324,6 +326,7 @@ class LermSampleForm(models.Model):
         # return self.env.ref('lerm_civil.sample_report_action').report_action(self)
 
     def open_sample_allotment_wizard(self):
+        self.filled_by = self.env.user
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
         return {
             'name': "Allot Sample",
