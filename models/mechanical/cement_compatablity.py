@@ -35,13 +35,13 @@ class CementCompatablity(models.Model):
         y_values = []
         for line in self.child_lines:
             x_values.append(line.admixture_dosage_percent)
-            y_values.append(line.flow_60_min)
+            y_values.append(line.flow_sec)
         
         # Create the line chart
         plt.plot(x_values, y_values, marker='o')
         plt.xlabel('Admixture Dosage %')
-        plt.ylabel('Flow at 60 Min (Sec)')
-        plt.title('Admixture Dosage % vs Flow at 60 Min')
+        plt.ylabel('Flow(Sec)')
+        plt.title('Admixture Dosage % vs Flow (Sec)')
 
 
         plt.ylim(bottom=0, top=max(y_values) + 10)
@@ -74,8 +74,8 @@ class CementCompatablityLines(models.Model):
     wt_of_water = fields.Float("Wt.of water  (g)")
     wt_of_admixture = fields.Float("Wt. of Admixture (g)",compute="_compute_wt_of_admixture")
     flow_sec = fields.Float("Flow (Sec)")
-    flow_30_min = fields.Float("Flow at 30 Min (Sec)")
-    flow_60_min = fields.Float("Flow at 60 Min (Sec)")
+    # flow_30_min = fields.Float("Flow at 30 Min (Sec)")
+    # flow_60_min = fields.Float("Flow at 60 Min (Sec)")
 
 
 

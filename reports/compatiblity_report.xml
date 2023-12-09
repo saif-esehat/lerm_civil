@@ -154,8 +154,8 @@
 									<th style="font-weight: bold;">Wt. of Water (g)</th>
 									<th style="font-weight: bold;">Wt. of Admixture (g)</th>
 									<th style="font-weight: bold;">Flow (Sec)</th>
-									<th style="font-weight: bold;">Flow at 30 Min (Sec)</th>
-									<th style="font-weight: bold;">Flow at 60 Min (Sec)</th>
+									<!-- <th style="font-weight: bold;">Flow at 30 Min (Sec)</th>
+									<th style="font-weight: bold;">Flow at 60 Min (Sec)</th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -184,12 +184,12 @@
 										<td>
 											<span t-field="line.flow_sec"/>
 										</td>
-										<td>
+										<!-- <td>
 											<span t-field="line.flow_30_min"/>
 										</td>
 										<td>
 											<span t-field="line.flow_60_min"/>
-										</td>
+										</td> -->
 									</tr>
 								</t>
 							</tbody>
@@ -226,46 +226,46 @@
 
 						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 					
-					<div>
 						<div>
-							<b>
-								Checked By
-							</b>
-						</div>
-						<div style="height:70px">
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:70px">
 
+							</div>
 						</div>
-					</div>
-					
-			      	<div>
-						<div >
-							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-						</div>
-						<div style="padding-top:5px">
-							Format No. <span t-esc="eln.material.test_format_no"/>
-						</div>
-						</div>
+						
 						<div>
-							<div>
-								<b>
-									Approved By
-								</b>
+							<div >
+								<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 							</div>
-							<div style="height:20px">
-								
+							<div style="padding-top:5px">
+								Format No. <span t-esc="eln.material.test_format_no"/>
 							</div>
-							<div>
-								<b>
-									Mechanical Department (HOD)
-								</b>
 							</div>
 							<div>
-								<b>
-									(Authorized Signatory)
-								</b>
+								<div>
+									<b>
+										Approved By
+									</b>
+								</div>
+								<div style="height:20px">
+									
+								</div>
+								<div>
+									<b>
+										Mechanical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
 							</div>
 						</div>
-					</div>
 
 
 					</div>

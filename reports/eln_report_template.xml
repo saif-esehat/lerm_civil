@@ -13,7 +13,9 @@
         </div>
         <div t-attf-class="article" t-att-style="report_header_style">
             <t t-out="0"/>
+
         </div>
+		
 		<div t-attf-class="footer o_standard_footer">
             <div class="text-center" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4 footerQR">
@@ -609,9 +611,9 @@
 	</template>
 
 
-	<template id="steel_tmt_bar_datasheet">
+	<!-- <template id="steel_tmt_bar_datasheet">
 		<t t-call="web.html_container">
-			<!-- <t t-call="web.basic_layout"> -->
+			<t t-call="web.basic_layout">
 			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
                 <div style="text-align:center;font-size:18px">
                     STEEL TMT BAR
@@ -639,7 +641,7 @@
 									<span t-field="o.end_date"/>
 								</td>
 							</tr>
-							<!-- <tr style="height:50px" cols="12">
+							<tr style="height:50px" cols="12">
 								<td colspan="4">Performed By :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.technician.name"/>
@@ -652,7 +654,7 @@
 									<![CDATA[&nbsp;]]>
 									<span style='padding:20px'></span>
 								</td>
-							</tr> -->
+							</tr>
 						</table>
 					</div>
 
@@ -966,11 +968,11 @@
 				</div>
 			</t>
 		</t>
-	</template>
+	</template> -->
 
 	<template id="cement_datasheet">
 		<t t-call="web.html_container">
-			<!-- <t t-call="web.basic_layout"> -->
+		   <t t-call="web.basic_layout">
 			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
                 <div style="text-align:center;font-size:18px">
                     Cement
@@ -2029,6 +2031,7 @@
 						</div>
 					</div>
 				</div>
+			  </t>
 			</t>
 		</t>
 	</template>

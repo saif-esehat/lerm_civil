@@ -431,7 +431,7 @@
                             <tree editable="bottom">
                                 <field name="sieve_size_passing"/>
                                 <field name="sieve_size_retained"/>
-                                <field name="grading_original_sample" readonly='1'/>
+                                <field name="grading_original_sample" readonly='1' style="width:200px;"/>
                                 <field name="weight_before_test"/>
                                 <field name="weight_after_test"/>
                                 <field name="passing_percent" readonly='1'/>
