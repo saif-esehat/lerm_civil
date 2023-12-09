@@ -108,20 +108,14 @@
                </tree>
                </field>
                </page> -->
-          <!-- <page string="Alias" attrs="{'invisible': [('is_sample','=',False)]}">
+          <page string="Alias" attrs="{'invisible': [('is_sample','=',False)]}">
                <field name='alias_table'>
-               <tree edidable="bottom">
-               <field name="alias"/>
-               <field name="customer"/>
-               </tree>
-               <form>
-               <group>
-               <field name="alias"/>
-               <field name="customer"/>
-               </group>
-               </form>
+                  <tree editable="bottom">
+                    <field name="alias"/>
+                    <field name="customer"/>
+                  </tree>
                </field>
-               </page> -->
+          </page>
           <page string="Datasheet" attrs="{'invisible': [('is_sample','=',False)]}">
             <field name='datasheet_table'>
               <tree edidable="bottom">
