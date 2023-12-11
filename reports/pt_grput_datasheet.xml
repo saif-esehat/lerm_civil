@@ -2,14 +2,49 @@
 <odoo>
 <template id="pt_grout_datasheet">
 		<t t-call="web.html_container">
-			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
+			<t t-call="lerm_civil.mechanical_data_sheet_header">
 				<div style="text-align:center;font-size:18px">
 					PT Grout
 				</div>
 				<div class="container_eln" style="margin-top:5px">
+				<table style="margin-top:20px">
+                        <tr cols="12">
+                            
+                            <td colspan="6">Job No :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.kes_no"></span>
+                            </td>
+                            <td colspan="6">Test Start Date: 
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.start_date"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Material: <span t-field="eln.material"></span>
+                            </td>
+                            <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                            </td>
+                        </tr>
+                        <tr style="height:50px" cols="12">
+								<td colspan="4">Performed By :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.technician.name"/>
+								</td>
+								<td colspan="4">Witness Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.witness_name"/>
+								</td>
+								<td colspan="4">Witness Signature :
+									<![CDATA[&nbsp;]]>
+									<span style='padding:20px'></span>
+								</td>
+							</tr>
+                      
+                    </table>
 					<div>
 						<div style="text-align:center;font-size:18px">
-							Fluidity
+							<!-- Fluidity -->
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','1e31d717-331a-4e71-8887-ef37cf38c7dd')]).parameter_name"/>
 						</div>
 					     <table style="margin-top:20px">
 								<tr cols="12">
@@ -75,9 +110,10 @@
 						<div t-if="data.setting_time_visible">
 							<div style="text-align:center;font-size:18px">
 								Setting Time
+								<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a76295ce-2066-42ae-8dc8-a5ddf1e71cd1')]).parameter_name"/> -->
 							</div>
 							<table>
-								<tr cols="12">
+								<!-- <tr cols="12">
 									<td colspan="6">Temperature :
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.temp_percent_setting"/>
@@ -97,7 +133,7 @@
 										<span t-field="data.end_date_setting"/>
 									</td>
 								</tr>
-								
+								 -->
 								
 
 								<tr cols="12" style="font-weight: bold; text-align: center;">
@@ -191,9 +227,10 @@
 						<div t-if="data.bleeding_visible">
 							<div style="text-align:center;font-size:18px">
 								Bleeding
+								<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_name"/> -->
 							</div>
 							<table>
-								<tr cols="12">
+								<!-- <tr cols="12">
 									<td colspan="6">Temperature :
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.temp_percent_bleeding"/>
@@ -212,7 +249,7 @@
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.end_date_bleeding"/>
 									</td>
-								</tr>
+								</tr> -->
 								<tr cols="12">
 									<td style="font-weight: bold;" colspan="6">Volume of sample at begning of test (mL) :
 										<![CDATA[&nbsp;]]>
@@ -280,9 +317,10 @@
                        <div t-if="data.volume_change_visible">
 							<div style="text-align:center;font-size:18px">
 								Volume Change
+								<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_name"/> -->
 							</div>
-							<table>
-								<tr cols="12">
+							<!-- <table> -->
+								<!-- <tr cols="12">
 									<td colspan="6">Temperature :
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.temp_percent_volume_change"/>
@@ -301,9 +339,9 @@
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.end_date_volume_change"/>
 									</td>
-								</tr>
+								</tr> -->
 								
-								</table>
+								<!-- </table> -->
 								<table style="margin-top:20px">
 
 								<tr cols="12">
@@ -360,8 +398,9 @@
 						<div t-if="data.compressive_strength_visible" style="margin-top:20px">
 							<div style="text-align:center;font-size:18px">
 								Compressive Strength
+								<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_name"/> -->
 							</div>
-							<table>
+							<!-- <table>
 								<tr cols="12">
 									<td colspan="6">Temperature :
 										<![CDATA[&nbsp;]]>
@@ -383,7 +422,7 @@
 									</td>
 								</tr>
 
-							</table>
+							</table> -->
 							
 							       <table>
 											<tr>
@@ -581,32 +620,54 @@
 										</tr>
 									</table>
 						
-						<div class="authorizeRowDataSheet">
+						 
+                    <!-- authorizeRowDataSheet -->
+                    
+                    <div class="authorizeRowDataSheet">
+						<div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr. Technician)
+                                </b>
+                            </div>
+						</div>
+						<div style="margin-left:500px">
+							
 							<div>
-								<div>
-									<b>
-										(JR Chemist)
-									</b>
-								</div>
-								<div>
-									<b>
-										Tested By
-									</b>
-								</div>
+								<b>
+									Checked By
+								</b>
 							</div>
-							<div style="margin-left:500px">
-								<div>
-									<b>
-										Mechanical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
+								</b>
 							</div>
 						</div>
+					</div>
 					
 				 </div>
 			</t>

@@ -15,6 +15,13 @@ class PtGrout(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+
+    
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
@@ -540,13 +547,13 @@ class PtGrout(models.Model):
 
 
     ### Compute Visible
-    @api.depends('tests')
+    @api.depends('sample_parameters')
     def _compute_visible(self):
-        fluidity_test = self.env['mechanical.grout.test'].search([('name', '=', 'Fluidity')])
-        setting_time_test = self.env['mechanical.grout.test'].search([('name', '=', 'Setting Time')])
-        bleeding_test = self.env['mechanical.grout.test'].search([('name', '=', 'Bleeding')])
-        volume_change_test = self.env['mechanical.grout.test'].search([('name', '=', 'Volume Change')])
-        compressive_strength_test = self.env['mechanical.grout.test'].search([('name', '=', 'Compressive Strength')])
+        # fluidity_test = self.env['mechanical.grout.test'].search([('name', '=', 'Fluidity')])
+        # setting_time_test = self.env['mechanical.grout.test'].search([('name', '=', 'Setting Time')])
+        # bleeding_test = self.env['mechanical.grout.test'].search([('name', '=', 'Bleeding')])
+        # volume_change_test = self.env['mechanical.grout.test'].search([('name', '=', 'Volume Change')])
+        # compressive_strength_test = self.env['mechanical.grout.test'].search([('name', '=', 'Compressive Strength')])
 
         for record in self:
             record.fludity_visible = False
@@ -555,16 +562,16 @@ class PtGrout(models.Model):
             record.volume_change_visible = False
             record.compressive_strength_visible = False
 
-            if fluidity_test in record.tests:
-                record.fludity_visible = True
-            if setting_time_test in record.tests:
-                record.setting_time_visible = True
-            if bleeding_test in record.tests:
-                record.bleeding_visible = True
-            if volume_change_test in record.tests:
-                record.volume_change_visible = True
-            if compressive_strength_test in record.tests:
-                record.compressive_strength_visible = True
+            # if fluidity_test in record.tests:
+            #     record.fludity_visible = True
+            # if setting_time_test in record.tests:
+            #     record.setting_time_visible = True
+            # if bleeding_test in record.tests:
+            #     record.bleeding_visible = True
+            # if volume_change_test in record.tests:
+            #     record.volume_change_visible = True
+            # if compressive_strength_test in record.tests:
+            #     record.compressive_strength_visible = True
                
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
