@@ -197,6 +197,60 @@ class Microsilica(models.Model):
                 record.control_compressive_strength_7_days = 0
 
 
+    accelerated_pozzolanic_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_accelerated_pozzolanic_conformity")
+
+    accelerated_pozzolanic_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_accelerated_pozzolanic_nabl",store=True)
+
+
+
+    @api.depends('control_compressive_strength_7_days','eln_ref')
+    def _compute_accelerated_pozzolanic_conformity(self):
+        for record in self:
+            record.accelerated_pozzolanic_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a3df1095-19f0-48b6-8e09-e7076a4b04b5')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a3df1095-19f0-48b6-8e09-e7076a4b04b5')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.control_compressive_strength_7_days - record.control_compressive_strength_7_days*mu_value
+                    upper = record.control_compressive_strength_7_days + record.control_compressive_strength_7_days*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.accelerated_pozzolanic_conformity = 'pass'
+                        break
+                    else:
+                        record.accelerated_pozzolanic_conformity = 'fail'
+
+    @api.depends('control_compressive_strength_7_days','eln_ref')
+    def _compute_accelerated_pozzolanic_nabl(self):
+        
+        for record in self:
+            record.accelerated_pozzolanic_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a3df1095-19f0-48b6-8e09-e7076a4b04b5')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a3df1095-19f0-48b6-8e09-e7076a4b04b5')]).parameter_table
+            for material in materials:
+                
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.control_compressive_strength_7_days - record.control_compressive_strength_7_days*mu_value
+                    upper = record.control_compressive_strength_7_days + record.control_compressive_strength_7_days*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.accelerated_pozzolanic_nabl = 'pass'
+                        break
+                    else:
+                        record.accelerated_pozzolanic_nabl = 'fail'
+
+
+
      #start 2--Oversize % Retained on 45 Micron IS sieve
  
 
@@ -213,6 +267,58 @@ class Microsilica(models.Model):
     # avrg_retain_wt = fields.Float(string="Average",compute="_compute_avrg_retain_wt")
     retain_wt_avrg = fields.Float(string="Average",compute="_compute_retain_wt_avrg")
     retain_wt_rounded = fields.Float(string="% Weight Retained",compute="_compute_retain_wt_rounded",digits=(16, 1))
+
+    oversize_retained_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_oversize_retained_conformity")
+
+    oversize_retained_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_oversize_retained_nabl",store=True)
+
+
+
+    @api.depends('retain_wt_rounded','eln_ref')
+    def _compute_oversize_retained_conformity(self):
+        for record in self:
+            record.oversize_retained_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b9c80b7f-5f8c-44a2-984b-6ad2a17d250c')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b9c80b7f-5f8c-44a2-984b-6ad2a17d250c')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.retain_wt_rounded - record.retain_wt_rounded*mu_value
+                    upper = record.retain_wt_rounded + record.retain_wt_rounded*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.oversize_retained_conformity = 'pass'
+                        break
+                    else:
+                        record.oversize_retained_conformity = 'fail'
+
+    @api.depends('retain_wt_rounded','eln_ref')
+    def _compute_oversize_retained_nabl(self):
+        
+        for record in self:
+            record.oversize_retained_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b9c80b7f-5f8c-44a2-984b-6ad2a17d250c')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b9c80b7f-5f8c-44a2-984b-6ad2a17d250c')]).parameter_table
+            for material in materials:
+                
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.retain_wt_rounded - record.retain_wt_rounded*mu_value
+                    upper = record.retain_wt_rounded + record.retain_wt_rounded*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.oversize_retained_nabl = 'pass'
+                        break
+                    else:
+                        record.oversize_retained_nabl = 'fail'
 
 
     
@@ -249,6 +355,61 @@ class Microsilica(models.Model):
     
     specific_gravity_tables = fields.One2many('specific.gravity.line','parent_id',string="Specific Gravity")
     specific_gravity_avrg = fields.Float(string="Average",compute="_compute_specific_gravity_avrg")
+
+    specific_gravity_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_specific_gravity_conformity")
+
+    specific_gravity_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_specific_gravity_nabl",store=True)
+
+
+
+    @api.depends('specific_gravity_avrg','eln_ref')
+    def _compute_specific_gravity_conformity(self):
+        for record in self:
+            record.specific_gravity_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','e3d938f3-80ef-4de0-96ba-a279f27b9ede')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e3d938f3-80ef-4de0-96ba-a279f27b9ede')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.specific_gravity_avrg - record.specific_gravity_avrg*mu_value
+                    upper = record.specific_gravity_avrg + record.specific_gravity_avrg*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.specific_gravity_conformity = 'pass'
+                        break
+                    else:
+                        record.specific_gravity_conformity = 'fail'
+
+    @api.depends('specific_gravity_avrg','eln_ref')
+    def _compute_specific_gravity_nabl(self):
+        
+        for record in self:
+            record.specific_gravity_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','e3d938f3-80ef-4de0-96ba-a279f27b9ede')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e3d938f3-80ef-4de0-96ba-a279f27b9ede')]).parameter_table
+            for material in materials:
+                
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.specific_gravity_avrg - record.specific_gravity_avrg*mu_value
+                    upper = record.specific_gravity_avrg + record.specific_gravity_avrg*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.specific_gravity_nabl = 'pass'
+                        break
+                    else:
+                        record.specific_gravity_nabl = 'fail'
+
+ 
+
     
    
     @api.depends('specific_gravity_tables.spe_gravt_microsilica')
@@ -411,6 +572,59 @@ class Microsilica(models.Model):
     comp_control_status_7days = fields.Boolean("Done")
 
 
+    comp_strngth_7_days_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_comp_strngth_7_days_conformity")
+
+    comp_strngth_7_days_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_comp_strngth_7_days_nabl",store=True)
+
+
+
+    @api.depends('comp_control_strngth_7_days','eln_ref')
+    def _compute_comp_strngth_7_days_conformity(self):
+        for record in self:
+            record.comp_strngth_7_days_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','8211b72d-889b-477c-a355-0476f6bcd0d7')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8211b72d-889b-477c-a355-0476f6bcd0d7')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.comp_control_strngth_7_days - record.comp_control_strngth_7_days*mu_value
+                    upper = record.comp_control_strngth_7_days + record.comp_control_strngth_7_days*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.comp_strngth_7_days_conformity = 'pass'
+                        break
+                    else:
+                        record.comp_strngth_7_days_conformity = 'fail'
+
+    @api.depends('comp_control_strngth_7_days','eln_ref')
+    def _compute_comp_strngth_7_days_nabl(self):
+        
+        for record in self:
+            record.comp_strngth_7_days_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','8211b72d-889b-477c-a355-0476f6bcd0d7')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8211b72d-889b-477c-a355-0476f6bcd0d7')]).parameter_table
+            for material in materials:
+                
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.comp_control_strngth_7_days - record.comp_control_strngth_7_days*mu_value
+                    upper = record.comp_control_strngth_7_days + record.comp_control_strngth_7_days*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.comp_strngth_7_days_nabl = 'pass'
+                        break
+                    else:
+                        record.comp_strngth_7_days_nabl = 'fail'
+
+
     @api.depends('comp_control_casting_7days_tables.comp_control_strength')
     def _compute_comp_control_average_casting_7days(self):
         for record in self:
@@ -464,6 +678,58 @@ class Microsilica(models.Model):
             else:
                 record.avrg_oversize_percent = 0.0
 
+    oversize_percent_retain_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_oversize_percent_retain_conformity")
+
+    oversize_percent_retain_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_oversize_percent_retain_nabl",store=True)
+
+
+
+    @api.depends('avrg_oversize_percent','eln_ref')
+    def _compute_oversize_percent_retain_conformity(self):
+        for record in self:
+            record.oversize_percent_retain_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','3c5d3687-bfaf-4667-aca6-b69c321af63b')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3c5d3687-bfaf-4667-aca6-b69c321af63b')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.avrg_oversize_percent - record.avrg_oversize_percent*mu_value
+                    upper = record.avrg_oversize_percent + record.avrg_oversize_percent*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.oversize_percent_retain_conformity = 'pass'
+                        break
+                    else:
+                        record.oversize_percent_retain_conformity = 'fail'
+
+    @api.depends('avrg_oversize_percent','eln_ref')
+    def _compute_oversize_percent_retain_nabl(self):
+        
+        for record in self:
+            record.oversize_percent_retain_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','3c5d3687-bfaf-4667-aca6-b69c321af63b')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3c5d3687-bfaf-4667-aca6-b69c321af63b')]).parameter_table
+            for material in materials:
+                
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.avrg_oversize_percent - record.avrg_oversize_percent*mu_value
+                    upper = record.avrg_oversize_percent + record.avrg_oversize_percent*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.oversize_percent_retain_nabl = 'pass'
+                        break
+                    else:
+                        record.oversize_percent_retain_nabl = 'fail'
+
     
      #6---Start -- Dry Loose Bulk Density
 
@@ -478,6 +744,59 @@ class Microsilica(models.Model):
     
     bulk_density_tables = fields.One2many('dry.loose.bulk.density.line','parent_id',string="Dry Loose Bulk Density")
     avrg_bulk_density = fields.Float(string="Average Dry Loose Bulk Density (kg/m³)",compute="_compute_avrg_bulk_density")
+
+    bulk_density_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_bulk_density_conformity")
+
+    bulk_density_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')],string="NABL",compute="_compute_bulk_density_nabl",store=True)
+
+
+
+    @api.depends('avrg_bulk_density','eln_ref')
+    def _compute_bulk_density_conformity(self):
+        for record in self:
+            record.bulk_density_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a1feec77-42b6-4d86-9ac7-a2758b3f4e5a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a1feec77-42b6-4d86-9ac7-a2758b3f4e5a')]).parameter_table
+            for material in materials:
+                
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.avrg_bulk_density - record.avrg_bulk_density*mu_value
+                    upper = record.avrg_bulk_density + record.avrg_bulk_density*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.bulk_density_conformity = 'pass'
+                        break
+                    else:
+                        record.bulk_density_conformity = 'fail'
+
+    @api.depends('avrg_bulk_density','eln_ref')
+    def _compute_bulk_density_nabl(self):
+        
+        for record in self:
+            record.bulk_density_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a1feec77-42b6-4d86-9ac7-a2758b3f4e5a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a1feec77-42b6-4d86-9ac7-a2758b3f4e5a')]).parameter_table
+            for material in materials:
+                
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.avrg_bulk_density - record.avrg_bulk_density*mu_value
+                    upper = record.avrg_bulk_density + record.avrg_bulk_density*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.bulk_density_nabl = 'pass'
+                        break
+                    else:
+                        record.bulk_density_nabl = 'fail'
+
     
     @api.depends('bulk_density_tables.dryloose_bulk_density')
     def _compute_avrg_bulk_density(self):

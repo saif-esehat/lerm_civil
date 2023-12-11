@@ -188,6 +188,8 @@
                       </field>
                       <field name="control_average_casting_7days"/>
                       <field name="control_compressive_strength_7_days"/>
+                      <field name="accelerated_pozzolanic_conformity"/>
+                      <field name="accelerated_pozzolanic_nabl"/>
                     </group>
 
                      <!--Start  Oversize % Retained on 45 Micron IS sieve -->
@@ -223,6 +225,8 @@
                         <group>
                             <field name='retain_wt_avrg'/>
                             <field name='retain_wt_rounded'/>
+                            <field name='oversize_retained_conformity'/>
+                            <field name='oversize_retained_nabl'/>
                         </group>  
                       
                     <!-- </group> -->
@@ -262,6 +266,8 @@
                     </field>
                         <group>
                             <field name='specific_gravity_avrg'/>
+                            <field name='specific_gravity_conformity'/>
+                            <field name='specific_gravity_nabl'/>
                         </group>  
                       
                     <!-- </group> -->
@@ -427,6 +433,8 @@
                       </field>
                       <field name="comp_control_average_casting_7days"/>
                       <field name="comp_control_strngth_7_days"/>
+                      <field name="comp_strngth_7_days_conformity"/>
+                      <field name="comp_strngth_7_days_nabl"/>
                     </group>
 
 
@@ -463,6 +471,8 @@
                     </field>
                         <group>
                             <field name='avrg_oversize_percent'/>
+                            <field name='oversize_retained_conformity'/>
+                            <field name='oversize_retained_nabl'/>
                         </group>  
                       
                     <!-- </group> -->
@@ -503,6 +513,8 @@
                     </field>
                         <group>
                             <field name='avrg_bulk_density'/>
+                            <field name='bulk_density_conformity'/>
+                            <field name='bulk_density_nabl'/>
                         </group>  
                       
                     <!-- </group> -->

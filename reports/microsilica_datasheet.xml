@@ -9,50 +9,50 @@
 		</div>
 		<div class="container_eln" style="margin-top:5px">
 				<!--1 Accelerated pozzolanic activity index with portland cement , 7 Days in % -->
-
+			<table style="margin-top:20px">
+				<tr cols="12">
+					<td colspan="6">Temperature :
+						<![CDATA[&nbsp;]]>
+						<span t-field="data.temp_percent_compressive"/>
+					</td>
+					<td colspan="6">Humidity :
+						<![CDATA[&nbsp;]]>
+						<span t-field="data.humidity_percent_compressive"/>
+					</td>
+					
+				</tr>
+				<tr cols="12">
+					<td colspan="4">Material: <span t-field="eln.material"></span>
+					</td>
+					<td colspan="4">Test Start Date :
+						<![CDATA[&nbsp;]]>
+						<span t-field="data.start_date_compressive"/>
+					</td>
+					<td colspan="4">Test End Date :
+						<![CDATA[&nbsp;]]>
+						<span t-field="data.end_date_compressive"/>
+					</td>
+				</tr>
+				<tr style="height:50px" cols="12">
+					<td colspan="4">Performed By :
+						<![CDATA[&nbsp;]]>
+						<span t-field="eln.technician.name"/>
+					</td>
+					<td colspan="4">Witness Name :
+						<![CDATA[&nbsp;]]>
+						<span t-field="eln.witness_name"/>
+					</td>
+					<td colspan="4">Witness Signature :
+						<![CDATA[&nbsp;]]>
+						<span style='padding:20px'></span>
+					</td>
+				</tr>
+					
+			</table>
 			<div t-if="data.compressive_visible" style="margin-top:20px">
 				
 				
-					<table style="margin-top:20px">
-						<tr cols="12">
-							<td colspan="6">Temperature :
-								<![CDATA[&nbsp;]]>
-								<span t-field="data.temp_percent_compressive"/>
-							</td>
-							<td colspan="6">Humidity :
-								<![CDATA[&nbsp;]]>
-								<span t-field="data.humidity_percent_compressive"/>
-							</td>
-							
-						</tr>
-						<tr cols="12">
-							<td colspan="4">Material: <span t-field="eln.material"></span>
-							</td>
-							<td colspan="4">Test Start Date :
-								<![CDATA[&nbsp;]]>
-								<span t-field="data.start_date_compressive"/>
-							</td>
-							<td colspan="4">Test End Date :
-								<![CDATA[&nbsp;]]>
-								<span t-field="data.end_date_compressive"/>
-							</td>
-						</tr>
-						<tr style="height:50px" cols="12">
-							<td colspan="4">Performed By :
-								<![CDATA[&nbsp;]]>
-								<span t-field="eln.technician.name"/>
-							</td>
-							<td colspan="4">Witness Name :
-								<![CDATA[&nbsp;]]>
-								<span t-field="eln.witness_name"/>
-							</td>
-							<td colspan="4">Witness Signature :
-								<![CDATA[&nbsp;]]>
-								<span style='padding:20px'></span>
-							</td>
-						</tr>
-							
-					</table>
+					
 					<div style="margin-top:20px;text-align:center;font-size:18px">
 						Accelerated pozzolanic activity index with portland cement , 7 Days in %
 					</div>
@@ -486,7 +486,7 @@
 							<span t-esc="r['final_vol_kero_cement']"/>
 						</td>
 						<td colspan="3" style="text-align: center;">
-							<span t-esc="r['displaced_volume']"/>
+							<span t-esc="r['displaced_volume']" t-options='{"widget": "float", "precision": 2}'/>
 						</td>
 						<td colspan="3" style="text-align: center;">
 							<span t-esc="r['spe_gravt_microsilica']" t-options='{"widget": "float", "precision": 2}'/>
