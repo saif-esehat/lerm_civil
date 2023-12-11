@@ -178,17 +178,17 @@
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Room Temp :
+							    <td colspan="3" style="font-weight: bold;">Room Temp °c :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="3">
-									
+									<span t-field="microsilica.temp_percent_compressive"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Room RH :
+								<td colspan="3" style="font-weight: bold;">Room RH % :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="3">
-									
+									<span t-field="microsilica.humidity_percent_compressive"/>
 								</td>
 							</tr>
 
@@ -250,7 +250,7 @@
 
 							<!--1 Accelerated pozzolanic activity index with portland cement , 7 Days in % -->
 
-						<tr t-if="microsilica.compressive_visible">
+						<tr t-if="microsilica.compressive_visible and (microsilica.accelerated_pozzolanic_nabl == 'pass' and nabl or microsilica.accelerated_pozzolanic_nabl == 'fail' and not nabl)">
 							
 
 							<!-- <td colspan="1" style="text-align: center;">
@@ -315,7 +315,7 @@
 							</td>
 						</tr>
 							<!--2 Oversize % Retained on 45 Micron wet sieve -->
-						<tr t-if="microsilica.oversize_retain_visible">
+						<tr t-if="microsilica.oversize_retain_visible and (microsilica.oversize_retained_nabl == 'pass' and nabl or microsilica.oversize_retained_nabl == 'fail' and not nabl)">
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>2</span>
@@ -377,7 +377,7 @@
 							</td>
 						</tr>
 							<!--3 Specific Gravity -->
-						<tr t-if="microsilica.specific_gravity_visible">
+						<tr t-if="microsilica.specific_gravity_visible and (microsilica.specific_gravity_nabl == 'pass' and nabl or microsilica.specific_gravity_nabl == 'fail' and not nabl)">
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>3</span>
@@ -431,7 +431,7 @@
 							
 						</tr>
 							<!--4 Compressive Strength -->
-						<tr t-if="microsilica.compressive_strength_visible">	
+						<tr t-if="microsilica.compressive_strength_visible and (microsilica.comp_strngth_7_days_nabl == 'pass' and nabl or microsilica.comp_strngth_7_days_nabl == 'fail' and not nabl)">	
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>4</span>
@@ -457,13 +457,13 @@
 							</td>
 
 							<td style="text-align: center;vertical-align: middle;padding:0px;max-width:100px">
-								<div style="text-align: center;vertical-align: middle; border-bottom:1px solid black;min-height:50px">
-									<!-- MPA -->
+								<div rowspan="2" style="text-align: center;vertical-align: middle; border-bottom:1px solid black;min-height:50px">
+									
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8211b72d-889b-477c-a355-0476f6bcd0d7')]).unit.name"/>
 								</div>
 								<div style="text-align: center;vertical-align: middle; border-bottom:1px solid black;min-height:25px">
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8211b72d-889b-477c-a355-0476f6bcd0d7')]).unit.name"/>
-									<!-- MPA -->
+									
 								</div>
 								<div style="text-align: center;vertical-align: middle;min-height:25px">
 									%
@@ -519,7 +519,7 @@
 						</tr>
 
 							<!--5 Oversize Percent Retained on 45 Micron IS sieve variation from Avg. % -->
-						<tr t-if="microsilica.oversize_percent_retain_visible">
+						<tr t-if="microsilica.oversize_percent_retain_visible and (microsilica.oversize_retained_nabl == 'pass' and nabl or microsilica.oversize_retained_nabl == 'fail' and not nabl)">
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>5</span>
@@ -582,7 +582,7 @@
 						</tr>
 
 							<!--6 Dry Loose Bulk Density -->
-						<tr t-if="microsilica.bulk_density_visible">
+						<tr t-if="microsilica.bulk_density_visible and (microsilica.bulk_density_nabl == 'pass' and nabl or microsilica.bulk_density_nabl == 'fail' and not nabl)">
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>6</span>
