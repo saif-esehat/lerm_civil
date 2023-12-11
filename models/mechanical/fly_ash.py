@@ -16,13 +16,18 @@ class FlyaschNormalConsistency(models.Model):
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
 
     temp_percent_normal = fields.Float("Temperature °c")
     humidity_percent_normal = fields.Float("Humidity %")
 
      ## Normal Consistency
 
-    tests = fields.Many2many("mechanical.cement.test",string="Tests")
+    # tests = fields.Many2many("mechanical.cement.test",string="Tests")
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
 
     normal_consistency_name = fields.Char("Name",default="Normal Consistency")
     normal_consistency_visible = fields.Boolean("Normal Consistency Visible",compute="_compute_visible")
@@ -31,32 +36,32 @@ class FlyaschNormalConsistency(models.Model):
 
 
     gravity_of_flyash1 = fields.Float(string="Specific Gravity of Flyash")
-    # gravity_of_flyash2 = fields.Float(string="Specific Gravity of Flyash")
+    gravity_of_flyash2 = fields.Float(string="Specific Gravity of Flyash")
 
     gravity_of_cement1 = fields.Float(string="Specific Gravity of Cement")
-    # gravity_of_cement2 = fields.Float(string="Specific Gravity of Cement")
+    gravity_of_cement2 = fields.Float(string="Specific Gravity of Cement")
 
 
     fly_ash_n1 = fields.Float(string="N",compute="_compute_fly_ash_n1")
-    # fly_ash_n2 = fields.Float(string="N",compute="_compute_fly_ash_n2")
+    fly_ash_n2 = fields.Float(string="N",compute="_compute_fly_ash_n2")
 
     wt_of_flash_1 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_1")
-    # wt_of_flash_2 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_2")
+    wt_of_flash_2 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_2")
 
     wt_of_cement_1 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
-    # wt_of_cement_2 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
+    wt_of_cement_2 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
 
     total_wt_of_sample_fly_1 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_1")
-    # total_wt_of_sample_fly_2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_2")
+    total_wt_of_sample_fly_2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_2")
 
     wt_of_water_required_fly_1 = fields.Float(string="Wt.of water required (g)")
-    # wt_of_water_required_fly_2 = fields.Float(string="Wt.of water required (g)")
+    wt_of_water_required_fly_2 = fields.Float(string="Wt.of water required (g)")
 
     penetration_planger_fly_1 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
-    # penetration_planger_fly_2 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
+    penetration_planger_fly_2 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
 
     normal_consistency_fly_1 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_1")
-    # normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
+    normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
 
     @api.depends('gravity_of_flyash1', 'gravity_of_cement1')
     def _compute_fly_ash_n1(self):
@@ -111,6 +116,58 @@ class FlyaschNormalConsistency(models.Model):
                 record.normal_consistency_fly_2 = (record.wt_of_water_required_fly_2 / record.total_wt_of_sample_fly_2) * 100
             else:
                 record.normal_consistency_fly_2 = 0.0
+
+
+    normal_consistency_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_normal_consistency_conformity", store=True)
+
+    @api.depends('normal_consistency_fly_1','eln_ref','grade')
+    def _compute_normal_consistency_conformity(self):
+        
+        for record in self:
+            record.normal_consistency_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.normal_consistency_fly_1 - record.normal_consistency_fly_1*mu_value
+                    upper = record.normal_consistency_fly_1 + record.normal_consistency_fly_1*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.normal_consistency_conformity = 'pass'
+                        break
+                    else:
+                        record.normal_consistency_conformity = 'fail'
+
+    normal_consistency_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_normal_consistency_nabl", store=True)
+
+    @api.depends('normal_consistency_fly_1','eln_ref','grade')
+    def _compute_normal_consistency_nabl(self):
+        
+        for record in self:
+            record.normal_consistency_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.normal_consistency_fly_1 - record.normal_consistency_fly_1*mu_value
+                    upper = record.normal_consistency_fly_1 + record.normal_consistency_fly_1*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.normal_consistency_nabl = 'pass'
+                        break
+                    else:
+                        record.normal_consistency_nabl = 'fail'
+
 
 
 
@@ -227,30 +284,81 @@ class FlyaschNormalConsistency(models.Model):
     particles_retained_table = fields.One2many('particles.retained.line','parent_id',string="Particles Retained")
     average_weight_retained = fields.Float("Average", compute="_compute_average_weight_retained")
 
-    prcent_retaind = fields.Float(string="% Weight Retained",compute="_compute_prcent_retaind",digits=(12,1))
+    prcent_retaind = fields.Float(string="% Weight Retained",compute="_compute_prcent_retained",digits=(12,1))
 
-
-    @api.depends('particles_retained_table.wt_retained')
+ 
+    @api.depends('particles_retained_table.wt_retained')  # Replace 'weight' with the actual field name in particles.retained.line
     def _compute_average_weight_retained(self):
         for record in self:
-            total_wt_retained = sum(record.particles_retained_table.mapped('wt_retained'))
-            count_lines = len(record.particles_retained_table)
-            record.average_weight_retained = total_wt_retained / count_lines if count_lines else 0.0
+            # Calculate the average weight
+            total_weight = sum(record.particles_retained_table.mapped('wt_retained'))
+            count = len(record.particles_retained_table)
+            record.average_weight_retained = total_weight / count if count else 0.0
 
     @api.depends('average_weight_retained')
-    def _compute_prcent_retaind(self):
+    def _compute_prcent_retained(self):
         for record in self:
-            # integer_part = math.floor(record.average_weight_retained)
-            # fractional_part = record.average_weight_retained - integer_part
-            # if fractional_part > 0 and fractional_part <= 0.25:
-            #     record.prcent_retaind = integer_part
-            # elif fractional_part > 0.25 and fractional_part <= 0.75:
-            #     record.prcent_retaind = integer_part + 0.5
-            # elif fractional_part > 0.75 and fractional_part <= 1:
-            #     record.prcent_retaind = integer_part + 1
-            # else:
-            #     record.prcent_retaind = 0
-            record.prcent_retaind = round(record.average_weight_retained,2)
+            # Round the average weight to the nearest 0.5
+            rounded_average = round(record.average_weight_retained * 2) / 2
+            record.prcent_retaind = rounded_average
+
+
+    prcent_retaind_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_prcent_retaind_conformity", store=True)
+
+    @api.depends('prcent_retaind','eln_ref','grade')
+    def _compute_prcent_retaind_conformity(self):
+        
+        for record in self:
+            record.prcent_retaind_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.prcent_retaind - record.prcent_retaind*mu_value
+                    upper = record.prcent_retaind + record.prcent_retaind*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.prcent_retaind_conformity = 'pass'
+                        break
+                    else:
+                        record.prcent_retaind_conformity = 'fail'
+
+    prcent_retaind_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_prcent_retaind_nabl", store=True)
+    
+    @api.depends('prcent_retaind','eln_ref','grade')
+    def _compute_prcent_retaind_nabl(self):
+        
+        for record in self:
+            record.prcent_retaind_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.prcent_retaind - record.prcent_retaind*mu_value
+                    upper = record.prcent_retaind + record.prcent_retaind*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.prcent_retaind_nabl = 'pass'
+                        break
+                    else:
+                        record.prcent_retaind_nabl = 'fail'
+
+
+
+
+
+
+
 
     # Soundness Test
     soundness_name_fly = fields.Char("Name",default="Soundness by Le-Chatelier Method")
@@ -310,6 +418,63 @@ class FlyaschNormalConsistency(models.Model):
                 record.expansion_soundness = integer_part + 1
             else:
                 record.expansion_soundness = 0
+
+
+    expansion_soundness_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_expansion_soundness_conformity", store=True)
+
+    @api.depends('expansion_soundness','eln_ref','grade')
+    def _compute_expansion_soundness_conformity(self):
+        
+        for record in self:
+            record.expansion_soundness_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.expansion_soundness - record.expansion_soundness*mu_value
+                    upper = record.expansion_soundness + record.expansion_soundness*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.expansion_soundness_conformity = 'pass'
+                        break
+                    else:
+                        record.expansion_soundness_conformity = 'fail'
+
+    expansion_soundness_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_expansion_soundness_nabl", store=True)
+    
+    @api.depends('expansion_soundness','eln_ref','grade')
+    def _compute_expansion_soundness_nabl(self):
+        
+        for record in self:
+            record.expansion_soundness_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.expansion_soundness - record.expansion_soundness*mu_value
+                    upper = record.expansion_soundness + record.expansion_soundness*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.expansion_soundness_nabl = 'pass'
+                        break
+                    else:
+                        record.expansion_soundness_nabl = 'fail'
+
+
+
+
+
+
     
     #  Specigic Gravity
     specigic_gravity_fly = fields.Char("Name",default="Specific Gravity")
@@ -373,6 +538,58 @@ class FlyaschNormalConsistency(models.Model):
         for record in self:
             average = (record.specific_gravity1 + record.specific_gravity2) / 2
             record.average_specific_gravity = average
+
+
+    average_specific_gravity_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_average_specific_gravity_conformity", store=True)
+
+    @api.depends('average_specific_gravity','eln_ref','grade')
+    def _compute_average_specific_gravity_conformity(self):
+        
+        for record in self:
+            record.average_specific_gravity_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_specific_gravity - record.average_specific_gravity*mu_value
+                    upper = record.average_specific_gravity + record.average_specific_gravity*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.average_specific_gravity_conformity = 'pass'
+                        break
+                    else:
+                        record.average_specific_gravity_conformity = 'fail'
+
+    average_specific_gravity_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_average_specific_gravity_nabl", store=True)
+    
+    @api.depends('average_specific_gravity','eln_ref','grade')
+    def _compute_average_specific_gravity_nabl(self):
+        
+        for record in self:
+            record.average_specific_gravity_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_specific_gravity - record.average_specific_gravity*mu_value
+                    upper = record.average_specific_gravity + record.average_specific_gravity*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.average_specific_gravity_nabl = 'pass'
+                        break
+                    else:
+                        record.average_specific_gravity_nabl = 'fail'
+
 
 
 
@@ -572,6 +789,58 @@ class FlyaschNormalConsistency(models.Model):
                 record.compressive_strength_of_sample = 0.0
 
 
+    compressive_strength_of_sample_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_compressive_strength_of_sample_conformity", store=True)
+
+    @api.depends('compressive_strength_of_sample','eln_ref','grade')
+    def _compute_compressive_strength_of_sample_conformity(self):
+        
+        for record in self:
+            record.compressive_strength_of_sample_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.compressive_strength_of_sample - record.compressive_strength_of_sample*mu_value
+                    upper = record.compressive_strength_of_sample + record.compressive_strength_of_sample*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.compressive_strength_of_sample_conformity = 'pass'
+                        break
+                    else:
+                        record.compressive_strength_of_sample_conformity = 'fail'
+
+    compressive_strength_of_sample_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_compressive_strength_of_sample_nabl", store=True)
+    
+    @api.depends('compressive_strength_of_sample','eln_ref','grade')
+    def _compute_compressive_strength_of_sample_nabl(self):
+        
+        for record in self:
+            record.compressive_strength_of_sample_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.compressive_strength_of_sample - record.compressive_strength_of_sample*mu_value
+                    upper = record.compressive_strength_of_sample + record.compressive_strength_of_sample*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.compressive_strength_of_sample_nabl = 'pass'
+                        break
+                    else:
+                        record.compressive_strength_of_sample_nabl = 'fail'
+
+
+
     # Lime reactivity
 
     lime_reactivity = fields.Char("Name",default="Lime Reactivity")
@@ -696,6 +965,59 @@ class FlyaschNormalConsistency(models.Model):
                 record.compressive_strength_28_days = integer_part + 1
             else:
                 record.compressive_strength_28_days = 0
+
+
+
+    
+    lime_reactivity_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_lime_reactivity_conformity", store=True)
+
+    @api.depends('compressive_strength_28_days','eln_ref','grade')
+    def _compute_lime_reactivity_conformity(self):
+        
+        for record in self:
+            record.lime_reactivity_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
+                    upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.lime_reactivity_conformity = 'pass'
+                        break
+                    else:
+                        record.lime_reactivity_conformity = 'fail'
+
+    lime_reactivity_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_lime_reactivity_nabl", store=True)
+    
+    @api.depends('compressive_strength_28_days','eln_ref','grade')
+    def _compute_lime_reactivity_nabl(self):
+        
+        for record in self:
+            record.lime_reactivity_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
+                    upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.lime_reactivity_nabl = 'pass'
+                        break
+                    else:
+                        record.lime_reactivity_nabl = 'fail'
 
 
 
@@ -842,48 +1164,74 @@ class FlyaschNormalConsistency(models.Model):
             else:
                 record.fineness_air_permeability = 0.0
 
-    
 
+    fineness_blaine_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_fineness_blaine_conformity", store=True)
 
-
-
-
-
-
-
-   
-   
-
+    @api.depends('fineness_air_permeability','eln_ref','grade')
+    def _compute_fineness_blaine_conformity(self):
         
+        for record in self:
+            record.fineness_blaine_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
+                    upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.fineness_blaine_conformity = 'pass'
+                        break
+                    else:
+                        record.fineness_blaine_conformity = 'fail'
 
+    fineness_blaine_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_fineness_blaine_nabl", store=True)
+    
+    @api.depends('fineness_air_permeability','eln_ref','grade')
+    def _compute_fineness_blaine_nabl(self):
+        
+        for record in self:
+            record.fineness_blaine_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
+                    upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.fineness_blaine_nabl = 'pass'
+                        break
+                    else:
+                        record.fineness_blaine_nabl = 'fail'
 
-
-
-
-
-
-
-   
-
-           
-       
 
 
 
     ### Compute Visible
-    @api.depends('tests')
+    @api.depends('sample_parameters')
     def _compute_visible(self):
-        normal_consistency_test = self.env['mechanical.cement.test'].search([('name', '=', 'Normal Consistency')])
-        setting_time_test = self.env['mechanical.cement.test'].search([('name', '=', 'Setting Time')])
-        particles_retained_test = self.env['mechanical.cement.test'].search([('name', '=', 'Particles retained on 45 micron IS sieve (wet sieving)')])
-        soundness_test = self.env['mechanical.cement.test'].search([('name', '=', 'Soundness')])
-        specific_gravity_test = self.env['mechanical.cement.test'].search([('name', '=', 'Specific Gravity')])
-        compressive_test = self.env['mechanical.cement.test'].search([('name', '=', 'Compressive Strength')])
-        lime_reactivity_test = self.env['mechanical.cement.test'].search([('name', '=', 'Lime Reactivity')])
-        # # casting_3days_test = self.env['mechanical.cement.test'].search([('name', '=', '3 Days')])
-        # # casting_7days_test = self.env['mechanical.cement.test'].search([('name', '=', '7 Days')])
-        # # casting_28days_test = self.env['mechanical.cement.test'].search([('name', '=', '28 Days')])
-        fineness_blaine = self.env['mechanical.cement.test'].search([('name', '=', 'Fineness (Blaine)')])
+        # normal_consistency_test = self.env['mechanical.cement.test'].search([('name', '=', 'Normal Consistency')])
+        # setting_time_test = self.env['mechanical.cement.test'].search([('name', '=', 'Setting Time')])
+        # particles_retained_test = self.env['mechanical.cement.test'].search([('name', '=', 'Particles retained on 45 micron IS sieve (wet sieving)')])
+        # soundness_test = self.env['mechanical.cement.test'].search([('name', '=', 'Soundness')])
+        # specific_gravity_test = self.env['mechanical.cement.test'].search([('name', '=', 'Specific Gravity')])
+        # compressive_test = self.env['mechanical.cement.test'].search([('name', '=', 'Compressive Strength')])
+        # lime_reactivity_test = self.env['mechanical.cement.test'].search([('name', '=', 'Lime Reactivity')])
+        # # # casting_3days_test = self.env['mechanical.cement.test'].search([('name', '=', '3 Days')])
+        # # # casting_7days_test = self.env['mechanical.cement.test'].search([('name', '=', '7 Days')])
+        # # # casting_28days_test = self.env['mechanical.cement.test'].search([('name', '=', '28 Days')])
+        # fineness_blaine = self.env['mechanical.cement.test'].search([('name', '=', 'Fineness (Blaine)')])
  
         for record in self:
             record.normal_consistency_visible = False
@@ -895,30 +1243,30 @@ class FlyaschNormalConsistency(models.Model):
             record.lime_reactivity_visible = False
             record.fineness_blaine_visible = False
 
-            if normal_consistency_test in record.tests:
-                record.normal_consistency_visible = True
+            # if normal_consistency_test in record.tests:
+            #     record.normal_consistency_visible = True
 
-            if setting_time_test in record.tests:
-                record.normal_consistency_visible = True
-                record.setting_time_visible  = True
-            if particles_retained_test in record.tests:
-                record.particles_retained_visible = True
-            if soundness_test in record.tests:
-                record.normal_consistency_visible = True
-                record.soundness_visible = True
-            if specific_gravity_test in record.tests:
-                record.specigic_gravity_visible = True
-            if compressive_test in record.tests:
-                record.specigic_gravity_visible = True
-                record.normal_consistency_visible = True
-                record.compressive_visible = True
-            if lime_reactivity_test in record.tests:
-                record.normal_consistency_visible = True
-                record.lime_reactivity_visible = True
-            # if dry_sieving_test in record.tests:
-            #     record.dry_sieving_visible = True
-            if fineness_blaine in record.tests:
-                record.fineness_blaine_visible = True
+            # if setting_time_test in record.tests:
+            #     record.normal_consistency_visible = True
+            #     record.setting_time_visible  = True
+            # if particles_retained_test in record.tests:
+            #     record.particles_retained_visible = True
+            # if soundness_test in record.tests:
+            #     record.normal_consistency_visible = True
+            #     record.soundness_visible = True
+            # if specific_gravity_test in record.tests:
+            #     record.specigic_gravity_visible = True
+            # if compressive_test in record.tests:
+            #     record.specigic_gravity_visible = True
+            #     record.normal_consistency_visible = True
+            #     record.compressive_visible = True
+            # if lime_reactivity_test in record.tests:
+            #     record.normal_consistency_visible = True
+            #     record.lime_reactivity_visible = True
+            # # if dry_sieving_test in record.tests:
+            # #     record.dry_sieving_visible = True
+            # if fineness_blaine in record.tests:
+            #     record.fineness_blaine_visible = True
 
 
             for sample in record.sample_parameters:
@@ -993,10 +1341,10 @@ class FlyaschNormalConsistency(models.Model):
 
 
 
-class CementTest(models.Model):
-    _name = "mechanical.cement.test"
-    _rec_name = "name"
-    name = fields.Char("Name")
+# class CementTest(models.Model):
+#     _name = "mechanical.cement.test"
+#     _rec_name = "name"
+#     name = fields.Char("Name")
 
 
 class ParticlesRetainedLine(models.Model):

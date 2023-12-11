@@ -2,16 +2,48 @@
 <odoo>
 <template id="flyash_datasheet">
 		<t t-call="web.html_container">
-			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
+			<t t-call="lerm_civil.mechanical_data_sheet_header">
 				<div style="text-align:center;font-size:18px">
 					Fly Ash
 				</div>
 				<div class="container_eln" style="margin-top:5px">
+				  <table style="margin-top:20px">
+                        <tr cols="12">
+				        <td colspan="6">Job No :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.kes_no"></span>
+                            </td>
+                            <td colspan="6">Test Start Date: 
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.start_date"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Material: <span t-field="eln.material"></span>
+                            </td>
+                            <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                            </td>
+                        </tr>
+                        <tr style="height:50px" cols="12">
+								<td colspan="4">Performed By :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.technician.name"/>
+								</td>
+								<td colspan="4">Witness Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.witness_name"/>
+								</td>
+								<td colspan="4">Witness Signature :
+									<![CDATA[&nbsp;]]>
+									<span style='padding:20px'></span>
+								</td>
+							</tr>
+					</table>
 					<div>
 						<div style="text-align:center;font-size:18px">
 							Normal Consistency
 						</div>
-					<table style="margin-top:20px">
+				     	<table style="margin-top:20px">
 								<tr cols="12">
 									<td colspan="6">Temperature :
 										<![CDATA[&nbsp;]]>
@@ -95,26 +127,7 @@
 								Setting Time
 							</div>
 							<table>
-								<tr cols="12">
-									<td colspan="6">Temperature :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.temp_percent_setting"/>
-									</td>
-									<td colspan="6">Test Start Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.start_date_setting"/>
-									</td>
-								</tr>
-								<tr cols="12">
-									<td colspan="6">Humidity :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.humidity_percent_setting"/>
-									</td>
-									<td  colspan="6">Test End Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.end_date_setting"/>
-									</td>
-								</tr>
+								
 								<tr cols="12">
 									<td style="font-weight: bold;" colspan="6">Total Weight of Sample(g):
 										<![CDATA[&nbsp;]]>
@@ -226,29 +239,7 @@
 							<div style="text-align:center;font-size:18px">
 								Particles Retained On 45 Micron IS Sieve (Wet Sieving)
 							</div>
-							<table>
-								<tr cols="12">
-									<td colspan="6">Temperature :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.temp_percent_retained"/>
-									</td>
-									<td colspan="6">Test Start Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.start_date_retained"/>
-									</td>
-								</tr>
-								<tr cols="12">
-									<td colspan="6">Humidity :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.humidity_percent_retained"/>
-									</td>
-									<td colspan="6">Test End Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.end_date_retained"/>
-									</td>
-								</tr>
-
-							</table>
+							
 							
 							<table style="margin-top:20px">
 
@@ -303,29 +294,7 @@
 							<div style="text-align:center;font-size:18px">
 								Soundness by Le-Chatelier Method
 							</div>
-							<table>
-								<tr cols="12">
-									<td colspan="6">Temperature :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.temp_percent_soundness"/>
-									</td>
-									<td colspan="6">Test Start Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.start_date_soundness"/>
-									</td>
-								</tr>
-								<tr cols="12">
-									<td colspan="6">Humidity :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.humidity_percent_soundness"/>
-									</td>
-									<td colspan="6">Test End Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.end_date_soundness"/>
-									</td>
-								</tr>
-
-							</table>
+							
 							<table style="margin-top: 20px">
 								
 									<tr>
@@ -398,27 +367,8 @@
 							<div style="text-align:center;font-size:18px">
 								Specific Gravity
 							</div>
-							<table>
-								<tr cols="12">
-									<td colspan="6">Temperature :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.temp_percent_specific"/>
-									</td>
-									<td colspan="6">Test Start Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.start_date_specific"/>
-									</td>
-								</tr>
-								<tr cols="12">
-									<td colspan="6">Humidity :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.humidity_percent_specific"/>
-									</td>
-									<td colspan="6">Test End Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.end_date_specific"/>
-									</td>
-								</tr>
+						
+								
 								<table>
 											<tr>
 												<th></th>
@@ -456,7 +406,7 @@
 											</tr>
 																				
 										</table>
-							</table>				
+									
 						</div>
 
 						<!-- Compressive Strength -->
@@ -464,29 +414,7 @@
 							<div style="text-align:center;font-size:18px">
 								Compressive Strength
 							</div>
-							<table>
-								<tr cols="12">
-									<td colspan="6">Temperature :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.temp_percent_compressive"/>
-									</td>
-									<td colspan="6">Test Start Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.start_date_compressive"/>
-									</td>
-								</tr>
-								<tr cols="12">
-									<td colspan="6">Humidity :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.humidity_percent_compressive"/>
-									</td>
-									<td colspan="6">Test End Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.end_date_compressive"/>
-									</td>
-								</tr>
-
-							</table>
+							
 							
 							<table style="margin-top: 20px">
 									
@@ -798,29 +726,7 @@
 							<div style="text-align:center;font-size:18px">
 								Lime Reactivity
 							</div>
-							<table>
-								<tr cols="12">
-									<td colspan="6">Temperature :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.temp_percent_lime"/>
-									</td>
-									<td colspan="6">Test Start Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.start_date_lime"/>
-									</td>
-								</tr>
-								<tr cols="12">
-									<td colspan="6">Humidity :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.humidity_percent_lime"/>
-									</td>
-									<td colspan="6">Test End Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.end_date_lime"/>
-									</td>
-								</tr>
-
-							</table>
+							
 							
 							<table style="margin-top: 20px">
 									<tr>
@@ -983,29 +889,7 @@
 							<div style="text-align:center;font-size:18px">
 								Fineness By Blaine Air Permeability Method (m²/kg)
 							</div>
-							<table>
-								<tr cols="12">
-									<td colspan="6">Temperature :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.temp_percent_fineness"/>
-									</td>
-									<td colspan="6">Test Start Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.start_date_fineness"/>
-									</td>
-								</tr>
-								<tr cols="12">
-									<td colspan="6">Humidity :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.humidity_percent_fineness"/>
-									</td>
-									<td colspan="6">Test End Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.end_date_fineness"/>
-									</td>
-								</tr>
-
-							</table>
+							
 							<table style="margin-top:20px">
 								<tr cols="12">
 									<td style="font-weight: bold;" colspan="6">Observation
@@ -1229,7 +1113,7 @@
 							</table>
 
 						</div>
-					<div class="authorizeRowDataSheet">
+					<!-- <div class="authorizeRowDataSheet">
 							<div>
 								<div>
 									<b>
@@ -1254,7 +1138,54 @@
 									</b>
 								</div>
 							</div>
+						</div> -->
+						  <!-- authorizeRowDataSheet -->
+                    
+                     <div class="authorizeRowDataSheet">
+						<div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr. Technician)
+                                </b>
+                            </div>
 						</div>
+						<div style="margin-left:500px">
+							
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
+								</b>
+							</div>
+						</div>
+					</div>
 				</div>
 			</t>
 		</t>
