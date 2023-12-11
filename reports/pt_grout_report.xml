@@ -6,7 +6,7 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report On PtGrout Mechanical</b></p>
 				</div>
@@ -206,9 +206,8 @@
 
 						</table>
 					</div>
-					<div style="margin-top:20px;">
-						<p><strong>Results</strong>:<![CDATA[&nbsp;]]></p>
-						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
+					 <div style="padding-top:5px">
+						<span t-esc="eln.material.test_parameter"/>
 					</div>
 
 					<table style="margin-top:30px;">
@@ -222,7 +221,13 @@
 									</th>
 									<th style="text-align: center;max-width:200px">
 										<span style="font-weight: bold;">
-											Test Parameters
+											Name Of Parameters
+										</span>
+									</th>
+									
+									<th style="text-align: center;">
+										<span style="font-weight: bold;">
+											Result
 										</span>
 									</th>
 									<th style="text-align: center;max-width:100px">
@@ -230,29 +235,29 @@
 											Unit
 										</span>
 									</th>
-									<th style="text-align: center;">
-										<span style="font-weight: bold;">
-											Result
-										</span>
-									</th>
-									<th style="text-align: center;padding:0px">
-										<span style="font-weight: bold;">
-											Test Method
-										</span>
-									</th>
-
-									<th style="text-align: center;max-width:150px">
-										<span colspan="3" style="font-weight: bold;">
-											Limit (As per MORTH Vth revision-2013)
-										</span>
-									</th>
+										<th style="max-width: 250px;text-align: center;">
+									<span style="font-weight: bold;">
+										<span t-esc="eln.material.specifications"/>
+									</span>
+								</th>
+								<th  style="max-width: 200px;text-align: center;">
+									<span style="font-weight: bold;">
+										<span t-esc="eln.material.method_reference"/>
+										
+									</span>
+								</th>
+								 <th style="text-align: center;" t-if="eln.conformity">
+									<span style="font-weight: bold;">
+										Confirmity Status
+									</span>
+							   	</th>
 								</tr>
 							</thead>
 							<tbody >
 
 								<!-- Initial Setting Time -->
 								
-								<tr t-if="ptgrout.setting_time_visible">
+								<!-- <tr t-if="ptgrout.setting_time_visible">
 									<td style="text-align: center;padding:0px">
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
@@ -273,15 +278,9 @@
 											<span t-field="ptgrout.initial_setting_time_hours"/>
 										</span>									
 									</td>
-									<!-- <td style="text-align: center;padding:0px">
-										
-										<span>
-											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a76295ce-2066-42ae-8dc8-a5ddf1e71cd1')]).test_method.test_method"/>
-										</span>
-									</td> -->
+								
 									<td style="text-align: center;padding:0px">
 										<span>
-											<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
 											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a76295ce-2066-42ae-8dc8-a5ddf1e71cd1')]).parameter_table" t-as="parameter">
 												<t t-if="parameter.grade.id == eln.grade_id.id">
 													<span t-field="parameter.specification"/>
@@ -290,11 +289,7 @@
 										</span>
 									</td>
 									
-									<!-- <td style="text-align: center;max-width:150px">
-										<span style="text-align: center;">
-											3 Min
-										</span>
-									</td> -->
+								
 									<td style="text-align: center; vertical-align: middle;">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a76295ce-2066-42ae-8dc8-a5ddf1e71cd1')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -303,11 +298,55 @@
 										</t>
 									</td>
 									
-								</tr>
+								</tr> -->
+								<tr t-if="ptgrout.setting_time_visible">
+								<td style="text-align: center;">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1" />
+									</div>
+								</td>
+								<td style="text-align: center;">
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).parameter_name"/>
+                                </td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="ptgrout.initial_setting_time_hours"/>
+									</span>									
+								</td>
+								<td  style="text-align: center; vertical-align: middle;">
+								        <span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).unit.name"/>
+										</span>
+								</td>
+								
+								<td style="text-align: center;">
+									<div>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+									</div>
+								</td>
+								<td style="text-align: center;">
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.specification"/>
+											</t>
+										</t>
+									</td>
+								<td t-if="eln.conformity" style="text-align: center;">
+									<!-- <span t-esc="flyash.normal_consistency_conformity"/> -->
+								</td>
+							</tr>
 
 									<!-- Final Setting Time -->
 
-								
+<!-- 								
 								<tr t-if="ptgrout.setting_time_visible">
 									<td style="text-align: center;padding:0px">
 										<span t-esc="i + 1" />
@@ -330,15 +369,9 @@
 											<span t-field="ptgrout.final_setting_time_hours"/>
 										</span>									
 									</td>
-									<!-- <td style="text-align: center;padding:0px">
-										
-										<span>
-											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a76295ce-2066-42ae-8dc8-a5ddf1e71cd1')]).test_method.test_method"/>
-										</span>
-									</td> -->
+									
 									<td style="text-align: center;padding:0px">
 										<span>
-											<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
 											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a76295ce-2066-42ae-8dc8-a5ddf1e71cd1')]).parameter_table" t-as="parameter">
 												<t t-if="parameter.grade.id == eln.grade_id.id">
 													<span t-field="parameter.specification"/>
@@ -349,11 +382,7 @@
 									
 									
 									
-									<!-- <td style="text-align: center;max-width:150px">
-										<span style="text-align: center;">
-											24 Min
-										</span>
-									</td> -->
+									
 									<td style="text-align: center; vertical-align: middle;">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a76295ce-2066-42ae-8dc8-a5ddf1e71cd1')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -362,11 +391,55 @@
 										</t>
 									</td>
 									
-								</tr>
+								</tr> -->
+								<tr t-if="ptgrout.setting_time_visible">
+								<td style="text-align: center;">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1" />
+									</div>
+								</td>
+								<td style="text-align: center;">
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).parameter_name"/>
+                                </td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="ptgrout.final_setting_time_hours"/>
+									</span>									
+								</td>
+								<td  style="text-align: center; vertical-align: middle;">
+								        <span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).unit.name"/>
+										</span>
+								</td>
+								
+								<td style="text-align: center;">
+									<div>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+									</div>
+								</td>
+								<td style="text-align: center;">
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.specification"/>
+											</t>
+										</t>
+									</td>
+								<td t-if="eln.conformity" style="text-align: center;">
+									<!-- <span t-esc="flyash.normal_consistency_conformity"/> -->
+								</td>
+							</tr>
 
 									<!-- Bleeding -->
 
-								<tr t-if="ptgrout.bleeding_visible and (ptgrout.bleedin_nabl == 'pass' and nabl or ptgrout.bleedin_nabl == 'fail' and not nabl)" style="margin-top:20px;">
+								<!-- <tr t-if="ptgrout.bleeding_visible and (ptgrout.bleedin_nabl == 'pass' and nabl or ptgrout.bleedin_nabl == 'fail' and not nabl)" style="margin-top:20px;">
 									<td style="text-align: center;padding:0px">
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
@@ -387,16 +460,9 @@
 											
 											<span t-field="ptgrout.final_bleeding" t-options='{"widget": "float", "precision": 2}'/>
 										</span>									
-									</td>
-									<!-- <td style="text-align: center;padding:0px">
-										
-										<span>
-											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).test_method.test_method"/>
-										</span>
-									</td> -->
+								
 									<td style="text-align: center;padding:0px">
 										<span>
-											<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
 											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table" t-as="parameter">
 												<t t-if="parameter.grade.id == eln.grade_id.id">
 													<span t-field="parameter.specification"/>
@@ -406,11 +472,7 @@
 									</td>
 									
 									
-									<!-- <td style="text-align: center;max-width:150px">
-										<span style="text-align: center;">
-											5 Max
-										</span>
-									</td> -->
+								
 									<td style="text-align: center; vertical-align: middle;">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -419,11 +481,57 @@
 										</t>
 									</td>
 									
-								</tr>
+								</tr> -->
+								<tr t-if="ptgrout.bleeding_visible and (ptgrout.bleedin_nabl == 'pass' and nabl or ptgrout.bleedin_nabl == 'fail' and not nabl)">
+								<td style="text-align: center;">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1" />
+									</div>
+								</td>
+								<td style="text-align: center;">
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_name"/>
+                                </td>
+								
+								<td style="text-align: center;">
+									<div>
+										<span t-field="ptgrout.final_bleeding" t-options='{"widget": "float", "precision": 2}'/>
+									</div>
+								</td>
+								<td  style="text-align: center; vertical-align: middle;">
+								        <span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).unit.name"/>
+										</span>
+								</td>
+								
+								<td style="text-align: center;">
+									<div>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+									</div>
+								</td>
+								<td style="text-align: center;">
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.specification"/>
+											</t>
+										</t>
+									</td>
+								<td t-if="eln.conformity" style="text-align: center;">
+									<span t-esc="ptgrout.bleeding_confirmity"/>
+								</td>
+								
+							</tr>
+
 
 									<!-- Volume Change -->
 
-								<tr t-if="ptgrout.volume_change_visible and (ptgrout.volume_change_nabl == 'pass' and nabl or ptgrout.volume_change_nabl == 'fail' and not nabl)" style="margin-top:20px;">
+								<!-- <tr t-if="ptgrout.volume_change_visible and (ptgrout.volume_change_nabl == 'pass' and nabl or ptgrout.volume_change_nabl == 'fail' and not nabl)" style="margin-top:20px;">
 									<td style="text-align: center;padding:0px">
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
@@ -444,16 +552,9 @@
 											
 											<span t-field="ptgrout.height_change_average" t-options='{"widget": "float", "precision": 2}'/>
 										</span>									
-									</td>
-									<!-- <td style="text-align: center;padding:0px">
-										
-										<span>
-											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).test_method.test_method"/>
-										</span>
-									</td> -->
+									
 									<td style="text-align: center;padding:0px">
 										<span>
-											<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
 											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table" t-as="parameter">
 												<t t-if="parameter.grade.id == eln.grade_id.id">
 													<span t-field="parameter.specification"/>
@@ -463,11 +564,7 @@
 									</td>
 									
 									
-									<!-- <td style="text-align: center;max-width:150px">
-										<span style="text-align: center;">
-											5 Max
-										</span>
-									</td> -->
+								
 									<td style="text-align: center; vertical-align: middle;">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -476,7 +573,52 @@
 										</t>
 									</td>
 									
-								</tr>
+								</tr> -->
+								<tr t-if="ptgrout.volume_change_visible and (ptgrout.volume_change_nabl == 'pass' and nabl or ptgrout.volume_change_nabl == 'fail' and not nabl)">
+								<td style="text-align: center;">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1" />
+									</div>
+								</td>
+								<td style="text-align: center;">
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_name"/>
+                                </td>
+								
+								<td style="text-align: center;">
+									<div>
+										<span t-field="ptgrout.height_change_average" t-options='{"widget": "float", "precision": 2}'/>
+									</div>
+								</td>
+								<td  style="text-align: center; vertical-align: middle;">
+								        <span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).unit.name"/>
+										</span>
+								</td>
+								
+								<td style="text-align: center;">
+									<div>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+									</div>
+								</td>
+								<td style="text-align: center;">
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.specification"/>
+											</t>
+										</t>
+									</td>
+								<td t-if="eln.conformity" style="text-align: center;">
+									<span t-esc="ptgrout.volume_change_confirmity"/>
+								</td>
+								
+							</tr>
 									<!-- Compressive Strength -->
 
 								<tr t-if="ptgrout.compressive_strength_visible">
@@ -486,7 +628,7 @@
 									</td>
 									<td  style="text-align: center;padding:0px;max-width:200px">
 										<div style="text-align: center; border-bottom:1px solid black;min-height:50px">
-											Compressive Strength
+											   <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_name"/>
 										</div>
 										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.compressive_strength_7days_nabl == 'pass' and nabl or ptgrout.compressive_strength_7days_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom:1px solid black;min-height:25px">
 											7 days
@@ -494,11 +636,6 @@
 										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.compressive_strength_28days_nabl == 'pass' and nabl or ptgrout.compressive_strength_28days_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
 											28 days
 										</div>	
-									</td>
-									<td style="text-align: center;padding:0px">
-										<span>
-											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).unit.name"/>
-										</span>
 									</td>
 									<td style="text-align: center;padding:0px">
 										<div style="text-align: center; border-bottom: 1px solid black;min-height:50px">
@@ -512,11 +649,32 @@
 											<span t-field="ptgrout.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
 										</div>
 									</td>
+									<td style="text-align: center;padding:0px">
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).unit.name"/>
+										</span>
+									</td>
+									
 									<!-- <td style="text-align: center;padding:0px">
 										<span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).test_method.test_method"/>
 										</span>
 									</td> -->
+									<td  style="text-align: center;padding:0px;max-width:200px">
+										<div style="text-align: center; border-bottom:1px solid black;min-height:50px">
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.permissable_limit"/>
+									     </t>
+							        	</t>
+										</div>
+										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.compressive_strength_7days_nabl == 'pass' and nabl or ptgrout.compressive_strength_7days_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom:1px solid black;min-height:25px">
+											27 Min
+										</div>
+										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.compressive_strength_28days_nabl == 'pass' and nabl or ptgrout.compressive_strength_28days_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
+											30 Min
+										</div>	
+									</td>
 									<td style="text-align: center;padding:0px; vertical-align: middle;">
 										<span>
 											<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
@@ -527,19 +685,20 @@
 											</t>
 										</span>
 									</td>
+								<td t-if="eln.conformity" style="text-align: center;vertical-align: middle;padding:0px;max-width:100px">
+									<div rowspan="2" style="text-align: center;vertical-align: middle; border-bottom:1px solid black;min-height:50px">
+									<!-- <span t-esc="ptgrout.compressive_strength_7days_confirmity"/> -->
+									</div>
+									<div  style="text-align: center;vertical-align: middle; border-bottom:1px solid black;min-height:25px">
+									<span t-esc="ptgrout.compressive_strength_7days_confirmity"/>
+									</div>
+									<div  style="text-align: center;vertical-align: middle; border-bottom:1px solid black;min-height:25px">
+									<span t-esc="ptgrout.compressive_strength_28days_confirmity"/>
+									</div>
+								</td>
 									
 									
-									<td  style="text-align: center;padding:0px;max-width:200px">
-										<div style="text-align: center; border-bottom:1px solid black;min-height:50px">
-											
-										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.compressive_strength_7days_nabl == 'pass' and nabl or ptgrout.compressive_strength_7days_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom:1px solid black;min-height:25px">
-											27 Min
-										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.compressive_strength_28days_nabl == 'pass' and nabl or ptgrout.compressive_strength_28days_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
-											30 Min
-										</div>	
-									</td>
+									
 									
 								</tr>
 							</tbody>
@@ -563,63 +722,69 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
+									 <li t-if="eln.has_witness">
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<div class="signatureContainer girdgird">
-							<div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										<span t-esc="eln.technician.name"/>
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
-							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
-									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-								</div>
-								<div style="padding-top:5px">
-									Format No. <span t-esc="eln.material.test_format_no"/>
-								</div>
-							</div>
-							<div>
-								<div>
-									<b>
-										Approved By 
-									</b>
-									
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-									<span t-esc="eln.sample_id.approved_by.name"/>
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
+							<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+					
+					<div>
+						<div>
+							<b>
+								Checked By
+							</b>
 						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(Sr. Technician)
+							</b>
+						</div>
+					</div>
+					<div>
+						<div >
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							Format No. <span t-esc="eln.material.test_format_no"/>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b>
+								Approved By 
+							</b>
+							
+						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								Mechanical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								(Authorized Signatory)
+							</b>
+						</div>
+					</div>
+				</div>
 					</div>
 				</div>
 				
