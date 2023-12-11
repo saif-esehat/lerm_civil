@@ -104,9 +104,6 @@
                                 </b>
                                 
                             </div>
-                            <div style="height:40px">
-
-                            </div>
                             <div>
                                 <b>
                                 <span t-esc="eln.sample_id.filled_by.name"/>
@@ -119,16 +116,14 @@
                             </div>
                         </div>
                         
-                        <div style="margin-left:500px">
+                        <div style="margin-left:600px">
                                     
                             <div>
                                 <b>
                                     Checked By
                                 </b>
                             </div>
-                            <div style="height:40px">
 
-                            </div>
                             <div>
                                 <b>
                                 <span t-esc="eln.sample_id.check_by.name"/>
