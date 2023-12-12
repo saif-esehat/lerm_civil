@@ -1125,9 +1125,19 @@ class FlyaschNormalConsistency(models.Model):
             record.mass_of_sample_fineness = 0.5 * record.specific_gravity_fineness * record.average_bed_volume
 
 
-    @api.depends('time_sample_trial1','time_sample_trial2','time_sample_trial3')
+    # @api.depends('time_sample_trial1','time_sample_trial2','time_sample_trial3')
+    # def _compute_average_sample_time(self):
+    #     self.average_sample_time = (self.time_sample_trial1 + self.time_sample_trial2 + self.time_sample_trial3)/3
+
+    @api.depends('time_sample_trial1', 'time_sample_trial2', 'time_sample_trial3')
     def _compute_average_sample_time(self):
-        self.average_sample_time = (self.time_sample_trial1 + self.time_sample_trial2 + self.time_sample_trial3)/3
+        for record in self:
+            # Ensure that all time values are present and non-zero
+            if all([record.time_sample_trial1, record.time_sample_trial2, record.time_sample_trial3]) and \
+                    any([record.time_sample_trial1 != 0, record.time_sample_trial2 != 0, record.time_sample_trial3 != 0]):
+                record.average_sample_time = (record.time_sample_trial1 + record.time_sample_trial2 + record.time_sample_trial3) / 3
+            else:
+                record.average_sample_time = 0.0
 
 
 
