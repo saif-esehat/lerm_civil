@@ -63,6 +63,13 @@ class FlyaschNormalConsistency(models.Model):
     normal_consistency_fly_1 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_1")
     normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
 
+    # @api.depends('gravity_of_flyash1', 'gravity_of_cement1')
+    # def _compute_fly_ash_n1(self):
+    #     for record in self:
+    #         if record.gravity_of_cement1 != 0:
+    #             record.fly_ash_n1 = record.gravity_of_flyash1 / record.gravity_of_cement1
+    #         else:
+    #             record.fly_ash_n1 = 0.0
     @api.depends('gravity_of_flyash1', 'gravity_of_cement1')
     def _compute_fly_ash_n1(self):
         for record in self:
@@ -70,6 +77,7 @@ class FlyaschNormalConsistency(models.Model):
                 record.fly_ash_n1 = record.gravity_of_flyash1 / record.gravity_of_cement1
             else:
                 record.fly_ash_n1 = 0.0
+
                 
 
     @api.depends('gravity_of_flyash2', 'gravity_of_cement2')
