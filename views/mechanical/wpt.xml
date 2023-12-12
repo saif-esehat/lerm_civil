@@ -87,10 +87,16 @@
                        <field name="average_of_wpt"/>
                     </group>
                     <group>
-                       <field name="wpt_conformity"/>
+                       <field name="wpt_conformity"
+                               decoration-success="wpt_conformity == 'pass'" 
+                               decoration-danger="wpt_conformity == 'fail'" 
+                               readonly="1"/>
                     </group>
                     <group>
-                       <field name="wpt_nabl"/>
+                       <field name="wpt_nabl"
+                               decoration-success="wpt_nabl == 'pass'" 
+                                decoration-danger="wpt_nabl == 'fail'" 
+                               readonly="1"/>
                     </group>
                 </sheet>
             </form>

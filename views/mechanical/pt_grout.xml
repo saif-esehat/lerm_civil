@@ -188,8 +188,14 @@
                         </tree>
                       </field>
                       <field name="final_bleeding"/>
-                      <field name="bleeding_confirmity"/>
-                      <field name="bleedin_nabl"/>
+                      <field name="bleeding_confirmity"
+                               decoration-success="bleeding_confirmity == 'pass'" 
+                               decoration-danger="bleeding_confirmity == 'fail'" 
+                               readonly="1"/>
+                      <field name="bleedin_nabl"
+                               decoration-success="bleedin_nabl == 'pass'" 
+                               decoration-danger="bleedin_nabl == 'fail'" 
+                               readonly="1"/>
                       
                     </group>
 
@@ -225,8 +231,14 @@
                         </tree>
                       </field>
                       <field name="height_change_average"/>
-                      <field name="volume_change_confirmity"/>
-                      <field name="volume_change_nabl"/>
+                      <field name="volume_change_confirmity"
+                               decoration-success="volume_change_confirmity == 'pass'" 
+                               decoration-danger="volume_change_confirmity == 'fail'" 
+                               readonly="1"/>
+                      <field name="volume_change_nabl"
+                               decoration-success="volume_change_nabl == 'pass'" 
+                               decoration-danger="volume_change_nabl == 'fail'" 
+                               readonly="1"/>
                     </group>
 
                      <!-- compressive strength -->
@@ -301,8 +313,14 @@
                       </field>
                       <field name="average_casting_28days"/>
                       <field name="compressive_strength_28_days"/>
-                      <field name="compressive_strength_28days_confirmity"/>
-                      <field name="compressive_strength_28days_nabl"/>
+                      <field name="compressive_strength_28days_confirmity"
+                               decoration-success="compressive_strength_28days_confirmity == 'pass'" 
+                               decoration-danger="compressive_strength_28days_confirmity == 'fail'" 
+                               readonly="1"/>
+                      <field name="compressive_strength_28days_nabl"
+                               decoration-success="compressive_strength_28days_nabl == 'pass'" 
+                               decoration-danger="compressive_strength_28days_nabl == 'fail'" 
+                               readonly="1"/>
                     </group>
                   
                 </sheet>
