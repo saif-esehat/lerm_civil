@@ -1111,9 +1111,11 @@ class FlyaschNormalConsistency(models.Model):
 
     @api.depends('time_fineness_trial1','time_fineness_trial2','time_fineness_trial3')
     def _compute_time_average_fineness(self):
-        self.average_time_fineness = (self.time_fineness_trial1 + self.time_fineness_trial2 + self.time_fineness_trial3)/3
+         for record in self:
+            record.average_time_fineness = (record.time_fineness_trial1 + record.time_fineness_trial2 + record.time_fineness_trial3)/3
 
 
+      
     @api.depends('average_specific_gravity')
     def _compute_specific_gravity_fineness(self):
         for record in self:

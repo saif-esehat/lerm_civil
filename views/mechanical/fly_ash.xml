@@ -171,8 +171,12 @@
                     </group>
                      <group attrs="{'invisible': [('normal_consistency_visible', '=', False)]}">
                        
-                            <field  name="normal_consistency_conformity" />
+                            <field  name="normal_consistency_conformity" 
+                                           decoration-success="normal_consistency_conformity == 'pass'" 
+                                           decoration-danger="normal_consistency_conformity == 'fail'" 
+                                           readonly="1" />
                             <field  name="normal_consistency_nabl" />
+                           
                          
                     </group>
                     
@@ -258,7 +262,10 @@
                     </group>
                     <group attrs="{'invisible': [('particles_retained_visible', '=', False)]}">
                        
-                            <field  name="prcent_retaind_conformity" />
+                            <field  name="prcent_retaind_conformity"
+                                           decoration-success="prcent_retaind_conformity == 'pass'" 
+                                           decoration-danger="prcent_retaind_conformity == 'fail'" 
+                                           readonly="1" /> 
                             <field  name="prcent_retaind_nabl" />
                          
                     </group>
@@ -300,7 +307,10 @@
                     </group>
                     <group attrs="{'invisible': [('soundness_visible', '=', False)]}">
                        
-                            <field  name="expansion_soundness_conformity" />
+                            <field  name="expansion_soundness_conformity"
+                                           decoration-success="expansion_soundness_conformity == 'pass'" 
+                                           decoration-danger="expansion_soundness_conformity == 'fail'" 
+                                           readonly="1" />
                             <field  name="expansion_soundness_nabl" />
                          
                     </group>
@@ -396,7 +406,10 @@
                     </group>
                      <group attrs="{'invisible': [('specigic_gravity_visible', '=', False)]}">
                        
-                            <field  name="average_specific_gravity_conformity" />
+                            <field  name="average_specific_gravity_conformity"
+                                           decoration-success="average_specific_gravity_conformity == 'pass'" 
+                                           decoration-danger="average_specific_gravity_conformity == 'fail'" 
+                                           readonly="1" />
                             <field  name="average_specific_gravity_nabl" />
                          
                     </group>
@@ -570,7 +583,10 @@
                     </group>
                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
                        
-                            <field  name="compressive_strength_of_sample_conformity" />
+                            <field  name="compressive_strength_of_sample_conformity"
+                                           decoration-success="compressive_strength_of_sample_conformity == 'pass'" 
+                                           decoration-danger="compressive_strength_of_sample_conformity == 'fail'" 
+                                           readonly="1" />
                             <field  name="compressive_strength_of_sample_nabl" />
                          
                     </group>
@@ -667,7 +683,10 @@
 
                       <group attrs="{'invisible': [('lime_reactivity_visible', '=', False)]}">
                        
-                            <field  name="lime_reactivity_conformity" />
+                            <field  name="lime_reactivity_conformity"
+                                           decoration-success="lime_reactivity_conformity == 'pass'" 
+                                           decoration-danger="lime_reactivity_conformity == 'fail'" 
+                                           readonly="1"  />
                             <field  name="lime_reactivity_nabl" />
                          
                     </group>
@@ -828,7 +847,10 @@
                     </group>
                      <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
                        
-                            <field  name="fineness_blaine_conformity" />
+                            <field  name="fineness_blaine_conformity"
+                                           decoration-success="fineness_blaine_conformity == 'pass'" 
+                                           decoration-danger="fineness_blaine_conformity == 'fail'" 
+                                           readonly="1" />
                             <field  name="fineness_blaine_nabl" />
                          
                     </group>

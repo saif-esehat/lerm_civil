@@ -65,6 +65,8 @@ class LermSampleForm(models.Model):
     filled_by = fields.Many2one('res.users',string="Filled By")
     check_by = fields.Many2one('res.users',string="Check By")
     approved_by = fields.Many2one('res.users',string="Approved By")
+    file_upload = fields.Binary(string="Datasheet Upload")
+    report_upload = fields.Binary(string="Report Upload")
 
 
     
