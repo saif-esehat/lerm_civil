@@ -14,6 +14,7 @@
         </div>
 		<div t-attf-class="footer o_standard_footer">
 			
+			
             <div class="text-center" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4">
 					
@@ -45,9 +46,13 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			 	<div style="position:absolute;opacity:0.25;font-size:3em;width:100%;height:100%;z-index:1000;margin:-10px">
+					<img src="/lerm_civil/static/src/img/watermark2.jpg"/>
+				</div>
 				<div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
 				</div>
+				
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						<table>

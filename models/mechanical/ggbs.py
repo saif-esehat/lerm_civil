@@ -40,6 +40,58 @@ class GgbsMechanical(models.Model):
     penetration_vicat = fields.Float("Penetration of vicat's Plunger(mm)")
     normal_consistency = fields.Float("Normal Consistency",compute="_compute_normal_consistency",store=True)
 
+    normal_consistency_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Conformity', default='fail',compute="_compute_normal_conformity")
+
+    normal_consistency_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+
+    ], string='NABL', default='fail',compute="_compute_normal_consistency_nabl")
+
+
+    @api.depends('normal_consistency','eln_ref','grade')
+    def _compute_normal_conformity(self):
+        for record in self:
+            record.normal_consistency_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','84946eb6-b44a-48cc-9d41-198f55346af0')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','84946eb6-b44a-48cc-9d41-198f55346af0')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    lower = record.normal_consistency - record.normal_consistency*mu_value
+                    upper = record.normal_consistency + record.normal_consistency*mu_value
+                    if lower >= req_min and upper <= req_max :
+                        record.normal_consistency_conformity = 'pass'
+                        break
+                    else:
+                        record.normal_consistency_conformity = 'fail'
+
+    @api.depends('normal_consistency','eln_ref','grade')
+    def _compute_normal_consistency_nabl(self):
+        
+        for record in self:
+            record.normal_consistency_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','84946eb6-b44a-48cc-9d41-198f55346af0')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','84946eb6-b44a-48cc-9d41-198f55346af0')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.normal_consistency - record.normal_consistency*mu_value
+                    upper = record.normal_consistency + record.normal_consistency*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.normal_consistency_nabl = 'pass'
+                        break
+                    else:
+                        record.normal_consistency_nabl = 'fail'
+
 
     @api.depends('wt_of_cement_trial1','wt_of_ggbs_trial1')
     def _compute_total_wt_sample(self):
@@ -99,14 +151,18 @@ class GgbsMechanical(models.Model):
         ('pass', 'Pass'),
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_specific_gravity_confirmity")
+    specific_gravity_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_specific_gravity_nabl")
 
 
     @api.depends('average_specific_gravity','eln_ref','grade')
     def _compute_specific_gravity_confirmity(self):
         for record in self:
             record.specific_gravity_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_table
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -119,6 +175,27 @@ class GgbsMechanical(models.Model):
                         break
                     else:
                         record.specific_gravity_confirmity = 'fail'
+    
+    @api.depends('average_specific_gravity','eln_ref','grade')
+    def _compute_specific_gravity_nabl(self):
+        
+        for record in self:
+            record.specific_gravity_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_specific_gravity - record.average_specific_gravity*mu_value
+                    upper = record.average_specific_gravity + record.average_specific_gravity*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.specific_gravity_nabl = 'pass'
+                        break
+                    else:
+                        record.specific_gravity_nabl = 'fail'
 
     @api.depends('initial_volume_kerosine_trial1','final_volume_kerosine_trial1')
     def _compute_displaced_volume_trail1(self):
@@ -169,7 +246,111 @@ class GgbsMechanical(models.Model):
     slag_28days_table = fields.One2many("ggbs.slag.28days.line",'parent_id',string="28 days")
     
     average_7days_slag = fields.Float("Average",compute="_compute_average_7days",store=True)
+
+    slag_7days_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Conformity', default='fail',compute="_compute_slag_7days_conformity")
+
+    slag_7days_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='NABL', default='fail',compute="_compute_slag_7days_nabl")
+
+
+    @api.depends('average_7days_slag','eln_ref','grade')
+    def _compute_slag_7days_conformity(self):
+        for record in self:
+            record.slag_7days_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    lower = record.average_7days_slag - record.average_7days_slag*mu_value
+                    upper = record.average_7days_slag + record.average_7days_slag*mu_value
+                    if lower >= req_min and upper <= req_max :
+                        record.slag_7days_conformity = 'pass'
+                        break
+                    else:
+                        record.slag_7days_conformity = 'fail'
+
+    @api.depends('average_7days_slag','eln_ref','grade')
+    def _compute_slag_7days_nabl(self):
+        
+        for record in self:
+            record.slag_7days_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_7days_slag - record.average_7days_slag*mu_value
+                    upper = record.average_7days_slag + record.average_7days_slag*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.slag_7days_nabl = 'pass'
+                        break
+                    else:
+                        record.slag_7days_nabl = 'fail'
+
+
     average_28days_slag = fields.Float("Average",compute="_compute_average_28days",store=True)
+
+    slag_28days_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Conformity', default='fail',compute="_compute_slag_28days_conformity")
+
+    slag_28days_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='NABL', default='fail',compute="_compute_slag_28days_nabl")
+
+
+    @api.depends('average_28days_slag','eln_ref','grade')
+    def _compute_slag_28days_conformity(self):
+        for record in self:
+            record.slag_28days_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    lower = record.average_28days_slag - record.average_28days_slag*mu_value
+                    upper = record.average_28days_slag + record.average_28days_slag*mu_value
+                    if lower >= req_min and upper <= req_max :
+                        record.slag_28days_conformity = 'pass'
+                        break
+                    else:
+                        record.slag_28days_conformity = 'fail'
+
+    @api.depends('average_28days_slag','eln_ref','grade')
+    def _compute_slag_28days_nabl(self):
+        
+        for record in self:
+            record.slag_28days_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_28days_slag - record.average_28days_slag*mu_value
+                    upper = record.average_28days_slag + record.average_28days_slag*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.slag_28days_nabl = 'pass'
+                        break
+                    else:
+                        record.slag_28days_nabl = 'fail'
     
     casting_28_name = fields.Char("Name",default="28 Days")
     status_28days = fields.Boolean("Done")
@@ -180,6 +361,7 @@ class GgbsMechanical(models.Model):
     status_7days = fields.Boolean("Done")
     casting_date_7days = fields.Date(string="Date of Casting")
     testing_date_7days = fields.Date(string="Date of Testing",compute="_compute_testing_date_7days")
+    
 
     @api.depends('slag_7days_table.compressive_strength')
     def _compute_average_7days(self):
@@ -246,6 +428,60 @@ class GgbsMechanical(models.Model):
     slag_28days_table_opc = fields.One2many("ggbs.slag.opc.28days.line",'parent_id',string="28 days")
     
     average_7days_slag_opc = fields.Float("Average",compute="_compute_average_7days_opc",store=True)
+
+    slag_opc_7days_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Conformity', default='fail',compute="_compute_slag_opc_7days_conformity")
+
+    slag_opc_7days_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='NABL', default='fail',compute="_compute_slag_opc_7days_nabl")
+
+
+    @api.depends('average_7days_slag_opc','eln_ref','grade')
+    def _compute_slag_opc_7days_conformity(self):
+        for record in self:
+            record.slag_opc_7days_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    lower = record.average_7days_slag_opc - record.average_7days_slag_opc*mu_value
+                    upper = record.average_7days_slag_opc + record.average_7days_slag_opc*mu_value
+                    if lower >= req_min and upper <= req_max :
+                        record.slag_opc_7days_conformity = 'pass'
+                        break
+                    else:
+                        record.slag_opc_7days_conformity = 'fail'
+
+    @api.depends('average_7days_slag_opc','eln_ref','grade')
+    def _compute_slag_opc_7days_nabl(self):
+        
+        for record in self:
+            record.slag_opc_7days_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_7days_slag_opc - record.average_7days_slag_opc*mu_value
+                    upper = record.average_7days_slag_opc + record.average_7days_slag_opc*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.slag_opc_7days_nabl = 'pass'
+                        break
+                    else:
+                        record.slag_opc_7days_nabl = 'fail'
+
+
+
     average_28days_slag_opc = fields.Float("Average",compute="_compute_average_28days_opc",store=True)
     
     casting_28_name_opc = fields.Char("Name",default="28 Days")
@@ -390,6 +626,11 @@ class GgbsMechanical(models.Model):
         ('pass', 'Pass'),
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_fineness_confirmity")
+    fineness_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Confirmity', default='fail',compute="_compute_fineness_nabl")
+
 
     @api.depends('fineness_air_permeability','eln_ref','grade')
     def _compute_fineness_confirmity(self):
@@ -409,6 +650,27 @@ class GgbsMechanical(models.Model):
                         break
                     else:
                         record.fineness_confirmity = 'fail'
+    
+    @api.depends('fineness_air_permeability','eln_ref','grade')
+    def _compute_fineness_nabl(self):
+        
+        for record in self:
+            record.fineness_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
+                    upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.fineness_nabl = 'pass'
+                        break
+                    else:
+                        record.fineness_nabl = 'fail'
 
     @api.depends('weight_of_mercury_before_trial1','weight_of_mercury_after_trail1','density_of_mercury')
     def _compute_bed_volume_trial1(self):
