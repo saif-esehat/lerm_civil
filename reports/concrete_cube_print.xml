@@ -197,54 +197,73 @@
 					
 					<!-- <div style="margin-top:20px;">
 						<u>Protocol : <span t-esc="o.material.test_parameter"/></u>
+
+					</div> -->
+					<div style="margin-top:20px;">
+						<span></span>
+					</div>
+					<!-- <div style="text-align:center;font-size:18px">
+						<span t-field="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_name"/>
 					</div> -->
 					<div>
 						<span></span>
 					</div>
 					<div style="padding-top:5px">
-						<span t-esc="eln.material.test_parameter"/>
+						<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>: 
+						<span>
+							<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
+							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table" t-as="parameter">
+								<t t-if="parameter.grade.id == eln.grade_id.id">
+									<span t-field="parameter.specification"/>
+								</t>
+							</t>
+						</span>
 					</div>
+					<!-- <td style="text-align: center;vertical-align: middle;">
+						
+					</td> -->
+
 					<table>
 						<thead>
-							<tr>
-								<th>
+							<tr style="text-align: center;">
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Sr. No
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										ID MARK/Location
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Length in mm
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Width in mm
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Area in mm²
 									</span>
 								</th>
 								
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Weight of sample in kg
 									</span>
 								</th>
 
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Crushing load in KN
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Compressive Strength in N/mm2
 									</span>
@@ -262,28 +281,28 @@
 										<t t-set="i" t-value="i+1"/>
 									</div>
                   				</td> -->
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.sr_no"/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.id_mark"/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.length" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.width" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.area" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.wt_sample" t-options='{"widget": "float", "precision": 3}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.crushing_load" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
@@ -296,28 +315,28 @@
 										<t t-set="i" t-value="i+1"/>
 									</div>
                   				</td> -->
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.sr_no"/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.id_mark"/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.length" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.width" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.area" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.wt_sample" t-options='{"widget": "float", "precision": 3}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.crushing_load" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
@@ -443,7 +462,8 @@
 					<p style="font-size:15px"><b>Test Data Sheet</b></p>
 				</div> -->
 				<div style="text-align:center;font-size:18px">
-                    Concrete Cube
+                    <!-- Concrete Cube -->
+					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_name"/>
                 </div>
 				<div class="container_eln" style="margin-top:5px">
 					<div t-foreach="eln" t-as="o">
@@ -491,46 +511,46 @@
 						<table style="margin-top:30px;">
 						<thead>
 							<tr>
-								<th>
+								<th style="text-align: center;"> 
 									<span>
 										Sr. No
 									</span>
 								</th>
-								<th>
+								<th	style="text-align: center;">
 									<span>
 										ID MARK/Location
 									</span>
 								</th>
 								
-								<th>
+								<th style="text-align: center;">
 									<span>
 										Length in mm
 									</span>
 								</th>
 
-								<th>
+								<th style="text-align: center;">
 									<span>
 										Width in mm
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;">
 									<span>
 										Area in mm²
 									</span>
 								</th>
 								
-								<th>
+								<th style="text-align: center;">
 									<span>
 										Weight of sample in kg
 									</span>
 								</th>
 
-								<th>
+								<th style="text-align: center;">
 									<span>
 										Crushing load in KN
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;">
 									<span>
 										Compressive Strength in N/mm2
 									</span>
@@ -539,28 +559,28 @@
 						</thead>
 						<tbody>
 							<tr t-foreach="data.child_lines" t-as="r">
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.sr_no"/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.id_mark"/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.length"/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.width" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.area" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.wt_sample"/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.crushing_load" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="r.compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
@@ -570,7 +590,7 @@
 					<div style="margin-top:10px">
 						<table>
 							<tr>
-								<td colspan="12">Avg. Compressive Strength :<![CDATA[&nbsp;]]>
+								<td colspan="12">Avg. Compressive Strength N/mm2 :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
 							</tr>

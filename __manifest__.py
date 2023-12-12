@@ -181,7 +181,8 @@
     'views/chemical/flyash.xml',
     'reports/flyash_chemical/flyash_datasheet.xml',
     'reports/steel_tmt_bar_datasheet.xml',
-    'reports/mechanical_general_template.xml'
+    'reports/mechanical_general_template.xml',
+    'reports/flyash_datasheet.xml',
     
  
 

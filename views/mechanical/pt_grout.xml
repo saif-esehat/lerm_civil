@@ -14,6 +14,9 @@
                         </h1>
                     </group>
                     <group>
+                    <field name="grade"/>
+                    </group>
+                    <group>
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" />
                         <field name="eln_ref"/>
@@ -28,7 +31,7 @@
                       </field>
                     </group>
                      <group >
-                        <field name="tests" widget="many2many_tags" options="{'no_create':True,'no_open': True}"/>
+                        <!-- <field name="tests" widget="many2many_tags" options="{'no_create':True,'no_open': True}"/> -->
                     </group>
                     <group attrs="{'invisible': [('fludity_visible', '=', False)]}">
                         <h1>
@@ -116,7 +119,7 @@
                             <field name="setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         </h1>
                     </group>
-                    <group  attrs="{'invisible': [('setting_time_visible', '=', False)]}">
+                    <!-- <group  attrs="{'invisible': [('setting_time_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_setting"/>
                       <field name="humidity_percent_setting"/>
@@ -125,7 +128,7 @@
                       <field name="start_date_setting"/>
                       <field name="end_date_setting"/>
                     </group>
-                    </group>
+                    </group> -->
                      <group>
                         
                        
@@ -160,7 +163,7 @@
                             <field name="bleeding_name" readonly="1" nolabel="1"   attrs="{'invisible': [('bleeding_visible', '=', False)]}"/>
                         </h1>
                     </group>
-                    <group  attrs="{'invisible': [('bleeding_visible', '=', False)]}">
+                    <!-- <group  attrs="{'invisible': [('bleeding_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_bleeding"/>
                       <field name="humidity_percent_bleeding"/>
@@ -169,8 +172,8 @@
                       <field name="start_date_bleeding"/>
                       <field name="end_date_bleeding"/>
                     </group>
-                    </group>
-                     <group>
+                    </group> -->
+                     <group> 
                         
                         <field name="vl_sample" attrs="{'invisible': [('bleeding_visible', '=', False)]}"/>
                         <field name="vl_decanted" attrs="{'invisible': [('bleeding_visible', '=', False)]}"/>
@@ -198,7 +201,7 @@
                             <field name="volume_change_name" readonly="1" nolabel="1"   attrs="{'invisible': [('volume_change_visible', '=', False)]}"/>
                         </h1>
                     </group>
-                    <group  attrs="{'invisible': [('volume_change_visible', '=', False)]}">
+                    <!-- <group  attrs="{'invisible': [('volume_change_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_volume_change"/>
                       <field name="humidity_percent_volume_change"/>
@@ -207,7 +210,7 @@
                       <field name="start_date_volume_change"/>
                       <field name="end_date_volume_change"/>
                     </group>
-                    </group>
+                    </group> -->
                     
                      <group attrs="{'invisible': [('volume_change_visible', '=', False)]}">
                       <field name="thickness_of_glass_plate"/>
@@ -233,7 +236,7 @@
                             <field name="compressive_strength_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
+                    <!-- <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_compressive"/>
                       <field name="humidity_percent_compressive"/>
@@ -242,7 +245,7 @@
                       <field name="start_date_compressive_strength"/>
                       <field name="end_date_compressive_strength"/>
                     </group>
-                    </group>
+                    </group> -->
                      <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}" style="width:50%" class="center-group">
                       <field  name="water_cement_ratio_1"  colspan="3" />
                       <field  name="wt_of_cement_1"  colspan="3" />

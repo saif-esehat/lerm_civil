@@ -2061,7 +2061,7 @@
 		</t>
 	</template>
 
-	<template id="flyash_datasheet">
+	<!-- <template id="flyash_datasheet">
 		<t t-call="web.html_container">
 			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
 				<div style="text-align:center;font-size:18px">
@@ -2149,7 +2149,6 @@
 
 							</table>
 					</div>
-					<!-- Setting time  -->
 
 						<div t-if="data.setting_time_visible">
 							<div style="text-align:center;font-size:18px">
@@ -2282,7 +2281,6 @@
 							</table>
 						</div>
 
-						<!-- Particles Retained On 45 Micron IS Sieve (Wet Sieving) -->
 						<div t-if="data.particles_retained_visible" style="margin-top:20px">
 							<div style="text-align:center;font-size:18px">
 								Particles Retained On 45 Micron IS Sieve (Wet Sieving)
@@ -2357,7 +2355,6 @@
 							</table>
 						</div>
 
-							<!-- Soundness  -->
 
 
 						<div t-if="data.soundness_visible" style="margin-top:20px">
@@ -2454,7 +2451,6 @@
 							</table>
 						</div>
 					
-					<!-- Specific Gravity -->
 						<div t-if="data.specigic_gravity_visible">
 							<div style="text-align:center;font-size:18px">
 								Specific Gravity
@@ -2520,7 +2516,6 @@
 							</table>				
 						</div>
 
-						<!-- Compressive Strength -->
 						<div t-if="data.compressive_visible" style="margin-top:20px">
 							<div style="text-align:center;font-size:18px">
 								Compressive Strength
@@ -2630,7 +2625,6 @@
 											<td style="text-align: center;"><span t-field="data.percent_flow" t-options='{"widget": "float", "precision": 2}'/></td>
 										</tr>
 									</table>
-									<!-- 28 Days  -->
 
 							<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.status_28days">
 								28 Days
@@ -2774,7 +2768,6 @@
 											<td style="text-align: center;"><span t-field="data.percent_flows" t-options='{"widget": "float", "precision": 2}'/></td>
 										</tr>
 									</table>
-									<!-- 28 Days  -->
 
 							<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.status_28dayss">
 								28 Days
@@ -2957,7 +2950,6 @@
 											<td style="text-align: center;"><span t-field="data.percent_flowss" t-options='{"widget": "float", "precision": 2}'/></td>
 										</tr>
 									</table>
-						<!-- 28 Days  -->
 
 							<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.status_28daysss">
 								28 Days
@@ -3039,7 +3031,6 @@
 							</table>
 					</div>
 					
-						<!-- Fineness By Blaine Air Permeability Method -->
 						<div t-if="data.fineness_blaine_visible" style="margin-top:20px">
 							<div style="text-align:center;font-size:18px">
 								Fineness By Blaine Air Permeability Method
@@ -3319,7 +3310,7 @@
 				</div>
 			</t>
 		</t>
-	</template>
+	</template> -->
 	
 	<template id="microsilica_datasheet">
 		<t t-call="web.html_container">
