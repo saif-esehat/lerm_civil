@@ -58,6 +58,14 @@
                             <field name="Silica"/>
                        </group>
                     </group> 
+                    <group attrs="{'invisible': [('Silica_visible', '=', False)]}">
+                          
+                        <field name='Silica_conformity'
+                               decoration-success="Silica_conformity == 'pass'" 
+                               decoration-danger="Silica_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='Silica_nabl'/>
+                    </group> 
 
                     <!-- Combined Ferric Oxide and Alumina -->
                     <group attrs="{'invisible': [('r2o3_visible', '=', False)]}">
@@ -91,6 +99,14 @@
                              <br></br>
                             <field name="r2o3"/>
                        </group>
+                    </group> 
+                     <group attrs="{'invisible': [('r2o3_visible', '=', False)]}">
+                          
+                        <field name='r2o3_conformity'
+                               decoration-success="r2o3_conformity == 'pass'" 
+                               decoration-danger="r2o3_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='r2o3_nabl'/>
                     </group> 
 
                       <!--%Ferric Oxide-->
@@ -126,6 +142,14 @@
                            
                        </group>
                     </group> 
+                     <group attrs="{'invisible': [('ferric_oxide_visible', '=', False)]}">
+                          
+                        <field name='ferric_oxide_conformity'
+                               decoration-success="ferric_oxide_conformity == 'pass'" 
+                               decoration-danger="ferric_oxide_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='ferric_oxide_nabl'/>
+                    </group> 
 
 
                       <!--%Alumina-->
@@ -155,6 +179,14 @@
                            
                            
                        </group>
+                    </group> 
+                     <group attrs="{'invisible': [('alumina1_visible', '=', False)]}">
+                          
+                        <field name='alumina_conformity'
+                               decoration-success="alumina_conformity == 'pass'" 
+                               decoration-danger="alumina_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='alumina_nabl'/>
                     </group> 
 
                       <!--cao-->
@@ -192,6 +224,14 @@
                            
                        </group>
                     </group> 
+                     <group attrs="{'invisible': [('cao_visible', '=', False)]}">
+                          
+                        <field name='cao_conformity'
+                               decoration-success="cao_conformity == 'pass'" 
+                               decoration-danger="cao_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='cao_nabl'/>
+                    </group> 
 
                      <!--MgO-->
                     <group attrs="{'invisible': [('mgo_visible', '=', False)]}">
@@ -227,6 +267,14 @@
                              <br></br>
                            
                        </group>
+                    </group> 
+                     <group attrs="{'invisible': [('mgo_visible', '=', False)]}">
+                          
+                        <field name='mgo_conformity'
+                               decoration-success="mgo_conformity == 'pass'" 
+                               decoration-danger="mgo_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='mgo_nabl'/>
                     </group> 
 
 
@@ -264,6 +312,14 @@
                              <br></br>
                            
                        </group>
+                    </group> 
+                     <group attrs="{'invisible': [('calicum_oxide_visible', '=', False)]}">
+                          
+                        <field name='calicum_oxide_conformity'
+                               decoration-success="calicum_oxide_conformity == 'pass'" 
+                               decoration-danger="calicum_oxide_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='calicum_oxide_nabl'/>
                     </group> 
 
 
@@ -303,6 +359,14 @@
                            
                        </group>
                     </group> 
+                     <group attrs="{'invisible': [('magnesium_oxide_visible', '=', False)]}">
+                          
+                        <field name='magnesium_oxide_conformity'
+                               decoration-success="magnesium_oxide_conformity == 'pass'" 
+                               decoration-danger="magnesium_oxide_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='magnesium_oxide_nabl'/>
+                    </group> 
 
 
                       <!--% Sulphur trioxide (SO3)-->
@@ -339,6 +403,14 @@
                              <br></br>
                            
                        </group>
+                    </group> 
+                     <group attrs="{'invisible': [('so3_visible', '=', False)]}">
+                          
+                        <field name='so3_conformity'
+                               decoration-success="so3_conformity == 'pass'" 
+                               decoration-danger="so3_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='so3_nabl'/>
                     </group> 
 
 
@@ -378,6 +450,14 @@
                              <br></br>
                            
                        </group>
+                    </group> 
+                     <group attrs="{'invisible': [('loi_visible', '=', False)]}">
+                          
+                        <field name='loi_conformity'
+                               decoration-success="loi_conformity == 'pass'" 
+                               decoration-danger="loi_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='loi_nabl'/>
                     </group> 
 
 
@@ -419,6 +499,14 @@
                            
                        </group>
                     </group> 
+                     <group attrs="{'invisible': [('na2o_visible', '=', False)]}">
+                          
+                        <field name='na2o_round_conformity'
+                               decoration-success="na2o_round_conformity == 'pass'" 
+                               decoration-danger="na2o_round_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='na2o_round_nabl'/>
+                    </group> 
 
 
                      <!--Alkali as K₂O -->
@@ -458,6 +546,14 @@
                            
                        </group>
                     </group> 
+                     <group attrs="{'invisible': [('k2o_visible', '=', False)]}">
+                          
+                        <field name='k2o_round_conformity'
+                               decoration-success="k2o_round_conformity == 'pass'" 
+                               decoration-danger="k2o_round_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='k2o_round_nabl'/>
+                    </group> 
 
 
                       <!--Available alkalis  % = A+B (0.65) -->
@@ -487,6 +583,14 @@
                            
                            
                        </group>
+                    </group> 
+                     <group attrs="{'invisible': [('available_alkalis_visible', '=', False)]}">
+                          
+                        <field name='available_alkalis_conformity'
+                               decoration-success="available_alkalis_conformity == 'pass'" 
+                               decoration-danger="available_alkalis_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='available_alkalis_nabl'/>
                     </group> 
 
 
@@ -528,6 +632,14 @@
                            
                        </group>
                     </group> 
+                     <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                          
+                        <field name='chloride_conformity'
+                               decoration-success="chloride_conformity == 'pass'" 
+                               decoration-danger="chloride_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='chloride_nabl'/>
+                    </group> 
 
                      <group attrs="{'invisible': [('combined_percentage_visible', '=', False)]}">
                         <h1>
@@ -555,6 +667,14 @@
                            
                            
                        </group>
+                    </group> 
+                     <group attrs="{'invisible': [('combined_percentage_visible', '=', False)]}">
+                          
+                        <field name='combined_percentage_conformity'
+                               decoration-success="combined_percentage_conformity == 'pass'" 
+                               decoration-danger="combined_percentage_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='combined_percentage_nabl'/>
                     </group> 
 
                 <!-- </group> -->
