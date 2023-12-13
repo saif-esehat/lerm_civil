@@ -69,15 +69,15 @@
 						End Date. <![CDATA[&nbsp;]]> <span t-esc="eln.end_date"/>
 					</div> -->
 				
-					<span style="text-align:left; display: flex; justify-content: space-between; margin-right: 6rem;" >
+					<span style="text-align:left; display: flex; justify-content: space-between; margin-right: 3rem;" >
 						FORMAT No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 					</span>
 					
-					<span style="text-align:center; display: flex; justify-content: space-between;  margin-left: 6rem;  margin-right: 3rem;">
+					<span style="text-align:center; display: flex; justify-content: space-between;  margin-left: 3rem;  margin-right: 3rem;">
 						Job No. <span t-esc="eln.kes_no"/>
 					</span>
 					
-					<span style="text-align:right; display: flex; justify-content: space-between;  margin-left: 6rem;  ">
+					<span style="text-align:right; display: flex; justify-content: space-between;  margin-left: 3rem;  ">
 						Date. <span t-esc="eln.end_date"/>
 					</span>
 				
@@ -413,7 +413,7 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
+									 <li t-if="eln.has_witness">
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 									</li>
 									<li t-if="eln.remarks">
@@ -422,7 +422,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="signatureContainer girdgird">
+						<!-- <div class="signatureContainer girdgird">
 							<div>
 								<div>
 									<b>
@@ -471,7 +471,66 @@
 									</b>
 								</div>
 							</div>
+						</div> -->
+				<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+					
+					<div>
+						<div>
+							<b>
+								Checked By
+							</b>
 						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(Sr. Chemist)
+							</b>
+						</div>
+					</div>
+					<div>
+						<div t-if="stamp and stamp == '4-in_report'">
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							Format No. <span t-esc="eln.material.test_format_no"/>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b>
+								Approved By 
+							</b>
+							
+						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								Chemical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								(Authorized Signatory)
+							</b>
+						</div>
+					</div>
+				</div>
+					
+			
 						<div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div>
@@ -571,7 +630,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="authorizeRowDataSheet">
+						<!-- <div class="authorizeRowDataSheet">
 							<div>
 								
 								<div>
@@ -598,7 +657,53 @@
 									</b>
 								</div>
 							</div>
-						</div>
+						</div> -->
+							<div class="authorizeRowDataSheet">
+				<div>
+					<div>
+						<b>
+							Tested By 
+						</b>
+						
+					</div>
+					<div style="height:40px">
+
+					</div>
+					<div>
+						<b>
+						<span t-esc="eln.sample_id.filled_by.name"/>
+						</b>
+					</div>
+					<div>
+						<b>
+							(Jr. Chemist)
+						</b>
+					</div>
+				</div>
+				
+				<div style="margin-left:500px">
+							
+					<div>
+						<b>
+							Checked By
+						</b>
+					</div>
+					<div style="height:40px">
+
+					</div>
+					<div>
+						<b>
+						<span t-esc="eln.sample_id.check_by.name"/>
+						</b>
+					</div>
+					
+					 <div>
+						<b>
+							(Sr. Chemist)
+						</b>
+					</div>
+				</div>
+			</div>
 
 					<!-- <div style="text-align:center;margin-top:25px">
 						......End of Report......
