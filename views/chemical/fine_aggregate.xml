@@ -54,7 +54,15 @@
                     </group> 
                     <group attrs="{'invisible': [('ph_visible', '=', False)]}">
                       <field name="ph_average"/>
-                    </group>   
+                    </group>  
+                    <group attrs="{'invisible': [('ph_visible', '=', False)]}">
+                          
+                        <field name='ph_average_conformity'
+                               decoration-success="ph_average_conformity == 'pass'" 
+                               decoration-danger="ph_average_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='ph_average_nabl'/>
+                    </group>  
 
                     <!-- Dissolved Silica  -->
                     <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
@@ -144,7 +152,15 @@
                     </group>  
                     <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
                       <field name="average_dissolved_silica"/>
-                    </group>      
+                    </group>
+                      <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+                          
+                        <field name='average_dissolved_silica_conformity'
+                               decoration-success="average_dissolved_silica_conformity == 'pass'" 
+                               decoration-danger="average_dissolved_silica_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='average_dissolved_silica_nabl'/>
+                    </group>       
                   <!-- Reduction in Alkalinity  -->
                     <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
                         <h1>
@@ -251,6 +267,14 @@
                     <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
                       <field name="average_reduction_alkalinity"/>
                     </group>
+                      <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
+                          
+                        <field name='average_reduction_alkalinity_conformity'
+                               decoration-success="average_reduction_alkalinity_conformity == 'pass'" 
+                               decoration-danger="average_reduction_alkalinity_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='average_reduction_alkalinity_nabl'/>
+                    </group> 
 
                     <!-- Chloride  -->
 
@@ -272,6 +296,14 @@
                       <field name="chloride_percent"/>
 
                     </group>
+                      <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                          
+                        <field name='chloride_percent_conformity'
+                               decoration-success="chloride_percent_conformity == 'pass'" 
+                               decoration-danger="chloride_percent_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='chloride_percent_nabl'/>
+                    </group> 
 
                   <!-- Sulphate  -->
                     <group attrs="{'invisible': [('sulphate_visible', '=', False)]}">
@@ -291,6 +323,14 @@
                       <field name="sulphate_percent"/>
 
                     </group>
+                      <group attrs="{'invisible': [('sulphate_visible', '=', False)]}">
+                          
+                        <field name='sulphate_percent_conformity'
+                               decoration-success="sulphate_percent_conformity == 'pass'" 
+                               decoration-danger="sulphate_percent_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='sulphate_percent_nabl'/>
+                    </group> 
                 </sheet>
             </form>
         </field>
