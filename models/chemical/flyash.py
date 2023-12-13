@@ -11,6 +11,7 @@ class ChemicalFlyAsh(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
 
 
     # % Silica
@@ -26,6 +27,57 @@ class ChemicalFlyAsh(models.Model):
     wt_of_two_r = fields.Float("Weight of residues in crucible after HF at 1100˚C gm")
     difference_in_wt = fields.Float("Difference in weight = ( B - C )",compute="_compute_difference_in_wt")
     Silica = fields.Float("SiO₂ = D x 100/A",compute="_compute_silica_percentage")
+
+    Silica_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_Silica_conformity", store=True)
+
+    @api.depends('Silica','eln_ref','grade')
+    def _compute_Silica_conformity(self):
+        
+        for record in self:
+            record.Silica_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.Silica - record.Silica*mu_value
+                    upper = record.Silica + record.Silica*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.Silica_conformity = 'pass'
+                        break
+                    else:
+                        record.Silica_conformity = 'fail'
+
+    Silica_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_Silica_nabl", store=True)
+
+    @api.depends('Silica','eln_ref','grade')
+    def _compute_Silica_nabl(self):
+        
+        for record in self:
+            record.Silica_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.Silica - record.Silica*mu_value
+                    upper = record.Silica + record.Silica*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.Silica_nabl = 'pass'
+                        break
+                    else:
+                        record.Silica_nabl = 'fail'
+
 
     @api.depends('wt_of_two_rp', 'wt_of_two_r')
     def _compute_difference_in_wt(self):
@@ -70,6 +122,56 @@ class ChemicalFlyAsh(models.Model):
             else:
                 record.r2o3 = 0.0
 
+    r2o3_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_r2o3_conformity", store=True)
+
+    @api.depends('r2o3','eln_ref','grade')
+    def _compute_r2o3_conformity(self):
+        
+        for record in self:
+            record.r2o3_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.r2o3 - record.r2o3*mu_value
+                    upper = record.r2o3 + record.r2o3*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.r2o3_conformity = 'pass'
+                        break
+                    else:
+                        record.r2o3_conformity = 'fail'
+
+    r2o3_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_r2o3_nabl", store=True)
+
+    @api.depends('r2o3','eln_ref','grade')
+    def _compute_r2o3_nabl(self):
+        
+        for record in self:
+            record.r2o3_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.r2o3 - record.r2o3*mu_value
+                    upper = record.r2o3 + record.r2o3*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.r2o3_nabl = 'pass'
+                        break
+                    else:
+                        record.r2o3_nabl = 'fail'
+
 
 
     # %Ferric Oxide
@@ -93,6 +195,56 @@ class ChemicalFlyAsh(models.Model):
             else:
                 record.ferric_oxide = 0.0
 
+    ferric_oxide_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_ferric_oxide_conformity", store=True)
+
+    @api.depends('ferric_oxide','eln_ref','grade')
+    def _compute_ferric_oxide_conformity(self):
+        
+        for record in self:
+            record.ferric_oxide_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.ferric_oxide - record.ferric_oxide*mu_value
+                    upper = record.ferric_oxide + record.ferric_oxide*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.ferric_oxide_conformity = 'pass'
+                        break
+                    else:
+                        record.ferric_oxide_conformity = 'fail'
+
+    ferric_oxide_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_ferric_oxide_nabl", store=True)
+
+    @api.depends('ferric_oxide','eln_ref','grade')
+    def _compute_ferric_oxide_nabl(self):
+        
+        for record in self:
+            record.ferric_oxide_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.ferric_oxide - record.ferric_oxide*mu_value
+                    upper = record.ferric_oxide + record.ferric_oxide*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.ferric_oxide_nabl = 'pass'
+                        break
+                    else:
+                        record.ferric_oxide_nabl = 'fail'
+
     
     # %Alumina
 
@@ -108,6 +260,58 @@ class ChemicalFlyAsh(models.Model):
     def _compute_alumina(self):
         for record in self:
             record.alumina = record.r2o3 - record.ferric_oxide
+
+
+    alumina_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_alumina_conformity", store=True)
+
+    @api.depends('alumina','eln_ref','grade')
+    def _compute_alumina_conformity(self):
+        
+        for record in self:
+            record.alumina_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.alumina - record.alumina*mu_value
+                    upper = record.alumina + record.alumina*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.alumina_conformity = 'pass'
+                        break
+                    else:
+                        record.alumina_conformity = 'fail'
+
+    alumina_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_alumina_nabl", store=True)
+
+    @api.depends('alumina','eln_ref','grade')
+    def _compute_alumina_nabl(self):
+        
+        for record in self:
+            record.alumina_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.alumina - record.alumina*mu_value
+                    upper = record.alumina + record.alumina*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.alumina_nabl = 'pass'
+                        break
+                    else:
+                        record.alumina_nabl = 'fail'
+
 
 
 
@@ -137,6 +341,59 @@ class ChemicalFlyAsh(models.Model):
 
 
 
+    cao_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_cao_conformity", store=True)
+
+    @api.depends('cao','eln_ref','grade')
+    def _compute_cao_conformity(self):
+        
+        for record in self:
+            record.cao_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.cao - record.cao*mu_value
+                    upper = record.cao + record.cao*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.cao_conformity = 'pass'
+                        break
+                    else:
+                        record.cao_conformity = 'fail'
+
+    cao_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_cao_nabl", store=True)
+
+    @api.depends('cao','eln_ref','grade')
+    def _compute_cao_nabl(self):
+        
+        for record in self:
+            record.cao_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.cao - record.cao*mu_value
+                    upper = record.cao + record.cao*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.cao_nabl = 'pass'
+                        break
+                    else:
+                        record.cao_nabl = 'fail'
+
+
+
+
     # MgO
     mgo_name = fields.Char("Name",default="MgO")
     mgo_visible = fields.Boolean("MgO",compute="_compute_visible")
@@ -158,6 +415,57 @@ class ChemicalFlyAsh(models.Model):
                 record.mgo = (record.burette_mgo * record.normality_mgo * 0.04032 * record.dilution_mgo * 100) / record.wt_of_sample_mgo
             else:
                 record.mgo = 0  # Handle the case where wt_of_sample_cao is zero
+
+    mgo_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_mgo_conformity", store=True)
+
+    @api.depends('mgo','eln_ref','grade')
+    def _compute_mgo_conformity(self):
+        
+        for record in self:
+            record.mgo_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.mgo - record.mgo*mu_value
+                    upper = record.mgo + record.mgo*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.mgo_conformity = 'pass'
+                        break
+                    else:
+                        record.mgo_conformity = 'fail'
+
+    mgo_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_mgo_nabl", store=True)
+
+    @api.depends('mgo','eln_ref','grade')
+    def _compute_mgo_nabl(self):
+        
+        for record in self:
+            record.mgo_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.mgo - record.mgo*mu_value
+                    upper = record.mgo + record.mgo*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.mgo_nabl = 'pass'
+                        break
+                    else:
+                        record.mgo_nabl = 'fail'
+
 
 
 
@@ -191,6 +499,59 @@ class ChemicalFlyAsh(models.Model):
                 record.calicum_oxide = 0 
 
 
+    calicum_oxide_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_calicum_oxide_conformity", store=True)
+
+    @api.depends('calicum_oxide','eln_ref','grade')
+    def _compute_calicum_oxide_conformity(self):
+        
+        for record in self:
+            record.calicum_oxide_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.calicum_oxide - record.calicum_oxide*mu_value
+                    upper = record.calicum_oxide + record.calicum_oxide*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.calicum_oxide_conformity = 'pass'
+                        break
+                    else:
+                        record.calicum_oxide_conformity = 'fail'
+
+    calicum_oxide_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_calicum_oxide_nabl", store=True)
+
+    @api.depends('calicum_oxide','eln_ref','grade')
+    def _compute_calicum_oxide_nabl(self):
+        
+        for record in self:
+            record.calicum_oxide_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.calicum_oxide - record.calicum_oxide*mu_value
+                    upper = record.calicum_oxide + record.calicum_oxide*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.calicum_oxide_nabl = 'pass'
+                        break
+                    else:
+                        record.calicum_oxide_nabl = 'fail'
+
+
+
+
 
     # %Magnesium Oxide
     magnesium_oxide_name = fields.Char("Name", default="% Magnesium Oxide")
@@ -218,6 +579,58 @@ class ChemicalFlyAsh(models.Model):
             else:
                 record.magnesium_oxide = 0
 
+
+
+    magnesium_oxide_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_magnesium_oxide_conformity", store=True)
+
+    @api.depends('magnesium_oxide','eln_ref','grade')
+    def _compute_magnesium_oxide_conformity(self):
+        
+        for record in self:
+            record.magnesium_oxide_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.magnesium_oxide - record.magnesium_oxide*mu_value
+                    upper = record.magnesium_oxide + record.magnesium_oxide*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.magnesium_oxide_conformity = 'pass'
+                        break
+                    else:
+                        record.magnesium_oxide_conformity = 'fail'
+
+    magnesium_oxide_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_magnesium_oxide_nabl", store=True)
+
+    @api.depends('magnesium_oxide','eln_ref','grade')
+    def _compute_magnesium_oxide_nabl(self):
+        
+        for record in self:
+            record.magnesium_oxide_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.magnesium_oxide - record.magnesium_oxide*mu_value
+                    upper = record.magnesium_oxide + record.magnesium_oxide*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.magnesium_oxide_nabl = 'pass'
+                        break
+                    else:
+                        record.magnesium_oxide_nabl = 'fail'
+
     # %Sulphur trioxide (SO3)
     so3_name = fields.Char("Name", default="% Sulphur trioxide (SO3)")
     so3_visible = fields.Boolean("SO3", compute="_compute_visible")
@@ -243,6 +656,57 @@ class ChemicalFlyAsh(models.Model):
                 record.so3 = record.difference_co3 * 34.3 / record.wt_of_sample_so3
             else:
                 record.so3 = 0
+
+
+    so3_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_so3_conformity", store=True)
+
+    @api.depends('so3','eln_ref','grade')
+    def _compute_so3_conformity(self):
+        
+        for record in self:
+            record.so3_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.so3 - record.so3*mu_value
+                    upper = record.so3 + record.so3*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.so3_conformity = 'pass'
+                        break
+                    else:
+                        record.so3_conformity = 'fail'
+
+    so3_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_so3_nabl", store=True)
+
+    @api.depends('so3','eln_ref','grade')
+    def _compute_so3_nabl(self):
+        
+        for record in self:
+            record.so3_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.so3 - record.so3*mu_value
+                    upper = record.so3 + record.so3*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.so3_nabl = 'pass'
+                        break
+                    else:
+                        record.so3_nabl = 'fail'
 
     # %Loss on Ignition
     loi_name = fields.Char("Name", default="% Loss on Ignition")
@@ -278,6 +742,58 @@ class ChemicalFlyAsh(models.Model):
 
 
 
+    loi_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_loi_conformity", store=True)
+
+    @api.depends('loi','eln_ref','grade')
+    def _compute_loi_conformity(self):
+        
+        for record in self:
+            record.loi_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.loi - record.loi*mu_value
+                    upper = record.loi + record.loi*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.loi_conformity = 'pass'
+                        break
+                    else:
+                        record.loi_conformity = 'fail'
+
+    loi_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_loi_nabl", store=True)
+
+    @api.depends('loi','eln_ref','grade')
+    def _compute_loi_nabl(self):
+        
+        for record in self:
+            record.loi_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.loi - record.loi*mu_value
+                    upper = record.loi + record.loi*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.loi_nabl = 'pass'
+                        break
+                    else:
+                        record.loi_nabl = 'fail'
+
+
+
     # Alkali as Na₂O Clause  
 
     na2o_name = fields.Char("Name", default="Alkali as Na₂O")
@@ -307,6 +823,58 @@ class ChemicalFlyAsh(models.Model):
     def _compute_na2o_round(self):
         for record in self:
             record.na2o_round = record.na2o_calculation * 1.3480
+
+
+    na2o_round_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_na2o_round_conformity", store=True)
+
+    @api.depends('na2o_round','eln_ref','grade')
+    def _compute_na2o_round_conformity(self):
+        
+        for record in self:
+            record.na2o_round_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.na2o_round - record.na2o_round*mu_value
+                    upper = record.na2o_round + record.na2o_round*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.na2o_round_conformity = 'pass'
+                        break
+                    else:
+                        record.na2o_round_conformity = 'fail'
+
+    na2o_round_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_na2o_round_nabl", store=True)
+
+    @api.depends('na2o_round','eln_ref','grade')
+    def _compute_na2o_round_nabl(self):
+        
+        for record in self:
+            record.na2o_round_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.na2o_round - record.na2o_round*mu_value
+                    upper = record.na2o_round + record.na2o_round*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.na2o_round_nabl = 'pass'
+                        break
+                    else:
+                        record.na2o_round_nabl = 'fail'
+
 
 
     # Alkali as K₂O 
@@ -339,6 +907,58 @@ class ChemicalFlyAsh(models.Model):
             record.k2o_round = record.k2o_calculation * 1.20
 
 
+    k2o_round_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_k2o_round_conformity", store=True)
+
+    @api.depends('k2o_round','eln_ref','grade')
+    def _compute_k2o_round_conformity(self):
+        
+        for record in self:
+            record.k2o_round_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.k2o_round - record.k2o_round*mu_value
+                    upper = record.k2o_round + record.k2o_round*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.k2o_round_conformity = 'pass'
+                        break
+                    else:
+                        record.k2o_round_conformity = 'fail'
+
+    k2o_round_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_k2o_round_nabl", store=True)
+
+    @api.depends('k2o_round','eln_ref','grade')
+    def _compute_k2o_round_nabl(self):
+        
+        for record in self:
+            record.k2o_round_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.k2o_round - record.k2o_round*mu_value
+                    upper = record.k2o_round + record.k2o_round*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.k2o_round_nabl = 'pass'
+                        break
+                    else:
+                        record.k2o_round_nabl = 'fail'
+
+
+
     # Available alkalis  % = A+B (0.65)
 
     available_alkalis_name = fields.Char("Name", default="Available alkalis")
@@ -353,6 +973,58 @@ class ChemicalFlyAsh(models.Model):
     def _compute_available_alkalis(self):
         for record in self:
             record.available_alkalis = record.na2o_round + (record.k2o_round * 0.65)
+
+    available_alkalis_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_available_alkalis_conformity", store=True)
+
+    @api.depends('available_alkalis','eln_ref','grade')
+    def _compute_available_alkalis_conformity(self):
+        
+        for record in self:
+            record.available_alkalis_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.available_alkalis - record.available_alkalis*mu_value
+                    upper = record.available_alkalis + record.available_alkalis*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.available_alkalis_conformity = 'pass'
+                        break
+                    else:
+                        record.available_alkalis_conformity = 'fail'
+
+    available_alkalis_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_available_alkalis_nabl", store=True)
+
+    @api.depends('available_alkalis','eln_ref','grade')
+    def _compute_available_alkalis_nabl(self):
+        
+        for record in self:
+            record.available_alkalis_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.available_alkalis - record.available_alkalis*mu_value
+                    upper = record.available_alkalis + record.available_alkalis*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.available_alkalis_nabl = 'pass'
+                        break
+                    else:
+                        record.available_alkalis_nabl = 'fail'
+
+
 
 
 
@@ -387,6 +1059,57 @@ class ChemicalFlyAsh(models.Model):
             else:
                 record.chloride = 0
 
+    chloride_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_chloride_conformity", store=True)
+
+    @api.depends('chloride','eln_ref','grade')
+    def _compute_chloride_conformity(self):
+        
+        for record in self:
+            record.chloride_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.chloride - record.chloride*mu_value
+                    upper = record.chloride + record.chloride*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.chloride_conformity = 'pass'
+                        break
+                    else:
+                        record.chloride_conformity = 'fail'
+
+    chloride_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_chloride_nabl", store=True)
+
+    @api.depends('chloride','eln_ref','grade')
+    def _compute_chloride_nabl(self):
+        
+        for record in self:
+            record.chloride_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.chloride - record.chloride*mu_value
+                    upper = record.chloride + record.chloride*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.chloride_nabl = 'pass'
+                        break
+                    else:
+                        record.chloride_nabl = 'fail'
+
+
 
      #combined_percentage
     combined_percentage_name = fields.Char("Name",default="SiO2 + Al2O3 + Fe2O3 %")
@@ -402,6 +1125,57 @@ class ChemicalFlyAsh(models.Model):
         for record in self:
             combined_percentage = record.Silica + record.alumina + record.ferric_oxide
             record.combined_percentage = combined_percentage
+
+    combined_percentage_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_combined_percentage_conformity", store=True)
+
+    @api.depends('combined_percentage','eln_ref','grade')
+    def _compute_combined_percentage_conformity(self):
+        
+        for record in self:
+            record.combined_percentage_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.combined_percentage - record.combined_percentage*mu_value
+                    upper = record.combined_percentage + record.combined_percentage*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.combined_percentage_conformity = 'pass'
+                        break
+                    else:
+                        record.combined_percentage_conformity = 'fail'
+
+    combined_percentage_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_combined_percentage_nabl", store=True)
+
+    @api.depends('combined_percentage','eln_ref','grade')
+    def _compute_combined_percentage_nabl(self):
+        
+        for record in self:
+            record.combined_percentage_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.combined_percentage - record.combined_percentage*mu_value
+                    upper = record.combined_percentage + record.combined_percentage*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.combined_percentage_nabl = 'pass'
+                        break
+                    else:
+                        record.combined_percentage_nabl = 'fail'
+
 
 
  
@@ -493,3 +1267,9 @@ class ChemicalFlyAsh(models.Model):
             records = record.eln_ref.parameters_result.parameter.ids
             record.sample_parameters = records
             print("Records",records)
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
+    
