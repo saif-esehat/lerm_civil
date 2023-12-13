@@ -172,6 +172,9 @@
 									<span t-field="eln.material.method_reference"></span>
 								</th>
 								<th t-if="eln.conformity">
+									<span>
+										Conformity
+									</span>
 								</th>
 							</tr>
 						</thead>

@@ -15,9 +15,9 @@
                     </group>
                     <group>
                         <field name="srf_id" invisible="1"/>
-                        <field name="sample_id" />
-                        <field name="eln_ref"/>
-                        <field name="grade"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="eln_ref" readonly="1"/>
+                        <field name="grade" readonly="1"/>
                         <field name="parameter_id" invisible="1"/>
                     </group>
                     <group>
@@ -217,20 +217,28 @@
                     
                     <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
                       <field name="average_specific_gravity" string="Average"/>
+                      <field name="specific_gravity_confirmity"  style="color: green;" attrs="{'invisible': [('specific_gravity_confirmity','!=','pass')]}"/>
+                      <field name="specific_gravity_confirmity"  style="color: red;" attrs="{'invisible': [('specific_gravity_confirmity','!=','fail')]}"/>
+                      <field name="specific_gravity_confirmity"  style="color: black;" attrs="{'invisible': [('specific_gravity_confirmity','!=','not_applicable')]}"/>
+
+                      <!-- <field name="nabl" style="background-color:green;color:white;"/> -->
+                      <field name="specific_gravity_nabl"  style="color: green;" attrs="{'invisible': [('specific_gravity_nabl','!=','pass')]}"/>
+                      <field name="specific_gravity_nabl"  style="color: red;" attrs="{'invisible': [('specific_gravity_nabl','!=','fail')]}"/>
                     </group>
 
                     <!-- Slag index  -->
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': ['|', ('slag_activity_7_visible', '=', False), ('slag_activity_28_visible', '=', False)]}">
                         <h1>
                             <field name="slag_activity_name" readonly="1" nolabel="1"/>
-                            <field name="slag_activity_visible" invisible="1"/>
+                            <field name="slag_activity_7_visible" invisible="1"/>
+                            <field name="slag_activity_28_visible" invisible="1"/>
                         </h1>
 
                     </group>
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': ['|', ('slag_activity_7_visible', '=', False), ('slag_activity_28_visible', '=', False)]}">
                      <h5>Compressive Strength of the mortar cube using GGBS</h5>
                     </group>
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}" style="width:40%">
+                    <group attrs="{'invisible': ['|', ('slag_activity_7_visible', '=', False), ('slag_activity_28_visible', '=', False)]}" style="width:40%">
 
                       <field  name="wt_of_cement_slag"  colspan="3" />
                       <field  name="wt_of_ggbs_slag"  colspan="3" />
@@ -243,19 +251,19 @@
                     
                     <!-- 7 days  -->
 
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_7_visible', '=', False)]}">
                         <h1>
                             <field name="casting_7_name" readonly="1" nolabel="1"/>
 
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_7_visible', '=', False)]}">
                             <field name="status_7days"/>
                       
                     </group>
                     
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_7_visible', '=', False)]}">
 
 
                       <field name="casting_date_7days"/>
@@ -275,19 +283,19 @@
                     </group>
 
                     <!-- 28 days  -->
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_28_visible', '=', False)]}">
                         <h1>
                             <field name="casting_28_name" readonly="1" nolabel="1"/>
 
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_28_visible', '=', False)]}">
                             <field name="status_28days"/>
                       
                     </group>
                     
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_28_visible', '=', False)]}">
 
 
                       <field name="casting_date_28days"/>
@@ -307,10 +315,10 @@
                     </group>
 
                     <!-- opc cube  -->
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': ['|', ('slag_activity_7_visible', '=', False), ('slag_activity_28_visible', '=', False)]}">
                       <h5>Compressive Strength of the control OPC mortar cube</h5>
                     </group>
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}" style="width:40%">
+                    <group attrs="{'invisible': ['|', ('slag_activity_7_visible', '=', False), ('slag_activity_28_visible', '=', False)]}" style="width:40%">
                       <field  name="wt_of_cement_slag_opc"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1_opc"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade2_opc"  colspan="3" />
@@ -322,19 +330,19 @@
 
                     <!-- 7 days  -->
 
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_7_visible', '=', False)]}">
                         <h1>
                             <field name="casting_7_name_opc" readonly="1" nolabel="1"/>
 
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_7_visible', '=', False)]}">
                             <field name="status_7days_opc"/>
                       
                     </group>
                     
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_7_visible', '=', False)]}">
 
 
                       <field name="casting_date_7days_opc"/>
@@ -354,19 +362,19 @@
                     </group>
 
                     <!-- 28 days  -->
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_28_visible', '=', False)]}">
                         <h1>
                             <field name="casting_28_name_opc" readonly="1" nolabel="1"/>
 
                             <!-- <field name="dry_sieving_visible" invisible="1"/> -->
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_28_visible', '=', False)]}">
                             <field name="status_28days_opc"/>
                       
                     </group>
                     
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_28_visible', '=', False)]}">
 
 
                       <field name="casting_date_28days_opc"/>
@@ -384,9 +392,24 @@
                       </field>
                       <field name="average_28days_slag_opc"/>
                     </group>
-                    <group attrs="{'invisible': [('slag_activity_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('slag_activity_7_visible', '=', False)]}">
                       <field name="slag_activity_index_7days"/>
+                      <field name="slag_7days_conformity"  style="color: green;" attrs="{'invisible': [('slag_7days_conformity','!=','pass')]}"/>
+                      <field name="slag_7days_conformity"  style="color: red;" attrs="{'invisible': [('slag_7days_conformity','!=','fail')]}"/>
+                      <field name="slag_7days_conformity"  style="color: black;" attrs="{'invisible': [('slag_7days_conformity','!=','not_applicable')]}"/>
+
+                      <field name="slag_7days_nabl"  style="color: green;" attrs="{'invisible': [('slag_7days_nabl','!=','pass')]}"/>
+                      <field name="slag_7days_nabl"  style="color: red;" attrs="{'invisible': [('slag_7days_nabl','!=','fail')]}"/>
+
+                    </group>
+                    <group attrs="{'invisible': [('slag_activity_28_visible', '=', False)]}">
                       <field name="slag_activity_index_28days"/>
+                      <field name="slag_28days_conformity"  style="color: green;" attrs="{'invisible': [('slag_28days_conformity','!=','pass')]}"/>
+                      <field name="slag_28days_conformity"  style="color: red;" attrs="{'invisible': [('slag_28days_conformity','!=','fail')]}"/>
+                      <field name="slag_28days_conformity"  style="color: black;" attrs="{'invisible': [('slag_28days_conformity','!=','not_applicable')]}"/>
+
+                      <field name="slag_28days_nabl"  style="color: green;" attrs="{'invisible': [('slag_28days_nabl','!=','pass')]}"/>
+                      <field name="slag_28days_nabl"  style="color: red;" attrs="{'invisible': [('slag_28days_nabl','!=','fail')]}"/>
 
                     </group>
 
@@ -570,6 +593,15 @@
                             <field  name="fineness_of_sample"  colspan="6"/>
                             <field  name="fineness_air_permeability"  colspan="6"/>
                           </group>
+                    </group>
+                    <group attrs="{'invisible': [('fineness_visible', '=', False)]}">
+                      <field name="fineness_confirmity"  style="color: green;" attrs="{'invisible': [('fineness_confirmity','!=','pass')]}"/>
+                      <field name="fineness_confirmity"  style="color: red;" attrs="{'invisible': [('fineness_confirmity','!=','fail')]}"/>
+                      <field name="fineness_confirmity"  style="color: black;" attrs="{'invisible': [('fineness_confirmity','!=','not_applicable')]}"/>
+
+                      <!-- <field name="nabl" style="background-color:green;color:white;"/> -->
+                      <field name="fineness_nabl"  style="color: green;" attrs="{'invisible': [('fineness_nabl','!=','pass')]}"/>
+                      <field name="fineness_nabl"  style="color: red;" attrs="{'invisible': [('fineness_nabl','!=','fail')]}"/>
                     </group>
                 </sheet>
             </form>
