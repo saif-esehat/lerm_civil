@@ -27,6 +27,7 @@ class ChemicalFineAggregate(models.Model):
 
     #Dissolved Silica
 
+
     alkali_aggregate_reactivity_dissolved_name = fields.Char("Name",default="Alkali Aggregate Reactivity ( Dissolved Silica)")
     alkali_aggregate_dissolved_visible = fields.Boolean("Alkali Aggregate",compute="_compute_visible")
 

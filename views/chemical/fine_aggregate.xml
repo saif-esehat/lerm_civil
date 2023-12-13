@@ -34,6 +34,7 @@
                             <field name="ph_visible" invisible="1"/>
                         </h1>
                     </group>
+                            
                     
                     <group attrs="{'invisible': [('ph_visible', '=', False)]}">
                         <label for="ph_1_percent_a" string="pH of 1 % Solution in water" />

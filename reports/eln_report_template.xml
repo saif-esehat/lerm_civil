@@ -494,7 +494,7 @@
 							<tr cols="12">
 								<td colspan="6">Job no :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.eln_id"/>
+									<span t-field="o.kes_no"/>
 								</td>
 								<td colspan="6">Test Start Date :
 									<![CDATA[&nbsp;]]>
