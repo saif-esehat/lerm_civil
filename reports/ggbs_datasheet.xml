@@ -46,8 +46,11 @@
 
 						
 						
-						<div style="text-align:center;font-size:18px">
+						<!-- <div style="text-align:center;font-size:18px">
 							Normal Consistency of GGBS
+						</div> -->
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','84946eb6-b44a-48cc-9d41-198f55346af0')]).parameter_name"/>
 						</div>
 				
 						<table style="margin-top:20px">
@@ -168,8 +171,11 @@
 						
 					<!-- Specific Gravity  -->
 					<div t-if="data.specific_gravity_visible" style="margin-top:20px">
-						<div style="text-align:center;font-size:18px">
+						<!-- <div style="text-align:center;font-size:18px">
 							Specific Gravity
+						</div> -->
+						<div style="text-align:center;font-size:18px;margin-top:20px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','10071b15-baa4-466f-a6a7-044da708f265')]).parameter_name"/>
 						</div>
 						
 						<table style="margin-top:20px">
@@ -252,8 +258,11 @@
 					<!-- Slag Activity Index  -->
 
 					<div t-if="data.slag_activity_visible" style="margin-top:20px">
-						<div style="text-align:center;font-size:18px">
+						<!-- <div style="text-align:center;font-size:18px">
 							Slag Activity Index
+						</div> -->
+						<div style="text-align:center;font-size:18px;margin-top:20px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_name"/>
 						</div>
 						
 						<table style="margin-top:20px">
@@ -714,8 +723,11 @@
 
 					<!-- Fineness By Blaine Air Permeability Method -->
 					<div t-if="data.fineness_visible" style="margin-top:20px">
-						<div style="text-align:center;font-size:18px">
+						<!-- <div style="text-align:center;font-size:18px">
 							Fineness By Blaine Air Permeability Method (m²/kg)
+						</div> -->
+						<div style="text-align:center;font-size:18px;margin-top:20px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_name"/>
 						</div>
 						
 						<table style="margin-top:20px">

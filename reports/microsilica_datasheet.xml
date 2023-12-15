@@ -53,9 +53,13 @@
 				
 				
 					
-					<div style="margin-top:20px;text-align:center;font-size:18px">
+					<!-- <div style="margin-top:20px;text-align:center;font-size:18px">
 						Accelerated pozzolanic activity index with portland cement , 7 Days in %
+					</div> -->
+					<div style="margin-top:20px;text-align:center;font-size:18px">
+						<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a3df1095-19f0-48b6-8e09-e7076a4b04b5')]).parameter_name"/>
 					</div>
+
 					<table style="margin-top: 20px">
 							
 						
@@ -354,8 +358,11 @@
 
 				<!--2 Oversize % Retained on 45 Micron IS sieve -->
 			<div t-if="data.oversize_retain_visible" style="margin-top:20px">
-				<div style="text-align:center;font-size:18px">
+				<!-- <div style="text-align:center;font-size:18px">
 						Oversize % Retained on 45 Micron IS sieve
+				</div> -->
+				<div style="text-align:center;font-size:18px;margin-top:30px">
+					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b9c80b7f-5f8c-44a2-984b-6ad2a17d250c')]).parameter_name"/>
 				</div>
 				<table>
 					<tr cols="12">
@@ -426,8 +433,11 @@
 				<!--3 Specific Gravity -->
 
 			<div t-if="data.specific_gravity_visible" style="margin-top:20px">
-				<div style="text-align:center;font-size:18px">
+				<!-- <div style="text-align:center;font-size:18px">
 						Specific Gravity
+				</div> -->
+				<div style="text-align:center;font-size:18px">
+					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','e3d938f3-80ef-4de0-96ba-a279f27b9ede')]).parameter_name"/>
 				</div>
 				<table>
 					<tr cols="12">
@@ -504,8 +514,11 @@
 				<!--4 Compressive Strength -->
 
 			<div t-if="data.compressive_strength_visible" style="margin-top:20px">
-				<div style="text-align:center;font-size:18px">
+				<!-- <div style="text-align:center;font-size:18px">
 					Compressive Strength	
+				</div> -->
+				<div style="text-align:center;font-size:18px">
+					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8211b72d-889b-477c-a355-0476f6bcd0d7')]).parameter_name"/>
 				</div>
 				<table>
 					<tr cols="12">
@@ -823,8 +836,11 @@
 				<!--5 Oversize Percent Retained on 45 Micron IS sieve variation from Avg. % -->
 
 			<div t-if="data.oversize_percent_retain_visible" style="margin-top:20px">
-				<div style="text-align:center;font-size:18px">
+				<!-- <div style="text-align:center;font-size:18px">
 						Oversize Percent Retained on 45 Micron IS sieve variation from Avg. %
+				</div> -->
+				<div style="text-align:center;font-size:18px">
+					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3c5d3687-bfaf-4667-aca6-b69c321af63b')]).parameter_name"/>
 				</div>
 				<table>
 					<tr cols="12">
@@ -896,8 +912,11 @@
 			  <!--6 Dry Loose Bulk Density -->
 
 			<div t-if="data.bulk_density_visible" style="margin-top:20px">
-				<div style="text-align:center;font-size:18px">
+				<!-- <div style="text-align:center;font-size:18px">
 						Dry Loose Bulk Density
+				</div> -->
+				<div style="text-align:center;font-size:18px">
+					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a1feec77-42b6-4d86-9ac7-a2758b3f4e5a')]).parameter_name"/>
 				</div>
 				<table>
 					<tr cols="12">

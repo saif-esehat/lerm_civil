@@ -10,10 +10,11 @@ class ReboundHammer(models.Model):
     name = fields.Char("Name",default="Rebound Hammer")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.rebound.hammer.line','parent_id',string="Parameter")
-    # average = fields.Integer(string="Average",compute="_compute_average")
-    # minimum = fields.Integer(string="Minimum",compute="_compute_min_max")
-    # maximum = fields.Integer(string="Maximum",compute="_compute_min_max")
+    # average = fields.Float(string="Average",compute="_compute_average")
+    # minimum = fields.Float(string="Minimum")
+    # maximum = fields.Float(string="Maximum")
 
+    
     # @api.depends('child_lines.avg')
     # def _compute_average(self):
     #     for record in self:
