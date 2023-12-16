@@ -5,6 +5,7 @@ import qrcode
 from io import BytesIO
 
 
+
 class ElnReport(models.AbstractModel):
     _name = 'report.lerm_civil.eln_report_template'
     _description = 'ELN Report'
@@ -39,7 +40,9 @@ class ElnReport(models.AbstractModel):
             'qrcode': qr_code,
             'stamp' : inreport_value,
             'nabl' : nabl,
+            'srf_id': eln.srf_id,
         }
+ 
 
 
 class DataSheetReport(models.AbstractModel):

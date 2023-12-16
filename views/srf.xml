@@ -82,11 +82,12 @@
                         <button name="open_sample_add_wizard" string="Repeat Sample" type="object" class="btn-primary" attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"/>
                     </group>
                     </group>
-                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="samples" context = "{'default_customer_id' : customer,'is_local': True}" invisible='1'>
+                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="samples" context = "{'default_customer_id' : customer,'is_local': True}" invisible='0'>
                         <tree>
                             <field name='kes_no'/>
                             <field name="material_id"/>
                             <field name="discipline_id"/>
+                            <field name="lab_l_id"/>
                             <field name="group_id"/>
                             <field name='parameters' widget="many2many_tags"/>
                             <field name='casting'/>
@@ -101,6 +102,7 @@
                             <field name="material_id_lab_name"  invisible="1"/>
                             <field name="material_id" />
                             <field name="discipline_id"/>
+                            <field name="lab_l_id"/>
                             <field name="group_id"/>
                             <field name='parameters' options='{"always_reload": True}' context="{'test_method' : True }" widget="many2many_tags"/>
                             <field name='casting'/>
@@ -174,6 +176,7 @@
                     <group style="width:50%">
                         <!-- <field name="sample_id"/> -->
                         <field name="discipline_id"  options="{'no_create': True}"/>
+                        <field name="lab_l_id"  options="{'no_create': True}"/>
                         <field name="material_id" context="{'lab_name':True}" domain="[('id', 'in', material_ids)]"  options="{'no_create': True}"/>
                         <field name="brand"/>
                         <field name="grade_id" domain="[('id', 'in', grade_ids)]"  options="{'no_create': True}"/>

@@ -1,5 +1,8 @@
-from odoo import api, fields, models
+from odoo import api, fields, models,_
 from odoo.exceptions import UserError
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class Discipline(models.Model):
     _name = "lerm_civil.discipline"
@@ -10,8 +13,40 @@ class Discipline(models.Model):
     discipline = fields.Char(string="Discipline", required=True,tracking=True)
     hod = fields.Many2one('res.users',string="Head of Department")
 
+    lab_l_ids = fields.One2many('lab.location','parent_id',string="Parameter")
+
+ 
+    
     def __str__(self):
         return self.discipline
+    
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(Discipline, self).create(vals)
+        # record.get_all_fields()
+        # record.eln_ref.write({'model_id':record.id})
+        return record
+    
+
+class LabLocation(models.Model):
+    _name = "lab.location"
+
+    parent_id = fields.Many2one('lerm_civil.discipline',string="Parent Id")
+
+    lab_no = fields.Integer(string="Lab Location")  # Reference the correct model
+    # lab_c_no = fields.Char("Lab Certificate No .",size=6, size_min=6)
+    lab_adress = fields.Char(string="Lab Address")
+
+    def name_get(self):
+        result = []
+        for record in self:
+            name = f"{record.lab_no}"
+            result.append((record.id, name))
+        return result
+
+
+
 
 class Group(models.Model):
     _name = "lerm_civil.group"
@@ -149,7 +184,10 @@ class SrfForm(models.Model):
     def compute_sample_count(self):
         count = self.env['lerm.srf.sample'].search_count([('srf_id', '=', self.id)])
         self.sample_count = count
+        
+   
 
+   
     def confirm_srf(self):
         srf_ids=[]
 
@@ -165,20 +203,30 @@ class SrfForm(models.Model):
             for sample in samples:
                 sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
                 kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+                # lab_l_id =  self.env['lab.location'].search([('id','=',self.env.context['allowed_company_ids'][0])])
                 company =  self.env['res.company'].search([('id','=',self.env.context['allowed_company_ids'][0])])
+                # lab_cert_no = str(sample.lab_certificate_no)
+                lab_loc = str(sample.lab_l_id.lab_no)
                 lab_cert_no = company.lab_certificate_no
-                lab_loc = company.lab_location
+                # lab_loc = company.lab_seq_no
                 ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
                 ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
-                ulr_no = ulr_no.replace('(lab_location)', lab_loc)
+                ulr_no = ulr_no.replace('(lab_no)', lab_loc)
                 # import wdb ; wdb.set_trace()
+              
+             
+        
 
+              
                 
-                sample.write({'sample_no':sample_id,'kes_no':kes_no,'status':'2-confirmed' ,'ulr_no':ulr_no})
+                sample.write({'sample_no':sample_id,'kes_no':kes_no,'status':'2-confirmed','ulr_no':ulr_no})
                 self.env.cr.commit()
+        
+   
+                
 
-
-
+                    
+        
 
         # for record in self.samples:
         #     # if vals.get('sample_no', 'New') == 'New' and vals.get('kes_no', 'New') == 'New':
@@ -254,6 +302,7 @@ class SrfForm(models.Model):
         if len(samples) > 0:
             print(samples[0].material_id.id , 'error')
             discipline_id = samples[-1].discipline_id.id
+            lab_l_id = samples[-1].lab_l_id.id
             material_id = samples[-1].material_id.id
             group_id = samples[-1].group_id.id
             alias = samples[-1].alias
@@ -334,6 +383,28 @@ class SrfForm(models.Model):
 
 class CreateSampleWizard(models.TransientModel):
     _name = 'create.srf.sample.wizard'
+    _rec_name = 'lab_l_id'
+
+    lab_l_id = fields.Many2one('lab.location',required=True, string="Lab Locations",domain="[('parent_id', '=', discipline_id)]")
+  
+    @api.onchange('discipline_id')
+    def onchange_discipline_id(self):
+        if self.discipline_id:
+            domain = [('parent_id', '=', self.discipline_id.id)]
+            return {'domain': {'lab_l_id': domain}}
+        else:
+            return {'domain': {'lab_l_id': []}}
+
+
+
+
+
+    def name_get(self):
+        result = []
+        for record in self:
+            name = f"Lab Locations: {', '.join(str(lab.lab_no) for lab in record.lab_l_id)}"
+            result.append((record.id, name))
+        return result
     
     srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id")
     sample_id = fields.Char(string="Sample Id")
@@ -387,6 +458,16 @@ class CreateSampleWizard(models.TransientModel):
     pricelist = fields.Many2one('product.pricelist',string='Pricelist')
     main_name = fields.Char(string="Product Name",compute='compute_main_name',store=True)
     price = fields.Float(string="Price",compute='compute_price',store=True)
+
+
+   
+   
+
+    # @api.depends('discipline_id')
+    # def compute_grade_required(self):
+    #     for wizard in self:
+    #         wizard.grade_required = wizard.discipline_id and wizard.discipline_id.lab_l_ids
+
 
     @api.depends('product_name')
     def compute_main_name(self):
@@ -469,6 +550,14 @@ class CreateSampleWizard(models.TransientModel):
             result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
             print(result)
             record.alias = result.alias
+
+    @api.onchange('discipline_id', 'lab_l_id')
+    def onchange_discipline_id(self):
+        if self.discipline_id and self.lab_l_id:
+            # Assuming you are interested in the first selected location
+            self.lab_l_id = self.lab_l_id[0]
+        else:
+            self.lab_l_id = False
        
    
 
@@ -477,6 +566,7 @@ class CreateSampleWizard(models.TransientModel):
         if data:
             print(data)
             discipline_id = data['discipline_id']
+            lab_l_id = data['lab_l_id']
             group_id =  data['group_id']
             material_id = data['material_id']
             grade_id = data['grade_id']
@@ -491,6 +581,7 @@ class CreateSampleWizard(models.TransientModel):
                 'srf_id': srf_id,
                 'group_id':group_id,
                 'discipline_id' : discipline_id,
+                'lab_l_id': lab_l_id,
                 'material_id' : material_id,
                 'grade_id' : grade_id,
                 'sample_qty':1,
@@ -505,6 +596,7 @@ class CreateSampleWizard(models.TransientModel):
             srf = self.env["lerm.srf.sample"].create({
                 'srf_id':srf_id,
                 'discipline_id': discipline_id,
+                'lab_l_id': lab_l_id,
                 'group_id':group_id,
                 'material_id' : material_id,
                 'grade_id' : grade_id,
@@ -536,6 +628,7 @@ class CreateSampleWizard(models.TransientModel):
             has_witness = self.has_witness
             witness = self.witness
             discipline_id = self.discipline_id.id
+            lab_l_id = self.lab_l_id.id
             scope = self.scope
             sample_description =self.sample_description
             parameters = self.parameters
@@ -575,6 +668,7 @@ class CreateSampleWizard(models.TransientModel):
                     'group_id':group_id,
                     'alias':alias,
                     'discipline_id': discipline_id,
+                    'lab_l_id': lab_l_id,
                     'material_id' : self.material_id.id,
                     'size_id':size_id,
                     'brand':brand,
@@ -607,6 +701,7 @@ class CreateSampleWizard(models.TransientModel):
                         'group_id':group_id,
                         'alias':alias,
                         'discipline_id': discipline_id,
+                        'lab_l_id': lab_l_id,
                         'material_id' : self.material_id.id,
                         'size_id':size_id,
                         'brand':brand,
@@ -679,6 +774,7 @@ class CreateSampleWizard(models.TransientModel):
                         'srf_date':sample.srf_id.srf_date,
                         'kes_no':sample.kes_no,
                         'discipline':sample.discipline_id.id,
+                        'lab_l_id': sample.lab_l_id.id,
                         'group': sample.group_id.id,
                         'material': sample.material_id.id,
                         'witness_name': sample.witness,
