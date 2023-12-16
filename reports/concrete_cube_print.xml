@@ -462,10 +462,11 @@
 					<p style="font-size:15px"><b>Test Data Sheet</b></p>
 				</div> -->
 				<div style="text-align:center;font-size:18px">
-                    <!-- Concrete Cube -->
-					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_name"/>
+                    Concrete Cube
+					<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_name"/> -->
                 </div>
 				<div class="container_eln" style="margin-top:5px">
+					
 					<div t-foreach="eln" t-as="o">
 						<table>
 							<tr cols="12">
@@ -507,6 +508,10 @@
 								</td>
 							</tr>
 						</table>
+						<div style="text-align:center;font-size:18px;margin-top:25px">
+						<!-- Concrete Cube -->
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_name"/>
+						</div>
 					</div>
 						<table style="margin-top:30px;">
 						<thead>

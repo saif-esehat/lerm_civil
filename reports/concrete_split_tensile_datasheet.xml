@@ -47,10 +47,13 @@
                     <!-- Concrete Split Tensile Strength -->
                     
                     <div t-if="data.splite_tensile_visible" style="margin-top:20px">
-                        <div style="text-align:center;font-size:18px">
+                        <!-- <div style="text-align:center;font-size:18px">
                             <b>Concrete Split Tensile Strength</b>
-                        </div>
-                        <table>
+                        </div> -->
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','51ff18a6-226c-4dbf-9389-7cc72b090e66')]).parameter_name"/>
+						</div>
+                        <table style="margin-top:20px">
                             <tr cols="12">
                                 <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
                                 <td colspan="2" style="text-align: center;"><b>ID MARK/ Location</b></td>
@@ -294,22 +297,21 @@
 							</tr>
 						</table>
 					</div>
-					<div></div>
-					
-					
-						<span style="margin-top:20px;font-weight: bold;" >
+					<div style="margin-top:20px;font-weight: bold;">
+						<span  >
 							<!-- <strong>Protocol :</strong><![CDATA[&nbsp;]]> -->
-							<span t-esc="eln.material.test_parameter"/>:
+							<span t-esc="eln.material.test_parameter"/> : 
 							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','51ff18a6-226c-4dbf-9389-7cc72b090e66')]).parameter_table" t-as="parameter">
 								<t t-if="parameter.grade.id == eln.grade_id.id">
 									<span t-field="parameter.specification"/>
 								</t>
 							</t>
 						</span>
+					</div>
 					
 					
 
-					<table style="margin-top:30px;">
+					<table style="margin-top:10px;">
 							<t t-set="i" t-value="0"/>
 								<thead>
 									<tr>
