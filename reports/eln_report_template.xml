@@ -3,13 +3,7 @@
 
 
 
-	<template id="custom_watermark">
-		<div class="page" style="position:absolute;opacity:0.6;font-size:3em;width:100%;height:100%;z-index:-1000;">
-			<img src="/lerm_civil/static/src/img/watermark3.jpg"/>
-		</div>
-
-		        <div class="page-break"></div>
-	</template>
+	
 
 
 	<template id="custom_layout_header_footer_lerm_eln">
@@ -21,12 +15,70 @@
 				<div t-if="eln.sample_id.scope == 'non_nabl' or not nabl" class="col-12 imageContainer" >
 					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
 				</div>
+				
 			</div>
+			<div class="row backgroundimage" style="opacity:0.3; font-size:100px; width:85%; text-align:center;top:500px; right:100px; position: fixed; z-index:99;">
+				<img src="/lerm_civil/static/src/img/watermark.jpg" style="width:100%;"/>
+			</div>
+			<div class="container_eln row" >
+				
+			
+					<table style="border:none;">
+						<tr cols="12" style="border:none;">
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span><b>Test Report</b></span>
+							</td>
+						</tr>
+					</table>
+			</div>
+			<div class="container_eln row" style="margin-right:4px;margin-left:4px;">
+				
+			
+					<table>
+						<tr>
+							<td colspan="3">Report no :
+							</td>
+							<td colspan="3">
+								<span t-field="o.kes_no"/>
+							</td>
+							<td colspan="3">Report Date :
+							</td>
+							<td colspan="3">
+								<span t-field="o.srf_date"/>
+							</td>
+							<td colspan="3"  t-if="nabl">ULR NO :
+							</td>
+							<td colspan="3" t-if="nabl">
+								<span t-field="o.sample_id.ulr_no"/>
+							</td>
+						</tr>
+					</table>
+			</div>
+			<!-- <t t-call="lerm_civil.custom_watermark"/>  -->
+
+			<!-- <div class="first-page">
+				<t t-call="lerm_civil.custom_watermark"/> 
+			</div>
+			<div class="not-first-page">
+				<t t-call="lerm_civil.custom_watermark"/> 
+			</div> -->
+
 			
         </div>
 		
         <div t-attf-class="article" t-att-style="report_header_style">
-	
+			
             <t t-out="0"/>
 				
         </div>
@@ -84,15 +136,15 @@
 						End Date. <![CDATA[&nbsp;]]> <span t-esc="eln.end_date"/>
 					</div> -->
 				
-					<span style="text-align:left; display: flex; justify-content: space-between; margin-right: 6rem;" >
+					<span style="text-align:left; display: flex; justify-content: space-between; margin-right: 3rem;" >
 						FORMAT No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 					</span>
 					
-					<span style="text-align:center; display: flex; justify-content: space-between;  margin-left: 6rem;  margin-right: 3rem;">
+					<span style="text-align:center; display: flex; justify-content: space-between;  margin-left: 3rem;  margin-right: 3rem;">
 						Job No. <span t-esc="eln.kes_no"/>
 					</span>
 					
-					<span style="text-align:right; display: flex; justify-content: space-between;  margin-left: 6rem;  ">
+					<span style="text-align:right; display: flex; justify-content: space-between;  margin-left: 3rem;  ">
 						Date. <span t-esc="eln.end_date"/>
 					</span>
 				
@@ -152,11 +204,11 @@
 			<!-- <t t-call="web.basic_layout"> -->
 			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 
-			 	<t t-call="lerm_civil.custom_watermark"/>
+			 	<!-- <t t-call="lerm_civil.custom_watermark"/> -->
 
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
-				</div>
+				</div> -->
 				<div class="container_eln">
 
 					<div t-foreach="eln" t-as="o">
@@ -164,7 +216,7 @@
 					
 
 						
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Report no :
 								</td>
@@ -182,8 +234,8 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
-						</table>
-						<table style="margin-top:10px;">
+						</table> -->
+						<table style="margin-top:20px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
 									<![CDATA[&nbsp;]]>
@@ -438,7 +490,7 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
+									 <li t-if="eln.has_witness">
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 									</li>
 									<li t-if="eln.remarks">
@@ -447,7 +499,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="signatureContainer girdgird">
+						<!-- <div class="signatureContainer girdgird">
 							<div>
 								<div>
 									<b>
@@ -496,7 +548,66 @@
 									</b>
 								</div>
 							</div>
+						</div> -->
+				<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+					
+					<div>
+						<div>
+							<b>
+								Checked By
+							</b>
 						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(Sr. Chemist)
+							</b>
+						</div>
+					</div>
+					<div>
+						<div t-if="stamp and stamp == '4-in_report'">
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							Format No. <span t-esc="eln.material.test_format_no"/>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b>
+								Approved By 
+							</b>
+							
+						</div>
+						<div style="height:30px">
+
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								Chemical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								(Authorized Signatory)
+							</b>
+						</div>
+					</div>
+				</div>
+					
+			
 						<div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div>
@@ -596,7 +707,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="authorizeRowDataSheet">
+						<!-- <div class="authorizeRowDataSheet">
 							<div>
 								
 								<div>
@@ -623,7 +734,53 @@
 									</b>
 								</div>
 							</div>
-						</div>
+						</div> -->
+							<div class="authorizeRowDataSheet">
+				<div>
+					<div>
+						<b>
+							Tested By 
+						</b>
+						
+					</div>
+					<div style="height:40px">
+
+					</div>
+					<div>
+						<b>
+						<span t-esc="eln.sample_id.filled_by.name"/>
+						</b>
+					</div>
+					<div>
+						<b>
+							(Jr. Chemist)
+						</b>
+					</div>
+				</div>
+				
+				<div style="margin-left:500px">
+							
+					<div>
+						<b>
+							Checked By
+						</b>
+					</div>
+					<div style="height:40px">
+
+					</div>
+					<div>
+						<b>
+						<span t-esc="eln.sample_id.check_by.name"/>
+						</b>
+					</div>
+					
+					 <div>
+						<b>
+							(Sr. Chemist)
+						</b>
+					</div>
+				</div>
+			</div>
 
 					<!-- <div style="text-align:center;margin-top:25px">
 						......End of Report......

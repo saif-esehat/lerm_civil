@@ -101,7 +101,10 @@
                     </group>
                     <group attrs="{'invisible': [('fsi_visible', '=', False)]}">
                      <field name="max_fsi"/>
-                     <field name='max_fsi_conformity' col="4"/>
+                     <field name='max_fsi_conformity' col="4"
+                                           decoration-success="max_fsi_conformity == 'pass'" 
+                                           decoration-danger="max_fsi_conformity == 'fail'" 
+                                           readonly="1"/>
                      <field name='max_fsi_nabl' col="4"/>
                     </group>
                     <!-- Sieve Analysis -->
@@ -185,7 +188,10 @@
                      <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
                      <field name='mmd'/>
                      <field name='omc'/>
-                     <field name='heavy_table_conformity' col="4"/>
+                     <field name='heavy_table_conformity' col="4"
+                                           decoration-success="heavy_table_conformity == 'pass'" 
+                                           decoration-danger="heavy_table_conformity == 'fail'" 
+                                           readonly="1"/>
                      <field name='heavy_table_nabl' col="4"/>
                     </group>
 
@@ -233,7 +239,10 @@
                      <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
                      <field name='mmd_light_omc'/>
                      <field name='omc_light_omc'/>
-                     <field name='light_omc_table_conformity' col="4"/>
+                     <field name='light_omc_table_conformity' col="4"
+                                           decoration-success="light_omc_table_conformity == 'pass'" 
+                                           decoration-danger="light_omc_table_conformity == 'fail'" 
+                                           readonly="1"/>
                      <field name='light_omc_table_nabl' col="4"/>
                     </group>
 
@@ -285,7 +294,10 @@
                      <field name="are_child_lines_filled" invisible="1"/>
                         <button string="Calculate Liquid Limit" name="liquid_calculation" type="object" class="oe_highlight" 
                                 attrs="{'invisible': [('are_child_lines_filled', '=', False)]}" />
-                     <field name='liquid_limit_conformity' col="4"/>
+                     <field name='liquid_limit_conformity' col="4"
+                                           decoration-success="liquid_limit_conformity == 'pass'" 
+                                           decoration-danger="liquid_limit_conformity == 'fail'" 
+                                           readonly="1"/>
                      <field name='liquid_limit_nabl' col="4"/>
                     </group>
                     <!-- Plastic Limit -->
@@ -328,7 +340,10 @@
                     <group attrs="{'invisible': [('plastic_limit_visible', '=', False)]}">
                      <field name="plastic_limit"/>
                      <field name="plasticity_index"/>
-                     <field name='plasticity_index_conformity' col="4"/>
+                     <field name='plasticity_index_conformity' col="4"
+                                           decoration-success="plasticity_index_conformity == 'pass'" 
+                                           decoration-danger="plasticity_index_conformity == 'fail'" 
+                                           readonly="1"/>
                      <field name='plasticity_index_nabl' col="4"/>
                     </group>
                      
@@ -398,7 +413,10 @@
                      
                     </group>
                     <group attrs="{'invisible': [('dry_density_visible', '=', False)]}">
-                      <field name='degree_of_compaction_conformity' col="4"/>
+                      <field name='degree_of_compaction_conformity' col="4"
+                              decoration-success="degree_of_compaction_conformity == 'pass'" 
+                              decoration-danger="degree_of_compaction_conformity == 'fail'" 
+                              readonly="1"/>
                       <field name='degree_of_compaction_nabl' col="4"/>
                     </group>
 
@@ -438,7 +456,10 @@
                     </group>
                     <group attrs="{'invisible': [('moisture_content_visible', '=', False)]}">
                         <field name='average_block'/>
-                        <field name='moisture_content_conformity' col="4"/>
+                        <field name='moisture_content_conformity' col="4"
+                               decoration-success="moisture_content_conformity == 'pass'" 
+                               decoration-danger="moisture_content_conformity == 'fail'" 
+                               readonly="1"/>
                         <field name='moisture_content_nabl' col="4"/>
                      </group>
 

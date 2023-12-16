@@ -188,7 +188,10 @@
                       </field>
                       <field name="control_average_casting_7days"/>
                       <field name="control_compressive_strength_7_days"/>
-                      <field name="accelerated_pozzolanic_conformity"/>
+                      <field name="accelerated_pozzolanic_conformity" 
+                      decoration-success="accelerated_pozzolanic_conformity == 'pass'" 
+                      decoration-danger="accelerated_pozzolanic_conformity == 'fail'" 
+                      readonly="1" />
                       <field name="accelerated_pozzolanic_nabl"/>
                     </group>
 
@@ -225,7 +228,11 @@
                         <group>
                             <field name='retain_wt_avrg'/>
                             <field name='retain_wt_rounded'/>
-                            <field name='oversize_retained_conformity'/>
+                            <field name='oversize_retained_conformity'
+                            decoration-success="oversize_retained_conformity == 'pass'" 
+                            decoration-danger="oversize_retained_conformity == 'fail'" 
+                            readonly="1" 
+                            />
                             <field name='oversize_retained_nabl'/>
                         </group>  
                       
@@ -266,7 +273,11 @@
                     </field>
                         <group>
                             <field name='specific_gravity_avrg'/>
-                            <field name='specific_gravity_conformity'/>
+                            <field name='specific_gravity_conformity'
+                            decoration-success="specific_gravity_conformity == 'pass'" 
+                            decoration-danger="specific_gravity_conformity == 'fail'" 
+                            readonly="1"
+                            />
                             <field name='specific_gravity_nabl'/>
                         </group>  
                       
@@ -433,7 +444,11 @@
                       </field>
                       <field name="comp_control_average_casting_7days"/>
                       <field name="comp_control_strngth_7_days"/>
-                      <field name="comp_strngth_7_days_conformity"/>
+                      <field name="comp_strngth_7_days_conformity"
+                      decoration-success="comp_strngth_7_days_conformity == 'pass'" 
+                      decoration-danger="comp_strngth_7_days_conformity == 'fail'" 
+                      readonly="1"
+                      />
                       <field name="comp_strngth_7_days_nabl"/>
                     </group>
 
@@ -471,7 +486,11 @@
                     </field>
                         <group>
                             <field name='avrg_oversize_percent'/>
-                            <field name='oversize_retained_conformity'/>
+                            <field name='oversize_retained_conformity'
+                            decoration-success="oversize_retained_conformity == 'pass'" 
+                            decoration-danger="oversize_retained_conformity == 'fail'" 
+                            readonly="1"
+                            />
                             <field name='oversize_retained_nabl'/>
                         </group>  
                       
@@ -513,7 +532,11 @@
                     </field>
                         <group>
                             <field name='avrg_bulk_density'/>
-                            <field name='bulk_density_conformity'/>
+                            <field name='bulk_density_conformity'
+                            decoration-success="bulk_density_conformity == 'pass'" 
+                            decoration-danger="bulk_density_conformity == 'fail'" 
+                            readonly="1"
+                            />
                             <field name='bulk_density_nabl'/>
                         </group>  
                       

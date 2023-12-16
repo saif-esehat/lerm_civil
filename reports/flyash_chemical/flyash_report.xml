@@ -128,7 +128,7 @@
 							</tr>
 						</table>
 					</div>
-					<div style="margin-top:20px;">
+					<div style="margin-top:20px;font-weight: bold;">
 						<u>Results</u>
 					</div>
 					<table>
@@ -137,15 +137,21 @@
 							
 
                             <tr cols="12">
-								<td colspan="1" style="border-top:none;border-bottom:none;text-align: center;">Sr no 
+								<td colspan="1" style="border-top:none;border-bottom:none;text-align: center;font-weight: bold;">Sr no 
 								</td>
-								<td colspan="2" style="border-top:none;border-bottom:none;text-align: center;">Test Parameter 
+								<td colspan="2" style="border-top:none;border-bottom:none;text-align: center;font-weight: bold;">Test Parameter 
 								</td>
-								<td colspan="1" style="border-bottom:none;text-align: center;">Results
+								<td colspan="1" style="border-bottom:none;text-align: center; font-weight: bold;">Results
 								</td>
 								
-                                <td colspan="3" style="text-align: center;">Test Method
-								</td>	
+                                <!-- <td colspan="3" style="text-align: center;">Test Method
+								</td>	 -->
+								<th colspan="3" style="text-align: center;font-weight: bold;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
+										
+									</span>
+								</th>
 							</tr>
                             <tr cols="12">
 								<td colspan="1" style="border-top:none">
@@ -154,9 +160,9 @@
 								</td>
 								<td colspan="1" style="border-top:none">
 								</td>
-                                <td colspan="1" style="text-align: center;">Siliceous pulverized fuel Ash
+                                <td colspan="1" style="text-align: center;font-weight: bold;">Siliceous pulverized fuel Ash
 								</td>
-                                <td colspan="2" style="text-align: center;">Calcareous pulverized fuel Ash 
+                                <td colspan="2" style="text-align: center;font-weight: bold;">Calcareous pulverized fuel Ash 
 								</td>	
 							</tr>
 						</thead>
@@ -167,11 +173,14 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td colspan="2" style="text-align: center;">
+								<!-- <td colspan="2" style="text-align: center;">
 									<span>
 									SiO2 + Al2O3 + Fe2O3 %
 									</span>
 									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_name"/>
 								</td>
 								
 								<td colspan="1" style="text-align: center;">
@@ -201,11 +210,14 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td colspan="2" style="text-align: center;">
+								<!-- <td colspan="2" style="text-align: center;">
 									<span>
 										Silica (SiO2)
 									</span>
 									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')]).parameter_name"/>
 								</td>
 								
 								<td colspan="1" style="text-align: center;">
@@ -235,11 +247,14 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td colspan="2" style="text-align: center;">
+								<!-- <td colspan="2" style="text-align: center;">
 									<span>
 										Magnesium Oxide % 
 									</span>
 									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')]).parameter_name"/>
 								</td>
 								
 								<td colspan="1" style="text-align: center;">
@@ -272,11 +287,14 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td colspan="2" style="text-align: center;">
+								<!-- <td colspan="2" style="text-align: center;">
 									<span>
 										Total Chloride (CI) 
 									</span>
 									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')]).parameter_name"/>
 								</td>
 								
 								<td colspan="1" style="text-align: center;">
@@ -307,11 +325,14 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td colspan="2" style="text-align: center;">
+								<!-- <td colspan="2" style="text-align: center;">
 									<span>
 										Loss on Ignition % 
 									</span>
 									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')]).parameter_name"/>
 								</td>
 								
 								<td colspan="1" style="text-align: center;">
@@ -342,11 +363,14 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td colspan="2" style="text-align: center;">
+								<!-- <td colspan="2" style="text-align: center;">
 									<span>
 										Alumina (Al2o3) %
 									</span>
 									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')]).parameter_name"/>
 								</td>
 								
 								<td colspan="1" style="text-align: center;">
@@ -376,11 +400,14 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td colspan="2" style="text-align: center;">
+								<!-- <td colspan="2" style="text-align: center;">
 									<span>
 									 Ferric Oxide (FeO3)
 									</span>
 									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')]).parameter_name"/>
 								</td>
 								
 								<td colspan="1" style="text-align: center;">
@@ -409,11 +436,14 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td colspan="2" style="text-align: center;">
+								<!-- <td colspan="2" style="text-align: center;">
 									<span>
 									 Sulphur trioxide (SO3) %
 									</span>
 									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')]).parameter_name"/>
 								</td>
 								
 								<td colspan="1" style="text-align: center;">
@@ -474,22 +504,22 @@
 										Checked By
 									</b>
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										<span t-esc="eln.sample_id.check_by.name"/>
 									</b>
 								</div>
 								<div>
 									<b>
-										(Authorized Signatory)
+										(Sr. Chemist)
 									</b>
 								</div>
 							</div>
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
@@ -499,11 +529,17 @@
 							<div>
 								<div>
 									<b>
-										Approved By
+										Approved By 
 									</b>
+									
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
 								</div>
 								<div>
 									<b>

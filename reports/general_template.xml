@@ -4,9 +4,39 @@
         <div t-attf-class="header article" t-att-style="report_header_style">
             <div class="row">
                 <div class="col-12">
-                    <div style="text-align:left;">	
-                        FORMAT No. <![CDATA[&nbsp;]]> <span t-esc="eln.material.data_sheet_format_no.name"/>
-                    </div>
+				<!-- <div>
+                    <span style="text-align:left;">	
+                        FORMAT No. <![CDATA[&nbsp;]]> <span t-esc="eln.parameters_result[0].parameter.datasheet_no"/>
+                    </span>
+					<span style="text-align:left;margin-left:23%;">	
+                        Report No. <![CDATA[&nbsp;]]> <span t-esc="eln.kes_no"/>
+                    </span>
+					<span style="text-align:left;margin-left:20%;">	
+                        Date <![CDATA[&nbsp;]]> <span t-esc="eln.end_date"/>
+                    </span>
+				</div> -->
+				<div class="container_eln">
+					<table style="border:none;">
+						<tr cols="12" style="border:none;">
+							<td colspan="4" style="border:none;">
+								<span style="text-align:left;">	
+									FORMAT No. <![CDATA[&nbsp;]]> <span t-esc="eln.parameters_result[0].parameter.datasheet_no"/>
+								</span>
+							</td>
+							<td colspan="4" style="border:none;">
+								<span style="text-align:left;margin-left:23%;">	
+									Report No. <![CDATA[&nbsp;]]> <span t-esc="eln.kes_no"/>
+								</span>
+							</td>
+							<td colspan="4" style="border:none;">
+								<span style="text-align:left;margin-left:20%;">	
+									Date <![CDATA[&nbsp;]]> <span t-esc="eln.end_date"/>
+								</span>
+							</td>
+						</tr>
+					</table>
+
+				</div>
                     <div style="text-align:center;margin-top:12px">	
                         KNACK ENGINEERING SERVICES PVT LTD
                     </div>
@@ -51,7 +81,7 @@
 							<tr cols="12">
 								<td colspan="6">Job no :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.eln_id"/>
+									<span t-field="o.kes_no"/>
 								</td>
 								<td colspan="6">Test Start Date :
 									<![CDATA[&nbsp;]]>
@@ -166,30 +196,50 @@
 					</table>
 					<div class="authorizeRowDataSheet">
 						<div>
-							<div>
-								<b>
-									(JR Chemist)
-								</b>
-							</div>
+							
 							<div>
 								<b>
 									Tested By
 								</b>
 							</div>
+							<div style="height:25px">
+								
+							</div>
+							<div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+							<div>
+								<b>
+									(JR Engineer)
+								</b>
+							</div>
 						</div>
-						<div style="margin-left:500px">
+						<div style="margin-left:600px">
 							<div>
-								<b>
-									Chemical Department (HOD)
-								</b>
+                                <b>
+                                    Checked By
+                                </b>
+                            </div>
+							<div style="height:25px">
+								
 							</div>
-							<div>
-								<b>
-									Checked By
-								</b>
-							</div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.check_by.name"/>
+                                </b>
+                            </div>
+                            
+                            <div>
+                                <b>
+                                    (Sr. Engineer)
+                                </b>
+                            </div>
 						</div>
 					</div>
+				
+
 				</div>
 			</t>
 		</t>

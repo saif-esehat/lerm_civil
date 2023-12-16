@@ -10,22 +10,22 @@ class ReboundHammer(models.Model):
     name = fields.Char("Name",default="Rebound Hammer")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.rebound.hammer.line','parent_id',string="Parameter")
-    # average = fields.Integer(string="Average",compute="_compute_average")
-    # minimum = fields.Integer(string="Minimum",compute="_compute_min_max")
-    # maximum = fields.Integer(string="Maximum",compute="_compute_min_max")
+    average = fields.Integer(string="Average",compute="_compute_average")
+    minimum = fields.Integer(string="Minimum",compute="_compute_min_max")
+    maximum = fields.Integer(string="Maximum",compute="_compute_min_max")
 
-    # @api.depends('child_lines.avg')
-    # def _compute_average(self):
-    #     for record in self:
-    #         total_value = sum(record.child_lines.mapped('avg'))
-    #         self.average = int(round(total_value / len(record.child_lines))) if record.child_lines else 0.0
+    @api.depends('child_lines.avg')
+    def _compute_average(self):
+        for record in self:
+            total_value = sum(record.child_lines.mapped('avg'))
+            self.average = int(round(total_value / len(record.child_lines))) if record.child_lines else 0.0
 
-    # @api.depends('child_lines.avg')
-    # def _compute_min_max(self):
-    #     for record in self:
-    #         values = record.child_lines.mapped('avg')
-    #         self.minimum = int(min(values)) if values else 0.0
-    #         self.maximum = int(max(values)) if values else 0.0
+    @api.depends('child_lines.avg')
+    def _compute_min_max(self):
+        for record in self:
+            values = record.child_lines.mapped('avg')
+            self.minimum = int(min(values)) if values else 0.0
+            self.maximum = int(max(values)) if values else 0.0
 
 
     @api.model

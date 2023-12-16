@@ -202,7 +202,11 @@
 
                     <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                       <field name="avrg_compressive_strength"/>
-                      <field name="comp_strength_confirmity"/>
+                      <field name="comp_strength_confirmity"
+                      decoration-success="comp_strength_confirmity == 'pass'" 
+                      decoration-danger="comp_strength_confirmity == 'fail'" 
+                      readonly="1"
+                      />
                       <field name="comp_strength_nabl"/>
                     </group>
                     
@@ -369,7 +373,11 @@
                     
                     <group attrs="{'invisible': [('water_absorbtion_visible', '=', False)]}">
                       <field name="avrg_water_absorption"/>
-                      <field name="water_absorption_confirmity"/>
+                      <field name="water_absorption_confirmity"
+                      decoration-success="water_absorption_confirmity == 'pass'" 
+                      decoration-danger="water_absorption_confirmity == 'fail'" 
+                      readonly="1"
+                      />
                       <field name="water_absorption_nabl"/>
                     </group>
                  

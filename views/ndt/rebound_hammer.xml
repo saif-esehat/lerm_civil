@@ -38,9 +38,9 @@
                             </tree>
                     </field>
                     <group>
-                    <!-- <field name="average" />
-                    <field name="minimum" />
-                    <field name="maximum" /> -->
+                    <field name="average" string="Average"/>
+                    <field name="minimum" string="Minimum"/>
+                    <field name="maximum" string="Maximum"/>
                     </group>
                 </sheet>
             </form>

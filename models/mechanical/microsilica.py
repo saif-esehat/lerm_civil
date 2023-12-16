@@ -200,6 +200,7 @@ class Microsilica(models.Model):
     accelerated_pozzolanic_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
+        
     ], string='Confirmity', default='fail',compute="_compute_accelerated_pozzolanic_conformity")
 
     accelerated_pozzolanic_nabl = fields.Selection([
@@ -227,6 +228,7 @@ class Microsilica(models.Model):
                         break
                     else:
                         record.accelerated_pozzolanic_conformity = 'fail'
+           
 
     @api.depends('control_compressive_strength_7_days','eln_ref')
     def _compute_accelerated_pozzolanic_nabl(self):

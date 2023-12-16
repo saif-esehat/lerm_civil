@@ -67,6 +67,11 @@
       align-items: center;
       justify-content: space-between;
     }
+    .flexcenter{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .table-wrapper {
       page-break-inside: avoid;
       

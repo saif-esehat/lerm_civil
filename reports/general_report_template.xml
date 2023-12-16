@@ -6,10 +6,68 @@
 				<div class="col-12 imageContainer" >
 					<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
 				</div>
+				
+			</div>
+			<div class="row backgroundimage" style="opacity:0.3; font-size:100px; width:85%; text-align:center;top:500px; right:100px; position: fixed; z-index:99;">
+				<img src="/lerm_civil/static/src/img/watermark.jpg" style="width:100%;"/>
+			</div>
+
+			<!-- <div class="row container_eln flexcenter" style="text-align:right !important;padding-right:10px;padding-left:10px;">
+				<b>Test Report</b>
+			</div> -->
+			<!-- <div class="row backgroundimage" style="margin-top:100px;position:absolute;opacity:0.25;font-size:3em;width:100%;text-align:center;z-index:-1000;">
+				<img src="/lerm_civil/static/src/img/watermark.jpg" style="width:100%;"/>
+			</div> -->
+			<div class="container_eln row" >
+				
+			
+					
+					<table style="border:none;">
+						<tr cols="12" style="border:none;">
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span></span>
+							</td>
+							<td colspan="1" style="border:none;"><span><b>Test Report</b></span>
+							</td>
+						</tr>
+					</table>
+			</div>
+			<div class="container_eln row" style="margin-right:4px;margin-left:4px;">
+				
+			
+					<table>
+						<tr>
+							<td colspan="3">Report no :
+							</td>
+							<td colspan="3">
+								<span t-field="o.kes_no"/>
+							</td>
+							<td colspan="3">Report Date :
+							</td>
+							<td colspan="3">
+								<span t-field="o.srf_date"/>
+							</td>
+							<td colspan="3"  t-if="nabl">ULR NO :
+							</td>
+							<td colspan="3" t-if="nabl">
+								<span t-field="o.sample_id.ulr_no"/>
+							</td>
+						</tr>
+					</table>
 			</div>
         </div>
 	
         <div t-attf-class="article" t-att-style="report_header_style">
+			
             <t t-out="0"/>
         </div>
 		<div t-attf-class="footer o_standard_footer">
@@ -46,16 +104,16 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
-			 	<div style="position:absolute;opacity:0.25;font-size:3em;width:100%;height:100%;z-index:1000;margin:-10px">
+			 	<!-- <div style="position:absolute;opacity:0.25;font-size:3em;width:100%;height:100%;z-index:1000;margin:-10px">
 					<img src="/lerm_civil/static/src/img/watermark2.jpg"/>
-				</div>
-				<div style="text-align:center;margin-top:10px">
+				</div> -->
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
-				</div>
+				</div> -->
 				
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Report no :
 								</td>
@@ -73,8 +131,8 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
-						</table>
-						<table style="margin-top:10px;">
+						</table> -->
+						<table style="margin-top:20px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
 									<![CDATA[&nbsp;]]>
@@ -175,7 +233,7 @@
                             <tr>
 								<td colspan="6">Instrument :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.instrument"/>
+									<span t-field="o.instrument.name"/>
 								</td>
 								<td colspan="6">Temperature :
 									<![CDATA[&nbsp;]]>
@@ -271,20 +329,15 @@
 								</ul>
 							</div>
 						</div>
-						<div class="signatureContainer girdgird">
-							<div>
-								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 100px; height: 100px;"/>
-							</div>
-							<!-- <div>
-								Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-							</div> -->
+						<!-- <div class="signatureContainer girdgird">
+							
+							
 							<div>
 								<div t-if="stamp and stamp == '4-in_report'">
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
 									Format No. 
-									<!-- <span t-esc="eln.material.test_format_no"/> -->
 									<span t-esc="eln.parameters_result[0].parameter.report_format_no"/>
 
 								</div>
@@ -300,7 +353,65 @@
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										NDT Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+						</div> -->
+
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:30px">
+
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.sample_id.check_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										Sr. Engineer
+									</b>
+								</div>
+								
+							</div>
+							<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									FORMAT No. <![CDATA[&nbsp;]]> <span t-esc="eln.parameters_result[0].parameter.report_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By 
+									</b>
+									
+								</div>
+								<div style="height:30px">
+
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										NDT Department (HOD)
 									</b>
 								</div>
 								<div>

@@ -451,7 +451,7 @@
 
 					<!-- Compressive Strength  -->
 
-					<div t-if="data.compressive_3_visible or data.compressive_7_visible or data.compressive_27_visible" style="margin-top:20px">
+					<div t-if="data.compressive_3_visible or data.compressive_7_visible or data.compressive_28_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
 							Compressive Strength
 						</div>

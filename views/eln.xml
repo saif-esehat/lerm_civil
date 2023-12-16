@@ -74,6 +74,8 @@
                                 <field name='witness_photo_name' invisible='1'/>
                                 <field name='attachment' filename='attachment_name'/>
                                 <field name='attachment_name' invisible='1'/>
+                                <field name='instrument'/>
+
                             </group>
                         </group>
                          <group>
