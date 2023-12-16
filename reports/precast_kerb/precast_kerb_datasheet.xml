@@ -48,8 +48,11 @@
 
                             <!-- Transverse Strength -->
 
-                            <div style="text-align:center;font-size:18px">
+                            <!-- <div style="text-align:center;font-size:18px">
                                 Transverse Strength
+                            </div> -->
+                            <div style="text-align:center;font-size:18px;margin-top:20px">
+								<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0b48abe6-07a4-4345-bcc1-30ff6e4830af')]).parameter_name"/>
                             </div>
                             
 
@@ -94,8 +97,12 @@
 
                     <!-- Water Absorbtion  -->
                     <div t-if="data.water_absorbtion_visible" style="margin-top:20px">
-                        <div style="text-align:center;font-size:18px">
+                        <!-- <div style="text-align:center;font-size:18px">
                             Water Absorbtion
+                        </div> -->
+                         <div style="text-align:center;font-size:18px;margin-top:20px">
+                            <!-- Water Absorbtion -->
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f913fc79-eeb4-4e16-a7fc-75608384d9b0')]).parameter_name"/>
                         </div>
                         
 

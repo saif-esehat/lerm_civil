@@ -12,12 +12,56 @@ class LermSampleForm(models.Model):
 
     _description = "Sample"
     _rec_name = 'kes_no'
+
+    # ref = fields.Char(string="ULR No.",required=True,readonly=True, default=lambda self: 'New',store=True)
+ 
+    # @api.model
+    # def create(self, vals):
+    #     discipline = self.env['lerm_civil.discipline'].browse(vals.get('discipline_id'))
+    #     if discipline:
+    #         lab_cert_no = discipline.lab_c_seq_no
+    #         lab_loc = discipline.lab_seq_no
+    #         # lab_date = discipline.start_date
+
+    #         # lab_date_str = str(lab_date)
+    #         # last_two_digits_year = str(lab_date.year)[-2:]
+    #         # lab_date = discipline.start_date
+    #         ref = self.env['ir.sequence'].next_by_code('lerm_civil.discipline') or 'New'
+    #         ref = ref.replace('(lab_c_seq_no)', lab_cert_no)
+    #         # ref = ref.replace('(start_date)', str(lab_date))  # Convert lab_date to string               
+    #         ref = ref.replace('(lab_seq_no)', lab_loc)
+    #         # ref = ref.replace('(start_date)', last_two_digits_year)
+
+    #         # Update the 'ref' value in the 'vals' dictionary
+    #         vals['ref'] = ref
+
+    #     return super(LermSampleForm, self).create(vals)
+
+
+    # @api.model
+    # def create(self, vals):
+    #     discipline = self.env['lerm_civil.discipline'].browse(vals.get('discipline_id'))
+    #     lab_location = discipline.lab_l_ids and discipline.lab_l_ids[0]  # Assuming there is at least one lab location
+    #     if lab_location:
+    #         lab_cert_no = str(lab_location.lab_c_no)  # Convert to string
+    #         lab_loc = str(lab_location.lab_no)  # Convert to string
+
+    #         ref = self.env['ir.sequence'].next_by_code('lerm_civil.discipline') or 'New'
+    #         ref = ref.replace('(lab_c_no)', lab_cert_no)
+    #         ref = ref.replace('(lab_no)', lab_loc)
+
+    #         vals['ulr_no'] = ref  # Assign the value to the correct field
+
+    #     return super(LermSampleForm, self).create(vals)
+                
     
+        
     srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,tracking=True)
     sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
+    lab_l_id = fields.Many2one('lab.location', string="Lab Locations",required=True,domain="[('parent_id', '=', discipline_id)]")
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
     material_id_lab_name = fields.Char(string="Material",compute="compute_material_id_lab_name",store=True)
@@ -69,7 +113,14 @@ class LermSampleForm(models.Model):
     report_upload = fields.Binary(string="Report Upload")
 
 
-    
+    # @api.model
+    # def create(self, vals):
+    #     # Generate lab_c sequence number during creation
+    #     vals['ref'] = self.env['ir.sequence'].next_by_code('ulr.line') or '/'
+    #     return super(LermSampleForm, self).create(vals)
+
+
+
     status = fields.Selection([
         ('1-pending', 'Pending'),
         ('2-confirmed', 'Confirmed'),
@@ -89,6 +140,60 @@ class LermSampleForm(models.Model):
     main_name = fields.Char(string="Product Name")
     price = fields.Float(string="Price")
     product_or_form_based = fields.Boolean("Product or Form Based",compute="compute_form_product_based")
+
+    # @api.model
+    # def create(self, vals):
+    #     sample = super(LermSampleForm, self).create(vals)
+
+    #     # Assuming lab_l_id is a Many2one field in LermSampleForm
+    #     lab_location = vals.get('lab_l_id')
+    #     if lab_location:
+    #         lab_cert_no = str(lab_location.lab_c_no)
+    #         lab_loc = str(lab_location.lab_no)
+
+    #         ref = self.env['ir.sequence'].next_by_code('lerm_civil.discipline') or 'New'
+    #         ref = ref.replace('(lab_c_no)', lab_cert_no)
+    #         ref = ref.replace('(lab_no)', lab_loc)
+
+    #         sample.write({'ulr_no': ref})
+
+    #     return sample
+    # @api.model
+    # def create(self, vals):
+    #     sample = super(LermSampleForm, self).create(vals)
+
+    #     # Assuming lab_l_id is a Many2one field in LermSampleForm
+    #     lab_location = vals.get('lab_l_id')
+    #     if lab_location:
+    #         lab_location = self.env['lab.location'].browse(lab_location[0])  # Assuming you are interested in the first selected location
+    #         lab_cert_no = str(lab_location.lab_c_no)
+    #         lab_loc = str(lab_location.lab_no)
+
+    #         ref = self.env['ir.sequence'].next_by_code('lerm_civil.discipline') or 'New'
+    #         ref = ref.replace('(lab_c_no)', lab_cert_no)
+    #         ref = ref.replace('(lab_no)', lab_loc)
+
+    #         sample.write({'ulr_no': ref})
+
+    #     return sample
+    
+    # @api.model
+    # def create(self, vals):
+    #     sample = super(LermSampleForm, self).create(vals)
+
+    #     # Assuming lab_l_id is a Many2one field in LermSampleForm
+    #     lab_location = self.lab_l_id
+    #     if lab_location:
+    #         lab_cert_no = str(lab_location.lab_c_no)
+    #         lab_loc = str(lab_location.lab_no)
+
+    #         ref = self.env['ir.sequence'].next_by_code('lerm_civil.discipline') or 'New'
+    #         ref = ref.replace('(lab_c_no)', lab_cert_no)
+    #         ref = ref.replace('(lab_no)', lab_loc)
+
+    #         sample.write({'ulr_no': ref})
+
+    #     return sample
 
 
     @api.depends('state')
@@ -114,7 +219,7 @@ class LermSampleForm(models.Model):
         for record in self:
             record.material_id_lab_name = record.material_id.lab_name
 
-    
+
     def open_form(self):
 
         eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
@@ -205,7 +310,7 @@ class LermSampleForm(models.Model):
         eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
         approved_by = self.env.user
         eln.write({'state':'3-approved'})
-    
+
 
     # def reject_pending_sample(self):
     #     self.write({'state': '2-alloted'})
@@ -340,7 +445,7 @@ class LermSampleForm(models.Model):
             'view_id': action.id,
             'target': 'new'
             }
-    
+
 
     # @api.model
     # def create(self, vals):
@@ -374,7 +479,7 @@ class LermSampleForm(models.Model):
             record.alias = result.alias
 
 
-    
+
     @api.depends('discipline_id')
     def compute_group_ids(self):
         for record in self:

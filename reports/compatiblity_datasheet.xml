@@ -16,11 +16,21 @@
                             <tr cols="12">
                                 <td colspan="6">Test Parameter :
 									                                                                                                                                                <![CDATA[&nbsp;]]>
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','686c637d-cf76-4240-a6ed-432c1573cd00')]).parameter_name"/>
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','7e8a78f8-c0d9-4b08-b452-012759929ca9')]).parameter_name"/>
                                 </td>
-                                <td colspan="6">Test method :
+                                <!-- <td colspan="6">Test method :
 									                                                                                                                                                <![CDATA[&nbsp;]]>
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','686c637d-cf76-4240-a6ed-432c1573cd00')]).test_method.test_method"/>
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','7e8a78f8-c0d9-4b08-b452-012759929ca9')]).test_method.test_method"/>
+                                </td> -->
+                                <td colspan="6">Test method :
+                                    <span>
+                                        <!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
+                                        <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7e8a78f8-c0d9-4b08-b452-012759929ca9')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+                                    </span>
                                 </td>
                             </tr>
                             <tr cols="12">
@@ -43,8 +53,26 @@
                                     <span t-field="o.end_date"/>
                                 </td>
                             </tr>
+                            <tr style="height:50px" cols="12">
+                                <td colspan="4">Performed By :
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="eln.technician.name"/>
+                                </td>
+                                <td colspan="4">Witness Name :
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="eln.witness_name"/>
+                                </td>
+                                <td colspan="4">Witness Signature :
+                                    <![CDATA[&nbsp;]]>
+                                    <span style='padding:20px'></span>
+                                </td>
+                            </tr>
 
                         </table>
+                        <div style="text-align:center;font-size:18px;margin-top:20px">
+							<!-- % Silica -->
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','7e8a78f8-c0d9-4b08-b452-012759929ca9')]).parameter_name"/>
+						</div>
                         <table class="table table-condensed" style="margin-top: 20px;">
                             <thead>
                                 <tr>

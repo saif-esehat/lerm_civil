@@ -6,12 +6,41 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
+<<<<<<< HEAD
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
 				
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						
 						<table style="margin-top:20px;">
+=======
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
+				<div style="text-align:center;margin-top:10px">
+					<p style="font-size:15px"><b>Test Report</b></p>
+				</div>
+				<div class="container_eln">
+					<div t-foreach="eln" t-as="o">
+						<table>
+							<tr>
+								<td colspan="3">Report no :
+								</td>
+								<td colspan="3">
+									<span t-field="o.kes_no"/>
+								</td>
+								<td colspan="3">Report Date :
+								</td>
+								<td colspan="3">
+									<span t-field="o.end_date"/>
+								</td>
+								<td colspan="3"  t-if="nabl">ULR NO :
+								</td>
+								<td colspan="3" t-if="nabl">
+									<span t-field="o.sample_id.ulr_no"/>
+								</td>
+							</tr>
+						</table>
+						<table style="margin-top:10px;">
+>>>>>>> f1032a5fe2592cd4f42e8a3330d337901d71aebb
 							<tr>
 								<td colspan="12">Customer Party Name :
 									<![CDATA[&nbsp;]]>
@@ -120,63 +149,78 @@
 					<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Sr. No
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Test Parameters
 									</span>
 								</th>
 								
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Test Result
 									</span>
 								</th>
-								<th>
+								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Unit
 									</span>
 								</th>
-								<th>
+								<!-- <th>
 									<span>
 										Acceptance Criteria As per IS:383:2016
 									</span>
+								</th> -->
+								<th style="text-align: center;font-weight: bold;">
+									<span>
+										<span t-esc="eln.material.specifications"/>
+										
+									</span>
 								</th>
-								<th>
+								<!-- <th>
 									<span>
 										Test Method
+									</span>
+								</th> -->
+								<th style="text-align: center;font-weight: bold;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
+										
 									</span>
 								</th>
 							</tr>
 						</thead>
 						<tbody >
 							<tr t-if="data.alkali_aggregate_dissolved_visible">
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td>
+								<!-- <td>
 									<span>
 										Alkali Aggregate Reactivity (Dissolved Silica)
 									</span>
 									
+								</td> -->
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_name"/>
 								</td>
 								
-								<td>
+								<td style="text-align: center;">
 									<span>
-										<span t-field="data.average_dissolved_silica"/>
+										<span t-field="data.average_dissolved_silica" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).unit.name"/> -->
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -185,7 +229,7 @@
                                         </t>
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -196,28 +240,33 @@
 								</td>
 							</tr>
 							<tr t-if="data.alkali_aggregate_alkalinity_visible">
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td>
+								<!-- <td>
 									<span>
 										Alkali Aggregate Reactivity (Reduction in Alkalinity)
 									</span>
 									
+								</td> -->
+								
+
+								<td style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_name"/>
 								</td>
 								
-								<td>
+								<td style="text-align: center;">
 									<span>
-										<span t-field="data.average_reduction_alkalinity"/>
+										<span t-field="data.average_reduction_alkalinity" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).unit.name"/> -->
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -226,7 +275,7 @@
                                         </t>
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -239,27 +288,31 @@
 							</tr>
 							
 							<tr t-if="data.chloride_visible">
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td>
+								<!-- <td>
 									<span>
 										Chloride 
 									</span>
+								</td> -->
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_name"/>
 								</td>
 								
-								<td>
+								<td style="text-align: center;">
 									<span>
-										<span t-field="data.chloride_percent"/>
+										<span t-field="data.chloride_percent" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).unit.name"/>
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -268,7 +321,7 @@
                                         </t>
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -280,27 +333,31 @@
 							</tr>
 							<tr t-if="data.sulphate_visible">
 
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td>
+								<!-- <td>
 									<span>
 										Sulphate (SO3)
 									</span>
+								</td> -->
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_name"/>
 								</td>
 								
-								<td>
+								<td style="text-align: center;">
 									<span>
-										<span t-field="data.sulphate_percent"/>
+										<span t-field="data.sulphate_percent" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).unit.name"/>
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -309,7 +366,7 @@
                                         </t>
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -321,27 +378,31 @@
 							</tr>
 							
 							<tr t-if="data.ph_visible">
-								<td>
+								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<td>
+								<!-- <td>
 									<span>
 										pH (25°C)
 									</span>
+								</td> -->
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_name"/>
 								</td>
 								
-								<td>
+								<td style="text-align: center;">
 									<span>
-										<span t-field="data.ph_average"/>
+										<span t-field="data.ph_average" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).unit.name"/>
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -350,7 +411,7 @@
                                         </t>
 									</span>
 								</td>
-								<td>
+								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
@@ -378,25 +439,65 @@
 								<li>
 									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 								</li>
-								<li>
+								<!-- <li>
+									<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+								</li> -->
+								<li t-if="eln.has_witness">
 									<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 								</li>
 							</ul>
 						</div>
 					</div>
+<<<<<<< HEAD
 					<div class="signatureContainer girdgird" style="margin-top:50px">
 						
 						<div >
 							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
+=======
+					<div class="signatureContainer girdgird" style="margin-top:50px;page-break-inside: avoid;">
+						<div>
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:30px">
+
+							</div>
+							<div>
+								<b>
+									<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							<div>
+								<b>
+									(Sr. Chemist)
+								</b>
+							</div>
+						</div>
+						<div>
+							<div>
+								<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+							</div>
+							<div style="padding-top:5px">
+								Format No. <span t-esc="eln.material.test_format_no"/>
+							</div>
+>>>>>>> f1032a5fe2592cd4f42e8a3330d337901d71aebb
 						</div>
 						<div>
 							<div>
 								<b>
-									Approved By
+									Approved By 
 								</b>
-							</div>
-							<div style="height:20px">
 								
+							</div>
+							<div style="height:30px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.approved_by.name"/>
+								</b>
 							</div>
 							<div>
 								<b>

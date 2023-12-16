@@ -14,12 +14,12 @@
 								<td colspan="3">Report no :
 								</td>
 								<td colspan="3">
-									<span t-field="o.eln_id"/>
+									<span t-field="o.kes_no"/>
 								</td>
 								<td colspan="3">Report Date :
 								</td>
 								<td colspan="3">
-									<span t-field="o.srf_date"/>
+									<span t-field="o.end_date"/>
 								</td>
 								<td colspan="3"  t-if="nabl">ULR NO :
 								</td>
@@ -488,7 +488,8 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
+									
+									<li t-if="eln.has_witness">
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 									</li>
 									<li t-if="eln.remarks">

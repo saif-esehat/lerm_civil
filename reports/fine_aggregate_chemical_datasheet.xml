@@ -3,17 +3,55 @@
     <template id="chemical_fine_aggregate">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
-			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+			 <t t-call="lerm_civil.mechanical_data_sheet_header">
                 <div style="text-align:center;font-size:18px">
-                    Fine Aggregate
+                    Fine Aggregate Chemical
                 </div>
+				
 				<div class="container_eln" style="margin-top:5px">
-                <!-- ph of 1%  -->
+
+					<table style="margin-top:20px">
+						<tr>
+							<td colspan="6">Job No  :  <span t-field="eln.kes_no"></span>
+							</td>
+							<!-- <td colspan="6">Grade  :  <span t-field="data.grade"></span>
+							</td> -->
+							<td colspan="6">Material: <span t-field="eln.material"></span>
+							</td>
+							
+						</tr>
+						<tr>
+							
+							<td colspan="6">Test Start Date  :  <span t-field="eln.start_date"></span>
+							</td>
+							<td colspan="6">Test End Date   :  <span t-field="eln.end_date"></span>
+							</td>
+						</tr>
+						<tr style="height:50px" cols="12">
+							<td colspan="4">Performed By :
+								<![CDATA[&nbsp;]]>
+								<span t-field="eln.technician.name"/>
+							</td>
+							<td colspan="4">Witness Name :
+								<![CDATA[&nbsp;]]>
+								<span t-field="eln.witness_name"/>
+							</td>
+							<td colspan="4">Witness Signature :
+								<![CDATA[&nbsp;]]>
+								<span style='padding:20px'></span>
+							</td>
+						</tr>
+					</table>
+
+                	<!-- ph of 1%  -->
 					<div t-if="data.ph_visible">
 					
 
-						<div style="text-align:center;font-size:18px">
+						<!-- <div style="text-align:center;font-size:18px">
 							pH of 1% solution in Water
+						</div> -->
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_name"/>
 						</div>
 						
 				
@@ -60,8 +98,11 @@
 					<div t-if="data.alkali_aggregate_dissolved_visible">
 					
 
-						<div style="text-align:center;font-size:18px">
+						<!-- <div style="text-align:center;font-size:18px">
 							Alkali Aggregate Reactivity ( Dissolved Silica)
+						</div> -->
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_name"/>
 						</div>
 						
 						<table style="margin-top:20px">
@@ -72,7 +113,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.wt_blank_crucible_after_ignition"/>
+									<span t-field="data.wt_blank_crucible_after_ignition" t-options='{"widget": "float", "precision": 2}'/>
 									
 								</td>
 							</tr>
@@ -83,7 +124,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.wt_blank_crucible_after_hf"/>
+									<span t-field="data.wt_blank_crucible_after_hf" t-options='{"widget": "float", "precision": 2}'/>
 									
 								</td>
 							</tr>
@@ -93,7 +134,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.diff_in_wt_of_silica_blank"/>
+									<span t-field="data.diff_in_wt_of_silica_blank" t-options='{"widget": "float", "precision": 2}'/>
 									
 								</td>
 							</tr>
@@ -109,13 +150,13 @@
 									
 								</td>
                                 <td colspan="2">
-									<span t-field="data.wt_crucible_after_ignition_a"/>	
+									<span t-field="data.wt_crucible_after_ignition_a" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.wt_crucible_after_ignition_b"/>	
+									<span t-field="data.wt_crucible_after_ignition_b" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.wt_crucible_after_ignition_c"/>	
+									<span t-field="data.wt_crucible_after_ignition_c" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
 							</tr>
 
@@ -125,13 +166,13 @@
 									
 								</td>
                                 <td colspan="2">
-									<span t-field="data.wt_crucible_after_hf_a"/>	
+									<span t-field="data.wt_crucible_after_hf_a" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.wt_crucible_after_hf_b"/>	
+									<span t-field="data.wt_crucible_after_hf_b" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.wt_crucible_after_hf_c"/>	
+									<span t-field="data.wt_crucible_after_hf_c" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
 							</tr>
                             
@@ -142,13 +183,13 @@
 									
 								</td>
                                 <td colspan="2">
-									<span t-field="data.diff_in_wt_of_silica_a"/>	
+									<span t-field="data.diff_in_wt_of_silica_a" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.diff_in_wt_of_silica_b"/>	
+									<span t-field="data.diff_in_wt_of_silica_b" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.diff_in_wt_of_silica_c"/>	
+									<span t-field="data.diff_in_wt_of_silica_c" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
 							</tr>
 
@@ -159,13 +200,13 @@
 									
 								</td>
                                 <td colspan="2">
-									<span t-field="data.dissolved_silica_a"/>	
+									<span t-field="data.dissolved_silica_a" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.dissolved_silica_b"/>	
+									<span t-field="data.dissolved_silica_b" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.dissolved_silica_c"/>	
+									<span t-field="data.dissolved_silica_c" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
 							</tr>
 
@@ -175,7 +216,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.average_dissolved_silica"/>	
+									<span t-field="data.average_dissolved_silica" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 
 							</tr>
@@ -190,8 +231,11 @@
 						
 					<!-- Reduction in Alkalinity  -->
 					<div t-if="data.alkali_aggregate_alkalinity_visible" style="margin-top:20px">
-						<div style="text-align:center;font-size:18px">
+						<!-- <div style="text-align:center;font-size:18px">
 							Alkali Aggregate Reactivity (Reduction in Alkalinity)
+						</div> -->
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_name"/>
 						</div>
 						
 						<table style="margin-top:20px">
@@ -251,13 +295,13 @@
 									
 								</td>
                                 <td colspan="2">
-									<span t-field="data.normality1"/>	
+									<span t-field="data.normality1" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.normality2"/>	
+									<span t-field="data.normality2" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.normality3"/>	
+									<span t-field="data.normality3" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
 							</tr>
 
@@ -267,13 +311,13 @@
 									
 								</td>
                                 <td colspan="2">
-									<span t-field="data.reduction_in_alkalinity1"/>	
+									<span t-field="data.reduction_in_alkalinity1" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.reduction_in_alkalinity2"/>	
+									<span t-field="data.reduction_in_alkalinity2" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 <td colspan="2">
-									<span t-field="data.reduction_in_alkalinity3"/>	
+									<span t-field="data.reduction_in_alkalinity3" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
 							</tr>
 
@@ -285,7 +329,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.average_reduction_alkalinity"/>	
+									<span t-field="data.average_reduction_alkalinity" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 
 							</tr>
@@ -298,8 +342,11 @@
 				<!-- Chloride  -->
 
                 <div t-if="data.chloride_visible" style="margin-top:20px">
-						<div style="text-align:center;font-size:18px">
+						<!-- <div style="text-align:center;font-size:18px">
 							Chloride
+						</div> -->
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_name"/>
 						</div>
 
                         <table style="margin-top:20px">
@@ -379,7 +426,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.normality_of_ammonia"/>	
+									<span t-field="data.normality_of_ammonia" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 
 							</tr>
@@ -389,7 +436,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.chloride_percent"/>	
+									<span t-field="data.chloride_percent" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 
 							</tr>
@@ -400,8 +447,11 @@
 
 
                 <div t-if="data.sulphate_visible" style="margin-top:20px">
-						<div style="text-align:center;font-size:18px">
+						<!-- <div style="text-align:center;font-size:18px">
 							SO3
+						</div> -->
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_name"/>
 						</div>
 
                         <table style="margin-top:20px">
@@ -441,7 +491,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.wt_empty_crucible_after_ignition"/>	
+									<span t-field="data.wt_empty_crucible_after_ignition" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 
 							</tr>
@@ -451,7 +501,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.wt_empty_crucible"/>	
+									<span t-field="data.wt_empty_crucible" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 
 							</tr>
@@ -461,7 +511,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.difference_in_wt_sulphate"/>	
+									<span t-field="data.difference_in_wt_sulphate" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 
 							</tr>
@@ -471,7 +521,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.sulphate_percent"/>	
+									<span t-field="data.sulphate_percent" t-options='{"widget": "float", "precision": 2}'/>	
 								</td>
                                 
 							</tr>
@@ -484,24 +534,44 @@
 						<div>
 							<div>
 								<b>
-									(JR Chemist)
+									Tested By 
+								</b>
+								
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.filled_by.name"/>
 								</b>
 							</div>
 							<div>
 								<b>
-									Tested By
+									(Jr. Chemist)
 								</b>
 							</div>
 						</div>
+						
 						<div style="margin-left:500px">
-							<div>
-								<b>
-									Chemical Department (HOD)
-								</b>
-							</div>
+									
 							<div>
 								<b>
 									Checked By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Chemist)
 								</b>
 							</div>
 						</div>

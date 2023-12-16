@@ -12,6 +12,7 @@ class SampleRangeLine(models.Model):
     sample_qty = fields.Integer(string="Sample Quantity")
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
+    lab_l_id = fields.Many2one('lab.location', string="Lab Locations")
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
     material_id_lab_name = fields.Char(string="Material",compute="compute_material_id_lab_name",store=True)

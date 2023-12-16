@@ -149,8 +149,11 @@
 								</td>
 							</tr>
 						</table>
-						<div style="margin-top:20px;"></div>
-						<table >
+						<!-- <div style="margin-top:20px;"></div> -->
+						<div style="text-align:center;font-size:18px;margin-top:20px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','7e8a78f8-c0d9-4b08-b452-012759929ca9')]).parameter_name"/>
+						</div>
+						<table style="margin-top: 20px;">
 							<thead>
 								<tr>
 									<th style="font-weight: bold;">Sr No.</th>
@@ -223,7 +226,8 @@
 									<li>
 									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
+									
+									<li t-if="eln.has_witness">
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 									</li>
 								</ul>
@@ -253,7 +257,7 @@
 								</div>
 							</div>
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div >
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
