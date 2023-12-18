@@ -72,7 +72,7 @@
                       
                         <field name="discipline_id" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <field name="material_id" domain="[('id', 'in', material_ids)]" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
-                        <field name="lab_l_id" readonly="1"/>
+                        <field name="lab_l_id" />
                         <field name="material_id_lab_name"/>
                         <field name="brand" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <field name='casting_date' attrs="{'invisible': [('casting', '!=', True)], 'readonly': [('state', '!=', '1-allotment_pending')]}"/>

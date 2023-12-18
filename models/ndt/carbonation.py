@@ -11,6 +11,14 @@ class CarbonationTest(models.Model):
     name = fields.Char("Name",default="Carbonation Test")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.carbonation.test.line','parent_id',string="Parameter")
+    average = fields.Float(string="Average of Depth of Carbonation in mm",compute="_compute_average")
+
+
+    @api.depends('child_lines.depth')
+    def _compute_average(self):
+        for record in self:
+            total_value = sum(record.child_lines.mapped('depth'))
+            self.average = float(round(total_value / len(record.child_lines),2)) if record.child_lines else 0.0
 
     @api.model
     def create(self, vals):

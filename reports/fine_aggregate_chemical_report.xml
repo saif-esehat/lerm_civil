@@ -6,41 +6,12 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-<<<<<<< HEAD
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
 				
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						
 						<table style="margin-top:20px;">
-=======
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
-				<div style="text-align:center;margin-top:10px">
-					<p style="font-size:15px"><b>Test Report</b></p>
-				</div>
-				<div class="container_eln">
-					<div t-foreach="eln" t-as="o">
-						<table>
-							<tr>
-								<td colspan="3">Report no :
-								</td>
-								<td colspan="3">
-									<span t-field="o.kes_no"/>
-								</td>
-								<td colspan="3">Report Date :
-								</td>
-								<td colspan="3">
-									<span t-field="o.end_date"/>
-								</td>
-								<td colspan="3"  t-if="nabl">ULR NO :
-								</td>
-								<td colspan="3" t-if="nabl">
-									<span t-field="o.sample_id.ulr_no"/>
-								</td>
-							</tr>
-						</table>
-						<table style="margin-top:10px;">
->>>>>>> f1032a5fe2592cd4f42e8a3330d337901d71aebb
 							<tr>
 								<td colspan="12">Customer Party Name :
 									<![CDATA[&nbsp;]]>
@@ -448,12 +419,6 @@
 							</ul>
 						</div>
 					</div>
-<<<<<<< HEAD
-					<div class="signatureContainer girdgird" style="margin-top:50px">
-						
-						<div >
-							Format No. <span t-esc="eln.material.data_sheet_format_no.name"/>
-=======
 					<div class="signatureContainer girdgird" style="margin-top:50px;page-break-inside: avoid;">
 						<div>
 							<div>
@@ -482,7 +447,6 @@
 							<div style="padding-top:5px">
 								Format No. <span t-esc="eln.material.test_format_no"/>
 							</div>
->>>>>>> f1032a5fe2592cd4f42e8a3330d337901d71aebb
 						</div>
 						<div>
 							<div>

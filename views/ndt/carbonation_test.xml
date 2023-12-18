@@ -26,6 +26,9 @@
                                 <field name="depth" string="Depth of Carbonation in mm" attrs="{'readonly': [('condition_of_concrete', '!=', 'carbonated')]}" />
                             </tree>
                     </field>
+                    <group>
+                        <field name="average" string="Average of Depth of Carbonation in mm" identity="result"/>
+                    </group>
                 </sheet>
             </form>
         </field>
