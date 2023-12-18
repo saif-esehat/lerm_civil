@@ -24,7 +24,6 @@ class ELN(models.Model):
     srf_date = fields.Date(string='SRF Date',tracking=True)
     kes_no = fields.Char(string="KES NO",tracking=True)
     discipline = fields.Many2one('lerm_civil.discipline',string="Discipline",tracking=4)
-    lab_l_id = fields.Many2one('lab.location', string="Lab Locations")
     group = fields.Many2one('lerm_civil.group',string="Group")
     material = fields.Many2one('product.template',string='Material')
     witness_name = fields.Char(string="Witness Name")
@@ -59,7 +58,7 @@ class ELN(models.Model):
     is_product_based_calculation = fields.Boolean(string="Product Based Calculation",compute="_compute_product_based")
     model_id = fields.Integer("Model ID")
     temperature = fields.Float("Temperature")
-    instrument = fields.Many2one('maintenance.equipment',string="Instrument")
+    instrument = fields.Char("Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
 
 
@@ -389,15 +388,6 @@ class ELN(models.Model):
         for record in self:
             if record.sample_id:
                 sample_record = self.env['lerm.srf.sample'].search([('id','=', record.sample_id.id)]).discipline_id
-                record.discipline = sample_record
-            else:
-                record.discipline = None
-
-    @api.onchange('sample_id')
-    def compute_lab_l_id(self):
-        for record in self:
-            if record.sample_id:
-                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.sample_id.id)]).lab_l_id
                 record.discipline = sample_record
             else:
                 record.discipline = None
