@@ -66,7 +66,7 @@
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						<table>
-							<tr>
+							<!-- <tr>
 								<td colspan="3">Report no :
 								</td>
 								<td colspan="3">
@@ -82,7 +82,7 @@
 								<td colspan="3" t-if="nabl">
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
-							</tr>
+							</tr> -->
 						</table>
 						<table style="margin-top:10px;">
 							<tr>
@@ -199,9 +199,9 @@
 						<u>Protocol : <span t-esc="o.material.test_parameter"/></u>
 
 					</div> -->
-					<div style="margin-top:20px;">
-						<span></span>
-					</div>
+					<!-- <div style="padding-top:5px">
+						<span t-esc="eln.material.test_parameter"/>
+					</div> -->
 					<!-- <div style="text-align:center;font-size:18px">
 						<span t-field="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_name"/>
 					</div> -->
@@ -210,6 +210,7 @@
 					</div>
 					<div style="padding-top:5px">
 						<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>: 
+						
 						<span>
 							<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
 							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table" t-as="parameter">

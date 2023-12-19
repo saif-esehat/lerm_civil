@@ -24,6 +24,8 @@ class ELN(models.Model):
     srf_date = fields.Date(string='SRF Date',tracking=True)
     kes_no = fields.Char(string="KES NO",tracking=True)
     discipline = fields.Many2one('lerm_civil.discipline',string="Discipline",tracking=4)
+    # lab_l_id = fields.Integer(string="Lab Locations")
+    lab_l_id = fields.Many2one('lab.location', string="Lab Locations",domain="[('parent_id', '=', discipline_id)]")
     group = fields.Many2one('lerm_civil.group',string="Group")
     material = fields.Many2one('product.template',string='Material')
     witness_name = fields.Char(string="Witness Name")

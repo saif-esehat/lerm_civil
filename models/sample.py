@@ -61,6 +61,7 @@ class LermSampleForm(models.Model):
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
+    # lab_l_id = fields.Integer(string="Lab Locations")
     lab_l_id = fields.Many2one('lab.location', string="Lab Locations",required=True,domain="[('parent_id', '=', discipline_id)]")
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
