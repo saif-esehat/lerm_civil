@@ -49,6 +49,7 @@
                                 <field name='srf_id' readonly="1"/>
                                 <field name='srf_date' readonly="1"/>
                                 <field name='discipline' readonly="1"/>
+                                <field name='lab_no_value' invisible="1"/>
                                 <!-- <field name='lab_l_id' readonly="1"/> -->
                                 <field name='material' readonly="1"/>
                                 <field name='size_id' readonly="1"/>
@@ -245,6 +246,7 @@
                     <field name='kes_no' optional="show"/>
                     <field name='discipline' optional="show"/>
                      <!-- <field name='lab_l_id' optional="show"/> -->
+                    <field name='lab_no_value' optional="show" invisible="1"/>
                     <field name='group' optional="show"/>
                     <field name='material' optional="show"/>
                     <field name='witness_name' optional="show"/>
@@ -300,6 +302,7 @@
                     <field name="technician" string="Technicians" />
                     <field name="casting_date" string="Casting Date" />
                     <field name="discipline" string="Discipline" />
+                    <field name='lab_no_value' string="Lab Location" invisible="1"/>
                       <!-- <field name="lab_l_id" string="Lab No" /> -->
                     <field name="group" string="Group" />
                     <field name="material" string="Material" />
