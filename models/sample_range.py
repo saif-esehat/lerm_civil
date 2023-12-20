@@ -6,13 +6,25 @@ from odoo.exceptions import UserError
 class SampleRangeLine(models.Model):
     _name ='sample.range.line'
 
+    # group_id = fields.Many2one('lerm_civil.group', string='Group', required=True)
+    # discipline_id = fields.Many2one('lerm_civil.discipline', string='Discipline', related='group_id.discipline')
+   
+
+    # @api.depends('group_id.discipline.lab_no')
+    # def _compute_lab_no(self):
+    #     for record in self:
+    #         lab_no = record.group_id.discipline.lab_no
+    #         record.lab_no = lab_no
+
 
     srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" )
     sample_range = fields.Char(string="Sample Range." ,required=True,readonly=True, default=lambda self: 'New')
     sample_qty = fields.Integer(string="Sample Quantity")
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
-    lab_l_id = fields.Many2one('lab.location', string="Lab Locations")
+    lab_no_value = fields.Char(string="Value")
+    # lab_l_id = fields.Integer(string="Lab Location")
+    # lab_l_id = fields.Many2one('lab.location', string="Lab Locations")
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
     material_id_lab_name = fields.Char(string="Material",compute="compute_material_id_lab_name",store=True)

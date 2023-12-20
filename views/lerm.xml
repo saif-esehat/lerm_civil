@@ -18,28 +18,28 @@
                     <notebook>
                         <page string="URL Line">
                           
-                                <!-- <form >
+                                <form >
                                  <sheet>
                                  <group>
                                   <group>
                                     <field name="lab_no"/>
                                   </group>
-                                  <group>
+                                  <!-- <group>
                                     <field name="lab_adress"/>
                                    
-                                  </group>
+                                  </group> -->
                                 </group>
                                  </sheet>
-                                </form> -->
-                        <field name="lab_l_ids" widget="section_and_note_one2many" nolabel="1" >
+                                </form>
+                        <!-- <field name="lab_l_ids" widget="section_and_note_one2many" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='lab_no'/>
                                 <field name='lab_adress'/>
                             
                             </tree>
                            
-                         </field> 
-                        
+                         </field>  -->
+                         
                         </page>
                 </notebook>
                 </sheet>
