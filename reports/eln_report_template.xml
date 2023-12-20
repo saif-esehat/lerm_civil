@@ -99,8 +99,9 @@
 							</div> -->
 							<div class="footerQR">
 								<div style="padding-right : 20px">
-									<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
+									<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 75px; height: 70px;"/>
 								</div>
+								
 								<div style="margin-left:90px">
 									<div class="footertext">
 										<span>
@@ -110,6 +111,11 @@
 									<div class="footertext">
 										CIN No.: U45209MH2017PTC291168
 									</div>
+									
+									
+								</div>
+								<div  style="padding-left : 80px;">
+									<img src="/lerm_civil/static/src/img/qr_image.png" style="width: 60px; height: 55px;"/>
 								</div>
 							</div>
 						</div>
@@ -118,6 +124,7 @@
                 <div t-if="report_type == 'pdf'" class="footertext">
                     Page: <span class="page"/> / <span class="topage"/>
                 </div>
+
             </div>	
         </div>
 	</template>
