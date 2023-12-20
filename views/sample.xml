@@ -146,10 +146,12 @@
                     </group> 
                     <group>
                       <group>
-                          <field name="file_upload" />
+                          <!-- <field name="file_upload" /> -->
+                          <field name="file_upload" widget="many2many_binary"/>
                       </group>
                       <group>
-                          <field name="report_upload" />
+                          <!-- <field name="report_upload" /> -->
+                          <field name="report_upload" widget="many2many_binary"/>
                       </group>
                     </group>  
 
