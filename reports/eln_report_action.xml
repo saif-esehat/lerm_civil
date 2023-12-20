@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- <record id="eln_report_action" model="ir.actions.report">
-        <field name="name">Report One Dim</field>
-        <field name="model">lerm.eln</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="report_name">lerm_civil.eln_report_template</field>
-        <field name="report_file">lerm_civil.eln_report_template</field>
-        <field name="print_report_name">'Order - %s' % (srf_id.kes_no or '')</field>
-        <field name="binding_model_id" ref="model_lerm_eln"/>
-        <field name="binding_type">report</field>
-        <field name="print_report_name">report_name</field>
-    </record> -->
+   
     <record id="eln_report_action" model="ir.actions.report">
-        <!-- <field name="name">{{object}}</field> -->
+        <field name="name">Report One Dim</field>
         <field name="model">lerm.eln</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">lerm_civil.eln_report_template</field>
