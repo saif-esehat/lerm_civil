@@ -22,11 +22,11 @@
                                  <sheet>
                                  <group>
                                   <group>
-                                    <field name="lab_seq_no"/>
+                                    <field name="lab_no"/>
                                   </group>
                                   <group>
-                                    <field name="lab_c_seq_no"/>
-                                    <field name="start_date"/>
+                                    <field name="lab_adress"/>
+                                   
                                   </group>
                                 </group>
                                  </sheet>
@@ -35,7 +35,6 @@
                             <tree editable="bottom">
                                 <field name='lab_no'/>
                                 <field name='lab_adress'/>
-                                <!-- <field name='lab_c_no'/> -->
                             
                             </tree>
                            

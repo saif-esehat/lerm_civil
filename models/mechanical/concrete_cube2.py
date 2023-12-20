@@ -242,7 +242,7 @@ class MechanicalConcreteCubeLine(models.Model):
     sr_no = fields.Integer(string="Sr.No.",readonly=True, copy=False, default=1)
     length = fields.Float(string="Length (mm)")
     width = fields.Float(string="Width (mm)")
-    area = fields.Float(string="Area (mm²)",compute="_compute_area" ,digits=(12,1))
+    area = fields.Float(string="Area (mm²)",compute="_compute_area" ,digits=(12,2))
     id_mark = fields.Char(string="ID Mark/Location",compute="_compute_id_mark")
     wt_sample = fields.Float(string="Weight of Sample in kgs",digits=(16,3))
     crushing_load = fields.Float(string="Crushing Load in kN")

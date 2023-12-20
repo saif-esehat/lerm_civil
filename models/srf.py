@@ -14,6 +14,17 @@ class Discipline(models.Model):
     hod = fields.Many2one('res.users',string="Head of Department")
 
     lab_l_ids = fields.One2many('lab.location','parent_id',string="Parameter")
+    # lab_no = fields.Integer(string="Lab Location")  # Reference the correct model
+    # # lab_c_no = fields.Char("Lab Certificate No .",size=6, size_min=6)
+    # lab_adress = fields.Char(string="Lab Address")
+
+    # def name_get(self):
+    #     result = []
+    #     for record in self:
+    #         name = f"{record.lab_no}"
+    #         result.append((record.id, name))
+    #     return result
+
 
  
     
@@ -207,7 +218,7 @@ class SrfForm(models.Model):
                 company =  self.env['res.company'].search([('id','=',self.env.context['allowed_company_ids'][0])])
                 # lab_cert_no = str(sample.lab_certificate_no)
                 lab_loc = str(sample.lab_l_id.lab_no)
-                lab_cert_no = company.lab_certificate_no
+                lab_cert_no = str(company.lab_certificate_no)
                 # lab_loc = company.lab_seq_no
                 ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
                 ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
@@ -385,7 +396,8 @@ class CreateSampleWizard(models.TransientModel):
     _name = 'create.srf.sample.wizard'
     _rec_name = 'lab_l_id'
 
-    lab_l_id = fields.Many2one('lab.location',required=True, string="Lab Locations",domain="[('parent_id', '=', discipline_id)]")
+    lab_l_id = fields.Many2one('lab.location', string="Lab Locations",domain="[('parent_id', '=', discipline_id)]")
+    # lab_l_id = fields.Integer(string="Lab Locations",)
   
     @api.onchange('discipline_id')
     def onchange_discipline_id(self):
@@ -551,13 +563,13 @@ class CreateSampleWizard(models.TransientModel):
             print(result)
             record.alias = result.alias
 
-    @api.onchange('discipline_id', 'lab_l_id')
-    def onchange_discipline_id(self):
-        if self.discipline_id and self.lab_l_id:
-            # Assuming you are interested in the first selected location
-            self.lab_l_id = self.lab_l_id[0]
-        else:
-            self.lab_l_id = False
+    # @api.onchange('discipline_id', 'lab_l_id')
+    # def onchange_discipline_id(self):
+    #     if self.discipline_id and self.lab_l_id:
+    #         # Assuming you are interested in the first selected location
+    #         self.lab_l_id = self.lab_l_id[0]
+    #     else:
+    #         self.lab_l_id = False
        
    
 
