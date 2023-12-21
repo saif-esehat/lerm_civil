@@ -2,7 +2,7 @@
 <odoo>
 <template id="wpt_datasheet">
 		<t t-call="web.html_container">
-			 <t t-call="lerm_civil.data_sheet_header_generaltemplate">
+			 <t t-call="lerm_civil.mechanical_data_sheet_header">
                 <div style="text-align:center;font-size:18px">
                     Water Permeability Test
                 </div>
@@ -32,7 +32,7 @@
                     </td>
                     <td colspan="4">Witness Name :
                         <![CDATA[&nbsp;]]>
-                        <span t-field="eln.witness_description"/>
+                        <span t-field="eln.witness_name"/>
                     </td>
                     <td colspan="4">Witness Signature :
                         <![CDATA[&nbsp;]]>
@@ -88,6 +88,10 @@
 						
 						
 					</div>
+						<div style="margin-top:20px;">
+                           <h6> <span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_name"/></h6>
+						</div>
+
 
 						
 						<table style="margin-top:20px" >

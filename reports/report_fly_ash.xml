@@ -13,7 +13,7 @@
 				<div class="container_eln">
 					
 					<div t-foreach="eln" t-as="o">
-						<table>
+					 <!-- <table>
 							<tr>
 								<td colspan="3">Test Report No :
 								</td>
@@ -30,9 +30,9 @@
 								<td colspan="3" t-if="nabl">
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
-							</tr>
+							</tr> -->
 
-						<table>
+						  <table>
 								<tr>
 									<!-- Left Side -->
 									<!-- <td colspan="12" style="width: 50%; vertical-align: top;"> -->
@@ -87,8 +87,8 @@
 								</tr>
 							
 
-						</table>
-						</table>
+						   </table>
+						<!-- </table> -->
 							
 						<table>
 						   <tr>
@@ -444,7 +444,7 @@
 								
 								<td style="text-align: center;">
 									<div>
-										<span t-field="flyash.average_soundness" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="flyash.expansion_soundness" t-options='{"widget": "float", "precision": 2}'/>
 									</div>
 								</td>
 								<td  style="text-align: center; vertical-align: middle;">
@@ -724,7 +724,7 @@
 
 						</tbody >
 					</table>
-					<div style="margin-top:20px" class="noteContainer">
+					<div >
 						<div>
 							<b>Remarks: -</b>
 						</div>
@@ -746,8 +746,8 @@
 						</div>
 					</div>
 				
+					<!-- <div style="margin-top:100px; page-break-inside: avoid;" class="signatureContainer girdgird"> -->
 					<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
-					
 					<div>
 						<div>
 							<b>
