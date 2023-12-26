@@ -12,37 +12,13 @@
 				<img src="/lerm_civil/static/src/img/watermark.jpg" style="width:100%;"/>
 			</div>
 
-			<!-- <div class="row container_eln flexcenter" style="text-align:right !important;padding-right:10px;padding-left:10px;">
-				<b>Test Report</b>
-			</div> -->
-			<!-- <div class="row backgroundimage" style="margin-top:100px;position:absolute;opacity:0.25;font-size:3em;width:100%;text-align:center;z-index:-1000;">
-				<img src="/lerm_civil/static/src/img/watermark.jpg" style="width:100%;"/>
-			</div> -->
-			<div class="container_eln row" >
-				
 			
-					
-					<table style="border:none;">
-						<tr cols="12" style="border:none;">
-							<td colspan="1" style="border:none;"><span></span>
-							</td>
-							<td colspan="1" style="border:none;"><span></span>
-							</td>
-							<td colspan="1" style="border:none;"><span></span>
-							</td>
-							<td colspan="1" style="border:none;"><span></span>
-							</td>
-							<td colspan="1" style="border:none;"><span></span>
-							</td>
-							<td colspan="1" style="border:none;"><span></span>
-							</td>
-							<td colspan="1" style="border:none;"><span><b>Test Report</b></span>
-							</td>
-						</tr>
-					</table>
+			<div style="width:100%;text-align:center;">
+				<span style="font-size:1rem"><b>Test Report</b></span>
 			</div>
-			<div class="container_eln row" style="margin-right:4px;margin-left:4px;">
-				
+			<div class="container_eln" style="margin-right:4px;margin-left:4px;">
+			
+
 			
 					<table>
 						<tr>
