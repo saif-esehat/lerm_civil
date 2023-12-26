@@ -45,11 +45,11 @@ class CarbonationnLine(models.Model):
     f3 = fields.Integer(string="3")
     f4 = fields.Integer(string="4")
     f5 = fields.Integer(string="5")
-    f6 = fields.Integer(string="6")
-    f7 = fields.Integer(string="7")
-    f8 = fields.Integer(string="8")
-    f9 = fields.Integer(string="9")
-    f10 = fields.Integer(string="10")
+    # f6 = fields.Integer(string="6")
+    # f7 = fields.Integer(string="7")
+    # f8 = fields.Integer(string="8")
+    # f9 = fields.Integer(string="9")
+    # f10 = fields.Integer(string="10")
     avg = fields.Float(string="Average" ,compute="_compute_average")
     mpa = fields.Integer(string="Mpa")
     direction = fields.Selection([
@@ -58,23 +58,56 @@ class CarbonationnLine(models.Model):
         ('vertical_down', 'Vertical Down')], string='Direction')
     
 
-    @api.depends('f1','f2','f3','f4','f5','f6','f7','f8','f9','f10')
+    # @api.depends('f1','f2','f3','f4','f5','f6','f7','f8','f9','f10')
+    # def _compute_average(self):
+    #     for record in self:
+    #         values = []
+    #         median = 0
+    #         median_first = 0
+    #         median_third = 0
+    #         values.append(record.f1)
+    #         values.append(record.f2)
+    #         values.append(record.f3)
+    #         values.append(record.f4)
+    #         values.append(record.f5)
+    #         values.append(record.f6)
+    #         values.append(record.f7)
+    #         values.append(record.f8)
+    #         values.append(record.f9)
+    #         values.append(record.f10)
+
+    #         sorted_array = sorted(values)
+    #         midpoint = len(sorted_array) // 2
+    #         if len(sorted_array) % 2 == 0:
+    #             median = (sorted_array[midpoint - 1] + sorted_array[midpoint]) / 2.0
+    #         else:
+    #             median = sorted_array[midpoint]
+
+    #         first_quartile = sorted_array[:midpoint]
+    #         third_quartile = sorted_array[midpoint:]
+    #         midpoint = len(first_quartile) // 2
+    #         if len(first_quartile) % 2 == 0:
+    #             median_first = (first_quartile[midpoint - 1] + first_quartile[midpoint]) / 2.0
+    #         else:
+    #             median_first = first_quartile[midpoint]
+    #         midpoint = len(third_quartile) // 2
+    #         if len(third_quartile) % 2 == 0:
+    #             median_third = (third_quartile[midpoint - 1] + third_quartile[midpoint]) / 2.0
+    #         else:
+    #             median_third = third_quartile[midpoint]
+    #         iqr = median_third - median_first
+    #         lower_bound = median_first - 1.5*iqr
+    #         upper_bound = median_third + 1.5*iqr
+
+    #         filtered_array = [x for x in values if lower_bound <= x <= upper_bound]
+
+    #         record.avg = sum(filtered_array) / len(filtered_array)
+
+
+    @api.depends('f1', 'f2', 'f3', 'f4', 'f5', 'f6')
     def _compute_average(self):
         for record in self:
-            values = []
-            median = 0
-            median_first = 0
-            median_third = 0
-            values.append(record.f1)
-            values.append(record.f2)
-            values.append(record.f3)
-            values.append(record.f4)
-            values.append(record.f5)
-            values.append(record.f6)
-            values.append(record.f7)
-            values.append(record.f8)
-            values.append(record.f9)
-            values.append(record.f10)
+            values = [record.f1, record.f2, record.f3, record.f4, record.f5, record.f6]
 
             sorted_array = sorted(values)
             midpoint = len(sorted_array) // 2
@@ -96,8 +129,8 @@ class CarbonationnLine(models.Model):
             else:
                 median_third = third_quartile[midpoint]
             iqr = median_third - median_first
-            lower_bound = median_first - 1.5*iqr
-            upper_bound = median_third + 1.5*iqr
+            lower_bound = median_first - 1.5 * iqr
+            upper_bound = median_third + 1.5 * iqr
 
             filtered_array = [x for x in values if lower_bound <= x <= upper_bound]
 
