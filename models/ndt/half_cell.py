@@ -51,8 +51,8 @@ class HalfCell(models.Model):
             correction = self.temp - 27.7
             mv = correction * (-0.91)
         else:
+            mv = 0
             print("No Factor Needed")
-            return
         
         # import wdb; wdb.set_trace()
 
@@ -65,12 +65,12 @@ class HalfCell(models.Model):
             if corresponding_line2:
                 # Update the existing record in child_lines_2
                 corresponding_line2.write({
-                    'r1': round((line1.r1 + mv),2),
-                    'r2': round((line1.r2 + mv),2),
-                    'r3': round((line1.r3 + mv),2),
-                    'r4': round((line1.r4 + mv),2),
-                    'r5': round((line1.r5 + mv),2),
-                    'r6': round((line1.r6 + mv),2),
+                    'r1': round((line1.r1 + mv),3),
+                    'r2': round((line1.r2 + mv),3),
+                    'r3': round((line1.r3 + mv),3),
+                    'r4': round((line1.r4 + mv),3),
+                    'r5': round((line1.r5 + mv),3),
+                    'r6': round((line1.r6 + mv),3),
                 })
             else:
                 # Create a new record in child_lines_2
@@ -79,12 +79,12 @@ class HalfCell(models.Model):
                     'member': line1.member,
                     'location': line1.location,
                     'level': line1.level,
-                    'r1': round((line1.r1 + mv),2),
-                    'r2': round((line1.r2 + mv),2),
-                    'r3': round((line1.r3 + mv),2),
-                    'r4': round((line1.r4 + mv),2),
-                    'r5': round((line1.r5 + mv),2),
-                    'r6': round((line1.r6 + mv),2),
+                    'r1': round((line1.r1 + mv),3),
+                    'r2': round((line1.r2 + mv),3),
+                    'r3': round((line1.r3 + mv),3),
+                    'r4': round((line1.r4 + mv),3),
+                    'r5': round((line1.r5 + mv),3),
+                    'r6': round((line1.r6 + mv),3),
                 })            
 
 class HalfCellLineOne(models.Model):
@@ -93,13 +93,13 @@ class HalfCellLineOne(models.Model):
     member = fields.Char("Member")
     location = fields.Char("Location")
     level = fields.Char("Location")
-    r1 = fields.Float("R1")
-    r2 = fields.Float("R2")
-    r3 = fields.Float("R3")
-    r4 = fields.Float("R4")
-    r5 = fields.Float("R5")
-    r6 = fields.Float("R6")
-    avg = fields.Float("AVG",compute='_compute_avg')
+    r1 = fields.Float("R1",digits=(16,3))
+    r2 = fields.Float("R2",digits=(16,3))
+    r3 = fields.Float("R3",digits=(16,3))
+    r4 = fields.Float("R4",digits=(16,3))
+    r5 = fields.Float("R5",digits=(16,3))
+    r6 = fields.Float("R6",digits=(16,3))
+    avg = fields.Float("AVG",compute='_compute_avg',digits=(16,3))
     corrosion_condition = fields.Selection([
            ('low', 'Low'),   
            ('uncertain', 'Corrosion Activity of Reinforcing steel in that area is uncertain'),
@@ -135,13 +135,13 @@ class HalfCellLineTwo(models.Model):
     member = fields.Char("Member")
     location = fields.Char("Location")
     level = fields.Char("Level")
-    r1 = fields.Float("R1")
-    r2 = fields.Float("R2")
-    r3 = fields.Float("R3")
-    r4 = fields.Float("R4")
-    r5 = fields.Float("R5")
-    r6 = fields.Float("R6")
-    avg = fields.Float("AVG",compute='_compute_avg')
+    r1 = fields.Float("R1",digits=(16,3))
+    r2 = fields.Float("R2",digits=(16,3))
+    r3 = fields.Float("R3",digits=(16,3))
+    r4 = fields.Float("R4",digits=(16,3))
+    r5 = fields.Float("R5",digits=(16,3))
+    r6 = fields.Float("R6",digits=(16,3))
+    avg = fields.Float("AVG",compute='_compute_avg',digits=(16,3))
     corrosion_condition = fields.Selection([
            ('low', 'Low'),   
            ('uncertain', 'Corrosion Activity of Reinforcing steel in that area is uncertain'),
@@ -170,3 +170,7 @@ class HalfCellLineTwo(models.Model):
                 record.corrosion_condition = 'uncertain'
             else:
                 record.corrosion_condition = 'low'
+
+
+    
+    

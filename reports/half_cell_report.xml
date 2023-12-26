@@ -128,7 +128,7 @@
 							<tr>
 								<td colspan="6">Instrument :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.instrument"/>
+									<span t-field="data.instrument.name"/>
 								</td>
 								<td colspan="6">Temperature :
 									<![CDATA[&nbsp;]]>
