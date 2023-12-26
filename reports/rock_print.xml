@@ -244,7 +244,7 @@
 
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<!-- <table>
 							<thead>
 								<tr>
 									<td colspan="3">Report no :
@@ -264,7 +264,7 @@
 									</td>
 								</tr>
 							</thead>
-						</table>
+						</table> -->
 						<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :

@@ -15,7 +15,7 @@
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						
-						<table>
+						<!-- <table>
 							
 							<tr>
 								<td colspan="3">Test Report No :
@@ -33,7 +33,7 @@
 								<td colspan="3" t-if="nabl">
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
-							</tr>
+							</tr> -->
 							
 						<table>
 								<tr>
@@ -85,7 +85,7 @@
 							
 
 						</table>
-						</table>
+						<!-- </table> -->
 							
 						<table>
 						   <tr>
