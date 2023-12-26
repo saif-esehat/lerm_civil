@@ -61,7 +61,7 @@ class ELN(models.Model):
     is_product_based_calculation = fields.Boolean(string="Product Based Calculation",compute="_compute_product_based")
     model_id = fields.Integer("Model ID")
     temperature = fields.Float("Temperature")
-    instrument = fields.Char("Instrument")
+    instrument = fields.Many2one('maintenance.equipment',string="Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
 
 
