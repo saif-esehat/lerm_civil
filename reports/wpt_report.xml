@@ -12,7 +12,7 @@
 				</div>
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Report no :
 								</td>
@@ -30,7 +30,7 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
-						</table>
+						</table> -->
 						<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
@@ -138,57 +138,84 @@
 							
 						</table>
 					</div>
-					<div style="margin-top:20px;">
+					<!-- <div style="margin-top:20px;">
 						<u>Protocol</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
-						<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).unit.name"/> -->
 						IS 516(Part2 / Sec1)<![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>2018
-						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
+					</div> -->
+					<div style="margin-top:20px;">
+						<span t-esc="eln.material.test_parameter"/>
 					</div>
 
 					<div style="margin-top:20px">
 						<table style="margin-top:20px">
 						<div>
-						<h6>Concrete-Depth Of Penetration Of Water Under Pressure</h6>
+                           <h6> <span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_name"/></h6>
 						</div>
 
 							
 
 							<tr cols="12">
-								<td colspan="1">Sr no 
+								<td style="text-align: center;">Sr no 
 								</td>
-								<td colspan="3">Sample Id Mark
+								<td style="text-align: center;">Sample Id Mark
 								</td>
-								<td colspan="3">Observation
+								<td style="text-align: center;">Observation
 								</td>
-								<td colspan="5">Requirement
-								</td>
-								<!-- <td colspan="5">Confirmity Status
+								<!-- <td colspan="5">Requirement
 								</td> -->
-								
+								<th style="max-width: 250px; text-align: center;">
+									<span>
+										<span t-esc="eln.material.unit"/>
+									</span>
+								</th>
+								<th style="max-width: 250px; text-align: center;">
+									<span>
+										<span t-esc="eln.material.specifications"/>
+									</span>
+								</th>
+								<th  style="max-width: 200px; text-align: center;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
+										
+									</span>
+							    </th>
 								
 							</tr>
 
 							<t t-set="i" t-value="0"/>
 							<tr t-foreach="data.child_lines" t-as="r" t-if="(data.wpt_nabl == 'pass' and nabl or data.wpt_nabl == 'fail' and not nabl)">
-								<td colspan="1">
+								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
 									</div>
                   				</td>
-								<td colspan="3">
+								<td style="text-align: center;">
 									<span t-esc="r['sample']"/>
 								</td>
-								<td colspan="3">
+								<td style="text-align: center;">
 									<span t-esc="r['average']"/>
 								</td>
-								<td colspan="5">
+								 <td style="text-align: center; vertical-align: middle;">
+								        <span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).unit.name"/>
+										</span>
+								   </td>
+							
+								 <td  style="text-align: center; vertical-align: middle;">
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
-                                </td>
+                                    </td>
+									 <td  style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
+								   </td>
 								<!-- <td t-if="eln.conformity">
                                         <span t-esc="data.wpt_conformity"/>
                                 </td>

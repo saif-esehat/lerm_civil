@@ -36,32 +36,32 @@ class FlyaschNormalConsistency(models.Model):
 
 
     gravity_of_flyash1 = fields.Float(string="Specific Gravity of Flyash")
-    gravity_of_flyash2 = fields.Float(string="Specific Gravity of Flyash")
+    # gravity_of_flyash2 = fields.Float(string="Specific Gravity of Flyash")
 
     gravity_of_cement1 = fields.Float(string="Specific Gravity of Cement")
-    gravity_of_cement2 = fields.Float(string="Specific Gravity of Cement")
+    # gravity_of_cement2 = fields.Float(string="Specific Gravity of Cement")
 
 
     fly_ash_n1 = fields.Float(string="N",compute="_compute_fly_ash_n1")
-    fly_ash_n2 = fields.Float(string="N",compute="_compute_fly_ash_n2")
+    # fly_ash_n2 = fields.Float(string="N",compute="_compute_fly_ash_n2")
 
     wt_of_flash_1 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_1")
-    wt_of_flash_2 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_2")
+    # wt_of_flash_2 = fields.Float(string="Wt. of  Flyash",compute="_compute_wt_of_flash_2")
 
     wt_of_cement_1 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
-    wt_of_cement_2 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
+    # wt_of_cement_2 = fields.Float(string="Wt. of  Cement (g)",default=0.8*400)
 
     total_wt_of_sample_fly_1 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_1")
-    total_wt_of_sample_fly_2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_2")
+    # total_wt_of_sample_fly_2 = fields.Float(string="Total Weight of Sample(g)",compute="_compute_wt_of_sample_fly_2")
 
     wt_of_water_required_fly_1 = fields.Float(string="Wt.of water required (g)")
-    wt_of_water_required_fly_2 = fields.Float(string="Wt.of water required (g)")
+    # wt_of_water_required_fly_2 = fields.Float(string="Wt.of water required (g)")
 
     penetration_planger_fly_1 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
-    penetration_planger_fly_2 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
+    # penetration_planger_fly_2 = fields.Float(string="Penetraion of vicat's Plunger (mm)")
 
     normal_consistency_fly_1 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_1")
-    normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
+    # normal_consistency_fly_2 = fields.Float(string="Normal Consistency, %",compute="_compute_normal_consistency_fly_2")
 
     # @api.depends('gravity_of_flyash1', 'gravity_of_cement1')
     # def _compute_fly_ash_n1(self):
@@ -80,33 +80,33 @@ class FlyaschNormalConsistency(models.Model):
 
                 
 
-    @api.depends('gravity_of_flyash2', 'gravity_of_cement2')
-    def _compute_fly_ash_n2(self):
-        for record in self:
-            if record.gravity_of_cement2 != 0:
-                record.fly_ash_n2 = record.gravity_of_flyash2 / record.gravity_of_cement2
-            else:
-                record.fly_ash_n2 = 0.0
+    # @api.depends('gravity_of_flyash2', 'gravity_of_cement2')
+    # def _compute_fly_ash_n2(self):
+    #     for record in self:
+    #         if record.gravity_of_cement2 != 0:
+    #             record.fly_ash_n2 = record.gravity_of_flyash2 / record.gravity_of_cement2
+    #         else:
+    #             record.fly_ash_n2 = 0.0
 
     @api.depends('fly_ash_n1')
     def _compute_wt_of_flash_1(self):
         for record in self:
             record.wt_of_flash_1 = 0.2 * record.fly_ash_n1 * 400
 
-    @api.depends('fly_ash_n2')
-    def _compute_wt_of_flash_2(self):
-        for record in self:
-            record.wt_of_flash_2 = 0.2 * record.fly_ash_n2 * 400
+    # @api.depends('fly_ash_n2')
+    # def _compute_wt_of_flash_2(self):
+    #     for record in self:
+    #         record.wt_of_flash_2 = 0.2 * record.fly_ash_n2 * 400
 
     @api.depends('wt_of_cement_1','wt_of_flash_1')
     def _compute_wt_of_sample_fly_1(self):
         for record in self:
             record.total_wt_of_sample_fly_1 = record.wt_of_cement_1 + record.wt_of_flash_1
 
-    @api.depends('wt_of_cement_2','wt_of_flash_2')
-    def _compute_wt_of_sample_fly_2(self):
-        for record in self:
-            record.total_wt_of_sample_fly_2 = record.wt_of_cement_2 + record.wt_of_flash_2
+    # @api.depends('wt_of_cement_2','wt_of_flash_2')
+    # def _compute_wt_of_sample_fly_2(self):
+    #     for record in self:
+    #         record.total_wt_of_sample_fly_2 = record.wt_of_cement_2 + record.wt_of_flash_2
 
     @api.depends('wt_of_water_required_fly_1', 'total_wt_of_sample_fly_1')
     def _compute_normal_consistency_fly_1(self):
@@ -117,13 +117,13 @@ class FlyaschNormalConsistency(models.Model):
                 record.normal_consistency_fly_1 = 0.0
 
 
-    @api.depends('wt_of_water_required_fly_2', 'total_wt_of_sample_fly_2')
-    def _compute_normal_consistency_fly_2(self):
-        for record in self:
-            if record.total_wt_of_sample_fly_2 != 0:
-                record.normal_consistency_fly_2 = (record.wt_of_water_required_fly_2 / record.total_wt_of_sample_fly_2) * 100
-            else:
-                record.normal_consistency_fly_2 = 0.0
+    # @api.depends('wt_of_water_required_fly_2', 'total_wt_of_sample_fly_2')
+    # def _compute_normal_consistency_fly_2(self):
+    #     for record in self:
+    #         if record.total_wt_of_sample_fly_2 != 0:
+    #             record.normal_consistency_fly_2 = (record.wt_of_water_required_fly_2 / record.total_wt_of_sample_fly_2) * 100
+    #         else:
+    #             record.normal_consistency_fly_2 = 0.0
 
 
     normal_consistency_conformity = fields.Selection([

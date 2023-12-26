@@ -115,7 +115,7 @@
 
                         
                             <field name="parameters_result" nolabel="1">
-                                <tree editable="bottom" >
+                                <tree editable="bottom"  delete="0">
                                     <field name="sequence" string="Sequence" widget="handle" />
                                     <field name="parameter"/>
                                     <field name="result_type"/>
@@ -142,6 +142,8 @@
                                 </tree>
                             </field>
 
+                         
+
                             <field  name="sop" />
                         
 
@@ -154,7 +156,7 @@
                         </group> -->
                         <group style="width:100%">
                             <field name="parameters_input" attrs="{'invisible': [('is_product_based_calculation', '=', True)]}" nolabel="1">
-                                <tree editable="bottom">
+                                <tree editable="bottom" delete="0">
                                     <field name="parameter_result" />
                                     <field name="is_parameter_dependent"/>
                                     <field name="identifier" invisible="1" />
