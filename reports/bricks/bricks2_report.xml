@@ -15,7 +15,7 @@
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						
-						<table>
+						<!-- <table>
 							
 							<tr>
 								<td colspan="3">Test Report No :
@@ -33,7 +33,7 @@
 								<td colspan="3" t-if="nabl">
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
-							</tr>
+							</tr> -->
 							
 						<table>
 								<tr>
@@ -85,7 +85,7 @@
 							
 
 						</table>
-						</table>
+						<!-- </table> -->
 							
 						<table>
 						   <tr>
@@ -826,7 +826,7 @@
 								</div>
 							</div>
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
