@@ -96,7 +96,9 @@
 						<tbody>
 							<tr>
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','9b54fc13-5dcd-4425-a416-72493dd69d43')]).parameter_name"/>
+                                    <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','9b54fc13-5dcd-4425-a416-72493dd69d43')]).parameter_name"/> -->
+								     Dia. in mm		
+
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -110,7 +112,10 @@
 							</tr>
 							<tr>
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','94690b88-1b96-401a-8a58-296a3501f113')]).parameter_name"/>
+                                    <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','94690b88-1b96-401a-8a58-296a3501f113')]).parameter_name"/> -->
+									Weight per meter, kg/m		
+
+
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -124,7 +129,8 @@
 							</tr>
 							<tr>
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','ec2b0629-4780-4f57-85ea-91f66cf2e8fe')]).parameter_name"/>
+								 	Length in mm	
+                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','ec2b0629-4780-4f57-85ea-91f66cf2e8fe')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -139,7 +145,7 @@
 							<tr>
 								 <td  style="text-align: center;">
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).parameter_name"/>
-                                </td  >
+                                </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).unit.name"/>
@@ -168,7 +174,9 @@
 
 							<tr>
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','3c774ea6-7c36-4444-980b-906d348eb388')]).parameter_name"/>
+								 Elongated Gauge Length, mm		
+
+                                    <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','3c774ea6-7c36-4444-980b-906d348eb388')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -184,7 +192,9 @@
 
 							<tr>
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','f9ec2ec0-fe47-429f-99a0-b7c99c842538')]).parameter_name"/>
+								 Yield Load  KN		
+
+                                    <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','f9ec2ec0-fe47-429f-99a0-b7c99c842538')]).parameter_name"/> -->
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -200,7 +210,9 @@
 
 							<tr>
 								<td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','1fed8a62-eb5f-43bc-9473-51537e4893ad')]).parameter_name"/>
+								Ultimate Load, Kn		
+
+                                    <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','1fed8a62-eb5f-43bc-9473-51537e4893ad')]).parameter_name"/> -->
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -323,7 +335,7 @@
 										</span>
 								   </td>
 								<td style="text-align: center;">
-									<span t-esc="data.re_bend_test"/>
+									<span t-esc="data.re_bend_test1"/>
 								</td>
 								<!-- <td>
 									Rebend Satisfactory
@@ -344,7 +356,7 @@
 								</td>
 							
 								<td style="text-align: center;">
-									<span t-esc="data.bend_test"/>
+									<span t-esc="data.bend_test1"/>
 									
 								</td>
 								<!-- <td>

@@ -99,7 +99,7 @@ class LermSampleForm(models.Model):
         ('7', '7 Days'),
         ('14', '14 Days'),
         ('28', '28 Days'),
-    ], string='Days of casting', default='3')
+    ], string='Days of Testing', default='3')
     date_casting = fields.Date("Date of Casting")
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(string="Alias")

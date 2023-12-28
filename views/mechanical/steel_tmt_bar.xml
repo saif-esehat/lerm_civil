@@ -9,10 +9,11 @@
             <form>
                 <sheet>
                    <group>
-                        <field name='eln_ref' invisible="1"/>
+                       
                         <h1>
                             STEEL TMT BAR
                         </h1>
+                         <field name='eln_ref' readonly="1"/>
                     </group>
                          
                             <group>
@@ -172,11 +173,11 @@
                             
                             <group style="width:51%" attrs="{'invisible': [('bend_visible', '=', False)]}">
                                 <field name="bend_visible" invisible="1"/>
-                                <field name='bend_test'/>
+                                <field name='bend_test1'/>
                             </group>
                              <group style="width:51%" attrs="{'invisible': [('rebend_visible', '=', False)]}">
                                 <field name="rebend_visible" invisible="1"/>
-                                <field name='re_bend_test'/>
+                                <field name='re_bend_test1'/>
                             </group>
                             <group style="width:51%" attrs="{'invisible': [('fracture_visible', '=', False)]}">
                                 <field name="fracture_visible" invisible="1"/>
