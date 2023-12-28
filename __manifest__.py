@@ -183,6 +183,9 @@
     'reports/steel_tmt_bar_datasheet.xml',
     'reports/mechanical_general_template.xml',
     'reports/flyash_datasheet.xml',
+    'views/mechanical/copler2.xml',
+    'reports/coupler2/coupler_datasheet.xml',
+    'reports/coupler2/coupler_report.xml',
     
  
 
