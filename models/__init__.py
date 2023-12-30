@@ -114,4 +114,5 @@ from .chemical import flyash
 from .mechanical import coupler2
 from .report import coupler2_ds_report
 from .chemical import crushed_sand
+from .report import crushed_sand_ds_report_chemical
 

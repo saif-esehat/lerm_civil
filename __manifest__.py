@@ -187,6 +187,9 @@
     'views/mechanical/copler2.xml',
     'reports/coupler2/coupler_datasheet.xml',
     'reports/coupler2/coupler_report.xml',
+    'reports/crushed_sand_chemical/crushed_sand_repot.xml',
+    'reports/crushed_sand_chemical/crushed_sand_dataheet.xml',
+    
     
  
 
