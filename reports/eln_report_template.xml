@@ -42,15 +42,11 @@
 						</tr>
 					</table>
 			</div> -->
-			<div style="width:100%;text-align:center;position:fixed;">
-				<span style="font-size:1rem"><b>Test Report</b></span>
-
+			<div style="width:100%;text-align:center;">
+				<div style="font-size:1rem"><b>Test Report</b></div>
 			</div>
 			<div class="container_eln row" style="margin-right:4px;margin-left:4px;">
 
-					
-				
-			
 					<table>
 						<tr>
 							<td colspan="3">Report no :

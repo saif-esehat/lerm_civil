@@ -276,6 +276,8 @@
 
 
 							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'pass' and nabl">
+							
+								
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -323,6 +325,7 @@
 							</tr>
 
 							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'fail' and not nabl">
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -370,6 +373,8 @@
 
 
 							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'pass' and nabl">
+							<!-- <tr> -->
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -416,6 +421,7 @@
 							</tr>
 
 							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'fail' and not nabl">
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>

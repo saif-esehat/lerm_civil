@@ -140,7 +140,15 @@
 							</tr>
 
 							<tr cols="12">
-								<td colspan="6">Initial Setting Time :
+								<td colspan="6">Initial Setting Time Minutes :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.initial_setting_time_minutes_unrounded"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Initial Setting Time Minutes (Rounded):
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -178,6 +186,16 @@
 							
 							<tr cols="12">
 								<td colspan="6">Final Setting Time :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.final_setting_time_minutes_unrounded"/>
+								</td>
+							</tr>
+
+
+							<tr cols="12">
+								<td colspan="6">Final Setting Time (Rounded):
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
