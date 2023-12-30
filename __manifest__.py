@@ -186,6 +186,10 @@
     'views/mechanical/copler2.xml',
     'reports/coupler2/coupler_datasheet.xml',
     'reports/coupler2/coupler_report.xml',
+    'views/chemical/gypsum.xml',
+    'views/chemical/hardend_concrete.xml',
+    'reports/hardend_concrete/harden_concrete_datasheet.xml',
+    'reports/hardend_concrete/hardend_concrete_report.xml',
     
  
 

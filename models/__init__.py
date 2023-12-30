@@ -113,4 +113,7 @@ from .report import flyash_chemical_report
 from .chemical import flyash
 from .mechanical import coupler2
 from .report import coupler2_ds_report
+from .chemical import gypsum
+from .chemical import hardend_concrete
+from .report import hardend_concrete_ds_report
 
