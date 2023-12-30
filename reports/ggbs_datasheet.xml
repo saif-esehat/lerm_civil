@@ -257,7 +257,7 @@
 
 					<!-- Slag Activity Index  -->
 
-					<div t-if="data.slag_activity_visible" style="margin-top:20px">
+					<div t-if="data.slag_activity_7_visible or data.slag_activity_28_visible" style="margin-top:20px">
 						<!-- <div style="text-align:center;font-size:18px">
 							Slag Activity Index
 						</div> -->

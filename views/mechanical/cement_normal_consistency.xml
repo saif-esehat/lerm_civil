@@ -145,8 +145,8 @@
                         <field name="final_setting_time_hours" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_minutes_unrounded" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_minutes" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
-                        <field name="final_setting_conformity"/>
-                        <field name="final_setting_nabl"/>
+                        <!-- <field name="final_setting_conformity"/> -->
+                        <!-- <field name="final_setting_nabl"/> -->
                     </group>
                     
 

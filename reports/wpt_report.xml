@@ -183,7 +183,7 @@
 							</tr>
 
 							<t t-set="i" t-value="0"/>
-							<tr t-foreach="data.child_lines" t-as="r" t-if="(data.wpt_nabl == 'pass' and nabl or data.wpt_nabl == 'fail' and not nabl)">
+							<tr t-foreach="data.child_lines" t-as="r">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />

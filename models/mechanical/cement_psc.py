@@ -154,8 +154,8 @@ class CementPsc(models.Model):
                     req_min = material.req_min
                     req_max = material.req_max
                     mu_value = line.mu_value
-                    lower = record.initial_setting_time_minutes_unrounded - record.initial_setting_time_minutes_unrounded*mu_value
-                    upper = record.initial_setting_time_minutes_unrounded + record.initial_setting_time_minutes_unrounded*mu_value
+                    lower = float(record.initial_setting_time_minutes_unrounded) - float(record.initial_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.initial_setting_time_minutes_unrounded) + float(record.initial_setting_time_minutes_unrounded)*mu_value
                     if lower >= req_min and upper <= req_max :
                         record.initial_setting_conformity = 'pass'
                         break
@@ -175,8 +175,8 @@ class CementPsc(models.Model):
                     lab_max = line.lab_max_value
                     mu_value = line.mu_value
                     
-                    lower = record.initial_setting_time_minutes_unrounded - record.initial_setting_time_minutes_unrounded*mu_value
-                    upper = record.initial_setting_time_minutes_unrounded + record.initial_setting_time_minutes_unrounded*mu_value
+                    lower = float(record.initial_setting_time_minutes_unrounded) - float(record.initial_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.initial_setting_time_minutes_unrounded) + float(record.initial_setting_time_minutes_unrounded)*mu_value
                     if lower >= lab_min and upper <= lab_max:
                         record.initial_setting_nabl = 'pass'
                         break
@@ -243,8 +243,8 @@ class CementPsc(models.Model):
                     req_min = material.req_min
                     req_max = material.req_max
                     mu_value = line.mu_value
-                    lower = record.final_setting_time_minutes_unrounded - record.final_setting_time_minutes_unrounded*mu_value
-                    upper = record.final_setting_time_minutes_unrounded + record.final_setting_time_minutes_unrounded*mu_value
+                    lower = float(record.final_setting_time_minutes_unrounded) - float(record.final_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.final_setting_time_minutes_unrounded) + float(record.final_setting_time_minutes_unrounded)*mu_value
                     if lower >= req_min and upper <= req_max :
                         record.final_setting_conformity = 'pass'
                         break
@@ -264,8 +264,8 @@ class CementPsc(models.Model):
                     lab_max = line.lab_max_value
                     mu_value = line.mu_value
                     
-                    lower = record.final_setting_time_minutes_unrounded - record.final_setting_time_minutes_unrounded*mu_value
-                    upper = record.final_setting_time_minutes_unrounded + record.final_setting_time_minutes_unrounded*mu_value
+                    lower = float(record.final_setting_time_minutes_unrounded) - float(record.final_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.final_setting_time_minutes_unrounded) + float(record.final_setting_time_minutes_unrounded)*mu_value
                     if lower >= lab_min and upper <= lab_max:
                         record.final_setting_nabl = 'pass'
                         break
