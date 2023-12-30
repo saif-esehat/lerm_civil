@@ -907,8 +907,8 @@
 
 							<tr t-if="ggbs.slag_activity_28_visible and ggbs.slag_28days_nabl == 'fail' and not nabl">
 								<td style="border-bottom:none;border-top:none;text-align: center;"> 
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
+									<!-- <span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/> -->
 									
 								</td>
 								<td style="text-align: center;">
@@ -970,6 +970,9 @@
 									
 									<li t-if="eln.has_witness">
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									</li>
+									<li>
+										Specific Gravity - Derived Parameter
 									</li>
 								</ul>
 							</div>

@@ -690,7 +690,7 @@
 										</span>
 								   </td>
 								<td style="text-align: center;">
-									<span t-esc="data.re_bend_test"/>
+									<span t-esc="data.re_bend_test1"/>
 								</td>
 								
                                   
@@ -727,7 +727,7 @@
 										</span>
 								   </td>
 								<td style="text-align: center;"> 
-									<span t-esc="data.bend_test"/>
+									<span t-esc="data.bend_test1"/>
 								</td>
 								
                                   

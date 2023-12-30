@@ -46,11 +46,18 @@ class SteelTmtBarLine(models.Model):
 
 
     
-    bend_test = fields.Selection([
+    # bend_test = fields.Selection([
+    #     ('satisfactory', 'Satisfactory'),
+    #     ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
+    
+    # re_bend_test = fields.Selection([
+    #     ('satisfactory', 'Satisfactory'),
+    #     ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+    bend_test1 = fields.Selection([
         ('satisfactory', 'Satisfactory'),
         ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
     
-    re_bend_test = fields.Selection([
+    re_bend_test1 = fields.Selection([
         ('satisfactory', 'Satisfactory'),
         ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
     
@@ -505,7 +512,7 @@ class SteelTmtBarLine(models.Model):
     @api.depends('crossectional_area')
     def _compute_gauge_length(self):
         for record in self:
-            gauge_length = (math.sqrt(record.crossectional_area) * 5.65)
+            gauge_length = round((math.sqrt(record.crossectional_area) * 5.65),2)
             record.gauge_length = gauge_length
             # record.gauge_length = round(gauge_length, 2)
 

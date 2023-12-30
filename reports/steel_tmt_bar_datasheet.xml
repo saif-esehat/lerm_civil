@@ -145,7 +145,7 @@
 							<tr>
 								 <td  style="text-align: center;">
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).parameter_name"/>
-                                </td  >
+                                </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).unit.name"/>
@@ -335,7 +335,7 @@
 										</span>
 								   </td>
 								<td style="text-align: center;">
-									<span t-esc="data.re_bend_test"/>
+									<span t-esc="data.re_bend_test1"/>
 								</td>
 								<!-- <td>
 									Rebend Satisfactory
@@ -356,7 +356,7 @@
 								</td>
 							
 								<td style="text-align: center;">
-									<span t-esc="data.bend_test"/>
+									<span t-esc="data.bend_test1"/>
 									
 								</td>
 								<!-- <td>
