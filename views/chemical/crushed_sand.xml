@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="chemical_fine_aggregate_form" model="ir.ui.view">
-        <field name="name">chemical.fine.aggregate.form</field>
-        <field name="model">chemical.fine.aggregate</field>
+        <record id="chemical_crushed_sand_form" model="ir.ui.view">
+        <field name="name">chemical.crushed.sand.form</field>
+        <field name="model">chemical.crushed.sand</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -58,11 +58,11 @@
                     </group>  
                     <group attrs="{'invisible': [('ph_visible', '=', False)]}">
                           
-                        <field name='ph_average_conformity'
-                               decoration-success="ph_average_conformity == 'pass'" 
-                               decoration-danger="ph_average_conformity == 'fail'" 
+                        <field name='ph_conformity'
+                               decoration-success="ph_conformity == 'pass'" 
+                               decoration-danger="ph_conformity == 'fail'" 
                                readonly="1"/>
-                        <field name='ph_average_nabl'/>
+                        <field name='ph_nabl'/>
                     </group>  
 
                     <!-- Dissolved Silica  -->
@@ -156,11 +156,11 @@
                     </group>
                       <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
                           
-                        <field name='average_dissolved_silica_conformity'
-                               decoration-success="average_dissolved_silica_conformity == 'pass'" 
-                               decoration-danger="average_dissolved_silica_conformity == 'fail'" 
+                        <field name='dissolved_silica_conformity'
+                               decoration-success="dissolved_silica_conformity == 'pass'" 
+                               decoration-danger="dissolved_silica_conformity == 'fail'" 
                                readonly="1"/>
-                        <field name='average_dissolved_silica_nabl'/>
+                        <field name='dissolved_silica_nabl'/>
                     </group>       
                   <!-- Reduction in Alkalinity  -->
                     <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
@@ -270,11 +270,11 @@
                     </group>
                       <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
                           
-                        <field name='average_reduction_alkalinity_conformity'
-                               decoration-success="average_reduction_alkalinity_conformity == 'pass'" 
-                               decoration-danger="average_reduction_alkalinity_conformity == 'fail'" 
+                        <field name='reduction_alkalinity_conformity'
+                               decoration-success="reduction_alkalinity_conformity == 'pass'" 
+                               decoration-danger="reduction_alkalinity_conformity == 'fail'" 
                                readonly="1"/>
-                        <field name='average_reduction_alkalinity_nabl'/>
+                        <field name='reduction_alkalinity_nabl'/>
                     </group> 
 
                     <!-- Chloride  -->
@@ -299,11 +299,11 @@
                     </group>
                       <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
                           
-                        <field name='chloride_percent_conformity'
-                               decoration-success="chloride_percent_conformity == 'pass'" 
-                               decoration-danger="chloride_percent_conformity == 'fail'" 
+                        <field name='chloride_conformity'
+                               decoration-success="chloride_conformity == 'pass'" 
+                               decoration-danger="chloride_conformity == 'fail'" 
                                readonly="1"/>
-                        <field name='chloride_percent_nabl'/>
+                        <field name='chloride_nabl'/>
                     </group> 
 
                   <!-- Sulphate  -->
@@ -326,11 +326,11 @@
                     </group>
                       <group attrs="{'invisible': [('sulphate_visible', '=', False)]}">
                           
-                        <field name='sulphate_percent_conformity'
-                               decoration-success="sulphate_percent_conformity == 'pass'" 
-                               decoration-danger="sulphate_percent_conformity == 'fail'" 
+                        <field name='sulphate_conformity'
+                               decoration-success="sulphate_conformity == 'pass'" 
+                               decoration-danger="sulphate_conformity == 'fail'" 
                                readonly="1"/>
-                        <field name='sulphate_percent_nabl'/>
+                        <field name='avrg_avrg_sulphate_nabl'/>
                     </group> 
                 </sheet>
             </form>
