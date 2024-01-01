@@ -144,7 +144,8 @@
 							</tr>
 							<tr>
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).parameter_name"/>
+								 	Cross sectional Area, mm²
+                                    <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>
@@ -159,7 +160,8 @@
 
 							<tr>
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','14f13802-a473-4cb9-8104-3adbcacf7621')]).parameter_name"/>
+								 Gauge Length mm
+                                    <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','14f13802-a473-4cb9-8104-3adbcacf7621')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>

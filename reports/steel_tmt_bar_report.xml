@@ -258,10 +258,10 @@
 								</td>
 							</tr>
 							<tr>
-							 <td  style="text-align: center;">
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
-                            </td>
+								<td  style="text-align: center;">
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+								</td>
 								 <td  style="text-align: center;">
 								 	Length in mm	
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','ec2b0629-4780-4f57-85ea-91f66cf2e8fe')]).parameter_name"/> -->
@@ -295,13 +295,14 @@
 								</td>
 							</tr>
 							<tr>
-							 <td  style="text-align: center;">
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
-                            </td>
+								<td  style="text-align: center;">
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+								</td>
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).parameter_name"/>
-                                </td  >
+								 	Cross sectional Area, mm²
+                                    <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).parameter_name"/> -->
+                                </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).unit.name"/>
@@ -332,12 +333,13 @@
 							</tr>
 
 							<tr>
-							 <td  style="text-align: center;">
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
-                            </td>
+								<td  style="text-align: center;">
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+								</td>
 								 <td  style="text-align: center;">
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','14f13802-a473-4cb9-8104-3adbcacf7621')]).parameter_name"/>
+								 Gauge Length mm
+                                    <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','14f13802-a473-4cb9-8104-3adbcacf7621')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
 								        <span>
