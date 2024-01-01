@@ -193,6 +193,8 @@
     'reports/hardend_concrete/hardend_concrete_report.xml',
     'reports/crushed_sand_chemical/crushed_sand_repot.xml',
     'reports/crushed_sand_chemical/crushed_sand_dataheet.xml',
+    'reports/gypsum_chem/gypsum_datasheet.xml',
+    'reports/gypsum_chem/gypsum_report.xml',
     
     
  

@@ -118,4 +118,5 @@ from .chemical import hardend_concrete
 from .report import hardend_concrete_ds_report
 from .chemical import crushed_sand
 from .report import crushed_sand_ds_report_chemical
+from .report import gypsum_ds_report
 
