@@ -417,7 +417,7 @@ class CementPsc(models.Model):
     wt_of_cement_soundness = fields.Float("Weight of Cement(g)",default=100)
     wt_of_water_req_soundness = fields.Float("Weight of water required(g)",compute="_compute_water_weight_soundness")
 
-    soundness_table = fields.One2many('cement.soundness.line','parent_id',string="Soundness")
+    soundness_table = fields.One2many('cement.psc.soundness.line','parent_id',string="Soundness")
     average_soundness = fields.Float("Average",compute="_compute_average_soundness")
     expansion_soundness = fields.Float("Expansion(mm)",compute="_compute_expansion_soundness")
 

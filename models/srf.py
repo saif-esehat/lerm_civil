@@ -118,6 +118,8 @@ class SrfForm(models.Model):
     # site_address = fields.Many2one('res.partner',string="Site Address")
     site_address = fields.Char(string="Site Address",compute="_compute_site_address")
     name_work = fields.Many2one('res.partner.project',string="Name of Work")
+    name_works = fields.Many2many('res.partner.project',string="Name of Work",compute="_compute_name_work")
+
     client_refrence = fields.Char(string="Client Reference Letter")
     samples = fields.One2many('lerm.srf.sample' , 'srf_id' , string="Samples",tracking=True)
     contact_other_ids = fields.Many2many('res.partner',string="Other Ids",compute="compute_other_ids")
@@ -161,6 +163,17 @@ class SrfForm(models.Model):
             else:
                 record.site_address = ''
 
+    @api.depends('customer')
+    def _compute_name_work(self):
+        for record in self:
+            customer = record.customer
+            if(customer):
+                name_work = record.env['res.partner'].search([("id","=",record.customer.id)]).projects
+                print("Name Work",name_work)
+                record.name_works = name_work
+
+            else:
+                record.name_works = None
 
 
 
