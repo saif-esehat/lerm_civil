@@ -190,7 +190,7 @@
 
 						   
 
-							<tr t-if="data.so3_visible">
+							<tr t-if="data.so3_visible and (data.so3_nabl == 'pass' and nabl or data.so3_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -251,7 +251,7 @@
 								
 							</tr>
 
-							<tr t-if="data.loi_visible">
+							<tr t-if="data.loi_visible and (data.loss_nabl == 'pass' and nabl or data.loss_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -316,7 +316,7 @@
 
 							
 
-							<tr t-if="data.cao_visible">
+							<tr t-if="data.cao_visible and (data.cao1_nabl == 'pass' and nabl or data.cao1_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -380,7 +380,7 @@
 							</tr>
 
 
-							<tr t-if="data.mgo_visible">
+							<tr t-if="data.mgo_visible and (data.mgo_nabl1 == 'pass' and nabl or data.mgo_nabl1 == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -442,7 +442,7 @@
 							</tr>
 
 
-							<tr t-if="data.cao_visible2">
+							<tr t-if="data.cao_visible2 and (data.cao_nabl2 == 'pass' and nabl or data.cao_nabl2 == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -504,7 +504,7 @@
 								
 							</tr>
 
-							<tr t-if="data.mgo_visible2">
+							<tr t-if="data.mgo_visible2 and (data.mgo_nabl2 == 'pass' and nabl or data.mgo_nabl2 == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -564,7 +564,7 @@
 								</td>
 								
 							</tr>
-							<tr t-if="data.free_lime_visible">
+							<tr t-if="data.free_lime_visible and (data.free_lime_nabl == 'pass' and nabl or data.free_lime_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -625,7 +625,7 @@
 								
 							</tr>
 							
-                            <tr t-if="data.soluble_sodium_visible">
+                            <tr t-if="data.soluble_sodium_visible and (data.soluble_sodium_nabl == 'pass' and nabl or data.soluble_sodium_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -685,7 +685,7 @@
 								
 								
 							</tr>
-							 <tr t-if="data.free_water_visible">
+							 <tr t-if="data.free_water_visible and (data.free_water_nabl == 'pass' and nabl or data.free_water_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -745,7 +745,7 @@
 								
 								
 							</tr>
-                             <tr t-if="data.combined_water_visible">
+                             <tr t-if="data.combined_water_visible and (data.combined_water_nabl == 'pass' and nabl or data.combined_water_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>

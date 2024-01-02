@@ -190,7 +190,7 @@ class ChemicalGyspum(models.Model):
     cao_name = fields.Char("Name",default="CaO")
     cao_visible = fields.Boolean("CaO",compute="_compute_visible")
 
-    plaster3 = fields.Char(string="Plaster Of Paris",default="2/3 of SO3")
+    plaster3 = fields.Char(string="Plaster Of Paris",default="2/3 of SO3 content")
     retarded3 = fields.Char(string="Retarded Hemihydrate Gypsum Plaster",default="2/3 of SO3 content")
     anhydrous3 = fields.Char(string="Anhydrous Gypsum Plaster",default="2/3 of SO3 content")
     keenes3 = fields.Char(string="Keene's Plaster",default="2/3 of SO3 content")
@@ -510,8 +510,8 @@ class ChemicalGyspum(models.Model):
     free_lime_visible = fields.Boolean("Free Lime",compute="_compute_visible")
 
     plaster7= fields.Char(string="Plaster Of Paris",default="--")
-    retarded7 = fields.Char(string="Retarded Hemihydrate Gypsum Plaster",default="--")
-    anhydrous7 = fields.Char(string="Anhydrous Gypsum Plaster",default="3 Min")
+    retarded7 = fields.Char(string="Retarded Hemihydrate Gypsum Plaster",default="3 Min")
+    anhydrous7 = fields.Char(string="Anhydrous Gypsum Plaster",default="--")
     keenes7 = fields.Char(string="Keene's Plaster",default="--")
 
 

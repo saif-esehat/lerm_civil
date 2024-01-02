@@ -36,23 +36,23 @@ class ChemicalHasdenedConcrete(models.Model):
             # remove this first when making changes
             self.ph_average_conformity = 'fail'
         
-        # for record in self:
-        #     record.ph_average_conformity = 'fail'
-        #     line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
-        #     materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
-        #     for material in materials:
-        #         if material.grade.id == record.grade.id:
-        #             req_min = material.req_min
-        #             req_max = material.req_max
-        #             mu_value = line.mu_value
-                    
-        #             lower = record.ph_average - record.ph_average*mu_value
-        #             upper = record.ph_average + record.ph_average*mu_value
-        #             if lower >= req_min and upper <= req_max:
-        #                 record.ph_average_conformity = 'pass'
-        #                 break
-        #             else:
-        #                 record.ph_average_conformity = 'fail'
+            for record in self:
+                record.ph_average_conformity = 'fail'
+                line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
+                materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
+                for material in materials:
+                    if material.grade.id == record.grade.id:
+                        req_min = material.req_min
+                        req_max = material.req_max
+                        mu_value = line.mu_value
+                        
+                        lower = record.ph_average - record.ph_average*mu_value
+                        upper = record.ph_average + record.ph_average*mu_value
+                        if lower >= req_min and upper <= req_max:
+                            record.ph_average_conformity = 'pass'
+                            break
+                        else:
+                            record.ph_average_conformity = 'fail'
 
     ph_average_nabl = fields.Selection([
         ('pass', 'NABL'),
@@ -63,23 +63,23 @@ class ChemicalHasdenedConcrete(models.Model):
         # remove this first
         self.ph_average_nabl = 'fail'
         
-        # for record in self:
-        #     record.ph_average_nabl = 'fail'
-        #     line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
-        #     materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
-        #     for material in materials:
-        #         if material.grade.id == record.grade.id:
-        #             lab_min = line.lab_min_value
-        #             lab_max = line.lab_max_value
-        #             mu_value = line.mu_value
+        for record in self:
+            record.ph_average_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
                     
-        #             lower = record.ph_average - record.ph_average*mu_value
-        #             upper = record.ph_average + record.ph_average*mu_value
-        #             if lower >= lab_min and upper <= lab_max:
-        #                 record.ph_average_nabl = 'pass'
-        #                 break
-        #             else:
-        #                 record.ph_average_nabl = 'fail'
+                    lower = record.ph_average - record.ph_average*mu_value
+                    upper = record.ph_average + record.ph_average*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.ph_average_nabl = 'pass'
+                        break
+                    else:
+                        record.ph_average_nabl = 'fail'
 
 
     #Dissolved Silica
