@@ -7,15 +7,15 @@
 			<!-- <t t-call="web.basic_layout"> -->
 			
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>TEST REPORT</b></p>
-				</div>
+				</div> -->
 				
 				
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						
-						<table>
+						<!-- <table>
 							
 							<tr>
 								<td colspan="3">Test Report No :
@@ -33,7 +33,7 @@
 								<td colspan="3" t-if="nabl">
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
-							</tr>
+							</tr> -->
 							
 						<table>
 								<tr>
@@ -85,7 +85,7 @@
 							
 
 						</table>
-						</table>
+						<!-- </table> -->
 							
 						<table>
 						   <tr>
@@ -232,7 +232,7 @@
 							   	   </th>
 								</tr>
 							</thead>
-						<tbody >
+						<tbody>
 			
 							<tr t-if="brick.compressive_strength_visible">
 								<td style="text-align: center;padding:0px">
@@ -365,7 +365,7 @@
 									</span>									
 								</td>
 							</tr>	
-						</tbody >
+						</tbody>
 				</table>
 				<table t-if="brick.compressive_strength_visible" style="margin-top: 20px;max-width:400px">
 					<tr>
@@ -436,7 +436,7 @@
 									</th>
 								</tr>
 							</thead>
-						<tbody >
+						<tbody>
 
 							<tr t-if="brick.efflorescence_visible">
 								<td style="text-align: center;padding:0px">
@@ -485,7 +485,7 @@
 								</td>
 							</tr>
 	
-						</tbody >
+						</tbody>
 				</table>
 				</div>
 
@@ -538,7 +538,7 @@
 									</th>
 								</tr>
 							</thead>
-						<tbody >
+						<tbody>
 
 							<tr t-if="brick.dimension_visible">
 								<td style="text-align: center;padding:0px">
@@ -578,7 +578,7 @@
 							</tr>
 							
 	
-						</tbody >
+						</tbody>
 				</table>
 				</div>
 
@@ -767,7 +767,7 @@
 								</td>
 							</tr>
 	
-						</tbody >
+						</tbody>
 				</table>
 				
 				<table style="margin-top: 20px;max-width:400px" t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
@@ -826,7 +826,7 @@
 								</div>
 							</div>
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">

@@ -7,9 +7,9 @@
 			<!-- <t t-call="web.basic_layout"> -->
 			
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
-				</div>
+				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
 						<!-- <table>
@@ -183,7 +183,7 @@
 							</tr>
 
 							<t t-set="i" t-value="0"/>
-							<tr t-foreach="data.child_lines" t-as="r" t-if="(data.wpt_nabl == 'pass' and nabl or data.wpt_nabl == 'fail' and not nabl)">
+							<tr t-foreach="data.child_lines" t-as="r">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />

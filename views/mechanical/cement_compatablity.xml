@@ -9,8 +9,8 @@
                 <form>
                     <sheet>
                         <group style="width:100%">
-                            <field name="eln_ref" invisible="1"/>
-                        </group >
+                            <field name="eln_ref" readonly="1"/>
+                        </group>
                          <h1>
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
@@ -34,8 +34,8 @@
                                 <field name="wt_of_water"/>
                                 <field name="wt_of_admixture"/>
                                 <field name="flow_sec"/>
-                                <!-- <field name="flow_30_min"/> -->
-                                <!-- <field name="flow_60_min"/> -->
+                                <field name="flow_30_min"/>
+                                <field name="flow_60_min"/>
                             </tree>
                         </field>
 

@@ -8,12 +8,12 @@
 			
 			<!-- <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general"> -->
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report on GGBS Mechanical</b></p>
-				</div>
+				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Report no :
 								</td>
@@ -31,7 +31,7 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
-						</table>
+						</table> -->
 						<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
@@ -133,7 +133,7 @@
 							<tr>
 								<td colspan="6">Instrument :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.instrument"/>
+									<span t-field="o.instrument.name"/>
 								</td>
 								<td colspan="6">Temperature :
 									<![CDATA[&nbsp;]]>
@@ -708,6 +708,7 @@
 
 
 
+							<!-- 28 days  -->
 							<tr t-if="ggbs.slag_activity_28_visible and ggbs.slag_28days_nabl == 'fail' and not nabl">
 								<td style="border-bottom:none;text-align: center;">
 									
@@ -726,7 +727,7 @@
 
 								<td  style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.average_28days_slag"/>
 										</t>
 										<t t-else="">
@@ -776,7 +777,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.average_28days_slag_opc"/>
 										</t>
 										<t t-else="">
@@ -788,7 +789,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c28cde20-f42a-4405-b127-b5d84fe78485')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.permissable_limit"/>
+											<!-- <span t-field="parameter.permissable_limit"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -828,7 +829,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.average_28days_slag_opc"/>
 										</t>
 										<t t-else="">
@@ -878,7 +879,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.slag_activity_index_28days"/>
 										</t>
 										<t t-else="">
@@ -907,8 +908,8 @@
 
 							<tr t-if="ggbs.slag_activity_28_visible and ggbs.slag_28days_nabl == 'fail' and not nabl">
 								<td style="border-bottom:none;border-top:none;text-align: center;"> 
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
+									<!-- <span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/> -->
 									
 								</td>
 								<td style="text-align: center;">
@@ -923,7 +924,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.slag_activity_index_28days"/>
 										</t>
 										<t t-else="">
@@ -970,6 +971,9 @@
 									
 									<li t-if="eln.has_witness">
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									</li>
+									<li>
+										Specific Gravity - Derived Parameter
 									</li>
 								</ul>
 							</div>

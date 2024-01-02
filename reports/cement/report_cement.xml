@@ -8,9 +8,9 @@
 			
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
 				
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
-				</div>
+				</div> -->
 				
 				<div class="container_eln">
 				
@@ -135,10 +135,12 @@
 							</tr>
 							
 						</table>
+						
 					</div>
 					<div style="margin-top:20px;">
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 					</div>
+					
 					<table style="margin-top:30px;">
 					<t t-set="i" t-value="0"/>
 						<thead>
@@ -274,6 +276,8 @@
 
 
 							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'pass' and nabl">
+							
+								
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -321,6 +325,7 @@
 							</tr>
 
 							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'fail' and not nabl">
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -368,6 +373,8 @@
 
 
 							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'pass' and nabl">
+							<!-- <tr> -->
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -414,6 +421,7 @@
 							</tr>
 
 							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'fail' and not nabl">
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>

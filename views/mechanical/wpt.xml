@@ -18,8 +18,8 @@
                     </group>
                     <group>
                         <field name="srf_id" invisible="1"/>
-                        <field name="sample_id" />
-                        <field name="eln_ref"/>
+                        <field name="sample_id"  readonly="1"/>
+                        <field name="eln_ref"  readonly="1"/>
                         <field name="parameter_id" invisible="1"/>
                     </group>
                     <group>
@@ -56,13 +56,13 @@
                             <field name="date_of_testing"  string="Date of Testing" identity="extra"/>
                         </group>
                         <group>
-                            <field name="age_of_days"/>
+                            <field name="age_of_days" identity="extra"/>
                         </group>
                         <group>
-                            <field name="age_of_test"/>
+                            <field name="age_of_test" identity="extra"/>
                         </group>
                         <group>
-                            <field name="difference"/>
+                            <field name="difference" identity="extra"/>
                         </group>
                          <!-- <group>
                          <field name='sample_condition'/>
@@ -84,19 +84,21 @@
                         </field>
                     </group>
                     <group>
-                       <field name="average_of_wpt"/>
+                       <field name="average_of_wpt" identity="extra"/>
                     </group>
                     <group>
                        <field name="wpt_conformity"
                                decoration-success="wpt_conformity == 'pass'" 
                                decoration-danger="wpt_conformity == 'fail'" 
-                               readonly="1"/>
+                               readonly="1"
+                               identity="extra"/>
                     </group>
                     <group>
                        <field name="wpt_nabl"
                                decoration-success="wpt_nabl == 'pass'" 
                                 decoration-danger="wpt_nabl == 'fail'" 
-                               readonly="1"/>
+                               readonly="1"
+                               identity="extra"/>
                     </group>
                 </sheet>
             </form>

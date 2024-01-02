@@ -18,7 +18,7 @@ class SteelTmtBarLine(models.Model):
     weight = fields.Float(string="Weight, in kg",digits=(10, 3))
     weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
     crossectional_area = fields.Float(string="Cross sectional Area, mm²",compute="_compute_crossectional_area")
-    gauge_length = fields.Float(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
+    gauge_length = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
     elongated_gauge_length = fields.Float(string="Elongated Gauge Length, mm")
     percent_elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True)
     yeild_load = fields.Float(string="Yield Load  KN")
@@ -28,7 +28,7 @@ class SteelTmtBarLine(models.Model):
     fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
     ts_ys_ratio = fields.Float(string="TS/YS Ratio",compute="_compute_ts_ys_ratio",store=True)
-    weight_per_meter = fields.Float(string="Weight per meter",compute="_compute_weight_per_meter",store=True)
+    weight_per_meter = fields.Float(string="Weight per meter",compute="_compute_weight_per_meter",store=True,digits=(10, 3))
     variation = fields.Float(string="Variation")
 
     requirement_utl = fields.Float(string="Requirement",compute="_compute_requirement_utl",store=True)
@@ -46,11 +46,18 @@ class SteelTmtBarLine(models.Model):
 
 
     
-    bend_test = fields.Selection([
+    # bend_test = fields.Selection([
+    #     ('satisfactory', 'Satisfactory'),
+    #     ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
+    
+    # re_bend_test = fields.Selection([
+    #     ('satisfactory', 'Satisfactory'),
+    #     ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+    bend_test1 = fields.Selection([
         ('satisfactory', 'Satisfactory'),
         ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
     
-    re_bend_test = fields.Selection([
+    re_bend_test1 = fields.Selection([
         ('satisfactory', 'Satisfactory'),
         ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
     
@@ -505,7 +512,7 @@ class SteelTmtBarLine(models.Model):
     @api.depends('crossectional_area')
     def _compute_gauge_length(self):
         for record in self:
-            gauge_length = (math.sqrt(record.crossectional_area) * 5.65)
+            gauge_length = round((math.sqrt(record.crossectional_area) * 5.65),2)
             record.gauge_length = gauge_length
             # record.gauge_length = round(gauge_length, 2)
 

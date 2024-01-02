@@ -73,47 +73,47 @@
 											<tr>
 												<td style="font-weight: bold;">Specific Gravity of Flyash</td>
 												<td style="text-align: center;"><span t-field="data.gravity_of_flyash1" /></td>
-												<td style="text-align: center;"><span t-field="data.gravity_of_flyash2"/></td>
+												<!-- <td style="text-align: center;"><span t-field="data.gravity_of_flyash2"/></td> -->
 											</tr>
 											<tr>
 												<td style="font-weight: bold;">Specific Gravity of Cement</td>
 												<td style="text-align: center;"><span t-field="data.gravity_of_cement1" /></td>
-												<td style="text-align: center;"><span t-field="data.gravity_of_cement2" /></td>
+												<!-- <td style="text-align: center;"><span t-field="data.gravity_of_cement2" /></td> -->
 											</tr>
 											<tr>
 												<td style="font-weight: bold;">N</td>
 												<td style="text-align: center;"><span t-field="data.fly_ash_n1" t-options='{"widget": "float", "precision": 2}'/></td>
-												<td style="text-align: center;"><span t-field="data.fly_ash_n2" t-options='{"widget": "float", "precision": 2}' /></td>
+												<!-- <td style="text-align: center;"><span t-field="data.fly_ash_n2" t-options='{"widget": "float", "precision": 2}' /></td> -->
 											</tr>
 											<tr>
 												<td style="font-weight: bold;">Wt. of Flyash</td>
 												<td style="text-align: center;"><span t-field="data.wt_of_flash_1" t-options='{"widget": "float", "precision": 2}' /></td>
-												<td style="text-align: center;"><span t-field="data.wt_of_flash_2" t-options='{"widget": "float", "precision": 2}' /></td>
+												<!-- <td style="text-align: center;"><span t-field="data.wt_of_flash_2" t-options='{"widget": "float", "precision": 2}' /></td> -->
 											</tr>
 											<tr>
 												<td style="font-weight: bold;">Wt. of Cement (g)</td>
 												<td style="text-align: center;"><span t-field="data.wt_of_cement_1" /></td>
-												<td style="text-align: center;"><span t-field="data.wt_of_cement_2"/></td>
+												<!-- <td style="text-align: center;"><span t-field="data.wt_of_cement_2"/></td> -->
 											</tr>
 											<tr>
 												<td style="font-weight: bold;">Total Weight of Sample(g)</td>
 												<td style="text-align: center;"><span t-field="data.total_wt_of_sample_fly_1" t-options='{"widget": "float", "precision": 2}'/></td>
-												<td style="text-align: center;"><span t-field="data.total_wt_of_sample_fly_2" t-options='{"widget": "float", "precision": 2}' /></td>
+												<!-- <td style="text-align: center;"><span t-field="data.total_wt_of_sample_fly_2" t-options='{"widget": "float", "precision": 2}' /></td> -->
 											</tr>
 											<tr>
 												<td style="font-weight: bold;">Wt. of water required (g)</td>
 												<td style="text-align: center;"><span t-field="data.wt_of_water_required_fly_1" t-options='{"widget": "float", "precision": 2}' /></td>
-												<td style="text-align: center;"><span t-field="data.wt_of_water_required_fly_2" t-options='{"widget": "float", "precision": 2}' /></td>
+												<!-- <td style="text-align: center;"><span t-field="data.wt_of_water_required_fly_2" t-options='{"widget": "float", "precision": 2}' /></td> -->
 											</tr>
 											<tr>
 												<td style="font-weight: bold;">Penetration of vicat's Plunger (mm)</td>
 												<td style="text-align: center;"><span t-field="data.penetration_planger_fly_1" /></td>
-												<td style="text-align: center;"><span t-field="data.penetration_planger_fly_2" /></td>
+												<!-- <td style="text-align: center;"><span t-field="data.penetration_planger_fly_2" /></td> -->
 											</tr>
 											<tr>
 												<td style="font-weight: bold;">Normal Consistency %</td>
 												<td style="text-align: center;"><span t-field="data.normal_consistency_fly_1" t-options='{"widget": "float", "precision": 2}'/></td>
-												<td style="text-align: center;"><span t-field="data.normal_consistency_fly_2" t-options='{"widget": "float", "precision": 2}'/></td>
+												<!-- <td style="text-align: center;"><span t-field="data.normal_consistency_fly_2" t-options='{"widget": "float", "precision": 2}'/></td> -->
 											</tr>
 										</table>
 

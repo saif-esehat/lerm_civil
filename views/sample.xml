@@ -147,11 +147,9 @@
                     </group> 
                     <group>
                       <group>
-                          <!-- <field name="file_upload" /> -->
                           <field name="file_upload" widget="many2many_binary"/>
                       </group>
                       <group>
-                          <!-- <field name="report_upload" /> -->
                           <field name="report_upload" widget="many2many_binary"/>
                       </group>
                     </group>  
@@ -308,7 +306,7 @@
                 <field name="technicians" string="Technicians" />
                 <field name="location" string="Location" />
                 <field name="scope" string="Scope" />
-                <field name="days_casting" string="Days of Casting" />
+                <field name="days_casting" string="Days of Testing" />
                 <field name="customer_id" string="Customer" />
                 <field name="status" string="Status" />
                 <field name="state" string="State" />

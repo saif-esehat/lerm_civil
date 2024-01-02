@@ -9,7 +9,7 @@
                 <sheet>
                     <group>
                         <field name="srf_id"/>
-                        <field name="sample_id"/>
+                        <field name="sample_id"  readonly="1"/>
                         <field name="parameter_id"/>
                     </group>
                     <group>

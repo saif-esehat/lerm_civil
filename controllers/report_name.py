@@ -129,7 +129,7 @@ class MyReportName(ReportController):
             else:
                 return
         except Exception as e:
-            _logger.exception("Error while generating report %s", reportname)
+            # _logger.exception("Error while generating report %s", reportname)
             se = _serialize_exception(e)
             error = {
                 'code': 200,

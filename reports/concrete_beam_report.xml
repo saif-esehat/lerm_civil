@@ -8,12 +8,12 @@
 			
 			<!-- <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general"> -->
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>TEST REPORT</b></p>
-				</div>
+				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Test Report No :
 								</td>
@@ -31,6 +31,7 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
+						</table> -->
 
 						<table>
 								<tr>
@@ -87,7 +88,7 @@
 								</tr>
 							
 
-						</table>
+						
 						</table>
 							
 						<table>

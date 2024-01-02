@@ -2,7 +2,7 @@ from odoo import api, fields, models,_
 from odoo.exceptions import UserError
 import logging
 
-_logger = logging.getLogger(__name__)
+# _logger = logging.getLogger(__name__)
 
 class Discipline(models.Model):
     _name = "lerm_civil.discipline"
