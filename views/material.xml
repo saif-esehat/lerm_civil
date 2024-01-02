@@ -111,8 +111,8 @@
           <page string="Alias" attrs="{'invisible': [('is_sample','=',False)]}">
                <field name='alias_table'>
                   <tree editable="bottom">
-                    <field name="alias"/>
                     <field name="customer"/>
+                    <field name="product_alias"/>
                   </tree>
                </field>
           </page>

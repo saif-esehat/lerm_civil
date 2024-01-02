@@ -64,7 +64,8 @@
                         <field name='contractor_ids' invisible='1'/>
                         <field name="contact_other_ids" invisible='1'/>
                         <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
-                        <field name="name_work" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="name_work" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" domain="[('id', 'in', name_works)]"/>
+                        <field name="name_works" invisible="1"/>
                         <field name="attachment" filename="attachment_name" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name='attachment_name' invisible='1'/>
                     </group>
@@ -192,7 +193,8 @@
                     </group>
                     <group style="width:50%">
                         <field name="group_id" domain="[('id', 'in', group_ids)]"  options="{'no_create': True}"/>
-                        <!-- <field name="alias"/> -->
+                        <field name="product_aliases" invisible="1"/>
+                        <field name="product_alias" domain="[('id', 'in', product_aliases)]"   options="{'no_create': True}" />
                         <field name="pricelist"/>
                         <field name="product_name"  invisible="1"/>
                         <field name="main_name"   invisible="1"/>
