@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="rcmt_datasheet">
+        <t t-call="web.html_container">
+            <t t-call="lerm_civil.mechanical_data_sheet_header">
+                <div style="text-align:center;font-size:18px;font-weight: bold">
+                    Concrete-RCMT
+                </div>
+
+                <div class="container_eln" style="margin-top:5px">
+                    <table style="margin-top:20px">
+                        <tr cols="12">
+                            
+                            <td colspan="6">Job No :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.kes_no"></span>
+                            </td>
+                            <td colspan="6">Test Start Date: 
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.start_date"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Material: <span t-field="eln.material"></span>
+                            </td>
+                            <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                            </td>
+                        </tr>
+                        <tr style="height:50px" cols="12">
+								<td colspan="4">Performed By :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.technician.name"/>
+								</td>
+								<td colspan="4">Witness Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.witness_name"/>
+								</td>
+								<td colspan="4">Witness Signature :
+									<![CDATA[&nbsp;]]>
+									<span style='padding:20px'></span>
+								</td>
+							</tr>
+                        <!-- <tr>
+                            <td colspan="6">Age at Test: <span t-field="data.age_of_days"></span>
+                            </td>
+                            <td colspan="6">Sample Conditioning: <span t-field="data.sample_condition"></span>
+                            </td>
+                        </tr> -->
+                    </table>
+                    <!-- Core sample and its dimension  -->
+                    
+                    <div style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Core sample and its dimension</b>
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1" style="text-align: center;"><b>Specimen No.</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Height (L) mm</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Diameter mm</b></td>
+                            </tr>
+                            <t t-set="f" t-value="0"/>
+                            <tr t-foreach="data.child_lines" t-as="r">
+                                <td colspan="1" style="text-align: center;">
+                                    <div>
+                                        <span t-esc="f + 1" />
+                                        <t t-set="f" t-value="f + 1"/>
+                                    </div>
+                                </td>
+                                <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['height']"/>
+                                </td>
+                                <td colspan="1" style="text-align: center;">
+                                    <span t-esc="r['diameter']"/>
+                                </td>
+                                
+                            </tr>
+                        </table>
+
+                         <table>
+                               
+                                <tr>
+                                    <td>Initial Voltage (V1)</td>
+                                    <td><span t-field="data.initial_voltage1"/></td>
+                                    <td><span t-field="data.initial_voltage2"/></td>
+                                    <td><span t-field="data.initial_voltage3"/></td>
+                                    <td><span t-field="data.initial_voltage4"/></td>
+                                    <td><span t-field="data.initial_voltage5"/></td>
+                                    <td><span t-field="data.initial_voltage6"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Initial Current (mA)</td>
+                                    <td><span t-field="data.initial_current1"/></td>
+                                    <td><span t-field="data.initial_current2"/></td>
+                                    <td><span t-field="data.initial_current3"/></td>
+                                    <td><span t-field="data.initial_current4"/></td>
+                                    <td><span t-field="data.initial_current5"/></td>
+                                    <td><span t-field="data.initial_current6"/></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Initial Temperature (T1)</td>
+                                    <td><span t-field="data.initial_temprrature1"/></td>
+                                    <td><span t-field="data.initial_temprrature2"/></td>
+                                    <td><span t-field="data.initial_temprrature3"/></td>
+                                    <td><span t-field="data.initial_temprrature4"/></td>
+                                    <td><span t-field="data.initial_temprrature5"/></td>
+                                    <td><span t-field="data.initial_temprrature6"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Final Voltage (V2)</td>
+                                    <td><span t-field="data.final_voltage1"/></td>
+                                    <td><span t-field="data.final_voltage2"/></td>
+                                    <td><span t-field="data.final_voltage3"/></td>
+                                    <td><span t-field="data.final_voltage4"/></td>
+                                    <td><span t-field="data.final_voltage5"/></td>
+                                    <td><span t-field="data.final_voltage6"/></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Final Current (mA)</td>
+                                    <td><span t-field="data.final_curent1"/></td>
+                                    <td><span t-field="data.final_curent2"/></td>
+                                    <td><span t-field="data.final_curent3"/></td>
+                                    <td><span t-field="data.final_curent4"/></td>
+                                    <td><span t-field="data.final_curent5"/></td>
+                                    <td><span t-field="data.final_curent6"/></td>
+                                  
+
+                                </tr>
+                                <tr>
+                                    <td>Final Temperature (T2)</td>
+                                    <td><span t-field="data.final_tempreture1"/></td>
+                                    <td><span t-field="data.final_tempreture2"/></td>
+                                    <td><span t-field="data.final_tempreture3"/></td>
+                                    <td><span t-field="data.final_tempreture4"/></td>
+                                    <td><span t-field="data.final_tempreture5"/></td>
+                                    <td><span t-field="data.final_tempreture6"/></td>
+
+                                </tr>
+                            </table>
+                                        
+                    </div>
+
+                     <!-- Measurement for Chloride Penetration depth  -->
+                    
+                    <div style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Measurement for Chloride Penetration depth</b>
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Depth-01</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Depth-02</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Depth-03</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Depth-04</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Depth-05</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Depth-06</b></td>
+                                <td colspan="2" style="text-align: center;"><b>dx Average mm</b></td>
+                            </tr>
+                            <t t-set="f" t-value="0"/>
+                            <tr t-foreach="data.child_lines1" t-as="r">
+                                <td colspan="1" style="text-align: center;">
+                                    <div>
+                                        <span t-esc="f + 1" />
+                                        <t t-set="f" t-value="f + 1"/>
+                                    </div>
+                                </td>
+                                <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['depth1']"/>
+                                </td>
+                                <td colspan="1" style="text-align: center;">
+                                    <span t-esc="r['depth2']"/>
+                                </td>
+                                <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['depth3']"/>
+                                </td>
+                                 <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['depth4']"/>
+                                </td>
+                                <td colspan="1" style="text-align: center;">
+                                    <span t-esc="r['depth5']"/>
+                                </td>
+                                <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['depth6']"/>
+                                </td>
+                                 <td colspan="2" style="text-align: center;">
+                                    <span t-esc="r['dx_avg']" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                        </table>
+                       
+                    </div>
+
+
+                 <div style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Observed Value</b>
+                        </div>
+                    <table>
+                    <tr>
+                        <th></th>
+                        <th style="text-align: center; font-weight: bold;">Specimen-01</th>
+                        <th style="text-align: center; font-weight: bold;">Specimen-02</th>
+                        <th style="text-align: center; font-weight: bold;">Specimen-03</th>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Average Value of anolye solution °C</td>
+                        <td style="text-align: center;"><span t-field="data.specimen1_ov1" /></td>
+                        <td style="text-align: center;"><span t-field="data.specimen2_ov1"/></td>
+                         <td style="text-align: center;"><span t-field="data.specimen3_ov1"/></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Absolute Value of applied Voltage V</td>
+                        <td style="text-align: center;"><span t-field="data.specimen1_ov2" /></td>
+                        <td style="text-align: center;"><span t-field="data.specimen2_ov2" /></td>
+                        <td style="text-align: center;"><span t-field="data.specimen3_ov2" /></td>
+                    </tr>
+                   
+                    <tr>
+                        <td style="font-weight: bold;">Thickness of specimen mm (L)</td>
+                        <td style="text-align: center;"><span t-field="data.specimen2" t-options='{"widget": "float", "precision": 2}' /></td>
+                        <td style="text-align: center;"><span t-field="data.specimen3" t-options='{"widget": "float", "precision": 2}' /></td>
+                        <td style="text-align: center;"><span t-field="data.specimen4" t-options='{"widget": "float", "precision": 2}' /></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Average Value of Penetration depth mm (dx)</td>
+                        <td style="text-align: center;"><span t-field="data.specimen1_depth1" t-options='{"widget": "float", "precision": 2}' /></td>
+                        <td style="text-align: center;"><span t-field="data.specimen2_depth2" t-options='{"widget": "float", "precision": 2}'/></td>
+                        <td style="text-align: center;"><span t-field="data.specimen3_depth3" t-options='{"widget": "float", "precision": 2}'/></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Test Duration Hour (t)</td>
+                        <td style="text-align: center;"><span t-field="data.specimen1_ov3" t-options='{"widget": "float", "precision": 2}'/></td>
+                        <td style="text-align: center;"><span t-field="data.specimen2_ov3" t-options='{"widget": "float", "precision": 2}' /></td>
+                        <td style="text-align: center;"><span t-field="data.specimen3_ov3" t-options='{"widget": "float", "precision": 2}' /></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Non-steady State migration Coefficient m2/s</td>
+                        <td style="text-align: center;"><span t-field="data.specimen1_ov_avg1" t-options='{"widget": "float", "precision": 2}' /></td>
+                        <td style="text-align: center;"><span t-field="data.specimen2_ov_avg2" t-options='{"widget": "float", "precision": 2}' /></td>
+                        <td style="text-align: center;"><span t-field="data.specimen3_ov_avg3" t-options='{"widget": "float", "precision": 2}' /></td>
+                    </tr>
+                   
+                </table>
+
+            </div>
+                    
+                   	
+                   
+                    
+                    <!-- authorizeRowDataSheet -->
+                    
+                     <div class="authorizeRowDataSheet">
+						<div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr. Technician)
+                                </b>
+                            </div>
+						</div>
+						<div style="margin-left:500px">
+							
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
+								</b>
+							</div>
+						</div>
+					</div>
+                    
+                    
+                </div>
+
+            </t>
+        </t>
+    </template>
+
+</odoo>

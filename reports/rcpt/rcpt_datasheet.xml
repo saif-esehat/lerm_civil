@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="rcpt_datasheet">
+        <t t-call="web.html_container">
+            <t t-call="lerm_civil.mechanical_data_sheet_header">
+                <div style="text-align:center;font-size:18px;font-weight: bold">
+                    Concrete-RCPT
+                </div>
+
+                <div class="container_eln" style="margin-top:5px">
+                    <table style="margin-top:20px">
+                        <tr cols="12">
+                            
+                            <td colspan="6">Job No :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.kes_no"></span>
+                            </td>
+                            <td colspan="6">Test Start Date: 
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.start_date"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Material: <span t-field="eln.material"></span>
+                            </td>
+                            <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                            </td>
+                        </tr>
+                         <tr style="height:50px" cols="12">
+                            <td colspan="4">Performed By :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.technician.name"/>
+                            </td>
+                            <td colspan="4">Witness Name :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.witness_name"/>
+                            </td>
+                            <td colspan="4">Witness Signature :
+                                <![CDATA[&nbsp;]]>
+                                <span style='padding:20px'></span>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td colspan="6">Age at Test: <span t-field="data.age_of_days"></span>
+                            </td>
+                            <td colspan="6">Sample Conditioning: <span t-field="data.sample_condition"></span>
+                            </td>
+                        </tr> -->
+                    </table>
+                    <!-- Core sample and its dimension  -->
+                    
+                    <div style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b> Concrete-RCPT</b>
+                        </div>
+                        <table>
+                            <tr cols="12">
+                                <td colspan="3" style="text-align: center;"><b>Sample No</b></td>
+                                <td colspan="3" style="text-align: center;"><b>Height</b></td>
+                                <td colspan="3" style="text-align: center;"><b>Dia Of Core</b></td>
+                                <td colspan="3" style="text-align: center;"><b>Identification Mark</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I0</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I30</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I60</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I90</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I120</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I150</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I180</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I210</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I240</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I270</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I300</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I330</b></td>
+                                <td colspan="3" style="text-align: center;"><b>I360</b></td>
+                                <td colspan="3" style="text-align: center;"><b>Qx</b></td>
+                                <td colspan="3" style="text-align: center;"><b>Qs</b></td>
+                               
+                            </tr>
+                            <t t-set="f" t-value="0"/>
+                            <tr t-foreach="data.child_lines" t-as="r">
+                                <td colspan="3" style="text-align: center;">
+                                    <div>
+                                        <span t-esc="f + 1" />
+                                        <t t-set="f" t-value="f + 1"/>
+                                    </div>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['height']"/>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['dia_core']"/>
+                                </td>
+                                 <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['identification_mark']"/>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['io']"/>
+                                </td>
+                                 <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i30']"/>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i60']"/>
+                                </td>
+                                 <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i90']"/>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i120']"/>
+                                </td>
+                                 <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i150']"/>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i180']"/>
+                                </td>
+                                 <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i210']"/>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i240']"/>
+                                </td>
+                                 <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i270']"/>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i300']"/>
+                                </td>
+                                 <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i330']"/>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['i360']"/>
+                                </td>
+                                 <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['qx']"/>
+                                </td>
+                                <td colspan="3" style="text-align: center;">
+                                    <span t-esc="r['qs']"/>
+                                </td>
+                                
+                            </tr>
+                        </table>
+
+                        
+                    </div>
+
+                     <div style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                            <b>Observed value</b>
+                        </div>
+                        
+                            <table>
+                                <tr>
+                                    <td style="text-align: center;"><b></b></td>
+                                    <td style="text-align: center;"><b> Sample-01</b></td>
+                                    <td style="text-align: center;"><b> Sample-02</b></td>
+                                    <td style="text-align: center;"><b> Sample-02</b></td>
+                                </tr>
+                               
+                                <tr>
+                                    <td style="text-align: center;"><b>Io</b></td>
+                                    <td style="text-align: center;"><span t-field="data.io_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.io_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.io_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I30</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i30_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i30_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i30_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I60</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i60_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i60_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i60_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I90</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i90_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i90_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i90_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I120</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i120_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i120_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i120_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I150</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i150_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i150_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i150_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I180</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i180_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i180_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i180_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I210</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i210_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i210_sample2"/></td>
+                                    <td style="text-align: center;" ><span t-field="data.i210_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I240</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i240_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i240_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i240_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I270</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i270_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i270_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i270_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I300</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i300_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i300_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i300_sample3"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I330</b></td>
+                                    <td style="text-align: center;"><span t-field="data.sample1_i330"/></td>
+                                    <td style="text-align: center;"><span t-field="data.sample2_i330"/></td>
+                                    <td style="text-align: center;"><span t-field="data.sample3_i330"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><b>I360</b></td>
+                                    <td style="text-align: center;"><span t-field="data.i360_sample1"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i360_sample2"/></td>
+                                    <td style="text-align: center;"><span t-field="data.i360_sample3"/></td>
+                                </tr>
+                            </table>
+
+                                        
+                    </div>
+
+                     
+                   	
+                   
+                    
+                    <!-- authorizeRowDataSheet -->
+                    <div class="authorizeRowDataSheet">
+						<div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (Jr. Technician)
+                                </b>
+                            </div>
+						</div>
+						<div style="margin-left:500px">
+							
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
+								</b>
+							</div>
+						</div>
+					</div>
+                </div>
+
+            </t>
+        </t>
+    </template>
+
+</odoo>

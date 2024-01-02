@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="ferrous_structural_steel_view" model="ir.ui.view">
+        <field name="name">ferrous.structural.steel.form</field>
+        <field name="model">ferrous.structural.steel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group>
+                        <field name='eln_ref' invisible="1"/>
+                        <h1>
+                            Ferrous Structural Steel
+                        </h1>
+                    </group>
+                         
+                           
+                                <group>
+                                    <field name='Id_no' invisible="1"/>
+                                </group>
+                                <group>
+                                <group>
+                                    <field name='grade'/>
+                                </group>
+                                <group>
+                                    <field name='size'/>
+                                </group>
+                                </group>
+                                
+                          
+                              <group>
+                                    <field name="srf_id" invisible="1"/>
+                                    <field name="sample_id" readonly="1"/>
+                                    <field name="eln_ref" readonly="1"/>
+                                    <!-- <field name="parameter_id" invisible="1"/> -->
+                              </group>
+                            <group>
+                                <field name="sample_parameters">
+                                    <tree>
+                                        <field name="parameter_name"/>
+                                        <field name="test_method"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                    <field name='tests' options="{'no_create':True}" invisible="1"/>
+                            </group>
+
+                            <group style="width:51%"> 
+                                <field name='width'/>
+                            </group>
+                            <group style="width:51%">
+                                <field name='thickness'/>
+                            </group>
+                            <!-- <group style="width:51%">
+                                <field name='weight'/>
+                            </group> -->
+                            <!-- <group style="width:51%">
+                                <field name='weight_per_meter'/>
+                            </group> -->
+                            <group style="width:51%">
+                                <field name='area'/>
+                            </group>
+                            <group style="width:51%">
+                                <field name='gauge_length1'/>
+                            </group>
+                            <group style="width:51%">
+                                <field name='final_length'/>
+                            </group>
+                           
+                                <!-- <group style="width:20%">
+                                <field name='weight_per_meter'/>
+                                </group> -->
+                                <!-- <group style="width:20%">
+                                <field name='variation'/>
+                                </group> -->
+                                <!-- <group style="width:20%">
+                                <field name='requirement_weight_per_meter'/>
+                                </group>
+                                <group style="width:20%">
+                                <field name='weight_per_meter_nabl'/>
+                                </group>
+                                <group style="width:20%">
+                                <field name='weight_per_meter_conformity'/>
+                                </group> -->
+                            <!-- </group> -->
+                            <group style="width:51%">
+                                <field name='yeild_load'/>
+                            </group>
+                            <group style="width:51%">
+                                <field name='ultimate_load'/>
+                            </group>
+                            <group >
+                                <group style="width:25%">
+                                <field name='proof_yeid_stress'/>
+                                </group>
+                                <group style="width:25%">
+                                <field name='requirement_yield'/>
+                                </group>
+                                <group style="width:25%">
+                                <!-- <field name='yield_nabl'/> -->
+                                <field name="yield_nabl"  style="color: green;" attrs="{'invisible': [('yield_nabl','!=','pass')]}"/>
+                                <field name="yield_nabl"  style="color: red;" attrs="{'invisible': [('yield_nabl','!=','fail')]}"/>
+                                </group>
+                                <group style="width:25%">
+                                <!-- <field name='yield_conformity'/> -->
+                                <field name="yield_conformity"  style="color: red;" attrs="{'invisible': [('yield_conformity','!=','fail')]}"/>
+                                <field name="yield_conformity"  style="color: green;" attrs="{'invisible': [('yield_conformity','!=','pass')]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group style="width:25%">
+                                <field name='ult_tens_strgth'/>
+                                </group>
+                                <group style="width:25%">
+                                <field name='requirement_utl'/>
+                                </group>
+                                <group style="width:25%">
+                                <!-- <field name='uts_nabl'/> -->
+                                <field name="uts_nabl"  style="color: green;" attrs="{'invisible': [('uts_nabl','!=','pass')]}"/>
+                                <field name="uts_nabl"  style="color: red;" attrs="{'invisible': [('uts_nabl','!=','fail')]}"/>
+                                </group>
+                                <group style="width:25%">
+                                <!-- <field name='uts_conformity'/> -->
+                                <field name="uts_conformity"  style="color: red;" attrs="{'invisible': [('uts_conformity','!=','fail')]}"/>
+                                <field name="uts_conformity"  style="color: green;" attrs="{'invisible': [('uts_conformity','!=','pass')]}"/>
+                                </group>
+                            </group>
+                             <group >
+                                <group style="width:25%">
+                                <field name='elongation'/>
+                                </group>
+                                <group style="width:25%">
+                                <field name='requirement_elongation'/>
+                                </group>
+                                <group style="width:25%">
+                                <!-- <field name='elongation_nabl'/> -->
+                                <field name="elongation_nabl"  style="color: green;" attrs="{'invisible': [('elongation_nabl','!=','pass')]}"/>
+                                <field name="elongation_nabl"  style="color: red;" attrs="{'invisible': [('elongation_nabl','!=','fail')]}"/>
+                                </group>
+                                <group style="width:25%">
+                                <!-- <field name="elongation_conformity"/> -->
+                                <field name="elongation_conformity"  style="color: red;" attrs="{'invisible': [('elongation_conformity','!=','fail')]}"/>
+                                <field name="elongation_conformity"  style="color: green;" attrs="{'invisible': [('elongation_conformity','!=','pass')]}"/>
+                                </group>
+                            </group>
+                            <!-- <group>
+                            <group>
+                                <group style="width:25%">
+                                <field name='ts_ys_ratio'/>
+                                </group>
+                                <group style="width:25%">
+                                <field name='requirement_ts_ys'/>
+                                </group>
+                                <group style="width:25%">
+                                <field name='ts_ys_nabl'/>
+                                </group>
+                                <group style="width:25%">
+                                <field name='ts_ys_conformity'/>
+                                </group>
+                            </group> -->
+                            
+                            <group style="width:51%" attrs="{'invisible': [('bend_visible', '=', False)]}">
+                                <field name="bend_visible" invisible="1"/>
+                                <field name='bend_test'/>
+                            </group>
+                            <!-- <group style="width:51%" attrs="{'invisible': [('rebend_visible', '=', False)]}">
+                                <field name="rebend_visible" invisible="1"/>
+                                <field name='re_bend_test'/>
+                            </group> -->
+                            <group style="width:51%" attrs="{'invisible': [('fracture_visible', '=', False)]}">
+                                <field name="fracture_visible" invisible="1"/>
+                                <field name='fracture'/>
+                            </group>
+              
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+
+
+    </data>
+</odoo>

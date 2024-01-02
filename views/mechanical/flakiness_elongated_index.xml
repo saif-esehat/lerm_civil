@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="flakiness_elongation_index_view" model="ir.ui.view">
+        <field name="name">mechanical.flakiness.elongation.index.form</field>
+        <field name="model">mechanical.flakiness.elongation.index</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1" />
+                        <field name="parameter_id"/>
+                       
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='sieve_size'/>
+                                <field name='wt_retained'/>
+                                <field name='elongated_retain'/>
+                                <field name='flaky_passing'/>
+                            </tree>
+                           
+                    </field> 
+                    <group>
+                            <group style="width:30%">
+                               <field name='wt_retained_total'/>
+                            </group>
+                            <group style="width:30%">
+                               <field name='elongated_retain_total'/>
+                            </group>
+                            <group style="width:30%">
+                               <field name='flaky_passing_total'/>
+                            </group>
+                    </group>
+                            <group>
+                               <field name='aggregate_elongation'/>
+                            </group>
+                            <group>
+                               <field name='aggregate_flakiness'/>
+                            </group>
+                            <group>
+                               <field name='combine_elongation_flakiness'/>
+                            </group>
+                           
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+
+
+    </data>
+</odoo>

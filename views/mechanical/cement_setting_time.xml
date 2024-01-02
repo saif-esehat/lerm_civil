@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_cement_setting_time" model="ir.ui.view">
+        <field name="name">mechanical.cement.setting.time.form</field>
+        <field name="model">mechanical.cement.setting.time</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                            <field name="temp_percent"/>
+                            <field name="humidity_percent"/>
+                    </group>
+
+                    <group>
+                            <field name="wt_of_cement"/>
+                            <field name="wt_of_water_required"/>
+                    </group>
+                   
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

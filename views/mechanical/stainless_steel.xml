@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="stainless_steel_view" model="ir.ui.view">
+        <field name="name">stainless.steel.form</field>
+        <field name="model">mechanical.stainless.steel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group>
+                        <field name='eln_ref' readonly="1"/>
+                        <h1>
+                            STAINLESS STEEL
+                        </h1>
+                    </group>
+                         
+                    <group>
+                             
+                        <group>
+                            <field name='Id_no'/>
+                        </group>
+                        <group>
+                            <field name='grade'/>
+                        </group>
+                             
+                    </group>
+                    <group style="width:65%">
+                        <field name='diameter'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='weight'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='length'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='area'/>
+                    </group>   
+                    <!-- <group style="width:65%">
+                        <field name='crossectional_area'/>
+                    </group> -->
+                    <group style="width:65%">
+                        <field name='gauge_length'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='final_length'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='yeild_load'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='ultimate_load'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='proof_yeid_stress'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='ult_tens_strgth'/>
+                    </group>
+                    <group style="width:65%">
+                        <group>
+                            <field name='weight_per_meter'/>
+                        </group>
+                        <group>
+                            <field name="weight_meter_result"/>
+                        </group>
+                    </group>
+                    
+                    <group style="width:65%">
+                        <field name='percent_elongation'/>
+                    </group>
+                     <group style="width:65%">
+                        <field name='fracture'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='bend_test'/>
+                    </group>
+                    <group style="width:65%">
+                        <field name='re_bend_test'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+
+
+    </data>
+</odoo>

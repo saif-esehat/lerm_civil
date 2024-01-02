@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="dring_shrinkage_view" model="ir.ui.view">
+        <field name="name">mechanical.drying.shrinkage.solid.form</field>
+        <field name="model">mechanical.drying.shrinkage.solid</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="parameter_id"/>
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='wet_measurment'/>
+                                <field name='dry_measurment'/>
+                                <field name='dry_length'/>
+                                <field name='drying_shrinkage'/>
+                            </tree>
+                    </field>
+                    <group>
+                        <field name='average_drying_shrinkage'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

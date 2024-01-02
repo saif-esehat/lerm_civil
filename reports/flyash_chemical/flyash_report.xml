@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="flyash_chemical_report">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
+				<!-- <div style="text-align:center;margin-top:10px">
+					<p style="font-size:15px"><b>Test Report</b></p>
+				</div> -->
+				<div class="container_eln">
+					<div t-foreach="eln" t-as="o">
+						<!-- <table>
+							<tr>
+								<td colspan="3">Report no :
+								</td>
+								<td colspan="3">
+									<span t-field="o.kes_no"/>
+								</td>
+								<td colspan="3">Report Date :
+								</td>
+								<td colspan="3">
+									<span t-field="o.end_date"/>
+								</td>
+								<td colspan="3"  t-if="nabl">ULR NO :
+								</td>
+								<td colspan="3" t-if="nabl">
+									<span t-field="o.sample_id.ulr_no"/>
+								</td>
+							</tr>
+						</table> -->
+						<table style="margin-top:10px;">
+							<tr>
+								<td colspan="12">Customer Party Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.street"/>
+									<span t-field="o.srf_id.customer.street2"/>
+									<span t-field="o.srf_id.customer.city"/>
+									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+									<span t-field="o.srf_id.customer.state_id"/>
+											,
+									<span t-field="o.srf_id.customer.country_id"/>
+								</td>
+							</tr>
+							<tr>
+								<!-- <td colspan="12">Project / Site Address :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address.name"/>
+									<span t-field="o.srf_id.site_address.street"/>
+									<span t-field="o.srf_id.site_address.street2"/>
+									<span t-field="o.srf_id.site_address.city"/>
+									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
+									<span t-field="o.srf_id.site_address.state_id"/>
+											,
+									<span t-field="o.srf_id.site_address.country_id"/>
+								</td> -->
+								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.start_date"/>
+								</td>
+								<td colspan="6">Test End Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.end_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.client_sample_id"/>
+								</td>
+								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_received_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Size :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.size_id.size"/>
+								</td>
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.grade_id.grade"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Brand :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.brand"/>
+								</td>
+								<td colspan="6">Consultant Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Client Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">Client Reference :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client_refrence"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">Discipline :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.discipline.discipline"/>
+								</td>
+								<td colspan="6">Group :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.group.group"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td colspan="12">Material/Test Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.material.name"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div style="margin-top:20px;font-weight: bold;">
+						<u>Results</u>
+					</div>
+					<table>
+					<t t-set="i" t-value="0"/>
+						<thead>
+							
+
+                            <tr cols="12">
+								<td colspan="1" style="border-top:none;border-bottom:none;text-align: center;font-weight: bold;">Sr no 
+								</td>
+								<td colspan="2" style="border-top:none;border-bottom:none;text-align: center;font-weight: bold;">Test Parameter 
+								</td>
+								<td colspan="1" style="border-bottom:none;text-align: center; font-weight: bold;">Results
+								</td>
+								
+                                <!-- <td colspan="3" style="text-align: center;">Test Method
+								</td>	 -->
+								<th colspan="3" style="text-align: center;font-weight: bold;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
+										
+									</span>
+								</th>
+							</tr>
+                            <tr cols="12">
+								<td colspan="1" style="border-top:none">
+								</td>
+								<td colspan="2" style="border-top:none">
+								</td>
+								<td colspan="1" style="border-top:none">
+								</td>
+                                <td colspan="1" style="text-align: center;font-weight: bold;">Siliceous pulverized fuel Ash
+								</td>
+                                <td colspan="2" style="text-align: center;font-weight: bold;">Calcareous pulverized fuel Ash 
+								</td>	
+							</tr>
+						</thead>
+						<tbody>
+
+						    <tr t-if="data.combined_percentage_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+									SiO2 + Al2O3 + Fe2O3 %
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.combined_percentage"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous15"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous15"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+							<tr t-if="data.Silica_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+										Silica (SiO2)
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.Silica"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous1"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous1"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+							<tr t-if="data.magnesium_oxide_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+										Magnesium Oxide % 
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.magnesium_oxide"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous8"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous8"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+
+							
+
+							<tr t-if="data.chloride_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+										Total Chloride (CI) 
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.chloride"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous14"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous14"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+
+							<tr t-if="data.loi_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+										Loss on Ignition % 
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.loi"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous10"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous10"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+
+							<tr t-if="data.alumina1_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+										Alumina (Al2o3) %
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.alumina"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous4"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous4"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
+							<tr t-if="data.ferric_oxide_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+									 Ferric Oxide (FeO3)
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.ferric_oxide"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous3"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous3"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+							<tr t-if="data.so3_visible">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+									 Sulphur trioxide (SO3) %
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.so3"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous9"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous9"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+							
+							
+						
+						</tbody>
+					</table>
+					<div style="page-break-inside: avoid;">
+						<div style="margin-top:20px" class="noteContainer">
+							<div>
+								<b>Note :-</b>
+							</div>
+							<div>
+								<ul>
+									<li>
+										The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+									</li>
+									<li>
+										Sample(s) was/were not drawn by laboratory.
+									</li>
+									<li>
+										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+									</li>
+									
+									<li t-if="eln.has_witness">
+										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									</li>
+									<li t-if="eln.remarks">
+										<span t-esc="eln.remarks"/>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="signatureContainer girdgird">
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:30px">
+
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.sample_id.check_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Sr. Chemist)
+									</b>
+								</div>
+							</div>
+							<div>
+								<div>
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By 
+									</b>
+									
+								</div>
+								<div style="height:30px">
+
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										Chemical Department (HOD)
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+						</div>
+						<div style="text-align:center;margin-top:25px">
+							......End of Report......
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_heay_ligth_compaction_view" model="ir.ui.view">
+        <field name="name">mechanical.density.relation.using.heavy.compaction.form</field>
+        <field name="model">mechanical.density.relation.using.heavy.compaction</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="parameter_id"/>
+                        <field name="wt_of_modul"/>
+                        <field name="vl_of_modul"/>
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='determination_no'/>
+                                <field name='wt_of_modul_compact'/>
+                                <field name='wt_of_compact'/>
+                                <field name='bulk_density'/>
+                                <field name='container_no'/>
+                                <field name='wt_of_container'/>
+                                <field name='wt_of_container_wet'/>
+                                <field name='wt_of_container_dry'/>
+                                <field name='wt_of_dry_sample'/>
+                                <field name='wt_of_moisture'/>
+                                <field name='moisture'/>
+                                <field name='dry_density'/>
+                            </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>
