@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="structural_steel_view" model="ir.ui.view">
+        <field name="name">mechanical.structural.steel.form</field>
+        <field name="model">mechanical.structural.steel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id"/>
+                        <field name="sample_id"/>
+                        <field name="parameter_id"/>
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='width'/>
+                                <field name='thickness'/>
+                                <field name='area'/>
+                                <field name='gauge_length'/>
+                                <field name='final_length'/>
+                                <field name='proof_yield_load'/>
+                                <field name='ultimate_load'/>
+                                <field name='proof_yield_n'/>
+                                <field name='ult_tens_strength'/>
+                                <field name='elongation'/>
+                                <field name='bend_test'/>
+                                <field name='fracture'/>
+                            </tree>
+                    </field> 
+                </sheet>
+            </form>
+        </field>
+    </record>
+    </data>
+</odoo>

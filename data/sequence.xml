@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_sample_no" model="ir.sequence">
+            <field name="name">Sample Sequence</field>
+            <field name="code">lerm.srf.sample</field>
+            <field name="prefix">SAM</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_kes_no" model="ir.sequence">
+            <field name="name">Kes Sequence</field>
+            <field name="code">lerm.srf.sample.kes</field>
+            <field name="prefix">KES%(y)s%(month)s%(day)s</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="eln_no" model="ir.sequence">
+            <field name="name">ELN Sequence</field>
+            <field name="code">lerm.eln.seq</field>
+            <field name="prefix">ELN</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!-- cement opc  -->
+
+        <record id="ulr_no_seqs" model="ir.sequence">
+            <field name="name">ULR Sequence</field>
+            <field name="code">sample.ulr.seq</field>
+            <field name="prefix">(lab_certificate_no)%(y)s(lab_no_value)</field>
+            <field name="suffix">F</field>
+            <field name="padding">8</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- New Ulr Sequence -->
+<!--        
+            <record id="ulr_line_lab_seq" model="ir.sequence">
+                <field name="name">ULR Line Lab Sequence</field>
+                <field name="code">lerm_civil.discipline</field>
+                <field name="prefix">(lab_c_no)%(y)s(lab_no)</field>
+                <field name="suffix">F</field>
+                <field name="padding">8</field>
+                <field name="company_id" eval="False"/>
+            </record> -->
+        
+
+        <record id="normal_consistency_test" model="mechanical.cement.test">
+            <field name="name">Normal Consistency</field>
+        </record>
+        
+        <record id="cement_test" model="mechanical.cement.test">
+            <field name="name">Setting Time</field>    
+        </record>
+
+        <record id="density_test" model="mechanical.cement.test">
+            <field name="name">Density</field>   
+        </record>
+
+        <record id="compressive_test" model="mechanical.cement.test">
+            <field name="name">Compressive Strength</field>   
+        </record>
+
+        <record id="soundness_test" model="mechanical.cement.test">
+            <field name="name">Soundness</field>   
+        </record>
+
+        <record id="dry_sieving_tests" model="mechanical.cement.test">
+            <field name="name">Dry Seiving</field>   
+        </record>
+
+        <record id="fineness_blaine_test" model="mechanical.cement.test">
+            <field name="name">Fineness (Blaine)</field>   
+        </record>
+
+        <!-- cement psc -->
+
+
+        <record id="normal_consistency_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Normal Consistency</field>
+        </record>
+        
+        <record id="cement_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Setting Time</field>    
+        </record>
+
+        <record id="density_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Density</field>   
+        </record>
+
+        <record id="compressive_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Compressive Strength</field>   
+        </record>
+
+        <record id="soundness_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Soundness</field>   
+        </record>
+
+        <record id="dry_sieving_tests_psc" model="mechanical.cement.psc.test">
+            <field name="name">Dry Seiving</field>   
+        </record>
+
+        <record id="fineness_blaine_test_psc" model="mechanical.cement.psc.test">
+            <field name="name">Fineness (Blaine)</field>   
+        </record>
+
+        <!-- cement ppc  -->
+
+
+        <record id="normal_consistency_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Normal Consistency</field>
+        </record>
+        
+        <record id="cement_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Setting Time</field>    
+        </record>
+
+        <record id="density_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Density</field>   
+        </record>
+
+        <record id="compressive_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Compressive Strength</field>   
+        </record>
+
+        <record id="soundness_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Soundness</field>   
+        </record>
+
+        <record id="dry_sieving_tests_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Dry Seiving</field>   
+        </record>
+
+        <record id="fineness_blaine_test_ppc" model="mechanical.cement.ppc.test">
+            <field name="name">Fineness (Blaine)</field>   
+        </record>
+
+        <!-- GGBS  -->
+
+        <record id="normal_consistency_test_ggbs" model="mechanical.ggbs.test">
+            <field name="name">Normal Consistency</field>
+        </record>
+        <record id="specific_gravity_test_ggbs" model="mechanical.ggbs.test">
+            <field name="name">Specific Gravity</field>
+        </record>
+        <record id="slag_activity_test_ggbs" model="mechanical.ggbs.test">
+            <field name="name">Slag Activity Index</field>
+        </record>
+        <record id="fineness_test_ggbs" model="mechanical.ggbs.test">
+            <field name="name">Fineness by Blaine</field>
+        </record>
+
+        <!-- Tmt Steel  -->
+
+        <record id="fracture_test_tmt" model="mechanical.tmt.test">
+            <field name="name">Fracture</field>
+        </record>
+        <record id="bend_test_tmt" model="mechanical.tmt.test">
+            <field name="name">Bend Test</field>
+        </record>
+        <record id="rebend_test_tmt" model="mechanical.tmt.test">
+            <field name="name">Rebend Test</field>
+        </record>
+
+        <!-- Gypsum  -->
+        <record id="normal_consistency_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Normal Consistency</field>
+        </record>
+        <record id="setting_time_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Setting Time</field>
+        </record>
+        <record id="dry_bulk_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Dry Bulk Density</field>
+        </record>
+        <record id="coarse_particle_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Free From Coarse Particle</field>
+        </record>
+        <record id="compressive_strength_test_dry_bulk" model="mechanical.gypsum.test">
+            <field name="name">Compressive Strength</field>
+        </record>
+    </data>
+</odoo>

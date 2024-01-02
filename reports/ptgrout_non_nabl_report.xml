@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	
+	<template id="lerm_ptgrout_non_nabl_report">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+				<div style="text-align:center;margin-top:10px">
+					<p style="font-size:15px"><b>Test Report On PtGrout Mechanical</b></p>
+				</div>
+				<div class="container_eln">
+					<div t-foreach="eln" t-as="o">
+						<table>
+							<tr>
+								<td colspan="3">Test Report No :
+								</td>
+								<td colspan="3">
+									<span t-field="o.kes_no"/>
+								</td>
+								<td colspan="3">Report Issue Date :
+								</td>
+								<td colspan="3">
+									<span t-field="o.srf_date"/>
+								</td>
+								<!-- <td colspan="3">ULR NO :
+								</td> -->
+								<td colspan="3">
+									---
+									<!-- <span t-field="o.sample_id.ulr_no"/> -->
+								</td>
+							</tr>
+
+						<table>
+								<tr>
+									<!-- Left Side -->
+									<!-- <td colspan="12" style="width: 50%; vertical-align: top;"> -->
+										<!-- <table> -->
+											<tr>
+												<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
+													Customer/Party Name :
+												</td>
+												<td colspan="3">
+												<span t-field="o.srf_id.customer.name"/>
+												<span t-field="o.srf_id.customer.street"/>
+												<span t-field="o.srf_id.customer.street2"/>
+												<span t-field="o.srf_id.customer.city"/>
+												<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+												<span t-field="o.srf_id.customer.state_id"/>
+												,
+												<span t-field="o.srf_id.customer.country_id"/>
+									           </td>
+											</tr>
+											
+										<!-- </table> -->
+									<!-- </td> -->
+									<!-- Right Side -->
+									<!-- <td colspan="12" style="width: 30%; vertical-align: top;"> -->
+										<!-- <table> -->
+											<tr>
+											    <td colspan="3" style="font-weight: bold;" >
+													Sample Receipt Date :
+												</td>
+												<td colspan="3">
+													<span t-field="o.sample_id.sample_received_date"/>
+												</td>
+											</tr>
+											<tr>
+											    <td colspan="3" style="font-weight: bold;" >
+													Test Start Date :
+												</td>
+												<td colspan="3">
+													<span t-field="o.start_date"/>
+												</td>
+											</tr>
+											<tr>
+											    <td colspan="3" style="font-weight: bold;" >
+													Test End Date :
+												</td>
+												<td colspan="3">
+													<span t-field="o.end_date"/>
+												</td>
+											</tr>
+										<!-- </table> -->
+									<!-- </td> -->
+								</tr>
+							
+
+						</table>
+						</table>
+							
+						<table>
+						   <tr>
+								<!-- <td colspan="12" style="font-weight: bold;">Project / Site Address :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address.name"/>
+									<span t-field="o.srf_id.site_address.street"/>
+									<span t-field="o.srf_id.site_address.street2"/>
+									<span t-field="o.srf_id.site_address.city"/>
+									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
+									<span t-field="o.srf_id.site_address.state_id"/>
+									,
+									<span t-field="o.srf_id.site_address.country_id"/>
+								</td> -->
+								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.site_address"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12" style="font-weight: bold;">Sample Description : <![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+								
+							</tr>
+							<tr>
+								<td colspan="3" style="font-weight: bold;">Sample Id Mark:
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="o.sample_id.client_sample_id"/>
+								</td>
+								<td colspan="3" style="font-weight: bold;">Sample Condition :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td>
+								</td>
+								
+							</tr>
+							<tr>
+							   <td colspan="3" style="font-weight: bold;">Quantity :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="o.sample_id.size_id.size"/>
+								</td>
+								<td colspan="3" style="font-weight: bold;">W/C Ratio :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+							    <td colspan="3" style="font-weight: bold;">Brand :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="o.sample_id.brand"/>
+								</td>
+								<td colspan="3" style="font-weight: bold;">Consultant Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td>
+									---
+								</td>
+							</tr>
+							<tr>
+							    <td colspan="3" style="font-weight: bold;">Client Name :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									---
+								</td>
+								<td colspan="3" style="font-weight: bold;">Client Reference :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td>
+									<span t-field="o.srf_id.client_refrence"/>
+								</td>
+							</tr>
+							<tr>
+							    <td colspan="3" style="font-weight: bold;">Discipline :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="o.discipline.discipline"/>
+								</td>
+								<td colspan="3" style="font-weight: bold;">Group :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									<span t-field="o.group.group"/>
+								</td>
+							</tr>
+							<tr>
+							    <td colspan="3" style="font-weight: bold;">Material :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="12">
+									<span t-field="o.material.name"/>
+								</td>
+							</tr>
+							<tr>
+
+								<!-- <td colspan="12" style="font-weight: bold;">Environmental Condition : -->
+									<!-- <span t-field="o.sample_id.sample_description"/> -->
+								<!-- </td> -->
+							    <td colspan="3" style="font-weight: bold;">Room Temp :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									
+								</td>
+								<td colspan="3" style="font-weight: bold;">Room RH :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="3">
+									
+								</td>
+							</tr>
+
+						</table>
+					</div>
+					<div style="margin-top:20px;">
+						<p><strong>Results</strong>:<![CDATA[&nbsp;]]></p>
+						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
+					</div>
+
+					<table style="margin-top:30px;">
+						<t t-set="i" t-value="0"/>
+							<thead>
+								<tr>
+									<th style="text-align: center;">
+										<span style="font-weight: bold;">
+											Sr. No
+										</span>
+									</th>
+									<th style="text-align: center;max-width:200px">
+										<span style="font-weight: bold;">
+											Test Parameters
+										</span>
+									</th>
+									<th style="text-align: center;max-width:100px">
+										<span style="font-weight: bold;">
+											Unit
+										</span>
+									</th>
+									<th style="text-align: center;">
+										<span style="font-weight: bold;">
+											Result
+										</span>
+									</th>
+									<th style="text-align: center;">
+										<span style="font-weight: bold;">
+											Test Method
+										</span>
+									</th>
+
+									<th style="text-align: center;max-width:150px">
+										<span colspan="3" style="font-weight: bold;">
+											Limit (As per MORTH Vth revision-2013)
+										</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody >
+
+								<!--1 Fluidity -->
+
+								<tr t-if="PtGroutNonNabl.fludity_visible">
+									<td style="text-align: center;padding:0px">
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</td>
+									<td style="text-align: center;padding:0px">
+										<span>
+											Fluidity
+										</span>
+										
+									</td>
+									<td style="text-align: center;padding:0px">
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','192208a3-8178-453e-a4f7-aad59a6513b6')]).unit.name"/>
+										</span>
+									</td>
+									<td style="text-align: center;padding:0px">
+										<span>
+											
+											<span t-field="PtGroutNonNabl.water_cement_ratio" t-options='{"widget": "float", "precision": 2}'/>
+										</span>									
+									</td>
+									<td style="text-align: center;padding:0px">
+										
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','192208a3-8178-453e-a4f7-aad59a6513b6')]).test_method.test_method"/>
+										</span>
+									</td>
+									
+									
+									<td style="text-align: center;max-width:150px">
+										<span style="text-align: center;">
+											---
+										</span>
+									</td>
+									
+								</tr>
+
+								<!--2 Bleeding -->
+
+								<tr t-if="PtGroutNonNabl.bleeding_visible">
+									<td style="text-align: center;padding:0px">
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</td>
+									<td style="text-align: center;padding:0px">
+										<span>
+											Bleeding
+										</span>
+										
+									</td>
+									<td style="text-align: center;padding:0px">
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b93c261b-7fdd-4608-8896-3eaa0fa6a5b2')]).unit.name"/>
+										</span>
+									</td>
+									<td style="text-align: center;padding:0px">
+										<span>
+											
+											<span t-field="PtGroutNonNabl.final_bleeding" t-options='{"widget": "float", "precision": 2}'/>
+										</span>									
+									</td>
+									<td style="text-align: center;padding:0px">
+										
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b93c261b-7fdd-4608-8896-3eaa0fa6a5b2')]).test_method.test_method"/>
+										</span>
+									</td>
+									
+									
+									<td style="text-align: center;max-width:150px">
+										<span style="text-align: center;">
+											0.3 Max
+										</span>
+									</td>
+									
+								</tr>	
+							</tbody>
+					</table>
+
+
+
+					<div style="page-break-inside: avoid;">
+						<div style="margin-top:20px" class="noteContainer">
+							<div>
+								<b>Note :-</b>
+							</div>
+							<div>
+								<ul>
+									<li>
+										The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+									</li>
+									<li>
+										Sample(s) was/were not drawn by laboratory.
+									</li>
+									<li>
+										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+									</li>
+									<li>
+										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="signatureContainer girdgird">
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.technician.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+							<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By 
+									</b>
+									
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</t>
+		</t>
+	</template>
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_fusion_bond_steel_view" model="ir.ui.view">
+        <field name="name">mechanical.fusion.bond.steel.form</field>
+        <field name="model">mechanical.fusion.bond.steel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group >
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                   
+                    <group >
+                        
+                        <div>
+                          <group>
+                            <field  name="dia"/>
+                          </group>
+                          <group>
+                            <field  name="coating_thickness"/>
+                          </group>
+                          <group>
+                            
+                            <field  name="continuity_coating"/>
+                          </group>
+                          <group>
+                            <field  name="adhesion_coating"/>
+                          </group>
+                          
+                        </div>
+                    </group>
+
+                     
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

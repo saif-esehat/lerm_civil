@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="chemical_flyash_form" model="ir.ui.view">
+        <field name="name">chemical.flyash.form</field>
+        <field name="model">chemical.flyash</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group >
+                    <h1>
+                        <field name="name" readonly="1" nolabel="1"/>
+                    </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" />
+                        <field name="eln_ref" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+                    <!-- Silica -->
+                    <!-- <group> -->
+                    <group attrs="{'invisible': [('Silica_visible', '=', False)]}">
+                        <h1>
+                            <field name="Silica_name" readonly="1" nolabel="1"/>
+                            <field name="Silica_visible" invisible="1"/>
+                        </h1>
+                           
+                    </group>
+                           <group attrs="{'invisible': [('Silica_visible', '=', False)]}">
+                                <group>
+                                    <field name="siliceous1"/>
+                                </group>
+                                <group>
+                                    <field name="calcareous1" />
+                                </group>
+                            </group>
+                    
+                    <group attrs="{'invisible': [('Silica_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample"/>
+                            <br></br>
+                            <field name="wt_of_two_rp"/>
+                             <br></br>
+                            <field name="wt_of_two_r"/>
+                             <br></br>
+                            <field name="difference_in_wt"/>
+                             <br></br>
+                            <field name="Silica"/>
+                       </group>
+                    </group> 
+                    <group attrs="{'invisible': [('Silica_visible', '=', False)]}">
+                          
+                        <field name='Silica_conformity'
+                               decoration-success="Silica_conformity == 'pass'" 
+                               decoration-danger="Silica_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='Silica_nabl'/>
+                    </group> 
+
+                    <!-- Combined Ferric Oxide and Alumina -->
+                    <group attrs="{'invisible': [('r2o3_visible', '=', False)]}">
+                        <h1>
+                            <field name="r2o3_name" readonly="1" nolabel="1"/>
+                            <field name="r2o3_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('r2o3_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous2"/>
+                        </group>
+                        <group>
+                            <field name="calcareous2" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('r2o3_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_empty_combine"/>
+                            <br></br>
+                            <field name="wt_of_cr_combine"/>
+                             <br></br>
+                            <field name="wt_of_sample_combine"/>
+                             <br></br>
+                            <field name="difference_in_wt_combaine"/>
+                             <br></br>
+                            <field name="r2o3"/>
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('r2o3_visible', '=', False)]}">
+                          
+                        <field name='r2o3_conformity'
+                               decoration-success="r2o3_conformity == 'pass'" 
+                               decoration-danger="r2o3_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='r2o3_nabl'/>
+                    </group> 
+
+                      <!--%Ferric Oxide-->
+                    <group attrs="{'invisible': [('ferric_oxide_visible', '=', False)]}">
+                        <h1>
+                            <field name="ferric_oxide_name" readonly="1" nolabel="1"/>
+                            <field name="ferric_oxide_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('ferric_oxide_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous3"/>
+                        </group>
+                        <group>
+                            <field name="calcareous3" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('ferric_oxide_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample_ferric_oxide"/>
+                            <br></br>
+                            <field name="burette_ferric_oxide"/>
+                             <br></br>
+                            <field name="normality_ferric_oxide"/>
+                             <br></br>
+                            <field name="ferric_oxide"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('ferric_oxide_visible', '=', False)]}">
+                          
+                        <field name='ferric_oxide_conformity'
+                               decoration-success="ferric_oxide_conformity == 'pass'" 
+                               decoration-danger="ferric_oxide_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='ferric_oxide_nabl'/>
+                    </group> 
+
+
+                      <!--%Alumina-->
+                    <group attrs="{'invisible': [('alumina1_visible', '=', False)]}">
+                        <h1>
+                            <field name="alumina_name" readonly="1" nolabel="1"/>
+                            <field name="alumina1_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('alumina1_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous4"/>
+                        </group>
+                        <group>
+                            <field name="calcareous4" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('alumina1_visible', '=', False)]}">
+                       <group>
+                            <field name="alumina"/>
+                            <br></br>
+                           
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('alumina1_visible', '=', False)]}">
+                          
+                        <field name='alumina_conformity'
+                               decoration-success="alumina_conformity == 'pass'" 
+                               decoration-danger="alumina_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='alumina_nabl'/>
+                    </group> 
+
+                      <!--cao-->
+                    <group attrs="{'invisible': [('cao_visible', '=', False)]}">
+                        <h1>
+                            <field name="cao_name" readonly="1" nolabel="1"/>
+                            <field name="cao_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('cao_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous5"/>
+                        </group>
+                        <group>
+                            <field name="calcareous5" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('cao_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample_cao"/>
+                            <br></br>
+                            <field name="burette_cao"/>
+                             <br></br>
+                            <field name="normality_cao"/>
+                             <br></br>
+                            <field name="dilution_cao"/>
+                             <br></br>
+                              <field name="cao"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('cao_visible', '=', False)]}">
+                          
+                        <field name='cao_conformity'
+                               decoration-success="cao_conformity == 'pass'" 
+                               decoration-danger="cao_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='cao_nabl'/>
+                    </group> 
+
+                     <!--MgO-->
+                    <group attrs="{'invisible': [('mgo_visible', '=', False)]}">
+                        <h1>
+                            <field name="mgo_name" readonly="1" nolabel="1"/>
+                            <field name="mgo_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('mgo_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous6"/>
+                        </group>
+                        <group>
+                            <field name="calcareous6" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('mgo_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample_mgo"/>
+                            <br></br>
+                            <field name="burette_mgo"/>
+                             <br></br>
+                            <field name="normality_mgo"/>
+                             <br></br>
+                            <field name="dilution_mgo"/>
+                             <br></br>
+                              <field name="mgo"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('mgo_visible', '=', False)]}">
+                          
+                        <field name='mgo_conformity'
+                               decoration-success="mgo_conformity == 'pass'" 
+                               decoration-danger="mgo_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='mgo_nabl'/>
+                    </group> 
+
+
+                    <!--% Calicum Oxide-->
+                    <group attrs="{'invisible': [('calicum_oxide_visible', '=', False)]}">
+                        <h1>
+                            <field name="calicum_oxide_name" readonly="1" nolabel="1"/>
+                            <field name="calicum_oxide_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('calicum_oxide_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous7"/>
+                        </group>
+                        <group>
+                            <field name="calcareous7" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('calicum_oxide_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample_calicum_oxide"/>
+                            <br></br>
+                            <field name="wt_cr_calicum_oxide"/>
+                             <br></br>
+                            <field name="wt_empty_calicum_oxide"/>
+                             <br></br>
+                            <field name="difference_calicum_oxide"/>
+                             <br></br>
+                              <field name="calicum_oxide"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('calicum_oxide_visible', '=', False)]}">
+                          
+                        <field name='calicum_oxide_conformity'
+                               decoration-success="calicum_oxide_conformity == 'pass'" 
+                               decoration-danger="calicum_oxide_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='calicum_oxide_nabl'/>
+                    </group> 
+
+
+
+                      <!--%Magnesium Oxide-->
+                    <group attrs="{'invisible': [('magnesium_oxide_visible', '=', False)]}">
+                        <h1>
+                            <field name="magnesium_oxide_name" readonly="1" nolabel="1"/>
+                            <field name="magnesium_oxide_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('magnesium_oxide_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous8"/>
+                        </group>
+                        <group>
+                            <field name="calcareous8" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('magnesium_oxide_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample_magnesium_oxide"/>
+                            <br></br>
+                            <field name="wt_cr_magnesium_oxide"/>
+                             <br></br>
+                            <field name="wt_empty_magnesium_oxide"/>
+                             <br></br>
+                            <field name="difference_magnesium_oxide"/>
+                             <br></br>
+                              <field name="magnesium_oxide"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('magnesium_oxide_visible', '=', False)]}">
+                          
+                        <field name='magnesium_oxide_conformity'
+                               decoration-success="magnesium_oxide_conformity == 'pass'" 
+                               decoration-danger="magnesium_oxide_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='magnesium_oxide_nabl'/>
+                    </group> 
+
+
+                      <!--% Sulphur trioxide (SO3)-->
+                    <group attrs="{'invisible': [('so3_visible', '=', False)]}">
+                        <h1>
+                            <field name="so3_name" readonly="1" nolabel="1"/>
+                            <field name="so3_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('so3_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous9"/>
+                        </group>
+                        <group>
+                            <field name="calcareous9" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('so3_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample_so3"/>
+                            <br></br>
+                            <field name="wt_cr_so3"/>
+                             <br></br>
+                            <field name="wt_empty_co3"/>
+                             <br></br>
+                            <field name="difference_co3"/>
+                             <br></br>
+                              <field name="so3"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('so3_visible', '=', False)]}">
+                          
+                        <field name='so3_conformity'
+                               decoration-success="so3_conformity == 'pass'" 
+                               decoration-danger="so3_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='so3_nabl'/>
+                    </group> 
+
+
+                     <!--%Loss on Ignition -->
+                    <group attrs="{'invisible': [('loi_visible', '=', False)]}">
+                        <h1>
+                            <field name="loi_name" readonly="1" nolabel="1"/>
+                            <field name="loi_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('loi_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous10"/>
+                        </group>
+                        <group>
+                            <field name="calcareous10" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('loi_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_empty_loi"/>
+                            <br></br>
+                            <field name="wt_empty_cs_loi"/>
+                             <br></br>
+                            <field name="wt_cs_loi"/>
+                             <br></br>
+                            <field name="wt_of_sample_loi"/>
+                             <br></br>
+                              <field name="loi_in_wt"/>
+                             <br></br>
+                            <field name="loi"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('loi_visible', '=', False)]}">
+                          
+                        <field name='loi_conformity'
+                               decoration-success="loi_conformity == 'pass'" 
+                               decoration-danger="loi_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='loi_nabl'/>
+                    </group> 
+
+
+
+                    <!--Alkali as Na₂O -->
+                    <group attrs="{'invisible': [('na2o_visible', '=', False)]}">
+                        <h1>
+                            <field name="na2o_name" readonly="1" nolabel="1"/>
+                            <field name="na2o_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('na2o_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous11"/>
+                        </group>
+                        <group>
+                            <field name="calcareous11" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('na2o_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample_na2o"/>
+                            <br></br>
+                            <field name="dilution_na2o"/>
+                             <br></br>
+                            <field name="sodium_reading_na2o"/>
+                             <br></br>
+                            <field name="ffg_na2o"/>
+                             <br></br>
+                              <field name="na2o_calculation"/>
+                             <br></br>
+                            <field name="na2o_round"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('na2o_visible', '=', False)]}">
+                          
+                        <field name='na2o_round_conformity'
+                               decoration-success="na2o_round_conformity == 'pass'" 
+                               decoration-danger="na2o_round_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='na2o_round_nabl'/>
+                    </group> 
+
+
+                     <!--Alkali as K₂O -->
+                    <group attrs="{'invisible': [('k2o_visible', '=', False)]}">
+                        <h1>
+                            <field name="k2o_name" readonly="1" nolabel="1"/>
+                            <field name="k2o_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('k2o_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous12"/>
+                        </group>
+                        <group>
+                            <field name="calcareous12" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('k2o_visible', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample_k2o"/>
+                            <br></br>
+                            <field name="dilution_k2o"/>
+                             <br></br>
+                            <field name="potasium_reading_k2o"/>
+                             <br></br>
+                            <field name="ffg_k2o"/>
+                             <br></br>
+                              <field name="k2o_calculation"/>
+                             <br></br>
+                            <field name="k2o_round"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('k2o_visible', '=', False)]}">
+                          
+                        <field name='k2o_round_conformity'
+                               decoration-success="k2o_round_conformity == 'pass'" 
+                               decoration-danger="k2o_round_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='k2o_round_nabl'/>
+                    </group> 
+
+
+                      <!--Available alkalis  % = A+B (0.65) -->
+                    <group attrs="{'invisible': [('available_alkalis_visible', '=', False)]}">
+                        <h1>
+                            <field name="available_alkalis_name" readonly="1" nolabel="1"/>
+                            <field name="available_alkalis_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('available_alkalis_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous13"/>
+                        </group>
+                        <group>
+                            <field name="calcareous13" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('available_alkalis_visible', '=', False)]}">
+                       <group>
+                            <field name="available_alkalis"/>
+                            <br></br>
+                           
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('available_alkalis_visible', '=', False)]}">
+                          
+                        <field name='available_alkalis_conformity'
+                               decoration-success="available_alkalis_conformity == 'pass'" 
+                               decoration-danger="available_alkalis_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='available_alkalis_nabl'/>
+                    </group> 
+
+
+
+                     <!--#Chloride -->
+                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                        <h1>
+                            <field name="chloride_name" readonly="1" nolabel="1"/>
+                            <field name="chloride_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous14"/>
+                        </group>
+                        <group>
+                            <field name="calcareous14" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                       <group>
+                            <field name="burette_reading_chloride"/>
+                            <br></br>
+                            <field name="burette_reading_sample_chloride"/>
+                             <br></br>
+                            <field name="diff_chloride"/>
+                             <br></br>
+                            <field name="normality_chloride"/>
+                             <br></br>
+                              <field name="wt_of_sample_chloride"/>
+                             <br></br>
+                            <field name="chloride"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                          
+                        <field name='chloride_conformity'
+                               decoration-success="chloride_conformity == 'pass'" 
+                               decoration-danger="chloride_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='chloride_nabl'/>
+                    </group> 
+
+                     <group attrs="{'invisible': [('combined_percentage_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_percentage_name" readonly="1" nolabel="1"/>
+                            <field name="combined_percentage_visible" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('combined_percentage_visible', '=', False)]}">
+                        <group>
+                            <field name="siliceous15"/>
+                        </group>
+                        <group>
+                            <field name="calcareous15" />
+                        </group>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('combined_percentage_visible', '=', False)]}">
+                       <group>
+                            <field name="combined_percentage"/>
+                            <br></br>
+                           
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('combined_percentage_visible', '=', False)]}">
+                          
+                        <field name='combined_percentage_conformity'
+                               decoration-success="combined_percentage_conformity == 'pass'" 
+                               decoration-danger="combined_percentage_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='combined_percentage_nabl'/>
+                    </group> 
+
+                <!-- </group> -->
+                   
+                </sheet>
+            </form>
+        </field>
+        </record>
+    </data>
+</odoo>

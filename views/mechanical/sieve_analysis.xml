@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_sieve_analysis_view" model="ir.ui.view">
+        <field name="name">mechanical.sieve.analysis.form</field>
+        <field name="model">mechanical.sieve.analysis</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="parameter_id"/>
+                        <field name="total"/>
+                        
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <div>
+                        <button string="Calculate" type="object" name="calculate" class="oe_highlight"/>
+                    </div>
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="serial_no" string="Sr.No"/>
+                                <field name='sieve_size' string="IS Sieve Size"/>
+                                <field name='wt_retained' string="Wt. Retained in gms"/>
+                                <field name='percent_retained' string="% Retained"/>
+                                <field name='cumulative_retained' context="{'default_cumulative_retained': cumulative_retained}" string="Cum. Retained %"/>
+                                <field name='passing_percent' string="Passing %" readonly="1"/>
+                                
+                            </tree>
+                    </field>
+                    
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

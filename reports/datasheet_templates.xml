@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <template id="10per_fine_coarse_agg_mechanical">
+        <t t-call="web.html_container">
+            <!-- <t t-call="lerm_civil.data_sheet_header"> -->
+            <div class="datasheet">
+            <h2 class="title">10 % Fine Value</h2>
+            <p class="title"><b> (As per IS 2386- Part IV )</b></p>
+            <div class="details">
+                <table>
+                    <tr>
+                        <td colspan="3">Job No :</td>
+                        <td colspan="3">Afzal khan</td>
+                        <td colspan="3">Test Start Date :</td>
+                        <td colspan="3">afzal khan</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Material :</td>
+                        <td colspan="3"></td>
+                        <td colspan="3">Test End Date :</td>
+                        <td colspan="3"></td>
+                    </tr>
+                </table>
+                <table style="margin-top: 20px;">
+                    <tr>
+                        <th>Particulars</th>
+                        <th>Results</th>
+                    </tr>
+                    <tr>
+                        <th>Weight of Sample taken in gms, A</th>
+                        <th>3500</th>
+                    </tr>
+                    <tr>
+                        <th>Weight of sample passing 2.36 mm IS sieve after applying load in 10 min, B</th>
+                        <th>432</th>
+                    </tr>
+                    <tr>
+                        <th>Percentage of Fines, Y = [(B/A)*100]</th>
+                        <th>12.34</th>
+                    </tr>
+                    <tr>
+                        <th>Load applied in 10 min, X kN</th>
+                        <th>215</th>
+                    </tr>
+                    <tr>
+                        <th>Load for 10 percent fines value, [(14*X)/(Y+4) KN</th>
+                        <th>247.87</th>
+                    </tr>
+                </table>
+
+                <div class="remarks"><b>Remarks : </b><span></span>
+                </div>
+
+                <div class="verificationBlock">
+                    <div>
+                        <b>
+                            Tested By
+                        </b>
+                    </div>
+                    <div style="height:20px">
+
+                    </div>
+                    <div>
+                        <b>
+                            Checked by
+                        </b>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- </t> -->
+        </t>
+
+    </template>
+    
+</odoo>
+
+
+
+
+

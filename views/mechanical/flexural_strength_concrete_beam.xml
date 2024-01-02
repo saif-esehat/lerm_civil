@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="flexural_strength_concrete_beam_view" model="ir.ui.view">
+        <field name="name">mechanical.flexural.strength.concrete.beam.form</field>
+        <field name="model">mechanical.flexural.strength.concrete.beam</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" invisible="1" />
+                        <field name="eln_ref"/>
+                        <!-- <field name="parameter_id"/> -->
+                        <field name="grade"/>
+                    </group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="date_of_casting"/>
+                        </group>
+                        <group>
+                            <field name="date_of_testing"/>
+                        </group>
+                        <group>
+                            <field name="age_of_days"/>
+                        </group>
+                        <group>
+                            <field name="age_of_test"/>
+                        </group>
+                    </group>
+
+
+                    <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='id_mark'/>
+                                <field name='length'/>
+                                <field name='depth'/>
+                                <field name='width'/>
+                                <field name='wt_of_sample'/>
+                                <field name='fracture_distance'/>
+                                <field name='failure_load'/>
+                                <field name='flexural_strength'/>
+                                
+                            </tree>
+                    </field>
+                    <group>
+                        <field name='average_flexural_strength'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>
