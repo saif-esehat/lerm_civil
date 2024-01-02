@@ -99,10 +99,11 @@ class LermSampleForm(models.Model):
         ('7', '7 Days'),
         ('14', '14 Days'),
         ('28', '28 Days'),
-    ], string='Days of Testing', default='3')
+    ], string='Days of casting', default='3')
     date_casting = fields.Date("Date of Casting")
     customer_id = fields.Many2one('res.partner' , string="Customer")
     alias = fields.Char(string="Alias")
+    product_alias = fields.Many2one('product.product',string="Product Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
     kes_no = fields.Char("KES No",required=True,readonly=True, default=lambda self: 'New' ,tracking=True)
