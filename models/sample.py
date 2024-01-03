@@ -499,7 +499,11 @@ class LermSampleForm(models.Model):
     def onchange_material_id(self):
         for record in self:
             result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
-            record.alias = result.alias
+            try:
+                record.alias = result.alias
+            except:
+                record.alias = None
+
 
 
 
