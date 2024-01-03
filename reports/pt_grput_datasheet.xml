@@ -105,123 +105,146 @@
 
 							</table>
 				        </div>
-						<!-- Setting time  -->
+							<!-- Setting time  -->
 
-						<div t-if="data.setting_time_visible">
-							<div style="text-align:center;font-size:18px">
-								Setting Time
-								<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a76295ce-2066-42ae-8dc8-a5ddf1e71cd1')]).parameter_name"/> -->
-							</div>
-							<table>
-								<!-- <tr cols="12">
-									<td colspan="6">Temperature :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.temp_percent_setting"/>
-									</td>
-									<td colspan="6">Test Start Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.start_date_setting"/>
-									</td>
-								</tr>
-								<tr cols="12">
-									<td colspan="6">Humidity :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.humidity_percent_setting"/>
-									</td>
-									<td  colspan="6">Test End Date :
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.end_date_setting"/>
-									</td>
-								</tr>
-								 -->
-								
-
-								<tr cols="12" style="font-weight: bold; text-align: center;">
-									<td colspan="12">
-										<h6>
-											<span t-field="data.initial_setting_time"/>
-										</h6>
-									</td>
-								</tr>
-								
-
-								<tr cols="12">
-									<td style="font-weight: bold;" colspan="6">The Time When water is added to cement (t1) :
-										<![CDATA[&nbsp;]]>
-									</td>
-									<td style="text-align: center;" colspan="6">
-										<span t-field="data.time_water_added" />
-									</td>
-								</tr>
-								
-
-								<tr cols="12">
-									<td style="font-weight: bold;" colspan="6">The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2) :
-										<![CDATA[&nbsp;]]>
-									</td>
-									<td style="text-align: center;" colspan="6">
-										<span t-field="data.time_needle_fails"/>
-									</td>
-								</tr>
-								
-								<tr cols="12">
-									<td style="font-weight: bold;" colspan="6">Initial Setting Time (t2-t1) (Hours) :
-										<![CDATA[&nbsp;]]>
-									</td>
-									<td style="text-align: center;" colspan="6">
-										<span t-field="data.initial_setting_time_hours"/>
-									</td>
-								</tr>
-
-								<!-- <tr cols="12">
-									<td style="font-weight: bold;" colspan="6">Initial Setting Time :
-										<![CDATA[&nbsp;]]>
-									</td>
-									<td style="text-align: center;" colspan="6">
-										<span t-field="data.initial_setting_time_minutes" />
-									</td>
-								</tr> -->
-							</table>
-							<table>
-								<tr cols="12" style="font-weight: bold; text-align: center;">
-									<td colspan="12">
-										<h6>
-											<span t-field="data.final_setting_time"/>
-										</h6>
-									</td>
-								</tr>
-
-								<tr cols="12">
-									<td style="font-weight: bold;" colspan="6">The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3) :
-										<![CDATA[&nbsp;]]>
-									</td>
-									<td style="text-align: center;" colspan="6">
-										<span t-field="data.time_needle_make_impression"/>
-									</td>
-								</tr>
-								
-
-								<tr cols="12">
-									<td style="font-weight: bold;" colspan="6">Final Setting Time (t3-t1) (Hours) :
-										<![CDATA[&nbsp;]]>
-									</td>
-									<td style="text-align: center;" colspan="6">
-										<span t-field="data.final_setting_time_hours"/>
-									</td>
-								</tr>
-								
-								<!-- <tr cols="12">
-									<td style="font-weight: bold;" colspan="6">Final Setting Time :
-										<![CDATA[&nbsp;]]>
-									</td>
-									<td style="text-align: center;" colspan="6">
-										<span t-field="data.final_setting_time_minutes"/>
-									</td>
-								</tr> -->
-
-								
-							</table>
+					<div t-if="data.initial_setting_time_visible">
+						<div style="text-align:center;font-size:18px">
+							Setting Time
 						</div>
+						<table>
+							<!-- <tr cols="12">
+								<td colspan="6">Temperature :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.temp_percent_setting"/>
+								</td>
+								<td colspan="6">Test Start Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.start_date_setting"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Humidity :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.humidity_percent_setting"/>
+								</td>
+								<td colspan="6">Test End Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.end_date_setting"/>
+								</td>
+							</tr> -->
+							<!-- <tr cols="12">
+								<td colspan="6">Weight of Cement(g) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_of_cement_setting_time"/>
+								</td>
+							</tr> -->
+
+							<tr cols="12">
+								<td colspan="12">
+									<h6>
+										<span t-field="data.initial_setting_time_name"/>
+									</h6>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="6">The Time When water is added to cement (t1) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.time_water_added"/>
+								</td>
+							</tr>
+							
+
+							<tr cols="12">
+								<td colspan="6">The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.time_needle_fails"/>
+								</td>
+							</tr>
+							
+							<tr cols="12">
+								<td colspan="6">Initial Setting Time (t2-t1) (Hours) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.initial_setting_time_hours"/>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="6">Initial Setting Time Minutes :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.initial_setting_time_minutes_unrounded"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Initial Setting Time Minutes (Rounded):
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.initial_setting_time_minutes"/>
+								</td>
+							</tr>
+						</table>
+						<table  t-if="data.final_setting_time_visible">
+							<tr cols="12">
+								<td colspan="12">
+									<h6>
+										<span t-field="data.final_setting_time_name"/>
+									</h6>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="6">The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.time_needle_make_impression"/>
+								</td>
+							</tr>
+							
+
+							<tr cols="12">
+								<td colspan="6">Final Setting Time (t2-t1) (Hours) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.final_setting_time_hours"/>
+								</td>
+							</tr>
+							
+							<tr cols="12">
+								<td colspan="6">Final Setting Time :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.final_setting_time_minutes_unrounded"/>
+								</td>
+							</tr>
+
+
+							<tr cols="12">
+								<td colspan="6">Final Setting Time (Rounded):
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.final_setting_time_minutes"/>
+								</td>
+							</tr>
+
+							
+						</table>
+					</div>
 						<!-- Bleeding  -->
 
 						<div t-if="data.bleeding_visible">
