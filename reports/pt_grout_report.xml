@@ -138,6 +138,7 @@
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td>
+									<span t-field="ptgrout.water_cement_ratio"/>
 								</td>
 							</tr>
 							<tr>

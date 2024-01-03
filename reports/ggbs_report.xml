@@ -496,7 +496,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.permissable_limit"/>
+											<!-- <span t-field="parameter.permissable_limit"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -504,7 +504,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.specification"/>
+											<!-- <span t-field="parameter.specification"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -556,7 +556,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.specification"/>
+											<!-- <span t-field="parameter.specification"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -841,7 +841,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c28cde20-f42a-4405-b127-b5d84fe78485')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.permissable_limit"/>
+											<!-- <span t-field="parameter.permissable_limit"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
