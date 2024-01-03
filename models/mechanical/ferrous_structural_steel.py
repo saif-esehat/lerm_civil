@@ -2,6 +2,7 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import math
 import re
+from decimal import Decimal, ROUND_HALF_UP
 
 
 
@@ -14,7 +15,7 @@ class FerrousStructuralSteel(models.Model):
     Id_no = fields.Char("ID No")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
-    width = fields.Float(string="Width mm",compute="_compute_width")
+    width = fields.Float(string="Width mm")
     thickness = fields.Float(string="Thickness mm",digits=(16, 2))
     weight = fields.Float(string="Weight, in kg",digits=(10, 2))
     weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
@@ -22,11 +23,11 @@ class FerrousStructuralSteel(models.Model):
     gauge_length1 = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
     final_length = fields.Float(string="FINAL LENGTH mm")
     # proof_2_percent = fields.Float(string="0.2% proof Load / Yield Load, KN")
-    elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True,digits=(16, 1))
+    elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True)
     yeild_load = fields.Float(string="0.2% proof Load / Yield Load, KN")
     ultimate_load = fields.Float(string="Ultimate Load, Kn")
-    proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True,digits=(16, 1))
-    ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True,digits=(16, 1))
+    proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True)
+    ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True)
     fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
     ts_ys_ratio = fields.Float(string="TS/YS Ratio",compute="_compute_ts_ys_ratio",store=True)
@@ -81,24 +82,24 @@ class FerrousStructuralSteel(models.Model):
     rebend_visible = fields.Boolean("Rebend Test",compute="_compute_visible")
 
     uts_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_uts_nabl",store=True)
+        ('pass', 'Nabl'),
+        ('fail', 'Non-Nabl')],string="NABL",compute="_compute_uts_nabl",store=True)
 
     yield_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_yield_nabl",store=True)
+        ('pass', 'Nabl'),
+        ('fail', 'Non-Nabl')],string="NABL",compute="_compute_yield_nabl",store=True)
 
     elongation_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_elongation_nabl",store=True)
+        ('pass', 'Nabl'),
+        ('fail', 'Non-Nabl')],string="NABL",compute="_compute_elongation_nabl",store=True)
 
     ts_ys_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_ts_ys_nabl",store=True)
+        ('pass', 'Nabl'),
+        ('fail', 'Non-Nabl')],string="NABL",compute="_compute_ts_ys_nabl",store=True)
 
     weight_per_meter_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_weight_per_meter_nabl",store=True)
+        ('pass', 'Nabl'),
+        ('fail', 'Non-Nabl')],string="NABL",compute="_compute_weight_per_meter_nabl",store=True)
 
     
 
@@ -488,25 +489,66 @@ class FerrousStructuralSteel(models.Model):
         for record in self:
             record.area = record.width * record.thickness
 
+    # @api.depends('area')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         record.gauge_length1 = round((5.65 * math.sqrt(record.area)),2)
     @api.depends('area')
     def _compute_gauge_length(self):
         for record in self:
-            record.gauge_length1 = round((5.65 * math.sqrt(record.area)),2)
+            record.gauge_length1 = math.ceil(5.65 * math.sqrt(record.area))
 
 
-    @api.depends('yeild_load','area')
+    # @api.depends('yeild_load','area')
+    # def _compute_proof_yeid_stress(self):
+    #     for record in self:
+    #         if record.area != 0:
+    #             record.proof_yeid_stress = record.yeild_load / record.area * 1000
+    #         else:
+    #             record.proof_yeid_stress = 0.0
+            
+    @api.depends('yeild_load', 'area')
     def _compute_proof_yeid_stress(self):
         for record in self:
             if record.area != 0:
-                record.proof_yeid_stress = record.yeild_load / record.area * 1000
+                proof_yeid_stress = Decimal(record.yeild_load / record.area * 1000)
+                float_result = float(proof_yeid_stress.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
+                record.proof_yeid_stress = round(float_result, 2)
             else:
                 record.proof_yeid_stress = 0.0
 
-    @api.depends('ultimate_load','area')
+    # @api.depends('ultimate_load','area')
+    # def _compute_ult_tens_strgth(self):
+    #     for record in self:
+    #         if record.area != 0:
+    #             record.ult_tens_strgth = record.ultimate_load / record.area * 1000
+    #         else:
+    #             record.ult_tens_strgth = 0.0
+    
+    # @api.depends('ultimate_load', 'area')
+    # def _compute_ult_tens_strgth(self):
+    #     for record in self:
+    #         if record.area != 0:
+    #             ult_tens_strgth = Decimal(record.ultimate_load / record.area * 1000)
+    #             float_result = float(ult_tens_strgth.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
+    #             record.ult_tens_strgth = round(float_result, 2)
+    #         else:
+    #             record.ult_tens_strgth = 0.0
+    # @api.depends('ultimate_load', 'area')
+    # def _compute_ult_tens_strgth(self):
+    #     for record in self:
+    #         if record.area != 0:
+    #             ult_tens_strgth = Decimal(record.ultimate_load) / Decimal(record.area) * Decimal('1000')
+    #             record.ult_tens_strgth = float(ult_tens_strgth.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
+    #         else:
+    #             record.ult_tens_strgth = 0.0
+    @api.depends('ultimate_load', 'area')
     def _compute_ult_tens_strgth(self):
         for record in self:
             if record.area != 0:
-                record.ult_tens_strgth = record.ultimate_load / record.area * 1000
+                ult_tens_strgth = Decimal(record.ultimate_load) / Decimal(record.area) * Decimal('1000')
+                float_result = float(ult_tens_strgth.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
+                record.ult_tens_strgth = round(float_result, 2)
             else:
                 record.ult_tens_strgth = 0.0
 
@@ -542,16 +584,16 @@ class FerrousStructuralSteel(models.Model):
 
   
 
-    @api.depends('eln_ref')
-    def _compute_width(self):
-        for record in self:
-            pattern = r'\d+(\.\d+)?'  # Match integer or float
-            match = re.search(pattern, str(record.eln_ref.size_id.size))
-            if match:
-                width = float(match.group())
-                record.width = width
-            else:
-                record.width = 0.0
+    # @api.depends('eln_ref')
+    # def _compute_width(self):
+    #     for record in self:
+    #         pattern = r'\d+(\.\d+)?'  # Match integer or float
+    #         match = re.search(pattern, str(record.eln_ref.size_id.size))
+    #         if match:
+    #             width = float(match.group())
+    #             record.width = width
+    #         else:
+    #             record.width = 0.0
                         
 
 
