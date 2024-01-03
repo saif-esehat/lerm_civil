@@ -177,6 +177,91 @@
                 </div>
 
 
+				 <div t-if="data.chloride_visible2" style="margin-top:20px">
+						<!-- <div style="text-align:center;font-size:18px">
+							Chloride
+						</div> -->
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_name"/>
+						</div>
+
+                        <table style="margin-top:20px">
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Cube Density, Kg/m3 :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.chloride_cube2"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Mass of the concrete cube taken for analysis :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.chloride_mass2"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Volume of 0.02 N (Silver nitrate added) in blank :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.chloride_valume2"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Burette Reading of 0.1N Ammonium thiocynate  Consumed for  Sample :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.chloride_reading2"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6"> Normality of 0.1 N Ammonium thiocynate solution :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.chloride_normality2"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Chloride % :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.chloride_p2"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Chloride, Kg/m3 :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.chloride_percent2"/>	
+								</td>
+                                
+							</tr>
+                         
+                        </table>
+                </div>
+
+
+
                      <!-- chloride_visible1 -->
                   <div t-if="data.chloride_visible1" style="margin-top:20px">
 						<!-- <div style="text-align:center;font-size:18px">

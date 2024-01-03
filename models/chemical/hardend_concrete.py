@@ -504,6 +504,87 @@ class ChemicalHasdenedConcrete(models.Model):
                         record.chloride_nabl1 = 'fail'
 
 
+        #Chloride
+    chloride_name2 = fields.Char("Name",default="Chloride (prestressed concrete)")
+    chloride_visible2 = fields.Boolean("Chloride",compute="_compute_visible")
+
+    chloride_cube2 = fields.Float("A)Cube Density, Kg/m3")
+    chloride_mass2 = fields.Float("B) Mass of the concrete cube taken for analysis ( gm)")
+    chloride_valume2 = fields.Float("C) Volume of 0.02 N (Silver nitrate added) in blank")
+    chloride_reading2 = fields.Float("D) Burette Reading of 0.1N Ammonium thiocynate  Consumed for  Sample) ( ml)")
+    chloride_normality2 = fields.Float("E) Normality of 0.1 N Ammonium thiocynate solution ( N)")
+    chloride_p2 = fields.Float("F)Chloride, % = ( C-D) x E x 0.03545 x 100/ B",compute="_compute_chloride_p2",digits=(12, 3))
+    chloride_percent2 = fields.Float("G)Chloride, Kg/m3 = (F/100 x A)",compute="_compute_chloride_percent2",digits=(12, 3))
+    # normality_of_ammonia = fields.Float("Normality of ammonia thiocynate (0.1)",digits=(16, 4))
+    # chloride_percent = fields.Float("Chloride %",compute="_compute_chloride_percent",digits=(16, 4))
+    @api.depends('chloride_valume2', 'chloride_reading2', 'chloride_normality2', 'chloride_mass2')
+    def _compute_chloride_p2(self):
+        for record in self:
+            if record.chloride_mass2 != 0:
+                record.chloride_p2 = (record.chloride_valume2 - record.chloride_reading2) * record.chloride_normality2 * 0.03545 * 100 / record.chloride_mass2
+            else:
+                record.chloride_p2 = 0.0  
+    
+    @api.depends('chloride_p2', 'chloride_cube2')
+    def _compute_chloride_percent2(self):
+        for record in self:
+            if record.chloride_cube2 != 0:
+                record.chloride_percent2 = (record.chloride_p2 / 100) * record.chloride_cube2
+            else:
+                record.chloride_percent2 = 0.0 
+    
+
+    chloride_conformity2 = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity",compute="_compute_chloride_conformity2", store=True)
+
+    @api.depends('chloride_percent2','eln_ref','grade')
+    def _compute_chloride_conformity2(self):
+        
+        for record in self:
+            record.chloride_conformity2 = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.chloride_percent2 - record.chloride_percent2*mu_value
+                    upper = record.chloride_percent2 + record.chloride_percent2*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.chloride_conformity2 = 'pass'
+                        break
+                    else:
+                        record.chloride_conformity2 = 'fail'
+
+    chloride_nabl2 = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_chloride_nabl2", store=True)
+
+    @api.depends('chloride_percent2','eln_ref','grade')
+    def _compute_chloride_nabl2(self):
+        
+        for record in self:
+            record.chloride_nabl2 = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.chloride_percent2 - record.chloride_percent2*mu_value
+                    upper = record.chloride_percent2 + record.chloride_percent2*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.chloride_nabl2 = 'pass'
+                        break
+                    else:
+                        record.chloride_nabl2 = 'fail'
+
+
 
 
 
@@ -608,6 +689,7 @@ class ChemicalHasdenedConcrete(models.Model):
             record.ph_visible = False
             record.alkali_aggregate_dissolved_visible = False
             record.chloride_visible1 = False
+            record.chloride_visible2 = False
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
                 if sample.internal_id == '628cf04d-645d-4794-a0fd-3daabff4b044':
@@ -622,6 +704,8 @@ class ChemicalHasdenedConcrete(models.Model):
                     record.alkali_aggregate_dissolved_visible = True
                 if sample.internal_id == 'f324e2d6-649f-4223-887e-aec3d85dffa9':
                     record.chloride_visible1 = True
+                if sample.internal_id == '98d321ee-f77f-434c-8bae-3711912c80f5':
+                    record.chloride_visible2 = True
                     	
 
     

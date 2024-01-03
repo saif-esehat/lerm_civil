@@ -256,6 +256,53 @@
 							</tr>
 
 
+							 <tr t-if="data.chloride_visible2 and (data.chloride_nabl2 == 'pass' and nabl or data.chloride_nabl2 == 'fail' and not nabl)">
+								<td style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td>
+									<span>
+										Chloride 
+									</span>
+								</td> -->
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_name"/>
+								</td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="data.chloride_percent2" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+							</tr>
+
+
+
                               <tr t-if="data.chloride_visible1 and (data.chloride_nabl1 == 'pass' and nabl or data.chloride_nabl1 == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />

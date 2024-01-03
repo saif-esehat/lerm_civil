@@ -13,50 +13,33 @@ class CouplerLine(models.Model):
     Id_no = fields.Char("ID No")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
-    diameter = fields.Integer(string="Outer Diameter")
+    diameter = fields.Float(string="Outer Diameter")
     crossectional_area = fields.Float(string="Nominal Cross Sectional Area mm²",compute="_compute_crossectional_area")
-    gauge_length = fields.Float(string="Gauge Length L, mm",store=True)
+    gauge_length = fields.Float(string="Gauge Length L, mm",compute="_compute_gauge_length",store=True)
     elongated_gauge_length = fields.Float(string="Gauge Length  at Maximum Force, mm")
     ultimate_load = fields.Float(string="Ultimate Tensile Load, KN")
-    # lentgh = fields.Float(string="Length in meter",digits=(10, 3))
-    # weight = fields.Float(string="Weight, in kg",digits=(10, 3))
-    # weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
-   
-   
-   
-    # percent_elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True)
-    # yeild_load = fields.Float(string="Yield Load  KN")
-   
-    # proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True)
-    # ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True)
+    distance = fields.Float(string="Distance of fracture From center of Coupler")
+    ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True)
+    total_elongation = fields.Float(string="Total Elongation at maximum force(%)",compute="_compute_elongation_percent",store=True)
+ 
     # fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
-    # ts_ys_ratio = fields.Float(string="TS/YS Ratio",compute="_compute_ts_ys_ratio",store=True)
-    # weight_per_meter = fields.Float(string="Weight per meter",compute="_compute_weight_per_meter",store=True)
-    # variation = fields.Float(string="Variation")
-
-    # requirement_utl = fields.Float(string="Requirement",compute="_compute_requirement_utl",store=True)
-    # requirement_yield = fields.Float(string="Requirement",compute="_compute_requirement_yield",store=True)
-    # requirement_ts_ys = fields.Float(string="Requirement",compute="_compute_requirement_ts_ys",store=True)
-    # requirement_elongation = fields.Float(string="Requirement",compute="_compute_requirement_elongation",store=True)
-    # requirement_weight_per_meter = fields.Float(string="Requirement",compute="_compute_requirement_weight_per_meter",digits=(16, 4),store=True)
-
+  
+    requirement_ult_tens_strgth = fields.Float(string="Requirement",compute="_compute_requirement_utl",store=True)
+    requirement_total_elongation = fields.Float(string="Requirement",compute="_compute_requirement_yield",store=True)
+   
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
-    tests = fields.Many2many("mechanical.tmt.test",string="Tests")
-    # fracture_visible = fields.Boolean("Fracture visible",compute="_compute_visible",store=True)
-    # bend_visible = fields.Boolean("Bend visible",compute="_compute_visible",store=True)
-    # rebend_visible = fields.Boolean("Rebend visible",compute="_compute_visible",store=True)
-    # bend_test_text = fields.Char(string="Bend Test Text", compute="_compute_bend_test_text", store=True)
+    # tests = fields.Many2many("mechanical.tmt.test",string="Tests")
+  
 
-
-    
-    bend_test = fields.Selection([
+    location_of_failure = fields.Char("Location of failure",default="Outside the length of the mechanical splice")
+    result_test = fields.Selection([
         ('satisfactory', 'Satisfactory'),
-        ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
+        ('non-satisfactory', 'Non-Satisfactory')],"Result",store=True)
     
-    re_bend_test = fields.Selection([
-        ('satisfactory', 'Satisfactory'),
-        ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+    # re_bend_test = fields.Selection([
+    #     ('satisfactory', 'Satisfactory'),
+    #     ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
     
       
 
@@ -72,87 +55,26 @@ class CouplerLine(models.Model):
     
 
 
-    uts_conformity = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_uts_conformity",store=True)
+  
+    # location_of_failure_visible = fields.Boolean("Location of failure",compute="_compute_visible")
+    # result_test_visible = fields.Boolean("Result",compute="_compute_visible")
 
-    yield_conformity = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_yield_conformity",store=True)
+  
+   
 
-    elongation_conformity = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_elongation_conformity",store=True)
-
-    ts_ys_conformity = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_ts_ys_conformity",store=True)
-
-    weight_per_meter_conformity = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="Conformity",compute="_compute_weight_per_meter_conformity",store=True)
-
-    fracture_visible = fields.Boolean("Fracture",compute="_compute_visible")
-    bend_visible = fields.Boolean("Bend Test",compute="_compute_visible")
-    rebend_visible = fields.Boolean("Rebend Test",compute="_compute_visible")
-
-    uts_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_uts_nabl",store=True)
-
-    yield_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_yield_nabl",store=True)
-
-    elongation_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_elongation_nabl",store=True)
-
-    ts_ys_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_ts_ys_nabl",store=True)
-    
-    
-
-    weight_per_meter_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_weight_per_meter_nabl",store=True)
-
-    
-
-    @api.depends('eln_ref','sample_parameters')
-    def _compute_visible(self):
-        for record in self:
-            record.fracture_visible = False
-            record.bend_visible  = False  
-            record.rebend_visible = False
-            for sample in record.sample_parameters:
-                print("Samples internal id",sample.internal_id)
-                if sample.internal_id == 'c3b7e054-bafc-40bf-82ad-82063feabfb8':
-                    record.fracture_visible = True
-                if sample.internal_id == 'dceffc67-d195-4991-8e28-e35eb27ecc34':
-                    record.bend_visible = True
-                if sample.internal_id == 'd898fa49-9d66-47c7-a311-7746433408f3':
-                    record.rebend_visible = True
-
-    fracture_visible = fields.Boolean("Fracture",compute="_compute_visible")
-    bend_visible = fields.Boolean("Bend Test",compute="_compute_visible")
-    rebend_visible = fields.Boolean("Rebend Test",compute="_compute_visible")
-
-    @api.depends('eln_ref','sample_parameters')
-    def _compute_visible(self):
-        for record in self:
-            record.fracture_visible = False
-            record.bend_visible  = False  
-            record.rebend_visible = False
-            for sample in record.sample_parameters:
-                print("Samples internal id",sample.internal_id)
-                if sample.internal_id == 'c3b7e054-bafc-40bf-82ad-82063feabfb8':
-                    record.fracture_visible = True
-                if sample.internal_id == 'dceffc67-d195-4991-8e28-e35eb27ecc34':
-                    record.bend_visible = True
-                if sample.internal_id == 'd898fa49-9d66-47c7-a311-7746433408f3':
-                    record.rebend_visible = True
+    # @api.depends('eln_ref','sample_parameters')
+    # def _compute_visible(self):
+    #     for record in self:
+    #         record.location_of_failure_visible = False
+    #         record.result_test_visible  = False  
+          
+    #         for sample in record.sample_parameters:
+    #             print("Samples internal id",sample.internal_id)
+    #             if sample.internal_id == 'c3b7e054-bafc-40bf-82ad-82063feabfb8':
+    #                 record.location_of_failure_visible = True
+    #             if sample.internal_id == 'dceffc67-d195-4991-8e28-e35eb27ecc34':
+    #                 record.result_test_visible = True
+               
 
     @api.depends('diameter')
     def _compute_crossectional_area(self):
@@ -162,6 +84,130 @@ class CouplerLine(models.Model):
             else:
                 record.crossectional_area = 0.0
 
+    @api.depends('diameter')
+    def _compute_gauge_length(self):
+        for record in self:
+            record.gauge_length = record.diameter * 10 + 50
+
+    @api.depends('ultimate_load', 'crossectional_area')
+    def _compute_ult_tens_strgth(self):
+        for coupler in self:
+            if coupler.crossectional_area != 0:
+                coupler.ult_tens_strgth = coupler.ultimate_load / coupler.crossectional_area * 1000
+            else:
+                coupler.ult_tens_strgth = 0
+
+    @api.depends('elongated_gauge_length', 'gauge_length')
+    def _compute_elongation_percent(self):
+        for record in self:
+            if record.gauge_length != 0:
+                record.total_elongation = ((record.elongated_gauge_length - record.gauge_length) / record.gauge_length) * 100
+            else:
+                record.total_elongation = 0
+
+
+    ult_tens_strgth_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity",compute="compute_ult_tens_strgth_conformity", store=True)
+
+    @api.depends('ult_tens_strgth','eln_ref','grade')
+    def compute_ult_tens_strgth_conformity(self):
+        
+        for record in self:
+            record.ult_tens_strgth_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
+                    upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.ult_tens_strgth_conformity = 'pass'
+                        break
+                    else:
+                        record.ult_tens_strgth_conformity = 'fail'
+
+    ult_tens_strgth_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_ult_tens_strgth_nabl", store=True)
+
+    @api.depends('ult_tens_strgth','eln_ref','grade')
+    def _compute_ult_tens_strgth_nabl(self):
+        
+        for record in self:
+            record.ult_tens_strgth_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
+                    upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.ult_tens_strgth_nabl = 'pass'
+                        break
+                    else:
+                        record.ult_tens_strgth_nabl = 'fail'
+
+
+    total_elongation_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity",compute="compute_total_elongation_conformity", store=True)
+
+    @api.depends('total_elongation','eln_ref','grade')
+    def compute_total_elongation_conformity(self):
+        
+        for record in self:
+            record.total_elongation_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.total_elongation - record.total_elongation*mu_value
+                    upper = record.total_elongation + record.total_elongation*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.total_elongation_conformity = 'pass'
+                        break
+                    else:
+                        record.total_elongation_conformity = 'fail'
+
+    total_elongation_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_total_elongation_nabl", store=True)
+
+    @api.depends('total_elongation','eln_ref','grade')
+    def _compute_total_elongation_nabl(self):
+        
+        for record in self:
+            record.total_elongation_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.total_elongation - record.total_elongation*mu_value
+                    upper = record.total_elongation + record.total_elongation*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.total_elongation_nabl = 'pass'
+                        break
+                    else:
+                        record.total_elongation_nabl = 'fail'
+
+
    
   
 
@@ -169,9 +215,20 @@ class CouplerLine(models.Model):
     def create(self, vals):
         # import wdb;wdb.set_trace()
         record = super(CouplerLine, self).create(vals)
-        # record.get_all_fields()
+        record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
+
+        
+    def get_all_fields(self):
+        record = self.env['mechanical.coupler'].browse(self.ids[0])
+        field_values = {}
+        for field_name, field in record._fields.items():
+            field_value = record[field_name]
+            field_values[field_name] = field_value
+
+        return field_values
+
 
 
     @api.depends('eln_ref')
@@ -185,42 +242,13 @@ class CouplerLine(models.Model):
         if self.eln_ref:
             self.size = self.eln_ref.size_id.id
 
-    # @api.depends('eln_ref')
-    # def _compute_dia(self):
-    #     for record in self:
-    #         pattern = r'\d+'
-    #         match = re.search(pattern, str(record.eln_ref.size_id.size))
-    #         if match:
-    #             dia = int(match.group())
-    #             record.diameter = int(match.group())
-    #         else:
-    #             record.diameter = 0
-                 
-
+  
 
     
 
     
 
 
-    # @api.depends('tests')
-    # def _compute_visible(self):
-    #     fracture_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Fracture')])
-    #     bend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Bend Test')])
-    #     rebend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Rebend Test')])
-
-
-    #     for record in self:
-    #         record.fracture_visible = False
-    #         record.bend_visible  = False  
-    #         record.rebend_visible = False
-            
-    #         if fracture_test in record.tests:
-    #             record.fracture_visible = True
-    #         if bend_test in record.tests:
-    #             record.bend_visible = True
-    #         if rebend_test in record.tests:
-    #             record.rebend_visible = True
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
@@ -228,6 +256,30 @@ class CouplerLine(models.Model):
             records = record.eln_ref.parameters_result.parameter.ids
             record.sample_parameters = records
             print("Records",records)
+
+    # @api.depends('eln_ref','grade')
+    # def _compute_requirement_utl(self):
+    #     for record in self:
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table
+    #         for material in materials:
+    #             if material.grade.id == record.grade.id:
+    #                 req_min = material.req_min
+    #                 record.ult_tens_strgth = req_min
+    #                 break
+    #             else:
+    #                 record.ult_tens_strgth = 0
+
+    # @api.depends('eln_ref','grade')
+    # def _compute_requirement_yield(self):
+    #     for record in self:
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_table
+    #         for material in materials:
+    #             if material.grade.id == record.grade.id:
+    #                 req_min = material.req_min
+    #                 record.total_elongation = req_min
+    #                 break
+    #             else:
+    #                 record.total_elongation = 0
             
 
 
