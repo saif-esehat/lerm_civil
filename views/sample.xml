@@ -269,6 +269,7 @@
                       <field name="group_id" optional="show"/>
                       <field name="material_id" optional="show"/>
                       <field name="alias" optional="show"/>
+                      <field name="customer_id"/>
                       <field name="brand" optional="show"/>
                       <field name="size_id" optional="show"/>
                       <field name="parameters" widget="many2many_tags" optional="show"/>

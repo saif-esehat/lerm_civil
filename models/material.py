@@ -97,8 +97,24 @@ class ParameterMasterAliasLine(models.Model):
     _name = 'lerm.alias.line'
 
     product_id = fields.Many2one('product.template',string="Parameter Id")
-    alias = fields.Char(string="Alias")
+    product_alias = fields.Many2one('product.product',string="Product Alias")
     customer = fields.Many2one('res.partner',string="Customer")
+    
+    @api.onchange('customer')
+    def onchange_customer(self):
+        
+        if self.customer:
+            products = self.customer.property_product_pricelist.item_ids.product_tmpl_id.product_variant_ids.ids
+            # print(self.customer.property_product_pricelist.item_ids.product_tmpl_id.product_variant_ids)
+            domain = [('id','in',products)]
+
+            return {'domain': {'product_alias': domain}}
+        else:
+            domain = [('id','in', [])]
+            
+            return {'domain': {'product_alias': domain}}
+            
+
 
 # class ParameterLine(models.Model):
 #     _name = 'lerm.parameter.line'

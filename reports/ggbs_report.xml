@@ -496,7 +496,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.permissable_limit"/>
+											<!-- <span t-field="parameter.permissable_limit"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -504,7 +504,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.specification"/>
+											<!-- <span t-field="parameter.specification"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -548,7 +548,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.permissable_limit"/>
+											<!-- <span t-field="parameter.permissable_limit"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -556,7 +556,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','55b3df61-8e67-4e94-86ea-98d9472f5c71')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.specification"/>
+											<!-- <span t-field="parameter.specification"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -708,6 +708,7 @@
 
 
 
+							<!-- 28 days  -->
 							<tr t-if="ggbs.slag_activity_28_visible and ggbs.slag_28days_nabl == 'fail' and not nabl">
 								<td style="border-bottom:none;text-align: center;">
 									
@@ -726,7 +727,7 @@
 
 								<td  style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.average_28days_slag"/>
 										</t>
 										<t t-else="">
@@ -776,7 +777,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.average_28days_slag_opc"/>
 										</t>
 										<t t-else="">
@@ -788,7 +789,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c28cde20-f42a-4405-b127-b5d84fe78485')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.permissable_limit"/>
+											<!-- <span t-field="parameter.permissable_limit"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -796,7 +797,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c28cde20-f42a-4405-b127-b5d84fe78485')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.specification"/>
+											<!-- <span t-field="parameter.specification"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -828,7 +829,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.average_28days_slag_opc"/>
 										</t>
 										<t t-else="">
@@ -840,7 +841,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c28cde20-f42a-4405-b127-b5d84fe78485')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.permissable_limit"/>
+											<!-- <span t-field="parameter.permissable_limit"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -848,7 +849,7 @@
 								<td style="text-align: center;border-bottom:none;border-top:none;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c28cde20-f42a-4405-b127-b5d84fe78485')]).parameter_table" t-as="parameter">
 										<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
-											<span t-field="parameter.specification"/>
+											<!-- <span t-field="parameter.specification"/> -->
 										<!-- </t> -->
 									</t>
 								</td>
@@ -878,7 +879,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.slag_activity_index_28days"/>
 										</t>
 										<t t-else="">
@@ -923,7 +924,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<t t-if="ggbs.status_7days">
+										<t t-if="ggbs.status_28days">
 											<span t-field="ggbs.slag_activity_index_28days"/>
 										</t>
 										<t t-else="">

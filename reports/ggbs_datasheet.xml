@@ -842,7 +842,7 @@
 									<span t-field="data.time_fineness_trial3"/>
 								</td>
 							</tr>
-                            <tr cols="12">
+                            <!-- <tr cols="12">
 								<td colspan="6">Temp. :
 									<![CDATA[&nbsp;]]>
 								</td>
@@ -858,7 +858,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.temp_fineness_trial3"/>
 								</td>
-							</tr>
+							</tr> -->
 							<tr cols="12">
 								<td colspan="6">Average Time(tₒ),Sec :
 									<![CDATA[&nbsp;]]>
@@ -950,7 +950,7 @@
 									<span t-field="data.time_sample_trial3"/>
 								</td>
 							</tr>
-                            <tr cols="12">
+                            <!-- <tr cols="12">
 								<td colspan="6">Temperature :
 									<![CDATA[&nbsp;]]>
 								</td>
@@ -966,7 +966,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.temp_fineness_calculated_trial3"/>
 								</td>
-							</tr>
+							</tr> -->
 							<tr cols="12">
 								<td colspan="6">Average Time(tₒ),Sec :
 									<![CDATA[&nbsp;]]>

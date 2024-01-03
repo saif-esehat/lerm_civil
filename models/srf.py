@@ -118,6 +118,8 @@ class SrfForm(models.Model):
     # site_address = fields.Many2one('res.partner',string="Site Address")
     site_address = fields.Char(string="Site Address",compute="_compute_site_address")
     name_work = fields.Many2one('res.partner.project',string="Name of Work")
+    name_works = fields.Many2many('res.partner.project',string="Name of Work",compute="_compute_name_work")
+
     client_refrence = fields.Char(string="Client Reference Letter")
     samples = fields.One2many('lerm.srf.sample' , 'srf_id' , string="Samples",tracking=True)
     contact_other_ids = fields.Many2many('res.partner',string="Other Ids",compute="compute_other_ids")
@@ -141,7 +143,7 @@ class SrfForm(models.Model):
         ('7', '7 Days'),
         ('14', '14 Days'),
         ('28', '28 Days'),
-    ], string='Days of Testing', default='3')
+    ], string='Days of casting', default='3')
     
     date_casting = fields.Date(string="Date of Casting")
 
@@ -161,6 +163,17 @@ class SrfForm(models.Model):
             else:
                 record.site_address = ''
 
+    @api.depends('customer')
+    def _compute_name_work(self):
+        for record in self:
+            customer = record.customer
+            if(customer):
+                name_work = record.env['res.partner'].search([("id","=",record.customer.id)]).projects
+                print("Name Work",name_work)
+                record.name_works = name_work
+
+            else:
+                record.name_works = None
 
 
 
@@ -500,10 +513,11 @@ class CreateSampleWizard(models.TransientModel):
         ('7', '7 Days'),
         ('14', '14 Days'),
         ('28', '28 Days'),
-    ], string='Days of Testing', default='3')
+    ], string='Days of casting', default='3')
     date_casting = fields.Date(string="Date of Casting")
     customer_id = fields.Many2one('res.partner' , string="Customer")
-    alias = fields.Char(string="Alias")
+    product_aliases = fields.Many2many('product.product',string="Product Aliases")
+    product_alias = fields.Many2one('product.product',string="Product Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
     conformity = fields.Boolean(string="Conformity Requested")
     volume = fields.Char(string="Volume")
@@ -530,8 +544,9 @@ class CreateSampleWizard(models.TransientModel):
     @api.depends('pricelist','material_id')
     def compute_price(self):
         for record in self:
+            if record.pricelist.id and record.material_id:
             # record.main_name = record.product_name.name
-            record.price = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).fixed_price
+                record.price = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).fixed_price
 
     @api.onchange('material_id')
     def compute_grade_required(self):
@@ -595,14 +610,24 @@ class CreateSampleWizard(models.TransientModel):
                 record.material_ids = material_ids
             else:
                 record.material_ids = None
+    
+    @api.onchange('material_id' ,'customer_id')
+    def compute_product_aliases(self):
+        for record in self:
+            if record.material_id and record.customer_id:
+                result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
+                record.product_aliases = result.product_alias.ids
+            else:
+                record.product_aliases = None
                 
 
-    @api.onchange('material_id.alias' ,'customer_id', 'material_id')
-    def onchange_material_id(self):
-        for record in self:
-            result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
-            print(result)
-            record.alias = result.alias
+    # @api.onchange('material_id' ,'customer_id', 'material_id')
+    # def onchange_material_id(self):
+    #     for record in self:
+    #         result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
+    #         print(result)
+            
+    #         record.product_alias = result.product_alias.id
 
     # @api.onchange('discipline_id', 'lab_l_id')
     # def onchange_discipline_id(self):
@@ -672,7 +697,7 @@ class CreateSampleWizard(models.TransientModel):
           
 
             group_id =  self.group_id.id
-            alias = self.alias
+            # alias = self.alias
             material_id = self.material_id.id
             size_id = self.size_id.id
             brand = self.brand
@@ -723,7 +748,7 @@ class CreateSampleWizard(models.TransientModel):
                 sample_range = self.env['sample.range.line'].create({
                     'srf_id': self.env.context.get('active_id'),
                     'group_id':group_id,
-                    'alias':alias,
+                    'product_alias':self.product_alias.id,
                     'discipline_id': discipline_id,
                     # 'lab_l_id': lab_l_id,
                     'lab_no_value':lab_no_value,
@@ -757,7 +782,7 @@ class CreateSampleWizard(models.TransientModel):
                     self.env["lerm.srf.sample"].create({
                         'srf_id': self.env.context.get('active_id'),
                         'group_id':group_id,
-                        'alias':alias,
+                        # 'alias':alias,
                         'discipline_id': discipline_id,
                         # 'lab_l_id': lab_l_id,
                         'lab_no_value':lab_no_value,
@@ -786,7 +811,8 @@ class CreateSampleWizard(models.TransientModel):
                         'product_name':product_name.id,
                         'main_name':self.main_name,
                         'price':self.price,
-                        'date_casting':self.date_casting
+                        'date_casting':self.date_casting,
+                        'product_alias':self.product_alias.id
 
                     })
 
