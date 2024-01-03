@@ -155,7 +155,7 @@ class GgbsMechanical(models.Model):
     specific_gravity_nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_specific_gravity_nabl")
+    ], string='NABL', default='fail',compute="_compute_specific_gravity_nabl")
 
 
     @api.depends('average_specific_gravity','eln_ref','grade')
@@ -551,9 +551,9 @@ class GgbsMechanical(models.Model):
     time_fineness_trial1 = fields.Float("Time(t),sec.",default=48)
     time_fineness_trial2 = fields.Float("Time(t),sec.",default=47)
     time_fineness_trial3 = fields.Float("Time(t),sec.",default=49)
-    temp_fineness_trial1 = fields.Float("Temp")
-    temp_fineness_trial2 = fields.Float("Temp")
-    temp_fineness_trial3 = fields.Float("Temp")
+    # temp_fineness_trial1 = fields.Float("Temp")
+    # temp_fineness_trial2 = fields.Float("Temp")
+    # temp_fineness_trial3 = fields.Float("Temp")
     average_time_fineness = fields.Float("Average Time(tₒ),Sec",compute="_compute_time_average_fineness")
 
 
