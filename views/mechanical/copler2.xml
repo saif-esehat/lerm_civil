@@ -47,19 +47,20 @@
                             <group style="width:51%"> 
                                 <field name='diameter'/>
                             </group>
-                            <group style="width:51%">
+                             <group style="width:51%">
+                                <field name='crossectional_area'/>
+                            </group>
+                            <!-- <group style="width:51%">
                                 <field name='lentgh'/>
                             </group>
                             <group style="width:51%">
                                 <field name='weight'/>
-                            </group>
+                            </group> -->
                             <!-- <group style="width:51%">
                                 <field name='weight_per_meter'/>
                             </group> -->
-                            <group style="width:51%">
-                                <field name='crossectional_area'/>
-                            </group>
-                            <group style="width:51%">
+                           
+                            <!-- <group style="width:51%">
                                 <field name='gauge_length'/>
                             </group>
                             <group style="width:51%">
@@ -88,11 +89,11 @@
                             <group>
                                 <group style="width:20%">
                                 <field name='weight_per_meter'/>
-                                </group>
+                                </group> -->
                                 <!-- <group style="width:20%">
                                 <field name='variation'/>
                                 </group> -->
-                                <group style="width:20%">
+                                <!-- <group style="width:20%">
                                 <field name='requirement_weight_per_meter'/>
                                 </group>
                                 <group style="width:20%">
@@ -186,7 +187,7 @@
                             <group style="width:51%" attrs="{'invisible': [('fracture_visible', '=', False)]}">
                                 <field name="fracture_visible" invisible="1"/>
                                 <field name='fracture'/>
-                            </group>
+                            </group> -->
               
 
                 </sheet>
