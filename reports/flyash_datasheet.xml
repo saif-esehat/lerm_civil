@@ -68,7 +68,7 @@
 											<tr>
 												<th></th>
 												<th style="text-align: center; font-weight: bold;">Trial 1</th>
-												<th style="text-align: center; font-weight: bold;">Trial 2</th>
+												<!-- <th style="text-align: center; font-weight: bold;">Trial 2</th> -->
 											</tr>
 											<tr>
 												<td style="font-weight: bold;">Specific Gravity of Flyash</td>
@@ -122,7 +122,7 @@
 					</div>
 					<!-- Setting time  -->
 
-						<div t-if="data.setting_time_visible">
+						<!-- <div t-if="data.setting_time_visible">
 							<div style="text-align:center;font-size:18px">
 								Setting Time
 							</div>
@@ -232,7 +232,147 @@
 
 								
 							</table>
+						</div> -->
+
+						<div t-if="data.initial_setting_time_visible">
+						<div style="text-align:center;font-size:18px">
+							Setting Time
 						</div>
+						<table>
+							<tr cols="12">
+								<td colspan="6">Temperature :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.temp_percent_setting"/>
+								</td>
+								<td colspan="6">Test Start Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.start_date_setting"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Humidity :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.humidity_percent_setting"/>
+								</td>
+								<td colspan="6">Test End Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.end_date_setting"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Weight of Cement(g) :
+									<![CDATA[&nbsp;]]>
+									<!-- <span t-field="data.material.name"/> -->
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_of_fly_settingg_time"/>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="12">
+									<h6>
+										<span t-field="data.setting_time_name"/>
+									</h6>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="6">The Time When water is added to cement (t1) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.time_water_added"/>
+								</td>
+							</tr>
+							
+
+							<tr cols="12">
+								<td colspan="6">The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.time_needle_fails"/>
+								</td>
+							</tr>
+							
+							<tr cols="12">
+								<td colspan="6">Initial Setting Time (t2-t1) (Hours) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.initial_setting_time_hours"/>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="6">Initial Setting Time Minutes :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.initial_setting_time_minutes_unrounded"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Initial Setting Time Minutes (Rounded):
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.initial_setting_time_minutes"/>
+								</td>
+							</tr>
+						</table>
+						<table  t-if="data.final_setting_time_visible">
+							<tr cols="12">
+								<td colspan="12">
+									<h6>
+										<span t-field="data.final_setting_time_name"/>
+									</h6>
+								</td>
+							</tr>
+
+							<tr cols="12">
+								<td colspan="6">The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.time_needle_make_impression"/>
+								</td>
+							</tr>
+							
+
+							<tr cols="12">
+								<td colspan="6">Final Setting Time (t2-t1) (Hours) :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.final_setting_time_hours"/>
+								</td>
+							</tr>
+							
+							<tr cols="12">
+								<td colspan="6">Final Setting Time :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.final_setting_time_minutes_unrounded"/>
+								</td>
+							</tr>
+
+
+							<tr cols="12">
+								<td colspan="6">Final Setting Time (Rounded):
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<span t-field="data.final_setting_time_minutes"/>
+								</td>
+							</tr>
+
+							
+						</table>
+					</div>
 
 						<!-- Particles Retained On 45 Micron IS Sieve (Wet Sieving) -->
 						<div t-if="data.particles_retained_visible" style="margin-top:20px">
@@ -991,9 +1131,9 @@
 								<tr cols="12">
 									<td style="font-weight: bold;"   colspan="6">Time(t) sec :
 									</td>
-									<td colspan="6" style="text-align: center;"><span t-field="data.time_fineness_trial1"/></td>
-									<td colspan="6" style="text-align: center;"><span t-field="data.time_fineness_trial2"/></td>
-									<td colspan="6" style="text-align: center;"><span t-field="data.time_fineness_trial3"/></td>
+									<td colspan="6" style="text-align: center;"><span t-field="data.time_finenesss_trial1"/></td>
+									<td colspan="6" style="text-align: center;"><span t-field="data.time_finenesss_trial2"/></td>
+									<td colspan="6" style="text-align: center;"><span t-field="data.time_finenesss_trial3"/></td>
 									
 								</tr>
 								<tr cols="12">
