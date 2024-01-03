@@ -112,13 +112,21 @@
                           </group>
                         </div>
                     </group>
+                     <group attrs="{'invisible': [('fludity_visible', '=', False)]}">
+                        <!-- <field name="bleeding_confirmity"
+                               decoration-success="bleeding_confirmity == 'pass'" 
+                               decoration-danger="bleeding_confirmity == 'fail'" 
+                               readonly="1"/> -->
+                      <field name="fludity_nabl"/>
+                      
+                    </group>
                        <!-- Setting Time Start -->
-                    <group>
+                    <!-- <group>
                         <field name="setting_time_visible" readonly="1" invisible="1" />
                         <h1>
                             <field name="setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         </h1>
-                    </group>
+                    </group> -->
                     <!-- <group  attrs="{'invisible': [('setting_time_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_setting"/>
@@ -129,32 +137,58 @@
                       <field name="end_date_setting"/>
                     </group>
                     </group> -->
-                     <group>
+                     <!-- <group> -->
                         
                        
-                    </group>
+                    <!-- </group> -->
                     <!-- Initial Setting Time -->
+                     <group>
+                        <field name="initial_setting_time_visible" readonly="1" invisible="1" />
+                        <field name="final_setting_time_visible" readonly="1" invisible="1" />
+                        <h1>
+                            <field name="setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': ['|', ('initial_setting_time_visible', '=', False), ('final_setting_time_visible', '=', False)]}"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}">
+                   
+                    </group>
+                   
                     <group style="width:50%">
                         <h3>
-                            <field name="initial_setting_time" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
+                            <field name="initial_setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
                         </h3>
                    
-                        <field name="time_water_added" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="time_needle_fails" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="initial_setting_time_hours" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <!-- <field name="initial_setting_time_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/> -->
-                        <!-- <field name="rounded_initial_setting_time_in_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/> -->
-                     </group>
-                     <group style="width:50%">
-                        <h3>
-                            <field name="final_setting_time" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        </h3>
-                   
-                        <field name="time_needle_make_impression" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <field name="final_setting_time_hours" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                        <!-- <field name="final_setting_time_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/> -->
-
+                        <field name="time_water_added" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="time_needle_fails" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_hours" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_minutes_unrounded" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_minutes" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_conformity"
+                         decoration-success="initial_setting_conformity == 'pass'" 
+                               decoration-danger="initial_setting_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name="initial_setting_nabl"/>
                     </group>
+                    
+
+                    <group style="width:50%">
+                        
+                        <field name="final_setting_time_visible" readonly="1" invisible="1" />
+                        <h1>
+                            <field name="final_setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        </h1>
+                   
+                        <field name="time_needle_make_impression" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_hours" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_minutes_unrounded" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_minutes" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_conformity"
+                         decoration-success="final_setting_conformity == 'pass'" 
+                               decoration-danger="final_setting_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name="final_setting_nabl"/>
+                    </group>
+
 
                     <!-- Bleeding -->
                      <group>
@@ -192,10 +226,8 @@
                                decoration-success="bleeding_confirmity == 'pass'" 
                                decoration-danger="bleeding_confirmity == 'fail'" 
                                readonly="1"/>
-                      <field name="bleedin_nabl"
-                               decoration-success="bleedin_nabl == 'pass'" 
-                               decoration-danger="bleedin_nabl == 'fail'" 
-                               readonly="1"/>
+                      <field name="bleeding_nabl"
+                              />
                       
                     </group>
 
@@ -235,10 +267,8 @@
                                decoration-success="volume_change_confirmity == 'pass'" 
                                decoration-danger="volume_change_confirmity == 'fail'" 
                                readonly="1"/>
-                      <field name="volume_change_nabl"
-                               decoration-success="volume_change_nabl == 'pass'" 
-                               decoration-danger="volume_change_nabl == 'fail'" 
-                               readonly="1"/>
+                      <field name="volume_nabl_1"
+                             />
                     </group>
 
                      <!-- compressive strength -->
@@ -288,8 +318,11 @@
                       </field>
                       <field name="average_casting_7days"/>
                       <field name="compressive_strength_7_days"/>
-                      <field name="compressive_strength_7days_confirmity"/>
-                      <field name="compressive_strength_7days_nabl"/>
+                      <field name="compressive_strength_7days_confirmity"
+                               decoration-success="compressive_strength_7days_confirmity == 'pass'" 
+                               decoration-danger="compressive_strength_7days_confirmity == 'fail'" 
+                               readonly="1"/>
+                      <field name="days7_nabl"/>
                     </group>
                      <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                             <field name="status_28days"/>
@@ -317,10 +350,8 @@
                                decoration-success="compressive_strength_28days_confirmity == 'pass'" 
                                decoration-danger="compressive_strength_28days_confirmity == 'fail'" 
                                readonly="1"/>
-                      <field name="compressive_strength_28days_nabl"
-                               decoration-success="compressive_strength_28days_nabl == 'pass'" 
-                               decoration-danger="compressive_strength_28days_nabl == 'fail'" 
-                               readonly="1"/>
+                      <field name="days28_nabl"/>
+                              
                     </group>
                   
                 </sheet>
