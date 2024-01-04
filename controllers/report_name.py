@@ -75,7 +75,13 @@ class MyReportName(ReportController):
 
                 if docids:
                     # Generic report:
+                    print("Contexttttttttttttt",context)
+                    print("report name",report_name)
+                    print("docs id ",docids)
+
                     response = self.report_routes(reportname, docids=docids, converter=converter, context=context)
+
+                    print("Response",response)
                 else:
                     # Particular report:
                     data = dict(url_decode(url.split('?')[1]).items())  # decoding the args represented in JSON
