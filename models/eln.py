@@ -3,6 +3,7 @@ from odoo.tools.safe_eval import safe_eval
 from odoo.exceptions import ValidationError
 from datetime import datetime
 import math
+from decimal import Decimal
 from matplotlib import pyplot as plt
 # import io
 # from PIL import Image
@@ -577,10 +578,33 @@ class InputLines(models.TransientModel):
         decimal_digits_limit = self.inputs.decimal_place
 
         for record in self:
-            decimal_part = str(record.value).split('.')[1] if '.' in str(record.value) else ''
-            if len(decimal_part) > decimal_digits_limit:
-                raise ValidationError("Number of digits after decimal should not exceed %s." % decimal_digits_limit)
+         
+            formatted_number = self.remove_zeros_after_12_digits(record.value)
+            print("formatted_number ================>",str(formatted_number))
 
+            decimal_part = str(formatted_number).split('.')[1] if '.' in str(formatted_number) else ''
+            print("================>",decimal_part)
+            # if len(decimal_part) > decimal_digits_limit:
+            #     raise ValidationError("Number of digits after decimal should not exceed %s." % decimal_digits_limit)
+
+
+    def remove_zeros_after_12_digits(self,number):
+        # Convert the number to a string
+        number_str = str(number)
+
+        # Split the string into the integer and decimal parts
+        integer_part, decimal_part = number_str.split('.')
+
+        # Remove zeros after 12 digits from the decimal point
+        truncated_decimal_part = decimal_part[:12]
+
+        # Combine the integer part and truncated decimal part
+        result = f"{integer_part}.{truncated_decimal_part}"
+
+        # Convert the result back to a floating-point number
+        result_number = float(result)
+
+        return result_number
 
 
 

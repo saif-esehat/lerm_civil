@@ -156,7 +156,7 @@
                         </group> -->
                         <group style="width:100%">
                             <field name="parameters_input" attrs="{'invisible': [('is_product_based_calculation', '=', True)]}" nolabel="1">
-                                <tree editable="bottom" delete="0">
+                                <tree editable="bottom" delete="1">
                                     <field name="parameter_result" />
                                     <field name="is_parameter_dependent"/>
                                     <field name="identifier" invisible="1" />
