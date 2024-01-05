@@ -248,7 +248,9 @@ class SrfForm(models.Model):
             # import wdb ; wdb.set_trace()
             for sample in samples:
                 sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
-                kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+                # kes_no = "KES"+ str(record.srf_date) + self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+                kes_no_daywise = self.env['ir.sequence'].next_by_code('lerm.sample.daywise.seq') 
+                kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') + kes_no_daywise or 'New'
                 # lab_l_id =  self.env['lab.location'].search([('id','=',self.env.context['allowed_company_ids'][0])])
                 company =  self.env['res.company'].search([('id','=',self.env.context['allowed_company_ids'][0])])
                 # lab_location =  self.env.context['discipline_id']

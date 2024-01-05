@@ -866,3 +866,4 @@ technician.lerm_civil.access_mech_precast_water_absorbtion_line,access_mech_prec
 technician.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.model_chemical_flyash,kes_technician_access_group,1,1,1,1
 lerm.size.line.technician,lerm_size_line,model_lerm_size_line,lerm_civil.kes_technician_access_group,1,0,0,0
 technician.lerm.srf.sample,lerm_srf_sample,model_lerm_srf_sample,lerm_civil.kes_technician_access_group,1,1,0,0
+technician.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_technician_access_group,1,1,1,1
