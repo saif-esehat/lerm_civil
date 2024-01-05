@@ -867,3 +867,6 @@ technician.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.m
 lerm.size.line.technician,lerm_size_line,model_lerm_size_line,lerm_civil.kes_technician_access_group,1,0,0,0
 technician.lerm.srf.sample,lerm_srf_sample,model_lerm_srf_sample,lerm_civil.kes_technician_access_group,1,1,0,0
 technician.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_technician_access_group,1,1,1,1
+
+
+admin.edit.lerm.civil.srf,edit_lerm_civil_srf,lerm_civil.model_edit_lerm_civil_srf,lerm_civil.srf_sample_editable,1,1,1,1

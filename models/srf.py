@@ -347,6 +347,31 @@ class SrfForm(models.Model):
             contact_ids = self.env['res.partner'].search([('parent_id', '=', record.customer.id),('type','=','delivery')])
             record.contact_site_ids = contact_ids
     
+    def open_edit_srf_header_wizard(self):
+        action = self.env.ref('lerm_civil.edit_srf_wizard_form')
+        
+        return {
+            'name': "Edit SRF Header",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'edit.lerm.civil.srf',
+            'view_id': action.id,
+            'target': 'new',
+            'context': {
+                'default_srf_id' : self.id,
+                'default_customer': self.customer.id,
+            'default_srf_date': self.srf_date,
+            'default_client': self.client,
+            'default_contact_person': self.contact_person.id,
+            'default_contractor': self.contractor.id,
+            'default_billing_customer': self.billing_customer.id,
+            'default_client_refrence': self.client_refrence,
+            'default_name_work': self.name_work.id  
+            }
+            }
+        
+    
     def open_sample_add_wizard(self):
 
         samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])

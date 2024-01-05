@@ -14,6 +14,7 @@
     'views/res_company.xml',
     'views/material.xml',
     'views/srf.xml',
+    'views/edit_srf_header_wizard.xml',
     'views/parameter_master.xml',
     'views/datasheet_master.xml',
     'views/sample.xml',
