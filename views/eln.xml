@@ -115,7 +115,7 @@
 
                         
                             <field name="parameters_result" nolabel="1">
-                                <tree editable="bottom"  delete="0">
+                                <tree editable="bottom"  delete="1">
                                     <field name="sequence" string="Sequence" widget="handle" />
                                     <field name="parameter"/>
                                     <field name="result_type"/>
