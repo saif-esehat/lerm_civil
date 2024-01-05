@@ -256,12 +256,17 @@ class SrfForm(models.Model):
                 # lab_location =  self.env.context['discipline_id']
                 # print('<<<<<<<<<<<<<<<<<<<<',lab_location)
                 # lab_cert_no = str(sample.lab_certificate_no)
-                lab_loc = str(sample.lab_no_value)
-                lab_cert_no = str(company.lab_certificate_no)
-                # lab_loc = company.lab_seq_no
-                ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
-                ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
-                ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                
+                if sample.scope == 'nabl':
+                
+                    lab_loc = str(sample.lab_no_value)
+                    lab_cert_no = str(company.lab_certificate_no)
+                    # lab_loc = company.lab_seq_no
+                    ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
+                    ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+                    ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                else:
+                    ulr_no = ''
                 # import wdb ; wdb.set_trace()
               
              
