@@ -236,6 +236,9 @@ class SrfForm(models.Model):
    
     def confirm_srf(self):
         srf_ids=[]
+        
+        
+        count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date)]) 
 
         for record in self.sample_range_table:
             sam_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample')]).number_next_actual
@@ -248,6 +251,9 @@ class SrfForm(models.Model):
             kes_range = "KES/"+str(kes_next_number)+"-"+str(kes_next_number+record.sample_qty-1)
             record.write({'sample_range': sample_range , 'kes_range': kes_range })
             samples = self.env['lerm.srf.sample'].search([('sample_range_id','=',record.id)])
+
+
+
             # import wdb ; wdb.set_trace()
             for sample in samples:
                 # import wdb; wdb.set_trace()
@@ -256,7 +262,7 @@ class SrfForm(models.Model):
                 year = str(self.srf_date.year)[-2:]
                 month = str(self.srf_date.month).zfill(2)
                 day = str(self.srf_date.day).zfill(2)
-                count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date)]) 
+                count = count + 1
 
                 kes_no = "KES"+ year+month+day + str(count).zfill(3) or "New"
 
