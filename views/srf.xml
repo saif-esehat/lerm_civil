@@ -24,7 +24,14 @@
                     string="Confirm"
                     attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"
                     groups="lerm_civil.kes_verified_by,lerm_civil.kes_hod_access_group"
-                    />       
+                    />
+
+                    
+                    <button name="open_edit_srf_header_wizard"
+                                type="object"
+                                string="Edit SRF"
+                                groups="lerm_civil.srf_sample_editable"
+                               />          
 
                     <button name="action_srf_sent_mail"
                                 type="object"

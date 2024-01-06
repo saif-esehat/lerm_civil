@@ -256,12 +256,17 @@ class SrfForm(models.Model):
                 # lab_location =  self.env.context['discipline_id']
                 # print('<<<<<<<<<<<<<<<<<<<<',lab_location)
                 # lab_cert_no = str(sample.lab_certificate_no)
-                lab_loc = str(sample.lab_no_value)
-                lab_cert_no = str(company.lab_certificate_no)
-                # lab_loc = company.lab_seq_no
-                ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
-                ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
-                ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                
+                if sample.scope == 'nabl':
+                
+                    lab_loc = str(sample.lab_no_value)
+                    lab_cert_no = str(company.lab_certificate_no)
+                    # lab_loc = company.lab_seq_no
+                    ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
+                    ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+                    ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                else:
+                    ulr_no = ''
                 # import wdb ; wdb.set_trace()
               
              
@@ -341,6 +346,31 @@ class SrfForm(models.Model):
         for record in self:
             contact_ids = self.env['res.partner'].search([('parent_id', '=', record.customer.id),('type','=','delivery')])
             record.contact_site_ids = contact_ids
+    
+    def open_edit_srf_header_wizard(self):
+        action = self.env.ref('lerm_civil.edit_srf_wizard_form')
+        
+        return {
+            'name': "Edit SRF Header",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'edit.lerm.civil.srf',
+            'view_id': action.id,
+            'target': 'new',
+            'context': {
+                'default_srf_id' : self.id,
+                'default_customer': self.customer.id,
+            'default_srf_date': self.srf_date,
+            'default_client': self.client,
+            'default_contact_person': self.contact_person.id,
+            'default_contractor': self.contractor.id,
+            'default_billing_customer': self.billing_customer.id,
+            'default_client_refrence': self.client_refrence,
+            'default_name_work': self.name_work.id  
+            }
+            }
+        
     
     def open_sample_add_wizard(self):
 
