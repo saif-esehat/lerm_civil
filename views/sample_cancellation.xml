@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="lerm_civil_sample_rejection_wizard" model="ir.ui.view">
+        <field name="name">sample.cancellation.wizard.form</field>
+        <field name="model">sample.cancellation.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+
+                    <field name="cancellation_reason"/>
+                    <field name="other_cancellation_reason"/>
+
+                </group>
+
+            </form>
+        </field>
