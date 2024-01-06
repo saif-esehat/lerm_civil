@@ -74,6 +74,7 @@ class MyReportName(ReportController):
                     reportname, docids = reportname.split('/')
 
                 if docids:
+                    # import wdb; wdb.set_trace()
                     # Generic report:
                    
 
