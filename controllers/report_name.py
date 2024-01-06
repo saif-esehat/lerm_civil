@@ -74,8 +74,11 @@ class MyReportName(ReportController):
                     reportname, docids = reportname.split('/')
 
                 if docids:
+                    # import wdb; wdb.set_trace()
                     # Generic report:
+
                     response = self.report_routes(reportname, docids=docids, converter=converter, context=context)
+
                 else:
                     # Particular report:
                     data = dict(url_decode(url.split('?')[1]).items())  # decoding the args represented in JSON

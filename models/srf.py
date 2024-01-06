@@ -241,6 +241,9 @@ class SrfForm(models.Model):
             sam_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample')]).number_next_actual
             kes_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample.kes')]).number_next_actual
             
+
+
+
             sample_range = "SAM/"+str(sam_next_number)+"-"+str(sam_next_number+record.sample_qty-1)
             kes_range = "KES/"+str(kes_next_number)+"-"+str(kes_next_number+record.sample_qty-1)
             record.write({'sample_range': sample_range , 'kes_range': kes_range })
@@ -248,6 +251,7 @@ class SrfForm(models.Model):
             # import wdb ; wdb.set_trace()
             for sample in samples:
                 sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
+                # kes_no = "KES"+ self.srf_date.year -2000 + "0"+self.srf_date.month + self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
                 kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
                 # lab_l_id =  self.env['lab.location'].search([('id','=',self.env.context['allowed_company_ids'][0])])
                 company =  self.env['res.company'].search([('id','=',self.env.context['allowed_company_ids'][0])])
