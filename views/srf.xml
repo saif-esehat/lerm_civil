@@ -24,7 +24,14 @@
                     string="Confirm"
                     attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"
                     groups="lerm_civil.kes_verified_by,lerm_civil.kes_hod_access_group"
-                    />       
+                    />
+
+                    
+                    <button name="open_edit_srf_header_wizard"
+                                type="object"
+                                string="Edit SRF"
+                                groups="lerm_civil.srf_sample_editable"
+                               />          
 
                     <button name="action_srf_sent_mail"
                                 type="object"
@@ -67,7 +74,7 @@
                         <field name="name_work" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" domain="[('id', 'in', name_works)]"/>
                         <!-- <field name="consultant_name1"/> -->
                         <field name="name_works" invisible="1"/>
-                        <field name="attachment" filename="attachment_name" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="attachment" filename="attachment_name" />
                         <field name='attachment_name' invisible='1'/>
                     </group>
                     <!-- <group style="width:33.33%">

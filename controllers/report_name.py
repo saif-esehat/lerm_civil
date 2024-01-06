@@ -74,8 +74,13 @@ class MyReportName(ReportController):
                     reportname, docids = reportname.split('/')
 
                 if docids:
+                    # import wdb; wdb.set_trace()
                     # Generic report:
+                   
+
                     response = self.report_routes(reportname, docids=docids, converter=converter, context=context)
+
+                    print("Response",response)
                 else:
                     # Particular report:
                     data = dict(url_decode(url.split('?')[1]).items())  # decoding the args represented in JSON
@@ -96,8 +101,7 @@ class MyReportName(ReportController):
                     if report.print_report_name and not len(obj) > 1:
                         report_name = safe_eval(report.print_report_name, {'object': obj, 'time': time})
                         filename = "%s.%s" % (report_name, extension)
-                        print("Filename",filename)
-                        print("Report Name",report_name)
+
                 if reportname == 'lerm_civil.eln_report_template':
                     pattern = r'active_model%22%3A%22([^%]+)%22.*?active_id%22%3A(\d+)'
                     match = re.search(pattern, url)

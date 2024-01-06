@@ -172,6 +172,7 @@ class LermSampleForm(models.Model):
         ('3-pending_verification','Pending Verification'),
         ('5-pending_approval','Pending Approval'),
         ('4-in_report', 'In-Report'),
+        ('5-cancelled', 'Cancelled'),
     ], string='State',default='1-allotment_pending')
     conformity = fields.Boolean(string="Conformity")
     parameters_result = fields.One2many('sample.parameters.result','sample_id',string="Parameters Result")
@@ -180,6 +181,16 @@ class LermSampleForm(models.Model):
     main_name = fields.Char(string="Product Name")
     price = fields.Float(string="Price")
     product_or_form_based = fields.Boolean("Product or Form Based",compute="compute_form_product_based")
+    
+    cancellation_reason = fields.Selection([
+        ('software_error', 'Software Error'),
+        ('work_cancelled', 'Work has been Cancelled'),
+        ('out_of_scope', 'Out of Scope'),
+        ('other', 'Other'),
+
+
+    ])
+    other_cancellation_reason = fields.Text("Cancellation Reason")
 
     # @api.model
     # def create(self, vals):

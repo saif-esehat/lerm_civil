@@ -30,7 +30,7 @@
 							<td colspan="3">Report Date :
 							</td>
 							<td colspan="3">
-								<span t-field="o.srf_date"/>
+								<span t-field="o.end_date"/>
 							</td>
 							<td colspan="3"  t-if="nabl">ULR NO :
 							</td>
