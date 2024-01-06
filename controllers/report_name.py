@@ -75,9 +75,7 @@ class MyReportName(ReportController):
 
                 if docids:
                     # Generic report:
-                    print("Contexttttttttttttt",context)
-                    print("report name",report_name)
-                    print("docs id ",docids)
+                   
 
                     response = self.report_routes(reportname, docids=docids, converter=converter, context=context)
 
@@ -102,8 +100,7 @@ class MyReportName(ReportController):
                     if report.print_report_name and not len(obj) > 1:
                         report_name = safe_eval(report.print_report_name, {'object': obj, 'time': time})
                         filename = "%s.%s" % (report_name, extension)
-                        print("Filename",filename)
-                        print("Report Name",report_name)
+
                 if reportname == 'lerm_civil.eln_report_template':
                     pattern = r'active_model%22%3A%22([^%]+)%22.*?active_id%22%3A(\d+)'
                     match = re.search(pattern, url)
