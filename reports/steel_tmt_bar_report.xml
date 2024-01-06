@@ -189,13 +189,14 @@
                             </td>
                                    
 								 <td  style="text-align: center;">
-								  Dia. in mm	
+								  Dia	
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','9b54fc13-5dcd-4425-a416-72493dd69d43')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
-								        <span>
+								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','9b54fc13-5dcd-4425-a416-72493dd69d43')]).unit.name"/>
-										</span>
+										</span> -->
+										mm
 								   </td>
 								<td style="text-align: center;">
 									<span t-esc="data.diameter"/>
@@ -226,13 +227,14 @@
 									<t t-set="i" t-value="i+1"/>
                             </td>
 								 <td  style="text-align: center;">
-								 	Weight per meter, kg/m	
+								 	Weight
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','94690b88-1b96-401a-8a58-296a3501f113')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
-								        <span>
+								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','94690b88-1b96-401a-8a58-296a3501f113')]).unit.name"/>
-										</span>
+										</span> -->
+										kg
 								   </td>
 								<td style="text-align: center;">
 									<span t-esc="data.weight"/>
@@ -263,13 +265,14 @@
 										<t t-set="i" t-value="i+1"/>
 								</td>
 								 <td  style="text-align: center;">
-								 	Length in mm	
+								 	Length 	
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','ec2b0629-4780-4f57-85ea-91f66cf2e8fe')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
-								        <span>
+								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ec2b0629-4780-4f57-85ea-91f66cf2e8fe')]).unit.name"/>
-										</span>
+										</span> -->
+										meter
 								   </td>
 								<td style="text-align: center;">
 									<span t-esc="data.lentgh"/>
@@ -300,13 +303,14 @@
 										<t t-set="i" t-value="i+1"/>
 								</td>
 								 <td  style="text-align: center;">
-								 	Cross sectional Area, mm²
+								 	Cross sectional Area
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
-								        <span>
+								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).unit.name"/>
-										</span>
+										</span> -->
+										 mm²
 								   </td>
 								<td style="text-align: center;">
 									<span t-esc="round(data.crossectional_area, 2)"/>
@@ -338,13 +342,14 @@
 										<t t-set="i" t-value="i+1"/>
 								</td>
 								 <td  style="text-align: center;">
-								 Gauge Length mm
+								 Gauge Length 
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','14f13802-a473-4cb9-8104-3adbcacf7621')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
-								        <span>
+								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','14f13802-a473-4cb9-8104-3adbcacf7621')]).unit.name"/>
-										</span>
+										</span> -->
+										mm
 								   </td>
 								<td style="text-align: center;">
 									<span t-esc="round(data.gauge_length ,2)"/>
@@ -376,13 +381,14 @@
 									<t t-set="i" t-value="i+1"/>
                             </td>
 								 <td  style="text-align: center;">
-								  Elongated Gauge Length, mm		
+								  Final Gauge Length		
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','3c774ea6-7c36-4444-980b-906d348eb388')]).parameter_name"/> -->
                                 </td>
 								 <td style="text-align: center; vertical-align: middle;">
-								        <span>
+								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3c774ea6-7c36-4444-980b-906d348eb388')]).unit.name"/>
-										</span>
+										</span> -->
+										mm
 								   </td>
 								<td style="text-align: center;">
 									<span t-esc="round(data.elongated_gauge_length , 2)"/>
@@ -415,13 +421,14 @@
 									<t t-set="i" t-value="i+1"/>
                             </td>
 								 <td  style="text-align: center;">
-								  Yield Load  KN	
+								  Yield Load  	
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','f9ec2ec0-fe47-429f-99a0-b7c99c842538')]).parameter_name"/> -->
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
-								        <span>
+								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f9ec2ec0-fe47-429f-99a0-b7c99c842538')]).unit.name"/>
-										</span>
+										</span> -->
+										KN
 								   </td>
 								<td style="text-align: center;">
 									<span t-esc="round(data.yeild_load,2)"/>
@@ -454,13 +461,14 @@
 									<t t-set="i" t-value="i+1"/>
                             </td>
 								 <td  style="text-align: center;">
-								 	Ultimate Load, Kn	
+								 	Ultimate Load	
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','1fed8a62-eb5f-43bc-9473-51537e4893ad')]).parameter_name"/> -->
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
-								        <span>
+								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','1fed8a62-eb5f-43bc-9473-51537e4893ad')]).unit.name"/>
-										</span>
+										</span> -->
+										KN
 								   </td>
 								<td style="text-align: center;">
 									<span t-esc="round(data.ultimate_load , 2)"/>

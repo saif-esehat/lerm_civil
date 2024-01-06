@@ -72,6 +72,7 @@
                       
                         <field name="discipline_id" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <field name="lab_no_value" optional="show" invisible="1"/>
+                        <!-- <field name="client_reference1"/> -->
                         <field name="material_id" domain="[('id', 'in', material_ids)]" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <!-- <field name="lab_l_id" /> -->
                         <field name="material_id_lab_name"/>
@@ -261,6 +262,7 @@
                       <field name="sample_received_date" optional="show"/>
                       <field name='kes_no'/>
                       <field name="srf_id" optional="show" />
+                      <!-- <field name="client_reference1" optional="show" /> -->
                       <field name="activity_ids" widget="list_activity" optional="show"/>
                       <field name="sample_no" optional="show"/>
                       <field name="discipline_id" optional="show"/>

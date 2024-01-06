@@ -273,7 +273,7 @@
 								</td> -->
 							</tr>
 
-							<tr>
+							<!-- <tr>
 								<td  style="text-align: center;">
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_name"/>
                                 </td>
@@ -285,13 +285,8 @@
 								<td style="text-align: center;">
 									<span t-esc="round(data.percent_elongation , 2)"/>
 								</td>
-								<!-- <td>
-									<span t-esc="data.requirement_elongation"/>
-								</td>
-								<td>
-									<span t-esc="data.elongation_nabl"/>
-								</td> -->
-							</tr>
+								
+							</tr> -->
 
 							<tr>
 								<td  style="text-align: center;">
