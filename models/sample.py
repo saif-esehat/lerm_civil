@@ -13,6 +13,12 @@ class LermSampleForm(models.Model):
     _description = "Sample"
     _rec_name = 'kes_no'
 
+    # client_reference1 = fields.Char(string="Client Reference",compute="_compute_client_reference", store=True)
+
+    # @api.depends('srf_id.client_refrence')
+    # def _compute_client_reference(self):
+    #     for record in self:
+    #         record.client_reference1 = record.srf_id.client_refrence
     # ref = fields.Char(string="ULR No.",required=True,readonly=True, default=lambda self: 'New',store=True)
  
     # @api.model
@@ -58,6 +64,7 @@ class LermSampleForm(models.Model):
 
     srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,tracking=True)
     sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
+  
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -132,7 +139,17 @@ class LermSampleForm(models.Model):
         help='Attach multiple images to the sample',
     )
 
+   
+    # @api.depends('client_refrence')
+    # def _compute_client_reference(self):
+    #     for record in self:
+    #         client_reference = record.client_refrence
+    #         record.client_reference = client_reference
 
+    # @api.onchange('discipline_id')
+    # def onchange_discipline_id(self):
+    #     # Trigger the computation of lab_no_value
+    #     self._compute_client_reference()
 
 
 

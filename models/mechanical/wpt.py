@@ -63,19 +63,19 @@ class WptMechanical(models.Model):
             record.wpt_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_of_wpt - record.average_of_wpt*mu_value
-                    upper = record.average_of_wpt + record.average_of_wpt*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.wpt_nabl = 'pass'
-                        break
-                    else:
-                        record.wpt_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_of_wpt - record.average_of_wpt*mu_value
+            upper = record.average_of_wpt + record.average_of_wpt*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.wpt_nabl = 'pass'
+                break
+            else:
+                record.wpt_nabl = 'fail'
 
 
 
