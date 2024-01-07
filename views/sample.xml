@@ -57,6 +57,8 @@
                         
        
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
+                   
+                   
                 </header>
                 <sheet>
                 <div class="oe_button_box" name="button_box"  >
@@ -262,7 +264,7 @@
                       <field name="sample_received_date" optional="show"/>
                       <field name='kes_no'/>
                       <field name="srf_id" optional="show" />
-                      <!-- <field name="client_reference1" optional="show" /> -->
+                      <field name="client_reference1" optional="show" />
                       <field name="activity_ids" widget="list_activity" optional="show"/>
                       <field name="sample_no" optional="show"/>
                       <field name="discipline_id" optional="show"/>

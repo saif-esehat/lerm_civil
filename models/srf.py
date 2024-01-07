@@ -118,7 +118,7 @@ class SrfForm(models.Model):
     # site_address = fields.Many2one('res.partner',string="Site Address")
     site_address = fields.Char(string="Site Address",compute="_compute_site_address")
     name_work = fields.Many2one('res.partner.project',string="Name of Work")
-    # consultant_name1 = fields.Char(string="Consultant Name",compute="_compute_consultant_name1")
+    consultant_name1 = fields.Char(string="Consultant Name",compute="_compute_consultant_name1")
 
     name_works = fields.Many2many('res.partner.project',string="Name of Work",compute="_compute_name_work")
 
@@ -187,38 +187,20 @@ class SrfForm(models.Model):
             else:
                 record.name_works = None
 
-    # @api.onchange('name_work')
-    # def _onchange_name_work(self):
-    #     # Set the value of consultant_name1 based on the selected name_work
-    #     if self.name_work:
-    #         self.consultant_name1 = self.name_work.consultant_name
+    @api.onchange('name_work')
+    def _onchange_name_work(self):
+        # Set the value of consultant_name1 based on the selected name_work
+        if self.name_work:
+            self.consultant_name1 = self.name_work.consultant_name
 
-    # @api.depends('name_work')
-    # def _compute_consultant_name1(self):
-    #     # Update consultant_name1 when name_work changes
-    #     for record in self:
-    #         if record.name_work:
-    #             record.consultant_name1 = record.name_work.consultant_name
-    #         else:
-    #             record.consultant_name1 = False
-
-    # @api.depends('name_work')
-    # def _compute_consultant_name1(self):
-    #     for record in self:
-    #         if record.name_work and record.name_work.consultant_name:
-    #             record.consultant_name1 = record.name_work.consultant_name
-    #         else:
-    #             record.consultant_name1 = False
-
-    # @api.depends('name_work')
-    # def _compute_consultant_name1(self):
-    #     for record in self:
-    #         if record.name_work:
-    #             consultant_name = record.name_work.consultant_name
-    #             record.consultant_name1 = consultant_name if consultant_name else False
-    #         else:
-    #             record.consultant_name1 = False
-
+    @api.depends('name_work')
+    def _compute_consultant_name1(self):
+        # Update consultant_name1 when name_work changes
+        for record in self:
+            if record.name_work:
+                record.consultant_name1 = record.name_work.consultant_name
+            else:
+                record.consultant_name1 = False
 
 
 
