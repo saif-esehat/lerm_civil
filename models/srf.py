@@ -263,10 +263,9 @@ class SrfForm(models.Model):
     def confirm_srf(self):
         srf_ids=[]
         
+        import wdb; wdb.set_trace()
         
-        # count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date)]) 
-        count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date),('kes_no','!=','New'),('status','=','2-confirmed')])
-        # import wdb ; wdb.set_trace()
+        count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date),('kes_no','!=','New'),('status','=','2-confirmed')]) 
 
         for record in self.sample_range_table:
             sam_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample')]).number_next_actual
@@ -358,7 +357,7 @@ class SrfForm(models.Model):
         srf_last_number = last_sample_range[last_sample_range_index+1:]
 
       
-        modified_srf_id = f"SRF/"+srffirstnumber_str+"-"+srf_last_number
+        modified_srf_id = f"SRF/"+year+month+day+srffirstnumber_str.zfill(3)+"-"+year+month+day+srf_last_number.zfill(3)
         modified_kes_number = f"KES/DUS"
         self.write({'srf_id': modified_srf_id})
         self.write({'kes_number': modified_kes_number})
