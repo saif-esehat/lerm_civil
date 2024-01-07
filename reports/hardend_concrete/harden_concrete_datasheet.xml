@@ -51,7 +51,7 @@
 							pH of 1% solution in Water
 						</div> -->
 						<div style="text-align:center;font-size:18px">
-							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_name"/>
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')]).parameter_name"/>
 						</div>
 						
 				
