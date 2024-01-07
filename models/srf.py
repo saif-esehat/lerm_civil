@@ -238,7 +238,9 @@ class SrfForm(models.Model):
         srf_ids=[]
         
         
-        count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date)]) 
+        # count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date)]) 
+        count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date),('kes_no','!=','New'),('status','=','2-confirmed')])
+        # import wdb ; wdb.set_trace()
 
         for record in self.sample_range_table:
             sam_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample')]).number_next_actual
@@ -248,13 +250,13 @@ class SrfForm(models.Model):
 
 
             sample_range = "SAM/"+str(sam_next_number)+"-"+str(sam_next_number+record.sample_qty-1)
-            kes_range = "KES/"+str(kes_next_number)+"-"+str(kes_next_number+record.sample_qty-1)
+            kes_range = "KES/"+str(count+1)+"-"+str(count+1+record.sample_qty-1)
             record.write({'sample_range': sample_range , 'kes_range': kes_range })
             samples = self.env['lerm.srf.sample'].search([('sample_range_id','=',record.id)])
 
 
 
-            # import wdb ; wdb.set_trace()
+            
             for sample in samples:
                 # import wdb; wdb.set_trace()
                 sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
