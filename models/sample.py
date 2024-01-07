@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import logging
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import datetime, timedelta
 
 # _logger = logging.getLogger(__name__)
 
@@ -13,12 +15,19 @@ class LermSampleForm(models.Model):
     _description = "Sample"
     _rec_name = 'kes_no'
 
-    # client_reference1 = fields.Char(string="Client Reference",compute="_compute_client_reference", store=True)
+    client_reference1 = fields.Char(string="Client Reference",compute="_compute_client_reference", store=True)
 
-    # @api.depends('srf_id.client_refrence')
-    # def _compute_client_reference(self):
-    #     for record in self:
-    #         record.client_reference1 = record.srf_id.client_refrence
+    @api.depends('srf_id.client_refrence')
+    def _compute_client_reference(self):
+        for record in self:
+            record.client_reference1 = record.srf_id.client_refrence
+
+
+   
+
+
+  
+
     # ref = fields.Char(string="ULR No.",required=True,readonly=True, default=lambda self: 'New',store=True)
  
     # @api.model
@@ -622,3 +631,6 @@ class SampleParametersResult(models.Model):
     specification = fields.Text(string="Specification")
     verified = fields.Boolean("Verified")
     result = fields.Float(string="Result",digits=(12, 5))
+
+
+# 
