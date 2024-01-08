@@ -494,7 +494,7 @@ class LermSampleForm(models.Model):
         # return self.env.ref('lerm_civil.sample_report_action').report_action(self)
 
     def open_sample_allotment_wizard(self):
-        self.filled_by = self.env.user
+        
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
         return {
             'name': "Allot Sample",
