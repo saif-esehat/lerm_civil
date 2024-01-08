@@ -71,9 +71,9 @@ class LermSampleForm(models.Model):
                 
     
 
-    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,tracking=True)
+    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,ondelete="cascade",tracking=True)
     sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
-  
+    eln_id = fields.Many2one('lerm.eln',string="ELN",ondelete="cascade")
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -83,7 +83,7 @@ class LermSampleForm(models.Model):
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
     material_id_lab_name = fields.Char(string="Material",compute="compute_material_id_lab_name",store=True)
-    ulr_no = fields.Char(string="ULR No." ,required=True,readonly=True, default=lambda self: 'New')
+    ulr_no = fields.Char(string="ULR No." ,readonly=True, default=lambda self: 'New')
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")

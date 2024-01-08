@@ -206,7 +206,7 @@ class SrfForm(models.Model):
 
     @api.model
     def _get_default_date(self):
-        previous_record = self.search([], limit=1, order='id desc')
+        previous_record = self.self.search([], order='srf_date desc', limit=1)
         return previous_record.srf_date if previous_record else None
     
     def action_srf_sent_mail(self):
@@ -931,7 +931,8 @@ class CreateSampleWizard(models.TransientModel):
                     for parameter in sample.parameters:
                         parameters.append((0,0,{'parameter':parameter.id ,'spreadsheet_template':parameter.spreadsheet_template.id}))
                         parameters_result.append((0,0,{'parameter':parameter.id,'unit': parameter.unit.id,'test_method':parameter.test_method.id}))
-                    self.env['lerm.eln'].sudo().create({
+                    
+                    eln_id = self.env['lerm.eln'].sudo().create({
                         'srf_id': sample.srf_id.id,
                         'srf_date':sample.srf_id.srf_date,
                         'kes_no':sample.kes_no,
@@ -950,8 +951,8 @@ class CreateSampleWizard(models.TransientModel):
                         'size_id':sample.size_id.id,
                         'grade_id':sample.grade_id.id
                     })
-
-                    sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})
+                    # import wdb;wdb.set_trace()
+                    sample.write({'state':'2-alloted' , 'technicians':self.technicians.id , 'eln_id':eln_id.id})
                 else:
                     pass
 
