@@ -263,7 +263,7 @@ class SrfForm(models.Model):
     def confirm_srf(self):
         srf_ids=[]
         
-        import wdb; wdb.set_trace()
+        # import wdb; wdb.set_trace()
         
         count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date),('kes_no','!=','New'),('status','=','2-confirmed')]) 
 
