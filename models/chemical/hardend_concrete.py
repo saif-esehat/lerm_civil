@@ -38,8 +38,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
             for record in self:
                 record.ph_average_conformity = 'fail'
-                line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
-                materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
+                line = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')])
+                materials = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')]).parameter_table
                 for material in materials:
                     if material.grade.id == record.grade.id:
                         req_min = material.req_min
@@ -65,8 +65,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.ph_average_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -692,7 +692,7 @@ class ChemicalHasdenedConcrete(models.Model):
             record.chloride_visible2 = False
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
-                if sample.internal_id == '628cf04d-645d-4794-a0fd-3daabff4b044':
+                if sample.internal_id == 'e9f2301d-bba0-42a2-bca8-ecbc5882a2b7':
                     record.ph_visible = True
                 if sample.internal_id == '034d2729-961c-40ae-a642-a26f03a2db5a':
                     record.chloride_visible = True

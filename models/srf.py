@@ -118,7 +118,7 @@ class SrfForm(models.Model):
     # site_address = fields.Many2one('res.partner',string="Site Address")
     site_address = fields.Char(string="Site Address",compute="_compute_site_address")
     name_work = fields.Many2one('res.partner.project',string="Name of Work")
-    # consultant_name1 = fields.Char(string="Consultant Name",compute="_compute_consultant_name1")
+    consultant_name1 = fields.Char(string="Consultant Name",compute="_compute_consultant_name1")
 
     name_works = fields.Many2many('res.partner.project',string="Name of Work",compute="_compute_name_work")
 
@@ -188,44 +188,26 @@ class SrfForm(models.Model):
             else:
                 record.name_works = None
 
-    # @api.onchange('name_work')
-    # def _onchange_name_work(self):
-    #     # Set the value of consultant_name1 based on the selected name_work
-    #     if self.name_work:
-    #         self.consultant_name1 = self.name_work.consultant_name
+    @api.onchange('name_work')
+    def _onchange_name_work(self):
+        # Set the value of consultant_name1 based on the selected name_work
+        if self.name_work:
+            self.consultant_name1 = self.name_work.consultant_name
 
-    # @api.depends('name_work')
-    # def _compute_consultant_name1(self):
-    #     # Update consultant_name1 when name_work changes
-    #     for record in self:
-    #         if record.name_work:
-    #             record.consultant_name1 = record.name_work.consultant_name
-    #         else:
-    #             record.consultant_name1 = False
-
-    # @api.depends('name_work')
-    # def _compute_consultant_name1(self):
-    #     for record in self:
-    #         if record.name_work and record.name_work.consultant_name:
-    #             record.consultant_name1 = record.name_work.consultant_name
-    #         else:
-    #             record.consultant_name1 = False
-
-    # @api.depends('name_work')
-    # def _compute_consultant_name1(self):
-    #     for record in self:
-    #         if record.name_work:
-    #             consultant_name = record.name_work.consultant_name
-    #             record.consultant_name1 = consultant_name if consultant_name else False
-    #         else:
-    #             record.consultant_name1 = False
-
+    @api.depends('name_work')
+    def _compute_consultant_name1(self):
+        # Update consultant_name1 when name_work changes
+        for record in self:
+            if record.name_work:
+                record.consultant_name1 = record.name_work.consultant_name
+            else:
+                record.consultant_name1 = False
 
 
 
     @api.model
     def _get_default_date(self):
-        previous_record = self.search([], limit=1, order='id desc')
+        previous_record = self.self.search([], order='srf_date desc', limit=1)
         return previous_record.srf_date if previous_record else None
     
     def action_srf_sent_mail(self):
@@ -282,10 +264,9 @@ class SrfForm(models.Model):
     def confirm_srf(self):
         srf_ids=[]
         
+        # import wdb; wdb.set_trace()
         
-        # count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date)]) 
-        count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date),('kes_no','!=','New'),('status','=','2-confirmed')])
-        # import wdb ; wdb.set_trace()
+        count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date),('kes_no','!=','New'),('status','=','2-confirmed')]) 
 
         for record in self.sample_range_table:
             sam_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample')]).number_next_actual
@@ -377,7 +358,7 @@ class SrfForm(models.Model):
         srf_last_number = last_sample_range[last_sample_range_index+1:]
 
       
-        modified_srf_id = f"SRF/"+srffirstnumber_str+"-"+srf_last_number
+        modified_srf_id = f"SRF/"+year+month+day+srffirstnumber_str.zfill(3)+"-"+year+month+day+srf_last_number.zfill(3)
         modified_kes_number = f"KES/DUS"
         self.write({'srf_id': modified_srf_id})
         self.write({'kes_number': modified_kes_number})
@@ -1032,7 +1013,8 @@ class CreateSampleWizard(models.TransientModel):
                     for parameter in sample.parameters:
                         parameters.append((0,0,{'parameter':parameter.id ,'spreadsheet_template':parameter.spreadsheet_template.id}))
                         parameters_result.append((0,0,{'parameter':parameter.id,'unit': parameter.unit.id,'test_method':parameter.test_method.id}))
-                    self.env['lerm.eln'].sudo().create({
+                    
+                    eln_id = self.env['lerm.eln'].sudo().create({
                         'srf_id': sample.srf_id.id,
                         'srf_date':sample.srf_id.srf_date,
                         'kes_no':sample.kes_no,
@@ -1051,8 +1033,8 @@ class CreateSampleWizard(models.TransientModel):
                         'size_id':sample.size_id.id,
                         'grade_id':sample.grade_id.id
                     })
-
-                    sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})
+                    # import wdb;wdb.set_trace()
+                    sample.write({'state':'2-alloted' , 'technicians':self.technicians.id , 'eln_id':eln_id.id})
                 else:
                     pass
 

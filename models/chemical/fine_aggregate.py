@@ -36,23 +36,23 @@ class ChemicalFineAggregate(models.Model):
             # remove this first when making changes
             self.ph_average_conformity = 'fail'
         
-        # for record in self:
-        #     record.ph_average_conformity = 'fail'
-        #     line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
-        #     materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
-        #     for material in materials:
-        #         if material.grade.id == record.grade.id:
-        #             req_min = material.req_min
-        #             req_max = material.req_max
-        #             mu_value = line.mu_value
-                    
-        #             lower = record.ph_average - record.ph_average*mu_value
-        #             upper = record.ph_average + record.ph_average*mu_value
-        #             if lower >= req_min and upper <= req_max:
-        #                 record.ph_average_conformity = 'pass'
-        #                 break
-        #             else:
-        #                 record.ph_average_conformity = 'fail'
+            for record in self:
+                record.ph_average_conformity = 'fail'
+                line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
+                materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
+                for material in materials:
+                    if material.grade.id == record.grade.id:
+                        req_min = material.req_min
+                        req_max = material.req_max
+                        mu_value = line.mu_value
+                        
+                        lower = record.ph_average - record.ph_average*mu_value
+                        upper = record.ph_average + record.ph_average*mu_value
+                        if lower >= req_min and upper <= req_max:
+                            record.ph_average_conformity = 'pass'
+                            break
+                        else:
+                            record.ph_average_conformity = 'fail'
 
     ph_average_nabl = fields.Selection([
         ('pass', 'NABL'),
@@ -63,23 +63,23 @@ class ChemicalFineAggregate(models.Model):
         # remove this first
         self.ph_average_nabl = 'fail'
         
-        # for record in self:
-        #     record.ph_average_nabl = 'fail'
-        #     line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
-        #     materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
-        #     for material in materials:
-        #         if material.grade.id == record.grade.id:
-        #             lab_min = line.lab_min_value
-        #             lab_max = line.lab_max_value
-        #             mu_value = line.mu_value
+        for record in self:
+            record.ph_average_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
                     
-        #             lower = record.ph_average - record.ph_average*mu_value
-        #             upper = record.ph_average + record.ph_average*mu_value
-        #             if lower >= lab_min and upper <= lab_max:
-        #                 record.ph_average_nabl = 'pass'
-        #                 break
-        #             else:
-        #                 record.ph_average_nabl = 'fail'
+                    lower = record.ph_average - record.ph_average*mu_value
+                    upper = record.ph_average + record.ph_average*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.ph_average_nabl = 'pass'
+                        break
+                    else:
+                        record.ph_average_nabl = 'fail'
 
 
     #Dissolved Silica
@@ -156,15 +156,15 @@ class ChemicalFineAggregate(models.Model):
         for record in self:
             record.diff_in_wt_of_silica_c = record.wt_crucible_after_ignition_c - record.wt_crucible_after_hf_c
 
-    average_dissolved_silica_conformity = fields.Selection([
+    average_dissolved_silica_conformity_fine = fields.Selection([
             ('pass', 'Pass'),
-            ('fail', 'Fail')], string="Conformity", store=True)
+            ('fail', 'Fail')], string="Conformity",compute="_compute_average_dissolved_silica_conformity_fine", store=True)
 
     @api.depends('average_dissolved_silica','eln_ref','grade')
-    def _compute_average_dissolved_silica_conformity(self):
+    def _compute_average_dissolved_silica_conformity_fine(self):
         
         for record in self:
-            record.average_dissolved_silica_conformity = 'fail'
+            record.average_dissolved_silica_conformity_fine = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_table
             for material in materials:
@@ -176,20 +176,20 @@ class ChemicalFineAggregate(models.Model):
                     lower = record.average_dissolved_silica - record.average_dissolved_silica*mu_value
                     upper = record.average_dissolved_silica + record.average_dissolved_silica*mu_value
                     if lower >= req_min and upper <= req_max:
-                        record.average_dissolved_silica_conformity = 'pass'
+                        record.average_dissolved_silica_conformity_fine = 'pass'
                         break
                     else:
-                        record.average_dissolved_silica_conformity = 'fail'
+                        record.average_dissolved_silica_conformity_fine = 'fail'
 
-    average_dissolved_silica_nabl = fields.Selection([
+    average_dissolved_silica_nabl_fine = fields.Selection([
         ('pass', 'NABL'),
-        ('fail', 'Non-NABL')], string="NABL", store=True)
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_average_dissolved_silica_nabl_fine", store=True)
 
     @api.depends('average_dissolved_silica','eln_ref','grade')
-    def _compute_average_dissolved_silica_nabl(self):
+    def _compute_average_dissolved_silica_nabl_fine(self):
         
         for record in self:
-            record.average_dissolved_silica_nabl = 'fail'
+            record.average_dissolved_silica_nabl_fine = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_table
             for material in materials:
@@ -201,10 +201,10 @@ class ChemicalFineAggregate(models.Model):
                     lower = record.average_dissolved_silica - record.average_dissolved_silica*mu_value
                     upper = record.average_dissolved_silica + record.average_dissolved_silica*mu_value
                     if lower >= lab_min and upper <= lab_max:
-                        record.average_dissolved_silica_nabl = 'pass'
+                        record.average_dissolved_silica_nabl_fine = 'pass'
                         break
                     else:
-                        record.average_dissolved_silica_nabl = 'fail'
+                        record.average_dissolved_silica_nabl_fine = 'fail'
 
 
 
@@ -277,15 +277,15 @@ class ChemicalFineAggregate(models.Model):
             record.average_reduction_alkalinity = (record.reduction_in_alkalinity1 + record.reduction_in_alkalinity2 + record.reduction_in_alkalinity3)/3
 
 
-    average_reduction_alkalinity_conformity = fields.Selection([
+    average_reduction_alkalinity_conformity_fine = fields.Selection([
             ('pass', 'Pass'),
-            ('fail', 'Fail')], string="Conformity",  store=True)
+            ('fail', 'Fail')], string="Conformity",compute="_compute_average_reduction_alkalinity_conformity_fine",  store=True)
 
     @api.depends('average_reduction_alkalinity','eln_ref','grade')
-    def _compute_average_reduction_alkalinity_conformity(self):
+    def _compute_average_reduction_alkalinity_conformity_fine(self):
         
         for record in self:
-            record.average_reduction_alkalinity_conformity = 'fail'
+            record.average_reduction_alkalinity_conformity_fine = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_table
             for material in materials:
@@ -297,20 +297,20 @@ class ChemicalFineAggregate(models.Model):
                     lower = record.average_reduction_alkalinity - record.average_reduction_alkalinity*mu_value
                     upper = record.average_reduction_alkalinity + record.average_reduction_alkalinity*mu_value
                     if lower >= req_min and upper <= req_max:
-                        record.average_reduction_alkalinity_conformity = 'pass'
+                        record.average_reduction_alkalinity_conformity_fine = 'pass'
                         break
                     else:
-                        record.average_reduction_alkalinity_conformity = 'fail'
+                        record.average_reduction_alkalinity_conformity_fine = 'fail'
 
-    average_reduction_alkalinity_nabl = fields.Selection([
+    average_reduction_alkalinity_nabl_fine = fields.Selection([
         ('pass', 'NABL'),
-        ('fail', 'Non-NABL')], string="NABL",  store=True)
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_average_reduction_alkalinity_nabl_fine",  store=True)
 
     @api.depends('average_reduction_alkalinity','eln_ref','grade')
-    def _compute_average_reduction_alkalinity_nabl(self):
+    def _compute_average_reduction_alkalinity_nabl_fine(self):
         
         for record in self:
-            record.average_reduction_alkalinity_nabl = 'fail'
+            record.average_reduction_alkalinity_nabl_fine = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_table
             for material in materials:
@@ -322,10 +322,10 @@ class ChemicalFineAggregate(models.Model):
                     lower = record.average_reduction_alkalinity - record.average_reduction_alkalinity*mu_value
                     upper = record.average_reduction_alkalinity + record.average_reduction_alkalinity*mu_value
                     if lower >= lab_min and upper <= lab_max:
-                        record.average_reduction_alkalinity_nabl = 'pass'
+                        record.average_reduction_alkalinity_nabl_fine = 'pass'
                         break
                     else:
-                        record.average_reduction_alkalinity_nabl = 'fail'
+                        record.average_reduction_alkalinity_nabl_fine = 'fail'
 
 
 
@@ -358,15 +358,15 @@ class ChemicalFineAggregate(models.Model):
             else:
                 record.chloride_percent = 0
 
-    chloride_percent_conformity = fields.Selection([
+    chloride_percent_conformity_fine = fields.Selection([
             ('pass', 'Pass'),
-            ('fail', 'Fail')], string="Conformity", store=True)
+            ('fail', 'Fail')], string="Conformity",compute="_compute_chloride_percent_conformity_fine", store=True)
 
     @api.depends('chloride_percent','eln_ref','grade')
-    def _compute_chloride_percent_conformity(self):
+    def _compute_chloride_percent_conformity_fine(self):
         
         for record in self:
-            record.chloride_percent_conformity = 'fail'
+            record.chloride_percent_conformity_fine = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_table
             for material in materials:
@@ -378,20 +378,20 @@ class ChemicalFineAggregate(models.Model):
                     lower = record.chloride_percent - record.chloride_percent*mu_value
                     upper = record.chloride_percent + record.chloride_percent*mu_value
                     if lower >= req_min and upper <= req_max:
-                        record.chloride_percent_conformity = 'pass'
+                        record.chloride_percent_conformity_fine = 'pass'
                         break
                     else:
-                        record.chloride_percent_conformity = 'fail'
+                        record.chloride_percent_conformity_fine = 'fail'
 
-    chloride_percent_nabl = fields.Selection([
+    chloride_percent_nabl_fine = fields.Selection([
         ('pass', 'NABL'),
-        ('fail', 'Non-NABL')], string="NABL", store=True)
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_chloride_percent_nabl_fine", store=True)
 
     @api.depends('chloride_percent','eln_ref','grade')
-    def _compute_chloride_percent_nabl(self):
+    def _compute_chloride_percent_nabl_fine(self):
         
         for record in self:
-            record.chloride_percent_nabl = 'fail'
+            record.chloride_percent_nabl_fine = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_table
             for material in materials:
@@ -403,10 +403,10 @@ class ChemicalFineAggregate(models.Model):
                     lower = record.chloride_percent - record.chloride_percent*mu_value
                     upper = record.chloride_percent + record.chloride_percent*mu_value
                     if lower >= lab_min and upper <= lab_max:
-                        record.chloride_percent_nabl = 'pass'
+                        record.chloride_percent_nabl_fine = 'pass'
                         break
                     else:
-                        record.chloride_percent_nabl = 'fail'
+                        record.chloride_percent_nabl_fine = 'fail'
 
 
 
@@ -436,15 +436,15 @@ class ChemicalFineAggregate(models.Model):
         for record in self:
             record.sulphate_percent = 2 * record.difference_in_wt_sulphate * 0.343
 
-    sulphate_percent_conformity = fields.Selection([
+    sulphate_percent_conformity_fine = fields.Selection([
             ('pass', 'Pass'),
-            ('fail', 'Fail')], string="Conformity", store=True)
+            ('fail', 'Fail')], string="Conformity",compute="_compute_sulphate_percent_conformity_fine", store=True)
 
     @api.depends('sulphate_percent','eln_ref','grade')
-    def _compute_sulphate_percent_conformity(self):
+    def _compute_sulphate_percent_conformity_fine(self):
         
         for record in self:
-            record.sulphate_percent_conformity = 'fail'
+            record.sulphate_percent_conformity_fine = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_table
             for material in materials:
@@ -456,20 +456,20 @@ class ChemicalFineAggregate(models.Model):
                     lower = record.sulphate_percent - record.sulphate_percent*mu_value
                     upper = record.sulphate_percent + record.sulphate_percent*mu_value
                     if lower >= req_min and upper <= req_max:
-                        record.sulphate_percent_conformity = 'pass'
+                        record.sulphate_percent_conformity_fine = 'pass'
                         break
                     else:
-                        record.sulphate_percent_conformity = 'fail'
+                        record.sulphate_percent_conformity_fine = 'fail'
 
-    sulphate_percent_nabl = fields.Selection([
+    sulphate_percent_nabl_fine = fields.Selection([
         ('pass', 'NABL'),
-        ('fail', 'Non-NABL')], string="NABL",  store=True)
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_sulphate_percent_nabl_fine",  store=True)
 
     @api.depends('sulphate_percent','eln_ref','grade')
-    def _compute_sulphate_percent_nabl(self):
+    def _compute_sulphate_percent_nabl_fine(self):
         
         for record in self:
-            record.sulphate_percent_nabl = 'fail'
+            record.sulphate_percent_nabl_fine = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_table
             for material in materials:
@@ -481,10 +481,10 @@ class ChemicalFineAggregate(models.Model):
                     lower = record.sulphate_percent - record.sulphate_percent*mu_value
                     upper = record.sulphate_percent + record.sulphate_percent*mu_value
                     if lower >= lab_min and upper <= lab_max:
-                        record.sulphate_percent_nabl = 'pass'
+                        record.sulphate_percent_nabl_fine = 'pass'
                         break
                     else:
-                        record.sulphate_percent_nabl = 'fail'
+                        record.sulphate_percent_nabl_fine = 'fail'
 
 
 

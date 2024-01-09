@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import logging
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import datetime, timedelta
 
 # _logger = logging.getLogger(__name__)
 
@@ -13,12 +15,19 @@ class LermSampleForm(models.Model):
     _description = "Sample"
     _rec_name = 'kes_no'
 
-    # client_reference1 = fields.Char(string="Client Reference",compute="_compute_client_reference", store=True)
+    client_reference1 = fields.Char(string="Client Reference",compute="_compute_client_reference", store=True)
 
-    # @api.depends('srf_id.client_refrence')
-    # def _compute_client_reference(self):
-    #     for record in self:
-    #         record.client_reference1 = record.srf_id.client_refrence
+    @api.depends('srf_id.client_refrence')
+    def _compute_client_reference(self):
+        for record in self:
+            record.client_reference1 = record.srf_id.client_refrence
+
+
+   
+
+
+  
+
     # ref = fields.Char(string="ULR No.",required=True,readonly=True, default=lambda self: 'New',store=True)
  
     # @api.model
@@ -62,9 +71,9 @@ class LermSampleForm(models.Model):
                 
     
 
-    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,tracking=True)
+    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,ondelete="cascade",tracking=True)
     sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
-  
+    eln_id = fields.Many2one('lerm.eln',string="ELN",ondelete="cascade")
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -74,7 +83,7 @@ class LermSampleForm(models.Model):
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
     material_id_lab_name = fields.Char(string="Material",compute="compute_material_id_lab_name",store=True)
-    ulr_no = fields.Char(string="ULR No." ,required=True,readonly=True, default=lambda self: 'New')
+    ulr_no = fields.Char(string="ULR No." ,readonly=True, default=lambda self: 'New')
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
@@ -696,3 +705,6 @@ class SampleParametersResult(models.Model):
     specification = fields.Text(string="Specification")
     verified = fields.Boolean("Verified")
     result = fields.Float(string="Result",digits=(12, 5))
+
+
+# 
