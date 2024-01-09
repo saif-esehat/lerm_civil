@@ -101,6 +101,42 @@
                                readonly="1"/>
                         <field name='chloride_nabl'/>
                     </group> 
+                      <!-- Chloride  -->
+
+                    <group attrs="{'invisible': [('chloride_visible2', '=', False)]}">
+                        <h1>
+                            <field name="chloride_name2" readonly="1" nolabel="1"/>
+                            <field name="chloride_visible2" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('chloride_visible2', '=', False)]}">
+                      <group>
+                            <field name="chloride_cube2"/>
+                            <br></br>
+                            <field name="chloride_mass2"/>
+                             <br></br>
+                            <field name="chloride_valume2"/>
+                             <br></br>
+                            <field name="chloride_reading2"/>
+                             <br></br>
+                              <field name="chloride_normality2"/>
+                             <br></br>
+                            <field name="chloride_p2"/>
+                             <br></br>
+                            <field name="chloride_percent2"/>
+                             <br></br>
+                           
+                       </group>
+
+                    </group>
+                      <group attrs="{'invisible': [('chloride_visible2', '=', False)]}">
+                          
+                        <field name='chloride_conformity2'
+                               decoration-success="chloride_conformity2 == 'pass'" 
+                               decoration-danger="chloride_conformity2 == 'fail'" 
+                               readonly="1"/>
+                        <field name='chloride_nabl2'/>
+                    </group> 
 
 
                       <!-- Chloride 2 -->

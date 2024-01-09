@@ -54,9 +54,18 @@
                         string="Reject" 
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification','5-pending_approval'))]}"/>
 
+
+                        <!-- <button
+                            type="object"
+                            name="cancel_sample"
+                            string="Cancel Sample"/> -->
+                            
+
                         
        
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
+                   
+                   
                 </header>
                 <sheet>
                 <div class="oe_button_box" name="button_box"  >
@@ -72,6 +81,7 @@
                       
                         <field name="discipline_id" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <field name="lab_no_value" optional="show" invisible="1"/>
+                        <!-- <field name="client_reference1"/> -->
                         <field name="material_id" domain="[('id', 'in', material_ids)]" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <!-- <field name="lab_l_id" /> -->
                         <field name="material_id_lab_name"/>
@@ -261,6 +271,7 @@
                       <field name="sample_received_date" optional="show"/>
                       <field name='kes_no'/>
                       <field name="srf_id" optional="show" />
+                      <field name="client_reference1" optional="show" />
                       <field name="activity_ids" widget="list_activity" optional="show"/>
                       <field name="sample_no" optional="show"/>
                       <field name="discipline_id" optional="show"/>
@@ -298,6 +309,7 @@
                 <field name="srf_id" string="SRF ID" />
                 <field name="casting" string="Casting" />
                 <field name="discipline_id" string="Discipline" />
+                <field name="kes_no" string="KES NO" />
                 <field name="lab_no_value" optional="show" invisible="1"/>
                 <!-- <field name="lab_l_id" string="Discipline" /> -->
                 <field name="group_id" string="Group" />

@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import logging
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import datetime, timedelta
 
 # _logger = logging.getLogger(__name__)
 
@@ -12,6 +14,19 @@ class LermSampleForm(models.Model):
 
     _description = "Sample"
     _rec_name = 'kes_no'
+
+    client_reference1 = fields.Char(string="Client Reference",compute="_compute_client_reference", store=True)
+
+    @api.depends('srf_id.client_refrence')
+    def _compute_client_reference(self):
+        for record in self:
+            record.client_reference1 = record.srf_id.client_refrence
+
+
+   
+
+
+  
 
     # ref = fields.Char(string="ULR No.",required=True,readonly=True, default=lambda self: 'New',store=True)
  
@@ -56,8 +71,9 @@ class LermSampleForm(models.Model):
                 
     
 
-    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,tracking=True)
+    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,ondelete="cascade",tracking=True)
     sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
+    eln_id = fields.Many2one('lerm.eln',string="ELN",ondelete="cascade")
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -67,7 +83,7 @@ class LermSampleForm(models.Model):
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
     material_id_lab_name = fields.Char(string="Material",compute="compute_material_id_lab_name",store=True)
-    ulr_no = fields.Char(string="ULR No." ,required=True,readonly=True, default=lambda self: 'New')
+    ulr_no = fields.Char(string="ULR No." ,readonly=True, default=lambda self: 'New')
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
@@ -132,7 +148,17 @@ class LermSampleForm(models.Model):
         help='Attach multiple images to the sample',
     )
 
+   
+    # @api.depends('client_refrence')
+    # def _compute_client_reference(self):
+    #     for record in self:
+    #         client_reference = record.client_refrence
+    #         record.client_reference = client_reference
 
+    # @api.onchange('discipline_id')
+    # def onchange_discipline_id(self):
+    #     # Trigger the computation of lab_no_value
+    #     self._compute_client_reference()
 
 
 
@@ -155,6 +181,7 @@ class LermSampleForm(models.Model):
         ('3-pending_verification','Pending Verification'),
         ('5-pending_approval','Pending Approval'),
         ('4-in_report', 'In-Report'),
+        ('5-cancelled', 'Cancelled'),
     ], string='State',default='1-allotment_pending')
     conformity = fields.Boolean(string="Conformity")
     parameters_result = fields.One2many('sample.parameters.result','sample_id',string="Parameters Result")
@@ -163,6 +190,16 @@ class LermSampleForm(models.Model):
     main_name = fields.Char(string="Product Name")
     price = fields.Float(string="Price")
     product_or_form_based = fields.Boolean("Product or Form Based",compute="compute_form_product_based")
+    
+    cancellation_reason = fields.Selection([
+        ('software_error', 'Software Error'),
+        ('work_cancelled', 'Work has been Cancelled'),
+        ('out_of_scope', 'Out of Scope'),
+        ('other', 'Other'),
+
+
+    ])
+    other_cancellation_reason = fields.Text("Cancellation Reason")
 
     # @api.model
     # def create(self, vals):
@@ -217,6 +254,80 @@ class LermSampleForm(models.Model):
     #         sample.write({'ulr_no': ref})
 
     #     return sample
+
+    def cancel_sample(self):
+        active_ids = self.env.context.get('active_ids')
+        action = self.env.ref('lerm_civil.sample_rejection_wizard')
+        return {
+            'name': "Cancel Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'sample.cancellation.wizard',
+            'view_id': action.id,
+            'target': 'new',
+            'context':{
+                'default_sample': self.id,
+                }
+            }
+
+        
+
+
+    def edit_sample(self):
+        
+
+        # import wdb;wdb.set_trace()
+        # samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])
+        action = self.env.ref('lerm_civil.srf_sample_wizard_form')
+        return {
+            'name': "Edit Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'create.srf.sample.wizard',
+            'view_id': action.id,
+            'target': 'new',
+            'context':{
+                'default_sample': self.id,
+                'default_is_update':True,
+                'default_parameters':self.parameters.ids,
+                'default_discipline_id': self.discipline_id.id,
+                'default_group_id': self.group_id.id,
+                'default_material_id': self.material_id.id,
+                'default_brand': self.brand,
+                'default_size_id': self.size_id.id,
+                'default_grade_id': self.grade_id.id,
+                'default_sample_qty': self.sample_qty,
+                'default_received_by_id': self.received_by_id.id,
+                'default_sample_received_date':self.sample_received_date,
+                'default_sample_condition':self.sample_condition,
+
+                'default_sample_reject_reason': self.sample_reject_reason,
+                'default_location': self.location,
+                'default_received_by_id': self.received_by_id.id,
+                'default_sample_received_date':self.sample_received_date,
+
+                'default_witness':self.witness,
+                'default_scope':self.scope,
+                'default_sample_description':self.sample_description,
+                'default_client_sample_id':self.client_sample_id,
+                'default_days_casting':self.days_casting,
+
+                'default_date_casting':self.date_casting,
+                'default_customer_id':self.customer_id.id,
+                # 'default_product_aliases':self.product_aliases.ids,
+
+                'default_product_alias':self.product_alias.id,
+                'default_conformity':self.conformity,
+                'default_product_name':self.product_name.id,
+                # 'default_pricelist':self.pricelist.id,
+                'default_main_name':self.main_name,
+                'default_price':self.price,
+                }
+            }
+
+    
 
 
     @api.depends('state')
@@ -457,7 +568,7 @@ class LermSampleForm(models.Model):
         # return self.env.ref('lerm_civil.sample_report_action').report_action(self)
 
     def open_sample_allotment_wizard(self):
-        self.filled_by = self.env.user
+        
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
         return {
             'name': "Allot Sample",
@@ -499,7 +610,11 @@ class LermSampleForm(models.Model):
     def onchange_material_id(self):
         for record in self:
             result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
-            record.alias = result.alias
+            try:
+                record.alias = result.alias
+            except:
+                record.alias = None
+
 
 
 
@@ -590,3 +705,6 @@ class SampleParametersResult(models.Model):
     specification = fields.Text(string="Specification")
     verified = fields.Boolean("Verified")
     result = fields.Float(string="Result",digits=(12, 5))
+
+
+# 

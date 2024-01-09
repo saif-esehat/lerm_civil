@@ -267,6 +267,7 @@ class SteelTmtBarLine(models.Model):
                     
                     lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
                     upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
+           
                     if lower >= req_min and upper <= req_max:
                         record.uts_conformity = 'pass'
                         break
@@ -277,6 +278,8 @@ class SteelTmtBarLine(models.Model):
     def _compute_uts_nabl(self):
         
         for record in self:
+            # import wdb; wdb.set_trace()
+
             record.uts_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table
@@ -288,6 +291,7 @@ class SteelTmtBarLine(models.Model):
                     
                     lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
                     upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
+                    
                     if lower >= lab_min and upper <= lab_max:
                         record.uts_nabl = 'pass'
                         break
@@ -323,6 +327,8 @@ class SteelTmtBarLine(models.Model):
                     
                     lower = record.percent_elongation - record.percent_elongation*mu_value
                     upper = record.percent_elongation + record.percent_elongation*mu_value
+                    
+
                     if lower >= req_min and upper <= req_max:
                         record.elongation_conformity = 'pass'
                         break
@@ -545,8 +551,8 @@ class SteelTmtBarLine(models.Model):
 
     @api.model
     def create(self, vals):
-        # import wdb;wdb.set_trace()
         record = super(SteelTmtBarLine, self).create(vals)
+        # import wdb;wdb.set_trace()
         # record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
@@ -556,6 +562,11 @@ class SteelTmtBarLine(models.Model):
     def _compute_grade_id(self):
         if self.eln_ref:
             self.grade = self.eln_ref.grade_id.id
+
+    # @api.onchange('bend_test1')
+    # def _compute_wdb(self):
+    #     import wdb; wdb.set_trace()
+        
     
 
     @api.depends('eln_ref')

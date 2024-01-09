@@ -70,11 +70,12 @@ class CementPsc(models.Model):
             record.normal_consistency_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','a9e97cea-372f-4775-9bcb-e9dd70e6e6df')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','a9e97cea-372f-4775-9bcb-e9dd70e6e6df')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     req_max = material.req_max
-                    mu_value = line.mu_value
+                    # mu_value = line.mu_value
                     lower = record.normal_consistency_trial1 - record.normal_consistency_trial1*mu_value
                     upper = record.normal_consistency_trial1 + record.normal_consistency_trial1*mu_value
                     if lower >= req_min and upper <= req_max :
@@ -148,11 +149,12 @@ class CementPsc(models.Model):
             record.initial_setting_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     req_max = material.req_max
-                    mu_value = line.mu_value
+                    # mu_value = line.mu_value
                     lower = float(record.initial_setting_time_minutes_unrounded) - float(record.initial_setting_time_minutes_unrounded)*mu_value
                     upper = float(record.initial_setting_time_minutes_unrounded) + float(record.initial_setting_time_minutes_unrounded)*mu_value
                     if lower >= req_min and upper <= req_max :
@@ -236,11 +238,12 @@ class CementPsc(models.Model):
             record.final_setting_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     req_max = material.req_max
-                    mu_value = line.mu_value
+                    # mu_value = line.mu_value
                     lower = float(record.final_setting_time_minutes_unrounded) - float(record.final_setting_time_minutes_unrounded)*mu_value
                     upper = float(record.final_setting_time_minutes_unrounded) + float(record.final_setting_time_minutes_unrounded)*mu_value
                     if lower >= req_min and upper <= req_max :
@@ -335,11 +338,12 @@ class CementPsc(models.Model):
             record.density_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','8fcf78c9-dd02-4664-bba4-b887a64a6952')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','8fcf78c9-dd02-4664-bba4-b887a64a6952')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     req_max = material.req_max
-                    mu_value = line.mu_value
+                    # mu_value = line.mu_value
                     lower = record.average_density - record.average_density*mu_value
                     upper = record.average_density + record.average_density*mu_value
                     if lower >= req_min and upper <= req_max :
@@ -432,11 +436,12 @@ class CementPsc(models.Model):
             record.soundness_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','5d2e505d-1d50-48aa-a8c8-9f70fe4b421b')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','5d2e505d-1d50-48aa-a8c8-9f70fe4b421b')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     req_max = material.req_max
-                    mu_value = line.mu_value
+                    
                     lower = record.expansion_soundness - record.expansion_soundness*mu_value
                     upper = record.expansion_soundness + record.expansion_soundness*mu_value
                     if lower >= req_min and upper <= req_max :
@@ -531,11 +536,12 @@ class CementPsc(models.Model):
             record.dry_seiving_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','ed89d6b3-783f-4044-aef7-d2dd847d3cce')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','ed89d6b3-783f-4044-aef7-d2dd847d3cce')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     req_max = material.req_max
-                    mu_value = line.mu_value
+                    
                     lower = record.fineness_dry_sieving - record.fineness_dry_sieving*mu_value
                     upper = record.fineness_dry_sieving + record.fineness_dry_sieving*mu_value
                     if lower >= req_min and upper <= req_max :
@@ -633,11 +639,12 @@ class CementPsc(models.Model):
             record.compressive_3days_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     req_max = material.req_max
-                    mu_value = line.mu_value
+                    # mu_value = line.mu_value
                     lower = record.compressive_strength_3_days - record.compressive_strength_3_days*mu_value
                     upper = record.compressive_strength_3_days + record.compressive_strength_3_days*mu_value
                     if lower >= req_min and upper <= req_max :
@@ -729,11 +736,12 @@ class CementPsc(models.Model):
             record.compressive_7days_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     req_max = material.req_max
-                    mu_value = line.mu_value
+                    # mu_value = line.mu_value
                     lower = record.compressive_strength_7_days - record.compressive_strength_7_days*mu_value
                     upper = record.compressive_strength_7_days + record.compressive_strength_7_days*mu_value
                     if lower >= req_min and upper <= req_max :
@@ -825,11 +833,12 @@ class CementPsc(models.Model):
             record.compressive_28days_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
                     req_max = material.req_max
-                    mu_value = line.mu_value
+                    # mu_value = line.mu_value
                     lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
                     upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
                     if lower >= req_min and upper <= req_max :
@@ -961,6 +970,7 @@ class CementPsc(models.Model):
             record.fineness_conformity = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_table
+            mu_value = line.mu_value
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
