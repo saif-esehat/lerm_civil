@@ -41,7 +41,7 @@
 													Customer/Party Name :
 												</td>
 												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/>
+												<span t-field="o.srf_id.customer.name"/><br/>
 												<span t-field="o.srf_id.customer.street"/>
 												<span t-field="o.srf_id.customer.street2"/>
 												<span t-field="o.srf_id.customer.city"/>
@@ -259,7 +259,7 @@
 										Setting Time
 									</span>
 									
-								</td >
+								</td>
 								<td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Setting time GP')]).test_method.test_method"/>
@@ -288,7 +288,7 @@
 										Freedom from coarse particles
 									</span>
 									
-								</td >
+								</td>
 								<td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Freedom from coarse particles GP')]).test_method.test_method"/>
@@ -317,7 +317,7 @@
 										Dry Bulk Density
 									</span>
 									
-								</td >
+								</td>
 								<td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Bulk density GP')]).test_method.test_method"/>
@@ -346,7 +346,7 @@
 										Compressive Strength 1 Days
 									</span>
 									
-								</td >
+								</td>
 								<td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Compressive strength GP')]).test_method.test_method"/>

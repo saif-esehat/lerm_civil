@@ -43,7 +43,7 @@
 													Customer/Party Name :
 												</td>
 												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/>
+												<span t-field="o.srf_id.customer.name"/> <br/>
 												<span t-field="o.srf_id.customer.street"/>
 												<span t-field="o.srf_id.customer.street2"/>
 												<span t-field="o.srf_id.customer.city"/>
@@ -222,7 +222,7 @@
 									</th>
 								</tr>
 							</thead>
-						<tbody >
+						<tbody>
 
 							<tr>
 								<!-- <div colspan="2" style="font-weight: bold;"> -->
@@ -339,7 +339,7 @@
 								</td>
 							</tr>
 	
-						</tbody >
+						</tbody>
 				</table>
 				</div>
 

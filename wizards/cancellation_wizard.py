@@ -7,6 +7,9 @@ import logging
 class SampleCancellationWizard(models.TransientModel):
     _name = "sample.cancellation.wizard"
 
+
+    sample = fields.Many2one('lerm.srf.sample')
+
     cancellation_reason = fields.Selection([
         ('software_error', 'Software Error'),
         ('work_cancelled', 'Work has been Cancelled'),

@@ -42,7 +42,7 @@
 													Customer/Party Name :
 												</td>
 												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/>
+												<span t-field="o.srf_id.customer.name"/> <br/>
 												<span t-field="o.srf_id.customer.street"/>
 												<span t-field="o.srf_id.customer.street2"/>
 												<span t-field="o.srf_id.customer.city"/>
@@ -247,7 +247,7 @@
 								</th>
 							</tr>
 						</thead>
-					<tbody >
+					<tbody>
 
 							<!--1 Accelerated pozzolanic activity index with portland cement , 7 Days in % -->
 
@@ -631,7 +631,7 @@
 								</t>
 							</td>
 						</tr>
-					</tbody >
+					</tbody>
 				</table>
 				<div>
 
