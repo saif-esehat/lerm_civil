@@ -42,7 +42,7 @@
 													Customer/Party Name :
 												</td>
 												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/>
+												<span t-field="o.srf_id.customer.name"/><br/>
 												<span t-field="o.srf_id.customer.street"/>
 												<span t-field="o.srf_id.customer.street2"/>
 												<span t-field="o.srf_id.customer.city"/>
@@ -244,7 +244,7 @@
 							   	</th>
 							</tr>
 						</thead>
-					<tbody >
+					<tbody>
 						 
 							<!-- <tr t-if="flyash.normal_consistency_visible and (flyash.normal_consistency_nabl == 'pass' and nabl or flyash.normal_consistency_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
@@ -825,7 +825,7 @@
 							</td>
 						</tr>
 
-						</tbody >
+						</tbody>
 					</table>
 					<div >
 						<div>

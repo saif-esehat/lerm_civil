@@ -36,51 +36,51 @@
 							</tr> -->
 							
 						<table>
+							<tr>
+								
 								<tr>
-									
-											<tr>
-												<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
-													Customer/Party Name :
-												</td>
-												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/>
-												<span t-field="o.srf_id.customer.street"/>
-												<span t-field="o.srf_id.customer.street2"/>
-												<span t-field="o.srf_id.customer.city"/>
-												<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
-												<span t-field="o.srf_id.customer.state_id"/>
-												,
-												<span t-field="o.srf_id.customer.country_id"/>
-									           </td>
-											</tr>
-											
-										
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Sample Receipt Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.sample_id.sample_received_date"/>
-												</td>
-											</tr>
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Test Start Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.start_date"/>
-												</td>
-											</tr>
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Test End Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.end_date"/>
-												</td>
-											</tr>
-										
+									<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
+										Customer/Party Name :
+									</td>
+									<td colspan="3">
+									<span t-field="o.srf_id.customer.name"/><br/>
+									<span t-field="o.srf_id.customer.street"/>
+									<span t-field="o.srf_id.customer.street2"/>
+									<span t-field="o.srf_id.customer.city"/>
+									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+									<span t-field="o.srf_id.customer.state_id"/>
+									,
+									<span t-field="o.srf_id.customer.country_id"/>
+									</td>
 								</tr>
+								
+							
+								<tr>
+									<td colspan="3" style="font-weight: bold;" >
+										Sample Receipt Date :
+									</td>
+									<td colspan="3">
+										<span t-field="o.sample_id.sample_received_date"/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3" style="font-weight: bold;" >
+										Test Start Date :
+									</td>
+									<td colspan="3">
+										<span t-field="o.start_date"/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3" style="font-weight: bold;" >
+										Test End Date :
+									</td>
+									<td colspan="3">
+										<span t-field="o.end_date"/>
+									</td>
+								</tr>
+									
+							</tr>
 
 							
 
