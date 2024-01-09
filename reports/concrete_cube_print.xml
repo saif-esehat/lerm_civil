@@ -88,13 +88,8 @@
 							<tr>
 								<td colspan="12" >Customer Party Name :
 									<![CDATA[&nbsp;]]>
-<<<<<<< HEAD
-									<span t-field="o.srf_id.customer.name"/><br/>
-									<span t-field="o.srf_id.customer.street" style=""/>
-=======
 									<span t-field="o.srf_id.customer.name" /><br/>
 									<span t-field="o.srf_id.customer.street" style="padding-left: 8.6rem;"/>
->>>>>>> 5c16ba65da40389ed21eba29c77671eb334fa4a6
 									<span t-field="o.srf_id.customer.street2"/>
 									<span t-field="o.srf_id.customer.city"/>
 									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
