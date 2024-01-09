@@ -8,11 +8,22 @@
         <field name="arch" type="xml">
             <form>
                 <group>
-
-                    <field name="cancellation_reason"/>
-                    <field name="other_cancellation_reason"/>
-
+                    <field name="sample" invisible="1"/>
+                    <field name="cancellation_reason" required="1"/>
+                    <field name="other_cancellation_reason" attrs="{'invisible': [('cancellation_reason', '!=', 'other')]}"/>
+                    
                 </group>
+                <footer>
+                    <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="cancel_current_sample"
+                            string="Cancel"/>
+                    <button
+                            type="object"
+                            name="discard_cancel"
+                            string="Discard"/>
+                </footer>
 
             </form>
         </field>
