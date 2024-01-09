@@ -181,7 +181,7 @@ class LermSampleForm(models.Model):
         ('3-pending_verification','Pending Verification'),
         ('5-pending_approval','Pending Approval'),
         ('4-in_report', 'In-Report'),
-        ('5-cancelled', 'Cancelled'),
+        ('6-cancelled', 'Cancelled'),
     ], string='State',default='1-allotment_pending')
     conformity = fields.Boolean(string="Conformity")
     parameters_result = fields.One2many('sample.parameters.result','sample_id',string="Parameters Result")
@@ -256,7 +256,8 @@ class LermSampleForm(models.Model):
     #     return sample
 
     def cancel_sample(self):
-        active_ids = self.env.context.get('active_ids')
+        # import wdb;wdb.set_trace()
+
         action = self.env.ref('lerm_civil.sample_rejection_wizard')
         return {
             'name': "Cancel Sample",
@@ -277,7 +278,6 @@ class LermSampleForm(models.Model):
     def edit_sample(self):
         
 
-        # import wdb;wdb.set_trace()
         # samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])
         action = self.env.ref('lerm_civil.srf_sample_wizard_form')
         return {

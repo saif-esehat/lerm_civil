@@ -55,10 +55,11 @@
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification','5-pending_approval'))]}"/>
 
 
-                        <!-- <button
+                        <button
                             type="object"
-                            name="cancel_sample"
-                            string="Cancel Sample"/> -->
+                            name="cancel_sample" 
+                            attrs="{'invisible': [('state', 'not in', ('1-allotment_pending','2-alloted','3-pending_verification','4-in_report','5-pending_approval'))]}"
+                            string="Cancel Sample"/>
                             
 
                         
