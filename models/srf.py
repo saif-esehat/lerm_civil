@@ -207,7 +207,7 @@ class SrfForm(models.Model):
 
     @api.model
     def _get_default_date(self):
-        previous_record = self.self.search([], order='srf_date desc', limit=1)
+        previous_record = self.search([], order='srf_date desc', limit=1)
         return previous_record.srf_date if previous_record else None
     
     def action_srf_sent_mail(self):
