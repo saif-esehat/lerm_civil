@@ -609,22 +609,22 @@
                                     <td >
                                         <span >Compresive Strength</span>
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle;">
+                                    <td >
                                         <span>
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).unit.name"/>
                                         </span>
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle;">
+                                    <td >
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle;">
+                                    <td >
                                         <span t-esc="data.average_compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle;">
+                                    <td >
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.permissable_limit"/>
@@ -685,7 +685,7 @@
 								</div>
 							</div>
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
