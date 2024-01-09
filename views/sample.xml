@@ -54,6 +54,13 @@
                         string="Reject" 
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification','5-pending_approval'))]}"/>
 
+
+                        <!-- <button
+                            type="object"
+                            name="cancel_sample"
+                            string="Cancel Sample"/> -->
+                            
+
                         
        
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>

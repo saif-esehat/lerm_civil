@@ -91,7 +91,7 @@
                         <button name="open_sample_add_wizard" string="Repeat Sample" type="object" class="btn-primary" attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"/>
                     </group>
                     </group>
-                    <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="samples" context = "{'default_customer_id' : customer,'is_local': True}" invisible='0'>
+                    <field readonly="1" name="samples" context = "{'default_customer_id' : customer,'is_local': True}" invisible='0'>
                         <tree>
                             <field name='kes_no'/>
                             <field name="material_id"/>
@@ -104,7 +104,8 @@
                             <field name='casting'/>
                             <!-- <field name="sample_quantity"/> -->
                             <field name="sample_received_date" />
-                            <field name="sample_description"/>                           
+                            <field name="sample_description"/>
+                            <button name="edit_sample" string="Edit" type="object" class="btn-primary" />                          
                         </tree>
                     </field>
                     <!-- <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" readonly="1" context = "{'default_customer_id' : customer,'is_local': True}">
@@ -185,6 +186,7 @@
                 <sheet>
                     <group style="width:50%">
                         <!-- <field name="sample_id"/> -->
+                        
                         <field name="discipline_id"  options="{'no_create': True}"/>
                         <field name="lab_no_value"  options="{'no_create': True}" invisible="1"/>
                         <!-- <field name="lab_l_id"  options="{'no_create': True}"/> -->
@@ -197,6 +199,7 @@
                         <field name="material_ids" invisible='1'/>
                         <field name="grade_ids" invisible='1'/>
                         <field name='conformity'/>
+                        <field name="sample" attrs="{'invisible': [('is_update','!=',True)]}" readonly="1"/>
                         <!--<field name="grade_ids" invisible='1'/> -->
                     </group>
                     <group style="width:50%">
@@ -208,7 +211,7 @@
                         <field name="main_name"   invisible="1"/>
                         <field name="price"   invisible="1"/>
                         <field name="size_id" domain="[('id', 'in', size_ids)]"  options="{'no_create': True}"/>
-                        <field name="sample_qty" />
+                        <field name="sample_qty" attrs="{'readonly': [('is_update','=',True)]}"/>
                         <field name="sample_received_date" readonly="1"/>
                         <field name="location"/>
                         <field name="casting" />
@@ -226,7 +229,7 @@
                         <field name="witness" attrs="{'invisible': [('has_witness','!=',True)]}"/>
                     </group>
                     <group style="width:50%">
-                        <field name="scope"/>
+                        <field name="scope" attrs="{'readonly': [('is_update','=',True)]}"/>
                     </group>
                     <group style="width:100%">
                         <field name="sample_description"/>
@@ -252,11 +255,14 @@
                                 <field name="test_method"/>
                             </tree>
                         </field>
+                         
+                        <field name="is_update" invisible="1"/>
                     </group>
                 </sheet>
                 <footer>
-                        <button name="add_sample" string="Add Sample" type="object" class="btn-primary"/>
-                        <button name="close_sample_wizard" string="Close" type="object"/>
+                        <button name="add_sample" string="Add Sample" type="object" class="btn-primary" attrs="{'invisible': [('is_update','=',True)]}"/>
+                        <button name="edit_current_sample" string="Edit Sample" type="object" class="btn-primary" attrs="{'invisible': [('is_update','!=',True)]}"/>
+                        <button name="close_sample_wizard" string="Close" type="object" />
                 </footer>
             </form>
         </field>

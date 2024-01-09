@@ -129,6 +129,7 @@ class SrfForm(models.Model):
     contact_site_ids = fields.Many2many('res.partner',string="Site Ids",compute="compute_site_ids")
     attachment = fields.Binary(string="Attachment")
     attachment_name = fields.Char(string="Attachment Name")
+
     state = fields.Selection([
         ('1-draft', 'Draft'),
         ('2-confirm', 'Confirm')
@@ -519,6 +520,7 @@ class SrfForm(models.Model):
                 'default_customer_id': self.customer.id,
                 'default_sample_received_date':self.srf_date,
                 'default_pricelist':self.customer.property_product_pricelist.id,
+                'default_is_update': False,
                 # 'default_discipline_id': self.discipline_id.id,
                 }
             }
@@ -568,6 +570,7 @@ class CreateSampleWizard(models.TransientModel):
    
     
     srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id")
+    
     sample_id = fields.Char(string="Sample Id")
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -621,6 +624,9 @@ class CreateSampleWizard(models.TransientModel):
     pricelist = fields.Many2one('product.pricelist',string='Pricelist')
     main_name = fields.Char(string="Product Name",compute='compute_main_name',store=True)
     price = fields.Float(string="Price",compute='compute_price',store=True)
+
+    sample = fields.Many2one('lerm.srf.sample',string="Sample")
+    is_update = fields.Boolean('Is Update')
 
 
    
@@ -716,6 +722,80 @@ class CreateSampleWizard(models.TransientModel):
             else:
                 record.product_aliases = None
                 
+    def edit_current_sample(self,data=False):
+        
+            
+
+        group_id =  self.group_id.id
+        # alias = self.alias
+        material_id = self.material_id.id
+        size_id = self.size_id.id
+        brand = self.brand
+        grade_id = self.grade_id.id
+        sample_received_date = self.sample_received_date
+        location = self.location
+        
+        discipline_id = self.discipline_id.id
+        lab_no_value = self.lab_no_value
+        # lab_l_id = self.lab_l_id.id
+        sample_description =self.sample_description
+        parameters = self.parameters
+        discipline_id = self.discipline_id
+        casting = self.casting
+        client_sample_id = self.client_sample_id
+        conformity = self.conformity
+        volume = self.volume
+        product_name = self.product_name
+
+
+        if self.grade_required:
+            if not self.grade_id:
+                raise UserError("Grade is Required")
+            
+
+        if not parameters:
+            raise UserError("Add atleast one Parameter")
+        
+        if discipline_id.internal_id == '742c99ff-c484-4806-bb68-11b4271d6147':
+            if len(parameters) > 1:
+                raise UserError("Only one Parameter is allowed in Non Destructive Testing")
+        
+        sample_id = self.env.context.get('active_id')
+        sample = self.env['lerm.srf.sample'].search([('id','=',sample_id)])
+        # import wdb; wdb.set_trace()
+
+
+        sample.write({
+            'discipline_id': discipline_id,
+            # 'lab_l_id': lab_l_id,
+            'lab_no_value':lab_no_value,
+            'group_id':group_id,
+            'material_id' : material_id,
+            'grade_id' : grade_id,
+            'parameters':parameters,
+            # 'sample_range_id':sample_range.id,
+            'size_id':size_id,
+            'sample_description':sample_description,
+            'casting':casting,
+            'date_casting':self.date_casting,
+            'days_casting':self.days_casting,
+            'brand':brand,
+            'sample_received_date':sample_received_date,
+            'location':location,
+            'sample_condition' : self.sample_condition,
+            'sample_reject_reason' : self.sample_reject_reason,
+            'has_witness' : self.has_witness,
+            'witness' : self.witness,
+            'client_sample_id':client_sample_id,
+            'conformity':conformity,
+            'volume':volume,
+            'product_name':product_name
+            
+        })
+        return {'type': 'ir.actions.act_window_close'}
+
+
+           
 
     # @api.onchange('material_id' ,'customer_id', 'material_id')
     # def onchange_material_id(self):
@@ -924,7 +1004,7 @@ class CreateSampleWizard(models.TransientModel):
         _name = "sample.allotment.wizard"
 
         technicians = fields.Many2one("res.users",string="Technicians")
-
+        
 
         @api.onchange('technicians')
         def onchange_technicians(self):
@@ -933,6 +1013,8 @@ class CreateSampleWizard(models.TransientModel):
             for user_id in users:
                 ids.append(user_id.id)
             print("IDS " + str(ids))
+            # import wdb; wdb.set_trace()
+
             return {'domain': {'technicians': [('id', 'in', ids)]}}
         
 

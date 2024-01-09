@@ -246,6 +246,80 @@ class LermSampleForm(models.Model):
 
     #     return sample
 
+    def cancel_sample(self):
+        active_ids = self.env.context.get('active_ids')
+        action = self.env.ref('lerm_civil.sample_rejection_wizard')
+        return {
+            'name': "Cancel Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'sample.cancellation.wizard',
+            'view_id': action.id,
+            'target': 'new',
+            'context':{
+                'default_sample': self.id,
+                }
+            }
+
+        
+
+
+    def edit_sample(self):
+        
+
+        # import wdb;wdb.set_trace()
+        # samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])
+        action = self.env.ref('lerm_civil.srf_sample_wizard_form')
+        return {
+            'name': "Edit Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'create.srf.sample.wizard',
+            'view_id': action.id,
+            'target': 'new',
+            'context':{
+                'default_sample': self.id,
+                'default_is_update':True,
+                'default_parameters':self.parameters.ids,
+                'default_discipline_id': self.discipline_id.id,
+                'default_group_id': self.group_id.id,
+                'default_material_id': self.material_id.id,
+                'default_brand': self.brand,
+                'default_size_id': self.size_id.id,
+                'default_grade_id': self.grade_id.id,
+                'default_sample_qty': self.sample_qty,
+                'default_received_by_id': self.received_by_id.id,
+                'default_sample_received_date':self.sample_received_date,
+                'default_sample_condition':self.sample_condition,
+
+                'default_sample_reject_reason': self.sample_reject_reason,
+                'default_location': self.location,
+                'default_received_by_id': self.received_by_id.id,
+                'default_sample_received_date':self.sample_received_date,
+
+                'default_witness':self.witness,
+                'default_scope':self.scope,
+                'default_sample_description':self.sample_description,
+                'default_client_sample_id':self.client_sample_id,
+                'default_days_casting':self.days_casting,
+
+                'default_date_casting':self.date_casting,
+                'default_customer_id':self.customer_id.id,
+                # 'default_product_aliases':self.product_aliases.ids,
+
+                'default_product_alias':self.product_alias.id,
+                'default_conformity':self.conformity,
+                'default_product_name':self.product_name.id,
+                # 'default_pricelist':self.pricelist.id,
+                'default_main_name':self.main_name,
+                'default_price':self.price,
+                }
+            }
+
+    
+
 
     @api.depends('state')
     def compute_form_product_based(self):
@@ -485,7 +559,7 @@ class LermSampleForm(models.Model):
         # return self.env.ref('lerm_civil.sample_report_action').report_action(self)
 
     def open_sample_allotment_wizard(self):
-        self.filled_by = self.env.user
+        
         action = self.env.ref('lerm_civil.srf_sample_allotment_wizard')
         return {
             'name': "Allot Sample",
