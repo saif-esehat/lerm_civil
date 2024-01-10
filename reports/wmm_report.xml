@@ -905,7 +905,7 @@
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 								<div>
@@ -933,7 +933,7 @@
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										Chemical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 								<div>

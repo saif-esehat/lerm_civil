@@ -684,6 +684,7 @@
 									</b>
 								</div>
 							</div>
+
 							<div>
 								<div t-if="stamp and stamp == '4-in_report'">
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
@@ -692,6 +693,7 @@
 									Format No. <span t-esc="eln.material.test_format_no"/>
 								</div>
 							</div>
+							
 							<div>
 								<div>
 									<b>
@@ -707,6 +709,13 @@
 									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
+							
+								<div>
+									<b>
+										Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
+									</b>
+								</div>
+								
 								<div>
 									<b>
 										(Authorized Signatory)

@@ -814,14 +814,16 @@
 								<div style="height:20px">
 
 								</div>
+
 								<div>
 									<b>
-										Mechanical Department (HOD)
+									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
+
 								<div>
 									<b>
-										(Authorized Signatory)
+										()
 									</b>
 								</div>
 							</div>
@@ -844,7 +846,13 @@
 								</div>
 								<div>
 									<b>
-										Mechanical Department (HOD)
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+
+								<div>
+									<b>
+										Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 								<div>

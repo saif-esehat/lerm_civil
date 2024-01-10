@@ -896,7 +896,7 @@
 						</div>
 						<div>
 							<b>
-								Mechanical Department (HOD)
+								Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 							</b>
 						</div>
 						<div>
