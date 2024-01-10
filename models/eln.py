@@ -327,7 +327,7 @@ class ELN(models.Model):
         }
     def print_report(self):
         eln = self
-        is_product_based = eln.is_product_based_calculation
+        is_product_based = eln.material.is_product_based_calculation
         if is_product_based == True:
             template_name = eln.material.product_based_calculation[0].main_report_template.report_name
         else:
@@ -336,7 +336,9 @@ class ELN(models.Model):
             'type': 'ir.actions.report',
             'report_type': 'qweb-html',
             'report_name': template_name,
-            'report_file': template_name
+            'report_file': template_name,
+            'data' : {'fromsample' : False , 'inreport' : self , 'nabl' : False,'fromEln':True}
+
         }
     def print_nabl_report(self):
         eln = self
