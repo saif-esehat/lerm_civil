@@ -499,7 +499,7 @@ class LermSampleForm(models.Model):
             'report_type': 'qweb-html',
             'report_name': template_name,
             'report_file': template_name,
-            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : True}
+            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : True,'fromEln':False}
         }
     def print_non_nabl_report(self):
         inreport = self.state
@@ -515,7 +515,7 @@ class LermSampleForm(models.Model):
             'report_type': 'qweb-pdf',
             'report_name': template_name,
             'report_file': template_name,
-            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : False}
+            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : False,'fromEln':False}
         }
     # def print_sample_report(self):
     #     eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])

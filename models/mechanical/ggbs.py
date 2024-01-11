@@ -586,7 +586,7 @@ class GgbsMechanical(models.Model):
     fineness_nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_fineness_nabl")
+    ], string='NABL', default='fail',compute="_compute_fineness_nabl")
 
 
     @api.depends('fineness_air_permeability','eln_ref','grade')
