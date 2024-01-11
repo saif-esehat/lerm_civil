@@ -952,7 +952,7 @@ class CementPsc(models.Model):
     average_sample_time = fields.Float("Average Time(tₒ),Sec",compute="_compute_average_sample_time")
 
     fineness_of_sample = fields.Float("Fineness of Sample",compute="_compute_fineness_of_sample")
-    fineness_air_permeability = fields.Float("Fineness By Blaine Air Permeability Method (m2/kg)",compute="_compute_fineness_air_permeability")
+    fineness_air_permeability = fields.Integer("Fineness By Blaine Air Permeability Method (m2/kg)",compute="_compute_fineness_air_permeability")
 
     fineness_conformity = fields.Selection([
         ('pass', 'Pass'),
