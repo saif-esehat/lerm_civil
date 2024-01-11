@@ -181,6 +181,7 @@
 							</tr>
 						</thead>
 						<tbody>
+						<!-- Normal Consistency  -->
 							<tr t-if="cement.normal_consistency_visible and cement.normal_consistency_nabl == 'pass' and nabl">
 								<td>
 									<span t-esc="i + 1" />
@@ -274,7 +275,7 @@
 								</td>
 							</tr>
 
-
+						<!-- Initial Setting Time  -->
 							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'pass' and nabl">
 							
 								
@@ -371,9 +372,9 @@
 								
 							</tr>
 
-
+						<!-- Final Setting Time  -->
 							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'pass' and nabl">
-							<!-- <tr> -->
+							
 							
 								<td>
 									<span t-esc="i + 1" />
@@ -466,6 +467,9 @@
 									<span t-field="cement.final_setting_conformity"/>
 								</td>
 							</tr>
+
+
+						<!-- Dry Sieving  -->
 							<tr t-if="cement.dry_sieving_visible and cement.dry_seiving_nabl == 'pass' and nabl">
 								<td>
 									<span t-esc="i + 1" />
@@ -557,6 +561,8 @@
 								</td>
 							</tr>
 
+
+						<!-- Density  -->
 							<tr t-if="cement.density_visible and cement.density_nabl == 'pass' and nabl">
 
 								<td>
@@ -649,6 +655,8 @@
 								</td>
 							</tr>
 
+
+						<!-- Soundness  -->
 							<tr t-if="cement.soundness_visible and cement.soundness_nabl == 'pass' and nabl">
 								<td>
 									<span t-esc="i + 1" />
@@ -740,6 +748,8 @@
 								</td>
 							</tr>
 
+
+						<!-- Fineness  -->
 							<tr t-if="cement.fineness_blaine_visible and cement.fineness_nabl == 'pass' and nabl">
 								<td>
 									<span t-esc="i + 1" />
@@ -830,6 +840,8 @@
 								</td>
 							</tr>
 
+
+						<!-- Compressive Strength  -->
 							<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass')) and nabl">
 								<td>
 									<span t-esc="i + 1" />
@@ -892,6 +904,8 @@
 								</td>
 							</tr>
 
+
+						<!-- 3 Days  -->
 							<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass' and nabl">
 								<td>
 									<span>a</span>
@@ -990,6 +1004,9 @@
 									<span t-field="cement.compressive_3days_conformity"/>
 								</td>
 							</tr>
+
+
+						<!-- 7 Days  -->
 							<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass' and nabl">
 								<td>
 									<span>b</span>
@@ -1090,6 +1107,8 @@
 								</td>
 							</tr>
 
+
+						<!-- 28 Days  -->
 							<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass' and nabl">
 								<td>
 									<span>c</span>
@@ -1187,8 +1206,12 @@
 									<span t-field="cement.compressive_28days_conformity"/>
 								</td>
 							</tr>
+
+
 						</tbody>
 					</table>
+
+
 					<div  style="page-break-inside: avoid;margin-top:20px;" class="noteContainer">
 						<div>
 							<b>Note :-</b>
@@ -1210,6 +1233,8 @@
 							</ul>
 						</div>
 					</div>
+
+					
 				    <div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 							<div>
 								<div>
@@ -1275,7 +1300,6 @@
 							</p>
 						</div>
 					</div>
-				<!-- </div> -->
 			
 				
 			</t>
