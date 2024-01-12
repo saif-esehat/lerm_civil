@@ -121,27 +121,27 @@
                                 <tree editable="bottom"  delete="1">
                                     <field name="sequence" string="Sequence" widget="handle" />
                                     <field name="parameter"/>
-                                    <field name="result_type"/>
-                                    <field name="result_char" attrs="{'readonly': [('result_type', '=', 'number')]}"/>
-                                    <field name="result" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    <field name="result_type" optional="show"/>
+                                    <field name="result_char" optional="show" attrs="{'readonly': [('result_type', '=', 'number')]}"/>
+                                    <field name="result" optional="show" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <!-- <field name="context_data" /> -->
-                                    <field name="calculation_type" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}"  />
-                                    <field name="calculated" />
-                                    <field name="unit" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
-                                    <field name="test_method" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" string="Parameter Test Method" />
-                                    <field name="specification_permissible_limit" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />                                    
-                                    <field name="specification" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
-                                    <field name="nabl_status" attrs="{'invisible': [('parent.is_product_based_calculation', '=', True)], 'readonly': [('result_type', '=', 'number')]}" />
+                                    <field name="calculation_type" optional="show" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}"  />
+                                    <field name="calculated" optional="show"/>
+                                    <field name="unit" optional="show" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    <field name="test_method" optional="show" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" string="Parameter Test Method" />
+                                    <field name="specification_permissible_limit" optional="show" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />                                    
+                                    <field name="specification" optional="show" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    <field name="nabl_status" optional="show" attrs="{'invisible': [('parent.is_product_based_calculation', '=', True)], 'readonly': [('result_type', '=', 'number')]}" />
                                     <!-- <field name="nabl_status"  attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" /> -->
-                                    <field name="conformity_status" 
+                                    <field name="conformity_status"  optional="show"
                                            decoration-success="conformity_status == 'pass'" 
                                            decoration-danger="conformity_status == 'fail'" 
                                            readonly="1" 
                                            attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" 
                                            />
-                                    <field name="model_id" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
-                                    <button string="Calculation" name="open_calculation_wizard" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','form_based')] , 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
-                                    <button string="Open Form" name="open_form" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','parameter_based')], 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    <field name="model_id" optional="show" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    <button string="Calculation" optional="show" name="open_calculation_wizard" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','form_based')] , 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    <button string="Open Form" optional="show" name="open_form" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','parameter_based')], 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                 </tree>
                             </field>
 
