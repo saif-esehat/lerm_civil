@@ -308,6 +308,7 @@
                         </h1>
                     </group>
                     
+                    <!-- </group> -->
                     <group attrs="{'invisible': ['|', '|', ('compressive_28_visible', '=', False), ('compressive_7_visible', '=', False), ('compressive_3_visible', '=', False)]}" style="width:40%">
                       <field  name="wt_of_cement_compressive"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1"  colspan="3" />

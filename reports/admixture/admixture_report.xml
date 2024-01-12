@@ -277,6 +277,7 @@
 								</ul>
 							</div>
 						</div>
+
 						<div class="signatureContainer girdgird">
 							<div>
 								<div>
@@ -287,17 +288,24 @@
 								<div style="height:20px">
 
 								</div>
-								<div>
+								<!-- <div>
 									<b>
 										Chemical Department (HOD)
 									</b>
+								</div> -->
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
 								</div>
+
 								<div>
 									<b>
 										(Authorized Signatory)
 									</b>
 								</div>
 							</div>
+
 							<div>
 								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
@@ -306,18 +314,26 @@
 									Format No. <span t-esc="eln.material.test_format_no"/>
 								</div>
 							</div>
+
 							<div>
 								<div>
 									<b>
 										Approved By
 									</b>
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
 								</div>
+
 								<div>
 									<b>
-										Chemical Department (HOD)
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+
+								<div>
+									<b>
+										Chemical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 								<div>

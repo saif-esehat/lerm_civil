@@ -482,7 +482,7 @@
 							</tr>
 
 
-							<tr t-if="flyash.initial_setting_time_visible and (flyash.initial_setting_nabl == 'pass' and nabl or flyash.initial_setting_nabl == 'fail' and not nabl) and not fromEln">
+							<!-- <tr t-if="flyash.initial_setting_time_visible and (flyash.initial_setting_nabl == 'pass' and nabl or flyash.initial_setting_nabl == 'fail' and not nabl) and not fromEln">
 							
 								
 								<td style="text-align: center;">
@@ -529,7 +529,56 @@
 									<span t-field="flyash.initial_setting_conformity"/>
 								</td>
 								
+							</tr> -->
+
+							<tr t-if="flyash.final_setting_time_visible and (flyash.final_setting_nabl == 'pass' and nabl or flyash.final_setting_nabl == 'fail' and not nabl) and not fromEln">
+							<!-- <tr> -->
+							
+								<td style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td style="text-align: center;"> 
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')]).parameter_name"/>
+									</span>
+									
+								</td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="flyash.final_setting_time_minutes"/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')]).unit.name"/>
+									</span>
+								</td>
+								
+								<td style="text-align: center;">
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td t-if="eln.conformity" style="text-align: center;">
+									<span t-field="flyash.final_setting_conformity"/>
+								</td>
 							</tr>
+
 							
 
 
@@ -1329,7 +1378,7 @@
 						</div>
 						<div>
 							<b>
-								Mechanical Department (HOD)
+								Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 							</b>
 						</div>
 						<div>
