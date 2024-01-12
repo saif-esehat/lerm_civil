@@ -510,7 +510,10 @@ class ConcreteCubeCompresiveReport(models.AbstractModel):
         if 'active_id' in data['context']:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
-            eln = self.env['lerm.eln'].sudo().browse(docids) 
+            eln = self.env['lerm.eln'].sudo().browse(docids)
+        
+
+
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         qr.add_data(eln.kes_no)
         qr.make(fit=True)
@@ -535,7 +538,8 @@ class ConcreteCubeCompresiveReport(models.AbstractModel):
             'data' : general_data,
             'qrcode': qr_code,
             'stamp' : inreport_value,
-            'nabl' : nabl
+            'nabl' : nabl,
+            
         }
         
 class ConcreteCubeCompresiveDatasheet(models.AbstractModel):
