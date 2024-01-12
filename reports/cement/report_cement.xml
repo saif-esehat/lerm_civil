@@ -1822,18 +1822,9 @@
 									</div>
 								</div>
 								<div>
-<<<<<<< HEAD
 									<b>
 										Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
-=======
-									<div >
-										<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-									</div>
-									<div style="padding-top:5px">
-										Format No. <span t-esc="eln.material.test_format_no"/>
-									</div>
->>>>>>> db7208937684df7431355030acdd5466d8bd7b9f
 								</div>
 								<div>
 									<div>
