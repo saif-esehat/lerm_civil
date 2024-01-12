@@ -141,7 +141,7 @@
 						<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
-							    <th >
+							    <th style="text-align: center;">
 									<span>
 										Sr. No
 									</span>
@@ -151,7 +151,7 @@
 										Parameter
 									</span>
 								</th>
-								  <th >
+								  <th style="text-align: center;" >
 									<span>
 										Unit
 									</span>
@@ -162,7 +162,7 @@
 										Observation-1
 									</span>
 								</th>
-								<th style="max-width: 250px;">
+								<th style="max-width: 250px; text-align: center;">
 									<span>
 										<span t-esc="eln.material.specifications"/>
 									</span>
@@ -188,11 +188,11 @@
 									<t t-set="i" t-value="i+1"/>
                             </td>
                                    
-								 <td  style="text-align: center;">
+								 <td  >
 								  Dia	
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','9b54fc13-5dcd-4425-a416-72493dd69d43')]).parameter_name"/> -->
                                 </td>
-								 <td style="text-align: center; vertical-align: middle;">
+								 <td  style="text-align: center;">
 								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','9b54fc13-5dcd-4425-a416-72493dd69d43')]).unit.name"/>
 										</span> -->
@@ -226,11 +226,11 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                             </td>
-								 <td  style="text-align: center;">
+								 <td >
 								 	Weight
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','94690b88-1b96-401a-8a58-296a3501f113')]).parameter_name"/> -->
                                 </td>
-								 <td style="text-align: center; vertical-align: middle;">
+								 <td style="text-align: center;">
 								        <!-- <span>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','94690b88-1b96-401a-8a58-296a3501f113')]).unit.name"/>
 										</span> -->
@@ -264,7 +264,7 @@
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
 								</td>
-								 <td  style="text-align: center;">
+								 <td>
 								 	Length 	
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','ec2b0629-4780-4f57-85ea-91f66cf2e8fe')]).parameter_name"/> -->
                                 </td>
@@ -302,7 +302,7 @@
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
 								</td>
-								 <td  style="text-align: center;">
+								 <td  >
 								 	Cross sectional Area
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','bd863f1b-4a6f-495d-bc9d-677f3343a7ed')]).parameter_name"/> -->
                                 </td>
@@ -341,7 +341,7 @@
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
 								</td>
-								 <td  style="text-align: center;">
+								 <td  >
 								 Gauge Length 
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','14f13802-a473-4cb9-8104-3adbcacf7621')]).parameter_name"/> -->
                                 </td>
@@ -380,7 +380,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                             </td>
-								 <td  style="text-align: center;">
+								 <td  >
 								  Final Gauge Length		
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','3c774ea6-7c36-4444-980b-906d348eb388')]).parameter_name"/> -->
                                 </td>
@@ -420,7 +420,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                             </td>
-								 <td  style="text-align: center;">
+								 <td  >
 								  Yield Load  	
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','f9ec2ec0-fe47-429f-99a0-b7c99c842538')]).parameter_name"/> -->
                                 </td>
@@ -460,7 +460,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                             </td>
-								 <td  style="text-align: center;">
+								 <td >
 								 	Ultimate Load	
                                     <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','1fed8a62-eb5f-43bc-9473-51537e4893ad')]).parameter_name"/> -->
                                 </td>
@@ -500,7 +500,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                             </td>
-								<td  style="text-align: center;">
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','c732ed77-4c06-4cd4-ae85-b7424c1a24c7')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
@@ -537,7 +537,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                             </td>
-								<td  style="text-align: center;">
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
@@ -576,7 +576,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                                 </td>
-								<td  style="text-align: center;">
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
@@ -614,7 +614,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                                 </td>
-								<td  style="text-align: center;">
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
@@ -653,7 +653,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                                 </td>
-								<td  style="text-align: center;">
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
@@ -691,7 +691,7 @@
 									<span t-esc="i + 1" />
 						 			<t t-set="i" t-value="i+1"/>
                              </td>
-						  		<td  style="text-align: center;">
+						  		<td >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','f781bfd8-550b-45f4-81ac-43f856d147b8')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
@@ -728,7 +728,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                               </td>
-								<td  style="text-align: center;">
+								<td >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','addd0c61-adb6-447d-b668-1fba0744680f')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
@@ -764,7 +764,7 @@
 									<span t-esc="i + 1" />
 							  		<t t-set="i" t-value="i+1"/>
                                 </td>
-								<td  style="text-align: center;">
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','9156ec17-ae78-4f98-987f-af5d39e407f2')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
