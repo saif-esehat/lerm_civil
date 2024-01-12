@@ -202,6 +202,7 @@
                     <!-- authorizeRowDataSheet -->
                     
                     <div class="authorizeRowDataSheet">
+<<<<<<< HEAD
                         <div>
                             <div>
                                 <b>
@@ -227,6 +228,53 @@
                             </div>
                         </div>
                     </div>
+=======
+						<div>
+							<div>
+								<b>
+									Tested By 
+								</b>
+								
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.filled_by.name"/>
+								</b>
+							</div>
+							<div>
+								<b>
+									(Jr. Technician)
+								</b>
+							</div>
+						</div>
+						
+						<div style="margin-left:500px">
+									
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(Sr. Technician)
+								</b>
+							</div>
+						</div>
+					</div>
+>>>>>>> db7208937684df7431355030acdd5466d8bd7b9f
                     
                 </div>
 
@@ -440,7 +488,7 @@
 							</div>
 						</div>
 
-						<div class="signatureContainer girdgird">
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 							<div>
 								<div>
 									<b>
@@ -472,15 +520,25 @@
 							<div>
 								<div>
 									<b>
-										Approved By
+										Approved By 
 									</b>
+									
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
 								</div>
 								<div>
 									<b>
+<<<<<<< HEAD
 										Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
+=======
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										Mechanical Department (HOD)
+>>>>>>> db7208937684df7431355030acdd5466d8bd7b9f
 									</b>
 								</div>
 								<div>

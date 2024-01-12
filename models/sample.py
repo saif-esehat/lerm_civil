@@ -71,9 +71,9 @@ class LermSampleForm(models.Model):
                 
     
 
-    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,tracking=True)
+    srf_id = fields.Many2one('lerm.civil.srf' , string="SRF ID" ,ondelete="cascade",tracking=True)
     sample_range_id = fields.Many2one('sample.range.line',string="Sample Range")
-  
+    eln_id = fields.Many2one('lerm.eln',string="ELN",ondelete="cascade")
     sample_no = fields.Char(string="Sample ID." ,required=True,readonly=True, default=lambda self: 'New')
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -83,7 +83,7 @@ class LermSampleForm(models.Model):
     group_id = fields.Many2one('lerm_civil.group',string="Group")
     material_id = fields.Many2one('product.template',string="Material")
     material_id_lab_name = fields.Char(string="Material",compute="compute_material_id_lab_name",store=True)
-    ulr_no = fields.Char(string="ULR No." ,required=True,readonly=True, default=lambda self: 'New')
+    ulr_no = fields.Char(string="ULR No." ,readonly=True, default=lambda self: 'New')
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
@@ -181,7 +181,7 @@ class LermSampleForm(models.Model):
         ('3-pending_verification','Pending Verification'),
         ('5-pending_approval','Pending Approval'),
         ('4-in_report', 'In-Report'),
-        ('5-cancelled', 'Cancelled'),
+        ('6-cancelled', 'Cancelled'),
     ], string='State',default='1-allotment_pending')
     conformity = fields.Boolean(string="Conformity")
     parameters_result = fields.One2many('sample.parameters.result','sample_id',string="Parameters Result")
@@ -254,6 +254,80 @@ class LermSampleForm(models.Model):
     #         sample.write({'ulr_no': ref})
 
     #     return sample
+
+    def cancel_sample(self):
+        # import wdb;wdb.set_trace()
+
+        action = self.env.ref('lerm_civil.sample_rejection_wizard')
+        return {
+            'name': "Cancel Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'sample.cancellation.wizard',
+            'view_id': action.id,
+            'target': 'new',
+            'context':{
+                'default_sample': self.id,
+                }
+            }
+
+        
+
+
+    def edit_sample(self):
+        
+
+        # samples = self.env["lerm.srf.sample"].search([("srf_id","=",self.id)])
+        action = self.env.ref('lerm_civil.srf_sample_wizard_form')
+        return {
+            'name': "Edit Sample",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'create.srf.sample.wizard',
+            'view_id': action.id,
+            'target': 'new',
+            'context':{
+                'default_sample': self.id,
+                'default_is_update':True,
+                'default_parameters':self.parameters.ids,
+                'default_discipline_id': self.discipline_id.id,
+                'default_group_id': self.group_id.id,
+                'default_material_id': self.material_id.id,
+                'default_brand': self.brand,
+                'default_size_id': self.size_id.id,
+                'default_grade_id': self.grade_id.id,
+                'default_sample_qty': self.sample_qty,
+                'default_received_by_id': self.received_by_id.id,
+                'default_sample_received_date':self.sample_received_date,
+                'default_sample_condition':self.sample_condition,
+
+                'default_sample_reject_reason': self.sample_reject_reason,
+                'default_location': self.location,
+                'default_received_by_id': self.received_by_id.id,
+                'default_sample_received_date':self.sample_received_date,
+
+                'default_witness':self.witness,
+                'default_scope':self.scope,
+                'default_sample_description':self.sample_description,
+                'default_client_sample_id':self.client_sample_id,
+                'default_days_casting':self.days_casting,
+
+                'default_date_casting':self.date_casting,
+                'default_customer_id':self.customer_id.id,
+                # 'default_product_aliases':self.product_aliases.ids,
+
+                'default_product_alias':self.product_alias.id,
+                'default_conformity':self.conformity,
+                'default_product_name':self.product_name.id,
+                # 'default_pricelist':self.pricelist.id,
+                'default_main_name':self.main_name,
+                'default_price':self.price,
+                }
+            }
+
+    
 
 
     @api.depends('state')
@@ -425,7 +499,7 @@ class LermSampleForm(models.Model):
             'report_type': 'qweb-html',
             'report_name': template_name,
             'report_file': template_name,
-            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : True}
+            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : True,'fromEln':False}
         }
     def print_non_nabl_report(self):
         inreport = self.state
@@ -441,7 +515,7 @@ class LermSampleForm(models.Model):
             'report_type': 'qweb-pdf',
             'report_name': template_name,
             'report_file': template_name,
-            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : False}
+            'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : False,'fromEln':False}
         }
     # def print_sample_report(self):
     #     eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])

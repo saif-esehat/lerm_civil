@@ -273,7 +273,7 @@
 								</div>
 							</div>
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
@@ -281,14 +281,15 @@
 								</div>
 							</div>
 							<div>
-								<div>
-									<b>
-										Approved By 
-									</b>
-									
-								</div>
-								<div style="height:30px">
+						<div>
+							<b>
+								Approved By 
+							</b>
+							
+						</div>
+						<div style="height:30px">
 
+<<<<<<< HEAD
 								</div>
 								<div>
 									<b>
@@ -306,6 +307,25 @@
 									</b>
 								</div>
 							</div>
+=======
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								Mechanical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								(Authorized Signatory)
+							</b>
+						</div>
+					</div>
+>>>>>>> db7208937684df7431355030acdd5466d8bd7b9f
 						</div>
 						<!-- <div style="text-align:center;margin-top:25px">
 							......End of Report......

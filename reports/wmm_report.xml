@@ -893,15 +893,17 @@
 								</ul>
 							</div>
 						</div>
-						<div class="signatureContainer girdgird">
-							<div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
-								<div style="height:20px">
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+					
+					<div>
+						<div>
+							<b>
+								Checked By
+							</b>
+						</div>
+						<div style="height:30px">
 
+<<<<<<< HEAD
 								</div>
 								<div>
 									<b>
@@ -942,7 +944,56 @@
 									</b>
 								</div>
 							</div>
+=======
 						</div>
+						<div>
+							<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(Sr. Technician)
+							</b>
+						</div>
+					</div>
+					<div>
+						<div>
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							Format No. <span t-esc="eln.material.test_format_no"/>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b>
+								Approved By 
+							</b>
+							
+						</div>
+						<div style="height:30px">
+
+>>>>>>> db7208937684df7431355030acdd5466d8bd7b9f
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								Mechanical Department (HOD)
+							</b>
+						</div>
+						<div>
+							<b>
+								(Authorized Signatory)
+							</b>
+						</div>
+					</div>
+				</div>
+				<!-- </div> -->
 						<div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div>

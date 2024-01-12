@@ -70,28 +70,25 @@
                     <group>
                     
                     </group>
-                     <group><h1>Observed value</h1></group>
+                     <!-- <group><h1>Observed value</h1></group>
                      <group>
                         <label for="io_sample1" string="Current" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="io_sample1" string="Sample-01" />
-                            <!-- <field  name="io_sample1"  colspan="3"  nolabel="1"/> -->
                           </group>
                           <group colspan="1" class="oe_inline"  >
                             <label for="io_sample2" string="Sample-02" />
-                            <!-- <field  name="io_sample2"  colspan="3"  nolabel="1"/> -->
                           </group>
                           <group colspan="1" class="oe_inline"  >
                             <label for="io_sample3" string="Sample-03" />
-                            <!-- <field  name="io_sample3"  colspan="3"  nolabel="1"/> -->
                           </group>
                         </div>
-                    </group>
+                    </group> -->
 
                    
           
-                    <group>
+                    <!-- <group>
                         <label for="io_sample1" string="I0" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
@@ -322,7 +319,7 @@
                             <field  name="i360_sample3"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
-                    </group>
+                    </group> -->
 
                 </sheet>
             </form>
