@@ -481,7 +481,7 @@
 									<t t-set="i" t-value="i+1"/>
                             </td>
 								
-								<td  style="text-align: center;">
+								<td>
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_name"/>
                                 </td>
 								<td >
