@@ -138,12 +138,12 @@
         <field name="arch" type="xml">
             <tree default_order='create_date desc' >
                 <field name="srf_id"/>
-                <field name="srf_date"/>
-                <field name="customer"/>
-                <field name="contact_person" />
-                <field name="billing_customer" />
-                <field name="name_work"/>
-                <field name="client_refrence"/>
+                <field name="srf_date" optional="show"/>
+                <field name="customer" optional="show"/>
+                <field name="contact_person" optional="show"/>
+                <field name="billing_customer" optional="show"/>
+                <field name="name_work" optional="show"/>
+                <field name="client_refrence" optional="show"/>
             </tree>
         </field>
     </record>

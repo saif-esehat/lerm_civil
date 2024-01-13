@@ -217,7 +217,7 @@
                         <div style="margin-left:500px">
                             <div>
                                 <b>
-                                    Mechanical Department (HOD)
+                                    Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
                                 </b>
                             </div>
                             <div>
@@ -440,24 +440,24 @@
 							</div>
 						</div>
 
-						<div class="signatureContainer girdgird">
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 							<div>
 								<div>
 									<b>
 										Checked By
 									</b>
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										<span t-esc="eln.sample_id.check_by.name"/>
 									</b>
 								</div>
 								<div>
 									<b>
-										(Authorized Signatory)
+										(Sr. Technician)
 									</b>
 								</div>
 							</div>
@@ -472,15 +472,16 @@
 							<div>
 								<div>
 									<b>
-										Approved By
+										Approved By 
 									</b>
+									
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
 								</div>
 								<div>
 									<b>
-										Chemical Department (HOD)
+										Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 								<div>

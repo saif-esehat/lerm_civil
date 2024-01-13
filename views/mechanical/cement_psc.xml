@@ -508,12 +508,12 @@
                             <field  name="average_time_fineness"  colspan="6"/>
                           </group>
                     </group>
-                    <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">                        
-                          <field name="specific_surface_of_reference_sample"/>
-                          <field name="air_viscosity_of_three_temp"/>
-                          <field name="density_of_reference_sample"/>
-                          <field name="mean_of_three_measured_times"/>
-                          <field name="apparatus_constant"/>
+                    <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}" style="width:70%;">                        
+                          <field name="specific_surface_of_reference_sample" style="width:70%;"/>
+                          <field name="air_viscosity_of_three_temp" style="width:70%;"/>
+                          <field name="density_of_reference_sample" style="width:70%;"/>
+                          <field name="mean_of_three_measured_times" style="width:70%;"/>
+                          <field name="apparatus_constant" style="width:70%;"/>
                     </group>
                     <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
                       <h6>Determination of fineness</h6>

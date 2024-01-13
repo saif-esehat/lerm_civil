@@ -308,6 +308,7 @@
                         </h1>
                     </group>
                     
+                    <!-- </group> -->
                     <group attrs="{'invisible': ['|', '|', ('compressive_28_visible', '=', False), ('compressive_7_visible', '=', False), ('compressive_3_visible', '=', False)]}" style="width:40%">
                       <field  name="wt_of_cement_compressive"  colspan="3" />
                       <field  name="wt_of_standard_sand_grade1"  colspan="3" />
@@ -530,11 +531,11 @@
                           </group>
                     </group>
                     <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">                        
-                          <field name="specific_surface_of_reference_sample"/>
-                          <field name="air_viscosity_of_three_temp"/>
-                          <field name="density_of_reference_sample"/>
-                          <field name="mean_of_three_measured_times"/>
-                          <field name="apparatus_constant"/>
+                          <field name="specific_surface_of_reference_sample" style="width:70%;"/>
+                          <field name="air_viscosity_of_three_temp" style="width:70%;"/>
+                          <field name="density_of_reference_sample" style="width:70%;"/>
+                          <field name="mean_of_three_measured_times" style="width:70%;"/>
+                          <field name="apparatus_constant" style="width:70%;"/>
                     </group>
                     <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
                       <h6>Determination of fineness</h6>

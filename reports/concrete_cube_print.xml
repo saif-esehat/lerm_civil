@@ -342,6 +342,8 @@
 									<span t-esc="r.compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
+
+							
 						</tbody>
 					</table>
 
@@ -431,7 +433,7 @@
 								</div>
 								<div>
 									<b>
-										Mechanical Department (HOD)
+										Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 								<div>
