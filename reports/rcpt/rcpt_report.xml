@@ -203,7 +203,7 @@
 
 					<table t-if="rcpt" style="margin-top:30px;">
 					  <div>
-					 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','e308efce-f477-496d-b7e2-2d0431c105cf')]).parameter_name"/>
+					 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).parameter_name"/>
 					 </div>
 						<t t-set="i" t-value="0"/>
 							<thead>
@@ -227,28 +227,24 @@
 										</span>
 									</th>
 									<th style="text-align: center;">
-									<span>
-										Unit
-									</span>
-								</th>
+										<span>
+											Unit
+										</span>
+									</th>
+										
+									<th style="text-align: center;font-weight: bold;">
+										<span>
+											<span t-esc="eln.material.specifications"/>
+											
+										</span>
+									</th>
 									
-									<th style="text-align: center;">
-									<span>
-										<span t-esc="eln.material.specifications"/>
-										
-									</span>
-								</th>
-								<!-- <th>
-									<span>
-										Test Method
-									</span>
-								</th> -->
-								<th style="text-align: center;">
-									<span>
-										<span t-esc="eln.material.method_reference"/>
-										
-									</span>
-								</th>
+									<th style="text-align: center;font-weight: bold;">
+										<span>
+											<span t-esc="eln.material.method_reference"/>
+											
+										</span>
+									</th>
 								</tr>
                                  <t t-set="f" t-value="0"/>
                                     <tr t-foreach="rcpt.child_lines" t-as="r">
@@ -264,31 +260,32 @@
                                         <td style="text-align: center;">
                                             <span t-esc="r['qs']"/>
                                         </td>
-								<td style="text-align: center;" rowspan="3">
-									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','bc8acbda-79b1-4733-9489-b49ce7d26921')]).unit.name"/>
-									</span>
-								</td>
+										<td style="text-align: center;">
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).unit.name"/>
+											</span>
+										</td>
                                       
 
-								<td style="text-align: center;" rowspan="3">
-									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','bc8acbda-79b1-4733-9489-b49ce7d26921')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                            </t>
-                                        </t>
-									</span>
-								</td>
-								<td style="text-align: center;" rowspan="3">
-									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','bc8acbda-79b1-4733-9489-b49ce7d26921')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
-                                            </t>
-                                        </t>
-									</span>
-								</td>
+										<td style="text-align: center; vertical-align: middle;">
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+										</td>
+								
+										<td style="text-align: center; vertical-align: middle;">
+											<span>
+												<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+													</t>
+												</t>
+											</span>
+										</td>
+											
                                        
                                     </tr>
 							</thead>
