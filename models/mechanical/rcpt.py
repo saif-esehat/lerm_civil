@@ -667,9 +667,33 @@ class RcptConcreteCubeLine(models.Model):
     # observe_value = fields.Float(string="Observed Sample Value")
 
 
+    # @api.depends(
+    #     "io", "i30", "i60", "i90", "i120", "i150", "i180", "i210", "i240",
+    #     "i270", "i300", "i330", "i360"
+    # )
+    # def _compute_qx(self):
+    #     for record in self:
+    #         qx = 900 * (
+    #             record.io
+    #             + 2 * record.i30
+    #             + 2 * record.i60
+    #             + 2 * record.i90
+    #             + 2 * record.i120
+    #             + 2 * record.i150
+    #             + 2 * record.i180
+    #             + 2 * record.i210
+    #             + 2 * record.i240
+    #             + 2 * record.i270
+    #             + 2 * record.i300
+    #             + 2 * record.i330
+    #             + record.i360
+    #         )/1000
+    #         # Round the calculated value to the nearest integer
+    #         record.qx = round(qx)
+
     @api.depends(
-        "io", "i30", "i60", "i90", "i120", "i150", "i180", "i210", "i240",
-        "i270", "i300", "i330", "i360"
+    "io", "i30", "i60", "i90", "i120", "i150", "i180", "i210", "i240",
+    "i270", "i300", "i330", "i360"
     )
     def _compute_qx(self):
         for record in self:
@@ -687,9 +711,9 @@ class RcptConcreteCubeLine(models.Model):
                 + 2 * record.i300
                 + 2 * record.i330
                 + record.i360
-            )/1000
-            # Round the calculated value to the nearest integer
-            # record.qx = round(qx)
+            ) / 1000
+            # Assign the calculated float value to the field
+            record.qx = qx
 
 
 
