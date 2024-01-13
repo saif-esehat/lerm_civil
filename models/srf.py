@@ -213,21 +213,24 @@ class SrfForm(models.Model):
         # date2 = datetime.strptime(vals["srf_date"], "%Y-%m-%d").date()
         print('=========?',previous_record_date)
         print('==========>',vals["srf_date"])
-        date1 = datetime.strptime(str(previous_record_date), "%Y-%m-%d")
-        date2 = datetime.strptime(str(vals["srf_date"]), "%Y-%m-%d")
+        try:
+            date1 = datetime.strptime(str(previous_record_date), "%Y-%m-%d")
+            date2 = datetime.strptime(str(vals["srf_date"]), "%Y-%m-%d")
 
-        group_name = 'lerm_civil.kes_srf_backdate_creation_group'
+            group_name = 'lerm_civil.kes_srf_backdate_creation_group'
 
-        if date1 > date2:
-            user_has_group = self.env.user.has_group(group_name)
-            if user_has_group:
+            if date1 > date2:
+                user_has_group = self.env.user.has_group(group_name)
+                if user_has_group:
+                    record = super(SrfForm, self).create(vals)
+                    return record
+                else:
+                    raise ValidationError("Backdate SRF Creation Not allowed")
+            else:
                 record = super(SrfForm, self).create(vals)
                 return record
-            else:
-                raise ValidationError("Backdate SRF Creation Not allowed")
-        else:
+        except:
             record = super(SrfForm, self).create(vals)
-            return record
         
         return record
         

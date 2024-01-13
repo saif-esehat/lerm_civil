@@ -168,7 +168,7 @@
 						</thead>
 						<tbody>
 
-						    <tr t-if="data.combined_percentage_visible">
+						    <tr t-if="data.combined_percentage_visible and (data.combined_percentage_nabl == 'pass' and nabl or data.combined_percentage_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -205,7 +205,7 @@
 								
 							</tr>
 
-							<tr t-if="data.Silica_visible">
+							<tr t-if="data.Silica_visible and (data.Silica_nabl == 'pass' and nabl or data.Silica_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -242,7 +242,7 @@
 								
 							</tr>
 
-							<tr t-if="data.magnesium_oxide_visible">
+							<tr t-if="data.magnesium_oxide_visible and (data.magnesium_oxide_nabl == 'pass' and nabl or data.magnesium_oxide_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -282,7 +282,7 @@
 
 							
 
-							<tr t-if="data.chloride_visible">
+							<tr t-if="data.chloride_visible and (data.chloride_nabl == 'pass' and nabl or data.chloride_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -320,7 +320,7 @@
 							</tr>
 
 
-							<tr t-if="data.loi_visible">
+							<tr t-if="data.loi_visible and (data.loi_nabl == 'pass' and nabl or data.loi_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -358,7 +358,7 @@
 							</tr>
 
 
-							<tr t-if="data.alumina1_visible">
+							<tr t-if="data.alumina1_visible and (data.alumina_nabl == 'pass' and nabl or data.alumina_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -395,7 +395,7 @@
 								
 							</tr>
 
-							<tr t-if="data.ferric_oxide_visible">
+							<tr t-if="data.ferric_oxide_visible and (data.ferric_oxide_nabl == 'pass' and nabl or data.ferric_oxide_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -431,7 +431,7 @@
 								
 								
 							</tr>
-							<tr t-if="data.so3_visible">
+							<tr t-if="data.so3_visible and (data.so3_nabl == 'pass' and nabl or data.so3_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>

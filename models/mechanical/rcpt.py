@@ -661,9 +661,9 @@ class RcptConcreteCubeLine(models.Model):
     i300 = fields.Float(string="I300", digits=(16,1))
     i330 = fields.Float(string="I330", digits=(16,1))
     i360 = fields.Float(string="I360", digits=(16,1))
-    qx = fields.Float(string="Qx", compute="_compute_qx", store=True)
+    qx = fields.Float(string="Qxy", compute="_compute_qx",digits=(16,2), store=True)
     # qs = fields.Float(string="Qs",)
-    qs = fields.Float(string="Qs", compute="_compute_qs", store=True)
+    qs = fields.Float(string="Qs", compute="_compute_qs",digits=(16,2), store=True)
     # observe_value = fields.Float(string="Observed Sample Value")
 
 
@@ -687,9 +687,9 @@ class RcptConcreteCubeLine(models.Model):
                 + 2 * record.i300
                 + 2 * record.i330
                 + record.i360
-            )
+            )/1000
             # Round the calculated value to the nearest integer
-            record.qx = round(qx)
+            # record.qx = round(qx)
 
 
 
