@@ -713,6 +713,8 @@ class GgbsMechanical(models.Model):
             record.normal_consistency_cement_visible = False
             record.specific_gravity_visible = False
             record.slag_activity_7_visible = False
+            record.slag_activity_28_visible = False
+
             record.fineness_visible = False
 
             
