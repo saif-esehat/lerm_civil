@@ -91,7 +91,7 @@ class FlyaschNormalConsistency(models.Model):
     @api.depends('fly_ash_n1')
     def _compute_wt_of_flash_1(self):
         for record in self:
-            record.wt_of_flash_1 = 0.2 * record.fly_ash_n1 * 400
+            record.wt_of_flash_1 = (0.2 * record.fly_ash_n1) * 400
 
     # @api.depends('fly_ash_n2')
     # def _compute_wt_of_flash_2(self):
@@ -1379,15 +1379,22 @@ class FlyaschNormalConsistency(models.Model):
             else:
                 record.specific_surface = 0.0
 
+    # @api.depends('specific_surface')
+    # def _compute_fineness_air_permeability(self):
+    #     for record in self:
+    #         if record.specific_surface:
+    #             rounded_specific_surface = round(record.specific_surface, 0)  # Round to nearest integer
+    #             record.fineness_air_permeability = max(360.0, rounded_specific_surface)  # Ensure value is at least 360
+    #         else:
+    #             record.fineness_air_permeability = 0.0
     @api.depends('specific_surface')
     def _compute_fineness_air_permeability(self):
+        # Your calculation for fineness_air_permeability based on specific_surface
         for record in self:
             if record.specific_surface:
-                rounded_specific_surface = round(record.specific_surface, 0)  # Round to nearest integer
-                record.fineness_air_permeability = max(360.0, rounded_specific_surface)  # Ensure value is at least 360
-            else:
-                record.fineness_air_permeability = 0.0
-
+                # Round up the value of specific_surface to the nearest integer
+                rounded_specific_surface = math.ceil(record.specific_surface)
+                record.fineness_air_permeability = rounded_specific_surface
 
     fineness_blaine_conformity = fields.Selection([
             ('pass', 'Pass'),
