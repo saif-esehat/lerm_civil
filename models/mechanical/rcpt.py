@@ -662,34 +662,29 @@ class RcptConcreteCubeLine(models.Model):
     i330 = fields.Float(string="I330", digits=(16,1))
     i360 = fields.Float(string="I360", digits=(16,1))
     qx = fields.Float(string="Qxy", compute="_compute_qx",digits=(16,2), store=True)
-    # qs = fields.Float(string="Qs",)
-    qs = fields.Float(string="Qs", compute="_compute_qs",digits=(16,2), store=True)
-    # observe_value = fields.Float(string="Observed Sample Value")
+    
+    
 
+    # qs = fields.Float(string="Qs", digits=(16, 2), store=True)
+    qs = fields.Float(string="Qs", compute="_compute_qs", digits=(16, 2), store=True)
 
-    # @api.depends(
-    #     "io", "i30", "i60", "i90", "i120", "i150", "i180", "i210", "i240",
-    #     "i270", "i300", "i330", "i360"
-    # )
-    # def _compute_qx(self):
+    # @api.depends("qx", "dia_core", "height")
+    # def _compute_qs(self):
     #     for record in self:
-    #         qx = 900 * (
-    #             record.io
-    #             + 2 * record.i30
-    #             + 2 * record.i60
-    #             + 2 * record.i90
-    #             + 2 * record.i120
-    #             + 2 * record.i150
-    #             + 2 * record.i180
-    #             + 2 * record.i210
-    #             + 2 * record.i240
-    #             + 2 * record.i270
-    #             + 2 * record.i300
-    #             + 2 * record.i330
-    #             + record.i360
-    #         )/1000
-    #         # Round the calculated value to the nearest integer
-    #         record.qx = round(qx)
+    #         record.qs = record.qx * (95 / record.dia_core) ** 2 * (record.height / 50)
+
+    @api.depends("qx", "dia_core", "height")
+    def _compute_qs(self):
+        for record in self:
+            if record.dia_core != 0:
+                raw_qs = record.qx * (95 / record.dia_core) ** 2 * (record.height / 50)
+                record.qs = round(raw_qs)
+            else:
+                # Handle the case where dia_core is zero (to avoid division by zero)
+                record.qs = 0  # You can adjust this based on your requirements
+
+
+
 
     @api.depends(
     "io", "i30", "i60", "i90", "i120", "i150", "i180", "i210", "i240",
@@ -715,21 +710,15 @@ class RcptConcreteCubeLine(models.Model):
             # Assign the calculated float value to the field
             record.qx = qx
 
+    
 
 
+
+
+   
 
     
-    @api.depends("qx", "dia_core", "height")
-    def _compute_qs(self):
-        for record in self:
-            if record.dia_core > 0:
-                qs = record.qx * (95 / record.dia_core) ** 2 * record.height / 50
-                # Round the calculated value to the nearest integer
-                record.qs = round(qs)
-            else:
-                record.qs = 0.0
 
-    
 
     @api.model
     def create(self, vals):

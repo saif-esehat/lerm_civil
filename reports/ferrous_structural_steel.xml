@@ -476,12 +476,12 @@
 								</td>
 							</tr> -->
 							<tr t-if="data.elongation_nabl == 'pass' and nabl or data.elongation_nabl == 'fail' and not nabl">
-							 <td >
+							 <td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
                             </td>
 								
-								<td  style="text-align: center;">
+								<td>
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_name"/>
                                 </td>
 								<td >
@@ -727,7 +727,7 @@
 						</div>
 						<div>
 							<b>
-								Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
+								Mechanical Department <span t-esc="eln.sample_id.approved_by.job_title"/>
 							</b>
 						</div>
 						<div>
