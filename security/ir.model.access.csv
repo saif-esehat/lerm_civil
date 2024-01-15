@@ -75,7 +75,7 @@ lerm.parameter.master.table,lerm_parameter_master_table,lerm_civil.model_lerm_pa
 eln.parameters.inputs,eln_parameters_inputs,lerm_civil.model_eln_parameters_inputs,lerm_civil.kes_admin_access_group,1,1,1,1
 eln.parameters.result,eln_parameters_result,lerm_civil.model_eln_parameters_result,lerm_civil.kes_admin_access_group,1,1,1,1
 lerm.datasheet.line,lerm_datasheet_line,lerm_civil.model_lerm_datasheet_line,lerm_civil.kes_admin_access_group,1,1,1,1
-admin.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gypsum,lerm_civil.kes_admin_access_group,1,1,1,1
+admin.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_admin_access_group,1,1,1,1
 
 
 
@@ -407,7 +407,7 @@ hod.lerm_civil.access_mechanical_precast_kerb,access_mechanical_precast_kerb,ler
 hod.lerm_civil.access_mech_precast_transverse_line,access_mech_precast_transverse_line,lerm_civil.model_mech_precast_transverse_line,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_mech_precast_water_absorbtion_line,access_mech_precast_water_absorbtion_line,lerm_civil.model_mech_precast_water_absorbtion_line,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.model_chemical_flyash,lerm_civil.kes_hod_access_group,1,0,0,0
-hod.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gypsum,lerm_civil.kes_hod_access_group,1,0,0,0
+hod.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_hod_access_group,1,0,0,0
 
 
 
@@ -638,7 +638,7 @@ quality.lerm_civil.access_mechanical_precast_kerb,access_mechanical_precast_kerb
 quality.lerm_civil.access_mech_precast_transverse_line,access_mech_precast_transverse_line,lerm_civil.model_mech_precast_transverse_line,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_mech_precast_water_absorbtion_line,access_mech_precast_water_absorbtion_line,lerm_civil.model_mech_precast_water_absorbtion_line,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.model_chemical_flyash,kes_quality_manager,1,0,0,0
-quality.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gypsum,lerm_civil.kes_quality_manager,1,0,0,0
+quality.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_quality_manager,1,0,0,0
 
 
 
@@ -870,7 +870,7 @@ technician.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.m
 lerm.size.line.technician,lerm_size_line,model_lerm_size_line,lerm_civil.kes_technician_access_group,1,0,0,0
 technician.lerm.srf.sample,lerm_srf_sample,model_lerm_srf_sample,lerm_civil.kes_technician_access_group,1,1,0,0
 technician.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_technician_access_group,1,1,1,1
-technician.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gypsum,lerm_civil.kes_technician_access_group,1,1,1,1
+technician.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_technician_access_group,1,1,1,1
 
 
 admin.edit.lerm.civil.srf,edit_lerm_civil_srf,lerm_civil.model_edit_lerm_civil_srf,lerm_civil.srf_sample_editable,1,1,1,1
