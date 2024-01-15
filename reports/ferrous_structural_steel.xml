@@ -133,10 +133,10 @@
 						<u>Protocol</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
 </div> -->
-					<div style="padding-top:5px">
+					<div style="padding-top:5px;margin-top:20px;">
 						<span t-esc="eln.material.test_parameter"/>
 					</div>
-					<table>
+					<table style="margin-top:20px;">
 						<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
@@ -485,7 +485,7 @@
 								<td>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_name"/>
 								</td>
-								<td >
+								<td style="text-align: center;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).unit.name"/>
 									</span>
@@ -557,7 +557,7 @@
 
 							<t t-if="i &lt;= 8">
 								<tr>
-									<td style="text-align: center;">
+									<td style="text-align: left;">
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','11470d0f-e6d1-4770-be6b-32267d3461cb')]).parameter_name"/>
 									</td>
 									<td style="text-align: center;">
@@ -596,7 +596,7 @@
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
 									</td>
-									<td style="text-align: center;">
+									<td style="text-align: left;">
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','11470d0f-e6d1-4770-be6b-32267d3461cb')]).parameter_name"/>
 									</td>
 									<td style="text-align: center;">
