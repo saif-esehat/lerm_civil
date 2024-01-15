@@ -146,7 +146,7 @@
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
 					</div>
-					<table style="margin-top:30px;">
+					<table style="margin-top:20px;margin-bottom:0px;">
 					<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
@@ -1326,7 +1326,7 @@
 						</tbody>
 					</table>
 					<div style="page-break-inside: avoid;">
-						<div style="margin-top:20px" class="noteContainer">
+						<div style="margin-top:10px" class="noteContainer">
 							<div>
 								<b>Note :-</b>
 							</div>
@@ -1353,7 +1353,7 @@
 						</div>
 						
 						
-						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+						<div style="page-break-inside: avoid;" class="signatureContainer girdgird">
 							<div>
 								<div>
 									<b>
@@ -1412,11 +1412,11 @@
 						<!-- <div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div> -->
-						<div style="margin-top: 50px; text-align: center;">
+						<!-- <div style="margin-top: 20px; text-align: center;">
 							<p style="border-top: 1px dashed #000; padding-top: 10px;">
 								...... End Of Report......
 							</p>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				
