@@ -442,8 +442,43 @@
 							</tr> -->
 
 
-						
-							<tr>
+							<t t-if="i &lt;= 8">
+								<tr>
+									<td  style="text-align: center;">
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','11470d0f-e6d1-4770-be6b-32267d3461cb')]).parameter_name"/>
+									</td>
+									<td style="text-align: center;">
+										<span t-esc="data.bend_test"/>
+									</td>
+									<td>
+										<!-- Statisfactory -->
+									</td>
+									<td style="text-align: center;" t-if="eln.conformity">
+										<span t-esc="data.bend_test"/>
+									</td>
+								</tr>
+								<tr>
+									<td  style="text-align: center;">
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','23d0ea9c-b7c9-42b6-94c8-c2dd36101849')]).parameter_name"/>
+									</td>
+									<td style="text-align: center;">
+										<span t-esc="data.fracture"/>
+									</td>
+									<td>
+										
+									</td>
+									<td t-if="eln.conformity"> 
+										
+									</td>
+								</tr>
+							</t>
+						</tbody>
+					</table>
+					<t t-if="i > 8">
+						<div style="page-break-before: always;"></div>
+						<table>
+							<tbody>
+								<tr>
 								<td  style="text-align: center;">
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','11470d0f-e6d1-4770-be6b-32267d3461cb')]).parameter_name"/>
                                 </td>
@@ -471,8 +506,9 @@
 									
 								</td>
 							</tr>
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</t>
 					
 					<div style="margin-top:20px; page-break-inside: avoid;" class="noteContainer">
 						<div>
