@@ -772,6 +772,7 @@
 
 							</tbody>
 						</table>
+						<div style="page-break-inside: avoid;">
 
 						<table style="margin-top: 20px;max-width:400px" t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 							<tr>
@@ -891,6 +892,7 @@
 						...... End Of Report......
 				</p>
 			</div>
+		</div>
 		<!-- </div> -->
 
 	</t>
