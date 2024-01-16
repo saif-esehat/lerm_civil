@@ -1395,6 +1395,8 @@ class FlyaschNormalConsistency(models.Model):
                 # Round up the value of specific_surface to the nearest integer
                 rounded_specific_surface = math.ceil(record.specific_surface)
                 record.fineness_air_permeability = rounded_specific_surface
+            else:
+                record.fineness_air_permeability = 0
 
     fineness_blaine_conformity = fields.Selection([
             ('pass', 'Pass'),
