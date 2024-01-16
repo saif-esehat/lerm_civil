@@ -232,7 +232,7 @@
 										</span>
 									</th>
 										
-									<th style="text-align: center;font-weight: bold;">
+									<!-- <th style="text-align: center;font-weight: bold;">
 										<span>
 											<span t-esc="eln.material.specifications"/>
 											
@@ -244,7 +244,7 @@
 											<span t-esc="eln.material.method_reference"/>
 											
 										</span>
-									</th>
+									</th> -->
 								</tr>
                                  <t t-set="f" t-value="0"/>
                                     <tr t-foreach="rcpt.child_lines" t-as="r">
@@ -267,7 +267,7 @@
 										</td>
                                       
 
-										<td style="text-align: center; vertical-align: middle;">
+										<!-- <td style="text-align: center; vertical-align: middle;">
 											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).parameter_table" t-as="parameter">
 												<t t-if="parameter.grade.id == eln.grade_id.id">
 													<span t-field="parameter.permissable_limit"/>
@@ -277,14 +277,13 @@
 								
 										<td style="text-align: center; vertical-align: middle;">
 											<span>
-												<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
 												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).parameter_table" t-as="parameter">
 													<t t-if="parameter.grade.id == eln.grade_id.id">
 														<span t-field="parameter.specification"/>
 													</t>
 												</t>
 											</span>
-										</td>
+										</td> -->
 											
                                        
                                     </tr>
@@ -296,7 +295,7 @@
                         </div> -->
 					<div class="page">
                         <div class="text-center">
-                            <h6>Chloride Ion Penetrability (as per ASTM 1020 - 2022)</h6>
+                            <h6>Chloride Ion Penetrability (ASTM C 1202:2022)</h6>
                         </div>
 
                         <table >

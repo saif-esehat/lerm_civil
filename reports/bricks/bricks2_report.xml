@@ -772,7 +772,6 @@
 
 							</tbody>
 						</table>
-						<div style="page-break-inside: avoid;">
 
 						<table style="margin-top: 20px;max-width:400px" t-if="brick.water_absorbtion_visible and (brick.water_absorption_nabl == 'pass' and nabl or brick.water_absorption_nabl == 'fail' and not nabl)">
 							<tr>
@@ -830,7 +829,7 @@
 
 							<div>
 								<b>
-										()
+										(Sr. Technician)
 								</b>
 							</div>
 						</div>
@@ -869,21 +868,7 @@
 							</div>
 						</div>
 					</div>
-					<div>
-						<b>
-							<span t-esc="eln.sample_id.approved_by.name"/>
-						</b>
-					</div>
-					<div>
-						<b>
-								Mechanical Department (HOD)
-						</b>
-					</div>
-					<div>
-						<b>
-								(Authorized Signatory)
-						</b>
-					</div>
+					
 				<!-- </div> -->
 			</div>
 
@@ -892,7 +877,6 @@
 						...... End Of Report......
 				</p>
 			</div>
-		</div>
 		<!-- </div> -->
 
 	</t>
