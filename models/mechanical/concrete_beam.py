@@ -37,6 +37,8 @@ class FlexuralStrengthConcreteBeam(models.Model):
     # age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
     age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
 
+    
+
     @api.onchange('eln_ref')
     def _compute_age_of_days(self):
         for record in self:
