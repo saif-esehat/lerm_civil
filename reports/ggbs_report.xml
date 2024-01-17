@@ -1192,8 +1192,8 @@
 
 							<tr t-if="ggbs.slag_activity_28_visible and ggbs.slag_28days_nabl == 'pass' and nabl and not fromEln">
 								<td style="border-bottom:none;border-top:none;text-align: center;"> 
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
+									<!-- <span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/> -->
 									
 								</td>
 								<td style="text-align: center;">
