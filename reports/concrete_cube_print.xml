@@ -240,6 +240,11 @@
 								</th>
 								<th style="text-align: center;font-weight: bold;">
 									<span>
+										Grade
+									</span>
+								</th>
+								<th style="text-align: center;font-weight: bold;">
+									<span>
 										Length in mm
 									</span>
 								</th>
@@ -290,6 +295,9 @@
 									<span t-esc="r.id_mark"/>
 								</td>
 								<td style="text-align: center;">
+									<span t-esc="o.sample_id.grade_id.grade"/>
+								</td>
+								<td style="text-align: center;">
 									<span t-esc="r.length" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
@@ -324,6 +332,9 @@
 									<span t-esc="r.id_mark"/>
 								</td>
 								<td style="text-align: center;">
+									<span t-esc="o.sample_id.grade_id.grade"/>
+								</td>
+								<td style="text-align: center;">
 									<span t-esc="r.length" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
@@ -355,7 +366,7 @@
 								</td>
 							</tr>
 							<tr t-if="data.nabl == 'fail' and not nabl"> 
-								<td colspan="12">Avg. Compressive Strength N/mm2 :<![CDATA[&nbsp;]]>
+								<td colspan="12">Result - Average Compressive Strength N/mm2 :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
 							</tr>
@@ -404,7 +415,7 @@
 								</div>
 								<div>
 									<b>
-										(Sr. Technician)
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 							</div>
@@ -432,13 +443,13 @@
 									</b>
 								</div>
 								<div>
-									<b>
+									<!-- <b>
 										Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
-									</b>
+									</b> -->
 								</div>
 								<div>
 									<b>
-										(Authorized Signatory)
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 							</div>
@@ -530,6 +541,12 @@
 										ID MARK/Location
 									</span>
 								</th>
+
+								<th style="text-align: center;font-weight: bold;">
+									<span>
+										Grade
+									</span>
+								</th>
 								
 								<th style="text-align: center;">
 									<span>
@@ -573,6 +590,9 @@
 								</td>
 								<td style="text-align: center;">
 									<span t-esc="r.id_mark"/>
+								</td>
+								<td style="text-align: center;">
+									<span t-esc="o.sample_id.grade_id.grade"/>
 								</td>
 								<td style="text-align: center;">
 									<span t-esc="r.length"/>
@@ -623,7 +643,7 @@
                             </div>
                             <div>
                                 <b>
-                                    (Jr. Technician)
+                                    (<span t-esc="eln.sample_id.approved_by.job_title"/>)
                                 </b>
                             </div>
                         </div>
@@ -646,7 +666,7 @@
                             
                             <div>
                                 <b>
-                                    (Sr. Technician)
+                                    (<span t-esc="eln.sample_id.approved_by.job_title"/>)
                                 </b>
                             </div>
                         </div>
