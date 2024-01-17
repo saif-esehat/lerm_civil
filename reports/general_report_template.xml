@@ -222,71 +222,186 @@
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 						<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
 					</div>
+
+
+					<t t-set="data_length" t-value="len(data.child_lines or [])"/>
+					<t t-if="data_length &lt;= 5">
+						<table style="margin-top:30px;">
+								<thead>
+									<tr>
+										
+										<t t-foreach="tabledata" t-as="column">
+											<th>
+												<span>
+													<t t-esc="column[1]" />
+												</span>
+											</th>
+										</t>
+									</tr>
+								</thead>
+								<!-- <tbody>
+									<t t-set="i" t-value="0"/>
+									<tr t-foreach="data.child_lines" t-as="r">
+										
+										<t t-foreach="tabledata" t-as="row">
+											<td>
+												<span>
+													<t t-esc="r[row[0]]"/>
+												</span>
+											</td>
+										</t>
+									</tr>
+								</tbody> -->
+
+
+								<!-- <tbody>
+									<t t-set="i" t-value="0"/>
+									<tr t-foreach="data.child_lines" t-as="r">
+										<t t-foreach="tabledata" t-as="row">
+											<td>
+											<span>
+												<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+													<t t-esc="round(float(r[row[0]]),2)"/>
+												</t>
+												<t t-else="">
+													<t t-esc="r[row[0]]"/>
+												</t>
+											</span>
+											</td>
+										</t>
+									</tr>
+								</tbody> -->
+								
+									<tbody>
+										<t t-set="i" t-value="0"/>
+										<tr t-foreach="range(len(data.child_lines))" t-as="index">
+											<t t-set="r" t-value="data.child_lines[index]"/>
+											<t t-foreach="tabledata" t-as="row">
+												<td>
+													<span>
+														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+															<t t-esc="round(float(r[row[0]]),2)"/>
+														</t>
+														<t t-else="">
+															<t t-esc="r[row[0]]"/>
+														</t>
+													</span>
+												</td>
+											</t>
+										</tr>
+									</tbody>
+								
+								<!-- <t t-if="data_length &gt;= 8">
+									<tbody>
+										<t t-set="i" t-value="0"/>
+										<tr t-foreach="range(8)" t-as="index">
+											<t t-set="r" t-value="data.child_lines[index]"/>
+											<t t-foreach="tabledata" t-as="row">
+												<td>
+													<span>
+														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+															<t t-esc="round(float(r[row[0]]),2)"/>
+														</t>
+														<t t-else="">
+															<t t-esc="r[row[0]]"/>
+														</t>
+													</span>
+												</td>
+											</t>
+										</tr>
+									</tbody>
+								</t> -->
+
+
+						</table>
+						
+					</t>
+					<t t-if="data_length &gt; 5">
+						<table style="margin-top:30px;">
+								<thead>
+									<tr>
+										
+										<t t-foreach="tabledata" t-as="column">
+											<th>
+												<span>
+													<t t-esc="column[1]" />
+												</span>
+											</th>
+										</t>
+									</tr>
+								</thead>
+								
+									<tbody>
+										<t t-set="i" t-value="0"/>
+										<tr t-foreach="range(5)" t-as="index">
+											<t t-set="r" t-value="data.child_lines[index]"/>
+											<t t-foreach="tabledata" t-as="row">
+												<td>
+													<span>
+														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+															<t t-esc="round(float(r[row[0]]),2)"/>
+														</t>
+														<t t-else="">
+															<t t-esc="r[row[0]]"/>
+														</t>
+													</span>
+												</td>
+											</t>
+										</tr>
+									</tbody>
+						</table>
+						<div style="page-break-before: always;"></div>
+						<table style="margin-top:30px;">
+								<thead>
+									<tr>
+										
+										<t t-foreach="tabledata" t-as="column">
+											<th>
+												<span>
+													<t t-esc="column[1]" />
+												</span>
+											</th>
+										</t>
+									</tr>
+								</thead>
+								
+									<tbody>
+										<t t-set="i" t-value="0"/>
+										<tr t-foreach="range(5, len(data.child_lines))" t-as="index">
+											<t t-set="r" t-value="data.child_lines[index]"/>
+											<t t-foreach="tabledata" t-as="row">
+												<td>
+													<span>
+														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+															<t t-esc="round(float(r[row[0]]),2)"/>
+														</t>
+														<t t-else="">
+															<t t-esc="r[row[0]]"/>
+														</t>
+													</span>
+												</td>
+											</t>
+										</tr>
+									</tbody>
+						</table>
+						
+					</t>
 					
-                    <table style="margin-top:30px;">
-							<thead>
-								<tr>
-									
-									<t t-foreach="tabledata" t-as="column">
-										<th>
-											<span>
-												<t t-esc="column[1]" />
-											</span>
-										</th>
-									</t>
-								</tr>
-            				</thead>
-							<!-- <tbody>
-								<t t-set="i" t-value="0"/>
-								<tr t-foreach="data.child_lines" t-as="r">
-									
-									<t t-foreach="tabledata" t-as="row">
-										<td>
-											<span>
-												<t t-esc="r[row[0]]"/>
-											</span>
-										</td>
-									</t>
-								</tr>
-							</tbody> -->
-
-
-							<tbody>
-								<t t-set="i" t-value="0"/>
-								<tr t-foreach="data.child_lines" t-as="r">
-									<t t-foreach="tabledata" t-as="row">
-										<td>
-										<span>
-											<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-												<t t-esc="round(float(r[row[0]]),2)"/>
-											</t>
-											<t t-else="">
-												<t t-esc="r[row[0]]"/>
-											</t>
-										</span>
-										</td>
-									</t>
-								</tr>
-							</tbody>
-							
-
-
-					</table>
 
 					<div style="page-break-inside: avoid;">
-					<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="resultdata and len(resultdata) &gt; 0">
-						<tr cols="12">
-							<td colspan="6" t-foreach="resultdata" t-as="result">
-								<span>
-									<t t-esc="result[1]"/>
-								</span> : 
-								<![CDATA[&nbsp;]]>
-								<span>
-									<t t-esc="formdata[result[0]]" />
-								</span>
-							</td>
-						</tr>
-					</table>
+					<table style="margin-top:10px;" t-foreach="data" t-as="formdata" t-if="resultdata and len(resultdata) &gt; 0">
+							<tr cols="12">
+								<td colspan="6" t-foreach="resultdata" t-as="result">
+									<span>
+										<t t-esc="result[1]"/>
+									</span> : 
+									<![CDATA[&nbsp;]]>
+									<span>
+										<t t-esc="formdata[result[0]]" />
+									</span>
+								</td>
+							</tr>
+						</table>
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
 							<div>
