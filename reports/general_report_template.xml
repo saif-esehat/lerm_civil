@@ -249,6 +249,8 @@
 									</t>
 								</tr>
 							</tbody> -->
+
+
 							<tbody>
 								<t t-set="i" t-value="0"/>
 								<tr t-foreach="data.child_lines" t-as="r">
@@ -266,10 +268,12 @@
 									</t>
 								</tr>
 							</tbody>
+							
+
 
 					</table>
 
-
+					<div style="page-break-inside: avoid;">
 					<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="resultdata and len(resultdata) &gt; 0">
 						<tr cols="12">
 							<td colspan="6" t-foreach="resultdata" t-as="result">
@@ -396,6 +400,7 @@
 									</b>
 								</div>
 							</div>
+						</div>
 						</div>
 					</div>
 				</div>
