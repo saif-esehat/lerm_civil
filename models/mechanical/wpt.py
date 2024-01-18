@@ -210,7 +210,7 @@ class WptMechanicalLine(models.Model):
     _name = "mechanical.wpt.line"
     parent_id = fields.Many2one('mechanical.wpt',string="Parent Id")
 
-    sample = fields.Char(string="Sample")
+    sample = fields.Char(string="Sample",compute="_compute_sample_id")
     depth1 = fields.Float(string="Specimen 1")
     depth2 = fields.Float(string="Specimen 2")
     depth3 = fields.Float(string="Specimen 3")
@@ -231,3 +231,10 @@ class WptMechanicalLine(models.Model):
     #         except:
     #             record.sample = None
 
+    @api.depends('parent_id')
+    def _compute_sample_id(self):
+        for record in self:
+            try:
+                record.sample = record.parent_id.eln_ref.sample_id.client_sample_id
+            except:
+                record.sample = None
