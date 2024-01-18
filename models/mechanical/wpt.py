@@ -12,6 +12,7 @@ class WptMechanical(models.Model):
 
 
     name = fields.Char("Name",default="Water Permeability Test")
+    eln_ref = fields.Many2one('lerm.eln',string="Eln")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('mechanical.wpt.line','parent_id',string="Parameter")
 
@@ -89,7 +90,6 @@ class WptMechanical(models.Model):
       
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
-    eln_ref = fields.Many2one('lerm.eln',string="Eln")
 
     # casting_date = fields.Date("Date of Casting",compute="_compute_casting_date")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
@@ -219,5 +219,15 @@ class WptMechanicalLine(models.Model):
     @api.depends('depth1','depth2','depth3')
     def _compute_average(self):
         for record in self:
-            record.average = round(((record.depth1 + record.depth2 + record.depth3)/3),3)
+            average = round(((record.depth1 + record.depth2 + record.depth3)/3),2)
+            record.average = average
+
+
+    # @api.depends('parent_id')
+    # def _compute_sample_id(self):
+    #     for record in self:
+    #         try:
+    #             record.sample = record.parent_id.eln_ref.sample_id.client_sample_id
+    #         except:
+    #             record.sample = None
 
