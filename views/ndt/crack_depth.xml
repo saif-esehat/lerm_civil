@@ -35,6 +35,10 @@
                     </field>
                      <group>
                             <field name="average" />
+                            <field name="min_cd" />
+                            <field name="max_cd" />
+
+                            <!-- <field name="average" /> -->
                     </group>
                 </sheet>
             </form>
