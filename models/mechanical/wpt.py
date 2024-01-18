@@ -219,7 +219,17 @@ class WptMechanicalLine(models.Model):
     @api.depends('depth1','depth2','depth3')
     def _compute_average(self):
         for record in self:
-            record.average = round(((record.depth1 + record.depth2 + record.depth3)/3),3)
+            average = round(((record.depth1 + record.depth2 + record.depth3)/3),2)
+            record.average = average
+
+
+    # @api.depends('parent_id')
+    # def _compute_sample_id(self):
+    #     for record in self:
+    #         try:
+    #             record.sample = record.parent_id.eln_ref.sample_id.client_sample_id
+    #         except:
+    #             record.sample = None
 
     @api.depends('parent_id')
     def _compute_sample_id(self):
