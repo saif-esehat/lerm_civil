@@ -186,11 +186,7 @@
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
-									<t t-if="i > 4">
-									<div style="page-break-before: always;"></div>
-									<!-- Reset i to 0 after the page break -->
-									<t t-set="i" t-value="0"/>
-								</t>
+									
 								</td>
 								<td>
 									
@@ -433,11 +429,7 @@
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
-									<t t-if="i > 4">
-									<div style="page-break-before: always;"></div>
-									<!-- Reset i to 0 after the page break -->
-									<t t-set="i" t-value="0"/>
-								</t>
+									
 								</td>
 								<td>
 									<span>
@@ -487,11 +479,7 @@
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
-									<t t-if="i > 4">
-									<div style="page-break-before: always;"></div>
-									<!-- Reset i to 0 after the page break -->
-									<t t-set="i" t-value="0"/>
-								</t>
+									
 								</td>
 								<td>
 									<span>
@@ -539,11 +527,7 @@
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
-									<t t-if="i > 4">
-									<div style="page-break-before: always;"></div>
-									<!-- Reset i to 0 after the page break -->
-									<t t-set="i" t-value="0"/>
-								</t>
+									
 								</td>
 								<td>
 									<span>
@@ -591,11 +575,7 @@
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
-									<t t-if="i > 4">
-									<div style="page-break-before: always;"></div>
-									<!-- Reset i to 0 after the page break -->
-									<t t-set="i" t-value="0"/>
-								</t>
+									
 								</td>
 								<td>
 									<span>
@@ -644,11 +624,8 @@
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
-									<t t-if="i > 4">
-									<div style="page-break-before: always;"></div>
-									<!-- Reset i to 0 after the page break -->
-									<t t-set="i" t-value="0"/>
-								</t>
+									
+								
 								</td>
 								<td>
 									<span>
@@ -664,7 +641,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.fineness_dry_sieving" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="cement.fineness_dry_sieving" />
 									</span>									
 								</td>
 								<td>
@@ -695,11 +672,7 @@
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
-									<t t-if="i > 4">
-									<div style="page-break-before: always;"></div>
-									<!-- Reset i to 0 after the page break -->
-									<t t-set="i" t-value="0"/>
-								</t>
+									
 								</td>
 								<td>
 									<span>
@@ -715,7 +688,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.fineness_dry_sieving" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="cement.fineness_dry_sieving" />
 									</span>									
 								</td>
 								<td>
@@ -746,11 +719,7 @@
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
-									<t t-if="i > 4">
-									<div style="page-break-before: always;"></div>
-									<!-- Reset i to 0 after the page break -->
-									<t t-set="i" t-value="0"/>
-								</t>
+									
 								</td>
 								<td>
 									<span>
@@ -766,7 +735,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.fineness_dry_sieving" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="cement.fineness_dry_sieving" />
 									</span>									
 								</td>
 								<td>
@@ -960,7 +929,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.expansion_soundness" t-options='{"widget": "float", "precision": 2}' />
+										<span t-field="cement.expansion_soundness"  />
 									</span>									
 								</td>
 								<td>
@@ -1007,7 +976,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.expansion_soundness" t-options='{"widget": "float", "precision": 2}' />
+										<span t-field="cement.expansion_soundness"  />
 									</span>									
 								</td>
 								<td>
@@ -1054,7 +1023,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.expansion_soundness" t-options='{"widget": "float", "precision": 2}' />
+										<span t-field="cement.expansion_soundness"  />
 									</span>									
 								</td>
 								<td>
@@ -1341,7 +1310,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_3days">
-											<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_3_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -1391,7 +1360,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_3days">
-											<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_3_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -1441,7 +1410,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_3days">
-											<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_3_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -1493,7 +1462,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_7days">
-											<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_7_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -1543,7 +1512,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_7days">
-											<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_7_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -1593,7 +1562,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_7days">
-											<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_7_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -1644,7 +1613,7 @@
 									<td>
 										<span>
 											<t t-if="cement.status_28days">
-												<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+												<span t-field="cement.compressive_strength_28_days" />
 											</t>
 											<t t-else="">
 												Awaited
@@ -1693,7 +1662,7 @@
 									<td>
 										<span>
 											<t t-if="cement.status_28days">
-												<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+												<span t-field="cement.compressive_strength_28_days" />
 											</t>
 											<t t-else="">
 												Awaited
@@ -1742,7 +1711,7 @@
 									<td>
 										<span>
 											<t t-if="cement.status_28days">
-												<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+												<span t-field="cement.compressive_strength_28_days" />
 											</t>
 											<t t-else="">
 												Awaited
@@ -1898,7 +1867,7 @@
 										<td>
 											<span>
 												<t t-if="cement.status_3days">
-													<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
+													<span t-field="cement.compressive_strength_3_days" />
 												</t>
 												<t t-else="">
 													Awaited
@@ -1948,7 +1917,7 @@
 										<td>
 											<span>
 												<t t-if="cement.status_3days">
-													<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
+													<span t-field="cement.compressive_strength_3_days" />
 												</t>
 												<t t-else="">
 													Awaited
@@ -1998,7 +1967,7 @@
 										<td>
 											<span>
 												<t t-if="cement.status_3days">
-													<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
+													<span t-field="cement.compressive_strength_3_days" />
 												</t>
 												<t t-else="">
 													Awaited
@@ -2050,7 +2019,7 @@
 										<td>
 											<span>
 												<t t-if="cement.status_7days">
-													<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+													<span t-field="cement.compressive_strength_7_days" />
 												</t>
 												<t t-else="">
 													Awaited
@@ -2100,7 +2069,7 @@
 										<td>
 											<span>
 												<t t-if="cement.status_7days">
-													<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+													<span t-field="cement.compressive_strength_7_days" />
 												</t>
 												<t t-else="">
 													Awaited
@@ -2150,7 +2119,7 @@
 										<td>
 											<span>
 												<t t-if="cement.status_7days">
-													<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+													<span t-field="cement.compressive_strength_7_days" />
 												</t>
 												<t t-else="">
 													Awaited
@@ -2201,7 +2170,7 @@
 											<td>
 												<span>
 													<t t-if="cement.status_28days">
-														<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+														<span t-field="cement.compressive_strength_28_days" />
 													</t>
 													<t t-else="">
 														Awaited
@@ -2250,7 +2219,7 @@
 											<td>
 												<span>
 													<t t-if="cement.status_28days">
-														<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+														<span t-field="cement.compressive_strength_28_days" />
 													</t>
 													<t t-else="">
 														Awaited
@@ -2299,7 +2268,7 @@
 											<td>
 												<span>
 													<t t-if="cement.status_28days">
-														<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+														<span t-field="cement.compressive_strength_28_days" />
 													</t>
 													<t t-else="">
 														Awaited
