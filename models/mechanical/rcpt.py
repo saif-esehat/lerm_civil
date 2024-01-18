@@ -647,7 +647,7 @@ class RcptConcreteCubeLine(models.Model):
     # undefined=fields.Float(string="Undefined")
     height=fields.Float(string="Height")
     dia_core = fields.Float(string="Dia Of Core")
-    identification_mark = fields.Char(string="Identification Mark",compute="_compute_sample_id")
+    identification_mark = fields.Char(string="Sample ID Mark",compute="_compute_sample_id")
     io = fields.Float(string="Io", digits=(16,1))
     i30 = fields.Float(string="I30", digits=(16,1))
     i60 = fields.Float(string="I60", digits=(16,1))
