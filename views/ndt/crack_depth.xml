@@ -35,8 +35,8 @@
                     </field>
                      <group>
                             <field name="average" string="Average" identity="result"/>
-                            <field name="min_cd" string="Min" identity="result"/>
-                            <field name="max_cd" string="Max" identity="result"/>
+                            <field name="min_cd" string="Min mm" identity="result"/>
+                            <field name="max_cd" string="Max mm" identity="result"/>
 
                             <!-- <field name="average" /> -->
                     </group>
