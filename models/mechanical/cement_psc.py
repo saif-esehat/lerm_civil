@@ -280,7 +280,9 @@ class CementPsc(models.Model):
                 time_difference = t2 - t1
 
                 record.final_setting_time_hours = time_difference
-                final_setting_time = time_difference.total_seconds() / 60
+                final_setting_time_decimal = time_difference.total_seconds() / 60
+                final_setting_time = int(final_setting_time_decimal)
+
                 if final_setting_time % 5 == 0:
                     record.final_setting_time_minutes = final_setting_time
                 else:

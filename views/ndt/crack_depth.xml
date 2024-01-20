@@ -34,7 +34,7 @@
                             </tree>
                     </field>
                      <group>
-                            <field name="average" />
+                            <field name="average" string="Average" identity="result"/>
                     </group>
                 </sheet>
             </form>

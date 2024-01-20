@@ -34,6 +34,16 @@
 								</span>
 							</td>
 						</tr>
+						<tr  cols="12">
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.grade_id.grade"/>
+								</td>
+								<td colspan="6">Instrument No :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.instrument.name"/>
+								</td>
+							</tr>
 					</table>
 
 				</div>
@@ -212,7 +222,7 @@
                             </div>
 							<div>
 								<b>
-									(JR Engineer)
+									(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 								</b>
 							</div>
 						</div>
@@ -233,7 +243,7 @@
                             
                             <div>
                                 <b>
-                                    (Sr. Engineer)
+                                    (<span t-esc="eln.sample_id.approved_by.job_title"/>)
                                 </b>
                             </div>
 						</div>
