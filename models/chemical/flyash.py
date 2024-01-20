@@ -1151,30 +1151,30 @@ class ChemicalFlyAsh(models.Model):
                     else:
                         record.combined_percentage_conformity = 'fail'
 
-    combined_percentage_nabl = fields.Selection([
-        ('pass', 'NABL'),
-        ('fail', 'Non-NABL')], string="NABL", compute="_compute_combined_percentage_nabl", store=True)
+    # combined_percentage_nabl = fields.Selection([
+    #     ('pass', 'NABL'),
+    #     ('fail', 'Non-NABL')], string="NABL", compute="_compute_combined_percentage_nabl", store=True)
 
-    @api.depends('combined_percentage','eln_ref','grade')
-    def _compute_combined_percentage_nabl(self):
+    # @api.depends('combined_percentage','eln_ref','grade')
+    # def _compute_combined_percentage_nabl(self):
         
-        for record in self:
-            record.combined_percentage_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
+    #     for record in self:
+    #         record.combined_percentage_nabl = 'fail'
+    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
+    #         for material in materials:
+    #             if material.grade.id == record.grade.id:
+    #                 lab_min = line.lab_min_value
+    #                 lab_max = line.lab_max_value
+    #                 mu_value = line.mu_value
                     
-                    lower = record.combined_percentage - record.combined_percentage*mu_value
-                    upper = record.combined_percentage + record.combined_percentage*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.combined_percentage_nabl = 'pass'
-                        break
-                    else:
-                        record.combined_percentage_nabl = 'fail'
+    #                 lower = record.combined_percentage - record.combined_percentage*mu_value
+    #                 upper = record.combined_percentage + record.combined_percentage*mu_value
+    #                 if lower >= lab_min and upper <= lab_max:
+    #                     record.combined_percentage_nabl = 'pass'
+    #                     break
+    #                 else:
+    #                     record.combined_percentage_nabl = 'fail'
 
 
 

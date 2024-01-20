@@ -197,6 +197,7 @@
     'reports/gypsum_chem/gypsum_datasheet.xml',
     'reports/gypsum_chem/gypsum_report.xml',
     'views/sample_cancellation.xml',
+    'views/chemical/opc_cement_chemical.xml',
     
     
  
