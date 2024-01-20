@@ -10,22 +10,38 @@ class ReboundHammer(models.Model):
     name = fields.Char("Name",default="Rebound Hammer")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.rebound.hammer.line','parent_id',string="Parameter")
-    average = fields.Float(string="Average",compute="_compute_average")
-    minimum = fields.Float(string="Minimum",compute="_compute_min_max")
-    maximum = fields.Float(string="Maximum",compute="_compute_min_max")
+    average_mpa = fields.Float(string="Average Mpa",compute="_compute_average",store=True)
+    minimum_mpa = fields.Float(string="Minimum Mpa",compute="_compute_average",store=True)
+    maximum_mpa = fields.Float(string="Maximum Mpa",compute="_compute_average",store=True)
 
-    @api.depends('child_lines.avg')
+    # @api.depends('child_lines.avg')
+    # def _compute_average(self):
+    #     for record in self:
+    #         total_value = sum(record.child_lines.mapped('avg'))
+    #         self.average = float(round(total_value / len(record.child_lines),2)) if record.child_lines else 0.0
+
+    # @api.depends('child_lines.mpa')
+    # def _compute_average(self):
+    #     for record in self:
+    #         mpa_values = record.child_lines.mapped('mpa')
+    #         record.average_mpa = sum(mpa_values) / len(mpa_values) if len(mpa_values) > 0 else 0.0
+
+    @api.depends('child_lines.mpa')
     def _compute_average(self):
         for record in self:
-            total_value = sum(record.child_lines.mapped('avg'))
-            self.average = float(round(total_value / len(record.child_lines),2)) if record.child_lines else 0.0
+            mpa_values = record.child_lines.mapped('mpa')
+            record.average_mpa = sum(mpa_values) / len(mpa_values) if len(mpa_values) > 0 else 0.0
+            record.minimum_mpa = min(mpa_values, default=0.0)
+            record.maximum_mpa = max(mpa_values, default=0.0)
 
-    @api.depends('child_lines.avg')
-    def _compute_min_max(self):
-        for record in self:
-            values = record.child_lines.mapped('avg')
-            self.minimum = round(float(min(values)),2) if values else 0.0
-            self.maximum = round(float(max(values)),2) if values else 0.0
+
+
+    # @api.depends('child_lines.avg')
+    # def _compute_min_max(self):
+    #     for record in self:
+    #         values = record.child_lines.mapped('avg')
+    #         self.minimum = round(float(min(values)),2) if values else 0.0
+    #         self.maximum = round(float(max(values)),2) if values else 0.0
 
 
     @api.model

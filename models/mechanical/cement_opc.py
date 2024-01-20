@@ -128,7 +128,7 @@ class CementNormalConsistency(models.Model):
     time_water_added = fields.Datetime("The Time When water is added to cement (t1)")
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
     initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
-    initial_setting_time_minutes = fields.Float("Initial Setting Time Rounded", compute="_compute_initial_setting_time")
+    initial_setting_time_minutes = fields.Integer("Initial Setting Time Rounded", compute="_compute_initial_setting_time")
     initial_setting_time_minutes_unrounded = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
 
     initial_setting_conformity = fields.Selection([
@@ -278,7 +278,8 @@ class CementNormalConsistency(models.Model):
                 time_difference = t2 - t1
                 record.final_setting_time_minutes = time_difference
                 record.final_setting_time_hours = time_difference
-                final_setting_time = time_difference.total_seconds() / 60
+                final_setting_time_decimal = time_difference.total_seconds() / 60
+                final_setting_time = int(final_setting_time_decimal)
                 if final_setting_time % 5 == 0:
                     record.final_setting_time_minutes = final_setting_time
                 else:
@@ -315,7 +316,7 @@ class CementNormalConsistency(models.Model):
     density_trial1 = fields.Float("Density (g/cm³)",compute="_compute_density_trial1")
     density_trial2 = fields.Float("Density (g/cm³)",compute="_compute_density_trial2")
 
-    average_density = fields.Float("Average",compute="_compute_density_average")
+    average_density = fields.Float("Average",compute="_compute_density_average",digits=(16,2))
 
     density_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -396,7 +397,8 @@ class CementNormalConsistency(models.Model):
 
     @api.depends('density_trial1','density_trial2')
     def _compute_density_average(self):
-        self.average_density = (self.density_trial1 + self.density_trial2)/2
+        average_density = round((self.density_trial1 + self.density_trial2)/2,1)
+        self.average_density = average_density
 
     # Density End  
 
@@ -414,7 +416,7 @@ class CementNormalConsistency(models.Model):
 
     soundness_table = fields.One2many('cement.soundness.line','parent_id',string="Soundness")
     average_soundness = fields.Float("Average",compute="_compute_average_soundness")
-    expansion_soundness = fields.Float("Expansion(mm)",compute="_compute_expansion_soundness")
+    expansion_soundness = fields.Float("Expansion(mm)",compute="_compute_expansion_soundness" ,digits=(16,1))
 
     soundness_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -484,11 +486,14 @@ class CementNormalConsistency(models.Model):
             integer_part = math.floor(record.average_soundness)
             fractional_part = record.average_soundness - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.expansion_soundness = integer_part
+                expansion_soundness = round(integer_part,1)
+                record.expansion_soundness = expansion_soundness
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.expansion_soundness = integer_part + 0.5
+                expansion_soundness = round(integer_part + 0.5,1)
+                record.expansion_soundness = expansion_soundness
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.expansion_soundness = integer_part + 1
+                expansion_soundness = round(integer_part + 1,1)
+                record.expansion_soundness = expansion_soundness
             else:
                 record.expansion_soundness = 0
 
@@ -513,7 +518,7 @@ class CementNormalConsistency(models.Model):
 
     dry_sieving_table = fields.One2many('cement.dry.sieving.line','parent_id',string="Dry Sieving")
     average_fineness = fields.Float("Average",compute="_compute_average_fineness")
-    fineness_dry_sieving = fields.Float("Fineness by dry sieving %",compute="_compute_fineness_dry_sieving")
+    fineness_dry_sieving = fields.Float("Fineness by dry sieving %",compute="_compute_fineness_dry_sieving" ,digits=(16,1))
 
 
     dry_seiving_conformity = fields.Selection([
@@ -580,7 +585,8 @@ class CementNormalConsistency(models.Model):
 
     @api.depends('average_fineness')
     def _compute_fineness_dry_sieving(self):
-        self.fineness_dry_sieving = round(self.average_fineness, 1)
+        fineness_dry_sieving = round(self.average_fineness, 1)
+        self.fineness_dry_sieving = fineness_dry_sieving
 
     # Compressive Strength 
 
@@ -616,7 +622,7 @@ class CementNormalConsistency(models.Model):
     casting_3_days_tables = fields.One2many('cement.casting.3days.line','parent_id',string="3 Days")
     average_casting_3days = fields.Float("Average",compute="_compute_average_3days")
     status_3days = fields.Boolean("Done")
-    compressive_strength_3_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_3days")
+    compressive_strength_3_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_3days" ,digits=(16,1))
 
     compressive_3days_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -692,11 +698,14 @@ class CementNormalConsistency(models.Model):
             integer_part = math.floor(record.average_casting_3days)
             fractional_part = record.average_casting_3days - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.compressive_strength_3_days = integer_part
+                compressive_strength_3_days = round(integer_part,1)
+                record.compressive_strength_3_days = compressive_strength_3_days
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.compressive_strength_3_days = integer_part + 0.5
+                compressive_strength_3_days = round(integer_part + 0.5,1)
+                record.compressive_strength_3_days = compressive_strength_3_days
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.compressive_strength_3_days = integer_part + 1
+                compressive_strength_3_days = round(integer_part + 1,1)
+                record.compressive_strength_3_days = compressive_strength_3_days
             else:
                 record.compressive_strength_3_days = 0
             
@@ -711,7 +720,7 @@ class CementNormalConsistency(models.Model):
     casting_7_days_tables = fields.One2many('cement.casting.7days.line','parent_id',string="7 Days")
     average_casting_7days = fields.Float("Average",compute="_compute_average_7days")
     status_7days = fields.Boolean("Done")
-    compressive_strength_7_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_7days")
+    compressive_strength_7_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_7days" ,digits=(16,1))
 
     compressive_7days_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -789,11 +798,14 @@ class CementNormalConsistency(models.Model):
             integer_part = math.floor(record.average_casting_7days)
             fractional_part = record.average_casting_7days - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.compressive_strength_7_days = integer_part
+                compressive_strength_7_days = round(integer_part,1)
+                record.compressive_strength_7_days = compressive_strength_7_days
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.compressive_strength_7_days = integer_part + 0.5
+                compressive_strength_7_days = round(integer_part + 0.5,1)
+                record.compressive_strength_7_days = compressive_strength_7_days
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.compressive_strength_7_days = integer_part + 1
+                compressive_strength_7_days = round(integer_part + 1,1)
+                record.compressive_strength_7_days = compressive_strength_7_days
             else:
                 record.compressive_strength_7_days = 0
 
@@ -808,7 +820,7 @@ class CementNormalConsistency(models.Model):
     casting_28_days_tables = fields.One2many('cement.casting.28days.line','parent_id',string="28 Days")
     average_casting_28days = fields.Float("Average",compute="_compute_average_28days")
     status_28days = fields.Boolean("Done")
-    compressive_strength_28_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_28days")
+    compressive_strength_28_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_28days" ,digits=(16,1))
 
 
     compressive_28days_conformity = fields.Selection([
@@ -887,11 +899,14 @@ class CementNormalConsistency(models.Model):
             integer_part = math.floor(record.average_casting_28days)
             fractional_part = record.average_casting_28days - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.compressive_strength_28_days = integer_part
+                compressive_strength_28_days = round(integer_part,1)
+                record.compressive_strength_28_days = compressive_strength_28_days
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.compressive_strength_28_days = integer_part + 0.5
+                compressive_strength_28_days = round(integer_part + 0.5,1)
+                record.compressive_strength_28_days = compressive_strength_28_days
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.compressive_strength_28_days = integer_part + 1
+                compressive_strength_28_days = round(integer_part + 1,1)
+                record.compressive_strength_28_days = compressive_strength_28_days
             else:
                 record.compressive_strength_28_days = 0
 

@@ -829,7 +829,7 @@
 
 							<div>
 								<b>
-										()
+										(Sr. Technician)
 								</b>
 							</div>
 						</div>
@@ -868,21 +868,7 @@
 							</div>
 						</div>
 					</div>
-					<div>
-						<b>
-							<span t-esc="eln.sample_id.approved_by.name"/>
-						</b>
-					</div>
-					<div>
-						<b>
-								Mechanical Department (HOD)
-						</b>
-					</div>
-					<div>
-						<b>
-								(Authorized Signatory)
-						</b>
-					</div>
+					
 				<!-- </div> -->
 			</div>
 

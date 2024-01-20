@@ -60,7 +60,8 @@ class HalfCell(models.Model):
         for line1 in self.child_lines_1:
             # import wdb; wdb.set_trace()
             # Find or create the corresponding record in child_lines_2 using the 'member' and 'location' fields
-            corresponding_line2 = self.child_lines_2.filtered(lambda line2: line2.member == line1.member and line2.location == line1.location)
+            # corresponding_line2 = self.child_lines_2.filtered(lambda line2: line2.member == line1.member and line2.location == line1.location)
+            corresponding_line2 = self.child_lines_2.filtered(lambda line2:line1.level == line2.level)
 
             if corresponding_line2:
                 # Update the existing record in child_lines_2

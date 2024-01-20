@@ -17,19 +17,62 @@ class FlexuralStrengthConcreteBeam(models.Model):
     
     average_flexural_strength = fields.Float(string="Average Flexural Strength in N/mm2",compute="_compute_average_flexural_strength")
 
+    # age_of_days = fields.Selection([
+    #     ('3days', '3 Days'),
+    #     ('7days', '7 Days'),
+    #     ('14days', '14 Days'),
+    #     ('28days', '28 Days'),
+    # ], string='Age', default='28days',required=True)
     age_of_days = fields.Selection([
         ('3days', '3 Days'),
         ('7days', '7 Days'),
         ('14days', '14 Days'),
         ('28days', '28 Days'),
-    ], string='Age', default='28days',required=True)
-    age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
+    ], string='Age', default='28days',required=True,compute="_compute_age_of_days")
+
+    # date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
     date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
     date_of_testing = fields.Date(string="Date of Testing")
+
+    # age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
+    age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
+
+    
+
+    @api.onchange('eln_ref')
+    def _compute_age_of_days(self):
+        for record in self:
+            if record.eln_ref.sample_id:
+                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).days_casting
+                if sample_record == '3':
+                    record.age_of_days = '3days'
+                elif sample_record == '7':
+                    record.age_of_days = '7days'
+                elif sample_record == '14':
+                    record.age_of_days = '14days'
+                elif sample_record == '28':
+                    record.age_of_days = '28days'
+                else:
+                    record.age_of_days = None
+            else:
+                record.age_of_days = None
+
+
     # confirmity = fields.Selection([
     #     ('pass', 'Pass'),
     #     ('fail', 'Fail'),
     # ], string='Confirmity', default='fail',compute="_compute_average_flexural_strength_conformity")
+
+    # @api.depends('date_of_testing','date_of_casting')
+    # def compute_age_of_test(self):
+    #     for record in self:
+    #         if record.date_of_casting and record.date_of_testing:
+    #             date1 = fields.Date.from_string(record.date_of_casting)
+    #             date2 = fields.Date.from_string(record.date_of_testing)
+    #             date_difference = (date2 - date1).days
+    #             record.age_of_test = date_difference
+    #         else:
+    #             record.age_of_test = 0
 
     @api.depends('date_of_testing','date_of_casting')
     def compute_age_of_test(self):
@@ -41,6 +84,15 @@ class FlexuralStrengthConcreteBeam(models.Model):
                 record.age_of_test = date_difference
             else:
                 record.age_of_test = 0
+
+    # @api.onchange('eln_ref')
+    # def compute_date_of_casting(self):
+    #     for record in self:
+    #         if record.eln_ref.sample_id:
+    #             sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).date_casting
+    #             record.date_of_casting = sample_record
+    #         else:
+    #             record.date_of_casting = None
 
     @api.onchange('eln_ref')
     def compute_date_of_casting(self):

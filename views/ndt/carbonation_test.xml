@@ -28,7 +28,12 @@
                     </field>
                     <group>
                         <field name="average" string="Average of Depth of Carbonation in mm" identity="result"/>
+                        <field name="min_depth" string="Min mm" identity="result"/>
+                        <field name="max_depth" string="Max mm" identity="result"/>
+
                     </group>
+                   
+
                 </sheet>
             </form>
         </field>

@@ -210,15 +210,18 @@
 					<tbody >
 						  <tr>
 						        
-								<td style="text-align: center;">
-									<span style="text-align: center;">
-										Normal Consistency
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','04efc0bd-63e2-4e23-9436-51cde4fe2c57')]).parameter_name"/>
 									</span>
-									
 								</td>
-								<td style="text-align: center;">
-									<span style="text-align: center;">
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Normal Consistency GP')]).test_method.test_method"/>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','04efc0bd-63e2-4e23-9436-51cde4fe2c57')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -226,27 +229,34 @@
 										<span t-field="gypsum.normal_consistency" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
-								<td style="text-align: center;">
-									<span style="text-align: center;" >
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Normal Consistency GP')]).unit.name"/>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','04efc0bd-63e2-4e23-9436-51cde4fe2c57')]).unit.name"/>
 									</span>
 								</td>
-								<td style="text-align: center;">
-									<span style="text-align: center;" >
-										--
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','04efc0bd-63e2-4e23-9436-51cde4fe2c57')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 							</tr>
 							<tr t-if="gypsum.setting_time_visible">
-								<td style="text-align: center;">
+								<td>
 									<span>
-										Setting Time
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8e7282a0-3e80-4cee-b520-128b5a5f2015')]).parameter_name"/>
 									</span>
-									
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Setting time GP')]).test_method.test_method"/>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8e7282a0-3e80-4cee-b520-128b5a5f2015')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -254,28 +264,36 @@
 										<span t-field="gypsum.setting_time_minutes"/>
 									</span>									
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Setting time GP')]).unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8e7282a0-3e80-4cee-b520-128b5a5f2015')]).unit.name"/>
 									</span>
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Setting time GP')]).parameter.lab_min_value"/> Min
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8e7282a0-3e80-4cee-b520-128b5a5f2015')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								
 							</tr>
+							<!-- Freedom  -->
 							<tr t-if="gypsum.coarse_particle_visible">
-								<td style="text-align: center;">
+								<td>
 									<span>
-										Freedom from coarse particles
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ec5fa471-0e2a-411a-b1de-72cc41aed2d5')]).parameter_name"/>
 									</span>
-									
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Freedom from coarse particles GP')]).test_method.test_method"/>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ec5fa471-0e2a-411a-b1de-72cc41aed2d5')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -283,28 +301,36 @@
 										<span t-field="gypsum.average_coarse_particle" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Freedom from coarse particles GP')]).unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ec5fa471-0e2a-411a-b1de-72cc41aed2d5')]).unit.name"/>
 									</span>
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['eln.parameters.result'].search([('eln_id','=',eln.id),('parameter.parameter_name','=','Freedom from coarse particles GP')]).parameter.lab_max_value"/> Max
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ec5fa471-0e2a-411a-b1de-72cc41aed2d5')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								
 							</tr>
+							<!-- Dry Bulk Density  -->
 							<tr t-if="gypsum.dry_bulk_visible">
-								<td style="text-align: center;">
+								<td>
 									<span>
-										Dry Bulk Density
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','2d915d3b-0324-40f1-a2b9-e385a7cdc90d')]).parameter_name"/>
 									</span>
-									
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Bulk density GP')]).test_method.test_method"/>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','2d915d3b-0324-40f1-a2b9-e385a7cdc90d')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -312,28 +338,35 @@
 										<span t-field="gypsum.average_dry_loose_bulk_density" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Bulk density GP')]).unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','2d915d3b-0324-40f1-a2b9-e385a7cdc90d')]).unit.name"/>
 									</span>
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-									--
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','2d915d3b-0324-40f1-a2b9-e385a7cdc90d')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								
 							</tr>
 							<tr t-if="gypsum.compressive_visible">
-								<td style="text-align: center;">
+								<td>
 									<span>
-										Compressive Strength 1 Days
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','65321ea8-98e6-4d73-8941-5ac65d2504a9')]).parameter_name"/>
 									</span>
-									
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Compressive strength GP')]).test_method.test_method"/>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','65321ea8-98e6-4d73-8941-5ac65d2504a9')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -341,14 +374,18 @@
 										<span t-field="gypsum.average_casting_1days" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('parameter_name','=','Compressive strength GP')]).unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','65321ea8-98e6-4d73-8941-5ac65d2504a9')]).unit.name"/>
 									</span>
 								</td>
-								<td style="text-align: center;">
+								<td>
 									<span>
-									--
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','65321ea8-98e6-4d73-8941-5ac65d2504a9')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
 									</span>
 								</td>
 								

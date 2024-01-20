@@ -482,7 +482,15 @@
 								</td>
 							</tr>
 						</tbody>
+						
 					</table>
+					<!-- <t t-set="split_data" t-value="eln.parameters_result.split(',')"/>
+					<t t-set="data_length" t-value="len(split_data or [])"/>
+					<t t-foreach="range(0, data_length, 3)" t-as="index"> -->
+
+
+
+
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
 							<div>
@@ -558,63 +566,63 @@
 								</div>
 							</div>
 						</div> -->
-				<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
-					
-					<div>
-						<div>
-							<b>
-								Checked By
-							</b>
-						</div>
-						<div style="height:30px">
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+						
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:30px">
 
-						</div>
-						<div>
-							<b>
-								<span t-esc="eln.sample_id.check_by.name"/>
-							</b>
-						</div>
-						<div>
-							<b>
-								(Sr. Chemist)
-							</b>
-						</div>
-					</div>
-					<div>
-						<div t-if="stamp and stamp == '4-in_report'">
-							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-						</div>
-						<div style="padding-top:5px">
-							Format No. <span t-esc="eln.material.test_format_no"/>
-						</div>
-					</div>
-					<div>
-						<div>
-							<b>
-								Approved By 
-							</b>
-							
-						</div>
-						<div style="height:30px">
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.sample_id.check_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Sr. Chemist)
+									</b>
+								</div>
+							</div>
+							<div>
+								<div t-if="stamp and stamp == '4-in_report'">
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By 
+									</b>
+									
+								</div>
+								<div style="height:30px">
 
-						</div>
-						<div>
-							<b>
-							<span t-esc="eln.sample_id.approved_by.name"/>
-							</b>
-						</div>
-						<div>
-							<b>
-								Chemical Department ()
-							</b>
-						</div>
-						<div>
-							<b>
-								(Authorized Signatory)
-							</b>
-						</div>
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										Chemical Department ()
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
 					</div>
-				</div>
 					
 			
 						<div style="text-align:center;margin-top:25px">
