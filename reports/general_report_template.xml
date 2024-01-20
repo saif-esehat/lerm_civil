@@ -484,7 +484,7 @@
 								</div>
 								<div>
 									<b>
-										Sr. Engineer
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 								
@@ -512,14 +512,14 @@
 									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
-								<div>
+								<!-- <div>
 									<b>
 										NDT Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
-								</div>
+								</div> -->
 								<div>
 									<b>
-										(Authorized Signatory)
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 							</div>

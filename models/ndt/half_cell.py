@@ -135,7 +135,7 @@ class HalfCellLineTwo(models.Model):
     parent_id = fields.Many2one('ndt.half.cell',string="Parent Id")
     member = fields.Char("Member")
     location = fields.Char("Location")
-    level = fields.Char("Level")
+    level = fields.Char("Location")
     r1 = fields.Float("R1",digits=(16,3))
     r2 = fields.Float("R2",digits=(16,3))
     r3 = fields.Float("R3",digits=(16,3))
