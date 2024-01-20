@@ -9,9 +9,9 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="srf_id"/>
+                        <field name="srf_id" readonly="1"/>
                         <field name="sample_id"  readonly="1"/>
-                        <field name="parameter_id" />
+                        <field name="parameter_id" readonly="1"/>
                         <field name="eln_ref"  readonly="1"/>
                         
                     </group>
