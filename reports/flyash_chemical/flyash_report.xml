@@ -168,7 +168,7 @@
 						</thead>
 						<tbody>
 
-						    <tr t-if="data.combined_percentage_visible and (data.combined_percentage_nabl == 'pass' and nabl or data.combined_percentage_nabl == 'fail' and not nabl)">
+						    <tr t-if="data.combined_percentage_visible">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
