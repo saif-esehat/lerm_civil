@@ -98,6 +98,16 @@
 									<span t-field="o.end_date"/>
 								</td>
 							</tr>
+							<tr  cols="12">
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.grade_id.grade"/>
+								</td>
+								<td colspan="6">Instrument No :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.instrument.name"/>
+								</td>
+							</tr>
 							<!-- <tr style="height:50px" cols="12">
 								<td colspan="4">Performed By :
 									<![CDATA[&nbsp;]]>
