@@ -197,7 +197,7 @@
     'reports/gypsum_chem/gypsum_datasheet.xml',
     'reports/gypsum_chem/gypsum_report.xml',
     'views/sample_cancellation.xml',
-    
+    'views/chemical/tmt_bar.xml',
     
  
 
