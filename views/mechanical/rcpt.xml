@@ -45,7 +45,7 @@
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no' string="Sample"/>
-                                <field name="identification_mark" string="Identification Mark"/>
+                                <field name="identification_mark" string="Sample ID Mark"/>
                                 <!-- <field name='undefined' string="Undefined"/> -->
                                 <field name='height' string="Height"/>
                                 <field name="dia_core" string="Dia Of Core"/>

@@ -9,9 +9,9 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="srf_id"/>
+                        <field name="srf_id" readonly="1"/>
                         <field name="sample_id"  readonly="1"/>
-                        <field name="parameter_id" />
+                        <field name="parameter_id" readonly="1"/>
                         <field name="eln_ref"  readonly="1"/>
                         
                     </group>
@@ -33,7 +33,7 @@
                             <tree editable="bottom">
                                 <field name="element_type" string="Element Type/Member Name" />
                                 <field name="level_id" string="Location" />
-                                <field name="dist" string="Dist. (mm)" />
+                                <field name="dist" string="Dist. (m)" />
                                 <field name="time" string="Time. (μs)" />
                                 <field name="velocity" string="Velocity(km/sec)" />
                                 <field name="condition_concrete" string="Condition Of Concrete" />

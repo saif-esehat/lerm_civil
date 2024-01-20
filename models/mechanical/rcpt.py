@@ -647,7 +647,7 @@ class RcptConcreteCubeLine(models.Model):
     # undefined=fields.Float(string="Undefined")
     height=fields.Float(string="Height")
     dia_core = fields.Float(string="Dia Of Core")
-    identification_mark = fields.Char(string="Identification Mark")
+    identification_mark = fields.Char(string="Sample ID Mark",compute="_compute_sample_id")
     io = fields.Float(string="Io", digits=(16,1))
     i30 = fields.Float(string="I30", digits=(16,1))
     i60 = fields.Float(string="I60", digits=(16,1))
@@ -662,16 +662,17 @@ class RcptConcreteCubeLine(models.Model):
     i330 = fields.Float(string="I330", digits=(16,1))
     i360 = fields.Float(string="I360", digits=(16,1))
     qx = fields.Float(string="Qxy", compute="_compute_qx",digits=(16,2), store=True)
-    
-    
+    qs = fields.Integer(string="Qs", compute="_compute_qs", digits=(16, 2), store=True)
 
-    # qs = fields.Float(string="Qs", digits=(16, 2), store=True)
-    qs = fields.Float(string="Qs", compute="_compute_qs", digits=(16, 2), store=True)
 
-    # @api.depends("qx", "dia_core", "height")
-    # def _compute_qs(self):
-    #     for record in self:
-    #         record.qs = record.qx * (95 / record.dia_core) ** 2 * (record.height / 50)
+    @api.depends('parent_id')
+    def _compute_sample_id(self):
+        for record in self:
+            try:
+                record.identification_mark = record.parent_id.eln_ref.sample_id.client_sample_id
+            except:
+                record.identification_mark = None
+    
 
     @api.depends("qx", "dia_core", "height")
     def _compute_qs(self):
