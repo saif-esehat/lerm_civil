@@ -249,6 +249,27 @@ class PtGrout(models.Model):
 
 
 
+    # @api.depends('time_needle_make_impression')
+    # def _compute_final_setting_time(self):
+    #     for record in self:
+    #         if record.time_needle_make_impression and record.time_water_added:
+    #             t1 = record.time_water_added
+    #             t2 = record.time_needle_make_impression
+    #             time_difference = t2 - t1
+
+    #             record.final_setting_time_hours = time_difference
+    #             final_setting_time = time_difference.total_seconds() / 60
+    #             if final_setting_time % 5 == 0:
+    #                 record.final_setting_time_minutes = final_setting_time
+    #             else:
+    #                 record.final_setting_time_minutes = round(final_setting_time / 5) * 5
+
+    #             record.final_setting_time_minutes_unrounded = final_setting_time
+    #         else:
+    #             record.final_setting_time_hours = False
+    #             record.final_setting_time_minutes = False
+    #             record.final_setting_time_minutes_unrounded = False
+                        
     @api.depends('time_needle_make_impression')
     def _compute_final_setting_time(self):
         for record in self:
@@ -257,18 +278,29 @@ class PtGrout(models.Model):
                 t2 = record.time_needle_make_impression
                 time_difference = t2 - t1
 
-                record.final_setting_time_hours = time_difference
-                final_setting_time = time_difference.total_seconds() / 60
-                if final_setting_time % 5 == 0:
-                    record.final_setting_time_minutes = final_setting_time
-                else:
-                    record.final_setting_time_minutes = round(final_setting_time / 5) * 5
+                # Convert time difference to seconds and then to minutes
+                final_setting_time_minutes = time_difference.total_seconds() / 60
 
-                record.final_setting_time_minutes_unrounded = final_setting_time
+                final_setting_time_hours = time_difference.total_seconds() / 3600
+                time_delta = timedelta(hours=final_setting_time_hours)
+
+                # Format the time in a similar way as initial_setting_time_hours
+                record.final_setting_time_hours = "{:0}:{:02}".format(int(time_delta.total_seconds() // 3600), int((time_delta.total_seconds() % 3600) // 60))
+
+                if final_setting_time_minutes % 5 == 0:
+                    record.final_setting_time_minutes = final_setting_time_minutes
+                else:
+                    record.final_setting_time_minutes = round(final_setting_time_minutes / 5) * 5
+
+                record.final_setting_time_minutes_unrounded = final_setting_time_minutes
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
                 record.final_setting_time_minutes_unrounded = False
+
+
+
+    
 
 
     
