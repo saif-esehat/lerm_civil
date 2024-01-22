@@ -34,9 +34,9 @@
                             </tree>
                     </field>
                      <group>
-                            <field name="average" />
-                            <field name="min_cd" />
-                            <field name="max_cd" />
+                            <field name="average" string="Average" identity="result"/>
+                            <field name="min_cd" string="Min mm" identity="result"/>
+                            <field name="max_cd" string="Max mm" identity="result"/>
 
                             <!-- <field name="average" /> -->
                     </group>
