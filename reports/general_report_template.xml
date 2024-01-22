@@ -229,6 +229,7 @@
 							</t>
 						</span>
 					</div>
+					
 
 
 					<t t-set="data_length" t-value="len(data.child_lines or [])"/>

@@ -37,11 +37,11 @@
 						<tr  cols="12">
 								<td colspan="6">Grade :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.grade_id.grade"/>
+									<span t-field="eln.grade_id.grade"/>
 								</td>
 								<td colspan="6">Instrument No :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.instrument.name"/>
+									<span t-field="eln.instrument.name"/>
 								</td>
 							</tr>
 					</table>
