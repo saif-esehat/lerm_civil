@@ -14,7 +14,7 @@ class Upv(models.Model):
     name = fields.Char("Name",default="UPV")
     
     structure_age = fields.Char("Approximate Age of structure  Years")
-    site_temp = fields.Char("Concrete Temp",required=True)
+    site_temp = fields.Float("Concrete Temp",required=True)
     concrete_grade = fields.Char("Concrete Grade")
     instrument = fields.Char("Instrument")
     structure = fields.Char("Structure")
@@ -117,7 +117,7 @@ class UpvLine(models.Model):
     def _compute_velocity(self):
         for record in self:
             # import wdb; wdb.set_trace() 
-            temp = record.parent_id.site_temp
+            temp = float(record.parent_id.site_temp)
             if record.dist and record.time and record.method != 'indirect':
                 velocity = (record.dist / record.time) * 1000  # Convert time from μs to seconds
                 if temp > 30:
