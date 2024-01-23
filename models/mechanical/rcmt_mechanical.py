@@ -34,10 +34,7 @@ class RCMT(models.Model):
 
     sample_condition = fields.Char(string="Sample Conditioning")
 
-    rcmt_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')], string="NABL", compute="_compute_rcmt_nabl", store=True)
-
+   
 
 
     dimension_name = fields.Char("Name",default="Core sample and its dimension")
@@ -128,41 +125,6 @@ class RCMT(models.Model):
 
 
 
-    # @api.depends('child_lines.height')
-    # def _compute_specimen1(self):
-    #     for record in self:
-    #         if record.child_lines:
-    #             if len(record.child_lines) > 0:
-    #                 first_child_line = record.child_lines[0]
-    #                 record.specimen2 = first_child_line.height
-    #             else:
-    #                 record.specimen2 = 0.0
-    #         else:
-    #             record.specimen2 = 0.0
-
-    # @api.depends('child_lines.height')
-    # def _compute_specimen2(self):
-    #     for record in self:
-    #         if record.child_lines:
-    #             if len(record.child_lines) > 1:
-    #                 second_child_line = record.child_lines[1]
-    #                 record.specimen3 = second_child_line.height
-    #             else:
-    #                 record.specimen3 = 0.0
-    #         else:
-    #             record.specimen3 = 0.0
-
-    # @api.depends('child_lines.height')
-    # def _compute_specimen3(self):
-    #     for record in self:
-    #         if record.child_lines:
-    #             if len(record.child_lines) > 2:
-    #                 third_child_line = record.child_lines[2]
-    #                 record.specimen4 = third_child_line.height
-    #             else:
-    #                 record.specimen4 = 0.0
-    #         else:
-    #             record.specimen4 = 0.0
 
     specimen1_depth1 = fields.Float(compute="_compute_specimen1_depth1")
     specimen2_depth2 = fields.Float(compute="_compute_specimen1_depth2")
@@ -209,64 +171,68 @@ class RCMT(models.Model):
     specimen2_ov_avg2 = fields.Float(string="Specimen-1 OV Avg 2",compute="_compute_specimen2_ov_avg2")
     specimen3_ov_avg3 = fields.Float(string="Specimen-1 OV Avg 3",compute="_compute_specimen3_ov_avg3")
 
-   
+    overall_average = fields.Float(string="Average", compute="_compute_overall_average")
+
+
+    @api.depends('specimen1_ov_avg1', 'specimen2_ov_avg2', 'specimen3_ov_avg3')
+    def _compute_overall_average(self):
+        for record in self:
+            # Check if any of the denominators is zero
+            if record.specimen1_ov_avg1 != 0 and record.specimen2_ov_avg2 != 0 and record.specimen3_ov_avg3 != 0:
+                overall_avg = (record.specimen1_ov_avg1 + record.specimen2_ov_avg2 + record.specimen3_ov_avg3) / 3
+                record.overall_average = overall_avg
+            else:
+                # Set a default value or handle the case where division by zero is not allowed
+                record.overall_average = 0.0  # Yo
+    
   
     @api.depends('specimen1_ov1', 'specimen1_ov2', 'specimen2', 'specimen1_depth1', 'specimen1_ov3')
     def _compute_specimen1_ov_avg1(self):
         for record in self:
-            # Perform the complex calculation
-            numerator = 0.0239 * (273 + record.specimen1_ov2) * record.specimen2
-            denominator = (record.specimen1_ov1 - 2) * record.specimen1_ov3
-            term1 = numerator / denominator
-            term2 = record.specimen1_depth1 - 0.0238 * (((273 + record.specimen1_ov2) * record.specimen2 * record.specimen1_depth1) / (record.specimen1_ov1 - 2)) ** 0.5
-            record.specimen1_ov_avg1 = round(term1 * term2, 2)
-
+            # Check if the denominator is zero
+            if record.specimen1_ov1 != 2 and record.specimen1_ov3 != 0:
+                # Perform the complex calculation
+                numerator = 0.0239 * (273 + record.specimen1_ov2) * record.specimen2
+                denominator = (record.specimen1_ov1 - 2) * record.specimen1_ov3
+                term1 = numerator / denominator
+                term2 = record.specimen1_depth1 - 0.0238 * (((273 + record.specimen1_ov2) * record.specimen2 * record.specimen1_depth1) / (record.specimen1_ov1 - 2)) ** 0.5
+                record.specimen1_ov_avg1 = round(term1 * term2, 2)
+            else:
+                # Set a default value or handle the case where division by zero is not allowed
+                record.specimen1_ov_avg1 = 0.0  # You can adjust this value as needed
 
     
             
     @api.depends('specimen2_ov1', 'specimen3', 'specimen2_ov2', 'specimen2_depth2', 'specimen2_ov3')
     def _compute_specimen2_ov_avg2(self):
         for record in self:
-            # Perform the complex calculation
-            numerator = 0.0239 * (273 + record.specimen2_ov2) * record.specimen3
-            denominator = (record.specimen2_ov1 - 2) * record.specimen2_ov3
-            term1 = numerator / denominator
-            term2 = record.specimen2_depth2 - 0.0238 * (((273 + record.specimen2_ov2) * record.specimen3 * record.specimen2_depth2) / (record.specimen2_ov1 - 2)) ** 0.5
-            record.specimen2_ov_avg2 = term1 * term2
+            # Check if the denominator is zero
+            if record.specimen2_ov1 != 2 and record.specimen2_ov3 != 0:
+                # Perform the complex calculation
+                numerator = 0.0239 * (273 + record.specimen2_ov2) * record.specimen3
+                denominator = (record.specimen2_ov1 - 2) * record.specimen2_ov3
+                term1 = numerator / denominator
+                term2 = record.specimen2_depth2 - 0.0238 * (((273 + record.specimen2_ov2) * record.specimen3 * record.specimen2_depth2) / (record.specimen2_ov1 - 2)) ** 0.5
+                record.specimen2_ov_avg2 = round(term1 * term2, 2)
+            else:
+                # Set a default value or handle the case where division by zero is not allowed
+                record.specimen2_ov_avg2 = 0.0  # You can adjust this value as needed
 
 
-    # @api.depends('specimen3_ov1', 'specimen4', 'specimen3_ov2', 'specimen3_depth3','specimen3_ov3')
-    # def _compute_specimen3_ov_avg3(self):
-    #     for record in self:
-    #         ov1_specimen3 = record.specimen3_ov1
-    #         ov2_specimen3 = record.specimen3_ov2
-    #         specimen4 = record.specimen4
-    #         depth3 = record.specimen3_depth3
-
-    #         if ov1_specimen3 and ov2_specimen3 and specimen4 and depth3:
-    #             if ov2_specimen3 != 2:
-    #                 complex_result = (
-    #                     (0.0239 * (273 + ov1_specimen3) * specimen4) /
-    #                     ((ov2_specimen3 - 2) * ov1_specimen3) *
-    #                     (depth3 - (0.0238 * ((273 + ov1_specimen3) * specimen4 * depth3 / (ov2_specimen3 - 2)) ** 0.5))
-    #                 )
-    #                 if complex_result.real >= 0:
-    #                     record.specimen3_ov_avg3 = complex_result.real
-    #                 else:
-    #                     record.specimen3_ov_avg3 = 0.0
-    #             else:
-    #                 record.specimen3_ov_avg3 = 0.0
-    #         else:
-    #             record.specimen3_ov_avg3 = 0.0
     @api.depends('specimen3_ov1', 'specimen4', 'specimen3_ov2', 'specimen3_depth3', 'specimen3_ov3')
     def _compute_specimen3_ov_avg3(self):
         for record in self:
-            # Perform the complex calculation
-            numerator = 0.0239 * (273 + record.specimen3_ov2) * record.specimen4
-            denominator = (record.specimen3_ov1 - 2) * record.specimen3_ov3
-            term1 = numerator / denominator
-            term2 = record.specimen3_depth3 - 0.0238 * (((273 + record.specimen3_ov2) * record.specimen4 * record.specimen3_depth3) / (record.specimen3_ov1 - 2)) ** 0.5
-            record.specimen3_ov_avg3 = term1 * term2
+            # Check if the denominator is zero
+            if record.specimen3_ov1 != 2 and record.specimen3_ov3 != 0:
+                # Perform the complex calculation
+                numerator = 0.0239 * (273 + record.specimen3_ov2) * record.specimen4
+                denominator = (record.specimen3_ov1 - 2) * record.specimen3_ov3
+                term1 = numerator / denominator
+                term2 = record.specimen3_depth3 - 0.0238 * (((273 + record.specimen3_ov2) * record.specimen4 * record.specimen3_depth3) / (record.specimen3_ov1 - 2)) ** 0.5
+                record.specimen3_ov_avg3 = term1 * term2
+            else:
+                # Set a default value or handle the case where division by zero is not allowed
+                record.specimen3_ov_avg3 = 0.0  # You can adju
     
 
     initial_voltage1 = fields.Float("Initial Voltage(V1)",digits=(12,1))
@@ -390,6 +356,34 @@ class RCMT(models.Model):
                         break
                 else:
                     record.rcmt_nabl = 'fail'
+
+    
+    rcmt_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')],string="NABL",compute="_compute_rcmt_nabl",store=True)
+
+
+
+    @api.depends('overall_average','eln_ref')
+    def _compute_rcmt_nabl(self):
+        
+        for record in self:
+            record.rcmt_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','36f86e6e-391c-4d7b-818d-28f7b75ea261')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','36f86e6e-391c-4d7b-818d-28f7b75ea261')]).parameter_table
+            for material in materials:
+                # if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.overall_average - record.overall_average*mu_value
+                    upper = record.overall_average + record.overall_average*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.rcmt_nabl = 'pass'
+                        break
+                    else:
+                        record.rcmt_nabl = 'fail'
 
 
 

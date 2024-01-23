@@ -50,9 +50,9 @@
                     <!-- Core sample and its dimension  -->
                     
                     <div style="margin-top:20px">
-                        <div style="text-align:center;font-size:18px">
+                        <!-- <div style="text-align:center;font-size:18px">
                             <b>Core sample and its dimension</b>
-                        </div>
+                        </div> -->
                         <!-- <table>
                             <tr cols="12">
                                 <td colspan="1" style="text-align: center;"><b>Specimen No.</b></td>
@@ -78,6 +78,20 @@
                         </table> -->
 
                          <table>
+                                <tr>
+                                 <td>
+                                 </td>
+                                  <td>
+                                  Specimen-01
+
+                                 </td>
+                                  <td>
+                                  Specimen-02
+                                 </td>
+                                  <td>
+                                  Specimen-03
+                                 </td>
+                                </tr>
 
                                 <tr>
                                     <td>Thickness of specimen, mm (L)</td>
@@ -245,12 +259,22 @@
                         <td style="text-align: center;"><span t-field="data.specimen3_ov3" t-options='{"widget": "float", "precision": 2}' /></td>
                     </tr>
                     <tr>
-                        <td style="font-weight: bold;">Non-steady State migration Coefficient m2/s</td>
+                        <td style="font-weight: bold;">Non-steady State migration Coefficient m²/sec</td>
                         <td style="text-align: center;"><span t-field="data.specimen1_ov_avg1" t-options='{"widget": "float", "precision": 2}' /></td>
                         <td style="text-align: center;"><span t-field="data.specimen2_ov_avg2" t-options='{"widget": "float", "precision": 2}' /></td>
                         <td style="text-align: center;"><span t-field="data.specimen3_ov_avg3" t-options='{"widget": "float", "precision": 2}' /></td>
                     </tr>
                    
+                </table>
+                <div style="margin-top:5px">
+                </div>
+               
+                <table>
+                 <tr  cols="6">
+                 <td style="font-weight: bold;">Average 10-12 m²/sec</td>
+                        <td style="text-align: center;"><span t-field="data.overall_average"  t-options='{"widget": "float", "precision": 2}'  /></td>
+                </tr>
+
                 </table>
 
             </div>

@@ -77,6 +77,9 @@ eln.parameters.result,eln_parameters_result,lerm_civil.model_eln_parameters_resu
 lerm.datasheet.line,lerm_datasheet_line,lerm_civil.model_lerm_datasheet_line,lerm_civil.kes_admin_access_group,1,1,1,1
 admin.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_admin_access_group,1,1,1,1
 admin.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_admin_access_group,1,1,1,1
+admin.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_admin_access_group,1,0,0,0
+
+
 
 
 
@@ -409,6 +412,8 @@ hod.lerm_civil.access_mech_precast_water_absorbtion_line,access_mech_precast_wat
 hod.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.model_chemical_flyash,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_hod_access_group,1,0,0,0
+hod.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_hod_access_group,1,0,0,0
+hod.lerm.dependent.inputs.srf,lerm_dependent_inputs_srf,lerm_civil.model_lerm_dependent_inputs,lerm_civil.kes_hod_access_group,1,0,0,0
 
 
 
@@ -640,6 +645,7 @@ quality.lerm_civil.access_mech_precast_water_absorbtion_line,access_mech_precast
 quality.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.model_chemical_flyash,kes_quality_manager,1,0,0,0
 quality.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_quality_manager,1,0,0,0
 quality.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_quality_manager,1,0,0,0
+quality.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_quality_manager,1,0,0,0
 
 
 
@@ -872,6 +878,8 @@ technician.lerm.srf.sample,lerm_srf_sample,model_lerm_srf_sample,lerm_civil.kes_
 technician.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_technician_access_group,1,1,1,1
 technician.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_technician_access_group,1,1,1,1
 technician.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_technician_access_group,1,1,1,1
+technician.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_technician_access_group,1,1,1,1
+technician.lerm.dependent.inputs.srf,lerm_dependent_inputs_srf,lerm_civil.model_lerm_dependent_inputs,lerm_civil.kes_technician_access_group,1,1,1,1
 hod.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,lerm_civil.kes_hod_access_group,1,0,0,0
 quality.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_quality_manager,1,0,0,0
 technician.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_technician_access_group,1,1,1,1
