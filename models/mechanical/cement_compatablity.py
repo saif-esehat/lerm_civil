@@ -45,6 +45,19 @@ class CementCompatablity(models.Model):
 
 
         plt.ylim(bottom=0, top=max(y_values) + 10)
+        # plt.xlim(left=0, right=max(x_values) + 1.5 )
+        
+        for i in range(len(x_values)):
+            plt.plot([x_values[i], x_values[i]], [0, y_values[i]], color='black', linestyle='--', alpha=0.5)
+            if i < len(x_values) - 1:
+                plt.plot([x_values[i], x_values[i + 1]], [y_values[i], y_values[i + 1]], color='black', linestyle='-', alpha=0.5)
+
+        max_y_index = y_values.index(max(y_values))
+        
+        plt.axhline(y=y_values[max_y_index], color='red', linestyle='--')
+
+        plt.axvline(x=x_values[max_y_index], color='red', linestyle='--')
+
         
         buffer = io.BytesIO()
         plt.savefig(buffer, format='png')
