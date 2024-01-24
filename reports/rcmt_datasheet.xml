@@ -50,10 +50,10 @@
                     <!-- Core sample and its dimension  -->
                     
                     <div style="margin-top:20px">
-                        <div style="text-align:center;font-size:18px">
+                        <!-- <div style="text-align:center;font-size:18px">
                             <b>Core sample and its dimension</b>
-                        </div>
-                        <table>
+                        </div> -->
+                        <!-- <table>
                             <tr cols="12">
                                 <td colspan="1" style="text-align: center;"><b>Specimen No.</b></td>
                                 <td colspan="2" style="text-align: center;"><b>Height (L) mm</b></td>
@@ -75,27 +75,53 @@
                                 </td>
                                 
                             </tr>
-                        </table>
+                        </table> -->
 
                          <table>
+                                <tr>
+                                 <td>
+                                 </td>
+                                  <td>
+                                  Specimen-01
+
+                                 </td>
+                                  <td>
+                                  Specimen-02
+                                 </td>
+                                  <td>
+                                  Specimen-03
+                                 </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Thickness of specimen, mm (L)</td>
+                                    <td><span t-field="data.thickness_specimen1"/></td>
+                                    <td><span t-field="data.thickness_specimen2"/></td>
+                                    <td><span t-field="data.thickness_specimen3"/></td>
+                                  
+                                </tr>
+
+                                 <tr>
+                                    <td>Diameter of specimen, mm</td>
+                                    <td><span t-field="data.diameter_specimen1"/></td>
+                                    <td><span t-field="data.diameter_specimen2"/></td>
+                                    <td><span t-field="data.diameter_specimen3"/></td>
+                                  
+                                </tr>
                                
                                 <tr>
                                     <td>Initial Voltage (V1)</td>
                                     <td><span t-field="data.initial_voltage1"/></td>
                                     <td><span t-field="data.initial_voltage2"/></td>
                                     <td><span t-field="data.initial_voltage3"/></td>
-                                    <td><span t-field="data.initial_voltage4"/></td>
-                                    <td><span t-field="data.initial_voltage5"/></td>
-                                    <td><span t-field="data.initial_voltage6"/></td>
+                                  
                                 </tr>
                                 <tr>
                                     <td>Initial Current (mA)</td>
                                     <td><span t-field="data.initial_current1"/></td>
                                     <td><span t-field="data.initial_current2"/></td>
                                     <td><span t-field="data.initial_current3"/></td>
-                                    <td><span t-field="data.initial_current4"/></td>
-                                    <td><span t-field="data.initial_current5"/></td>
-                                    <td><span t-field="data.initial_current6"/></td>
+                                   
 
                                 </tr>
                                 <tr>
@@ -103,18 +129,14 @@
                                     <td><span t-field="data.initial_temprrature1"/></td>
                                     <td><span t-field="data.initial_temprrature2"/></td>
                                     <td><span t-field="data.initial_temprrature3"/></td>
-                                    <td><span t-field="data.initial_temprrature4"/></td>
-                                    <td><span t-field="data.initial_temprrature5"/></td>
-                                    <td><span t-field="data.initial_temprrature6"/></td>
+                                   
                                 </tr>
                                 <tr>
                                     <td>Final Voltage (V2)</td>
                                     <td><span t-field="data.final_voltage1"/></td>
                                     <td><span t-field="data.final_voltage2"/></td>
                                     <td><span t-field="data.final_voltage3"/></td>
-                                    <td><span t-field="data.final_voltage4"/></td>
-                                    <td><span t-field="data.final_voltage5"/></td>
-                                    <td><span t-field="data.final_voltage6"/></td>
+                                   
 
                                 </tr>
                                 <tr>
@@ -122,9 +144,7 @@
                                     <td><span t-field="data.final_curent1"/></td>
                                     <td><span t-field="data.final_curent2"/></td>
                                     <td><span t-field="data.final_curent3"/></td>
-                                    <td><span t-field="data.final_curent4"/></td>
-                                    <td><span t-field="data.final_curent5"/></td>
-                                    <td><span t-field="data.final_curent6"/></td>
+                                 
                                   
 
                                 </tr>
@@ -133,9 +153,7 @@
                                     <td><span t-field="data.final_tempreture1"/></td>
                                     <td><span t-field="data.final_tempreture2"/></td>
                                     <td><span t-field="data.final_tempreture3"/></td>
-                                    <td><span t-field="data.final_tempreture4"/></td>
-                                    <td><span t-field="data.final_tempreture5"/></td>
-                                    <td><span t-field="data.final_tempreture6"/></td>
+                                   
 
                                 </tr>
                             </table>
@@ -157,6 +175,7 @@
                                 <td colspan="2" style="text-align: center;"><b>Depth-04</b></td>
                                 <td colspan="2" style="text-align: center;"><b>Depth-05</b></td>
                                 <td colspan="1" style="text-align: center;"><b>Depth-06</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Depth-07</b></td>
                                 <td colspan="2" style="text-align: center;"><b>dx Average mm</b></td>
                             </tr>
                             <t t-set="f" t-value="0"/>
@@ -167,23 +186,26 @@
                                         <t t-set="f" t-value="f + 1"/>
                                     </div>
                                 </td>
-                                <td colspan="2" style="text-align: center;">
+                                <td colspan="1" style="text-align: center;">
                                     <span t-esc="r['depth1']"/>
                                 </td>
-                                <td colspan="1" style="text-align: center;">
+                                <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['depth2']"/>
                                 </td>
-                                <td colspan="2" style="text-align: center;">
+                                <td colspan="1" style="text-align: center;">
                                     <span t-esc="r['depth3']"/>
                                 </td>
                                  <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['depth4']"/>
                                 </td>
-                                <td colspan="1" style="text-align: center;">
+                                <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['depth5']"/>
                                 </td>
-                                <td colspan="2" style="text-align: center;">
+                                <td colspan="1" style="text-align: center;">
                                     <span t-esc="r['depth6']"/>
+                                </td>
+                                 <td colspan="1" style="text-align: center;">
+                                    <span t-esc="r['depth7']"/>
                                 </td>
                                  <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['dx_avg']" t-options='{"widget": "float", "precision": 2}'/>
@@ -206,13 +228,13 @@
                         <th style="text-align: center; font-weight: bold;">Specimen-03</th>
                     </tr>
                     <tr>
-                        <td style="font-weight: bold;">Average Value of anolye solution °C</td>
+                        <td style="font-weight: bold;">Absolute Value of applied Voltage, U</td>
                         <td style="text-align: center;"><span t-field="data.specimen1_ov1" /></td>
                         <td style="text-align: center;"><span t-field="data.specimen2_ov1"/></td>
                          <td style="text-align: center;"><span t-field="data.specimen3_ov1"/></td>
                     </tr>
                     <tr>
-                        <td style="font-weight: bold;">Absolute Value of applied Voltage V</td>
+                        <td style="font-weight: bold;">Average Value of anolye solution °C ,T</td>
                         <td style="text-align: center;"><span t-field="data.specimen1_ov2" /></td>
                         <td style="text-align: center;"><span t-field="data.specimen2_ov2" /></td>
                         <td style="text-align: center;"><span t-field="data.specimen3_ov2" /></td>
@@ -237,12 +259,22 @@
                         <td style="text-align: center;"><span t-field="data.specimen3_ov3" t-options='{"widget": "float", "precision": 2}' /></td>
                     </tr>
                     <tr>
-                        <td style="font-weight: bold;">Non-steady State migration Coefficient m2/s</td>
+                        <td style="font-weight: bold;">Non-steady State migration Coefficient m²/sec</td>
                         <td style="text-align: center;"><span t-field="data.specimen1_ov_avg1" t-options='{"widget": "float", "precision": 2}' /></td>
                         <td style="text-align: center;"><span t-field="data.specimen2_ov_avg2" t-options='{"widget": "float", "precision": 2}' /></td>
                         <td style="text-align: center;"><span t-field="data.specimen3_ov_avg3" t-options='{"widget": "float", "precision": 2}' /></td>
                     </tr>
                    
+                </table>
+                <div style="margin-top:5px">
+                </div>
+               
+                <table>
+                 <tr  cols="6">
+                 <td style="font-weight: bold;">Average 10-12 m²/sec</td>
+                        <td style="text-align: center;"><span t-field="data.overall_average"  t-options='{"widget": "float", "precision": 2}'  /></td>
+                </tr>
+
                 </table>
 
             </div>
