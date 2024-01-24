@@ -62,10 +62,10 @@
 
 
                    <group>
-                        <h1>
+                        <!-- <h1>
                             <field name="dimension_name" readonly="1" nolabel="1"/>
                         
-                        </h1>
+                        </h1> -->
                     </group>
 
                    
@@ -295,7 +295,7 @@
                    
 
                     <group>
-                        <label for="specimen1_ov1" string="Average Value of anolye solution °C" />
+                        <label for="specimen1_ov1" string="Absolute Value of applied Voltage, U" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="specimen1_ov1" string="Specimen 1" />
@@ -312,7 +312,7 @@
                         </div>
                     </group>
                      <group>
-                        <label for="specimen1_ov2" string="Absolute Value of applied Voltage V" />
+                        <label for="specimen1_ov2" string="Average Value of anolye solution °C ,T" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="specimen1_ov2" string="" />
@@ -400,6 +400,9 @@
                           </group>
                         </div>
                     </group> 
+                    <group>
+                     <field name="overall_average"/>
+                    </group>
                     <group>
                       <field name="rcmt_nabl"/>
                     </group>

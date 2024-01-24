@@ -469,6 +469,8 @@ class ChemicalCrushedSand(models.Model):
     #                 else:
     #                     record.chloride_nabl = 'fail'
 
+    
+
     @api.depends('chloride_percent','eln_ref','grade')
     def _compute_chloride_nabl(self):
         
