@@ -11,10 +11,12 @@ class HalfCell(models.Model):
     name = fields.Char("Name",default="Half Cell")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
     structure_age = fields.Char("Year of Construction")
-    temp = fields.Float("Temp")
+    temp = fields.Float("Temperature °C")
     instrument = fields.Char("Instrument")
     child_lines_1 = fields.One2many('ndt.half.cell.one', 'parent_id', string="Parameter")
     child_lines_2 = fields.One2many('ndt.half.cell.two', 'parent_id', string="Parameter")
+
+    notes = fields.One2many('ndt.half.cell.notes','parent_id',string="Notes")
 
 
     def upgrade(self):
@@ -175,3 +177,8 @@ class HalfCellLineTwo(models.Model):
 
     
     
+class HalfCellNotes(models.Model):
+    _name = "ndt.half.cell.notes"
+
+    parent_id = fields.Many2one('ndt.half.cell',string="Parent Id")
+    notes = fields.Char("Notes")

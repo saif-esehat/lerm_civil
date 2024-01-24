@@ -27,10 +27,16 @@
                             </tree>
                     </field>
                     <group>
-                            <field name="average" string="Average" identity="result"/> 
-                            <field name="average_min" string="Average Min" identity="result"/>         
-                            <field name="average_max" string="Average Max" identity="result"/>                      
+                            <field name="average" string="Average (mm)" identity="result"/> 
+                            <field name="average_min" string="Average Min (mm)" identity="result"/>         
+                            <field name="average_max" string="Average Max (mm)" identity="result"/>                      
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                 </sheet>
             </form>
         </field>

@@ -26,20 +26,26 @@
                                 <field name="tc" string="Tc"/>
                                 <field name="ts" string="Ts"/>
                                 <field name="distance" string="Distance"/>
-                                <field name="tc2" string="Tc2"/>
+                                <!-- <field name="tc2" string="Tc2"/>
                                 <field name="ts2" string="Ts2"/>
                                 <field name="tc2_by_ts2" string="Tc2/Ts2"/>
-                                <field name="sqrt_Tc2_by_Ts2minus1" string="√Tc2/Ts2-1"/>
+                                <field name="sqrt_Tc2_by_Ts2minus1" string="√Tc2/Ts2-1"/> -->
                                 <field name="cd" string="CD=√Tc2/Ts2-1 x 200"/>
                             </tree>
                     </field>
                      <group>
-                            <field name="average" string="Average" identity="result"/>
+                            <field name="average" string="Average (mm)" identity="result"/>
                             <field name="min_cd" string="Min mm" identity="result"/>
                             <field name="max_cd" string="Max mm" identity="result"/>
 
                             <!-- <field name="average" /> -->
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                 </sheet>
             </form>
         </field>

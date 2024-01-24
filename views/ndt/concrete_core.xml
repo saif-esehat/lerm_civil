@@ -29,8 +29,8 @@
                                 <field name="dry" string="Dry wt kg"/>
                                 <field name="failure_load" string="Failure Load kN"/>
                                 <field name="measured_comp_str" string="Measured compressive strength, Mpa" readonly='1'/>
-                                <field name="core_factor_ld" string="Corr Factor as per IS-516(If L/D ratio  Two)" readonly='1'/>
-                                <field name="core_factor_dia" string="Corr Factor as per IS-516(If Dia is 75±5 MM Or  70MM)" readonly='1'/>
+                                <field name="core_factor_ld" string="Corr Factor as per IS-516(If L/D ratio &lt;= Two) (0.11xL/D+0.78)" readonly='1'/>
+                                <field name="core_factor_dia" string="Corr Factor as per IS-516(If Dia is &lt; 70mm or 75±5 mm)" readonly='1'/>
                                 <field name="core_factor_cube" string="Corr Factor for Eqv.150 mm Cube Strength, as per IS 516" readonly='1'/>
                                 <field name="final_cube_strength" string="Final Eqv.150 mm Cube Strength, Mpa" readonly='1'/>
                             </tree>
@@ -38,6 +38,12 @@
                     <group>
                         <field name='average' string="Average Compressive Strength in Mpa" identity="result"/>
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                 </sheet>
             </form>
         </field>

@@ -394,19 +394,18 @@ class ChemicalCrushedSand(models.Model):
             record.chloride_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.chloride_percent - record.chloride_percent*mu_value
-                    upper = record.chloride_percent + record.chloride_percent*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.chloride_nabl = 'pass'
-                        break
-                    else:
-                        record.chloride_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.chloride_percent - record.chloride_percent*mu_value
+            upper = record.chloride_percent + record.chloride_percent*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.chloride_nabl = 'pass'
+                break
+            else:
+                record.chloride_nabl = 'fail'
 
 
 

@@ -15,6 +15,8 @@ class CarbonationTest(models.Model):
     min_depth = fields.Float(string="Min mm",compute="_compute_min_max")
     max_depth = fields.Float(string="Max mm",compute="_compute_min_max")
 
+    notes = fields.One2many('ndt.carbonation.test.notes','parent_id',string="Notes")
+
 
 
     @api.depends('child_lines.depth')
@@ -28,8 +30,10 @@ class CarbonationTest(models.Model):
         for record in self:
             depth_values = record.child_lines.mapped('depth')
             # record.average = sum(depth_values) / len(depth_values) if depth_values else 0.0
-            record.min_depth = min(depth_values, default=0.0)
-            record.max_depth = max(depth_values, default=0.0)
+            min_depth = round(min(depth_values, default=0.0),2)
+            record.min = min_depth
+            max_depth = round(max(depth_values, default=0.0),2)
+            record.max_depth = max_depth
 
     @api.model
     def create(self, vals):
@@ -55,3 +59,8 @@ class CarbonationnLine(models.Model):
                 
 
 
+class CarbonationTestNotes(models.Model):
+    _name = "ndt.carbonation.test.notes"
+
+    parent_id = fields.Many2one('ndt.carbonation.test',string="Parent Id")
+    notes = fields.Char("Notes")
