@@ -34,6 +34,14 @@ class RCMT(models.Model):
 
     sample_condition = fields.Char(string="Sample Conditioning")
 
+    specime_prepared = fields.Datetime(string="Date & Time Specime Prepared")
+    conditioning_started = fields.Datetime(string="Date & Time Conditioning Started")
+    Vaccum_starte = fields.Datetime(string="Date & Time Vaccum Started")
+    water_added = fields.Datetime(string="Date & Time Water Added")
+    vaccum_turn_off = fields.Datetime(string="Date & Time Vaccum Turn Off")
+    soaking_started = fields.Datetime(string="Date & Time Soaking Started")
+    soaking_completed = fields.Datetime(string="Date & Time Soaking completed")
+
    
 
 

@@ -878,15 +878,12 @@ technician.lerm.srf.sample,lerm_srf_sample,model_lerm_srf_sample,lerm_civil.kes_
 technician.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_technician_access_group,1,1,1,1
 technician.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_technician_access_group,1,1,1,1
 technician.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_technician_access_group,1,1,1,1
-<<<<<<< HEAD
 technician.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_technician_access_group,1,1,1,1
 technician.lerm.dependent.inputs.srf,lerm_dependent_inputs_srf,lerm_civil.model_lerm_dependent_inputs,lerm_civil.kes_technician_access_group,1,1,1,1
-=======
 hod.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,lerm_civil.kes_hod_access_group,1,0,0,0
 quality.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_quality_manager,1,0,0,0
 technician.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_technician_access_group,1,1,1,1
 
->>>>>>> a083b713db78f10c53d431892eada1a9c06c2c62
 
 
 
