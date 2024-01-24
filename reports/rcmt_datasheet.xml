@@ -53,29 +53,43 @@
                         <!-- <div style="text-align:center;font-size:18px">
                             <b>Core sample and its dimension</b>
                         </div> -->
-                        <!-- <table>
-                            <tr cols="12">
-                                <td colspan="1" style="text-align: center;"><b>Specimen No.</b></td>
-                                <td colspan="2" style="text-align: center;"><b>Height (L) mm</b></td>
-                                <td colspan="1" style="text-align: center;"><b>Diameter mm</b></td>
+                        <table>
+                            <tr>
+                            <td>Date  Time Specime Prepared : </td>
+                            <td><span t-field="data.specime_prepared"/></td>
+                           
                             </tr>
-                            <t t-set="f" t-value="0"/>
-                            <tr t-foreach="data.child_lines" t-as="r">
-                                <td colspan="1" style="text-align: center;">
-                                    <div>
-                                        <span t-esc="f + 1" />
-                                        <t t-set="f" t-value="f + 1"/>
-                                    </div>
-                                </td>
-                                <td colspan="2" style="text-align: center;">
-                                    <span t-esc="r['height']"/>
-                                </td>
-                                <td colspan="1" style="text-align: center;">
-                                    <span t-esc="r['diameter']"/>
-                                </td>
-                                
+                            <tr>
+                                <td>Date  Time Specime Prepared : </td>
+                                <td><span t-field="data.conditioning_started"/></td>
                             </tr>
-                        </table> -->
+                            <tr>
+                                <td>Date  Time Specime Prepared : </td>
+                                <td><span t-field="data.Vaccum_starte"/></td>
+                            </tr>
+                            <tr>
+                                 <td>Date  Time Specime Prepared : </td>
+                                 <td><span t-field="data.water_added"/></td>
+                            </tr>
+                            <tr>
+                              <td>Date  Time Specime Prepared : </td>
+                              <td><span t-field="data.vaccum_turn_off"/></td>
+                            </tr>
+                            <tr>
+                                 <td>Date  Time Specime Prepared : </td>
+                                 <td><span t-field="data.soaking_started"/></td>
+                            </tr>
+                            <tr>
+                              <td>Date  Time Specime Prepared : </td>
+                              <td><span t-field="data.soaking_completed"/></td>
+                            </tr>
+                          
+                         
+                        </table>
+                         <div style="margin-top:5px">
+                         </div>
+
+
 
                          <table>
                                 <tr>
@@ -271,7 +285,7 @@
                
                 <table>
                  <tr  cols="6">
-                 <td style="font-weight: bold;">Average 10-12 m²/sec</td>
+                 <td style="font-weight: bold;">Average 10^-12 m²/sec</td>
                         <td style="text-align: center;"><span t-field="data.overall_average"  t-options='{"widget": "float", "precision": 2}'  /></td>
                 </tr>
 
