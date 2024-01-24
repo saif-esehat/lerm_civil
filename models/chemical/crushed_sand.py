@@ -401,23 +401,39 @@ class ChemicalCrushedSand(models.Model):
     volume_silver_nitrate_added = fields.Float("Volume of silver nitrate added")
     volume_ammonia_blank = fields.Float("Volume of ammonia thiocynate for (Blank)")
     volume_ammonia_sample = fields.Float("Volume of ammonia thiocynate for (Sample)")
-    volume_ammonia_consumed = fields.Float("Volume of ammonia thiocynate consumed",compute="_compute_volume_ammonia_consumed")
+    # volume_ammonia_consumed = fields.Float("Volume of ammonia thiocynate consumed",compute="_compute_volume_ammonia_consumed")
+    volume_ammonia_consumed = fields.Float("Volume of ammonia thiocynate consumed", compute="_compute_volume_ammonia_consumed", store=True)
     normality_of_ammonia = fields.Float("Normality of ammonia thiocynate (0.1)",digits=(16, 4))
-    chloride_percent = fields.Float("Chloride %",compute="_compute_chloride_percent",digits=(16, 4))
+    # chloride_percent = fields.Float("Chloride %",compute="_compute_chloride_percent",digits=(16, 4))
+    chloride_percent = fields.Float("Chloride %", digits=(16, 4), compute="_compute_chloride_percent", store=True)
 
-    @api.depends('volume_ammonia_blank','volume_ammonia_blank')
+    # @api.depends('volume_ammonia_blank','volume_ammonia_blank')
+    # def _compute_volume_ammonia_consumed(self):
+    #     for record in self:
+    #         record.volume_ammonia_consumed = record.volume_ammonia_blank - record.volume_ammonia_sample
+
+    # Volume of ammonia consumed calculation
+    @api.depends('volume_ammonia_blank', 'volume_ammonia_sample')
     def _compute_volume_ammonia_consumed(self):
         for record in self:
             record.volume_ammonia_consumed = record.volume_ammonia_blank - record.volume_ammonia_sample
 
+    # @api.depends('volume_ammonia_consumed','normality_of_ammonia','aliqote_taken_chloride')
+    # def _compute_chloride_percent(self):
+    #     for record in self:
+    #         if record.aliqote_taken_chloride != 0:
+    #             record.chloride_percent = (record.volume_ammonia_consumed * record.normality_of_ammonia * 0.03545 * 100)/record.aliqote_taken_chloride
+    #         else:
+    #             record.chloride_percent = 0
 
-    @api.depends('volume_ammonia_consumed','normality_of_ammonia','aliqote_taken_chloride')
+    # Chloride percent calculation
+    @api.depends('volume_ammonia_consumed', 'normality_of_ammonia', 'aliqote_taken_chloride')
     def _compute_chloride_percent(self):
         for record in self:
             if record.aliqote_taken_chloride != 0:
-                record.chloride_percent = (record.volume_ammonia_consumed * record.normality_of_ammonia * 0.03545 * 100)/record.aliqote_taken_chloride
+                record.chloride_percent = (record.volume_ammonia_consumed * record.normality_of_ammonia * 0.03545 * 100) / record.aliqote_taken_chloride
             else:
-                record.chloride_percent = 0
+                record.chloride_percent = 0.0
 
     chloride_conformity = fields.Selection([
             ('pass', 'Pass'),
