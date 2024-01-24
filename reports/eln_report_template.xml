@@ -2272,7 +2272,7 @@
 						<div style="margin-left:500px">
 							<div>
 								<b>
-									Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
+									(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 								</b>
 							</div>
 							<div>
@@ -3254,7 +3254,7 @@
 					<div style="margin-left:500px">
 						<div>
 							<b>
-								Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
+								(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 							</b>
 						</div>
 						<div>

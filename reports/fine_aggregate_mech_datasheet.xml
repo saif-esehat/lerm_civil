@@ -1200,7 +1200,7 @@
                             </div>
                             <div>
                                 <b>
-                                    (Jr. Technician)
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
                                 </b>
                             </div>
                         </div>
@@ -1222,7 +1222,7 @@
 
                             <div>
                                 <b>
-									(Sr. Technician)
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
                                 </b>
                             </div>
                         </div>
@@ -1953,7 +1953,7 @@
                                 </div>
                                 <div>
                                     <b>
-								(Sr. Technician)
+								        (<span t-esc="eln.sample_id.check_by.job_title"/>)
                                     </b>
                                 </div>
                             </div>
@@ -1982,14 +1982,10 @@
                                 </div>
                                 <div>
                                     <b>
-								Mechanical Department (HOD)
+                                        (<span t-esc="eln.sample_id.approved_by.job_title"/>)
                                     </b>
                                 </div>
-                                <div>
-                                    <b>
-								(Authorized Signatory)
-                                    </b>
-                                </div>
+                                
                             </div>
                         </div>
                         <div style="text-align:center;margin-top:25px">
