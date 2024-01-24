@@ -14,6 +14,9 @@ class ReboundHammer(models.Model):
     minimum_mpa = fields.Float(string="Minimum Mpa",compute="_compute_average",store=True)
     maximum_mpa = fields.Float(string="Maximum Mpa",compute="_compute_average",store=True)
 
+    notes = fields.One2many('ndt.rebound.hammer.notes','parent_id',string="Notes")
+
+
     # @api.depends('child_lines.avg')
     # def _compute_average(self):
     #     for record in self:
@@ -31,8 +34,11 @@ class ReboundHammer(models.Model):
         for record in self:
             mpa_values = record.child_lines.mapped('mpa')
             record.average_mpa = sum(mpa_values) / len(mpa_values) if len(mpa_values) > 0 else 0.0
-            record.minimum_mpa = min(mpa_values, default=0.0)
-            record.maximum_mpa = max(mpa_values, default=0.0)
+            minimum_mpa = round(min(mpa_values, default=0.0),2)
+            record.minimum_mpa = minimum_mpa
+            maximum_mpa = round(max(mpa_values, default=0.0),2)
+            record.maximum_mpa = maximum_mpa
+
 
 
 
@@ -155,3 +161,8 @@ class CarbonationnLine(models.Model):
                 
 
 
+class ReboundHammerNotes(models.Model):
+    _name = "ndt.rebound.hammer.notes"
+
+    parent_id = fields.Many2one('ndt.rebound.hammer',string="Parent Id")
+    notes = fields.Char("Notes")

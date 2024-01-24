@@ -60,6 +60,12 @@
                                 <field name="corrosion_condition" />
                             </tree>
                     </field>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                     
                 </sheet>
             </form>

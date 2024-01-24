@@ -14,7 +14,7 @@ class Upv(models.Model):
     name = fields.Char("Name",default="UPV")
     
     structure_age = fields.Char("Approximate Age of structure  Years")
-    site_temp = fields.Float("Concrete Temp",required=True)
+    site_temp = fields.Float("Concrete Temp °C",required=True)
     concrete_grade = fields.Char("Concrete Grade")
     instrument = fields.Char("Instrument")
     structure = fields.Char("Structure")
@@ -24,6 +24,8 @@ class Upv(models.Model):
     average = fields.Float("Average km/s", compute="_compute_velocity_stats",digits=(16,2))
     min = fields.Float("Min km/s", compute="_compute_velocity_stats",digits=(16,2))
     max = fields.Float("Max km/s", compute="_compute_velocity_stats",digits=(16,2))
+
+    notes = fields.One2many('ndt.upv.notes','parent_id',string="Notes")
 
     @api.depends('eln_ref')
     def _compute_grade(self):
@@ -36,8 +38,10 @@ class Upv(models.Model):
             velocities = record.child_lines.mapped('velocity')
             if velocities:
                 record.average = sum(velocities) / len(velocities)
-                record.min = min(velocities)
-                record.max = max(velocities)
+                minimum = round(min(velocities),2)
+                record.min = minimum
+                maximum = round(max(velocities),2)
+                record.max = maximum
             else:
                 record.average = 0.0
                 record.min = 0.0
@@ -78,7 +82,7 @@ class UpvLine(models.Model):
     method = fields.Selection([
         ('direct', 'Direct'),
         ('indirect', 'In-Direct'),
-        ('semi_direct', 'Semi-Direct')],"Method")
+        ('Semi_direct', 'Semi-Direct')],"Method")
     
     @api.depends('velocity')
     def _compute_quality(self):
@@ -133,3 +137,9 @@ class UpvLine(models.Model):
 
             else:
                 record.velocity = 0.0
+
+class UpvNotes(models.Model):
+    _name = "ndt.upv.notes"
+
+    parent_id = fields.Many2one('ndt.upv',string="Parent Id")
+    notes = fields.Char("Notes")
