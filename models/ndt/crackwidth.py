@@ -10,9 +10,12 @@ class CrackWidth(models.Model):
     name = fields.Char("Name",default="Crack Width")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.crack.width.line','parent_id',string="Parameter")
-    average = fields.Float(string='Average', digits=(16, 2), compute='_compute_average')
-    min = fields.Float(string='Min', digits=(16, 2), compute='_compute_min_max')
-    max = fields.Float(string='Max', digits=(16, 2), compute='_compute_min_max')
+    average = fields.Float(string='Average (mm)', digits=(16, 2), compute='_compute_average')
+    min = fields.Float(string='Min (mm)', digits=(16, 2), compute='_compute_min_max')
+    max = fields.Float(string='Max (mm)', digits=(16, 2), compute='_compute_min_max')
+
+    notes = fields.One2many('ndt.crack.width.notes','parent_id',string="Notes")
+
 
 
     @api.model
@@ -38,8 +41,10 @@ class CrackWidth(models.Model):
         for record in self:
             crack_width_values = record.child_lines.mapped('crack_width_mm')
             if crack_width_values:
-                record.min = min(crack_width_values)
-                record.max = max(crack_width_values)
+                minimum = round(min(crack_width_values),2)
+                record.min = minimum
+                maximum = round(max(crack_width_values),2)
+                record.max = maximum
             else:
                 record.min = 0.0
                 record.max = 0.0
@@ -54,3 +59,8 @@ class CrackWidthLine(models.Model):
 
     
 
+class CrackWidthNotes(models.Model):
+    _name = "ndt.crack.width.notes"
+
+    parent_id = fields.Many2one('ndt.crack.width',string="Parent Id")
+    notes = fields.Char("Notes")

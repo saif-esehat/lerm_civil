@@ -32,6 +32,12 @@
                         <field name="max_depth" string="Max mm" identity="result"/>
 
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                    
 
                 </sheet>

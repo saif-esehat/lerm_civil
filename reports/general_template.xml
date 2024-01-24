@@ -34,16 +34,7 @@
 								</span>
 							</td>
 						</tr>
-						<tr  cols="12">
-								<td colspan="6">Grade :
-									<![CDATA[&nbsp;]]>
-									<span t-field="eln.grade_id.grade"/>
-								</td>
-								<td colspan="6">Instrument No :
-									<![CDATA[&nbsp;]]>
-									<span t-field="eln.instrument.name"/>
-								</td>
-							</tr>
+					
 					</table>
 
 				</div>
@@ -113,9 +104,20 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.grade_id.grade"/>
 								</td>
-								<td colspan="6">Instrument No :
+								<td colspan="6">Instrument :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.instrument.name"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Test Method
+									<span>
+										<t t-foreach="o.parameters_result.parameter[0].parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == o.grade_id.id">
+													<span t-field="parameter.specification"/>
+											</t>
+										</t>
+									</span>
 								</td>
 							</tr>
 							<!-- <tr style="height:50px" cols="12">
@@ -187,12 +189,35 @@
 							<tr t-foreach="data.child_lines" t-as="r">
 								<t t-foreach="tabledata" t-as="row">
 									<td>
-									<span>
+									<!-- <span>
 										<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
 											<t t-esc="round(float(r[row[0]]),2)"/>
 										</t>
 										<t t-else="">
 											<t t-esc="r[row[0]]"/>
+										</t>
+									</span> -->
+
+
+									<span>
+										<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+											<t t-esc="round(float(r[row[0]]),2)"/>
+										</t>
+										<t t-else="">
+											<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+											<t t-set="field_name" t-value="row[0]"/>
+											<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+											<t t-if="field_type.ttype == 'selection'">
+												<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+												<!-- <span>Selection </span> -->
+												
+												<t t-esc="selection.name"/>
+											</t>
+											<t t-else="">
+
+												<t t-esc="r[row[0]]"/>
+											</t>
 										</t>
 									</span>
 									</td>
@@ -214,6 +239,118 @@
 							</td>
 						</tr>
 					</table>
+					<div style="margin-top:20px">
+							<table>
+								<thead>
+									<th>
+										Review and Approval
+									</th>
+									<th>
+										Name of Analyst/Engineer
+									</th>
+									<th>
+										Name of Witness (Client/Customer)
+									</th>
+									<th>
+										Name of Witness (Consultant)	
+									</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											Person
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											Designation
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											Date
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											Signature
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											Remarks
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+								</tbody>
+								
+							</table>
+
+						</div>
 					<div class="authorizeRowDataSheet">
 						<div>
 							

@@ -201,9 +201,16 @@
 							</tr>
 
 							<tr>
-								<td colspan="12">Material/Test Name :
+								<td colspan="12">Material :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
+								</td>
+								
+							</tr>
+							<tr>
+								<td colspan="12">Test Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.parameters_result.parameter[0].parameter_name"/>
 								</td>
 							</tr>
                             <tr>
@@ -237,7 +244,6 @@
 						<table style="margin-top:30px;">
 								<thead>
 									<tr>
-										
 										<t t-foreach="tabledata" t-as="column">
 											<th>
 												<span>
@@ -291,7 +297,20 @@
 															<t t-esc="round(float(r[row[0]]),2)"/>
 														</t>
 														<t t-else="">
-															<t t-esc="r[row[0]]"/>
+															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+															<t t-set="field_name" t-value="row[0]"/>
+															<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+															<t t-if="field_type.ttype == 'selection'">
+																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+																<!-- <span>Selection </span> -->
+																
+																<t t-esc="selection.name"/>
+															</t>
+															<t t-else="">
+
+																<t t-esc="r[row[0]]"/>
+															</t>
 														</t>
 													</span>
 												</td>
@@ -350,7 +369,20 @@
 															<t t-esc="round(float(r[row[0]]),2)"/>
 														</t>
 														<t t-else="">
-															<t t-esc="r[row[0]]"/>
+															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+															<t t-set="field_name" t-value="row[0]"/>
+															<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+															<t t-if="field_type.ttype == 'selection'">
+																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+																<!-- <span>Selection </span> -->
+																
+																<t t-esc="selection.name"/>
+															</t>
+															<t t-else="">
+
+																<t t-esc="r[row[0]]"/>
+															</t>
 														</t>
 													</span>
 												</td>
@@ -384,7 +416,20 @@
 															<t t-esc="round(float(r[row[0]]),2)"/>
 														</t>
 														<t t-else="">
-															<t t-esc="r[row[0]]"/>
+															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+															<t t-set="field_name" t-value="row[0]"/>
+															<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+															<t t-if="field_type.ttype == 'selection'">
+																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+																<!-- <span>Selection </span> -->
+																
+																<t t-esc="selection.name"/>
+															</t>
+															<t t-else="">
+
+																<t t-esc="r[row[0]]"/>
+															</t>
 														</t>
 													</span>
 												</td>
@@ -429,8 +474,16 @@
 									<li>
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 									</li>
+									<t t-foreach="data.notes" t-as="note" >
+										<li>
+											<p><span t-esc="note.notes"/></p>
+										</li>
+									</t>
 								</ul>
 							</div>
+						</div>
+						<div t-if="o.witness_photo" style="margin-top: 20px;">
+							<img t-att-src="'data:image/png;base64,' + o.witness_photo.decode('utf-8')" style="max-width: 100%;z-index:-10;"/>
 						</div>
 						<!-- <div class="signatureContainer girdgird">
 							

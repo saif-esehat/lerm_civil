@@ -42,6 +42,12 @@
                     <field name="minimum_mpa" string="Minimum Mpa" identity="result"/>
                     <field name="maximum_mpa" string="Maximum Mpa" identity="result"/>
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                 </sheet>
             </form>
         </field>

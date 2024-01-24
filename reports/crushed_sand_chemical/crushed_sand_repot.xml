@@ -141,22 +141,14 @@
 										Unit
 									</span>
 								</th>
-								<!-- <th>
-									<span>
-										Acceptance Criteria As per IS:383:2016
-									</span>
-								</th> -->
+								
 								<th style="text-align: center;font-weight: bold;">
 									<span>
 										<span t-esc="eln.material.specifications"/>
 										
 									</span>
 								</th>
-								<!-- <th>
-									<span>
-										Test Method
-									</span>
-								</th> -->
+								
 								<th style="text-align: center;font-weight: bold;">
 									<span>
 										<span t-esc="eln.material.method_reference"/>
@@ -166,17 +158,13 @@
 							</tr>
 						</thead>
 						<tbody >
+								<!-- dissolved silica visible Start -->
 							<tr t-if="data.alkali_aggregate_dissolved_visible and (data.dissolved_silica_nabl == 'pass' and nabl or data.dissolved_silica_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<!-- <td>
-									<span>
-										Alkali Aggregate Reactivity (Dissolved Silica)
-									</span>
-									
-								</td> -->
+								
 								<td  style="text-align: center;vertical-align: middle;">
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')]).parameter_name"/>
 								</td>
@@ -188,7 +176,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')]).unit.name"/> -->
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')]).unit.name"/>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -210,17 +198,15 @@
                                     </span>
 								</td>
 							</tr>
+
+								<!-- Alkali Aggregate Reactivity Start -->
+
 							<tr t-if="data.alkali_aggregate_alkalinity_visible and (data.reduction_alkalinity_nabl == 'pass' and nabl or data.reduction_alkalinity_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<!-- <td>
-									<span>
-										Alkali Aggregate Reactivity (Reduction in Alkalinity)
-									</span>
-									
-								</td> -->
+								
 								
 
 								<td style="text-align: center;vertical-align: middle;">
@@ -234,7 +220,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')]).unit.name"/> -->
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')]).unit.name"/>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -257,17 +243,15 @@
 								</td>
 								
 							</tr>
-							
+
+								<!-- chloride Start -->
+
 							<tr t-if="data.chloride_visible and (data.chloride_nabl == 'pass' and nabl or data.chloride_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<!-- <td>
-									<span>
-										Chloride 
-									</span>
-								</td> -->
+								
 								
 								<td  style="text-align: center;vertical-align: middle;">
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')]).parameter_name"/>
@@ -302,17 +286,15 @@
 									</span>
 								</td>
 							</tr>
+
+								<!-- sulphate Start -->
 							<tr t-if="data.sulphate_visible and (data.avrg_avrg_sulphate_nabl == 'pass' and nabl or data.avrg_avrg_sulphate_nabl == 'fail' and not nabl)">
 
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<!-- <td>
-									<span>
-										Sulphate (SO3)
-									</span>
-								</td> -->
+								
 								
 								<td  style="text-align: center;vertical-align: middle;">
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')]).parameter_name"/>
@@ -347,7 +329,8 @@
 									</span>
 								</td>
 							</tr>
-							
+
+								<!-- ph Start -->
 							<tr t-if="data.ph_visible and (data.ph_nabl == 'pass' and nabl or data.ph_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />

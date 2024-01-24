@@ -10,9 +10,11 @@ class CoverMeter(models.Model):
     name = fields.Char("Name",default="Cover Meter")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('ndt.cover.meter.line','parent_id',string="Parameter")
-    average = fields.Float(string='Average', digits=(16, 2), compute='_compute_average')
-    average_min = fields.Float(string='Average Min', digits=(16, 2), compute='_compute_average')
-    average_max = fields.Float(string='Average Max', digits=(16, 2), compute='_compute_average')
+    average = fields.Float(string='Average (mm)', digits=(16, 2), compute='_compute_average')
+    average_min = fields.Float(string='Average Min (mm)', digits=(16, 2), compute='_compute_average')
+    average_max = fields.Float(string='Average Max (mm)', digits=(16, 2), compute='_compute_average')
+    notes = fields.One2many('ndt.cover.meter.notes','parent_id',string="Notes")
+
 
     #just Testing will remove later
     parameters = fields.Many2many('lerm.parameter.master',string="Parameters")
@@ -27,8 +29,10 @@ class CoverMeter(models.Model):
             if num_records > 0:
                 record.average = total_cover / num_records
                 cover_values = record.child_lines.mapped('cover')
-                record.average_min = min(cover_values)
-                record.average_max = max(cover_values)
+                average_min = round(min(cover_values),2)
+                record.average_min -average_min
+                average_max = round(max(cover_values),2)
+                record.average_max = record.average_max
             else:
                 record.average = 0.0
                 record.average_min = 0.0
@@ -43,7 +47,7 @@ class CoverMeter(models.Model):
         record.parameter_id.write({'model_id':record.id})
         return record
 
-class CrackDepthLine(models.Model):
+class CoverMeterLine(models.Model):
     _name = "ndt.cover.meter.line"
     parent_id = fields.Many2one('ndt.cover.meter',string="Parent Id")
     member = fields.Char(string="Element Type")
@@ -52,7 +56,11 @@ class CrackDepthLine(models.Model):
     cover = fields.Float(string='Cover in mm',digits=(16, 2))
     
 
+class CoverMeterNotes(models.Model):
+    _name = "ndt.cover.meter.notes"
 
+    parent_id = fields.Many2one('ndt.cover.meter',string="Parent Id")
+    notes = fields.Char("Notes")
                 
 
 
