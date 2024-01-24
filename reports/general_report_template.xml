@@ -205,6 +205,9 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
+								
+							</tr>
+							<tr>
 								<td colspan="12">Test Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.parameters_result.parameter[0].parameter_name"/>
