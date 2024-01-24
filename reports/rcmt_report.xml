@@ -519,7 +519,7 @@
 					<tbody>
 					   
 						<tr  cols="6" t-if="(rcmt.rcmt_nabl == 'pass' and nabl or rcmt.rcmt_nabl == 'fail' and not nabl )">
-						<td style="font-weight: bold;">Average 10-12 m²/sec</td>
+						<td style="font-weight: bold;">Average 10^-12 m²/sec</td>
 						<td style="text-align: center;"><span t-field="rcmt.overall_average"  t-options='{"widget": "float", "precision": 2}'  /></td>
 						</tr>
 

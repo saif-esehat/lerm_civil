@@ -57,6 +57,24 @@
                          <field name='sample_condition'/>
                         </group>
                     </group>
+
+                    <group>
+                    </group>
+
+                    <group>
+                      <group>
+                         <field name='specime_prepared'/>
+                         <field name='conditioning_started'/>
+                         <field name='Vaccum_starte'/>
+                         <field name='water_added'/>
+                      </group>
+                       <group>
+                         <field name='vaccum_turn_off'/>
+                         <field name='soaking_started'/>
+                         <field name='soaking_completed'/>
+                        
+                      </group>
+                    </group>
                    
 
 
