@@ -9,6 +9,7 @@ class CrackWidth(models.Model):
     _rec_name = "name"
     name = fields.Char("Name",default="Crack Width")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.crack.width.line','parent_id',string="Parameter")
     average = fields.Float(string='Average (mm)', digits=(16, 2), compute='_compute_average')
     min = fields.Float(string='Min (mm)', digits=(16, 2), compute='_compute_min_max')

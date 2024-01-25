@@ -109,8 +109,21 @@
 									<span t-field="o.instrument.name"/>
 								</td>
 							</tr>
+							<t t-foreach="data" t-as="formdata" t-if="extradata and len(extradata) &gt; 0">
+								<tr cols="12">
+									<td colspan="6" t-foreach="extradata" t-as="result">
+										<span>
+											<t t-esc="result[1]"/>
+										</span> : 
+										<![CDATA[&nbsp;]]>
+										<span>
+											<t t-esc="formdata[result[0]]" />
+										</span>
+									</td>
+								</tr>
+							</t>
 							<tr>
-								<td>Test Method
+								<td>Test Method :	
 									<span>
 										<t t-foreach="o.parameters_result.parameter[0].parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == o.grade_id.id">
@@ -120,6 +133,7 @@
 									</span>
 								</td>
 							</tr>
+							
 							<!-- <tr style="height:50px" cols="12">
 								<td colspan="4">Performed By :
 									<![CDATA[&nbsp;]]>
@@ -137,7 +151,7 @@
 						</table>
 					</div>
 
-					<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="extradata and len(extradata) &gt; 0">
+					<!-- <table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="extradata and len(extradata) &gt; 0">
 						<tr cols="12">
 							<td colspan="6" t-foreach="extradata" t-as="result">
 								<span>
@@ -149,7 +163,7 @@
 								</span>
 							</td>
 						</tr>
-					</table>
+					</table> -->
 
 					<table style="margin-top:30px;">
 						<thead>

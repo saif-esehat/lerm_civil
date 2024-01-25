@@ -9,6 +9,7 @@ class CoverMeter(models.Model):
 
     name = fields.Char("Name",default="Cover Meter")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.cover.meter.line','parent_id',string="Parameter")
     average = fields.Float(string='Average (mm)', digits=(16, 2), compute='_compute_average')
     average_min = fields.Float(string='Average Min (mm)', digits=(16, 2), compute='_compute_average')

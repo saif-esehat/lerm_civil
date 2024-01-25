@@ -9,6 +9,7 @@ class ReboundHammer(models.Model):
 
     name = fields.Char("Name",default="Rebound Hammer")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.rebound.hammer.line','parent_id',string="Parameter")
     average_mpa = fields.Float(string="Average Mpa",compute="_compute_average",store=True)
     minimum_mpa = fields.Float(string="Minimum Mpa",compute="_compute_average",store=True)

@@ -9,6 +9,7 @@ class ConcreteCore(models.Model):
 
     name = fields.Char("Name",default="Concrete Core")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.concrete.core.line','parent_id',string="Parameter")
     average = fields.Float(string="Average Compressive Strength in Mpa",compute="_compute_average")
 

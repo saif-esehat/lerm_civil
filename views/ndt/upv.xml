@@ -17,7 +17,7 @@
                     </group>
                      <group style="width:50%">
                         <field name="structure_age" string="Structure Age" identity="extra"/>
-                        <field name="site_temp"  string="Concrete Temperature °C" identity="extra"/>
+                        <field name="temperature"  string="Concrete Temperature °C" identity="extra"/>
                     </group>
                     <group style="width:50%">
                         <field name="grade_id"  />

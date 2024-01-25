@@ -220,7 +220,7 @@
 								</td>
 								<td colspan="6">Temperature :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.temperature"/>
+									<span t-field="data.temperature"/>°C
 								</td>
 							</tr>
 						</table>
@@ -471,21 +471,27 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
+									<li style="margin-bottom: 0px;">
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 									</li>
 									<t t-foreach="data.notes" t-as="note" >
-										<li>
-											<p><span t-esc="note.notes"/></p>
+										<li style="margin-bottom: 0px;">
+											<span t-esc="note.notes"/>
 										</li>
 									</t>
 								</ul>
 							</div>
 						</div>
-						<div t-if="o.witness_photo" style="margin-top: 20px;">
-							<img t-att-src="'data:image/png;base64,' + o.witness_photo.decode('utf-8')" style="max-width: 100%;z-index:-10;height:200px;"/>
+						<div t-if="o.witness_photo or o.attachment">
+							<b>PHOTOS</b>
 						</div>
-						
+						<div t-if="o.witness_photo" style="margin-top: 20px; display: grid; place-items: center;">
+							<img t-att-src="'data:image/png;base64,' + o.witness_photo.decode('utf-8')" style="max-width: 100%; height: 250px;" />
+						</div>
+
+						<div t-if="o.attachment" style="margin-top: 10px; display: grid; place-items: center;">
+							<img t-att-src="'data:image/png;base64,' + o.attachment.decode('utf-8')" style="max-width: 100%;z-index:1000;height:250px;"/>
+						</div>
 
 						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 							<div>
