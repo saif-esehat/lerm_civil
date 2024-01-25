@@ -42,6 +42,25 @@
                             <field name="name1" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
+                    <group>
+                      <group>
+                        <field name="temp_conc_surface"/> 
+                        <field name="temp_around_specimen"/>
+                        <field name="date_conditioning"/>
+                        <field name="current_apply"/>
+                        <field name="int_temp_naoh"/>
+                        <field name="int_temp_nacl"/><br/>
+                      </group>
+                      <group>
+                        <field name="date_specimen_prepared"/>
+                        <field name="date_conditioning_started"/>
+                        <field name="date_vaccum_started"/>
+                        <field name="date_water_added"/>
+                        <field name="date_vaccum_turn_of"/>
+                        <field name="date_soaking_started"/>
+                        <field name="date_soaking_completed"/><br/>
+                      </group>
+                    </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no' string="Sample"/>
