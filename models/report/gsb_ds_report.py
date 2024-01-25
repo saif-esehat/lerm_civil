@@ -168,75 +168,95 @@ class GsbReport(models.AbstractModel):
         plt.figure(figsize=(12, 6))
         x_values = []
         y_values = []
+        # import wdb;wdb.set_trace()
         for line in general_data.density_relation_table:
             x_values.append(line.moisture)
             y_values.append(line.dry_density)
 
-     
-        
-        max_y = max(y_values)
-        min_y = round(min(y_values),2)
-        max_x = x_values[y_values.index(max_y)]
-        min_x = round(min(x_values),2)
+
+        if general_data.density_relation_table:
+            try:
+                max_y = max(y_values)
+            except:
+                max_y = 100
+            try:
+                min_y = round(min(y_values),2)
+            except:
+                min_y = 0
+            try:
+                max_x = x_values[y_values.index(max_y)]
+            except:
+                max_x = 100
+            try:
+                min_x = round(min(x_values),2)
+            except:
+                min_x = 0 
+            
+            
 
 
-        # Format max_y and max_x to display 2 digits after the decimal point
-        max_y = round(max_y , 2)
-        max_x = round(max_x, 2)
-        print("Y_MAX",max_y)
-        print("X_MAX",max_x)
+            # Format max_y and max_x to display 2 digits after the decimal point
+            max_y = round(max_y , 2)
+            max_x = round(max_x, 2)
+            print("Y_MAX",max_y)
+            print("X_MAX",max_x)
 #    
 
         
-        # Perform cubic spline interpolation
-        x_smooth = np.linspace(min(x_values), max(x_values), 100)
-        # cs = CubicSpline(x_values, y_values,1)
-        # cs = interp1d(x_values, y_values,kind='cubic')
-        cs = Akima1DInterpolator(x_values, y_values)
+            # Perform cubic spline interpolation
+            x_smooth = np.linspace(min(x_values), max(x_values), 100)
+            # cs = CubicSpline(x_values, y_values,1)
+            # cs = interp1d(x_values, y_values,kind='cubic')
+            cs = Akima1DInterpolator(x_values, y_values)
 
-        # Create the line chart with a connected smooth line and markers
-        plt.plot(x_smooth, cs(x_smooth), color='red', label='Smooth Curve')
-        plt.scatter(x_values, y_values, marker='o', color='blue', s=30, label='Data Points')
+            # Create the line chart with a connected smooth line and markers
+            plt.plot(x_smooth, cs(x_smooth), color='red', label='Smooth Curve')
+            plt.scatter(x_values, y_values, marker='o', color='blue', s=30, label='Data Points')
 
+            
+            # Add a horizontal line with a label
+            plt.axhline(y=max_y, color='green', linestyle='--', label=f'Max Y = {max_y}')
+
+            # Add a vertical line with a label
+            plt.axvline(x=max_x, color='orange', linestyle='--', label=f'Max X = {max_x}')
+
+            
+            # Set the grid
+            ax = plt.gca()
+            ax.grid(which='both', linestyle='--', linewidth=0.5)
+
+            # Set the x-axis major and minor tick marks
+            ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
+            ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
+
+            # Set the y-axis tick marks
+            # plt.yticks([1.60, 1.62, 1.64, 1.66, 1.68, 1.70, 1.72, 1.74, 1.76, 1.78, 1.80])
+
+            # edit range here
+            plt.yticks(np.arange(min_y*0.99 , max_y*1.1 , max_y/100))
+
+
+            if max_x != min_x:
+                plt.xticks(np.arange(min_x, max_x + 1.0, (max_x - min_x) / 5))
+            
         
-        # Add a horizontal line with a label
-        plt.axhline(y=max_y, color='green', linestyle='--', label=f'Max Y = {max_y}')
+            plt.xlabel('% Moisture')
+            plt.ylabel('Dry density in gm/cc')
+            plt.title('% Moisture vs Dry density in gm/cc')
+            plt.legend()
 
-        # Add a vertical line with a label
-        plt.axvline(x=max_x, color='orange', linestyle='--', label=f'Max X = {max_x}')
+            # Save the Matplotlib plot to a BytesIO object
+            buffer = BytesIO()
+            plt.savefig(buffer, format='png')
+            graph_image = base64.b64encode(buffer.getvalue()).decode('utf-8')
 
-        
-        # Set the grid
-        ax = plt.gca()
-        ax.grid(which='both', linestyle='--', linewidth=0.5)
+            # Close the Matplotlib plot to free up resources
+            plt.close()
+        else:
+            graph_image = None
+            max_y = 0
+            max_x = 0
 
-        # Set the x-axis major and minor tick marks
-        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
-        ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
-
-        # Set the y-axis tick marks
-        # plt.yticks([1.60, 1.62, 1.64, 1.66, 1.68, 1.70, 1.72, 1.74, 1.76, 1.78, 1.80])
-
-        # edit range here
-        plt.yticks(np.arange(min_y*0.99 , max_y*1.1 , max_y/100))
-
-
-        if max_x != min_x:
-         plt.xticks(np.arange(min_x, max_x + 1.0, (max_x - min_x) / 5))
-         
-       
-        plt.xlabel('% Moisture')
-        plt.ylabel('Dry density in gm/cc')
-        plt.title('% Moisture vs Dry density in gm/cc')
-        plt.legend()
-
-        # Save the Matplotlib plot to a BytesIO object
-        buffer = BytesIO()
-        plt.savefig(buffer, format='png')
-        graph_image = base64.b64encode(buffer.getvalue()).decode('utf-8')
-
-        # Close the Matplotlib plot to free up resources
-        plt.close()
       
         # Prepare data for the chart
         
@@ -247,45 +267,45 @@ class GsbReport(models.AbstractModel):
             cbrx_values.append(line.penetration)
             cbry_values.append(line.load)
         
-        
+        if general_data.cbr_table:
         # Perform cubic spline interpolation
-        cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 1000)
-        cbrcs = CubicSpline(cbrx_values, cbry_values)
+            cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 1000)
+            cbrcs = CubicSpline(cbrx_values, cbry_values)
 
-        # Create the line chart with a connected smooth line and markers
-        plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
-        plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
+            # Create the line chart with a connected smooth line and markers
+            plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
+            plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
 
-        # Add a horizontal line with a label
-        plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
-        plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
+            # Add a horizontal line with a label
+            plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
+            plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
 
-        # Add a vertical line with a label
-        plt.axvline(x=2.5, color='orange', linestyle='--')
-        plt.axvline(x=5.0, color='orange', linestyle='--')
-        
-        # Set the grid
-        ax = plt.gca()
-        ax.grid(which='both', linestyle='--', linewidth=0.5)
+            # Add a vertical line with a label
+            plt.axvline(x=2.5, color='orange', linestyle='--')
+            plt.axvline(x=5.0, color='orange', linestyle='--')
+            
+            # Set the grid
+            ax = plt.gca()
+            ax.grid(which='both', linestyle='--', linewidth=0.5)
 
-        # Set the x-axis major and minor tick marks
-        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
-        ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
+            # Set the x-axis major and minor tick marks
+            ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
+            ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
 
-        # Set the y-axis tick marks
-        plt.xticks(range(0 , 15 , 1))
-        plt.yticks(range(0 , 481 , 50))
-        
-        plt.xlabel('Penetration in mm')
-        plt.ylabel('Load')
-        plt.title('Penetration in mm vs Load')
-        plt.legend()
+            # Set the y-axis tick marks
+            plt.xticks(range(0 , 15 , 1))
+            plt.yticks(range(0 , 481 , 50))
+            
+            plt.xlabel('Penetration in mm')
+            plt.ylabel('Load')
+            plt.title('Penetration in mm vs Load')
+            plt.legend()
 
-        # Save the Matplotlib plot to a BytesIO object
-        buffer2 = BytesIO()
-        plt.savefig(buffer2, format='png')
-        cbr_graph_image = base64.b64encode(buffer2.getvalue()).decode('utf-8')
-        plt.close()
+            # Save the Matplotlib plot to a BytesIO object
+            buffer2 = BytesIO()
+            plt.savefig(buffer2, format='png')
+            cbr_graph_image = base64.b64encode(buffer2.getvalue()).decode('utf-8')
+            plt.close()
         
         return {
             'eln': eln,

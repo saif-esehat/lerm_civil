@@ -442,11 +442,7 @@
 									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
-								<div>
-									<!-- <b>
-										Mechanical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>)
-									</b> -->
-								</div>
+								
 								<div>
 									<b>
 										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
@@ -643,7 +639,7 @@
 							</div>
 							<div>
 								<b>
-									(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+									(<span t-esc="eln.sample_id.filled_by.job_title"/>)
 								</b>
 							</div>
 						</div>
@@ -666,7 +662,7 @@
 							
 							<div>
 								<b>
-									(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
 								</b>
 							</div>
 						</div>

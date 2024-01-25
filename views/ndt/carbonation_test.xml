@@ -18,6 +18,9 @@
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
+                    <group style="width:50%">
+                        <field name="temperature" string="Temperature °C"/>
+                    </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="member" string="Member / Element Type"/>
@@ -32,6 +35,12 @@
                         <field name="max_depth" string="Max mm" identity="result"/>
 
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                    
 
                 </sheet>

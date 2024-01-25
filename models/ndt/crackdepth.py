@@ -9,12 +9,15 @@ class CrackDepth(models.Model):
 
     name = fields.Char("Name",default="Crack Depth")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.crack.depth.line','parent_id',string="Parameter")
     average = fields.Float(string='Average mm', digits=(16, 2), compute='_compute_average')
     # min_cd = fields.Float(string="Min mm")
     min_cd = fields.Float(string="Min mm", compute='_compute_min_cd', store=True)
     # max_cd = fields.Float(string="Max mm")
     max_cd = fields.Float(string="Max mm", compute='_compute_max_cd', store=True)
+    notes = fields.One2many('ndt.crack.depth.notes','parent_id',string="Notes")
+
 
 
    
@@ -26,20 +29,21 @@ class CrackDepth(models.Model):
             num_records = len(record.child_lines)
 
             if num_records > 0:
-                record.average = total_cd / num_records
+                average = round(total_cd / num_records,2)
+                record.average = average
             else:
                 record.average = 0.0
     
     @api.depends('child_lines.cd')
     def _compute_min_cd(self):
         for record in self:
-            min_cd_value = min(record.child_lines.mapped('cd'), default=0.0)
+            min_cd_value = round(min(record.child_lines.mapped('cd'), default=0.0),2)
             record.min_cd = min_cd_value
 
     @api.depends('child_lines.cd')
     def _compute_max_cd(self):
         for record in self:
-            max_cd_value = max(record.child_lines.mapped('cd'), default=0.0)
+            max_cd_value = round(max(record.child_lines.mapped('cd'), default=0.0),2)
             record.max_cd = max_cd_value
 
     @api.model
@@ -86,3 +90,8 @@ class CrackDepthLine(models.Model):
                 pass
                 
                 
+class CrackDepthNotes(models.Model):
+    _name = "ndt.crack.depth.notes"
+
+    parent_id = fields.Many2one('ndt.crack.depth',string="Parent Id")
+    notes = fields.Char("Notes")

@@ -9,8 +9,12 @@ class ConcreteCore(models.Model):
 
     name = fields.Char("Name",default="Concrete Core")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.concrete.core.line','parent_id',string="Parameter")
     average = fields.Float(string="Average Compressive Strength in Mpa",compute="_compute_average")
+
+    notes = fields.One2many('ndt.concrete.core.notes','parent_id',string="Notes")
+
 
 
     @api.depends('child_lines.final_cube_strength')
@@ -96,3 +100,10 @@ class ConcreteCoreLine(models.Model):
             print("Final Cube Strength",final_cube_strength)
             record.final_cube_strength = final_cube_strength
 
+
+
+class ConcreteCoreNotes(models.Model):
+    _name = "ndt.concrete.core.notes"
+
+    parent_id = fields.Many2one('ndt.concrete.core',string="Parent Id")
+    notes = fields.Char("Notes")

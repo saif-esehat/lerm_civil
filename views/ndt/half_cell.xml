@@ -14,8 +14,8 @@
                         <field name="parameter_id" invisible="1"/>
                     </group>
                      <group style="width:50%">
-                        <field name="structure_age"/>
-                        <field name="temp"/>
+                        <field name="structure_age" string="Structure Age"/>
+                        <field name="temperature" string="Temperature °C"/>
                     </group>
                     <group style="width:50%">
                         <field name="instrument"/>
@@ -58,6 +58,12 @@
                                 <field name="r6" />
                                 <field name="avg" />
                                 <field name="corrosion_condition" />
+                            </tree>
+                    </field>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
                             </tree>
                     </field>
                     

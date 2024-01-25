@@ -465,14 +465,10 @@
 							</div>
 							<div>
 								<b>
-									Chemical Department (<span t-esc="eln.sample_id.approved_by.job_title"/>) 
+									(<span t-esc="eln.sample_id.approved_by.job_title"/>) 
 								</b>
 							</div>
-							<div>
-								<b>
-									(Authorized Signatory)
-								</b>
-							</div>
+							
 						</div>
 					</div>
 				</div>

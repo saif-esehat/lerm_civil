@@ -17,11 +17,11 @@
                     </group>
                      <group style="width:50%">
                         <field name="structure_age" string="Structure Age" identity="extra"/>
-                        <field name="site_temp"  string="Concrete Temperature" identity="extra"/>
+                        <field name="temperature"  string="Concrete Temperature °C" identity="extra"/>
                     </group>
                     <group style="width:50%">
-                        <field name="grade_id"  string="Grade Id" identity="extra"/>
-                        <field name="instrument"  string="Instrument" identity="extra"/>
+                        <field name="grade_id"  />
+                        <field name="instrument" />
                     </group>
 
                     <group>
@@ -37,16 +37,22 @@
                                 <field name="time" string="Time. (μs)" />
                                 <field name="velocity" string="Velocity(km/sec)" />
                                 <field name="condition_concrete" string="Condition Of Concrete" />
-                                <field name="surface" string="Surface" />
+                                <field name="surface" string="Surface" widget="selection"/>
                                 <field name="quality" string="Quality" />
                                 <field name="method" string="Method" />
                             </tree>
                     </field>
                     <group>
                         <field name="average" string="Average km/s" identity="result"/>
-                        <field name="min" string="Min Value km/s" identity="result" />
-                        <field name="max" string="Max Value km/s" identity="result"/>
+                        <field name="minimum" string="Min Value km/s" identity="result" />
+                        <field name="maximum" string="Max Value km/s" identity="result"/>
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                 </sheet>
             </form>
         </field>

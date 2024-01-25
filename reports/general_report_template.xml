@@ -201,9 +201,16 @@
 							</tr>
 
 							<tr>
-								<td colspan="12">Material/Test Name :
+								<td colspan="12">Material :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
+								</td>
+								
+							</tr>
+							<tr>
+								<td colspan="12">Test Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.parameters_result.parameter[0].parameter_name"/>
 								</td>
 							</tr>
                             <tr>
@@ -213,7 +220,7 @@
 								</td>
 								<td colspan="6">Temperature :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.temperature"/>
+									<span t-field="data.temperature"/>°C
 								</td>
 							</tr>
 						</table>
@@ -237,7 +244,6 @@
 						<table style="margin-top:30px;">
 								<thead>
 									<tr>
-										
 										<t t-foreach="tabledata" t-as="column">
 											<th>
 												<span>
@@ -288,10 +294,25 @@
 												<td>
 													<span>
 														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-															<t t-esc="round(float(r[row[0]]),2)"/>
+															<!-- <t t-esc="round(float(r[row[0]]),2)"/> -->
+															<t t-esc="float(r[row[0]]).quantize(Decimal('0.00'))"/>
+
 														</t>
 														<t t-else="">
-															<t t-esc="r[row[0]]"/>
+															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+															<t t-set="field_name" t-value="row[0]"/>
+															<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+															<t t-if="field_type.ttype == 'selection'">
+																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+																<!-- <span>Selection </span> -->
+																
+																<t t-esc="selection.name"/>
+															</t>
+															<t t-else="">
+
+																<t t-esc="r[row[0]]"/>
+															</t>
 														</t>
 													</span>
 												</td>
@@ -347,10 +368,24 @@
 												<td>
 													<span>
 														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-															<t t-esc="round(float(r[row[0]]),2)"/>
+															<!-- <t t-esc="round(float(r[row[0]]),2)"/> -->
+															<t t-esc="float(r[row[0]]).quantize(Decimal('0.00'))"/>
 														</t>
 														<t t-else="">
-															<t t-esc="r[row[0]]"/>
+															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+															<t t-set="field_name" t-value="row[0]"/>
+															<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+															<t t-if="field_type.ttype == 'selection'">
+																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+																<!-- <span>Selection </span> -->
+																
+																<t t-esc="selection.name"/>
+															</t>
+															<t t-else="">
+
+																<t t-esc="r[row[0]]"/>
+															</t>
 														</t>
 													</span>
 												</td>
@@ -381,10 +416,25 @@
 												<td>
 													<span>
 														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-															<t t-esc="round(float(r[row[0]]),2)"/>
+															<!-- <t t-esc="round(float(r[row[0]]),2)"/> -->
+															<t t-esc="float(r[row[0]]).quantize(Decimal('0.00'))"/>
+
 														</t>
 														<t t-else="">
-															<t t-esc="r[row[0]]"/>
+															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+															<t t-set="field_name" t-value="row[0]"/>
+															<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+															<t t-if="field_type.ttype == 'selection'">
+																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+																<!-- <span>Selection </span> -->
+																
+																<t t-esc="selection.name"/>
+															</t>
+															<t t-else="">
+
+																<t t-esc="r[row[0]]"/>
+															</t>
 														</t>
 													</span>
 												</td>
@@ -426,46 +476,28 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
-										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+									
+									<t t-foreach="data.notes" t-as="note" style="margin-bottom: 0px;margin-top: 0px;">
+										<li style="margin-bottom: 0px;margin-top: 0px;">
+											<span t-esc="note.notes"/>
+										</li>
+									</t>
+									<li style="margin-bottom: 0px;">
+										<p>Test witnessed by : <span style="margin-bottom: 0px;margin-top: 0px;" t-esc="eln.witness_name"/></p>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<!-- <div class="signatureContainer girdgird">
-							
-							
-							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
-									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-								</div>
-								<div style="padding-top:5px">
-									Format No. 
-									<span t-esc="eln.parameters_result[0].parameter.report_format_no"/>
+						<div t-if="o.witness_photo or o.attachment">
+							<b>PHOTOS</b>
+						</div>
+						<div t-if="o.witness_photo" style="margin-top: 20px;width:100%;text-align:center;align-items:right;">
+							<img t-att-src="'data:image/png;base64,' + o.witness_photo.decode('utf-8')" style="max-width: 100%; height: 250px;" />
+						</div>
 
-								</div>
-							</div>
-							<div>
-								<div>
-									<b>
-										Approved By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										NDT Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
-						</div> -->
+						<div t-if="o.attachment" style="margin-top: 20px;width:100%;text-align:center;">
+							<img t-att-src="'data:image/png;base64,' + o.attachment.decode('utf-8')" style="max-width: 100%;z-index:1000;height:250px;"/>
+						</div>
 
 						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 							<div>
@@ -484,7 +516,7 @@
 								</div>
 								<div>
 									<b>
-										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+										(<span t-esc="eln.sample_id.check_by.job_title"/>)
 									</b>
 								</div>
 								

@@ -77,8 +77,15 @@ eln.parameters.result,eln_parameters_result,lerm_civil.model_eln_parameters_resu
 lerm.datasheet.line,lerm_datasheet_line,lerm_civil.model_lerm_datasheet_line,lerm_civil.kes_admin_access_group,1,1,1,1
 admin.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_admin_access_group,1,1,1,1
 admin.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_admin_access_group,1,1,1,1
-admin.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_admin_access_group,1,0,0,0
-
+admin.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_admin_access_group,1,1,1,1
+admin.ndt.cover.meter.notes,access_ndt_cover_meter_notes,lerm_civil.model_ndt_cover_meter_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.crack.depth.notes,access_ndt_crack_depth_notes,lerm_civil.model_ndt_crack_depth_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.crack.width.notes,access_ndt_crack_width_notes,lerm_civil.model_ndt_crack_width_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.rebound.hammer.notes,access_ndt_rebound_hammer_notes,lerm_civil.model_ndt_rebound_hammer_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.model_ndt_carbonation_test_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_admin_access_group,1,1,1,1
 
 
 
@@ -414,7 +421,14 @@ hod.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.
 hod.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm.dependent.inputs.srf,lerm_dependent_inputs_srf,lerm_civil.model_lerm_dependent_inputs,lerm_civil.kes_hod_access_group,1,0,0,0
-
+hod.ndt.cover.meter.notes,access_ndt_cover_meter_notes,lerm_civil.model_ndt_cover_meter_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.crack.depth.notes,access_ndt_crack_depth_notes,lerm_civil.model_ndt_crack_depth_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.crack.width.notes,access_ndt_crack_width_notes,lerm_civil.model_ndt_crack_width_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.rebound.hammer.notes,access_ndt_rebound_hammer_notes,lerm_civil.model_ndt_rebound_hammer_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.model_ndt_carbonation_test_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_hod_access_group,1,0,0,0
 
 
 
@@ -646,7 +660,14 @@ quality.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.mode
 quality.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_quality_manager,1,0,0,0
 quality.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_quality_manager,1,0,0,0
 quality.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_quality_manager,1,0,0,0
-
+quality.ndt.cover.meter.notes,access_ndt_cover_meter_notes,lerm_civil.model_ndt_cover_meter_notes,kes_quality_manager,1,0,0,0
+quality.ndt.crack.depth.notes,access_ndt_crack_depth_notes,lerm_civil.model_ndt_crack_depth_notes,kes_quality_manager,1,0,0,0
+quality.ndt.crack.width.notes,access_ndt_crack_width_notes,lerm_civil.model_ndt_crack_width_notes,kes_quality_manager,1,0,0,0
+quality.ndt.rebound.hammer.notes,access_ndt_rebound_hammer_notes,lerm_civil.model_ndt_rebound_hammer_notes,kes_quality_manager,1,0,0,0
+quality.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.model_ndt_carbonation_test_notes,kes_quality_manager,1,0,0,0
+quality.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_quality_manager,1,0,0,0
+quality.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_quality_manager,1,0,0,0
+quality.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_quality_manager,1,0,0,0
 
 
 
@@ -883,6 +904,14 @@ technician.lerm.dependent.inputs.srf,lerm_dependent_inputs_srf,lerm_civil.model_
 hod.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,lerm_civil.kes_hod_access_group,1,0,0,0
 quality.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_quality_manager,1,0,0,0
 technician.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_technician_access_group,1,1,1,1
+technician.ndt.cover.meter.notes,access_ndt_cover_meter_notes,lerm_civil.model_ndt_cover_meter_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.crack.depth.notes,access_ndt_crack_depth_notes,lerm_civil.model_ndt_crack_depth_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.crack.width.notes,access_ndt_crack_width_notes,lerm_civil.model_ndt_crack_width_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.rebound.hammer.notes,access_ndt_rebound_hammer_notes,lerm_civil.model_ndt_rebound_hammer_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.model_ndt_carbonation_test_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_technician_access_group,1,1,1,1
 
 
 

@@ -18,6 +18,9 @@
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
+                    <group style="width:50%">
+                        <field name="temperature" string="Temperature °C"/>
+                    </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="member" string="Member"/>
@@ -27,10 +30,16 @@
                             </tree>
                     </field>
                     <group>
-                            <field name="average" string="Average" identity="result"/> 
-                            <field name="average_min" string="Average Min" identity="result"/>         
-                            <field name="average_max" string="Average Max" identity="result"/>                      
+                            <field name="average" string="Average (mm)" identity="result"/> 
+                            <field name="average_min" string="Average Min (mm)" identity="result"/>         
+                            <field name="average_max" string="Average Max (mm)" identity="result"/>                      
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                 </sheet>
             </form>
         </field>

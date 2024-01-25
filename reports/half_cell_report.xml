@@ -118,35 +118,13 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Year of Construction :
+								<td colspan="12">Year of Construction :
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.structure_age"/>
 								</td>
-								<td colspan="6">Half Cell Potential Reading (Cu/CuSO4) :
-									<![CDATA[&nbsp;]]>
-									<span>Probability of active Corrosion</span>
-								</td>
+								
 							</tr>
-							<tr>
-								<td colspan="3">More positive than -200mV :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="1">
-									<span>No Corrosion</span>
-								</td>
-								<td colspan="3">Between -200mV to -350mV:
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="1">
-									<span>Uncertainity</span>
-								</td>
-								<td colspan="3">More negative than -350mV :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="1">
-									<span>90%</span>
-								</td>
-							</tr>
+							
 						</table>
 					</div>
 					<div style="margin-top:20px;">
@@ -237,6 +215,9 @@
 								
 							</tr>
 						</table>
+					</div>
+					<div>
+						<span>Reading after temperature correction coefficient as per IS 516 (Part 5/Sec 2) : 2021</span>
 					</div>
 
 					<div style="margin-top:20px">
@@ -437,30 +418,130 @@
 										We do not undertake any responsibility for any involvement in any type of litigation arising out of result submitted by Knack Engineering Services Pvt Ltd
 									</li>
 									<li>
-										Correction Factor calculation :-
-										<ul>
-											<li>
-												Ideal Temperature for test is 22.2 ± 5.5°C
-											</li>
-											<li>
-												Site temperature = 31.6 °C
-											</li>
-											<li>
-												Variation in temperature = 3.9 °C
-											</li>
-											<li>
-												0.91 mV will increase per 1 °C after ideal temperature 22.2 ± 5.5°C
-											</li>
-											<li>
-												Hence -3.54 mV will add in observed readings
-											</li>
-										</ul>
-									</li>
-									<li>
 										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
 									</li>
+									<t t-foreach="data.notes" t-as="note" >
+										<li>
+											<p><span t-esc="note.notes"/></p>
+										</li>
+									</t>
 								</ol>
 							</div>
+						</div>
+						<div style="margin-top:20px">
+							<table>
+								<thead>
+									<th>
+										Review and Approval
+									</th>
+									<th>
+										Name of Analyst/Engineer
+									</th>
+									<th>
+										Name of Witness (Client/Customer)
+									</th>
+									<th>
+										Name of Witness (Consultant)	
+									</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											Person
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											Designation
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											Date
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											Signature
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											Remarks
+										</td>
+										
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+
+										<td>
+
+										</td>
+									</tr>
+
+								</tbody>
+								
+							</table>
+
+						</div>
+						<div t-if="o.witness_photo" style="margin-top: 20px;">
+							<img t-att-src="'data:image/png;base64,' + o.witness_photo.decode('utf-8')" style="max-width: 100%;z-index:-10;"/>
 						</div>
 						<div class="signatureContainer girdgird">
 							<div>
@@ -479,7 +560,7 @@
 								</div>
 								<div>
 									<b>
-										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+										(<span t-esc="eln.sample_id.check_by.job_title"/>)
 									</b>
 								</div>
 							</div>
