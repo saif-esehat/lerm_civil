@@ -295,7 +295,7 @@
 													<span>
 														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
 															<t t-esc="round(float(r[row[0]]),2)"/>
-														</t>
+														</t> 
 														<t t-else="">
 															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
 															<t t-set="field_name" t-value="row[0]"/>
@@ -367,7 +367,7 @@
 													<span>
 														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
 															<t t-esc="round(float(r[row[0]]),2)"/>
-														</t>
+														</t> 
 														<t t-else="">
 															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
 															<t t-set="field_name" t-value="row[0]"/>
@@ -414,7 +414,7 @@
 													<span>
 														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
 															<t t-esc="round(float(r[row[0]]),2)"/>
-														</t>
+														</t> 
 														<t t-else="">
 															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
 															<t t-set="field_name" t-value="row[0]"/>
@@ -451,6 +451,13 @@
 									<![CDATA[&nbsp;]]>
 									<span>
 										<t t-esc="formdata[result[0]]" />
+										<!-- <t t-if="str(formdata[result[0]]).replace('.', '', 1).isdigit()">
+											<t t-esc="round(float(formdata[result[0]]),2)"/>
+										</t>
+										<t t-else="">
+
+											<t t-esc="r[formdata[result[0]]"/>
+										</t>  -->
 									</span>
 								</td>
 							</tr>

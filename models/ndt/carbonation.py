@@ -32,7 +32,7 @@ class CarbonationTest(models.Model):
             depth_values = record.child_lines.mapped('depth')
             # record.average = sum(depth_values) / len(depth_values) if depth_values else 0.0
             min_depth = round(min(depth_values, default=0.0),2)
-            record.min = min_depth
+            record.min_depth = min_depth
             max_depth = round(max(depth_values, default=0.0),2)
             record.max_depth = max_depth
 
