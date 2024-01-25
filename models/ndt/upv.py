@@ -46,6 +46,8 @@ class Upv(models.Model):
                 maximum = max(velocities)
                 maximum = max(maximum,2)
                 record.maximum = maximum
+                # import wdb;wdb.set_trace()
+
             else:
                 record.average = 0.0
                 record.minimum = 0.0
