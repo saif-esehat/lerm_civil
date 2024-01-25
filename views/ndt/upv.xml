@@ -44,8 +44,8 @@
                     </field>
                     <group>
                         <field name="average" string="Average km/s" identity="result"/>
-                        <field name="min" string="Min Value km/s" identity="result" />
-                        <field name="max" string="Max Value km/s" identity="result"/>
+                        <field name="minimum" string="Min Value km/s" identity="result" />
+                        <field name="maximum" string="Max Value km/s" identity="result"/>
                     </group>
                     <field name="notes" nolabel="1" >
                             <tree editable="bottom">

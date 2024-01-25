@@ -57,6 +57,11 @@ class CementCompatablity(models.Model):
         plt.axhline(y=y_values[max_y_index], color='red', linestyle='--')
 
         plt.axvline(x=x_values[max_y_index], color='red', linestyle='--')
+        
+        label_space = 1
+        
+        for i in range(len(x_values)):
+            plt.text(x_values[i], y_values[i] + label_space , f'{y_values[i]}', fontsize=10, ha='left', va='bottom', color='black')
 
         
         buffer = io.BytesIO()
