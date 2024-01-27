@@ -25,6 +25,36 @@ class RcptConcreteCube(models.Model):
     age_of_test = fields.Integer("Age of Test, days",compute="compute_age_of_test")
     difference = fields.Integer("Difference",compute="compute_difference")
 
+    temp_conc_surface = fields.Char("Temp.of Concrete Surface(°C)")
+    temp_around_specimen = fields.Char("Temp.around the Specimen(°C)")
+    date_conditioning = fields.Date(string="Date Of Conditiong")
+    current_apply = fields.Char("Current Applied")
+    int_temp_naoh = fields.Char("Initial Temp of NaOH(°C)")
+    int_temp_nacl = fields.Char("Initial Temp of Nacl(°C)")
+
+    date_specimen_prepared = fields.Datetime(string="Date & time Specimen Prepared")
+    date_conditioning_started = fields.Datetime(string="Date & time Conditioning Started")
+    date_vaccum_started = fields.Datetime(string="Date & time Vaccum Started:")
+    date_water_added = fields.Datetime(string="Date & time Water Added:")
+    date_vaccum_turn_of = fields.Datetime(string="Date & time Vaccum Turn Off:")
+    date_soaking_started = fields.Datetime(string="Date & time Soaking Started:")
+    date_soaking_completed = fields.Datetime(string="Date & time Soaking Completed:")
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
     @api.onchange('eln_ref')
     def _compute_age_of_days(self):
         for record in self:

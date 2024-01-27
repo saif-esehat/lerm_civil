@@ -222,7 +222,7 @@
 									<span t-esc="r['avg']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['corrosion_condition']"/>
+									<span t-esc="r['corrosion_condition'].capitalize()"/>
 								</td>
 								
 							</tr>
@@ -322,7 +322,7 @@
 									<span t-esc="r['avg']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['corrosion_condition']"/>
+									<span t-esc="r['corrosion_condition'].capitalize()"/>
 								</td>
 								
 							</tr>
@@ -500,7 +500,7 @@
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
-									Format No. <span t-esc="eln.material.test_format_no"/>
+									Format No. <span t-esc="o.parameters_result.parameter[0].report_format_no"/>
 								</div>
 							</div>
 							<div>

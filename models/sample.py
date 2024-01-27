@@ -130,9 +130,27 @@ class LermSampleForm(models.Model):
     approved_by = fields.Many2one('res.users',string="Approved By")
     # file_upload = fields.Binary(string="Datasheet Upload")
     # report_upload = fields.Binary(string="Report Upload")
+    # file_upload = fields.Many2many(
+    #     'ir.attachment',
+    #     'lerm_sample_image_rel',
+    #     'sample_id',
+    #     'attachment_id',
+    #     string='Datasheet Upload',
+    #     help='Attach multiple images to the sample',
+    # )
+
+    # report_upload = fields.Many2many(
+    #     'ir.attachment',
+    #     'lerm_sample_image_rel',
+    #     'sample_id',
+    #     'attachment_id',
+    #     string='Report Upload',
+    #     help='Attach multiple images to the sample',
+    # )
+
     file_upload = fields.Many2many(
         'ir.attachment',
-        'lerm_sample_image_rel',
+        'lerm_file_upload_rel',
         'sample_id',
         'attachment_id',
         string='Datasheet Upload',
@@ -141,7 +159,7 @@ class LermSampleForm(models.Model):
 
     report_upload = fields.Many2many(
         'ir.attachment',
-        'lerm_sample_image_rel',
+        'lerm_report_upload_rel',
         'sample_id',
         'attachment_id',
         string='Report Upload',

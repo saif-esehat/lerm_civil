@@ -139,7 +139,7 @@
 									<span t-esc="r['avg']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['corrosion_condition']"/>
+									<span t-esc="r['corrosion_condition'].capitalize()"/>
 								</td>
 							</tr>
 						</table>
@@ -211,7 +211,7 @@
 									<span t-esc="r['avg']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['corrosion_condition']"/>
+									<span t-esc="r['corrosion_condition'].capitalize()"/>
 								</td>
 							</tr>
 						</table>
