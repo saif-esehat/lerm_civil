@@ -363,11 +363,11 @@
 							<tr cols="12">
 								<td colspan="6">Average :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.average_soundness"/>
+									<span t-field="data.average_soundness" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="6">Expansion :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.expansion_soundness"/>
+									<span t-field="data.expansion_soundness" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -606,11 +606,11 @@
 							<tr cols="12">
 								<td colspan="6">Average :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.average_casting_3days"/>
+									<span t-field="data.average_casting_3days" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="6">Compressive Strength :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.compressive_strength_3_days"/>
+									<span t-field="data.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -684,11 +684,11 @@
 							<tr cols="12">
 								<td colspan="6">Average :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.average_casting_7days"/>
+									<span t-field="data.average_casting_7days" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="6">Compressive Strength :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.compressive_strength_7_days"/>
+									<span t-field="data.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -761,11 +761,11 @@
 							<tr cols="12">
 								<td colspan="6">Average :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.average_casting_28days"/>
+									<span t-field="data.average_casting_28days" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="6">Compressive Strength :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.compressive_strength_28_days"/>
+									<span t-field="data.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -917,7 +917,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.average_time_fineness"/>
+									<span t-field="data.average_time_fineness" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -955,7 +955,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.mean_of_three_measured_times"/>
+									<span t-field="data.mean_of_three_measured_times" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 							<tr cols="12">
@@ -1007,7 +1007,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.average_sample_time"/>
+									<span t-field="data.average_sample_time" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>

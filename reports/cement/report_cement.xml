@@ -8,15 +8,15 @@
 			
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
 				
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
-				</div>
+				</div> -->
 				
 				<div class="container_eln">
 				
 					<div t-foreach="eln" t-as="o">
 						
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Report no :
 								</td>
@@ -34,7 +34,7 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
-						</table>
+						</table> -->
 						<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
@@ -135,10 +135,12 @@
 							</tr>
 							
 						</table>
+						
 					</div>
 					<div style="margin-top:20px;">
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 					</div>
+					
 					<table style="margin-top:30px;">
 					<t t-set="i" t-value="0"/>
 						<thead>
@@ -477,7 +479,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.fineness_dry_sieving"/>
+										<span t-field="cement.fineness_dry_sieving" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td>
@@ -523,7 +525,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.fineness_dry_sieving"/>
+										<span t-field="cement.fineness_dry_sieving" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td>
@@ -660,7 +662,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.average_soundness"/>
+										<span t-field="cement.expansion_soundness" t-options='{"widget": "float", "precision": 2}' />
 									</span>									
 								</td>
 								<td>
@@ -706,7 +708,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.average_soundness"/>
+										<span t-field="cement.expansion_soundness" t-options='{"widget": "float", "precision": 2}' />
 									</span>									
 								</td>
 								<td>
@@ -903,7 +905,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_3days">
-											<span t-field="cement.compressive_strength_3_days"/>
+											<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
 										</t>
 										<t t-else="">
 											Awaited
@@ -953,7 +955,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_3days">
-											<span t-field="cement.compressive_strength_3_days"/>
+											<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
 										</t>
 										<t t-else="">
 											Awaited
@@ -1002,7 +1004,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_7days">
-											<span t-field="cement.compressive_strength_7_days"/>
+											<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
 										</t>
 										<t t-else="">
 											Awaited
@@ -1052,7 +1054,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_7days">
-											<span t-field="cement.compressive_strength_7_days"/>
+											<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
 										</t>
 										<t t-else="">
 											Awaited
@@ -1101,7 +1103,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_28days">
-											<span t-field="cement.compressive_strength_28_days"/>
+											<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
 										</t>
 										<t t-else="">
 											Awaited
@@ -1150,7 +1152,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_28days">
-											<span t-field="cement.compressive_strength_28_days"/>
+											<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
 										</t>
 										<t t-else="">
 											Awaited
@@ -1224,7 +1226,7 @@
 								</div>
 							</div>
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div >
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">

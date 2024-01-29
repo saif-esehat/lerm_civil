@@ -1083,7 +1083,8 @@ class CementPsc(models.Model):
     def _compute_visible(self):
         for record in self:
             record.normal_consistency_visible = False
-            record.setting_time_visible  = False  
+            record.initial_setting_time_visible  = False 
+            record.final_setting_time_visible  = False  
             record.density_visible = False
             record.soundness_visible = False
             record.dry_sieving_visible = False
@@ -1098,9 +1099,13 @@ class CementPsc(models.Model):
                 print("Samples internal id",sample.internal_id)
                 if sample.internal_id == 'a9e97cea-372f-4775-9bcb-e9dd70e6e6df':
                     record.normal_consistency_visible = True
+                if sample.internal_id == '40ce7425-30fe-4043-b518-015f5c60d916':
+                    record.normal_consistency_visible = True
+                    record.initial_setting_time_visible  = True
                 if sample.internal_id == 'd339933c-5e9c-4335-9ea2-2d87624c3061':
                     record.normal_consistency_visible = True
-                    record.setting_time_visible  = True
+                    record.initial_setting_time_visible  = True
+                    record.final_setting_time_visible  = True
                 if sample.internal_id == '8fcf78c9-dd02-4664-bba4-b887a64a6952':
                     record.density_visible = True
                 if sample.internal_id == '5d2e505d-1d50-48aa-a8c8-9f70fe4b421b':

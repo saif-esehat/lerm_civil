@@ -45,7 +45,11 @@ class CarbonationnLine(models.Model):
     f3 = fields.Integer(string="3")
     f4 = fields.Integer(string="4")
     f5 = fields.Integer(string="5")
+<<<<<<< HEAD
     # f6 = fields.Integer(string="6")
+=======
+    f6 = fields.Integer(string="6")
+>>>>>>> cc22b7e062b71106d11973b4f7b5621e1946b4f1
     # f7 = fields.Integer(string="7")
     # f8 = fields.Integer(string="8")
     # f9 = fields.Integer(string="9")
@@ -135,10 +139,6 @@ class CarbonationnLine(models.Model):
             filtered_array = [x for x in values if lower_bound <= x <= upper_bound]
 
             record.avg = sum(filtered_array) / len(filtered_array)
-
-
-
-
                 
 
 
