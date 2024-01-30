@@ -63,7 +63,7 @@
 							<tr cols="12">
 								<td colspan="6">Age of Test, Days :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.age_of_days"/>
+									<span t-field="data.age_of_test"/>
 								</td>
 							</tr>
 						</table>
