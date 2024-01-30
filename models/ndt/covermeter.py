@@ -7,8 +7,10 @@ class CoverMeter(models.Model):
     _inherit = "lerm.eln"
     _rec_name = "name"
 
-    name = fields.Char("Name",default="Cover Meter")
+    name = fields.Char("Name",compute="_compute_name")
+
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.cover.meter.line','parent_id',string="Parameter")
     average = fields.Float(string='Average (mm)', digits=(16, 2), compute='_compute_average')
     average_min = fields.Float(string='Average Min (mm)', digits=(16, 2), compute='_compute_average')
@@ -20,6 +22,15 @@ class CoverMeter(models.Model):
     parameters = fields.Many2many('lerm.parameter.master',string="Parameters")
 
 
+    @api.depends('parameter_id')
+    def _compute_name(self):
+        for record in self:
+            try:
+                record.name = record.parameter_id.parameter.parameter_name
+            except:
+                record.name = "Cover Depth"
+
+
     @api.depends('child_lines.cover')
     def _compute_average(self):
         for record in self:
@@ -27,12 +38,14 @@ class CoverMeter(models.Model):
             num_records = len(record.child_lines)
 
             if num_records > 0:
-                record.average = total_cover / num_records
+                average = total_cover / num_records
+                average = round(average,2)
+                record.average = average
                 cover_values = record.child_lines.mapped('cover')
                 average_min = round(min(cover_values),2)
-                record.average_min -average_min
-                average_max = round(max(cover_values),2)
-                record.average_max = record.average_max
+                record.average_min = average_min
+                average_max = max(cover_values)
+                record.average_max = average_max
             else:
                 record.average = 0.0
                 record.average_min = 0.0

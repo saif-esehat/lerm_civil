@@ -108,13 +108,19 @@
 								</td>
 							</tr>
 							<tr>
+								<td colspan="12">Test Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.parameters_result.parameter[0].parameter_name"/>
+								</td>
+							</tr>
+                            <tr>
 								<td colspan="6">Instrument :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.instrument.name"/>
 								</td>
 								<td colspan="6">Temperature :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.temperature"/>
+									<span t-field="data.temperature"/>°C
 								</td>
 							</tr>
 							<tr>
@@ -130,6 +136,13 @@
 					<div style="margin-top:20px;">
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
+						<span>
+							<t t-foreach="o.parameters_result.parameter[0].parameter_table" t-as="parameter">
+								<t t-if="parameter.grade.id == o.grade_id.id">
+										<span t-field="parameter.specification"/>
+								</t>
+							</t>
+						</span>
 					</div>
 
 					<div style="margin-top:20px">
@@ -150,9 +163,9 @@
 							<tr cols="12">
 								<td colspan="1" style="border-top:none">Sr no 
 								</td>
-								<td colspan="3" style="border-top:none">Member
+								<td colspan="2" style="border-top:none">Member
 								</td>
-								<td colspan="2" style="border-top:none">Location
+								<td colspan="1" style="border-top:none">Location
 								</td>
 								<td colspan="1">R1
 								</td>
@@ -166,6 +179,10 @@
 								</td>
 								<td colspan="1">R6
 								</td>
+								<td colspan="1">Average
+								</td>
+								<td colspan="1">Corrosion Condition
+								</td>
 								
 							</tr>
 
@@ -177,10 +194,10 @@
 										<t t-set="i" t-value="i+1"/>
 									</div>
                   				</td>
-								<td colspan="3">
+								<td colspan="2">
 									<span t-esc="r['member']"/>
 								</td>
-								<td colspan="2">
+								<td colspan="1">
 									<span t-esc="r['level']"/>
 								</td>
 								<td colspan="1">
@@ -200,6 +217,12 @@
 								</td>
 								<td colspan="1">
 									<span t-esc="r['r6']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['avg']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['corrosion_condition'].capitalize()"/>
 								</td>
 								
 							</tr>
@@ -216,11 +239,12 @@
 							</tr>
 						</table>
 					</div>
+					
+
+					<div style="margin-top:20px">
 					<div>
 						<span>Reading after temperature correction coefficient as per IS 516 (Part 5/Sec 2) : 2021</span>
 					</div>
-
-					<div style="margin-top:20px">
 						<table style="margin-top:20px">
 
 							<tr cols="12">
@@ -238,9 +262,9 @@
 							<tr cols="12">
 								<td colspan="1" style="border-top:none">Sr no 
 								</td>
-								<td colspan="3" style="border-top:none">Member
+								<td colspan="2" style="border-top:none">Member
 								</td>
-								<td colspan="2" style="border-top:none">Location
+								<td colspan="1" style="border-top:none">Location
 								</td>
 								<td colspan="1">R1
 								</td>
@@ -254,6 +278,10 @@
 								</td>
 								<td colspan="1">R6
 								</td>
+								<td colspan="1">Average
+								</td>
+								<td colspan="1">Corrosion Condition
+								</td>
 								
 							</tr>
 							
@@ -266,10 +294,10 @@
 										<t t-set="i" t-value="i+1"/>
 									</div>
                   				</td>
-								<td colspan="3">
+								<td colspan="2">
 									<span t-esc="r['member']"/>
 								</td>
-								<td colspan="2">
+								<td colspan="1">
 									<span t-esc="r['level']"/>
 								</td>
 								<td colspan="1">
@@ -289,6 +317,12 @@
 								</td>
 								<td colspan="1">
 									<span t-esc="r['r6']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['avg']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['corrosion_condition'].capitalize()"/>
 								</td>
 								
 							</tr>
@@ -417,131 +451,28 @@
 									<li>
 										We do not undertake any responsibility for any involvement in any type of litigation arising out of result submitted by Knack Engineering Services Pvt Ltd
 									</li>
-									<li>
-										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
-									</li>
-									<t t-foreach="data.notes" t-as="note" >
-										<li>
-											<p><span t-esc="note.notes"/></p>
+									
+									<t t-foreach="data.notes" t-as="note" style="margin-bottom: 0px;margin-top: 0px;">
+										<li style="margin-bottom: 0px;margin-top: 0px;">
+											<span t-esc="note.notes"/>
 										</li>
 									</t>
+									<li style="margin-bottom: 0px;">
+										<p>Test witnessed by : <span style="margin-bottom: 0px;margin-top: 0px;" t-esc="eln.witness_name"/></p>
+									</li>
 								</ol>
 							</div>
 						</div>
-						<div style="margin-top:20px">
-							<table>
-								<thead>
-									<th>
-										Review and Approval
-									</th>
-									<th>
-										Name of Analyst/Engineer
-									</th>
-									<th>
-										Name of Witness (Client/Customer)
-									</th>
-									<th>
-										Name of Witness (Consultant)	
-									</th>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											Person
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-									<tr>
-										<td>
-											Designation
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-									<tr>
-										<td>
-											Date
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-									<tr>
-										<td>
-											Signature
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-									<tr>
-										<td>
-											Remarks
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-								</tbody>
-								
-							</table>
-
+						
+						<div t-if="o.witness_photo or o.attachment">
+							<b>PHOTOS</b>
 						</div>
-						<div t-if="o.witness_photo" style="margin-top: 20px;">
-							<img t-att-src="'data:image/png;base64,' + o.witness_photo.decode('utf-8')" style="max-width: 100%;z-index:-10;"/>
+						<div t-if="o.witness_photo" style="margin-top: 20px;width:100%;text-align:center;align-items:right;">
+							<img t-att-src="'data:image/png;base64,' + o.witness_photo.decode('utf-8')" style="max-width: 100%; height: 250px;" />
+						</div>
+
+						<div t-if="o.attachment" style="margin-top: 20px;width:100%;text-align:center;">
+							<img t-att-src="'data:image/png;base64,' + o.attachment.decode('utf-8')" style="max-width: 100%;z-index:1000;height:250px;"/>
 						</div>
 						<div class="signatureContainer girdgird">
 							<div>
@@ -569,7 +500,7 @@
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
-									Format No. <span t-esc="eln.material.test_format_no"/>
+									Format No. <span t-esc="o.parameters_result.parameter[0].report_format_no"/>
 								</div>
 							</div>
 							<div>

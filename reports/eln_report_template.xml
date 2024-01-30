@@ -49,12 +49,12 @@
 
 					<table>
 						<tr>
-							<td colspan="3">Report no :
+							<td colspan="3">Test Report no :
 							</td>
 							<td colspan="3">
 								<span t-field="o.kes_no"/>
 							</td>
-							<td colspan="3">Report Date :
+							<td colspan="3">Report Issue Date :
 							</td>
 							<td colspan="3">
 								<span t-field="o.end_date"/>

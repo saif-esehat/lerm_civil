@@ -11,12 +11,15 @@
                     <group>
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id"  readonly="1"/>
-                        <field name="parameter_id"/>
+                        <field name="parameter_id" readonly="1"/>
                     </group>
                     <group>
                         <h1>
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
+                    </group>
+                    <group style="width:50%">
+                        <field name="temperature" string="Temperature °C" identity="extra"/>
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">

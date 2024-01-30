@@ -17,6 +17,9 @@
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
+                    <group style="width:50%">
+                        <field name="temperature" string="Temperature °C" identity="extra"/>
+                    </group>
                     <field name="child_lines" nolabel="1">
                             <tree editable="bottom">
                                 <field name="member" string="Element Type"/>

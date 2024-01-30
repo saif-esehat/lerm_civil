@@ -14,7 +14,7 @@ class Upv(models.Model):
     name = fields.Char("Name",default="UPV")
     
     structure_age = fields.Char("Approximate Age of structure  Years")
-    site_temp = fields.Float("Concrete Temp °C",required=True)
+    temperature = fields.Float("Concrete Temp °C",required=True)
     concrete_grade = fields.Char("Concrete Grade")
     instrument = fields.Char("Instrument")
     structure = fields.Char("Structure")
@@ -22,8 +22,8 @@ class Upv(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
     child_lines = fields.One2many('ndt.upv.line', 'parent_id', string="Parameter")
     average = fields.Float("Average km/s", compute="_compute_velocity_stats",digits=(16,2))
-    min = fields.Float("Min km/s", compute="_compute_velocity_stats",digits=(16,2))
-    max = fields.Float("Max km/s", compute="_compute_velocity_stats",digits=(16,2))
+    minimum = fields.Float("Min km/s", compute="_compute_velocity_stats",digits=(16,2))
+    maximum = fields.Float("Max km/s", compute="_compute_velocity_stats",digits=(16,2))
 
     notes = fields.One2many('ndt.upv.notes','parent_id',string="Notes")
 
@@ -37,15 +37,22 @@ class Upv(models.Model):
         for record in self:
             velocities = record.child_lines.mapped('velocity')
             if velocities:
-                record.average = sum(velocities) / len(velocities)
-                minimum = round(min(velocities),2)
-                record.min = minimum
-                maximum = round(max(velocities),2)
-                record.max = maximum
+                average = sum(velocities) / len(velocities)
+                average = round(average,2)
+                record.average = average
+                minimum = min(velocities)
+                minimum = round(minimum,2)
+                record.minimum = minimum
+                maximum = max(velocities)
+                maximum = max(maximum,2)
+                record.maximum = maximum
+               
+                # import wdb;wdb.set_trace()
+
             else:
                 record.average = 0.0
-                record.min = 0.0
-                record.max = 0.0
+                record.minimum = 0.0
+                record.maximum = 0.0
 
 
 
@@ -82,7 +89,7 @@ class UpvLine(models.Model):
     method = fields.Selection([
         ('direct', 'Direct'),
         ('indirect', 'In-Direct'),
-        ('Semi_direct', 'Semi-Direct')],"Method")
+        ('semi_direct', 'Semi-Direct')],"Method")
     
     @api.depends('velocity')
     def _compute_quality(self):
@@ -121,18 +128,18 @@ class UpvLine(models.Model):
     def _compute_velocity(self):
         for record in self:
             # import wdb; wdb.set_trace() 
-            temp = float(record.parent_id.site_temp)
+            temp = float(record.parent_id.temperature)
             if record.dist and record.time and record.method != 'indirect':
-                velocity = (record.dist / record.time) * 1000  # Convert time from μs to seconds
+                velocity = round((record.dist / record.time) * 1000 ,2) # Convert time from μs to seconds
                 if temp > 30:
-                    velocity = velocity + (velocity*0.05)
+                    velocity = round(velocity + (velocity*0.05),2)
                 record.velocity = velocity
             elif record.dist and record.time and record.method == 'indirect':
                 velocity = ((record.dist / record.time) * 1000)  # Convert time from μs to seconds
                 if velocity > 3:
-                    velocity = velocity + 0.5
+                    velocity = round(velocity + 0.5,2)
                 if temp > 30:
-                    velocity = velocity + (velocity*0.05)
+                    velocity = round(velocity + (velocity*0.05),2)
                 record.velocity = velocity
 
             else:

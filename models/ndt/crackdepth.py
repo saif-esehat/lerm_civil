@@ -9,6 +9,7 @@ class CrackDepth(models.Model):
 
     name = fields.Char("Name",default="Crack Depth")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.crack.depth.line','parent_id',string="Parameter")
     average = fields.Float(string='Average mm', digits=(16, 2), compute='_compute_average')
     # min_cd = fields.Float(string="Min mm")
