@@ -508,11 +508,11 @@
 						<div t-if="o.witness_photo or o.attachment">
 							<b>PHOTOS</b>
 						</div>
-						<div t-if="o.witness_photo" style="margin-top: 20px;width:100%;text-align:center;align-items:right;">
-							<img t-att-src="'data:image/png;base64,' + o.witness_photo.decode('utf-8')" style="max-width: 100%; height: 250px;" />
+						<div t-if="o.witness_photo" style="margin-top: 20px;width:100%;text-align:center;align-items:right;z-index:1000;">
+							<img t-att-src="'data:image/png;base64,' + o.witness_photo.decode('utf-8')" style="max-width: 100%; height: 250px;z-index:1000;" />
 						</div>
 
-						<div t-if="o.attachment" style="margin-top: 20px;width:100%;text-align:center;">
+						<div t-if="o.attachment" style="margin-top: 20px;width:100%;text-align:center;z-index:1000;">
 							<img t-att-src="'data:image/png;base64,' + o.attachment.decode('utf-8')" style="max-width: 100%;z-index:1000;height:250px;"/>
 						</div>
 

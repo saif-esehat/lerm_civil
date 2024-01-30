@@ -52,11 +52,11 @@ class CementCompatablity(models.Model):
             if i < len(x_values) - 1:
                 plt.plot([x_values[i], x_values[i + 1]], [y_values[i], y_values[i + 1]], color='black', linestyle='-', alpha=0.5)
 
-        max_y_index = y_values.index(max(y_values))
+        # max_y_index = y_values.index(max(y_values))
         
-        plt.axhline(y=y_values[max_y_index], color='red', linestyle='--')
+        # plt.axhline(y=y_values[max_y_index], color='red', linestyle='--')
 
-        plt.axvline(x=x_values[max_y_index], color='red', linestyle='--')
+        # plt.axvline(x=x_values[max_y_index], color='red', linestyle='--')
         
         label_space = 1
         
