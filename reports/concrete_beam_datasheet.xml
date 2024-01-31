@@ -57,15 +57,17 @@
 							<tr>
 								<td colspan="6">Date of Casting  :  <span t-field="data.date_of_casting"></span>
 								</td>
-								<td colspan="6">Date of Testing  :  <span t-field="data.date_of_testing"></span>
+								<!-- <td colspan="6">Date of Testing  :  <span t-field="data.date_of_testing"></span>
+								</td> -->
+								<td colspan="6">Age of Test, Days :  <span t-field="data.age_of_test"></span>
 								</td>
 							</tr>
-							<tr cols="12">
+							<!-- <tr cols="12">
 								<td colspan="6">Age of Test, Days :
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.age_of_test"/>
 								</td>
-							</tr>
+							</tr> -->
 						</table>
 						<div>
 						</div>
