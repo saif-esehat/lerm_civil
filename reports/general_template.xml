@@ -28,7 +28,7 @@
 							</td>
 							<td colspan="4" style="border:none;">
 								<span style="text-align:left;margin-left:23%;">	
-									Report No. <![CDATA[&nbsp;]]> <span t-esc="eln.kes_no"/>
+									Test Report No. <![CDATA[&nbsp;]]> <span t-esc="eln.kes_no"/>
 								</span>
 							</td>
 							<td colspan="4" style="border:none;">
