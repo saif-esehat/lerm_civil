@@ -199,6 +199,9 @@
     'views/sample_cancellation.xml',
     'views/chemical/opc_cement_chemical.xml',
     'views/chemical/tmt_bar.xml',
+    'views/mechanical/structural_steel_round.xml',
+    'reports/structural_steel_round/datasheet.xml',
+    'reports/structural_steel_round/report.xml',
     
     
  

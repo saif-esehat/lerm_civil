@@ -49,12 +49,12 @@
 
 					<table>
 						<tr>
-							<td colspan="3">Report no :
+							<td colspan="3">Test Report no :
 							</td>
 							<td colspan="3">
 								<span t-field="o.kes_no"/>
 							</td>
-							<td colspan="3">Report Date :
+							<td colspan="3">Report Issue Date :
 							</td>
 							<td colspan="3">
 								<span t-field="o.end_date"/>
@@ -344,7 +344,7 @@
 
 					<t t-if='not nabl'>
 						<t t-set="i" t-value="0"/>
-						<t t-if="len(non_nabl_parameters) &lt;= 3">
+						<t t-if="len(non_nabl_parameters) &lt;= 6">
 							<table>
 								<thead>
 									<tr>
@@ -434,7 +434,7 @@
 								</tbody>
 							</table>
 						</t>
-						<t t-if="len(non_nabl_parameters) &gt; 3">
+						<t t-if="len(non_nabl_parameters) &gt; 6">
 							<table>
 								<thead>
 									<tr>
@@ -482,7 +482,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="non_nabl_parameters[:3]" t-as="parameter">
+									<t t-foreach="non_nabl_parameters[:6]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>
@@ -571,7 +571,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="non_nabl_parameters[3:]" t-as="parameter">
+									<t t-foreach="non_nabl_parameters[6:]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>
@@ -618,7 +618,7 @@
 
 					<t t-if='nabl'>
 						<t t-set="i" t-value="0"/>
-						<t t-if="len(nabl_parameters) &lt;= 3">
+						<t t-if="len(nabl_parameters) &lt;= 6">
 							<table>
 								<thead>
 									<tr>
@@ -708,7 +708,7 @@
 								</tbody>
 							</table>
 						</t>
-						<t t-if="len(nabl_parameters) &gt; 3">
+						<t t-if="len(nabl_parameters) &gt; 6">
 							<table>
 								<thead>
 									<tr>
@@ -756,7 +756,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="nabl_parameters[:3]" t-as="parameter">
+									<t t-foreach="nabl_parameters[:6]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>
@@ -845,7 +845,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="nabl_parameters[3:]" t-as="parameter">
+									<t t-foreach="nabl_parameters[6:]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>

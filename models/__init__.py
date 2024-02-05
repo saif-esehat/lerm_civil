@@ -121,3 +121,5 @@ from .report import crushed_sand_ds_report_chemical
 from .report import gypsum_ds_report
 from .chemical import opc_cement_chemical
 from .chemical import tmt_bar
+from .mechanical import structural_steel_round
+from .report import structural_steel_round_ds_report
