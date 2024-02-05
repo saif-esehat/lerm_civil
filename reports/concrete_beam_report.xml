@@ -134,7 +134,7 @@
                                 </td>
                                 <td colspan="2" style="text-align: center;font-weight: bold;">ID MARK/ Location
 								</td>
-								<td colspan="2" style="text-align: center;font-weight: bold;">Grade
+								<td colspan="2" style="text-align: center;font-weight: bold;width:200px;">Grade
 								</td>
 								<td colspan="2" style="text-align: center;font-weight: bold;">Length in mm
 								</td>
@@ -150,7 +150,7 @@
 									Fracture Distance from near support in Cm
 								</td>
 								
-								<td colspan="2" style="text-align: center;font-weight: bold;">Crushing Load in kN (P)
+								<td colspan="2" style="text-align: center;font-weight: bold;">Crushing Load in kN
 								</td>
 								
 								<td colspan="2" style="text-align: center;font-weight: bold;">Flexural Strength in N/mm2
