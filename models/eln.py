@@ -3,6 +3,7 @@ from odoo.tools.safe_eval import safe_eval
 from odoo.exceptions import ValidationError
 from datetime import datetime
 import math
+from decimal import Decimal
 from matplotlib import pyplot as plt
 # import io
 # from PIL import Image
@@ -20,7 +21,7 @@ class ELN(models.Model):
     eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New',tracking=3)
     srf_id = fields.Many2one('lerm.civil.srf',string="SRF ID")
     technician = fields.Many2one('res.users',string="Technicians",tracking=5)
-    sample_id = fields.Many2one('lerm.srf.sample',string='Sample ID',tracking=True)
+    sample_id = fields.Many2one('lerm.srf.sample',string='Sample ID',tracking=True,ondelete="cascade")
     srf_date = fields.Date(string='SRF Date',tracking=True)
     kes_no = fields.Char(string="KES NO",tracking=True)
     discipline = fields.Many2one('lerm_civil.discipline',string="Discipline",tracking=4)
@@ -326,7 +327,7 @@ class ELN(models.Model):
         }
     def print_report(self):
         eln = self
-        is_product_based = eln.is_product_based_calculation
+        is_product_based = eln.material.is_product_based_calculation
         if is_product_based == True:
             template_name = eln.material.product_based_calculation[0].main_report_template.report_name
         else:
@@ -335,7 +336,9 @@ class ELN(models.Model):
             'type': 'ir.actions.report',
             'report_type': 'qweb-html',
             'report_name': template_name,
-            'report_file': template_name
+            'report_file': template_name,
+            'data' : {'fromsample' : False , 'inreport' : self , 'nabl' : False,'fromEln':True}
+
         }
     def print_nabl_report(self):
         eln = self
@@ -470,21 +473,9 @@ class ParameteResultCalculationWizard(models.TransientModel):
             req_min = material_table.req_min
             req_max = material_table.req_max
             mu_neg = record.result - record.result*record.parameter.mu_value
-            print("mu_val")
-            print(record.parameter.mu_value)
-            print("req_min")
-            print(req_min)
-            print("req_max")
-            print(req_max)
-            print("mu_neg")
-            print(mu_neg)
+
             mu_pos = record.result + record.result*record.parameter.mu_value
-            print("mu_pos")
-            print(mu_pos)
-            print("req_min <= mu_neg <= req_max")
-            print(req_min <= mu_neg <= req_max)
-            print("req_min <= mu_pos <= req_max")
-            print(req_min <= mu_pos <= req_max)
+
         
             if req_min <= mu_neg <= req_max and req_min <= mu_pos <= req_max:
                 record.conformity_status = "pass"
@@ -577,10 +568,33 @@ class InputLines(models.TransientModel):
         decimal_digits_limit = self.inputs.decimal_place
 
         for record in self:
-            decimal_part = str(record.value).split('.')[1] if '.' in str(record.value) else ''
-            if len(decimal_part) > decimal_digits_limit:
-                raise ValidationError("Number of digits after decimal should not exceed %s." % decimal_digits_limit)
+         
+            formatted_number = self.remove_zeros_after_12_digits(record.value)
+            print("formatted_number ================>",str(formatted_number))
 
+            decimal_part = str(formatted_number).split('.')[1] if '.' in str(formatted_number) else ''
+            print("================>",decimal_part)
+            # if len(decimal_part) > decimal_digits_limit:
+            #     raise ValidationError("Number of digits after decimal should not exceed %s." % decimal_digits_limit)
+
+
+    def remove_zeros_after_12_digits(self,number):
+        # Convert the number to a string
+        number_str = str(number)
+
+        # Split the string into the integer and decimal parts
+        integer_part, decimal_part = number_str.split('.')
+
+        # Remove zeros after 12 digits from the decimal point
+        truncated_decimal_part = decimal_part[:12]
+
+        # Combine the integer part and truncated decimal part
+        result = f"{integer_part}.{truncated_decimal_part}"
+
+        # Convert the result back to a floating-point number
+        result_number = float(result)
+
+        return result_number
 
 
 

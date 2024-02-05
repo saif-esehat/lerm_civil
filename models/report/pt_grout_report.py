@@ -16,10 +16,22 @@ class PtGroutReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
-        if 'active_id' in data['context']:
-            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        # if 'active_id' in data['context']:
+        #     eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        # else:
+        #     eln = self.env['lerm.eln'].sudo().browse(docids)
+        nabl = data.get('nabl')
+        fromEln = data.get('fromEln')
+        if fromEln == False:
+            if 'active_id' in data['context']:
+                eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(docids)
         else:
-            eln = self.env['lerm.eln'].sudo().browse(docids)
+            if 'active_id' in data['context']:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['context']['active_id'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(docids)
         
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         qr.add_data(eln.kes_no)
@@ -43,5 +55,7 @@ class PtGroutReport(models.AbstractModel):
         return {
             'eln': eln,
             'ptgrout': ptgrout_data,
-            'qrcode': qr_code
+            'qrcode': qr_code,
+            'nabl':nabl,
+            'fromEln':fromEln
         }

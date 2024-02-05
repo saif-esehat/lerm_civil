@@ -14,16 +14,18 @@ class Upv(models.Model):
     name = fields.Char("Name",default="UPV")
     
     structure_age = fields.Char("Approximate Age of structure  Years")
-    site_temp = fields.Char("Site Temp")
+    temperature = fields.Float("Concrete Temp °C",required=True)
     concrete_grade = fields.Char("Concrete Grade")
     instrument = fields.Char("Instrument")
     structure = fields.Char("Structure")
     grade_id = fields.Many2one('lerm.grade.line',compute="_compute_grade", string="Grade")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
     child_lines = fields.One2many('ndt.upv.line', 'parent_id', string="Parameter")
-    average = fields.Float("Average", compute="_compute_velocity_stats",digits=(16,2))
-    min = fields.Float("Min", compute="_compute_velocity_stats",digits=(16,2))
-    max = fields.Float("Max", compute="_compute_velocity_stats",digits=(16,2))
+    average = fields.Float("Average km/s", compute="_compute_velocity_stats",digits=(16,2))
+    minimum = fields.Float("Min km/s", compute="_compute_velocity_stats",digits=(16,2))
+    maximum = fields.Float("Max km/s", compute="_compute_velocity_stats",digits=(16,2))
+
+    notes = fields.One2many('ndt.upv.notes','parent_id',string="Notes")
 
     @api.depends('eln_ref')
     def _compute_grade(self):
@@ -35,13 +37,22 @@ class Upv(models.Model):
         for record in self:
             velocities = record.child_lines.mapped('velocity')
             if velocities:
-                record.average = sum(velocities) / len(velocities)
-                record.min = min(velocities)
-                record.max = max(velocities)
+                average = sum(velocities) / len(velocities)
+                average = round(average,2)
+                record.average = average
+                minimum = min(velocities)
+                minimum = round(minimum,2)
+                record.minimum = minimum
+                maximum = max(velocities)
+                maximum = max(maximum,2)
+                record.maximum = maximum
+               
+                # import wdb;wdb.set_trace()
+
             else:
                 record.average = 0.0
-                record.min = 0.0
-                record.max = 0.0
+                record.minimum = 0.0
+                record.maximum = 0.0
 
 
 
@@ -58,7 +69,7 @@ class UpvLine(models.Model):
     parent_id = fields.Many2one('ndt.upv',string="Parent Id")
     element_type = fields.Char("Element Type")
     level_id = fields.Char("Location")
-    dist = fields.Float("Dist. (mm)",digits=(16,2))
+    dist = fields.Float("Dist. (m)",digits=(16,2))
     time = fields.Float("Time. (μs)",digits=(16,2))
     velocity = fields.Float("Velocity(km/sec)",compute="_compute_velocity",digits=(16,2))
     condition_concrete = fields.Selection([
@@ -66,7 +77,7 @@ class UpvLine(models.Model):
         ('wet', 'Wet')],"Condition Of Concrete")
     
     surface = fields.Selection([
-        ('w/o_plaster', 'W/O Plaster')],"Surface")
+        ('w/o_plaster', 'W/O Plaster')],"Surface",default='w/o_plaster')
     
     quality = fields.Selection([
         ('excellent','Excellent'),
@@ -113,18 +124,29 @@ class UpvLine(models.Model):
     #     return int(numeric_part) if numeric_part else 0
     
     
-    @api.depends('dist', 'time','method')
+    @api.depends('dist', 'time','method','parent_id')
     def _compute_velocity(self):
         for record in self:
             # import wdb; wdb.set_trace() 
+            temp = float(record.parent_id.temperature)
             if record.dist and record.time and record.method != 'indirect':
-                velocity = (record.dist / record.time) * 1000  # Convert time from μs to seconds
+                velocity = round((record.dist / record.time) * 1000 ,2) # Convert time from μs to seconds
+                if temp > 30:
+                    velocity = round(velocity + (velocity*0.05),2)
                 record.velocity = velocity
             elif record.dist and record.time and record.method == 'indirect':
                 velocity = ((record.dist / record.time) * 1000)  # Convert time from μs to seconds
                 if velocity > 3:
-                    velocity = velocity + 0.5
+                    velocity = round(velocity + 0.5,2)
+                if temp > 30:
+                    velocity = round(velocity + (velocity*0.05),2)
                 record.velocity = velocity
 
             else:
                 record.velocity = 0.0
+
+class UpvNotes(models.Model):
+    _name = "ndt.upv.notes"
+
+    parent_id = fields.Many2one('ndt.upv',string="Parent Id")
+    notes = fields.Char("Notes")

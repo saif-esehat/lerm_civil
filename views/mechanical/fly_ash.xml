@@ -18,8 +18,8 @@
                     </group>
                     <group>
                         <field name="srf_id" invisible="1"/>
-                        <field name="sample_id" />
-                        <field name="eln_ref"/>
+                        <field name="sample_id" readonly="1" />
+                        <field name="eln_ref" readonly="1"/>
                         <field name="parameter_id" invisible="1"/>
                     </group>
                     <group>
@@ -182,29 +182,20 @@
                     
                     
                      <!-- Setting Time Start -->
-                    <group>
+                    <!-- <group>
                         <field name="setting_time_visible" readonly="1" invisible="1" />
                         <h1>
                             <field name="setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         </h1>
                     </group>
-                    <!-- <group  attrs="{'invisible': [('setting_time_visible', '=', False)]}">
-                    <group>
-                      <field name="temp_percent_setting"/>
-                      <field name="humidity_percent_setting"/>
-                    </group>
-                    <group>
-                      <field name="start_date_setting"/>
-                      <field name="end_date_setting"/>
-                    </group>
-                    </group> -->
+                    
                      <group>
                         
                         <field name="total_wt_of_sample_setting_time" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         <field name="wt_of_water_required_setting_time" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
-                    </group>
+                    </group> -->
                     <!-- Initial Setting Time -->
-                    <group style="width:50%">
+                    <!-- <group style="width:50%">
                         <h3>
                             <field name="initial_setting_time" readonly="1" nolabel="1"   attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         </h3>
@@ -215,7 +206,6 @@
                         <field name="initial_setting_time_minutes_unrounded" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         <field name="initial_setting_time_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         
-                        <!-- <field name="rounded_initial_setting_time_in_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/> -->
                      </group>
                      <group style="width:50%">
                         <h3>
@@ -227,6 +217,59 @@
                         <field name="final_setting_time_minutes_unrounded" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
                         <field name="final_setting_time_minutes" attrs="{'invisible': [('setting_time_visible', '=', False)]}"/>
 
+                    </group> -->
+
+                    <!-- Setting Time Start -->
+                    <group>
+                        <field name="initial_setting_time_visible" readonly="1" invisible="1" />
+                        <field name="final_setting_time_visible" readonly="1" invisible="1" />
+                        <h1>
+                            <field name="setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': ['|', ('initial_setting_time_visible', '=', False), ('final_setting_time_visible', '=', False)]}"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}">
+                      <field name="temp_percent_setting"/>
+                      <field name="humidity_percent_setting"/>
+                    </group>
+                    <group>
+                      <field name="start_date_setting"/>
+                      <field name="end_date_setting"/>
+                    </group>
+                    </group>
+                    <group>
+                        
+                        <field name="wt_of_fly_settingg_time" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="wt_of_water_required_setting_time" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                    </group>
+                    <group style="width:50%">
+                        <h3>
+                            <field name="initial_setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        </h3>
+                   
+                        <field name="time_water_added" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="time_needle_fails" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_hours" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_minutes_unrounded" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_time_minutes" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_conformity"/>
+                        <field name="initial_setting_nabl"/>
+                    </group>
+                    
+
+                    <group style="width:50%">
+                        
+                        <field name="final_setting_time_visible" readonly="1" invisible="1" />
+                        <h1>
+                            <field name="final_setting_time_name" readonly="1" nolabel="1"   attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        </h1>
+                   
+                        <field name="time_needle_make_impression" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_hours" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_minutes_unrounded" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_time_minutes" attrs="{'invisible': [('final_setting_time_visible', '=', False)]}"/>
+                        <field name="final_setting_conformity"/>
+                        <field name="final_setting_nabl"/>
                     </group>
 
                    <!-- Particles retained on 45 micron IS sieve (wet sieving)  -->
@@ -777,19 +820,19 @@
                       <h6>Take an amount (m1),g. of standard sample so as to give the sample bed of porosity e=0.500</h6>
                     </group>
                      <group attrs="{'invisible': [('fineness_blaine_visible', '=', False)]}">
-                        <label for="time_fineness_trial1" string="Time(t),sec." />
+                        <label for="time_finenesss_trial1" string="Time(t),sec." />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
-                            <label for="time_fineness_trial1" string="1" />
-                            <field  name="time_fineness_trial1"  colspan="3"  nolabel="1"/>
+                            <label for="time_finenesss_trial1" string="1" />
+                            <field  name="time_finenesss_trial1"  colspan="3"  nolabel="1"/>
                           </group>
                           <group colspan="1" class="oe_inline"  >
-                            <label for="time_fineness_trial2" string="2" />
-                            <field  name="time_fineness_trial2"  colspan="3"  nolabel="1"/>
+                            <label for="time_finenesss_trial2" string="2" />
+                            <field  name="time_finenesss_trial2"  colspan="3"  nolabel="1"/>
                           </group>
                           <group colspan="1" class="oe_inline"  >
-                            <label for="time_fineness_trial3" string="3" />
-                            <field  name="time_fineness_trial3"  colspan="3"  nolabel="1"/>
+                            <label for="time_finenesss_trial3" string="3" />
+                            <field  name="time_finenesss_trial3"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
                     </group>

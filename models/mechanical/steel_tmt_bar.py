@@ -18,7 +18,7 @@ class SteelTmtBarLine(models.Model):
     weight = fields.Float(string="Weight, in kg",digits=(10, 3))
     weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
     crossectional_area = fields.Float(string="Cross sectional Area, mm²",compute="_compute_crossectional_area")
-    gauge_length = fields.Float(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
+    gauge_length = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
     elongated_gauge_length = fields.Float(string="Elongated Gauge Length, mm")
     percent_elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True)
     yeild_load = fields.Float(string="Yield Load  KN")
@@ -28,7 +28,7 @@ class SteelTmtBarLine(models.Model):
     fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
     ts_ys_ratio = fields.Float(string="TS/YS Ratio",compute="_compute_ts_ys_ratio",store=True)
-    weight_per_meter = fields.Float(string="Weight per meter",compute="_compute_weight_per_meter",store=True)
+    weight_per_meter = fields.Float(string="Weight per meter",compute="_compute_weight_per_meter",store=True,digits=(10, 3))
     variation = fields.Float(string="Variation")
 
     requirement_utl = fields.Float(string="Requirement",compute="_compute_requirement_utl",store=True)
@@ -46,11 +46,18 @@ class SteelTmtBarLine(models.Model):
 
 
     
-    bend_test = fields.Selection([
+    # bend_test = fields.Selection([
+    #     ('satisfactory', 'Satisfactory'),
+    #     ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
+    
+    # re_bend_test = fields.Selection([
+    #     ('satisfactory', 'Satisfactory'),
+    #     ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+    bend_test1 = fields.Selection([
         ('satisfactory', 'Satisfactory'),
         ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
     
-    re_bend_test = fields.Selection([
+    re_bend_test1 = fields.Selection([
         ('satisfactory', 'Satisfactory'),
         ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
     
@@ -260,6 +267,7 @@ class SteelTmtBarLine(models.Model):
                     
                     lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
                     upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
+           
                     if lower >= req_min and upper <= req_max:
                         record.uts_conformity = 'pass'
                         break
@@ -270,6 +278,8 @@ class SteelTmtBarLine(models.Model):
     def _compute_uts_nabl(self):
         
         for record in self:
+            # import wdb; wdb.set_trace()
+
             record.uts_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table
@@ -281,6 +291,7 @@ class SteelTmtBarLine(models.Model):
                     
                     lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
                     upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
+                    
                     if lower >= lab_min and upper <= lab_max:
                         record.uts_nabl = 'pass'
                         break
@@ -316,6 +327,8 @@ class SteelTmtBarLine(models.Model):
                     
                     lower = record.percent_elongation - record.percent_elongation*mu_value
                     upper = record.percent_elongation + record.percent_elongation*mu_value
+                    
+
                     if lower >= req_min and upper <= req_max:
                         record.elongation_conformity = 'pass'
                         break
@@ -505,7 +518,7 @@ class SteelTmtBarLine(models.Model):
     @api.depends('crossectional_area')
     def _compute_gauge_length(self):
         for record in self:
-            gauge_length = (math.sqrt(record.crossectional_area) * 5.65)
+            gauge_length = round((math.sqrt(record.crossectional_area) * 5.65),2)
             record.gauge_length = gauge_length
             # record.gauge_length = round(gauge_length, 2)
 
@@ -538,8 +551,8 @@ class SteelTmtBarLine(models.Model):
 
     @api.model
     def create(self, vals):
-        # import wdb;wdb.set_trace()
         record = super(SteelTmtBarLine, self).create(vals)
+        # import wdb;wdb.set_trace()
         # record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
@@ -549,6 +562,11 @@ class SteelTmtBarLine(models.Model):
     def _compute_grade_id(self):
         if self.eln_ref:
             self.grade = self.eln_ref.grade_id.id
+
+    # @api.onchange('bend_test1')
+    # def _compute_wdb(self):
+    #     import wdb; wdb.set_trace()
+        
     
 
     @api.depends('eln_ref')

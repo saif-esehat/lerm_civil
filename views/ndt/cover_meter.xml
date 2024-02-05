@@ -10,27 +10,36 @@
                 <sheet>
                     <group>
                         <field name="srf_id" invisible="1"/>
-                        <field name="sample_id" invisible="1" />
-                        <field name="parameter_id"/>
+                        <field name="sample_id"  readonly="1"/>
+                        <field name="parameter_id" readonly="1"/>
                     </group>
                     <group>
                         <h1>
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
+                    <group style="width:50%">
+                        <field name="temperature" string="Temperature °C" identity="extra"/>
+                    </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="member" string="Member"/>
                                 <field name="location" string="Location"/>
                                 <!-- <field name="level" /> -->
-                                <field name="cover" string="Cover"/>
+                                <field name="cover" string="Cover in (mm)"/>
                             </tree>
                     </field>
                     <group>
-                            <field name="average" string="Average" identity="result"/> 
-                            <field name="average_min" string="Average Min" identity="result"/>         
-                            <field name="average_max" string="Average Max" identity="result"/>                      
+                            <field name="average" string="Average (mm)" identity="result"/> 
+                            <field name="average_min" string="Average Min (mm)" identity="result"/>         
+                            <field name="average_max" string="Average Max (mm)" identity="result"/>                      
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                 </sheet>
             </form>
         </field>

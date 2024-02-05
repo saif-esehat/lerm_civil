@@ -88,19 +88,18 @@ class CementNormalConsistency(models.Model):
             record.normal_consistency_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','a9e97cea-372f-4775-9bcb-e9dd70e6e6df')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','a9e97cea-372f-4775-9bcb-e9dd70e6e6df')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.normal_consistency_trial1 - record.normal_consistency_trial1*mu_value
-                    upper = record.normal_consistency_trial1 + record.normal_consistency_trial1*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.normal_consistency_nabl = 'pass'
-                        break
-                    else:
-                        record.normal_consistency_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.normal_consistency_trial1 - record.normal_consistency_trial1*mu_value
+            upper = record.normal_consistency_trial1 + record.normal_consistency_trial1*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.normal_consistency_nabl = 'pass'
+                break
+            else:
+                record.normal_consistency_nabl = 'fail'
 
 
     
@@ -129,18 +128,18 @@ class CementNormalConsistency(models.Model):
     time_water_added = fields.Datetime("The Time When water is added to cement (t1)")
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
     initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
-    initial_setting_time_minutes = fields.Float("Initial Setting Time Rounded", compute="_compute_initial_setting_time")
+    initial_setting_time_minutes = fields.Integer("Initial Setting Time Rounded", compute="_compute_initial_setting_time")
     initial_setting_time_minutes_unrounded = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
 
     initial_setting_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Conformity', default='fail',compute="_compute_initial_setting_conformity")
+    ], string='Conformity', default='fail')
 
     initial_setting_nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='NABL', default='pass',compute="_compute_initial_setting_nabl")
+    ], string='NABL', default='pass')
 
 
     @api.depends('initial_setting_time_minutes_unrounded','eln_ref','grade')
@@ -154,8 +153,8 @@ class CementNormalConsistency(models.Model):
                     req_min = material.req_min
                     req_max = material.req_max
                     mu_value = line.mu_value
-                    lower = record.initial_setting_time_minutes_unrounded - record.initial_setting_time_minutes_unrounded*mu_value
-                    upper = record.initial_setting_time_minutes_unrounded + record.initial_setting_time_minutes_unrounded*mu_value
+                    lower = float(record.initial_setting_time_minutes_unrounded) - float(record.initial_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.initial_setting_time_minutes_unrounded) + float(record.initial_setting_time_minutes_unrounded)*mu_value
                     if lower >= req_min and upper <= req_max :
                         record.initial_setting_conformity = 'pass'
                         break
@@ -169,19 +168,18 @@ class CementNormalConsistency(models.Model):
             record.initial_setting_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.initial_setting_time_minutes_unrounded - record.initial_setting_time_minutes_unrounded*mu_value
-                    upper = record.initial_setting_time_minutes_unrounded + record.initial_setting_time_minutes_unrounded*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.initial_setting_nabl = 'pass'
-                        break
-                    else:
-                        record.initial_setting_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = float(record.initial_setting_time_minutes_unrounded) - float(record.initial_setting_time_minutes_unrounded)*mu_value
+            upper = float(record.initial_setting_time_minutes_unrounded) + float(record.initial_setting_time_minutes_unrounded)*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.initial_setting_nabl = 'pass'
+                break
+            else:
+                record.initial_setting_nabl = 'fail'
 
 
     @api.depends('time_water_added', 'time_needle_fails')
@@ -224,12 +222,12 @@ class CementNormalConsistency(models.Model):
     final_setting_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Conformity', default='fail',compute="_compute_final_setting_conformity")
+    ], string='Conformity', default='fail')
 
     final_setting_nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='NABL', default='pass',compute="_compute_final_setting_nabl")
+    ], string='NABL', default='pass')
 
 
     @api.depends('final_setting_time_minutes_unrounded','eln_ref','grade')
@@ -243,8 +241,8 @@ class CementNormalConsistency(models.Model):
                     req_min = material.req_min
                     req_max = material.req_max
                     mu_value = line.mu_value
-                    lower = record.final_setting_time_minutes_unrounded - record.final_setting_time_minutes_unrounded*mu_value
-                    upper = record.final_setting_time_minutes_unrounded + record.final_setting_time_minutes_unrounded*mu_value
+                    lower = float(record.final_setting_time_minutes_unrounded) - float(record.final_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.final_setting_time_minutes_unrounded) + float(record.final_setting_time_minutes_unrounded)*mu_value
                     if lower >= req_min and upper <= req_max :
                         record.final_setting_conformity = 'pass'
                         break
@@ -258,19 +256,16 @@ class CementNormalConsistency(models.Model):
             record.final_setting_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.final_setting_time_minutes_unrounded - record.final_setting_time_minutes_unrounded*mu_value
-                    upper = record.final_setting_time_minutes_unrounded + record.final_setting_time_minutes_unrounded*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.final_setting_nabl = 'pass'
-                        break
-                    else:
-                        record.final_setting_nabl = 'fail'
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            lower = float(record.final_setting_time_minutes_unrounded) - float(record.final_setting_time_minutes_unrounded)*mu_value
+            upper = float(record.final_setting_time_minutes_unrounded) + float(record.final_setting_time_minutes_unrounded)*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.final_setting_nabl = 'pass'
+                break
+            else:
+                record.final_setting_nabl = 'fail'
 
 
 
@@ -283,7 +278,8 @@ class CementNormalConsistency(models.Model):
                 time_difference = t2 - t1
                 record.final_setting_time_minutes = time_difference
                 record.final_setting_time_hours = time_difference
-                final_setting_time = time_difference.total_seconds() / 60
+                final_setting_time_decimal = time_difference.total_seconds() / 60
+                final_setting_time = int(final_setting_time_decimal)
                 if final_setting_time % 5 == 0:
                     record.final_setting_time_minutes = final_setting_time
                 else:
@@ -320,7 +316,7 @@ class CementNormalConsistency(models.Model):
     density_trial1 = fields.Float("Density (g/cm³)",compute="_compute_density_trial1")
     density_trial2 = fields.Float("Density (g/cm³)",compute="_compute_density_trial2")
 
-    average_density = fields.Float("Average",compute="_compute_density_average")
+    average_density = fields.Float("Average",compute="_compute_density_average",digits=(16,2))
 
     density_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -359,19 +355,18 @@ class CementNormalConsistency(models.Model):
             record.density_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','8fcf78c9-dd02-4664-bba4-b887a64a6952')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','8fcf78c9-dd02-4664-bba4-b887a64a6952')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_density - record.average_density*mu_value
-                    upper = record.average_density + record.average_density*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.density_nabl = 'pass'
-                        break
-                    else:
-                        record.density_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_density - record.average_density*mu_value
+            upper = record.average_density + record.average_density*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.density_nabl = 'pass'
+                break
+            else:
+                record.density_nabl = 'fail'
 
     
 
@@ -402,7 +397,8 @@ class CementNormalConsistency(models.Model):
 
     @api.depends('density_trial1','density_trial2')
     def _compute_density_average(self):
-        self.average_density = (self.density_trial1 + self.density_trial2)/2
+        average_density = round((self.density_trial1 + self.density_trial2)/2,1)
+        self.average_density = average_density
 
     # Density End  
 
@@ -420,7 +416,7 @@ class CementNormalConsistency(models.Model):
 
     soundness_table = fields.One2many('cement.soundness.line','parent_id',string="Soundness")
     average_soundness = fields.Float("Average",compute="_compute_average_soundness")
-    expansion_soundness = fields.Float("Expansion(mm)",compute="_compute_expansion_soundness")
+    expansion_soundness = fields.Float("Expansion(mm)",compute="_compute_expansion_soundness" ,digits=(16,1))
 
     soundness_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -459,19 +455,18 @@ class CementNormalConsistency(models.Model):
             record.soundness_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','5d2e505d-1d50-48aa-a8c8-9f70fe4b421b')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','5d2e505d-1d50-48aa-a8c8-9f70fe4b421b')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.expansion_soundness - record.expansion_soundness*mu_value
-                    upper = record.expansion_soundness + record.expansion_soundness*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.soundness_nabl = 'pass'
-                        break
-                    else:
-                        record.soundness_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.expansion_soundness - record.expansion_soundness*mu_value
+            upper = record.expansion_soundness + record.expansion_soundness*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.soundness_nabl = 'pass'
+                break
+            else:
+                record.soundness_nabl = 'fail'
 
     @api.depends('soundness_table.expansion')
     def _compute_average_soundness(self):
@@ -491,11 +486,14 @@ class CementNormalConsistency(models.Model):
             integer_part = math.floor(record.average_soundness)
             fractional_part = record.average_soundness - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.expansion_soundness = integer_part
+                expansion_soundness = round(integer_part,1)
+                record.expansion_soundness = expansion_soundness
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.expansion_soundness = integer_part + 0.5
+                expansion_soundness = round(integer_part + 0.5,1)
+                record.expansion_soundness = expansion_soundness
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.expansion_soundness = integer_part + 1
+                expansion_soundness = round(integer_part + 1,1)
+                record.expansion_soundness = expansion_soundness
             else:
                 record.expansion_soundness = 0
 
@@ -520,7 +518,7 @@ class CementNormalConsistency(models.Model):
 
     dry_sieving_table = fields.One2many('cement.dry.sieving.line','parent_id',string="Dry Sieving")
     average_fineness = fields.Float("Average",compute="_compute_average_fineness")
-    fineness_dry_sieving = fields.Float("Fineness by dry sieving %",compute="_compute_fineness_dry_sieving")
+    fineness_dry_sieving = fields.Float("Fineness by dry sieving %",compute="_compute_fineness_dry_sieving" ,digits=(16,1))
 
 
     dry_seiving_conformity = fields.Selection([
@@ -560,19 +558,18 @@ class CementNormalConsistency(models.Model):
             record.dry_seiving_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','ed89d6b3-783f-4044-aef7-d2dd847d3cce')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','ed89d6b3-783f-4044-aef7-d2dd847d3cce')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.fineness_dry_sieving - record.fineness_dry_sieving*mu_value
-                    upper = record.fineness_dry_sieving + record.fineness_dry_sieving*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.dry_seiving_nabl = 'pass'
-                        break
-                    else:
-                        record.dry_seiving_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.fineness_dry_sieving - record.fineness_dry_sieving*mu_value
+            upper = record.fineness_dry_sieving + record.fineness_dry_sieving*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.dry_seiving_nabl = 'pass'
+                break
+            else:
+                record.dry_seiving_nabl = 'fail'
 
     
 
@@ -588,7 +585,8 @@ class CementNormalConsistency(models.Model):
 
     @api.depends('average_fineness')
     def _compute_fineness_dry_sieving(self):
-        self.fineness_dry_sieving = round(self.average_fineness, 1)
+        fineness_dry_sieving = round(self.average_fineness, 1)
+        self.fineness_dry_sieving = fineness_dry_sieving
 
     # Compressive Strength 
 
@@ -624,7 +622,7 @@ class CementNormalConsistency(models.Model):
     casting_3_days_tables = fields.One2many('cement.casting.3days.line','parent_id',string="3 Days")
     average_casting_3days = fields.Float("Average",compute="_compute_average_3days")
     status_3days = fields.Boolean("Done")
-    compressive_strength_3_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_3days")
+    compressive_strength_3_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_3days" ,digits=(16,1))
 
     compressive_3days_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -663,19 +661,18 @@ class CementNormalConsistency(models.Model):
             record.compressive_3days_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.compressive_strength_3_days - record.compressive_strength_3_days*mu_value
-                    upper = record.compressive_strength_3_days + record.compressive_strength_3_days*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.compressive_3days_nabl = 'pass'
-                        break
-                    else:
-                        record.compressive_3days_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.compressive_strength_3_days - record.compressive_strength_3_days*mu_value
+            upper = record.compressive_strength_3_days + record.compressive_strength_3_days*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.compressive_3days_nabl = 'pass'
+                break
+            else:
+                record.compressive_3days_nabl = 'fail'
 
     @api.depends('casting_3_days_tables.compressive_strength')
     def _compute_average_3days(self):
@@ -701,11 +698,14 @@ class CementNormalConsistency(models.Model):
             integer_part = math.floor(record.average_casting_3days)
             fractional_part = record.average_casting_3days - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.compressive_strength_3_days = integer_part
+                compressive_strength_3_days = round(integer_part,1)
+                record.compressive_strength_3_days = compressive_strength_3_days
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.compressive_strength_3_days = integer_part + 0.5
+                compressive_strength_3_days = round(integer_part + 0.5,1)
+                record.compressive_strength_3_days = compressive_strength_3_days
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.compressive_strength_3_days = integer_part + 1
+                compressive_strength_3_days = round(integer_part + 1,1)
+                record.compressive_strength_3_days = compressive_strength_3_days
             else:
                 record.compressive_strength_3_days = 0
             
@@ -720,7 +720,7 @@ class CementNormalConsistency(models.Model):
     casting_7_days_tables = fields.One2many('cement.casting.7days.line','parent_id',string="7 Days")
     average_casting_7days = fields.Float("Average",compute="_compute_average_7days")
     status_7days = fields.Boolean("Done")
-    compressive_strength_7_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_7days")
+    compressive_strength_7_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_7days" ,digits=(16,1))
 
     compressive_7days_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -759,19 +759,18 @@ class CementNormalConsistency(models.Model):
             record.compressive_7days_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.compressive_strength_7_days - record.compressive_strength_7_days*mu_value
-                    upper = record.compressive_strength_7_days + record.compressive_strength_7_days*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.compressive_7days_nabl = 'pass'
-                        break
-                    else:
-                        record.compressive_7days_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.compressive_strength_7_days - record.compressive_strength_7_days*mu_value
+            upper = record.compressive_strength_7_days + record.compressive_strength_7_days*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.compressive_7days_nabl = 'pass'
+                break
+            else:
+                record.compressive_7days_nabl = 'fail'
     
 
     @api.depends('casting_7_days_tables.compressive_strength')
@@ -799,11 +798,14 @@ class CementNormalConsistency(models.Model):
             integer_part = math.floor(record.average_casting_7days)
             fractional_part = record.average_casting_7days - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.compressive_strength_7_days = integer_part
+                compressive_strength_7_days = round(integer_part,1)
+                record.compressive_strength_7_days = compressive_strength_7_days
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.compressive_strength_7_days = integer_part + 0.5
+                compressive_strength_7_days = round(integer_part + 0.5,1)
+                record.compressive_strength_7_days = compressive_strength_7_days
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.compressive_strength_7_days = integer_part + 1
+                compressive_strength_7_days = round(integer_part + 1,1)
+                record.compressive_strength_7_days = compressive_strength_7_days
             else:
                 record.compressive_strength_7_days = 0
 
@@ -818,7 +820,7 @@ class CementNormalConsistency(models.Model):
     casting_28_days_tables = fields.One2many('cement.casting.28days.line','parent_id',string="28 Days")
     average_casting_28days = fields.Float("Average",compute="_compute_average_28days")
     status_28days = fields.Boolean("Done")
-    compressive_strength_28_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_28days")
+    compressive_strength_28_days = fields.Float("Compressive Strength",compute="_compute_compressive_strength_28days" ,digits=(16,1))
 
 
     compressive_28days_conformity = fields.Selection([
@@ -858,19 +860,18 @@ class CementNormalConsistency(models.Model):
             record.compressive_28days_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
-                    upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.compressive_28days_nabl = 'pass'
-                        break
-                    else:
-                        record.compressive_28days_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
+            upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.compressive_28days_nabl = 'pass'
+                break
+            else:
+                record.compressive_28days_nabl = 'fail'
 
     @api.depends('casting_28_days_tables.compressive_strength')
     def _compute_average_28days(self):
@@ -898,11 +899,14 @@ class CementNormalConsistency(models.Model):
             integer_part = math.floor(record.average_casting_28days)
             fractional_part = record.average_casting_28days - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.compressive_strength_28_days = integer_part
+                compressive_strength_28_days = round(integer_part,1)
+                record.compressive_strength_28_days = compressive_strength_28_days
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.compressive_strength_28_days = integer_part + 0.5
+                compressive_strength_28_days = round(integer_part + 0.5,1)
+                record.compressive_strength_28_days = compressive_strength_28_days
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.compressive_strength_28_days = integer_part + 1
+                compressive_strength_28_days = round(integer_part + 1,1)
+                record.compressive_strength_28_days = compressive_strength_28_days
             else:
                 record.compressive_strength_28_days = 0
 
@@ -956,7 +960,7 @@ class CementNormalConsistency(models.Model):
     average_sample_time = fields.Float("Average Time(tₒ),Sec",compute="_compute_average_sample_time")
 
     fineness_of_sample = fields.Float("Fineness of Sample",compute="_compute_fineness_of_sample")
-    fineness_air_permeability = fields.Float("Fineness By Blaine Air Permeability Method (m2/kg)",compute="_compute_fineness_air_permeability")
+    fineness_air_permeability = fields.Integer("Fineness By Blaine Air Permeability Method (m2/kg)",compute="_compute_fineness_air_permeability")
 
     fineness_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -994,19 +998,18 @@ class CementNormalConsistency(models.Model):
             record.fineness_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','ca17d450-c526-4092-a3a7-6b0ff7e69c0a')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
-                    upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.fineness_nabl = 'pass'
-                        break
-                    else:
-                        record.fineness_nabl = 'fail'
+            
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
+            upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.fineness_nabl = 'pass'
+                break
+            else:
+                record.fineness_nabl = 'fail'
 
     
     @api.depends('weight_of_mercury_before_trial1','weight_of_mercury_after_trail1','density_of_mercury')

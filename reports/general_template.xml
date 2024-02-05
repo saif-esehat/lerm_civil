@@ -15,7 +15,10 @@
                         Date <![CDATA[&nbsp;]]> <span t-esc="eln.end_date"/>
                     </span>
 				</div> -->
-				<div class="container_eln">
+				<div style="margin-top:1.5rem;height:1rem;">
+					<span> </span>
+				</div>
+				<div class="container_eln" >
 					<table style="border:none;">
 						<tr cols="12" style="border:none;">
 							<td colspan="4" style="border:none;">
@@ -34,6 +37,7 @@
 								</span>
 							</td>
 						</tr>
+					
 					</table>
 
 				</div>
@@ -98,6 +102,41 @@
 									<span t-field="o.end_date"/>
 								</td>
 							</tr>
+							<tr  cols="12">
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.grade_id.grade"/>
+								</td>
+								<td colspan="6">Instrument :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.instrument.name"/>
+								</td>
+							</tr>
+							<t t-foreach="data" t-as="formdata" t-if="extradata and len(extradata) &gt; 0">
+								<tr cols="12">
+									<td colspan="6" t-foreach="extradata" t-as="result">
+										<span>
+											<t t-esc="result[1]"/>
+										</span> : 
+										<![CDATA[&nbsp;]]>
+										<span>
+											<t t-esc="formdata[result[0]]" />
+										</span>
+									</td>
+								</tr>
+							</t>
+							<tr>
+								<td>Test Method :	
+									<span>
+										<t t-foreach="o.parameters_result.parameter[0].parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == o.grade_id.id">
+													<span t-field="parameter.specification"/>
+											</t>
+										</t>
+									</span>
+								</td>
+							</tr>
+							
 							<!-- <tr style="height:50px" cols="12">
 								<td colspan="4">Performed By :
 									<![CDATA[&nbsp;]]>
@@ -115,7 +154,7 @@
 						</table>
 					</div>
 
-					<table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="extradata and len(extradata) &gt; 0">
+					<!-- <table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="extradata and len(extradata) &gt; 0">
 						<tr cols="12">
 							<td colspan="6" t-foreach="extradata" t-as="result">
 								<span>
@@ -127,7 +166,7 @@
 								</span>
 							</td>
 						</tr>
-					</table>
+					</table> -->
 
 					<table style="margin-top:30px;">
 						<thead>
@@ -167,12 +206,35 @@
 							<tr t-foreach="data.child_lines" t-as="r">
 								<t t-foreach="tabledata" t-as="row">
 									<td>
-									<span>
+									<!-- <span>
 										<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
 											<t t-esc="round(float(r[row[0]]),2)"/>
 										</t>
 										<t t-else="">
 											<t t-esc="r[row[0]]"/>
+										</t>
+									</span> -->
+
+
+									<span>
+										<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+											<t t-esc="round(float(r[row[0]]),2)"/>
+										</t>
+										<t t-else="">
+											<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+											<t t-set="field_name" t-value="row[0]"/>
+											<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+											<t t-if="field_type.ttype == 'selection'">
+												<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+												<!-- <span>Selection </span> -->
+												
+												<t t-esc="selection.name"/>
+											</t>
+											<t t-else="">
+
+												<t t-esc="r[row[0]]"/>
+											</t>
 										</t>
 									</span>
 									</td>
@@ -188,12 +250,34 @@
 									<t t-esc="result[1]"/>
 								</span> : 
 								<![CDATA[&nbsp;]]>
-								<span>
+								<!-- <span>
 									<t t-esc="formdata[result[0]]" />
-								</span>
+								</span> -->
+								<span>
+										<t t-if="str(formdata[result[0]]).replace('.', '', 1).isdigit()">
+											<t t-esc="round(float(formdata[result[0]]),2)"/>
+										</t> 
+										<t t-else="">
+											<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+											<t t-set="field_name" t-value="row[0]"/>
+											<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+											<t t-if="field_type.ttype == 'selection'">
+												<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',formdata[result[0]])])"/>
+												<!-- <span>Selection </span> -->
+												
+												<t t-esc="selection.name"/>
+											</t>
+											<t t-else="">
+
+												<t t-esc="formdata[result[0]]"/>
+											</t>
+										</t>
+									</span>
 							</td>
 						</tr>
 					</table>
+					
 					<div class="authorizeRowDataSheet">
 						<div>
 							
@@ -212,7 +296,7 @@
                             </div>
 							<div>
 								<b>
-									(JR Engineer)
+									(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 								</b>
 							</div>
 						</div>
@@ -233,7 +317,7 @@
                             
                             <div>
                                 <b>
-                                    (Sr. Engineer)
+                                    (<span t-esc="eln.sample_id.approved_by.job_title"/>)
                                 </b>
                             </div>
 						</div>

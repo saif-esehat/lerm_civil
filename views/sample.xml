@@ -54,9 +54,19 @@
                         string="Reject" 
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification','5-pending_approval'))]}"/>
 
+
+                        <button
+                            type="object"
+                            name="cancel_sample" 
+                            attrs="{'invisible': [('state', 'not in', ('1-allotment_pending','2-alloted','3-pending_verification','4-in_report','5-pending_approval'))]}"
+                            string="Cancel Sample"/>
+                            
+
                         
        
                         <field  invisible="context.get('is_local',False)" readonly="1" name="state" widget="statusbar"/>
+                   
+                   
                 </header>
                 <sheet>
                 <div class="oe_button_box" name="button_box"  >
@@ -72,6 +82,7 @@
                       
                         <field name="discipline_id" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <field name="lab_no_value" optional="show" invisible="1"/>
+                        <!-- <field name="client_reference1"/> -->
                         <field name="material_id" domain="[('id', 'in', material_ids)]" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <!-- <field name="lab_l_id" /> -->
                         <field name="material_id_lab_name"/>
@@ -261,6 +272,7 @@
                       <field name="sample_received_date" optional="show"/>
                       <field name='kes_no'/>
                       <field name="srf_id" optional="show" />
+                      <field name="client_reference1" optional="show" />
                       <field name="activity_ids" widget="list_activity" optional="show"/>
                       <field name="sample_no" optional="show"/>
                       <field name="discipline_id" optional="show"/>
@@ -269,6 +281,7 @@
                       <field name="group_id" optional="show"/>
                       <field name="material_id" optional="show"/>
                       <field name="alias" optional="show"/>
+                      <field name="customer_id"/>
                       <field name="brand" optional="show"/>
                       <field name="size_id" optional="show"/>
                       <field name="parameters" widget="many2many_tags" optional="show"/>
@@ -297,6 +310,7 @@
                 <field name="srf_id" string="SRF ID" />
                 <field name="casting" string="Casting" />
                 <field name="discipline_id" string="Discipline" />
+                <field name="kes_no" string="KES NO" />
                 <field name="lab_no_value" optional="show" invisible="1"/>
                 <!-- <field name="lab_l_id" string="Discipline" /> -->
                 <field name="group_id" string="Group" />
@@ -306,7 +320,7 @@
                 <field name="technicians" string="Technicians" />
                 <field name="location" string="Location" />
                 <field name="scope" string="Scope" />
-                <field name="days_casting" string="Days of Casting" />
+                <field name="days_casting" string="Days of Testing" />
                 <field name="customer_id" string="Customer" />
                 <field name="status" string="Status" />
                 <field name="state" string="State" />

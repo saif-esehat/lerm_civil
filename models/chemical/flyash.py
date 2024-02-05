@@ -99,8 +99,8 @@ class ChemicalFlyAsh(models.Model):
     r2o3_name = fields.Char("Name",default="Combined Ferric Oxide and Alumina")
     r2o3_visible = fields.Boolean("Combined Ferric Oxide and Alumina",compute="_compute_visible")
 
-    siliceous2 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous2 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous2 = fields.Char(string="Siliceous Pulverized Fuel Ash" ,default="70.0 Min")
+    calcareous2 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="50.0 Min")
 
     wt_of_empty_combine = fields.Float("Wt of empty crucible (gm)")
     wt_of_cr_combine = fields.Float("Wt of  empty  crucible + residue (gm)")
@@ -398,8 +398,8 @@ class ChemicalFlyAsh(models.Model):
     mgo_name = fields.Char("Name",default="MgO")
     mgo_visible = fields.Boolean("MgO",compute="_compute_visible")
 
-    siliceous6 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous6 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous6 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="5.0 Max")
+    calcareous6 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="5.0 Max")
 
     wt_of_sample_mgo = fields.Float("Wt of sample (gm)")
     burette_mgo  = fields.Float("BR of 0.01N EDTA")
@@ -557,8 +557,8 @@ class ChemicalFlyAsh(models.Model):
     magnesium_oxide_name = fields.Char("Name", default="% Magnesium Oxide")
     magnesium_oxide_visible = fields.Boolean("MgO", compute="_compute_visible")
 
-    siliceous8 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="0.5 Max")
-    calcareous8 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="0.5 Max")
+    siliceous8 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="5.0 Max")
+    calcareous8 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="5.0 Max")
 
     wt_of_sample_magnesium_oxide = fields.Float("sample wt (gm)")
     wt_cr_magnesium_oxide = fields.Float("wt of crucible + residue (gm)")
@@ -635,8 +635,8 @@ class ChemicalFlyAsh(models.Model):
     so3_name = fields.Char("Name", default="% Sulphur trioxide (SO3)")
     so3_visible = fields.Boolean("SO3", compute="_compute_visible")
 
-    siliceous9 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="3 Max")
-    calcareous9 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="1.5 Max")
+    siliceous9 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="3.0 Max")
+    calcareous9 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="3.0 Max")
 
     wt_of_sample_so3 = fields.Float("sample wt (gm)")
     wt_cr_so3 = fields.Float("wt of crucible + residue (gm)")
@@ -712,8 +712,8 @@ class ChemicalFlyAsh(models.Model):
     loi_name = fields.Char("Name", default="% Loss on Ignition")
     loi_visible = fields.Boolean("% Loss on Ignition", compute="_compute_visible")
 
-    siliceous10 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="7.0 Max")
-    calcareous10 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="7.0 Max")
+    siliceous10 = fields.Char(string="Siliceous Pulverized Fuel Ash",default="5.0 Max")
+    calcareous10 = fields.Char(string="Calcareous Pulverized Fuel Ash",default="5.0 Max")
 
     wt_of_empty_loi = fields.Float("wt of empty crucible (gm)")
     wt_empty_cs_loi = fields.Float("wt of empty crucible + sample before ignition gm")
@@ -799,8 +799,8 @@ class ChemicalFlyAsh(models.Model):
     na2o_name = fields.Char("Name", default="Alkali as Na₂O")
     na2o_visible = fields.Boolean("Alkali as Na₂O", compute="_compute_visible")
 
-    siliceous11 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous11 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous11 = fields.Char(string="Siliceous Pulverized Fuel Ash" , default="--")
+    calcareous11 = fields.Char(string="Calcareous Pulverized Fuel Ash", default="--")
 
     wt_of_sample_na2o = fields.Float("Weight of sample taken")
     dilution_na2o = fields.Float("Dilution")
@@ -882,8 +882,8 @@ class ChemicalFlyAsh(models.Model):
     k2o_name = fields.Char("Name", default="Alkali as K₂O")
     k2o_visible = fields.Boolean("Alkali as K₂O", compute="_compute_visible")
 
-    siliceous12 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous12 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous12 = fields.Char(string="Siliceous Pulverized Fuel Ash" , default="--")
+    calcareous12 = fields.Char(string="Calcareous Pulverized Fuel Ash", default="--")
 
     wt_of_sample_k2o = fields.Float("Weight of sample taken")
     dilution_k2o = fields.Float("Dilution")
@@ -964,8 +964,8 @@ class ChemicalFlyAsh(models.Model):
     available_alkalis_name = fields.Char("Name", default="Available alkalis")
     available_alkalis_visible = fields.Boolean("Available alkalis", compute="_compute_visible")
 
-    siliceous13 = fields.Char(string="Siliceous Pulverized Fuel Ash")
-    calcareous13 = fields.Char(string="Calcareous Pulverized Fuel Ash")
+    siliceous13 = fields.Char(string="Siliceous Pulverized Fuel Ash" ,  default="1.5 Max")
+    calcareous13 = fields.Char(string="Calcareous Pulverized Fuel Ash",  default="1.5 Max")
 
     available_alkalis = fields.Float("Available alkalis  % = A+B (0.65)",compute="_compute_available_alkalis")
 
@@ -1151,30 +1151,30 @@ class ChemicalFlyAsh(models.Model):
                     else:
                         record.combined_percentage_conformity = 'fail'
 
-    combined_percentage_nabl = fields.Selection([
-        ('pass', 'NABL'),
-        ('fail', 'Non-NABL')], string="NABL", compute="_compute_combined_percentage_nabl", store=True)
+    # combined_percentage_nabl = fields.Selection([
+    #     ('pass', 'NABL'),
+    #     ('fail', 'Non-NABL')], string="NABL", compute="_compute_combined_percentage_nabl", store=True)
 
-    @api.depends('combined_percentage','eln_ref','grade')
-    def _compute_combined_percentage_nabl(self):
+    # @api.depends('combined_percentage','eln_ref','grade')
+    # def _compute_combined_percentage_nabl(self):
         
-        for record in self:
-            record.combined_percentage_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
+    #     for record in self:
+    #         record.combined_percentage_nabl = 'fail'
+    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
+    #         for material in materials:
+    #             if material.grade.id == record.grade.id:
+    #                 lab_min = line.lab_min_value
+    #                 lab_max = line.lab_max_value
+    #                 mu_value = line.mu_value
                     
-                    lower = record.combined_percentage - record.combined_percentage*mu_value
-                    upper = record.combined_percentage + record.combined_percentage*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.combined_percentage_nabl = 'pass'
-                        break
-                    else:
-                        record.combined_percentage_nabl = 'fail'
+    #                 lower = record.combined_percentage - record.combined_percentage*mu_value
+    #                 upper = record.combined_percentage + record.combined_percentage*mu_value
+    #                 if lower >= lab_min and upper <= lab_max:
+    #                     record.combined_percentage_nabl = 'pass'
+    #                     break
+    #                 else:
+    #                     record.combined_percentage_nabl = 'fail'
 
 
 

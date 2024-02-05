@@ -9,13 +9,13 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
-				</div>
+				</div> -->
 
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Report no :
 								</td>
@@ -33,12 +33,12 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
-						</table>
+						</table> -->
 						<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.name"/><br/>
 									<span t-field="o.srf_id.customer.street"/>
 									<span t-field="o.srf_id.customer.street2"/>
 									<span t-field="o.srf_id.customer.city"/>
@@ -609,22 +609,22 @@
                                     <td >
                                         <span >Compresive Strength</span>
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle;">
+                                    <td >
                                         <span>
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).unit.name"/>
                                         </span>
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle;">
+                                    <td >
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle;">
+                                    <td >
                                         <span t-esc="data.average_compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle;">
+                                    <td >
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.permissable_limit"/>
@@ -680,18 +680,20 @@
 								</div>
 								<div>
 									<b>
-										(Authorized Signatory)
+										(<span t-esc="eln.sample_id.check_by.job_title"/>)
 									</b>
 								</div>
 							</div>
+
 							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
+								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
 								<div style="padding-top:5px">
 									Format No. <span t-esc="eln.material.test_format_no"/>
 								</div>
 							</div>
+							
 							<div>
 								<div>
 									<b>
@@ -707,11 +709,18 @@
 									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
+							
 								<div>
+									<b>
+										 (<span t-esc="eln.sample_id.approved_by.job_title"/>)
+									</b>
+								</div>
+								
+								<!-- <div>
 									<b>
 										(Authorized Signatory)
 									</b>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						<div style="text-align:center;margin-top:25px">

@@ -15,7 +15,7 @@
 							<tr>
 								<td colspan="12">Customer Party Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.name"/><br/>
 									<span t-field="o.srf_id.customer.street"/>
 									<span t-field="o.srf_id.customer.street2"/>
 									<span t-field="o.srf_id.customer.city"/>
@@ -166,7 +166,7 @@
 							</tr>
 						</thead>
 						<tbody >
-							<tr t-if="data.alkali_aggregate_dissolved_visible">
+							<tr t-if="data.alkali_aggregate_dissolved_visible and (data.average_dissolved_silica_nabl_fine == 'pass' and nabl or data.average_dissolved_silica_nabl_fine == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -210,7 +210,7 @@
                                     </span>
 								</td>
 							</tr>
-							<tr t-if="data.alkali_aggregate_alkalinity_visible">
+							<tr t-if="data.alkali_aggregate_alkalinity_visible and (data.average_reduction_alkalinity_nabl_fine == 'pass' and nabl or data.average_reduction_alkalinity_nabl_fine == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -258,7 +258,7 @@
 								
 							</tr>
 							
-							<tr t-if="data.chloride_visible">
+							<tr t-if="data.chloride_visible and (data.chloride_percent_nabl_fine == 'pass' and nabl or data.chloride_percent_nabl_fine == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -302,7 +302,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr t-if="data.sulphate_visible">
+							<tr t-if="data.sulphate_visible and (data.sulphate_percent_nabl_fine == 'pass' and nabl or data.sulphate_percent_nabl_fine == 'fail' and not nabl)">
 
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -348,7 +348,7 @@
 								</td>
 							</tr>
 							
-							<tr t-if="data.ph_visible">
+							<tr t-if="data.ph_visible and (data.ph_average_nabl == 'pass' and nabl or data.ph_average_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -397,7 +397,7 @@
 					</table>
 					<div style="margin-top:20px" class="noteContainer">
 						<div>
-							<b>Note :-</b>
+							<b>Note :-</b>average_dissolved_silica_nabl_fine
 						</div>
 						<div>
 							<ul>
@@ -465,14 +465,10 @@
 							</div>
 							<div>
 								<b>
-									Chemical Department (HOD)
+									(<span t-esc="eln.sample_id.approved_by.job_title"/>) 
 								</b>
 							</div>
-							<div>
-								<b>
-									(Authorized Signatory)
-								</b>
-							</div>
+							
 						</div>
 					</div>
 				</div>

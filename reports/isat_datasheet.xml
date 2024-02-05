@@ -92,31 +92,48 @@
 				</div>
 
 				<div class="authorizeRowDataSheet">
-					<div>
-						<div>
-							<b>
-								(JR Chemist)
-							</b>
-						</div>
-						<div>
-							<b>
-								Tested By
-							</b>
-						</div>
+
+                        <div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
+                                </b>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-left:600px">
+                                    
+                            <div>
+                                <b>
+                                    Checked By
+                                </b>
+                            </div>
+
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.check_by.name"/>
+                                </b>
+                            </div>
+                            
+                            <div>
+                                <b>
+                                    (<span t-esc="eln.sample_id.check_by.job_title"/>)
+                                </b>
+                            </div>
+                        </div>
+						
 					</div>
-					<div style="margin-left:500px">
-						<div>
-							<b>
-								Chemical Department (HOD)
-							</b>
-						</div>
-						<div>
-							<b>
-								Checked By
-							</b>
-						</div>
-					</div>
-				</div>
 			</t>
 		</t>
 	</template>

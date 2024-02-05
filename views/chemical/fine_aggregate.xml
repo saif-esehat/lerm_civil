@@ -15,7 +15,7 @@
                     </group>
                     <group>
                         <field name="srf_id" invisible="1"/>
-                        <field name="sample_id" />
+                        <field name="sample_id" readonly="1"/>
                         <field name="eln_ref" readonly="1"/>
                         <field name="parameter_id" invisible="1"/>
                     </group>
@@ -156,11 +156,11 @@
                     </group>
                       <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
                           
-                        <field name='average_dissolved_silica_conformity'
-                               decoration-success="average_dissolved_silica_conformity == 'pass'" 
-                               decoration-danger="average_dissolved_silica_conformity == 'fail'" 
+                        <field name='average_dissolved_silica_conformity_fine'
+                               decoration-success="average_dissolved_silica_conformity_fine == 'pass'" 
+                               decoration-danger="average_dissolved_silica_conformity_fine == 'fail'" 
                                readonly="1"/>
-                        <field name='average_dissolved_silica_nabl'/>
+                        <field name='average_dissolved_silica_nabl_fine'/>
                     </group>       
                   <!-- Reduction in Alkalinity  -->
                     <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
@@ -270,11 +270,11 @@
                     </group>
                       <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
                           
-                        <field name='average_reduction_alkalinity_conformity'
-                               decoration-success="average_reduction_alkalinity_conformity == 'pass'" 
-                               decoration-danger="average_reduction_alkalinity_conformity == 'fail'" 
+                        <field name='average_reduction_alkalinity_conformity_fine'
+                               decoration-success="average_reduction_alkalinity_conformity_fine == 'pass'" 
+                               decoration-danger="average_reduction_alkalinity_conformity_fine == 'fail'" 
                                readonly="1"/>
-                        <field name='average_reduction_alkalinity_nabl'/>
+                        <field name='average_reduction_alkalinity_nabl_fine'/>
                     </group> 
 
                     <!-- Chloride  -->
@@ -299,11 +299,11 @@
                     </group>
                       <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
                           
-                        <field name='chloride_percent_conformity'
-                               decoration-success="chloride_percent_conformity == 'pass'" 
-                               decoration-danger="chloride_percent_conformity == 'fail'" 
+                        <field name='chloride_percent_conformity_fine'
+                               decoration-success="chloride_percent_conformity_fine == 'pass'" 
+                               decoration-danger="chloride_percent_conformity_fine == 'fail'" 
                                readonly="1"/>
-                        <field name='chloride_percent_nabl'/>
+                        <field name='chloride_percent_nabl_fine'/>
                     </group> 
 
                   <!-- Sulphate  -->
@@ -326,11 +326,11 @@
                     </group>
                       <group attrs="{'invisible': [('sulphate_visible', '=', False)]}">
                           
-                        <field name='sulphate_percent_conformity'
-                               decoration-success="sulphate_percent_conformity == 'pass'" 
-                               decoration-danger="sulphate_percent_conformity == 'fail'" 
+                        <field name='sulphate_percent_conformity_fine'
+                               decoration-success="sulphate_percent_conformity_fine == 'pass'" 
+                               decoration-danger="sulphate_percent_conformity_fine == 'fail'" 
                                readonly="1"/>
-                        <field name='sulphate_percent_nabl'/>
+                        <field name='sulphate_percent_nabl_fine'/>
                     </group> 
                 </sheet>
             </form>

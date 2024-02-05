@@ -7,12 +7,12 @@
 			<!-- <t t-call="web.basic_layout"> -->
 			
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>TEST REPORT</b></p>
-				</div>
+				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Test Report No :
 								</td>
@@ -29,7 +29,7 @@
 								<td colspan="3" t-if="nabl">
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
-							</tr>
+							</tr> -->
 
 						<table>
 								<tr>
@@ -41,7 +41,7 @@
 													Customer/Party Name :
 												</td>
 												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/>
+												<span t-field="o.srf_id.customer.name"/><br/>
 												<span t-field="o.srf_id.customer.street"/>
 												<span t-field="o.srf_id.customer.street2"/>
 												<span t-field="o.srf_id.customer.city"/>
@@ -87,7 +87,7 @@
 							
 
 						</table>
-						</table>
+						<!-- </table> -->
 							
 						<table>
 						   <tr>
@@ -203,7 +203,7 @@
 
 					<table t-if="rcpt" style="margin-top:30px;">
 					  <div>
-					 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','e308efce-f477-496d-b7e2-2d0431c105cf')]).parameter_name"/>
+					 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).parameter_name"/>
 					 </div>
 						<t t-set="i" t-value="0"/>
 							<thead>
@@ -215,7 +215,7 @@
 									</th>
 									<th style="text-align: center;max-width:200px">
 										<span style="font-weight: bold;">
-											Identification Mark
+											Sample Id Mark
 
 										</span>
 									</th>
@@ -226,12 +226,25 @@
 											 Charge Passed (in Coulombs)
 										</span>
 									</th>
+									<th style="text-align: center;">
+										<span>
+											Unit
+										</span>
+									</th>
+										
+									<!-- <th style="text-align: center;font-weight: bold;">
+										<span>
+											<span t-esc="eln.material.specifications"/>
+											
+										</span>
+									</th>
 									
-									 <th  style="max-width: 250px;">
-									<span>
-										<span t-esc="eln.material.specifications"/>
-									</span>
-							     	</th>
+									<th style="text-align: center;font-weight: bold;">
+										<span>
+											<span t-esc="eln.material.method_reference"/>
+											
+										</span>
+									</th> -->
 								</tr>
                                  <t t-set="f" t-value="0"/>
                                     <tr t-foreach="rcpt.child_lines" t-as="r">
@@ -247,13 +260,31 @@
                                         <td style="text-align: center;">
                                             <span t-esc="r['qs']"/>
                                         </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b572caae-1de0-4b06-b9d8-bea46109dc27')]).parameter_table" t-as="parameter">
-                                                <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                    <span t-field="parameter.specification"/>
-                                                </t>
-                                            </t>
-                                        </td>
+										<td style="text-align: center;">
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).unit.name"/>
+											</span>
+										</td>
+                                      
+
+										<!-- <td style="text-align: center; vertical-align: middle;">
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+										</td>
+								
+										<td style="text-align: center; vertical-align: middle;">
+											<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+													</t>
+												</t>
+											</span>
+										</td> -->
+											
                                        
                                     </tr>
 							</thead>
@@ -264,7 +295,7 @@
                         </div> -->
 					<div class="page">
                         <div class="text-center">
-                            <h6>Chloride Ion Penetrability (as per ASTM 1020 - 2022)</h6>
+                            <h6>Chloride Ion Penetrability (ASTM C 1202:2022)</h6>
                         </div>
 
                         <table >
@@ -343,7 +374,7 @@
 						</div>
 						<div>
 							<b>
-								(Sr. Technician)
+								(<span t-esc="eln.sample_id.check_by.job_title"/>)
 							</b>
 						</div>
 					</div>
@@ -372,14 +403,10 @@
 						</div>
 						<div>
 							<b>
-								Mechanical Department (HOD)
+								(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 							</b>
 						</div>
-						<div>
-							<b>
-								(Authorized Signatory)
-							</b>
-						</div>
+						
 					</div>
 				</div>
 

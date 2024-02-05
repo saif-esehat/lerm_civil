@@ -82,6 +82,9 @@
                                     <th>Wt. of Water (g)</th>
                                     <th>Wt. of Admixture (g)</th>
                                     <th>Flow (Sec)</th>
+                                    <th>Flow at 30 Min (Sec)</th>
+                                    <th>Flow at 60 Min Retention (Sec)</th>
+
 
                                 </tr>
                             </thead>
@@ -105,6 +108,12 @@
                                         </td>
                                         <td>
                                             <span t-field="line.flow_sec"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.flow_30_min"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.flow_60_min"/>
                                         </td>
                                        
                                     </tr>
@@ -139,7 +148,7 @@
                             </div>
                             <div>
                                 <b>
-                                    (Jr. Technician)
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
                                 </b>
                             </div>
                         </div>
@@ -160,7 +169,7 @@
                             
                             <div>
                                 <b>
-                                    (Sr. Technician)
+                                    (<span t-esc="eln.sample_id.check_by.job_title"/>)
                                 </b>
                             </div>
                         </div>

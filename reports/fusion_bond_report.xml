@@ -4,33 +4,12 @@
 	
 	<template id="lerm_fusion_bond_coated_steel_report">
 		<t t-call="web.html_container">
-			<!-- <t t-call="web.basic_layout"> -->
 			
-			<!-- <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general"> -->
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
-				<div style="text-align:center;margin-top:10px">
-					<p style="font-size:15px"><b>TEST REPORT</b></p>
-				</div>
+				
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
-							<tr>
-								<td colspan="3">Test Report No :
-								</td>
-								<td colspan="3">
-									<span t-field="o.kes_no"/>
-								</td>
-								<td colspan="3">Report Issue Date :
-								</td>
-								<td colspan="3">
-									<span t-field="o.end_date"/>
-								</td>
-								<td colspan="3"  t-if="nabl">ULR NO :
-								</td>
-								<td colspan="3" t-if="nabl">
-									<span t-field="o.sample_id.ulr_no"/>
-								</td>
-							</tr>
+						
 
 						<table>
 								<tr>
@@ -42,7 +21,7 @@
 													Customer/Party Name :
 												</td>
 												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/>
+												<span t-field="o.srf_id.customer.name"/> <br/>
 												<span t-field="o.srf_id.customer.street"/>
 												<span t-field="o.srf_id.customer.street2"/>
 												<span t-field="o.srf_id.customer.city"/>
@@ -87,7 +66,7 @@
 								</tr>
 							
 
-						</table>
+						
 						</table>
 							
 						<table>
@@ -221,7 +200,7 @@
 									</th>
 								</tr>
 							</thead>
-						<tbody >
+						<tbody>
 
 							<tr>
 								<!-- <div colspan="2" style="font-weight: bold;"> -->
@@ -338,7 +317,7 @@
 								</td>
 							</tr>
 	
-						</tbody >
+						</tbody>
 				</table>
 				</div>
 
@@ -395,7 +374,7 @@
 						</div>
 						<div>
 							<b>
-								(Sr. Technician)
+								(<span t-esc="eln.sample_id.check_by.job_title"/>)
 							</b>
 						</div>
 					</div>
@@ -424,14 +403,10 @@
 						</div>
 						<div>
 							<b>
-								Mechanical Department (HOD)
+								(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 							</b>
 						</div>
-						<div>
-							<b>
-								(Authorized Signatory)
-							</b>
-						</div>
+						
 					</div>
 				</div>
 

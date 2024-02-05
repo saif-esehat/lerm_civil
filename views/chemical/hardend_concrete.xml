@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="chemical_hardend_concrete_form" model="ir.ui.view">
+        <field name="name">chemical.hardened.concrete.form</field>
+        <field name="model">chemical.hardened.concrete</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                <group >
+                    <h1>
+                        <field name="name" readonly="1" nolabel="1"/>
+                    </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="eln_ref" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+                    <!-- ph at 1% -->
+                    <group attrs="{'invisible': [('ph_visible', '=', False)]}">
+                        <h1>
+                            <field name="ph_name" readonly="1" nolabel="1"/>
+                            <field name="ph_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                            
+                    
+                    <group attrs="{'invisible': [('ph_visible', '=', False)]}">
+                        <label for="ph_1_percent_a" string="pH of 1 % Solution in water" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="ph_1_percent_a" string="A" />
+                            <field  name="ph_1_percent_a"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="ph_1_percent_b" string="B" />
+                            <field  name="ph_1_percent_b"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="ph_1_percent_c" string="C" />
+                            <field  name="ph_1_percent_c"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group> 
+                    <group attrs="{'invisible': [('ph_visible', '=', False)]}">
+                      <field name="ph_average"/>
+                    </group>  
+                    <group attrs="{'invisible': [('ph_visible', '=', False)]}">
+                          
+                        <field name='ph_average_conformity'
+                               decoration-success="ph_average_conformity == 'pass'" 
+                               decoration-danger="ph_average_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='ph_average_nabl'/>
+                    </group>  
+
+                        <!-- Chloride  -->
+
+                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                        <h1>
+                            <field name="chloride_name" readonly="1" nolabel="1"/>
+                            <field name="chloride_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                      <group>
+                            <field name="chloride_cube"/>
+                            <br></br>
+                            <field name="chloride_mass"/>
+                             <br></br>
+                            <field name="chloride_valume"/>
+                             <br></br>
+                            <field name="chloride_reading"/>
+                             <br></br>
+                              <field name="chloride_normality"/>
+                             <br></br>
+                            <field name="chloride_p"/>
+                             <br></br>
+                            <field name="chloride_percent"/>
+                             <br></br>
+                           
+                       </group>
+
+                    </group>
+                      <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                          
+                        <field name='chloride_conformity'
+                               decoration-success="chloride_conformity == 'pass'" 
+                               decoration-danger="chloride_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='chloride_nabl'/>
+                    </group> 
+                      <!-- Chloride  -->
+
+                    <group attrs="{'invisible': [('chloride_visible2', '=', False)]}">
+                        <h1>
+                            <field name="chloride_name2" readonly="1" nolabel="1"/>
+                            <field name="chloride_visible2" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('chloride_visible2', '=', False)]}">
+                      <group>
+                            <field name="chloride_cube2"/>
+                            <br></br>
+                            <field name="chloride_mass2"/>
+                             <br></br>
+                            <field name="chloride_valume2"/>
+                             <br></br>
+                            <field name="chloride_reading2"/>
+                             <br></br>
+                              <field name="chloride_normality2"/>
+                             <br></br>
+                            <field name="chloride_p2"/>
+                             <br></br>
+                            <field name="chloride_percent2"/>
+                             <br></br>
+                           
+                       </group>
+
+                    </group>
+                      <group attrs="{'invisible': [('chloride_visible2', '=', False)]}">
+                          
+                        <field name='chloride_conformity2'
+                               decoration-success="chloride_conformity2 == 'pass'" 
+                               decoration-danger="chloride_conformity2 == 'fail'" 
+                               readonly="1"/>
+                        <field name='chloride_nabl2'/>
+                    </group> 
+
+
+                      <!-- Chloride 2 -->
+
+                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                        <h1>
+                            <field name="chloride_name1" readonly="1" nolabel="1"/>
+                            <field name="chloride_visible1" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('chloride_visible1', '=', False)]}">
+                      <group>
+                            <field name="chloride_density"/>
+                            <br></br>
+                            <field name="chloride_mass1"/>
+                             <br></br>
+                            <field name="chloride_valume1"/>
+                             <br></br>
+                            <field name="chloride_reading1"/>
+                             <br></br>
+                              <field name="diff"/>
+                             <br></br>
+                            <field name="chloride_calculation"/>
+                             <br></br>
+                            <field name="chloride_acide"/>
+                             <br></br>
+                           
+                       </group>
+
+                    </group>
+                      <group attrs="{'invisible': [('chloride_visible1', '=', False)]}">
+                          
+                        <field name='chloride_conformity1'
+                               decoration-success="chloride_conformity1 == 'pass'" 
+                               decoration-danger="chloride_conformity1 == 'fail'" 
+                               readonly="1"/>
+                        <field name='chloride_nabl1'/>
+                    </group> 
+
+
+                  <!-- Sulphate  -->
+                    <group attrs="{'invisible': [('sulphate_visible', '=', False)]}">
+                        <h1>
+                            <field name="sulphate_name" readonly="1" nolabel="1"/>
+                            <field name="sulphate_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('sulphate_visible', '=', False)]}">
+                      <group>
+                      <field name="sample_wt_sulphate"/>
+                        <br></br>
+                      <field name="volume_make_upto_sulphate"/>
+                        <br></br>
+                      <field name="wt_empty_crucible_after_ignition"/>
+                        <br></br>
+                      <field name="wt_empty_crucible"/>
+                        <br></br>
+                      <field name="difference_in_wt_sulphate"/>
+                        <br></br>
+                      <field name="sulphate_so3"/>
+                        <br></br>
+                      <field name="sulphate_percent"/>
+                        <br></br>
+                      </group>
+
+                    </group>
+                      <group attrs="{'invisible': [('sulphate_visible', '=', False)]}">
+                          
+                        <field name='sulphate_conformity'
+                               decoration-success="sulphate_conformity == 'pass'" 
+                               decoration-danger="sulphate_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='sulphate_nabl'/>
+                    </group> 
+
+                    <!-- Dissolved Silica  -->
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+                        <h1>
+                            <field name="alkali_aggregate_reactivity_dissolved_name" readonly="1" nolabel="1"/>
+                            <field name="alkali_aggregate_dissolved_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+                        <field name="wt_blank_crucible_after_ignition"/>
+                        <field name="wt_blank_crucible_after_hf"/>
+                        <field name="diff_in_wt_of_silica_blank"/>
+
+                    </group>
+
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+                        <label for="wt_crucible_after_ignition_a" string="Wt of Crucible + Sample residue after igniation (gm) (A)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_crucible_after_ignition_a" string="A" />
+                            <field  name="wt_crucible_after_ignition_a"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_crucible_after_ignition_b" string="B" />
+                            <field  name="wt_crucible_after_ignition_b"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_crucible_after_ignition_c" string="C" />
+                            <field  name="wt_crucible_after_ignition_c"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
+
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+                        <label for="wt_crucible_after_hf_a" string="Wt of  Cruciable +Sample residue after HF (gm) (B)" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_crucible_after_hf_a" string="A"  />
+                            <field  name="wt_crucible_after_hf_a"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_crucible_after_hf_b" string="B" />
+                            <field  name="wt_crucible_after_hf_b"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="wt_crucible_after_hf_c" string="C" />
+                            <field  name="wt_crucible_after_hf_c"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>    
+
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+                        <label for="diff_in_wt_of_silica_a" string="Diff. in Wt of silica in Sample (gm)  = A - B" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="diff_in_wt_of_silica_a" string="A" />
+                            <field  name="diff_in_wt_of_silica_a"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="diff_in_wt_of_silica_b" string="B" />
+                            <field  name="diff_in_wt_of_silica_b"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="diff_in_wt_of_silica_c" string="C" />
+                            <field  name="diff_in_wt_of_silica_c"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>          
+
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+
+                        <label for="dissolved_silica_a" string="Dissolved Silica" />
+                        <div class="address_format " cols='12' >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="dissolved_silica_a" string="A"  />
+                            <field  name="dissolved_silica_a"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="dissolved_silica_b" string="B" />
+                            <field  name="dissolved_silica_b"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="dissolved_silica_c" string="C" />
+                            <field  name="dissolved_silica_c"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>  
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+                      <field name="average_dissolved_silica"/>
+                    </group>
+                      <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+                          
+                        <field name='average_dissolved_conformity'
+                               decoration-success="average_dissolved_conformity == 'pass'" 
+                               decoration-danger="average_dissolved_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='average_dissolved_nabl'/>
+                    </group>       
+                  <!-- Reduction in Alkalinity  -->
+                    <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
+                        <h1>
+                            <field name="alkali_aggregate_reactivity_alkalinity_name" readonly="1" nolabel="1"/>
+                            <field name="alkali_aggregate_alkalinity_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
+
+                        <label for="blank_reading1" string="Blank Reading (ml) (A)" />
+                        <div class="address_format " cols='12' >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="blank_reading1" string="A"  />
+                            <field  name="blank_reading1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="blank_reading2" string="B" />
+                            <field  name="blank_reading2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="blank_reading3" string="C" />
+                            <field  name="blank_reading3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>  
+
+                    <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
+
+                        <label for="burette_reading1" string="Burette Reading (sample) (ml) (B)" />
+                        <div class="address_format " cols='12' >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="burette_reading1" string="A"  />
+                            <field  name="burette_reading1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="burette_reading2" string="B" />
+                            <field  name="burette_reading2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="burette_reading3" string="C" />
+                            <field  name="burette_reading3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>  
+
+
+                    <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
+
+                        <label for="diff_in_reading1" string="Diff in Reading (ml) (A-B)" />
+                        <div class="address_format " cols='12' >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="diff_in_reading1" string="A"  />
+                            <field  name="diff_in_reading1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="diff_in_reading2" string="B" />
+                            <field  name="diff_in_reading2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="diff_in_reading3" string="C" />
+                            <field  name="diff_in_reading3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>  
+
+                    <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
+
+                        <label for="normality1" string="Normality of 0.05N HCL" />
+                        <div class="address_format " cols='12' >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="normality1" string="A"  />
+                            <field  name="normality1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="normality2" string="B" />
+                            <field  name="normality2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="normality3" string="C" />
+                            <field  name="normality3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>  
+
+                    <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
+
+                        <label for="reduction_in_alkalinity1" string="Reduction in Alkalinity" />
+                        <div class="address_format " cols='12' >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="reduction_in_alkalinity1" string="A"  />
+                            <field  name="reduction_in_alkalinity1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="reduction_in_alkalinity2" string="B" />
+                            <field  name="reduction_in_alkalinity2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1"  class="oe_inline">
+                            <label for="reduction_in_alkalinity3" string="C" />
+                            <field  name="reduction_in_alkalinity3"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>  
+                    <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
+                      <field name="average_reduction_alkalinity"/>
+                    </group>
+                      <group attrs="{'invisible': [('alkali_aggregate_alkalinity_visible', '=', False)]}">
+                          
+                        <field name='average_reduction_conformity'
+                               decoration-success="average_reduction_conformity == 'pass'" 
+                               decoration-danger="average_reduction_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='average_reduction_nabl'/>
+                    </group> 
+
+                
+                </sheet>
+            </form>
+        </field>
+        </record>
+    </data>
+</odoo>

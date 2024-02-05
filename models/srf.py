@@ -1,8 +1,10 @@
 from odoo import api, fields, models,_
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError ,ValidationError
 import logging
+from datetime import datetime
 
-_logger = logging.getLogger(__name__)
+
+# _logger = logging.getLogger(__name__)
 
 class Discipline(models.Model):
     _name = "lerm_civil.discipline"
@@ -118,6 +120,10 @@ class SrfForm(models.Model):
     # site_address = fields.Many2one('res.partner',string="Site Address")
     site_address = fields.Char(string="Site Address",compute="_compute_site_address")
     name_work = fields.Many2one('res.partner.project',string="Name of Work")
+    consultant_name1 = fields.Char(string="Consultant Name",compute="_compute_consultant_name1")
+
+    name_works = fields.Many2many('res.partner.project',string="Name of Work",compute="_compute_name_work")
+
     client_refrence = fields.Char(string="Client Reference Letter")
     samples = fields.One2many('lerm.srf.sample' , 'srf_id' , string="Samples",tracking=True)
     contact_other_ids = fields.Many2many('res.partner',string="Other Ids",compute="compute_other_ids")
@@ -125,6 +131,7 @@ class SrfForm(models.Model):
     contact_site_ids = fields.Many2many('res.partner',string="Site Ids",compute="compute_site_ids")
     attachment = fields.Binary(string="Attachment")
     attachment_name = fields.Char(string="Attachment Name")
+
     state = fields.Selection([
         ('1-draft', 'Draft'),
         ('2-confirm', 'Confirm')
@@ -161,13 +168,76 @@ class SrfForm(models.Model):
             else:
                 record.site_address = ''
 
+    # @api.depends('customer')
+    # def _compute_name_work(self):
+    #     for record in self:
+    #         customer = record.customer
+    #         if(customer):
+    #             name_work = record.env['res.partner'].search([("id","=",record.customer.id)]).projects
+    #             print("Name Work",name_work)
+    #             record.name_works = name_work
 
+    #         else:
+    #             record.name_works = None
+    @api.depends('customer')
+    def _compute_name_work(self):
+        for record in self:
+            if record.customer:
+                partner_record = record.env['res.partner'].browse(record.customer.id)
+                name_work = partner_record.projects
+                print("Name Work", name_work)
+                record.name_works = name_work
+            else:
+                record.name_works = None
 
+    @api.onchange('name_work')
+    def _onchange_name_work(self):
+        # Set the value of consultant_name1 based on the selected name_work
+        if self.name_work:
+            self.consultant_name1 = self.name_work.consultant_name
 
+    @api.depends('name_work')
+    def _compute_consultant_name1(self):
+        # Update consultant_name1 when name_work changes
+        for record in self:
+            if record.name_work:
+                record.consultant_name1 = record.name_work.consultant_name
+            else:
+                record.consultant_name1 = False
 
     @api.model
+    def create(self, vals):
+        previous_record_date = self.search([], order='srf_date desc', limit=1).srf_date
+        
+        # previous_record_date = datetime.strptime(previous_record_date, "%Y-%m-%d").date()
+        # date2 = datetime.strptime(vals["srf_date"], "%Y-%m-%d").date()
+        print('=========?',previous_record_date)
+        print('==========>',vals["srf_date"])
+        try:
+            date1 = datetime.strptime(str(previous_record_date), "%Y-%m-%d")
+            date2 = datetime.strptime(str(vals["srf_date"]), "%Y-%m-%d")
+
+            group_name = 'lerm_civil.kes_srf_backdate_creation_group'
+
+            if date1 > date2:
+                user_has_group = self.env.user.has_group(group_name)
+                if user_has_group:
+                    record = super(SrfForm, self).create(vals)
+                    return record
+                else:
+                    raise ValidationError("Backdate SRF Creation Not allowed")
+            else:
+                record = super(SrfForm, self).create(vals)
+                return record
+        except:
+            record = super(SrfForm, self).create(vals)
+        
+        return record
+        
+    @api.model
     def _get_default_date(self):
-        previous_record = self.search([], limit=1, order='id desc')
+        previous_record = self.search([], order='srf_date desc', limit=1)
+        # print("+++++++++++++>",previous_record)
         return previous_record.srf_date if previous_record else None
     
     def action_srf_sent_mail(self):
@@ -223,30 +293,56 @@ class SrfForm(models.Model):
    
     def confirm_srf(self):
         srf_ids=[]
+        
+        # import wdb; wdb.set_trace()
+        
+        count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date),('kes_no','!=','New'),('status','=','2-confirmed')]) 
 
         for record in self.sample_range_table:
             sam_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample')]).number_next_actual
             kes_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample.kes')]).number_next_actual
             
+
+
+
             sample_range = "SAM/"+str(sam_next_number)+"-"+str(sam_next_number+record.sample_qty-1)
-            kes_range = "KES/"+str(kes_next_number)+"-"+str(kes_next_number+record.sample_qty-1)
+            kes_range = "KES/"+str(count+1)+"-"+str(count+1+record.sample_qty-1)
             record.write({'sample_range': sample_range , 'kes_range': kes_range })
             samples = self.env['lerm.srf.sample'].search([('sample_range_id','=',record.id)])
-            # import wdb ; wdb.set_trace()
+
+
+
+            
             for sample in samples:
+                # import wdb; wdb.set_trace()
                 sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
-                kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+
+                year = str(self.srf_date.year)[-2:]
+                month = str(self.srf_date.month).zfill(2)
+                day = str(self.srf_date.day).zfill(2)
+                count = count + 1
+
+                kes_no = "KES"+ year+month+day + str(count).zfill(3) or "New"
+
+                # kes_no = "KES"+ str(record.srf_date) + self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+                kes_no_daywise = self.env['ir.sequence'].next_by_code('lerm.sample.daywise.seq') 
+                # kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') + kes_no_daywise or 'New'
                 # lab_l_id =  self.env['lab.location'].search([('id','=',self.env.context['allowed_company_ids'][0])])
                 company =  self.env['res.company'].search([('id','=',self.env.context['allowed_company_ids'][0])])
                 # lab_location =  self.env.context['discipline_id']
                 # print('<<<<<<<<<<<<<<<<<<<<',lab_location)
                 # lab_cert_no = str(sample.lab_certificate_no)
-                lab_loc = str(sample.lab_no_value)
-                lab_cert_no = str(company.lab_certificate_no)
-                # lab_loc = company.lab_seq_no
-                ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
-                ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
-                ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                
+                if sample.scope == 'nabl':
+                
+                    lab_loc = str(sample.lab_no_value)
+                    lab_cert_no = str(company.lab_certificate_no)
+                    # lab_loc = company.lab_seq_no
+                    ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
+                    ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+                    ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                else:
+                    ulr_no = ''
                 # import wdb ; wdb.set_trace()
               
              
@@ -292,7 +388,7 @@ class SrfForm(models.Model):
         srf_last_number = last_sample_range[last_sample_range_index+1:]
 
       
-        modified_srf_id = f"SRF/"+srffirstnumber_str+"-"+srf_last_number
+        modified_srf_id = f"SRF/"+year+month+day+srffirstnumber_str.zfill(3)+"-"+year+month+day+srf_last_number.zfill(3)
         modified_kes_number = f"KES/DUS"
         self.write({'srf_id': modified_srf_id})
         self.write({'kes_number': modified_kes_number})
@@ -326,6 +422,31 @@ class SrfForm(models.Model):
         for record in self:
             contact_ids = self.env['res.partner'].search([('parent_id', '=', record.customer.id),('type','=','delivery')])
             record.contact_site_ids = contact_ids
+    
+    def open_edit_srf_header_wizard(self):
+        action = self.env.ref('lerm_civil.edit_srf_wizard_form')
+        
+        return {
+            'name': "Edit SRF Header",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'edit.lerm.civil.srf',
+            'view_id': action.id,
+            'target': 'new',
+            'context': {
+                'default_srf_id' : self.id,
+                'default_customer': self.customer.id,
+            'default_srf_date': self.srf_date,
+            'default_client': self.client,
+            'default_contact_person': self.contact_person.id,
+            'default_contractor': self.contractor.id,
+            'default_billing_customer': self.billing_customer.id,
+            'default_client_refrence': self.client_refrence,
+            'default_name_work': self.name_work.id  
+            }
+            }
+        
     
     def open_sample_add_wizard(self):
 
@@ -410,6 +531,7 @@ class SrfForm(models.Model):
                 'default_customer_id': self.customer.id,
                 'default_sample_received_date':self.srf_date,
                 'default_pricelist':self.customer.property_product_pricelist.id,
+                'default_is_update': False,
                 # 'default_discipline_id': self.discipline_id.id,
                 }
             }
@@ -459,6 +581,7 @@ class CreateSampleWizard(models.TransientModel):
    
     
     srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id")
+    
     sample_id = fields.Char(string="Sample Id")
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -503,7 +626,8 @@ class CreateSampleWizard(models.TransientModel):
     ], string='Days of casting', default='3')
     date_casting = fields.Date(string="Date of Casting")
     customer_id = fields.Many2one('res.partner' , string="Customer")
-    alias = fields.Char(string="Alias")
+    product_aliases = fields.Many2many('product.product',string="Product Aliases")
+    product_alias = fields.Many2one('product.product',string="Product Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
     conformity = fields.Boolean(string="Conformity Requested")
     volume = fields.Char(string="Volume")
@@ -511,6 +635,9 @@ class CreateSampleWizard(models.TransientModel):
     pricelist = fields.Many2one('product.pricelist',string='Pricelist')
     main_name = fields.Char(string="Product Name",compute='compute_main_name',store=True)
     price = fields.Float(string="Price",compute='compute_price',store=True)
+
+    sample = fields.Many2one('lerm.srf.sample',string="Sample")
+    is_update = fields.Boolean('Is Update')
 
 
    
@@ -530,8 +657,9 @@ class CreateSampleWizard(models.TransientModel):
     @api.depends('pricelist','material_id')
     def compute_price(self):
         for record in self:
+            if record.pricelist.id and record.material_id:
             # record.main_name = record.product_name.name
-            record.price = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).fixed_price
+                record.price = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).fixed_price
 
     @api.onchange('material_id')
     def compute_grade_required(self):
@@ -595,14 +723,98 @@ class CreateSampleWizard(models.TransientModel):
                 record.material_ids = material_ids
             else:
                 record.material_ids = None
-                
-
-    @api.onchange('material_id.alias' ,'customer_id', 'material_id')
-    def onchange_material_id(self):
+    
+    @api.onchange('material_id' ,'customer_id')
+    def compute_product_aliases(self):
         for record in self:
-            result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
-            print(result)
-            record.alias = result.alias
+            if record.material_id and record.customer_id:
+                result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
+                record.product_aliases = result.product_alias.ids
+            else:
+                record.product_aliases = None
+                
+    def edit_current_sample(self,data=False):
+        
+            
+
+        group_id =  self.group_id.id
+        # alias = self.alias
+        material_id = self.material_id.id
+        size_id = self.size_id.id
+        brand = self.brand
+        grade_id = self.grade_id.id
+        sample_received_date = self.sample_received_date
+        location = self.location
+        
+        discipline_id = self.discipline_id.id
+        lab_no_value = self.lab_no_value
+        # lab_l_id = self.lab_l_id.id
+        sample_description =self.sample_description
+        parameters = self.parameters
+        discipline_id = self.discipline_id
+        casting = self.casting
+        client_sample_id = self.client_sample_id
+        conformity = self.conformity
+        volume = self.volume
+        product_name = self.product_name
+
+
+        if self.grade_required:
+            if not self.grade_id:
+                raise UserError("Grade is Required")
+            
+
+        if not parameters:
+            raise UserError("Add atleast one Parameter")
+        
+        if discipline_id.internal_id == '742c99ff-c484-4806-bb68-11b4271d6147':
+            if len(parameters) > 1:
+                raise UserError("Only one Parameter is allowed in Non Destructive Testing")
+        
+        sample_id = self.env.context.get('active_id')
+        sample = self.env['lerm.srf.sample'].search([('id','=',sample_id)])
+        # import wdb; wdb.set_trace()
+
+
+        sample.write({
+            'discipline_id': discipline_id,
+            # 'lab_l_id': lab_l_id,
+            'lab_no_value':lab_no_value,
+            'group_id':group_id,
+            'material_id' : material_id,
+            'grade_id' : grade_id,
+            'parameters':parameters,
+            # 'sample_range_id':sample_range.id,
+            'size_id':size_id,
+            'sample_description':sample_description,
+            'casting':casting,
+            'date_casting':self.date_casting,
+            'days_casting':self.days_casting,
+            'brand':brand,
+            'sample_received_date':sample_received_date,
+            'location':location,
+            'sample_condition' : self.sample_condition,
+            'sample_reject_reason' : self.sample_reject_reason,
+            'has_witness' : self.has_witness,
+            'witness' : self.witness,
+            'client_sample_id':client_sample_id,
+            'conformity':conformity,
+            'volume':volume,
+            'product_name':product_name
+            
+        })
+        return {'type': 'ir.actions.act_window_close'}
+
+
+           
+
+    # @api.onchange('material_id' ,'customer_id', 'material_id')
+    # def onchange_material_id(self):
+    #     for record in self:
+    #         result = self.env['lerm.alias.line'].search([('customer', '=', record.customer_id.id),('product_id', '=', record.material_id.id)])
+    #         print(result)
+            
+    #         record.product_alias = result.product_alias.id
 
     # @api.onchange('discipline_id', 'lab_l_id')
     # def onchange_discipline_id(self):
@@ -672,7 +884,7 @@ class CreateSampleWizard(models.TransientModel):
           
 
             group_id =  self.group_id.id
-            alias = self.alias
+            # alias = self.alias
             material_id = self.material_id.id
             size_id = self.size_id.id
             brand = self.brand
@@ -723,7 +935,7 @@ class CreateSampleWizard(models.TransientModel):
                 sample_range = self.env['sample.range.line'].create({
                     'srf_id': self.env.context.get('active_id'),
                     'group_id':group_id,
-                    'alias':alias,
+                    'product_alias':self.product_alias.id,
                     'discipline_id': discipline_id,
                     # 'lab_l_id': lab_l_id,
                     'lab_no_value':lab_no_value,
@@ -757,7 +969,7 @@ class CreateSampleWizard(models.TransientModel):
                     self.env["lerm.srf.sample"].create({
                         'srf_id': self.env.context.get('active_id'),
                         'group_id':group_id,
-                        'alias':alias,
+                        # 'alias':alias,
                         'discipline_id': discipline_id,
                         # 'lab_l_id': lab_l_id,
                         'lab_no_value':lab_no_value,
@@ -786,7 +998,8 @@ class CreateSampleWizard(models.TransientModel):
                         'product_name':product_name.id,
                         'main_name':self.main_name,
                         'price':self.price,
-                        'date_casting':self.date_casting
+                        'date_casting':self.date_casting,
+                        'product_alias':self.product_alias.id
 
                     })
 
@@ -802,7 +1015,7 @@ class CreateSampleWizard(models.TransientModel):
         _name = "sample.allotment.wizard"
 
         technicians = fields.Many2one("res.users",string="Technicians")
-
+        
 
         @api.onchange('technicians')
         def onchange_technicians(self):
@@ -811,6 +1024,8 @@ class CreateSampleWizard(models.TransientModel):
             for user_id in users:
                 ids.append(user_id.id)
             print("IDS " + str(ids))
+            # import wdb; wdb.set_trace()
+
             return {'domain': {'technicians': [('id', 'in', ids)]}}
         
 
@@ -828,7 +1043,8 @@ class CreateSampleWizard(models.TransientModel):
                     for parameter in sample.parameters:
                         parameters.append((0,0,{'parameter':parameter.id ,'spreadsheet_template':parameter.spreadsheet_template.id}))
                         parameters_result.append((0,0,{'parameter':parameter.id,'unit': parameter.unit.id,'test_method':parameter.test_method.id}))
-                    self.env['lerm.eln'].sudo().create({
+                    
+                    eln_id = self.env['lerm.eln'].sudo().create({
                         'srf_id': sample.srf_id.id,
                         'srf_date':sample.srf_id.srf_date,
                         'kes_no':sample.kes_no,
@@ -847,8 +1063,8 @@ class CreateSampleWizard(models.TransientModel):
                         'size_id':sample.size_id.id,
                         'grade_id':sample.grade_id.id
                     })
-
-                    sample.write({'state':'2-alloted' , 'technicians':self.technicians.id})
+                    # import wdb;wdb.set_trace()
+                    sample.write({'state':'2-alloted' , 'technicians':self.technicians.id , 'eln_id':eln_id.id})
                 else:
                     pass
 

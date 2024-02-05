@@ -9,24 +9,71 @@
                 </div>
 				<div class="container_eln" style="margin-top:5px">
 					
-                    <table style="margin-top:20px">
+                   <table>
 							<tr cols="12">
-								<td colspan="6">Year of Construction :
+								<td colspan="6">Job no :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.structure_age"/>
+									<span t-field="eln.kes_no"/>
+								</td>
+								<td colspan="6">Test Start Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.start_date"/>
+								</td>
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Material :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.material.name"/>
+								</td>
+							<td colspan="6">Test End Date :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.end_date"/>
+								</td>
+							</tr>
+							<tr  cols="12">
+								<td colspan="6">Grade :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.grade_id.grade"/>
 								</td>
 								<td colspan="6">Instrument :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.instrument.name"/>
+									<span t-field="eln.instrument.name"/>
 								</td>
+							</tr>
+							 <tr>
 								
-							</tr>
-							<tr cols="12">
-								<td colspan="6">Temp :
+								<td colspan="6">Temperature :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.temp"/>
-								</td>	
+									<span t-field="data.temperature"/>°C
+								</td>
 							</tr>
+							
+							<tr>
+								<td>Test Method :	
+									<span>
+										<t t-foreach="eln.parameters_result.parameter[0].parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.specification"/>
+											</t>
+										</t>
+									</span>
+								</td>
+							</tr>
+							
+							<!-- <tr style="height:50px" cols="12">
+								<td colspan="4">Performed By :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.technician.name"/>
+								</td>
+								<td colspan="4">Witness Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.witness_name"/>
+								</td>
+								<td colspan="4">Witness Signature :
+									<![CDATA[&nbsp;]]>
+									<span style='padding:20px'></span>
+								</td>
+							</tr> -->
 						</table>
 
 						<table style="margin-top:20px">
@@ -68,7 +115,7 @@
 									<span t-esc="r['member']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['location']"/>
+									<span t-esc="r['level']"/>
 								</td>
 								<td colspan="1">
 									<span t-esc="r['r1']"/>
@@ -92,10 +139,14 @@
 									<span t-esc="r['avg']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['corrosion_condition']"/>
+									<span t-esc="r['corrosion_condition'].capitalize()"/>
 								</td>
 							</tr>
 						</table>
+
+						<div style="margin-top:20px">
+							<span>Reading after temperature correction coefficient as per IS 516 (Part 5/Sec 2) : 2021</span>
+						</div>
 
 						<table style="margin-top:20px">
 
@@ -136,7 +187,7 @@
 									<span t-esc="r['member']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['location']"/>
+									<span t-esc="r['level']"/>
 								</td>
 								<td colspan="1">
 									<span t-esc="r['r1']"/>
@@ -160,36 +211,53 @@
 									<span t-esc="r['avg']"/>
 								</td>
 								<td colspan="1">
-									<span t-esc="r['corrosion_condition']"/>
+									<span t-esc="r['corrosion_condition'].capitalize()"/>
 								</td>
 							</tr>
 						</table>
 
 					<div class="authorizeRowDataSheet">
-						<div>
-							<div>
-								<b>
-									(JR Chemist)
-								</b>
-							</div>
-							<div>
-								<b>
-									Tested By
-								</b>
-							</div>
-						</div>
-						<div style="margin-left:500px">
-							<div>
-								<b>
-									Mechanical Department (HOD)
-								</b>
-							</div>
-							<div>
-								<b>
-									Checked By
-								</b>
-							</div>
-						</div>
+
+                        <div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
+                                </b>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-left:600px">
+                                    
+                            <div>
+                                <b>
+                                    Checked By
+                                </b>
+                            </div>
+
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.check_by.name"/>
+                                </b>
+                            </div>
+                            
+                            <div>
+                                <b>
+                                    (<span t-esc="eln.sample_id.approved_by.job_title"/>)
+                                </b>
+                            </div>
+                        </div>
+						
 					</div>
 				</div>
 			</t>

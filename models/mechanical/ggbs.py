@@ -155,7 +155,7 @@ class GgbsMechanical(models.Model):
     specific_gravity_nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_specific_gravity_nabl")
+    ], string='NABL', default='fail',compute="_compute_specific_gravity_nabl")
 
 
     @api.depends('average_specific_gravity','eln_ref','grade')
@@ -214,20 +214,24 @@ class GgbsMechanical(models.Model):
     def _compute_specific_gravity_trail1(self):
         for record in self:
             if record.displaced_volume_trial1 != 0:
-                record.specific_gravity_trial1 = record.wt_of_ggbs_sg_trial1 / record.displaced_volume_trial1
+                specific_gravity_trial1 = record.wt_of_ggbs_sg_trial1 / record.displaced_volume_trial1
+                record.specific_gravity_trial1 = round(specific_gravity_trial1,2)
 
     
     @api.depends('wt_of_ggbs_sg_trial2','displaced_volume_trial2')
     def _compute_specific_gravity_trail2(self):
         for record in self:
             if record.displaced_volume_trial2 != 0:
-                record.specific_gravity_trial2 = record.wt_of_ggbs_sg_trial2 / record.displaced_volume_trial2
+                specific_gravity_trial2 = record.wt_of_ggbs_sg_trial2 / record.displaced_volume_trial2
+                record.specific_gravity_trial2 = round(specific_gravity_trial2,2)
+
 
 
     @api.depends('specific_gravity_trial1','specific_gravity_trial2')
     def _compute_sg_average(self):
         for record in self:
-            record.average_specific_gravity = (record.specific_gravity_trial1 + record.specific_gravity_trial2)/2
+            average_specific_gravity = (record.specific_gravity_trial1 + record.specific_gravity_trial2)/2
+            record.average_specific_gravity = round(average_specific_gravity,2)
 
 
     # Slag Activity Index
@@ -547,9 +551,9 @@ class GgbsMechanical(models.Model):
     time_fineness_trial1 = fields.Float("Time(t),sec.",default=48)
     time_fineness_trial2 = fields.Float("Time(t),sec.",default=47)
     time_fineness_trial3 = fields.Float("Time(t),sec.",default=49)
-    temp_fineness_trial1 = fields.Float("Temp")
-    temp_fineness_trial2 = fields.Float("Temp")
-    temp_fineness_trial3 = fields.Float("Temp")
+    # temp_fineness_trial1 = fields.Float("Temp")
+    # temp_fineness_trial2 = fields.Float("Temp")
+    # temp_fineness_trial3 = fields.Float("Temp")
     average_time_fineness = fields.Float("Average Time(tₒ),Sec",compute="_compute_time_average_fineness")
 
 
@@ -582,7 +586,7 @@ class GgbsMechanical(models.Model):
     fineness_nabl = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
-    ], string='Confirmity', default='fail',compute="_compute_fineness_nabl")
+    ], string='NABL', default='fail',compute="_compute_fineness_nabl")
 
 
     @api.depends('fineness_air_permeability','eln_ref','grade')
@@ -669,7 +673,8 @@ class GgbsMechanical(models.Model):
 
     @api.depends('average_bed_volume','sg_fineness_calculated')
     def _compute_mass_sample_calculated(self):
-        self.mass_of_sample_taken_fineness_calculated = 0.5*self.average_bed_volume*self.sg_fineness_calculated
+        mass_of_sample_taken_fineness_calculated = 0.5*self.average_bed_volume*self.sg_fineness_calculated
+        self.mass_of_sample_taken_fineness_calculated = round(mass_of_sample_taken_fineness_calculated,2)
 
     @api.depends('time_sample_trial1','time_sample_trial2','time_sample_trial3')
     def _compute_average_sample_time(self):
@@ -682,7 +687,8 @@ class GgbsMechanical(models.Model):
                 print("Apparatus constant",record.apparatus_constant)
                 print("Average time",record.average_sample_time)
                 print("sg",record.sg_fineness_calculated)
-                record.fineness_of_sample = (521.08*record.apparatus_constant*math.sqrt(record.average_sample_time))/record.sg_fineness_calculated
+                fineness_of_sample = (521.08*record.apparatus_constant*math.sqrt(record.average_sample_time))/record.sg_fineness_calculated
+                record.fineness_of_sample = round(fineness_of_sample,2)
             else:
                 record.fineness_of_sample = 0
     
@@ -707,6 +713,8 @@ class GgbsMechanical(models.Model):
             record.normal_consistency_cement_visible = False
             record.specific_gravity_visible = False
             record.slag_activity_7_visible = False
+            record.slag_activity_28_visible = False
+
             record.fineness_visible = False
 
             
@@ -782,7 +790,8 @@ class GgbsSlag7DaysLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
+                compressive_strength = ((record.crushing_load / record.crosssectional_area)*1000)
+                record.compressive_strength = round(compressive_strength,3)
             else:
                 record.compressive_strength = 0
 
@@ -808,7 +817,8 @@ class GgbsSlag28DaysLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
+                compressive_strength = ((record.crushing_load / record.crosssectional_area)*1000)
+                record.compressive_strength = round(compressive_strength,3)
             else:
                 record.compressive_strength = 0
 
@@ -834,7 +844,8 @@ class GgbsSlagOpc7DaysLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
+                compressive_strength = ((record.crushing_load / record.crosssectional_area)*1000)
+                record.compressive_strength = round(compressive_strength,3)
             else:
                 record.compressive_strength = 0
 
@@ -860,6 +871,7 @@ class GgbsSlagOpc28DaysLine(models.Model):
     def _compute_compressive_strength(self):
         for record in self:
             if record.crosssectional_area != 0:
-                record.compressive_strength = round(((record.crushing_load / record.crosssectional_area)*1000),3)
+                compressive_strength = ((record.crushing_load / record.crosssectional_area)*1000)
+                record.compressive_strength = round(compressive_strength,3)
             else:
                 record.compressive_strength = 0

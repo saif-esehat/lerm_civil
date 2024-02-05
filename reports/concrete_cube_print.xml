@@ -60,13 +60,13 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
-				</div>
+				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
-							<!-- <tr>
+						<!-- <table>
+							<tr>
 								<td colspan="3">Report no :
 								</td>
 								<td colspan="3">
@@ -82,13 +82,13 @@
 								<td colspan="3" t-if="nabl">
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
-							</tr> -->
-						</table>
+							</tr>
+						</table> -->
 						<table style="margin-top:10px;">
 							<tr>
-								<td colspan="12">Customer Party Name :
+								<td colspan="12" >Customer Party Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.name" /><br/>
 									<span t-field="o.srf_id.customer.street"/>
 									<span t-field="o.srf_id.customer.street2"/>
 									<span t-field="o.srf_id.customer.city"/>
@@ -185,7 +185,8 @@
 							<tr>
 								<td colspan="6">Age in Days :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.age_of_days"/>
+									<span t-field="data.age_of_test"/>
+									<span> Days</span>
 								</td>
 								<td colspan="6">Date of Casting :
 									<![CDATA[&nbsp;]]>
@@ -235,6 +236,11 @@
 								<th style="text-align: center;font-weight: bold;">
 									<span>
 										ID MARK/Location
+									</span>
+								</th>
+								<th style="text-align: center;font-weight: bold;">
+									<span>
+										Grade
 									</span>
 								</th>
 								<th style="text-align: center;font-weight: bold;">
@@ -289,6 +295,9 @@
 									<span t-esc="r.id_mark"/>
 								</td>
 								<td style="text-align: center;">
+									<span t-esc="o.sample_id.grade_id.grade"/>
+								</td>
+								<td style="text-align: center;">
 									<span t-esc="r.length" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
@@ -323,6 +332,9 @@
 									<span t-esc="r.id_mark"/>
 								</td>
 								<td style="text-align: center;">
+									<span t-esc="o.sample_id.grade_id.grade"/>
+								</td>
+								<td style="text-align: center;">
 									<span t-esc="r.length" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
@@ -341,6 +353,8 @@
 									<span t-esc="r.compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
+
+							
 						</tbody>
 					</table>
 
@@ -352,7 +366,7 @@
 								</td>
 							</tr>
 							<tr t-if="data.nabl == 'fail' and not nabl"> 
-								<td colspan="12">Avg. Compressive Strength N/mm2 :<![CDATA[&nbsp;]]>
+								<td colspan="12">Result - Average Compressive Strength N/mm2 :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
 							</tr>
@@ -401,7 +415,7 @@
 								</div>
 								<div>
 									<b>
-										(Sr. Technician)
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 							</div>
@@ -428,14 +442,10 @@
 									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
+								
 								<div>
 									<b>
-										Mechanical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 							</div>
@@ -527,6 +537,12 @@
 										ID MARK/Location
 									</span>
 								</th>
+
+								<th style="text-align: center;font-weight: bold;">
+									<span>
+										Grade
+									</span>
+								</th>
 								
 								<th style="text-align: center;">
 									<span>
@@ -572,6 +588,9 @@
 									<span t-esc="r.id_mark"/>
 								</td>
 								<td style="text-align: center;">
+									<span t-esc="o.sample_id.grade_id.grade"/>
+								</td>
+								<td style="text-align: center;">
 									<span t-esc="r.length"/>
 								</td>
 								<td style="text-align: center;">
@@ -604,50 +623,49 @@
 					</div>
 					<div class="authorizeRowDataSheet">
 						<div>
-                            <div>
-                                <b>
-                                    Tested By 
-                                </b>
-                                
-                            </div>
-                            <div style="height:40px">
+							<div>
+								<b>
+									Tested By 
+								</b>
+								
+							</div>
+							<div style="height:30px">
 
-                            </div>
-                            <div>
-                                <b>
-                                <span t-esc="eln.sample_id.filled_by.name"/>
-                                </b>
-                            </div>
-                            <div>
-                                <b>
-                                    (Jr. Technician)
-                                </b>
-                            </div>
-                        </div>
-                        
-                        <div style="margin-left:500px">
-                                    
-                            <div>
-                                <b>
-                                    Checked By
-                                </b>
-                            </div>
-                            <div style="height:40px">
-
-                            </div>
-                            <div>
-                                <b>
-                                <span t-esc="eln.sample_id.check_by.name"/>
-                                </b>
-                            </div>
-                            
-                            <div>
-                                <b>
-                                    (Sr. Technician)
-                                </b>
-                            </div>
-                        </div>
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.filled_by.name"/>
+								</b>
+							</div>
+							<div>
+								<b>
+									(<span t-esc="eln.sample_id.filled_by.job_title"/>)
+								</b>
+							</div>
+						</div>
 						
+						<div style="margin-left:500px">
+									
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:30px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
+								</b>
+							</div>
+						</div>
 					</div>
 
 					<!-- <div style="text-align:center;margin-top:25px">

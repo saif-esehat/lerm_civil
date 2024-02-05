@@ -65,26 +65,99 @@ class PtGrout(models.Model):
             else:
                 record.water_cement_ratio = 0.
 
+    fludity_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')],string="NABL",compute="_compute_fluidity_nabl",store=True)
 
-     # Setting Time
-    setting_time_visible = fields.Boolean("Setting Time Visible",compute="_compute_visible")
+
+
+    @api.depends('water_cement_ratio','eln_ref')
+    def _compute_fluidity_nabl(self):
+        
+        for record in self:
+            record.fludity_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','1e31d717-331a-4e71-8887-ef37cf38c7dd')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','1e31d717-331a-4e71-8887-ef37cf38c7dd')]).parameter_table
+            for material in materials:
+                # if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.water_cement_ratio - record.water_cement_ratio*mu_value
+                    upper = record.water_cement_ratio + record.water_cement_ratio*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.fludity_nabl = 'pass'
+                        break
+                    else:
+                        record.fludity_nabl = 'fail'
+
+
+
+
+                        
+     #Initial setting Time
+    initial_setting_time_visible = fields.Boolean("Initial Setting Time Visible",compute="_compute_visible")
+    initial_setting_time_name = fields.Char("Name",default="Initial Setting Time")
+
     setting_time_name = fields.Char("Name",default="Setting Time")
-
-    temp_percent_setting = fields.Float("Temperature °c")
-    humidity_percent_setting = fields.Float("Humidity %")
-    start_date_setting = fields.Date("Start Date")
-    end_date_setting = fields.Date("End Date")
-
-    
-
-    initial_setting_time = fields.Char("Name", default="Initial Setting Time")
     time_water_added = fields.Datetime("The Time When water is added to cement (t1)")
     time_needle_fails = fields.Datetime("The time at which needle fails to penetrate the test block to a point 5 ± 0.5 mm (t2)")
-    initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)", compute="_compute_initial_setting_time")
-    # initial_setting_time_minutes = fields.Float("Initial Setting Time", compute="_compute_initial_setting_time")
+    initial_setting_time_hours = fields.Char("Initial Setting Time (t2-t1) (Hours)",compute="_compute_initial_setting_time")
+    initial_setting_time_minutes = fields.Char("Initial Setting Time Rounded",compute="_compute_initial_setting_time")
+    initial_setting_time_minutes_unrounded = fields.Char("Initial Setting Time",compute="_compute_initial_setting_time")
 
-   
-    
+    initial_setting_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Conformity', default='fail',compute="_compute_initial_setting_conformity")
+
+    initial_setting_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL'),
+    ], string='NABL', default='NABL',compute="_compute_initial_setting_nabl")
+
+
+    @api.depends('initial_setting_time_minutes_unrounded','eln_ref','grade')
+    def _compute_initial_setting_conformity(self):
+        for record in self:
+            record.initial_setting_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    lower = float(record.initial_setting_time_minutes_unrounded) - float(record.initial_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.initial_setting_time_minutes_unrounded) + float(record.initial_setting_time_minutes_unrounded)*mu_value
+                    if lower >= req_min and upper <= req_max :
+                        record.initial_setting_conformity = 'pass'
+                        break
+                    else:
+                        record.initial_setting_conformity = 'fail'
+
+    @api.depends('initial_setting_time_minutes_unrounded','eln_ref','grade')
+    def _compute_initial_setting_nabl(self):
+        
+        for record in self:
+            record.initial_setting_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = float(record.initial_setting_time_minutes_unrounded) - float(record.initial_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.initial_setting_time_minutes_unrounded) + float(record.initial_setting_time_minutes_unrounded)*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.initial_setting_nabl = 'pass'
+                        break
+                    else:
+                        record.initial_setting_nabl = 'fail'
+
 
     @api.depends('time_water_added', 'time_needle_fails')
     def _compute_initial_setting_time(self):
@@ -94,45 +167,109 @@ class PtGrout(models.Model):
                 t2 = record.time_needle_fails
                 time_difference = t2 - t1
 
-                # Calculate the time difference in hours and minutes
-                total_minutes = time_difference.total_seconds() / 60
-                hours = int(total_minutes // 60)
-                minutes = int(total_minutes % 60)
+                # Convert time difference to seconds and then to minutes
+                time_difference_minutes = time_difference.total_seconds() / 60
 
-                # Round minutes
-                rounded_minutes = round(minutes)
-                
-                # Convert hours and minutes to total minutes
-                total_minutes = hours * 60 + rounded_minutes
+                initial_setting_time_hours = time_difference.total_seconds() / 3600
+                time_delta = timedelta(hours=initial_setting_time_hours)
+                record.initial_setting_time_hours = "{:0}:{:02}".format(int(time_delta.total_seconds() // 3600), int((time_delta.total_seconds() % 3600) // 60))
+                if time_difference_minutes % 5 == 0:
+                    record.initial_setting_time_minutes = time_difference_minutes
+                else:
+                    record.initial_setting_time_minutes = round(time_difference_minutes / 5) * 5
 
-                # Format the time as hours:minutes
-                formatted_time = f"{hours}:{minutes:02}"
+                record.initial_setting_time_minutes_unrounded = time_difference_minutes
 
-                # Store the formatted time in the initial_setting_time_hours field
-                record.initial_setting_time_hours = formatted_time
-
-                # Store the total rounded minutes in the initial_setting_time_minutes field
-                # record.initial_setting_time_minutes = total_minutes
             else:
-                record.initial_setting_time_hours = "0:00"
-                # record.initial_setting_time_minutes = 0.0
+                record.initial_setting_time_hours = False
+                record.initial_setting_time_minutes = False
+                record.initial_setting_time_minutes_unrounded = False
 
-   
+    #Final setting Time
 
+    final_setting_time_visible = fields.Boolean("Final Setting Time Visible",compute="_compute_visible")
+    final_setting_time_name = fields.Char("Name",default="Final Setting Time")
 
-
-
-
-     #Final setting Time
-
-    final_setting_time = fields.Char("Name",default="Final Setting Time")
     time_needle_make_impression = fields.Datetime("The Time at which the needle make an impression on the surface of test block while attachment fails to do (t3)")
-    final_setting_time_hours = fields.Char("Final Setting Time (t3-t1) (Hours)",compute="_compute_final_setting_time")
-    final_setting_time_minutes = fields.Char("Final Setting Time",compute="_compute_final_setting_time")
+    final_setting_time_hours = fields.Char("Final Setting Time (t2-t1) (Hours)",compute="_compute_final_setting_time")
+    final_setting_time_minutes = fields.Char("Final Setting Time Rounded",compute="_compute_final_setting_time")
+    final_setting_time_minutes_unrounded = fields.Char("Final Setting Time",compute="_compute_final_setting_time")
+
+    final_setting_conformity = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+    ], string='Conformity', default='fail',compute="_compute_final_setting_conformity")
+
+    final_setting_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL'),
+    ], string='NABL', default='NABL',compute="_compute_final_setting_nabl")
+
+
+    @api.depends('final_setting_time_minutes_unrounded','eln_ref','grade')
+    def _compute_final_setting_conformity(self):
+        for record in self:
+            record.final_setting_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    lower = float(record.final_setting_time_minutes_unrounded) - float(record.final_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.final_setting_time_minutes_unrounded) + float(record.final_setting_time_minutes_unrounded)*mu_value
+                    if lower >= req_min and upper <= req_max :
+                        record.final_setting_conformity = 'pass'
+                        break
+                    else:
+                        record.final_setting_conformity = 'fail'
+
+    @api.depends('final_setting_time_minutes_unrounded','eln_ref','grade')
+    def _compute_final_setting_nabl(self):
+        
+        for record in self:
+            record.final_setting_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = float(record.final_setting_time_minutes_unrounded) - float(record.final_setting_time_minutes_unrounded)*mu_value
+                    upper = float(record.final_setting_time_minutes_unrounded) + float(record.final_setting_time_minutes_unrounded)*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.final_setting_nabl = 'pass'
+                        break
+                    else:
+                        record.final_setting_nabl = 'fail'
 
 
 
 
+    # @api.depends('time_needle_make_impression')
+    # def _compute_final_setting_time(self):
+    #     for record in self:
+    #         if record.time_needle_make_impression and record.time_water_added:
+    #             t1 = record.time_water_added
+    #             t2 = record.time_needle_make_impression
+    #             time_difference = t2 - t1
+
+    #             record.final_setting_time_hours = time_difference
+    #             final_setting_time = time_difference.total_seconds() / 60
+    #             if final_setting_time % 5 == 0:
+    #                 record.final_setting_time_minutes = final_setting_time
+    #             else:
+    #                 record.final_setting_time_minutes = round(final_setting_time / 5) * 5
+
+    #             record.final_setting_time_minutes_unrounded = final_setting_time
+    #         else:
+    #             record.final_setting_time_hours = False
+    #             record.final_setting_time_minutes = False
+    #             record.final_setting_time_minutes_unrounded = False
+                        
     @api.depends('time_needle_make_impression')
     def _compute_final_setting_time(self):
         for record in self:
@@ -140,22 +277,34 @@ class PtGrout(models.Model):
                 t1 = record.time_water_added
                 t2 = record.time_needle_make_impression
                 time_difference = t2 - t1
-                # import wdb;wdb.set_trace()
-                hours = time_difference.days * 24 + time_difference.seconds // 3600
-                minutes = (time_difference.seconds % 3600) // 60
 
-                # Format as "hh:mm"
-                formatted_time = f"{hours:02}:{minutes:02}"
-                # time_hours = time_difference.days * 24 + time_difference.seconds / 3600
-                record.final_setting_time_hours = formatted_time
-                final_setting_time = time_difference.total_seconds() / 60
-                if final_setting_time % 5 == 0:
-                    record.final_setting_time_minutes =  final_setting_time
+                # Convert time difference to seconds and then to minutes
+                final_setting_time_minutes = time_difference.total_seconds() / 60
+
+                final_setting_time_hours = time_difference.total_seconds() / 3600
+                time_delta = timedelta(hours=final_setting_time_hours)
+
+                # Format the time in a similar way as initial_setting_time_hours
+                record.final_setting_time_hours = "{:0}:{:02}".format(int(time_delta.total_seconds() // 3600), int((time_delta.total_seconds() % 3600) // 60))
+
+                if final_setting_time_minutes % 5 == 0:
+                    record.final_setting_time_minutes = final_setting_time_minutes
                 else:
-                    record.final_setting_time_minutes =  round(final_setting_time / 5) * 5
+                    record.final_setting_time_minutes = round(final_setting_time_minutes / 5) * 5
+
+                record.final_setting_time_minutes_unrounded = final_setting_time_minutes
             else:
                 record.final_setting_time_hours = False
                 record.final_setting_time_minutes = False
+                record.final_setting_time_minutes_unrounded = False
+
+
+
+    
+
+
+    
+
 
 
 
@@ -178,9 +327,9 @@ class PtGrout(models.Model):
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_bleeding_confirmity_confirmity")
 
-    bleedin_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_bleedin_nabl",store=True)
+    # bleedin_nabl_pt = fields.Selection([
+    #     ('pass', 'NABL'),
+    #     ('fail', 'Non-NABL')],default='NABL',compute="_compute_bleedin1_nabl",store=True)
 
 
     @api.depends('final_bleeding','eln_ref')
@@ -203,11 +352,18 @@ class PtGrout(models.Model):
                     else:
                         record.bleeding_confirmity = 'fail'
 
+
+    bleeding_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')],string="NABL",compute="_compute_bleeding_nabl",store=True)
+
+
+
     @api.depends('final_bleeding','eln_ref')
-    def _compute_bleedin_nabl(self):
+    def _compute_bleeding_nabl(self):
         
         for record in self:
-            record.bleedin_nabl = 'fail'
+            record.bleeding_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table
             for material in materials:
@@ -219,10 +375,11 @@ class PtGrout(models.Model):
                     lower = record.final_bleeding - record.final_bleeding*mu_value
                     upper = record.final_bleeding + record.final_bleeding*mu_value
                     if lower >= lab_min and upper <= lab_max:
-                        record.bleedin_nabl = 'pass'
+                        record.bleeding_nabl = 'pass'
                         break
                     else:
-                        record.bleedin_nabl = 'fail'
+                        record.bleeding_nabl = 'fail'
+
 
     @api.depends('vl_decanted', 'vl_sample')
     def _compute_final_bleeding(self):
@@ -255,10 +412,7 @@ class PtGrout(models.Model):
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_volume_change_confirmity")
 
-    volume_change_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_volume_change_nabl",store=True)
-
+  
 
     @api.depends('height_change_average','eln_ref')
     def _compute_volume_change_confirmity(self):
@@ -280,11 +434,17 @@ class PtGrout(models.Model):
                     else:
                         record.volume_change_confirmity = 'fail'
 
+    volume_nabl_1 = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')],string="NABL",compute="_compute_volume_nabl_1",store=True)
+
+
+
     @api.depends('height_change_average','eln_ref')
-    def _compute_volume_change_nabl(self):
+    def _compute_volume_nabl_1(self):
         
         for record in self:
-            record.volume_change_nabl = 'fail'
+            record.volume_nabl_1 = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table
             for material in materials:
@@ -296,10 +456,11 @@ class PtGrout(models.Model):
                     lower = record.height_change_average - record.height_change_average*mu_value
                     upper = record.height_change_average + record.height_change_average*mu_value
                     if lower >= lab_min and upper <= lab_max:
-                        record.volume_change_nabl = 'pass'
+                        record.volume_nabl_1 = 'pass'
                         break
                     else:
-                        record.volume_change_nabl = 'fail'
+                        record.volume_nabl_1 = 'fail'
+
 
     @api.depends('volume_change_table.height_change')
     def _compute_height_change_average(self):
@@ -329,6 +490,35 @@ class PtGrout(models.Model):
     grout_temperature_1 = fields.Float(string="Grout Temperature °c")
 
 
+    compressive_strength_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')],string="NABL",compute="_compute_volume_nabl",store=True)
+
+
+
+    @api.depends('water_cement_ratio_1','eln_ref')
+    def _compute_volume_nabl(self):
+        
+        for record in self:
+            record.compressive_strength_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            for material in materials:
+                # if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.water_cement_ratio_1 - record.water_cement_ratio_1*mu_value
+                    upper = record.water_cement_ratio_1 + record.water_cement_ratio_1*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.compressive_strength_nabl = 'pass'
+                        break
+                    else:
+                        record.compressive_strength_nabl = 'fail'
+
+
+
     @api.depends('wt_of_water_1', 'wt_of_cement_1')
     def _compute_ratio_1(self):
         for record in self:
@@ -354,10 +544,7 @@ class PtGrout(models.Model):
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_compressive_strength_7days_confirmity")
 
-    compressive_strength_7days_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_compressive_strength_7days_nabl",store=True)
-
+  
 
     @api.depends('compressive_strength_7_days','eln_ref')
     def _compute_compressive_strength_7days_confirmity(self):
@@ -379,11 +566,37 @@ class PtGrout(models.Model):
                     else:
                         record.compressive_strength_7days_confirmity = 'fail'
 
+    # @api.depends('compressive_strength_7_days','eln_ref')
+    # def compressive_strength_7days_nabl_1(self):
+        
+    #     for record in self:
+    #         record.compressive_strength_7days_nabl_pt = 'fail'
+    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+    #         for material in materials:
+    #             # if material.grade.id == record.grade.id:
+    #                 lab_min = line.lab_min_value
+    #                 lab_max = line.lab_max_value
+    #                 mu_value = line.mu_value
+                    
+    #                 lower = record.compressive_strength_7_days - record.compressive_strength_7_days*mu_value
+    #                 upper = record.compressive_strength_7_days + record.compressive_strength_7_days*mu_value
+    #                 if lower >= lab_min and upper <= lab_max:
+    #                     record.compressive_strength_7days_nabl_pt = 'pass'
+    #                     break
+    #                 else:
+    #                     record.compressive_strength_7days_nabl_pt = 'fail'
+    days7_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')],string="NABL",compute="_compute_days7_nabl",store=True)
+
+
+
     @api.depends('compressive_strength_7_days','eln_ref')
-    def _compute_compressive_strength_7days_nabl(self):
+    def _compute_days7_nabl(self):
         
         for record in self:
-            record.compressive_strength_7days_nabl = 'fail'
+            record.days7_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
             for material in materials:
@@ -395,10 +608,11 @@ class PtGrout(models.Model):
                     lower = record.compressive_strength_7_days - record.compressive_strength_7_days*mu_value
                     upper = record.compressive_strength_7_days + record.compressive_strength_7_days*mu_value
                     if lower >= lab_min and upper <= lab_max:
-                        record.compressive_strength_7days_nabl = 'pass'
+                        record.days7_nabl = 'pass'
                         break
                     else:
-                        record.compressive_strength_7days_nabl = 'fail'
+                        record.days7_nabl = 'fail'
+
 
 
     @api.depends('casting_7_days_tables.compressive_strength')
@@ -453,10 +667,7 @@ class PtGrout(models.Model):
         ('fail', 'Fail'),
     ], string='Confirmity', default='fail',compute="_compute_compressive_strength_28days_confirmity")
 
-    compressive_strength_28days_nabl = fields.Selection([
-        ('pass', 'Pass'),
-        ('fail', 'Fail')],string="NABL",compute="_compute_compressive_strength_28days_nabl",store=True)
-
+  
 
     @api.depends('compressive_strength_28_days','eln_ref')
     def _compute_compressive_strength_28days_confirmity(self):
@@ -478,11 +689,37 @@ class PtGrout(models.Model):
                     else:
                         record.compressive_strength_28days_confirmity = 'fail'
 
+    # @api.depends('compressive_strength_28_days','eln_ref')
+    # def compressive_strength_28days_nabl_1(self):
+        
+    #     for record in self:
+    #         record.compressive_strength_28days_nabl_pt = 'fail'
+    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+    #         for material in materials:
+    #             # if material.grade.id == record.grade.id:
+    #                 lab_min = line.lab_min_value
+    #                 lab_max = line.lab_max_value
+    #                 mu_value = line.mu_value
+                    
+    #                 lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
+    #                 upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
+    #                 if lower >= lab_min and upper <= lab_max:
+    #                     record.compressive_strength_28days_nabl_pt = 'pass'
+    #                     break
+    #                 else:
+    #                     record.compressive_strength_28days_nabl_pt = 'fail'
+    days28_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')],string="NABL",compute="_compute_days28_nabl",store=True)
+
+
+
     @api.depends('compressive_strength_28_days','eln_ref')
-    def _compute_compressive_strength_28days_nabl(self):
+    def _compute_days28_nabl(self):
         
         for record in self:
-            record.compressive_strength_28days_nabl = 'fail'
+            record.days28_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
             for material in materials:
@@ -494,10 +731,10 @@ class PtGrout(models.Model):
                     lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
                     upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
                     if lower >= lab_min and upper <= lab_max:
-                        record.compressive_strength_28days_nabl = 'pass'
+                        record.days28_nabl = 'pass'
                         break
                     else:
-                        record.compressive_strength_28days_nabl = 'fail'
+                        record.days28_nabl = 'fail'
 
 
     @api.depends('casting_28_days_tables.compressive_strength')
@@ -557,7 +794,8 @@ class PtGrout(models.Model):
 
         for record in self:
             record.fludity_visible = False
-            record.setting_time_visible = False
+            record.initial_setting_time_visible = False
+            record.final_setting_time_visible = False
             record.bleeding_visible = False
             record.volume_change_visible = False
             record.compressive_strength_visible = False
@@ -579,8 +817,10 @@ class PtGrout(models.Model):
                 if sample.internal_id == '1e31d717-331a-4e71-8887-ef37cf38c7dd':
                     record.fludity_visible = True
                 # Setting Time 
-                if sample.internal_id == 'a76295ce-2066-42ae-8dc8-a5ddf1e71cd1':
-                    record.setting_time_visible = True
+                if sample.internal_id == '0fd53f55-7350-4597-8057-139ef15f07fe':
+                    record.initial_setting_time_visible = True
+                if sample.internal_id == '9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e':
+                    record.final_setting_time_visible = True
                 # Bleeding 
                 if sample.internal_id == '950eafa7-9b4f-4025-b34c-75a33149cc6f':
                     record.bleeding_visible = True

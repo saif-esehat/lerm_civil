@@ -15,8 +15,8 @@
                     </group>
                     <group>
                         <field name="srf_id" invisible="1"/>
-                        <field name="sample_id" />
-                        <field name="eln_ref"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="eln_ref" readonly="1"/>
                         <field name="parameter_id" invisible="1"/>
                         <field name="grade" exception="grade"  string="Grade" identity="extra"/> 
                     </group>
@@ -57,19 +57,37 @@
                          <field name='sample_condition'/>
                         </group>
                     </group>
+
+                    <group>
+                    </group>
+
+                    <group>
+                      <group>
+                         <field name='specime_prepared'/>
+                         <field name='conditioning_started'/>
+                         <field name='Vaccum_starte'/>
+                         <field name='water_added'/>
+                      </group>
+                       <group>
+                         <field name='vaccum_turn_off'/>
+                         <field name='soaking_started'/>
+                         <field name='soaking_completed'/>
+                        
+                      </group>
+                    </group>
                    
 
 
 
                    <group>
-                        <h1>
+                        <!-- <h1>
                             <field name="dimension_name" readonly="1" nolabel="1"/>
                         
-                        </h1>
+                        </h1> -->
                     </group>
 
                    
-                    <group>
+                    <!-- <group>
                         <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
@@ -80,13 +98,57 @@
                            
                          </field> 
                         
-                    </group>
+                    </group> -->
+
                      <group>
+                        <label for="thickness_specimen1" string="Thickness of specimen, mm (L)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="thickness_specimen1" string="Specimen-01" />
+                            <field  name="thickness_specimen1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="18" class="oe_inline"  >
+                            <label for="thickness_specimen2" string="Specimen-02" />
+                            <field  name="thickness_specimen2"  colspan="12"  nolabel="1"/>
+                          </group>
+                           <group colspan="18" class="oe_inline"  >
+                            <label for="thickness_specimen3" string="Specimen-03" />
+                            <field  name="thickness_specimen3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                         
+                        </div>
+                      </group>
+
+                    
+
+                       <group>
+                        <label for="diameter_specimen1" string="Diameter of specimen, mm" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="diameter_specimen1" string="1" />
+                            <field  name="diameter_specimen1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="18" class="oe_inline"  >
+                            <label for="diameter_specimen2" string="2" />
+                            <field  name="diameter_specimen2"  colspan="12"  nolabel="1"/>
+                          </group>
+                           <group colspan="18" class="oe_inline"  >
+                            <label for="diameter_specimen3" string="3" />
+                            <field  name="diameter_specimen3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                         
+                        </div>
+                      </group>
+
+
+                      <group>
                         <label for="initial_voltage1" string="Initial Voltage(V1)" />
                         <div class="address_format " >
                           <group colspan="18"  class="oe_inline">
                             <label for="initial_voltage1" string="1" />
-                            <field  name="initial_voltage1" context="{'default_initial_voltage1': 'Cell-01'}"  colspan="12"  nolabel="1"/>
+                            <field  name="initial_voltage1" colspan="12"  nolabel="1"/>
                           </group>
                           <group colspan="18" class="oe_inline"  >
                             <label for="initial_voltage2" string="2" />
@@ -97,21 +159,7 @@
                             <field  name="initial_voltage3"  colspan="12"  nolabel="1"/>
                           </group>
 
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="initial_voltage4" string="4" />
-                            <field  name="initial_voltage4"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="initial_voltage5" string="5" />
-                            <field  name="initial_voltage5"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="initial_voltage6" string="6" />
-                            <field  name="initial_voltage6"  colspan="12"  nolabel="1"/>
-                          </group>
-
+                       
                         </div>
                     </group>
 
@@ -132,20 +180,7 @@
                             <field  name="initial_current3"  colspan="12"  nolabel="1"/>
                           </group>
 
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="initial_current4" string="4" />
-                            <field  name="initial_current4"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="initial_current5" string="5" />
-                            <field  name="initial_current5"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="initial_current6" string="6" />
-                            <field  name="initial_current6"  colspan="12"  nolabel="1"/>
-                          </group>
+                        
                         </div>
                       </group>
 
@@ -165,20 +200,7 @@
                             <field  name="initial_temprrature3"  colspan="12"  nolabel="1"/>
                           </group>
 
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="initial_temprrature4" string="4" />
-                            <field  name="initial_temprrature4"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="initial_temprrature5" string="5" />
-                            <field  name="initial_temprrature5"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="initial_temprrature6" string="6" />
-                            <field  name="initial_temprrature6"  colspan="12"  nolabel="1"/>
-                          </group>
+                       
                         </div>
                       </group>
 
@@ -199,20 +221,7 @@
                             <field  name="final_voltage3"  colspan="12"  nolabel="1"/>
                           </group>
 
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="final_voltage4" string="4" />
-                            <field  name="final_voltage4"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="final_voltage5" string="5" />
-                            <field  name="final_voltage5"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="final_voltage6" string="6" />
-                            <field  name="final_voltage6"  colspan="12"  nolabel="1"/>
-                          </group>
+                       
                         </div>
                       </group>
 
@@ -233,20 +242,7 @@
                             <field  name="final_curent3"  colspan="12"  nolabel="1"/>
                           </group>
 
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="final_curent4" string="4" />
-                            <field  name="final_curent4"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="final_curent5" string="5" />
-                            <field  name="final_curent5"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="final_curent6" string="6" />
-                            <field  name="final_curent6"  colspan="12"  nolabel="1"/>
-                          </group>
+                        
                         </div>
                       </group>
 
@@ -266,20 +262,7 @@
                             <field  name="final_tempreture3"  colspan="12"  nolabel="1"/>
                           </group>
 
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="final_tempreture4" string="4" />
-                            <field  name="final_tempreture4"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="final_tempreture5" string="5" />
-                            <field  name="final_tempreture5"  colspan="12"  nolabel="1"/>
-                          </group>
-
-                          <group colspan="18" class="oe_inline"  >
-                            <label for="final_tempreture6" string="6" />
-                            <field  name="final_tempreture6"  colspan="12"  nolabel="1"/>
-                          </group>
+                         
                         </div>
                       </group>
 
@@ -289,6 +272,13 @@
                         
                         </h1>
                     </group>
+
+
+
+                  
+                  
+
+                  
                    
 
                     <group>
@@ -300,6 +290,7 @@
                                 <field name='depth4'/>
                                 <field name='depth5'/>
                                 <field name='depth6'/>
+                                <field name='depth7'/>
                                 <field name='dx_avg'/>
                               
                             </tree>
@@ -308,12 +299,9 @@
                         
                     </group>
 
-                    <!-- <group>
-                    <field name='specimen2'/>
-                    <field name='specimen3'/>
-                    <field name='specimen4'/>
+                  
                     
-                    </group> -->
+                    <!-- </group>  -->
                      <group>
                         <h1>
                             <field name="observed_value_name" readonly="1" nolabel="1"/>
@@ -325,7 +313,7 @@
                    
 
                     <group>
-                        <label for="specimen1_ov1" string="Average Value of anolye solution °C" />
+                        <label for="specimen1_ov1" string="Absolute Value of applied Voltage, U" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="specimen1_ov1" string="Specimen 1" />
@@ -342,7 +330,7 @@
                         </div>
                     </group>
                      <group>
-                        <label for="specimen1_ov2" string="Absolute Value of applied Voltage V" />
+                        <label for="specimen1_ov2" string="Average Value of anolye solution °C ,T" />
                         <div class="address_format " >
                           <group colspan="1"  class="oe_inline">
                             <label for="specimen1_ov2" string="" />
@@ -429,6 +417,9 @@
                             <field  name="specimen3_ov_avg3"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
+                    </group> 
+                    <group>
+                     <field name="overall_average"/>
                     </group>
                     <group>
                       <field name="rcmt_nabl"/>

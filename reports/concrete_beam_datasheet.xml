@@ -75,6 +75,8 @@
                                 </td>
                                 <td colspan="2" style="text-align: center;font-weight: bold;">ID MARK/ Location
 								</td>
+								<td colspan="2" style="text-align: center;font-weight: bold;">Grade
+								</td>
 								<td colspan="2" style="text-align: center;font-weight: bold;">Length
 								</td>
                                 <td colspan="2" style="text-align: center;font-weight: bold;">Depth in mm
@@ -85,7 +87,7 @@
 								</td>
                                 <td colspan="2" style="text-align: center;font-weight: bold;">Fracture Distance from near support in Cm
 								</td>
-								<td colspan="2" style="text-align: center;font-weight: bold;">Failure Load in kN (P)
+								<td colspan="2" style="text-align: center;font-weight: bold;">Crushing Load in kN (P)
 								</td>
 								
 								<td colspan="2" style="text-align: center;font-weight: bold;">Flexural Strength in N/mm2
@@ -103,6 +105,10 @@
 								<td colspan="2" style="text-align: center;">
 									<span t-esc="r['id_mark']"/>
 								</td>
+								<td colspan="2" style="text-align: center;">
+									<span t-field="data.grade"></span>
+								</td>
+								 
 								<td colspan="2" style="text-align: center;">
 									<span t-esc="r['length']"/>
 								</td>
@@ -129,15 +135,21 @@
 						</table>
                         <table style="margin-top:20px">
                             <tr cols="12">
-                                    <td colspan="6">Average Flexural Strength in N/mm2 :
-                                        <![CDATA[&nbsp;]]>
+                                    <td colspan="6">Result - Avg Flexural Strength in N/mm2 
+                                        <![CDATA[&nbsp;]]> : 
+										<span t-field="data.average_flexural_strength" t-options='{"widget": "float", "precision": 2}'/>
+
                                     </td>
-                                    <td colspan="6" style="text-align: center;">
+                                    <!-- <td colspan="6" style="text-align: center;">
                                         <![CDATA[&nbsp;]]>
                                         <span t-field="data.average_flexural_strength" t-options='{"widget": "float", "precision": 2}'/>
-                                    </td>
+                                    </td> -->
+									
+									
                             </tr>
+							
                         </table>
+						
 					</div>
 
             
@@ -151,7 +163,7 @@
 						</b>
 						
 					</div>
-					<div style="height:40px">
+					<div style="height:30px">
 
 					</div>
 					<div>
@@ -161,7 +173,7 @@
 					</div>
 					<div>
 						<b>
-							(Jr. Technician)
+							(<span t-esc="eln.sample_id.filled_by.job_title"/>)
 						</b>
 					</div>
 				</div>
@@ -173,7 +185,7 @@
 							Checked By
 						</b>
 					</div>
-					<div style="height:40px">
+					<div style="height:30px">
 
 					</div>
 					<div>
@@ -184,7 +196,7 @@
 					
 					 <div>
 						<b>
-							(Sr. Technician)
+							(<span t-esc="eln.sample_id.check_by.job_title"/>)
 						</b>
 					</div>
 				</div>

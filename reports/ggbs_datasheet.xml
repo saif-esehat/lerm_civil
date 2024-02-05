@@ -257,7 +257,7 @@
 
 					<!-- Slag Activity Index  -->
 
-					<div t-if="data.slag_activity_visible" style="margin-top:20px">
+					<div t-if="data.slag_activity_7_visible or data.slag_activity_28_visible" style="margin-top:20px">
 						<!-- <div style="text-align:center;font-size:18px">
 							Slag Activity Index
 						</div> -->
@@ -842,7 +842,7 @@
 									<span t-field="data.time_fineness_trial3"/>
 								</td>
 							</tr>
-                            <tr cols="12">
+                            <!-- <tr cols="12">
 								<td colspan="6">Temp. :
 									<![CDATA[&nbsp;]]>
 								</td>
@@ -858,7 +858,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.temp_fineness_trial3"/>
 								</td>
-							</tr>
+							</tr> -->
 							<tr cols="12">
 								<td colspan="6">Average Time(tₒ),Sec :
 									<![CDATA[&nbsp;]]>
@@ -950,7 +950,7 @@
 									<span t-field="data.time_sample_trial3"/>
 								</td>
 							</tr>
-                            <tr cols="12">
+                            <!-- <tr cols="12">
 								<td colspan="6">Temperature :
 									<![CDATA[&nbsp;]]>
 								</td>
@@ -966,7 +966,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.temp_fineness_calculated_trial3"/>
 								</td>
-							</tr>
+							</tr> -->
 							<tr cols="12">
 								<td colspan="6">Average Time(tₒ),Sec :
 									<![CDATA[&nbsp;]]>
@@ -1018,7 +1018,7 @@
                             </div>
                             <div>
                                 <b>
-                                    (Jr. Technician)
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
                                 </b>
                             </div>
 						</div>
@@ -1040,7 +1040,7 @@
 							
 							<div>
 								<b>
-									(Sr. Technician)
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
 								</b>
 							</div>
 						</div>

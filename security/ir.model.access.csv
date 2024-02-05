@@ -75,6 +75,18 @@ lerm.parameter.master.table,lerm_parameter_master_table,lerm_civil.model_lerm_pa
 eln.parameters.inputs,eln_parameters_inputs,lerm_civil.model_eln_parameters_inputs,lerm_civil.kes_admin_access_group,1,1,1,1
 eln.parameters.result,eln_parameters_result,lerm_civil.model_eln_parameters_result,lerm_civil.kes_admin_access_group,1,1,1,1
 lerm.datasheet.line,lerm_datasheet_line,lerm_civil.model_lerm_datasheet_line,lerm_civil.kes_admin_access_group,1,1,1,1
+admin.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_admin_access_group,1,1,1,1
+admin.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_admin_access_group,1,1,1,1
+admin.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_admin_access_group,1,1,1,1
+admin.ndt.cover.meter.notes,access_ndt_cover_meter_notes,lerm_civil.model_ndt_cover_meter_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.crack.depth.notes,access_ndt_crack_depth_notes,lerm_civil.model_ndt_crack_depth_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.crack.width.notes,access_ndt_crack_width_notes,lerm_civil.model_ndt_crack_width_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.rebound.hammer.notes,access_ndt_rebound_hammer_notes,lerm_civil.model_ndt_rebound_hammer_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.model_ndt_carbonation_test_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_admin_access_group,1,1,1,1
+admin.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_admin_access_group,1,1,1,1
+
 
 
 
@@ -97,7 +109,7 @@ lerm.contractor.line.srf,lerm_contractor_line_srf,lerm_civil.model_lerm_contract
 
 verified.lerm.civil.srf,lerm_civil_srf,model_lerm_civil_srf,lerm_civil.kes_verified_by,1,1,1,1
 verified.sample.range.line,sample_range_line_srf,model_sample_range_line,lerm_civil.kes_verified_by,1,1,1,1
-verified.lerm.srf.sample,lerm_srf_sample_srf,model_lerm_srf_sample,lerm_civil.kes_verified_by,1,1,1,0
+verified.lerm.srf.sample,lerm_srf_sample_srf,model_lerm_srf_sample,lerm_civil.kes_verified_by,1,1,1,1
 verified.parameter.master,lerm_parameter_master,model_lerm_parameter_master,lerm_civil.kes_verified_by,1,0,0,0
 verified.test_method.hod,lerm_civil_test_method,model_lerm_civil_test_method,lerm_civil.kes_verified_by,1,0,0,0
 verified.lerm.grade.line,lerm_grade_line,model_lerm_grade_line,lerm_civil.kes_verified_by,1,0,0,0
@@ -383,7 +395,6 @@ hod.lerm_civil.access_mech_gsb_impact_line,access_mech_gsb_impact_line,lerm_civi
 hod.lerm_civil.access_mechanical_admixture,access_mechanical_admixture,lerm_civil.model_mechanical_admixture,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_mechanical_admixture_line,access_mechanical_admixture_line,lerm_civil.model_mechanical_admixture_line,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_mechanical_rcmt,access_mechanical_rcmt,lerm_civil.model_mechanical_rcmt,lerm_civil.kes_hod_access_group,1,0,0,0
-hod.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_mechanical_penetration_depth_rcmt_line,access_mechanical_penetration_depth_rcmt_line,lerm_civil.model_mechanical_penetration_depth_rcmt_line,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_mechanical_fusion_bond_steel,access_mechanical_fusion_bond_steel,lerm_civil.model_mechanical_fusion_bond_steel,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_mechanical_rcpt_concrete_cube,access_mechanical_rcpt_concrete_cube,lerm_civil.model_mechanical_rcpt_concrete_cube,lerm_civil.kes_hod_access_group,1,0,0,0
@@ -406,7 +417,18 @@ hod.lerm_civil.access_mechanical_precast_kerb,access_mechanical_precast_kerb,ler
 hod.lerm_civil.access_mech_precast_transverse_line,access_mech_precast_transverse_line,lerm_civil.model_mech_precast_transverse_line,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_mech_precast_water_absorbtion_line,access_mech_precast_water_absorbtion_line,lerm_civil.model_mech_precast_water_absorbtion_line,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.model_chemical_flyash,lerm_civil.kes_hod_access_group,1,0,0,0
-
+hod.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_hod_access_group,1,0,0,0
+hod.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_hod_access_group,1,0,0,0
+hod.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_hod_access_group,1,0,0,0
+hod.lerm.dependent.inputs.srf,lerm_dependent_inputs_srf,lerm_civil.model_lerm_dependent_inputs,lerm_civil.kes_hod_access_group,1,0,0,0
+hod.ndt.cover.meter.notes,access_ndt_cover_meter_notes,lerm_civil.model_ndt_cover_meter_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.crack.depth.notes,access_ndt_crack_depth_notes,lerm_civil.model_ndt_crack_depth_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.crack.width.notes,access_ndt_crack_width_notes,lerm_civil.model_ndt_crack_width_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.rebound.hammer.notes,access_ndt_rebound_hammer_notes,lerm_civil.model_ndt_rebound_hammer_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.model_ndt_carbonation_test_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_hod_access_group,1,0,0,0
+hod.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_hod_access_group,1,0,0,0
 
 
 
@@ -613,7 +635,6 @@ quality.lerm_civil.access_mech_gsb_impact_line,access_mech_gsb_impact_line,lerm_
 quality.lerm_civil.access_mechanical_admixture,access_mechanical_admixture,lerm_civil.model_mechanical_admixture,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_mechanical_admixture_line,access_mechanical_admixture_line,lerm_civil.model_mechanical_admixture_line,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_mechanical_rcmt,access_mechanical_rcmt,lerm_civil.model_mechanical_rcmt,kes_quality_manager,1,0,0,0
-quality.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_mechanical_penetration_depth_rcmt_line,access_mechanical_penetration_depth_rcmt_line,lerm_civil.model_mechanical_penetration_depth_rcmt_line,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_mechanical_fusion_bond_steel,access_mechanical_fusion_bond_steel,lerm_civil.model_mechanical_fusion_bond_steel,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_mechanical_rcpt_concrete_cube,access_mechanical_rcpt_concrete_cube,lerm_civil.model_mechanical_rcpt_concrete_cube,kes_quality_manager,1,0,0,0
@@ -636,7 +657,17 @@ quality.lerm_civil.access_mechanical_precast_kerb,access_mechanical_precast_kerb
 quality.lerm_civil.access_mech_precast_transverse_line,access_mech_precast_transverse_line,lerm_civil.model_mech_precast_transverse_line,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_mech_precast_water_absorbtion_line,access_mech_precast_water_absorbtion_line,lerm_civil.model_mech_precast_water_absorbtion_line,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.model_chemical_flyash,kes_quality_manager,1,0,0,0
-
+quality.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_quality_manager,1,0,0,0
+quality.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_quality_manager,1,0,0,0
+quality.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_quality_manager,1,0,0,0
+quality.ndt.cover.meter.notes,access_ndt_cover_meter_notes,lerm_civil.model_ndt_cover_meter_notes,kes_quality_manager,1,0,0,0
+quality.ndt.crack.depth.notes,access_ndt_crack_depth_notes,lerm_civil.model_ndt_crack_depth_notes,kes_quality_manager,1,0,0,0
+quality.ndt.crack.width.notes,access_ndt_crack_width_notes,lerm_civil.model_ndt_crack_width_notes,kes_quality_manager,1,0,0,0
+quality.ndt.rebound.hammer.notes,access_ndt_rebound_hammer_notes,lerm_civil.model_ndt_rebound_hammer_notes,kes_quality_manager,1,0,0,0
+quality.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.model_ndt_carbonation_test_notes,kes_quality_manager,1,0,0,0
+quality.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_quality_manager,1,0,0,0
+quality.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_quality_manager,1,0,0,0
+quality.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_quality_manager,1,0,0,0
 
 
 
@@ -842,7 +873,6 @@ technician.lerm_civil.access_mech_gsb_impact_line,access_mech_gsb_impact_line,le
 technician.lerm_civil.access_mechanical_admixture,access_mechanical_admixture,lerm_civil.model_mechanical_admixture,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_mechanical_admixture_line,access_mechanical_admixture_line,lerm_civil.model_mechanical_admixture_line,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_mechanical_rcmt,access_mechanical_rcmt,lerm_civil.model_mechanical_rcmt,kes_technician_access_group,1,1,1,1
-technician.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_mechanical_penetration_depth_rcmt_line,access_mechanical_penetration_depth_rcmt_line,lerm_civil.model_mechanical_penetration_depth_rcmt_line,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_mechanical_fusion_bond_steel,access_mechanical_fusion_bond_steel,lerm_civil.model_mechanical_fusion_bond_steel,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_mechanical_rcpt_concrete_cube,access_mechanical_rcpt_concrete_cube,lerm_civil.model_mechanical_rcpt_concrete_cube,kes_technician_access_group,1,1,1,1
@@ -864,3 +894,27 @@ technician.lerm_civil.access_mechanical_precast_kerb,access_mechanical_precast_k
 technician.lerm_civil.access_mech_precast_transverse_line,access_mech_precast_transverse_line,lerm_civil.model_mech_precast_transverse_line,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_mech_precast_water_absorbtion_line,access_mech_precast_water_absorbtion_line,lerm_civil.model_mech_precast_water_absorbtion_line,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_chemical_flyash,access_chemical_flyash,lerm_civil.model_chemical_flyash,kes_technician_access_group,1,1,1,1
+lerm.size.line.technician,lerm_size_line,model_lerm_size_line,lerm_civil.kes_technician_access_group,1,0,0,0
+technician.lerm.srf.sample,lerm_srf_sample,model_lerm_srf_sample,lerm_civil.kes_technician_access_group,1,1,0,0
+technician.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_technician_access_group,1,1,1,1
+technician.chemical.gyspum,chemical_gypsum,lerm_civil.model_chemical_gyspum,lerm_civil.kes_technician_access_group,1,1,1,1
+technician.chemical.hardened.concrete,chemical_hardened_concrete,lerm_civil.model_chemical_hardened_concrete,lerm_civil.kes_technician_access_group,1,1,1,1
+technician.chemical.crushed.sand,chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,lerm_civil.kes_technician_access_group,1,1,1,1
+technician.lerm.dependent.inputs.srf,lerm_dependent_inputs_srf,lerm_civil.model_lerm_dependent_inputs,lerm_civil.kes_technician_access_group,1,1,1,1
+hod.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,lerm_civil.kes_hod_access_group,1,0,0,0
+quality.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_quality_manager,1,0,0,0
+technician.lerm_civil.access_mechanical_dimension_rcmt_line,access_mechanical_dimension_rcmt_line,lerm_civil.model_mechanical_dimension_rcmt_line,kes_technician_access_group,1,1,1,1
+technician.ndt.cover.meter.notes,access_ndt_cover_meter_notes,lerm_civil.model_ndt_cover_meter_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.crack.depth.notes,access_ndt_crack_depth_notes,lerm_civil.model_ndt_crack_depth_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.crack.width.notes,access_ndt_crack_width_notes,lerm_civil.model_ndt_crack_width_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.rebound.hammer.notes,access_ndt_rebound_hammer_notes,lerm_civil.model_ndt_rebound_hammer_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.model_ndt_carbonation_test_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_technician_access_group,1,1,1,1
+technician.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_technician_access_group,1,1,1,1
+
+
+
+
+
+admin.edit.lerm.civil.srf,edit_lerm_civil_srf,lerm_civil.model_edit_lerm_civil_srf,lerm_civil.srf_sample_editable,1,1,1,1

@@ -7,12 +7,12 @@
 			<!-- <t t-call="web.basic_layout"> -->
 			
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report On PtGrout Mechanical</b></p>
-				</div>
+				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Test Report No :
 								</td>
@@ -24,13 +24,13 @@
 								<td colspan="3">
 									<span t-field="o.srf_date"/>
 								</td>
-								<!-- <td colspan="3">ULR NO :
+								<!<td colspan="3">ULR NO :
 								</td> -->
-								<td colspan="3">
-									---
-									<!-- <span t-field="o.sample_id.ulr_no"/> -->
+								<!-- <td colspan="3">
+								
 								</td>
 							</tr>
+						</table>  -->
 
 						<table>
 								<tr>
@@ -42,7 +42,7 @@
 													Customer/Party Name :
 												</td>
 												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/>
+												<span t-field="o.srf_id.customer.name"/><br/>
 												<span t-field="o.srf_id.customer.street"/>
 												<span t-field="o.srf_id.customer.street2"/>
 												<span t-field="o.srf_id.customer.city"/>
@@ -87,7 +87,7 @@
 								</tr>
 							
 
-						</table>
+						
 						</table>
 							
 						<table>
@@ -138,6 +138,7 @@
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td>
+									<span t-field="ptgrout.water_cement_ratio"/>
 								</td>
 							</tr>
 							<tr>
@@ -407,9 +408,10 @@
 								</div>
 								<div>
 									<b>
-										(Authorized Signatory)
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
+								
 							</div>
 						</div>
 					</div>

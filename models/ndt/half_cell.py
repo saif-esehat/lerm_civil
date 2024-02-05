@@ -11,10 +11,12 @@ class HalfCell(models.Model):
     name = fields.Char("Name",default="Half Cell")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
     structure_age = fields.Char("Year of Construction")
-    temp = fields.Float("Temp")
+    temperature = fields.Float("Temperature °C")
     instrument = fields.Char("Instrument")
     child_lines_1 = fields.One2many('ndt.half.cell.one', 'parent_id', string="Parameter")
     child_lines_2 = fields.One2many('ndt.half.cell.two', 'parent_id', string="Parameter")
+
+    notes = fields.One2many('ndt.half.cell.notes','parent_id',string="Notes")
 
 
     def upgrade(self):
@@ -44,11 +46,11 @@ class HalfCell(models.Model):
 
     def button_press_action(self):
 
-        if self.temp < 22.2:
-            correction = 22.2 - self.temp
+        if self.temperature < 22.2:
+            correction = 22.2 - self.temperature
             mv = correction * (-0.91)
-        elif self.temp > 27.7:
-            correction = self.temp - 27.7
+        elif self.temperature > 27.7:
+            correction = self.temperature - 27.7
             mv = correction * (-0.91)
         else:
             mv = 0
@@ -60,7 +62,8 @@ class HalfCell(models.Model):
         for line1 in self.child_lines_1:
             # import wdb; wdb.set_trace()
             # Find or create the corresponding record in child_lines_2 using the 'member' and 'location' fields
-            corresponding_line2 = self.child_lines_2.filtered(lambda line2: line2.member == line1.member and line2.location == line1.location)
+            # corresponding_line2 = self.child_lines_2.filtered(lambda line2: line2.member == line1.member and line2.location == line1.location)
+            corresponding_line2 = self.child_lines_2.filtered(lambda line2:line1.level == line2.level)
 
             if corresponding_line2:
                 # Update the existing record in child_lines_2
@@ -134,7 +137,7 @@ class HalfCellLineTwo(models.Model):
     parent_id = fields.Many2one('ndt.half.cell',string="Parent Id")
     member = fields.Char("Member")
     location = fields.Char("Location")
-    level = fields.Char("Level")
+    level = fields.Char("Location")
     r1 = fields.Float("R1",digits=(16,3))
     r2 = fields.Float("R2",digits=(16,3))
     r3 = fields.Float("R3",digits=(16,3))
@@ -174,3 +177,8 @@ class HalfCellLineTwo(models.Model):
 
     
     
+class HalfCellNotes(models.Model):
+    _name = "ndt.half.cell.notes"
+
+    parent_id = fields.Many2one('ndt.half.cell',string="Parent Id")
+    notes = fields.Char("Notes")

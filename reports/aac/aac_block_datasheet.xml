@@ -283,7 +283,7 @@
 								<span t-esc="r['final_length']"/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['change_length']"/>
+								<span t-esc="r['change_length']" t-options='{"widget": "float", "precision": 2}' />
 							</td>
 							<td colspan="2">
 								<span t-esc="r['drying_shrinkage']"/>
@@ -366,32 +366,52 @@
 				</div>
 				</div>
 
-				<div class="authorizeRowDataSheet">
-					<div>
+				   <!-- authorizeRowDataSheet -->
+                    <div class="authorizeRowDataSheet">
 						<div>
-							<b>
-								(JR Chemist)
-							</b>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
+                                </b>
+                            </div>
 						</div>
-						<div>
-							<b>
-								Tested By
-							</b>
+						<div style="margin-left:500px">
+							
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
+								</b>
+							</div>
 						</div>
 					</div>
-					<div style="margin-left:500px">
-						<div>
-							<b>
-								Chemical Department (HOD)
-							</b>
-						</div>
-						<div>
-							<b>
-								Checked By
-							</b>
-						</div>
-					</div>
-				</div>
 			</t>
 		</t>
 	</template>

@@ -39,7 +39,7 @@
 							<tr>
 								<td colspan="12">Customer Party Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.name"/><br/>
 									<span t-field="o.srf_id.customer.street"/>
 									<span t-field="o.srf_id.customer.street2"/>
 									<span t-field="o.srf_id.customer.city"/>
@@ -181,10 +181,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr t-if="cement.normal_consistency_visible and cement.normal_consistency_nabl == 'pass' and nabl">
+						<!-- Normal Consistency  -->
+							<tr t-if="cement.normal_consistency_visible and cement.normal_consistency_nabl == 'pass' and nabl and not fromEln">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									
@@ -228,10 +230,11 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.normal_consistency_visible and cement.normal_consistency_nabl == 'fail' and not nabl">
+							<tr t-if="cement.normal_consistency_visible and cement.normal_consistency_nabl == 'fail' and not nabl and not fromEln">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -274,11 +277,61 @@
 								</td>
 							</tr>
 
-
-							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'pass' and nabl">
+							<tr t-if="cement.normal_consistency_visible and fromEln">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a9e97cea-372f-4775-9bcb-e9dd70e6e6df')]).parameter_name"/>
+									</span>
+									
+								</td>
+								
+								
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a9e97cea-372f-4775-9bcb-e9dd70e6e6df')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="cement.normal_consistency_trial1"/>
+									</span>									
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a9e97cea-372f-4775-9bcb-e9dd70e6e6df')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a9e97cea-372f-4775-9bcb-e9dd70e6e6df')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-field="cement.normal_consistency_conformity"/>
+								</td>
+							</tr>
+
+						<!-- Initial Setting Time  -->
+							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'pass' and nabl and not fromEln">
+							
+								
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -322,10 +375,12 @@
 								
 							</tr>
 
-							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'fail' and not nabl">
+							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'fail' and not nabl and not fromEln">
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -369,10 +424,62 @@
 							</tr>
 
 
-							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'pass' and nabl">
+							<tr t-if="cement.initial_setting_time_visible and fromEln">
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')]).parameter_name"/>
+									</span>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="cement.initial_setting_time_minutes"/>
+									</span>									
+								</td>
+								
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','40ce7425-30fe-4043-b518-015f5c60d916')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-field="cement.initial_setting_conformity"/>
+								</td>
+								
+							</tr>
+
+						<!-- Final Setting Time  -->
+							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'pass' and nabl and not fromEln">
+							
+							
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -415,10 +522,12 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'fail' and not nabl">
+							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'fail' and not nabl and not fromEln">
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -460,10 +569,63 @@
 									<span t-field="cement.final_setting_conformity"/>
 								</td>
 							</tr>
-							<tr t-if="cement.dry_sieving_visible and cement.dry_seiving_nabl == 'pass' and nabl">
+
+							<tr t-if="cement.final_setting_time_visible and fromEln">
+							
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')]).parameter_name"/>
+									</span>
+									
+								</td>
+								
+								
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="cement.final_setting_time_minutes"/>
+									</span>									
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d339933c-5e9c-4335-9ea2-2d87624c3061')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-field="cement.final_setting_conformity"/>
+								</td>
+							</tr>
+
+
+						<!-- Dry Sieving  -->
+							<tr t-if="cement.dry_sieving_visible and cement.dry_seiving_nabl == 'pass' and nabl and not fromEln">
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+									
+								
 								</td>
 								<td>
 									<span>
@@ -479,7 +641,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.fineness_dry_sieving" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="cement.fineness_dry_sieving" />
 									</span>									
 								</td>
 								<td>
@@ -506,10 +668,11 @@
 							</tr>
 
 
-							<tr t-if="cement.dry_sieving_visible and cement.dry_seiving_nabl == 'fail' and not nabl">
+							<tr t-if="cement.dry_sieving_visible and cement.dry_seiving_nabl == 'fail' and not nabl and not fromEln">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -525,7 +688,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.fineness_dry_sieving" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="cement.fineness_dry_sieving" />
 									</span>									
 								</td>
 								<td>
@@ -551,11 +714,61 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.density_visible and cement.density_nabl == 'pass' and nabl">
+
+							<tr t-if="cement.dry_sieving_visible and fromEln">
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ed89d6b3-783f-4044-aef7-d2dd847d3cce')]).parameter_name"/>
+									</span>
+								</td>
+								
+								
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ed89d6b3-783f-4044-aef7-d2dd847d3cce')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="cement.fineness_dry_sieving" />
+									</span>									
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ed89d6b3-783f-4044-aef7-d2dd847d3cce')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ed89d6b3-783f-4044-aef7-d2dd847d3cce')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-field="cement.dry_seiving_conformity"/>
+								</td>
+							</tr>
+
+
+						<!-- Density  -->
+							<tr t-if="cement.density_visible and cement.density_nabl == 'pass' and nabl and not fromEln">
 
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -597,11 +810,12 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.density_visible and cement.density_nabl == 'fail' and not nabl">
+							<tr t-if="cement.density_visible and cement.density_nabl == 'fail' and not nabl and not fromEln">
 
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -643,10 +857,63 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.soundness_visible and cement.soundness_nabl == 'pass' and nabl">
+
+							<tr t-if="cement.density_visible and fromEln">
+
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+								</td>
+									
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8fcf78c9-dd02-4664-bba4-b887a64a6952')]).parameter_name"/>
+									</span>
+								</td>
+								
+								
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8fcf78c9-dd02-4664-bba4-b887a64a6952')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="cement.average_density"/>
+									</span>									
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8fcf78c9-dd02-4664-bba4-b887a64a6952')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8fcf78c9-dd02-4664-bba4-b887a64a6952')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-field="cement.density_conformity"/>
+								</td>
+							</tr>
+
+							
+
+
+						<!-- Soundness  -->
+							<tr t-if="cement.soundness_visible and cement.soundness_nabl == 'pass' and nabl and not fromEln">
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -662,7 +929,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.expansion_soundness" t-options='{"widget": "float", "precision": 2}' />
+										<span t-field="cement.expansion_soundness"  />
 									</span>									
 								</td>
 								<td>
@@ -689,10 +956,11 @@
 							</tr>
 
 
-							<tr t-if="cement.soundness_visible and cement.soundness_nabl == 'fail' and not nabl">
+							<tr t-if="cement.soundness_visible and cement.soundness_nabl == 'fail' and not nabl and not fromEln">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -708,7 +976,7 @@
 								</td>
 								<td>
 									<span>
-										<span t-field="cement.expansion_soundness" t-options='{"widget": "float", "precision": 2}' />
+										<span t-field="cement.expansion_soundness"  />
 									</span>									
 								</td>
 								<td>
@@ -734,10 +1002,60 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.fineness_blaine_visible and cement.fineness_nabl == 'pass' and nabl">
+
+							<tr t-if="cement.soundness_visible and fromEln">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5d2e505d-1d50-48aa-a8c8-9f70fe4b421b')]).parameter_name"/>
+									</span>
+								</td>
+								
+								
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5d2e505d-1d50-48aa-a8c8-9f70fe4b421b')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="cement.expansion_soundness"  />
+									</span>									
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5d2e505d-1d50-48aa-a8c8-9f70fe4b421b')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5d2e505d-1d50-48aa-a8c8-9f70fe4b421b')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-field="cement.soundness_conformity"/>
+								</td>
+							</tr>
+
+
+						<!-- Fineness  -->
+							<tr t-if="cement.fineness_blaine_visible and cement.fineness_nabl == 'pass' and nabl and not fromEln">
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -779,10 +1097,11 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.fineness_blaine_visible and cement.fineness_nabl == 'fail' and not nabl">
+							<tr t-if="cement.fineness_blaine_visible and cement.fineness_nabl == 'fail' and not nabl and not fromEln">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -824,10 +1143,60 @@
 								</td>
 							</tr>
 
-							<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass')) and nabl">
+
+							<tr t-if="cement.fineness_blaine_visible and fromEln">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','97ca92ab-492a-44a2-8245-0c3a2d40e313')]).parameter_name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','97ca92ab-492a-44a2-8245-0c3a2d40e313')]).unit.name"/>
+									</span>
+								</td>
+								
+								<td>
+									<span>
+										<span t-field="cement.fineness_air_permeability"/>
+									</span>									
+								</td>
+								
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','97ca92ab-492a-44a2-8245-0c3a2d40e313')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','97ca92ab-492a-44a2-8245-0c3a2d40e313')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-field="cement.fineness_conformity"/>
+								</td>
+							</tr>
+
+						<t t-if="i &lt;= 4">
+						<!-- Compressive Strength  -->
+							<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass')) and nabl and not fromEln">
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -855,10 +1224,11 @@
 								</td>
 							</tr>
 
-							<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'fail') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'fail') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'fail')) and not nabl">
+							<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'fail') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'fail') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'fail')) and not nabl and not fromEln">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
+									
 								</td>
 								<td>
 									<span>
@@ -886,7 +1256,42 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass' and nabl">
+
+							<tr t-if="((cement.compressive_28_visible ) or (cement.compressive_7_visible ) or (cement.compressive_3_visible)) and fromEln">
+								<td>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+									
+								</td>
+								<td>
+									<span>
+										Compressive Strength
+									</span>
+								</td>
+								<td>
+									<span>
+									</span>
+								</td>
+								<td>
+									<span>
+									</span>									
+								</td>
+								<td>
+									<span>
+									</span>
+								</td>
+								<td>
+									<span>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									
+								</td>
+							</tr>
+
+
+						<!-- 3 Days  -->
+							<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass' and nabl and not fromEln">
 								<td>
 									<span>a</span>
 								</td>
@@ -905,7 +1310,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_3days">
-											<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_3_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -936,7 +1341,7 @@
 							</tr>
 
 
-							<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'fail' and not nabl">
+							<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'fail' and not nabl and not fromEln">
 								<td>
 									<span>a</span>
 								</td>
@@ -955,7 +1360,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_3days">
-											<span t-field="cement.compressive_strength_3_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_3_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -984,7 +1389,60 @@
 									<span t-field="cement.compressive_3days_conformity"/>
 								</td>
 							</tr>
-							<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass' and nabl">
+
+
+							<tr t-if="cement.compressive_3_visible and fromEln">
+								<td>
+									<span>a</span>
+								</td>
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_name"/>
+									</span>
+								</td>
+								
+								
+								<td>
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).unit.name"/>
+									</span>
+								</td>
+								<td>
+									<span>
+										<t t-if="cement.status_3days">
+											<span t-field="cement.compressive_strength_3_days" />
+										</t>
+										<t t-else="">
+											Awaited
+										</t>
+									</span>									
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td>
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                        </t>
+									</t>
+									</span>
+								</td>
+								<td t-if="eln.conformity">
+									<span t-field="cement.compressive_3days_conformity"/>
+								</td>
+							</tr>
+
+
+						<!-- 7 Days  -->
+							<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass' and nabl and not fromEln">
 								<td>
 									<span>b</span>
 								</td>
@@ -1004,7 +1462,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_7days">
-											<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_7_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -1034,7 +1492,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'fail' and not nabl">
+							<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'fail' and not nabl and not fromEln">
 								<td>
 									<span>b</span>
 								</td>
@@ -1054,7 +1512,7 @@
 								<td>
 									<span>
 										<t t-if="cement.status_7days">
-											<span t-field="cement.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+											<span t-field="cement.compressive_strength_7_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -1084,26 +1542,27 @@
 								</td>
 							</tr>
 
-							<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass' and nabl">
+							<tr t-if="cement.compressive_7_visible and fromEln">
 								<td>
-									<span>c</span>
+									<span>b</span>
 								</td>
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_name"/>
 									</span>
 								</td>
 								
 								
+								
 								<td>
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).unit.name"/>
 									</span>
 								</td>
 								<td>
 									<span>
-										<t t-if="cement.status_28days">
-											<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+										<t t-if="cement.status_7days">
+											<span t-field="cement.compressive_strength_7_days" />
 										</t>
 										<t t-else="">
 											Awaited
@@ -1112,7 +1571,7 @@
 								</td>
 								<td>
 									<span>
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.permissable_limit"/>
                                         </t>
@@ -1121,7 +1580,7 @@
 								</td>
 								<td>
 									<span>
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.specification"/>
                                         </t>
@@ -1129,147 +1588,807 @@
 									</span>
 								</td>
 								<td t-if="eln.conformity">
-									<span t-field="cement.compressive_28days_conformity"/>
+									<span t-field="cement.compressive_7days_conformity"/>
 								</td>
 							</tr>
 
-							<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'fail' and not nabl">
-								<td>
-									<span>c</span>
-								</td>
-								<td>
-									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_name"/>
-									</span>
-								</td>
-								
-								
-								<td>
-									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).unit.name"/>
-									</span>
-								</td>
-								<td>
-									<span>
-										<t t-if="cement.status_28days">
-											<span t-field="cement.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
-										</t>
-										<t t-else="">
-											Awaited
-										</t>
-									</span>									
-								</td>
-								<td>
-									<span>
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
-										<t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                        </t>
-									</t>
-									</span>
-								</td>
-								<td>
-									<span>
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
-										<t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
-                                        </t>
-									</t>
-									</span>
-								</td>
-								<td t-if="eln.conformity">
-									<span t-field="cement.compressive_28days_conformity"/>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<div  style="page-break-inside: avoid;margin-top:20px;" class="noteContainer">
-						<div>
-							<b>Note :-</b>
-						</div>
-						<div>
-							<ul>
-								<li>
-									The Test Report(s) is/are valid only to the sample submitted to the laboratory.
-								</li>
-								<li>
-									Sample(s) was/were not drawn by laboratory.
-								</li>
-								<li>
-									This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
-								</li>
-								<li t-if="eln.has_witness">
-									<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
-								</li>
-							</ul>
-						</div>
-					</div>
-				    <div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
-							<div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
-								<div style="height:30px">
 
-								</div>
-								<div>
-									<b>
-										<span t-esc="eln.sample_id.check_by.name"/>
-									</b>
-								</div>
-								<div>
-									<b>
-										(Sr. Technician)
-									</b>
-								</div>
-							</div>
-							<div>
-								<div >
-									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-								</div>
-								<div style="padding-top:5px">
-									Format No. <span t-esc="eln.material.test_format_no"/>
-								</div>
-							</div>
-							<div>
-								<div>
-									<b>
-										Approved By 
-									</b>
+						<!-- 28 Days  -->
+								<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass' and nabl and not fromEln">
+									<td>
+										<span>c</span>
+									</td>
+									<td>
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_name"/>
+										</span>
+									</td>
 									
-								</div>
-								<div style="height:30px">
+									
+									<td>
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).unit.name"/>
+										</span>
+									</td>
+									<td>
+										<span>
+											<t t-if="cement.status_28days">
+												<span t-field="cement.compressive_strength_28_days" />
+											</t>
+											<t t-else="">
+												Awaited
+											</t>
+										</span>									
+									</td>
+									<td>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.permissable_limit"/>
+											</t>
+										</t>
+										</span>
+									</td>
+									<td>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.specification"/>
+											</t>
+										</t>
+										</span>
+									</td>
+									<td t-if="eln.conformity">
+										<span t-field="cement.compressive_28days_conformity"/>
+									</td>
+								</tr>
 
+								<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'fail' and not nabl and not fromEln">
+									<td>
+										<span>c</span>
+									</td>
+									<td>
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_name"/>
+										</span>
+									</td>
+									
+									
+									<td>
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).unit.name"/>
+										</span>
+									</td>
+									<td>
+										<span>
+											<t t-if="cement.status_28days">
+												<span t-field="cement.compressive_strength_28_days" />
+											</t>
+											<t t-else="">
+												Awaited
+											</t>
+										</span>									
+									</td>
+									<td>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.permissable_limit"/>
+											</t>
+										</t>
+										</span>
+									</td>
+									<td>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.specification"/>
+											</t>
+										</t>
+										</span>
+									</td>
+									<td t-if="eln.conformity">
+										<span t-field="cement.compressive_28days_conformity"/>
+									</td>
+								</tr>
+
+								<tr t-if="cement.compressive_28_visible and fromEln">
+									<td>
+										<span>c</span>
+									</td>
+									<td>
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_name"/>
+										</span>
+									</td>
+									
+									
+									<td>
+										<span>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).unit.name"/>
+										</span>
+									</td>
+									<td>
+										<span>
+											<t t-if="cement.status_28days">
+												<span t-field="cement.compressive_strength_28_days" />
+											</t>
+											<t t-else="">
+												Awaited
+											</t>
+										</span>									
+									</td>
+									<td>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.permissable_limit"/>
+											</t>
+										</t>
+										</span>
+									</td>
+									<td>
+										<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.specification"/>
+											</t>
+										</t>
+										</span>
+									</td>
+									<td t-if="eln.conformity">
+										<span t-field="cement.compressive_28days_conformity"/>
+									</td>
+								</tr>
+							</t>
+
+							</tbody>
+						</table>
+						<t  t-if="i > 4">
+						<div style="page-break-before: always;"></div>
+							<table>
+								<tbody>
+									<!-- Compressive Strength  -->
+									<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass')) and nabl and not fromEln">
+										<td>
+											<span t-esc="i + 1" />
+											<t t-set="i" t-value="i+1"/>
+											
+										</td>
+										<td>
+											<span>
+												Compressive Strength
+											</span>
+										</td>
+										<td>
+											<span>
+											</span>
+										</td>
+										<td>
+											<span>
+											</span>									
+										</td>
+										<td>
+											<span>
+											</span>
+										</td>
+										<td>
+											<span>
+											</span>
+										</td>
+										<td t-if="eln.conformity">
+											
+										</td>
+									</tr>
+
+									<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'fail') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'fail') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'fail')) and not nabl and not fromEln">
+										<td>
+											<span t-esc="i + 1" />
+											<t t-set="i" t-value="i+1"/>
+											
+										</td>
+										<td>
+											<span>
+												Compressive Strength
+											</span>
+										</td>
+										<td>
+											<span>
+											</span>
+										</td>
+										<td>
+											<span>
+											</span>									
+										</td>
+										<td>
+											<span>
+											</span>
+										</td>
+										<td>
+											<span>
+											</span>
+										</td>
+										<td t-if="eln.conformity">
+											
+										</td>
+									</tr>
+
+
+									<tr t-if="((cement.compressive_28_visible ) or (cement.compressive_7_visible ) or (cement.compressive_3_visible)) and fromEln">
+										<td>
+											<span t-esc="i + 1" />
+											<t t-set="i" t-value="i+1"/>
+											
+										</td>
+										<td>
+											<span>
+												Compressive Strength
+											</span>
+										</td>
+										<td>
+											<span>
+											</span>
+										</td>
+										<td>
+											<span>
+											</span>									
+										</td>
+										<td>
+											<span>
+											</span>
+										</td>
+										<td>
+											<span>
+											</span>
+										</td>
+										<td t-if="eln.conformity">
+											
+										</td>
+									</tr>
+
+
+								<!-- 3 Days  -->
+									<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass' and nabl and not fromEln">
+										<td>
+											<span>a</span>
+										</td>
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_name"/>
+											</span>
+										</td>
+										
+										
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).unit.name"/>
+											</span>
+										</td>
+										<td>
+											<span>
+												<t t-if="cement.status_3days">
+													<span t-field="cement.compressive_strength_3_days" />
+												</t>
+												<t t-else="">
+													Awaited
+												</t>
+											</span>									
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td t-if="eln.conformity">
+											<span t-field="cement.compressive_3days_conformity"/>
+										</td>
+									</tr>
+
+
+									<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'fail' and not nabl and not fromEln">
+										<td>
+											<span>a</span>
+										</td>
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_name"/>
+											</span>
+										</td>
+										
+										
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).unit.name"/>
+											</span>
+										</td>
+										<td>
+											<span>
+												<t t-if="cement.status_3days">
+													<span t-field="cement.compressive_strength_3_days" />
+												</t>
+												<t t-else="">
+													Awaited
+												</t>
+											</span>									
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td t-if="eln.conformity">
+											<span t-field="cement.compressive_3days_conformity"/>
+										</td>
+									</tr>
+
+
+									<tr t-if="cement.compressive_3_visible and fromEln">
+										<td>
+											<span>a</span>
+										</td>
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_name"/>
+											</span>
+										</td>
+										
+										
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).unit.name"/>
+											</span>
+										</td>
+										<td>
+											<span>
+												<t t-if="cement.status_3days">
+													<span t-field="cement.compressive_strength_3_days" />
+												</t>
+												<t t-else="">
+													Awaited
+												</t>
+											</span>									
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','8ff8bce6-fb91-4673-8789-557cf91c3449')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td t-if="eln.conformity">
+											<span t-field="cement.compressive_3days_conformity"/>
+										</td>
+									</tr>
+
+
+								<!-- 7 Days  -->
+									<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass' and nabl and not fromEln">
+										<td>
+											<span>b</span>
+										</td>
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_name"/>
+											</span>
+										</td>
+										
+										
+										
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).unit.name"/>
+											</span>
+										</td>
+										<td>
+											<span>
+												<t t-if="cement.status_7days">
+													<span t-field="cement.compressive_strength_7_days" />
+												</t>
+												<t t-else="">
+													Awaited
+												</t>
+											</span>									
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td t-if="eln.conformity">
+											<span t-field="cement.compressive_7days_conformity"/>
+										</td>
+									</tr>
+
+									<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'fail' and not nabl and not fromEln">
+										<td>
+											<span>b</span>
+										</td>
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_name"/>
+											</span>
+										</td>
+										
+										
+										
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).unit.name"/>
+											</span>
+										</td>
+										<td>
+											<span>
+												<t t-if="cement.status_7days">
+													<span t-field="cement.compressive_strength_7_days" />
+												</t>
+												<t t-else="">
+													Awaited
+												</t>
+											</span>									
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td t-if="eln.conformity">
+											<span t-field="cement.compressive_7days_conformity"/>
+										</td>
+									</tr>
+
+									<tr t-if="cement.compressive_7_visible and fromEln">
+										<td>
+											<span>b</span>
+										</td>
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_name"/>
+											</span>
+										</td>
+										
+										
+										
+										<td>
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).unit.name"/>
+											</span>
+										</td>
+										<td>
+											<span>
+												<t t-if="cement.status_7days">
+													<span t-field="cement.compressive_strength_7_days" />
+												</t>
+												<t t-else="">
+													Awaited
+												</t>
+											</span>									
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td>
+											<span>
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+												</t>
+											</t>
+											</span>
+										</td>
+										<td t-if="eln.conformity">
+											<span t-field="cement.compressive_7days_conformity"/>
+										</td>
+									</tr>
+
+
+								<!-- 28 Days  -->
+										<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass' and nabl and not fromEln">
+											<td>
+												<span>c</span>
+											</td>
+											<td>
+												<span>
+													<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_name"/>
+												</span>
+											</td>
+											
+											
+											<td>
+												<span>
+													<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).unit.name"/>
+												</span>
+											</td>
+											<td>
+												<span>
+													<t t-if="cement.status_28days">
+														<span t-field="cement.compressive_strength_28_days" />
+													</t>
+													<t t-else="">
+														Awaited
+													</t>
+												</span>									
+											</td>
+											<td>
+												<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+															<span t-field="parameter.permissable_limit"/>
+													</t>
+												</t>
+												</span>
+											</td>
+											<td>
+												<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+															<span t-field="parameter.specification"/>
+													</t>
+												</t>
+												</span>
+											</td>
+											<td t-if="eln.conformity">
+												<span t-field="cement.compressive_28days_conformity"/>
+											</td>
+										</tr>
+
+										<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'fail' and not nabl and not fromEln">
+											<td>
+												<span>c</span>
+											</td>
+											<td>
+												<span>
+													<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_name"/>
+												</span>
+											</td>
+											
+											
+											<td>
+												<span>
+													<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).unit.name"/>
+												</span>
+											</td>
+											<td>
+												<span>
+													<t t-if="cement.status_28days">
+														<span t-field="cement.compressive_strength_28_days" />
+													</t>
+													<t t-else="">
+														Awaited
+													</t>
+												</span>									
+											</td>
+											<td>
+												<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+															<span t-field="parameter.permissable_limit"/>
+													</t>
+												</t>
+												</span>
+											</td>
+											<td>
+												<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+															<span t-field="parameter.specification"/>
+													</t>
+												</t>
+												</span>
+											</td>
+											<td t-if="eln.conformity">
+												<span t-field="cement.compressive_28days_conformity"/>
+											</td>
+										</tr>
+
+										<tr t-if="cement.compressive_28_visible and fromEln">
+											<td>
+												<span>c</span>
+											</td>
+											<td>
+												<span>
+													<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_name"/>
+												</span>
+											</td>
+											
+											
+											<td>
+												<span>
+													<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).unit.name"/>
+												</span>
+											</td>
+											<td>
+												<span>
+													<t t-if="cement.status_28days">
+														<span t-field="cement.compressive_strength_28_days" />
+													</t>
+													<t t-else="">
+														Awaited
+													</t>
+												</span>									
+											</td>
+											<td>
+												<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+															<span t-field="parameter.permissable_limit"/>
+													</t>
+												</t>
+												</span>
+											</td>
+											<td>
+												<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a0229a9-ba1d-4fc9-b2fa-3383699d3464')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+															<span t-field="parameter.specification"/>
+													</t>
+												</t>
+												</span>
+											</td>
+											<td t-if="eln.conformity">
+												<span t-field="cement.compressive_28days_conformity"/>
+											</td>
+										</tr>
+							</tbody>
+							</table>
+						</t>
+
+
+						<div style="page-break-inside: avoid;">
+							<div  style="page-break-inside: avoid;margin-top:20px;" class="noteContainer">
+								<div>
+									<b>Note :-</b>
 								</div>
 								<div>
-									<b>
-									<span t-esc="eln.sample_id.approved_by.name"/>
-									</b>
-								</div>
-								<div>
-									<b>
-										Mechanical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
+									<ul>
+										<li>
+											The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+										</li>
+										<li>
+											Sample(s) was/were not drawn by laboratory.
+										</li>
+										<li>
+											This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+										</li>
+										<li t-if="eln.has_witness">
+											<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+										</li>
+									</ul>
 								</div>
 							</div>
+
+							<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+									<div>
+										<div>
+											<b>
+												Checked By
+											</b>
+										</div>
+										<div style="height:30px">
+
+										</div>
+										<div>
+											<b>
+												<span t-esc="eln.sample_id.check_by.name"/>
+											</b>
+										</div>
+										<div>
+											<b>
+												(<span t-esc="eln.sample_id.check_by.job_title"/>)
+											</b>
+										</div>
+									</div>
+
+									<div>
+										<div >
+											<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+										</div>
+										<div style="padding-top:5px">
+											Format No. <span t-esc="eln.material.test_format_no"/>
+										</div>
+									</div>
+									<div>
+										<div>
+											<b>
+												Approved By 
+											</b>
+											
+										</div>
+										<div style="height:30px">
+
+										</div>
+										<div>
+											<b>
+											<span t-esc="eln.sample_id.approved_by.name"/>
+											</b>
+										</div>
+										
+										<div>
+											<b>
+												(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+											</b>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- <div style="text-align:center;margin-top:25px">
+								......End of Report......
+							</div> -->
+							<div style="margin-top: 20px; text-align: center;">
+								<p style="border-top: 1px dashed #000; padding-top: 10px;">
+									...... End Of Report......
+								</p>
+							</div>
 						</div>
-						<!-- <div style="text-align:center;margin-top:25px">
-							......End of Report......
-						</div> -->
-						<div style="margin-top: 50px; text-align: center;">
-							<p style="border-top: 1px dashed #000; padding-top: 10px;">
-								...... End Of Report......
-							</p>
-						</div>
-					</div>
-				<!-- </div> -->
+
 			
 				
 			</t>

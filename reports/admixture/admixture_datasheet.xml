@@ -144,24 +144,24 @@
 					<div>
 						<div>
 							<b>
-								(JR Chemist)
+								Tested By
 							</b>
 						</div>
 						<div>
 							<b>
-								Tested By
+								(<span t-esc="eln.sample_id.filled_by.job_title"/>)
 							</b>
 						</div>
 					</div>
 					<div style="margin-left:500px">
 						<div>
 							<b>
-								Chemical Department (HOD)
+								Checked By
 							</b>
 						</div>
 						<div>
 							<b>
-								Checked By
+								(<span t-esc="eln.sample_id.check_by.job_title"/>)
 							</b>
 						</div>
 					</div>

@@ -951,7 +951,7 @@
                             </div>
                             <div>
                                 <b>
-                                    (Jr. Technician)
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
                                 </b>
                             </div>
 						</div>
@@ -973,7 +973,7 @@
 							
 							<div>
 								<b>
-									(Sr. Technician)
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
 								</b>
 							</div>
 						</div>
@@ -990,13 +990,13 @@
 			<!-- <t t-call="web.basic_layout"> -->
 			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
                
-				<div style="text-align:center;margin-top:10px">
+				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
-				</div>
+				</div> -->
 
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<table>
+						<!-- <table>
 							<tr>
 								<td colspan="3">Report no :
 								</td>
@@ -1014,12 +1014,12 @@
 									<span t-field="o.sample_id.ulr_no"/>
 								</td>
 							</tr>
-						</table>
+						</table> -->
 						<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.customer.name"/>
+									<span t-field="o.srf_id.customer.name"/><br/>
 									<span t-field="o.srf_id.customer.street"/>
 									<span t-field="o.srf_id.customer.street2"/>
 									<span t-field="o.srf_id.customer.city"/>
@@ -1807,14 +1807,14 @@
 								</ul>
 							</div>
 						</div>
-						<div class="signatureContainer girdgird" style="page-break-inside: avoid;">
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 							<div>
 								<div>
 									<b>
 										Checked By
 									</b>
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
 								</div>
 								<div>
@@ -1824,7 +1824,7 @@
 								</div>
 								<div>
 									<b>
-										(Authorized Signatory)
+										(<span t-esc="eln.sample_id.check_by.job_title"/>)
 									</b>
 								</div>
 							</div>
@@ -1843,7 +1843,7 @@
 									</b>
 									
 								</div>
-								<div style="height:20px">
+								<div style="height:30px">
 
 								</div>
 								<div>
@@ -1851,9 +1851,10 @@
 									<span t-esc="eln.sample_id.approved_by.name"/>
 									</b>
 								</div>
+							
 								<div>
 									<b>
-										(Authorized Signatory)
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
 							</div>

@@ -59,7 +59,7 @@ class SampleRangeLine(models.Model):
         ('28', '28 Days'),
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
-    alias = fields.Char(string="Alias")
+    product_alias = fields.Many2one('product.product',string="Product Alias")
     parameters = fields.Many2many('lerm.parameter.master',string="Parameter")
     # parameters_ids = fields.Many2many('lerm.datasheet.line',string="Parameter" , compute="compute_param_ids")
     kes_range = fields.Char("KES Range",required=True,readonly=True, default=lambda self: 'New')

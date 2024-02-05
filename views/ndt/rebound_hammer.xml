@@ -10,13 +10,16 @@
                 <sheet>
                     <group>
                         <field name="srf_id" invisible="1"/>
-                        <field name="sample_id" invisible="1" />
+                        <field name="sample_id"  readonly="1"/>
                         <field name="parameter_id"/>
                     </group>
                     <group>
                         <h1>
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
+                    </group>
+                    <group style="width:50%">
+                        <field name="temperature" string="Temperature °C" identity="extra"/>
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">
@@ -38,10 +41,16 @@
                             </tree>
                     </field>
                     <group>
-                    <field name="average" string="Average" identity="result"/>
-                    <field name="minimum" string="Minimum" identity="result"/>
-                    <field name="maximum" string="Maximum" identity="result"/>
+                    <field name="average_mpa" string="Average Mpa" identity="result"/>
+                    <field name="minimum_mpa" string="Minimum Mpa" identity="result"/>
+                    <field name="maximum_mpa" string="Maximum Mpa" identity="result"/>
                     </group>
+                    <field name="notes" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="notes" />
+                               
+                            </tree>
+                    </field>
                 </sheet>
             </form>
         </field>

@@ -14,6 +14,7 @@
     'views/res_company.xml',
     'views/material.xml',
     'views/srf.xml',
+    'views/edit_srf_header_wizard.xml',
     'views/parameter_master.xml',
     'views/datasheet_master.xml',
     'views/sample.xml',
@@ -92,6 +93,7 @@
     'views/mechanical/gsb.xml',
     'views/mechanical/wbm.xml',
     'views/mechanical/isat.xml',
+    'views/chemical/crushed_sand.xml',
 
 
     'views/product_grade_wizard.xml',
@@ -183,6 +185,21 @@
     'reports/steel_tmt_bar_datasheet.xml',
     'reports/mechanical_general_template.xml',
     'reports/flyash_datasheet.xml',
+    'views/mechanical/copler2.xml',
+    'reports/coupler2/coupler_datasheet.xml',
+    'reports/coupler2/coupler_report.xml',
+    'views/chemical/gypsum.xml',
+    'views/chemical/hardend_concrete.xml',
+    'reports/hardend_concrete/harden_concrete_datasheet.xml',
+    'reports/hardend_concrete/hardend_concrete_report.xml',
+    'reports/crushed_sand_chemical/crushed_sand_repot.xml',
+    'reports/crushed_sand_chemical/crushed_sand_dataheet.xml',
+    'reports/gypsum_chem/gypsum_datasheet.xml',
+    'reports/gypsum_chem/gypsum_report.xml',
+    'views/sample_cancellation.xml',
+    'views/chemical/opc_cement_chemical.xml',
+    'views/chemical/tmt_bar.xml',
+    
     
  
 

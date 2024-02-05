@@ -150,7 +150,7 @@
 						
 					</table>
 						
-					<div class="authorizeRowDataSheet">
+			<div class="authorizeRowDataSheet">
 
                         <div>
                             <div>
@@ -166,7 +166,7 @@
                             </div>
                             <div>
                                 <b>
-                                    (Jr. Technician)
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
                                 </b>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                             
                             <div>
                                 <b>
-                                    (Sr. Technician)
+                                    (<span t-esc="eln.sample_id.check_by.job_title"/>)
                                 </b>
                             </div>
                         </div>
