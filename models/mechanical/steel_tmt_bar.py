@@ -515,12 +515,21 @@ class SteelTmtBarLine(models.Model):
     # def _compute_gauge_length(self):
     #     for record in self:
     #         record.gauge_length = ((5.65 * math.sqrt(record.crossectional_area)),2)
+    # @api.depends('crossectional_area')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         gauge_length = round((math.sqrt(record.crossectional_area) * 5.65),2)
+    #         record.gauge_length = gauge_length
+            # record.gauge_length = round(gauge_length, 2)
+                
+   
+
     @api.depends('crossectional_area')
     def _compute_gauge_length(self):
         for record in self:
-            gauge_length = round((math.sqrt(record.crossectional_area) * 5.65),2)
+            gauge_length = math.ceil(math.sqrt(record.crossectional_area) * 5.65)
             record.gauge_length = gauge_length
-            # record.gauge_length = round(gauge_length, 2)
+
 
 
     @api.depends('yeild_load','crossectional_area')
