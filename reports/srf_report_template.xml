@@ -68,7 +68,7 @@
 							<tr>
 								
 								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
-									<span t-field="o.site_address"/>
+									<span t-field="o.name_work"/>
 								</td>
 							</tr>
 							<tr>
@@ -82,6 +82,7 @@
 								</td>
 								<td colspan="4">Consultant Name :
 									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.consultant_name1"/>
 									
 								</td>
 							</tr>
