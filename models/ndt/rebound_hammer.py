@@ -127,7 +127,6 @@ class CarbonationnLine(models.Model):
     #         record.avg = sum(filtered_array) / len(filtered_array)
 
 
-
     @api.depends('f1', 'f2', 'f3', 'f4', 'f5', 'f6')
     def _compute_average(self):
         for record in self:
