@@ -58,7 +58,7 @@
 </td> -->
 
 								<td colspan="12">Project / Site Address : 																		<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.site_address"/>
+									<span t-field="o.srf_id.name_work"/>
 								</td>
 							</tr>
 							<tr>
@@ -100,12 +100,14 @@
 									<span t-field="o.sample_id.brand"/>
 								</td>
 								<td colspan="6">Consultant Name :
-																											<![CDATA[&nbsp;]]>
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.consultant_name1"/>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="6">Client Name :
-																											<![CDATA[&nbsp;]]>
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client"/>
 								</td>
 								<td colspan="6">Client Reference :
 																											<![CDATA[&nbsp;]]>
@@ -139,7 +141,7 @@
 						<span t-esc="eln.material.test_parameter"/>
 					</div> -->
 							
-			 <div style="padding-top:5px">
+			 <!-- <div style="padding-top:5px">
 				<span t-esc="o.material.test_parameter "/> 
 
 				
@@ -161,7 +163,30 @@
 				</t>
 			
 				
-			</div>
+			</div> -->
+
+			<div style="padding-top:5px">
+						<span t-esc="o.material.test_parameter"/>
+
+						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')])" t-as="parameter">
+						<span t-esc="parameter.test_method.test_method"/>
+					  </t>
+				
+						
+						 <t t-set="test_method_displayed" t-value="False"/>
+    
+						<t t-foreach="env['lerm.parameter.master'].search([])" t-as="parameter">
+							<t t-if="data.rebend_visible and parameter.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8' and not test_method_displayed">
+								<span t-esc="parameter.test_method.test_method"/>
+								<t t-set="test_method_displayed" t-value="True"/>
+							</t>
+							<t t-elif="data.bend_visible and parameter.internal_id == 'addd0c61-adb6-447d-b668-1fba0744680f' and not test_method_displayed">
+								<span t-esc="parameter.test_method.test_method"/>
+								<t t-set="test_method_displayed" t-value="True"/>
+							</t>
+						</t>
+					</div>
+
 
             	
 					<table>

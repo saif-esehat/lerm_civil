@@ -576,7 +576,29 @@ class CreateSampleWizard(models.TransientModel):
 
     @api.onchange('discipline_id')
     def onchange_discipline_id(self):
+        edit_mode = self.env.context.get('edit_mode')
+        
+        print("before Chagne " ,self.env.context)
+
+     
+
         # Trigger the computation of lab_no_value
+        if not edit_mode: 
+            self.group_id = None
+            self.material_id = None
+            self.grade_id = None
+            self.size_id = None
+            self.parameters = None
+
+        self.env.context = dict(self.env.context)
+        self.env.context.update({
+        'edit_mode': False,
+        })
+
+
+        
+        print("after Chagne " ,self.env.context)
+
         self._compute_lab_no()
    
     
@@ -664,6 +686,7 @@ class CreateSampleWizard(models.TransientModel):
     @api.onchange('material_id')
     def compute_grade_required(self):
         for record in self:
+            
             for material in record.material_id:
                 # import wdb; wdb.set_trace()
                 if len(material.grade_table) > 0:
@@ -674,6 +697,12 @@ class CreateSampleWizard(models.TransientModel):
 
     @api.onchange('material_id')
     def compute_grade(self):
+        edit_mode = self.env.context.get('edit_mode')
+        if  not edit_mode:
+            self.grade_id = None
+            self.size_id = None
+            self.parameters = None
+        
         for record in self:
             if record.material_id:
                 record.grade_ids = self.env['product.template'].search([('id','=', record.material_id.id)]).grade_table
