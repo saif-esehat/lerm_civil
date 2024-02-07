@@ -141,7 +141,7 @@
 
                       <!-- Chloride 2 -->
 
-                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('chloride_visible1', '=', False)]}">
                         <h1>
                             <field name="chloride_name1" readonly="1" nolabel="1"/>
                             <field name="chloride_visible1" invisible="1"/>
