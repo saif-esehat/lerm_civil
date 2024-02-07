@@ -307,7 +307,7 @@ class LermSampleForm(models.Model):
             'view_id': action.id,
             'target': 'new',
             'context':{
-                'edit_mode': True, 
+                'default_edit_mode': True, 
                 'default_sample': self.id,
                 'default_is_update':True,
                 'default_parameters':self.parameters.ids,

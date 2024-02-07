@@ -524,13 +524,21 @@ class SteelTmtBarLine(models.Model):
                 
    
 
+    # @api.depends('crossectional_area')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         gauge_length = math.ceil(math.sqrt(record.crossectional_area) * 5.65)
+    #         record.gauge_length = gauge_length
     @api.depends('crossectional_area')
     def _compute_gauge_length(self):
         for record in self:
-            gauge_length = math.ceil(math.sqrt(record.crossectional_area) * 5.65)
-            record.gauge_length = gauge_length
-
-
+            gauge_length = math.sqrt(record.crossectional_area) * 5.65
+            # Check if the decimal part is greater than or equal to 0.5
+            if gauge_length - int(gauge_length) >= 0.5:
+                rounded_gauge_length = math.ceil(gauge_length)
+            else:
+                rounded_gauge_length = math.floor(gauge_length)
+            record.gauge_length = int(rounded_gauge_length)
 
     @api.depends('yeild_load','crossectional_area')
     def _compute_proof_yeid_stress(self):
