@@ -64,309 +64,154 @@
 
 						<table>
 						<thead>
-							<tr>
-								<th style="text-align: center;">
-									<span>
-										Parameter
-									</span>
-								</th>
+								<tr>
+									<th style="text-align: center;">Parameter</th>
+									<th style="text-align: center;  font-weight: bold;">Observation-1</th>
+									<th style="text-align: center; font-weight: bold;">Observation-2</th>
+								</tr>
+							</thead>
 								
-								<th style="text-align: center;">
-									<span>
-										Observation-1
-									</span>
-								</th>
-								<!-- <th>
-									<span>
-										Requirement as per IS 1786:2008(RA 2018)
-									</span>
-								</th> -->
-								 <!-- <th  style="max-width: 200px;">
-									<span>
-										<span t-esc="eln.material.method_reference"/>
-										
-									</span>
-							    	</th>
-								<th>
-									<span>
-										Confirmity Status
-									</span>
-								</th> -->
-							</tr>
-						</thead>
+							
 						<tbody>
 							<tr>
-								<!-- <td>
-									Width , mm
-								</td> -->
-								 <td  style="text-align: center;">
+								
+								 <td >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','c83e774f-f8e4-455e-b2cb-00924cb4bf2e')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
 									<span t-esc="data.width"/>
 								</td>
-								<!-- <td>
-									
-								</td>
-								<td>
-									
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.width2"/></td>
+							
+								
 							</tr>
-							<!-- <tr>
-								<td>
-									Weight, Kg									
-								</td>
-								<td>
-									<span t-esc="data.weight"/>
-								</td>
-								<td>
-									
-								</td>
-								<td>
-									
-								</td>
-							</tr> -->
+						
 							<tr>
-								<!-- <td>
-									Thickness, mm																		
-								</td> -->
-								<td  style="text-align: center;">
+							
+								<td >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','4a6bc5cb-9277-4577-88a9-e21b5d2a19ab')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
 									<span t-esc="data.thickness"/>
 								</td>
-								<!-- <td>
-									
-								</td>
-								<td>
-									
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.thickness2"/></td>
+								
 							</tr>
 							<tr>
-								<!-- <td>
-									Area, mm2																											
-								</td> -->
-								 <td  style="text-align: center;">
+							
+								 <td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','73919477-397a-415d-87ca-f7767f0252e1')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.area, 2)"/>
+									<span t-esc="data.area"/>	
 								</td>
-								<!-- <td>
-									
-								</td>
-								<td>
-									
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.area2"/></td>
+							
 							</tr>
 
 							<tr>
-								<!-- <td>
-									Gauge Length, mm																																				
-								</td> -->
-								 <td  style="text-align: center;">
+								
+								 <td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','766d68c8-72ce-45a8-9254-b2c49e864355')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.gauge_length1 ,2)"/>
+									<span t-esc="data.gauge_length1"/>
 								</td>
-								<!-- <td>
-									
-								</td>
-								<td>
-									
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.gauge_length2"/></td>
+							
 							</tr>
 
 							<tr>
-								<!-- <td>
-									Final Length, mm																																				
-								</td> -->
-								 <td  style="text-align: center;">
+							
+								 <td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','df4c2fe9-228a-463f-bece-c0d9ecf12ea1')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.final_length , 2)"/>
+									<span t-esc="data.final_length"/>
 								</td>
-								<!-- <td>
-									
-								</td>
-								<td>
-									
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.final_length2"/></td>
 							</tr>
 
 
 							<tr>
-								<!-- <td>
-									0.2% Proof Load / Yield Load, KN																																				
-								</td> -->
-								<td  style="text-align: center;">
+							
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','ee51b0ef-c7ad-4216-9b9c-410b725b4436')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.yeild_load,2)"/>
+									<span t-esc="data.yeild_load"/>
 								</td>
-								<!-- <td>
-									
-								</td>
-								<td>
-									
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.yeild_load2"/></td>
 							</tr>
 
 
 							<tr>
-								<!-- <td>
-									Ultimate Load, KN																																				
-								</td> -->
-								<td  style="text-align: center;">
+								
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','0e0e009b-f5a6-478b-8c89-cf66c6f61a9e')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.ultimate_load , 2)"/>
+									<span t-esc="data.ultimate_load"/>
 								</td>
-								<!-- <td>
-									
-								</td>
-								<td>
-									
-								</td> -->
+							<td style="text-align: center;"><span t-field="data.ultimate_load2"/></td>
 							</tr>
 
 							<tr>
-								<!-- <td>
-									0.2% proof Load / Yield Stress N/mm2																																				
-								</td> -->
-								<td  style="text-align: center;">
+							
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.proof_yeid_stress , 2)"/>
+									<span t-esc="data.proof_yeid_stress"/>
 								</td>
-								<!-- <td>
-									<span t-esc="data.requirement_yield"/>
-								</td>
-								<td>
-									<span t-esc="data.yield_conformity"/>
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.proof_yeid_stress2"/></td>
 							</tr>
 							<tr>
-								<!-- <td>
-									Ultimate Tensile Strength, N/mm2																									
-								</td> -->
-								<td  style="text-align: center;">
+							
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.ult_tens_strgth, 2)"/>
+									<span t-esc="data.ult_tens_strgth"/>
 								</td>
-								<!-- <td>
-									<span t-esc="data.requirement_utl"/>
-								</td>
-								<td>
-									<span t-esc="data.uts_conformity"/>
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.ult_tens_strgth2"/></td>
 							</tr>
 
 
-							<!-- <tr>
-								<td>
-									TS/YS Ratio																									
-								</td>
-								<td>
-									<span t-esc="round(data.ts_ys_ratio , 2)"/>
-								</td>
-								<td>
-									<span t-esc="data.requirement_ts_ys"/>
-								</td>
-								<td>
-									<span t-esc="data.ts_ys_nabl"/>
-								</td>
-							</tr> -->
-
+						
 							<tr>
-								<!-- <td>
-									% Elongation																																		
-								</td> -->
-								<td  style="text-align: center;">
+								
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.elongation , 2)"/>
+									<span t-esc="data.elongation" t-options='{"widget": "float", "precision": 1}'/>
 								</td>
-								<!-- <td>
-									<span t-esc="data.requirement_elongation"/>
-								</td>
-								<td>
-									<span t-esc="data.elongation_conformity"/>
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.elongation2" t-options='{"widget": "float", "precision": 1}'/></td>
 							</tr>
 
-							<!-- <tr>
-								<td>
-									Weight Per Meter, Kg/m																																		
-								</td>
-								<td>
-									<span t-esc="round(data.weight_per_meter , 2)"/>
-								</td>
-								<td>
-									<span t-esc="data.requirement_weight_per_meter"/>
-								</td>
-								<td>
-									<span t-esc="data.weight_per_meter_nabl"/>
-								</td>
-							</tr> -->
-
-							<!-- <tr>
-								<td>
-									Rebend Test 																																		
-								</td>
-								<td>
-									<span t-esc="data.re_bend_test"/>
-								</td>
-								<td>
-									Statisfactory
-								</td>
-								<td>
-									<span t-esc="data.re_bend_test"/>
-								</td>
-							</tr> -->
-
+							
 							<tr>
-								<!-- <td>
-									Bend Test																																		
-								</td> -->
-								<td  style="text-align: center;">
+								
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','11470d0f-e6d1-4770-be6b-32267d3461cb')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
 									<span t-esc="data.bend_test"/>
 								</td>
-								<!-- <td>
-									Statisfactory
-								</td>
-								<td>
-									<span t-esc="data.bend_test"/>
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.bend_test2"/></td>
+								
 							</tr>
 							<tr>
-								<!-- <td>
-									Fracture																																		
-								</td> -->
-								<td  style="text-align: center;">
+							
+								<td  >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','23d0ea9c-b7c9-42b6-94c8-c2dd36101849')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center;">
 									<span t-esc="data.fracture"/>
 								</td>
-								<!-- <td>
-									
-								</td>
-								<td>
-									
-								</td> -->
+								<td style="text-align: center;"><span t-field="data.fracture"/></td>
+								
 							</tr>
 						</tbody>
 					</table>

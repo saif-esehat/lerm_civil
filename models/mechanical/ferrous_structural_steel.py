@@ -23,11 +23,11 @@ class FerrousStructuralSteel(models.Model):
     gauge_length1 = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
     final_length = fields.Float(string="FINAL LENGTH mm")
     # proof_2_percent = fields.Float(string="0.2% proof Load / Yield Load, KN")
-    elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True)
+    elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True,digits=(12,1))
     yeild_load = fields.Float(string="0.2% proof Load / Yield Load, KN")
-    ultimate_load = fields.Float(string="Ultimate Load, Kn")
-    proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True)
-    ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True)
+    ultimate_load = fields.Float(string="Ultimate Load, KN")
+    proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True,digits=(12,1))
+    ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True,digits=(12,1))
     fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
     ts_ys_ratio = fields.Float(string="TS/YS Ratio",compute="_compute_ts_ys_ratio",store=True)
@@ -45,6 +45,75 @@ class FerrousStructuralSteel(models.Model):
     # fracture_visible = fields.Boolean("Fracture visible",compute="_compute_visible",store=True)
     # bend_visible = fields.Boolean("Bend visible",compute="_compute_visible",store=True)
     # rebend_visible = fields.Boolean("Rebend visible",compute="_compute_visible",store=True)
+
+    width2 = fields.Float(string="Width mm")
+    thickness2 = fields.Float(string="Thickness mm",digits=(16, 2))
+    area2 = fields.Float(string="AREA mm²",compute="_compute_area2",store=True)
+    gauge_length2 = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length2",store=True)
+    final_length2 = fields.Float(string="FINAL LENGTH mm")
+    yeild_load2 = fields.Float(string="0.2% proof Load / Yield Load, KN")
+    ultimate_load2 = fields.Float(string="Ultimate Load, KN")
+    proof_yeid_stress2 = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress2",store=True,digits=(12,1))
+    ult_tens_strgth2 = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth2",store=True,digits=(12,1))
+    elongation2 = fields.Float(string="% Elongation",compute="_compute_elongation_percent2",store=True,digits=(12,1))
+     
+    bend_test2 = fields.Selection([
+        ('satisfactory', 'Satisfactory'),
+        ('non-satisfactory', 'Non-Satisfactory')],"Bend Test",store=True)
+    
+    fracture2 = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
+
+    @api.depends('width2', 'thickness2')
+    def _compute_area2(self):
+        for record in self:
+            record.area2 = record.width2 * record.thickness2
+
+
+    # @api.depends('area2')
+    # def _compute_gauge_length2(self):
+    #     for record in self:
+    #         record.gauge_length2 = math.ceil(5.65 * math.sqrt(record.area2))
+
+    @api.depends('area2')
+    def _compute_gauge_length2(self):
+        for record in self:
+            gauge_length2 = math.sqrt(record.area2) * 5.65
+            # Check if the decimal part is greater than or equal to 0.5
+            if gauge_length2 - int(gauge_length2) >= 0.5:
+                rounded_gauge_length2 = math.ceil(gauge_length2)
+            else:
+                rounded_gauge_length2 = math.floor(gauge_length2)
+            record.gauge_length2 = int(rounded_gauge_length2)
+
+    @api.depends('yeild_load2', 'area2')
+    def _compute_proof_yeid_stress2(self):
+        for record in self:
+            if record.area2 != 0:
+                proof_yeid_stress2 = Decimal(record.yeild_load2 / record.area2 * 1000)
+                float_result2 = float(proof_yeid_stress2.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
+                record.proof_yeid_stress2 = round(float_result2, 2)
+            else:
+                record.proof_yeid_stress2 = 0.0
+
+    @api.depends('ultimate_load2', 'area2')
+    def _compute_ult_tens_strgth2(self):
+        for record in self:
+            if record.area2 != 0:
+                ult_tens_strgth2 = Decimal(record.ultimate_load2) / Decimal(record.area2) * Decimal('1000')
+                float_result3 = float(ult_tens_strgth2.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
+                record.ult_tens_strgth2 = round(float_result3, 2)
+            else:
+                record.ult_tens_strgth2 = 0.0
+
+    @api.depends('gauge_length2','final_length2')
+    def _compute_elongation_percent2(self):
+        for record in self:
+            if record.gauge_length2 != 0:
+                record.elongation2 = ((record.final_length2 - record.gauge_length2)/record.gauge_length2)*100
+            else:
+                record.elongation2 = 0
+
+
 
 
     
@@ -493,10 +562,21 @@ class FerrousStructuralSteel(models.Model):
     # def _compute_gauge_length(self):
     #     for record in self:
     #         record.gauge_length1 = round((5.65 * math.sqrt(record.area)),2)
+    # @api.depends('area')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         record.gauge_length1 = math.ceil(5.65 * math.sqrt(record.area))
+            
     @api.depends('area')
     def _compute_gauge_length(self):
         for record in self:
-            record.gauge_length1 = math.ceil(5.65 * math.sqrt(record.area))
+            gauge_length1 = math.sqrt(record.area) * 5.65
+            # Check if the decimal part is greater than or equal to 0.5
+            if gauge_length1 - int(gauge_length1) >= 0.5:
+                rounded_gauge_length1 = math.ceil(gauge_length1)
+            else:
+                rounded_gauge_length1 = math.floor(gauge_length1)
+            record.gauge_length1 = int(rounded_gauge_length1)
 
 
     # @api.depends('yeild_load','area')
@@ -517,31 +597,7 @@ class FerrousStructuralSteel(models.Model):
             else:
                 record.proof_yeid_stress = 0.0
 
-    # @api.depends('ultimate_load','area')
-    # def _compute_ult_tens_strgth(self):
-    #     for record in self:
-    #         if record.area != 0:
-    #             record.ult_tens_strgth = record.ultimate_load / record.area * 1000
-    #         else:
-    #             record.ult_tens_strgth = 0.0
-    
-    # @api.depends('ultimate_load', 'area')
-    # def _compute_ult_tens_strgth(self):
-    #     for record in self:
-    #         if record.area != 0:
-    #             ult_tens_strgth = Decimal(record.ultimate_load / record.area * 1000)
-    #             float_result = float(ult_tens_strgth.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
-    #             record.ult_tens_strgth = round(float_result, 2)
-    #         else:
-    #             record.ult_tens_strgth = 0.0
-    # @api.depends('ultimate_load', 'area')
-    # def _compute_ult_tens_strgth(self):
-    #     for record in self:
-    #         if record.area != 0:
-    #             ult_tens_strgth = Decimal(record.ultimate_load) / Decimal(record.area) * Decimal('1000')
-    #             record.ult_tens_strgth = float(ult_tens_strgth.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
-    #         else:
-    #             record.ult_tens_strgth = 0.0
+   
     @api.depends('ultimate_load', 'area')
     def _compute_ult_tens_strgth(self):
         for record in self:
