@@ -191,13 +191,7 @@
 										</t>
 									</t>
 								</td>
-								<!-- <td style="text-align: center; vertical-align: middle;">
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9b54fc13-5dcd-4425-a416-72493dd69d43')]).parameter_table" t-as="parameter">
-										<t t-if="parameter.grade.id == eln.grade_id.id">
-											<span t-field="parameter.specification"/>
-										</t>
-									</t>
-								   </td> -->
+								
 								<td t-if="eln.conformity" style="text-align: center;">
 
 								</td>

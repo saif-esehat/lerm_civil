@@ -164,6 +164,11 @@
 										Observation-1
 									</span>
 								</th>
+								 <th style="text-align: center;">
+									<span>
+										Observation-2
+									</span>
+								</th>
 								<th style="max-width: 200px; text-align: center;">
 									<span>
 										<span t-esc="eln.material.specifications"/>
@@ -179,9 +184,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<!-- <td>
-									Width , mm
-								</td> -->
+								
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -198,8 +201,15 @@
 								<td style="text-align: center;">
 									<span t-esc="data.width"/>
 								</td>
-								<td>
-
+								<td style="text-align: center;">
+									<span t-esc="data.width2"/>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c83e774f-f8e4-455e-b2cb-00924cb4bf2e')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
 								</td>
 								<td t-if="eln.conformity">
 
@@ -222,27 +232,21 @@
 								<td style="text-align: center;">
 									<span t-esc="data.thickness"/>
 								</td>
-								<td>
-
+								<td style="text-align: center;">
+									<span t-esc="data.thickness2"/>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','4a6bc5cb-9277-4577-88a9-e21b5d2a19ab')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
 								</td>
 								<td t-if="eln.conformity">
 
 								</td>
 							</tr>
-							<!-- <tr>
-								<td>
-									Length, meter																		
-								</td>
-								<td>
-									<span t-esc="data.lentgh"/>
-								</td>
-								<td>
-									
-								</td>
-								<td t-if="eln.conformity">
-									
-								</td>
-							</tr> -->
+							
 							<tr>
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -258,10 +262,17 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.area, 2)"/>
+									<span t-esc="data.area"/>
 								</td>
-								<td>
-
+								<td style="text-align: center;">
+									<span t-esc="data.area2"/>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','73919477-397a-415d-87ca-f7767f0252e1')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
 								</td>
 								<td t-if="eln.conformity">
 
@@ -283,10 +294,17 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.gauge_length1 ,2)"/>
+									<span t-esc="data.gauge_length1"/>
 								</td>
-								<td>
-
+								<td style="text-align: center;">
+									<span t-esc="data.gauge_length2"/>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','766d68c8-72ce-45a8-9254-b2c49e864355')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
 								</td>
 								<td t-if="eln.conformity">
 
@@ -308,10 +326,17 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.final_length , 2)"/>
+									<span t-esc="data.final_length"/>
 								</td>
-								<td>
-
+								<td style="text-align: center;">
+									<span t-esc="data.final_length2"/>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','df4c2fe9-228a-463f-bece-c0d9ecf12ea1')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
 								</td>
 								<td t-if="eln.conformity">
 
@@ -334,10 +359,17 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.yeild_load,2)"/>
+									<span t-esc="data.yeild_load"/>
 								</td>
-								<td>
-
+								<td style="text-align: center;">
+									<span t-esc="data.yeild_load2"/>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ee51b0ef-c7ad-4216-9b9c-410b725b4436')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
 								</td>
 								<td t-if="eln.conformity">
 
@@ -360,10 +392,17 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.ultimate_load , 2)"/>
+									<span t-esc="data.ultimate_load"/>
 								</td>
-								<td>
-
+								<td style="text-align: center;">
+									<span t-esc="data.ultimate_load2"/>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0e0e009b-f5a6-478b-8c89-cf66c6f61a9e')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
 								</td>
 								<td t-if="eln.conformity">
 
@@ -386,7 +425,10 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.proof_yeid_stress , 2)"/>
+									<span t-esc="data.proof_yeid_stress"/>
+								</td>
+								<td style="text-align: center;">
+									<span t-esc="data.proof_yeid_stress2"/>
 								</td>
 								<td style="text-align: center;">
 									<!-- <span t-esc="data.requirement_yield"/> -->
@@ -420,7 +462,10 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.ult_tens_strgth, 2)"/>
+									<span t-esc="data.ult_tens_strgth"/>
+								</td>
+								<td style="text-align: center;">
+									<span t-esc="data.ult_tens_strgth2"/>
 								</td>
 								<td style="text-align: center;">
 									<!-- <span t-esc="data.requirement_yield"/> -->
@@ -437,47 +482,7 @@
 								</td>
 							</tr>
 
-							<!-- <tr t-if="data.uts_nabl == 'pass' and nabl">
-								<td>
-									Ultimate Tensile Strength, N/mm2																									
-								</td>
-								<td>
-									<span t-esc="round(data.ult_tens_strgth, 2)"/>
-								</td>
-								<td>
-									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                            </t>
-                                        </t>
-									</span>
-								</td>
-								<td t-if="eln.conformity">
-									<span t-esc="data.uts_nabl"/>
-								</td>
-							</tr>
-
-							<tr t-if="data.uts_nabl == 'fail' and not nabl">
-								<td>
-									Ultimate Tensile Strength, N/mm2																									
-								</td>
-								<td>
-									<span t-esc="round(data.ult_tens_strgth, 2)"/>
-								</td>
-								<td>
-									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                            </t>
-                                        </t>
-									</span>
-								</td>
-								<td t-if="eln.conformity">
-									<span t-esc="data.uts_nabl"/>
-								</td>
-							</tr> -->
+						
 							<tr t-if="data.elongation_nabl == 'pass' and nabl or data.elongation_nabl == 'fail' and not nabl">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -494,7 +499,10 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.elongation , 2)"/>
+									<span t-esc="data.elongation" t-options='{"widget": "float", "precision": 1}'/>
+								</td>
+								<td style="text-align: center;">
+									<span t-esc="data.elongation2"/>
 								</td>
 								<td style="text-align: center;">
 									<!-- <span t-esc="data.requirement_yield"/> -->
@@ -511,52 +519,6 @@
 								</td>
 							</tr>
 
-
-
-
-							<!-- <tr t-if="data.elongation_nabl == 'pass' and nabl">
-								<td>
-									% Elongation																																		
-								</td>
-								<td>
-									<span t-esc="round(data.elongation , 2)"/>
-								</td>
-								<td>
-									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                            </t>
-                                        </t>
-									</span>
-								</td>
-								<td t-if="eln.conformity">
-									<span t-esc="data.elongation_nabl"/>
-								</td>
-							</tr>
-
-							<tr t-if="data.elongation_nabl == 'fail' and not nabl">
-								<td>
-									% Elongation																																		
-								</td>
-								<td>
-									<span t-esc="round(data.elongation , 2)"/>
-								</td>
-								<td>
-									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                            </t>
-                                        </t>
-									</span>
-								</td>
-								<td t-if="eln.conformity">
-									<span t-esc="data.elongation_nabl"/>
-								</td>
-							</tr> -->
-
-
 							<t t-if="i &lt;= 8">
 								<tr>
 									<td style="text-align: left;">
@@ -565,6 +527,9 @@
 									<td style="text-align: center;">
 										<span t-esc="data.bend_test"/>
 									</td>
+									<td style="text-align: center;">
+								    	<span t-esc="data.bend_test2"/>
+								   </td>
 									<td>
 										<!-- Statisfactory -->
 									</td>
@@ -579,6 +544,9 @@
 									<td style="text-align: center;">
 										<span t-esc="data.fracture"/>
 									</td>
+									<td style="text-align: center;">
+								    	<span t-esc="data.fracture2"/>
+								   </td>
 									<td>
 
 									</td>
@@ -610,6 +578,10 @@
 									<td style="text-align: center;">
 										<span t-esc="data.bend_test"/>
 									</td>
+									<td style="text-align: center;">
+										<span t-esc="data.bend_test2"/>
+									</td>
+									
 									<td>
 										<!-- Statisfactory -->
 									</td>
@@ -633,6 +605,9 @@
 									</td>
 									<td style="text-align: center;">
 										<span t-esc="data.fracture"/>
+									</td>
+									<td style="text-align: center;">
+										<span t-esc="data.fracture2"/>
 									</td>
 									<td>
 
