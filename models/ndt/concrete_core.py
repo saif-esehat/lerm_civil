@@ -12,6 +12,7 @@ class ConcreteCore(models.Model):
     temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.concrete.core.line','parent_id',string="Parameter")
     average = fields.Float(string="Average Compressive Strength in Mpa",compute="_compute_average")
+    structure = fields.Char("Structure")
 
     notes = fields.One2many('ndt.concrete.core.notes','parent_id',string="Notes")
 

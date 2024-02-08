@@ -16,6 +16,7 @@ class CoverMeter(models.Model):
     average_min = fields.Float(string='Average Min (mm)', digits=(16, 2), compute='_compute_average')
     average_max = fields.Float(string='Average Max (mm)', digits=(16, 2), compute='_compute_average')
     notes = fields.One2many('ndt.cover.meter.notes','parent_id',string="Notes")
+    structure = fields.Char("Structure")
 
 
     #just Testing will remove later

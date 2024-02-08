@@ -14,6 +14,7 @@ class CrackWidth(models.Model):
     average = fields.Float(string='Average (mm)', digits=(16, 2), compute='_compute_average')
     min = fields.Float(string='Min (mm)', digits=(16, 2), compute='_compute_min_max')
     max = fields.Float(string='Max (mm)', digits=(16, 2), compute='_compute_min_max')
+    structure = fields.Char("Structure")
 
     notes = fields.One2many('ndt.crack.width.notes','parent_id',string="Notes")
 
