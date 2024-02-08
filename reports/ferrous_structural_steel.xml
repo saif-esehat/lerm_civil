@@ -519,11 +519,22 @@
 								</td>
 							</tr>
 
-							<t t-if="i &lt;= 8">
+							<t t-if="i &lt;= 6">
+							
 								<tr>
-									<td style="text-align: left;">
+								<td style="text-align: center;">
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</td>
+									<td >
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','11470d0f-e6d1-4770-be6b-32267d3461cb')]).parameter_name"/>
 									</td>
+									<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','11470d0f-e6d1-4770-be6b-32267d3461cb')]).unit.name"/>
+									</span>
+
+								</td>
 									<td style="text-align: center;">
 										<span t-esc="data.bend_test"/>
 									</td>
@@ -533,14 +544,24 @@
 									<td>
 										<!-- Statisfactory -->
 									</td>
-									<td style="text-align: center;" t-if="eln.conformity">
-										<span t-esc="data.bend_test"/>
+									<td  t-if="eln.conformity" >
+										<!-- <span t-esc="data.bend_test"/> -->
 									</td>
 								</tr>
 								<tr>
-									<td style="text-align: center;">
+								<td style="text-align: center;">
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</td>
+									<td>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','23d0ea9c-b7c9-42b6-94c8-c2dd36101849')]).parameter_name"/>
 									</td>
+									<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','23d0ea9c-b7c9-42b6-94c8-c2dd36101849')]).unit.name"/>
+									</span>
+
+								</td>
 									<td style="text-align: center;">
 										<span t-esc="data.fracture"/>
 									</td>
@@ -557,8 +578,11 @@
 							</t>
 						</tbody>
 					</table>
-					<t t-if="i > 8">
-						<div style="page-break-before: always;"></div>
+					<div style="page-break-before: always;">
+					
+					<t t-if="i > 6">
+					<!-- <div style="page-break-before: always;"></div> -->
+						
 						<table>
 							<tbody>
 								<tr>
@@ -566,7 +590,7 @@
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
 									</td>
-									<td style="text-align: left;">
+									<td>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','11470d0f-e6d1-4770-be6b-32267d3461cb')]).parameter_name"/>
 									</td>
 									<td style="text-align: center;">
@@ -583,10 +607,9 @@
 									</td>
 									
 									<td>
-										<!-- Statisfactory -->
 									</td>
-									<td style="text-align: center;" t-if="eln.conformity">
-										<span t-esc="data.bend_test"/>
+									<td  t-if="eln.conformity">
+										<!-- <span t-esc="data.bend_test"/> -->
 									</td>
 								</tr>
 								<tr>
@@ -643,58 +666,7 @@
 						</div>
 
 					</div>
-					<!-- <div class="signatureContainer girdgird">
-						 <div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										Mechanical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
-				         	<div>
-								<div t-if="stamp and stamp == '4-in_report'">
-									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-								</div>
-								<div style="padding-top:5px">
-									Format No. 
-                                    <span t-esc="eln.material.test_format_no"/>
-								</div>
-							</div>
-						<div>
-							<div>
-								<b>
-									Approved By
-								</b>
-							</div>
-							<div style="height:20px">
-
-							</div>
-							<div>
-								<b>
-									Mechanical Department (HOD)
-								</b>
-							</div>
-							<div>
-								<b>
-									(Authorized Signatory)
-								</b>
-							</div>
-						</div>
-					</div> -->
-
+				
 					<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 
 						<div>
@@ -751,6 +723,7 @@
 					<div style="text-align:center;margin-top:25px">
 							......End of Report......
 					</div>
+				</div>
 				</div>
 
 				<!-- </div> -->
