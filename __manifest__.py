@@ -21,6 +21,7 @@
     'views/sample_range.xml',
     'views/eln.xml',
     'views/contractor.xml',
+    # 'views/employee.xml',
     # 'views/mechanical/sieve_analysis.xml',
     'views/mechanical/free_swell_index.xml',
     'views/mechanical/soil_cbr.xml',
@@ -199,6 +200,9 @@
     'views/sample_cancellation.xml',
     'views/chemical/opc_cement_chemical.xml',
     'views/chemical/tmt_bar.xml',
+    'views/mechanical/structural_steel_round.xml',
+    'reports/structural_steel_round/datasheet.xml',
+    'reports/structural_steel_round/report.xml',
     
     
  

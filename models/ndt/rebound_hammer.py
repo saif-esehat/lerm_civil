@@ -14,6 +14,7 @@ class ReboundHammer(models.Model):
     average_mpa = fields.Float(string="Average Mpa",compute="_compute_average",store=True)
     minimum_mpa = fields.Float(string="Minimum Mpa",compute="_compute_average",store=True)
     maximum_mpa = fields.Float(string="Maximum Mpa",compute="_compute_average",store=True)
+    structure = fields.Char("Structure")
 
     notes = fields.One2many('ndt.rebound.hammer.notes','parent_id',string="Notes")
 
@@ -125,7 +126,6 @@ class CarbonationnLine(models.Model):
     #         filtered_array = [x for x in values if lower_bound <= x <= upper_bound]
 
     #         record.avg = sum(filtered_array) / len(filtered_array)
-
 
 
     @api.depends('f1', 'f2', 'f3', 'f4', 'f5', 'f6')

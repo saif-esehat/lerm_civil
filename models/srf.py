@@ -576,12 +576,25 @@ class CreateSampleWizard(models.TransientModel):
 
     @api.onchange('discipline_id')
     def onchange_discipline_id(self):
+        edit_mode = self.edit_mode
         # Trigger the computation of lab_no_value
+        print("Before Edit Mode", edit_mode)
+        if not edit_mode: 
+            self.group_id = None
+            self.material_id = None
+            self.grade_id = None
+            self.size_id = None
+            self.parameters = None
+        
+        print("After Edit Mode", edit_mode)
+        
+        self.edit_mode = False
         self._compute_lab_no()
    
     
     srf_id = fields.Many2one('lerm.civil.srf' , string="Srf Id")
     
+    edit_mode = fields.Boolean(string="Casting")
     sample_id = fields.Char(string="Sample Id")
     casting = fields.Boolean(string="Casting")
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
@@ -664,6 +677,7 @@ class CreateSampleWizard(models.TransientModel):
     @api.onchange('material_id')
     def compute_grade_required(self):
         for record in self:
+            
             for material in record.material_id:
                 # import wdb; wdb.set_trace()
                 if len(material.grade_table) > 0:
@@ -673,7 +687,9 @@ class CreateSampleWizard(models.TransientModel):
 
 
     @api.onchange('material_id')
-    def compute_grade(self):
+    def compute_grade(self):        
+
+        
         for record in self:
             if record.material_id:
                 record.grade_ids = self.env['product.template'].search([('id','=', record.material_id.id)]).grade_table

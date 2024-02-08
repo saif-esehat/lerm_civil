@@ -341,7 +341,7 @@ class ChemicalHasdenedConcrete(models.Model):
 
     #Chloride
     chloride_name = fields.Char("Name",default="Chloride as Cl  BS 1881 Part 124:2015(prestressed concrete)")
-    chloride_visible = fields.Boolean("Chloride",compute="_compute_visible")
+    chloride_visible = fields.Boolean("Chloride as Cl  BS 1881 Part 124:2015(prestressed concrete)",compute="_compute_visible")
 
     chloride_cube = fields.Float("A)Cube Density, Kg/m3")
     chloride_mass = fields.Float("B) Mass of the concrete cube taken for analysis ( gm)")
@@ -421,7 +421,7 @@ class ChemicalHasdenedConcrete(models.Model):
 
      #Chloride 2
     chloride_name1 = fields.Char("Name",default="Chloride  as Cl IS 14989 Pt2 :2001")
-    chloride_visible1 = fields.Boolean("Chloride",compute="_compute_visible")
+    chloride_visible1 = fields.Boolean("Chloride  as Cl IS 14989 Pt2 :2001",compute="_compute_visible")
 
     chloride_density = fields.Float("Density")
     chloride_mass1 = fields.Float("Mass of concrete  sample taken")
@@ -506,7 +506,7 @@ class ChemicalHasdenedConcrete(models.Model):
 
         #Chloride
     chloride_name2 = fields.Char("Name",default="Chloride (prestressed concrete)")
-    chloride_visible2 = fields.Boolean("Chloride",compute="_compute_visible")
+    chloride_visible2 = fields.Boolean("Chloride (prestressed concrete)",compute="_compute_visible")
 
     chloride_cube2 = fields.Float("A)Cube Density, Kg/m3")
     chloride_mass2 = fields.Float("B) Mass of the concrete cube taken for analysis ( gm)")
@@ -589,7 +589,7 @@ class ChemicalHasdenedConcrete(models.Model):
 
 
     #Sulphate
-    sulphate_name = fields.Char("Name",default="Sulphate")
+    sulphate_name = fields.Char("Name",default="Sulphate BS 1881 Part 124:2015")
     sulphate_visible = fields.Boolean("Sulphate",compute="_compute_visible")
 
 

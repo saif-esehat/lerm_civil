@@ -185,8 +185,8 @@
             <form>
                 <sheet>
                     <group style="width:50%">
-                        <!-- <field name="sample_id"/> -->
-                        
+                        <field name="edit_mode" invisible="1"/>
+
                         <field name="discipline_id"  options="{'no_create': True}"/>
                         <field name="lab_no_value"  options="{'no_create': True}" invisible="1"/>
                         <!-- <field name="lab_l_id"  options="{'no_create': True}"/> -->

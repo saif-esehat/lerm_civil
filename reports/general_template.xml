@@ -15,7 +15,10 @@
                         Date <![CDATA[&nbsp;]]> <span t-esc="eln.end_date"/>
                     </span>
 				</div> -->
-				<div class="container_eln">
+				<div style="margin-top:1.5rem;height:1rem;">
+					<span> </span>
+				</div>
+				<div class="container_eln" >
 					<table style="border:none;">
 						<tr cols="12" style="border:none;">
 							<td colspan="4" style="border:none;">
@@ -25,7 +28,7 @@
 							</td>
 							<td colspan="4" style="border:none;">
 								<span style="text-align:left;margin-left:23%;">	
-									Report No. <![CDATA[&nbsp;]]> <span t-esc="eln.kes_no"/>
+									Test Report No. <![CDATA[&nbsp;]]> <span t-esc="eln.kes_no"/>
 								</span>
 							</td>
 							<td colspan="4" style="border:none;">
@@ -247,124 +250,34 @@
 									<t t-esc="result[1]"/>
 								</span> : 
 								<![CDATA[&nbsp;]]>
-								<span>
+								<!-- <span>
 									<t t-esc="formdata[result[0]]" />
-								</span>
+								</span> -->
+								<span>
+										<t t-if="str(formdata[result[0]]).replace('.', '', 1).isdigit()">
+											<t t-esc="round(float(formdata[result[0]]),2)"/>
+										</t> 
+										<t t-else="">
+											<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+											<t t-set="field_name" t-value="row[0]"/>
+											<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+											<t t-if="field_type.ttype == 'selection'">
+												<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',formdata[result[0]])])"/>
+												<!-- <span>Selection </span> -->
+												
+												<t t-esc="selection.name"/>
+											</t>
+											<t t-else="">
+
+												<t t-esc="formdata[result[0]]"/>
+											</t>
+										</t>
+									</span>
 							</td>
 						</tr>
 					</table>
-					<div style="margin-top:20px">
-							<table>
-								<thead>
-									<th>
-										Review and Approval
-									</th>
-									<th>
-										Name of Analyst/Engineer
-									</th>
-									<th>
-										Name of Witness (Client/Customer)
-									</th>
-									<th>
-										Name of Witness (Consultant)	
-									</th>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											Person
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-									<tr>
-										<td>
-											Designation
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-									<tr>
-										<td>
-											Date
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-									<tr>
-										<td>
-											Signature
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-									<tr>
-										<td>
-											Remarks
-										</td>
-										
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-
-										<td>
-
-										</td>
-									</tr>
-
-								</tbody>
-								
-							</table>
-
-						</div>
+					
 					<div class="authorizeRowDataSheet">
 						<div>
 							

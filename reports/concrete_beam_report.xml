@@ -27,7 +27,7 @@
 							<tr>
 								
 								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.site_address"/>
+									<span t-field="o.srf_id.name_work"/>
 								</td>
 							</tr>
 							<tr>
@@ -70,11 +70,13 @@
 								</td>
 								<td colspan="6">Consultant Name :
 									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.consultant_name1"/>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="6">Client Name :
 									<![CDATA[&nbsp;]]>
+										<span t-field="o.srf_id.client"/>
 								</td>
 								<td colspan="6">Client Reference :
 									<![CDATA[&nbsp;]]>
@@ -99,194 +101,32 @@
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Age in Days :
+							    <td colspan="6" >Age in Days :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="concrete_beam.age_of_test"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Date of Casting :
+								
+								<td colspan="6" >Date of Casting :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
 									<span t-field="concrete_beam.date_of_casting"/>
 								</td>
+								
 							</tr>
 						</table>
 					</div>
 		
-			<!-- <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln"> -->
-				
-				<!-- <div class="container_eln">
-					<div t-foreach="eln" t-as="o">
+			
+					<div style="padding-top:5px">
+						<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>: 
 						
-
-						<table>
-								<tr>
-									
-											<tr>
-												<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
-													Customer/Party Name :
-												</td>
-												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/> <br/>
-												<span t-field="o.srf_id.customer.street"/>
-												<span t-field="o.srf_id.customer.street2"/>
-												<span t-field="o.srf_id.customer.city"/>
-												<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
-												<span t-field="o.srf_id.customer.state_id"/>
-												,
-												<span t-field="o.srf_id.customer.country_id"/>
-									           </td>
-											</tr>
-											
-									
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Sample Receipt Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.sample_id.sample_received_date"/>
-												</td>
-											</tr>
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Test Start Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.start_date"/>
-												</td>
-											</tr>
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Test End Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.end_date"/>
-												</td>
-											</tr>
-										
-								</tr>
-							
-
 						
-						</table>
-							
-						<table>
-						   <tr>
-								
-								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.site_address"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="12" style="font-weight: bold;">Sample Description : <![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.sample_description"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="12" style="font-weight: bold;">Sample Id Mark: <![CDATA[&nbsp;]]>
-										<span t-field="o.sample_id.client_sample_id"/>
-								</td>
-							</tr>
-							<tr>
-							   <td colspan="3" style="font-weight: bold;">Quantity :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
-									<span t-field="o.sample_id.size_id.size"/>
-								</td>
-								<td colspan="3" style="font-weight: bold;">Grade :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
-									<span t-field="o.grade_id.grade"/>
-								</td>
-							</tr>
-							<tr>
-							    <td colspan="3" style="font-weight: bold;">Brand :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
-									<span t-field="o.sample_id.brand"/>
-								</td>
-								<td colspan="3" style="font-weight: bold;">Consultant Name :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
-								</td>
-							</tr>
-							<tr>
-							    <td colspan="3" style="font-weight: bold;">Client Name :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3"></td>
-								<td colspan="3" style="font-weight: bold;">Client Reference :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
-									<span t-field="o.srf_id.client_refrence"/>
-								</td>
-							</tr>
-							<tr>
-							    <td colspan="3" style="font-weight: bold;">Discipline :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
-									<span t-field="o.discipline.discipline"/>
-								</td>
-								<td colspan="3" style="font-weight: bold;">Group :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
-									<span t-field="o.group.group"/>
-								</td>
-							</tr>
-							<tr>
-							    <td colspan="3" style="font-weight: bold;">Material/Test Name :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="12">
-									<span t-field="o.material.name"/>
-								</td>
-							</tr>
-							<tr>
-							    <td colspan="3" style="font-weight: bold;">Age in Days :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
-									<span t-field="concrete_beam.age_of_test"/>
-								</td>
-								<td colspan="3" style="font-weight: bold;">Date of Casting :
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
-									<span t-field="concrete_beam.date_of_casting"/>
-								</td>
-							</tr>
-							
-						</table>
-					</div> -->
-
-
-					
-
-
-					<!-- <div style="margin-top:20px;">
-						<p><strong>Results</strong>:<![CDATA[&nbsp;]]></p>
+							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_table" t-as="parameter">
+								<t t-if="parameter.grade.id == eln.grade_id.id">
+									<span t-field="parameter.specification"/>
+								</t>
+							</t>
+						
 					</div>
-					
-					<div colspan="2" style="font-weight: bold;">
-						<td >
-							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_name"/>
-						</td>
-					</div> -->
-					<div>
-						<span>
-							<span t-esc="eln.material.test_parameter"/>
-						</span>
-					</div>
-					<div></div>
 
 						
 				
@@ -296,7 +136,7 @@
                                 </td>
                                 <td colspan="2" style="text-align: center;font-weight: bold;">ID MARK/ Location
 								</td>
-								<td colspan="2" style="text-align: center;font-weight: bold;">Grade
+								<td colspan="2" style="text-align: center;font-weight: bold;width:200px;">Grade
 								</td>
 								<td colspan="2" style="text-align: center;font-weight: bold;">Length in mm
 								</td>
@@ -312,7 +152,7 @@
 									Fracture Distance from near support in Cm
 								</td>
 								
-								<td colspan="2" style="text-align: center;font-weight: bold;">Crushing Load in kN (P)
+								<td colspan="2" style="text-align: center;font-weight: bold;">Crushing Load in kN
 								</td>
 								
 								<td colspan="2" style="text-align: center;font-weight: bold;">Flexural Strength in N/mm2

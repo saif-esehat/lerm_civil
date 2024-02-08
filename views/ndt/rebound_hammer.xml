@@ -19,7 +19,8 @@
                         </h1>
                     </group>
                     <group style="width:50%">
-                        <field name="temperature" string="Temperature °C"/>
+                        <field name="temperature" string="Temperature °C" identity="extra"/>
+                        <field name="structure" string="Structure Age" identity="extra"/>
                     </group>
                     <field name="child_lines" nolabel="1" >
                             <tree editable="bottom">

@@ -12,6 +12,8 @@ from . import contractor
 from . import company
 from . import data_sheets_report
 from . import enviroment_register
+# from . import employee
+
 from .report import cement_report
 from .report import flyash_report
 from .report import gypsum_report
@@ -121,3 +123,5 @@ from .report import crushed_sand_ds_report_chemical
 from .report import gypsum_ds_report
 from .chemical import opc_cement_chemical
 from .chemical import tmt_bar
+from .mechanical import structural_steel_round
+from .report import structural_steel_round_ds_report

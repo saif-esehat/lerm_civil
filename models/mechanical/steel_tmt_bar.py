@@ -168,27 +168,7 @@ class SteelTmtBarLine(models.Model):
 
     @api.depends('weight_per_meter','eln_ref','size')
     def _compute_weight_per_meter_nabl(self):
-        # for record in self:
-        #     # print("Steel Size",record.size)
-        #     record.weight_per_meter_nabl = 'fail'
-        #     line = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')])
-        #     materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
-        #     for material in materials:
-        #         # print("Materials size",material.size.id)
-        #         if material.size.id == record.size.id:
-        #             req_min = material.req_min
-        #             req_max = material.req_max
-        #             mu_value = line.mu_value
-                    
-        #             lower = record.weight_per_meter - record.weight_per_meter*mu_value
-        #             upper = record.weight_per_meter + record.weight_per_meter*mu_value
-                    
-        #             if lower >= req_min and upper <= req_max:
-        #                 record.weight_per_meter_nabl = 'pass'
-        #                 break
-        #             else:
-        #                 record.weight_per_meter_nabl = 'fail'
-
+      
 
         for record in self:
             record.weight_per_meter_nabl = 'fail'
@@ -515,13 +495,30 @@ class SteelTmtBarLine(models.Model):
     # def _compute_gauge_length(self):
     #     for record in self:
     #         record.gauge_length = ((5.65 * math.sqrt(record.crossectional_area)),2)
+    # @api.depends('crossectional_area')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         gauge_length = round((math.sqrt(record.crossectional_area) * 5.65),2)
+    #         record.gauge_length = gauge_length
+            # record.gauge_length = round(gauge_length, 2)
+                
+   
+
+    # @api.depends('crossectional_area')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         gauge_length = math.ceil(math.sqrt(record.crossectional_area) * 5.65)
+    #         record.gauge_length = gauge_length
     @api.depends('crossectional_area')
     def _compute_gauge_length(self):
         for record in self:
-            gauge_length = round((math.sqrt(record.crossectional_area) * 5.65),2)
-            record.gauge_length = gauge_length
-            # record.gauge_length = round(gauge_length, 2)
-
+            gauge_length = math.sqrt(record.crossectional_area) * 5.65
+            # Check if the decimal part is greater than or equal to 0.5
+            if gauge_length - int(gauge_length) >= 0.5:
+                rounded_gauge_length = math.ceil(gauge_length)
+            else:
+                rounded_gauge_length = math.floor(gauge_length)
+            record.gauge_length = int(rounded_gauge_length)
 
     @api.depends('yeild_load','crossectional_area')
     def _compute_proof_yeid_stress(self):

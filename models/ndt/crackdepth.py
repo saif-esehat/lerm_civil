@@ -16,6 +16,7 @@ class CrackDepth(models.Model):
     min_cd = fields.Float(string="Min mm", compute='_compute_min_cd', store=True)
     # max_cd = fields.Float(string="Max mm")
     max_cd = fields.Float(string="Max mm", compute='_compute_max_cd', store=True)
+    structure = fields.Char("Structure")
     notes = fields.One2many('ndt.crack.depth.notes','parent_id',string="Notes")
 
 

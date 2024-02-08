@@ -49,13 +49,11 @@ class SRFEditWizard(models.TransientModel):
             'attachment':self.attachment,
             'attachment_name':self.attachment_name
         })
-        # import wdb; wdb.set_trace()
         samples = self.env['lerm.civil.srf'].search([("id","=",self.srf_id.id)]).samples
         for sample in samples:
             sample.write({
                 'customer_id': self.customer.id,
             })
-
         
     
     
@@ -112,3 +110,9 @@ class SRFEditWizard(models.TransientModel):
         for record in self:
             contact_ids = self.env['res.partner'].search([('parent_id', '=', record.customer.id),('type','=','delivery')])
             record.contact_site_ids = contact_ids
+
+    @api.onchange('customer')
+    def compute_client(self):
+        for record in self:
+            if record.customer:
+                self.client = self.env['res.partner'].search([("id","=",self.customer.id)]).consultant

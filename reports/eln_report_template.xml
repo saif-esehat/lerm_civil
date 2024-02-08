@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-
-
-	
-
-
 	<template id="custom_layout_header_footer_lerm_eln">
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
@@ -49,12 +44,12 @@
 
 					<table>
 						<tr>
-							<td colspan="3">Report no :
+							<td colspan="3">Test Report no :
 							</td>
 							<td colspan="3">
 								<span t-field="o.kes_no"/>
 							</td>
-							<td colspan="3">Report Date :
+							<td colspan="3">Report Issue Date :
 							</td>
 							<td colspan="3">
 								<span t-field="o.end_date"/>
@@ -123,10 +118,11 @@
 						</div>
 					</div>
                 </ul>
-                <div t-if="report_type == 'pdf'" class="footertext">
+                <div style="margin-bottom:5px;" t-if="report_type == 'pdf'" class="footertext">
                     Page: <span class="page"/> / <span class="topage"/>
                 </div>
-
+				
+					
             </div>	
         </div>
 	</template>
@@ -249,7 +245,7 @@
 									<span t-field="o.srf_id.site_address.country_id"/>
 								</td> -->
 								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.site_address"/>
+									<span t-field="o.srf_id.name_work"/>
 								</td>
 							</tr>
 							<tr>
@@ -293,11 +289,13 @@
 								</td>
 								<td colspan="6">Consultant Name :
 									<![CDATA[&nbsp;]]>
+										<span t-field="o.srf_id.consultant_name1"/>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="6">Client Name :
 									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client"/>
 								</td>
 								<td colspan="6">Client Reference :
 									<![CDATA[&nbsp;]]>
@@ -344,7 +342,7 @@
 
 					<t t-if='not nabl'>
 						<t t-set="i" t-value="0"/>
-						<t t-if="len(non_nabl_parameters) &lt;= 3">
+						<t t-if="len(non_nabl_parameters) &lt;= 6">
 							<table>
 								<thead>
 									<tr>
@@ -405,7 +403,10 @@
 											</td>
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
+
+
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
@@ -434,7 +435,7 @@
 								</tbody>
 							</table>
 						</t>
-						<t t-if="len(non_nabl_parameters) &gt; 3">
+						<t t-if="len(non_nabl_parameters) &gt; 6">
 							<table>
 								<thead>
 									<tr>
@@ -482,7 +483,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="non_nabl_parameters[:3]" t-as="parameter">
+									<t t-foreach="non_nabl_parameters[:6]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>
@@ -571,7 +572,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="non_nabl_parameters[3:]" t-as="parameter">
+									<t t-foreach="non_nabl_parameters[6:]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>
@@ -585,6 +586,7 @@
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												<!-- <span t-esc="str(parameter['result'])"/> -->
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
@@ -618,7 +620,7 @@
 
 					<t t-if='nabl'>
 						<t t-set="i" t-value="0"/>
-						<t t-if="len(nabl_parameters) &lt;= 3">
+						<t t-if="len(nabl_parameters) &lt;= 6">
 							<table>
 								<thead>
 									<tr>
@@ -680,6 +682,7 @@
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												<!-- <span t-esc="str(parameter['result'])"/> -->
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
@@ -708,7 +711,7 @@
 								</tbody>
 							</table>
 						</t>
-						<t t-if="len(nabl_parameters) &gt; 3">
+						<t t-if="len(nabl_parameters) &gt; 6">
 							<table>
 								<thead>
 									<tr>
@@ -756,7 +759,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="nabl_parameters[:3]" t-as="parameter">
+									<t t-foreach="nabl_parameters[:6]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>
@@ -770,6 +773,7 @@
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												<!-- <span t-esc="str(parameter['result'])"/> -->
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
@@ -845,7 +849,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="nabl_parameters[3:]" t-as="parameter">
+									<t t-foreach="nabl_parameters[6:]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>
@@ -859,6 +863,7 @@
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												<!-- <span t-esc="str(parameter['result'])"/> -->
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->

@@ -111,7 +111,7 @@
 									<span t-field="o.srf_id.site_address.country_id"/>
 								</td> -->
 								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.site_address"/>
+									<span t-field="o.srf_id.name_work"/>
 								</td>
 							</tr>
 							<tr>
@@ -154,11 +154,13 @@
 								</td>
 								<td colspan="6">Consultant Name :
 									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.consultant_name1"/>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="6">Client Name :
 									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client"/>
 								</td>
 								<td colspan="6">Client Reference :
 									<![CDATA[&nbsp;]]>
@@ -212,14 +214,13 @@
 					<div style="padding-top:5px">
 						<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>: 
 						
-						<span>
-							<!-- <strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]> -->
+						
 							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table" t-as="parameter">
 								<t t-if="parameter.grade.id == eln.grade_id.id">
 									<span t-field="parameter.specification"/>
 								</t>
 							</t>
-						</span>
+						
 					</div>
 					<!-- <td style="text-align: center;vertical-align: middle;">
 						
@@ -227,7 +228,7 @@
 
 					<table>
 						<thead>
-							<tr style="text-align: center;">
+							<tr  style="text-align: center;">
 								<th style="text-align: center;font-weight: bold;">
 									<span>
 										Sr. No
@@ -238,7 +239,7 @@
 										ID MARK/Location
 									</span>
 								</th>
-								<th style="text-align: center;font-weight: bold;">
+								<th style="text-align: center;font-weight: bold;width:150px;">
 									<span>
 										Grade
 									</span>
@@ -270,7 +271,7 @@
 										Crushing load in KN
 									</span>
 								</th>
-								<th style="text-align: center;font-weight: bold;">
+								<th style="text-align: center;font-weight: bold;padding-left:1px; padding-right:1px;">
 									<span>
 										Compressive Strength in N/mm2
 									</span>
@@ -281,7 +282,7 @@
 						<tbody>
 							<!-- <t t-set="i" t-value="0"/> -->
 							<!-- non nabl -->
-							<tr t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'fail' and not nabl">
+							<tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'fail' and not nabl">
 								<!-- <td>
 									<div>
 										<span t-esc="i + 1"/>
@@ -318,7 +319,7 @@
 							</tr>
 
 							<!-- nabl -->
-							<tr t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'pass' and nabl">
+							<tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'pass' and nabl">
 								<!-- <td>
 									<div>
 										<span t-esc="i + 1"/>
@@ -415,7 +416,7 @@
 								</div>
 								<div>
 									<b>
-										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+										(<span t-esc="eln.sample_id.check_by.job_title"/>)
 									</b>
 								</div>
 							</div>
@@ -524,6 +525,24 @@
 							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_name"/>
 						</div>
 					</div>
+						<table style="margin-top:20px">
+				
+							
+							<tr>
+								<td colspan="6">Date of Casting  :  <span t-field="data.date_of_casting"></span>
+								</td>
+								<!-- <td colspan="6">Date of Testing  :  <span t-field="data.date_of_testing"></span>
+								</td> -->
+								<td colspan="6">Age of Test, Days :  <span t-field="data.age_of_test"></span>
+								</td>
+							</tr>
+							<!-- <tr cols="12">
+								<td colspan="6">Age of Test, Days :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.age_of_test"/>
+								</td>
+							</tr> -->
+						</table>
 						<table style="margin-top:30px;">
 						<thead>
 							<tr>
