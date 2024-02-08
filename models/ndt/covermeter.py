@@ -5,9 +5,11 @@ import math
 class CoverMeter(models.Model):
     _name = "ndt.cover.meter"
     _inherit = "lerm.eln"
-    _rec_name = "name"
+    _rec_name = "name1"
 
-    name = fields.Char("Name",default="Cover Meter")
+    # name = fields.Char("Name",default="Cover Depth")
+    name1 = fields.Char("Name",default="Cover Depth")
+
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.cover.meter.line','parent_id',string="Parameter")

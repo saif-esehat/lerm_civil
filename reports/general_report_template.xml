@@ -293,10 +293,8 @@
 											<t t-foreach="tabledata" t-as="row">
 												<td>
 													<span>
-														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-															<!-- <t t-esc="round(float(r[row[0]]),2)"/> -->
-															<t t-esc="float(r[row[0]]).quantize(Decimal('0.00'))"/>
-
+														<t t-if="str(r[row[0]]).isdigit()">
+															<t t-esc="round(float(r[row[0]]), 2)"/>
 														</t>
 														<t t-else="">
 															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
@@ -367,9 +365,8 @@
 											<t t-foreach="tabledata" t-as="row">
 												<td>
 													<span>
-														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-															<!-- <t t-esc="round(float(r[row[0]]),2)"/> -->
-															<t t-esc="float(r[row[0]]).quantize(Decimal('0.00'))"/>
+														<t t-if="str(r[row[0]]).isdigit()">
+															<t t-esc="round(float(r[row[0]]), 2)"/>
 														</t>
 														<t t-else="">
 															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
@@ -415,11 +412,10 @@
 											<t t-foreach="tabledata" t-as="row">
 												<td>
 													<span>
-														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-															<!-- <t t-esc="round(float(r[row[0]]),2)"/> -->
-															<t t-esc="float(r[row[0]]).quantize(Decimal('0.00'))"/>
-
+														<t t-if="str(r[row[0]]).isdigit()">
+															<t t-esc="round(float(r[row[0]]), 2)"/>
 														</t>
+
 														<t t-else="">
 															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
 															<t t-set="field_name" t-value="row[0]"/>

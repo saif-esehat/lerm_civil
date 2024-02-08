@@ -49,6 +49,12 @@ class SRFEditWizard(models.TransientModel):
             'attachment':self.attachment,
             'attachment_name':self.attachment_name
         })
+        # import wdb; wdb.set_trace()
+        samples = self.env['lerm.civil.srf'].search([("id","=",self.srf_id.id)]).samples
+        for sample in samples:
+            sample.write({
+                'customer_id': self.customer.id,
+            })
 
         
     
