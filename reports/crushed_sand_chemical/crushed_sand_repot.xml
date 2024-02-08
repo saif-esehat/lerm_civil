@@ -261,7 +261,7 @@
 								
 								<td style="text-align: center;">
 									<span>
-										<span t-field="data.chloride_percent" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="data.chloride_percent" t-options='{"widget": "float", "precision": 4}'/>
 									</span>									
 								</td>
 								<td style="text-align: center;">
@@ -304,7 +304,7 @@
 								
 								<td style="text-align: center;">
 									<span>
-										<span t-field="data.sulphate_percent" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="data.sulphate_percent" t-options='{"widget": "float", "precision": 4}'/>
 									</span>									
 								</td>
 								<td style="text-align: center;">

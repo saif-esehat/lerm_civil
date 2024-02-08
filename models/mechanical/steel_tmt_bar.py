@@ -168,27 +168,7 @@ class SteelTmtBarLine(models.Model):
 
     @api.depends('weight_per_meter','eln_ref','size')
     def _compute_weight_per_meter_nabl(self):
-        # for record in self:
-        #     # print("Steel Size",record.size)
-        #     record.weight_per_meter_nabl = 'fail'
-        #     line = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')])
-        #     materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
-        #     for material in materials:
-        #         # print("Materials size",material.size.id)
-        #         if material.size.id == record.size.id:
-        #             req_min = material.req_min
-        #             req_max = material.req_max
-        #             mu_value = line.mu_value
-                    
-        #             lower = record.weight_per_meter - record.weight_per_meter*mu_value
-        #             upper = record.weight_per_meter + record.weight_per_meter*mu_value
-                    
-        #             if lower >= req_min and upper <= req_max:
-        #                 record.weight_per_meter_nabl = 'pass'
-        #                 break
-        #             else:
-        #                 record.weight_per_meter_nabl = 'fail'
-
+      
 
         for record in self:
             record.weight_per_meter_nabl = 'fail'

@@ -246,7 +246,12 @@
 									<span t-esc="r['brand']"/>
 								</td>
 								<td>
-									<span t-esc="r['date_casting']"/>
+									<t t-if="r['date_casting']">
+										<span t-esc="r['date_casting'].strftime('%d/%m/%y')"/>
+									</t>
+									<t t-else="">
+										<span t-esc="r['date_casting']"/>
+									</t>
 								</td>
 								<td>
 									<!-- <span t-esc="r['grade_id'].grade"/> -->
