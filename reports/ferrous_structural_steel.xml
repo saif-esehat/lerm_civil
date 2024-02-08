@@ -262,10 +262,10 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="data.area"/>
+									<span t-esc="data.area" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="data.area2"/>
+									<span t-esc="data.area2" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center; vertical-align: middle;">
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','73919477-397a-415d-87ca-f7767f0252e1')]).parameter_table" t-as="parameter">
