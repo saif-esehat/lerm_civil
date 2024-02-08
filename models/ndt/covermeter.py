@@ -5,7 +5,7 @@ import math
 class CoverMeter(models.Model):
     _name = "ndt.cover.meter"
     _inherit = "lerm.eln"
-    _rec_name = "name1"
+    _rec_name = "name"
 
     # name = fields.Char("Name",default="Cover Depth")
     # name1 = fields.Char("Name",default="Cover Depth")

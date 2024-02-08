@@ -6,8 +6,13 @@
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='personal_information']/field[@name='gender']" position="after">
-                    <field name='signature' widget="image"/>
+                <xpath expr="//page[@name='personal_information']" position="after">
+                    <page name="others" string="Others">
+                            <group style="width:50%;">
+                                <field name='signature' widget="image" style="height:50px;"/>
+                            </group>
+                    </page>
+                    
                 </xpath>
             </field>
         </record>

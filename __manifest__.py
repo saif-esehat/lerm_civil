@@ -21,7 +21,7 @@
     'views/sample_range.xml',
     'views/eln.xml',
     'views/contractor.xml',
-    # 'views/employee.xml',
+    'views/employee.xml',
     # 'views/mechanical/sieve_analysis.xml',
     'views/mechanical/free_swell_index.xml',
     'views/mechanical/soil_cbr.xml',

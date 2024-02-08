@@ -12,7 +12,7 @@ from . import contractor
 from . import company
 from . import data_sheets_report
 from . import enviroment_register
-# from . import employee
+from . import employee
 
 from .report import cement_report
 from .report import flyash_report

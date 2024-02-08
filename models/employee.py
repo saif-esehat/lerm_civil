@@ -2,8 +2,7 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 
 
-class EmployeeIngerited(models.Model):
-    _name = "employee.inherited"
+class EmployeeInherited(models.Model):
     _inherit = "hr.employee"
 
     signature = fields.Binary(string="Signature", attachment=True)
