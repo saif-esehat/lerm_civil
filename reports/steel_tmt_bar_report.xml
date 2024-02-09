@@ -133,14 +133,7 @@
 							</tr>
 						</table>
 					</div>
-					<!-- <div style="margin-top:20px;">
-						<u>Protocol</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
-<span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
-</div> -->
-					<!-- <div style="padding-top:5px">
-						<span t-esc="eln.material.test_parameter"/>
-					</div> -->
-							
+				
 			 <div style="padding-top:5px">
 				<span t-esc="o.material.test_parameter "/> 
 
@@ -167,30 +160,7 @@
 				
 			</div>
 
-			<!-- <div style="padding-top:5px">
-						<span t-esc="o.material.test_parameter"/>
-
-						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')])" t-as="parameter">
-						<span t-esc="parameter.test_method.test_method"/>
-					  </t>
-				
-						
-						 <t t-set="test_method_displayed" t-value="False"/>
-    
-						<t t-foreach="env['lerm.parameter.master'].search([])" t-as="parameter">
-							<t t-if="data.rebend_visible and parameter.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8' and not test_method_displayed">
-								<span t-esc="parameter.test_method.test_method"/>
-								<t t-set="test_method_displayed" t-value="True"/>
-							</t>
-							<t t-elif="data.bend_visible and parameter.internal_id == 'addd0c61-adb6-447d-b668-1fba0744680f' and not test_method_displayed">
-								<span t-esc="parameter.test_method.test_method"/>
-								<t t-set="test_method_displayed" t-value="True"/>
-							</t>
-						</t>
-					</div> -->
-
-
-            	
+		
 					<table>
 						<t t-set="i" t-value="0"/>
 						<thead>
@@ -235,6 +205,7 @@
 								</th>
 							</tr>
 						</thead>
+						
 						<tbody>
 							<tr>
 								<td style="text-align: center;">
@@ -858,11 +829,52 @@
 						</tbody>
 					</table>
 					<div style="page-break-before: always;">
-							
-						
+				
 								<t t-if="i > 8">
 									<!-- <div style="page-break-before: always;"></div> -->
-									<table>
+						<table>
+						<thead>
+							<tr>
+								<th style="text-align: center; width: 5%;">
+									<span>
+										Sr. No
+									</span>
+								</th>
+								<th style="text-align: center; width: 25%;">
+									<span>
+										Parameter
+									</span>
+								</th>
+								<th style="text-align: center; width: 5%;">
+									<span>
+										Unit
+									</span>
+								</th>
+
+								<th style="text-align: center; width: 10%;">
+									<span>
+										Observation-1
+									</span>
+								</th>
+								<th style="max-width: 250px; text-align: center; width: 10%;">
+									<span>
+										<span t-esc="eln.material.specifications"/>
+									</span>
+								</th>
+								<!-- <th style="max-width: 200px; text-align: center;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
+										
+									</span>
+							    </th> -->
+
+								<th t-if="eln.conformity" style="text-align: center; width: 10%;">
+									<span>
+										Confirmity Status
+									</span>
+								</th>
+							</tr>
+						</thead>
 										<tbody>
 											<tr>
 												<td style="text-align: center;">
