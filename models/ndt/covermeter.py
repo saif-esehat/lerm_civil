@@ -7,6 +7,9 @@ class CoverMeter(models.Model):
     _inherit = "lerm.eln"
     _rec_name = "name"
 
+    # name = fields.Char("Name",default="Cover Depth")
+    # name1 = fields.Char("Name",default="Cover Depth")
+
     name = fields.Char("Name",compute="_compute_name")
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
@@ -16,6 +19,7 @@ class CoverMeter(models.Model):
     average_min = fields.Float(string='Average Min (mm)', digits=(16, 2), compute='_compute_average')
     average_max = fields.Float(string='Average Max (mm)', digits=(16, 2), compute='_compute_average')
     notes = fields.One2many('ndt.cover.meter.notes','parent_id',string="Notes")
+    structure = fields.Char("Structure")
 
 
     #just Testing will remove later

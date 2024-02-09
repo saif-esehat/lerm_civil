@@ -690,7 +690,7 @@
 									</span>
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="round(data.weight_per_meter , 2)" t-options='{"widget": "float", "precision": 3}'/>
+									<span t-esc="data.weight_per_meter" t-options='{"widget": "float", "precision": 3}'/>
 								</td>
 
 

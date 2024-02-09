@@ -14,6 +14,7 @@ class ReboundHammer(models.Model):
     average_mpa = fields.Float(string="Average Mpa",compute="_compute_average",store=True)
     minimum_mpa = fields.Float(string="Minimum Mpa",compute="_compute_average",store=True)
     maximum_mpa = fields.Float(string="Maximum Mpa",compute="_compute_average",store=True)
+    structure = fields.Char("Structure")
 
     notes = fields.One2many('ndt.rebound.hammer.notes','parent_id',string="Notes")
 

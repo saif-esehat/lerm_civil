@@ -15,6 +15,7 @@ class CarbonationTest(models.Model):
     average = fields.Float(string="Average of Depth of Carbonation in mm",compute="_compute_average")
     min_depth = fields.Float(string="Min mm",compute="_compute_min_max")
     max_depth = fields.Float(string="Max mm",compute="_compute_min_max")
+    structure = fields.Char("Structure")
 
     notes = fields.One2many('ndt.carbonation.test.notes','parent_id',string="Notes")
 

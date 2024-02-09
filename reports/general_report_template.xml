@@ -47,32 +47,49 @@
             <t t-out="0"/>
         </div>
 		<div t-attf-class="footer o_standard_footer">
-			
-			
             <div class="text-center" style="border-top: 1px solid black;">
-                <ul class="list-inline mb4">
-					
-					<span>
+                <ul class="list-inline mb4 footerQR">
+					<!-- <div style="border-top: 1px solid black;">
 						<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 50px; height: 50px;"/>
-					</span>	
-                    <span class="footertext">
-						Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
-					</span>
-						
-					<div class="footertext">
-						Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
+					</div> -->
+					<div>
+						<div class="footertext">
+							Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+						</div>
+						<div>
+							<!-- <div>
+								<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 70px; height: 70px;"/>
+							</div> -->
+							<div class="footerQR">
+								<div style="padding-right : 20px">
+									<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 75px; height: 70px;"/>
+								</div>
+								
+								<div style="margin-left:90px">
+									<div class="footertext">
+										<span>
+											Email : sales@knackengineeringservices.com <span style="padding-left:10px">Website :  www.knackengineeringservices.com</span> 
+										</span>
+									</div>
+									<div class="footertext">
+										CIN No.: U45209MH2017PTC291168
+									</div>
+									
+									
+								</div>
+								<div  style="padding-left : 80px;">
+									<img src="/lerm_civil/static/src/img/qr_image.png" style="width: 60px; height: 55px;"/>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="footertext">
-						CIN No.: U45209MH2017PTC291168
-					</div>
-
-					
-					
                 </ul>
-                <div t-if="report_type == 'pdf'" class="footertext">
+                <div style="margin-bottom:5px;" t-if="report_type == 'pdf'" class="footertext">
                     Page: <span class="page"/> / <span class="topage"/>
                 </div>
-            </div>
+				
+					
+            </div>	
         </div>
 	</template>
 	
@@ -220,9 +237,13 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.instrument.name"/>
 								</td>
-								<td colspan="6">Temperature :
+								<td colspan="3">Temperature :
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.temperature"/>°C
+								</td>
+								<td colspan="3">Structure Age :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.structure"/>
 								</td>
 							</tr>
 						</table>
@@ -242,14 +263,14 @@
 
 
 					<t t-set="data_length" t-value="len(data.child_lines or [])"/>
-					<t t-if="data_length &lt;= 5">
+					<t t-if="data_length &lt;= 7">
 						<table style="margin-top:30px;">
 								<thead>
 									<tr>
 										<t t-foreach="tabledata" t-as="column">
 											<th>
 												<span>
-													<t t-esc="column[1]" />
+													<t style="text-align:center;" t-esc="column[1]" />
 												</span>
 											</th>
 										</t>
@@ -294,9 +315,9 @@
 											<t t-set="r" t-value="data.child_lines[index]"/>
 											<t t-foreach="tabledata" t-as="row">
 												<td>
-													<span>
+													<span style="text-align:center;">
 														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-															<t t-esc="round(float(r[row[0]]),2)"/>
+															<t style="text-align:center;" t-esc="round(float(r[row[0]]),2)"/>
 														</t> 
 														<t t-else="">
 															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
@@ -307,11 +328,11 @@
 																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
 																<!-- <span>Selection </span> -->
 																
-																<t t-esc="selection.name"/>
+																<t style="text-align:center;" t-esc="selection.name"/>
 															</t>
 															<t t-else="">
 
-																<t t-esc="r[row[0]]"/>
+																<t style="text-align:center;" t-esc="r[row[0]]"/>
 															</t>
 														</t>
 													</span>
@@ -345,7 +366,7 @@
 						</table>
 						
 					</t>
-					<t t-if="data_length &gt; 5">
+					<t t-if="data_length &gt; 7">
 						<table style="margin-top:30px;">
 								<thead>
 									<tr>
@@ -353,7 +374,7 @@
 										<t t-foreach="tabledata" t-as="column">
 											<th>
 												<span>
-													<t t-esc="column[1]" />
+													<t style="text-align:center;" t-esc="column[1]" />
 												</span>
 											</th>
 										</t>
@@ -362,13 +383,13 @@
 								
 									<tbody>
 										<t t-set="i" t-value="0"/>
-										<tr t-foreach="range(5)" t-as="index">
+										<tr t-foreach="range(7)" t-as="index">
 											<t t-set="r" t-value="data.child_lines[index]"/>
 											<t t-foreach="tabledata" t-as="row">
 												<td>
 													<span>
 														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-															<t t-esc="round(float(r[row[0]]),2)"/>
+															<t style="text-align:center;" t-esc="round(float(r[row[0]]),2)"/>
 														</t> 
 														<t t-else="">
 															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
@@ -379,11 +400,11 @@
 																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
 																<!-- <span>Selection </span> -->
 																
-																<t t-esc="selection.name"/>
+																<t style="text-align:center;" t-esc="selection.name"/>
 															</t>
 															<t t-else="">
 
-																<t t-esc="r[row[0]]"/>
+																<t style="text-align:center;" t-esc="r[row[0]]"/>
 															</t>
 														</t>
 													</span>
@@ -392,6 +413,12 @@
 										</tr>
 									</tbody>
 						</table>
+						<div t-if="stamp and stamp == '4-in_report'" style="margin-top:20px;">
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+							FORMAT No. <![CDATA[&nbsp;]]> <span t-esc="eln.parameters_result[0].parameter.report_format_no"/>
+						</div>
 						<div style="page-break-before: always;"></div>
 						<table style="margin-top:30px;">
 								<thead>
@@ -400,7 +427,7 @@
 										<t t-foreach="tabledata" t-as="column">
 											<th>
 												<span>
-													<t t-esc="column[1]" />
+													<t style="text-align:center;" t-esc="column[1]" />
 												</span>
 											</th>
 										</t>
@@ -409,13 +436,13 @@
 								
 									<tbody>
 										<t t-set="i" t-value="0"/>
-										<tr t-foreach="range(5, len(data.child_lines))" t-as="index">
+										<tr t-foreach="range(7, len(data.child_lines))" t-as="index">
 											<t t-set="r" t-value="data.child_lines[index]"/>
 											<t t-foreach="tabledata" t-as="row">
 												<td>
 													<span>
 														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-															<t t-esc="round(float(r[row[0]]),2)"/>
+															<t style="text-align:center;" t-esc="round(float(r[row[0]]),2)"/>
 														</t> 
 														<t t-else="">
 															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
@@ -426,11 +453,11 @@
 																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
 																<!-- <span>Selection </span> -->
 																
-																<t t-esc="selection.name"/>
+																<t style="text-align:center;" t-esc="selection.name"/>
 															</t>
 															<t t-else="">
 
-																<t t-esc="r[row[0]]"/>
+																<t style="text-align:center;" t-esc="r[row[0]]"/>
 															</t>
 														</t>
 													</span>
@@ -479,7 +506,7 @@
 								</td>
 							</tr>
 						</table>
-					<div style="page-break-inside: avoid;">
+					<div >
 						<div style="margin-top:20px" class="noteContainer">
 							<div>
 								<b>Note :-</b>
@@ -576,6 +603,11 @@
 							</div>
 						</div>
 						</div>
+					</div>
+					<div style="margin-top: 10px; text-align: center;">
+							<p style="border-top: 1px dashed #000; padding-top: 10px;">
+								...... End Of Report......
+							</p>
 					</div>
 				</div>
 			</t>

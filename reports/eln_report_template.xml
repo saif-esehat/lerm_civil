@@ -118,10 +118,11 @@
 						</div>
 					</div>
                 </ul>
-                <div t-if="report_type == 'pdf'" class="footertext">
+                <div style="margin-bottom:5px;" t-if="report_type == 'pdf'" class="footertext">
                     Page: <span class="page"/> / <span class="topage"/>
                 </div>
-
+				
+					
             </div>	
         </div>
 	</template>
@@ -402,7 +403,10 @@
 											</td>
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
+
+
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
@@ -582,6 +586,7 @@
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												<!-- <span t-esc="str(parameter['result'])"/> -->
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
@@ -677,6 +682,7 @@
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												<!-- <span t-esc="str(parameter['result'])"/> -->
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
@@ -767,6 +773,7 @@
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												<!-- <span t-esc="str(parameter['result'])"/> -->
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
@@ -856,6 +863,7 @@
 											<td t-if="parameter['result_type'] == 'number'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->
 												<span t-esc="'{:.{}f}'.format(parameter['result'], parameter['parameter'].decimal)"/>
+												<!-- <span t-esc="str(parameter['result'])"/> -->
 											</td>
 											<td t-if="parameter['result_type'] == 'char'">
 												<!-- <span t-esc="round(parameter['result'], parameter['parameter'].decimal)"/> -->

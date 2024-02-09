@@ -10,7 +10,7 @@ class HalfCell(models.Model):
 
     name = fields.Char("Name",default="Half Cell")
     parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
-    structure_age = fields.Char("Year of Construction")
+    structure = fields.Char("Structure")
     temperature = fields.Float("Temperature °C")
     instrument = fields.Char("Instrument")
     child_lines_1 = fields.One2many('ndt.half.cell.one', 'parent_id', string="Parameter")
