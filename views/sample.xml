@@ -163,6 +163,9 @@
                       <group>
                           <field name="report_upload" widget="many2many_binary"/>
                       </group>
+                      <group>
+                          <field name="signature_required"/>
+                      </group>
                     </group>  
 
 

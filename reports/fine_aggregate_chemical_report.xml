@@ -190,7 +190,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).unit.name"/> -->
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).unit.name"/>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -236,7 +236,7 @@
 								</td>
 								<td style="text-align: center;">
 									<span>
-										<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).unit.name"/> -->
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).unit.name"/>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -277,7 +277,7 @@
 								
 								<td style="text-align: center;">
 									<span>
-										<span t-field="data.chloride_percent" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="data.chloride_percent" t-options='{"widget": "float", "precision": 4}'/>
 									</span>									
 								</td>
 								<td style="text-align: center;">
@@ -322,7 +322,7 @@
 								
 								<td style="text-align: center;">
 									<span>
-										<span t-field="data.sulphate_percent" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="data.sulphate_percent" t-options='{"widget": "float", "precision": 4}'/>
 									</span>									
 								</td>
 								<td style="text-align: center;">

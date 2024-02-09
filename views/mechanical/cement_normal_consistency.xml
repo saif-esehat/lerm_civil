@@ -118,8 +118,8 @@
                         <field name="initial_setting_time_hours" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
                         <field name="initial_setting_time_minutes_unrounded" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
                         <field name="initial_setting_time_minutes" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
-                        <field name="initial_setting_conformity"/>
-                        <field name="initial_setting_nabl"/>
+                        <field name="initial_setting_conformity" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
+                        <field name="initial_setting_nabl" attrs="{'invisible': [('initial_setting_time_visible', '=', False)]}"/>
                     </group>
                     
 

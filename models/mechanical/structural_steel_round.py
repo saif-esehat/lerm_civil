@@ -28,7 +28,7 @@ class StructuralSteelRound(models.Model):
     @api.depends('dia1')
     def _compute_area(self):
         for record in self:
-            record.area1 = (record.dia1 * record.dia1 * 3.146) / 4
+            record.area1 = (record.dia1 * record.dia1 * 3.1416) / 4
 
     @api.depends('area1')
     def _compute_gauge_length(self):
@@ -63,6 +63,40 @@ class StructuralSteelRound(models.Model):
     re_bend_test = fields.Selection([
         ('satisfactory', 'Satisfactory'),
         ('non-satisfactory', 'Non-Satisfactory')],"Re-Bend Test",store=True)
+    
+    @api.depends('eln_ref','sample_parameters')
+    def _compute_visible(self):
+        for record in self:
+            record.fracture_visible = False
+            record.bend_visible  = False  
+            record.rebend_visible = False
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                if sample.internal_id == '62ffe6d0-ca87-41f6-9e18-47169dc04398':
+                    record.fracture_visible = True
+                if sample.internal_id == '43b89870-ec82-488f-866f-4a5a953073aa':
+                    record.bend_visible = True
+                if sample.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
+                    record.rebend_visible = True
+
+    fracture_visible = fields.Boolean("Fracture",compute="_compute_visible")
+    bend_visible = fields.Boolean("Bend Test",compute="_compute_visible")
+    rebend_visible = fields.Boolean("Rebend Test",compute="_compute_visible")
+
+    @api.depends('eln_ref','sample_parameters')
+    def _compute_visible(self):
+        for record in self:
+            record.fracture_visible = False
+            record.bend_visible  = False  
+            record.rebend_visible = False
+            for sample in record.sample_parameters:
+                print("Samples internal id",sample.internal_id)
+                if sample.internal_id == '62ffe6d0-ca87-41f6-9e18-47169dc04398':
+                    record.fracture_visible = True
+                if sample.internal_id == '43b89870-ec82-488f-866f-4a5a953073aa':
+                    record.bend_visible = True
+                if sample.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
+                    record.rebend_visible = True
 
 
     dia2 = fields.Float(string="Dia mm")
@@ -78,7 +112,7 @@ class StructuralSteelRound(models.Model):
     @api.depends('dia2')
     def _compute_area2(self):
         for record in self:
-            record.area2 = (record.dia2 * record.dia2 * 3.146) / 4
+            record.area2 = (record.dia2 * record.dia2 * 3.1416) / 4
 
     @api.depends('area2')
     def _compute_gauge_length2(self):
