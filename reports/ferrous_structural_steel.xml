@@ -135,9 +135,19 @@
 						<u>Protocol</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/>
 </div> -->
-					<div style="padding-top:5px;margin-top:20px;">
-						<span t-esc="eln.material.test_parameter"/>
-					</div>
+			<div style="padding-top:5px">
+				<span t-esc="o.material.test_parameter "/> 
+
+				
+			  <t t-if="data.bend_visible">
+				<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','11470d0f-e6d1-4770-be6b-32267d3461cb')])" t-as="parameter">
+					<span t-esc="parameter.test_method.test_method"/>
+				</t>
+				</t>
+			
+				
+			</div>
+
 					<table style="margin-top:20px;">
 						<t t-set="i" t-value="0"/>
 						<thead>
@@ -425,10 +435,10 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="data.proof_yeid_stress"/>
+									<span t-esc="data.proof_yeid_stress" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="data.proof_yeid_stress2"/>
+									<span t-esc="data.proof_yeid_stress2" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
 									<!-- <span t-esc="data.requirement_yield"/> -->
@@ -462,10 +472,10 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="data.ult_tens_strgth"/>
+									<span t-esc="data.ult_tens_strgth" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="data.ult_tens_strgth2"/>
+									<span t-esc="data.ult_tens_strgth2" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
 									<!-- <span t-esc="data.requirement_yield"/> -->
@@ -499,10 +509,10 @@
 
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="data.elongation" t-options='{"widget": "float", "precision": 1}'/>
+									<span t-esc="data.elongation" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="data.elongation2"/>
+									<span t-esc="data.elongation2" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
 									<!-- <span t-esc="data.requirement_yield"/> -->
@@ -584,6 +594,48 @@
 					<!-- <div style="page-break-before: always;"></div> -->
 						
 						<table>
+						<thead>
+							<tr>
+								<th style="text-align: center; width: 5%;">
+									<span>
+										Sr. No
+									</span>
+								</th>
+
+								<th style="text-align: center; width: 25%;">
+									<span >
+										Parameter
+									</span>
+								</th>
+								<th style="text-align: center; width: 5%;">
+									<span>
+										Unit
+									</span>
+								</th>
+
+								<th style="text-align: center; width: 10%;">
+									<span>
+										Observation-1
+									</span>
+								</th>
+								 <th style="text-align: center; width: 10%;">
+									<span>
+										Observation-2
+									</span>
+								</th>
+								<th style="text-align: center;width: 15%;">
+									<span>
+										<span t-esc="eln.material.specifications"/>
+
+									</span>
+								</th>
+								<th t-if="eln.conformity" style="text-align: center;width: 10%;">
+									<span>
+										Confirmity Status
+									</span>
+								</th>
+							</tr>
+						</thead>
 							<tbody>
 								<tr>
 									<td style="text-align: center;">
