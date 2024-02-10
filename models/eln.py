@@ -5,6 +5,7 @@ from datetime import datetime
 import math
 from decimal import Decimal
 from matplotlib import pyplot as plt
+from datetime import datetime, timedelta
 # import io
 # from PIL import Image
 # import base64
@@ -255,11 +256,42 @@ class ELN(models.Model):
 
 
 
+    # def confirm_eln(self):
+    #     self.sample_id.write({'state':'3-pending_verification'})
+    #     # import wdb;wdb.set_trace();
+    #     self.sample_id.parameters_result.unlink()
+    #     self.end_date = datetime.now().date()
+    #     if self.srf_date:
+    #         if self.start_date < self.srf_date:
+    #             raise ValidationError("Start Date cannot be less than SRF Date")
+
+    #     for result in self.parameters_result:
+    #         if not result.calculated:
+    #             raise ValidationError("Not all parameters are calculated. Please ensure all parameters are calculated before proceeding.")
+
+    #     for result in self.parameters_result:
+    #         self.env["sample.parameters.result"].create({
+    #             'sample_id':self.sample_id.id,
+    #             'parameter': result.parameter.id,
+    #             'result': result.result,
+    #             'unit':result.unit.id,
+    #             'specification':result.specification,
+    #             'test_method':result.test_method.id
+    #         })
+    #     self.write({'state': '2-confirm'})
+            
     def confirm_eln(self):
         self.sample_id.write({'state':'3-pending_verification'})
         # import wdb;wdb.set_trace();
         self.sample_id.parameters_result.unlink()
-        self.end_date = datetime.now().date()
+        
+        # Fetch start_date and set it as end_date
+        start_date = self.start_date
+        # Ensure end_date is not the current date
+        desired_end_date = start_date if start_date != datetime.now().date() else start_date + timedelta(days=1)
+
+        self.end_date = desired_end_date
+        
         if self.srf_date:
             if self.start_date < self.srf_date:
                 raise ValidationError("Start Date cannot be less than SRF Date")
@@ -279,30 +311,33 @@ class ELN(models.Model):
             })
         self.write({'state': '2-confirm'})
 
-    # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
 
- 
 
-    def open_result_wizard(self):
-        action = self.env.ref('lerm_civil.eln_result_update_wizard')
+   
+        # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
 
-        parameters = []
-        for parameter in self.parameters:
-            parameters.append((0,0,{'parameter':parameter.id}))
-        
-        return {
-            'name': "Result Update",
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'eln.update.result.wizard',
-            'view_id': action.id,
-            'target': 'new',
-            'context': {
-                'default_results':parameters
+    
+
+        def open_result_wizard(self):
+            action = self.env.ref('lerm_civil.eln_result_update_wizard')
+
+            parameters = []
+            for parameter in self.parameters:
+                parameters.append((0,0,{'parameter':parameter.id}))
+            
+            return {
+                'name': "Result Update",
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'eln.update.result.wizard',
+                'view_id': action.id,
+                'target': 'new',
+                'context': {
+                    'default_results':parameters
+                }
             }
-        }
-        
+            
     # def print_datasheet(self):
     #     eln = self
     #     template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
