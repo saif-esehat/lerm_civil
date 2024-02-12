@@ -280,18 +280,54 @@ class ELN(models.Model):
     #         })
     #     self.write({'state': '2-confirm'})
             
+    # def confirm_eln(self):
+    #     self.sample_id.write({'state':'3-pending_verification'})
+    #     # import wdb;wdb.set_trace();
+    #     self.sample_id.parameters_result.unlink()
+        
+    #     # Fetch start_date and set it as end_date
+    #     start_date = self.start_date
+    #     # Ensure end_date is not the current date
+    #     desired_end_date = start_date if start_date != datetime.now().date() else start_date + timedelta(days=1)
+
+    #     self.end_date = desired_end_date
+        
+    #     if self.srf_date:
+    #         if self.start_date < self.srf_date:
+    #             raise ValidationError("Start Date cannot be less than SRF Date")
+
+    #     for result in self.parameters_result:
+    #         if not result.calculated:
+    #             raise ValidationError("Not all parameters are calculated. Please ensure all parameters are calculated before proceeding.")
+
+    #     for result in self.parameters_result:
+    #         self.env["sample.parameters.result"].create({
+    #             'sample_id':self.sample_id.id,
+    #             'parameter': result.parameter.id,
+    #             'result': result.result,
+    #             'unit':result.unit.id,
+    #             'specification':result.specification,
+    #             'test_method':result.test_method.id
+    #         })
+    #     self.write({'state': '2-confirm'})
     def confirm_eln(self):
         self.sample_id.write({'state':'3-pending_verification'})
-        # import wdb;wdb.set_trace();
         self.sample_id.parameters_result.unlink()
-        
-        # Fetch start_date and set it as end_date
+            
         start_date = self.start_date
-        # Ensure end_date is not the current date
-        desired_end_date = start_date if start_date != datetime.now().date() else start_date + timedelta(days=1)
-
-        self.end_date = desired_end_date
         
+        # Ensure end_date is not before start_date
+        if self.end_date and self.end_date < start_date:
+            raise ValidationError("End Date cannot be before Start Date")
+        
+        # If end_date is not provided, set it to the next day after start_date
+        if not self.end_date:
+            self.end_date = start_date + timedelta(days=1)
+        else:
+            # If end_date is provided, check if it's before start_date
+            if self.end_date < start_date:
+                raise ValidationError("End Date cannot be before Start Date")
+            
         if self.srf_date:
             if self.start_date < self.srf_date:
                 raise ValidationError("Start Date cannot be less than SRF Date")
@@ -310,7 +346,7 @@ class ELN(models.Model):
                 'test_method':result.test_method.id
             })
         self.write({'state': '2-confirm'})
-
+    
 
 
    
