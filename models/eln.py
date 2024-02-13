@@ -346,6 +346,10 @@ class ELN(models.Model):
                 'test_method':result.test_method.id
             })
         self.write({'state': '2-confirm'})
+
+
+    
+
     
 
 

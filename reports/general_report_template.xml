@@ -528,7 +528,7 @@
 											<span t-esc="note.notes"/>
 										</li>
 									</t>
-									<li style="margin-bottom: 0px;">
+									<li style="margin-bottom: 0px;" t-if="eln.has_witness">
 										<p>Test witnessed by : <span style="margin-bottom: 0px;margin-top: 0px;" t-esc="eln.witness_name"/></p>
 									</li>
 								</ul>
