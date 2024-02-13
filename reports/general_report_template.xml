@@ -263,8 +263,8 @@
 
 
 					<t t-set="data_length" t-value="len(data.child_lines or [])"/>
-					<t t-if="data_length &lt;= 7">
-						<table style="margin-top:30px;">
+					<t t-if="data_length &lt;= o.sample_id.page_break">
+						<table style="margin-top:15px;">
 								<thead>
 									<tr>
 										<t t-foreach="tabledata" t-as="column">
@@ -366,8 +366,8 @@
 						</table>
 						
 					</t>
-					<t t-if="data_length &gt; 7">
-						<table style="margin-top:30px;">
+					<t t-if="data_length &gt; o.sample_id.page_break">
+						<table style="margin-top:15px;">
 								<thead>
 									<tr>
 										
@@ -383,7 +383,7 @@
 								
 									<tbody>
 										<t t-set="i" t-value="0"/>
-										<tr t-foreach="range(7)" t-as="index">
+										<tr t-foreach="range(o.sample_id.page_break)" t-as="index">
 											<t t-set="r" t-value="data.child_lines[index]"/>
 											<t t-foreach="tabledata" t-as="row">
 												<td>
@@ -413,14 +413,14 @@
 										</tr>
 									</tbody>
 						</table>
-						<div t-if="stamp and stamp == '4-in_report'" style="margin-top:20px;">
+						<!-- <div t-if="stamp and stamp == '4-in_report'" style="margin-top:20px;">
 							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 						</div>
 						<div style="padding-top:5px">
 							FORMAT No. <![CDATA[&nbsp;]]> <span t-esc="eln.parameters_result[0].parameter.report_format_no"/>
-						</div>
+						</div> -->
 						<div style="page-break-before: always;"></div>
-						<table style="margin-top:30px;">
+						<table style="margin-top:15px;">
 								<thead>
 									<tr>
 										
@@ -436,7 +436,7 @@
 								
 									<tbody>
 										<t t-set="i" t-value="0"/>
-										<tr t-foreach="range(7, len(data.child_lines))" t-as="index">
+										<tr t-foreach="range(o.sample_id.page_break, len(data.child_lines))" t-as="index">
 											<t t-set="r" t-value="data.child_lines[index]"/>
 											<t t-foreach="tabledata" t-as="row">
 												<td>

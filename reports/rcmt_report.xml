@@ -114,7 +114,7 @@
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td colspan="6">Age in Days :
 									<![CDATA[&nbsp;]]>
 									<span t-field="rcmt.age_of_days"/>
@@ -123,7 +123,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="rcmt.date_of_casting"/>
 								</td>
-							</tr>
+							</tr> -->
 							
 						</table>
 					</div>
@@ -442,8 +442,8 @@
 
                         </tbody>
                     </table>
-					  <div style="margin-top:5px;margin-top:20px;page-break-before: always;">
-                     </div>
+					  <!-- <div style="margin-top:5px;margin-top:20px;page-break-before: always;"> -->
+                     <!-- </div> -->
                
 				
 
@@ -455,7 +455,7 @@
 					<tbody>
 					   
 						<tr  cols="6" t-if="(rcmt.rcmt_nabl == 'pass' and nabl or rcmt.rcmt_nabl == 'fail' and not nabl )">
-						<td style="font-weight: bold;">Average 10^-12 m²/sec</td>
+						<td style="font-weight: bold;">Average 10 E-12 m²/sec</td>
 						<td style="text-align: center;"><span t-field="rcmt.overall_average"  t-options='{"widget": "float", "precision": 2}'  /></td>
 						</tr>
 
