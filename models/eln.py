@@ -346,10 +346,22 @@ class ELN(models.Model):
                 'test_method':result.test_method.id
             })
         self.write({'state': '2-confirm'})
-    
+        
 
+    # def create_sample_parameters_result(self):
+    #     lerm_eln_obj = self.env['lerm.eln'].browse(self._context.get('active_id'))
+    #     lerm_eln_obj.ensure_one()
+    #     for wizard in self:
+    #         lerm_eln_obj.parameters_result.create({
+    #             'sample_id': wizard.sample_id.id,
+    #             'parameter': wizard.parameter.id,
+    #             'result': wizard.result,
+    #             'unit': wizard.unit.id,
+    #             'specification': wizard.specification,
+    #             'test_method': wizard.test_method.id,
+    #         })
+    #     return {'type': 'ir.actions.act_window_close'}
 
-   
         # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
 
     
@@ -565,23 +577,80 @@ class ParameteResultCalculationWizard(models.TransientModel):
                 record.nabl_status = 'non-nabl'
 
     
+    # purana code imp
+    # def update_result(self):
+    #     # import wdb; wdb.set_trace()
+    #     result_id = self.env.context.get('result_id')
+    #     result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
+    #     self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
+    #     self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
+    #     for input in self.inputs_lines:
+    #         # import wdb; wdb.set_trace()
+    #         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
+
+
+
+
+    #     result_id.sudo().write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
+    #     return {'type': 'ir.actions.act_window_close'}
+                
+    # def update_result(self):
+    #     # Check if the result has already been updated
+    #     if self.env.context.get('result_updated'):
+    #         # If the result has already been updated, do nothing
+    #         return {'type': 'ir.actions.act_window_close'}
+        
+    #     # Get the result ID from the context
+    #     result_id = self.env.context.get('result_id')
+    #     result = self.env["eln.parameters.result"].browse(result_id)
+
+    #     # Update inputs in ELN
+    #     self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
+    #     for input in self.inputs_lines:
+    #         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
+
+    #     # Update result in SampleParametersResult
+    #     sample_results = self.env['sample.parameters.result'].search([('parameter', '=', result.parameter.id)])
+    #     sample_results.write({'result': result.result})
+        
+    #     # Update result in ELN
+    #     result.write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
+
+    #     # Create a mutable copy of the context and set a flag to indicate that the result has been updated
+    #     context = dict(self.env.context)
+    #     context['result_updated'] = True
+
+    #     return {'type': 'ir.actions.act_window_close', 'context': context}
+
 
     def update_result(self):
-        # import wdb; wdb.set_trace()
+    # Check if the result has already been updated
+        if self.env.context.get('result_updated'):
+            # If the result has already been updated, do nothing
+            return {'type': 'ir.actions.act_window_close'}
+        
+        # Get the result ID from the context
         result_id = self.env.context.get('result_id')
-        result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
-        self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
+        result = self.env["eln.parameters.result"].browse(result_id)
+
+        # Update inputs in ELN
         self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
         for input in self.inputs_lines:
-            # import wdb; wdb.set_trace()
             self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
 
+        # Update result in SampleParametersResult only if it's not updated already
+        sample_results = self.env['sample.parameters.result'].search([('parameter', '=', result.parameter.id)])
+        if not sample_results.filtered(lambda r: r.result == self.result):
+            sample_results.write({'result': self.result})
+        
+        # Update result in ELN
+        result.write({'result': self.result, 'calculated': True, 'nabl_status': self.nabl_status, 'conformity_status': self.conformity_status})
 
+        # Create a mutable copy of the context and set a flag to indicate that the result has been updated
+        context = dict(self.env.context)
+        context['result_updated'] = True
 
-
-        result_id.sudo().write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
-        return {'type': 'ir.actions.act_window_close'}
-
+        return {'type': 'ir.actions.act_window_close', 'context': context}
     # def calculate(self):
     #     values = {}
     #     for input in self.inputs_lines:
@@ -878,5 +947,9 @@ class UpdateResultChild(models.TransientModel):
     wizard_id = fields.Many2one('eln.update.result.wizard')
     parameter = fields.Many2one('eln.parameters',string="Parameter")
     result = fields.Float(string="Result")
+
+
+
+
 
 
