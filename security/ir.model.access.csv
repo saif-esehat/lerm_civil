@@ -86,7 +86,8 @@ admin.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.mo
 admin.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_admin_access_group,1,1,1,1
 admin.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_admin_access_group,1,1,1,1
 admin.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_admin_access_group,1,1,1,1
-
+admin.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_admin_access_group,1,1,1,1
+admin.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_admin_access_group,1,1,1,1
 
 
 
@@ -122,6 +123,8 @@ verified.lerm.qty.line,lerm_qty_line,model_lerm_qty_line,lerm_civil.kes_verified
 verified.sample.allotment.wizard,sample_allotment_wizard,model_sample_allotment_wizard,lerm_civil.kes_verified_by,1,1,1,1
 verified.eln.parameters.inputs,eln_parameters_inputs,lerm_civil.model_eln_parameters_inputs,lerm_civil.kes_verified_by,1,1,1,1
 verified.eln.parameters.result,eln_parameters_result,lerm_civil.model_eln_parameters_result,lerm_civil.kes_verified_by,1,1,1,1
+verified.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_verified_by,1,1,1,1
+verified.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_verified_by,1,1,1,1
 
 
 
@@ -166,6 +169,8 @@ quality.ir.model,ir_model_hod,base.model_ir_model,lerm_civil.kes_quality_manager
 
 
 
+
+
 sample.range.line.checkedby,sample_range_line,model_sample_range_line,lerm_civil.kes_checked_by,1,0,0,0
 lerm.srf.sample.checkedby,lerm_srf_sample,model_lerm_srf_sample,lerm_civil.kes_checked_by,1,1,0,0
 eln.parameters.checkedby,eln_parameters,model_eln_parameters,lerm_civil.kes_checked_by,1,0,0,0
@@ -190,6 +195,8 @@ checkedby.lerm.datasheet.line,lerm_datasheet_line,lerm_civil.model_lerm_datashee
 checkedby.lerm_civil.group,lerm_civil_group,model_lerm_civil_group,lerm_civil.kes_checked_by,1,0,0,0
 checkedby.lerm.product.based.calculation,lerm_product_based_calculation,lerm_civil.model_lerm_product_based_calculation,lerm_civil.kes_checked_by,1,0,0,0
 checkedby.ir.model,ir_model_hod,base.model_ir_model,lerm_civil.kes_checked_by,1,0,0,0
+checked_by.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_checked_by,1,0,0,0
+checked_by.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_checked_by,1,1,1,1
 
 
 
@@ -429,6 +436,8 @@ hod.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.mode
 hod.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_hod_access_group,1,0,0,0
 hod.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_hod_access_group,1,0,0,0
 hod.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_hod_access_group,1,0,0,0
+hod.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_hod_access_group,1,1,1,1
+hod.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_hod_access_group,1,1,1,1
 
 
 
@@ -668,6 +677,8 @@ quality.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civil.
 quality.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_quality_manager,1,0,0,0
 quality.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_quality_manager,1,0,0,0
 quality.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_quality_manager,1,0,0,0
+quality.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_quality_manager,1,0,0,0
+quality.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_hod_access_group,1,0,0,0
 
 
 
@@ -912,6 +923,9 @@ technician.ndt.carbonation.test.notes,access_ndt_carbonation_test_notes,lerm_civ
 technician.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_technician_access_group,1,1,1,1
 technician.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_technician_access_group,1,1,1,1
 technician.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_technician_access_group,1,1,1,1
+
+technician.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_technician_access_group,1,0,0,0
+technician.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_technician_access_group,1,0,0,0
 
 
 
