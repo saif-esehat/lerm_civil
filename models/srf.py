@@ -443,7 +443,9 @@ class SrfForm(models.Model):
             'default_contractor': self.contractor.id,
             'default_billing_customer': self.billing_customer.id,
             'default_client_refrence': self.client_refrence,
-            'default_name_work': self.name_work.id  
+            'default_name_work': self.name_work.id,
+            'default_attachment':self.attachment,
+            'default_attachment_name':self.attachment_name
             }
             }
         

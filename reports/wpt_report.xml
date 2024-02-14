@@ -12,87 +12,65 @@
 				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<!-- <table>
-							<tr>
-								<td colspan="3">Report no :
-								</td>
-								<td colspan="3">
-									<span t-field="o.kes_no"/>
-								</td>
-								<td colspan="3">Report Date :
-								</td>
-								<td colspan="3">
-									<span t-field="o.srf_date"/>
-								</td>
-								<td colspan="3"  t-if="nabl">ULR NO :
-								</td>
-								<td colspan="3" t-if="nabl">
-									<span t-field="o.sample_id.ulr_no"/>
-								</td>
-							</tr>
-						</table> -->
-						<table style="margin-top:10px;">
+						
+					<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.customer.name"/><br/>
+																											<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.customer.name"/>
+									<br/>
 									<span t-field="o.srf_id.customer.street"/>
 									<span t-field="o.srf_id.customer.street2"/>
 									<span t-field="o.srf_id.customer.city"/>
 									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
 									<span t-field="o.srf_id.customer.state_id"/>
-									,
+											,
 									<span t-field="o.srf_id.customer.country_id"/>
 								</td>
 							</tr>
 							<tr>
-								<!-- <td colspan="12">Project / Site Address :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.srf_id.site_address.name"/>
-									<span t-field="o.srf_id.site_address.street"/>
-									<span t-field="o.srf_id.site_address.street2"/>
-									<span t-field="o.srf_id.site_address.city"/>
-									<span t-if="o.srf_id.site_address.zip" t-field="o.srf_id.site_address.zip"/>
-									<span t-field="o.srf_id.site_address.state_id"/>
-									,
-									<span t-field="o.srf_id.site_address.country_id"/>
-								</td> -->
-								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+								
+
+								<td colspan="12">Project / Site Address : 																		<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.name_work"/>
 								</td>
 							</tr>
-							
+							<tr>
+								<td colspan="12">Sample Description : 																		<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+							</tr>
 						</table>
 						<table>
 							<tr>
-								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
+								<td colspan="6">Test Start Date :																		<![CDATA[&nbsp;]]>
 									<span t-field="o.start_date"/>
 								</td>
-								<td colspan="6">Test End Date :<![CDATA[&nbsp;]]>
+								<td colspan="6">Test End Date :																		<![CDATA[&nbsp;]]>
 									<span t-field="o.end_date"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
+								<td colspan="6">Sample Id Mark: 																		<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.client_sample_id"/>
 								</td>
-								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
+								<td colspan="6">Sample Receipt Date :																		<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_received_date"/>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="6">Size :
-									<![CDATA[&nbsp;]]>
+																											<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.size_id.size"/>
 								</td>
 								<td colspan="6">Grade :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.grade_id.grade"/>
+																											<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.grade_id.grade"/>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="6">Brand :
-									<![CDATA[&nbsp;]]>
+																											<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.brand"/>
 								</td>
 								<td colspan="6">Consultant Name :
@@ -103,40 +81,31 @@
 							<tr>
 								<td colspan="6">Client Name :
 									<![CDATA[&nbsp;]]>
-										<span t-field="o.srf_id.client"/>
+									<span t-field="o.srf_id.client"/>
 								</td>
 								<td colspan="6">Client Reference :
-									<![CDATA[&nbsp;]]>
+																											<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.client_refrence"/>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="6">Discipline :
-									<![CDATA[&nbsp;]]>
+																											<![CDATA[&nbsp;]]>
 									<span t-field="o.discipline.discipline"/>
 								</td>
 								<td colspan="6">Group :
-									<![CDATA[&nbsp;]]>
+																											<![CDATA[&nbsp;]]>
 									<span t-field="o.group.group"/>
 								</td>
 							</tr>
-							
+
 							<tr>
 								<td colspan="12">Material/Test Name :
-									<![CDATA[&nbsp;]]>
+																											<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
-							<!-- <tr>
-								<td colspan="6">Instrument :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.instrument"/>
-								</td>
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.temperature"/>
-								</td>
-							</tr> -->
+							
 							
 						</table>
 					</div>
@@ -260,8 +229,13 @@
 										Checked By
 									</b>
 								</div>
-								<div style="height:30px">
-
+								<div style="height: 40px;">
+									<t t-if="eln.sample_id.checkby_signature_required">
+										<div t-if="eln.sample_id.check_by.employee_id.signature">
+											<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
+										</div>
+										
+									</t>
 								</div>
 								<div>
 									<b>
@@ -289,19 +263,24 @@
 							</b>
 							
 						</div>
-						<div style="height:30px">
-
+						<div style="height: 40px;">
+							<t t-if="eln.sample_id.approveby_signature_required">
+								<div t-if="eln.sample_id.approved_by.employee_id.signature">
+									<img t-att-src="'data:image/png;base64,' + eln.sample_id.approved_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
 								</div>
-								<div>
-									<b>
-									<span t-esc="eln.sample_id.approved_by.name"/>
-									</b>
-								</div>
-								<div>
-									<b>
-										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
-									</b>
-								</div>
+								
+							</t>
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+							</b>
+						</div>
 								
 							</div>
 						</div>

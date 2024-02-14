@@ -332,17 +332,21 @@
 
 					<t t-foreach="eln.parameters_result" t-as="parameter">
 						<t t-if="parameter['nabl_status'] == 'non-nabl'">
-							<t t-set="non_nabl_parameters" t-value="non_nabl_parameters + [parameter]"/>
+							<t t-if="'(depend)' not in parameter['parameter'].parameter_name">
+								<t t-set="non_nabl_parameters" t-value="non_nabl_parameters + [parameter]"/>
+							</t>
 						</t>
 						<t t-elif="parameter['nabl_status'] == 'nabl'">
-							<t t-set="nabl_parameters" t-value="nabl_parameters + [parameter]"/>
+							<t t-if="'(depend)' not in parameter['parameter'].parameter_name">
+								<t t-set="nabl_parameters" t-value="nabl_parameters + [parameter]"/>
+							</t>
 						</t>
 					</t>
 					
 
 					<t t-if='not nabl'>
 						<t t-set="i" t-value="0"/>
-						<t t-if="len(non_nabl_parameters) &lt;= 6">
+						<t t-if="len(non_nabl_parameters) &lt;= o.sample_id.page_break">
 							<table>
 								<thead>
 									<tr>
@@ -435,7 +439,7 @@
 								</tbody>
 							</table>
 						</t>
-						<t t-if="len(non_nabl_parameters) &gt; 6">
+						<t t-if="len(non_nabl_parameters) &gt; o.sample_id.page_break">
 							<table>
 								<thead>
 									<tr>
@@ -483,7 +487,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="non_nabl_parameters[:6]" t-as="parameter">
+									<t t-foreach="non_nabl_parameters[:o.sample_id.page_break]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>
@@ -524,6 +528,18 @@
 									</t>
 								</tbody>
 							</table>
+							<div style="margin-top:10px; page-break-inside: avoid; text-align: center;">
+								<div class="signatureContainer girdgird" style="display: inline-block;">
+									<div>
+										<div t-if="stamp and stamp == '4-in_report'">
+											<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+										</div>
+										<div style="padding-top:5px">
+											Format No. <span t-esc="eln.material.test_format_no"/>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div style="page-break-before: always;"></div>
 							<table>
 								<thead>
@@ -572,7 +588,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="non_nabl_parameters[6:]" t-as="parameter">
+									<t t-foreach="non_nabl_parameters[o.sample_id.page_break:]" t-as="parameter">
 										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
 											<td>
 												<div>
@@ -617,10 +633,11 @@
 						</t>
 						
 					</t>
+					
 
 					<t t-if='nabl'>
 						<t t-set="i" t-value="0"/>
-						<t t-if="len(nabl_parameters) &lt;= 6">
+						<t t-if="len(nabl_parameters) &lt;= o.sample_id.page_break">
 							<table>
 								<thead>
 									<tr>
@@ -669,7 +686,7 @@
 								</thead>
 								<tbody>
 									<t t-foreach="nabl_parameters" t-as="parameter">
-										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
+										<tr t-if="parameter['parameter'].parameter_name">
 											<td>
 												<div>
 													<span t-esc="i + 1"/>
@@ -711,7 +728,7 @@
 								</tbody>
 							</table>
 						</t>
-						<t t-if="len(nabl_parameters) &gt; 6">
+						<t t-if="len(nabl_parameters) &gt; o.sample_id.page_break">
 							<table>
 								<thead>
 									<tr>
@@ -759,8 +776,8 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="nabl_parameters[:6]" t-as="parameter">
-										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
+									<t t-foreach="nabl_parameters[:o.sample_id.page_break]" t-as="parameter">
+										<tr t-if="parameter['parameter'].parameter_name">
 											<td>
 												<div>
 													<span t-esc="i + 1"/>
@@ -801,6 +818,18 @@
 									</t>
 								</tbody>
 							</table>
+							<div style="margin-top:10px; page-break-inside: avoid; text-align: center;">
+								<div class="signatureContainer girdgird" style="display: inline-block;">
+									<div>
+										<div t-if="stamp and stamp == '4-in_report'">
+											<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+										</div>
+										<div style="padding-top:5px">
+											Format No. <span t-esc="eln.material.test_format_no"/>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div style="page-break-before: always;"></div>
 							<table>
 								<thead>
@@ -849,8 +878,8 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="nabl_parameters[6:]" t-as="parameter">
-										<tr t-if="'(depend)' not in parameter['parameter'].parameter_name">
+									<t t-foreach="nabl_parameters[o.sample_id.page_break:]" t-as="parameter">
+										<tr t-if="parameter['parameter'].parameter_name">
 											<td>
 												<div>
 													<span t-esc="i + 1"/>
@@ -894,7 +923,7 @@
 						</t>
 						
 					</t>
-
+					
 
 					
 
@@ -931,56 +960,7 @@
 								</ul>
 							</div>
 						</div>
-						<!-- <div class="signatureContainer girdgird">
-							<div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										Chemical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
-							<div>
-								<div t-if="stamp and stamp == '4-in_report'">
-									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-								</div>
-								<div style="padding-top:5px">
-									Format No. <span t-esc="eln.material.test_format_no"/>
-								</div>
-							</div>
-							<div>
-								<div>
-									<b>
-										Approved By
-									</b>
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-										Chemical Department (HOD)
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div>
-							</div>
-						</div> -->
+						
 						<div style="margin-top:10px; page-break-inside: avoid;" class="signatureContainer girdgird">
 						
 							<div>
@@ -989,14 +969,13 @@
 										Checked By
 									</b>
 								</div>
-								<div style="height:30px">
-									<t t-if="eln.sample_id.signature_required">
+								<div style="height: 40px;">
+									<t t-if="eln.sample_id.checkby_signature_required">
 										<div t-if="eln.sample_id.check_by.employee_id.signature">
-											<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 100%; z-index: -10;"/>
+											<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
 										</div>
 										
 									</t>
-									
 								</div>
 								<div>
 									<b>
@@ -1024,8 +1003,13 @@
 									</b>
 									
 								</div>
-								<div style="height:30px">
-
+								<div style="height: 40px;">
+									<t t-if="eln.sample_id.approveby_signature_required">
+										<div t-if="eln.sample_id.approved_by.employee_id.signature">
+											<img t-att-src="'data:image/png;base64,' + eln.sample_id.approved_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
+										</div>
+										
+									</t>
 								</div>
 								<div>
 									<b>
@@ -1043,7 +1027,7 @@
 									</b>
 								</div>
 							</div>
-					</div>
+					   </div>
 					
 			
 						<div style="text-align:center;margin-top:25px">
@@ -1203,8 +1187,13 @@
 							Checked By
 						</b>
 					</div>
-					<div style="height:40px">
-
+					<div style="height: 40px;">
+						<t t-if="eln.sample_id.checkby_signature_required">
+							<div t-if="eln.sample_id.check_by.employee_id.signature">
+								<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
+							</div>
+							
+						</t>
 					</div>
 					<div>
 						<b>

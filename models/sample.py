@@ -128,7 +128,10 @@ class LermSampleForm(models.Model):
     filled_by = fields.Many2one('res.users',string="Filled By")
     check_by = fields.Many2one('res.users',string="Check By")
     approved_by = fields.Many2one('res.users',string="Approved By")
-    signature_required = fields.Boolean("Signature")
+    checkby_signature_required = fields.Boolean("Checked by Signature")
+    approveby_signature_required = fields.Boolean("Approved by Signature")
+    page_break = fields.Integer("Page break",default=6)
+
     # file_upload = fields.Binary(string="Datasheet Upload")
     # report_upload = fields.Binary(string="Report Upload")
     # file_upload = fields.Many2many(

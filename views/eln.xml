@@ -19,6 +19,8 @@
                             name="print_report"
                             string="Print Report"
                             />
+
+                  
                     
                     <!-- <button
                             type="object"
@@ -242,7 +244,7 @@
             <field name="name">lerm.eln.tree</field>
             <field name="model">lerm.eln</field>
             <field name="arch" type="xml">
-                <tree default_order='create_date desc'>
+                <tree default_order='create_date desc' create="false">
                     <!-- <field name='eln_id' optional="show"/> -->
                     <field name='eln_id' optional="show"/>
                     <field name='srf_id' optional="show"/>
@@ -375,6 +377,9 @@
             </form>
         </field>
     </record>
+
+
+       
 
 
 

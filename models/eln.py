@@ -5,6 +5,7 @@ from datetime import datetime
 import math
 from decimal import Decimal
 from matplotlib import pyplot as plt
+from datetime import datetime, timedelta
 # import io
 # from PIL import Image
 # import base64
@@ -255,11 +256,78 @@ class ELN(models.Model):
 
 
 
+    # def confirm_eln(self):
+    #     self.sample_id.write({'state':'3-pending_verification'})
+    #     # import wdb;wdb.set_trace();
+    #     self.sample_id.parameters_result.unlink()
+    #     self.end_date = datetime.now().date()
+    #     if self.srf_date:
+    #         if self.start_date < self.srf_date:
+    #             raise ValidationError("Start Date cannot be less than SRF Date")
+
+    #     for result in self.parameters_result:
+    #         if not result.calculated:
+    #             raise ValidationError("Not all parameters are calculated. Please ensure all parameters are calculated before proceeding.")
+
+    #     for result in self.parameters_result:
+    #         self.env["sample.parameters.result"].create({
+    #             'sample_id':self.sample_id.id,
+    #             'parameter': result.parameter.id,
+    #             'result': result.result,
+    #             'unit':result.unit.id,
+    #             'specification':result.specification,
+    #             'test_method':result.test_method.id
+    #         })
+    #     self.write({'state': '2-confirm'})
+            
+    # def confirm_eln(self):
+    #     self.sample_id.write({'state':'3-pending_verification'})
+    #     # import wdb;wdb.set_trace();
+    #     self.sample_id.parameters_result.unlink()
+        
+    #     # Fetch start_date and set it as end_date
+    #     start_date = self.start_date
+    #     # Ensure end_date is not the current date
+    #     desired_end_date = start_date if start_date != datetime.now().date() else start_date + timedelta(days=1)
+
+    #     self.end_date = desired_end_date
+        
+    #     if self.srf_date:
+    #         if self.start_date < self.srf_date:
+    #             raise ValidationError("Start Date cannot be less than SRF Date")
+
+    #     for result in self.parameters_result:
+    #         if not result.calculated:
+    #             raise ValidationError("Not all parameters are calculated. Please ensure all parameters are calculated before proceeding.")
+
+    #     for result in self.parameters_result:
+    #         self.env["sample.parameters.result"].create({
+    #             'sample_id':self.sample_id.id,
+    #             'parameter': result.parameter.id,
+    #             'result': result.result,
+    #             'unit':result.unit.id,
+    #             'specification':result.specification,
+    #             'test_method':result.test_method.id
+    #         })
+    #     self.write({'state': '2-confirm'})
     def confirm_eln(self):
         self.sample_id.write({'state':'3-pending_verification'})
-        # import wdb;wdb.set_trace();
         self.sample_id.parameters_result.unlink()
-        self.end_date = datetime.now().date()
+            
+        start_date = self.start_date
+        
+        # Ensure end_date is not before start_date
+        if self.end_date and self.end_date < start_date:
+            raise ValidationError("End Date cannot be before Start Date")
+        
+        # If end_date is not provided, set it to the next day after start_date
+        if not self.end_date:
+            self.end_date = start_date + timedelta(days=1)
+        else:
+            # If end_date is provided, check if it's before start_date
+            if self.end_date < start_date:
+                raise ValidationError("End Date cannot be before Start Date")
+            
         if self.srf_date:
             if self.start_date < self.srf_date:
                 raise ValidationError("Start Date cannot be less than SRF Date")
@@ -278,31 +346,51 @@ class ELN(models.Model):
                 'test_method':result.test_method.id
             })
         self.write({'state': '2-confirm'})
-
-    # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
-
- 
-
-    def open_result_wizard(self):
-        action = self.env.ref('lerm_civil.eln_result_update_wizard')
-
-        parameters = []
-        for parameter in self.parameters:
-            parameters.append((0,0,{'parameter':parameter.id}))
         
-        return {
-            'name': "Result Update",
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'eln.update.result.wizard',
-            'view_id': action.id,
-            'target': 'new',
-            'context': {
-                'default_results':parameters
+
+
+    
+
+    
+
+    # def create_sample_parameters_result(self):
+    #     lerm_eln_obj = self.env['lerm.eln'].browse(self._context.get('active_id'))
+    #     lerm_eln_obj.ensure_one()
+    #     for wizard in self:
+    #         lerm_eln_obj.parameters_result.create({
+    #             'sample_id': wizard.sample_id.id,
+    #             'parameter': wizard.parameter.id,
+    #             'result': wizard.result,
+    #             'unit': wizard.unit.id,
+    #             'specification': wizard.specification,
+    #             'test_method': wizard.test_method.id,
+    #         })
+    #     return {'type': 'ir.actions.act_window_close'}
+
+        # parameters = fields.One2many('eln_id','eln.parameters',string="Parameters")
+
+    
+
+        def open_result_wizard(self):
+            action = self.env.ref('lerm_civil.eln_result_update_wizard')
+
+            parameters = []
+            for parameter in self.parameters:
+                parameters.append((0,0,{'parameter':parameter.id}))
+            
+            return {
+                'name': "Result Update",
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'eln.update.result.wizard',
+                'view_id': action.id,
+                'target': 'new',
+                'context': {
+                    'default_results':parameters
+                }
             }
-        }
-        
+            
     # def print_datasheet(self):
     #     eln = self
     #     template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
@@ -494,23 +582,73 @@ class ParameteResultCalculationWizard(models.TransientModel):
                 record.nabl_status = 'non-nabl'
 
     
+    # old code imp
+    # def update_result(self):
+    #     # import wdb; wdb.set_trace()
+    #     result_id = self.env.context.get('result_id')
+    #     result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
+    #     self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
+    #     self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
+    #     for input in self.inputs_lines:
+    #         # import wdb; wdb.set_trace()
+    #         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
+
+
+
+
+    #     result_id.sudo().write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
+    #     return {'type': 'ir.actions.act_window_close'}
+                
+    # def update_result(self):
+    #     # Check if the result has already been updated
+    #     if self.env.context.get('result_updated'):
+    #         # If the result has already been updated, do nothing
+    #         return {'type': 'ir.actions.act_window_close'}
+        
+    #     # Get the result ID from the context
+    #     result_id = self.env.context.get('result_id')
+    #     result = self.env["eln.parameters.result"].browse(result_id)
+
+    #     # Update inputs in ELN
+    #     self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
+    #     for input in self.inputs_lines:
+    #         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
+
+    #     # Update result in SampleParametersResult
+    #     sample_results = self.env['sample.parameters.result'].search([('parameter', '=', result.parameter.id)])
+    #     sample_results.write({'result': result.result})
+        
+    #     # Update result in ELN
+    #     result.write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
+
+    #     # Create a mutable copy of the context and set a flag to indicate that the result has been updated
+    #     context = dict(self.env.context)
+    #     context['result_updated'] = True
+
+    #     return {'type': 'ir.actions.act_window_close', 'context': context}
+
 
     def update_result(self):
-        # import wdb; wdb.set_trace()
+        if self.env.context.get('result_updated'):
+            return {'type': 'ir.actions.act_window_close'}
+        
         result_id = self.env.context.get('result_id')
-        result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
-        self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
+        result = self.env["eln.parameters.result"].browse(result_id)
+
         self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
         for input in self.inputs_lines:
-            # import wdb; wdb.set_trace()
             self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
 
+        sample_results = self.env['sample.parameters.result'].search([('parameter', '=', result.parameter.id)])
+        if not sample_results.filtered(lambda r: r.result == self.result):
+            sample_results.write({'result': self.result})
+        
+        result.write({'result': self.result, 'calculated': True, 'nabl_status': self.nabl_status, 'conformity_status': self.conformity_status})
 
+        context = dict(self.env.context)
+        context['result_updated'] = True
 
-
-        result_id.sudo().write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
-        return {'type': 'ir.actions.act_window_close'}
-
+        return {'type': 'ir.actions.act_window_close', 'context': context}
     # def calculate(self):
     #     values = {}
     #     for input in self.inputs_lines:
@@ -807,5 +945,9 @@ class UpdateResultChild(models.TransientModel):
     wizard_id = fields.Many2one('eln.update.result.wizard')
     parameter = fields.Many2one('eln.parameters',string="Parameter")
     result = fields.Float(string="Result")
+
+
+
+
 
 
