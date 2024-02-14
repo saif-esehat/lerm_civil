@@ -168,6 +168,9 @@
                           <field name="approveby_signature_required" attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"/>
 
                       </group>
+                      <group>
+                        <field name="page_break" />
+                      </group>
                     </group>  
 
 

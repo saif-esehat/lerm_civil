@@ -399,7 +399,7 @@
 					</table>
 					<div style="margin-top:20px" class="noteContainer">
 						<div>
-							<b>Note :-</b>average_dissolved_silica_nabl_fine
+							<b>Note :-</b>
 						</div>
 						<div>
 							<ul>
@@ -417,6 +417,9 @@
 								</li> -->
 								<li t-if="eln.has_witness">
 									<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+								</li>
+								<li t-if="eln.remarks">
+									<span t-esc="eln.remarks"/>
 								</li>
 							</ul>
 						</div>
