@@ -144,6 +144,7 @@
                                     <field name="model_id" optional="show" readonly="1" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <button string="Calculation" optional="show" name="open_calculation_wizard" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','form_based')] , 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
                                     <button string="Open Form" optional="show" name="open_form" type="object" class="oe_highlight" attrs="{'invisible': [('calculation_type','=','parameter_based')], 'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
+                                    
                                 </tree>
                             </field>
 

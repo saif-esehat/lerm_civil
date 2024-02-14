@@ -7,6 +7,7 @@
         <field name="model">lerm.srf.sample</field>
         <field name="arch" type="xml">
             <form>
+                
                 <header>
                         <button
                             type="object"
@@ -53,6 +54,14 @@
                         name="reject_sample" 
                         string="Reject" 
                         attrs="{'invisible': [('state', 'not in', ('3-pending_verification','5-pending_approval'))]}"/>
+
+
+                        <button type="object" 
+                        name="reallocate_sample" 
+                        string="Reallocate" 
+                        attrs="{'invisible': [('state', 'in', ('1-allotment_pending'))]}"
+                        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_verified_by"
+                        />
 
 
                         <button

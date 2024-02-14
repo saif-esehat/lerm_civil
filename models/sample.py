@@ -491,6 +491,19 @@ class LermSampleForm(models.Model):
             'view_id': action.id,
             'target': 'new'
             }
+    
+    def reallocate_sample(self):
+
+        action = self.env.ref('lerm_civil.sample_reallocation_wizard')
+        return {
+            'name': "Reallocate",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'sample.reallocation.wizard',
+            'view_id': action.id,
+            'target': 'new'
+            }
 
 
     def print_datasheet(self):
