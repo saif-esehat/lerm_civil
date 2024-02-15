@@ -21,39 +21,66 @@ class StructuralSteelRound(models.Model):
     final_length1 = fields.Float(string="FINAL LENGTH mm")
     yeild_load1 = fields.Float(string="0.2% proof Load / Yield Load, KN")
     ultimate_load1 = fields.Float(string="Ultimate Load, KN")
-    proof_yeid_stress1 = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2", compute="_compute_proof_yield_stress", store=True,digits=(12,1))
-    ult_tens_strgth1 = fields.Float(string="Ultimate Tensile Strength, N/mm2", compute="_compute_ultimate_tensile_strength", store=True,digits=(12,1))
-    elongation1 = fields.Float(string="% Elongation", compute="_compute_elongation", store=True,digits=(12,1))
+    proof_yeid_stress1 = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2", compute="_compute_proof_yield_stress", store=True,digits=(12,2))
+    ult_tens_strgth1 = fields.Float(string="Ultimate Tensile Strength, N/mm2", compute="_compute_ultimate_tensile_strength", store=True,digits=(12,2))
+    elongation1 = fields.Float(string="% Elongation", compute="_compute_elongation", store=True,digits=(12,2))
 
     @api.depends('dia1')
     def _compute_area(self):
         for record in self:
             record.area1 = (record.dia1 * record.dia1 * 3.1416) / 4
 
+    # @api.depends('area1')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         record.gauge_length1 = 5.65 * (record.area1 ** 0.5)
+
     @api.depends('area1')
     def _compute_gauge_length(self):
         for record in self:
-            record.gauge_length1 = 5.65 * (record.area1 ** 0.5)
+            gauge_length1 = math.sqrt(record.area1) * 5.65
+            # Check if the decimal part is greater than or equal to 0.5
+            if gauge_length1 - int(gauge_length1) >= 0.5:
+                rounded_gauge_length1 = math.ceil(gauge_length1)
+            else:
+                rounded_gauge_length1 = math.floor(gauge_length1)
+            record.gauge_length1 = int(rounded_gauge_length1)
 
+   
     @api.depends('yeild_load1', 'area1')
     def _compute_proof_yield_stress(self):
         for record in self:
             if record.area1 != 0:
-                record.proof_yeid_stress1 = round((record.yeild_load1 / record.area1) * 1000, 1)
+                proof_yield_stress_decimal1 = (Decimal(record.yeild_load1) / Decimal(record.area1)) * 1000
+                record.proof_yeid_stress1 = proof_yield_stress_decimal1.quantize(Decimal('0.01'))
+            else:
+                record.proof_yeid_stress1 = 0.0
 
 
+    # @api.depends('ultimate_load1', 'area1')
+    # def _compute_ultimate_tensile_strength(self):
+    #     for record in self:
+    #         if record.area1 != 0:
+    #             record.ult_tens_strgth1 = (record.ultimate_load1 / record.area1) * 1000
     @api.depends('ultimate_load1', 'area1')
     def _compute_ultimate_tensile_strength(self):
         for record in self:
             if record.area1 != 0:
-                record.ult_tens_strgth1 = (record.ultimate_load1 / record.area1) * 1000
+                ult_tensile_strength_decimal = Decimal(record.ultimate_load1 / record.area1 * 1000)
+                record.ult_tens_strgth1 = ult_tensile_strength_decimal.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            else:
+                record.ult_tens_strgth1 = 0.0
 
+   
+                
     @api.depends('final_length1', 'gauge_length1')
     def _compute_elongation(self):
         for record in self:
             if record.gauge_length1 != 0:
-                elongation_decimal = ((Decimal(record.final_length1) - Decimal(record.gauge_length1)) / Decimal(record.gauge_length1)) * 100
-                record.elongation1 = elongation_decimal.quantize(Decimal('0.0'), rounding=ROUND_HALF_UP)
+                elongation_decimal1 = ((Decimal(record.final_length1) - Decimal(record.gauge_length1)) / Decimal(record.gauge_length1)) * 100
+                record.elongation1 = elongation_decimal1.quantize(Decimal('0.01'))
+            else:
+                record.elongation1 = 0.0
    
     fracture1 = fields.Char("Fracture",default="W.G.L")
     bend_test = fields.Selection([
@@ -105,26 +132,45 @@ class StructuralSteelRound(models.Model):
     final_length2 = fields.Float(string="FINAL LENGTH mm")
     yeild_load2 = fields.Float(string="0.2% proof Load / Yield Load, KN")
     ultimate_load2 = fields.Float(string="Ultimate Load, KN")
-    proof_yeid_stress2 = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yield_stress2", store=True,digits=(12,1))
-    ult_tens_strgth2 = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ultimate_tensile_strength2", store=True,digits=(12,1))
-    elongation2 = fields.Float(string="% Elongation",compute="_compute_elongation2", store=True,digits=(12,1))
+    proof_yeid_stress2 = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yield_stress2", store=True,digits=(12,2))
+    ult_tens_strgth2 = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ultimate_tensile_strength2", store=True,digits=(12,2))
+    elongation2 = fields.Float(string="% Elongation",compute="_compute_elongation2", store=True,digits=(12,2))
 
     @api.depends('dia2')
     def _compute_area2(self):
         for record in self:
-            record.area2 = (record.dia2 * record.dia2 * 3.1416) / 4
+            record.area2 = ((record.dia2 * record.dia2 * 3.1416) / 4)
 
+    # @api.depends('area2')
+    # def _compute_gauge_length2(self):
+    #     for record in self:
+    #         record.gauge_length2 = 5.65 * (record.area2 ** 0.5)
     @api.depends('area2')
     def _compute_gauge_length2(self):
         for record in self:
-            record.gauge_length2 = 5.65 * (record.area2 ** 0.5)
+            gauge_length2 = math.sqrt(record.area2) * 5.65
+            # Check if the decimal part is greater than or equal to 0.5
+            if gauge_length2 - int(gauge_length2) >= 0.5:
+                rounded_gauge_length2 = math.ceil(gauge_length2)
+            else:
+                rounded_gauge_length2 = math.floor(gauge_length2)
+            record.gauge_length2 = int(rounded_gauge_length2)
 
+    # @api.depends('yeild_load2', 'area2')
+    # def _compute_proof_yield_stress2(self):
+    #     for record in self:
+    #         if record.area2 != 0:
+    #             proof_yield_stress_decimal = (Decimal(record.yeild_load2) / Decimal(record.area2)) * 1000
+    #             record.proof_yeid_stress2 = proof_yield_stress_decimal.quantize(Decimal('0.0'), rounding=ROUND_HALF_UP)
+            
     @api.depends('yeild_load2', 'area2')
     def _compute_proof_yield_stress2(self):
         for record in self:
             if record.area2 != 0:
                 proof_yield_stress_decimal = (Decimal(record.yeild_load2) / Decimal(record.area2)) * 1000
-                record.proof_yeid_stress2 = proof_yield_stress_decimal.quantize(Decimal('0.0'), rounding=ROUND_HALF_UP)
+                record.proof_yeid_stress2 = proof_yield_stress_decimal.quantize(Decimal('0.01'))
+            else:
+                record.proof_yeid_stress2 = 0.0
 
     @api.depends('ultimate_load2', 'area2')
     def _compute_ultimate_tensile_strength2(self):
@@ -132,13 +178,22 @@ class StructuralSteelRound(models.Model):
             if record.area2 != 0:
                 record.ult_tens_strgth2 = (record.ultimate_load2 / record.area2) * 1000
 
+    # @api.depends('final_length2', 'gauge_length2')
+    # def _compute_elongation2(self):
+    #     for record in self:
+    #         if record.gauge_length2 != 0:
+    #             elongation_decimal = ((Decimal(record.final_length2) - Decimal(record.gauge_length2)) / Decimal(record.gauge_length2)) * 100
+    #             record.elongation2 = elongation_decimal.quantize(Decimal('0.0'), rounding=ROUND_HALF_UP)
+                
     @api.depends('final_length2', 'gauge_length2')
     def _compute_elongation2(self):
         for record in self:
             if record.gauge_length2 != 0:
                 elongation_decimal = ((Decimal(record.final_length2) - Decimal(record.gauge_length2)) / Decimal(record.gauge_length2)) * 100
-                record.elongation2 = elongation_decimal.quantize(Decimal('0.0'), rounding=ROUND_HALF_UP)
-   
+                record.elongation2 = elongation_decimal.quantize(Decimal('0.01'))
+            else:
+                record.elongation2 = 0.0
+    
 
    
     fracture2 = fields.Char("Fracture",default="W.G.L")
