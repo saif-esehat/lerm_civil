@@ -240,11 +240,11 @@
 
 							<tr  t-if="data.ult_tens_strgth_nabl == 'pass' and nabl or data.ult_tens_strgth_nabl == 'fail' and not nabl">
 								<td >
-                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','ee51b0ef-c7ad-4216-9b9c-410b725b4436')]).parameter_name"/>
+                                    <span t-field="env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_name"/>
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ee51b0ef-c7ad-4216-9b9c-410b725b4436')]).unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).unit.name"/>
 									</span>
 								</td>
 								<td style="text-align: center;">
@@ -253,7 +253,7 @@
 								<td style="text-align: center;">
 									<!-- <span t-esc="data.requirement_yield"/> -->
 									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ee51b0ef-c7ad-4216-9b9c-410b725b4436')]).parameter_table" t-as="parameter">
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.permissable_limit"/>
                                             </t>
