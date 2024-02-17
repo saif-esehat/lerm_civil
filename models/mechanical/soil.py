@@ -163,9 +163,23 @@ class Soil(models.Model):
     # material_sieve = fields.Char(String="Material")
     # start_date_sieve = fields.Date("Start Date")
     # end_date_sieve = fields.Date("End Date")
-    child_lines = fields.One2many('mechanical.soil.sieve.analysis.line','parent_id',string="Sieve Analysis")
-    total = fields.Integer(string="Total",compute="_compute_total")
+    child_lines = fields.One2many('mechanical.soil.sieve.analysis.line','parent_id',string="Sieve Analysis",default=lambda self: self._default_sieve_analysis_child_lines())
+    total1 = fields.Integer(string="Total",compute="_compute_total")
     # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
+
+
+    @api.model
+    def _default_sieve_analysis_child_lines(self):
+        default_lines = [
+            (0, 0, {'sieve_size': '75 mm'}),
+            (0, 0, {'sieve_size': '19 mm'}),
+            (0, 0, {'sieve_size': '4.75 mm'}),
+            (0, 0, {'sieve_size': '2 mm'}),
+            (0, 0, {'sieve_size': '425 mic'}),
+            (0, 0, {'sieve_size': '75 mic'}),
+            (0, 0, {'sieve_size': 'Pan'})
+        ]
+        return default_lines
 
 
     def calculate(self): 
@@ -192,7 +206,7 @@ class Soil(models.Model):
     def _compute_total(self):
         for record in self:
             print("recordd",record)
-            record.total = sum(record.child_lines.mapped('wt_retained'))
+            record.total1 = sum(record.child_lines.mapped('wt_retained'))
 
     # @api.onchange('child_lines.wt_retained')
     # def _compute_cumulative(self):
@@ -200,7 +214,7 @@ class Soil(models.Model):
     #         record.total = sum(record.child_lines.mapped('wt_retained'))
 
 
-    @api.onchange('total')
+    @api.onchange('total1')
     def _onchange_total(self):
         for line in self.child_lines:
             line._compute_percent_retained()
@@ -1017,7 +1031,7 @@ class SoilSieveAnalysisLine(models.Model):
     sieve_size = fields.Char(string="IS Sieve Size")
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
-    cumulative_retained = fields.Float(string="Cum. Retained %", compute="_compute_cumulative_retained", store=True)
+    cumulative_retained = fields.Float(string="Cum. Retained %",  store=True)
     passing_percent = fields.Float(string="Passing %")
 
     # @api.onchange('cumulative_retained')
@@ -1074,11 +1088,11 @@ class SoilSieveAnalysisLine(models.Model):
     
    
 
-    @api.depends('wt_retained', 'parent_id.total')
+    @api.depends('wt_retained', 'parent_id.total1')
     def _compute_percent_retained(self):
         for record in self:
             try:
-                record.percent_retained = record.wt_retained / self.parent_id.total * 100
+                record.percent_retained = record.wt_retained / self.parent_id.total1 * 100
             except ZeroDivisionError:
                 record.percent_retained = 0
 
