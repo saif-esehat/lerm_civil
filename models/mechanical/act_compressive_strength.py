@@ -37,17 +37,14 @@ class ActCompressiveStrength(models.Model):
     def _compute_act_compressive(self):
         for record in self:
             record.act_compressive = (record.average_compr_strength) * (1.64) + (8.09)
+    @api.model
+    def create(self, vals):
+        # import wdb;wdb.set_trace()
+        record = super(ActCompressiveStrength, self).create(vals)
+        record.get_all_fields()
+        record.eln_ref.write({'model_id':record.id})
+        return record
 
-    @api.depends('eln_ref')
-    def _compute_grade_id(self):
-        if self.eln_ref:
-            self.grade = self.eln_ref.grade_id.id
-
-    @api.depends('eln_ref')
-    def _compute_size_id(self):
-        if self.eln_ref:
-            self.size = self.eln_ref.size_id.id
-    
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
         for record in self:
@@ -55,14 +52,27 @@ class ActCompressiveStrength(models.Model):
             record.sample_parameters = records
             print("Records",records)
 
+    def get_all_fields(self):
+        record = self.env['mechanical.act.compressive'].browse(self.ids[0])
+        field_values = {}
+        for field_name, field in record._fields.items():
+            field_value = record[field_name]
+            field_values[field_name] = field_value
 
+        return field_values
 
-   
-    @api.model
-    def create(self, vals):
-        record = super(ActCompressiveStrength, self).create(vals)
-        record.parameter_id.write({'model_id': record.id})
-        return record
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
+
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)
 
 
 class ActCompressiveStrengthLine(models.Model):
@@ -108,3 +118,7 @@ class ActCompressiveStrengthLine(models.Model):
         records = self.sorted('id')
         for index, record in enumerate(records):
             record.sr_no = index + 1
+
+
+   
+
