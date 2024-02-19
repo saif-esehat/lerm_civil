@@ -407,7 +407,7 @@ class CementPpc(models.Model):
 
     @api.depends('density_trial1','density_trial2')
     def _compute_density_average(self):
-        average_density = round((self.density_trial1 + self.density_trial2)/2,1)
+        average_density = round((self.density_trial1 + self.density_trial2)/2,2)
         self.average_density = average_density
 
     # Density End  

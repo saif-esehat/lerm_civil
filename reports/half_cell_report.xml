@@ -128,7 +128,7 @@
 							<tr>
 								<td colspan="12">Year of Construction :
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.structure_age"/>
+									<span t-field="data.structure"/>
 								</td>
 								
 							</tr>
@@ -153,11 +153,13 @@
 							<tr cols="12">
 								<td colspan="1" style="border-bottom:none">
 								</td>
-								<td colspan="3" style="border-bottom:none">
-								</td>
 								<td colspan="2" style="border-bottom:none">
 								</td>
-								<td colspan="6">Potential mV (milli volts)
+								<td colspan="1" style="border-bottom:none">
+								</td>
+								<!-- <td colspan="2" style="border-bottom:none">
+								</td> -->
+								<td colspan="8">Potential mV (milli volts)
 								</td>
 								
 							</tr>

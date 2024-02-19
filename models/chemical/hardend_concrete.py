@@ -67,19 +67,19 @@ class ChemicalHasdenedConcrete(models.Model):
             record.ph_average_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.ph_average - record.ph_average*mu_value
-                    upper = record.ph_average + record.ph_average*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.ph_average_nabl = 'pass'
-                        break
-                    else:
-                        record.ph_average_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.ph_average - record.ph_average*mu_value
+            upper = record.ph_average + record.ph_average*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.ph_average_nabl = 'pass'
+                break
+            else:
+                record.ph_average_nabl = 'fail'
 
 
     #Dissolved Silica
@@ -201,19 +201,19 @@ class ChemicalHasdenedConcrete(models.Model):
             record.average_dissolved_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_dissolved_silica - record.average_dissolved_silica*mu_value
-                    upper = record.average_dissolved_silica + record.average_dissolved_silica*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.average_dissolved_nabl = 'pass'
-                        break
-                    else:
-                        record.average_dissolved_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_dissolved_silica - record.average_dissolved_silica*mu_value
+            upper = record.average_dissolved_silica + record.average_dissolved_silica*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.average_dissolved_nabl = 'pass'
+                break
+            else:
+                record.average_dissolved_nabl = 'fail'
 
 
 
@@ -322,19 +322,19 @@ class ChemicalHasdenedConcrete(models.Model):
             record.average_reduction_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_reduction_alkalinity - record.average_reduction_alkalinity*mu_value
-                    upper = record.average_reduction_alkalinity + record.average_reduction_alkalinity*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.average_reduction_nabl = 'pass'
-                        break
-                    else:
-                        record.average_reduction_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_reduction_alkalinity - record.average_reduction_alkalinity*mu_value
+            upper = record.average_reduction_alkalinity + record.average_reduction_alkalinity*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.average_reduction_nabl = 'pass'
+                break
+            else:
+                record.average_reduction_nabl = 'fail'
 
 
 
@@ -405,19 +405,19 @@ class ChemicalHasdenedConcrete(models.Model):
             record.chloride_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.chloride_percent - record.chloride_percent*mu_value
-                    upper = record.chloride_percent + record.chloride_percent*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.chloride_nabl = 'pass'
-                        break
-                    else:
-                        record.chloride_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.chloride_percent - record.chloride_percent*mu_value
+            upper = record.chloride_percent + record.chloride_percent*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.chloride_nabl = 'pass'
+                break
+            else:
+                record.chloride_nabl = 'fail'
 
      #Chloride 2
     chloride_name1 = fields.Char("Name",default="Chloride  as Cl IS 14989 Pt2 :2001")
@@ -489,19 +489,19 @@ class ChemicalHasdenedConcrete(models.Model):
             record.chloride_nabl1 = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.chloride_acide - record.chloride_acide*mu_value
-                    upper = record.chloride_acide + record.chloride_acide*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.chloride_nabl1 = 'pass'
-                        break
-                    else:
-                        record.chloride_nabl1 = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.chloride_acide - record.chloride_acide*mu_value
+            upper = record.chloride_acide + record.chloride_acide*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.chloride_nabl1 = 'pass'
+                break
+            else:
+                record.chloride_nabl1 = 'fail'
 
 
         #Chloride
@@ -570,19 +570,19 @@ class ChemicalHasdenedConcrete(models.Model):
             record.chloride_nabl2 = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.chloride_percent2 - record.chloride_percent2*mu_value
-                    upper = record.chloride_percent2 + record.chloride_percent2*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.chloride_nabl2 = 'pass'
-                        break
-                    else:
-                        record.chloride_nabl2 = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.chloride_percent2 - record.chloride_percent2*mu_value
+            upper = record.chloride_percent2 + record.chloride_percent2*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.chloride_nabl2 = 'pass'
+                break
+            else:
+                record.chloride_nabl2 = 'fail'
 
 
 
@@ -661,19 +661,19 @@ class ChemicalHasdenedConcrete(models.Model):
             record.sulphate_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.sulphate_percent - record.sulphate_percent*mu_value
-                    upper = record.sulphate_percent + record.sulphate_percent*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.sulphate_nabl = 'pass'
-                        break
-                    else:
-                        record.sulphate_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.sulphate_percent - record.sulphate_percent*mu_value
+            upper = record.sulphate_percent + record.sulphate_percent*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.sulphate_nabl = 'pass'
+                break
+            else:
+                record.sulphate_nabl = 'fail'
 
 
 
