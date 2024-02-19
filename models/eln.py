@@ -42,9 +42,9 @@ class ELN(models.Model):
     datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
     fetch_ds_button = fields.Float(string="Fetch Datasheet")
     size_id = fields.Many2one('lerm.size.line',string="Size")
-    size_ids = fields.Many2many('lerm.size.line',string="Size")
+    size_ids = fields.Many2many('lerm.size.line',string="Size",compute="compute_size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
-    grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
+    grade_ids = fields.Many2many('lerm.grade.line',string="Grades",compute="compute_grade")
 
     update_result = fields.Integer("Update Result")
     state = fields.Selection([

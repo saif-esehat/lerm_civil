@@ -57,7 +57,7 @@
                                 <field name='lab_no_value' invisible="1"/>
                                 <!-- <field name='lab_l_id' readonly="1"/> -->
                                 <field name='material' readonly="1"/>
-                                <field name='size_id' />
+                                <field name='size_id' domain="[('id', 'in', size_ids)]"/>
                                 <field name='start_date' required="1"/>
                                 <field name='witness_description'/>
                                 <field name='casting_date' invisible="1"/>
@@ -68,7 +68,7 @@
                                 <field name='is_product_based_calculation'/>
                                 <!-- <field name='is_form_based_calculation'/> -->
                                 <field name='invisible_fetch_inputs' invisible="1" />
-                                <field name='size_ids' />
+                                <field name='size_ids' invisible="1"/>
 
 
                             </group>
@@ -77,14 +77,14 @@
                                 <field name='kes_no' readonly="1"/>
                                 <field name='group' readonly="1"/>
                                 <field name='witness_name'/>
-                                <field name='grade_id' />
+                                <field name='grade_id' domain="[('id', 'in', grade_ids)]"/>
                                 <field name='end_date'/>
                                 <field name="witness_photo" filename='witness_photo_name'/>
                                 <field name='witness_photo_name' invisible='1'/>
                                 <field name='attachment' filename='attachment_name'/>
                                 <field name='attachment_name' invisible='1'/>
                                 <field name='instrument'/>
-                                <field name='grade_ids' />
+                                <field name='grade_ids' invisible="1"/>
 
 
                             </group>
