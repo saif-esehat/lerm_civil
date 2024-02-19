@@ -1149,9 +1149,9 @@ class CementPsc(models.Model):
 
     @api.model
     def create(self, vals):
-        # import wdb;wdb.set_trace()
         record = super(CementPsc, self).create(vals)
-        record.get_all_fields()
+        
+        # record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
 
@@ -1172,6 +1172,7 @@ class CementPsc(models.Model):
             print("Records",records)
 
     def get_all_fields(self):
+        # import wdb;wdb.set_trace()
         record = self.env['mechanical.cement.psc'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():

@@ -41,6 +41,9 @@ class ELN(models.Model):
     parameters = fields.One2many('eln.parameters','eln_id',string="Parameters")
     datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
     fetch_ds_button = fields.Float(string="Fetch Datasheet")
+
+
+    
     size_id = fields.Many2one('lerm.size.line',string="Size")
     size_ids = fields.Many2many('lerm.size.line',string="Size",compute="compute_size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
