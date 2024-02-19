@@ -3,8 +3,8 @@
     <data>
 
         <record id="drying_shrinkage_concrete_man_hole_view" model="ir.ui.view">
-        <field name="name">mechanical.drying.shrinkage.concrete.man.hole.form</field>
-        <field name="model">mechanical.drying.shrinkage.concrete.man.hole</field>
+        <field name="name">drying.shrinkage.concrete.man.hole.form</field>
+        <field name="model">drying.shrinkage.concrete.man.hole</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>

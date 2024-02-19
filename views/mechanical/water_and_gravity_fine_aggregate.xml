@@ -3,8 +3,8 @@
     <data>
 
         <record id="mechanical_specific_gravity_water_absorption_view" model="ir.ui.view">
-        <field name="name">mechanical.specific.and.water.fine.aggregate.form</field>
-        <field name="model">mechanical.specific.and.water.fine.aggregate</field>
+        <field name="name">specific.and.water.fine.aggregate.form</field>
+        <field name="model">specific.and.water.fine.aggregate</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>

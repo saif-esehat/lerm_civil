@@ -3,13 +3,13 @@ from odoo.exceptions import UserError,ValidationError
 import math
 
 class SpecificAndWater(models.Model):
-    _name = "mechanical.specific.and.water.fine.aggregate"
+    _name = "specific.and.water.fine.aggregate"
     _inherit = "lerm.eln"
     _rec_name = "name"
 
     name = fields.Char("Name",default="Specific Gravity & Water Absorption")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines = fields.One2many('mechanical.specific.and.water.fine.aggregate.line','parent_id',string="Parameter")
+    child_lines = fields.One2many('specific.and.water.fine.aggregate.line','parent_id',string="Parameter")
 
 
     @api.model
@@ -22,8 +22,8 @@ class SpecificAndWater(models.Model):
     
 
 class SpecificAndWaterLine(models.Model):
-    _name = "mechanical.specific.and.water.fine.aggregate.line"
-    parent_id = fields.Many2one('mechanical.specific.and.water.fine.aggregate',string="Parent Id")
+    _name = "specific.and.water.fine.aggregate.line"
+    parent_id = fields.Many2one('specific.and.water.fine.aggregate',string="Parent Id")
 
     sample_no = fields.Integer(string="Sr.No.",readonly=True, copy=False, default=1)
     wt_of_empty_pycnometer = fields.Integer(string="Weight of empty Pycnometer in gms")

@@ -78,13 +78,13 @@ class CompressiveStrengthConcreteManHoleLine(models.Model):
 
 
 class MoistureContentConcreteManHole(models.Model):
-    _name = "mechanical.moisture.content.concrete.man.hole"
+    _name = "moisture.content.concrete.man.hole"
     _inherit = "lerm.eln"
     _rec_name = "name"
 
     name = fields.Char("Name",default="Moisture Content")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines = fields.One2many('mechanical.moisture.content.concrete.man.hole.line','parent_id',string="Parameter")
+    child_lines = fields.One2many('moisture.content.concrete.man.hole.line','parent_id',string="Parameter")
     average_block = fields.Float(string="Average",compute="_compute_average_moisture_content")
 
 
@@ -105,8 +105,8 @@ class MoistureContentConcreteManHole(models.Model):
         return record
 
 class MoistureContentConcreteManHoleLine(models.Model):
-    _name = "mechanical.moisture.content.concrete.man.hole.line"
-    parent_id = fields.Many2one('mechanical.moisture.content.concrete.man.hole',string="Parent Id")
+    _name = "moisture.content.concrete.man.hole.line"
+    parent_id = fields.Many2one('moisture.content.concrete.man.hole',string="Parent Id")
    
     sr_no = fields.Integer(string="SR NO.", readonly=True, copy=False, default=1)
     wt_of_sample = fields.Integer(string="Weight of sample W1 in gm")
@@ -146,13 +146,13 @@ import math
 
 
 class DryingShrinkageConcreteManHole(models.Model):
-    _name = "mechanical.drying.shrinkage.concrete.man.hole"
+    _name = "drying.shrinkage.concrete.man.hole"
     _inherit = "lerm.eln"
     _rec_name = "name"
 
     name = fields.Char("Name",default="Drying Shrinkage")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines = fields.One2many('mechanical.drying.shrinkage.concrete.man.hole.line','parent_id',string="Parameter")
+    child_lines = fields.One2many('drying.shrinkage.concrete.man.hole.line','parent_id',string="Parameter")
     average_drying_shrinkage = fields.Float(string="Average",compute="_compute_average_drying_shrinkage")
 
     @api.depends('child_lines.drying_shrinkage')
@@ -174,8 +174,8 @@ class DryingShrinkageConcreteManHole(models.Model):
    
 
 class DryingShrinkageConcreteManHoleLine(models.Model):
-    _name = "mechanical.drying.shrinkage.concrete.man.hole.line"
-    parent_id = fields.Many2one('mechanical.drying.shrinkage.concrete.man.hole',string="Parent Id")
+    _name = "drying.shrinkage.concrete.man.hole.line"
+    parent_id = fields.Many2one('drying.shrinkage.concrete.man.hole',string="Parent Id")
    
     sr_no = fields.Integer(string="Sr No.", readonly=True, copy=False, default=1)
     length_specimen = fields.Integer(string="Length Of Specimen")

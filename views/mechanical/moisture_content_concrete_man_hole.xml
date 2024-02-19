@@ -3,8 +3,8 @@
     <data>
 
         <record id="mechanical_moisture_content_concrete_man_hole_view" model="ir.ui.view">
-        <field name="name">mechanical.moisture.content.concrete.man.hole.form</field>
-        <field name="model">mechanical.moisture.content.concrete.man.hole</field>
+        <field name="name">moisture.content.concrete.man.hole.form</field>
+        <field name="model">moisture.content.concrete.man.hole</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>

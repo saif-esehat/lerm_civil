@@ -3,8 +3,8 @@
     <data>
 
         <record id="mechanical_splitting_tensile_strength_concrete_view" model="ir.ui.view">
-        <field name="name">mechanical.splitting.tensile.strength.concrete.form</field>
-        <field name="model">mechanical.splitting.tensile.strength.concrete</field>
+        <field name="name">split.tensile.strength.concrete.form</field>
+        <field name="model">split.tensile.strength.concrete</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
