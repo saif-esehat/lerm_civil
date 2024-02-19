@@ -24,13 +24,13 @@ class SoilCBR(models.Model):
 
 
 class DENSITYRELATIONUSINGHEAVYCOMPACTION(models.Model):
-    _name = "mechanical.density.relation.using.heavy.compaction"
+    _name = "density.heavy.compaction"
     _inherit = "lerm.eln"
     _rec_name = "name"
 
     name = fields.Char("Name",default="DETERMINATION OF WATER CONTENT")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines = fields.One2many('mechanical.density.relation.using.heavy.compaction.line','parent_id',string="Parameter")
+    child_lines = fields.One2many('density.heavy.compaction.line','parent_id',string="Parameter")
     wt_of_modul = fields.Integer(string="Weight of Mould in gm")
     vl_of_modul = fields.Integer(string="Volume of Mould in cc")
     
@@ -44,8 +44,8 @@ class DENSITYRELATIONUSINGHEAVYCOMPACTION(models.Model):
 
 
 class DENSITYRELATIONUSINGHEAVYCOMPACTIONLINE(models.Model):
-    _name = "mechanical.density.relation.using.heavy.compaction.line"
-    parent_id = fields.Many2one('mechanical.density.relation.using.heavy.compaction',string="Parent Id")
+    _name = "density.heavy.compaction.line"
+    parent_id = fields.Many2one('density.heavy.compaction',string="Parent Id")
 
     determination_no = fields.Float(string="Determination No")
     wt_of_modul_compact = fields.Integer(string="Weight of Mould + Compacted sample in gm")

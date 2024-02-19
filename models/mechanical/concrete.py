@@ -3,13 +3,13 @@ from odoo.exceptions import UserError,ValidationError
 import math
 
 class SplittingTensileStrengthConcrete(models.Model):
-    _name = "mechanical.splitting.tensile.strength.concrete"
+    _name = "split.tensile.strength.concrete"
     _inherit = "lerm.eln"
     _rec_name = "name"
 
     name = fields.Char("Name",default="Compressive Strength of Concrete Cube")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines = fields.One2many('mechanical.splitting.tensile.strength.concrete.line','parent_id',string="Parameter")
+    child_lines = fields.One2many('split.tensile.strength.concrete.line','parent_id',string="Parameter")
     average_splite_tensile_strength = fields.Float(string="Average Compressive Strength in N/mm2",compute="_compute_average_splite_tensile_strength")
 
 
@@ -33,8 +33,8 @@ class SplittingTensileStrengthConcrete(models.Model):
         return record
 
 class SplittingTensileStrengthConcreteLine(models.Model):
-    _name = "mechanical.splitting.tensile.strength.concrete.line"
-    parent_id = fields.Many2one('mechanical.splitting.tensile.strength.concrete', string="Parent Id")
+    _name = "split.tensile.strength.concrete.line"
+    parent_id = fields.Many2one('split.tensile.strength.concrete', string="Parent Id")
 
     sr_no = fields.Integer(string="Sr.No.", readonly=True, copy=False, default=1)
     wt_of_cylinder = fields.Float(string="Weight of Cylinder in Kg")

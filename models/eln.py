@@ -42,7 +42,10 @@ class ELN(models.Model):
     datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
     fetch_ds_button = fields.Float(string="Fetch Datasheet")
     size_id = fields.Many2one('lerm.size.line',string="Size")
+    size_ids = fields.Many2many('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
+    grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
+
     update_result = fields.Integer("Update Result")
     state = fields.Selection([
         ('1-draft', 'In-Test'),
@@ -94,7 +97,19 @@ class ELN(models.Model):
 
 
     
+    
+    @api.depends('material')
+    def compute_grade(self):        
+        for record in self:
+            if record.material:
+                record.grade_ids = self.env['product.template'].search([('id','=', record.material.id)]).grade_table
 
+    @api.depends('material')
+    def compute_size(self):
+        for record in self:
+            if record.material:
+                record.size_ids = self.env['product.template'].search([('id','=', record.material.id)]).size_table
+    
 
     @api.onchange('witness')
     def update_witness_name(self):

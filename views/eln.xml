@@ -68,6 +68,8 @@
                                 <field name='is_product_based_calculation'/>
                                 <!-- <field name='is_form_based_calculation'/> -->
                                 <field name='invisible_fetch_inputs' invisible="1" />
+                                <field name='size_ids' />
+
 
                             </group>
                             <group style="width:50%">
@@ -82,6 +84,8 @@
                                 <field name='attachment' filename='attachment_name'/>
                                 <field name='attachment_name' invisible='1'/>
                                 <field name='instrument'/>
+                                <field name='grade_ids' />
+
 
                             </group>
                         </group>

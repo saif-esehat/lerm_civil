@@ -3,8 +3,8 @@
     <data>
 
         <record id="mechanical_heay_ligth_compaction_view" model="ir.ui.view">
-        <field name="name">mechanical.density.relation.using.heavy.compaction.form</field>
-        <field name="model">mechanical.density.relation.using.heavy.compaction</field>
+        <field name="name">density.heavy.compaction.form</field>
+        <field name="model">density.heavy.compaction</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
