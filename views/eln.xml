@@ -19,6 +19,12 @@
                             name="print_report"
                             string="Print Report"
                             />
+                    
+                    <button
+                            type="object"
+                            name="reupdate_result"
+                            string="Update Results"
+                            />
 
                   
                     
