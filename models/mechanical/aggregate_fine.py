@@ -436,7 +436,7 @@ class FineAggregate(models.Model):
     soundness_na2so4_name = fields.Char("Name",default="Soundness Na2SO4")
     soundness_na2so4_visible = fields.Boolean("Soundness Na2SO4 Visible",compute="_compute_visible")
 
-    soundness_na2so4_child_lines = fields.One2many('mechanical.soundnesss.na2so4.line','parent_id',string="Parameter")
+    soundness_na2so4_child_lines = fields.One2many('mechanical.soundnesss.na2so4.line','parent_id',string="Parameter",default=lambda self: self._default_soundness_passing_child_lines())
     total_na2so4 = fields.Integer(string="Total",compute="_compute_total_na2so4")
     soundness_na2so4 = fields.Float(string="Soundness Na2SO4",compute="_compute_soundness_na2so4")
 
@@ -502,12 +502,25 @@ class FineAggregate(models.Model):
         for record in self:
             record.soundness_na2so4 = sum(record.soundness_na2so4_child_lines.mapped('cumulative_loss_percent'))
 
+    @api.model
+    def _default_soundness_passing_child_lines(self):
+        default_lines = [
+            (0, 0, {'sieve_size_passing': '150 µ', 'sieve_size_retained': '--'}),
+            (0, 0, {'sieve_size_passing': '300 µ', 'sieve_size_retained': '150 µ'}),
+            (0, 0, {'sieve_size_passing': '600 µ', 'sieve_size_retained': '300 µ'}),
+            (0, 0, {'sieve_size_passing': '1.18 mm', 'sieve_size_retained': '600 µ'}),
+            (0, 0, {'sieve_size_passing': '2.36 mm', 'sieve_size_retained': '1.18 mm'}),
+            (0, 0, {'sieve_size_passing': '4.47 mm', 'sieve_size_retained': '2.36 mm'}),
+            (0, 0, {'sieve_size_passing': '10 mm', 'sieve_size_retained': '4.75 mm'})
+        ]
+        return default_lines
+
 
     # Soundness MgSO4
     soundness_mgso4_name = fields.Char("Name",default="Soundness MgSO4")
     soundness_mgso4_visible = fields.Boolean("Soundness MgSO4 Visible",compute="_compute_visible")
 
-    soundness_mgso4_child_lines = fields.One2many('mechanical.soundnesss.mgso4.line','parent_id',string="Parameter")
+    soundness_mgso4_child_lines = fields.One2many('mechanical.soundnesss.mgso4.line','parent_id',string="Parameter",default=lambda self: self._default_soundness_mgso4_passing_child_lines())
     total_mgso4 = fields.Integer(string="Total",compute="_compute_total_mgso4")
     soundness_mgso4 = fields.Float(string="Soundness MgSO4",compute="_compute_soundness_mgso4")
 
@@ -574,6 +587,19 @@ class FineAggregate(models.Model):
     def _compute_soundness_mgso4(self):
         for record in self:
             record.soundness_mgso4 = sum(record.soundness_mgso4_child_lines.mapped('cumulative_loss_percent'))
+
+    @api.model
+    def _default_soundness_mgso4_passing_child_lines(self):
+        default_lines = [
+            (0, 0, {'sieve_size_passing': '150 µ', 'sieve_size_retained': '--'}),
+            (0, 0, {'sieve_size_passing': '300 µ', 'sieve_size_retained': '150 µ'}),
+            (0, 0, {'sieve_size_passing': '600 µ', 'sieve_size_retained': '300 µ'}),
+            (0, 0, {'sieve_size_passing': '1.18 mm', 'sieve_size_retained': '600 µ'}),
+            (0, 0, {'sieve_size_passing': '2.36 mm', 'sieve_size_retained': '1.18 mm'}),
+            (0, 0, {'sieve_size_passing': '4.47 mm', 'sieve_size_retained': '2.36 mm'}),
+            (0, 0, {'sieve_size_passing': '10 mm', 'sieve_size_retained': '4.75 mm'})
+        ]
+        return default_lines
 
 
       # Deleterious Content

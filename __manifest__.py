@@ -204,6 +204,8 @@
     'views/mechanical/structural_steel_round.xml',
     'reports/structural_steel_round/datasheet.xml',
     'reports/structural_steel_round/report.xml',
+    'reports/act/act_datasheet.xml',
+    'reports/act/act_report.xml',
     
     
  
