@@ -36,77 +36,7 @@
                             <!-- <field name="tests" widget="many2many_tags"/> -->
                     </group>
 
-                    <!-- CBR -->
-                     <group attrs="{'invisible': [('soil_visible', '=', False)]}">
-                        <h1>
-                            <field name="soil_name" readonly="1" nolabel="1"/>
-                            <field name="soil_visible" invisible="1"/>
-                        </h1>
-                    </group>
-                    
-                    <!-- <group attrs="{'invisible': [('soil_visible', '=', False)]}"> -->
-                    <!-- <group>
-                      <field name="job_no_soil"/>
-                      <field name="material_soil"/>
-                    </group>
-                    <group>
-                      <field name="start_date_soil"/>
-                      <field name="end_date_soil"/>
-                    </group>
-                    </group> -->
-                    <group attrs="{'invisible': [('soil_visible', '=', False)]}">
-                      <field name="soil_table">
-                        <tree editable="bottom">
-                          <field name="penetration"/>
-                          <field name="proving_reading"/>
-                          <field name="load"/>
-                          <!-- <field name="wt_retained"/> -->
-                        </tree>
-                      </field>
-                      
-                    </group>
-                    <group attrs="{'invisible': [('soil_visible', '=', False)]}">
-                      <field name="chart_image_cbr" widget="image" readonly="1"/>
-                    </group>
-                    <!-- FSI -->
-                    <group attrs="{'invisible': [('fsi_visible', '=', False)]}">
-                        <h1>
-                            <field name="fsi_name" readonly="1" nolabel="1"/>
-                            <field name="fsi_visible" invisible="1"/>
-                        </h1>
-                    </group>
-                    
-                    <!-- <group attrs="{'invisible': [('fsi_visible', '=', False)]}"> -->
-                    <!-- <group>
-                      <field name="job_no_fsi"/>
-                      <field name="material_fsi"/>
-                    </group>
-                    <group>
-                      <field name="start_date_fsi"/>
-                      <field name="end_date_fsi"/>
-                    </group>
-                    </group> -->
-                    <group attrs="{'invisible': [('fsi_visible', '=', False)]}">
-                      <field name="fsi_table">
-                        <tree editable="bottom">
-                          <field name="wt_sample"/>
-                          <field name="dry_sample"/>
-                          <field name="v_sample_kerosin"/>
-                          <field name="v_sample_water"/>
-                          <field name="increase_volume"/>
-                          <field name="fsi"/>
-                        </tree>
-                      </field>
-                      
-                    </group>
-                    <group attrs="{'invisible': [('fsi_visible', '=', False)]}">
-                     <field name="max_fsi"/>
-                     <field name='max_fsi_conformity' col="4"
-                                           decoration-success="max_fsi_conformity == 'pass'" 
-                                           decoration-danger="max_fsi_conformity == 'fail'" 
-                                           readonly="1"/>
-                     <field name='max_fsi_nabl' col="4"/>
-                    </group>
+
                     <!-- Sieve Analysis -->
                     <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
                         <h1>
@@ -138,115 +68,13 @@
                           <field name="passing_percent"/>
                         </tree>
                       </field>
-                      <field name="total"/>
+                      <field name="total1"/>
                       <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
                         <button string="Calculate Sieve Analysis" type="object" name="calculate" class="oe_highlight"/>
                     </group>
                       <!-- <! <field name="cumulative"/>> -->
                       
                     </group>
-                    <!-- Heavy Compaction MDD -->
-                     <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
-                        <h1>
-                            <field name="heavy_name" readonly="1" nolabel="1"/>
-                            <field name="heavy_visible" invisible="1"/>
-                        </h1>
-                    </group>
-                    
-                   
-                    <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
-                     <field name="wt_of_modul"/>
-                     <field name="vl_of_modul"/>
-                    </group>
-                    <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
-                  
-                      <field name="heavy_table">
-                        <tree editable="bottom">
-                          <field name="determination_no"/>
-                          <field name="wt_of_modul_compact"/>
-                           <field name="wt_of_compact"/>
-                          <field name="bulk_density"/>
-                          <field name="container_no"/>
-                          <field name="wt_of_container"/>
-                          <field name="wt_of_container_wet"/>
-                          <field name="wt_of_container_dry"/>
-                           <field name="wt_of_dry_sample"/>
-                          <field name="wt_of_moisture"/>
-                          <field name="moisture"/>
-                          <field name="dry_density"/>
-                        </tree>
-                      </field>
-                      <!-- <field name="total"/> -->
-                      <!-- <! <field name="cumulative"/>> -->
-                   
-                      
-                    </group>
-                    <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
-                      <field name="graph_image_density" widget="image" readonly="1"/>
-                    </group>
-
-                     <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
-                     <field name='mmd'/>
-                     <field name='omc'/>
-                     <field name='heavy_table_conformity' col="4"
-                                           decoration-success="heavy_table_conformity == 'pass'" 
-                                           decoration-danger="heavy_table_conformity == 'fail'" 
-                                           readonly="1"/>
-                     <field name='heavy_table_nabl' col="4"/>
-                    </group>
-
-                   
-                  <!-- Light Compaction OMC -->
-                     <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
-                        <h1>
-                            <field name="light_omc_name1" readonly="1" nolabel="1"/>
-                            <field name="light_omc_visible" invisible="1"/>
-                        </h1>
-                    </group>
-                    
-                 
-                    <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
-                     <field name="wt_of_modul_light_omc"/>
-                     <field name="vl_of_modul_light_omc"/>
-                    </group>
-                    <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
-                  
-                      <field name="light_omc_table">
-                        <tree editable="bottom">
-                          <field name="determination_no"/>
-                          <field name="wt_of_modul_compact"/>
-                           <field name="wt_of_compact"/>
-                          <field name="bulk_density"/>
-                          <field name="container_no"/>
-                          <field name="wt_of_container"/>
-                          <field name="wt_of_container_wet"/>
-                          <field name="wt_of_container_dry"/>
-                           <field name="wt_of_dry_sample"/>
-                          <field name="wt_of_moisture"/>
-                          <field name="moisture"/>
-                          <field name="dry_density"/>
-                        </tree>
-                      </field>
-                      <!-- <field name="total"/> -->
-                      <!-- <! <field name="cumulative"/>> -->
-                      
-                    </group>
-
-                     <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
-                      <field name="graph_image_light_omc" widget="image" readonly="1"/>
-                    </group>
-
-                     <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
-                     <field name='mmd_light_omc'/>
-                     <field name='omc_light_omc'/>
-                     <field name='light_omc_table_conformity' col="4"
-                                           decoration-success="light_omc_table_conformity == 'pass'" 
-                                           decoration-danger="light_omc_table_conformity == 'fail'" 
-                                           readonly="1"/>
-                     <field name='light_omc_table_nabl' col="4"/>
-                    </group>
-
-                     
 
 
                     <!-- Liquid Limit-->
@@ -346,6 +174,189 @@
                                            readonly="1"/>
                      <field name='plasticity_index_nabl' col="4"/>
                     </group>
+                    <!-- FSI -->
+                    <group attrs="{'invisible': [('fsi_visible', '=', False)]}">
+                        <h1>
+                            <field name="fsi_name" readonly="1" nolabel="1"/>
+                            <field name="fsi_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    
+                    <!-- <group attrs="{'invisible': [('fsi_visible', '=', False)]}"> -->
+                    <!-- <group>
+                      <field name="job_no_fsi"/>
+                      <field name="material_fsi"/>
+                    </group>
+                    <group>
+                      <field name="start_date_fsi"/>
+                      <field name="end_date_fsi"/>
+                    </group>
+                    </group> -->
+                    <group attrs="{'invisible': [('fsi_visible', '=', False)]}">
+                      <field name="fsi_table">
+                        <tree editable="bottom">
+                          <field name="wt_sample"/>
+                          <field name="dry_sample"/>
+                          <field name="v_sample_kerosin"/>
+                          <field name="v_sample_water"/>
+                          <field name="increase_volume"/>
+                          <field name="fsi"/>
+                        </tree>
+                      </field>
+                      
+                    </group>
+                    <group attrs="{'invisible': [('fsi_visible', '=', False)]}">
+                     <field name="max_fsi"/>
+                     <field name='max_fsi_conformity' col="4"
+                                           decoration-success="max_fsi_conformity == 'pass'" 
+                                           decoration-danger="max_fsi_conformity == 'fail'" 
+                                           readonly="1"/>
+                     <field name='max_fsi_nabl' col="4"/>
+                    </group>
+                     <!-- Light Compaction OMC -->
+                     <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
+                        <h1>
+                            <field name="light_omc_name1" readonly="1" nolabel="1"/>
+                            <field name="light_omc_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    
+                 
+                    <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
+                     <field name="wt_of_modul_light_omc"/>
+                     <field name="vl_of_modul_light_omc"/>
+                    </group>
+                    <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
+                  
+                      <field name="light_omc_table">
+                        <tree editable="bottom">
+                          <field name="determination_no"/>
+                          <field name="wt_of_modul_compact"/>
+                           <field name="wt_of_compact"/>
+                          <field name="bulk_density"/>
+                          <field name="container_no"/>
+                          <field name="wt_of_container"/>
+                          <field name="wt_of_container_wet"/>
+                          <field name="wt_of_container_dry"/>
+                           <field name="wt_of_dry_sample"/>
+                          <field name="wt_of_moisture"/>
+                          <field name="moisture"/>
+                          <field name="dry_density"/>
+                        </tree>
+                      </field>
+                      <!-- <field name="total"/> -->
+                      <!-- <! <field name="cumulative"/>> -->
+                      
+                    </group>
+
+                     <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
+                      <field name="graph_image_light_omc" widget="image" readonly="1"/>
+                    </group>
+
+                     <group attrs="{'invisible': [('light_omc_visible', '=', False)]}">
+                     <field name='mmd_light_omc'/>
+                     <field name='omc_light_omc'/>
+                     <field name='light_omc_table_conformity' col="4"
+                                           decoration-success="light_omc_table_conformity == 'pass'" 
+                                           decoration-danger="light_omc_table_conformity == 'fail'" 
+                                           readonly="1"/>
+                     <field name='light_omc_table_nabl' col="4"/>
+                    </group>
+
+                     <!-- Heavy Compaction MDD -->
+                     <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
+                        <h1>
+                            <field name="heavy_name" readonly="1" nolabel="1"/>
+                            <field name="heavy_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    
+                   
+                    <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
+                     <field name="wt_of_modul"/>
+                     <field name="vl_of_modul"/>
+                    </group>
+                    <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
+                  
+                      <field name="heavy_table">
+                        <tree editable="bottom">
+                          <field name="determination_no"/>
+                          <field name="wt_of_modul_compact"/>
+                           <field name="wt_of_compact"/>
+                          <field name="bulk_density"/>
+                          <field name="container_no"/>
+                          <field name="wt_of_container"/>
+                          <field name="wt_of_container_wet"/>
+                          <field name="wt_of_container_dry"/>
+                           <field name="wt_of_dry_sample"/>
+                          <field name="wt_of_moisture"/>
+                          <field name="moisture"/>
+                          <field name="dry_density"/>
+                        </tree>
+                      </field>
+                      <!-- <field name="total"/> -->
+                      <!-- <! <field name="cumulative"/>> -->
+                   
+                      
+                    </group>
+                    <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
+                      <field name="graph_image_density" widget="image" readonly="1"/>
+                    </group>
+
+                     <group attrs="{'invisible': [('heavy_visible', '=', False)]}">
+                     <field name='mmd'/>
+                     <field name='omc'/>
+                     <field name='heavy_table_conformity' col="4"
+                                           decoration-success="heavy_table_conformity == 'pass'" 
+                                           decoration-danger="heavy_table_conformity == 'fail'" 
+                                           readonly="1"/>
+                     <field name='heavy_table_nabl' col="4"/>
+                    </group>
+
+
+                     
+
+
+
+                    <!-- CBR -->
+                     <group attrs="{'invisible': [('soil_visible', '=', False)]}">
+                        <h1>
+                            <field name="soil_name" readonly="1" nolabel="1"/>
+                            <field name="soil_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    
+                    <!-- <group attrs="{'invisible': [('soil_visible', '=', False)]}"> -->
+                    <!-- <group>
+                      <field name="job_no_soil"/>
+                      <field name="material_soil"/>
+                    </group>
+                    <group>
+                      <field name="start_date_soil"/>
+                      <field name="end_date_soil"/>
+                    </group>
+                    </group> -->
+                    <group attrs="{'invisible': [('soil_visible', '=', False)]}">
+                      <field name="soil_table">
+                        <tree editable="bottom">
+                          <field name="penetration"/>
+                          <field name="proving_reading"/>
+                          <field name="load"/>
+                          <!-- <field name="wt_retained"/> -->
+                        </tree>
+                      </field>
+                      
+                    </group>
+                    <group attrs="{'invisible': [('soil_visible', '=', False)]}">
+                      <field name="chart_image_cbr" widget="image" readonly="1"/>
+                    </group>
+                    
+                    
+                   
+                   
+                 
+
+
                      
                        
 

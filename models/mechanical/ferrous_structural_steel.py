@@ -23,11 +23,11 @@ class FerrousStructuralSteel(models.Model):
     gauge_length1 = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
     final_length = fields.Float(string="FINAL LENGTH mm")
     # proof_2_percent = fields.Float(string="0.2% proof Load / Yield Load, KN")
-    elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True,digits=(12,1))
+    elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True,digits=(12,2))
     yeild_load = fields.Float(string="0.2% proof Load / Yield Load, KN")
     ultimate_load = fields.Float(string="Ultimate Load, KN")
-    proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True,digits=(12,1))
-    ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True,digits=(12,1))
+    proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True,digits=(12,2))
+    ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True,digits=(12,2))
     fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
     ts_ys_ratio = fields.Float(string="TS/YS Ratio",compute="_compute_ts_ys_ratio",store=True)
@@ -53,9 +53,9 @@ class FerrousStructuralSteel(models.Model):
     final_length2 = fields.Float(string="FINAL LENGTH mm")
     yeild_load2 = fields.Float(string="0.2% proof Load / Yield Load, KN")
     ultimate_load2 = fields.Float(string="Ultimate Load, KN")
-    proof_yeid_stress2 = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress2",store=True,digits=(12,1))
-    ult_tens_strgth2 = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth2",store=True,digits=(12,1))
-    elongation2 = fields.Float(string="% Elongation",compute="_compute_elongation_percent2",store=True,digits=(12,1))
+    proof_yeid_stress2 = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress2",store=True,digits=(12,2))
+    ult_tens_strgth2 = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth2",store=True,digits=(12,2))
+    elongation2 = fields.Float(string="% Elongation",compute="_compute_elongation_percent2",store=True,digits=(12,2))
      
     bend_test2 = fields.Selection([
         ('satisfactory', 'Satisfactory'),
@@ -85,13 +85,22 @@ class FerrousStructuralSteel(models.Model):
                 rounded_gauge_length2 = math.floor(gauge_length2)
             record.gauge_length2 = int(rounded_gauge_length2)
 
+    # @api.depends('yeild_load2', 'area2')
+    # def _compute_proof_yeid_stress2(self):
+    #     for record in self:
+    #         if record.area2 != 0:
+    #             proof_yeid_stress2 = Decimal(record.yeild_load2 / record.area2 * 1000)
+    #             float_result2 = float(proof_yeid_stress2.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
+    #             record.proof_yeid_stress2 = round(float_result2, 2)
+    #         else:
+    #             record.proof_yeid_stress2 = 0.0
+            
     @api.depends('yeild_load2', 'area2')
     def _compute_proof_yeid_stress2(self):
         for record in self:
             if record.area2 != 0:
-                proof_yeid_stress2 = Decimal(record.yeild_load2 / record.area2 * 1000)
-                float_result2 = float(proof_yeid_stress2.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
-                record.proof_yeid_stress2 = round(float_result2, 2)
+                proof_yeid_stress2 = Decimal(record.yeild_load2) / Decimal(record.area2) * 1000
+                record.proof_yeid_stress2 = float(proof_yeid_stress2.quantize(Decimal('.01')))
             else:
                 record.proof_yeid_stress2 = 0.0
 
@@ -587,13 +596,22 @@ class FerrousStructuralSteel(models.Model):
     #         else:
     #             record.proof_yeid_stress = 0.0
             
+    # @api.depends('yeild_load', 'area')
+    # def _compute_proof_yeid_stress(self):
+    #     for record in self:
+    #         if record.area != 0:
+    #             proof_yeid_stress = Decimal(record.yeild_load / record.area * 1000)
+    #             float_result = float(proof_yeid_stress.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
+    #             record.proof_yeid_stress = round(float_result, 2)
+    #         else:
+    #             record.proof_yeid_stress = 0.0
+            
     @api.depends('yeild_load', 'area')
     def _compute_proof_yeid_stress(self):
         for record in self:
             if record.area != 0:
-                proof_yeid_stress = Decimal(record.yeild_load / record.area * 1000)
-                float_result = float(proof_yeid_stress.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP))
-                record.proof_yeid_stress = round(float_result, 2)
+                proof_yeid_stress = Decimal(record.yeild_load) / Decimal(record.area) * 1000
+                record.proof_yeid_stress = float(proof_yeid_stress.quantize(Decimal('.01')))
             else:
                 record.proof_yeid_stress = 0.0
 

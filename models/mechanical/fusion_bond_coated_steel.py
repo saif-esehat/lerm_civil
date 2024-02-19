@@ -14,8 +14,8 @@ class MechanicalFusionBondSteel(models.Model):
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
 
 
-    dia = fields.Float("DIA, mm")
-    coating_thickness = fields.Float("Coating Thickness")
+    dia = fields.Char("DIA, mm")
+    coating_thickness = fields.Char("Coating Thickness")
     continuity_coating = fields.Selection(
         [('satisfactory', 'Satisfactory'),
          ('unsatisfactory', 'UnSatisfactory')],
@@ -24,8 +24,8 @@ class MechanicalFusionBondSteel(models.Model):
     )
 
     adhesion_coating = fields.Selection(
-        [('nocrackobserved', 'No Visibal crack observed'),
-         ('crackobserved', 'Crack Observed')],
+        [('satisfactory', 'Satisfactory'),
+         ('unsatisfactory', 'UnSatisfactory')],
         string='Adhesion of coating',
         help='Choose an option from the list.'
     )

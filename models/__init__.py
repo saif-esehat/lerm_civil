@@ -125,3 +125,4 @@ from .chemical import opc_cement_chemical
 from .chemical import tmt_bar
 from .mechanical import structural_steel_round
 from .report import structural_steel_round_ds_report
+from .report import act_compressive_strength_ds_report

@@ -1190,7 +1190,7 @@
 							<table>
 								<tr> 
 									<td colspan="12">Total :<![CDATA[&nbsp;]]>
-										<span t-esc="round(float(data.total),2)"/>
+										<span t-esc="round(float(data.total1),2)"/>
 									</td>
 								</tr>
 							</table>

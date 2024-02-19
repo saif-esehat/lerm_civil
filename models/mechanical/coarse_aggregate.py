@@ -470,6 +470,8 @@ class CoarseAggregateMechanical(models.Model):
         return res
 
 
+
+
     def calculate_sieve(self): 
         for record in self:
             for line in record.sieve_analysis_child_lines:

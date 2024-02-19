@@ -647,14 +647,18 @@ class ParameteResultCalculationWizard(models.TransientModel):
         if self.env.context.get('result_updated'):
             return {'type': 'ir.actions.act_window_close'}
         
+        
+        eln_id = self.env.context.get('eln_id')
         result_id = self.env.context.get('result_id')
         result = self.env["eln.parameters.result"].browse(result_id)
+        sample_id = self.env["lerm.eln"].browse(eln_id).sample_id.id
+        
 
         self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
         for input in self.inputs_lines:
             self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
 
-        sample_results = self.env['sample.parameters.result'].search([('parameter', '=', result.parameter.id)])
+        sample_results = self.env['sample.parameters.result'].search([('sample_id','=',sample_id),('parameter', '=', result.parameter.id)])
         if not sample_results.filtered(lambda r: r.result == self.result):
             sample_results.write({'result': self.result})
         

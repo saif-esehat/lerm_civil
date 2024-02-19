@@ -91,34 +91,64 @@ class UpvLine(models.Model):
         ('indirect', 'In-Direct'),
         ('semi_direct', 'Semi-Direct')],"Method")
     
+    # @api.depends('velocity')
+    # def _compute_quality(self):
+    #     for record in self:
+    #         # import wdb; wdb.set_trace() 
+    #         string1 = "M25"
+    #         string2 = self.parent_id.grade_id.grade
+
+    #         numeric_part1 = self.extract_number_from_string(string1)
+    #         numeric_part2 = self.extract_number_from_string(string2)
+
+    #         # self.extract_numeric_part(string1)
+    #         if record.velocity > 4.5:
+    #             record.quality = 'excellent'
+    #         elif numeric_part1 > numeric_part2 and 3.5 <= record.velocity <= 4.5:
+    #             record.quality = 'good'
+    #         elif numeric_part1 < numeric_part2 and 3.75 <= record.velocity <= 4.5:
+    #             record.quality = 'good'
+    #         else:
+    #             record.quality = 'doubtful'
+    
+    # def extract_number_from_string(self,string):
+    #     pattern = r'\d+'  # Regular expression pattern to match one or more digits
+    #     match = re.search(pattern, string)
+    #     if match:
+    #         return int(match.group())  # Convert the matched substring to an integer
+    #     else:
+    #         return None  # 
+
     @api.depends('velocity')
     def _compute_quality(self):
         for record in self:
-            # import wdb; wdb.set_trace() 
             string1 = "M25"
             string2 = self.parent_id.grade_id.grade
+            print("String 2:", string2)  # Add this line for debugging
+            
+            if string2:  # Check if string2 is not None or empty
+                numeric_part1 = self.extract_number_from_string(string1)
+                numeric_part2 = self.extract_number_from_string(string2)
+                print("Numeric Part 2:", numeric_part2)  # Add this line for debugging
 
-            numeric_part1 = self.extract_number_from_string(string1)
-            numeric_part2 = self.extract_number_from_string(string2)
-
-            # self.extract_numeric_part(string1)
-            if record.velocity > 4.5:
-                record.quality = 'excellent'
-            elif numeric_part1 > numeric_part2 and 3.5 <= record.velocity <= 4.5:
-                record.quality = 'good'
-            elif numeric_part1 < numeric_part2 and 3.75 <= record.velocity <= 4.5:
-                record.quality = 'good'
+                if record.velocity > 4.5:
+                    record.quality = 'excellent'
+                elif numeric_part1 > numeric_part2 and 3.5 <= record.velocity <= 4.5:
+                    record.quality = 'good'
+                elif numeric_part1 < numeric_part2 and 3.75 <= record.velocity <= 4.5:
+                    record.quality = 'good'
+                else:
+                    record.quality = 'doubtful'
             else:
                 record.quality = 'doubtful'
-    
-    def extract_number_from_string(self,string):
-        pattern = r'\d+'  # Regular expression pattern to match one or more digits
-        match = re.search(pattern, string)
-        if match:
-            return int(match.group())  # Convert the matched substring to an integer
-        else:
-            return None  # 
-    
+
+    def extract_number_from_string(self, string):
+        if string:  # Ensure string is not None or empty
+            pattern = r'\d+'  # Regular expression pattern to match one or more digits
+            match = re.search(pattern, string)
+            if match:
+                return int(match.group())  # Convert the matched substring to an integer
+        return None  # Return None if string is None or empty    
     # def extract_numeric_part(s):
     #     numeric_part = ''.join(filter(str.isdigit, s))
     #     return int(numeric_part) if numeric_part else 0

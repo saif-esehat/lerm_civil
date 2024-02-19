@@ -15,7 +15,7 @@ class CouplerLine(models.Model):
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
     diameter = fields.Float(string="Outer Diameter")
     crossectional_area = fields.Float(string="Nominal Cross Sectional Area mm²",compute="_compute_crossectional_area")
-    gauge_length = fields.Float(string="Gauge Length L, mm",compute="_compute_gauge_length",store=True)
+    gauge_length = fields.Float(string="Gauge Length L, mm",store=True)
     elongated_gauge_length = fields.Float(string="Gauge Length  at Maximum Force, mm")
     ultimate_load = fields.Float(string="Ultimate Tensile Load, KN")
     distance = fields.Float(string="Distance of fracture From center of Coupler")
@@ -76,18 +76,26 @@ class CouplerLine(models.Model):
     #                 record.result_test_visible = True
                
 
+    # @api.depends('diameter')
+    # def _compute_crossectional_area(self):
+    #     for record in self:
+    #         if record.diameter:
+    #             record.crossectional_area = 3.14 * (record.diameter ** 2) / 4
+    #         else:
+    #             record.crossectional_area = 0.0 
+
     @api.depends('diameter')
     def _compute_crossectional_area(self):
         for record in self:
             if record.diameter:
-                record.crossectional_area = 3.14 * (record.diameter ** 2) / 4
+                record.crossectional_area = (record.diameter * record.diameter * 3.1416) / 4
             else:
                 record.crossectional_area = 0.0
 
-    @api.depends('diameter')
-    def _compute_gauge_length(self):
-        for record in self:
-            record.gauge_length = record.diameter * 10 + 50
+    # @api.depends('diameter')
+    # def _compute_gauge_length(self):
+    #     for record in self:
+    #         record.gauge_length = record.diameter * 10 + 50
 
     @api.depends('ultimate_load', 'crossectional_area')
     def _compute_ult_tens_strgth(self):
