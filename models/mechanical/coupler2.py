@@ -8,9 +8,11 @@ import re
 class CouplerLine(models.Model):
     _name = "mechanical.coupler"
     _inherit = "lerm.eln"
+    _rec_name = "name"
    
     
     Id_no = fields.Char("ID No")
+    name = fields.Char("Name",default="COUPLER")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
     diameter = fields.Float(string="Outer Diameter")
@@ -223,7 +225,7 @@ class CouplerLine(models.Model):
     def create(self, vals):
         # import wdb;wdb.set_trace()
         record = super(CouplerLine, self).create(vals)
-        record.get_all_fields()
+        # record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
 
