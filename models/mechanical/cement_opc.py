@@ -1146,7 +1146,7 @@ class CementNormalConsistency(models.Model):
     def create(self, vals):
         # import wdb;wdb.set_trace()
         record = super(CementNormalConsistency, self).create(vals)
-        record.get_all_fields()
+        # record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
 
