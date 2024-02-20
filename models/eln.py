@@ -42,9 +42,9 @@ class ELN(models.Model):
     datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
     fetch_ds_button = fields.Float(string="Fetch Datasheet")
     size_id = fields.Many2one('lerm.size.line',string="Size")
-    size_ids = fields.Many2many('lerm.size.line',string="Size",compute="compute_size")
+    # size_ids = fields.Many2many('lerm.size.line',string="Size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
-    grade_ids = fields.Many2many('lerm.grade.line',string="Grades",compute="compute_grade")
+    # grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
 
     update_result = fields.Integer("Update Result")
     state = fields.Selection([
@@ -98,24 +98,24 @@ class ELN(models.Model):
 
     
     
-    @api.depends('material')
-    def compute_grade(self):        
-        for record in self:
-            try:
-                if record.material:
-                    record.grade_ids = self.env['product.template'].search([('id','=', record.material.id)]).grade_table
-            except:
-                record.grade_ids = False
+    # @api.onchange('material')
+    # def compute_grade(self):        
+    #     for record in self:
+    #         try:
+    #             if record.material:
+    #                 record.grade_ids = self.env['product.template'].search([('id','=', record.material.id)]).grade_table
+    #         except:
+    #             record.grade_ids = False
 
 
-    @api.depends('material')
-    def compute_size(self):
-        for record in self:
-            try:
-                if record.material:
-                    record.size_ids = self.env['product.template'].search([('id','=', record.material.id)]).size_table
-            except:
-                record.size_ids = False
+    # @api.onchange('material')
+    # def compute_size(self):
+    #     for record in self:
+    #         try:
+    #             if record.material:
+    #                 record.size_ids = self.env['product.template'].search([('id','=', record.material.id)]).size_table
+    #         except:
+    #             record.size_ids = False
 
     @api.onchange('witness')
     def update_witness_name(self):
@@ -379,6 +379,31 @@ class ELN(models.Model):
                 'test_method':result.test_method.id
             })
         self.write({'state': '2-confirm'})
+
+
+    def reupdate_result(self):
+        sample = self.sample_id
+        # import wdb;wdb.set_trace()
+        # print(sample)
+        sample.parameters_result.unlink()
+        for result in self.parameters_result:
+            sample.parameters_result.create({
+                'sample_id':self.sample_id.id,
+                'parameter': result.parameter.id,
+                'result': result.result,
+                'unit':result.unit.id,
+                'specification':result.specification,
+                'test_method':result.test_method.id 
+            })
+        # for result in self.parameters_result:
+        #     self.env["sample.parameters.result"].create({
+        #         'sample_id':self.sample_id.id,
+        #         'parameter': result.parameter.id,
+        #         'result': result.result,
+        #         'unit':result.unit.id,
+        #         'specification':result.specification,
+        #         'test_method':result.test_method.id
+        #     })
         
 
 
@@ -616,21 +641,23 @@ class ParameteResultCalculationWizard(models.TransientModel):
 
     
     # old code imp
-    # def update_result(self):
-    #     # import wdb; wdb.set_trace()
-    #     result_id = self.env.context.get('result_id')
-    #     result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
-    #     self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
-    #     self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
-    #     for input in self.inputs_lines:
-    #         # import wdb; wdb.set_trace()
-    #         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
+    def update_result(self):
+        # import wdb; wdb.set_trace()
+        result_id = self.env.context.get('result_id')
+        result_id = self.env["eln.parameters.result"].search([('id','=',result_id)])
+        self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id'))])
+        self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
+        for input in self.inputs_lines:
+            # import wdb; wdb.set_trace()
+            self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
 
 
 
 
-    #     result_id.sudo().write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
-    #     return {'type': 'ir.actions.act_window_close'}
+        result_id.sudo().write({'result':self.result,'calculated':True,'nabl_status':self.nabl_status,'conformity_status':self.conformity_status})
+        return {'type': 'ir.actions.act_window_close'}
+    
+    
                 
     # def update_result(self):
     #     # Check if the result has already been updated
@@ -661,31 +688,31 @@ class ParameteResultCalculationWizard(models.TransientModel):
     #     return {'type': 'ir.actions.act_window_close', 'context': context}
 
 
-    def update_result(self):
-        if self.env.context.get('result_updated'):
-            return {'type': 'ir.actions.act_window_close'}
+    # def update_result(self):
+    #     if self.env.context.get('result_updated'):
+    #         return {'type': 'ir.actions.act_window_close'}
         
         
-        eln_id = self.env.context.get('eln_id')
-        result_id = self.env.context.get('result_id')
-        result = self.env["eln.parameters.result"].browse(result_id)
-        sample_id = self.env["lerm.eln"].browse(eln_id).sample_id.id
+    #     eln_id = self.env.context.get('eln_id')
+    #     result_id = self.env.context.get('result_id')
+    #     result = self.env["eln.parameters.result"].browse(result_id)
+    #     sample_id = self.env["lerm.eln"].browse(eln_id).sample_id.id
         
 
-        self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
-        for input in self.inputs_lines:
-            self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
+    #     self.env["eln.parameters.inputs"].sudo().search([('eln_id','=',self.env.context.get('eln_id')),('inputs.label','=',self.parameter.parameter_name)]).write({'value':self.result})
+    #     for input in self.inputs_lines:
+    #         self.env["eln.parameters.inputs"].search([('eln_id','=',self.env.context.get('eln_id')),('id','=',input.inputs_id.id)]).write({'value':input.value,'date_time':input.date_time})
 
-        sample_results = self.env['sample.parameters.result'].search([('sample_id','=',sample_id),('parameter', '=', result.parameter.id)])
-        if not sample_results.filtered(lambda r: r.result == self.result):
-            sample_results.write({'result': self.result})
+    #     sample_results = self.env['sample.parameters.result'].search([('sample_id','=',sample_id),('parameter', '=', result.parameter.id)])
+    #     if not sample_results.filtered(lambda r: r.result == self.result):
+    #         sample_results.write({'result': self.result})
         
-        result.write({'result': self.result, 'calculated': True, 'nabl_status': self.nabl_status, 'conformity_status': self.conformity_status})
+    #     result.write({'result': self.result, 'calculated': True, 'nabl_status': self.nabl_status, 'conformity_status': self.conformity_status})
 
-        context = dict(self.env.context)
-        context['result_updated'] = True
+    #     context = dict(self.env.context)
+    #     context['result_updated'] = True
 
-        return {'type': 'ir.actions.act_window_close', 'context': context}
+    #     return {'type': 'ir.actions.act_window_close', 'context': context}
     # def calculate(self):
     #     values = {}
     #     for input in self.inputs_lines:
