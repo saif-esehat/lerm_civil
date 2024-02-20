@@ -170,43 +170,7 @@
 						</thead>
 						<tbody>
 
-						    <tr t-if="data.combined_percentage_visible">
-								<td colspan="1" style="text-align: center;">
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
-								</td>
-								<!-- <td colspan="2" style="text-align: center;">
-									<span>
-									SiO2 + Al2O3 + Fe2O3 %
-									</span>
-									
-								</td> -->
-								<td colspan="2" style="text-align: center;vertical-align: middle;">
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_name"/>
-								</td>
-								
-								<td colspan="1" style="text-align: center;">
-									<span>
-										<span t-field="data.combined_percentage"/>
-									</span>									
-								</td>
-
-								<td colspan="1" style="text-align: center;">
-									<span>
-										<span t-field="data.siliceous15"/>
-									</span>									
-								</td>
-
-								<td colspan="2" style="text-align: center;">
-									<span>
-										<span t-field="data.calcareous15"/>
-									</span>									
-								</td>
-								
-								
-								
-							</tr>
-
+						   
 							<tr t-if="data.Silica_visible and (data.Silica_nabl == 'pass' and nabl or data.Silica_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -469,6 +433,116 @@
 								
 								
 							</tr>
+
+							<tr t-if="data.cao_visible and (data.cao_nabl == 'pass' and nabl or data.cao_nabl == 'fail' and not nabl)">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+									 Sulphur trioxide (SO3) %
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.cao"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous5"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous5"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+							<tr t-if="data.mgo_visible and (data.mgo_nabl == 'pass' and nabl or data.mgo_nabl == 'fail' and not nabl)">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+									 Sulphur trioxide (SO3) %
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.mgo"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous6"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous6"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+							 <tr t-if="data.combined_percentage_visible and (data.combined_percentage_nabl == 'pass' and nabl or data.combined_percentage_nabl == 'fail' and not nabl)">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+									SiO2 + Al2O3 + Fe2O3 %
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.combined_percentage"/>
+									</span>									
+								</td>
+
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.siliceous15"/>
+									</span>									
+								</td>
+
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="data.calcareous15"/>
+									</span>									
+								</td>
+								
+								
+								
+							</tr>
+
 							
 							
 						
