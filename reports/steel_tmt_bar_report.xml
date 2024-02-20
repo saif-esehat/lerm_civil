@@ -703,7 +703,7 @@
 								</td>
 							</tr>
 
-							<t t-if="i &lt;= 8">
+							<!-- <t t-if="i &lt;= 8"> -->
 							
 								<tr>
 									<td style="text-align: center;">
@@ -815,13 +815,12 @@
 
 									</td>
 								</tr>
-							</t>
+							<!-- </t> -->
 						</tbody>
 					</table>
 					<div style="page-break-before: always;">
 				
 								<t t-if="i > 8">
-									<!-- <div style="page-break-before: always;"></div> -->
 						<table>
 						<thead>
 							<tr>
@@ -851,12 +850,7 @@
 										<span t-esc="eln.material.specifications"/>
 									</span>
 								</th>
-								<!-- <th style="max-width: 200px; text-align: center;">
-									<span>
-										<span t-esc="eln.material.method_reference"/>
-										
-									</span>
-							    </th> -->
+								
 
 								<th t-if="eln.conformity" style="text-align: center; width: 10%;">
 									<span>

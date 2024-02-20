@@ -67,7 +67,7 @@
 
                      <!-- Water Absorption -->
 
-
+<!-- 
                     <group attrs="{'invisible': [('water_absorption_visible', '=', False)]}">
                         <h1>
                             <field name="water_absorption_name" readonly="1" nolabel="1"/>
@@ -177,7 +177,7 @@
                                            readonly="1"/>
                             <field  name="water_absorption_nabl"/>
                           </group>
-                    </group>
+                    </group> -->
                       <!--  Specific Gravity -->
 
 

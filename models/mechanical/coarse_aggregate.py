@@ -179,7 +179,7 @@ class CoarseAggregateMechanical(models.Model):
     soundness_na2so4_name = fields.Char("Name",default="Soundness Na2SO4")
     soundness_na2so4_visible = fields.Boolean("Soundness Na2SO4 Visible",compute="_compute_visible")
 
-    soundness_na2so4_child_lines = fields.One2many('mechanical.soundness.na2so4.line','parent_id',string="Parameter")
+    soundness_na2so4_child_lines = fields.One2many('mechanical.soundness.na2so4.line','parent_id',string="Parameter",default=lambda self: self._default_soundness_na2so4_child_lines())
     total_na2so4 = fields.Integer(string="Total",compute="_compute_total_na2so4")
     soundness_na2so4 = fields.Float(string="Soundness",compute="_compute_soundness_na2so4")
     
@@ -196,11 +196,23 @@ class CoarseAggregateMechanical(models.Model):
             record.soundness_na2so4 = round((sum(record.soundness_na2so4_child_lines.mapped('cumulative_loss_percent'))),2)
 
 
+    @api.model
+    def _default_soundness_na2so4_child_lines(self):
+        default_lines = [
+            (0, 0, {'sieve_size_passing': '63 mm', 'sieve_size_retained': '40 mm'}),
+            (0, 0, {'sieve_size_passing': '40 mm', 'sieve_size_retained': '20 mm'}),
+            (0, 0, {'sieve_size_passing': '20 mm', 'sieve_size_retained': '10 mm'}),
+            (0, 0, {'sieve_size_passing': '10 mm', 'sieve_size_retained': '4.75 mm'})
+           
+        ]
+        return default_lines
+
+
     # Soundness MgSO4
     soundness_mgso4_name = fields.Char("Name",default="Soundness MgSO4")
     soundness_mgso4_visible = fields.Boolean("Soundness MgSO4 Visible",compute="_compute_visible")
 
-    soundness_mgso4_child_lines = fields.One2many('mechanical.soundness.mgso4.line','parent_id',string="Parameter")
+    soundness_mgso4_child_lines = fields.One2many('mechanical.soundness.mgso4.line','parent_id',string="Parameter",default=lambda self: self._default_soundness_mgso4_child_lines())
     total_mgso4 = fields.Integer(string="Total",compute="_compute_total_mgso4")
     soundness_mgso4 = fields.Float(string="Soundness",compute="_compute_soundness_mgso4")
     
@@ -216,6 +228,18 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_soundness_mgso4(self):
         for record in self:
             record.soundness_mgso4 = round((sum(record.soundness_mgso4_child_lines.mapped('cumulative_loss_percent'))),2)
+    
+
+    @api.model
+    def _default_soundness_mgso4_child_lines(self):
+        default_lines = [
+            (0, 0, {'sieve_size_passing': '63 mm', 'sieve_size_retained': '40 mm'}),
+            (0, 0, {'sieve_size_passing': '40 mm', 'sieve_size_retained': '20 mm'}),
+            (0, 0, {'sieve_size_passing': '20 mm', 'sieve_size_retained': '10 mm'}),
+            (0, 0, {'sieve_size_passing': '10 mm', 'sieve_size_retained': '4.75 mm'})
+           
+        ]
+        return default_lines
 
 
     #Elongation Index
@@ -223,7 +247,7 @@ class CoarseAggregateMechanical(models.Model):
     elongation_visible = fields.Boolean("Elongation Visible",compute="_compute_visible")
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    elongation_child_lines = fields.One2many('mechanical.elongation.index.line','parent_id',string="Parameter")
+    elongation_child_lines = fields.One2many('mechanical.elongation.index.line','parent_id',string="Parameter", default=lambda self: self.default_elongation_sizes())
     wt_retained_total_elongation = fields.Float(string="Wt Retained Total",compute="_compute_wt_retained_total_elongation")
     elongated_retain_total = fields.Float(string="Elongated Retained Total",compute="_compute_elongated_retain")
     flaky_passing_total = fields.Float(string="Flaky Passing Total",compute="_compute_flaky_passing")
@@ -255,6 +279,29 @@ class CoarseAggregateMechanical(models.Model):
             else:
                 record.aggregate_elongation = 0.0
 
+    @api.model
+    def default_elongation_sizes(self):
+        default_lines = [
+            (0, 0, {'sieve_size': '63 mm'}),
+            (0, 0, {'sieve_size': '50 mm'}),
+            (0, 0, {'sieve_size': '40 mm'}),
+            (0, 0, {'sieve_size': '31.5 mm'}),
+            (0, 0, {'sieve_size': '25 mm'}),
+            (0, 0, {'sieve_size': '20 mm'}),
+            (0, 0, {'sieve_size': '16 mm'}),
+            (0, 0, {'sieve_size': '12.5 mm'}),
+            (0, 0, {'sieve_size': '10 mm'}),
+            (0, 0, {'sieve_size': '6.3 mm'}),
+            (0, 0, {'sieve_size': '4.75 mm'}),
+            (0, 0, {'sieve_size': '2.36 mm'}),
+            (0, 0, {'sieve_size': '1.18 mm'}),
+            (0, 0, {'sieve_size': 'Pan'}),
+            
+        ]
+        return default_lines   
+
+
+
 
     # @api.depends('wt_retained_total','flaky_passing_total')
     # def _compute_aggregate_flakiness(self):
@@ -278,7 +325,7 @@ class CoarseAggregateMechanical(models.Model):
     flakiness_visible = fields.Boolean("Flakiness Visible",compute="_compute_visible")
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    flakiness_child_lines = fields.One2many('mechanical.flakiness.index.line','parent_id',string="Parameter")
+    flakiness_child_lines = fields.One2many('mechanical.flakiness.index.line','parent_id',string="Parameter", default=lambda self: self.default_flakiness_sizes())
     wt_retained_total_flakiness = fields.Float(string="Wt Retained Total",compute="_compute_wt_retained_total_flakiness")
     flaky_passing_total = fields.Float(string="Flaky Passing Total",compute="_compute_flaky_passing")
     aggregate_flakiness = fields.Float(string="Aggregate Flakiness Value in %",compute="_compute_aggregate_flakiness")
@@ -312,6 +359,30 @@ class CoarseAggregateMechanical(models.Model):
                 record.combine_elongation_flakiness = record.aggregate_elongation + record.aggregate_flakiness
             else:
                 record.combine_elongation_flakiness = 0.0
+
+   
+    @api.model
+    def default_flakiness_sizes(self):
+        default_lines = [
+            (0, 0, {'sieve_size': '63 mm'}),
+            (0, 0, {'sieve_size': '50 mm'}),
+            (0, 0, {'sieve_size': '40 mm'}),
+            (0, 0, {'sieve_size': '31.5 mm'}),
+            (0, 0, {'sieve_size': '25 mm'}),
+            (0, 0, {'sieve_size': '20 mm'}),
+            (0, 0, {'sieve_size': '16 mm'}),
+            (0, 0, {'sieve_size': '12.5 mm'}),
+            (0, 0, {'sieve_size': '10 mm'}),
+            (0, 0, {'sieve_size': '6.3 mm'}),
+            (0, 0, {'sieve_size': '4.75 mm'}),
+            (0, 0, {'sieve_size': '2.36 mm'}),
+            (0, 0, {'sieve_size': '1.18 mm'}),
+            (0, 0, {'sieve_size': 'Pan'}),
+            
+        ]
+        return default_lines   
+
+
 
     # Deleterious Content
 
@@ -936,16 +1007,16 @@ class ElongationIndexLine(models.Model):
 
     
 
-    # @api.model
-    # def create(self, vals):
-    #     # Set the serial_no based on the existing records for the same parent
-    #     if vals.get('parent_id'):
-    #         existing_records = self.search([('parent_id', '=', vals['parent_id'])])
-    #         if existing_records:
-    #             max_serial_no = max(existing_records.mapped('sr_no'))
-    #             vals['sr_no'] = max_serial_no + 1
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
 
-    #     return super(FlakinessElongationIndexLine, self).create(vals)
+        return super(ElongationIndexLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines
@@ -976,6 +1047,17 @@ class FlakinessIndexLine(models.Model):
     #             vals['sr_no'] = max_serial_no + 1
 
     #     return super(FlakinessElongationIndexLine, self).create(vals)
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
+
+        return super(FlakinessIndexLine, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines

@@ -180,7 +180,7 @@ class FineAggregate(models.Model):
  
     # Specific Gravity
 
-    specific_gravity_name = fields.Char("Name",default="Specific Gravity")
+    specific_gravity_name = fields.Char("Name",default="Specific Gravity & Water Absorption")
     specific_gravity_visible = fields.Boolean("Specific Gravity Visible",compute="_compute_visible")
 
     wt_of_empty_pycnometer = fields.Integer(string="Weight of empty Pycnometer in gms")
@@ -279,100 +279,100 @@ class FineAggregate(models.Model):
 
     # Water Absorption
 
-    water_absorption_name = fields.Char("Name",default="Water Absorption")
-    water_absorption_visible = fields.Boolean("Water Absorption Visible",compute="_compute_visible")
+    # water_absorption_name = fields.Char("Name",default="Water Absorption")
+    # water_absorption_visible = fields.Boolean("Water Absorption Visible",compute="_compute_visible")
 
-    wt_of_empty_pycnometer1 = fields.Integer(string="Weight of empty Pycnometer in gms")
-    wt_of_pycnometer1 = fields.Integer(string="Weight of Pycnometer with full of water in gms")
-    wt_of_pycnometer_surface_dry1 = fields.Integer(string="Weight of Pycnometer + Saturated surface dry Aggregate in gms")
-    wt_of_pycnometer_surface_dry_water1 = fields.Integer(string="Weight of Pycnometer + Saturated surface dry Aggregate + Water in gms")
-    wt_of_saturated_surface_dry1 = fields.Integer(string="Weight of Saturated surface dry Aggregate in gms",compute='_compute_wt_of_saturated_surface_dry1')
-    wt_of_oven_dried1 = fields.Integer(string="Weight of Oven dried Aggregate in gms")
-    volume_of_water1 = fields.Integer(string="Volume of water displaced by saturated surface dry aggregate",compute="_compute_volume_of_water1")
-    specific_gravity1 = fields.Float(string="SPECIFIC GRAVITY", compute="_compute_specific_gravity1")
-    water_absorption1 = fields.Float(string="Water Absorption %",compute="_compute_water_absorption1")
+    # wt_of_empty_pycnometer1 = fields.Integer(string="Weight of empty Pycnometer in gms")
+    # wt_of_pycnometer1 = fields.Integer(string="Weight of Pycnometer with full of water in gms")
+    # wt_of_pycnometer_surface_dry1 = fields.Integer(string="Weight of Pycnometer + Saturated surface dry Aggregate in gms")
+    # wt_of_pycnometer_surface_dry_water1 = fields.Integer(string="Weight of Pycnometer + Saturated surface dry Aggregate + Water in gms")
+    # wt_of_saturated_surface_dry1 = fields.Integer(string="Weight of Saturated surface dry Aggregate in gms",compute='_compute_wt_of_saturated_surface_dry1')
+    # wt_of_oven_dried1 = fields.Integer(string="Weight of Oven dried Aggregate in gms")
+    # volume_of_water1 = fields.Integer(string="Volume of water displaced by saturated surface dry aggregate",compute="_compute_volume_of_water1")
+    # specific_gravity1 = fields.Float(string="SPECIFIC GRAVITY", compute="_compute_specific_gravity1")
+    # water_absorption1 = fields.Float(string="Water Absorption %",compute="_compute_water_absorption1")
 
-    water_absorption_conformity = fields.Selection([
-            ('pass', 'Pass'),
-            ('fail', 'Fail')], string="Conformity", compute="_compute_water_absorption_conformity", store=True)
+    # water_absorption_conformity = fields.Selection([
+    #         ('pass', 'Pass'),
+    #         ('fail', 'Fail')], string="Conformity", compute="_compute_water_absorption_conformity", store=True)
 
-    @api.depends('water_absorption1','eln_ref','grade')
-    def _compute_water_absorption_conformity(self):
+    # @api.depends('water_absorption1','eln_ref','grade')
+    # def _compute_water_absorption_conformity(self):
         
-        for record in self:
-            record.water_absorption_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    req_min = material.req_min
-                    req_max = material.req_max
-                    mu_value = line.mu_value
+    #     for record in self:
+    #         record.water_absorption_conformity = 'fail'
+    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')])
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).parameter_table
+    #         for material in materials:
+    #             if material.grade.id == record.grade.id:
+    #                 req_min = material.req_min
+    #                 req_max = material.req_max
+    #                 mu_value = line.mu_value
                     
-                    lower = record.water_absorption1 - record.water_absorption1*mu_value
-                    upper = record.water_absorption1 + record.water_absorption1*mu_value
-                    if lower >= req_min and upper <= req_max:
-                        record.water_absorption_conformity = 'pass'
-                        break
-                    else:
-                        record.water_absorption_conformity = 'fail'
+    #                 lower = record.water_absorption1 - record.water_absorption1*mu_value
+    #                 upper = record.water_absorption1 + record.water_absorption1*mu_value
+    #                 if lower >= req_min and upper <= req_max:
+    #                     record.water_absorption_conformity = 'pass'
+    #                     break
+    #                 else:
+    #                     record.water_absorption_conformity = 'fail'
 
-    water_absorption_nabl = fields.Selection([
-        ('pass', 'NABL'),
-        ('fail', 'Non-NABL')], string="NABL", compute="_compute_water_absorption_nabl", store=True)
+    # water_absorption_nabl = fields.Selection([
+    #     ('pass', 'NABL'),
+    #     ('fail', 'Non-NABL')], string="NABL", compute="_compute_water_absorption_nabl", store=True)
 
-    @api.depends('water_absorption1','eln_ref','grade')
-    def _compute_water_absorption_nabl(self):
+    # @api.depends('water_absorption1','eln_ref','grade')
+    # def _compute_water_absorption_nabl(self):
         
-        for record in self:
-            record.water_absorption_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
+    #     for record in self:
+    #         record.water_absorption_nabl = 'fail'
+    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')])
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).parameter_table
+    #         for material in materials:
+    #             if material.grade.id == record.grade.id:
+    #                 lab_min = line.lab_min_value
+    #                 lab_max = line.lab_max_value
+    #                 mu_value = line.mu_value
                     
-                    lower = record.water_absorption1 - record.water_absorption1*mu_value
-                    upper = record.water_absorption1 + record.water_absorption1*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.water_absorption_nabl = 'pass'
-                        break
-                    else:
-                        record.water_absorption_nabl = 'fail'
+    #                 lower = record.water_absorption1 - record.water_absorption1*mu_value
+    #                 upper = record.water_absorption1 + record.water_absorption1*mu_value
+    #                 if lower >= lab_min and upper <= lab_max:
+    #                     record.water_absorption_nabl = 'pass'
+    #                     break
+    #                 else:
+    #                     record.water_absorption_nabl = 'fail'
 
 
 
 
-    @api.depends('wt_of_pycnometer_surface_dry1', 'wt_of_empty_pycnometer1')
-    def _compute_wt_of_saturated_surface_dry1(self):
-        for line in self:
-            line.wt_of_saturated_surface_dry1 = line.wt_of_pycnometer_surface_dry1 - line.wt_of_empty_pycnometer1
+    # @api.depends('wt_of_pycnometer_surface_dry1', 'wt_of_empty_pycnometer1')
+    # def _compute_wt_of_saturated_surface_dry1(self):
+    #     for line in self:
+    #         line.wt_of_saturated_surface_dry1 = line.wt_of_pycnometer_surface_dry1 - line.wt_of_empty_pycnometer1
 
 
-    @api.depends('wt_of_pycnometer1', 'wt_of_empty_pycnometer1', 'wt_of_pycnometer_surface_dry1', 'wt_of_pycnometer_surface_dry_water1')
-    def _compute_volume_of_water1(self):
-        for line in self:
-            volume_of_water1 = (line.wt_of_pycnometer1 - line.wt_of_empty_pycnometer1) - (line.wt_of_pycnometer_surface_dry_water1 - line.wt_of_pycnometer_surface_dry1)
-            line.volume_of_water1 = volume_of_water1
+    # @api.depends('wt_of_pycnometer1', 'wt_of_empty_pycnometer1', 'wt_of_pycnometer_surface_dry1', 'wt_of_pycnometer_surface_dry_water1')
+    # def _compute_volume_of_water1(self):
+    #     for line in self:
+    #         volume_of_water1 = (line.wt_of_pycnometer1 - line.wt_of_empty_pycnometer1) - (line.wt_of_pycnometer_surface_dry_water1 - line.wt_of_pycnometer_surface_dry1)
+    #         line.volume_of_water1 = volume_of_water1
 
-    @api.depends('wt_of_oven_dried1', 'volume_of_water1')
-    def _compute_specific_gravity1(self):
-        for line in self:
-            if line.volume_of_water1:
-                line.specific_gravity1 = line.wt_of_oven_dried1 / line.volume_of_water1
-            else:
-                line.specific_gravity1 = 0.0
+    # @api.depends('wt_of_oven_dried1', 'volume_of_water1')
+    # def _compute_specific_gravity1(self):
+    #     for line in self:
+    #         if line.volume_of_water1:
+    #             line.specific_gravity1 = line.wt_of_oven_dried1 / line.volume_of_water1
+    #         else:
+    #             line.specific_gravity1 = 0.0
 
 
-    @api.depends('wt_of_saturated_surface_dry1', 'wt_of_oven_dried1')
-    def _compute_water_absorption1(self):
-        for line in self:
-            if line.wt_of_oven_dried1:
-                line.water_absorption1 = (line.wt_of_saturated_surface_dry1 - line.wt_of_oven_dried1) / line.wt_of_oven_dried1 * 100
-            else:
-                line.water_absorption1 = 0.0
+    # @api.depends('wt_of_saturated_surface_dry1', 'wt_of_oven_dried1')
+    # def _compute_water_absorption1(self):
+    #     for line in self:
+    #         if line.wt_of_oven_dried1:
+    #             line.water_absorption1 = (line.wt_of_saturated_surface_dry1 - line.wt_of_oven_dried1) / line.wt_of_oven_dried1 * 100
+    #         else:
+    #             line.water_absorption1 = 0.0
 
 
 
@@ -909,7 +909,7 @@ class FineAggregate(models.Model):
             record.loose_bulk_visible = False
             record.rodded_bulk_visible = False
             record.specific_gravity_visible = False
-            record.water_absorption_visible = False
+            record.specific_gravity_visible = False
             record.sieve_visible = False
             record.soundness_na2so4_visible = False
             record.soundness_mgso4_visible = False
@@ -932,7 +932,7 @@ class FineAggregate(models.Model):
                     record.specific_gravity_visible = True
 
                 if sample.internal_id == "f8088f5b-226c-42ce-a78a-572391879ab4":
-                    record.water_absorption_visible = True
+                    record.specific_gravity_visible = True
 
                 if sample.internal_id == "318d72a1-7188-4086-b132-62b50e63f5d1":
                     record.sieve_visible = True

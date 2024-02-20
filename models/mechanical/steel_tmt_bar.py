@@ -8,10 +8,12 @@ import re
 class SteelTmtBarLine(models.Model):
     _name = "steel.tmt.bar"
     _inherit = "lerm.eln"
+    _rec_name = "name"
    
     
     Id_no = fields.Char("ID No")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+    name = fields.Char("Name",default="STEEL TMT BAR")
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
     diameter = fields.Integer(string="Dia. in mm",compute="_compute_dia")
     lentgh = fields.Float(string="Length in meter",digits=(10, 3))
