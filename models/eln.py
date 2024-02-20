@@ -45,9 +45,9 @@ class ELN(models.Model):
 
     
     size_id = fields.Many2one('lerm.size.line',string="Size")
-    # size_ids = fields.Many2many('lerm.size.line',string="Size")
+    size_ids = fields.Many2many('lerm.size.line',string="Size", compute="compute_size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
-    # grade_ids = fields.Many2many('lerm.grade.line',string="Grades")
+    grade_ids = fields.Many2many('lerm.grade.line',string="Grades", compute="compute_grade")
 
     update_result = fields.Integer("Update Result")
     state = fields.Selection([
@@ -101,24 +101,24 @@ class ELN(models.Model):
 
     
     
-    # @api.onchange('material')
-    # def compute_grade(self):        
-    #     for record in self:
-    #         try:
-    #             if record.material:
-    #                 record.grade_ids = self.env['product.template'].search([('id','=', record.material.id)]).grade_table
-    #         except:
-    #             record.grade_ids = False
+    @api.depends('material')
+    def compute_grade(self):        
+        for record in self:
+            try:
+                if record.material:
+                    record.grade_ids = self.env['product.template'].search([('id','=', record.material.id)]).grade_table
+            except:
+                record.grade_ids = False
 
 
-    # @api.onchange('material')
-    # def compute_size(self):
-    #     for record in self:
-    #         try:
-    #             if record.material:
-    #                 record.size_ids = self.env['product.template'].search([('id','=', record.material.id)]).size_table
-    #         except:
-    #             record.size_ids = False
+    @api.depends('material')
+    def compute_size(self):
+        for record in self:
+            try:
+                if record.material:
+                    record.size_ids = self.env['product.template'].search([('id','=', record.material.id)]).size_table
+            except:
+                record.size_ids = False
 
     @api.onchange('witness')
     def update_witness_name(self):

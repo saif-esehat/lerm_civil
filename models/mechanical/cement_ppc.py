@@ -325,7 +325,7 @@ class CementPpc(models.Model):
     density_trial1 = fields.Float("Density (g/cm³)",compute="_compute_density_trial1")
     density_trial2 = fields.Float("Density (g/cm³)",compute="_compute_density_trial2")
 
-    average_density = fields.Float("Average",compute="_compute_density_average" ,digits=(16,1))
+    average_density = fields.Float("Average",compute="_compute_density_average" ,digits=(16,2))
 
     # average_density = fields.Float("Average",compute="_compute_density_average")
 
