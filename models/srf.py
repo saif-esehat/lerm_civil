@@ -53,9 +53,9 @@ class Discipline(models.Model):
     #     record.get_all_fields()
     #     return record
     
-    def get_all_fields(self):
-        # Your implementation to retrieve all fields goes here
-        pass
+    # def get_all_fields(self):
+    #     # Your implementation to retrieve all fields goes here
+    #     pass
     
 
 # class LabLocation(models.Model):

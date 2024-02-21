@@ -703,7 +703,7 @@
 								</td>
 							</tr>
 
-							<!-- <t t-if="i &lt;= 8"> -->
+							<t t-if="i &lt;= 8">
 							
 								<tr>
 									<td style="text-align: center;">
@@ -815,12 +815,12 @@
 
 									</td>
 								</tr>
-							<!-- </t> -->
+							</t>
 						</tbody>
 					</table>
 					<div style="page-break-before: always;">
 				
-								<t t-if="i > 8">
+						<t t-if="i > 8">
 						<table>
 						<thead>
 							<tr>
