@@ -829,6 +829,8 @@ class ELNParametersResult(models.Model):
     test_method = fields.Many2one('lerm_civil.test_method',string="Specification")
     specification_permissible_limit = fields.Text(string="Specification",compute='_compute_specification')
     specification = fields.Text(string="Test Method", compute='_compute_specification')
+
+
     nabl_status = fields.Selection([
         ('nabl', 'NABL'),
         ('non-nabl', 'Non-NABL')
@@ -863,6 +865,48 @@ class ELNParametersResult(models.Model):
         for record in self:
             record.calculation_type = record.parameter.calculation_type
 
+
+    # @api.depends('eln_id.material', 'eln_id.grade_id', 'eln_id.size_id','parameter')
+    # def _compute_specification(self):
+    #     for record in self:
+    #         # import wdb; wdb.set_trace()
+    #         material_id = record.eln_id.material.id
+    #         grade_id = record.eln_id.grade_id.id
+    #         size_id = record.eln_id.size_id.id
+    #         parameter_id = record.parameter.id
+    #         parameter = record.parameter
+
+    #         if parameter.fetch_by_grade and parameter.fetch_by_size and grade_id != False and size_id != False:
+    #             specification = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+    #         elif parameter.fetch_by_grade and grade_id != False:
+    #             specification = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+    #         elif parameter.fetch_by_size and size_id != False:
+    #             specification = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('parameter_id','=',parameter_id)]).specification
+    #         else:
+    #             specification = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+    #         print("specsi")
+    #         print(specification)
+    #         table_record = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])
+    #         try:
+    #             record.specification = specification
+    #         except:
+    #             record.specification = False
+
+    #         if parameter.fetch_by_grade and parameter.fetch_by_size and grade_id != False and size_id != False:
+    #             specification_permissible_limit = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+    #         elif parameter.fetch_by_grade and grade_id != False:
+    #             specification_permissible_limit = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+    #         elif parameter.fetch_by_size and size_id != False:
+    #             specification_permissible_limit = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('parameter_id','=',parameter_id)]).specification
+    #         else:
+    #             specification_permissible_limit = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+
+    #         try:
+    #             record.specification_permissible_limit = specification_permissible_limit
+    #         except:
+    #             record.specification_permissible_limit = False
+    #         print("permisss")
+    #         print(specification_permissible_limit)
 
     @api.depends('eln_id.material', 'eln_id.grade_id', 'eln_id.size_id','parameter')
     def _compute_specification(self):

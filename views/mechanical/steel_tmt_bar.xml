@@ -10,10 +10,9 @@
                 <sheet>
                    <group>
                        
-                        <h1>
-                            STEEL TMT BAR
-                        </h1>
+                       
                          <field name='eln_ref' readonly="1"/>
+                          <field name='name' readonly="1"/>
                     </group>
                          
                             <group>
