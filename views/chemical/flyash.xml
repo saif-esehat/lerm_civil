@@ -674,7 +674,7 @@
                                decoration-success="combined_percentage_conformity == 'pass'" 
                                decoration-danger="combined_percentage_conformity == 'fail'" 
                                readonly="1"/>
-                        <!-- <field name='combined_percentage_nabl'/> -->
+                        <field name='combined_percentage_nabl'/>
                     </group> 
 
                 <!-- </group> -->

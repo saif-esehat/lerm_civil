@@ -1043,7 +1043,7 @@ class ChemicalFlyAsh(models.Model):
     diff_chloride = fields.Float("Diff. in Burette readings = (A - B )",compute="_compute_diff_chloride")
     normality_chloride = fields.Float("Normarility of 0.025N NH₄SCN")
     wt_of_sample_chloride  = fields.Float("weight of sample (gm)")
-    chloride = fields.Float("Chloride % = C x D x 0.03545 x 100 / E",compute="_compute_chloride")
+    chloride = fields.Float("Chloride % = C x D x 0.03545 x 100 / E",compute="_compute_chloride",digits=(12,3))
 
     @api.depends('burette_reading_chloride', 'burette_reading_sample_chloride')
     def _compute_diff_chloride(self):
