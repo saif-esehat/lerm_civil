@@ -156,37 +156,41 @@
 										ID MARK/ Location
 									</span>
 								</th>
-								
 								<th style="text-align: center;font-weight: bold;">
 									<span>
-										Wt. of Cube in Kgs.
+										Length in mm
 									</span>
 								</th>
 								<th style="text-align: center;font-weight: bold;">
 									<span>
-										Crushing Load in KN
+										Width in mm
+									</span>
+								</th>
+								<th style="text-align: center;font-weight: bold;">
+									<span>
+										Area in mm2
+									</span>
+								</th>
+								
+								
+								<th style="text-align: center;font-weight: bold;">
+									<span>
+										Weight of Sample in kgs
+									</span>
+								</th>
+								<th style="text-align: center;font-weight: bold;">
+									<span>
+										Crushing Load in kN
+
 									</span>
 								</th>
 								<th>
 									<span>
-										COMPRESSIVE STRENGTH  (N/mm2)
+										Compressive Strength in N/mm2
+
 									</span>
 								</th>
-                                <!-- <th  style="text-align: center; font-weight: bold;">
-									<span>
-										AVG.COMPRESSIVE STRENGTH (N/mm2)
-									</span>
-								</th>
-                                 <th  style="text-align: center; font-weight: bold;">
-									<span>
-										ACT Compressive (N/mm2)
-									</span>
-								</th> -->
-								<!-- <th style="max-width: 250px; text-align: center;">
-									<span>
-										<span t-esc="eln.material.specifications"/>
-									</span>
-								</th> -->
+                              
 							
 							</tr>
 						</thead>
@@ -203,15 +207,24 @@
 										<td style="text-align: center;">
 											<span t-esc="line.id_mark"/>
 										</td>
+										<td style="text-align: center;">
+											<span t-esc="line.length" t-options='{"widget": "float", "precision": 2}'/>
+										</td>
+										<td style="text-align: center;">
+											<span t-esc="line.width" t-options='{"widget": "float", "precision": 2}'/>
+										</td>
+										<td style="text-align: center;">
+											<span t-esc="line.area" t-options='{"widget": "float", "precision": 2}'/>
+										</td>
 									
 										<td style="text-align: center;">
-											<span t-esc="line.weight_sample"/>
+											<span t-esc="line.weight_sample" t-options='{"widget": "float", "precision": 3}'/>
 										</td>
 										<td style="text-align: center;">
-											<span t-esc="line.crushing_load"/>
+											<span t-esc="line.crushing_load" t-options='{"widget": "float", "precision": 1}'/>
 										</td>
 										<td style="text-align: center;">
-											<span t-esc="line.compressive_strength"/>
+											<span t-esc="line.compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
 										</td>
 										
 										
@@ -229,13 +242,17 @@
 					<div style="margin-top:10px">
 						<table>
 							<tr > 
-								<td colspan="12">AVG.COMPRESSIVE STRENGTH (N/mm2) :<![CDATA[&nbsp;]]>
-									<span t-field="data.average_compr_strength"/>
+								<td colspan="12">Avg.Compressive strength (N/mm2) :<![CDATA[&nbsp;]]>
+								</td>
+								<td>
+									<span t-field="data.average_compr_strength" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 							<tr> 
-								<td colspan="12">ACT Compressive (N/mm2) :<![CDATA[&nbsp;]]>
-									<span t-field="data.act_compressive"/>
+								<td colspan="12"> Compressive strength by ACT (N/mm2) :<![CDATA[&nbsp;]]>
+								</td>
+								<td>
+									<span t-field="data.act_compressive" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 							

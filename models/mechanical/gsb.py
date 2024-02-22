@@ -121,7 +121,7 @@ class GsbMechanical(models.Model):
                         line.write({'cumulative_retained': round(line.percent_retained + line.percent_retained,2)})
                         line.write({'passing_percent': round(100 -line.percent_retained - line.percent_retained,2)})
                 else:
-                    previous_line_record = self.env['mech.dry.gradation.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+                    previous_line_record = self.env['mech.gsb.dry.gradation.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
                     line.write({'cumulative_retained': round(previous_line_record + line.percent_retained,2)})
                     line.write({'passing_percent': round(100-(previous_line_record + line.percent_retained),2)})
                     print("Previous Cumulative",previous_line_record)
@@ -130,11 +130,25 @@ class GsbMechanical(models.Model):
     
 
 
+    # @api.depends('dry_gradation_table.wt_retained')
+    # def _compute_total_sieve(self):
+    #     for record in self:
+    #         print("recordd",record)
+    #         record.total_sieve_analysis = sum(record.dry_gradation_table.mapped('wt_retained'))
+                    
+    # @api.depends('dry_gradation_table.wt_retained')
+    # def _compute_total_sieve(self):
+    #     for record in self:
+    #         total = sum(record.dry_gradation_table.mapped('wt_retained'))
+    #         record.total_sieve_analysis = Decimal(str(total))
     @api.depends('dry_gradation_table.wt_retained')
     def _compute_total_sieve(self):
         for record in self:
-            print("recordd",record)
-            record.total_sieve_analysis = sum(record.dry_gradation_table.mapped('wt_retained'))
+            total = sum(record.dry_gradation_table.mapped('wt_retained'))
+            record.total_sieve_analysis = round(total)
+
+
+   
 
     def default_get(self, fields):
         print("From Default Value")
@@ -142,7 +156,7 @@ class GsbMechanical(models.Model):
 
         default_dry_sieve_sizes = []
         default_elongated_sieve_sizes = []
-        dry_sieve_sizes = ['75 mm', '53 mm','26.5 mm', '9.50 mm', '4.75 mm','2.36 mm','425 micron','75 micron','pan']
+        dry_sieve_sizes = ['53 mm','26.5 mm', '9.5 mm', '4.75 mm','2.36 mm','850 mic','425 mic','75 mic','pan']
         elongation_sieve_sizes = ['63 mm', '50 mm', '40 mm', '31.5 mm', '25 mm','20 mm','16 mm','12.5 mm','10 mm','6.3 mm']
 
 

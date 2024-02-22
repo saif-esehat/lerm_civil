@@ -84,8 +84,8 @@ class ActCompressiveStrengthLine(models.Model):
     width = fields.Float(string="Width")
     area = fields.Float(string="Area mm2", compute="_compute_area", store=True,digits=(12,2))  # Added store=True
     id_mark = fields.Char(string="Id Mark")
-    weight_sample = fields.Float(string="Weight of Sample in kgs")
-    crushing_load = fields.Float(string="Crushing Load in kN")
+    weight_sample = fields.Float(string="Weight of Sample in kgs",digits=(12,3))
+    crushing_load = fields.Float(string="Crushing Load in kN",digits=(12,1))
     compressive_strength = fields.Float(string="Compressive Strength in N/mm2", compute="_compute_compressive_strength",digits=(12,2))
 
     @api.depends('length', 'width')
