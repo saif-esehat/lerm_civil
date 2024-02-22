@@ -172,6 +172,14 @@
         </field>
 
     </record>
+
+    <record id="lerm_srf_reports_action" model="ir.actions.act_window">
+            <field name="name">SRF Reports</field>
+            <field name="type">ir.actions.act_window</field>    
+            <field name="res_model">srf.reports.wizard</field>
+            <field name="view_mode">form</field>
+            
+    </record>
     
     <menuitem id="lerm_root"
         groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by"
@@ -197,6 +205,19 @@
         groups="kes_technician_access_group,kes_admin_access_group"
         parent="lerm_root"
         sequence="20"  />
+
+    <!-- <menuitem id="reporting_menu"
+        name="Reporting"
+        parent="lerm_root" 
+        sequence="25"  />
+
+    <menuitem id="lerm_srf_reporting"
+        parent="lerm_menu"
+        name="SRF"
+        parent="reporting_menu"
+        action="lerm_srf_reports_action"
+        sequence="10" /> -->
+
 
     <menuitem id="lerm_product_item_param_master"
         parent="lerm_menu"

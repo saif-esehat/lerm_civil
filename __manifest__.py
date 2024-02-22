@@ -207,6 +207,7 @@
     'reports/act/act_datasheet.xml',
     'reports/act/act_report.xml',
     
+    'views/wizards/srf_reports_wizard.xml',
     
  
 
