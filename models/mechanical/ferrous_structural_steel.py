@@ -9,10 +9,12 @@ from decimal import Decimal, ROUND_HALF_UP
 class FerrousStructuralSteel(models.Model):
     _name = "ferrous.structural.steel"
     _inherit = "lerm.eln"
+    _rec_name = "name"
    
     
    
     Id_no = fields.Char("ID No")
+    name = fields.Char("Name",default="Ferrous Structural Steel")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
     width = fields.Float(string="Width mm")

@@ -163,7 +163,7 @@
                                 </td>
 								<td style="text-align: center; vertical-align: middle;">
 									<span>
-										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b4aa7f04-295b-48fe-b3f2-c31b6582a4d')]).unit.name"/>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b4aa7f04-295b-48fe-b3f2-c31b6582a4d5')]).unit.name"/>
 									</span>
 								</td>
 								<td style="text-align: center;">

@@ -10,9 +10,7 @@
                 <sheet>
                    <group>
                         <field name='eln_ref' invisible="1"/>
-                        <h1>
-                             Structural Steel Round
-                        </h1>
+                        <field name='name' readonly="1"/>
                     </group>
                          
                            

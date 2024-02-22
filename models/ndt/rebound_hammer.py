@@ -75,7 +75,7 @@ class CarbonationnLine(models.Model):
     # f9 = fields.Integer(string="9")
     # f10 = fields.Integer(string="10")
     avg = fields.Float(string="Average" ,compute="_compute_average")
-    mpa = fields.Integer(string="Mpa")
+    mpa = fields.Float(string="Mpa")
     direction = fields.Selection([
         ('horizontal', 'Horizontal'),
         ('vertical_up', 'Vertical Up'), 

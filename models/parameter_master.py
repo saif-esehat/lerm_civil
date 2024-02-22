@@ -35,6 +35,9 @@ class ParameterMaster(models.Model):
     dependent_inputs = fields.One2many("lerm.dependent.inputs","parameter_id",string="Inputs")
     formula = fields.Text("Formula")
     material = fields.Many2one('product.template',string="Material")
+
+    fetch_by_grade = fields.Boolean("Fetch by Grade",default="True")
+    fetch_by_size = fields.Boolean("Fetch by Size",default="True")
     
     fetch_by_grade = fields.Boolean("Fetch by Grade", default=True)
     fetch_by_size = fields.Boolean("Fetch by Size", default=True)

@@ -113,89 +113,91 @@
 						<u>Protocol</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 						IS 516(Part2 / Sec1)<![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>2018
 					</div> -->
-					<div style="margin-top:20px;">
+					<div style="margin-top:10px;">
 						<span t-esc="eln.material.test_parameter"/>
 					</div>
 
-					<div style="margin-top:20px">
-						<table style="margin-top:20px">
-						<div>
-                           <h6> <span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_name"/></h6>
-						</div>
-
-							
-
-							<tr cols="12">
-								<td style="text-align: center;">Sr no 
-								</td>
-								<td style="text-align: center;">Sample Id Mark
-								</td>
-								<td style="text-align: center;">Observation
-								</td>
-								<!-- <td colspan="5">Requirement
-								</td> -->
-								<th style="max-width: 250px; text-align: center;">
-									<span>
-										<span t-esc="eln.material.unit"/>
-									</span>
-								</th>
-								<th style="max-width: 250px; text-align: center;">
-									<span>
-										<span t-esc="eln.material.specifications"/>
-									</span>
-								</th>
-								<th  style="max-width: 200px; text-align: center;">
-									<span>
-										<span t-esc="eln.material.method_reference"/>
-										
-									</span>
-							    </th>
-								
-							</tr>
-
-							<t t-set="i" t-value="0"/>
-							<tr t-foreach="data.child_lines" t-as="r">
-								<td style="text-align: center;">
-									<div>
-										<span t-esc="i + 1" />
-										<t t-set="i" t-value="i+1"/>
-									</div>
-                  				</td>
-								<td style="text-align: center;">
-									<span t-esc="r['sample']"/>
-								</td>
-								<td style="text-align: center;">
-									<span t-esc="r['average']"/>
-								</td>
-								 <td style="text-align: center; vertical-align: middle;">
-								        <span>
-											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).unit.name"/>
-										</span>
-								   </td>
-							
-								 <td  style="text-align: center; vertical-align: middle;">
-                                        <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                            </t>
-                                        </t>
-                                    </td>
-									 <td  style="text-align: center; vertical-align: middle;">
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table" t-as="parameter">
-										<t t-if="parameter.grade.id == eln.grade_id.id">
-											<span t-field="parameter.specification"/>
-										</t>
-									</t>
-								   </td>
-								<!-- <td t-if="eln.conformity">
-                                        <span t-esc="data.wpt_conformity"/>
-                                </td>
-								 -->
-								
-							</tr>
-							
-						</table>
+					<div>
+						<h6> <span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_name"/></h6>
 					</div>
+					<t t-if="len(data.child_lines) &lt;= o.sample_id.page_break">
+						<div style="margin-top:10px">
+							<table style="margin-top:10px">
+
+								
+
+								<tr cols="12">
+									<td style="text-align: center;">Sr no 
+									</td>
+									<td style="text-align: center;">Sample Id Mark
+									</td>
+									<td style="text-align: center;">Observation
+									</td>
+									<!-- <td colspan="5">Requirement
+									</td> -->
+									<th style="max-width: 250px; text-align: center;">
+										<span>
+											<span t-esc="eln.material.unit"/>
+										</span>
+									</th>
+									<th style="max-width: 250px; text-align: center;">
+										<span>
+											<span t-esc="eln.material.specifications"/>
+										</span>
+									</th>
+									<th  style="max-width: 200px; text-align: center;">
+										<span>
+											<span t-esc="eln.material.method_reference"/>
+											
+										</span>
+									</th>
+									
+								</tr>
+
+								<t t-set="i" t-value="0"/>
+								<tr t-foreach="data.child_lines" t-as="r">
+									<td style="text-align: center;">
+										<div>
+											<span t-esc="i + 1" />
+											<t t-set="i" t-value="i+1"/>
+										</div>
+									</td>
+									<td style="text-align: center;">
+										<span t-esc="r['sample']"/>
+									</td>
+									<td style="text-align: center;">
+										<span t-esc="r['average']"/>
+									</td>
+										<td style="text-align: center; vertical-align: middle;">
+											<span>
+												<span t-field="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).unit.name"/>
+											</span>
+										</td>
+								
+										<td  style="text-align: center; vertical-align: middle;">
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+										</td>
+											<td  style="text-align: center; vertical-align: middle;">
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','92a72eba-0268-46ef-ba88-9c04558006ec')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.specification"/>
+											</t>
+										</t>
+										</td>
+									<!-- <td t-if="eln.conformity">
+											<span t-esc="data.wpt_conformity"/>
+									</td>
+										-->
+									
+								</tr>
+								
+							</table>
+						</div>
+					</t>
 
 					
 					
@@ -287,7 +289,7 @@
 						<!-- <div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div> -->
-						<div style="margin-top: 50px; text-align: center;">
+						<div style="margin-top: 30px; text-align: center;">
 							<p style="border-top: 1px dashed #000; padding-top: 10px;">
 								...... End Of Report......
 							</p>

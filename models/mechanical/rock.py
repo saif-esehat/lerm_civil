@@ -66,7 +66,7 @@ class MechanicalRock(models.Model):
     
     #usc
     # parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    usc_name1 = fields.Char("Name",default="USC")
+    usc_name = fields.Char("Name",default="UCS")
     usc_visible = fields.Boolean("USC Visible",compute="_compute_visible")
     child_lines1 = fields.One2many('mechanical.usc.line','parent_id',string="Parameter")
     
@@ -151,14 +151,14 @@ class MechanicalRockLine(models.Model):
     sr_no = fields.Integer(string="Specimen NO.", readonly=True, copy=False, default=1)
     # location = fields.Char(string="Location")
     # sample_no = fields.Char(string="Sample Number")
-    depth = fields.Float(string="Depth in (mtr)")
+    depth = fields.Char(string="Depth in (mtr)", size=100) 
     ssd_weight = fields.Float(string="SSD weight of sample in kg, Msat",digits=(16, 3))
     wt_sample_water = fields.Float(string="Weight of sample in water in kg, Msub",digits=(16, 3))
     oven_dry_wt = fields.Float(string="Oven dry weight of sample in kg, Ms",digits=(16, 3))
     porosity = fields.Float(string="Porosity",compute="_compute_porosity")
     water_absorption = fields.Float(string="Water Absorption",compute="_compute_water_absorption")
-    dry_density = fields.Float(string="Dry Density",compute="_compute_dry_density",digits=(16, 3))
-    saturated_spc_gravity = fields.Float(string="Saturated Specific Gravity",compute="_compute_saturated_spc_gravity")
+    dry_density = fields.Float(string="Dry Density",compute="_compute_dry_density",digits=(16, 2))
+    saturated_spc_gravity = fields.Float(string="Saturated Specific Gravity",compute="_compute_saturated_spc_gravity",digits=(16, 2))
 
     @api.depends('ssd_weight', 'wt_sample_water', 'oven_dry_wt')
     def _compute_porosity(self):
@@ -178,21 +178,37 @@ class MechanicalRockLine(models.Model):
             else:
                 record.water_absorption = 0.0
 
-    @api.depends('wt_sample_water', 'wt_sample_water', 'oven_dry_wt')
+    # @api.depends('wt_sample_water', 'wt_sample_water', 'oven_dry_wt')
+    # def _compute_dry_density(self):
+    #     for record in self:
+    #         if record.ssd_weight and record.wt_sample_water and record.oven_dry_wt:
+    #             record.dry_density = record.oven_dry_wt / record.ssd_weight - record.wt_sample_water
+    #         else:
+    #             record.dry_density = 0.0
+                
+    @api.depends('ssd_weight', 'wt_sample_water', 'oven_dry_wt')
+    def _compute_saturated_spc_gravity(self):
+        for record in self:
+            if record.ssd_weight and record.wt_sample_water and record.oven_dry_wt:
+                record.saturated_spc_gravity = record.oven_dry_wt / (record.ssd_weight - record.wt_sample_water)
+            else:
+                record.saturated_spc_gravity = 0.0
+
+    # @api.depends('oven_dry_wt','dry_density')
+    # def _compute_saturated_spc_gravity(self):
+    #     for record in self:
+    #         if record.dry_density != 0:
+    #             record.saturated_spc_gravity = record.oven_dry_wt/record.dry_density
+    #         else:
+    #             record.saturated_spc_gravity = 0.0
+                
+    @api.depends('ssd_weight', 'wt_sample_water', 'oven_dry_wt')
     def _compute_dry_density(self):
         for record in self:
             if record.ssd_weight and record.wt_sample_water and record.oven_dry_wt:
-                record.dry_density = record.oven_dry_wt / record.ssd_weight - record.wt_sample_water
+                record.dry_density = record.oven_dry_wt / (record.ssd_weight - record.wt_sample_water)
             else:
                 record.dry_density = 0.0
-
-    @api.depends('oven_dry_wt','dry_density')
-    def _compute_saturated_spc_gravity(self):
-        for record in self:
-            if record.dry_density != 0:
-                record.saturated_spc_gravity = record.oven_dry_wt/record.dry_density
-            else:
-                record.saturated_spc_gravity = 0.0
 
     @api.model
     def create(self, vals):
@@ -219,12 +235,12 @@ class MechanicalUSCLine(models.Model):
     
     location = fields.Char(string="Location")
     sr_no = fields.Integer(string="Sample NO.", readonly=True, copy=False, default=1)
-    depth = fields.Float(string="Depth in (mtr)")
+    depth = fields.Char(string="Depth in (mtr)")
     diameter = fields.Float(string="Dia. in mm")
     length = fields.Float(string="Length in mm")
     ld_ratio = fields.Float(string="L/D ratio",compute="_compute_ld_ratio")
-    area = fields.Float(string="Area in mm2",compute="_compute_area",digits=(16,1))
-    load = fields.Float(string="Load in KN")
+    area = fields.Float(string="Area in mm2",compute="_compute_area",digits=(16,2))
+    load = fields.Float(string="Load in KN",digits=(16,2))
     usc = fields.Float(string="UCS in N/mm2",compute="_compute_usc")
 
 
@@ -237,19 +253,23 @@ class MechanicalUSCLine(models.Model):
                 record.ld_ratio = 0
 
 
-    @api.depends('length')
+    # @api.depends('length')
+    # def _compute_area(self):
+    #     for record in self:
+    #         record.area = (3.143 )* (record.length * record.length) / 4
+                
+    @api.depends('diameter')
     def _compute_area(self):
         for record in self:
-            record.area = (3.143 )* (record.length * record.length) / 4
-
+            record.area = (3.14 * record.diameter * record.diameter) / 4  # Round the result to 2 decimal places
+    
     @api.depends('load', 'area')
     def _compute_usc(self):
         for record in self:
             if record.area != 0:
-                record.usc = (record.load * 1000) / record.area
+                record.usc = round((record.load / record.area) * 1000, 2)  # Round the result to 2 decimal places
             else:
-                record.usc = 0
-
+                record.usc = 0.0
 
 
     @api.model

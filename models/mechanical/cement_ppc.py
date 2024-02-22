@@ -325,7 +325,7 @@ class CementPpc(models.Model):
     density_trial1 = fields.Float("Density (g/cm³)",compute="_compute_density_trial1")
     density_trial2 = fields.Float("Density (g/cm³)",compute="_compute_density_trial2")
 
-    average_density = fields.Float("Average",compute="_compute_density_average" ,digits=(16,1))
+    average_density = fields.Float("Average",compute="_compute_density_average" ,digits=(16,2))
 
     # average_density = fields.Float("Average",compute="_compute_density_average")
 
@@ -407,7 +407,7 @@ class CementPpc(models.Model):
 
     @api.depends('density_trial1','density_trial2')
     def _compute_density_average(self):
-        average_density = round((self.density_trial1 + self.density_trial2)/2,1)
+        average_density = round((self.density_trial1 + self.density_trial2)/2,2)
         self.average_density = average_density
 
     # Density End  

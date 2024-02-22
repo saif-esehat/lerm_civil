@@ -47,6 +47,15 @@ class Discipline(models.Model):
         record.get_all_fields()
         # record.eln_ref.write({'model_id':record.id})
         return record
+    # @api.model
+    # def create(self, vals):
+    #     record = super(Discipline, self).create(vals)
+    #     record.get_all_fields()
+    #     return record
+    
+    # def get_all_fields(self):
+    #     # Your implementation to retrieve all fields goes here
+    #     pass
     
 
 # class LabLocation(models.Model):

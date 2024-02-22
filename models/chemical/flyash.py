@@ -1043,7 +1043,7 @@ class ChemicalFlyAsh(models.Model):
     diff_chloride = fields.Float("Diff. in Burette readings = (A - B )",compute="_compute_diff_chloride")
     normality_chloride = fields.Float("Normarility of 0.025N NH₄SCN")
     wt_of_sample_chloride  = fields.Float("weight of sample (gm)")
-    chloride = fields.Float("Chloride % = C x D x 0.03545 x 100 / E",compute="_compute_chloride")
+    chloride = fields.Float("Chloride % = C x D x 0.03545 x 100 / E",compute="_compute_chloride",digits=(12,3))
 
     @api.depends('burette_reading_chloride', 'burette_reading_sample_chloride')
     def _compute_diff_chloride(self):
@@ -1151,30 +1151,30 @@ class ChemicalFlyAsh(models.Model):
                     else:
                         record.combined_percentage_conformity = 'fail'
 
-    # combined_percentage_nabl = fields.Selection([
-    #     ('pass', 'NABL'),
-    #     ('fail', 'Non-NABL')], string="NABL", compute="_compute_combined_percentage_nabl", store=True)
+    combined_percentage_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_combined_percentage_nabl", store=True)
 
-    # @api.depends('combined_percentage','eln_ref','grade')
-    # def _compute_combined_percentage_nabl(self):
+    @api.depends('combined_percentage','eln_ref','grade')
+    def _compute_combined_percentage_nabl(self):
         
-    #     for record in self:
-    #         record.combined_percentage_nabl = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
-    #         for material in materials:
-    #             if material.grade.id == record.grade.id:
-    #                 lab_min = line.lab_min_value
-    #                 lab_max = line.lab_max_value
-    #                 mu_value = line.mu_value
+        for record in self:
+            record.combined_percentage_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
                     
-    #                 lower = record.combined_percentage - record.combined_percentage*mu_value
-    #                 upper = record.combined_percentage + record.combined_percentage*mu_value
-    #                 if lower >= lab_min and upper <= lab_max:
-    #                     record.combined_percentage_nabl = 'pass'
-    #                     break
-    #                 else:
-    #                     record.combined_percentage_nabl = 'fail'
+                    lower = record.combined_percentage - record.combined_percentage*mu_value
+                    upper = record.combined_percentage + record.combined_percentage*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.combined_percentage_nabl = 'pass'
+                        break
+                    else:
+                        record.combined_percentage_nabl = 'fail'
 
 
 

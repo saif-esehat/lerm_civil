@@ -17,6 +17,8 @@
                             attrs="{'invisible': [('state', 'not in', ('1-allotment_pending'))]}"
                             groups="lerm_civil.kes_job_allocation,lerm_civil.kes_hod_access_group,lerm_civil.kes_verified_by,lerm_civil.kes_quality_manager"
                             />
+                        
+                        
 
                         <button
                             type="object"
@@ -285,6 +287,7 @@
             <tree default_order='create_date desc' create="false">
               <header>
                     <button type="object" class="oe_highlight" name="open_sample_allotment_wizard"  string="Bulk Allotment" />
+                    <button type="object" class="oe_highlight" name="reallocate_sample"  string="ReAllotment" />
                 </header>
                       <field name="sample_received_date" optional="show"/>
                       <field name='kes_no' width="400px"/>

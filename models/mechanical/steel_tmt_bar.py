@@ -8,10 +8,12 @@ import re
 class SteelTmtBarLine(models.Model):
     _name = "steel.tmt.bar"
     _inherit = "lerm.eln"
+    _rec_name = "name"
    
     
     Id_no = fields.Char("ID No")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+    name = fields.Char("Name",default="STEEL TMT BAR")
     size = fields.Many2one('lerm.size.line',string="Size",compute="_compute_size_id",store=True)
     diameter = fields.Integer(string="Dia. in mm",compute="_compute_dia")
     lentgh = fields.Float(string="Length in meter",digits=(10, 3))
@@ -477,6 +479,9 @@ class SteelTmtBarLine(models.Model):
         for record in self:
             if record.lentgh != 0:
                 record.weight_per_meter = record.weight / record.lentgh
+                # to be removed
+                self._compute_sample_parameters()
+
             else:
                 record.weight_per_meter = 0.0
 
@@ -553,8 +558,17 @@ class SteelTmtBarLine(models.Model):
         # record.get_all_fields()
         self._compute_size_id()
         self._compute_grade_id()
+        self._compute_sample_parameters()
         record.eln_ref.write({'model_id':record.id})
         return record
+
+    def read(self, fields=None, load='_classic_read'):
+
+        self._compute_sample_parameters()
+        self._compute_visible()
+        self._compute_size_id()
+        self._compute_grade_id()
+        return super(SteelTmtBarLine, self).read(fields=fields, load=load)
 
 
     @api.depends('eln_ref')
@@ -586,7 +600,18 @@ class SteelTmtBarLine(models.Model):
                  
 
 
-    
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
+        # return {'type': 'ir.actions.client', 'tag': 'history_back'}
 
     
 

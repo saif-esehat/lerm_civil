@@ -64,7 +64,7 @@
                     <!-- USC -->
                     <group attrs="{'invisible': [('usc_visible', '=', False)]}">
                         <h1>
-                            <field name="usc_name1" readonly="1" nolabel="1"/>
+                            <field name="usc_name" readonly="1" nolabel="1"/>
                             <field name="usc_visible" invisible="1"/>
                         </h1>
                     </group>

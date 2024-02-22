@@ -13,7 +13,7 @@ class Upv(models.Model):
     eln_ref = fields.Many2one("lerm.eln")
     name = fields.Char("Name",default="UPV")
     
-    structure_age = fields.Char("Approximate Age of structure  Years")
+    structure = fields.Char("Approximate Age of structure  Years")
     temperature = fields.Float("Concrete Temp °C",required=True)
     concrete_grade = fields.Char("Concrete Grade")
     instrument = fields.Char("Instrument")
@@ -126,13 +126,18 @@ class UpvLine(models.Model):
             string2 = self.parent_id.grade_id.grade
             print("String 2:", string2)  # Add this line for debugging
             
-            if string2:  # Check if string2 is not None or empty
+            if string2 and string2 != '--' :  # Check if string2 is not None or empty
                 numeric_part1 = self.extract_number_from_string(string1)
                 numeric_part2 = self.extract_number_from_string(string2)
                 print("Numeric Part 2:", numeric_part2)  # Add this line for debugging
-
+                
+                print(type(numeric_part1))
+                print(type(numeric_part2))
+                print(type(record.velocity))                
+                
                 if record.velocity > 4.5:
                     record.quality = 'excellent'
+            
                 elif numeric_part1 > numeric_part2 and 3.5 <= record.velocity <= 4.5:
                     record.quality = 'good'
                 elif numeric_part1 < numeric_part2 and 3.75 <= record.velocity <= 4.5:

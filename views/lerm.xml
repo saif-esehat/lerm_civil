@@ -178,6 +178,8 @@
             <field name="type">ir.actions.act_window</field>    
             <field name="res_model">srf.reports.wizard</field>
             <field name="view_mode">form</field>
+            <!-- <field name="view_id" ref="sample_reallocation_wizard"/> -->
+
             
     </record>
     
@@ -206,17 +208,16 @@
         parent="lerm_root"
         sequence="20"  />
 
-    <!-- <menuitem id="reporting_menu"
+    <menuitem id="reporting_menu"
         name="Reporting"
         parent="lerm_root" 
         sequence="25"  />
 
     <menuitem id="lerm_srf_reporting"
-        parent="lerm_menu"
         name="SRF"
         parent="reporting_menu"
         action="lerm_srf_reports_action"
-        sequence="10" /> -->
+        sequence="10" />
 
 
     <menuitem id="lerm_product_item_param_master"

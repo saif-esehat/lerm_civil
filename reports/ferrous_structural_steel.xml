@@ -588,9 +588,9 @@
 							</t>
 						</tbody>
 					</table>
-					<div style="page-break-before: always;">
+				<div style="page-break-before: always;">
 					
-					<t t-if="i > 6">
+				  <t t-if="i > 6">
 					<!-- <div style="page-break-before: always;"></div> -->
 						
 						<table>
@@ -776,7 +776,7 @@
 							......End of Report......
 					</div>
 				</div>
-				</div>
+		</div>
 
 				<!-- </div> -->
 			</t>
