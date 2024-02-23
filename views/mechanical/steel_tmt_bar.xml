@@ -7,6 +7,7 @@
         <field name="model">steel.tmt.bar</field>
         <field name="arch" type="xml">
             <form>
+
                 <sheet>
                    <group>
                        
@@ -182,6 +183,13 @@
                                 <field name="fracture_visible" invisible="1"/>
                                 <field name='fracture'/>
                             </group>
+
+                            <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
               
 
                 </sheet>

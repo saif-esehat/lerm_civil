@@ -19,7 +19,11 @@ class ELN(models.Model):
     _name = 'lerm.eln'
     _inherit = ['mail.thread','mail.activity.mixin']
     _rec_name = 'eln_id'
+
+
     eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New',tracking=3)
+    ir_model = fields.Many2one('ir.model',string="Model")
+
     srf_id = fields.Many2one('lerm.civil.srf',string="SRF ID")
     technician = fields.Many2one('res.users',string="Technicians",tracking=5)
     sample_id = fields.Many2one('lerm.srf.sample',string='Sample ID',tracking=True,ondelete="cascade")
@@ -41,13 +45,15 @@ class ELN(models.Model):
     parameters = fields.One2many('eln.parameters','eln_id',string="Parameters")
     datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
     fetch_ds_button = fields.Float(string="Fetch Datasheet")
+    ir_model = fields.Many2one('ir.model',string="Model")
+
 
 
     
     size_id = fields.Many2one('lerm.size.line',string="Size")
-    size_ids = fields.Many2many('lerm.size.line',string="Size",compute="compute_size")
+    size_ids = fields.Many2many('lerm.size.line',string="Size", compute="compute_size")
     grade_id = fields.Many2one('lerm.grade.line',string="Grade")
-    grade_ids = fields.Many2many('lerm.grade.line',string="Grades",compute="compute_grade")
+    grade_ids = fields.Many2many('lerm.grade.line',string="Grades", compute="compute_grade")
 
     update_result = fields.Integer("Update Result")
     state = fields.Selection([
@@ -104,21 +110,39 @@ class ELN(models.Model):
     @api.depends('material')
     def compute_grade(self):        
         for record in self:
-            if record.material:
-                record.grade_ids = self.env['product.template'].search([('id','=', record.material.id)]).grade_table
+            try:
+                if record.material:
+                    record.grade_ids = self.env['product.template'].search([('id','=', record.material.id)]).grade_table
+            except:
+                record.grade_ids = False
+
 
     @api.depends('material')
     def compute_size(self):
         for record in self:
-            if record.material:
-                record.size_ids = self.env['product.template'].search([('id','=', record.material.id)]).size_table
-    
+            try:
+                if record.material:
+                    record.size_ids = self.env['product.template'].search([('id','=', record.material.id)]).size_table
+            except:
+                record.size_ids = False
 
     @api.onchange('witness')
     def update_witness_name(self):
         if self.env.context.get('update_witness_name'):
             self.witness_name = self.witness
 
+    # @api.depends('material')
+    # def compute_grade(self):        
+    #     for record in self:
+    #         if record.material:
+    #             record.grade_ids = self.env['product.template'].search([('id','=', record.material.id)]).grade_table
+
+    # @api.depends('material')
+    # def compute_size(self):
+    #     for record in self:
+    #         if record.material:
+    #             record.size_ids = self.env['product.template'].search([('id','=', record.material.id)]).size_table
+    
     @api.model
     def create(self, values):
         record = super(ELN, self).create(values)
@@ -436,7 +460,7 @@ class ELN(models.Model):
             
     # def print_datasheet(self):
     #     eln = self
-    #     template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+    #     template_name = eln.parameters_re[0]sult.parameter.datasheet_report_template.report_name
     #     return {
     #         'type': 'ir.actions.report',
     #         'report_type': 'qweb-pdf',
@@ -811,6 +835,8 @@ class ELNParametersResult(models.Model):
     test_method = fields.Many2one('lerm_civil.test_method',string="Specification")
     specification_permissible_limit = fields.Text(string="Specification",compute='_compute_specification')
     specification = fields.Text(string="Test Method", compute='_compute_specification')
+
+
     nabl_status = fields.Selection([
         ('nabl', 'NABL'),
         ('non-nabl', 'Non-NABL')
@@ -854,12 +880,78 @@ class ELNParametersResult(models.Model):
             grade_id = record.eln_id.grade_id.id
             size_id = record.eln_id.size_id.id
             parameter_id = record.parameter.id
-            specification = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+            parameter = record.parameter
+
+            if parameter.fetch_by_grade and parameter.fetch_by_size and grade_id != False and size_id != False:
+                try:
+                    specification = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])[0].specification
+                except:
+                    specification = False
+            elif parameter.fetch_by_grade and grade_id != False:
+                try:
+                    specification = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])[0].specification
+                except:
+                    specification = False
+            elif parameter.fetch_by_size and size_id != False:
+                try:
+                    specification = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('parameter_id','=',parameter_id)])[0].specification
+                except:
+                    specification = False
+            else:
+                try:
+                    specification = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])[0].specification
+                except:
+                    specification = False
             print("specsi")
             print(specification)
-            table_record = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])
-            record.specification = specification
-            record.specification_permissible_limit = table_record.permissable_limit
+            table_record = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])
+            try:
+                record.specification = specification
+            except:
+                record.specification = False
+
+            if parameter.fetch_by_grade and parameter.fetch_by_size and grade_id != False and size_id != False:
+                try:
+                    specification_permissible_limit = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])[0].permissable_limit
+                except:
+                    specification_permissible_limit = False
+            elif parameter.fetch_by_grade and grade_id != False:
+                try:    
+                    specification_permissible_limit = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])[0].permissable_limit
+                except:
+                    specification_permissible_limit = False
+            elif parameter.fetch_by_size and size_id != False:
+                try:
+                
+                    specification_permissible_limit = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('parameter_id','=',parameter_id)])[0].permissable_limit
+                except:
+                    specification_permissible_limit = False
+            else:
+                try:
+                    specification_permissible_limit = record.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])[0].permissable_limit
+                except:
+                    specification_permissible_limit = False
+            try:
+                record.specification_permissible_limit = specification_permissible_limit
+            except:
+                record.specification_permissible_limit = False
+            print("permisss")
+            print(specification_permissible_limit)
+
+    # @api.depends('eln_id.material', 'eln_id.grade_id', 'eln_id.size_id','parameter')
+    # def _compute_specification(self):
+    #     for record in self:
+    #         # import wdb; wdb.set_trace()
+    #         material_id = record.eln_id.material.id
+    #         grade_id = record.eln_id.grade_id.id
+    #         size_id = record.eln_id.size_id.id
+    #         parameter_id = record.parameter.id
+    #         specification = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)]).specification
+    #         print("specsi")
+    #         print(specification)
+    #         table_record = self.env['lerm.parameter.master.table'].search([('material','=',material_id),('size','=',size_id),('grade','=',grade_id),('parameter_id','=',parameter_id)])
+    #         record.specification = specification
+    #         record.specification_permissible_limit = table_record.permissable_limit
 
     def open_form(self):
         # import wdb; wdb.set_trace()
@@ -891,6 +983,8 @@ class ELNParametersResult(models.Model):
 
                  }
                 }
+        
+    
 
 
 
