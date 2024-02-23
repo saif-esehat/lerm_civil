@@ -101,6 +101,19 @@ class MechanicalConcreteCube(models.Model):
             else:
                 record.age_of_days = None
 
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
+        # return {'type': 'ir.actions.client', 'tag': 'history_back'}
+
     # @api.depends('date_of_casting','age_of_days')
     # def _compute_testing_date(self):
     #     for record in self:

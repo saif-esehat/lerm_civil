@@ -19,7 +19,11 @@ class ELN(models.Model):
     _name = 'lerm.eln'
     _inherit = ['mail.thread','mail.activity.mixin']
     _rec_name = 'eln_id'
+
+
     eln_id = fields.Char("ELN ID",required=True,readonly=True, default=lambda self: 'New',tracking=3)
+    ir_model = fields.Many2one('ir.model',string="Model")
+
     srf_id = fields.Many2one('lerm.civil.srf',string="SRF ID")
     technician = fields.Many2one('res.users',string="Technicians",tracking=5)
     sample_id = fields.Many2one('lerm.srf.sample',string='Sample ID',tracking=True,ondelete="cascade")
@@ -41,6 +45,8 @@ class ELN(models.Model):
     parameters = fields.One2many('eln.parameters','eln_id',string="Parameters")
     datasheets = fields.One2many('eln.spreadsheets','eln_id',string="Datasheets")
     fetch_ds_button = fields.Float(string="Fetch Datasheet")
+    ir_model = fields.Many2one('ir.model',string="Model")
+
 
 
     
@@ -454,7 +460,7 @@ class ELN(models.Model):
             
     # def print_datasheet(self):
     #     eln = self
-    #     template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+    #     template_name = eln.parameters_re[0]sult.parameter.datasheet_report_template.report_name
     #     return {
     #         'type': 'ir.actions.report',
     #         'report_type': 'qweb-pdf',
@@ -977,6 +983,8 @@ class ELNParametersResult(models.Model):
 
                  }
                 }
+        
+    
 
 
 

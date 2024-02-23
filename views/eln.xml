@@ -91,6 +91,8 @@
                                 <field name='attachment_name' invisible='1'/>
                                 <field name='instrument'/>
                                 <field name='grade_ids' invisible="1"/>
+                                <field name='ir_model' invisible="1"/>
+
 
 
                             </group>

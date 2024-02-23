@@ -39,6 +39,9 @@ class ParameterMaster(models.Model):
     fetch_by_grade = fields.Boolean("Fetch by Grade",default="True")
     fetch_by_size = fields.Boolean("Fetch by Size",default="True")
     
+    fetch_by_grade = fields.Boolean("Fetch by Grade", default=True)
+    fetch_by_size = fields.Boolean("Fetch by Size", default=True)
+
 
     def name_get(self):
         res = []
