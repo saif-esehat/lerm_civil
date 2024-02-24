@@ -617,17 +617,35 @@ class FlyaschNormalConsistency(models.Model):
             except:
                 record.average_soundness = 0
 
+    # @api.depends('average_soundness')
+    # def _compute_expansion_soundness(self):
+    #     for record in self:
+    #         integer_part = math.floor(record.average_soundness)
+    #         fractional_part = record.average_soundness - integer_part
+    #         if fractional_part > 0 and fractional_part <= 0.25:
+    #             record.expansion_soundness = integer_part
+    #         elif fractional_part > 0.25 and fractional_part <= 0.75:
+    #             record.expansion_soundness = integer_part + 0.5
+    #         elif fractional_part > 0.75 and fractional_part <= 1:
+    #             record.expansion_soundness = integer_part + 1
+    #         else:
+    #             record.expansion_soundness = 0
+
+
     @api.depends('average_soundness')
     def _compute_expansion_soundness(self):
         for record in self:
             integer_part = math.floor(record.average_soundness)
             fractional_part = record.average_soundness - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.expansion_soundness = integer_part
+                expansion_soundness = round(integer_part,1)
+                record.expansion_soundness = expansion_soundness
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.expansion_soundness = integer_part + 0.5
+                expansion_soundness = round(integer_part + 0.5,1)
+                record.expansion_soundness = expansion_soundness
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.expansion_soundness = integer_part + 1
+                expansion_soundness = round(integer_part + 1,1)
+                record.expansion_soundness = expansion_soundness
             else:
                 record.expansion_soundness = 0
 
