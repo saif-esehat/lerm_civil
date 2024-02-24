@@ -395,6 +395,11 @@
 											Test witnessed by : <span t-esc="eln.witness_name"/>
 										</p>
 									</li>
+									<li t-if="eln.remarks">
+									<p style="font-size: 10px;">
+										Remarks :<span t-esc="eln.remarks"/>
+									</li>
+									</p>
 								</ul>
 							</div>
 
