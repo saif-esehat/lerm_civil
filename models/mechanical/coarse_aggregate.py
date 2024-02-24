@@ -704,6 +704,18 @@ class CoarseAggregateMechanical(models.Model):
                     record.aggregate_grading_visible = True
                 if sample.internal_id == '5c163fc2-c88c-4233-921e-1eae56c3ba23':
                     record.angularity_visible = True
+
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
                 
 
     @api.model

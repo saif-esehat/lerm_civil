@@ -30,6 +30,12 @@
                         <field name='failure_location'/>
                         <field name='result'/>
                     </group>
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
                 </sheet>
             </form>
         </field>

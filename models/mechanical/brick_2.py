@@ -379,6 +379,17 @@ class MechanicalBricks(models.Model):
                 if sample.internal_id == "cf278290-8d5d-4f45-8afb-b911f9cafe41":
                     record.dimension_visible = True 
      
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
 
     @api.model
     def create(self, vals):

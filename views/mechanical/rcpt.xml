@@ -89,6 +89,12 @@
                     <group>
                     
                     </group>
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
                      <!-- <group><h1>Observed value</h1></group>
                      <group>
                         <label for="io_sample1" string="Current" />
@@ -339,7 +345,7 @@
                           </group>
                         </div>
                     </group> -->
-
+                 
                 </sheet>
             </form>
         </field>
