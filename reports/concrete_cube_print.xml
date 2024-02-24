@@ -396,10 +396,11 @@
 										</p>
 									</li>
 									<li t-if="eln.remarks">
-									<p style="font-size: 10px;">
+								    	<p style="font-size: 10px;">
 										Remarks :<span t-esc="eln.remarks"/>
-									</li>
 									</p>
+									</li>
+									
 								</ul>
 							</div>
 
