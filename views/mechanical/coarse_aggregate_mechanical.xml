@@ -538,8 +538,17 @@
                             </tree>
                     </field>
                     </group>
+                     <group style="width:33%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                            <field name="total_grading1"/>
+                        </group>
+                        <group style="width:33%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                            <field name="total_weight_after1"/>
+                        </group>
+                        <group style="width:33%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                            <field name="total_commulative1"/>
+                        </group>
                     <group attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
-                        <field name="total_mgso4"/>
+                        <!-- <field name="total_mgso4"/> -->
                         <field name="soundness_mgso4"/>
                     </group>
 
@@ -575,10 +584,22 @@
                             </tree>
                     </field>
                     </group>
-                    <group attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
-                        <field name="total_na2so4"/>
-                        <field name="soundness_na2so4"/>
+                   
+                         <group style="width:33%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                            <field name="total_grading"/>
+                        </group>
+                        <group style="width:33%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                            <field name="total_weight_after"/>
+                        </group>
+                        <group style="width:33%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                            <field name="total_commulative"/>
+                        </group>
+                       
+                  
+                     <group attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                     <field name="soundness_na2so4"/>
                     </group>
+
                     <group attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
                           <group>
                             <field  name="soundness_na2so4_conformity"
@@ -587,6 +608,12 @@
                                            readonly="1"/>
                             <field  name="soundness_na2so4_nabl"/>
                           </group>
+                    </group>
+
+
+                     <group style="width:100%">
+                        
+                       
                     </group>
 
                  

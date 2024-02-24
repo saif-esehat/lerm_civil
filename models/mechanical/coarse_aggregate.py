@@ -444,6 +444,39 @@ class CoarseAggregateMechanical(models.Model):
     soundness_na2so4_child_lines = fields.One2many('mechanical.soundness.na2so4.line','parent_id',string="Parameter",default=lambda self: self._default_soundness_na2so4_child_lines())
     total_na2so4 = fields.Integer(string="Total",compute="_compute_total_na2so4")
     soundness_na2so4 = fields.Float(string="Soundness",compute="_compute_soundness_na2so4")
+
+    total_grading = fields.Float(string="Total Grading of Original sample in %", compute="_compute_total_grading")
+
+    @api.depends('soundness_na2so4_child_lines.grading_original_sample')
+    def _compute_total_grading(self):
+        for record in self:
+            total_grading = sum(line.grading_original_sample for line in record.soundness_na2so4_child_lines)
+            record.total_grading = total_grading
+
+
+    total_weight_before = fields.Float(string="Total Weight of test fraction before test in gm", compute="_compute_total_weight")
+
+    @api.depends('soundness_na2so4_child_lines.weight_before_test')
+    def _compute_total_weight(self):
+        for record in self:
+            total_weight_before = sum(line.weight_before_test for line in record.soundness_na2so4_child_lines)
+            record.total_weight_before = total_weight_before
+
+    total_weight_after = fields.Float(string="Total Weight of test feaction Passing Finer Sieve After ", compute="_compute_total_weight_after")
+
+    @api.depends('soundness_na2so4_child_lines.weight_after_test')
+    def _compute_total_weight_after(self):
+        for record in self:
+            total_weight_after = sum(line.weight_after_test for line in record.soundness_na2so4_child_lines)
+            record.total_weight_after = total_weight_after
+
+    total_commulative = fields.Float(string="Total Commulative percentage Loss", compute="_compute_total_cumulative")
+
+    @api.depends('soundness_na2so4_child_lines.cumulative_loss_percent')
+    def _compute_total_cumulative(self):
+        for record in self:
+            total_commulative = sum(line.cumulative_loss_percent for line in record.soundness_na2so4_child_lines)
+            record.total_commulative = total_commulative
     
 
     @api.depends('soundness_na2so4_child_lines.weight_before_test')
@@ -528,6 +561,40 @@ class CoarseAggregateMechanical(models.Model):
     soundness_mgso4_child_lines = fields.One2many('mechanical.soundness.mgso4.line','parent_id',string="Parameter",default=lambda self: self._default_soundness_mgso4_child_lines())
     total_mgso4 = fields.Integer(string="Total",compute="_compute_total_mgso4")
     soundness_mgso4 = fields.Float(string="Soundness",compute="_compute_soundness_mgso4")
+
+
+    total_grading1 = fields.Float(string="Total Grading of Original sample in %", compute="_compute_total_grading1")
+
+    @api.depends('soundness_mgso4_child_lines.grading_original_sample')
+    def _compute_total_grading1(self):
+        for record in self:
+            total_grading1 = sum(line.grading_original_sample for line in record.soundness_mgso4_child_lines)
+            record.total_grading1 = total_grading1
+
+
+    total_weight_before1 = fields.Float(string="Total Weight of test fraction before test in gm", compute="_compute_total_weight1")
+
+    @api.depends('soundness_mgso4_child_lines.weight_before_test')
+    def _compute_total_weight1(self):
+        for record in self:
+            total_weight_before1 = sum(line.weight_before_test for line in record.soundness_mgso4_child_lines)
+            record.total_weight_before1 = total_weight_before1
+
+    total_weight_after1 = fields.Float(string="Total Weight of test feaction Passing Finer Sieve After ", compute="_compute_total_weight_after1")
+
+    @api.depends('soundness_mgso4_child_lines.weight_after_test')
+    def _compute_total_weight_after1(self):
+        for record in self:
+            total_weight_after1 = sum(line.weight_after_test for line in record.soundness_mgso4_child_lines)
+            record.total_weight_after1 = total_weight_after1
+
+    total_commulative1 = fields.Float(string="Total Commulative percentage Loss", compute="_compute_total_cumulative1")
+
+    @api.depends('soundness_mgso4_child_lines.cumulative_loss_percent')
+    def _compute_total_cumulative1(self):
+        for record in self:
+            total_commulative1 = sum(line.cumulative_loss_percent for line in record.soundness_mgso4_child_lines)
+            record.total_commulative1 = total_commulative1
     
     
 
