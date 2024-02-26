@@ -173,15 +173,16 @@
 
     </record>
 
-    <record id="lerm_srf_reports_action" model="ir.actions.act_window">
-            <field name="name">SRF Reports</field>
+    <!-- <record id="lerm_sample_reports_action" model="ir.actions.act_window">
+            <field name="name">Sample Reports</field>
             <field name="type">ir.actions.act_window</field>    
-            <field name="res_model">srf.reports.wizard</field>
+            <field name="res_model">sample.reports.wizard</field>
             <field name="view_mode">form</field>
-            <!-- <field name="view_id" ref="sample_reallocation_wizard"/> -->
+            <field name="view_id" ref="sample_reports_wizard"/>
+            <field name="target">new</field>
 
             
-    </record>
+    </record> -->
     
     <menuitem id="lerm_root"
         groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by"
@@ -208,16 +209,18 @@
         parent="lerm_root"
         sequence="20"  />
 
-    <menuitem id="reporting_menu"
-        name="Reporting"
+    <!-- <menuitem id="reporting_menu"
+        name="Reports"
         parent="lerm_root" 
+        groups="lerm_civil.kes_admin_access_group"
         sequence="25"  />
 
-    <menuitem id="lerm_srf_reporting"
-        name="SRF"
+    <menuitem id="lerm_sample_reporting"
+        name="Sample"
         parent="reporting_menu"
-        action="lerm_srf_reports_action"
-        sequence="10" />
+        action="lerm_sample_reports_action"
+        groups="lerm_civil.kes_admin_access_group"
+        sequence="10" /> -->
 
 
     <menuitem id="lerm_product_item_param_master"

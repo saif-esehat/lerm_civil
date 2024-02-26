@@ -529,13 +529,13 @@ class GgbsMechanical(models.Model):
 
     fineness_temp = fields.Float("Testing Temperature")
 
-    weight_of_mercury_before_trial1 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g." ,default=83.700,digits=(16, 3))
-    weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=83.680,digits=(16, 3))
+    weight_of_mercury_before_trial1 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g." ,default=83.320,digits=(16, 3))
+    weight_of_mercury_before_trial2 = fields.Float("Weight of mercury before placing the sample in the permeability cell  (m₁),g.",default=83.340,digits=(16, 3))
     
-    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=50.710,digits=(16, 3))
-    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=50.714,digits=(16, 3))
+    weight_of_mercury_after_trail1 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=54.000,digits=(16, 3))
+    weight_of_mercury_after_trail2 = fields.Float("Weight of mercury after placing the sample in the permeability cell  (m₂),g.",default=53.990,digits=(16, 3))
 
-    density_of_mercury = fields.Float("Density of mercury , g/cm3",default=13.52,digits=(16, 3))
+    density_of_mercury = fields.Float("Density of mercury , g/cm3",default=13.53,digits=(16, 3))
 
     bed_volume_trial1 = fields.Float("Bed Volume (V=m₂-m₁/D),cm3.",compute="_compute_bed_volume_trial1",digits=(16, 3))
     bed_volume_trial2 = fields.Float("Bed Volume (V=m₂-m₁/D),cm3.",compute="_compute_bed_volume_trial2",digits=(16, 3))

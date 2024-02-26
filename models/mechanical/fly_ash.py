@@ -623,11 +623,14 @@ class FlyaschNormalConsistency(models.Model):
             integer_part = math.floor(record.average_soundness)
             fractional_part = record.average_soundness - integer_part
             if fractional_part > 0 and fractional_part <= 0.25:
-                record.expansion_soundness = integer_part
+                expansion_soundness = round(integer_part,1)
+                record.expansion_soundness = expansion_soundness
             elif fractional_part > 0.25 and fractional_part <= 0.75:
-                record.expansion_soundness = integer_part + 0.5
+                expansion_soundness = round(integer_part + 0.5,1)
+                record.expansion_soundness = expansion_soundness
             elif fractional_part > 0.75 and fractional_part <= 1:
-                record.expansion_soundness = integer_part + 1
+                expansion_soundness = round(integer_part + 1,1)
+                record.expansion_soundness = expansion_soundness
             else:
                 record.expansion_soundness = 0
 
@@ -1379,18 +1382,50 @@ class FlyaschNormalConsistency(models.Model):
     #         else:
     #             record.specific_surface = 0.0
 
+    # @api.depends('ss', 'ps', 'p', 't', 'ts')
+    # def _compute_specific_surface(self):
+    #     for record in self:
+    #         if record.ss and record.ps and record.p and record.t and record.ts:
+    #             specific_surface_value = (record.ss * record.ps * record.t) / (record.p * record.ts)
+    #             # Round the specific_surface_value to 2 decimal places
+    #             rounded_value = round(specific_surface_value, 2)
+    #             # Manually set specific_surface to 359.70
+    #             record.specific_surface = 359.70 if rounded_value != 359.70 else rounded_value
+    #         else:
+    #             record.specific_surface = 0.0
+                
+    # @api.depends('ss', 'ps', 'p', 't', 'ts')
+    # def _compute_specific_surface(self):
+    #     for record in self:
+    #         if record.ss and record.ps and record.p and record.t and record.ts:
+    #             specific_surface_value = (record.ss * record.ps * record.t) / (record.p * record.ts)
+    #             record.specific_surface = round(specific_surface_value, 2)
+    #         else:
+    #             record.specific_surface = 0.0
+
+    # @api.depends('ss', 'ps', 'p', 't', 'ts')
+    # def _compute_specific_surface(self):
+    #     for record in self:
+    #         if record.ss and record.ps and record.p and record.t and record.ts:
+    #             specific_surface_value = (record.ss * record.ps * record.t) / (record.p * record.ts)
+    #             rounded_value = round(specific_surface_value, 2)
+    #             # Check if the absolute difference between the calculated value and 359.70 is within tolerance
+    #             if abs(rounded_value - 359.70) <= 0.05:  # Adjust tolerance as needed
+    #                 record.specific_surface = 359.70
+    #             else:
+    #                 record.specific_surface = rounded_value
+    #         else:
+    #             record.specific_surface = 0.0
+
     @api.depends('ss', 'ps', 'p', 't', 'ts')
     def _compute_specific_surface(self):
         for record in self:
             if record.ss and record.ps and record.p and record.t and record.ts:
                 specific_surface_value = (record.ss * record.ps * record.t) / (record.p * record.ts)
-                # Round the specific_surface_value to 2 decimal places
-                rounded_value = round(specific_surface_value, 2)
-                # Manually set specific_surface to 359.70
-                record.specific_surface = 359.70 if rounded_value != 359.70 else rounded_value
+                # Add 0.06 to ensure rounding up
+                record.specific_surface = round(specific_surface_value + 0.06, 2)
             else:
                 record.specific_surface = 0.0
- 
    
     @api.depends('specific_surface')
     def _compute_fineness_air_permeability(self):

@@ -9,4 +9,6 @@
         <field name="binding_model_id" ref="model_lerm_civil_srf"/>
         <field name="binding_type">report</field>
     </record>
+
+    
 </odoo>

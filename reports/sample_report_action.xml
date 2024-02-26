@@ -10,7 +10,7 @@
         <field name="binding_type">report</field>
     </record>
 
-     <record id="sample_report_action" model="ir.actions.report">
+     <!-- <record id="sample_report_action" model="ir.actions.report">
         <field name="name">10% fine </field>
         <field name="model">lerm.srf.sample</field>
         <field name="report_type">qweb-pdf</field>
@@ -18,5 +18,5 @@
         <field name="report_file">lerm_civil.10per_fine_coarse_agg_mechanical</field>
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
-    </record>
+    </record> -->
 </odoo>
