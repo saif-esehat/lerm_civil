@@ -173,10 +173,10 @@
 
     </record>
 
-    <record id="lerm_srf_reports_action" model="ir.actions.act_window">
-            <field name="name">SRF Reports</field>
+    <record id="lerm_sample_reports_action" model="ir.actions.act_window">
+            <field name="name">Sample Reports</field>
             <field name="type">ir.actions.act_window</field>    
-            <field name="res_model">srf.reports.wizard</field>
+            <field name="res_model">sample.reports.wizard</field>
             <field name="view_mode">form</field>
             <!-- <field name="view_id" ref="sample_reallocation_wizard"/> -->
 
@@ -209,14 +209,16 @@
         sequence="20"  />
 
     <menuitem id="reporting_menu"
-        name="Reporting"
+        name="Reports"
         parent="lerm_root" 
+        groups="lerm_civil.kes_admin_access_group"
         sequence="25"  />
 
-    <menuitem id="lerm_srf_reporting"
-        name="SRF"
+    <menuitem id="lerm_sample_reporting"
+        name="Sample"
         parent="reporting_menu"
-        action="lerm_srf_reports_action"
+        action="lerm_sample_reports_action"
+        groups="lerm_civil.kes_admin_access_group"
         sequence="10" />
 
 
