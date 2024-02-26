@@ -72,7 +72,7 @@
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_wizard">
 				<div class="container_eln">
 				
-						<table>
+						<table style="margin-top:30px;">
 							<tr>
 								<td colspan="3">Customer :
 								</td>
