@@ -529,6 +529,7 @@ class LermSampleForm(models.Model):
             template_name = eln.material.product_based_calculation[0].main_report_template.report_name
         else:
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
+        # import wdb ; wdb.set_trace()
         return {
             # 'name':str(self.kes_no),
             'type': 'ir.actions.report',
@@ -546,6 +547,7 @@ class LermSampleForm(models.Model):
         else:
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
         print("Template name",template_name)
+
         return {
             'type': 'ir.actions.report',
             'report_type': 'qweb-pdf',
