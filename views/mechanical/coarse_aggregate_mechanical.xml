@@ -538,15 +538,20 @@
                             </tree>
                     </field>
                     </group>
-                     <group style="width:33%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                    <group style="width:100%">
+                     <group style="width:25%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
                             <field name="total_grading1"/>
                         </group>
-                        <group style="width:33%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                         <group style="width:25%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                            <field name="total_weight_before_test1"/>
+                        </group>
+                        <group style="width:25%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
                             <field name="total_weight_after1"/>
                         </group>
-                        <group style="width:33%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
+                        <group style="width:25%" attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
                             <field name="total_commulative1"/>
                         </group>
+                    </group>
                     <group attrs="{'invisible': [('soundness_mgso4_visible', '=', False)]}">
                         <!-- <field name="total_mgso4"/> -->
                         <field name="soundness_mgso4"/>
@@ -584,16 +589,20 @@
                             </tree>
                     </field>
                     </group>
-                   
-                         <group style="width:33%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                   <group style="width:100%">
+                        <group style="width:25%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
                             <field name="total_grading"/>
                         </group>
-                        <group style="width:33%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                         <group style="width:25%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                            <field name="total_weight_before"/>
+                        </group>
+                        <group style="width:25%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
                             <field name="total_weight_after"/>
                         </group>
-                        <group style="width:33%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
+                        <group style="width:25%" attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
                             <field name="total_commulative"/>
                         </group>
+                    </group>
                        
                   
                      <group attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">

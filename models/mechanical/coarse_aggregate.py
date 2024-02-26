@@ -571,6 +571,14 @@ class CoarseAggregateMechanical(models.Model):
             total_grading1 = sum(line.grading_original_sample for line in record.soundness_mgso4_child_lines)
             record.total_grading1 = total_grading1
 
+    total_weight_before_test1 = fields.Float(string="Total Weight of test fraction before test in gm.", compute="_compute_total_weight_before_test1")
+
+    @api.depends('soundness_mgso4_child_lines.weight_before_test')
+    def _compute_total_weight_before_test1(self):
+        for record in self:
+            total_weight_before_test1 = sum(line.weight_before_test for line in record.soundness_mgso4_child_lines)
+            record.total_weight_before_test1 = total_weight_before_test1
+
 
     total_weight_before1 = fields.Float(string="Total Weight of test fraction before test in gm", compute="_compute_total_weight1")
 
@@ -1054,7 +1062,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_clay_lumps(self):
         for record in self:
             if record.wt_sample_clay_lumps != 0:
-                record.clay_lumps_percent = round(((record.wt_sample_clay_lumps - record.wt_dry_sample_clay_lumps)/record.wt_sample_clay_lumps * 100),1)
+                record.clay_lumps_percent = ((record.wt_sample_clay_lumps - record.wt_dry_sample_clay_lumps)/record.wt_sample_clay_lumps * 100)
             else:
                 record.clay_lumps_percent = 0
 
@@ -1496,7 +1504,7 @@ class CoarseAggregateMechanical(models.Model):
             record.crushing_visible = False
             record.abrasion_visible = False
             record.specific_gravity_visible = False
-            record.average_impact_value = False
+            record.impact_visible = False
             record.fine10_visible = False
             record.soundness_na2so4_visible = False
             record.soundness_mgso4_visible = False
