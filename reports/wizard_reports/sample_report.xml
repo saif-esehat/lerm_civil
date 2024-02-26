@@ -156,11 +156,7 @@
 												Identification Mark
 											</span>
 										</th>
-										<th>
-											<span>
-												Quantity
-											</span>
-										</th>
+										
 
 										<th>
 											<span>
@@ -231,11 +227,7 @@
 											<!-- <span t-esc="r['grade_id'].grade"/> -->
 											<span t-esc="r['client_sample_id']"/>
 										</td>
-										<td>
-											<span t-if="r['sample_qty']">
-												<span t-esc="r['sample_qty']"/> <![CDATA[&nbsp;]]> Set
-											</span>
-										</td>
+										
 										<td>
 											<span t-foreach="r['parameters']" t-as="param">
 												<span t-if="param.parameter_name">
