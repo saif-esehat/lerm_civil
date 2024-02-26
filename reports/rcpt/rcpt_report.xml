@@ -121,16 +121,16 @@
 
 						<!-- 1 Compressive strength  -->
 					
-				<div t-if="rcpt" style="margin-top:20px;">
+				<div t-if="rcpt">
 					<div style="padding-top:5px">
 						<span t-esc="eln.material.test_parameter"/>
 					</div>
 					
 
-					<table t-if="rcpt" style="margin-top:30px;">
-					  <div>
+					<table t-if="rcpt">
+					  <!-- <div>
 					 <span t-field="env['lerm.parameter.master'].search([('internal_id','=','cbda-79b1-4733-9489-b49ce7d26921f5ad')]).parameter_name"/>
-					 </div>
+					 </div> -->
 						<t t-set="i" t-value="0"/>
 							<thead>
 								<tr>
@@ -275,8 +275,11 @@
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
 							 <li t-if="eln.has_witness">
-                                <p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+                                Test witnessed by : <span t-esc="eln.witness_name"/>
                              </li>
+							 <li t-if="eln.remarks">
+								<span t-esc="eln.remarks"/>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -346,11 +349,11 @@
 					</div>
 				</div>
 
-				<div style="margin-top: 50px; text-align: center;">
+				<!-- <div style="margin-top: 50px; text-align: center;">
 					<p style="border-top: 1px dashed #000; padding-top: 10px;">
 						...... End Of Report......
 					</p>
-				</div>
+				</div> -->
 											
 				</div>
 	
