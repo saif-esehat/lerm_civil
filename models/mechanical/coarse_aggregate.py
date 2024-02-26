@@ -996,7 +996,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_finer75(self):
         for record in self:
             if record.wt_sample_finer75 != 0:
-                record.material_finer75 = round(((record.wt_sample_finer75 - record.wt_dry_sample_finer75)/record.wt_sample_finer75 * 100),1)
+                record.material_finer75 = ((record.wt_sample_finer75 - record.wt_dry_sample_finer75)/record.wt_sample_finer75 * 100)
             else:
                 record.material_finer75 = 0
 
@@ -1128,7 +1128,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_light_weight(self):
         for record in self:
             if record.wt_sample_light_weight != 0:
-                record.light_weight_percent = round(((record.wt_sample_light_weight - record.wt_dry_sample_light_weight)/record.wt_sample_light_weight * 100),1)
+                record.light_weight_percent = record.wt_dry_sample_light_weight/record.wt_sample_light_weight*100
             else:
                 record.light_weight_percent = 0
 
