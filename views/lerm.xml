@@ -178,7 +178,8 @@
             <field name="type">ir.actions.act_window</field>    
             <field name="res_model">sample.reports.wizard</field>
             <field name="view_mode">form</field>
-            <!-- <field name="view_id" ref="sample_reallocation_wizard"/> -->
+            <field name="view_id" ref="sample_reports_wizard"/>
+            <field name="target">new</field>
 
             
     </record>

@@ -72,7 +72,7 @@
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_wizard">
 				<div class="container_eln">
 				
-						<table>
+						<table style="margin-top:30px;">
 							<tr>
 								<td colspan="3">Customer :
 								</td>
@@ -156,11 +156,7 @@
 												Identification Mark
 											</span>
 										</th>
-										<th>
-											<span>
-												Quantity
-											</span>
-										</th>
+										
 
 										<th>
 											<span>
@@ -170,6 +166,11 @@
 										<th>
 											<span>
 												Test Method
+											</span>
+										</th>
+										<th>
+											<span>
+												State
 											</span>
 										</th>
 									</tr>
@@ -226,11 +227,7 @@
 											<!-- <span t-esc="r['grade_id'].grade"/> -->
 											<span t-esc="r['client_sample_id']"/>
 										</td>
-										<td>
-											<span t-if="r['sample_qty']">
-												<span t-esc="r['sample_qty']"/> <![CDATA[&nbsp;]]> Set
-											</span>
-										</td>
+										
 										<td>
 											<span t-foreach="r['parameters']" t-as="param">
 												<span t-if="param.parameter_name">
@@ -245,6 +242,17 @@
 												</span>
 											</span>
 										</td>
+										<td>
+											<span t-if="r['state']">
+												<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=','state'),('model_id.model','=','lerm.srf.sample')])"/>
+
+												<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r['state'])])"/>
+												<!-- <span>Selection </span> -->
+												
+												<t style="text-align:center;" t-esc="selection.name"/>
+											</span>
+										</td>
+										
 										
 									</tr>
 								</tbody>
