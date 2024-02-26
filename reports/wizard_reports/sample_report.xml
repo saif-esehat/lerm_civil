@@ -172,6 +172,11 @@
 												Test Method
 											</span>
 										</th>
+										<th>
+											<span>
+												State
+											</span>
+										</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -245,6 +250,17 @@
 												</span>
 											</span>
 										</td>
+										<td>
+											<span t-if="r['state']">
+												<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=','state'),('model_id.model','=','lerm.srf.sample')])"/>
+
+												<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r['state'])])"/>
+												<!-- <span>Selection </span> -->
+												
+												<t style="text-align:center;" t-esc="selection.name"/>
+											</span>
+										</td>
+										
 										
 									</tr>
 								</tbody>
