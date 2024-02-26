@@ -209,8 +209,8 @@
                             <field  name="specific_gravity_trial1"  colspan="3"  nolabel="1"/>
                           </group>
                           <group colspan="1" class="oe_inline"  >
-                            <label for="specific_gravity_trial1" string="" />
-                            <field  name="specific_gravity_trial1"  colspan="3"  nolabel="1"/>
+                            <label for="specific_gravity_trial2" string="" />
+                            <field  name="specific_gravity_trial2"  colspan="3"  nolabel="1"/>
                           </group>
                         </div>
                     </group>
