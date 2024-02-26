@@ -98,6 +98,7 @@
 
 
     'views/product_grade_wizard.xml',
+    'views/wizards/sample_reports_wizard.xml',
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',
@@ -206,8 +207,9 @@
     'reports/structural_steel_round/report.xml',
     'reports/act/act_datasheet.xml',
     'reports/act/act_report.xml',
+    'reports/wizard_reports/sample_report.xml',
+
     
-    'views/wizards/srf_reports_wizard.xml',
     
  
 

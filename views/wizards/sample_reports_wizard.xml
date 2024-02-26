@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="srf_reports_wizard" model="ir.ui.view">
-        <field name="name">srf.reports.wizard.form</field>
-        <field name="model">srf.reports.wizard</field>
+        <record id="sample_reports_wizard" model="ir.ui.view">
+        <field name="name">sample.reports.wizard.form</field>
+        <field name="model">sample.reports.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>

@@ -32,6 +32,7 @@ from .report import bricks2_ds_report
 from .report import concrete_beam_ds_report
 from .report import solid_concrete_block_ds_report
 from .report import rock_print
+from .report import sample_reports
 # from .mechanical import sieve_analysis
 from .mechanical import free_swell_index
 from .mechanical import soil_cbr
