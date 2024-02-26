@@ -375,29 +375,30 @@
 						</table>
 					</div>
 					<div style="page-break-inside: avoid;">
-						<div style="margin-top:10px" class="noteContainer">
+						<div style="margin-top:20px" class="noteContainer">
 							<div>
 								<b>Note :-</b>
 							</div>
 							<div>
 								<ul>
-									<li style="font-size: 10px;">
+									<li>
 										The Test Report(s) is/are valid only to the sample submitted to the laboratory.
 									</li>
-									<li style="font-size: 10px;">
+									<li>
 										Sample(s) was/were not drawn by laboratory.
 									</li>
-									<li style="font-size: 10px;">
-										This Report may not be reproduced except in full/part without the permission of the Lab Head of the Laboratory.
+									<li>
+										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li t-if="eln.has_witness">
-										<p style="font-size: 10px;">
-											Test witnessed by : <span t-esc="eln.witness_name"/>
-										</p>
+									<li>
+										Test witnessed by : <span t-esc="eln.witness_name"/>
+										
+									</li>
+									<li t-if="eln.remarks">
+										<span t-esc="eln.remarks"/>
 									</li>
 								</ul>
 							</div>
-
 						</div>
 						<div style="margin-top:10px; page-break-inside: avoid;" class="signatureContainer girdgird">
 							<div>
