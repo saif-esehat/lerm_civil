@@ -89,6 +89,8 @@ admin.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_nd
 admin.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_admin_access_group,1,1,1,1
 admin.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_admin_access_group,1,1,1,1
 admin.sample.reports.wizard,access_sample_reports_wizard,lerm_civil.model_sample_reports_wizard,kes_admin_access_group,1,1,1,1
+admin.ulr.reports.wizard,access_ulr_reports_wizard,lerm_civil.model_ulr_reports_wizard,kes_admin_access_group,1,1,1,1
+
 admin.lerm_civil.access_structural_steel_round,access_structural_steel_round,lerm_civil.model_structural_steel_round,kes_admin_access_group,1,1,1,1
 
 
