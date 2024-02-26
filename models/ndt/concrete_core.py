@@ -17,6 +17,10 @@ class ConcreteCore(models.Model):
     notes = fields.One2many('ndt.concrete.core.notes','parent_id',string="Notes")
 
 
+    
+
+
+
 
     @api.depends('child_lines.final_cube_strength')
     def _compute_average(self):
@@ -24,7 +28,7 @@ class ConcreteCore(models.Model):
             total_value = sum(record.child_lines.mapped('final_cube_strength'))
             record.average = round((total_value / len(record.child_lines) if record.child_lines else 0.0),2)
 
-
+   
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()

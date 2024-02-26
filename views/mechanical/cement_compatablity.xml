@@ -46,6 +46,13 @@
                             <field name="comment" />
                         </group>
 
+                         <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
+
                     </sheet>
                 </form>
             </field>

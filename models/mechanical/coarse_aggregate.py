@@ -996,7 +996,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_finer75(self):
         for record in self:
             if record.wt_sample_finer75 != 0:
-                record.material_finer75 = round(((record.wt_sample_finer75 - record.wt_dry_sample_finer75)/record.wt_sample_finer75 * 100),1)
+                record.material_finer75 = ((record.wt_sample_finer75 - record.wt_dry_sample_finer75)/record.wt_sample_finer75 * 100)
             else:
                 record.material_finer75 = 0
 
@@ -1128,7 +1128,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_light_weight(self):
         for record in self:
             if record.wt_sample_light_weight != 0:
-                record.light_weight_percent = round(((record.wt_sample_light_weight - record.wt_dry_sample_light_weight)/record.wt_sample_light_weight * 100),1)
+                record.light_weight_percent = record.wt_dry_sample_light_weight/record.wt_sample_light_weight*100
             else:
                 record.light_weight_percent = 0
 
@@ -1565,6 +1565,18 @@ class CoarseAggregateMechanical(models.Model):
                     record.aggregate_grading_visible = True
                 if sample.internal_id == '5c163fc2-c88c-4233-921e-1eae56c3ba23':
                     record.angularity_visible = True
+
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
                 
 
     @api.model

@@ -190,6 +190,12 @@
                             <field name="compressive_strength_nabl"/>
                         </group>
                     </group>
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
 
                 </sheet>
             </form>

@@ -29,6 +29,12 @@
                     <field name="description"/>
                     </group>
                   </group>
+                   <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
                 </form>
             </field>
         </record>
