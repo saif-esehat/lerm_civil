@@ -99,6 +99,8 @@
 
     'views/product_grade_wizard.xml',
     'views/wizards/sample_reports_wizard.xml',
+    'views/wizards/ulr_reports_wizard.xml',
+
     'reports/eln_report_action.xml',
     'reports/eln_report_template.xml',
     'reports/sample_report_template.xml',
@@ -208,6 +210,8 @@
     'reports/act/act_datasheet.xml',
     'reports/act/act_report.xml',
     'reports/wizard_reports/sample_report.xml',
+    'reports/wizard_reports/ulr_report.xml',
+
 
     
     

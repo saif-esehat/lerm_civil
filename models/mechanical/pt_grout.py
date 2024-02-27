@@ -830,6 +830,18 @@ class PtGrout(models.Model):
                 # Compressive Strength 
                 if sample.internal_id == 'a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e':
                     record.compressive_strength_visible = True
+
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }                
                 
 
 

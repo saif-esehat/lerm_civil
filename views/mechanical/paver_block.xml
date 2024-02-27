@@ -529,6 +529,12 @@
                         <field name='average_hight' col="4"/>
                         <field name='plan_area' col="4"/>
                     </group>
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
                     
                      
 

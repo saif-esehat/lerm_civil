@@ -30,7 +30,18 @@ class PrecastKerbMechanical(models.Model):
                     record.transverse_visible = True
                 if sample.internal_id == 'f913fc79-eeb4-4e16-a7fc-75608384d9b0':
                     record.water_absorbtion_visible = True
+
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
                 
+            }           
 
     @api.model
     def create(self, vals):

@@ -37,6 +37,19 @@ class ActCompressiveStrength(models.Model):
     def _compute_act_compressive(self):
         for record in self:
             record.act_compressive = (record.average_compr_strength) * (1.64) + (8.09)
+
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
+                    
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()

@@ -276,6 +276,12 @@
                           <field name="elongation1_confirmity"  style="color: green;" attrs="{'invisible': [('elongation1_confirmity','!=','pass')]}"/>
                           </group>
                       </group>
+                      <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
 
                     
 

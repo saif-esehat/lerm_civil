@@ -58,6 +58,9 @@ class FlexuralStrengthConcreteBeam(models.Model):
                 record.age_of_days = None
 
 
+              
+
+
     # confirmity = fields.Selection([
     #     ('pass', 'Pass'),
     #     ('fail', 'Fail'),
@@ -165,6 +168,18 @@ class FlexuralStrengthConcreteBeam(models.Model):
             total_lines = len(record.child_lines)
             record.average_flexural_strength = total_strength / total_lines if total_lines > 0 else 0.0
 
+
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }  
 
     @api.model
     def create(self, vals):
