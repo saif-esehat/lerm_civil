@@ -598,7 +598,7 @@ class ChemicalHasdenedConcrete(models.Model):
     wt_empty_crucible_after_ignition = fields.Float("C) Wt. of Empty crusible gm")
     wt_empty_crucible = fields.Float("D) Wt. of Empty crusible + Residue wt gm")
     difference_in_wt_sulphate = fields.Float("E) Residue Wt,  gm = ( D - C )",compute="_compute_difference_in_wt_sulphate",digits=(16, 4))
-    sulphate_so3 = fields.Float("F)%Sulphate as SO3 = E x 34.3/B",compute="_compute_sulphate_so3",digits=(16, 2))
+    sulphate_so3 = fields.Float("F)%Sulphate as SO3 = E x 34.3/B",compute="_compute_sulphate_so3",digits=(16, 4))
     sulphate_percent = fields.Float("G)Sulphate as SO3 on the basis of Cement content (F)*100/A",compute="_compute_sulphate_percent",digits=(16, 2))
 
     @api.depends('wt_empty_crucible', 'wt_empty_crucible_after_ignition')
