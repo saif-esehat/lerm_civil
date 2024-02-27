@@ -26,18 +26,11 @@
                         </tree>
                       </field>
                     </group>
-                     <group >
+                     <!-- <group >
                             
                             <field name="tests" widget="many2many_tags"/>
-                    </group>
-                     <!-- compressive strength -->
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
-                        <h1>
-                            <field name="compressive_name" readonly="1" nolabel="1"/>
-                            <field name="compressive_visible" invisible="1"/>
-                        </h1>
-                    </group>
-                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    </group> -->
+                    <group >
                     <group>
                       <field name="temp_percent_compressive"/>
                       <field name="humidity_percent_compressive"/>
@@ -47,6 +40,14 @@
                       <field name="end_date_compressive"/>
                     </group>
                     </group>
+                     <!-- compressive strength -->
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <h1>
+                            <field name="compressive_name" readonly="1" nolabel="1"/>
+                            <field name="compressive_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    
                     <group>
                      <group attrs="{'invisible': [('compressive_visible', '=', False)]}" style="width:50%" class="center-group">
                      <h4 class="center-heading">Compressive Strength of Test Mixture</h4>
@@ -203,7 +204,7 @@
                             <field name="oversize_retain_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('oversize_retain_visible', '=', False)]}">
+                    <!-- <group attrs="{'invisible': [('oversize_retain_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_oversize"/>
                       <field name="humidity_percent_oversize"/>
@@ -212,7 +213,7 @@
                       <field name="start_date_oversize"/>
                       <field name="end_date_oversize"/>
                     </group>
-                    </group>
+                    </group> -->
                     
                     <group attrs="{'invisible': [('oversize_retain_visible', '=', False)]}">
                     <!-- <group> -->
@@ -247,7 +248,7 @@
                             <field name="specific_gravity_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
+                    <!-- <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_specific"/>
                       <field name="humidity_percent_specific"/>
@@ -256,7 +257,7 @@
                       <field name="start_date_specific"/>
                       <field name="end_date_specific"/>
                     </group>
-                    </group>
+                    </group> -->
 
                     <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}">
                     <!-- <group> -->
@@ -291,7 +292,7 @@
                             <field name="compressive_strength_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
+                    <!-- <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                     <group>
                       <field name="temp_percent_cmp_strngth"/>
                       <field name="humidity_percent_cmp_strngth"/>
@@ -300,7 +301,7 @@
                       <field name="start_date_cmp_strngth"/>
                       <field name="end_date_cmp_strngth"/>
                     </group>
-                    </group>
+                    </group> -->
                     <group>
                      <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}" style="width:50%" class="center-group">
                      <h4 class="center-heading">Compressive Strength of Test Mortar</h4>
@@ -461,7 +462,7 @@
                             <field name="oversize_percent_retain_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('oversize_percent_retain_visible', '=', False)]}">
+                    <!-- <group attrs="{'invisible': [('oversize_percent_retain_visible', '=', False)]}">
                     <group>
                       <field name="oversize_temp_percent"/>
                       <field name="oversize_humidity_percent_specific"/>
@@ -470,7 +471,7 @@
                       <field name="oversize_start_date_specific"/>
                       <field name="oversize_end_date_specific"/>
                     </group>
-                    </group>
+                    </group> -->
 
                     <group attrs="{'invisible': [('oversize_percent_retain_visible', '=', False)]}">
                     <!-- <group> -->
@@ -506,7 +507,7 @@
                             <field name="bulk_density_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('bulk_density_visible', '=', False)]}">
+                    <!-- <group attrs="{'invisible': [('bulk_density_visible', '=', False)]}">
                     <group>
                       <field name="bulk_density_temp_percent"/>
                       <field name="bulk_density_humidity_percent"/>
@@ -515,7 +516,7 @@
                       <field name="bulk_density_start_date"/>
                       <field name="bulk_density_end_date"/>
                     </group>
-                    </group>
+                    </group> -->
 
                     <group attrs="{'invisible': [('bulk_density_visible', '=', False)]}">
                     <!-- <group> -->
