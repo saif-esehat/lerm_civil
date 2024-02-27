@@ -61,9 +61,14 @@
                             </tree>
                     </field>
                     </group>
-                    <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
+                  <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('sieve_visible', '=', False)]}">
                         <field name="total_sieve_analysis"/>
                     </group>
+                    <group style="width:50%"  attrs="{'invisible': [('sieve_visible', '=', False)]}">
+                        <field name="fineness_modulus"/>
+                    </group>
+                  </group>
 
                      <!-- Water Absorption -->
 

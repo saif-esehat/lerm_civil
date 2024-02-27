@@ -6,7 +6,7 @@
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
 			
-			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
 				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report on Half Cell Potential</b></p>
 				</div> -->
@@ -254,11 +254,11 @@
 							<tr cols="12">
 								<td colspan="1" style="border-bottom:none">
 								</td>
-								<td colspan="3" style="border-bottom:none">
+								<td colspan="2" style="border-bottom:none">
 								</td>
 								<td colspan="2" style="border-bottom:none">
 								</td>
-								<td colspan="6">Potential mV (milli volts)
+								<td colspan="8">Potential mV (milli volts)
 								</td>
 								
 							</tr>
@@ -343,8 +343,8 @@
 							</tr>
 						</table>
 					</div>
-					<div style="page-break-before: always;">
-					</div>
+					<!-- <div style="page-break-before: always;">
+					</div> -->
 					<div style="margin-top:20px;page-break-inside: avoid">
 						<h4 >Criteria for Corrosion of Rebar in Concrete for Different Half-Cells</h4>
 						<b style="text-align:center">(Clauses 4 and 6.11)</b>
@@ -398,10 +398,10 @@
 								<span>– 200 mV to – 350 mV</span>
 							</td>
 							<td colspan="2">
-								<span> &gt;– 126 mV to – 276 mV</span>
+								<span>– 126 mV to – 276 mV</span>
 							</td>
 							<td colspan="2">
-								<span> &gt;– 106 mV to – 256 mV</span>
+								<span> – 106 mV to – 256 mV</span>
 							</td>
 							<td colspan="4">
 								<span>Corrosion activity of the reinforcing steel in that area is uncertain</span>
@@ -412,13 +412,13 @@
 								<span>3</span>
 							</td>
 							<td colspan="3">
-								<span> – 350 mV or more negative than – 350 mV</span>
+								<span>&lt; – 350 mV or more negative than – 350 mV</span>
 							</td>
 							<td colspan="2">
-								<span>– 276 mV</span>
+								<span>&lt; – 276 mV</span>
 							</td>
 							<td colspan="2">
-								<span> – 256 mV</span>
+								<span>&lt; – 256 mV</span>
 							</td>
 							<td colspan="4">
 								<span>High (there is a greater than 90 percent probability that reinforcing steel corrosion is occurring in that area at the time of measurement)</span>
@@ -429,13 +429,13 @@
 								<span>4</span>
 							</td>
 							<td colspan="3">
-								<span>– 500 mV</span>
+								<span>&lt; – 500 mV</span>
 							</td>
 							<td colspan="2">
-								<span>– 426 mV</span>
+								<span>&lt; – 426 mV</span>
 							</td>
 							<td colspan="2">
-								<span> – 406 mV</span>
+								<span>&lt; – 406 mV</span>
 							</td>
 							<td colspan="4">
 								<span>Severe corrosion</span>
@@ -558,6 +558,11 @@
 							<li>
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
+							<t t-foreach="data.notes" t-as="note" style="margin-bottom: 0px;margin-top: 0px;">
+								<li style="margin-bottom: 0px;margin-top: 0px;">
+									<span t-esc="note.notes"/>
+								</li>
+							</t>
 							 <li t-if="eln.has_witness">
 								Test witnessed by : <span t-esc="eln.witness_name"/>
 							</li>
@@ -600,7 +605,7 @@
 							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 						</div>
 						<div style="padding-top:5px">
-							Format No. <span t-esc="eln.material.test_format_no"/>
+									Format No. <span t-esc="o.parameters_result.parameter[0].report_format_no"/>
 						</div>
 					</div>
 					<div>

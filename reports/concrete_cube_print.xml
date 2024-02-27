@@ -390,18 +390,18 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
-										Test witnessed by : <span t-esc="eln.witness_name"/>
-										
+									<li t-if="eln.has_witness">
+										<p>Test witnessed by : <span t-esc="eln.witness_name"/>
+										</p>
 									</li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
 									</li>
-									<li t-if="eln.remarks">
+									<!-- <li t-if="eln.remarks">
 									<p style="font-size: 10px;">
 										Remarks : <span t-esc="eln.remarks"/>
 									</p>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</div>

@@ -1,7 +1,9 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
-from datetime import timedelta
+from datetime import datetime , timedelta
 import math
+
+
 
 
 
@@ -607,7 +609,7 @@ class FlyaschNormalConsistency(models.Model):
 
     soundness_table = fields.One2many('flyash.soundness.line','parent_id',string="Soundness")
     average_soundness = fields.Float("Average",compute="_compute_average_soundness")
-    expansion_soundness = fields.Integer("Expansion(mm)",compute="_compute_expansion_soundness")
+    expansion_soundness = fields.Float("Expansion(mm)",compute="_compute_expansion_soundness" ,digits=(16,1))
 
     @api.depends('soundness_table.expansion')
     def _compute_average_soundness(self):
@@ -633,8 +635,6 @@ class FlyaschNormalConsistency(models.Model):
                 record.expansion_soundness = expansion_soundness
             else:
                 record.expansion_soundness = 0
-
-
     expansion_soundness_conformity = fields.Selection([
             ('pass', 'Pass'),
             ('fail', 'Fail')], string="Conformity", compute="_compute_expansion_soundness_conformity", store=True)
