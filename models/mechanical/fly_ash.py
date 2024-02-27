@@ -1584,7 +1584,18 @@ class FlyaschNormalConsistency(models.Model):
                     record.fineness_blaine_visible = True
                
 
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
 
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
+            
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()

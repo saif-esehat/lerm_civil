@@ -353,6 +353,12 @@
                       <field name="days28_nabl"/>
                               
                     </group>
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
                   
                 </sheet>
             </form>

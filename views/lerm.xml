@@ -173,7 +173,7 @@
 
     </record>
 
-    <!-- <record id="lerm_sample_reports_action" model="ir.actions.act_window">
+     <record id="lerm_sample_reports_action" model="ir.actions.act_window">
             <field name="name">Sample Reports</field>
             <field name="type">ir.actions.act_window</field>    
             <field name="res_model">sample.reports.wizard</field>
@@ -182,6 +182,15 @@
             <field name="target">new</field>
 
             
+    </record>
+
+    <!-- <record id="lerm_ulr_reports_action" model="ir.actions.act_window">
+            <field name="name">ULR Reports</field>
+            <field name="type">ir.actions.act_window</field>    
+            <field name="res_model">ulr.reports.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ulr_reports_wizard"/>
+            <field name="target">new</field>
     </record> -->
     
     <menuitem id="lerm_root"
@@ -219,6 +228,14 @@
         name="Sample"
         parent="reporting_menu"
         action="lerm_sample_reports_action"
+        groups="lerm_civil.kes_admin_access_group"
+        sequence="10" /> -->
+
+
+    <!-- <menuitem id="lerm_ulr_reporting"
+        name="ULR"
+        parent="reporting_menu"
+        action="lerm_ulr_reports_action"
         groups="lerm_civil.kes_admin_access_group"
         sequence="10" /> -->
 

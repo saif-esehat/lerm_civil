@@ -92,6 +92,12 @@
                     <group attrs="{'invisible': [('usc_visible', '=', False)]}">
                         <field name='avg_usc' col="4"/>
                     </group>
+                      <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
                     
                      
                 </sheet>

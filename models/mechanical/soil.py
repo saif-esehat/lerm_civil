@@ -930,6 +930,17 @@ class Soil(models.Model):
                 if sample.internal_id == 'a59bdedd-72cb-40e8-be97-e17fc20ff3fa':
                     record.moisture_content_visible = True
 
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
 
     @api.model
     def create(self, vals):
