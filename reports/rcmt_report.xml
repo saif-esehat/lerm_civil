@@ -104,7 +104,7 @@
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
-							<!-- <tr>
+							<tr>
 								<td colspan="6">Age in Days :
 									<![CDATA[&nbsp;]]>
 									<span t-field="rcmt.age_of_days"/>
@@ -113,7 +113,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="rcmt.date_of_casting"/>
 								</td>
-							</tr> -->
+							</tr>
 							
 						</table>
 					</div>
