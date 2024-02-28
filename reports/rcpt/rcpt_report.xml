@@ -115,6 +115,8 @@
 							<tr>
 								<td colspan="6">Age in Days :
 									<![CDATA[&nbsp;]]>
+
+									<span t-field="rcpt.age_of_days"/>
 									<span t-field="rcpt.age_of_test"/>
 									<span> Days</span>
 								</td>
