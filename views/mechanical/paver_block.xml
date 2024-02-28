@@ -190,6 +190,43 @@
                           </group>
                         </div>
                     </group>
+                    <group attrs="{'invisible': [('paver_visible', '=', False)]}">
+                        <label for="st_correction_factor1" string="Correction Factor" />
+                        <div class="address_format " >
+                          <group colspan="1"  class="oe_inline">
+                            <label for="st_correction_factor1" string="Sample 1" />
+                            <field  name="st_correction_factor1"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="st_correction_factor2" string="Sample 2" />
+                            <field  name="st_correction_factor2"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="st_correction_factor3" string="Sample 3" />
+                            <field  name="st_correction_factor3"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="st_correction_factor4" string="Sample 4" />
+                            <field  name="st_correction_factor4"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="st_correction_factor5" string="Sample 5" />
+                            <field  name="st_correction_factor5"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="st_correction_factor6" string="Sample 6" />
+                            <field  name="st_correction_factor6"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="st_correction_factor7" string="Sample 7" />
+                            <field  name="st_correction_factor7"  colspan="3"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="st_correction_factor8" string="Sample 8" />
+                            <field  name="st_correction_factor8"  colspan="3"  nolabel="1"/>
+                          </group>
+                        </div>
+                    </group>
                      <group attrs="{'invisible': [('paver_visible', '=', False)]}">
                         <label for="split_tensile1" string="Tensile Splitting Strength in N/mm2" />
                         <div class="address_format " >
