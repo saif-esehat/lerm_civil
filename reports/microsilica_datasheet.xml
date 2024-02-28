@@ -364,7 +364,7 @@
 				<div style="text-align:center;font-size:18px;margin-top:30px">
 					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b9c80b7f-5f8c-44a2-984b-6ad2a17d250c')]).parameter_name"/>
 				</div>
-				<table>
+				<!-- <table>
 					<tr cols="12">
 						<td colspan="6">Temperature :
 							<![CDATA[&nbsp;]]>
@@ -385,7 +385,7 @@
 							<span t-field="data.end_date_oversize"/>
 						</td>
 					</tr>
-				</table>
+				</table> -->
 				<table style="margin-top:20px">
 
 					<tr cols="12">
@@ -439,7 +439,7 @@
 				<div style="text-align:center;font-size:18px">
 					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','e3d938f3-80ef-4de0-96ba-a279f27b9ede')]).parameter_name"/>
 				</div>
-				<table>
+				<!-- <table>
 					<tr cols="12">
 						<td colspan="6">Temperature :
 							<![CDATA[&nbsp;]]>
@@ -460,7 +460,7 @@
 							<span t-field="data.end_date_specific"/>
 						</td>
 					</tr>
-				</table>
+				</table> -->
 				<table style="margin-top:20px">
 
 					<tr cols="12">
@@ -520,7 +520,7 @@
 				<div style="text-align:center;font-size:18px">
 					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','8211b72d-889b-477c-a355-0476f6bcd0d7')]).parameter_name"/>
 				</div>
-				<table>
+				<!-- <table>
 					<tr cols="12">
 						<td colspan="6">Temperature :
 							<![CDATA[&nbsp;]]>
@@ -541,7 +541,7 @@
 							<span t-field="data.end_date_cmp_strngth"/>
 						</td>
 					</tr>
-				</table>
+				</table> -->
 				<table style="margin-top: 20px">
 							
 						
@@ -842,7 +842,7 @@
 				<div style="text-align:center;font-size:18px">
 					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3c5d3687-bfaf-4667-aca6-b69c321af63b')]).parameter_name"/>
 				</div>
-				<table>
+				<!-- <table>
 					<tr cols="12">
 						<td colspan="6">Temperature :
 							<![CDATA[&nbsp;]]>
@@ -863,7 +863,7 @@
 							<span t-field="data.oversize_end_date_specific"/>
 						</td>
 					</tr>
-				</table>
+				</table> -->
 				<table style="margin-top:20px">
 
 					<tr cols="12">
@@ -918,7 +918,7 @@
 				<div style="text-align:center;font-size:18px">
 					<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a1feec77-42b6-4d86-9ac7-a2758b3f4e5a')]).parameter_name"/>
 				</div>
-				<table>
+				<!-- <table>
 					<tr cols="12">
 						<td colspan="6">Temperature :
 							<![CDATA[&nbsp;]]>
@@ -939,7 +939,7 @@
 							<span t-field="data.bulk_density_end_date"/>
 						</td>
 					</tr>
-				</table>
+				</table> -->
 				<table style="margin-top:20px">
 
 					<tr cols="12">

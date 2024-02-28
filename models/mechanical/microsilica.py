@@ -259,10 +259,10 @@ class Microsilica(models.Model):
     oversize_name = fields.Char("Name",default="Oversize % Retained on 45 Micron IS sieve")
     oversize_retain_visible = fields.Boolean("Oversize Visible",compute="_compute_visible")
 
-    temp_percent_oversize = fields.Float("Temperature °c")
-    humidity_percent_oversize = fields.Float("Humidity %")
-    start_date_oversize = fields.Date("Start Date")
-    end_date_oversize = fields.Date("End Date")
+    # temp_percent_oversize = fields.Float("Temperature °c")
+    # humidity_percent_oversize = fields.Float("Humidity %")
+    # start_date_oversize = fields.Date("Start Date")
+    # end_date_oversize = fields.Date("End Date")
     
     
     oversize_retained_tables = fields.One2many('oversize.retail.line','parent_id',string="Oversize % Retained on 45 Micron IS sieve")
@@ -349,10 +349,10 @@ class Microsilica(models.Model):
     specific_gravity_name = fields.Char("Name",default="Specific Gravity")
     specific_gravity_visible = fields.Boolean("Specific Visible",compute="_compute_visible")
 
-    temp_percent_specific = fields.Float("Temperature °c")
-    humidity_percent_specific = fields.Float("Humidity %")
-    start_date_specific = fields.Date("Start Date")
-    end_date_specific = fields.Date("End Date")
+    # temp_percent_specific = fields.Float("Temperature °c")
+    # humidity_percent_specific = fields.Float("Humidity %")
+    # start_date_specific = fields.Date("Start Date")
+    # end_date_specific = fields.Date("End Date")
     
     
     specific_gravity_tables = fields.One2many('specific.gravity.line','parent_id',string="Specific Gravity")
@@ -430,10 +430,10 @@ class Microsilica(models.Model):
     compressive_strength_name = fields.Char("Name",default="Compressive Strength")
     compressive_strength_visible = fields.Boolean("Compressive Visible",compute="_compute_visible")
 
-    temp_percent_cmp_strngth = fields.Float("Temperature °c")
-    humidity_percent_cmp_strngth = fields.Float("Humidity %")
-    start_date_cmp_strngth = fields.Date("Start Date")
-    end_date_cmp_strngth = fields.Date("End Date")
+    # temp_percent_cmp_strngth = fields.Float("Temperature °c")
+    # humidity_percent_cmp_strngth = fields.Float("Humidity %")
+    # start_date_cmp_strngth = fields.Date("Start Date")
+    # end_date_cmp_strngth = fields.Date("End Date")
     
     n_is = fields.Integer(string="N (as per IS 15388)",default=1)
     microsilica_wt = fields.Integer(string="Weight of Microsilica (100*N)",default=100)
@@ -662,10 +662,10 @@ class Microsilica(models.Model):
     oversize_percent_name = fields.Char("Name",default="Oversize Percent Retained on 45 Micron IS sieve variation from Avg. %")
     oversize_percent_retain_visible = fields.Boolean("Oversize Percent Visible",compute="_compute_visible")
 
-    oversize_temp_percent = fields.Float("Temperature °c")
-    oversize_humidity_percent_specific = fields.Float("Humidity %")
-    oversize_start_date_specific = fields.Date("Start Date")
-    oversize_end_date_specific = fields.Date("End Date")
+    # oversize_temp_percent = fields.Float("Temperature °c")
+    # oversize_humidity_percent_specific = fields.Float("Humidity %")
+    # oversize_start_date_specific = fields.Date("Start Date")
+    # oversize_end_date_specific = fields.Date("End Date")
     
     
     oversize_percent_tables = fields.One2many('oversize.retain.percent.line','parent_id',string="Oversize 45 Grain Micron")
@@ -738,10 +738,10 @@ class Microsilica(models.Model):
     bulk_density_name = fields.Char("Name",default="Dry Loose Bulk Density")
     bulk_density_visible = fields.Boolean("Dry Bulk Density Visible",compute="_compute_visible")
 
-    bulk_density_temp_percent = fields.Float("Temperature °c")
-    bulk_density_humidity_percent = fields.Float("Humidity %")
-    bulk_density_start_date = fields.Date("Start Date")
-    bulk_density_end_date = fields.Date("End Date")
+    # bulk_density_temp_percent = fields.Float("Temperature °c")
+    # bulk_density_humidity_percent = fields.Float("Humidity %")
+    # bulk_density_start_date = fields.Date("Start Date")
+    # bulk_density_end_date = fields.Date("End Date")
     
     
     bulk_density_tables = fields.One2many('dry.loose.bulk.density.line','parent_id',string="Dry Loose Bulk Density")

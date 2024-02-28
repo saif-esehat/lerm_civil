@@ -201,9 +201,9 @@ class CoarseAggregateMechanical(models.Model):
     # specific_gravity_child_lines = fields.One2many('mechanical.specific.gravity.and.water.absorption.line','parent_id',string="Parameter")
     
 
-    wt_surface_dry = fields.Integer(string="Weight of saturated surface dry (SSD) sample in air in gms")
-    wt_sample_inwater = fields.Integer(string="Weight of saturated sample in water in gms")
-    oven_dried_wt = fields.Integer(string="Oven dried weight of sample in gms")
+    wt_surface_dry = fields.Float(string="Weight of saturated surface dry (SSD) sample in air in gms")
+    wt_sample_inwater = fields.Float(string="Weight of saturated sample in water in gms")
+    oven_dried_wt = fields.Float(string="Oven dried weight of sample in gms")
     specific_gravity = fields.Float(string="Specific Gravity",compute="_compute_specific_gravity")
     water_absorption = fields.Float(string="Water absorption  %",compute="_compute_water_absorption")
 

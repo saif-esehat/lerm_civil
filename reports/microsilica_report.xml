@@ -39,8 +39,8 @@
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
 							</tr>
-						</table>
-						<table>
+						<!-- </table>
+						<table> -->
 							<tr>
 								<td colspan="6">Test Start Date :																		<![CDATA[&nbsp;]]>
 									<span t-field="o.start_date"/>
@@ -125,7 +125,7 @@
 						<p><strong>Results</strong>:<![CDATA[&nbsp;]]></p>
 						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
 					</div>
-					<table style="margin-top:30px;">
+					<table style="margin-top:10px;">
 						<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
@@ -960,7 +960,10 @@
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
 							 <li t-if="eln.has_witness">
-								<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+								Test witnessed by : <span t-esc="eln.witness_name"/>
+							</li>
+							<li t-if="eln.remarks">
+								<span t-esc="eln.remarks"/>
 							</li>
 						</ul>
 					</div>
