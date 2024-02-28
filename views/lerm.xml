@@ -218,7 +218,7 @@
         parent="lerm_root"
         sequence="20"  />
 
-    <!-- <menuitem id="reporting_menu"
+    <menuitem id="reporting_menu"
         name="Reports"
         parent="lerm_root" 
         groups="lerm_civil.kes_admin_access_group"
@@ -229,7 +229,7 @@
         parent="reporting_menu"
         action="lerm_sample_reports_action"
         groups="lerm_civil.kes_admin_access_group"
-        sequence="10" /> -->
+        sequence="10" />
 
 
     <!-- <menuitem id="lerm_ulr_reporting"
