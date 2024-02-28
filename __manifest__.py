@@ -9,6 +9,8 @@
     'security/security.xml',
     'data/sequence.xml',
     'views/enviroment_register.xml',
+    'reports/wizard_reports/sample_report.xml',
+    'reports/wizard_reports/ulr_report.xml',
     'views/lerm.xml',
     'views/groups.xml',
     'views/res_company.xml',
@@ -209,8 +211,7 @@
     'reports/structural_steel_round/report.xml',
     'reports/act/act_datasheet.xml',
     'reports/act/act_report.xml',
-    'reports/wizard_reports/sample_report.xml',
-    'reports/wizard_reports/ulr_report.xml',
+    
 
 
     
