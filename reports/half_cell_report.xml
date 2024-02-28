@@ -254,11 +254,11 @@
 							<tr cols="12">
 								<td colspan="1" style="border-bottom:none">
 								</td>
-								<td colspan="3" style="border-bottom:none">
+								<td colspan="2" style="border-bottom:none">
 								</td>
 								<td colspan="2" style="border-bottom:none">
 								</td>
-								<td colspan="6">Potential mV (milli volts)
+								<td colspan="8">Potential mV (milli volts)
 								</td>
 								
 							</tr>
@@ -343,6 +343,8 @@
 							</tr>
 						</table>
 					</div>
+					<!-- <div style="page-break-before: always;">
+					</div> -->
 					<div style="margin-top:20px;page-break-inside: avoid">
 						<h4 >Criteria for Corrosion of Rebar in Concrete for Different Half-Cells</h4>
 						<b style="text-align:center">(Clauses 4 and 6.11)</b>
@@ -376,16 +378,16 @@
 								<span>1</span>
 							</td>
 							<td colspan="3">
-								<span> &gt;-200 mV or less negative than -200 mV</span>
+								<span> &gt; – 200 mV or less negative than – 200 mV</span>
 							</td>
 							<td colspan="2">
-								<span> &gt;-126 mV</span>
+								<span> &gt; – 126 mV</span>
 							</td>
 							<td colspan="2">
-								<span> &gt;-106 mV</span>
+								<span> &gt;– 106 mV</span>
 							</td>
 							<td colspan="4">
-								<span>Low (there is a greater than 90 percent probability that no reinforcing steel corrosion is occuring in that area at the time of measurement)</span>
+								<span>Low (there is a greater than 90 percent probability that no reinforcing steel corrosion is occurring in that area at the time of measurement)</span>
 							</td>
 						</tr>
 						<tr cols="12">
@@ -393,13 +395,13 @@
 								<span>2</span>
 							</td>
 							<td colspan="3">
-								<span>-200 mV to -350 mV</span>
+								<span>– 200 mV to – 350 mV</span>
 							</td>
 							<td colspan="2">
-								<span> &gt;-126 mV to -276 mV</span>
+								<span>– 126 mV to – 276 mV</span>
 							</td>
 							<td colspan="2">
-								<span> &gt;-106 mV to -256 mV</span>
+								<span> – 106 mV to – 256 mV</span>
 							</td>
 							<td colspan="4">
 								<span>Corrosion activity of the reinforcing steel in that area is uncertain</span>
@@ -410,16 +412,16 @@
 								<span>3</span>
 							</td>
 							<td colspan="3">
-								<span> less than -350 mV or more negative than -350 mV</span>
+								<span>&lt; – 350 mV or more negative than – 350 mV</span>
 							</td>
 							<td colspan="2">
-								<span> less than -276 mV</span>
+								<span>&lt; – 276 mV</span>
 							</td>
 							<td colspan="2">
-								<span> less than -276 mV</span>
+								<span>&lt; – 256 mV</span>
 							</td>
 							<td colspan="4">
-								<span>Low (there is a greater than 90 percent probability that reinforcing steel corrosion is occuring in that area at the time of measurement)</span>
+								<span>High (there is a greater than 90 percent probability that reinforcing steel corrosion is occurring in that area at the time of measurement)</span>
 							</td>
 						</tr>
 						<tr cols="12">
@@ -427,22 +429,22 @@
 								<span>4</span>
 							</td>
 							<td colspan="3">
-								<span> less than -500 mV </span>
+								<span>&lt; – 500 mV</span>
 							</td>
 							<td colspan="2">
-								<span> less than -426 mV</span>
+								<span>&lt; – 426 mV</span>
 							</td>
 							<td colspan="2">
-								<span> less than -406 mV</span>
+								<span>&lt; – 406 mV</span>
 							</td>
 							<td colspan="4">
-								<span>Severe Corrosion</span>
+								<span>Severe corrosion</span>
 							</td>
 						</tr>
 					</table>
 					</div>
 					
-					<div style="page-break-inside: avoid;">
+					<!-- <div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
 							<div>
 								<b>Note :-</b>
@@ -537,14 +539,103 @@
 										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
 									</b>
 								</div>
-								<!-- <div>
-									<b>
-										(Authorized Signatory)
-									</b>
-								</div> -->
+								
 							</div>
 						</div>
+					</div> -->
+					<div style="margin-top:20px; page-break-inside: avoid;" class="noteContainer">
+					<div>
+						<b>Remarks: -</b>
 					</div>
+					<div>
+						<ul>
+							<li>
+								The Test Report(s) is/are valid only to the sample submitted to the laboratory.
+							</li>
+							<li>
+								Sample(s) was/were not drawn by laboratory.
+							</li>
+							<li>
+								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
+							</li>
+							<t t-foreach="data.notes" t-as="note" style="margin-bottom: 0px;margin-top: 0px;">
+								<li style="margin-bottom: 0px;margin-top: 0px;">
+									<span t-esc="note.notes"/>
+								</li>
+							</t>
+							 <li t-if="eln.has_witness">
+								Test witnessed by : <span t-esc="eln.witness_name"/>
+							</li>
+							<li t-if="eln.remarks">
+								<span t-esc="eln.remarks"/>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+
+				<div class="signatureContainer girdgird">
+					<div>
+						<div>
+							<b>
+								Checked By
+							</b>
+						</div>
+						<div style="height: 40px;">
+							<t t-if="eln.sample_id.checkby_signature_required">
+								<div t-if="eln.sample_id.check_by.employee_id.signature">
+									<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
+								</div>
+								
+							</t>
+						</div>
+						<div>
+							<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(<span t-esc="eln.sample_id.check_by.job_title"/>)
+							</b>
+						</div>
+					</div>
+					<div>
+						<div>
+							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+						</div>
+						<div style="padding-top:5px">
+									Format No. <span t-esc="o.parameters_result.parameter[0].report_format_no"/>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b>
+								Approved By 
+							</b>
+							
+						</div>
+						<div style="height: 40px;">
+							<t t-if="eln.sample_id.approveby_signature_required">
+								<div t-if="eln.sample_id.approved_by.employee_id.signature">
+									<img t-att-src="'data:image/png;base64,' + eln.sample_id.approved_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
+								</div>
+								
+							</t>
+						</div>
+						<div>
+							<b>
+							<span t-esc="eln.sample_id.approved_by.name"/>
+							</b>
+						</div>
+						<div>
+							<b>
+								(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+							</b>
+						</div>
+						
+					</div>		
+				</div>
 				</div>
 			</t>
 		</t>

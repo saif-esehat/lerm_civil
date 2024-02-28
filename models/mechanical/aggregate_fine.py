@@ -385,6 +385,14 @@ class FineAggregate(models.Model):
     total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
     # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
 
+    fineness_modulus = fields.Float(string="Fineness Modulus", compute="_compute_fineness_modulus")
+
+    @api.depends('sieve_analysis_child_lines.cumulative_retained')
+    def _compute_fineness_modulus(self):
+        for record in self:
+            fineness_modulus = sum(line.cumulative_retained for line in record.sieve_analysis_child_lines)/100
+            record.fineness_modulus = fineness_modulus
+
     @api.model
     def _default_sieve_analysis_child_lines(self):
         default_lines = [

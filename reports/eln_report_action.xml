@@ -20,6 +20,16 @@
         <field name="binding_model_id" ref="model_sample_reports_wizard"/>
         <field name="binding_type">report</field>
     </record>
+
+    <record id="ulr_wizard_report_action" model="ir.actions.report">
+        <field name="name">ULR Report</field>
+        <field name="model">lerm.srf.sample</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.ulr_wizard_report_template</field>
+        <field name="report_file">lerm_civil.ulr_wizard_report_template</field>
+        <field name="binding_model_id" ref="model_ulr_reports_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
     
     
     <record id="datasheet_report_action" model="ir.actions.report">

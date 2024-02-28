@@ -25,7 +25,7 @@ class ChemicalFlyAsh(models.Model):
     wt_of_sample = fields.Float("Wt of sample taken W1 (gm)")
     wt_of_two_rp = fields.Float("Wt of two residue and paper after ignition at 1100˚C in crucible gm")
     wt_of_two_r = fields.Float("Weight of residues in crucible after HF at 1100˚C gm")
-    difference_in_wt = fields.Float("Difference in weight = ( B - C )",compute="_compute_difference_in_wt")
+    difference_in_wt = fields.Float("Difference in weight = ( B - C )",compute="_compute_difference_in_wt",digits=(16, 4))
     Silica = fields.Float("SiO₂ = D x 100/A",compute="_compute_silica_percentage")
 
     Silica_conformity = fields.Selection([
@@ -641,7 +641,7 @@ class ChemicalFlyAsh(models.Model):
     wt_of_sample_so3 = fields.Float("sample wt (gm)")
     wt_cr_so3 = fields.Float("wt of crucible + residue (gm)")
     wt_empty_co3 = fields.Float("wt of empty crucible (gm)")
-    difference_co3 = fields.Float("Residue weight = (B - C) gm", compute="_compute_difference_so3")
+    difference_co3 = fields.Float("Residue weight = (B - C) gm", compute="_compute_difference_so3",digits=(16, 4))
     so3 = fields.Float("% Sulphur trioxide (SO3)", compute="_compute_so3")
 
     @api.depends('wt_cr_so3', 'wt_empty_co3')
@@ -718,8 +718,8 @@ class ChemicalFlyAsh(models.Model):
     wt_of_empty_loi = fields.Float("wt of empty crucible (gm)")
     wt_empty_cs_loi = fields.Float("wt of empty crucible + sample before ignition gm")
     wt_cs_loi = fields.Float("wt of crucible + sample after ignition gm")
-    wt_of_sample_loi = fields.Float("Wt of sample gm = B - C", compute="_compute_wt_of_sample_loi")
-    loi_in_wt = fields.Float("Loss in weight = B - A", compute="_compute_loi_in_wt")
+    wt_of_sample_loi = fields.Float("Wt of sample gm = B - C", compute="_compute_wt_of_sample_loi",digits=(16, 4))
+    loi_in_wt = fields.Float("Loss in weight = B - A", compute="_compute_loi_in_wt",digits=(16, 4))
     loi = fields.Float("Loss on ignition = E x 100/ D", compute="_compute_loi")
 
     @api.depends('wt_empty_cs_loi', 'wt_cs_loi')
@@ -1042,7 +1042,7 @@ class ChemicalFlyAsh(models.Model):
     burette_reading_sample_chloride = fields.Float("Burette reading  for sample (ml)")
     diff_chloride = fields.Float("Diff. in Burette readings = (A - B )",compute="_compute_diff_chloride")
     normality_chloride = fields.Float("Normarility of 0.025N NH₄SCN")
-    wt_of_sample_chloride  = fields.Float("weight of sample (gm)")
+    wt_of_sample_chloride  = fields.Float("weight of sample (gm)",digits=(16, 4))
     chloride = fields.Float("Chloride % = C x D x 0.03545 x 100 / E",compute="_compute_chloride",digits=(12,3))
 
     @api.depends('burette_reading_chloride', 'burette_reading_sample_chloride')
