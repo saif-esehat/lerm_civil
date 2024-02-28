@@ -181,7 +181,7 @@
                         </tree>
                         </field>
                     </group>
-                    
+                     <group style="width:100%">
                     <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                             
                         <group style="width:33%">
@@ -194,6 +194,7 @@
                             <field name="total_flakiness_retained"/>
                         </group>
                         
+                    </group>
                     </group>
                      
                     <group style="width:100%">
