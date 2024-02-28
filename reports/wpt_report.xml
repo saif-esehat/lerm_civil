@@ -105,6 +105,16 @@
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
+							<tr>
+								<td colspan="6">Age in Days :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.age_of_test"/>
+								</td>
+								<td colspan="6">Date of Casting :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.date_of_casting"/>
+								</td>
+							</tr>
 							
 							
 						</table>
@@ -289,10 +299,10 @@
 						<!-- <div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div> -->
-						<div style="margin-top: 30px; text-align: center;">
-							<p style="border-top: 1px dashed #000; padding-top: 10px;">
+						<div style="margin-top: 10px; text-align: center;">
+							
 								...... End Of Report......
-							</p>
+							
 						</div>
 					</div>
 				<!-- </div> -->
