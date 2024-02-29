@@ -1345,7 +1345,11 @@
 									</li>
 									
 									<li t-if="eln.has_witness">
-										<p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
+										Test witnessed by : <span t-esc="eln.witness_name"/>
+										
+									</li>
+									<li t-if="eln.remarks">
+										<span t-esc="eln.remarks"/>
 									</li>
 									<li>
 										Specific Gravity - Derived Parameter

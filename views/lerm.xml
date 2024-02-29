@@ -232,12 +232,12 @@
         sequence="10" />
 
 
-    <!-- <menuitem id="lerm_ulr_reporting"
+    <menuitem id="lerm_ulr_reporting"
         name="ULR"
         parent="reporting_menu"
         action="lerm_ulr_reports_action"
         groups="lerm_civil.kes_admin_access_group"
-        sequence="10" /> -->
+        sequence="10" />
 
 
     <menuitem id="lerm_product_item_param_master"
