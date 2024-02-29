@@ -66,6 +66,15 @@ class PaverBlock(models.Model):
     failure_load7 = fields.Float(string="Failure Load in N")
     failure_load8 = fields.Float(string="Failure Load in N")
 
+    st_correction_factor1 = fields.Float(string="Correction Factor")
+    st_correction_factor2 = fields.Float(string="Correction Factor")
+    st_correction_factor3 = fields.Float(string="Correction Factor")
+    st_correction_factor4 = fields.Float(string="Correction Factor")
+    st_correction_factor5 = fields.Float(string="Correction Factor")
+    st_correction_factor6 = fields.Float(string="Correction Factor")
+    st_correction_factor7 = fields.Float(string="Correction Factor")
+    st_correction_factor8 = fields.Float(string="Correction Factor")
+
     split_tensile1 = fields.Float(string="Tensile Splitting Strength in N/mm2",compute="_compute_split_tensile1")
     split_tensile2 = fields.Float(string="Tensile Splitting Strength in N/mm2",compute="_compute_split_tensile2")
     split_tensile3 = fields.Float(string="Tensile Splitting Strength in N/mm2",compute="_compute_split_tensile3")
@@ -127,70 +136,70 @@ class PaverBlock(models.Model):
             record.area8 = record.mean_of_lenght8 * record.mean_thickness8
 
 
-    @api.depends('failure_load1', 'area1')
+    @api.depends('failure_load1', 'area1','st_correction_factor1')
     def _compute_split_tensile1(self):
         for record in self:
             if record.area1 != 0:
-                record.split_tensile1 = record.failure_load1 / record.area1
+                record.split_tensile1 = 0.637*record.failure_load1*record.st_correction_factor1 / record.area1
             else:
                 record.split_tensile1 = 0.0
 
-    @api.depends('failure_load2', 'area2')
+    @api.depends('failure_load2', 'area2','st_correction_factor2')
     def _compute_split_tensile2(self):
         for record in self:
             if record.area2 != 0:
-                record.split_tensile2 = record.failure_load2 / record.area2
+                record.split_tensile2 = 0.637*record.failure_load2*record.st_correction_factor2 / record.area2
             else:
                 record.split_tensile2 = 0.0
 
-    @api.depends('failure_load3', 'area3')
+    @api.depends('failure_load3', 'area3','st_correction_factor3')
     def _compute_split_tensile3(self):
         for record in self:
             if record.area3 != 0:
-                record.split_tensile3 = record.failure_load3 / record.area3
+                record.split_tensile3 = 0.637*record.failure_load3*record.st_correction_factor3 / record.area3
             else:
                 record.split_tensile3 = 0.0
 
 
 
-    @api.depends('failure_load4', 'area4')
+    @api.depends('failure_load4', 'area4','st_correction_factor4')
     def _compute_split_tensile4(self):
         for record in self:
             if record.area4 != 0:
-                record.split_tensile4 = record.failure_load4 / record.area4
+                record.split_tensile4 = 0.637*record.failure_load4*record.st_correction_factor4 / record.area4
             else:
                 record.split_tensile4 = 0.0
 
-    @api.depends('failure_load5', 'area5')
+    @api.depends('failure_load5', 'area5','st_correction_factor5')
     def _compute_split_tensile5(self):
         for record in self:
             if record.area5 != 0:
-                record.split_tensile5 = record.failure_load5 / record.area5
+                record.split_tensile5 = 0.637*record.failure_load5*record.st_correction_factor5 / record.area5
             else:
                 record.split_tensile5 = 0.0
 
 
-    @api.depends('failure_load6', 'area6')
+    @api.depends('failure_load6', 'area6','st_correction_factor6')
     def _compute_split_tensile6(self):
         for record in self:
             if record.area6 != 0:
-                record.split_tensile6 = record.failure_load6 / record.area6
+                record.split_tensile6 = 0.637*record.failure_load6*record.st_correction_factor6 / record.area6
             else:
                 record.split_tensile6 = 0.0
 
-    @api.depends('failure_load7', 'area7')
+    @api.depends('failure_load7', 'area7','st_correction_factor7')
     def _compute_split_tensile7(self):
         for record in self:
             if record.area7 != 0:
-                record.split_tensile7 = record.failure_load7 / record.area7
+                record.split_tensile7 = 0.637*record.failure_load7*record.st_correction_factor7 / record.area7
             else:
                 record.split_tensile7 = 0.0
 
-    @api.depends('failure_load8', 'area8')
+    @api.depends('failure_load8', 'area8','st_correction_factor8')
     def _compute_split_tensile8(self):
         for record in self:
             if record.area8 != 0:
-                record.split_tensile8 = record.failure_load8 / record.area8
+                record.split_tensile8 = 0.637*record.failure_load8*record.st_correction_factor8 / record.area8
             else:
                 record.split_tensile8 = 0.0
 

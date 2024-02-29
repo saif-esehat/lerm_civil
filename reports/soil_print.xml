@@ -1271,6 +1271,12 @@
 									</th>
 									<th>
 										<span>
+											Weight of   moisture in gm
+
+										</span>
+									</th>
+									<th>
+										<span>
 											% Moisture
 										</span>
 									</th>
@@ -1291,37 +1297,40 @@
 										</div>
 									</td>
 									<td>
-										<span t-esc="round(float(r.determination_no))"/>
+										<span t-esc="r.determination_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_modul_compact))"/>
+										<span t-esc="r.wt_of_modul_compact"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_compact))"/>
+										<span t-esc="r.wt_of_compact"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.bulk_density))"/>
+										<span t-esc="r.bulk_density"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.container_no))"/>
+										<span t-esc="r.container_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_container_wet),2)"/>
+										<span t-esc="r.wt_of_container"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_container_dry))"/>
+										<span t-esc="r.wt_of_container_wet"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_dry_sample))"/>
+										<span t-esc="r.wt_of_container_dry"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_moisture),2)"/>
+										<span t-esc="r.wt_of_dry_sample"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.moisture))"/>
+										<span t-esc="r.wt_of_moisture"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.dry_density))"/>
+										<span t-esc="r.moisture"  t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.dry_density"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</tbody>
@@ -1436,6 +1445,12 @@
 									</th>
 									<th>
 										<span>
+											Weight of   moisture in gm
+
+										</span>
+									</th>
+									<th>
+										<span>
 											% Moisture
 										</span>
 									</th>
@@ -1456,37 +1471,40 @@
 										</div>
 									</td>
 									<td>
-										<span t-esc="round(float(r.determination_no))"/>
+										<span t-esc="r.determination_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_modul_compact))"/>
+										<span t-esc="r.wt_of_modul_compact"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_compact))"/>
+										<span t-esc="r.wt_of_compact"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.bulk_density))"/>
+										<span t-esc="r.bulk_density"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.container_no))"/>
+										<span t-esc="r.container_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_container_wet),2)"/>
+										<span t-esc="r.wt_of_container"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_container_dry))"/>
+										<span t-esc="r.wt_of_container_wet"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_dry_sample))"/>
+										<span t-esc="r.wt_of_container_dry"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_moisture),2)"/>
+										<span t-esc="r.wt_of_dry_sample"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.moisture))"/>
+										<span t-esc="r.wt_of_moisture"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.dry_density))"/>
+										<span t-esc="r.moisture"  t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.dry_density"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</tbody>
@@ -1519,11 +1537,11 @@
 						<table style="margin-top:30px;">
 							<thead>
 								<tr>
-									<th>
+									<!-- <th>
 										<span>
 											Sr. No
 										</span>
-									</th>
+									</th> -->
 									<th>
 										<span>
 											Container No
@@ -1567,37 +1585,37 @@
 								</tr>
 							</thead>
 							<tbody>
-								<t t-set="m" t-value="0"/>
+								<!-- <t t-set="m" t-value="0"/> -->
 								<tr t-foreach="data.child_liness" t-as="r">
-									<td>
+									<!-- <td>
 										<div>
 											<span t-esc="m + 1" />
 											<t t-set="m" t-value="m+1"/>
 										</div>
+									</td> -->
+									<td>
+										<span t-esc="r.container_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.container_no))"/>
+										<span t-esc="r.blwo_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.blwo_no))"/>
+										<span t-esc="r.mass_of_wet"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_wet))"/>
+										<span t-esc="r.mass_of_dry"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_dry))"/>
+										<span t-esc="r.mass_of_container"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_container))"/>
+										<span t-esc="r.mass_of_moisture"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_moisture),2)"/>
+										<span t-esc="r.mass_of_dry_sample"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_dry_sample))"/>
-									</td>
-									<td>
-										<span t-esc="round(float(r.moisture),2)"/>
+										<span t-esc="r.moisture"  t-options='{"widget": "float", "precision": 2}' />
 									</td>
 								</tr>
 							</tbody>
@@ -1607,7 +1625,7 @@
 								<tr cols="12">
 									<td colspan="6">Liquid Limit :
 										<![CDATA[&nbsp;]]>
-										<span t-field="data.liquid_limit"/>
+										<span t-field="data.liquid_limit"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</table>
@@ -1676,25 +1694,25 @@
 										</div>
 									</td>
 									<td>
-										<span t-esc="round(float(r.container_no))"/>
+										<span t-esc="r.container_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_wet))"/>
+										<span t-esc="r.mass_of_wet"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_dry))"/>
+										<span t-esc="r.mass_of_dry"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_container))"/>
+										<span t-esc="r.mass_of_container"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_moisture),2)"/>
+										<span t-esc="r.mass_of_moisture"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.mass_of_dry_sample))"/>
+										<span t-esc="r.mass_of_dry_sample"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.moisture),2)"/>
+										<span t-esc="r.moisture"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</tbody>
@@ -1704,7 +1722,7 @@
 								<tr cols="12">
 									<td colspan="12">Average of % Moisture :
 										<![CDATA[&nbsp;]]>
-										<span t-field="data.plastic_limit"/>
+										<span t-field="data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</table>
@@ -1750,11 +1768,11 @@
 							</tr>
 							<tr>
 								<td style="font-weight: bold;">Weight of sand + Cylinder before pouring gm</td>
-								<td style="text-align: center;"><span t-field="data.wt_of_before_cylinder" t-options='{"widget": "float", "precision": 2}'/></td>
+								<td style="text-align: center;"><span t-field="data.wt_of_before_cylinder"/></td>
 							</tr>
 							<tr>
 								<td style="font-weight: bold;">Weight of sand + Cylinder after pouring gm</td>
-								<td style="text-align: center;"><span t-field="data.wt_of_after_cylinder" t-options='{"widget": "float", "precision": 2}' /></td>
+								<td style="text-align: center;"><span t-field="data.wt_of_after_cylinder"/></td>
 							</tr>
 							<tr>
 								<td style="font-weight: bold;">Weight of sand in cone gm</td>
@@ -1762,7 +1780,7 @@
 							</tr>
 							<tr>
 								<td style="font-weight: bold;">Weight of sand in hole gm</td>
-								<td style="text-align: center;"><span t-field="data.wt_of_sand_hole" t-options='{"widget": "float", "precision": 2}'/></td>
+								<td style="text-align: center;"><span t-field="data.wt_of_sand_hole"/></td>
 							</tr>
 							<tr>
 								<td style="font-weight: bold;">Density of sand gm/cc</td>
@@ -1770,7 +1788,7 @@
 							</tr>
 							<tr>
 								<td style="font-weight: bold;">Volume of hole cc</td>
-								<td style="text-align: center;"><span t-field="data.volume_of_hole" /></td>
+								<td style="text-align: center;"><span t-field="data.volume_of_hole" t-options='{"widget": "float", "precision": 2}' /></td>
 							</tr>
 							<tr>
 								<td style="font-weight: bold;">Bulk Density of sample gm/cc</td>
@@ -1779,7 +1797,7 @@
 
 							<tr>
 								<td style="font-weight: bold;">Dry Density of sample</td>
-								<td style="text-align: center;"><span t-field="data.dry_density_of_sample" /></td>
+								<td style="text-align: center;"><span t-field="data.dry_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
 							</tr>
 							<tr>
 								<td style="font-weight: bold;">Degree of Compaction %</td>
@@ -1825,16 +1843,16 @@
 
 								<tr t-foreach="data.moisture_content_table" t-as="r">
 									<td>
-										<span t-esc="round(float(r.sr_no))"/>
+										<span t-esc="r.sr_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_sample))"/>
+										<span t-esc="r.wt_of_sample" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.oven_dry_wt))"/>
+										<span t-esc="r.oven_dry_wt" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.moisture_content))"/>
+										<span t-esc="r.moisture_content" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</tbody>
@@ -1844,7 +1862,7 @@
 								<tr cols="12">
 									<td colspan="12">Average :
 										<![CDATA[&nbsp;]]>
-										<span t-field="data.average_block"/>
+										<span t-field="data.average_block" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</table>
