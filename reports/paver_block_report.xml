@@ -1175,9 +1175,9 @@
                         <thead>
                             <tr>
                                
-                                <th>Length in mm</th>
-                                <th>Width in mm</th>
-                                <th>Thickness in mm</th>
+                                <th>Length in Avg mm </th>
+                                <th>Width in Avg mm</th>
+                                <th>Thickness in Avg mm</th>
                                 <th>Plan Area</th>
                                <th  style="max-width: 250px;">
                                 <span>
