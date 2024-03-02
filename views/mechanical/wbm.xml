@@ -156,10 +156,10 @@
                         </h1>
                 </group>
                 <group attrs="{'invisible': [('abrasion_visible', '=', False)]}">
-                    <field name="total_weight_sample_abrasion"/>
-                    <field name="weight_passing_sample_abrasion"/>
-                    <field name="weight_retain_sample_abrasion"/>
-                    <field name="abrasion_value_percentage"/>
+                    <field name="total_weight_sample_abrasion" string="Total weight of Sample in gms" style="width:550px;"/>
+                    <field name="weight_passing_sample_abrasion" string="Weight of Passing sample in 1.70 mm IS sieve in gms" style="width:550px;"/>
+                    <field name="weight_retain_sample_abrasion" string="Weight of Retain sample in 1.70 mm IS sieve in gms" style="width:550px;"/>
+                    <field name="abrasion_value_percentage" string="Abrasion Value (%)" style="width:550px;"/>
                 </group>
 
                 <!-- Liquid Limit -->
@@ -186,9 +186,18 @@
                            
                     </field> 
                 </group>
-                    <group attrs="{'invisible': [('liquid_limit_visible', '=', False)]}">
+                    <!-- <group attrs="{'invisible': [('liquid_limit_visible', '=', False)]}">
                         <field name="liquid_limit"/>
-                        <field name="remarks_liquid_limit"/>
+                       
+                    </group> -->
+
+                     <group attrs="{'invisible': [('liquid_limit_visible', '=', False)]}">
+                     <field name="liquid_limit" width="50%" />
+                     <field name="are_child_lines_filled" invisible="1"/>
+                        <button string="Calculate Liquid Limit" name="liquid_calculation" type="object" class="oe_highlight" 
+                                attrs="{'invisible': [('are_child_lines_filled', '=', False)]}" />
+                      <field name="remarks_liquid_limit"/>
+                   
                     </group>
 
                 <!-- Plastic Limit -->

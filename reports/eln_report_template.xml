@@ -55,9 +55,9 @@
 							<td colspan="3">
 								<span t-field="o.end_date"/>
 							</td>
-							<td colspan="3"  t-if="nabl">ULR NO :
+							<td colspan="3"  t-if="nabl or fromEln">ULR NO :
 							</td>
-							<td colspan="3" t-if="nabl">
+							<td colspan="3" t-if="nabl or fromEln">
 								<span t-field="o.sample_id.ulr_no"/>
 							</td>
 						</tr>
