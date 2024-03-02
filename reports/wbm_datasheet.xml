@@ -42,19 +42,19 @@
 								</div>
 							</td>
 							<td colspan="3">
-								<span t-esc="r['sieve_size']"/>
+								<span t-esc="r['sieve_size']" />
 							</td>
 							<td colspan="2">
-								<span t-esc="r['wt_retained']"/>
+								<span t-esc="r['wt_retained']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['percent_retained']"/>
+								<span t-esc="r['percent_retained']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['cumulative_retained']"/>
+								<span t-esc="r['cumulative_retained']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['passing_percent']"/>
+								<span t-esc="r['passing_percent']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 
 							
@@ -66,7 +66,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.total_sieve_analysis"/>
+								<span t-field="data.total_sieve_analysis" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -105,16 +105,16 @@
 								</div>
 							</td>
 							<td colspan="3">
-								<span t-esc="r['sieve_size']"/>
+								<span t-esc="r['sieve_size']" />
 							</td>
 							<td colspan="3">
-								<span t-esc="r['wt_retained']"/>
+								<span t-esc="r['wt_retained']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['elongated_retained']"/>
+								<span t-esc="r['elongated_retained']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['flakiness_retained']"/>
+								<span t-esc="r['flakiness_retained']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>	
 							
 						</tr>
@@ -125,7 +125,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.total_wt_retained_fl_el"/>
+								<span t-field="data.total_wt_retained_fl_el" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -134,7 +134,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.total_elongated_retained"/>
+								<span t-field="data.total_elongated_retained" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -143,7 +143,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.total_flakiness_retained"/>
+								<span t-field="data.total_flakiness_retained" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -153,7 +153,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.aggregate_elongation"/>
+								<span t-field="data.aggregate_elongation" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -162,7 +162,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.aggregate_flakiness"/>
+								<span t-field="data.aggregate_flakiness" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -171,7 +171,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.aggregate_combine"/>
+								<span t-field="data.aggregate_combine" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -220,22 +220,22 @@
 								</div>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['wt_of_cylinder']"/>
+								<span t-esc="r['wt_of_cylinder']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['total_wt_of_dried']"/>
+								<span t-esc="r['total_wt_of_dried']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['total_wt_aggregate']"/>
+								<span t-esc="r['total_wt_aggregate']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td colspan="2">
-								<span t-esc="r['wt_of_aggregate_passing']"/>
+								<span t-esc="r['wt_of_aggregate_passing']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['wt_of_aggregate_retained']"/>
+								<span t-esc="r['wt_of_aggregate_retained']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['impact_value']"/>
+								<span t-esc="r['impact_value']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 							
@@ -247,7 +247,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.average_impact_value"/>
+								<span t-field="data.average_impact_value" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -269,7 +269,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.total_weight_sample_abrasion"/>
+									<span t-field="data.total_weight_sample_abrasion" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             <tr cols="12">
@@ -278,7 +278,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.weight_passing_sample_abrasion"/>
+									<span t-field="data.weight_passing_sample_abrasion" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             <tr cols="12">
@@ -287,7 +287,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.weight_retain_sample_abrasion"/>
+									<span t-field="data.weight_retain_sample_abrasion" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             <tr cols="12">
@@ -296,7 +296,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.abrasion_value_percentage"/>
+									<span t-field="data.abrasion_value_percentage" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             
@@ -317,7 +317,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.wt_ssd_sample"/>
+									<span t-field="data.wt_ssd_sample" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             <tr cols="12">
@@ -326,7 +326,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.oven_dried_wt"/>
+									<span t-field="data.oven_dried_wt" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             <tr cols="12">
@@ -335,7 +335,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.water_absorbtion"/>
+									<span t-field="data.water_absorbtion" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             
@@ -384,22 +384,22 @@
 								<span t-esc="r['blows']"/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['mass_wet_sample_container']"/>
+								<span t-esc="r['mass_wet_sample_container']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['mass_dry_sample_container']"/>
+								<span t-esc="r['mass_dry_sample_container']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td colspan="2">
-								<span t-esc="r['mass_container']"/>
+								<span t-esc="r['mass_container']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['mass_moisture']"/>
+								<span t-esc="r['mass_moisture']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['mass_dry_sample']"/>
+								<span t-esc="r['mass_dry_sample']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['moisture_percent']"/>
+								<span t-esc="r['moisture_percent']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -410,7 +410,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.liquid_limit"/>
+								<span t-field="data.liquid_limit" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -419,7 +419,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.remarks_liquid_limit"/>
+								<span t-field="data.remarks_liquid_limit" />
 							</td>
 							
 						</tr>
@@ -463,22 +463,22 @@
 								<span t-esc="r['container_no']"/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['mass_wet_sample_container']"/>
+								<span t-esc="r['mass_wet_sample_container']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['mass_dry_sample_container']"/>
+								<span t-esc="r['mass_dry_sample_container']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td colspan="2">
-								<span t-esc="r['mass_container']"/>
+								<span t-esc="r['mass_container']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['mass_moisture']"/>
+								<span t-esc="r['mass_moisture']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['mass_dry_sample']"/>
+								<span t-esc="r['mass_dry_sample']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['moisture_percent']"/>
+								<span t-esc="r['moisture_percent']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -489,7 +489,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.average_plastic_moisture"/>
+								<span t-field="data.average_plastic_moisture" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -521,7 +521,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.plasticity_index"/>
+								<span t-field="data.plasticity_index" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -543,7 +543,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.wt_of_modul"/>
+								<span t-field="data.wt_of_modul" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -552,7 +552,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.vl_of_modul"/>
+								<span t-field="data.vl_of_modul" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -594,40 +594,40 @@
 						<t t-set="i" t-value="0"/>
 						<tr t-foreach="data.density_relation_table" t-as="r">
 							<td colspan="1">
-								<span t-esc="r['determination_no']"/>
+								<span t-esc="r['determination_no']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['wt_of_modul_compact']"/>
+								<span t-esc="r['wt_of_modul_compact']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['wt_of_compact']"/>
+								<span t-esc="r['wt_of_compact']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['bulk_density']"/>
+								<span t-esc="r['bulk_density']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['container_no']"/>
+								<span t-esc="r['container_no']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['wt_of_container']"/>
+								<span t-esc="r['wt_of_container']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['wt_of_container_wet']"/>
+								<span t-esc="r['wt_of_container_wet']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['wt_of_container_dry']"/>
+								<span t-esc="r['wt_of_container_dry']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['wt_of_dry_sample']"/>
+								<span t-esc="r['wt_of_dry_sample']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['wt_of_moisture']"/>
+								<span t-esc="r['wt_of_moisture']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['moisture']"/>
+								<span t-esc="r['moisture']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['dry_density']"/>
+								<span t-esc="r['dry_density']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -667,13 +667,13 @@
 								</div>
 							</td>
 							<td colspan="4">
-								<span t-esc="r['penetration']"/>
+								<span t-esc="r['penetration']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="3">
-								<span t-esc="r['proving_reading']"/>
+								<span t-esc="r['proving_reading']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="3">
-								<span t-esc="r['load']"/>
+								<span t-esc="r['load']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>	
 							
 						</tr>

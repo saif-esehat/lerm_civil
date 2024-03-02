@@ -132,7 +132,7 @@
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td colspan="6">Instrument :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.instrument.name"/>
@@ -141,7 +141,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.temperature"/>
 								</td>
-							</tr>
+							</tr> -->
 						</table>
 					</div>
 					<div style="margin-top:20px;">
