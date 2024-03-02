@@ -61,9 +61,10 @@
                             <group style="width:51%">
                                 <field name='elongated_gauge_length'/>
                             </group>
-                            <group >
+                            <group attrs="{'invisible': [('elongation_visible', '=', False)]}">
                                 <group style="width:25%">
                                 <field name='percent_elongation'/>
+                                <field name="elongation_visible" invisible="1"/>
                                 </group>
                                 <group style="width:25%">
                                 <field name='requirement_elongation'/>
@@ -81,9 +82,10 @@
                                        readonly="1"/>
                                 </group>
                             </group>
-                            <group>
-                                <group style="width:20%">
+                            <group attrs="{'invisible': [('weight_per_meter_visible', '=', False)]}">
+                                <group style="width:20%" >
                                 <field name='weight_per_meter'/>
+                                <field name="weight_per_meter_visible" invisible="1"/>
                                 </group>
                                 <!-- <group style="width:20%">
                                 <field name='variation'/>
@@ -110,9 +112,10 @@
                             <group style="width:51%">
                                 <field name='ultimate_load'/>
                             </group>
-                            <group >
-                                <group style="width:25%">
+                            <group attrs="{'invisible': [('yield_visible', '=', False)]}">
+                                <group style="width:25%" >
                                 <field name='proof_yeid_stress'/>
+                                <field name="yield_visible" invisible="1"/>
                                 </group>
                                 <group style="width:25%">
                                 <field name='requirement_yield'/>
@@ -130,9 +133,10 @@
                                        readonly="1"/>
                                 </group>
                             </group>
-                            <group>
-                                <group style="width:25%">
+                            <group attrs="{'invisible': [('uts_visible', '=', False)]}">
+                                <group style="width:25%" >
                                 <field name='ult_tens_strgth'/>
+                                <field name="uts_visible" invisible="1"/>
                                 </group>
                                 <group style="width:25%">
                                 <field name='requirement_utl'/>
@@ -150,9 +154,10 @@
                                        readonly="1"/>
                                 </group>
                             </group>
-                            <group>
-                                <group style="width:25%">
+                            <group attrs="{'invisible': [('ts_ys_visible', '=', False)]}">
+                                <group style="width:25%" >
                                 <field name='ts_ys_ratio'/>
+                                <field name="ts_ys_visible" invisible="1"/>
                                 </group>
                                 <group style="width:25%">
                                 <field name='requirement_ts_ys'/>

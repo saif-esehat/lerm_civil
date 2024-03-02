@@ -184,14 +184,14 @@
             
     </record>
 
-    <!-- <record id="lerm_ulr_reports_action" model="ir.actions.act_window">
+    <record id="lerm_ulr_reports_action" model="ir.actions.act_window">
             <field name="name">ULR Reports</field>
             <field name="type">ir.actions.act_window</field>    
             <field name="res_model">ulr.reports.wizard</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="ulr_reports_wizard"/>
             <field name="target">new</field>
-    </record> -->
+    </record>
     
     <menuitem id="lerm_root"
         groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by"
@@ -232,12 +232,12 @@
         sequence="10" />
 
 
-    <!-- <menuitem id="lerm_ulr_reporting"
+    <menuitem id="lerm_ulr_reporting"
         name="ULR"
         parent="reporting_menu"
         action="lerm_ulr_reports_action"
         groups="lerm_civil.kes_admin_access_group"
-        sequence="10" /> -->
+        sequence="10" />
 
 
     <menuitem id="lerm_product_item_param_master"
