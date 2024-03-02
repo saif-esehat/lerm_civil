@@ -144,11 +144,11 @@
 							</tr>
 						</table>
 					</div>
-					<div style="margin-top:20px;">
+					<div style="margin-top:10px;">
 						<u>Results</u><![CDATA[&nbsp;]]>:<![CDATA[&nbsp;]]>
 						<!-- <span t-field="eln.parameters_result.parameter[0].test_method.test_method"/> -->
 					</div>
-					<table style="margin-top:20px;margin-bottom:0px;">
+					<table style="margin-top:10px;margin-bottom:0px;">
 					<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
@@ -940,7 +940,7 @@
 
 
 							<tr t-if="ggbs.slag_activity_28_visible and ggbs.slag_28days_nabl == 'fail' and not nabl and not fromEln">
-								<td style="border-bottom:none;text-align: center;">
+								<td style="border-bottom:none;border-top:none;text-align: center;">
 									
 								</td>
 								
@@ -990,7 +990,7 @@
 							</tr>
 
 							<tr t-if="ggbs.slag_activity_28_visible and fromEln">
-								<td style="border-bottom:none;text-align: center;">
+								<td style="border-bottom:none;border-top:none;text-align: center;">
 									
 								</td>
 								
