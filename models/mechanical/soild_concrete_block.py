@@ -130,7 +130,7 @@ class SolidConcreteBlock(models.Model):
     moisture_movment_visible = fields.Boolean("Moisture Movment Visible",compute="_compute_visible")
 
     child_lines1 = fields.One2many('mechanical.moisture.movement.line','parent_id',string="Parameter")
-    average_moisture_movment = fields.Float(string="Average",compute="_compute_average_moisture_movment", digits=(12, 2))
+    average_moisture_movment = fields.Float(string="Average",compute="_compute_average_moisture_movment", digits=(12, 3))
 
     moisture_movment_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -198,7 +198,7 @@ class SolidConcreteBlock(models.Model):
     drying_shrinkage_visible = fields.Boolean("Drying Shrinkage Visible",compute="_compute_visible")
 
     child_lines2 = fields.One2many('mechanical.drying.shrinkage.line','parent_id',string="Parameter")
-    average_drying_shrinkage = fields.Float(string="Average", compute="_compute_average_drying_shrinkage")
+    average_drying_shrinkage = fields.Float(string="Average", compute="_compute_average_drying_shrinkage",digits=(12,3))
 
     drying_shrinkage_conformity = fields.Selection([
         ('pass', 'Pass'),
@@ -609,7 +609,7 @@ class MoistureMovementLine(models.Model):
     sr_no = fields.Integer(string="Sr.No.", readonly=True, copy=False, default=1)
     dry_length = fields.Float(string="Dry Length of the Block")
     wet_length = fields.Float(string="Wet Length of the Block")
-    moisture_movment = fields.Float(string="Moisture Movement %", compute="_compute_moisture_movement", digits=(12, 2))
+    moisture_movment = fields.Float(string="Moisture Movement %", compute="_compute_moisture_movement", digits=(12, 3))
 
 
 
@@ -649,18 +649,19 @@ class DryingShrinkageLine(models.Model):
     wet_measurment = fields.Float(string="Wet measuremet of the Block",digits=(12, 3))
     dry_measurment = fields.Float(string="Dry Measurement of the Block",digits=(12, 3))
     dry_lengths = fields.Float(string="Dry Lenth")
-    drying_shrinkage = fields.Float(string="Drying Shrinkage %", compute="_compute_drying_shrinkage",digits=(12, 2))
+    drying_shrinkage = fields.Float(string="Drying Shrinkage %", compute="_compute_drying_shrinkage1",digits=(12, 4))
 
 
 
     @api.depends('wet_measurment', 'dry_measurment', 'dry_lengths')
-    def _compute_drying_shrinkage(self):
+    def _compute_drying_shrinkage1(self):
         for record in self:
             if record.dry_lengths != 0:
-                record.drying_shrinkage = (record.wet_measurment - record.dry_measurment) / record.dry_lengths * 100
+                record.drying_shrinkage = record.wet_measurment - record.dry_measurment / record.dry_lengths * 100
             else:
                 record.drying_shrinkage = 0.0
 
+  
 
     @api.model
     def create(self, vals):
@@ -757,6 +758,7 @@ class CompressiveStrengthSolidBlock(models.Model):
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
     length = fields.Float(string="Length in mm")
     width = fields.Float(string="Width in mm")
+    thickness = fields.Float(string="Thickness (mm)")
     # hight = fields.Float(string="Thickness in mm")
     area = fields.Float(string="Area (mm²)",compute="compute_area")
     load = fields.Float(string="Load (N)")
