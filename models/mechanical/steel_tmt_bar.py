@@ -143,6 +143,13 @@ class SteelTmtBarLine(models.Model):
     fracture_visible = fields.Boolean("Fracture",compute="_compute_visible")
     bend_visible = fields.Boolean("Bend Test",compute="_compute_visible")
     rebend_visible = fields.Boolean("Rebend Test",compute="_compute_visible")
+    
+    uts_visible = fields.Boolean("Ultimate Tensile Strength",compute="_compute_visible")
+    elongation_visible = fields.Boolean("Elongation",compute="_compute_visible")
+    weight_per_meter_visible = fields.Boolean("Weight Per Meter",compute="_compute_visible")
+    yield_visible = fields.Boolean("Yield",compute="_compute_visible")
+    ts_ys_visible = fields.Boolean("TS/YS",compute="_compute_visible")
+
 
     @api.depends('eln_ref','sample_parameters')
     def _compute_visible(self):
@@ -150,6 +157,13 @@ class SteelTmtBarLine(models.Model):
             record.fracture_visible = False
             record.bend_visible  = False  
             record.rebend_visible = False
+
+            record.uts_visible = False
+            record.elongation_visible  = False  
+            record.weight_per_meter_visible = False
+            record.yield_visible  = False  
+            record.ts_ys_visible = False
+            
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
                 if sample.internal_id == '9156ec17-ae78-4f98-987f-af5d39e407f2':
@@ -158,6 +172,17 @@ class SteelTmtBarLine(models.Model):
                     record.bend_visible = True
                 if sample.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
                     record.rebend_visible = True
+
+                if sample.internal_id == '7da4cce7-4027-4d73-955e-ca7f7a2a2228':
+                    record.uts_visible = True
+                if sample.internal_id == 'b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725':
+                    record.elongation_visible = True
+                if sample.internal_id == '15558232-8a13-472c-b10d-1fc011e63aeb':
+                    record.weight_per_meter_visible = True
+                if sample.internal_id == 'c732ed77-4c06-4cd4-ae85-b7424c1a24c7':
+                    record.yield_visible = True
+                if sample.internal_id == 'de4bb55e-9318-4725-ac44-fd1850d9e2eb':
+                    record.ts_ys_visible = True
 
 
     @api.depends('weight','lentgh')

@@ -262,7 +262,7 @@
 							</td>
 							<td colspan="2">
 								<div>
-									<span t-field="data.remarks_liquid_limit"/>
+									<span t-field="data.liquid_limit" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
 							</td>
 							<td colspan="2">
@@ -299,7 +299,7 @@
 							</td>
 							<td colspan="2">
 								<div>
-									<span t-field="data.remarks_plastic"/>
+									<span t-field="data.average_plastic_moisture" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
 							</td>
 							<td colspan="2">
@@ -336,7 +336,7 @@
 							</td>
 							<td colspan="2">
 								<div>
-									<span t-field="data.remarks_plastic"/>
+									<span t-field="data.plasticity_index" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
 							</td>
 							<td colspan="2">
@@ -373,7 +373,7 @@
 							</td>
 							<td colspan="2">
 								<div>
-									<span t-field="data.water_absorbtion"/>
+									<span t-field="data.water_absorbtion" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
 							</td>
 							<td colspan="2">
@@ -410,7 +410,7 @@
 							</td>
 							<td colspan="2">
 								<div>
-									<span t-field="data.abrasion_value_percentage"/>
+									<span t-field="data.abrasion_value_percentage" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
 							</td>
 							<td colspan="2">
@@ -447,7 +447,7 @@
 							</td>
 							<td colspan="2">
 								<div>
-									<span t-field="data.average_impact_value"/>
+									<span t-field="data.average_impact_value" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
 							</td>
 							<td colspan="2">
@@ -484,7 +484,7 @@
 							</td>
 							<td colspan="2">
 								<div>
-									<span t-field="data.aggregate_flakiness"/>
+									<span t-field="data.aggregate_flakiness" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
 							</td>
 							<td colspan="2">
@@ -521,7 +521,7 @@
 							</td>
 							<td colspan="2">
 								<div>
-									<span t-field="data.aggregate_elongation"/>
+									<span t-field="data.aggregate_elongation" t-options='{"widget": "float", "precision": 2}'/>
 								</div>
 							</td>
 							<td colspan="2">
@@ -623,37 +623,37 @@
 								<tbody>
 									<tr t-foreach="data.density_relation_table" t-as="r">
 										<td>
-											<span t-esc="round(float(r.determination_no))"/>
+											<span t-esc="r.determination_no"/>
 										</td>
 										<td>
-											<span t-esc="round(float(r.wt_of_modul_compact))"/>
+											<span t-esc="r.wt_of_modul_compact"/>
 										</td>
 										<td>
-											<span t-esc="round(float(r.wt_of_compact))"/>
+											<span t-esc="r.wt_of_compact"/>
 										</td>
 										<td>
-											<span t-esc="round(float(r.bulk_density))"/>
+											<span t-esc="r.bulk_density"/>
 										</td>
 										<td>
-											<span t-esc="round(float(r.container_no))"/>
+											<span t-esc="r.container_no"/>
 										</td>
 										<td>
-											<span t-esc="round(float(r.wt_of_container_wet),2)"/>
+											<span t-esc="r.wt_of_container_wet"/>
 										</td>
 										<td>
-											<span t-esc="round(float(r.wt_of_container_dry))"/>
+											<span t-esc="r.wt_of_container_dry"/>
 										</td>
 										<td>
-											<span t-esc="round(float(r.wt_of_dry_sample))"/>
+											<span t-esc="r.wt_of_dry_sample"/>
 										</td>
 										<td>
-											<span t-esc="round(float(r.wt_of_moisture),2)"/>
+											<span t-esc="r.wt_of_moisture" t-options='{"widget": "float", "precision": 2}'/>
 										</td>
 										<td>
-											<span t-esc="r.moisture"/>
+											<span t-esc="r.moisture" t-options='{"widget": "float", "precision": 2}'/>
 										</td>
 										<td>
-											<span t-esc="r.dry_density"/>
+											<span t-esc="r.dry_density" t-options='{"widget": "float", "precision": 2}'/>
 										</td>
 									</tr>
 								</tbody>
@@ -664,12 +664,12 @@
 									<td colspan="3">Weight of Mould in gm :
 									</td>
 									<td colspan="3">
-										<span t-field="data.wt_of_modul"/>
+										<span t-field="data.wt_of_modul" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td colspan="3">Volume of Mould in cc :
 									</td>
 									<td colspan="3">
-										<span t-field="data.vl_of_modul"/>
+										<span t-field="data.vl_of_modul" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</table>
@@ -758,13 +758,13 @@
 										</div>
 									</td>
 									<td>
-										<span t-esc="r.penetration"/>
+										<span t-esc="r.penetration" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="r.proving_reading"/>
+										<span t-esc="r.proving_reading" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="r.load"/>
+										<span t-esc="r.load" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 							</tbody>
@@ -833,9 +833,9 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-									<li>
-										<p>Test witnessed by : <span t-esc="eln.witness_name"/>
-										</p>
+									<li t-if="eln.has_witness">
+										Test witnessed by : <span t-esc="eln.witness_name"/>
+										
 									</li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>

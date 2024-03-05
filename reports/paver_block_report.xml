@@ -1175,9 +1175,9 @@
                         <thead>
                             <tr>
                                
-                                <th>Length in mm</th>
-                                <th>Width in mm</th>
-                                <th>Thickness in mm</th>
+                                <th>Length in Avg mm </th>
+                                <th>Width in Avg mm</th>
+                                <th>Thickness in Avg mm</th>
                                 <th>Plan Area</th>
                                <th  style="max-width: 250px;">
                                 <span>
@@ -1859,12 +1859,12 @@
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
 									<li t-if="eln.has_witness">
-                                     Test witnessed by : <span t-esc="eln.witness_name"/>
-                                   </li>
-                                   <li t-if="eln.remarks">
+										Test witnessed by : <span t-esc="eln.witness_name"/>
+										
+									</li>
+									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
 									</li>
-
 								</ul>
 							</div>
 						</div>

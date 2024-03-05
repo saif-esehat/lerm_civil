@@ -132,7 +132,7 @@ class WbmMechanical(models.Model):
                         line.write({'cumulative_retained': round(line.percent_retained + line.percent_retained,2)})
                         line.write({'passing_percent': round(100 -line.percent_retained - line.percent_retained,2)})
                 else:
-                    previous_line_record = self.env['mech.dry.gradation.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+                    previous_line_record = self.env['mech.wbm.dry.gradation.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
                     line.write({'cumulative_retained': round(previous_line_record + line.percent_retained,2)})
                     line.write({'passing_percent': round(100-(previous_line_record + line.percent_retained),2)})
                     print("Previous Cumulative",previous_line_record)
@@ -153,18 +153,18 @@ class WbmMechanical(models.Model):
 
         default_dry_sieve_sizes = []
         default_elongated_sieve_sizes = []
-        dry_sieve_sizes = ['53 mm','45 mm','22.4 mm', '11.2 mm', '4.75 mm','2.36 mm','600 micron','75 micron','pan']
-        elongation_sieve_sizes = ['63 mm', '50 mm', '40 mm', '31.5 mm', '25 mm','20 mm','16 mm','12.5 mm','10 mm','6.3 mm']
+        dry_sieve_sizes = ['63 mm','53 mm','45 mm','22.4','12.2 mm','pan']
+        elongation_sieve_sizes = ['63 mm', '50 mm', '40 mm', '31.5 mm', '25 mm','20 mm','16 mm','12.5 mm','10 mm','6.3 mm','4.75 mm','2.36 mm','1.18 mm','Pan']
 
 
-        for i in range(9):  # You can change the number of default lines as needed
+        for i in range(6):  # You can change the number of default lines as needed
             size = {
                 'sieve_size': dry_sieve_sizes[i] # Set the default product
                 # Set the default quantity
             }
             default_dry_sieve_sizes.append((0, 0, size))
         res['dry_gradation_table'] = default_dry_sieve_sizes
-        for i in range(10):  # You can change the number of default lines as needed
+        for i in range(14):  # You can change the number of default lines as needed
             size = {
                 'sieve_size': elongation_sieve_sizes[i] # Set the default product
                 # Set the default quantity
@@ -179,7 +179,7 @@ class WbmMechanical(models.Model):
     water_absorbtion_name = fields.Char(default="Water Absorbtion")
     water_absorbtion_visible = fields.Boolean(compute="_compute_visible")
 
-    wt_ssd_sample = fields.Integer('Weight of saturated surface dry (SSD) sample in air in gms, A')
+    wt_ssd_sample = fields.Float('Weight of saturated surface dry (SSD) sample in air in gms, A')
     oven_dried_wt = fields.Float('Oven dried weight of sample in gms, C')
     water_absorbtion = fields.Float('Water absorption  %',compute="_compute_water_absorbtion")
 
@@ -228,7 +228,7 @@ class WbmMechanical(models.Model):
     def _compute_aggregate_elongation(self):
         for record in self:
             if record.total_elongated_retained != 0:
-                record.aggregate_elongation = round(record.total_elongated_retained/record.total_wt_retained_fl_el,2)
+                record.aggregate_elongation = record.total_elongated_retained/record.total_wt_retained_fl_el*100
             else:
                 record.aggregate_elongation = 0
 
@@ -236,14 +236,14 @@ class WbmMechanical(models.Model):
     def _compute_aggregate_flakiness(self):
         for record in self:
             if record.total_flakiness_retained != 0:
-                record.aggregate_flakiness = round(record.total_flakiness_retained/record.total_wt_retained_fl_el,2)
+                record.aggregate_flakiness = record.total_flakiness_retained/record.total_wt_retained_fl_el*100
             else:
                 record.aggregate_flakiness = 0
 
     @api.depends('total_wt_retained_fl_el','total_flakiness_retained')
     def _compute_aggregate_combine(self):
         for record in self:
-            record.aggregate_combine = round(record.aggregate_elongation+record.aggregate_flakiness,2)
+            record.aggregate_combine = record.aggregate_elongation+record.aggregate_flakiness
             
 
 
@@ -252,9 +252,9 @@ class WbmMechanical(models.Model):
     abrasion_value_name = fields.Char("Name",default="Abrasion Value")
     abrasion_visible = fields.Boolean("Abrasion Visible",compute="_compute_visible")
 
-    total_weight_sample_abrasion = fields.Integer(string="Total weight of Sample in gms")
-    weight_passing_sample_abrasion = fields.Integer(string="Weight of Passing sample in 1.70 mm IS sieve in gms")
-    weight_retain_sample_abrasion = fields.Integer(string="Weight of Retain sample in 1.70 mm IS sieve in gms",compute="_compute_weight_retain_sample_abrasion")
+    total_weight_sample_abrasion = fields.Float(string="Total weight of Sample in gms")
+    weight_passing_sample_abrasion = fields.Float(string="Weight of Passing sample in 1.70 mm IS sieve in gms")
+    weight_retain_sample_abrasion = fields.Float(string="Weight of Retain sample in 1.70 mm IS sieve in gms",compute="_compute_weight_retain_sample_abrasion")
     abrasion_value_percentage = fields.Float(string="Abrasion Value (%)",compute="_compute_sample_weight")
 
 
@@ -300,6 +300,35 @@ class WbmMechanical(models.Model):
     remarks_liquid_limit = fields.Selection([
         ('plastic', 'Plastic'),
         ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
+    
+
+     # def calculate_result(self):
+    are_child_lines_filled = fields.Boolean(compute='_compute_are_child_lines_filled',string='child lines',store=False)
+
+    @api.depends('liquid_limit_table.moisture_percent', 'liquid_limit_table.mass_dry_sample')  # Replace with actual field names
+    def _compute_are_child_lines_filled(self):
+        for record in self:
+            all_lines_filled = all(line.moisture_percent and line.mass_dry_sample for line in record.liquid_limit_table)
+            record.are_child_lines_filled = all_lines_filled
+
+    
+
+    def liquid_calculation(self):
+        print('<<<<<<<<<<<<')
+        for record in self:
+            data = self.liquid_limit_table
+           
+            result = 0  # Initialize result before the loop
+            print(data, 'data')
+            container2Moisture = data[1].moisture_percent
+            container1Moisture = data[0].moisture_percent
+            container3Moisture = data[2].moisture_percent
+            cont2blow = data[1].blows
+            cont3blow = data[2].blows
+            result = (container2Moisture * 100 - ((container2Moisture - container3Moisture) * 100 * (25 - cont2blow)) / (cont3blow - cont2blow)) / 100
+            print(result, 'final result')
+        self.write({'liquid_limit': result})
+
 
 
     # Plastic Limit
@@ -328,10 +357,20 @@ class WbmMechanical(models.Model):
     plasticity_index_visible = fields.Boolean("Plasticity Index Visible",compute="_compute_visible")
     plasticity_index = fields.Float("Plasticity Index",compute="_compute_plasticity_limit")
 
-    @api.depends('average_plastic_moisture','liquid_limit')
+    # @api.depends('average_plastic_moisture','liquid_limit')
+    # def _compute_plasticity_limit(self):
+    #     for record in self:
+    #         record.plasticity_index = record.liquid_limit - record.average_plastic_moisture
+
+    @api.depends('average_plastic_moisture')
     def _compute_plasticity_limit(self):
         for record in self:
-            record.plasticity_index = record.liquid_limit - record.average_plastic_moisture
+            if record.average_plastic_moisture == 0.0:
+                record.plasticity_index = 'Null'
+            else:
+                plasticity_value = 46.14 - record.average_plastic_moisture
+                # Format the string representation with 2 decimal places
+                record.plasticity_index = '{:.2f}'.format(plasticity_value)
 
     # Density Relation Heavy Compaction
     density_relation_name = fields.Char("Name",default="Density Relation Using Heavy Compaction")

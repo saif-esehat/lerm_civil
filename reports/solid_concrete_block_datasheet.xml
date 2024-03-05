@@ -110,7 +110,7 @@
                             <tr cols="12">
                                 <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
                                 <td colspan="2" style="text-align: center;"><b>Length (mm)</b></td>
-                                <td colspan="1" style="text-align: center;"><b>Widhe (mm)</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Width (mm)</b></td>
                                 <td colspan="2" style="text-align: center;"><b>Thickness (mm)</b></td>
                                 <td colspan="1" style="text-align: center;"><b>Area (mm²)</b></td>
                                 <td colspan="2" style="text-align: center;"><b>Load (N)</b></td>
@@ -131,8 +131,8 @@
                                 <td colspan="1" style="text-align: center;">
                                     <span t-esc="r['width']"/>
                                 </td>
-                                <td colspan="2" style="text-align: center;">
-                                    <span></span>
+                                <td colspan="1" style="text-align: center;">
+                                    <span t-esc="r['thickness']"/>
                                 </td>
                                  <td colspan="2" style="text-align: center;">
                                     <span t-esc="r['area']" t-options='{"widget": "float", "precision": 2}'/>
@@ -228,7 +228,7 @@
                             <tr cols="12">
                                 <td colspan="6"><b>Average Block Density :</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_block" t-options='{"widget": "float", "precision": 1}'/>
+                                    <span t-field="data.average_block" />
                                 </td>
                             </tr>
                         </table>
@@ -317,7 +317,7 @@
                                 </td>
                                 
                                 <td colspan="2" style="text-align: center;">
-                                    <span t-esc="r['drying_shrinkage']" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-esc="r['drying_shrinkage']" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                                 
                                 
@@ -327,7 +327,7 @@
                             <tr cols="12">
                                 <td colspan="6"><b>Average :</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_drying_shrinkage" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-field="data.average_drying_shrinkage" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                             
@@ -965,9 +965,10 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
-                                   <li t-if="eln.has_witness">
-                                        <p>Test witnessed by : <span t-esc="eln.witness_name"/></p>
-                                   </li>
+                                  <li t-if="eln.has_witness">
+										Test witnessed by : <span t-esc="eln.witness_name"/>
+										
+									</li>
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
 									</li>
