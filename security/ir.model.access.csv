@@ -92,6 +92,7 @@ admin.sample.reports.wizard,access_sample_reports_wizard,lerm_civil.model_sample
 admin.ulr.reports.wizard,access_ulr_reports_wizard,lerm_civil.model_ulr_reports_wizard,kes_admin_access_group,1,1,1,1
 
 admin.lerm_civil.access_structural_steel_round,access_structural_steel_round,lerm_civil.model_structural_steel_round,kes_admin_access_group,1,1,1,1
+admin.lerm_civil.access_sample_reject_wizard,access_sample_reject_wizard,lerm_civil.model_sample_reject_wizard,lerm_civil.kes_admin_access_group,1,1,1,1
 
 
 
@@ -201,10 +202,11 @@ checkedby.lerm.product.based.calculation,lerm_product_based_calculation,lerm_civ
 checkedby.ir.model,ir_model_hod,base.model_ir_model,lerm_civil.kes_checked_by,1,0,0,0
 checked_by.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_checked_by,1,0,0,0
 checked_by.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_checked_by,1,1,1,1
+checked_by.lerm_civil.access_sample_reject_wizard,access_sample_reject_wizard,lerm_civil.model_sample_reject_wizard,lerm_civil.kes_checked_by,1,1,1,1
 
 
 
-hod.lerm_civil.access_sample_reject_wizard,access_sample_reject_wizard,lerm_civil.model_sample_reject_wizard,lerm_civil.kes_hod_access_group,1,0,0,0
+hod.lerm_civil.access_sample_reject_wizard,access_sample_reject_wizard,lerm_civil.model_sample_reject_wizard,lerm_civil.kes_hod_access_group,1,1,1,1
 hod.lerm_civil.access_ndt_crack_depth,access_ndt_crack_depth,lerm_civil.model_ndt_crack_depth,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_ndt_crack_depth_line,access_ndt_crack_depth_line,lerm_civil.model_ndt_crack_depth_line,lerm_civil.kes_hod_access_group,1,0,0,0
 hod.lerm_civil.access_ndt_acil_crack_depth,access_ndt_acil_crack_depth,lerm_civil.model_ndt_acil_crack_depth,lerm_civil.kes_hod_access_group,1,0,0,0
