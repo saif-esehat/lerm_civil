@@ -592,13 +592,13 @@
 											Sr No
 										</span>
 									</th>
-									<th style="text-align: center;max-width:200px">
+									<th style="text-align: center;max-width:50px">
 										<span style="font-weight: bold;">
 											Name of test
 
 										</span>
 									</th>
-                                    <th style="text-align: center;max-width:200px">
+                                    <th style="text-align: center;max-width:5px">
 										<span style="font-weight: bold;">
 											Unit
 
@@ -611,7 +611,7 @@
 											Test Result
 										</span>
 									</th>
-                                    <th  style="max-width: 250px;">
+                                    <th  style="max-width: 20px;">
 									<span>
 										<span t-esc="eln.material.specifications"/>
 									</span>
