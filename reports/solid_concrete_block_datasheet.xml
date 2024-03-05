@@ -366,7 +366,7 @@
                                 </td>
                                 
                                 <td colspan="2" style="text-align: center;">
-                                    <span t-esc="r['water_absorption']" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-esc="r['water_absorption']" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                                 
                                 
@@ -376,7 +376,7 @@
                             <tr cols="12">
                                 <td colspan="6"><b>Average :</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_water_absorption" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-field="data.average_water_absorption" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                             
@@ -808,7 +808,7 @@
                                         </span>
                                     </td>
                                      <td style="text-align: center; vertical-align: middle;">
-                                        <span t-esc="data.average_moisture_movment" t-options='{"widget": "float", "precision": 2}'/>
+                                        <span t-esc="data.average_moisture_movment" t-options='{"widget": "float", "precision": 3}'/>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_table" t-as="parameter">
@@ -847,7 +847,7 @@
                                         </span>
                                     </td>
                                      <td style="text-align: center; vertical-align: middle;">
-                                        <span t-esc="data.average_drying_shrinkage" t-options='{"widget": "float", "precision": 2}'/>
+                                        <span t-esc="data.average_drying_shrinkage" t-options='{"widget": "float", "precision": 3}'/>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_table" t-as="parameter">
@@ -886,7 +886,7 @@
                                         </span>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <span t-esc="data.average_water_absorption" t-options='{"widget": "float", "precision": 2}'/>
+                                        <span t-esc="data.average_water_absorption" t-options='{"widget": "float", "precision": 3}'/>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_table" t-as="parameter">
