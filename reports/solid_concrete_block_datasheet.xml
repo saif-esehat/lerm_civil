@@ -587,18 +587,18 @@
 						<t t-set="i" t-value="0"/>
 							<thead>
 								<tr>
-									<th style="text-align: center;">
+									<th style="text-align: center; width: 5%;">
 										<span style="font-weight: bold;">
 											Sr No
 										</span>
 									</th>
-									<th style="text-align: center;max-width:50px">
+									<th style="text-align: center; width: 25%;">
 										<span style="font-weight: bold;">
 											Name of test
 
 										</span>
 									</th>
-                                    <th style="text-align: center;max-width:5px">
+                                    <th style="text-align: center; width: 10%;">
 										<span style="font-weight: bold;">
 											Unit
 
@@ -606,12 +606,12 @@
 									</th>
 									
 
-									<th style="text-align: center;max-width:100px">
+									<th style="text-align: center; width: 10%;">
 										<span style="font-weight: bold;">
 											Test Result
 										</span>
 									</th>
-                                    <th  style="max-width: 20px;">
+                                    <th  style="text-align: center; width: 15%;">
 									<span>
 										<span t-esc="eln.material.specifications"/>
 									</span>
@@ -641,7 +641,7 @@
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
                                    
-                                    <td  style="text-align: center;">
+                                    <td >
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','085e1df4-a0fd-40bc-ac92-b6118328c2e8')]).parameter_name"/>
                                     </td>
                                    <td style="text-align: center; vertical-align: middle;">
@@ -678,7 +678,7 @@
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
-                                     <td  style="text-align: center;">
+                                     <td >
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','5630893a-6e66-4825-8fbb-f92c897025d3')]).parameter_name"/>
                                     </td>
                                    <td style="text-align: center; vertical-align: middle;">
@@ -715,7 +715,7 @@
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
-                                     <td  style="text-align: center;">
+                                     <td >
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','8e237cad-9411-4b06-b9f3-26e96747a582')]).parameter_name"/>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
@@ -753,7 +753,7 @@
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
-                                    <td  style="text-align: center;">
+                                    <td>
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')]).parameter_name"/>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
@@ -790,7 +790,7 @@
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
-                                    <td  style="text-align: center;">
+                                    <td>
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_name"/>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
@@ -829,7 +829,7 @@
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
-                                    <td  style="text-align: center;">
+                                    <td>
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_name"/>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
@@ -868,7 +868,7 @@
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
-                                   <td  style="text-align: center;">
+                                   <td>
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_name"/>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
@@ -899,6 +899,7 @@
                                     </td>
                                 </tr>
 
+                               <t t-if="i &lt;= 6">
 
                                  <!-- Compressive Strength -->
                                  <tr t-if="data.compressive_visible and (data.compressive_nabl == 'pass' and nabl or data.compressive_nabl == 'fail' and not nabl)">
@@ -906,7 +907,7 @@
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
                                     </td>
-                                    <td  style="text-align: center;">
+                                    <td >
                                             <span t-field="env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_name"/>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
@@ -936,9 +937,104 @@
                                         <span t-esc="data.compressive_conformity"/>
                                     </td>
                                 </tr>
+                            </t>
   
                            
                     </table>
+                    <t t-if="i &gt; 6">
+						<div style="page-break-before: always;"></div>
+
+						<table>
+						<thead>
+                        <tr>
+									<th style="width: 5%;">
+										<span style="font-weight: bold;">
+											Sr No
+										</span>
+									</th>
+									<th style="text-align: center; width: 25%;">
+										<span style="font-weight: bold;">
+											Name of test
+
+										</span>
+									</th>
+                                    <th style="text-align: center; width: 10%;">
+										<span style="font-weight: bold;">
+											Unit
+
+										</span>
+									</th>
+									
+
+									<th style="text-align: center; width: 10%;">
+										<span style="font-weight: bold;">
+											Test Result
+										</span>
+									</th>
+                                    <th  style="text-align: center; width: 15%;">
+									<span>
+										<span t-esc="eln.material.specifications"/>
+									</span>
+							     	</th>
+								
+                                    <!-- <th  style="max-width: 200px;">
+									<span>
+										<span t-esc="eln.material.method_reference"/>
+										
+									</span>
+							    	</th> -->
+
+                                    <th style="text-align: center;" t-if="eln.conformity">
+									<span style="font-weight: bold;">
+										Confirmity Status
+									</span>
+							   	   </th> 
+									
+								</tr>
+							
+						</thead>
+						<tbody>
+                          <!-- Compressive Strength -->
+                                 <tr t-if="data.compressive_visible and (data.compressive_nabl == 'pass' and nabl or data.compressive_nabl == 'fail' and not nabl)">
+                                    <td colspan="1" style="text-align: center;">
+                                        <span t-esc="i + 1" />
+                                        <t t-set="i" t-value="i+1"/>
+                                    </td>
+                                    <td>
+                                            <span t-field="env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_name"/>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <span>
+                                            <span t-field="env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).unit.name"/>
+                                        </span>
+                                    </td>
+                                     <td style="text-align: center; vertical-align: middle;">
+                                        <span t-esc="data.avg_compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <!-- <td style="text-align: center; vertical-align: middle;">
+                                        <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+                                    </td> -->
+                                   
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+                                    </td>
+                                    <td style="text-align: center;" t-if="eln.conformity">
+                                        <span t-esc="data.compressive_conformity"/>
+                                    </td>
+                                </tr>
+				
+						</tbody>
+					</table>
+				</t>
+
                     
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
