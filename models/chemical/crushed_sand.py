@@ -395,7 +395,7 @@ class ChemicalCrushedSand(models.Model):
     chloride_name = fields.Char("Name",default="Chloride")
     chloride_visible = fields.Boolean("Chloride",compute="_compute_visible")
 
-    sample_wt_chloride = fields.Float("Sample Wt")
+    sample_wt_chloride = fields.Float("Sample Wt",digits=(16, 4))
     volume_make_upto_chloride = fields.Float("Volume make Upto")
     aliqote_taken_chloride = fields.Float("Aliqote taken")
     volume_silver_nitrate_added = fields.Float("Volume of silver nitrate added")
@@ -516,7 +516,7 @@ class ChemicalCrushedSand(models.Model):
     sulphate_visible = fields.Boolean("Sulphate",compute="_compute_visible")
 
 
-    sample_wt_sulphate = fields.Float("Sample Wt")
+    sample_wt_sulphate = fields.Float("Sample Wt",digits=(16, 4))
     volume_make_upto_sulphate = fields.Float("Volume make Upto")
     aliqote_taken_sulphate = fields.Float("Aliqote taken")
     wt_empty_crucible_after_ignition = fields.Float("Wt. of empty crucible+residue after ignition",digits=(16, 4))
