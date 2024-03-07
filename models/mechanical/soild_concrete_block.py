@@ -265,7 +265,7 @@ class SolidConcreteBlock(models.Model):
     water_absorption_name = fields.Char("Name", default="Water Absorption")
     water_absorption_visible = fields.Boolean("Water Absorption Visible", compute="_compute_visible")
     child_lines3 = fields.One2many('mechanical.water.absorption.line', 'parent_id', string="Parameter")
-    average_water_absorption = fields.Float(string="Average", compute="_compute_average_water_absorption", store=True)
+    average_water_absorption = fields.Float(string="Average", compute="_compute_average_water_absorption",digits=(12,3), store=True)
     water_absorption_conformity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail')], string="Conformity", compute="_compute_water_absorption_conformity", store=True)
@@ -688,7 +688,7 @@ class WaterAbsorptionLine(models.Model):
     sr_no = fields.Integer(string="Sr.No.", readonly=True, copy=False, default=1)
     wet_mass = fields.Float(string="Wet Mass of the Block (kg)")
     dry_mass = fields.Float(string="Dry Mass of the Block (kg)")
-    water_absorption = fields.Float(string="Water Absorption %", compute="_compute_water_absorption")
+    water_absorption = fields.Float(string="Water Absorption %", compute="_compute_water_absorption",digits=(12,3))
 
 
     @api.depends('wet_mass', 'dry_mass')
