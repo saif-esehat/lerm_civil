@@ -151,9 +151,9 @@
 				
 			            </div>
 						<!-- <div style="margin-top:20px;"></div> -->
-						<div style="text-align:center;font-size:18px;margin-top:20px">
+						<!-- <div style="text-align:center;font-size:18px;margin-top:20px">
 							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','7e8a78f8-c0d9-4b08-b452-012759929ca9')]).parameter_name"/>
-						</div>
+						</div> -->
 						<table style="margin-top: 5px;">
 							<thead>
 								<tr>
@@ -194,12 +194,12 @@
 										<td>
 											<span t-field="line.wt_of_admixture"/>
 										</td>
-										<td>
+										<!-- <td>
 											<span t-field="line.flow_sec"/>
 										</td>
 										<td>
 											<span t-field="line.flow_30_min"/>
-										</td>
+										</td> -->
 										<td>
 											<span t-field="line.flow_60_min"/>
 										</td>
@@ -265,7 +265,7 @@
 								</div>
 								<div>
 									<b>
-										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+										(<span t-esc="eln.sample_id.check_by.job_title"/>)
 									</b>
 								</div>
 							</div>

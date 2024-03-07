@@ -830,7 +830,7 @@
 
 							<div>
 								<b>
-									<span t-esc="eln.sample_id.approved_by.name"/>
+									<span t-esc="eln.sample_id.check_by.name"/>
 								</b>
 							</div>
 
