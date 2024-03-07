@@ -183,22 +183,22 @@
 									<span t-field="o.sample_id.grade_id.grade"/>
 								</td>
 								<td colspan="2" style="text-align: center;">
-									<span t-esc="r['length']"/>
+									<span t-esc="r['length']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="2" style="text-align: center;">
-									<span t-esc="r['depth']"/>
+									<span t-esc="r['depth']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="2" style="text-align: center;">
-									<span t-esc="r['width']"/>
+									<span t-esc="r['width']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
                                 <td colspan="2" style="text-align: center;">
-									<span t-esc="r['wt_of_sample']"/>
+									<span t-esc="r['wt_of_sample']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<span t-esc="r['fracture_distance']"/>
 								</td>
 								<td colspan="2" style="text-align: center;">
-									<span t-esc="r['failure_load']"/>
+									<span t-esc="r['failure_load']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<span t-esc="r['flexural_strength']" t-options='{"widget": "float", "precision": 2}'/>
