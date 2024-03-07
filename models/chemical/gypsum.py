@@ -23,9 +23,9 @@ class ChemicalGyspum(models.Model):
     anhydrous1 = fields.Char(string="Anhydrous Gypsum Plaster",default="40 Min")
     keenes1 = fields.Char(string="Keene's Plaster",default="47 Min")
 
-    wt_of_sample_so3 = fields.Float("A) Wt of Sample (gm)")
-    wt_cr_so3 = fields.Float("B) Wt of crucible +Residue after ignition (gm)")
-    wt_empty_co3 = fields.Float("C) Wt of empty crucible (gm)")
+    wt_of_sample_so3 = fields.Float("A) Wt of Sample (gm)",digits=(16, 4))
+    wt_cr_so3 = fields.Float("B) Wt of crucible +Residue after ignition (gm)",digits=(16, 4))
+    wt_empty_co3 = fields.Float("C) Wt of empty crucible (gm)",digits=(16, 4))
     difference_co3 = fields.Float("D)Diff. in weight(gm)=( B - C )",compute="_compute_difference_co3",digits=(12,4))
     so3 = fields.Float("SO3  % =  D x 34.30  / A",compute="_compute_so3",digits=(12,3))
 
@@ -103,11 +103,11 @@ class ChemicalGyspum(models.Model):
     anhydrous2 = fields.Char(string="Anhydrous Gypsum Plaster",default="3.0 Max")
     keenes2 = fields.Char(string="Keene's Plaster",default="2.0 Max")
 
-    wt_of_empty_loi = fields.Float("A) Wt of empty weighing bottle (gm)")
-    wt_empty_cs_loi = fields.Float("B) (Wt of empty weighing bottle + Sample) before ignition, gm")
-    wt_cs_loi = fields.Float("C) Wt.of sample (B-A) ( gm )", compute="_compute_wt_cs_loi", store=True)
-    wt_of_sample_loi = fields.Float("D) (Wt of empty weighing bottle + Sample) after ignition, (gm)")
-    loi_in_wt = fields.Float("E) Diff. in weight = (B - D), gm", compute="_compute_loi_in_wt", store=True)
+    wt_of_empty_loi = fields.Float("A) Wt of empty weighing bottle (gm)",digits=(16, 4))
+    wt_empty_cs_loi = fields.Float("B) (Wt of empty weighing bottle + Sample) before ignition, gm",digits=(16, 4))
+    wt_cs_loi = fields.Float("C) Wt.of sample (B-A) ( gm )", compute="_compute_wt_cs_loi", store=True,digits=(16, 4))
+    wt_of_sample_loi = fields.Float("D) (Wt of empty weighing bottle + Sample) after ignition, (gm)",digits=(16, 4))
+    loi_in_wt = fields.Float("E) Diff. in weight = (B - D), gm", compute="_compute_loi_in_wt", store=True,digits=(16, 4))
     loi = fields.Float("LOI % = E x 100 / C", compute="_compute_loi", store=True)
 
     @api.depends('wt_empty_cs_loi', 'wt_of_empty_loi')
@@ -195,7 +195,7 @@ class ChemicalGyspum(models.Model):
     anhydrous3 = fields.Char(string="Anhydrous Gypsum Plaster",default="2/3 of SO3 content")
     keenes3 = fields.Char(string="Keene's Plaster",default="2/3 of SO3 content")
 
-    wt_of_sample_cao1 = fields.Float("A) Wt of Sample (gm)")
+    wt_of_sample_cao1 = fields.Float("A) Wt of Sample (gm)",digits=(16, 4))
     burette_cao1  = fields.Float("B) Burrette reading (ml)")
     normality_cao1 = fields.Float("C) Normality of 0.1N KMnO₄")
     cao1 = fields.Float("CaO  % = B x C x 11.22/ A",compute="_compute_cao1")
@@ -275,7 +275,7 @@ class ChemicalGyspum(models.Model):
     keenes4 = fields.Char(string="Keene's Plaster",default="0.3 Max")
 
 
-    wt_of_sample_mgo1 = fields.Float("A) Wt of Sample (gm)")
+    wt_of_sample_mgo1 = fields.Float("A) Wt of Sample (gm)",digits=(16, 4))
     burette_mgo1 = fields.Float("B) Wt of crucible + Residue after ignition (gm)")
     normality_mgo1 = fields.Float("C) Wt of empty Cruible (gm)")
     dilution_mgo1 = fields.Float("D) Diff. in weight (gm)", compute="_compute_dilution_mgo1",digits=(16,4), store=True)
@@ -359,7 +359,7 @@ class ChemicalGyspum(models.Model):
     keenes5 = fields.Char(string="Keene's Plaster",default="--")
 
 
-    wt_of_sample_cao2 = fields.Float("A) Wt of Sample (gm)")
+    wt_of_sample_cao2 = fields.Float("A) Wt of Sample (gm)",digits=(16, 4))
     burette_cao2 = fields.Float("B) BR of 0.01N EDTA")
     normality_cao2 = fields.Float("C) Normality OF EDTA")
     dilution_cao2 = fields.Float("D) Dilution")
@@ -436,7 +436,7 @@ class ChemicalGyspum(models.Model):
     keenes6 = fields.Char(string="Keene's Plaster",default="--")
 
 
-    wt_of_sample_mgo2 = fields.Float("A) Wt of Sample (gm)")
+    wt_of_sample_mgo2 = fields.Float("A) Wt of Sample (gm)",digits=(16, 4))
     burette_mgo2 = fields.Float("B) BR of 0.01N CaO - BR of 0.01N EDTA")
     normality_mgo2 = fields.Float("C) Normality of EDTA")
     dilution_mgo2 = fields.Float("D) Dilution")
@@ -515,7 +515,7 @@ class ChemicalGyspum(models.Model):
     keenes7 = fields.Char(string="Keene's Plaster",default="--")
 
 
-    free_lime_wt = fields.Float("A) Wt.of sample (gm)")
+    free_lime_wt = fields.Float("A) Wt.of sample (gm)",digits=(16, 4))
     free_lime_br = fields.Float("B) Burette reading (ml)")
     free_lime_nor = fields.Float("C) Normality of 0.5N HCL")
     free_lime = fields.Float("Free lime % = B x C x 0.0037 x 100/ A", compute="_compute_free_lime",digits=(16,3), store=True)
@@ -593,7 +593,7 @@ class ChemicalGyspum(models.Model):
     keenes8 = fields.Char(string="Keene's Plaster",default="0.3 Max")
 
 
-    soluble_sodium_wt = fields.Float("A) Wt.of sample (gm)")
+    soluble_sodium_wt = fields.Float("A) Wt.of sample (gm)",digits=(16, 4))
     soluble_sodium_re = fields.Float("B) Reading")
     soluble_sodium_fa = fields.Float("C) Factor")
     soluble_sodium = fields.Float("Soluble sodium oxide % (Na2O)", compute="_compute_soluble_sodium", store=True)
@@ -670,7 +670,7 @@ class ChemicalGyspum(models.Model):
     keenes9 = fields.Char(string="Keene's Plaster",default="--")
 
 
-    free_water_wt = fields.Float("Mass of sample")
+    free_water_wt = fields.Float("Mass of sample",digits=(16, 4))
     free_water_br = fields.Float("Mass in gm of the material after drying")
     free_water_nor = fields.Float("Diff", compute="_compute_free_water_nor", store=True)
     free_water = fields.Float("Free water = diff * 100 / Mass", compute="_compute_free_water", store=True)
@@ -752,7 +752,7 @@ class ChemicalGyspum(models.Model):
     keenes10 = fields.Char(string="Keene's Plaster",default="--")
 
 
-    combined_water_wt = fields.Float("Mass of prepared sample")
+    combined_water_wt = fields.Float("Mass of prepared sample",digits=(16, 4))
     combined_water_br = fields.Float("Mass in gm of the material before drying")
     combined_water_nor = fields.Float("Mass in gm of the material after drying")
     combined_water_di = fields.Float("Diff", compute="_compute_combined_water_di",digits=(16,3), store=True)
