@@ -130,6 +130,9 @@ class SrfForm(models.Model):
     site_address = fields.Char(string="Site Address",compute="_compute_site_address")
     name_work = fields.Many2one('res.partner.project',string="Name of Work")
     consultant_name1 = fields.Char(string="Consultant Name",compute="_compute_consultant_name1")
+    # department_id = fields.Many2one('hr.department', string='Department')
+
+    department_id = fields.Char(string='Department')
 
     name_works = fields.Many2many('res.partner.project',string="Name of Work",compute="_compute_name_work")
 
@@ -160,6 +163,16 @@ class SrfForm(models.Model):
     ], string='Days of casting', default='3')
     
     date_casting = fields.Date(string="Date of Casting")
+
+
+
+    # @api.depends('department_id')
+    # def _compute_department(self):
+    #     for record in self:
+    #         record.department = record.department_id.name if record.department_id else False
+
+
+   
 
 
     @api.depends('contact_person')
@@ -473,6 +486,7 @@ class SrfForm(models.Model):
             lab_no_value = samples[-1].lab_no_value
             material_id = samples[-1].material_id.id
             group_id = samples[-1].group_id.id
+            department_id = samples[-1].department_id
             alias = samples[-1].alias
             brand = samples[-1].brand
             size_id = samples[-1].size_id.id
@@ -506,6 +520,7 @@ class SrfForm(models.Model):
             'default_sample_condition':sample_condition,
             'default_sample_reject_reason':sample_reject_reason,
             'default_witness':witness,
+            # 'default_department_id':department_id,
             'default_scope':scope,
             'default_sample_description':sample_description,
             'default_group_id':group_id,
@@ -611,6 +626,7 @@ class CreateSampleWizard(models.TransientModel):
     discipline_id = fields.Many2one('lerm_civil.discipline',string="Discipline")
    
     group_id = fields.Many2one('lerm_civil.group',string="Group")
+    # department_id = fields.Char(string='Department')
     material_id = fields.Many2one('product.template',string="Material")
     brand = fields.Char(string="Brand")
     size_id = fields.Many2one('lerm.size.line',string="Size")
@@ -647,7 +663,7 @@ class CreateSampleWizard(models.TransientModel):
         ('7', '7 Days'),
         ('14', '14 Days'),
         ('28', '28 Days'),
-    ], string='Days of casting', default='3')
+    ], string='Days of Testing', default='3')
     date_casting = fields.Date(string="Date of Casting")
     customer_id = fields.Many2one('res.partner' , string="Customer")
     product_aliases = fields.Many2many('product.product',string="Product Aliases")
@@ -662,6 +678,27 @@ class CreateSampleWizard(models.TransientModel):
 
     sample = fields.Many2one('lerm.srf.sample',string="Sample")
     is_update = fields.Boolean('Is Update')
+
+    department_id = fields.Char(string='Department')
+
+
+    @api.onchange('discipline_id', 'group_id', 'material_id')
+    def onchange_discipline_group_material(self):
+        if self.discipline_id and self.group_id and self.material_id:
+            # Assuming you have a relation between Material and CreateSampleWizard models
+            material = self.env['product.template'].search([
+                ('id', '=', self.material_id.id),
+                ('discipline', '=', self.discipline_id.id),
+                ('group', '=', self.group_id.id)], limit=1)
+            if material:
+                self.department_id = material.department_ids.name
+
+    # @api.depends('discipline_id', 'group_id')
+    # def compute_discipline_id(self):
+    #     for record in self:
+    #         material = self.env['product.template'].search([('discipline', '=', record.discipline_id.id), ('group', '=', record.group_id.id)], limit=1)
+    #         if material:
+    #             record.department_id = material.department_id.id
 
 
    
@@ -765,6 +802,7 @@ class CreateSampleWizard(models.TransientModel):
             
 
         group_id =  self.group_id.id
+        department_id = self.department_id
         # alias = self.alias
         material_id = self.material_id.id
         size_id = self.size_id.id
@@ -824,6 +862,7 @@ class CreateSampleWizard(models.TransientModel):
             'sample_reject_reason' : self.sample_reject_reason,
             'has_witness' : self.has_witness,
             'witness' : self.witness,
+            'department_id': department_id,
             'client_sample_id':client_sample_id,
             'conformity':conformity,
             'volume':volume,
@@ -861,6 +900,7 @@ class CreateSampleWizard(models.TransientModel):
             lab_no_value = data['lab_no_value']
             # lab_l_id = data['lab_l_id']
             group_id =  data['group_id']
+            department_id = data['department_id']
             material_id = data['material_id']
             grade_id = data['grade_id']
             srf_id  = data['srf_id']
@@ -870,6 +910,7 @@ class CreateSampleWizard(models.TransientModel):
             casting = data["casting"]
             days_casting = data["days_casting"]
             date_casting = data["date_casting"]
+            
             sample_range = self.env['sample.range.line'].create({
                 'srf_id': srf_id,
                 'group_id':group_id,
@@ -878,6 +919,7 @@ class CreateSampleWizard(models.TransientModel):
                 'lab_no_value':lab_no_value,
                 'material_id' : material_id,
                 'grade_id' : grade_id,
+                'department_id': department_id,
                 'sample_qty':1,
                 'parameters':parameters,
                 'size_id':size_id,
@@ -894,6 +936,7 @@ class CreateSampleWizard(models.TransientModel):
                 'lab_no_value':lab_no_value,
                 'group_id':group_id,
                 'material_id' : material_id,
+                'department_id': department_id,
                 'grade_id' : grade_id,
                 'parameters':parameters,
                 'sample_range_id':sample_range.id,
@@ -916,12 +959,14 @@ class CreateSampleWizard(models.TransientModel):
             size_id = self.size_id.id
             brand = self.brand
             grade_id = self.grade_id.id
+           
             sample_received_date = self.sample_received_date
             location = self.location
             sample_condition = self.sample_condition
             sample_reject_reason = self.sample_reject_reason
             has_witness = self.has_witness
             witness = self.witness
+            department_id: self.department_id
             discipline_id = self.discipline_id.id
             lab_no_value = self.lab_no_value
             # lab_l_id = self.lab_l_id.id
@@ -976,6 +1021,7 @@ class CreateSampleWizard(models.TransientModel):
                     'sample_reject_reason':sample_reject_reason,
                     'has_witness':has_witness,
                     'witness':witness,
+                    'department_id':self.department_id,
                     'conformity':conformity,
                     'scope':scope,
                     'sample_description':sample_description,
@@ -996,6 +1042,7 @@ class CreateSampleWizard(models.TransientModel):
                     self.env["lerm.srf.sample"].create({
                         'srf_id': self.env.context.get('active_id'),
                         'group_id':group_id,
+                       
                         # 'alias':alias,
                         'discipline_id': discipline_id,
                         # 'lab_l_id': lab_l_id,
@@ -1010,6 +1057,7 @@ class CreateSampleWizard(models.TransientModel):
                         'sample_reject_reason':sample_reject_reason,
                         'has_witness':has_witness,
                         'witness':witness,
+                        'department_id':self.department_id,
                         'conformity':conformity,
                         'scope':scope,
                         'sample_description':sample_description,
@@ -1081,6 +1129,7 @@ class CreateSampleWizard(models.TransientModel):
                         'group': sample.group_id.id,
                         'material': sample.material_id.id,
                         'witness_name': sample.witness,
+                        # 'department_id': sample.department_id.id,
                         'sample_id':sample.id,
                         'parameters':parameters,
                         'technician': self.technicians.id,
@@ -1088,7 +1137,8 @@ class CreateSampleWizard(models.TransientModel):
                         'conformity':sample.conformity,
                         'has_witness':sample.has_witness,
                         'size_id':sample.size_id.id,
-                        'grade_id':sample.grade_id.id
+                        'grade_id':sample.grade_id.id,
+                        'department_id':sample.department_id,
                     })
                     # import wdb;wdb.set_trace()
                     sample.write({'state':'2-alloted' , 'technicians':self.technicians.id , 'eln_id':eln_id.id})

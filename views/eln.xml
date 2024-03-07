@@ -82,6 +82,7 @@
                                 <field name='sample_id' readonly="1"/>
                                 <field name='kes_no' readonly="1"/>
                                 <field name='group' readonly="1"/>
+                                <field name='department_id'/>
                                 <field name='witness_name'/>
                                 <field name='grade_id' domain="[('id', 'in', grade_ids)]"/>
                                 <field name='end_date'/>
