@@ -25,6 +25,7 @@
                         <field name="brand"/>
                         <field name='casting_date'/>
                         <field name="grade_id" domain="[('id', 'in', grade_ids)]"/>
+                        <field name="department_id"/>
                         <field name="client_sample_id"/>
                         <field name="received_by_id"/>
                         <field name="sample_condition"/>

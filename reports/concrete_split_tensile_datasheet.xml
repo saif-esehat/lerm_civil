@@ -292,11 +292,25 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
-								<td colspan="6">Casting Date :
+								<td colspan="6">Date of Casting :
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.date_of_casting"/>
 								</td>
 							</tr>
+
+							<tr>
+							    <td colspan="12" >Age in Days :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.age_of_test"/>
+								</td>
+								
+								<!-- <td colspan="6" >Date of Casting :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.date_of_casting"/>
+								</td>
+								 -->
+							</tr>
+							
 						</table>
 					</div>
 					<div style="margin-top:20px;font-weight: bold;">
@@ -369,7 +383,7 @@
 									<span t-esc="r['id_mark']"/>
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="r['wt_of_cylender']"/>
+									<span t-esc="r['wt_of_cylender']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td style="text-align: center;">
 									<span t-esc="r['height']"/>

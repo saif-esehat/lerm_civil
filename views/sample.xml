@@ -111,7 +111,7 @@
                         <field name='kes_no'/>
                         <field name='ulr_no'/>
                         <field name="group_id" domain="[('id', 'in', group_ids)]" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
-                        <!-- <field name="alias"/> -->
+                        <field name="department_id"/>
                         <field name="product_name" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <field name="main_name" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
                         <field name="price" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
@@ -299,6 +299,7 @@
                       <field name="lab_no_value" optional="show" invisible="1"/>
                       <!-- <field name="lab_l_id" optional="show"/> -->
                       <field name="group_id" optional="show"/>
+                      <field name="department_id" optional="show"/>
                       <field name="material_id" optional="show"/>
                       <field name="alias" optional="show"/>
                       <field name="customer_id"/>
