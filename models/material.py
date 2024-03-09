@@ -14,6 +14,7 @@ class Material(models.Model):
     result_remark = fields.Char("Results Remark Column Title")
     discipline = fields.Many2one('lerm_civil.discipline',string="Discipline")
     group = fields.Many2one('lerm_civil.group',string="Group")
+    department_ids = fields.Many2one('hr.department', string='Department')
     test_format_no = fields.Char(string="Test Format No")
     data_sheet_format_no = fields.Many2one('lerm.datasheet.master',string="Data Sheet Format No")
     group_ids = fields.Many2many('lerm_civil.group',string="Group Ids",compute="compute_group_ids")
@@ -29,6 +30,25 @@ class Material(models.Model):
     lab_name = fields.Char(string="Lab Name")
     product_based_calculation = fields.One2many('lerm.product.based.calculation','product_id',string="Product Based Calculation")
     sop = fields.Html(string='SOP')
+
+
+    @api.onchange('department_id')
+    def update_department_name(self):
+        if self.env.context.get('update_department_name'):
+            self.department_id = self.department_id
+
+   
+    @api.model
+    def create(self, values):
+        record = super(Material, self).create(values)
+        record.update_department_name()
+        return record
+
+
+    
+
+
+   
 
     # discipline2 = fields.One2many('material.discipline.line')
 
@@ -84,6 +104,9 @@ class Material(models.Model):
             # record.group = None
             group_ids = self.env['lerm_civil.group'].search([('discipline', '=', record.discipline.id)])
             record.group_ids = group_ids
+
+   
+
 
     
 

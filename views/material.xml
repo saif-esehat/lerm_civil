@@ -40,6 +40,7 @@
             </group>
             <group style="width:50%">
               <field name="group" domain="[('id', 'in', group_ids)]"/>
+              <field name="department_ids"/>
               <field name="group_ids" invisible='1'/>
               <field name="parameter_master_ids" invisible='1'/>
               <field name="data_sheet_format_no"/>

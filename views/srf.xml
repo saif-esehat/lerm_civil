@@ -72,6 +72,9 @@
 
                     </group>
                     <group style="width:50%">
+
+                        <!-- <field name='department_id'/> -->
+                        <!-- <field name="department"/> -->
                         <field name="customer" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
                         <field name='client' attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
                         <field name='contractor' domain="[('id', 'in', contractor_ids)]"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
@@ -104,9 +107,11 @@
                             <field name="material_id"/>
                             <field name="discipline_id"/>
                             <field name="lab_no_value" invisible="1"/>
+                             <!-- <field name="department_id"/> -->
                             <!-- <field name="disciplaine_value"/> -->
                             <!-- <field name="lab_l_id"/> -->
                             <field name="group_id"/>
+                            <field name="department_id"/>
                             <field name='parameters' widget="many2many_tags"/>
                             <field name='casting'/>
                             <!-- <field name="sample_quantity"/> -->
@@ -191,6 +196,7 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                <group>
                     <group style="width:50%">
                         <field name="edit_mode" invisible="1"/>
 
@@ -210,10 +216,12 @@
                         <!--<field name="grade_ids" invisible='1'/> -->
                     </group>
                     <group style="width:50%">
+                    <!-- <br></br> -->
                         <field name="group_id" domain="[('id', 'in', group_ids)]"  options="{'no_create': True}"/>
-                        <field name="product_aliases" invisible="1"/>
-                        <field name="product_alias" domain="[('id', 'in', product_aliases)]"   options="{'no_create': True}" />
-                        <field name="pricelist"/>
+                        <field name="department_id"  options="{'no_create': True}"/>
+                        <!-- <field name="product_aliases" invisible="1"/> -->
+                        <!-- <field name="product_alias" domain="[('id', 'in', product_aliases)]"   options="{'no_create': True}" />
+                        <field name="pricelist"/> -->
                         <field name="product_name"  invisible="1"/>
                         <field name="main_name"   invisible="1"/>
                         <field name="price"   invisible="1"/>
@@ -227,6 +235,7 @@
                         <field name="size_ids" invisible='1'/>
                         <!-- <field name="size_ids" invisible='1'/>
                         <field name="qty_ids" invisible='1'/> -->
+                    </group>
                     </group>
                     <group style="width:100%">
                         <field name="sample_reject_reason" attrs="{'required': [('sample_condition','=','non_satisfactory')] , 'invisible': [('sample_condition', '=', 'satisfactory')]}"/>
@@ -245,7 +254,7 @@
                         <field name="volume"/>
                     </group>
                     <group style="width:50%">
-                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}"/>
+                        <field name="days_casting" attrs="{'invisible':[('casting','!=',True)]}" string="Days of Testing"/>
                     </group>
                     <group style="width:50%">
                         <field name="date_casting" attrs="{'invisible':[('casting','!=',True)]}"/>

@@ -50,6 +50,7 @@
 							<td colspan="3">
 								<span t-field="o.kes_no"/>
 							</td>
+							
 							<td colspan="3">Report Issue Date :
 							</td>
 							<td colspan="3">
