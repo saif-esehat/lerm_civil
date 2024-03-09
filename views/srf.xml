@@ -10,7 +10,12 @@
         </field> -->
     </record>
     <!-- <menuitem id="srf_form" groups="kes_hod_access_group,kes_admin_access_group,lerm_civil.kes_access_srf" name="SRF" parent="lerm_transaction_data" action="srf_form_id" sequence="10" /> -->
-    <menuitem id="srf_form" name="SRF" groups="lerm_civil.kes_access_srf,lerm_civil.kes_quality_manager" parent="lerm_transaction_data" action="srf_form_id" sequence="10"/>
+    <menuitem id="srf_form" 
+        name="SRF" 
+        groups="lerm_civil.kes_access_srf,lerm_civil.kes_quality_manager,lerm_civil.kes_verified_by,lerm_civil.kes_hod_access_group,lerm_civil.kes_confirm_srf" 
+        parent="lerm_transaction_data" 
+        action="srf_form_id" 
+        sequence="10"/>
 
     <record id="lerm_civil_srf_form" model="ir.ui.view">
         <field name="name">lerm.civil.srf.form</field>
@@ -23,7 +28,7 @@
                     name="confirm_srf"
                     string="Confirm"
                     attrs="{'invisible': [('state', 'in', ('2-confirm'))]}"
-                    groups="lerm_civil.kes_verified_by,lerm_civil.kes_hod_access_group"
+                    groups="lerm_civil.kes_verified_by,lerm_civil.kes_confirm_srf" 
                     />
 
                     
@@ -57,12 +62,14 @@
                     <group style="width:50%" >
                         <field name="srf_id" readonly="1"/>
                         <field name="kes_number"  invisible="1"/>
-                        <field name="srf_date" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="srf_date" attrs="{'readonly': ['|', ('state', '=', '2-confirm'), ('date_editable', '=', False)]}"/>
                         <!-- <field name="contact_person" context="{'hide_reference':True}" domain="[('id', 'in', contact_contact_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/> -->
                         <field name="contact_person" domain="[('id', 'in', contact_site_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <!-- <field name="site_address" domain="[('id', 'in', contact_site_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/> -->
                         <field name="site_address"/>
                         <field name="client_refrence" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
+                        <field name="date_editable" invisible="1"/>
+
                     </group>
                     <group style="width:50%">
 
