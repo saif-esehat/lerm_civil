@@ -343,6 +343,9 @@
         action="test_sample_pending_in_report_action"
         sequence="24" />
 
+    
+    
+
    
 
 </odoo>
