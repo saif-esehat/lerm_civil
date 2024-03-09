@@ -35,7 +35,7 @@ class ELN(models.Model):
     # lab_l_id = fields.Many2one('lab.location', string="Lab Locations",domain="[('parent_id', '=', discipline_id)]")
     group = fields.Many2one('lerm_civil.group',string="Group")
     # department_id = fields.Many2one('hr.department', string='Department')
-    # department_id = fields.Char(string='Department')
+    department_id = fields.Char(string='Department')
     material = fields.Many2one('product.template',string='Material')
     witness_name = fields.Char(string="Witness Name")
     witness_description = fields.Char(string="Witness Description")

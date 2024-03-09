@@ -41,6 +41,21 @@
                          </field>  -->
                          
                         </page>
+                        <!-- <page string="Non-NABL">
+                          
+                                <form >
+                                 <sheet>
+                                 <group>
+                                  <group>
+                                    <field name="non_nabl"/>
+                                  </group>
+                                
+                                </group>
+                                 </sheet>
+                                </form>
+                      
+                         
+                        </page> -->
                 </notebook>
                 </sheet>
             </form>

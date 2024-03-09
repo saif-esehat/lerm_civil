@@ -17,7 +17,7 @@ class Discipline(models.Model):
 
     lab_no = fields.Integer(string="Lab Location")  # Reference the correct model
 #     # lab_c_no = fields.Char("Lab Certificate No .",size=6, size_min=6)
-#     lab_adress = fields.Char(string="Lab Address")
+    # non_nabl = fields.Char(string="Non-NABL")
 
 
     # lab_l_ids = fields.One2many('lab.location','parent_id',string="Parameter")

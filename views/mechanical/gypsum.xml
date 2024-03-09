@@ -19,8 +19,11 @@
                         <field name="sample_id" readonly="1" />
                         <field name="eln_ref" readonly="1"/>
                         <field name="parameter_id" invisible="1"/>
+                         <field name="grade"/>
                     </group>
                     <group>
+                    
+                      
                       <field name="sample_parameters">
                         <tree>
                           <field name="parameter_name"/>
@@ -298,6 +301,42 @@
                       
 
                     </group>
+
+                    <!-- 7 Days Casting  -->
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <h1>
+                            <field name="casting_7_name" readonly="1" nolabel="1"/>
+
+                            <!-- <field name="dry_sieving_visible" invisible="1"/> -->
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                            <field name="status_7days"/>
+                      
+                    </group>
+                    
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+
+                      <field name="casting_date_7days"/>
+                      <field name="testing_date_7days"/>
+                      
+                      <field name="casting_7_days_tables">
+                        <tree editable="bottom">
+                          <field name="length"/>
+                          <field name="width"/>
+                          <field name="crosssectional_area"/>
+                          <field name="wt_of_cement_cube"/>
+                          <field name="crushing_load" />
+                          <field name="compressive_strength" />
+                        </tree>
+                      </field>
+                      <field name="average_casting_7days"/>
+                      <!-- <field name="compressive_strength_7_days"/> -->
+                    </group>
+                    <!-- <group style="width:50%" attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                      <field name="compressive_7days_conformity"/>
+                      <field name="compressive_7days_nabl"/>
+                    </group> -->
                      <button
                             type="object"
                             class="oe_highlight" 

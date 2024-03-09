@@ -557,6 +557,8 @@ class LermSampleForm(models.Model):
             'report_file': template_name,
             'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : False,'fromEln':False}
         }
+
+    
     # def print_sample_report(self):
     #     eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
     #     is_product_based = eln.is_product_based_calculation
