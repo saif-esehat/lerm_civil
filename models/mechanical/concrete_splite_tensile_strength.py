@@ -183,12 +183,27 @@ class ConcreteSplitTensileStrengthLine(models.Model):
     parent_id = fields.Many2one('mechanical.concrete.split.tensile',string="Parent Id")
 
     sr_no = fields.Integer(string="Sr.No.",readonly=True, copy=False, default=1)
-    id_mark = fields.Char(string="ID MARK/ Location")
+    id_mark = fields.Char(string="ID MARK/ Location",compute="_compute_id_mark")
     wt_of_cylender = fields.Float(string="Weight of Cylinder Kg")
     height = fields.Float(string="Height mm")
     diameter = fields.Float(string="Diameter mm")
     breaking_load = fields.Float(string="Breaking Load KN")
     split_strength = fields.Float(string="Split Tensile Strength N/mm2",compute="_compute_split_strength")
+
+
+
+    @api.depends('parent_id')
+    def _compute_id_mark(self):
+        for record in self:
+            sample_id = record.parent_id.eln_ref.sample_id.client_sample_id
+            record.id_mark = sample_id
+
+
+    # @api.onchange('parent_id.eln_ref.sample_id.client_sample_id')
+    # def _onchange_id_mark(self):
+    #     for record in self:
+    #         sample_id = record.parent_id.eln_ref.sample_id.client_sample_id
+    #         record.id_mark = sample_id
 
 
 

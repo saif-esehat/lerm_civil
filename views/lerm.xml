@@ -41,6 +41,21 @@
                          </field>  -->
                          
                         </page>
+                        <!-- <page string="Non-NABL">
+                          
+                                <form >
+                                 <sheet>
+                                 <group>
+                                  <group>
+                                    <field name="non_nabl"/>
+                                  </group>
+                                
+                                </group>
+                                 </sheet>
+                                </form>
+                      
+                         
+                        </page> -->
                 </notebook>
                 </sheet>
             </form>
@@ -342,6 +357,9 @@
         parent="sample_status"
         action="test_sample_pending_in_report_action"
         sequence="24" />
+
+    
+    
 
    
 

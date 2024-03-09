@@ -61,6 +61,8 @@
 							<tr cols="12" style="margin-top:20px">
 								<td colspan="6">Wt. of  Gypsum Plaster (g) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.wt_gypsum_plaster"/>
 
 								</td>
@@ -68,18 +70,24 @@
 							<tr cols="12">
 								<td colspan="6">Weight of Water Required(g) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.wt_water_req"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Penetraion of vicat's Plunger (mm) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.penetration_vicat"/>
 								</td>
 							</tr>
 							<tr cols="12">
 								<td colspan="6">Normal Consistency (%) :
 									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
 									<span t-field="data.normal_consistency"/>
 								</td>
 							</tr>
@@ -510,6 +518,85 @@
 								
 							</tr>
 						</table>
+
+
+						<!-- 7 Days  -->
+
+						<div style="text-align:center;font-size:18px;margin-top:20px" t-if="data.status_7days">
+							7 Days
+						</div>
+						<table style="margin-top:20px" t-if="data.status_7days">
+						<tr cols="12">
+								<td colspan="6">Date of Casting :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.casting_date_7days"/>
+								</td>
+								<td colspan="6">Date of Testing :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.testing_date_7days"/>
+								</td>
+							</tr>
+						</table>
+						
+						<table style="margin-top:20px" t-if="data.status_7days">
+							<tr cols="12">
+								<td colspan="1">Sr no 
+								</td>
+								<td colspan="1">Length in mm 
+								</td>
+								<td colspan="1">Width in mm
+								</td>
+								<td colspan="2">Crosssectional Area
+								</td>
+								<td colspan="2">wt of Cement Cube in gm
+								</td>
+								<td colspan="2">Crushing Load in KN
+								</td>
+								<td colspan="3">Compressive Strength (N/mm²)
+								</td>
+							</tr>
+
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.casting_7_days_tables" t-as="r">
+								<td colspan="1">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</div>
+                  				</td>
+								<td colspan="1">
+									<span t-esc="r['length']"/>
+								</td>
+								<td colspan="1">
+									<span t-esc="r['width']"/>
+								</td>
+								<td colspan="2">
+									<span t-esc="r['crosssectional_area']"/>
+								</td>
+								<td colspan="2">
+									<span t-esc="r['wt_of_cement_cube']"/>
+								</td>
+								<td colspan="2">
+									<span t-esc="r['crushing_load']"/>
+								</td>
+								<td colspan="3">
+									<span t-esc="r['compressive_strength']"/>
+								</td>
+							</tr>
+						</table>
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Average :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.average_casting_7days" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+								<!-- <td colspan="6">Compressive Strength :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+								</td> -->
+							</tr>
+						</table>
+
 
 					</div>
 
