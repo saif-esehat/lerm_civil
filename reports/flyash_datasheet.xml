@@ -13,6 +13,7 @@
                                 <![CDATA[&nbsp;]]>
                                 <span t-field="eln.kes_no"></span>
                             </td>
+							
                             <td colspan="6">Test Start Date: 
                                 <![CDATA[&nbsp;]]>
                                 <span t-field="eln.start_date"></span>

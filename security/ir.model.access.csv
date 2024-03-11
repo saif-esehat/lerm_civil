@@ -113,28 +113,6 @@ lerm.contractor.line.srf,lerm_contractor_line_srf,lerm_civil.model_lerm_contract
 
 
 
-verified.lerm.civil.srf,lerm_civil_srf,model_lerm_civil_srf,lerm_civil.kes_verified_by,1,1,1,1
-verified.sample.range.line,sample_range_line_srf,model_sample_range_line,lerm_civil.kes_verified_by,1,1,1,1
-verified.lerm.srf.sample,lerm_srf_sample_srf,model_lerm_srf_sample,lerm_civil.kes_verified_by,1,1,1,1
-verified.parameter.master,lerm_parameter_master,model_lerm_parameter_master,lerm_civil.kes_verified_by,1,0,0,0
-verified.test_method.hod,lerm_civil_test_method,model_lerm_civil_test_method,lerm_civil.kes_verified_by,1,0,0,0
-verified.lerm.grade.line,lerm_grade_line,model_lerm_grade_line,lerm_civil.kes_verified_by,1,0,0,0
-verified.disciplines,lerm_civil_discipline,model_lerm_civil_discipline,lerm_civil.kes_verified_by,1,0,0,0
-verified.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_verified_by,1,0,0,0
-verified.lerm.eln,lerm_eln,model_lerm_eln,lerm_civil.kes_verified_by,1,0,0,0
-verified.lerm_civil.group,lerm_civil_group,model_lerm_civil_group,lerm_civil.kes_verified_by,1,1,1,1
-verified.lerm.size.line,lerm_size_line,model_lerm_size_line,lerm_civil.kes_verified_by,1,1,1,1
-verified.lerm.qty.line,lerm_qty_line,model_lerm_qty_line,lerm_civil.kes_verified_by,1,1,1,1
-verified.sample.allotment.wizard,sample_allotment_wizard,model_sample_allotment_wizard,lerm_civil.kes_verified_by,1,1,1,1
-verified.eln.parameters.inputs,eln_parameters_inputs,lerm_civil.model_eln_parameters_inputs,lerm_civil.kes_verified_by,1,1,1,1
-verified.eln.parameters.result,eln_parameters_result,lerm_civil.model_eln_parameters_result,lerm_civil.kes_verified_by,1,1,1,1
-verified.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_verified_by,1,1,1,1
-verified.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_verified_by,1,1,1,1
-
-
-
-
-
 quality.lerm_civil.disciplines,lerm_civil_discipline,model_lerm_civil_discipline,lerm_civil.kes_quality_manager,1,1,1,1
 quality.lerm_civil.group,lerm_civil_group,model_lerm_civil_group,lerm_civil.kes_quality_manager,1,1,1,1
 lerm.civil.srf.quality,lerm_civil_srf,model_lerm_civil_srf,lerm_civil.kes_quality_manager,1,0,0,0
@@ -171,6 +149,24 @@ quality.eln.parameters.result,eln_parameters_result,lerm_civil.model_eln_paramet
 quality.lerm.datasheet.line,lerm_datasheet_line,lerm_civil.model_lerm_datasheet_line,lerm_civil.kes_quality_manager,1,1,1,1
 quality.ir.model,ir_model_hod,base.model_ir_model,lerm_civil.kes_quality_manager,1,0,0,0
 
+
+verified.lerm.civil.srf,lerm_civil_srf,model_lerm_civil_srf,lerm_civil.kes_verified_by,1,1,1,1
+verified.sample.range.line,sample_range_line_srf,model_sample_range_line,lerm_civil.kes_verified_by,1,1,1,1
+verified.lerm.srf.sample,lerm_srf_sample_srf,model_lerm_srf_sample,lerm_civil.kes_verified_by,1,1,1,1
+verified.parameter.master,lerm_parameter_master,model_lerm_parameter_master,lerm_civil.kes_verified_by,1,0,0,0
+verified.test_method.hod,lerm_civil_test_method,model_lerm_civil_test_method,lerm_civil.kes_verified_by,1,0,0,0
+verified.lerm.grade.line,lerm_grade_line,model_lerm_grade_line,lerm_civil.kes_verified_by,1,0,0,0
+verified.disciplines,lerm_civil_discipline,model_lerm_civil_discipline,lerm_civil.kes_verified_by,1,0,0,0
+verified.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_verified_by,1,0,0,0
+verified.lerm.eln,lerm_eln,model_lerm_eln,lerm_civil.kes_verified_by,1,0,0,0
+verified.lerm_civil.group,lerm_civil_group,model_lerm_civil_group,lerm_civil.kes_verified_by,1,1,1,1
+verified.lerm.size.line,lerm_size_line,model_lerm_size_line,lerm_civil.kes_verified_by,1,1,1,1
+verified.lerm.qty.line,lerm_qty_line,model_lerm_qty_line,lerm_civil.kes_verified_by,1,1,1,1
+verified.sample.allotment.wizard,sample_allotment_wizard,model_sample_allotment_wizard,lerm_civil.kes_verified_by,1,1,1,1
+verified.eln.parameters.inputs,eln_parameters_inputs,lerm_civil.model_eln_parameters_inputs,lerm_civil.kes_verified_by,1,1,1,1
+verified.eln.parameters.result,eln_parameters_result,lerm_civil.model_eln_parameters_result,lerm_civil.kes_verified_by,1,1,1,1
+verified.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_verified_by,1,1,1,1
+verified.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_verified_by,1,1,1,1
 
 
 
@@ -935,3 +931,39 @@ technician.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civ
 
 
 admin.edit.lerm.civil.srf,edit_lerm_civil_srf,lerm_civil.model_edit_lerm_civil_srf,lerm_civil.srf_sample_editable,1,1,1,1
+
+
+
+
+srf_backdate.lerm.civil.srf,lerm_civil_srf,model_lerm_civil_srf,lerm_civil.kes_srf_backdate_creation_group,1,1,1,1
+srf_backdate.lerm.srf.sample,lerm_srf_sample,model_lerm_srf_sample,lerm_civil.kes_srf_backdate_creation_group,1,1,1,1
+srf_backdate.sample.range.line,sample_range_line_srf,model_sample_range_line,lerm_civil.kes_srf_backdate_creation_group,1,1,1,1
+srf_backdate.parameter.master,lerm_parameter_master,model_lerm_parameter_master,lerm_civil.kes_srf_backdate_creation_group,1,0,0,0
+srf_backdate.test_method.hod,lerm_civil_test_method,model_lerm_civil_test_method,lerm_civil.kes_srf_backdate_creation_group,1,0,0,0
+srf_backdate.lerm.grade.line,lerm_grade_line,model_lerm_grade_line,lerm_civil.kes_srf_backdate_creation_group,1,0,0,0
+srf_backdate.disciplines,lerm_civil_discipline,model_lerm_civil_discipline,lerm_civil.kes_srf_backdate_creation_group,1,0,0,0
+srf_backdate.lerm_civil.group,lerm_civil_group,model_lerm_civil_group,lerm_civil.kes_srf_backdate_creation_group,1,1,1,1
+srf_backdate.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_srf_backdate_creation_group,1,0,0,0
+srf_backdate.lerm.size.line,lerm_size_line,model_lerm_size_line,lerm_civil.kes_srf_backdate_creation_group,1,1,1,1
+srf_backdate.lerm.qty.line,lerm_qty_line,model_lerm_qty_line,lerm_civil.kes_srf_backdate_creation_group,1,1,1,1
+
+
+
+srf_confirm.lerm.civil.srf,lerm_civil_srf,model_lerm_civil_srf,lerm_civil.kes_confirm_srf,1,1,0,0
+srf_confirm.sample.range.line,sample_range_line_srf,model_sample_range_line,lerm_civil.kes_confirm_srf,1,1,1,1
+srf_confirm.lerm.srf.sample,lerm_srf_sample_srf,model_lerm_srf_sample,lerm_civil.kes_confirm_srf,1,1,1,0
+srf_confirm.parameter.master,lerm_parameter_master,model_lerm_parameter_master,lerm_civil.kes_confirm_srf,1,0,0,0
+srf_confirm.test_method.hod,lerm_civil_test_method,model_lerm_civil_test_method,lerm_civil.kes_confirm_srf,1,0,0,0
+srf_confirm.lerm.grade.line,lerm_grade_line,model_lerm_grade_line,lerm_civil.kes_confirm_srf,1,0,0,0
+srf_confirm.disciplines,lerm_civil_discipline,model_lerm_civil_discipline,lerm_civil.kes_confirm_srf,1,0,0,0
+srf_confirm.sample.parameters.result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_confirm_srf,1,0,0,0
+srf_confirm.lerm_civil.group,lerm_civil_group,model_lerm_civil_group,lerm_civil.kes_confirm_srf,1,0,0,0
+srf_confirm.lerm.size.line,lerm_size_line,model_lerm_size_line,lerm_civil.kes_confirm_srf,1,0,0,0
+srf_confirm.lerm.qty.line,lerm_qty_line,model_lerm_qty_line,lerm_civil.kes_confirm_srf,1,0,0,0
+srf_confirm.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_confirm_srf,1,1,1,1
+
+
+
+
+
+

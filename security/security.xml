@@ -5,13 +5,14 @@
             <field name="name">LERM Civil</field>
         </record>
 
-        <!-- <record model="res.groups" id="kes_admin_access_group">
-            <field name="name">Admin</field>
+        <record model="res.groups" id="kes_confirm_srf">
+            <field name="name">SRF Confirm</field>
             <field name="category_id" ref="kes_lerm_access_categories"/>
-        </record> -->
+        </record>
+  
 
-        <record model="res.groups" id="kes_technician_access_group">
-            <field name="name">Technician</field>
+        <record model="res.groups" id="kes_access_srf">
+            <field name="name">SRF</field>
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
 
@@ -20,8 +21,23 @@
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
 
-        <record model="res.groups" id="kes_access_srf">
-            <field name="name">SRF</field>
+        <record model="res.groups" id="kes_srf_backdate_creation_group">
+            <field name="name">SRF Backdate creation</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
+        <record model="res.groups" id="lerm_master">
+            <field name="name">Master Data</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
+        <record model="res.groups" id="kes_verified_by">
+            <field name="name">Verified by</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record>
+
+        <record model="res.groups" id="kes_technician_access_group">
+            <field name="name">Technician</field>
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
 
@@ -30,10 +46,6 @@
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
 
-        <record model="res.groups" id="kes_verified_by">
-            <field name="name">Verified by</field>
-            <field name="category_id" ref="kes_lerm_access_categories"/>
-        </record>
 
         <record model="res.groups" id="kes_job_allocation">
             <field name="name">Job Allocation</field>
@@ -53,10 +65,7 @@
         </record>
 
 
-        <record model="res.groups" id="kes_srf_backdate_creation_group">
-            <field name="name">SRF Backdate creation</field>
-            <field name="category_id" ref="kes_lerm_access_categories"/>
-        </record>
+        
 
         <record model="res.groups" id="kes_hod_access_group">
             <field name="name">Head of Department</field>

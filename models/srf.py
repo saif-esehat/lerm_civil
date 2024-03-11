@@ -163,6 +163,24 @@ class SrfForm(models.Model):
     ], string='Days of casting', default='3')
     
     date_casting = fields.Date(string="Date of Casting")
+    date_editable = fields.Boolean(string="SRF Date editable",default=False,compute="_compute_date_editable")
+
+
+    def _compute_date_editable(self):
+        for record in self:
+            backdate_group_id = record.env.ref('lerm_civil.kes_srf_backdate_creation_group').id
+
+            if backdate_group_id in self.env.user.groups_id.ids:
+                record.date_editable = True
+            else:
+                record.date_editable = False
+
+    def read(self, fields=None, load='_classic_read'):
+
+        self._compute_date_editable()
+        
+        return super(SrfForm, self).read(fields=fields, load=load)
+
 
 
 
@@ -189,6 +207,9 @@ class SrfForm(models.Model):
                 record.site_address = address
             else:
                 record.site_address = ''
+
+    
+
 
     # @api.depends('customer')
     # def _compute_name_work(self):
@@ -233,8 +254,7 @@ class SrfForm(models.Model):
         
         # previous_record_date = datetime.strptime(previous_record_date, "%Y-%m-%d").date()
         # date2 = datetime.strptime(vals["srf_date"], "%Y-%m-%d").date()
-        print('=========?',previous_record_date)
-        print('==========>',vals["srf_date"])
+      
         try:
             date1 = datetime.strptime(str(previous_record_date), "%Y-%m-%d")
             date2 = datetime.strptime(str(vals["srf_date"]), "%Y-%m-%d")
@@ -255,12 +275,23 @@ class SrfForm(models.Model):
             record = super(SrfForm, self).create(vals)
         
         return record
+
+    
+        
         
     @api.model
     def _get_default_date(self):
         previous_record = self.search([], order='srf_date desc', limit=1)
+        current_date =  datetime.now().date()
+
+        # srf_group_id = self.env.ref('lerm_civil.kes_access_srf').id
+        # import wdb; wdb.set_trace()
+        
+        
+        # if backdate_group_id in self.env.user.groups_id.ids:
+        #     return datetime.now().date()
         # print("+++++++++++++>",previous_record)
-        return previous_record.srf_date if previous_record else None
+        return current_date
     
     def action_srf_sent_mail(self):
         return {
@@ -331,6 +362,7 @@ class SrfForm(models.Model):
             kes_range = "KES/"+str(count+1)+"-"+str(count+1+record.sample_qty-1)
             record.write({'sample_range': sample_range , 'kes_range': kes_range })
             samples = self.env['lerm.srf.sample'].search([('sample_range_id','=',record.id)])
+            
 
 
 
@@ -354,6 +386,12 @@ class SrfForm(models.Model):
                 # lab_location =  self.env.context['discipline_id']
                 # print('<<<<<<<<<<<<<<<<<<<<',lab_location)
                 # lab_cert_no = str(sample.lab_certificate_no)
+                # import wdb; wdb.set_trace()
+
+                # sample.received_by_id = self.env.user.id
+
+                
+
                 
                 if sample.scope == 'nabl':
                 
