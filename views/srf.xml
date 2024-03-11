@@ -80,7 +80,7 @@
                         <field name='contractor' domain="[('id', 'in', contractor_ids)]"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
                         <field name='contractor_ids' invisible='1'/>
                         <field name="contact_other_ids" invisible='1'/>
-                        <field name="billing_customer" domain="[('id', 'in', contact_other_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
+                        <field name="billing_customer"  attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
                         <field name="name_work" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" domain="[('id', 'in', name_works)]"/>
                         <field name="consultant_name1"/>
                         <field name="name_works" invisible="1"/>

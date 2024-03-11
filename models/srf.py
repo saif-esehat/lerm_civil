@@ -388,7 +388,10 @@ class SrfForm(models.Model):
                 # lab_cert_no = str(sample.lab_certificate_no)
                 # import wdb; wdb.set_trace()
 
-                sample.received_by_id = self.env.user.id
+                # try: 
+                #     sample.received_by_id = self.env.user
+                # except:
+                #     pass
 
                 
 
@@ -1126,6 +1129,7 @@ class CreateSampleWizard(models.TransientModel):
     
     class AllotSampleWizard(models.TransientModel):
         _name = "sample.allotment.wizard"
+        _inherit = ['mail.thread','mail.activity.mixin']
 
         technicians = fields.Many2one("res.users",string="Technicians")
         
@@ -1189,5 +1193,16 @@ class CreateSampleWizard(models.TransientModel):
 
         def close_allotment_wizard(self):
             return {'type': 'ir.actions.act_window_close'}
+        
+        def schedule_activity(self):
+        # Schedule an activity for the current record
+            self.activity_schedule(
+                'mail.mail_activity_data_todo',
+                note='Your activity description here',
+                user_id=self.env.user.id,
+                date_deadline=fields.Date.today(),
+                summary='Your activity summary here'
+            )
+            return True
 
 
