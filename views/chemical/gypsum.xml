@@ -467,11 +467,15 @@
 
                     <group attrs="{'invisible': [('free_water_visible', '=', False)]}">
                        <group>
-                            <field name="free_water_wt"/>
+                            <field name="wt_of_empty_water"/>
                             <br></br>
-                            <field name="free_water_br"/>
+                            <field name="wt_empty_cs_water"/>
                              <br></br>
-                            <field name="free_water_nor"/>
+                            <field name="wt_cs_water"/>
+                             <br></br>
+                            <field name="wt_of_sample_water"/>
+                              <br></br>
+                            <field name="water_in_wt"/>
                              <br></br>
                             <field name="free_water"/>
                              <br></br>

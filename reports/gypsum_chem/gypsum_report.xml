@@ -704,7 +704,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.free_water"/>
+										<span t-field="data.free_water" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td colspan="2" style="text-align: center;">
