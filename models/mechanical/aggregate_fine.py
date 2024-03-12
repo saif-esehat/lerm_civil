@@ -428,10 +428,6 @@ class FineAggregate(models.Model):
                     print("Previous Cumulative",previous_line_record)
 
     
-                    
-
- 
-
     @api.depends('sieve_analysis_child_lines.wt_retained')
     def _compute_total_sieve(self):
         for record in self:
