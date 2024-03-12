@@ -209,8 +209,12 @@
 								    <td>Diff. in weight (gm)</td>
                                     <td><span t-field="data.dilution_mgo1" t-options='{"widget": "float", "precision": 4}'/></td>
                                 </tr>
+								<tr>
+								    <td>Dilution</td>
+                                    <td><span t-field="data.dilution_mgo2" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
                                 <tr>
-								    <td>MgO % = D x 36.21/ A</td>
+								    <td>MgO % = D x 36.21 * E/ A</td>
                                     <td><span t-field="data.mgo1" t-options='{"widget": "float", "precision": 2}'/></td>
                                 </tr>
 								
@@ -373,7 +377,7 @@
 								
 								<tr>
 								    <td>Soluble sodium oxide % (Na2O)</td>
-                                    <td><span t-field="data.soluble_sodium" t-options='{"widget": "float", "precision": 2}'/></td>
+                                    <td><span t-field="data.soluble_sodium" t-options='{"widget": "float", "precision": 3}'/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -472,6 +476,49 @@
                         </table>
 
 					</div>
+
+
+					<div t-if="data.cao_visible2">
+					
+						<div style="text-align:center;font-size:18px">
+							<!-- CaO -->
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')]).parameter_name"/>
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td> Wt of sample (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_sample_calcium_oxide"/>
+									</td>
+								</tr>
+								<tr>
+								 <td> Burette reading (ml)</td>
+                                    <td>
+									<span t-field="data.burette_calcium_oxide"/>
+									</td>
+								</tr>
+								<tr>
+								   <td> Normality OF 0.1N KMnO₄</td>
+                                    <td><span t-field="data.normality_calcium_oxide"/></td>
+								</tr>
+								<tr>
+								    <td>Dilution</td>
+
+                                    <td><span t-field="data.dilution_calcium_oxide"/></td>
+								</tr>
+								<tr>
+								    <td>Calcium Oxide = B*C*2.8*D/A</td>
+                                    <td><span t-field="data.calcium_oxide" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
 
 
 					
