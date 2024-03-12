@@ -171,12 +171,12 @@
                         </h1>
                     </group>
                     <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
-                        <field name="elongation_table">
+                        <field name="elongation_table" style="width:80%">
                             <tree editable="bottom">
-                                <field name="sieve_size" />
-                                <field name="wt_retained" />
-                                <field name="elongated_retained" />
-                                <field name="flakiness_retained" />
+                                <field name="sieve_size" style="width: 150px;" />
+                                <field name="wt_retained" style="width: 150px;"/>
+                                <field name="elongated_retained" style="width: 200px;"/>
+                                <field name="flakiness_retained" style="width: 200px;"/>
                             </tree>
                           
                         </field>
@@ -675,12 +675,12 @@
                     <group attrs="{'invisible': [('aggregate_grading_visible', '=', False)]}">
                         <field name="aggregate_grading_child_lines" nolabel="1">
                             <tree editable="bottom">
-                                <field name="serial_no" string="Sr.No" />
-                                <field name="sieve_size" string="IS Sieve Size" />
+                                <field name="serial_no" string="Sr.No"/>
+                                <field name="sieve_size" string="IS Sieve Size"/>
                                 <field name="wt_retained" string="Wt. Retained in gms"/>
-                                <field name="percent_retained" string="% Retained" />
-                                <field name="cumulative_retained" context="{'default_cumulative_retained': cumulative_retained}" string="Cum. Retained %" />
-                                <field name="passing_percent" string="Passing %" readonly="1" />
+                                <field name="percent_retained" string="% Retained"/>
+                                <field name="cumulative_retained" context="{'default_cumulative_retained': cumulative_retained}" string="Cum. Retained %"/>
+                                <field name="passing_percent" string="Passing %" readonly="1"/>
                             </tree>
                         </field>
                     </group>
