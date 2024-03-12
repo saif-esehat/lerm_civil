@@ -670,23 +670,51 @@ class ChemicalGyspum(models.Model):
     keenes9 = fields.Char(string="Keene's Plaster",default="--")
 
 
-    free_water_wt = fields.Float("Mass of sample",digits=(16, 4))
-    free_water_br = fields.Float("Mass in gm of the material after drying")
-    free_water_nor = fields.Float("Diff", compute="_compute_free_water_nor", store=True)
-    free_water = fields.Float("Free water = diff * 100 / Mass", compute="_compute_free_water", store=True)
 
-    @api.depends('free_water_wt', 'free_water_br')
-    def _compute_free_water_nor(self):
-        for record in self:
-            record.free_water_nor = record.free_water_wt - record.free_water_br
+    wt_of_empty_water = fields.Float("A) Wt of empty weighing bottle (gm)",digits=(16, 4))
+    wt_empty_cs_water = fields.Float("B) (Wt of empty weighing bottle + Sample) before ignition, gm",digits=(16, 4))
+    wt_cs_water = fields.Float("C) Wt.of sample (B-A) ( gm )", compute="_compute_wt_cs_water", store=True,digits=(16, 4))
+    wt_of_sample_water = fields.Float("D) (Wt of empty weighing bottle + Sample) after ignition, (gm)",digits=(16, 4))
+    water_in_wt = fields.Float("E) Diff. in weight = (B - D), gm", compute="_compute_water_in_wt", store=True,digits=(16, 4))
+    free_water = fields.Float("Free water = E x 100 / C", compute="_compute_water", store=True)
 
-    @api.depends('free_water_nor', 'free_water_wt')
-    def _compute_free_water(self):
+    @api.depends('wt_empty_cs_water', 'wt_of_empty_water')
+    def _compute_wt_cs_water(self):
         for record in self:
-            if record.free_water_wt != 0:
-                record.free_water = (record.free_water_nor * 100) / record.free_water_wt
+            record.wt_cs_water = record.wt_empty_cs_water - record.wt_of_empty_water
+
+    @api.depends('wt_empty_cs_water', 'wt_of_sample_water')
+    def _compute_water_in_wt(self):
+        for record in self:
+            record.water_in_wt = record.wt_empty_cs_water - record.wt_of_sample_water
+
+    @api.depends('wt_cs_water', 'water_in_wt')
+    def _compute_water(self):
+        for record in self:
+            if record.wt_cs_water != 0:
+                record.free_water = (record.water_in_wt * 100) / record.wt_cs_water
             else:
                 record.free_water = 0.0
+  
+
+
+    # free_water_wt = fields.Float("Mass of sample",digits=(16, 4))
+    # free_water_br = fields.Float("Mass in gm of the material after drying")
+    # free_water_nor = fields.Float("Diff", compute="_compute_free_water_nor", store=True)
+    # free_water = fields.Float("Free water = diff * 100 / Mass", compute="_compute_free_water", store=True)
+
+    # @api.depends('free_water_wt', 'free_water_br')
+    # def _compute_free_water_nor(self):
+    #     for record in self:
+    #         record.free_water_nor = record.free_water_wt - record.free_water_br
+
+    # @api.depends('free_water_nor', 'free_water_wt')
+    # def _compute_free_water(self):
+    #     for record in self:
+    #         if record.free_water_wt != 0:
+    #             record.free_water = (record.free_water_nor * 100) / record.free_water_wt
+    #         else:
+    #             record.free_water = 0.0
    
   
   

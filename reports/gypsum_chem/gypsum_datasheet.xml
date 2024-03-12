@@ -385,7 +385,7 @@
 					<div t-if="data.free_water_visible">
 					
 						<div style="text-align:center;font-size:18px">
-							<!-- % Sulphur trioxide (SO3) -->
+							<!-- free water -->
 							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','c3ac1330-a4d9-4526-9533-4130ff635bf6')]).parameter_name"/>
 						</div>
 						
@@ -393,25 +393,35 @@
 						<table>
                             
                             <tbody>
+                              <tr>
+								    <td> Wt of empty weighing bottle (gm)</td>
+                                    <td>
+									<span t-field="data.wt_of_empty_water"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>(Wt of empty weighing bottle + Sample) before ignition, gm</td>
+                                    <td>
+									<span t-field="data.wt_empty_cs_water"/>
+									</td>
+								</tr>
                                 <tr>
-								    <td>Mass of sample</td>
+								 <td> Wt.of sample (B-A) ( gm )</td>
                                     <td>
-									<span t-field="data.free_water_wt"/>
+									<span t-field="data.wt_cs_water" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
 								<tr>
-								 <td>Mass in gm of the material after drying</td>
-                                    <td>
-									<span t-field="data.free_water_br"/>
-									</td>
+								   <td>(Wt of empty weighing bottle + Sample) after ignition, (gm)</td>
+                                    <td><span t-field="data.wt_of_sample_water"/></td>
 								</tr>
 								<tr>
-								   <td>Diff</td>
-                                    <td><span t-field="data.free_water_nor" t-options='{"widget": "float", "precision": 2}'/></td>
+								    <td> Diff. in weight = (B - D), gm</td>
+
+                                    <td><span t-field="data.water_in_wt" t-options='{"widget": "float", "precision": 2}'/></td>
 								</tr>
-							
 								<tr>
-								    <td>Free water = diff * 100 / Mass</td>
+								    <td>Free Water = E x 100 / C</td>
                                     <td><span t-field="data.free_water" t-options='{"widget": "float", "precision": 2}'/></td>
                                 </tr>
                             </tbody>
