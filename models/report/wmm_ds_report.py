@@ -184,10 +184,14 @@ class WmmDatasheet(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data):
-        if 'active_id' in data['context']:
-            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        if data['fromsample'] == True:
+            if 'active_id' in data['context']:
+                eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(docids) 
+            model_id = eln.model_id
         else:
-            eln = self.env['lerm.eln'].sudo().browse(docids) 
+            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         model_id = eln.model_id
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 

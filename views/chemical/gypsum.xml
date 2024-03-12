@@ -215,6 +215,8 @@
                              <br></br>
                             <field name="dilution_mgo1"/>
                              <br></br>
+                             <field name="dilution_mgo2"/>
+                             <br></br>
                               <field name="mgo1"/>
                              <br></br>
                            
@@ -467,11 +469,15 @@
 
                     <group attrs="{'invisible': [('free_water_visible', '=', False)]}">
                        <group>
-                            <field name="free_water_wt"/>
+                            <field name="wt_of_empty_water"/>
                             <br></br>
-                            <field name="free_water_br"/>
+                            <field name="wt_empty_cs_water"/>
                              <br></br>
-                            <field name="free_water_nor"/>
+                            <field name="wt_cs_water"/>
+                             <br></br>
+                            <field name="wt_of_sample_water"/>
+                              <br></br>
+                            <field name="water_in_wt"/>
                              <br></br>
                             <field name="free_water"/>
                              <br></br>
@@ -540,6 +546,61 @@
                                readonly="1"/>
                         <field name='free_water_nabl'/>
                     </group> 
+
+
+
+
+                      <!--calsium oxide-->
+                    <group attrs="{'invisible': [('calcium_oxide_visible2', '=', False)]}">
+                        <h1>
+                            <field name="calcium_oxide_name" readonly="1" nolabel="1"/>
+                            <field name="calcium_oxide_visible2" invisible="1"/>
+                            
+                        </h1>
+                          
+                    </group>
+
+                    <group attrs="{'invisible': [('calcium_oxide_visible2', '=', False)]}">
+                         <group>
+                            <field name="plaster11"/>
+                        </group>
+                        <group>
+                            <field name="retarded11" />
+                        </group>
+                          <group>
+                            <field name="anhydrous11"/>
+                        </group>
+                        <group>
+                            <field name="keenes11" />
+                        </group>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('calcium_oxide_visible2', '=', False)]}">
+                       <group>
+                            <field name="wt_of_sample_calcium_oxide"/>
+                            <br></br>
+                            <field name="burette_calcium_oxide"/>
+                             <br></br>
+                            <field name="normality_calcium_oxide"/>
+                             <br></br>
+                              <field name="dilution_calcium_oxide"/>
+                             <br></br>
+                           
+                              <field name="calcium_oxide"/>
+                             <br></br>
+                           
+                       </group>
+                    </group> 
+                     <group attrs="{'invisible': [('calcium_oxide_visible2', '=', False)]}">
+                          
+                        <field name='calcium_oxide_conformity2'
+                               decoration-success="calcium_oxide_conformity2 == 'pass'" 
+                               decoration-danger="calcium_oxide_conformity2 == 'fail'" 
+                               readonly="1"/>
+                        <field name='calcium_oxide_nabl2'/>
+                    </group> 
+
 
 
 

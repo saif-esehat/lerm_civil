@@ -358,10 +358,13 @@
                 <sheet>
                     <group style="width:100%">
                         <field name='technicians'/>
+                        <!-- <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/> -->
                     </group>
                     <footer>
                         <button name="allot_sample" string="Allot Sample" type="object" class="btn-primary"/>
                         <button name="close_allotment_wizard" string="Close" type="object"/>
+                        <!-- <button name="schedule_activity" string="Schedule Activity" type="object" class="oe_highlight"/> -->
                     </footer>
                 </sheet>
             </form>

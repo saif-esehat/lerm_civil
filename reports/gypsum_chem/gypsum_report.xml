@@ -644,7 +644,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.soluble_sodium"/>
+										<span t-field="data.soluble_sodium" t-options='{"widget": "float", "precision": 3}'/>
 									</span>									
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -704,7 +704,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.free_water"/>
+										<span t-field="data.free_water" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -793,6 +793,68 @@
 								<td  style="text-align: center;">
 									<span>
 										<span t-field="data.keenes10"/>
+									</span>									
+								</td>
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','1afa0443-8649-48a3-b73e-49f9fbb08d3d')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								
+								
+							</tr>
+
+
+							<tr t-if="data.calcium_oxide_visible2 and (data.calcium_oxide_nabl2 == 'pass' and nabl or data.calcium_oxide_nabl2 == 'fail' and not nabl)">
+								<td colspan="1" style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<span>
+									 Sulphur trioxide (SO3) %
+									</span>
+									
+								</td> -->
+								<td colspan="2" style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')]).parameter_name"/>
+								</td>
+								
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<span t-field="data.calcium_oxide" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td colspan="2" style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')]).unit.name"/>
+									</span>
+								</td>
+
+								<td  style="text-align: center;">
+									<span>
+										<span t-field="data.plaster11"/>
+									</span>									
+								</td>
+
+								<td  style="text-align: center;">
+									<span>
+										<span t-field="data.retarded11"/>
+									</span>									
+								</td>
+                                <td  style="text-align: center;">
+									<span>
+										<span t-field="data.anhydrous11"/>
+									</span>									
+								</td>
+
+								<td  style="text-align: center;">
+									<span>
+										<span t-field="data.keenes11"/>
 									</span>									
 								</td>
 								<td colspan="1" style="text-align: center;">
