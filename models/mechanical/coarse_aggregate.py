@@ -198,8 +198,7 @@ class CoarseAggregateMechanical(models.Model):
     specific_gravity_name = fields.Char("Name",default="Specific Gravity & Water Absorption")
     specific_gravity_visible = fields.Boolean("Specific Gravity Visible",compute="_compute_visible")
 
-    # specific_gravity_child_lines = fields.One2many('mechanical.specific.gravity.and.water.absorption.line','parent_id',string="Parameter")
-    
+    #  specific_gravity_child_lines = fields.One2many('mechanical.specific.gravity.and.water.absorption.line','parent_id',string="Parameter")
 
     wt_surface_dry = fields.Float(string="Weight of saturated surface dry (SSD) sample in air in gms")
     wt_sample_inwater = fields.Float(string="Weight of saturated sample in water in gms")

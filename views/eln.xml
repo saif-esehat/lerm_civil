@@ -28,12 +28,12 @@
 
                   
                     
-                    <!-- <button
+                    <button
                             type="object"
                             name="print_datasheet"
                             string="Print Datasheet"
                             />
-                     -->
+                    
                     <!-- <button
                                 type="object"
                                 name="print_nabl_report"

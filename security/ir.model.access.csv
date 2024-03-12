@@ -922,6 +922,9 @@ technician.ndt.upv.notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes
 technician.ndt.half.cell.notes,access_ndt_half_cell_notes,lerm_civil.model_ndt_half_cell_notes,kes_technician_access_group,1,1,1,1
 technician.ndt.concrete.core.notes,access_ndt_concrete_core_notes,lerm_civil.model_ndt_concrete_core_notes,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_structural_steel_round,access_structural_steel_round,lerm_civil.model_structural_steel_round,kes_technician_access_group,1,1,1,1
+technician.lerm_civil.mech_elong_line,access_mech_elong_line,lerm_civil.model_mechanical_elongation_flakiness_line,kes_technician_access_group,1,1,1,1
+
+
 
 technician.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_technician_access_group,1,0,0,0
 technician.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_technician_access_group,1,0,0,0
@@ -964,6 +967,15 @@ srf_confirm.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_ci
 
 
 
-
+master.lerm.grade.line,lerm_grade_line,model_lerm_grade_line,lerm_civil.lerm_master,1,1,1,1
+master.lerm.size.line,lerm_grade_line,model_lerm_size_line,lerm_civil.lerm_master,1,1,1,1
+master.test_method,lerm_civil_test_method,model_lerm_civil_test_method,lerm_civil.lerm_master,1,1,1,1
+master.discipline,lerm_civil_discipline,model_lerm_civil_discipline,lerm_civil.lerm_master,1,1,1,1
+master.parameter,lerm_civil_parameter_master,model_lerm_parameter_master,lerm_civil.lerm_master,1,1,1,1
+master.parameter.table,lerm_civil_parameter_master_table,model_lerm_parameter_master_table,lerm_civil.lerm_master,1,1,1,1
+master.dependent_inputs,lerm_civil_dependent_input_master,model_lerm_dependent_inputs,lerm_civil.lerm_master,1,1,1,1
+master.group,lerm_civil_group,model_lerm_civil_group,lerm_civil.lerm_master,1,1,1,1
+master.product.template,lerm_civil_product,model_product_template,lerm_civil.lerm_master,1,1,1,1
+master.product.product,lerm_civil_product,model_product_product,lerm_civil.lerm_master,1,1,1,1
 
 
