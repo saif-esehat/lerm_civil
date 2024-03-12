@@ -460,17 +460,15 @@ class ELN(models.Model):
                 }
             }
             
-    # def print_datasheet(self):
-    #     eln = self
-    #     template_name = eln.parameters_re[0]sult.parameter.datasheet_report_template.report_name
-    #     return {
-    #         'type': 'ir.actions.report',
-    #         'report_type': 'qweb-pdf',
-    #         'report_name': template_name,
-    #         'report_file': template_name
-    #     }
     def print_datasheet(self):
+        # import wdb ; wdb.set_trace()
+
+        # sample_id = self.sample_id
+        # sample_id.print_datasheet()
+
         eln = self
+        # eln = self.env["lerm.eln"].search([('sample_id','=', eln.sample_id.id)])S
+
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
             template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
@@ -480,8 +478,25 @@ class ELN(models.Model):
             'type': 'ir.actions.report',
             'report_type': 'qweb-html',
             'report_name': template_name,
-            'report_file': template_name
+            'report_file': template_name,
+            'data' : {'fromsample' : False,'eln_id':self.id},
+            
         }
+        
+
+    # def print_datasheet(self):
+    #     eln = self
+    #     is_product_based = eln.is_product_based_calculation
+    #     if is_product_based == True:
+    #         template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
+    #     else:
+    #         template_name = eln.parameters_result.parameter[0].datasheet_report_template.report_name
+    #     return {
+    #         'type': 'ir.actions.report',
+    #         'report_type': 'qweb-html',
+    #         'report_name': template_name,
+    #         'report_file': template_name
+    #     }
     def print_report(self):
         eln = self
         is_product_based = eln.material.is_product_based_calculation
