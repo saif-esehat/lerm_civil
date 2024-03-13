@@ -209,7 +209,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.so3"/>
+										<span t-field="data.so3" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td  colspan="2" style="text-align: center;">
@@ -270,7 +270,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.loi"/>
+										<span t-field="data.loi" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -335,7 +335,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.cao1"/>
+										<span t-field="data.cao1" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -399,7 +399,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.mgo1"/>
+										<span t-field="data.mgo1" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -461,7 +461,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.cao2"/>
+										<span t-field="data.cao2" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -523,7 +523,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.mgo2"/>
+										<span t-field="data.mgo2" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -764,7 +764,7 @@
 								
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.combined_water"/>
+										<span t-field="data.combined_water" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td colspan="2" style="text-align: center;">
