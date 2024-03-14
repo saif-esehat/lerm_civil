@@ -116,6 +116,7 @@ class LermSampleForm(models.Model):
         ('3', '3 Days'),
         ('7', '7 Days'),
         ('14', '14 Days'),
+        ('21', '21 Days'),
         ('28', '28 Days'),
         ('56', '56 Days'),
         ('112', '112 Days'),
