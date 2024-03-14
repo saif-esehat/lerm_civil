@@ -362,16 +362,14 @@ class LermSampleForm(models.Model):
         for record in self:
             record.product_or_form_based = False
             if record.state != '1-allotment_pending':
-                eln_id = self.env['lerm.eln'].search([('sample_id','=',self.id)])
-                is_product_based = eln_id.is_product_based_calculation
-                print("DATA",eln_id.parameters_result)
-                is_form_based = eln_id.parameters_result[0].calculation_type == "form_based"
-
-                if is_product_based or is_form_based:
-                    record.product_or_form_based = True
-                    record.parameters_result.write({'verified':True})
-                else:
-                    record.product_or_form_based = False
+                eln_id = self.env['lerm.eln'].search([('sample_id','=',record.id)])
+                if eln_id and eln_id.parameters_result:  # Check if eln_id and parameters_result are not empty
+                    print("DATA",eln_id.parameters_result)
+                    is_product_based = eln_id.is_product_based_calculation
+                    is_form_based = eln_id.parameters_result[0].calculation_type == "form_based"
+                    if is_product_based or is_form_based:
+                        record.product_or_form_based = True
+                        record.parameters_result.write({'verified':True})
             else:
                 record.product_or_form_based = False
 
