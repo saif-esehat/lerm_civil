@@ -66,7 +66,6 @@
                                 <field name='size_id' domain="[('id', 'in', size_ids)]"/>
                                 <field name='start_date' required="1"/>
                                 <field name='witness_description'/>
-                                <field name='casting_date' invisible="1"/>
                                 <field name='remarks'/>
                               
                                 <field name='conformity' readonly="1"/>
@@ -90,6 +89,7 @@
                                 <field name='witness_photo_name' invisible='1'/>
                                 <field name='attachment' filename='attachment_name'/>
                                 <field name='attachment_name' invisible='1'/>
+                                <field name='casting_date' />
                                 <field name='instrument'/>
                                 <field name='grade_ids' invisible="1"/>
                                 <field name='ir_model' invisible="1"/>
