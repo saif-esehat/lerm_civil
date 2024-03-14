@@ -405,7 +405,7 @@
 					</table>
 					<table style="margin-top:5px">
 						<tr cols="12">
-							<td colspan="6"><b>Average Split Tensile Strength :</b>
+							<td colspan="6"><b>Average Split Tensile Strength N/mm2:</b>
 							
 								<span t-field="data.average_split_tensile" t-options='{"widget": "float", "precision": 2}'/>
 							</td>

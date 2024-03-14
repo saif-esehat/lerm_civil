@@ -22,6 +22,8 @@ class MechanicalConcreteCube(models.Model):
         ('7days', '7 Days'),
         ('14days', '14 Days'),
         ('28days', '28 Days'),
+        ('56days', '56 Days'),
+        ('112days', '112 Days'),
     ], string='Age', default='28days',required=True,compute="_compute_age_of_days")
     date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
     date_of_testing = fields.Date(string="Date of Testing")
@@ -54,6 +56,10 @@ class MechanicalConcreteCube(models.Model):
                 age_of_days = 14
             elif record.age_of_days == '28days':
                 age_of_days = 28
+            elif record.age_of_days == '56days':
+                age_of_days = 56
+            elif record.age_of_days == '112days':
+                age_of_days = 112
             else:
                 age_of_days = 0
             record.difference = record.age_of_test - age_of_days
@@ -96,6 +102,10 @@ class MechanicalConcreteCube(models.Model):
                     record.age_of_days = '14days'
                 elif sample_record == '28':
                     record.age_of_days = '28days'
+                elif sample_record == '56':
+                    record.age_of_days = '56days'
+                elif sample_record == '112':
+                    record.age_of_days = '112days'
                 else:
                     record.age_of_days = None
             else:
