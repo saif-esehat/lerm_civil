@@ -32,7 +32,7 @@
                         <group>
                             <field name="date_of_casting"  string="Date of Casting" identity="extra"/>
                         </group>
-                        <group>
+                        <group style="width:30%">
                             <field name="date_of_testing"  string="Date of Testing" identity="extra"/>
                         </group>
                         <group>
@@ -74,7 +74,7 @@
                        
                     </group>
 
-                    <group attrs="{'invisible': [('splite_tensile_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('splite_tensile_visible', '=', False)]}" style="white-space:nowrap">
                         <field name='average_split_tensile'  col="12"/> 
                        
                          <!-- <tr cols="12">
