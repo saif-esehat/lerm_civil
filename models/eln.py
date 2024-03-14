@@ -41,7 +41,7 @@ class ELN(models.Model):
     witness_description = fields.Char(string="Witness Description")
     witness_photo = fields.Binary(string="Witness Photo")
     witness_photo_name = fields.Char(string="Witness Photo Name")
-    casting_date = fields.Date(string="Casting Date")
+    casting_date = fields.Date(string="Casting Date",compute="_compute_casting_date")
     attachment = fields.Binary(string="Attachment")
     attachment_name = fields.Char(string="Attachment Name")
     parameters = fields.One2many('eln.parameters','eln_id',string="Parameters")
@@ -89,13 +89,13 @@ class ELN(models.Model):
     #             raise ValidationError("Start Date cannot be before SRF creation date")
     #         else:
     #             pass
-    # @api.depends('casting_date','sample_id')
-    # def _compute_casting_date(self):
-    #     for record in self:
-    #         if record.sample_id.casting:
-    #             record.casting_date = record.sample_id.date_casting
-    #         else:
-    #             record.casting_date = None
+    @api.depends('casting_date','sample_id')
+    def _compute_casting_date(self):
+        for record in self:
+            if record.sample_id.casting:
+                record.casting_date = record.sample_id.casting_date
+            else:
+                record.casting_date = None
 
     @api.onchange('start_date', 'srf_date')
     def _start_date_validate(self):
