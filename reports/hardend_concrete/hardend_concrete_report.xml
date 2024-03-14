@@ -537,7 +537,7 @@
 							</div>
 							<div>
 								<b>
-									(Sr. Chemist)
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
 								</b>
 							</div>
 						</div>
