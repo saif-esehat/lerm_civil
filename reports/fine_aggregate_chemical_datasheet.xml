@@ -528,6 +528,125 @@
                             
                         </table>
                 </div>
+
+				<div t-if="data.na2O_name_visible" style="margin-top:20px">
+					
+						<div style="text-align:center;font-size:18px">
+							<!-- Alkali as Na₂O -->
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')]).parameter_name"/>
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>Weight of sample taken</td>
+                                    <td>
+									<span t-field="data.sample_wt_na2O"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>Dilution</td>
+                                    <td>
+									<span t-field="data.dilution_na2O"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>Sodium reading</td>
+                                    <td><span t-field="data.sidium_reading_na2O"/></td>
+								</tr>
+								<tr>
+								    <td>Factor from graph</td>
+
+                                    <td><span t-field="data.factor_graph_na2O"/></td>
+								</tr>
+								<tr>
+								<td>Dilution *Reading* factor *100/10000*wt of sample*A4</td>
+
+                                <td><span t-field="data.dilution_reading_na2O" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+								    <td>Na * 1.3480</td>
+                                    <td><span t-field="data.na2O" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+
+					<div t-if="data.k2O_name_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							<!-- Alkali as K₂O -->
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')]).parameter_name"/>
+
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>Weight of sample taken</td>
+                                    <td>
+									<span t-field="data.sample_wt_k2O"/>
+									</td>
+								</tr>
+								<tr>
+								 <td>Dilution</td>
+                                    <td>
+									<span t-field="data.dilution_k2O"/>
+									</td>
+								</tr>
+								<tr>
+								   <td>Potasium reading</td>
+                                    <td><span t-field="data.sidium_reading_k2O"/></td>
+								</tr>
+								<tr>
+								    <td>Factor from graph</td>
+
+                                    <td><span t-field="data.factor_graph_k2O"/></td>
+								</tr>
+								<tr>
+								    <td>Dilution *Reading* factor *100/10000*wt of sample*A4</td>
+
+                                    <td><span t-field="data.dilution_reading_k2O" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+								    <td>K *1.20</td>
+                                    <td><span t-field="data.k2O" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+					</div>
+
+
+					<div t-if="data.total_alkali_content_visible">
+					
+						<div style="text-align:center;font-size:18px">
+							<!-- Available alkalis -->
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')]).parameter_name"/>
+						</div>
+						
+				
+						<table>
+                            
+                            <tbody>
+                                <tr>
+								    <td>Total alkali content as Na2O equivalent, %</td>
+                                    <td>
+									<span t-field="data.total_alkali_content"/>
+									</td>
+								</tr>
+								
+                            </tbody>
+                        </table>
+
+					</div>
 						
 
 					<div class="authorizeRowDataSheet">
