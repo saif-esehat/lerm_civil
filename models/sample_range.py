@@ -58,7 +58,10 @@ class SampleRangeLine(models.Model):
         ('3', '3 Days'),
         ('7', '7 Days'),
         ('14', '14 Days'),
+        ('21', '21 Days'),
         ('28', '28 Days'),
+        ('56', '56 Days'),
+        ('112', '112 Days'),
     ], string='Days of casting', default='3')
     customer_id = fields.Many2one('res.partner' , string="Customer")
     product_alias = fields.Many2one('product.product',string="Product Alias")
@@ -70,7 +73,10 @@ class SampleRangeLine(models.Model):
         ('3', '3 Days'),
         ('7', '7 Days'),
         ('14', '14 Days'),
+        ('21', '21 Days'),
         ('28', '28 Days'),
+        ('56', '56 Days'),
+        ('112', '112 Days'),
     ], string='Days of casting', default='3')
     date_casting = fields.Date("Date of Casting")
     casting = fields.Boolean(string="Casting")

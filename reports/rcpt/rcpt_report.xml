@@ -113,14 +113,14 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Age in Days :
+								<!-- <td colspan="6">Age in Days :
 									<![CDATA[&nbsp;]]>
 
 									<span t-field="rcpt.age_of_days"/>
 									<span t-field="rcpt.age_of_test"/>
 									<span> Days</span>
-								</td>
-								<td colspan="6">Date of Casting :
+								</td> -->
+								<td colspan="12">Date of Casting :
 									<![CDATA[&nbsp;]]>
 									<span t-field="rcpt.date_of_casting"/>
 								</td>

@@ -21,7 +21,10 @@ class MechanicalConcreteCube(models.Model):
         ('3days', '3 Days'),
         ('7days', '7 Days'),
         ('14days', '14 Days'),
+        ('21days', '21 Days'),
         ('28days', '28 Days'),
+        ('56days', '56 Days'),
+        ('112days', '112 Days'),
     ], string='Age', default='28days',required=True,compute="_compute_age_of_days")
     date_of_casting = fields.Date(string="Date of Casting",compute="compute_date_of_casting")
     date_of_testing = fields.Date(string="Date of Testing")
@@ -52,8 +55,14 @@ class MechanicalConcreteCube(models.Model):
                 age_of_days = 7
             elif record.age_of_days == '14days':
                 age_of_days = 14
+            elif record.age_of_days == '21days':
+                age_of_days = 21
             elif record.age_of_days == '28days':
                 age_of_days = 28
+            elif record.age_of_days == '56days':
+                age_of_days = 56
+            elif record.age_of_days == '112days':
+                age_of_days = 112
             else:
                 age_of_days = 0
             record.difference = record.age_of_test - age_of_days
@@ -94,8 +103,14 @@ class MechanicalConcreteCube(models.Model):
                     record.age_of_days = '7days'
                 elif sample_record == '14':
                     record.age_of_days = '14days'
+                elif sample_record == '21':
+                    record.age_of_days = '21days'
                 elif sample_record == '28':
                     record.age_of_days = '28days'
+                elif sample_record == '56':
+                    record.age_of_days = '56days'
+                elif sample_record == '112':
+                    record.age_of_days = '112days'
                 else:
                     record.age_of_days = None
             else:
@@ -256,18 +271,34 @@ class MechanicalConcreteCubeLine(models.Model):
     length = fields.Float(string="Length (mm)")
     width = fields.Float(string="Width (mm)")
     area = fields.Float(string="Area (mm²)",compute="_compute_area" ,digits=(12,2))
-    id_mark = fields.Char(string="ID Mark/Location",compute="_compute_id_mark")
+    id_mark = fields.Char(string="ID Mark/Location")
     wt_sample = fields.Float(string="Weight of Sample in kgs",digits=(16,3))
     crushing_load = fields.Float(string="Crushing Load in kN")
     compressive_strength = fields.Float(string="Compressive Strength N/mm²",compute="_compute_compressive_strength" ,digits=(12,2))
    
 
 
-    @api.depends('parent_id')
-    def _compute_id_mark(self):
+    # @api.depends('parent_id')
+    # def _compute_id_mark(self):
+    #     for record in self:
+    #         sample_id = record.parent_id.eln_ref.sample_id.client_sample_id
+    #         record.id_mark = sample_id
+
+
+    @api.onchange('parent_id')
+    def _onchange_parent_id(self):
         for record in self:
             sample_id = record.parent_id.eln_ref.sample_id.client_sample_id
-            record.id_mark = sample_id
+            if sample_id:
+                record.id_mark = sample_id
+            else:
+                record.id_mark = ""
+
+    @api.onchange('id_mark')
+    def _onchange_id_mark(self):
+        for record in self:
+            if record.id_mark and not record.parent_id.eln_ref.sample_id.client_sample_id:
+                record.parent_id.eln_ref.sample_id.client_sample_id = record.id_mark
 
 
 

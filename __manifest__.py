@@ -211,6 +211,9 @@
     'reports/structural_steel_round/report.xml',
     'reports/act/act_datasheet.xml',
     'reports/act/act_report.xml',
+    'views/mechanical/drying_shrinkage.xml',
+    'reports/drying_shrinkage/drying_datasheet.xml',
+    'reports/drying_shrinkage/drying_report.xml',
     
 
 
