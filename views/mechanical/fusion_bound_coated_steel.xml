@@ -35,17 +35,17 @@
                     <group >
                         
                         <div>
-                          <group>
+                          <group style="width:40%">
                             <field  name="dia"/>
-                          </group>
-                          <group>
+                          <!-- </group>
+                          <group style="width:40%"> -->
                             <field  name="coating_thickness"/>
-                          </group>
-                          <group>
+                          <!-- </group>
+                          <group style="width:40%"> -->
                             
                             <field  name="continuity_coating"/>
-                          </group>
-                          <group>
+                          <!-- </group>
+                          <group style="width:40%"> -->
                             <field  name="adhesion_coating"/>
                           </group>
                           
