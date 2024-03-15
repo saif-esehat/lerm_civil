@@ -190,33 +190,33 @@
 					<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
-								<th style="text-align: center;">
+								<th style="text-align: center; width: 5%;">
 									<span>
 										Sr. No
 									</span>
 								</th>
-								<th style="text-align: center;max-width: 10px;">
+								<th style="text-align: center; width: 25%;">
 									<span>
 										Name of Test
 									</span>
 								</th>
-								<th style="text-align: center;">
+								<th style="text-align: center; width: 10%;">
 									<span>
 										Unit
 									</span>
 								</th>
-								<th style="text-align: center;">
+								<th style="text-align: center; width: 10%;">
 									<span>
 										Test Result
 									</span>
 								</th>
-								 <th style="text-align: center;">
+								 <th style="text-align: center; width: 15%;">
                                 <span>
                                     <span t-esc="eln.material.specifications"/>
                                 </span>
                             </th>
                            
-							<th style="text-align: center;">
+							<th style="text-align: center; width: 15%;">
 							<span>
 								<span t-esc="eln.material.method_reference"/>
 								
