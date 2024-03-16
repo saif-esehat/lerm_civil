@@ -137,6 +137,19 @@ class LermSampleForm(models.Model):
     approveby_signature_required = fields.Boolean("Approved by Signature")
     page_break = fields.Integer("Page break",default=6)
 
+    invoice_status = fields.Selection([
+        ('1-uninvoiced', 'Uninvoiced'),
+        ('2-invoiced', 'Invoiced'),
+        ('3-closed', 'Closed'),
+    ], string='Invoice Status', default='1-uninvoiced')
+
+    invoice_number = fields.Many2one(
+        'account.move',  # Related model name for invoices
+        string="Invoice Number",  # Label for the field
+        help="Select the invoice number",  # Optional help string for the field
+        domain="[('move_type', '=', 'out_invoice')]"  # Optional domain filter for invoices
+    )
+
     # file_upload = fields.Binary(string="Datasheet Upload")
     # report_upload = fields.Binary(string="Report Upload")
     # file_upload = fields.Many2many(
@@ -382,10 +395,10 @@ class LermSampleForm(models.Model):
 
     def open_form(self):
 
-        eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+        eln = self.env['lerm.eln'].sudo().search([('sample_id','=',self.id)])
         if self.product_or_form_based:
             if eln.is_product_based_calculation:
-                model_record = self.env['lerm.product.based.calculation'].search([('product_id','=',eln.material.id),('grade','=',eln.grade_id.id)])
+                model_record = self.env['lerm.product.based.calculation'].sudo().search([('product_id','=',eln.material.id),('grade','=',eln.grade_id.id)])
                 model = model_record.ir_model.model
                 return {
                         'view_mode': 'form',
@@ -413,7 +426,7 @@ class LermSampleForm(models.Model):
         #  self.env['lerm.eln'].search()
         # import wdb ; wdb.set_trace()
         # Assuming you want to open a record in the 'res.partner' model
-        eln_id = self.env['lerm.eln'].search([('sample_id','=',self.id)]).id  # Replace with the actual ID of the record you want to open
+        eln_id = self.env['lerm.eln'].sudo().search([('sample_id','=',self.id)]).id  # Replace with the actual ID of the record you want to open
 
         eln = self.env['lerm.eln'].browse(eln_id)
 
@@ -467,7 +480,7 @@ class LermSampleForm(models.Model):
             if not result.verified:
                 raise ValidationError("Not all parameters are verified. Please ensure all parameters are verified before proceeding.")
         self.write({'state': '4-in_report'})
-        eln = self.env['lerm.eln'].search([('sample_id','=',self.id)])
+        eln = self.env['lerm.eln'].sudo().search([('sample_id','=',self.id)])
         approved_by = self.env.user
         eln.write({'state':'3-approved'})
 
@@ -510,7 +523,7 @@ class LermSampleForm(models.Model):
 
 
     def print_datasheet(self):
-        eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
+        eln = self.env["lerm.eln"].sudo().search([('sample_id','=', self.id)])
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
             template_name = eln.material.product_based_calculation[0].datasheet_report_template.report_name
@@ -526,7 +539,8 @@ class LermSampleForm(models.Model):
         
     def print_nabl_report(self):
         inreport = self.state
-        eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
+        eln = self.env["lerm.eln"].sudo().search([('sample_id','=', self.id)])
+        print("ELNNNNNNNNNNNNNNNNN",eln)
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
             template_name = eln.material.product_based_calculation[0].main_report_template.report_name
@@ -543,7 +557,7 @@ class LermSampleForm(models.Model):
         }
     def print_non_nabl_report(self):
         inreport = self.state
-        eln = self.env["lerm.eln"].search([('sample_id','=', self.id)])
+        eln = self.env["lerm.eln"].sudo().search([('sample_id','=', self.id)])
         is_product_based = eln.is_product_based_calculation
         if is_product_based == True:
             template_name = eln.material.product_based_calculation[0].main_report_template.report_name
@@ -724,7 +738,7 @@ class RejectSampleWizard(models.Model):
         if self.reject_reason:
             sample_id = self.env.context.get('active_id')
             sample = self.env['lerm.srf.sample'].search([('id','=',sample_id)]).write({'state': '2-alloted'})
-            eln = self.env['lerm.eln'].search([('sample_id','=',sample_id)])
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',sample_id)])
             eln.write({'state':'4-rejected'})
             eln.message_post(body="<b>Sample Rejected :<b> " + self.reject_reason)
 

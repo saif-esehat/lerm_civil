@@ -183,7 +183,7 @@ class ConcreteSplitTensileStrengthLine(models.Model):
     parent_id = fields.Many2one('mechanical.concrete.split.tensile',string="Parent Id")
 
     sr_no = fields.Integer(string="Sr.No.",readonly=True, copy=False, default=1)
-    id_mark = fields.Char(string="ID MARK/ Location",compute="_compute_id_mark")
+    id_mark = fields.Char(string="ID MARK/ Location")
     wt_of_cylender = fields.Float(string="Weight of Cylinder Kg")
     height = fields.Float(string="Height mm")
     diameter = fields.Float(string="Diameter mm")
@@ -192,11 +192,26 @@ class ConcreteSplitTensileStrengthLine(models.Model):
 
 
 
-    @api.depends('parent_id')
-    def _compute_id_mark(self):
+    # @api.depends('parent_id')
+    # def _compute_id_mark(self):
+    #     for record in self:
+    #         sample_id = record.parent_id.eln_ref.sample_id.client_sample_id
+    #         record.id_mark = sample_id
+
+    @api.onchange('parent_id')
+    def _onchange_parent_id(self):
         for record in self:
             sample_id = record.parent_id.eln_ref.sample_id.client_sample_id
-            record.id_mark = sample_id
+            if sample_id:
+                record.id_mark = sample_id
+            else:
+                record.id_mark = ""
+
+    @api.onchange('id_mark')
+    def _onchange_id_mark(self):
+        for record in self:
+            if record.id_mark and not record.parent_id.eln_ref.sample_id.client_sample_id:
+                record.parent_id.eln_ref.sample_id.client_sample_id = record.id_mark
 
 
     # @api.onchange('parent_id.eln_ref.sample_id.client_sample_id')

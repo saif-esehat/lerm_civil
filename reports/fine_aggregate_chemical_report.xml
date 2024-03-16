@@ -394,6 +394,144 @@
 									</span>
 								</td>
 							</tr>
+
+							<tr t-if="data.na2O_name_visible and (data.na2O_nabl == 'pass' and nabl or data.na2O_nabl == 'fail' and not nabl)">
+								<td style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')]).parameter_name"/>
+								</td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="data.na2O" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td  style="text-align: center; vertical-align: middle;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')]).unit.name"/>
+									</span>
+								</td>
+
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+
+								
+								
+								
+							</tr>
+
+
+							<tr t-if="data.k2O_name_visible and (data.k2O_nabl == 'pass' and nabl or data.k2O_nabl == 'fail' and not nabl)">
+								<td style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')]).parameter_name"/>
+								</td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="data.k2O" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td  style="text-align: center; vertical-align: middle;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')]).unit.name"/>
+									</span>
+								</td>
+
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+
+								
+								
+								
+							</tr>
+
+							<tr t-if="data.total_alkali_content_visible and (data.total_alkali_content_nabl == 'pass' and nabl or data.total_alkali_content_nabl == 'fail' and not nabl)">
+								<td style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')]).parameter_name"/>
+								</td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="data.total_alkali_content" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td  style="text-align: center; vertical-align: middle;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')]).unit.name"/>
+									</span>
+								</td>
+
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+
+								
+								
+								
+							</tr>
+
+
 							
 						</tbody>
 					</table>
