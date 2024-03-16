@@ -9,29 +9,10 @@
 				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<!-- <table>
+						
+						<table >
 							<tr>
-								<td colspan="3">Report no :
-								</td>
-								<td colspan="3">
-									<span t-field="o.kes_no"/>
-								</td>
-								<td colspan="3">Report Date :
-								<span t-field="o.end_date"/>
-								</td>
-								<td colspan="3">
-									<span t-field="o.srf_date"/>
-								</td>
-								<td colspan="3" t-if="nabl">ULR NO :
-								</td>
-								<td colspan="3" t-if="nabl">
-									<span t-field="o.sample_id.ulr_no"/>
-								</td>
-							</tr>
-						</table> -->
-						<table style="margin-top:10px;">
-							<tr>
-								<td colspan="12">Customer Party Name :
+								<td colspan="9">Customer Party Name :
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.customer.name"/>
 									<br/>
@@ -43,19 +24,14 @@
 											,
 									<span t-field="o.srf_id.customer.country_id"/>
 								</td>
-							</tr>
-							<tr>
 								
-
-								<td colspan="12">Project / Site Address : 																		<![CDATA[&nbsp;]]>
+								<td colspan="9">Project / Site Address : 																		<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.name_work"/>
 								</td>
 							</tr>
-							<tr>
-								<td colspan="12">Sample Description : 																		<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.sample_description"/>
-								</td>
-							</tr>
+								
+						
+							
 						</table>
 						<table>
 							<tr>
@@ -65,16 +41,14 @@
 								<td colspan="6">Test End Date :																		<![CDATA[&nbsp;]]>
 									<span t-field="o.end_date"/>
 								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Sample Id Mark: 																		<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.client_sample_id"/>
-								</td>
 								<td colspan="6">Sample Receipt Date :																		<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_received_date"/>
 								</td>
 							</tr>
 							<tr>
+								<td colspan="6">Sample Id Mark: 																		<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.client_sample_id"/>
+								</td>
 								<td colspan="6">Size :
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.size_id.size"/>
@@ -83,23 +57,20 @@
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.grade_id.grade"/>
 								</td>
+								
 							</tr>
+							
+							
 							<tr>
-								<td colspan="6">Brand :
-																											<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.brand"/>
-								</td>
-								<td colspan="6">Consultant Name :
+								<td colspan="6">Consultant :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.consultant_name1"/>
 								</td>
-							</tr>
-							<tr>
-								<td colspan="6">Client Name :
+								<td colspan="6">Client :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.client"/>
 								</td>
-								<td colspan="6">Client Reference :
+								<td colspan="6">Client Ref :
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.client_refrence"/>
 								</td>
@@ -113,6 +84,10 @@
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.group.group"/>
 								</td>
+								<td colspan="6">Brand :
+																											<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.brand"/>
+								</td>
 							</tr>
 
 							<tr>
@@ -120,11 +95,15 @@
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
+								<td colspan="6">Sample Description : 																		<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+							
 							</tr>
 						</table>
 					</div>
 				
-			 <div style="padding-top:5px">
+			 <div style="padding-top:2px">
 				<span t-esc="o.material.test_parameter "/> 
 
 				
@@ -667,7 +646,7 @@
 
 
 							
-							<t t-if="i &lt;= 8">
+							<!-- <t t-if="i &lt;= 8"> -->
 								<tr t-if="(data.weight_per_meter_nabl == 'pass' and nabl or data.weight_per_meter_nabl == 'fail' and not nabl) and data.weight_per_meter_visible">
 									<td style="text-align: center;">
 										<span t-esc="i + 1" />
@@ -816,11 +795,11 @@
 
 									</td>
 								</tr>
-							</t>
+							<!-- </t> -->
 						</tbody>
 					</table>
 				
-					<t t-if="i &gt; 8">
+					<!-- <t t-if="i &gt; 8">
 						<div style="page-break-before: always;"></div>
 
 						<table>
@@ -887,13 +866,7 @@
 										</t>
 									</t>
 								</td>
-								<!-- <td style="text-align: center; vertical-align: middle;">
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table" t-as="parameter">
-										<t t-if="parameter.grade.id == eln.grade_id.id">
-											<span t-field="parameter.specification"/>
-										</t>
-									</t>
-								</td> -->
+								
 								<td t-if="eln.conformity" style="text-align: center;">
 									<span t-esc="data.weight_per_meter_conformity"/>
 								</td>
@@ -992,11 +965,11 @@
 							</tr>
 						</tbody>
 					</table>
-				</t>
+				</t> -->
 
 				
 							
-						<div style="margin-top:10px" class="noteContainer">
+						<div style="margin-top:2px" class="noteContainer">
 							<div>
 								<b>Note :-</b>
 							</div>
@@ -1022,7 +995,7 @@
 							</div>
 						</div>
 					
-						<div style="margin-top:10px; page-break-inside: avoid;" class="signatureContainer girdgird">
+						<div style="margin-top:2px; page-break-inside: avoid;" class="signatureContainer girdgird">
 
 							<div>
 								<div>
@@ -1030,7 +1003,7 @@
 									Checked By
 									</b>
 								</div>
-								<div style="height: 40px;">
+								<div style="height: 20px;">
 									<t t-if="eln.sample_id.checkby_signature_required">
 										<div t-if="eln.sample_id.check_by.employee_id.signature">
 											<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
@@ -1053,7 +1026,7 @@
 								<div>
 									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
 								</div>
-								<div style="padding-top:5px">
+								<div style="padding-top:2px">
 								Format No. <span t-esc="eln.material.test_format_no"/>
 								</div>
 							</div>
@@ -1064,7 +1037,7 @@
 									</b>
 
 								</div>
-								<div style="height: 40px;">
+								<div style="height: 20px;">
 									<t t-if="eln.sample_id.approveby_signature_required">
 										<div t-if="eln.sample_id.approved_by.employee_id.signature">
 											<img t-att-src="'data:image/png;base64,' + eln.sample_id.approved_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
@@ -1085,10 +1058,10 @@
 								
 							</div>
 						</div>
-						<div style="text-align:center;margin-top:15px">
+						<!-- <div style="text-align:center;margin-top:15px">
 								......End of Report......
 						</div>
-				
+				 -->
 
 				</div>
 			</t>
