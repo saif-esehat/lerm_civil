@@ -181,6 +181,8 @@
                       </group>
                       <group>
                         <field name="page_break" />
+                        <field name="invoice_status" attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"/>
+                        <field name="invoice_number" attrs="{'invisible': [('state', '!=', '4-in_report'), ('invoice_status', '!=', '2-invoiced')]}"/>
                       </group>
                     </group>  
 
