@@ -209,7 +209,7 @@
     </record>
     
     <menuitem id="lerm_root"
-        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by"
+        groups="lerm_civil.lerm_master,lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by"
         name="LERM CIVIL"
         sequence="10" 
         web_icon="lerm_civil,static/description/icon.png"/>
@@ -229,7 +229,7 @@
 
     <menuitem id="lerm_menu"
         name="Master Data"
-        groups="kes_technician_access_group,kes_admin_access_group"
+        groups="kes_technician_access_group,kes_admin_access_group,lerm_civil.lerm_master"
         parent="lerm_root"
         sequence="20"  />
 
@@ -257,7 +257,7 @@
 
     <menuitem id="lerm_product_item_param_master"
         parent="lerm_menu"
-        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.lerm_master"
         name="Product Master"
         action="lerm_product_action"
         sequence="11" />
@@ -267,20 +267,20 @@
         name="Discipline Master"
         parent="lerm_menu"
         action="lerm_discipline_action"
-        groups="kes_admin_access_group"
+        groups="kes_admin_access_group,lerm_civil.lerm_master"
         sequence="12" />
 
     <menuitem id="size_master"
         name="Size Master"
         parent="lerm_menu"
         action="size_master_action"
-        groups="kes_admin_access_group"
+        groups="kes_admin_access_group,lerm_civil.lerm_master"
         sequence="13" />
 
     <menuitem id="lerm_test_method"
         name="Test Method"
         parent="lerm_menu"
-        groups="kes_admin_access_group"
+        groups="kes_admin_access_group,lerm_civil.lerm_master"
         action="test_method_action"
         sequence="14" />
 

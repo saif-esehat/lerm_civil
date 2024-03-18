@@ -118,6 +118,8 @@
                             <field name="sample_received_date" />
                             <field name="sample_description"/>
                             <button name="edit_sample" string="Edit" type="object" groups="lerm_civil.srf_sample_editable" class="btn-primary" />                          
+                            <button name="reallocate_sample" string="Reallocate" type="object" groups="lerm_civil.kes_job_allocation,lerm_civil.kes_hod_access_group,lerm_civil.kes_verified_by,lerm_civil.kes_quality_manager" class="btn-primary" />                          
+
                         </tree>
                     </field>
                     <!-- <field attrs="{'readonly': [('state', 'in', ('2-confirm'))]}" name="sample_range_table" readonly="1" context = "{'default_customer_id' : customer,'is_local': True}">
@@ -277,8 +279,9 @@
                 </sheet>
                 <footer>
                         <button name="add_sample" string="Add Sample" type="object" class="btn-primary" attrs="{'invisible': [('is_update','=',True)]}"/>
-                        <button name="edit_current_sample" string="Edit Sample" type="object" class="btn-primary" attrs="{'invisible': [('is_update','!=',True)]}"/>
+                        <button name="edit_current_sample" string="Save" type="object" class="btn-primary" attrs="{'invisible': [('is_update','!=',True)]}"/>
                         <button name="close_sample_wizard" string="Close" type="object" />
+
                 </footer>
             </form>
         </field>
