@@ -277,6 +277,10 @@
         </record>
 
 
+   
+
+
+
         <record id="eln_result_update_wizard" model="ir.ui.view">
             <field name="name">eln.update.result.wizard</field>
             <field name="model">eln.update.result.wizard</field>

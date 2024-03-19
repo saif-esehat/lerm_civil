@@ -226,7 +226,6 @@
         sequence="20"  />
 
 
-
     <menuitem id="lerm_menu"
         name="Master Data"
         groups="kes_technician_access_group,kes_admin_access_group,lerm_civil.lerm_master"
@@ -238,6 +237,8 @@
         parent="lerm_root" 
         groups="lerm_civil.kes_admin_access_group"
         sequence="25"  />
+
+     
 
     <menuitem id="lerm_sample_reporting"
         name="Sample"
@@ -357,6 +358,8 @@
         parent="sample_status"
         action="test_sample_pending_in_report_action"
         sequence="24" />
+
+   
 
     
     
