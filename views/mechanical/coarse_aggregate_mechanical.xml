@@ -171,12 +171,12 @@
                         </h1>
                     </group>
                     <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
-                        <field name="elongation_table" style="width:80%">
-                            <tree editable="bottom">
-                                <field name="sieve_size" style="width: 150px;" />
-                                <field name="wt_retained" style="width: 150px;"/>
-                                <field name="elongated_retained" style="width: 200px;"/>
-                                <field name="flakiness_retained" style="width: 200px;"/>
+                        <field name="elongation_table" style="width:90%">
+                            <tree>
+                                <field name="sieve_size"  />
+                                <field name="wt_retained" />
+                                <field name="elongated_retained" />
+                                <field name="flakiness_retained" />
                             </tree>
                           
                         </field>
@@ -294,20 +294,22 @@
 
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('impact_visible', '=', False)]}">
-                    <field name="impact_value_child_lines" nolabel="1" >
-                            <tree editable="bottom">
+                    <group attrs="{'invisible': [('impact_visible', '=', False)]}" >
+                    <field name="impact_value_child_lines" nolabel="1" style="width:100%" >
+                            <tree >
                                 <field name='sample_no'/>
-                                <field name='wt_of_cylinder'/>
-                                <field name='total_wt_of_dried'/>
-                                <field name='total_wt_aggregate'/>
-                                <field name='wt_of_aggregate_passing'/>
-                                <field name='wt_of_aggregate_retained'/>
+                                <field name='wt_of_cylinder' />
+                                <field name='total_wt_of_dried'  />
+                                <field name='total_wt_aggregate'  />
+                                <field name='wt_of_aggregate_passing'  />
+                                <field name='wt_of_aggregate_retained' />
                                 <field name='impact_value'/>
                             </tree>
                            
                     </field> 
                     </group>
+                   
+
                             <group attrs="{'invisible': [('impact_visible', '=', False)]}">
                                <field name='average_impact_value'/>
                             </group>
@@ -334,7 +336,7 @@
                     </group>
                     <group attrs="{'invisible': [('crushing_visible', '=', False)]}">
                     <field name="crushing_value_child_lines" nolabel="1" >
-                            <tree editable="bottom">
+                            <tree>
                                 <field name='sample_no'/>
                                 <field name='wt_of_cylinder'/>
                                 <field name='total_wt_of_dried'/>
@@ -573,7 +575,7 @@
                     </group>
                     <group attrs="{'invisible': [('soundness_na2so4_visible', '=', False)]}">
                     <field name="soundness_na2so4_child_lines" nolabel="1" style="width:80%" >
-                            <tree editable="bottom">
+                            <tree>
                                 <field name="sieve_size_passing"/>
                                 <field name="sieve_size_retained"/>
                                 <field name="grading_original_sample" readonly='1'/>
@@ -665,7 +667,7 @@
                     </div>
                     <group attrs="{'invisible': [('aggregate_grading_visible', '=', False)]}">
                         <field name="aggregate_grading_child_lines" nolabel="1">
-                            <tree editable="bottom">
+                            <tree>
                                 <field name="serial_no" string="Sr.No"/>
                                 <field name="sieve_size" string="IS Sieve Size"/>
                                 <field name="wt_retained" string="Wt. Retained in gms"/>

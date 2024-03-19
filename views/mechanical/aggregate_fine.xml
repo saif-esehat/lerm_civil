@@ -50,7 +50,7 @@
                     </div>
                     <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
                     <field name="sieve_analysis_child_lines" nolabel="1" >
-                            <tree editable="bottom">
+                            <tree>
                                 <field name="serial_no" string="Sr.No"/>
                                 <field name='sieve_size' string="IS Sieve Size"/>
                                 <field name='wt_retained' string="Wt. Retained in gms"/>
