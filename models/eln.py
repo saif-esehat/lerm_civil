@@ -79,6 +79,33 @@ class ELN(models.Model):
     temperature = fields.Float("Temperature")
     instrument = fields.Many2one('maintenance.equipment',string="Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
+    date_testing = fields.Date("Date of Testing",compute="_compute_date_testing")
+
+    @api.depends('sample_id')
+    def _compute_date_testing(self):
+        for record in self:
+            if record.sample_id.casting and record.sample_id.casting_date:
+                date_casting = record.sample_id.casting_date
+                days_casting = 0
+                if record.sample_id.days_casting == '3':
+                    days_casting = 3
+                elif record.sample_id.days_casting == '7':
+                    days_casting = 7
+                elif record.sample_id.days_casting == '14':
+                    days_casting = 14
+                elif record.sample_id.days_casting == '21':
+                    days_casting = 21
+                elif record.sample_id.days_casting == '28':
+                    days_casting = 28
+                elif record.sample_id.days_casting == '56':
+                    days_casting = 56
+                elif record.sample_id.days_casting == '112':
+                    days_casting = 112
+                # import wdb; wdb.set_trace()
+                
+                record.date_testing = date_casting + timedelta(days=int(days_casting))
+            else:
+                 record.date_testing = False
 
 
     # @api.onchange('start_date','srf_date')
