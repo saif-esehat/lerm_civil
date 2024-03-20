@@ -362,7 +362,7 @@ class CoarseAggregateMechanical(models.Model):
     wt_sample_passing_10fine = fields.Float("Weight of sample passing 2.36 mm IS sieve after applying load in 10 min, B")
     percent_of_fines = fields.Float("Percentage of Fines",compute="_compute_percent_fines")
     load_applied_10fine = fields.Float("Load applied in 10 min, X kN")
-    load_10percent_fine_values = fields.Integer("Load for 10 percent fines value",compute="_compute_load_10percent_fine_values")
+    load_10percent_fine_values = fields.Float("Load for 10 percent fines value",compute="_compute_load_10percent_fine_values")
 
     @api.depends('wt_sample_10fine','wt_sample_passing_10fine')
     def _compute_percent_fines(self):
@@ -376,7 +376,7 @@ class CoarseAggregateMechanical(models.Model):
     def _compute_load_10percent_fine_values(self):
         for record in self:
             if record.percent_of_fines != 0:
-                record.load_10percent_fine_values = round((14 * record.load_applied_10fine/record.percent_of_fines + 4),1)
+                record.load_10percent_fine_values = (14 * record.load_applied_10fine)/(record.percent_of_fines + 4)
             else:
                 record.load_10percent_fine_values = 0
 

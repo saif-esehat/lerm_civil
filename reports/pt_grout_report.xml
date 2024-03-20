@@ -12,87 +12,23 @@
 				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<!-- <table>
+					   
+						<table style="margin-top:10px;">
 							<tr>
-								<td colspan="3">Test Report No :
-								</td>
-								<td colspan="3">
-									<span t-field="o.kes_no"/>
-								</td>
-								<td colspan="3">Report Issue Date :
-								</td>
-								<td colspan="3">
-									<span t-field="o.srf_date"/>
-								</td>
-								<td colspan="3"  t-if="nabl">ULR NO :
-								</td>
-								<td colspan="3" t-if="nabl">
-									<span t-field="o.sample_id.ulr_no"/>
+								<td colspan="12">Customer Party Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.customer.name"/><br/>
+									<span t-field="o.srf_id.customer.street"/>
+									<span t-field="o.srf_id.customer.street2"/>
+									<span t-field="o.srf_id.customer.city"/>
+									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+									<span t-field="o.srf_id.customer.state_id"/>
+									,
+									<span t-field="o.srf_id.customer.country_id"/>
 								</td>
 							</tr>
-						</table> -->
-
-						<table>
-								<tr>
-									<!-- Left Side -->
-									<!-- <td colspan="12" style="width: 50%; vertical-align: top;"> -->
-										<!-- <table> -->
-											<tr>
-												<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
-													Customer/Party Name :
-												</td>
-												<td colspan="3">
-												<span t-field="o.srf_id.customer.name"/> <br/>
-												<span t-field="o.srf_id.customer.street"/>
-												<span t-field="o.srf_id.customer.street2"/>
-												<span t-field="o.srf_id.customer.city"/>
-												<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
-												<span t-field="o.srf_id.customer.state_id"/>
-												,
-												<span t-field="o.srf_id.customer.country_id"/>
-									           </td>
-											</tr>
-											
-										<!-- </table> -->
-									<!-- </td> -->
-									<!-- Right Side -->
-									<!-- <td colspan="12" style="width: 30%; vertical-align: top;"> -->
-										<!-- <table> -->
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Sample Receipt Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.sample_id.sample_received_date"/>
-												</td>
-											</tr>
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Test Start Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.start_date"/>
-												</td>
-											</tr>
-											<tr>
-											    <td colspan="3" style="font-weight: bold;" >
-													Test End Date :
-												</td>
-												<td colspan="3">
-													<span t-field="o.end_date"/>
-												</td>
-											</tr>
-										<!-- </table> -->
-									<!-- </td> -->
-								</tr>
-							
-
-						
-						</table>
-							
-						<table>
-						   <tr>
-								<!-- <td colspan="12" style="font-weight: bold;">Project / Site Address :
+							<tr>
+								<!-- <td colspan="12">Project / Site Address :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.site_address.name"/>
 									<span t-field="o.srf_id.site_address.street"/>
@@ -108,104 +44,87 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12" style="font-weight: bold;">Sample Description : <![CDATA[&nbsp;]]>
+								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
-								
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.start_date"/>
+								</td>
+								 <td colspan="6">Test End Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.end_date"/>
+								</td>
 							</tr>
 							<tr>
-								<td colspan="3" style="font-weight: bold;">Sample Id Mark:
-									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
+								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.client_sample_id"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Sample Condition :
-									<![CDATA[&nbsp;]]>
+								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_received_date"/>
 								</td>
-								<td>
-								</td>
-								
 							</tr>
 							<tr>
-							   <td colspan="3" style="font-weight: bold;">Quantity :
+								<td colspan="6">Size :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="o.sample_id.size_id.size"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">W/C Ratio :
+								<td colspan="6">Grade :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
-									<span t-field="ptgrout.water_cement_ratio"/>
+									<span t-field="o.grade_id.grade"/>
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Brand :
+								<td colspan="6">Brand :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="o.sample_id.brand"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Consultant Name :
+								<td colspan="6">Consultant Name :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="o.srf_id.consultant_name1"/>
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Client Name :
+								<td colspan="6">Client Name :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="o.srf_id.client"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Client Reference :
+								<td colspan="6">Client Reference :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td>
 									<span t-field="o.srf_id.client_refrence"/>
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Discipline :
+								<td colspan="6">Discipline :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="o.discipline.discipline"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Group :
+								<td colspan="6">Group :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
 									<span t-field="o.group.group"/>
 								</td>
 							</tr>
+							
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Material :
+								<td colspan="12">Material/Test Name :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="12">
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
+
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Room Temp :
+								<td colspan="6">Room Temp : 
 									<![CDATA[&nbsp;]]>
+									<span t-field="ptgrout.temp_percent_fluidity"/>
 								</td>
-								<td colspan="3">
-									
-								</td>
-								<td colspan="3" style="font-weight: bold;">Room RH :
+								<td colspan="6">Room RH :
 									<![CDATA[&nbsp;]]>
-								</td>
-								<td colspan="3">
-									
+									<span t-field="ptgrout.humidity_percent_fludity"/>
 								</td>
 							</tr>
-
+							
 						</table>
 					</div>
 					 <div style="padding-top:5px">
@@ -737,11 +656,27 @@
 											<!-- <span t-field="ptgrout.comp_average_casting_7days" t-options='{"widget": "float", "precision": 2}'/> -->
 										</div>
 										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or ptgrout.days7_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom: 1px solid black;min-height:25px">
-											<span t-field="ptgrout.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+											<!-- <span t-field="ptgrout.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/> -->
+											<span>
+												<t t-if="ptgrout.status_7days">
+													<span t-field="ptgrout.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+												</t>
+												<t t-else="">
+												Awaited
+												</t>
+											</span>
 										</div>
 										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or ptgrout.days28_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
 											
-											<span t-field="ptgrout.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+											<!-- <span t-field="ptgrout.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/> -->
+											<span>
+												<t t-if="ptgrout.status_28days">
+													<span t-field="ptgrout.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+												</t>
+												<t t-else="">
+												Awaited
+												</t>
+											</span>
 										</div>
 									</td>
 									<td style="text-align: center;padding:0px">
@@ -806,10 +741,10 @@
 										<div style="text-align: center; border-bottom:1px solid black;min-height:50px">
 											   <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_name"/>
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or ptgrout.days7_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom:1px solid black;min-height:25px">
+										<div  style="text-align: center; border-bottom:1px solid black;min-height:25px">
 											7 days
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or ptgrout.days28_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
+										<div  style="text-align: center;min-height:25px">
 											28 days
 										</div>	
 									</td>
@@ -817,12 +752,28 @@
 										<div style="text-align: center; border-bottom: 1px solid black;min-height:50px">
 											<!-- <span t-field="ptgrout.comp_average_casting_7days" t-options='{"widget": "float", "precision": 2}'/> -->
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or ptgrout.days7_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom: 1px solid black;min-height:25px">
-											<span t-field="ptgrout.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+										<div  style="text-align: center; border-bottom: 1px solid black;min-height:25px">
+											<!-- <span t-field="ptgrout.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/> -->
+											<span>
+												<t t-if="ptgrout.status_7days">
+													<span t-field="ptgrout.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/>
+												</t>
+												<t t-else="">
+												Awaited
+												</t>
+											</span>
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or ptgrout.days28_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
+										<div style="text-align: center;min-height:25px">
 											
-											<span t-field="ptgrout.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+											<!-- <span t-field="ptgrout.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/> -->
+											<span>
+												<t t-if="ptgrout.status_28days">
+													<span t-field="ptgrout.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/>
+												</t>
+												<t t-else="">
+												Awaited
+												</t>
+											</span>
 										</div>
 									</td>
 									<td style="text-align: center;padding:0px">
@@ -844,10 +795,10 @@
 									     </t>
 							        	</t>
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or ptgrout.days7_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom:1px solid black;min-height:25px">
+										<div style="text-align: center; border-bottom:1px solid black;min-height:25px">
 											27 Min
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or ptgrout.days28_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
+										<div style="text-align: center;min-height:25px">
 											30 Min
 										</div>	
 									</td>

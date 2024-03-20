@@ -18,6 +18,7 @@ class GsbMechanical(models.Model):
 
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     
     def open_eln_page(self):
         # import wdb; wdb.set_trace()
@@ -62,6 +63,12 @@ class GsbMechanical(models.Model):
             records = record.eln_ref.parameters_result.parameter.ids
             record.sample_parameters = records
             print("Records",records)
+            
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
+
 
     @api.depends('eln_ref','sample_parameters')
     def _compute_visible(self):
@@ -205,6 +212,59 @@ class GsbMechanical(models.Model):
             else:
                 record.water_absorbtion = 0
 
+    water_absorbtion_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_water_absorbtion_conformity", store=True)
+
+
+
+    @api.depends('water_absorbtion','eln_ref','grade')
+    def _compute_water_absorbtion_conformity(self):
+        
+        for record in self:
+            record.water_absorbtion_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.water_absorbtion - record.water_absorbtion*mu_value
+                    upper = record.water_absorbtion + record.water_absorbtion*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.water_absorbtion_conformity = 'pass'
+                        break
+                    else:
+                        record.water_absorbtion_conformity = 'fail'
+
+    water_absorbtion_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_water_absorbtion_nabl", store=True)
+
+    @api.depends('water_absorbtion','eln_ref','grade')
+    def _compute_water_absorbtion_nabl(self):
+        
+        for record in self:
+            record.water_absorbtion_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.water_absorbtion - record.water_absorbtion*mu_value
+                    upper = record.water_absorbtion + record.water_absorbtion*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.water_absorbtion_nabl = 'pass'
+                        break
+                    else:
+                        record.water_absorbtion_nabl = 'fail'
+
+
     # Flakiness and Elongation 
     elongation_name = fields.Char(default="Elongation and Flakiness Index")
     elongation_visible = fields.Boolean(compute="_compute_visible")
@@ -242,7 +302,7 @@ class GsbMechanical(models.Model):
     def _compute_aggregate_elongation(self):
         for record in self:
             if record.total_elongated_retained != 0:
-                record.aggregate_elongation = round(record.total_elongated_retained/record.total_wt_retained_fl_el,2)
+                record.aggregate_elongation = record.total_elongated_retained/record.total_wt_retained_fl_el * 100
             else:
                 record.aggregate_elongation = 0
 
@@ -250,14 +310,120 @@ class GsbMechanical(models.Model):
     def _compute_aggregate_flakiness(self):
         for record in self:
             if record.total_flakiness_retained != 0:
-                record.aggregate_flakiness = round(record.total_flakiness_retained/record.total_wt_retained_fl_el,2)
+                record.aggregate_flakiness = record.total_flakiness_retained/record.total_wt_retained_fl_el * 100
             else:
                 record.aggregate_flakiness = 0
 
     @api.depends('total_wt_retained_fl_el','total_flakiness_retained')
     def _compute_aggregate_combine(self):
         for record in self:
-            record.aggregate_combine = round(record.aggregate_elongation+record.aggregate_flakiness,2)
+            record.aggregate_combine = record.aggregate_elongation+record.aggregate_flakiness
+
+    aggregate_flakiness_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_aggregate_flakiness_conformity", store=True)
+
+
+
+    @api.depends('aggregate_flakiness','eln_ref','grade')
+    def _compute_aggregate_flakiness_conformity(self):
+        
+        for record in self:
+            record.aggregate_flakiness_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.aggregate_flakiness - record.aggregate_flakiness*mu_value
+                    upper = record.aggregate_flakiness + record.aggregate_flakiness*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.aggregate_flakiness_conformity = 'pass'
+                        break
+                    else:
+                        record.aggregate_flakiness_conformity = 'fail'
+
+    aggregate_flakiness_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_aggregate_flakiness_nabl", store=True)
+
+    @api.depends('aggregate_flakiness','eln_ref','grade')
+    def _compute_aggregate_flakiness_nabl(self):
+        
+        for record in self:
+            record.aggregate_flakiness_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.aggregate_flakiness - record.aggregate_flakiness*mu_value
+                    upper = record.aggregate_flakiness + record.aggregate_flakiness*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.aggregate_flakiness_nabl = 'pass'
+                        break
+                    else:
+                        record.aggregate_flakiness_nabl = 'fail'
+
+
+
+    aggregate_elongation_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_aggregate_elongation_conformity", store=True)
+
+
+
+    @api.depends('aggregate_elongation','eln_ref','grade')
+    def _compute_aggregate_elongation_conformity(self):
+        
+        for record in self:
+            record.aggregate_elongation_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.aggregate_elongation - record.aggregate_elongation*mu_value
+                    upper = record.aggregate_elongation + record.aggregate_elongation*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.aggregate_elongation_conformity = 'pass'
+                        break
+                    else:
+                        record.aggregate_elongation_conformity = 'fail'
+
+    aggregate_elongation_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_aggregate_elongation_nabl", store=True)
+
+    @api.depends('aggregate_elongation','eln_ref','grade')
+    def _compute_aggregate_elongation_nabl(self):
+        
+        for record in self:
+            record.aggregate_elongation_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.aggregate_elongation - record.aggregate_elongation*mu_value
+                    upper = record.aggregate_elongation + record.aggregate_elongation*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.aggregate_elongation_nabl = 'pass'
+                        break
+                    else:
+                        record.aggregate_elongation_nabl = 'fail'
             
 
 
@@ -286,6 +452,58 @@ class GsbMechanical(models.Model):
             else:
                 line.abrasion_value_percentage = 0.0
 
+    abrasion_value_percentage_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_abrasion_value_percentage_conformity", store=True)
+
+
+
+    @api.depends('abrasion_value_percentage','eln_ref','grade')
+    def _compute_abrasion_value_percentage_conformity(self):
+        
+        for record in self:
+            record.abrasion_value_percentage_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.abrasion_value_percentage - record.abrasion_value_percentage*mu_value
+                    upper = record.abrasion_value_percentage + record.abrasion_value_percentage*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.abrasion_value_percentage_conformity = 'pass'
+                        break
+                    else:
+                        record.abrasion_value_percentage_conformity = 'fail'
+
+    abrasion_value_percentage_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_abrasion_value_percentage_nabl", store=True)
+
+    @api.depends('abrasion_value_percentage','eln_ref','grade')
+    def _compute_abrasion_value_percentage_nabl(self):
+        
+        for record in self:
+            record.abrasion_value_percentage_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.abrasion_value_percentage - record.abrasion_value_percentage*mu_value
+                    upper = record.abrasion_value_percentage + record.abrasion_value_percentage*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.abrasion_value_percentage_nabl = 'pass'
+                        break
+                    else:
+                        record.abrasion_value_percentage_nabl = 'fail'
+
     # Impact Value 
     impact_value_name = fields.Char("Name",default="Impact Value")
     impact_visible = fields.Boolean("Impact Visible",compute="_compute_visible")
@@ -305,6 +523,58 @@ class GsbMechanical(models.Model):
             else:
                 record.average_impact_value = 0.0
 
+    average_impact_value_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_average_impact_value_conformity", store=True)
+
+
+
+    @api.depends('average_impact_value','eln_ref','grade')
+    def _compute_average_impact_value_conformity(self):
+        
+        for record in self:
+            record.average_impact_value_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_impact_value - record.average_impact_value*mu_value
+                    upper = record.average_impact_value + record.average_impact_value*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.average_impact_value_conformity = 'pass'
+                        break
+                    else:
+                        record.average_impact_value_conformity = 'fail'
+
+    average_impact_value_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_average_impact_value_nabl", store=True)
+
+    @api.depends('average_impact_value','eln_ref','grade')
+    def _compute_average_impact_value_nabl(self):
+        
+        for record in self:
+            record.average_impact_value_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_impact_value - record.average_impact_value*mu_value
+                    upper = record.average_impact_value + record.average_impact_value*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.average_impact_value_nabl = 'pass'
+                        break
+                    else:
+                        record.average_impact_value_nabl = 'fail'
+
     # Liquid Limit
     liquid_limit_name = fields.Char("Name",default="Liquid Limit")
     liquid_limit_visible = fields.Boolean("Liquid Limit Visible",compute="_compute_visible")
@@ -314,6 +584,89 @@ class GsbMechanical(models.Model):
     remarks_liquid_limit = fields.Selection([
         ('plastic', 'Plastic'),
         ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
+    
+    liquid_limit_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
+    
+
+
+      # def calculate_result(self):
+    are_child_lines_filled = fields.Boolean(compute='_compute_are_child_lines_filled',string='child lines',store=False)
+
+    @api.depends('liquid_limit_table.moisture_percent', 'liquid_limit_table.mass_dry_sample')  # Replace with actual field names
+    def _compute_are_child_lines_filled(self):
+        for record in self:
+            all_lines_filled = all(line.moisture_percent and line.mass_dry_sample for line in record.liquid_limit_table)
+            record.are_child_lines_filled = all_lines_filled
+
+    
+
+    def liquid_calculation(self):
+        print('<<<<<<<<<<<<')
+        for record in self:
+            data = self.liquid_limit_table
+           
+            result = 0  # Initialize result before the loop
+            print(data, 'data')
+            container2Moisture = data[1].moisture_percent
+            container1Moisture = data[0].moisture_percent
+            container3Moisture = data[2].moisture_percent
+            cont2blow = data[1].blows
+            cont3blow = data[2].blows
+            result = (container2Moisture * 100 - ((container2Moisture - container3Moisture) * 100 * (25 - cont2blow)) / (cont3blow - cont2blow)) / 100
+            print(result, 'final result')
+        self.write({'liquid_limit': result})
+
+
+
+
+
+    @api.depends('liquid_limit','eln_ref','grade')
+    def _compute_liquid_limit_conformity(self):
+        
+        for record in self:
+            record.liquid_limit_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.liquid_limit - record.liquid_limit*mu_value
+                    upper = record.liquid_limit + record.liquid_limit*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.liquid_limit_conformity = 'pass'
+                        break
+                    else:
+                        record.liquid_limit_conformity = 'fail'
+
+    liquid_limit_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_liquid_limit_value_nabl", store=True)
+
+    @api.depends('liquid_limit','eln_ref','grade')
+    def _compute_liquid_limit_value_nabl(self):
+        
+        for record in self:
+            record.liquid_limit_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.liquid_limit - record.liquid_limit*mu_value
+                    upper = record.liquid_limit + record.liquid_limit*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.liquid_limit_nabl = 'pass'
+                        break
+                    else:
+                        record.liquid_limit_nabl = 'fail'
 
 
     # Plastic Limit
@@ -338,6 +691,58 @@ class GsbMechanical(models.Model):
             else:
                 record.average_plastic_moisture = 0.0
 
+    average_plastic_moisture_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_average_plastic_moisture_conformity", store=True)
+
+
+
+    @api.depends('average_plastic_moisture','eln_ref','grade')
+    def _compute_average_plastic_moisture_conformity(self):
+        
+        for record in self:
+            record.average_plastic_moisture_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_plastic_moisture - record.average_plastic_moisture*mu_value
+                    upper = record.average_plastic_moisture + record.average_plastic_moisture*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.average_plastic_moisture_conformity = 'pass'
+                        break
+                    else:
+                        record.average_plastic_moisture_conformity = 'fail'
+
+    average_plastic_moisture_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_average_plastic_moisture_nabl", store=True)
+
+    @api.depends('average_plastic_moisture','eln_ref','grade')
+    def _compute_average_plastic_moisture_nabl(self):
+        
+        for record in self:
+            record.average_plastic_moisture_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.average_plastic_moisture - record.average_plastic_moisture*mu_value
+                    upper = record.average_plastic_moisture + record.average_plastic_moisture*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.average_plastic_moisture_nabl = 'pass'
+                        break
+                    else:
+                        record.average_plastic_moisture_nabl = 'fail'
+
     # Plasticity Index
     plasticity_index_visible = fields.Boolean("Plasticity Index Visible",compute="_compute_visible")
     plasticity_index = fields.Float("Plasticity Index",compute="_compute_plasticity_limit")
@@ -345,7 +750,59 @@ class GsbMechanical(models.Model):
     @api.depends('average_plastic_moisture','liquid_limit')
     def _compute_plasticity_limit(self):
         for record in self:
-            record.plasticity_index = record.liquid_limit - record.average_plastic_moisture
+            record.plasticity_index = 46.14 - record.average_plastic_moisture
+
+    plasticity_index_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_plasticity_index_conformity", store=True)
+
+
+
+    @api.depends('plasticity_index','eln_ref','grade')
+    def _compute_plasticity_index_conformity(self):
+        
+        for record in self:
+            record.plasticity_index_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.plasticity_index - record.plasticity_index*mu_value
+                    upper = record.plasticity_index + record.plasticity_index*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.plasticity_index_conformity = 'pass'
+                        break
+                    else:
+                        record.plasticity_index_conformity = 'fail'
+
+    plasticity_index_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_plasticity_index_nabl", store=True)
+
+    @api.depends('plasticity_index','eln_ref','grade')
+    def _compute_plasticity_index_nabl(self):
+        
+        for record in self:
+            record.plasticity_index_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.plasticity_index - record.plasticity_index*mu_value
+                    upper = record.plasticity_index + record.plasticity_index*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.plasticity_index_nabl = 'pass'
+                        break
+                    else:
+                        record.plasticity_index_nabl = 'fail'
 
     # Density Relation Heavy Compaction
     density_relation_name = fields.Char("Name",default="Density Relation Using Heavy Compaction")

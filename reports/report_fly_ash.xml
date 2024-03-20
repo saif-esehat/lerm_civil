@@ -954,20 +954,9 @@
 
 										</div>
 										<div style="text-align: center;vertical-align: middle;min-height:25px">
-                                          											<!-- status_28dayss -->
+                                    <!-- status_28dayss -->
 
-											<!-- <span>
-												<t t-if="flyash.status_28days">
-													<t t-if="flyash.compressive_strength_of_sample">
-														<span t-field="flyash.compressive_strength_of_sample" t-options='{"widget": "float", "precision": 2}'/>
-													</t>
-													<t t-else="">
-													Awaited
-													</t>
-												</t>
-												<t t-else="">
-												</t>
-											</span> -->
+										
 											<span>
 											<t t-if="flyash.status_28dayss">
 												<span t-field="flyash.compressive_strength_of_sample" t-options='{"widget": "float", "precision": 2}'/>
