@@ -920,6 +920,28 @@ class ELNParametersResult(models.Model):
     sequence = fields.Char("Sequence")
 
     
+<<<<<<< HEAD
+=======
+    eln_state = fields.Selection([
+        ('1-draft', 'In-Test'),
+        ('2-confirm', 'In-Check'),
+        ('3-approved','Approved'),
+        ('4-rejected','Rejected')
+    ], string='State',default='1-draft')
+
+
+    @api.onchange('parameter')
+    def _compute_result_editable(self):
+        state = self.eln_state
+        current_user_groups = self.env.user.groups_id.ids
+        hod_group_id = self.env.ref('lerm_civil.kes_hod_access_group').id
+
+        if state != '1-draft' and hod_group_id not in current_user_groups:
+            self.result_editable = False
+        else:
+            self.result_editable = True
+
+>>>>>>> 55facf6492ad478c119f0e945a1491365b8d664e
 
 
     # @api.depends('result')
@@ -1083,7 +1105,11 @@ class ELNParametersResult(models.Model):
                 'grade_id':self.eln_id.grade_id.id,
                 'result_id':self.id,
                 'eln_id':self.eln_id.id,
+<<<<<<< HEAD
                 'eln_state':self.eln_id.state
+=======
+                'eln_state':self.state
+>>>>>>> 55facf6492ad478c119f0e945a1491365b8d664e
             }
             }
 

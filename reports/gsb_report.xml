@@ -138,6 +138,7 @@
 							</tr>
 						</table>
 					</div>
+					<span t-field="eln.material.test_parameter" style="margin-top:5px"/>
 
 					<div t-if="data.dry_gradation_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">

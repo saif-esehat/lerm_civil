@@ -39,7 +39,7 @@
                             <field name="fludity_visible" invisible="1"/>
                         </h1>
                     </group>
-                     <group attrs="{'invisible': [('fludity_visible', '=', False)]}">
+                     <group >
                     <group>
                       <field name="temp_percent_fluidity"/>
                       <field name="humidity_percent_fludity"/>
