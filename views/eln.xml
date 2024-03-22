@@ -90,6 +90,7 @@
                                 <field name='attachment' filename='attachment_name'/>
                                 <field name='attachment_name' invisible='1'/>
                                 <field name='casting_date' />
+                                <field name='date_testing'/>
                                 <field name='instrument'/>
                                 <field name='grade_ids' invisible="1"/>
                                 <field name='ir_model' invisible="1"/>
@@ -272,9 +273,15 @@
                     <field name='material' optional="show"/>
                     <field name='witness_name' optional="show"/>
                     <field name='casting_date' optional="show"/>
+                    <field name='date_testing' optional="show"/>
+
                 </tree>
             </field>
         </record>
+
+
+   
+
 
 
         <record id="eln_result_update_wizard" model="ir.ui.view">

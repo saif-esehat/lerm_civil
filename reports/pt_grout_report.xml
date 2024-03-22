@@ -12,26 +12,7 @@
 				</div> -->
 				<div class="container_eln">
 					<div t-foreach="eln" t-as="o">
-						<!-- <table>
-							<tr>
-								<td colspan="3">Test Report No :
-								</td>
-								<td colspan="3">
-									<span t-field="o.kes_no"/>
-								</td>
-								<td colspan="3">Report Issue Date :
-								</td>
-								<td colspan="3">
-									<span t-field="o.srf_date"/>
-								</td>
-								<td colspan="3"  t-if="nabl">ULR NO :
-								</td>
-								<td colspan="3" t-if="nabl">
-									<span t-field="o.sample_id.ulr_no"/>
-								</td>
-							</tr>
-						</table> -->
-
+					   
 						<table style="margin-top:10px;">
 							<tr>
 								<td colspan="12">Customer Party Name :

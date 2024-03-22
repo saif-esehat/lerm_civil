@@ -79,6 +79,33 @@ class ELN(models.Model):
     temperature = fields.Float("Temperature")
     instrument = fields.Many2one('maintenance.equipment',string="Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
+    date_testing = fields.Date("Date of Testing",compute="_compute_date_testing")
+
+    @api.depends('sample_id')
+    def _compute_date_testing(self):
+        for record in self:
+            if record.sample_id.casting and record.sample_id.casting_date:
+                date_casting = record.sample_id.casting_date
+                days_casting = 0
+                if record.sample_id.days_casting == '3':
+                    days_casting = 3
+                elif record.sample_id.days_casting == '7':
+                    days_casting = 7
+                elif record.sample_id.days_casting == '14':
+                    days_casting = 14
+                elif record.sample_id.days_casting == '21':
+                    days_casting = 21
+                elif record.sample_id.days_casting == '28':
+                    days_casting = 28
+                elif record.sample_id.days_casting == '56':
+                    days_casting = 56
+                elif record.sample_id.days_casting == '112':
+                    days_casting = 112
+                # import wdb; wdb.set_trace()
+                
+                record.date_testing = date_casting + timedelta(days=int(days_casting))
+            else:
+                 record.date_testing = False
 
 
     # @api.onchange('start_date','srf_date')
@@ -872,6 +899,27 @@ class ELNParametersResult(models.Model):
     result_char = fields.Char("Result")
     sequence = fields.Char("Sequence")
 
+    
+    eln_state = fields.Selection([
+        ('1-draft', 'In-Test'),
+        ('2-confirm', 'In-Check'),
+        ('3-approved','Approved'),
+        ('4-rejected','Rejected')
+    ], string='State',default='1-draft')
+
+
+    @api.onchange('parameter')
+    def _compute_result_editable(self):
+        state = self.eln_state
+        current_user_groups = self.env.user.groups_id.ids
+        hod_group_id = self.env.ref('lerm_civil.kes_hod_access_group').id
+
+        if state != '1-draft' and hod_group_id not in current_user_groups:
+            self.result_editable = False
+        else:
+            self.result_editable = True
+
+
 
     # @api.depends('result')
     # def compute_nabl_status(self):
@@ -1033,7 +1081,8 @@ class ELNParametersResult(models.Model):
                 'size_id':self.eln_id.size_id.id,
                 'grade_id':self.eln_id.grade_id.id,
                 'result_id':self.id,
-                'eln_id':self.eln_id.id
+                'eln_id':self.eln_id.id,
+                'eln_state':self.state
             }
             }
 

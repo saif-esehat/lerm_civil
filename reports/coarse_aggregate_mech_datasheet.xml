@@ -61,7 +61,7 @@
 									<span t-esc="r1['wt_of_aggregate_retained']"/>
 								</td>
                                 <td colspan="z">
-									<span t-esc="r1['crushing_value']"/>
+									<span t-esc="r1['crushing_value']"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 						</tr>
 						</table>
@@ -72,7 +72,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.average_crushing_value"/>
+									<span t-field="data.average_crushing_value"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                         </table>
@@ -123,7 +123,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.specific_gravity"/>
+									<span t-field="data.specific_gravity"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             <tr cols="12">
@@ -132,7 +132,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.water_absorption"/>
+									<span t-field="data.water_absorption"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -190,7 +190,7 @@
 									<span t-esc="r3['wt_of_aggregate_retained']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r3['impact_value']"/>
+									<span t-esc="r3['impact_value']"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                                 
@@ -202,7 +202,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.average_impact_value"/>
+									<span t-field="data.average_impact_value"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                         </table>
@@ -253,7 +253,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.abrasion_value_percentage"/>
+									<span t-field="data.abrasion_value_percentage"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             
@@ -291,7 +291,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.percent_of_fines"/>
+									<span t-field="data.percent_of_fines"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             <tr cols="12">
@@ -309,7 +309,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.load_10percent_fine_values"/>
+									<span t-field="data.load_10percent_fine_values"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -382,7 +382,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.total_na2so4"/>
+									<span t-field="data.total_na2so4"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             <tr cols="12">
@@ -463,7 +463,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.total_mgso4"/>
+									<span t-field="data.total_mgso4"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                             <tr cols="12">
@@ -472,7 +472,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.soundness_mgso4"/>
+									<span t-field="data.soundness_mgso4"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
                         </table>
@@ -679,7 +679,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.total_wt_retained_fl_el"/>
+								<span t-field="data.total_wt_retained_fl_el"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -688,7 +688,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.total_elongated_retained"/>
+								<span t-field="data.total_elongated_retained"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -697,7 +697,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.total_flakiness_retained"/>
+								<span t-field="data.total_flakiness_retained"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -707,7 +707,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.aggregate_elongation"/>
+								<span t-field="data.aggregate_elongation"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -716,7 +716,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.aggregate_flakiness"/>
+								<span t-field="data.aggregate_flakiness"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -725,7 +725,7 @@
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
-								<span t-field="data.aggregate_combine"/>
+								<span t-field="data.aggregate_combine"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 						</tr>
@@ -766,7 +766,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.wt_sample_finer75"/>
+									<span t-field="data.wt_sample_finer75"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -803,7 +803,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.clay_lumps_percent"/>
+									<span t-field="data.clay_lumps_percent"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -840,7 +840,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.light_weight_percent"/>
+									<span t-field="data.light_weight_percent"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -895,7 +895,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.loose_bulk_density"/>
+									<span t-field="data.loose_bulk_density"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -949,7 +949,7 @@
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.rodded_bulk_density"/>
+									<span t-field="data.rodded_bulk_density" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
