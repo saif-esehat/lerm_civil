@@ -18,6 +18,7 @@
                         <field name="srf_id" invisible="1"/>
                         <field name="sample_id" readonly="1"/>
                         <field name="eln_ref" readonly="1"/>
+                        <field name="grade" readonly="1"/>
                         <field name="parameter_id" invisible="1"/>
                     </group>
                     <group>
@@ -71,9 +72,18 @@
                         <field name="oven_dried_wt"/>
                         <field name="water_absorbtion"/>
                     </group>
+                    <group attrs="{'invisible': [('water_absorbtion_visible', '=', False)]}">
+                       
+                        <field  name="water_absorbtion_conformity"
+                                        decoration-success="water_absorbtion_conformity == 'pass'" 
+                                        decoration-danger="water_absorbtion_conformity == 'fail'" 
+                                        readonly="1" />
+                        <field  name="water_absorbtion_nabl" />
+                         
+                    </group>
 
                     <!-- Elongation and Flakiness  -->
-                    <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
+                    <!-- <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                         <h1>
                             <field name="elongation_name" readonly="1" nolabel="1"/>
                             <field name="elongation_visible" invisible="1"/>
@@ -118,7 +128,67 @@
                         <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                             <field name="aggregate_combine"/>
                         </group>
+                    </group> -->
+                      <!-- Elongation and Flakiness  -->
+                    <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
+                        <h1>
+                            <field name="elongation_name" readonly="1" nolabel="1"/>
+                            <field name="elongation_visible" invisible="1"/>
+                            <field name="flakiness_visible" invisible="1"/>
+
+
+                        </h1>
                     </group>
+                    <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
+                        <field name="elongation_table">
+                        <tree editable="bottom">
+                          <field name="sieve_size"/>
+                          <field name="wt_retained"/>
+                          <field name="elongated_retained"/>
+                          <field name="flakiness_retained"/>
+                        </tree>
+                        </field>
+                    </group>
+                    
+                    <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}" style="white-space:nowrap;">
+                            
+                        <group>
+                            <field name="total_wt_retained_fl_el"/>
+                        <!-- </group>
+                        <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}"> -->
+                            <field name="total_elongated_retained"/>
+                         <!-- </group> -->
+                        <!-- <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}"> -->
+                            <field name="total_flakiness_retained"/>
+
+                            <field  name="aggregate_flakiness_conformity"
+                                        decoration-success="aggregate_flakiness_conformity == 'pass'" 
+                                        decoration-danger="aggregate_flakiness_conformity == 'fail'" 
+                                        readonly="1" string="Flakiness Conformity"/>
+                            <field  name="aggregate_flakiness_nabl" />
+                        </group>
+                        
+                   
+                     
+                    <!-- <group style="width:100%"> -->
+                        
+                        <group>
+                            <field name="aggregate_elongation"/>
+                        <!-- </group>
+                        <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}"> -->
+                            <field name="aggregate_flakiness"/>
+                        <!-- </group>
+                        <group style="width:33%" attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}"> -->
+                            <field name="aggregate_combine"/>
+
+                             <field  name="aggregate_elongation_conformity"
+                                        decoration-success="aggregate_elongation_conformity == 'pass'" 
+                                        decoration-danger="aggregate_elongation_conformity == 'fail'" 
+                                        readonly="1" string="Elongation Conformity" />
+                            <field  name="aggregate_elongation_nabl" />
+                        </group>
+                    </group>
+
 
                     <!-- Impact Value  -->
                     <group attrs="{'invisible': [('impact_visible', '=', False)]}">
@@ -142,10 +212,19 @@
                            
                     </field> 
                     </group>
-                            <group attrs="{'invisible': [('impact_visible', '=', False)]}">
-                               <field name='average_impact_value'/>
-                            </group>
-                     
+                    <group attrs="{'invisible': [('impact_visible', '=', False)]}">
+                        <field name='average_impact_value'/>
+                    </group>
+                     <group attrs="{'invisible': [('impact_visible', '=', False)]}">
+                       
+                        <field  name="average_impact_value_conformity"
+                                        decoration-success="average_impact_value_conformity == 'pass'" 
+                                        decoration-danger="average_impact_value_conformity == 'fail'" 
+                                        readonly="1" />
+                        <field  name="average_impact_value_nabl" />
+                         
+                    </group>
+                
 
                 <!-- Abrasion Value  -->
                 <group attrs="{'invisible': [('abrasion_visible', '=', False)]}">
@@ -161,6 +240,15 @@
                     <field name="weight_retain_sample_abrasion"/>
                     <field name="abrasion_value_percentage"/>
                 </group>
+                 <group attrs="{'invisible': [('abrasion_visible', '=', False)]}">
+                       
+                        <field  name="abrasion_value_percentage_conformity"
+                                        decoration-success="abrasion_value_percentage_conformity == 'pass'" 
+                                        decoration-danger="abrasion_value_percentage_conformity == 'fail'" 
+                                        readonly="1" />
+                        <field  name="abrasion_value_percentage_nabl" />
+                         
+                 </group>
 
                 <!-- Liquid Limit -->
                 <group attrs="{'invisible': [('liquid_limit_visible', '=', False)]}">
@@ -186,9 +274,21 @@
                            
                     </field> 
                 </group>
-                    <group attrs="{'invisible': [('liquid_limit_visible', '=', False)]}">
-                        <field name="liquid_limit"/>
+                    <group attrs="{'invisible': [('liquid_limit_visible', '=', False)]}" style="width:50%">
+                        <field name="liquid_limit" style="width:50%"/>
+                        <field name="are_child_lines_filled" invisible="1"/>
+                        <button string="Calculate Liquid Limit" name="liquid_calculation" type="object" class="oe_highlight" 
+                                attrs="{'invisible': [('are_child_lines_filled', '=', False)]}" />
                         <field name="remarks_liquid_limit"/>
+                    </group>
+                    <group attrs="{'invisible': [('liquid_limit_visible', '=', False)]}">
+                       
+                        <field  name="liquid_limit_conformity"
+                                        decoration-success="liquid_limit_conformity == 'pass'" 
+                                        decoration-danger="liquid_limit_conformity == 'fail'" 
+                                        readonly="1" />
+                        <field  name="liquid_limit_nabl" />
+                         
                     </group>
 
                 <!-- Plastic Limit -->
@@ -216,14 +316,31 @@
                 </group>
                     <group attrs="{'invisible': [('plastic_visible', '=', False)]}">
                         <field name="average_plastic_moisture"/>
-                        <field name="remarks_plastic"/>
+                        <field name="remarks_plastic" style="width:30%"/>
                     </group>
-
+                 <group attrs="{'invisible': [('plastic_visible', '=', False)]}">
+                       
+                        <field  name="average_plastic_moisture_conformity"
+                                        decoration-success="average_plastic_moisture_conformity == 'pass'" 
+                                        decoration-danger="average_plastic_moisture_conformity == 'fail'" 
+                                        readonly="1" />
+                        <field  name="average_plastic_moisture_nabl" />
+                         
+                    </group>
                 <!-- Plasticity index  -->
                 <group attrs="{'invisible': [('plasticity_index_visible', '=', False)]}">
                     <field name="plasticity_index"/>
                     <field name="plasticity_index_visible" invisible="1"/>
                 </group>
+                 <group attrs="{'invisible': [('plasticity_index_visible', '=', False)]}">
+                       
+                        <field  name="plasticity_index_conformity"
+                                        decoration-success="plasticity_index_conformity == 'pass'" 
+                                        decoration-danger="plasticity_index_conformity == 'fail'" 
+                                        readonly="1" />
+                        <field  name="plasticity_index_nabl" />
+                         
+                    </group>
 
                 <!-- Density Relation Heavy Compaction  -->
                 <group attrs="{'invisible': [('density_relation_visible', '=', False)]}">

@@ -309,6 +309,7 @@ class GsbReport(models.AbstractModel):
         else:
             cbr_graph_image = None
             cbry_values = []  # Set to an empty list instead of 0
+            cbrx_values = []
 
         return {
             'eln': eln,
