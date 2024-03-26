@@ -330,6 +330,7 @@
                 <!-- Plasticity index  -->
                 <group attrs="{'invisible': [('plasticity_index_visible', '=', False)]}">
                     <field name="plasticity_index"/>
+                    <field name="remarks_plasticity_index" style="width:30%"/>
                     <field name="plasticity_index_visible" invisible="1"/>
                 </group>
                  <group attrs="{'invisible': [('plasticity_index_visible', '=', False)]}">

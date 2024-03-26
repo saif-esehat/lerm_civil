@@ -336,11 +336,17 @@
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','88627a7b-c438-4d13-bfde-330ee0005734')]).unit.name"/>
 									</span>
 								</td>
-								<td colspan="2" style="text-align: center;">
+								<!-- <td colspan="2" style="text-align: center;">
 									<div>
 										<span t-field="data.liquid_limit"  t-options='{"widget": "float", "precision": 2}'/>
 									</div>
+								</td> -->
+								<td colspan="2" style="text-align: center;">
+									<div>
+										<span t-esc="data.remarks_liquid_limit if data.liquid_limit == 0.00 else data.liquid_limit" />
+									</div>
 								</td>
+								
 								<td colspan="2" style="text-align: center;">
 									<div>
 										<span>
@@ -384,9 +390,11 @@
 									</span>
 								</td>
 								<td colspan="2" style="text-align: center;">
+								
 									<div>
-										<span t-field="data.average_plastic_moisture"  t-options='{"widget": "float", "precision": 2}'/>
+										<span t-esc="data.remarks_plastic if data.average_plastic_moisture == 0.00 else data.average_plastic_moisture" />
 									</div>
+									
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
@@ -430,9 +438,21 @@
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6fd54acc-61fd-478f-9bcf-6817965312f1')]).unit.name"/>
 									</span>
 								</td>
+								<!-- <td colspan="2" style="text-align: center;">
+									<div>
+										<t t-set="plasticity_index_float" t-value="0.0 if data.plasticity_index == 'non-plastic' else float(data.plasticity_index)" />
+										<span t-esc="data.remarks_plasticity_index if plasticity_index_float == 46.14 else plasticity_index_float" t-att-options="{'widget': 'float', 'precision': 2} if plasticity_index_float != 46.14 else {}" />
+									</div>
+								</td> -->
 								<td colspan="2" style="text-align: center;">
 									<div>
-										<span t-field="data.plasticity_index"  t-options='{"widget": "float", "precision": 2}'/>
+										<t t-set="plasticity_index_float" t-value="0.0 if data.plasticity_index == 'non-plastic' else float(data.plasticity_index)" />
+										<t t-if="plasticity_index_float != 46.14">
+											<span t-esc="data.remarks_plasticity_index if plasticity_index_float == 46.14 else plasticity_index_float" t-options='{"widget": "float", "precision": 2}' />
+										</t>
+										<t t-else="">
+											<span t-esc="data.remarks_plasticity_index if plasticity_index_float == 46.14 else plasticity_index_float" />
+										</t>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
