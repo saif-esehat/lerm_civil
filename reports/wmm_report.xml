@@ -729,7 +729,7 @@
 										DETERMINATION OF WATER CONTENT-DRY 
 									</div>
 									<div>
-										DENSITY RELATION USING HEAVY COMPACTION : 
+										DENSITY RELATION USING HEAVY COMPACTION : Test Method IS 2720 Part 8 : 1983 RA 2020
 										<span> 
 											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','fc19b116-3cb1-448a-8bb0-8f48657ae86b')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -900,7 +900,7 @@
 								</tr>
 						</table>
 
-						<table t-if="data.cbr_visible" style="margin-top:10px;">
+						<table t-if="data.cbr_visible and data.cbr_table" style="margin-top:10px;">
 								<thead>
 									<tr>
 										<th>
