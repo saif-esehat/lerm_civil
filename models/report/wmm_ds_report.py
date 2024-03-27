@@ -20,12 +20,25 @@ class WMMReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
-        inreport_value = data.get('inreport', None)
+        # inreport_value = data.get('inreport', None)
+        # nabl = data.get('nabl')
+        # if 'active_id' in data['context']:
+        #     eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        # else:
+        #     eln = self.env['lerm.eln'].sudo().browse(docids) 
         nabl = data.get('nabl')
-        if 'active_id' in data['context']:
-            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        fromEln = data.get('fromEln')
+        inreport_value = data.get('inreport', None)
+        if fromEln == False:
+            if 'active_id' in data['context']:
+                eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(docids)
         else:
-            eln = self.env['lerm.eln'].sudo().browse(docids) 
+            if 'active_id' in data['context']:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['context']['active_id'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(docids)
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         qr.add_data(eln.kes_no)
         qr.make(fit=True)
@@ -267,6 +280,7 @@ class WMMReport(models.AbstractModel):
             'qrcode': qr_code,
             'stamp' : inreport_value,
             'nabl' : nabl,
+            'fromEln':fromEln,
             'graphHeavy' : graph_image,
             'mdd' : max_y,
             'omc' : max_x,
@@ -281,14 +295,18 @@ class WmmDatasheet(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data):
-        if data['fromsample'] == True:
-            if 'active_id' in data['context']:
+        # if data['fromsample'] == True:
+        #     if 'active_id' in data['context']:
+        #         eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        #     else:
+        #         eln = self.env['lerm.eln'].sudo().browse(docids) 
+        #     model_id = eln.model_id
+        # else:
+        #     eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
+        if 'active_id' in data['context']:
                 eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
-            else:
-                eln = self.env['lerm.eln'].sudo().browse(docids) 
-            model_id = eln.model_id
         else:
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
+                eln = self.env['lerm.eln'].sudo().browse(docids) 
         model_id = eln.model_id
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
