@@ -1235,31 +1235,31 @@
 							<tbody>
 								<tr t-foreach="data.density_relation_table" t-as="r">
 									<td>
-										<span t-esc="round(float(r.determination_no))"/>
+										<span t-esc="r.determination_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_modul_compact))"/>
+										<span t-esc="r.wt_of_modul_compact"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_compact))"/>
+										<span t-esc="r.wt_of_compact"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.bulk_density))"/>
+										<span t-esc="r.bulk_density"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.container_no))"/>
+										<span t-esc="r.container_no"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_container_wet),2)"/>
+										<span t-esc="r.wt_of_container_wet"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_container_dry))"/>
+										<span t-esc="r.wt_of_container_dry"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_dry_sample))"/>
+										<span t-esc="r.wt_of_dry_sample"/>
 									</td>
 									<td>
-										<span t-esc="round(float(r.wt_of_moisture),2)"/>
+										<span t-esc="r.wt_of_moisture"/>
 									</td>
 									<td>
 										<span t-esc="r.moisture"/>
@@ -1349,7 +1349,7 @@
 
 										<th>
 											<span>
-												Penetration in mm
+												Proving Ring Reading
 											</span>
 										</th>
 

@@ -119,6 +119,7 @@
                     
                     <group attrs="{'invisible': [('liquid_limit_visible', '=', False)]}">
                      <field name="liquid_limit" style="width:50%"/>
+                      <field name="remarks_liquid_limit" style="width:50%"/>
                      <field name="are_child_lines_filled" invisible="1"/>
                         <button string="Calculate Liquid Limit" name="liquid_calculation" type="object" class="oe_highlight" 
                                 attrs="{'invisible': [('are_child_lines_filled', '=', False)]}" />
@@ -166,14 +167,31 @@
                       
                     </group>
                     <group attrs="{'invisible': [('plastic_limit_visible', '=', False)]}" style="white-space: nowrap;">
-                     <field name="plastic_limit" />
-                     <field name="plasticity_index"/>
+                     <field name="plastic_limit" style="width:50%" />
+                     <field name="plasticity_index" style="width:50%"/>
+                     <field name="remarks_plastic" style="width:50%"/>
                      <field name='plasticity_index_conformity' col="4"
                                            decoration-success="plasticity_index_conformity == 'pass'" 
                                            decoration-danger="plasticity_index_conformity == 'fail'" 
                                            readonly="1"/>
                      <field name='plasticity_index_nabl' col="4"/>
                     </group>
+
+                      <!-- Plasticity index  -->
+                <!-- <group attrs="{'invisible': [('plasticity_index_visible', '=', False)]}">
+                    <field name="plasticity_index1"/>
+                    <field name="remarks_plasticity_index1" style="width:30%"/>
+                    <field name="plasticity_index_visible" invisible="1"/>
+                </group>
+                 <group attrs="{'invisible': [('plasticity_index_visible', '=', False)]}">
+                       
+                        <field  name="plasticity_index_conformity1"
+                                        decoration-success="plasticity_index_conformity1 == 'pass'" 
+                                        decoration-danger="plasticity_index_conformity1 == 'fail'" 
+                                        readonly="1" />
+                        <field  name="plasticity_index_nabl1" />
+                         
+                    </group> -->
                     <!-- FSI -->
                     <group attrs="{'invisible': [('fsi_visible', '=', False)]}">
                         <h1>
