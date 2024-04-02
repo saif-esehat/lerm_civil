@@ -746,6 +746,9 @@ class GsbMechanical(models.Model):
     # Plasticity Index
     plasticity_index_visible = fields.Boolean("Plasticity Index Visible",compute="_compute_visible")
     plasticity_index = fields.Float("Plasticity Index",compute="_compute_plasticity_limit")
+    remarks_plasticity_index = fields.Selection([
+        ('plastic', 'Plastic'),
+        ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
 
     @api.depends('average_plastic_moisture','liquid_limit')
     def _compute_plasticity_limit(self):

@@ -269,8 +269,8 @@
                     </field> 
                 </group>
                     <group attrs="{'invisible': [('plastic_visible', '=', False)]}">
-                        <field name="average_plastic_moisture"/>
-                        <field name="remarks_plastic" style="width:30%"/>
+                        <field name="average_plastic_moisture"  style="width:50%"/>
+                        <field name="remarks_plastic"  style="width:50%"/>
                     </group>
                  <group attrs="{'invisible': [('plastic_visible', '=', False)]}">
                        
@@ -284,7 +284,8 @@
 
                 <!-- Plasticity index  -->
                 <group attrs="{'invisible': [('plasticity_index_visible', '=', False)]}">
-                    <field name="plasticity_index"/>
+                    <field name="plasticity_index"  style="width:50%"/>
+                    <field name="remarks_plasticity_index"  style="width:50%"/>
                     <field name="plasticity_index_visible" invisible="1"/>
                 </group>
                  <group attrs="{'invisible': [('plasticity_index_visible', '=', False)]}">
