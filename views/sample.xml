@@ -318,6 +318,10 @@
                       <field name="scope" optional="show"/>
                       <field name="sample_description" optional="show"/>
                       <field name="state" widget="badge" optional="show"/>
+                      <field name="invoice_status" optional="show"/>
+                      <field name="invoice_number" optional="show"/>
+
+                      
 
             </tree>
         </field>
