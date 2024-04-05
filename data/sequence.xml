@@ -59,6 +59,15 @@
                 <field name="padding">8</field>
                 <field name="company_id" eval="False"/>
             </record> -->
+
+        <record id="inv_no_seqs" model="ir.sequence">
+            <field name="name">INV Sequence</field>
+            <field name="code">invoice.seq</field>
+            <field name="prefix">INV/%(y)s</field>
+            <field name="suffix"></field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
         
 
         <record id="normal_consistency_test" model="mechanical.cement.test">
