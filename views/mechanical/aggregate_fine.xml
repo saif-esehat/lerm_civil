@@ -50,7 +50,7 @@
                     </div>
                     <group attrs="{'invisible': [('sieve_visible', '=', False)]}">
                     <field name="sieve_analysis_child_lines" nolabel="1" >
-                            <tree>
+                            <tree editable="bottom">
                                 <field name="serial_no" string="Sr.No"/>
                                 <field name='sieve_size' string="IS Sieve Size"/>
                                 <field name='wt_retained' string="Wt. Retained in gms"/>
@@ -374,7 +374,7 @@
                         </div>
                     </group> -->
 
-                    <group attrs="{'invisible': [('specific_gravity_visible', '=', False)]}" style="white-space: nowrap; width:50%;" >
+                    <group attrs="{'invisible': [('loose_bulk_visible', '=', False)]}" style="white-space: nowrap; width:50%;" >
                         <field name="weight_empty_bucket" />
                         <field name="volume_of_bucket" />
                         <field name="sample_plus_bucket"  />

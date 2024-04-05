@@ -96,7 +96,7 @@
     <template id="general_report_template">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
-			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln_general">
+			 <t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 			 	<!-- <div style="position:absolute;opacity:0.25;font-size:3em;width:100%;height:100%;z-index:1000;margin:-10px">
 					<img src="/lerm_civil/static/src/img/watermark2.jpg"/>
 				</div> -->

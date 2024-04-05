@@ -515,6 +515,10 @@ class Soil(models.Model):
     child_liness = fields.One2many('mechanical.liquid.limits.line','parent_id',string="Liquid Limit")
     liquid_limit = fields.Float('Liquid Limit')
 
+    remarks_liquid_limit = fields.Selection([
+        ('plastic', 'Plastic'),
+        ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
+
     liquid_limit_conformity = fields.Selection([
             ('pass', 'Pass'),
             ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
@@ -605,6 +609,10 @@ class Soil(models.Model):
     plastic_limit_table = fields.One2many('mechanical.plasticl.limit.line','parent_id',string="Parameter")
 
     plastic_limit = fields.Float(string="Average of % Moisture", compute="_compute_plastic_limit")
+    remarks_plastic = fields.Selection([
+        ('plastic', 'Plastic'),
+        ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
+
     plasticity_index = fields.Char(string="Plasticity Index", compute="_compute_plasticity_index")
 
     plasticity_index_conformity = fields.Selection([
@@ -688,6 +696,78 @@ class Soil(models.Model):
                 plasticity_value = 46.14 - record.plastic_limit
                 # Format the string representation with 2 decimal places
                 record.plasticity_index = '{:.2f}'.format(plasticity_value)
+
+
+
+    #  # Plasticity Index
+    # plasticity_index_visible = fields.Boolean("Plasticity Index Visible",compute="_compute_visible")
+    # plasticity_index1 = fields.Char("Plasticity Index",compute="_compute_plasticity_index1")
+    # remarks_plasticity_index1 = fields.Selection([
+    #     ('plastic', 'Plastic'),
+    #     ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
+
+    # @api.depends('plastic_limit')
+    # def _compute_plasticity_index1(self):
+    #     for record in self:
+    #         if record.plastic_limit == 0.0:
+    #             record.plasticity_index1 = 'Null'
+    #         else:
+    #             plasticity_value = 46.14 - record.plastic_limit
+    #             # Format the string representation with 2 decimal places
+    #             record.plasticity_index1 = '{:.2f}'.format(plasticity_value)
+
+
+    # plasticity_index_conformity1 = fields.Selection([
+    #         ('pass', 'Pass'),
+    #         ('fail', 'Fail')], string="Conformity", compute="_compute_plasticity_index_conformity1", store=True)
+
+
+
+    # @api.depends('plasticity_index1','eln_ref','grade')
+    # def _compute_plasticity_index_conformity1(self):
+        
+    #     for record in self:
+    #         record.plasticity_index_conformity1 = 'fail'
+    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')])
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')]).parameter_table
+    #         for material in materials:
+    #             if material.grade.id == record.grade.id:
+    #                 req_min = material.req_min
+    #                 req_max = material.req_max
+    #                 mu_value = line.mu_value
+                    
+    #                 lower = record.plasticity_index1 - record.plasticity_index1*mu_value
+    #                 upper = record.plasticity_index1 + record.plasticity_index1*mu_value
+    #                 if lower >= req_min and upper <= req_max:
+    #                     record.plasticity_index_conformity1 = 'pass'
+    #                     break
+    #                 else:
+    #                     record.plasticity_index_conformity1 = 'fail'
+
+    # plasticity_index_nabl1 = fields.Selection([
+    #     ('pass', 'NABL'),
+    #     ('fail', 'Non-NABL')], string="NABL", compute="_compute_plasticity_index_nabl1", store=True)
+
+    # @api.depends('plasticity_index1','eln_ref','grade')
+    # def _compute_plasticity_index_nabl1(self):
+        
+    #     for record in self:
+    #         record.plasticity_index_nabl1 = 'fail'
+    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')])
+    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')]).parameter_table
+    #         for material in materials:
+    #             if material.grade.id == record.grade.id:
+    #                 lab_min = line.lab_min_value
+    #                 lab_max = line.lab_max_value
+    #                 mu_value = line.mu_value
+                    
+    #                 lower = record.plasticity_index1 - record.plasticity_index1*mu_value
+    #                 upper = record.plasticity_index1 + record.plasticity_index1*mu_value
+    #                 if lower >= lab_min and upper <= lab_max:
+    #                     record.plasticity_index_nabl1 = 'pass'
+    #                     break
+    #                 else:
+    #                     record.plasticity_index_nabl1 = 'fail'
 
 
      # Dry Density by Sand Replacement method
@@ -894,6 +974,7 @@ class Soil(models.Model):
             # record.light_mdd_visible = False
             record.liquid_limit_visible = False
             record.plastic_limit_visible = False
+            # record.plasticity_index_visible = False
             record.dry_density_visible = False
             record.moisture_content_visible = False
 
@@ -923,6 +1004,10 @@ class Soil(models.Model):
                
                 if sample.internal_id == 'f797da97-2ff0-4b81-aca1-0e07dab7cd87':
                     record.plastic_limit_visible = True
+                    
+                # if sample.internal_id == '1411e90a-70ac-4f77-b544-26e5b8d6dd71':
+                #     record.plasticity_index_visible = True
+
 
                 if sample.internal_id == 'bfc0b682-0c28-4c8b-924f-7e6988a658ee':
                     record.dry_density_visible = True

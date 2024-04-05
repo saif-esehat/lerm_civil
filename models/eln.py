@@ -1089,6 +1089,7 @@ class ELNParametersResult(models.Model):
 
 
     
+    
 
 class ELNParametersInputs(models.Model):
     _name = 'eln.parameters.inputs'
