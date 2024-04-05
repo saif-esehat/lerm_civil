@@ -22,3 +22,5 @@ class AccountMoveInheritedLerm(models.Model):
         for rec in self.invoice_line_ids.report_no1:
             rec.invoice_status = '1-uninvoiced'
         super(AccountMoveInheritedLerm,self).button_draft()
+        for record in self.invoice_line_ids.report_no1:
+            record.invoice_number = None
