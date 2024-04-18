@@ -158,14 +158,11 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Material/Test Name :
+								<td colspan="12">Material/Test Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
-								<td colspan="6">Job Ref No :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.kes_no"/>
-								</td>
+								
 							</tr>
 						</table>
 					</div>
@@ -178,7 +175,12 @@
 						<div t-if="data.sieve_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
 							<td colspan="2">
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).parameter_name"/>
+								<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).parameter_name"/>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
 							</td>
 						</div>
 						<table t-if="data.sieve_visible">
@@ -187,7 +189,7 @@
 								</td>
                                 <td colspan="2">Percentage of Passing (in %) observed				
 								</td>
-								<td colspan="2">Requirements as per
+								<!-- <td colspan="2">Requirements as per
 								 <span>
 								 	<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -195,11 +197,11 @@
 										</t>
                                 	</t>
 								 </span>
-								</td>
+								</td> -->
 
                             </tr>
 							<t t-set="k" t-value="0"/>
-							<tr t-foreach="data.child_lines" t-as="r" t-if="'pan' not in r['sieve_size']">
+							<tr t-foreach="data.child_lines" t-as="r" t-if="'pan' != r['sieve_size']">
 								
 								<td colspan="2" >
 									<t t-set="k" t-value="k+1"/>
@@ -208,7 +210,7 @@
 								<td colspan="2" >
 									<span t-esc="r['passing_percent']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-								<td colspan="2" t-if="k == 1">
+								<!-- <td colspan="2" t-if="k == 1">
 										<span>100%</span>
 									</td>
 									<td colspan="2" t-if="k == 2">
@@ -233,8 +235,7 @@
 										<span>0% - 5%</span>
 									</td>
 									<td colspan="2" t-if="k == 9">
-										<!-- <span>0% - 5%</span> -->
-									</td>
+									</td> -->
 							</tr>
 						</table>
                         
@@ -1106,7 +1107,7 @@
 										DETERMINATION OF WATER CONTENT-DRY 
 									</div>
 									<div>
-										DENSITY RELATION USING HEAVY COMPACTION : Test Method IS 2720 Part 8 : 1983 RA 2020
+										DENSITY RELATION USING HEAVY COMPACTION : Test Method 
 										<span> 
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).test_method.test_method"/>
 										</span>
@@ -1189,7 +1190,7 @@
 										<span t-esc="r.bulk_density" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 									<td>
-										<span t-esc="r.container_no" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-esc="r.container_no" t-options='{"widget": "float", "precision": 0}'/>
 									</td>
 									<td>
 										<span t-esc="r.wt_of_container_wet" t-options='{"widget": "float", "precision": 2}'/>
@@ -1256,7 +1257,7 @@
 								<tr>
 									<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
 										<div>
-											LABORATORY DETERMINATION OF CBR : Test Method  : IS 2720 Part 16 :1987 RA 2020 <![CDATA[&nbsp;]]> <span t-field="env['lerm.parameter.master'].search([('internal_id','=','47ba9d28-2065-4532-814a-3a4c1e884305')]).test_method.test_method"/>
+											LABORATORY DETERMINATION OF CBR : Test Method  : <![CDATA[&nbsp;]]> <span t-field="env['lerm.parameter.master'].search([('internal_id','=','47ba9d28-2065-4532-814a-3a4c1e884305')]).test_method.test_method"/>
 
 										</div>
 										<div>

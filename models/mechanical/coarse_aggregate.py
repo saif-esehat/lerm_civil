@@ -121,8 +121,8 @@ class CoarseAggregateMechanical(models.Model):
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     # abrasion_value_child_lines = fields.One2many('mechanical.abrasion.value.coarse.aggregate.line','parent_id',string="Parameter")
-    total_weight_sample_abrasion = fields.Integer(string="Total weight of Sample in gms")
-    weight_passing_sample_abrasion = fields.Integer(string="Weight of Passing sample in 1.70 mm IS sieve in gms")
+    total_weight_sample_abrasion = fields.Float(string="Total weight of Sample in gms")
+    weight_passing_sample_abrasion = fields.Float(string="Weight of Passing sample in 1.70 mm IS sieve in gms")
     weight_retain_sample_abrasion = fields.Integer(string="Weight of Retain sample in 1.70 mm IS sieve in gms",compute="_compute_weight_retain_sample_abrasion")
     abrasion_value_percentage = fields.Float(string="Abrasion Value (%)",compute="_compute_sample_weight")
 
@@ -1586,6 +1586,13 @@ class CoarseAggregateMechanical(models.Model):
         record.eln_ref.write({'model_id':record.id})
         return record
 
+    def read(self, fields=None, load='_classic_read'):
+
+        self._compute_sample_parameters()
+        self._compute_visible()
+
+        return super(CoarseAggregateMechanical, self).read(fields=fields, load=load)
+
    
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
@@ -1702,9 +1709,9 @@ class SieveAnalysisLine(models.Model):
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
     sieve_size = fields.Char(string="IS Sieve Size mm")
     wt_retained = fields.Float(string="Wt. Retained in gms")
-    percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
-    cumulative_retained = fields.Float(string="Cum. Retained %", store=True)
-    passing_percent = fields.Float(string="Passing %")
+    percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained",digits=(16,3))
+    cumulative_retained = fields.Float(string="Cum. Retained %", store=True,digits=(16,3))
+    passing_percent = fields.Float(string="Passing %",digits=(16,3))
 
 
 

@@ -668,8 +668,7 @@ class WbmDryGradationLine(models.Model):
 
         res = super(WbmDryGradationLine, self).unlink()
 
-        if parent_id:
-            parent_id.sieve_analysis_child_lines._reorder_serial_numbers()
+        
 
         return res
 

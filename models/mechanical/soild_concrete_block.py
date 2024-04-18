@@ -109,19 +109,19 @@ class SolidConcreteBlock(models.Model):
             record.block_density_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_block - record.average_block*mu_value
-                    upper = record.average_block + record.average_block*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.block_density_nabl = 'pass'
-                        break
-                    else:
-                        record.block_density_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_block - record.average_block*mu_value
+            upper = record.average_block + record.average_block*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.block_density_nabl = 'pass'
+                break
+            else:
+                record.block_density_nabl = 'fail'
 
 
     
@@ -177,19 +177,19 @@ class SolidConcreteBlock(models.Model):
             record.moisture_movment_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_moisture_movment - record.average_moisture_movment*mu_value
-                    upper = record.average_moisture_movment + record.average_moisture_movment*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.moisture_movment_nabl = 'pass'
-                        break
-                    else:
-                        record.moisture_movment_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_moisture_movment - record.average_moisture_movment*mu_value
+            upper = record.average_moisture_movment + record.average_moisture_movment*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.moisture_movment_nabl = 'pass'
+                break
+            else:
+                record.moisture_movment_nabl = 'fail'
 
 
      
@@ -245,19 +245,19 @@ class SolidConcreteBlock(models.Model):
             record.drying_shrinkage_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_drying_shrinkage - record.average_drying_shrinkage*mu_value
-                    upper = record.average_drying_shrinkage + record.average_drying_shrinkage*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.drying_shrinkage_nabl = 'pass'
-                        break
-                    else:
-                        record.drying_shrinkage_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_drying_shrinkage - record.average_drying_shrinkage*mu_value
+            upper = record.average_drying_shrinkage + record.average_drying_shrinkage*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.drying_shrinkage_nabl = 'pass'
+                break
+            else:
+                record.drying_shrinkage_nabl = 'fail'
 
 
     
@@ -308,19 +308,19 @@ class SolidConcreteBlock(models.Model):
             record.water_absorption_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')])
             materials = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_water_absorption - record.average_water_absorption * mu_value
-                    upper = record.average_water_absorption + record.average_water_absorption * mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.water_absorption_nabl = 'pass'
-                        break
-                    else:
-                        record.water_absorption_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_water_absorption - record.average_water_absorption * mu_value
+            upper = record.average_water_absorption + record.average_water_absorption * mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.water_absorption_nabl = 'pass'
+                break
+            else:
+                record.water_absorption_nabl = 'fail'
 
 
     # Dimension
@@ -429,19 +429,19 @@ class SolidConcreteBlock(models.Model):
             record.compressive_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.avg_compressive_strength - record.avg_compressive_strength*mu_value
-                    upper = record.avg_compressive_strength + record.avg_compressive_strength*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.compressive_nabl = 'pass'
-                        break
-                    else:
-                        record.compressive_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.avg_compressive_strength - record.avg_compressive_strength*mu_value
+            upper = record.avg_compressive_strength + record.avg_compressive_strength*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.compressive_nabl = 'pass'
+                break
+            else:
+                record.compressive_nabl = 'fail'
 
 
 
