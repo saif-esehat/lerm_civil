@@ -79,10 +79,10 @@
 								<span t-esc="r['sieve_size']"/>
 							</td>
 							<td colspan="2">
-								<span t-esc="r['wt_retained']"/>
+								<span t-esc="r['wt_retained']" />
 							</td>
 							<td colspan="2">
-								<span t-esc="r['percent_retained']"/>
+								<span t-esc="r['percent_retained']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
 								<span t-esc="r['cumulative_retained']"/>

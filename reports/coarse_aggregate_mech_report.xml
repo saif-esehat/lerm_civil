@@ -141,6 +141,13 @@
 					<div t-if="data.sieve_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
 							Sieve Analysis
+							<span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c2168fff-e47c-4155-99ff-9d7dc223e768')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+							</span>
 						</div>
 						<table>
 							<tr cols="12">
@@ -148,14 +155,17 @@
 								</td>
                                 <td colspan="2">Percentage of Passing (in %) observed				
 								</td>
-								<td colspan="2">Requirements as per
-								 <span>
+								<td colspan="2">
+								 <!-- <span>
 								 	<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','c2168fff-e47c-4155-99ff-9d7dc223e768')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
 											<span t-field="parameter.specification"/>
 										</t>
                                 	</t>
-								 </span>
+								 </span> -->
+								 <span>
+                                    <span t-esc="eln.material.specifications"/>
+                                </span>
 								</td>
 
                             </tr>
@@ -167,7 +177,7 @@
 									<span t-esc="r['sieve_size']"/>
 								</td>
 								<td colspan="2" >
-									<span t-esc="r['passing_percent']"/>
+									<span t-esc="r['passing_percent']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="2" t-if="k == 1">
 									<span>100%</span>
@@ -210,13 +220,13 @@
 										Test Result
 									</span>
 								</th>
-								 <th style="text-align: center; width: 15%;">
+								 <th style="text-align: center; width: 18%;">
                                 <span>
                                     <span t-esc="eln.material.specifications"/>
                                 </span>
                             </th>
                            
-							<th style="text-align: center; width: 15%;">
+							<th style="text-align: center; width: 25%;">
 							<span>
 								<span t-esc="eln.material.method_reference"/>
 								
@@ -249,7 +259,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3114db41-cfa7-49ad-9324-fcdbc9661038')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -258,12 +268,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3114db41-cfa7-49ad-9324-fcdbc9661038')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
 							<tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or data.specific_gravity_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -288,7 +300,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','22ee804f-41a3-4fd1-a301-a8d9180fba10')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -297,12 +309,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','22ee804f-41a3-4fd1-a301-a8d9180fba10')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
 							<tr t-if="data.loose_bulk_visible and (data.loose_bulk_density_nabl == 'pass' and nabl or data.loose_bulk_density_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -327,7 +341,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','65a41d1f-d557-438e-8fd1-2c619a334d02')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -336,12 +350,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','65a41d1f-d557-438e-8fd1-2c619a334d02')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
 							<tr  t-if="data.rodded_bulk_visible and (data.rodded_bulk_density_nabl == 'pass' and nabl or data.rodded_bulk_density_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -366,7 +382,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','357f579d-a310-4015-bc11-28a85c53ac83')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -375,12 +391,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','357f579d-a310-4015-bc11-28a85c53ac83')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
                             <tr t-if="data.impact_visible and (data.impact_value_nabl == 'pass' and nabl or data.impact_value_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -405,7 +423,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','2bd241bd-4bc3-4fe0-bea2-c1c15ff867a2')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -414,12 +432,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','2bd241bd-4bc3-4fe0-bea2-c1c15ff867a2')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
                             <tr t-if="data.crushing_visible and (data.average_crushing_value_nabl == 'pass' and nabl or data.average_crushing_value_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -444,7 +464,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ee2d3ead-3bf8-4ae5-8e5d-dfe983111f71')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -453,12 +473,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ee2d3ead-3bf8-4ae5-8e5d-dfe983111f71')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
                             <tr t-if="data.elongation_visible and (data.aggregate_combine_nabl == 'pass' and nabl or data.aggregate_combine_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -479,6 +501,15 @@
 										<span t-field="data.aggregate_elongation"  t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
+								<td style="text-align: center;border-bottom:none;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9effe915-e5a3-45a7-aaeb-10caababd667')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
 								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9effe915-e5a3-45a7-aaeb-10caababd667')]).parameter_table" t-as="parameter">
@@ -488,16 +519,9 @@
                                         </t>
 									</span>
 								</td>
-								<td style="text-align: center;">
-									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9effe915-e5a3-45a7-aaeb-10caababd667')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                            </t>
-                                        </t>
-									</span>
-								</td>
+								
 							</tr>
+
                             <tr t-if="data.flakiness_visible and (data.aggregate_combine_nabl == 'pass' and nabl or data.aggregate_combine_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -518,6 +542,15 @@
 										<span t-field="data.aggregate_flakiness"  t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
+								<td style="text-align: center;border-top:none;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','be7a60bc-bb2c-410d-b91a-4f8730a4ac6f')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
 								<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','be7a60bc-bb2c-410d-b91a-4f8730a4ac6f')]).parameter_table" t-as="parameter">
@@ -527,16 +560,9 @@
                                         </t>
 									</span>
 								</td>
-								<td style="text-align: center;">
-									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','be7a60bc-bb2c-410d-b91a-4f8730a4ac6f')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                            </t>
-                                        </t>
-									</span>
-								</td>
+								
 							</tr>
+
                             <tr t-if="data.abrasion_visible and (data.abrasion_value_percentage_nabl == 'pass' and nabl or data.abrasion_value_percentage_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -561,7 +587,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','37f2161e-5cc0-413f-b76c-10478c65baf9')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -570,12 +596,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','37f2161e-5cc0-413f-b76c-10478c65baf9')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
 							<tr t-if="data.fine10_visible and (data.load_10percent_fine_values_nabl == 'pass' and nabl or data.load_10percent_fine_values_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -600,7 +628,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5f506c08-4369-491d-93a6-030514c29661')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -609,12 +637,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5f506c08-4369-491d-93a6-030514c29661')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
 							<tr t-if="data.soundness_mgso4_visible and (data.soundness_mgso4_nabl == 'pass' and nabl or data.soundness_mgso4_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -639,7 +669,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','89650e58-11a6-42af-8eb7-187467443a79')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -648,12 +678,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','89650e58-11a6-42af-8eb7-187467443a79')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
                             <tr t-if="data.soundness_na2so4_visible and (data.soundness_na2so4_nabl == 'pass' and nabl or data.soundness_na2so4_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -678,7 +710,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','153f3c8b-6ccb-4db0-b89d-02db61f61e81')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -687,12 +719,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','153f3c8b-6ccb-4db0-b89d-02db61f61e81')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
                             <tr t-if="data.finer75_visible and (data.material_finer75_nabl == 'pass' and nabl or data.material_finer75_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -717,7 +751,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','988f5bf6-c865-453c-9cd6-993a5a59ad95')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -726,12 +760,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','988f5bf6-c865-453c-9cd6-993a5a59ad95')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
-							</tr>   
+								
+							</tr> 
+							  
                             <tr t-if="data.clay_lump_visible and (data.clay_lumps_percent_nabl == 'pass' and nabl or data.clay_lumps_percent_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -756,7 +792,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d7e389bc-21ad-41eb-a602-f448f996eb2f')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -765,12 +801,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d7e389bc-21ad-41eb-a602-f448f996eb2f')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>   
+
                             <tr t-if="data.light_weight_visible and (data.light_weight_percent_nabl == 'pass' and nabl or data.light_weight_percent_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -795,7 +833,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','e7cc6b68-2550-4e1e-a28e-8526295e733f')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -804,12 +842,14 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','e7cc6b68-2550-4e1e-a28e-8526295e733f')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>
+
 							<tr t-if="data.angularity_visible and (data.angularity_number_conformity_nabl == 'pass' and nabl or data.angularity_number_conformity_nabl == 'fail' and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -834,7 +874,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5c163fc2-c88c-4233-921e-1eae56c3ba23')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -843,11 +883,12 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5c163fc2-c88c-4233-921e-1eae56c3ba23')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>      
 
 							<tr t-if="data.aggregate_grading_visible">
@@ -874,7 +915,7 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6976f6b5-5756-4ef7-a680-50b0c0dbccc8')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
+                                                <span t-field="parameter.permissable_limit"/>
                                             </t>
                                         </t>
 									</span>
@@ -883,16 +924,17 @@
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6976f6b5-5756-4ef7-a680-50b0c0dbccc8')]).parameter_table" t-as="parameter">
                                             <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
+                                                <span t-field="parameter.specification"/>
                                             </t>
                                         </t>
 									</span>
 								</td>
+								
 							</tr>      
 						</tbody>
 					</table>
 					<div style="page-break-inside: avoid;">
-                        <div style="margin-top:20px" class="noteContainer">
+                        <div style="margin-top:10px" class="noteContainer">
                             <div>
                                 <b>Note :-</b>
                             </div>
@@ -917,7 +959,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+                        <div style="margin-top:10px; page-break-inside: avoid;" class="signatureContainer girdgird">
 
                             <div>
                                 <div>
