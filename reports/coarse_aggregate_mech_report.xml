@@ -160,7 +160,7 @@
 
                             </tr>
 							<t t-set="k" t-value="0"/>
-							<tr t-foreach="data.sieve_analysis_child_lines" t-as="r" t-if="'pan' not in r['sieve_size']">
+							<tr t-foreach="data.sieve_analysis_child_lines" t-as="r" t-if="'pan' != r['sieve_size']">
 								
 								<td colspan="2" >
 									<t t-set="k" t-value="k+1"/>
