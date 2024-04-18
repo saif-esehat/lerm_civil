@@ -133,14 +133,10 @@
 							
 						</table>
 					</div>
-					 <div style="margin-top:10px;">
-
-                        <span t-esc="eln.material.test_parameter"/>
-
-                    </div>
+					 
 					<div t-if="data.sieve_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
-							Sieve Analysis
+							Sieve Analysis: <span t-esc="eln.material.test_parameter"/>
 						</div>
 						<table>
 							<tr cols="12">

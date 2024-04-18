@@ -120,7 +120,7 @@ class GsbMechanical(models.Model):
     dry_gradation_visible = fields.Boolean(compute="_compute_visible")
 
     dry_gradation_table = fields.One2many('mech.gsb.dry.gradation.line','parent_id',string="Dry Gradation")
-    total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
+    total_sieve_analysis = fields.Float(string="Total",compute="_compute_total_sieve")
     
 
 
@@ -1103,8 +1103,8 @@ class GsbDryGradationLine(models.Model):
 
         res = super(GsbDryGradationLine, self).unlink()
 
-        if parent_id:
-            parent_id.sieve_analysis_child_lines._reorder_serial_numbers()
+        # if parent_id:
+        #     parent_id.sieve_analysis_child_lines._reorder_serial_numbers()
 
         return res
 
