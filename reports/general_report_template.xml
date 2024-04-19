@@ -3,8 +3,12 @@
     <template id="custom_layout_header_footer_lerm_eln_general">
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
-				<div class="col-12 imageContainer" >
+				<div t-if="nabl" class="col-12 imageContainer" >
 					<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
+				</div>
+				
+				<div t-if="not nabl" class="col-12 imageContainer" >
+					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
 				</div>
 				
 			</div>

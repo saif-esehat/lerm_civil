@@ -364,13 +364,13 @@
 									<span t-esc="r['weight_after_test']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['grading_original_sample']"/>
+									<span t-esc="r['grading_original_sample']" t-options='{"widget": "float", "precision": 2}'/>
 								</td> 
                                 <td colspan="1">
-									<span t-esc="r['passing_percent']"/>
+									<span t-esc="r['passing_percent']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
                                 <td colspan="1">
-									<span t-esc="r['cumulative_loss_percent']"/>
+									<span t-esc="r['cumulative_loss_percent']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>   
 							</tr>
 						</table>
@@ -446,13 +446,13 @@
 									<span t-esc="r['weight_after_test']"/>
 								</td>
                                 <td colspan="2">
-									<span t-esc="r['grading_original_sample']"/>
+									<span t-esc="r['grading_original_sample']" t-options='{"widget": "float", "precision": 2}'/>
 								</td> 
                                 <td colspan="1">
-									<span t-esc="r['passing_percent']"/>
+									<span t-esc="r['passing_percent']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
                                 <td colspan="1">
-									<span t-esc="r['cumulative_loss_percent']"/>
+									<span t-esc="r['cumulative_loss_percent']" t-options='{"widget": "float", "precision": 2}'/>
 								</td> 
 							</tr>  
 						</table>
@@ -993,7 +993,7 @@
 									<span t-esc="r['wt_retained']"/>
 								</td>
 								<td colspan="2">
-									<span t-esc="r['percent_retained']"/>
+									<span t-esc="r['percent_retained']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
                                 <td colspan="2">
 									<span t-esc="r['cumulative_retained']"/>
@@ -1123,16 +1123,16 @@
 						</table>
 					</div>
 
-					<div class="authorizeRowDataSheet">
+					<!-- <div class="authorizeRowDataSheet">
 						<div>
 							<div>
 								<b>
-									(JR Chemist)
+									Filled By
 								</b>
 							</div>
 							<div>
 								<b>
-									Tested By
+									(<span t-esc="eln.sample_id.filled_by.job_title"/>)
 								</b>
 							</div>
 						</div>
@@ -1148,7 +1148,54 @@
 								</b>
 							</div>
 						</div>
-					</div>
+					</div> -->
+					<div class="signatureContainer girdgird">
+							<div>
+								<div>
+									<b>
+										Tested By
+									</b>
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.sample_id.filled_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(Authorized Signatory)
+									</b>
+								</div>
+							</div>
+							
+							<div>
+								<div>
+									<b>
+										Checked By 
+									</b>
+									
+								</div>
+								<div style="height:20px">
+
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.check_by.name"/>
+									</b>
+								</div>
+								
+								<div>
+									<b>
+										(<span t-esc="eln.sample_id.check_by.job_title"/>)
+									</b>
+								</div>
+
+								
+							</div>
+						</div>
 				</div>
 			</t>
 		</t>

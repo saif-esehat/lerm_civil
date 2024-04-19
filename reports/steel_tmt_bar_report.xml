@@ -12,7 +12,7 @@
 						
 						<table >
 							<tr>
-								<td colspan="12">Customer Party Name :
+								<td style="font-size:12px;width:100%" >Customer Party Name :
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.customer.name"/>
 									
@@ -25,7 +25,10 @@
 									<span t-field="o.srf_id.customer.country_id"/>
 								</td>
 								
-								<td colspan="6">Project / Site Address : 																		<![CDATA[&nbsp;]]>
+								
+							</tr>
+							<tr>
+							<td style="font-size:12px;width:100%" >Project / Site Address : 																		<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.name_work"/>
 								</td>
 							</tr>
@@ -35,67 +38,65 @@
 						</table>
 						<table>
 							<tr>
-								<td colspan="6">Test Start Date :																		<![CDATA[&nbsp;]]>
+								<td style="font-size:12px;width:30%;" colspan="3">Test Start Date :																		<![CDATA[&nbsp;]]>
 									<span t-field="o.start_date"/>
 								</td>
-								<td colspan="6">Test End Date :																		<![CDATA[&nbsp;]]>
+								<td style="font-size:12px;width:30%;" colspan="3">Test End Date :																		<![CDATA[&nbsp;]]>
 									<span t-field="o.end_date"/>
 								</td>
-								<td colspan="6">Sample Receipt Date :																		<![CDATA[&nbsp;]]>
+								<td style="font-size:12px;width:40%;" colspan="4">Sample Receipt Date :																		<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_received_date"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Sample Id Mark: 																		<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.client_sample_id"/>
+								<td style="font-size:12px;width:30%;" colspan="3">Grade :
+																											<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.grade_id.grade"/>
 								</td>
-								<td colspan="6">Size :
+								<td style="font-size:12px;width:30%;" colspan="3">Size :
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.size_id.size"/>
 								</td>
-								<td colspan="6">Grade :
-																											<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.grade_id.grade"/>
+								<td style="font-size:12px;width:40%;" colspan="4">Sample Id Mark: 																		<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.client_sample_id"/>
 								</td>
 								
 							</tr>
 							
 							
 							<tr>
-								<td colspan="6">Consultant :
+								<td style="font-size:12px;width:30%;" colspan="3">Consultant :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.consultant_name1"/>
 								</td>
-								<td colspan="6">Client :
+								<td style="font-size:12px;width:30%4" colspan="3">Client :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.client"/>
 								</td>
-								<td colspan="6">Client Ref :
+								<td style="font-size:12px;width:40%;" colspan="4">Client Ref :
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.client_refrence"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Discipline :
-																											<![CDATA[&nbsp;]]>
+								<td style="font-size:12px;" colspan="3">Brand :
+									<span t-field="o.sample_id.brand"/>
+								</td>
+								<td style="font-size:12px;" colspan="3">Discipline :
 									<span t-field="o.discipline.discipline"/>
 								</td>
-								<td colspan="6">Group :
-																											<![CDATA[&nbsp;]]>
+								
+								<td style="font-size:12px;" colspan="3">Group :
 									<span t-field="o.group.group"/>
-								</td>
-								<td colspan="6">Brand :
-																											<![CDATA[&nbsp;]]>
-									<span t-field="o.sample_id.brand"/>
 								</td>
 							</tr>
 
 							<tr>
-								<td colspan="12">Material/Test Name :
+								<td style="font-size:12px;width:50%;" colspan="6">Material/Test Name :
 																											<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
-								<td colspan="6">Sample Description : 																		<![CDATA[&nbsp;]]>
+								<td style="font-size:12px;width:50%;" colspan="6">Sample Description : 																		<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
 							
@@ -104,16 +105,16 @@
 					</div>
 				
 			 <div style="padding-top:2px">
-				<span t-esc="o.material.test_parameter "/> 
+				<span style="font-size:12px;" t-esc="o.material.test_parameter "/> 
 
 				
 					<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','7da4cce7-4027-4d73-955e-ca7f7a2a2228')])" t-as="parameter">
-						<span t-esc="parameter.test_method.test_method"/>
+						<span style="font-size:12px;" t-esc="parameter.test_method.test_method"/>
 					</t>
 
 			  <t t-if="data.bend_visible">
 				<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','addd0c61-adb6-447d-b668-1fba0744680f')])" t-as="parameter">
-					<span t-esc="parameter.test_method.test_method"/>
+					<span style="font-size:12px;" t-esc="parameter.test_method.test_method"/>
 				</t>
 				</t>
 			
@@ -121,7 +122,7 @@
 				
                  <t t-if="data.rebend_visible ">
 				<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','f781bfd8-550b-45f4-81ac-43f856d147b8')])" t-as="parameter">
-					<span t-esc="parameter.test_method.test_method"/>
+					<span style="font-size:12px;" t-esc="parameter.test_method.test_method"/>
 				</t>
 				</t>
 		      
@@ -134,30 +135,30 @@
 						<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
-								<th style="text-align: center;">
+								<th style="text-align: center;font-size:12px;">
 									<span>
 										Sr. No
 									</span>
 								</th>
-								<th style="text-align: center;">
+								<th style="text-align: center;font-size:12px;">
 									<span>
 										Parameter
 									</span>
 								</th>
-								<th style="text-align: center;">
+								<th style="text-align: center;font-size:12px;">
 									<span>
 										Unit
 									</span>
 								</th>
 
-								<th style="text-align: center;">
+								<th style="text-align: center;font-size:12px;">
 									<span>
 										Observation-1
 									</span>
 								</th>
-								<th style="max-width: 250px; text-align: center;">
+								<th style="max-width: 250px; text-align: center;font-size:12px;">
 									<span>
-										<span t-esc="eln.material.specifications"/>
+										<span style="font-size:12px;" t-esc="eln.material.specifications"/>
 									</span>
 								</th>
 								<!-- <th style="max-width: 200px; text-align: center;">
@@ -168,15 +169,15 @@
 							    </th> -->
 
 								<th t-if="eln.conformity" style="text-align: center;">
-									<span>
+									<span style="font-size:12px;">
 										Confirmity Status
 									</span>
 								</th>
 							</tr>
 						</thead>
 						
-						<tbody>
-							<tr t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
+						<tbody >
+							<tr style="font-size:12px;"  t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -216,7 +217,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
+							<tr style="font-size:12px;" t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -255,7 +256,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
+							<tr style="font-size:12px;" t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -294,7 +295,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
+							<tr style="font-size:12px;" t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -333,7 +334,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
+							<tr style="font-size:12px;" t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -372,7 +373,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
+							<tr style="font-size:12px;" t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -412,7 +413,7 @@
 							</tr>
 
 
-							<tr t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
+							<tr style="font-size:12px;" t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -452,7 +453,7 @@
 							</tr>
 
 
-							<tr t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
+							<tr style="font-size:12px;" t-if="data.yield_visible or data.uts_visible or data.elongation_visible or data.weight_per_meter_visible or data.ts_ys_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -492,7 +493,7 @@
 							</tr>
 
 
-							<tr t-if="(data.yield_nabl == 'pass' and nabl or data.yield_nabl == 'fail' and not nabl) and data.yield_visible">
+							<tr style="font-size:12px;" t-if="(data.yield_nabl == 'pass' and nabl or data.yield_nabl == 'fail' and not nabl) and data.yield_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -529,7 +530,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="(data.uts_nabl == 'pass' and nabl or data.uts_nabl == 'fail' and not nabl) and data.uts_visible">
+							<tr style="font-size:12px;" t-if="(data.uts_nabl == 'pass' and nabl or data.uts_nabl == 'fail' and not nabl) and data.uts_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -568,7 +569,7 @@
 
 
 
-							<tr t-if="(data.ts_ys_nabl == 'pass' and nabl or data.ts_ys_nabl == 'fail' and not nabl) and data.ts_ys_visible">
+							<tr style="font-size:12px;" t-if="(data.ts_ys_nabl == 'pass' and nabl or data.ts_ys_nabl == 'fail' and not nabl) and data.ts_ys_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -606,7 +607,7 @@
 							</tr>
 
 
-							<tr t-if="(data.elongation_nabl == 'pass' and nabl or data.elongation_nabl == 'fail' and not nabl) and data.elongation_visible">
+							<tr style="font-size:12px;" t-if="(data.elongation_nabl == 'pass' and nabl or data.elongation_nabl == 'fail' and not nabl) and data.elongation_visible">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -647,7 +648,7 @@
 
 							
 							<!-- <t t-if="i &lt;= 8"> -->
-								<tr t-if="(data.weight_per_meter_nabl == 'pass' and nabl or data.weight_per_meter_nabl == 'fail' and not nabl) and data.weight_per_meter_visible">
+								<tr style="font-size:12px;" t-if="(data.weight_per_meter_nabl == 'pass' and nabl or data.weight_per_meter_nabl == 'fail' and not nabl) and data.weight_per_meter_visible">
 									<td style="text-align: center;">
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
@@ -685,7 +686,7 @@
 								</tr>
 
 							
-								<tr t-if="data.rebend_visible">
+								<tr style="font-size:12px;" t-if="data.rebend_visible">
 									<td style="text-align: center;">
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
@@ -722,7 +723,7 @@
 									</td>
 								</tr>
 
-								<tr t-if="data.bend_visible">
+								<tr style="font-size:12px;" t-if="data.bend_visible">
 									<td style="text-align: center;">
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
@@ -759,7 +760,7 @@
 									</td>
 								</tr>
 
-								<tr t-if="data.fracture_visible">
+								<tr style="font-size:12px;" t-if="data.fracture_visible">
 									<td style="text-align: center;">
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
@@ -1003,10 +1004,10 @@
 									Checked By
 									</b>
 								</div>
-								<div style="height: 20px;">
+								<div style="height: 30px;">
 									<t t-if="eln.sample_id.checkby_signature_required">
 										<div t-if="eln.sample_id.check_by.employee_id.signature">
-											<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
+											<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 30px;margin-top:1px; z-index: -10;"/>
 										</div>
 										
 									</t>
@@ -1024,7 +1025,7 @@
 							</div>
 							<div>
 								<div>
-									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image" style="width:65px;height:65px;"/>
 								</div>
 								<div style="padding-top:2px">
 								Format No. <span t-esc="eln.material.test_format_no"/>
@@ -1037,10 +1038,10 @@
 									</b>
 
 								</div>
-								<div style="height: 20px;">
+								<div style="height: 30px;">
 									<t t-if="eln.sample_id.approveby_signature_required">
 										<div t-if="eln.sample_id.approved_by.employee_id.signature">
-											<img t-att-src="'data:image/png;base64,' + eln.sample_id.approved_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
+											<img t-att-src="'data:image/png;base64,' + eln.sample_id.approved_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 30px;margin-top:1px;margin-bottom:1px; z-index: -10;"/>
 										</div>
 										
 									</t>

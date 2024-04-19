@@ -252,14 +252,22 @@ class ProductProduct(models.Model):
             'target': 'new',
             'context': {'default_product_id': self.id},
         }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 93d4169472a6cba38b5831c85aa7be5da92d4bc7
 
 class AccountMoveLineInherited(models.Model):
     _inherit = 'account.move.line'
     report_no = fields.Char(string="Report No")
     pricelist_id = fields.Many2one("product.pricelist",string="Pricelist",compute='_compute_pricelist')
     product_id = fields.Many2one('product.product', string='Product', ondelete='restrict')
+<<<<<<< HEAD
     report_no1 = fields.Many2many("lerm.srf.sample", string="KES No.",domain="[('state', '=', '4-in_report'),('srf_id.customer', '=', partner_id)]")
+=======
+    report_no1 = fields.Many2many("lerm.srf.sample", string="KES No.",domain="[('state', '=', '4-in_report'),('srf_id.customer', '=', partner_id),('invoice_status', '!=', '2-invoiced')]")
+>>>>>>> 93d4169472a6cba38b5831c85aa7be5da92d4bc7
 
    
 
@@ -281,7 +289,11 @@ class AccountMoveLineInherited(models.Model):
     @api.depends("move_id.pricelist_id")
     def _compute_pricelist(self):
         # import wdb; wdb.set_trace();
+<<<<<<< HEAD
         self.pricelist_id = self.move_id.pricelist_id.id
 
 
     
+=======
+        self.pricelist_id = self.move_id.pricelist_id.id 
+>>>>>>> 93d4169472a6cba38b5831c85aa7be5da92d4bc7
