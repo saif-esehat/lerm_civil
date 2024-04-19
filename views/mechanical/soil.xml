@@ -412,38 +412,38 @@
                   
                     
                                  <group style="white-space: nowrap;">
-                                         <field name='mmd'/>
-                                        <field name='determination_no'/>
-                                       
-                                        <field name='wt_of_sample'/>
-                                       
-                                        <field name='water_of_sample'/>
-                                       
-                                        <field name='wt_of_before_cylinder'/>
-                                        
-                                        <field name='wt_of_after_cylinder'/>
-                                        
-                                        <field name='wt_of_sand_cone'/>
+                                         <field name='mmd_drydencity'/>
                                 </group>
                                 <group style="white-space: nowrap;">
-                                        <field name='omc'/>
-                                        <field name='wt_of_sand_hole'/>
+                                        <field name='omc_drydencity'/>
                                         
-                                        <field name='density_of_sand'/>
-                                        
-                                        <field name='volume_of_hole'/>
-                                       
-                                        <field name='bulk_density_of_sample'/>
-                                        
-                                        <field name='dry_density_of_sample'/>
-                                        
-                                        <field name='degree_of_compaction'/>
                                 </group>
+
+                                  <field name="dry_density_table">
+                                      <tree editable="bottom">
+                                        <field name='determination_no'/>
+                                        <field name='wt_of_sample'/>
+                                        <field name='water_of_sample'/>
+                                        <field name='wt_of_before_cylinder'/>
+                                        <field name='wt_of_after_cylinder'/>
+                                        <field name='wt_of_sand_cone'/>
+                                        <field name='wt_of_sand_hole'/>
+                                        <field name='density_of_sand'/>
+                                        <field name='volume_of_hole'/>
+                                        <field name='bulk_density_of_sample'/>
+                                         <field name='dry_density_of_sample'/>
+                                          <field name='degree_of_compaction'/>
+
+
+                                        <!-- <field name="wt_retained"/> -->
+                                      </tree>
+                                  </field>
 
                                
                      
                     </group>
                     <group attrs="{'invisible': [('dry_density_visible', '=', False)]}">
+                      <field name="avg_degree_of_compaction"/>
                       <field name='degree_of_compaction_conformity' col="4"
                               decoration-success="degree_of_compaction_conformity == 'pass'" 
                               decoration-danger="degree_of_compaction_conformity == 'fail'" 

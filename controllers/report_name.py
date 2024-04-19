@@ -41,6 +41,8 @@ from odoo.exceptions import AccessError, UserError, AccessDenied
 from odoo.models import check_method_name
 from odoo.service import db, security  
 from odoo.addons.web.controllers.main import ReportController 
+from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.http import request
 
 class MyReportName(ReportController):
     @http.route(['/report/download'], type='http', auth="user")
@@ -146,3 +148,4 @@ class MyReportName(ReportController):
                 headers=[("Content-Type", "application/json")]
             )
             raise werkzeug.exceptions.InternalServerError(response=res) from e
+

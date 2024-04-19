@@ -125,7 +125,7 @@ class SrfForm(models.Model):
     customer = fields.Many2one('res.partner',string="Customer",tracking=True)
     billing_customer = fields.Many2one('res.partner',string="Billing Customer")
     contact_person = fields.Many2one('res.partner',string="Contact Person")
-    client = fields.Char("Client")
+    client = fields.Char("Client",compute="_compute_name_client1")
     # site_address = fields.Many2one('res.partner',string="Site Address")
     site_address = fields.Char(string="Site Address",compute="_compute_site_address")
     name_work = fields.Many2one('res.partner.project',string="Name of Work")
@@ -250,6 +250,23 @@ class SrfForm(models.Model):
                 record.consultant_name1 = record.name_work.consultant_name
             else:
                 record.consultant_name1 = False
+
+
+
+    @api.onchange('name_work')
+    def _onchange_name_client(self):
+        # Set the value of consultant_name1 based on the selected name_work
+        if self.name_work:
+            self.client = self.name_work.client_name
+
+    @api.depends('name_work')
+    def _compute_name_client1(self):
+        # Update client when name_work changes
+        for record in self:
+            if record.name_work:
+                record.client = record.name_work.client_name
+            else:
+                record.client = False
 
     @api.model
     def create(self, vals):

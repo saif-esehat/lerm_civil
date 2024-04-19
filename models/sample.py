@@ -137,18 +137,29 @@ class LermSampleForm(models.Model):
     approveby_signature_required = fields.Boolean("Approved by Signature")
     page_break = fields.Integer("Page break",default=6)
 
+
+
+    invoice_number = fields.Many2one(
+        'account.move',  
+        string="Invoice Number",  
+        help="Select the invoice number",  
+        domain="[('move_type', '=', 'out_invoice')]",  
+       
+        store=True
+    )
+
     invoice_status = fields.Selection([
         ('1-uninvoiced', 'Uninvoiced'),
         ('2-invoiced', 'Invoiced'),
         ('3-closed', 'Closed'),
-    ], string='Invoice Status', default='1-uninvoiced')
+    ], string='Invoice Status',  store=True, default='1-uninvoiced')
 
-    invoice_number = fields.Many2one(
-        'account.move',  # Related model name for invoices
-        string="Invoice Number",  # Label for the field
-        help="Select the invoice number",  # Optional help string for the field
-        domain="[('move_type', '=', 'out_invoice')]"  # Optional domain filter for invoices
-    )
+   
+
+   
+
+
+   
 
     # file_upload = fields.Binary(string="Datasheet Upload")
     # report_upload = fields.Binary(string="Report Upload")

@@ -69,6 +69,7 @@ from .mechanical import aggregate_fine
 from .mechanical import brick_2
 from .mechanical import concrete_cube2
 from .mechanical import soild_concrete_block
+from .mechanical import concrete_cube_water_absorption
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
@@ -132,4 +133,5 @@ from .report import structural_steel_round_ds_report
 from .report import act_compressive_strength_ds_report
 from .mechanical import drying_shrinkage
 from .report import drying_shrinkage_ds_report
+from .report import concrete_cube_water_ds_report
 # from .import dash_bord
