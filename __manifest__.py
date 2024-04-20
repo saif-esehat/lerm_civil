@@ -4,7 +4,7 @@
  'website': "http://www.esehat.org", 
  'category': 'Uncategorized', 
  'version': '13.0.1', 
- 'depends':['base' , 'contacts','stock','product' , 'mail','documents','documents_spreadsheet','lerm_civil_inv','attachment_indexation','maintenance'],
+ 'depends':['base' , 'contacts','stock','product' , 'mail','documents','documents_spreadsheet','lerm_civil_inv','attachment_indexation','maintenance','portal'],
  'data': [
     'security/security.xml',
     'data/sequence.xml',
@@ -214,6 +214,10 @@
     'views/mechanical/drying_shrinkage.xml',
     'reports/drying_shrinkage/drying_datasheet.xml',
     'reports/drying_shrinkage/drying_report.xml',
+    'views/mechanical/concrete_cube_water_absorption.xml',
+    'reports/concrete_cube_water_absorption/concrete_datasheet.xml',
+    'reports/concrete_cube_water_absorption/concrete_report.xml',
+    # 'views/portal_template.xml'
     
 
 

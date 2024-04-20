@@ -778,27 +778,33 @@ class Soil(models.Model):
     # start_date_dry_density = fields.Date("Start Date")
     # end_date_dry_density = fields.Date("End Date")
 
+    dry_density_table = fields.One2many('mechanical.dry.dencity.line','parent_id',string="Parameter")
+    mmd_drydencity = fields.Float(string="MMD gm/cc", store=True)
+    omc_drydencity = fields.Float(string="OMC %", store=True)
+    avg_degree_of_compaction = fields.Float(string="Degree of Compaction in %",compute="_compute_avg_degree_of_compaction")
+
+    @api.depends('dry_density_table.degree_of_compaction')
+    def _compute_avg_degree_of_compaction(self):
+        for record in self:
+            degree_of_compaction_values = record.dry_density_table.mapped('degree_of_compaction')
+            if degree_of_compaction_values:
+                avg_degree_of_compaction = sum(degree_of_compaction_values) / len(degree_of_compaction_values)
+                record.avg_degree_of_compaction = avg_degree_of_compaction
+            else:
+                record.avg_degree_of_compaction = 0.0
+
+    
+
 
    
 
-    determination_no = fields.Integer(string="Determination No")
-    wt_of_sample = fields.Integer(string="Weight of sample gm")
-    water_of_sample = fields.Integer(string="Water content of sample RMM")
-    wt_of_before_cylinder = fields.Integer(string="Weight of sand + Cylinder before pouring gm")
-    wt_of_after_cylinder = fields.Integer(string="Weight of sand + Cylinder after pouring gm")
-    wt_of_sand_cone = fields.Integer(string="Weight of sand in cone gm")
-    wt_of_sand_hole = fields.Integer(string="Weight of sand in hole gm", compute="_compute_sand_hole")
-    density_of_sand = fields.Float(string="Density of sand gm/cc")
-    volume_of_hole = fields.Float(string="Volume of hole cc",compute="_compute_volume_of_hole")
-    bulk_density_of_sample = fields.Float(string="Bulk Density of sample gm/cc",compute="_compute_bulk_density")
-    dry_density_of_sample = fields.Float(string="Dry Density of sample",compute="_compute_dry_density")
-    degree_of_compaction = fields.Float(string="Degree of Compaction %",compute="_compute_degree_of_compaction")
+   
 
     degree_of_compaction_conformity = fields.Selection([
             ('pass', 'Pass'),
             ('fail', 'Fail')], string="Conformity", compute="_compute_degree_of_compaction_conformity", store=True)
 
-    @api.depends('degree_of_compaction','eln_ref','grade')
+    @api.depends('avg_degree_of_compaction','eln_ref','grade')
     def _compute_degree_of_compaction_conformity(self):
         
         for record in self:
@@ -811,8 +817,8 @@ class Soil(models.Model):
                     req_max = material.req_max
                     mu_value = line.mu_value
                     
-                    lower = record.degree_of_compaction - record.degree_of_compaction*mu_value
-                    upper = record.degree_of_compaction + record.degree_of_compaction*mu_value
+                    lower = record.avg_degree_of_compaction - record.avg_degree_of_compaction*mu_value
+                    upper = record.avg_degree_of_compaction + record.avg_degree_of_compaction*mu_value
                     if lower >= req_min and upper <= req_max:
                         record.degree_of_compaction_conformity = 'pass'
                         break
@@ -823,7 +829,7 @@ class Soil(models.Model):
         ('pass', 'Pass'),
         ('fail', 'Fail')], string="NABL", compute="_compute_degree_of_compaction_nabl", store=True)
 
-    @api.depends('degree_of_compaction','eln_ref','grade')
+    @api.depends('avg_degree_of_compaction','eln_ref','grade')
     def _compute_degree_of_compaction_nabl(self):
         
         for record in self:
@@ -836,8 +842,8 @@ class Soil(models.Model):
                     lab_max = line.lab_max_value
                     mu_value = line.mu_value
                     
-                    lower = record.degree_of_compaction - record.degree_of_compaction*mu_value
-                    upper = record.degree_of_compaction + record.degree_of_compaction*mu_value
+                    lower = record.avg_degree_of_compaction - record.avg_degree_of_compaction*mu_value
+                    upper = record.avg_degree_of_compaction + record.avg_degree_of_compaction*mu_value
                     if lower >= lab_min and upper <= lab_max:
                         record.degree_of_compaction_nabl = 'pass'
                         break
@@ -846,46 +852,7 @@ class Soil(models.Model):
 
 
 
-    @api.depends('wt_of_before_cylinder','wt_of_after_cylinder','wt_of_sand_cone')
-    def _compute_sand_hole(self):
-        for record in self:
-            record.wt_of_sand_hole = record.wt_of_before_cylinder - record.wt_of_after_cylinder - record.wt_of_sand_cone
-
-
-    @api.depends('wt_of_sand_hole', 'density_of_sand')
-    def _compute_volume_of_hole(self):
-        for record in self:
-            if record.density_of_sand != 0:
-                record.volume_of_hole = record.wt_of_sand_hole / record.density_of_sand
-            else:
-                record.volume_of_hole = 0.0
-
- 
-
-
-    @api.depends('wt_of_sample', 'volume_of_hole')
-    def _compute_bulk_density(self):
-        for record in self:
-            if record.volume_of_hole != 0:  # Avoid division by zero
-                record.bulk_density_of_sample = record.wt_of_sample / record.volume_of_hole
-            else:
-                record.bulk_density_of_sample = 0.0
-
-    @api.depends('bulk_density_of_sample', 'water_of_sample')
-    def _compute_dry_density(self):
-        for record in self:
-            if record.water_of_sample + 100 != 0:  # Avoid division by zero
-                record.dry_density_of_sample = (100 * record.bulk_density_of_sample) / (record.water_of_sample + 100)
-            else:
-                record.dry_density_of_sample = 0.0
-
-    @api.depends('dry_density_of_sample', 'mmd')
-    def _compute_degree_of_compaction(self):
-        for record in self:
-            if record.mmd != 0:
-                record.degree_of_compaction = (record.dry_density_of_sample / record.mmd) * 100
-            else:
-                record.degree_of_compaction = 0.0
+  
 
     
    
@@ -1445,6 +1412,86 @@ class MoistureContentLine(models.Model):
         records = self.sorted('id')
         for index, record in enumerate(records):
             record.sr_no = index + 1
+
+
+class DryDencityLine(models.Model):
+    _name = "mechanical.dry.dencity.line"
+    parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
+   
+    determination_no = fields.Integer(string="Determination No",readonly=True, copy=False, default=1)
+    wt_of_sample = fields.Integer(string="Weight of sample gm")
+    water_of_sample = fields.Integer(string="Water content of sample RMM")
+    wt_of_before_cylinder = fields.Integer(string="Weight of sand + Cylinder before pouring gm")
+    wt_of_after_cylinder = fields.Integer(string="Weight of sand + Cylinder after pouring gm")
+    wt_of_sand_cone = fields.Integer(string="Weight of sand in cone gm")
+    wt_of_sand_hole = fields.Integer(string="Weight of sand in hole gm", compute="_compute_sand_hole")
+    density_of_sand = fields.Float(string="Density of sand gm/cc")
+    volume_of_hole = fields.Float(string="Volume of hole cc",compute="_compute_volume_of_hole")
+    bulk_density_of_sample = fields.Float(string="Bulk Density of sample gm/cc",compute="_compute_bulk_density")
+    dry_density_of_sample = fields.Float(string="Dry Density of sample",compute="_compute_dry_density")
+    degree_of_compaction = fields.Float(string="Degree of Compaction %",compute="_compute_degree_of_compaction")
+
+    
+
+
+    @api.depends('wt_of_before_cylinder','wt_of_after_cylinder','wt_of_sand_cone')
+    def _compute_sand_hole(self):
+        for record in self:
+            record.wt_of_sand_hole = record.wt_of_before_cylinder - record.wt_of_after_cylinder - record.wt_of_sand_cone
+
+
+    @api.depends('wt_of_sand_hole', 'density_of_sand')
+    def _compute_volume_of_hole(self):
+        for record in self:
+            if record.density_of_sand != 0:
+                record.volume_of_hole = record.wt_of_sand_hole / record.density_of_sand
+            else:
+                record.volume_of_hole = 0.0
+
+ 
+
+
+    @api.depends('wt_of_sample', 'volume_of_hole')
+    def _compute_bulk_density(self):
+        for record in self:
+            if record.volume_of_hole != 0:  # Avoid division by zero
+                record.bulk_density_of_sample = record.wt_of_sample / record.volume_of_hole
+            else:
+                record.bulk_density_of_sample = 0.0
+
+    @api.depends('bulk_density_of_sample', 'water_of_sample')
+    def _compute_dry_density(self):
+        for record in self:
+            if record.water_of_sample + 100 != 0:  # Avoid division by zero
+                record.dry_density_of_sample = (100 * record.bulk_density_of_sample) / (record.water_of_sample + 100)
+            else:
+                record.dry_density_of_sample = 0.0
+
+    @api.depends('dry_density_of_sample', 'parent_id.mmd_drydencity')
+    def _compute_degree_of_compaction(self):
+        for record in self:
+            if record.parent_id.mmd_drydencity != 0:  # Access mmd_drydencity from parent_id
+                record.degree_of_compaction = (record.dry_density_of_sample / record.parent_id.mmd_drydencity) * 100
+            else:
+                record.degree_of_compaction = 0.0
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('determination_no'))
+                vals['determination_no'] = max_serial_no + 1
+
+        return super(DryDencityLine, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.determination_no = index + 1
 
 
 

@@ -929,7 +929,7 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										<span t-field="data.degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="data.avg_degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -974,7 +974,7 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										<span t-field="data.degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="data.avg_degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -1728,7 +1728,7 @@
 								</tr>
 							</table>
 						</div>
-						<table style="margin-top:30px;">
+						<table style="margin-top:30px;" t-if="data.heavy_visible">
 							<thead>
 								<tr>
 									<th>
@@ -2269,78 +2269,132 @@
 							</div>
 							
 						<table style="margin-top:30px;">
-						      <!-- <div>
-								<tr cols="12">
-									<td colspan="4">MMD gm/cc :
-									</td>
-									<td>
-										<![CDATA[&nbsp;]]>
-										<span t-field="data.mmd"/>
-									</td>
-								</tr>
+							<thead>
 								<tr>
-									<td colspan="4">OMC gm/cc :
+									<th>
+										<span>
+											Determination No
+										</span>
+									</th>
+									<th>
+										<span>
+											"Weight of sample gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Water content of sample RMM
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of sand + Cylinder before pouring gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of sand + Cylinder after pouring gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of sand in cone gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of sand in hole gm
+										</span>
+									</th>
+									<th>
+										<span>
+											Density of sand gm/cc
+										</span>
+									</th>
+									<th>
+										<span>
+											Volume of hole cc
+										</span>
+									</th>
+									<th>
+										<span>
+											DBulk Density of sample gm/cc
+										</span>
+									</th>
+									<th>
+										<span>
+											Dry Density of sample
+										</span>
+									</th>
+									<th>
+										<span>
+											Degree of Compaction %
+										</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- <t t-set="n" t-value="0"/> -->
+								<tr t-foreach="data.dry_density_table" t-as="r">
+									<!-- <td>
+										<div>
+											<span t-esc="n + 1" />
+											<t t-set="n" t-value="n+1"/>
+										</div>
+									</td> -->
+									<td>
+										<span t-esc="r.determination_no"/>
 									</td>
 									<td>
+										<span t-esc="r.wt_of_sample" />
+									</td>
+									<td>
+										<span t-esc="r.water_of_sample" />
+									</td>
+									<td>
+										<span t-esc="r.wt_of_before_cylinder" />
+									</td>
+									<td>
+										<span t-esc="r.wt_of_after_cylinder"  />
+									</td>
+									<td>
+										<span t-esc="r.wt_of_sand_cone"  />
+									</td>
+									<td>
+										<span t-esc="r.wt_of_sand_hole"  />
+									</td>
+
+
+									<td>
+										<span t-esc="r.density_of_sand"  />
+									</td>
+									<td>
+										<span t-esc="r.volume_of_hole"  t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.bulk_density_of_sample" t-options='{"widget": "float", "precision": 2}' />
+									</td>
+									<td>
+										<span t-esc="r.dry_density_of_sample"  t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.degree_of_compaction" t-options='{"widget": "float", "precision": 2}'  />
+									</td>
+									
+								</tr>
+							</tbody>
+						</table>
+					</div>
+						<div style="margin-top:20px" t-if="data.dry_density_visible">
+							<table>
+								<tr cols="12">
+									<td colspan="12">Average degree of compaction :
 										<![CDATA[&nbsp;]]>
-										<span t-field="data.omc"/>
+										<span t-field="data.avg_degree_of_compaction"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
 								</tr>
-							  </div> -->
-								
-					      	
-							
-							<tr>
-								<td style="font-weight: bold;">Determination No :</td>
-								<td style="text-align: center;"><span t-field="data.determination_no" /></td>
-								
-							</tr>
-							<tr>
-								<td style="font-weight: bold;">Water content of sample RMM</td>
-								<td style="text-align: center;"><span t-field="data.water_of_sample" /></td>
-							</tr>
-							<tr>
-								<td style="font-weight: bold;">Weight of sand + Cylinder before pouring gm</td>
-								<td style="text-align: center;"><span t-field="data.wt_of_before_cylinder"/></td>
-							</tr>
-							<tr>
-								<td style="font-weight: bold;">Weight of sand + Cylinder after pouring gm</td>
-								<td style="text-align: center;"><span t-field="data.wt_of_after_cylinder"/></td>
-							</tr>
-							<tr>
-								<td style="font-weight: bold;">Weight of sand in cone gm</td>
-								<td style="text-align: center;"><span t-field="data.wt_of_sand_cone" /></td>
-							</tr>
-							<tr>
-								<td style="font-weight: bold;">Weight of sand in hole gm</td>
-								<td style="text-align: center;"><span t-field="data.wt_of_sand_hole"/></td>
-							</tr>
-							<tr>
-								<td style="font-weight: bold;">Density of sand gm/cc</td>
-								<td style="text-align: center;"><span t-field="data.density_of_sand" t-options='{"widget": "float", "precision": 2}' /></td>
-							</tr>
-							<tr>
-								<td style="font-weight: bold;">Volume of hole cc</td>
-								<td style="text-align: center;"><span t-field="data.volume_of_hole" t-options='{"widget": "float", "precision": 2}' /></td>
-							</tr>
-							<tr>
-								<td style="font-weight: bold;">Bulk Density of sample gm/cc</td>
-								<td style="text-align: center;"><span t-field="data.bulk_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
-							</tr>
-
-							<tr>
-								<td style="font-weight: bold;">Dry Density of sample</td>
-								<td style="text-align: center;"><span t-field="data.dry_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
-							</tr>
-							<tr>
-								<td style="font-weight: bold;">Degree of Compaction %</td>
-								<td style="text-align: center;"><span t-field="data.degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/></td>
-							</tr>
-						</table>
-
-						
-					</div>
-
+							</table>
+						</div>
 					<div t-if="data.moisture_content_visible">
 						
 							<div style="text-align:center;">
