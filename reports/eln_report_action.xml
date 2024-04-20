@@ -995,6 +995,29 @@
         <field name="binding_type">report</field>
     </record>
 
+     <record id="concrete_cube_water_absorption_datasheet_action" model="ir.actions.report">
+        <field name="name">Concrete Cube Water Absorption Data Sheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.concrete_cube_water_datasheet</field>
+        <field name="report_file">lerm_civil.concrete_cube_water_datasheet</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/> 
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <record id="concrete_cube_water_report_action" model="ir.actions.report">
+        <field name="name">Concrete Cube Water Absorption Report </field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.concrete_cube_water_report</field>
+        <field name="report_file">lerm_civil.concrete_cube_water_report</field>
+        <!-- <field name="binding_model_id" ref="model_lerm_eln"/> -->
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
 
 
 </odoo>

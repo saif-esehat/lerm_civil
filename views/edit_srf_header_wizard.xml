@@ -10,7 +10,7 @@
                     <group style="width:50%" >
                         <field name="srf_id" readonly="1"/>
                         <field name="kes_number"  invisible="1"/>
-                        <field name="srf_date" />
+                        <field name="srf_date" readonly="1"/>
                         <!-- <field name="contact_person" context="{'hide_reference':True}" domain="[('id', 'in', contact_contact_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/> -->
                         <field name="contact_person" domain="[('id', 'in', contact_site_ids)]" />
                         <!-- <field name="site_address" domain="[('id', 'in', contact_site_ids)]" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/> -->
@@ -23,7 +23,7 @@
                         <field name='contractor' domain="[('id', 'in', contractor_ids)]"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
                         <field name='contractor_ids' invisible='1'/>
                         <field name="contact_other_ids" invisible='1'/>
-                        <field name="billing_customer"   groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
+                        <field name="billing_customer"  groups="lerm_civil.kes_verified_by,lerm_civil.kes_access_srf"/>
                         <field name="name_work"  domain="[('id', 'in', name_works)]"/>
                         <field name="name_works" invisible="1"/>
                         <field name="attachment" filename="attachment_name" />

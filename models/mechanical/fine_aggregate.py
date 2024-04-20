@@ -31,7 +31,7 @@ class SpecificAndWaterLine(models.Model):
     wt_of_pycnometer_surface_dry = fields.Integer(string="Weight of Pycnometer + Saturated surface dry Aggregate in gms")
     wt_of_pycnometer_surface_dry_water = fields.Integer(string="Weight of Pycnometer + Saturated surface dry Aggregate + Water in gms")
     wt_of_saturated_surface_dry = fields.Integer(string="Weight of Saturated surface dry Aggregate in gms",compute='_compute_wt_of_saturated_surface_dry')
-    wt_of_oven_dried = fields.Integer(string="Weight of Oven dried Aggregate in gms")
+    wt_of_oven_dried = fields.Float(string="Weight of Oven dried Aggregate in gms")
     volume_of_water = fields.Integer(string="Volume of water displaced by saturated surface dry aggregate",compute="_compute_volume_of_water")
     specific_gravity = fields.Float(string="SPECIFIC GRAVITY", compute="_compute_specific_gravity")
     water_absorption = fields.Float(string="Water Absorption %",compute="_compute_water_absorption")

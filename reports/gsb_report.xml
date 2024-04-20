@@ -202,6 +202,68 @@
 						</table>
                         
 					</div>
+					<div t-if="data.dry_gradation_visible and not fromEln" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							Sieve Analysis
+						</div>
+						<table t-if="data.dry_gradation_visible and not fromEln">
+							<tr cols="12">
+                                <td colspan="2">IS Sieve Size
+								</td>
+                                <td colspan="2">Percentage of Passing (in %) observed				
+								</td>
+								<td colspan="2">Requirements as per
+								 <span>
+								 	<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','64fecdf5-6741-4817-95f4-5e53a0676c5f')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+                                	</t>
+								 </span>
+								</td>
+
+                            </tr>
+							<t t-set="k" t-value="0"/>
+							<tr t-foreach="data.dry_gradation_table" t-as="r" t-if="'pan' not in r['sieve_size']">
+								
+								<td colspan="2" >
+									<t t-set="k" t-value="k+1"/>
+									<span t-esc="r['sieve_size']"/>
+								</td>
+								<td colspan="2" >
+									<span t-esc="r['passing_percent']"/>
+								</td>
+								<td colspan="2" t-if="k == 1">
+										<span>100%</span>
+									</td>
+									<td colspan="2" t-if="k == 2">
+										<span>95% - 100%</span>
+									</td>
+									<td colspan="2" t-if="k == 3">
+										<span>60% - 80%</span>
+									</td>
+									<td colspan="2" t-if="k == 4">
+										<span>40% - 60%</span>
+									</td>
+									<td colspan="2" t-if="k == 5">
+										<span>25% - 40%</span>
+									</td>
+									<td colspan="2" t-if="k == 6">
+										<span>15% - 30%</span>
+									</td>
+									<td colspan="2" t-if="k == 7">
+										<span>8% - 22%</span>
+									</td>
+									<td colspan="2" t-if="k == 8">
+										<span>0% - 5%</span>
+									</td>
+									<td colspan="2" t-if="k == 9">
+										<span>0% - 5%</span>
+									</td>
+							</tr>
+						</table>
+                        
+					</div>
 
 					<table style="margin-top:15px">
 
@@ -317,7 +379,7 @@
 								</tr>
 							</div> -->
 							<t t-set="i" t-value="0"/>
-							<tr t-if="data.liquid_limit_visible and (data.liquid_limit_nabl == 'pass' and nabl or data.liquid_limit_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.liquid_limit_visible and (data.liquid_limit_nabl == 'pass' and nabl) or (data.liquid_limit_nabl == 'fail' and not nabl) and not fromEln">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -422,7 +484,7 @@
 								</td>
 							</tr>
                            <!-- Plastic Limit -->
-							<tr t-if="data.plastic_visible and (data.average_plastic_moisture_nabl == 'pass' and nabl or data.average_plastic_moisture_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.plastic_visible and (data.average_plastic_moisture_nabl == 'pass' and nabl) or (data.average_plastic_moisture_nabl == 'fail' and not nabl) and not fromEln">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -521,7 +583,7 @@
 								</td>
 							</tr>
                              <!-- Plasticity Index -->
-							<tr t-if="data.plasticity_index_visible and (data.plasticity_index_nabl == 'pass' and nabl or data.plasticity_index_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.plasticity_index_visible and (data.plasticity_index_nabl == 'pass' and nabl) or (data.plasticity_index_nabl == 'fail' and not nabl) and not fromEln">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -628,7 +690,7 @@
 							</tr>
 
 
-							<tr t-if="data.water_absorbtion_visible and (data.water_absorbtion_nabl == 'pass' and nabl or data.water_absorbtion_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.water_absorbtion_visible and (data.water_absorbtion_nabl == 'pass' and nabl) or (data.water_absorbtion_nabl == 'fail' and not nabl) and not fromEln">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -645,7 +707,7 @@
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')]).unit.name"/>
 									</span>
 								</td>
-								<td colspan="2">
+								<td colspan="2" style="text-align: center; vertical-align: middle;">
 									<div>
 										<span t-field="data.water_absorbtion"  t-options='{"widget": "float", "precision": 2}'/>
 									</div>
@@ -722,7 +784,7 @@
 								</td>
 							</tr>
                            <!-- Absorbtion Value -->
-							<tr t-if="data.abrasion_visible and (data.abrasion_value_percentage_nabl == 'pass' and nabl or data.abrasion_value_percentage_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.abrasion_visible and (data.abrasion_value_percentage_nabl == 'pass' and nabl) or (data.abrasion_value_percentage_nabl == 'fail' and not nabl) and not fromEln">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -817,7 +879,7 @@
 							</tr>
 
                            <!-- impact_visible -->
-							<tr t-if="data.impact_visible and (data.average_impact_value_nabl == 'pass' and nabl or data.average_impact_value_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.impact_visible and (data.average_impact_value_nabl == 'pass' and nabl) or (data.average_impact_value_nabl == 'fail' and not nabl) and not fromEln">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -912,7 +974,8 @@
 							</tr>
 
                            <!-- flakiness_visible -->
-							<tr t-if="data.flakiness_visible and (data.aggregate_flakiness_nabl == 'pass' and nabl or data.aggregate_flakiness_nabl == 'fail' and not nabl and not fromEln)">
+						   <t style="page-break-inside: avoid;">
+							<tr t-if="data.flakiness_visible and (data.aggregate_flakiness_nabl == 'pass' and nabl) or (data.aggregate_flakiness_nabl == 'fail' and not nabl) and not fromEln">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -1006,7 +1069,7 @@
 								</td>
 							</tr>
                             <!-- Elongation % -->
-							<tr t-if="data.elongation_visible and (data.aggregate_elongation_nabl == 'pass' and nabl or data.aggregate_elongation_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.elongation_visible and (data.aggregate_elongation_nabl == 'pass' and nabl) or (data.aggregate_elongation_nabl == 'fail' and not nabl) and not fromEln">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -1098,12 +1161,13 @@
 									<span t-esc="data.aggregate_elongation_conformity"/>
 								</td>
 							</tr>
+							</t>
 
 					</table>
 					
 					<div style="page-break-inside: avoid;margin-top:20px">
 
-						<table t-if="data.density_relation_visible and fromEln">
+						<table t-if="data.density_relation_visible or fromEln">
 							<tr >
 								<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
 									<div>
@@ -1221,7 +1285,7 @@
 							</tbody>
 						</table>
 
-							<table  t-if="data.density_relation_visible and fromEln" style="margin-top : 10px">
+							<table  t-if="data.density_relation_visible or fromEln" style="margin-top : 10px">
 								<tr>
 									<td colspan="3">Weight of Mould in gm :
 									</td>
@@ -1242,11 +1306,11 @@
 							<img t-att-src="'data:image/png;base64,'+str(graphHeavy)" style="max-width: 100%;"/>
 					</div>
 
-					<div  t-if="data.density_relation_visible and fromEln"  style="margin-top: 10px;">
+					<div  t-if="data.density_relation_visible or fromEln"  style="margin-top: 10px;">
 						From Graph 
 					</div>
 
-					<table  t-if="data.density_relation_visible and fromEln" style="margin-top: 10px;">
+					<table  t-if="data.density_relation_visible or fromEln" style="margin-top: 10px;">
 						<tr>
 							<td colspan="3">MDD :</td>
 							<td colspan="3">
@@ -1261,6 +1325,26 @@
 					
 					<div  style="page-break-inside: avoid;margin-top:20px">
 						<table  t-if="data.density_relation_visible and fromEln">
+								<tr>
+									<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
+										<div>
+											LABORATORY DETERMINATION OF CBR : Test Method  : <![CDATA[&nbsp;]]> 
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','f1046910-b27e-48c6-81b8-900521446761')]).test_method.test_method"/>
+											<span> 
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6c0014d9-12d3-45ea-bc23-5b35ec6ffd24')]).parameter_table" t-as="parameter">
+											<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.specification"/>
+											</t>
+											</t>
+										</span>
+										</div>
+										<div>
+											CONDITION SOAKED 1 Div. = 6.96kg
+										</div>
+									</div>
+								</tr>
+						</table>
+						<table  t-if="data.density_relation_visible and not fromEln">
 								<tr>
 									<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
 										<div>
@@ -1329,6 +1413,54 @@
 									</tr>
 								</tbody>
 						</table>
+						<table t-if="data.cbr_visible and data.cbr_table and not fromEln" style="margin-top:10px;">
+								<thead>
+									<tr>
+										<th>
+											<span>
+												Sr. No
+											</span>
+										</th>
+										<th>
+											<span>
+												Penetration in mm
+											</span>
+										</th>
+
+										<th>
+											<span>
+												Proving Ring Reading
+											</span>
+										</th>
+
+										<th>
+											<span>
+												Load in Kg
+											</span>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-set="i" t-value="0"/>
+									<tr t-foreach="data.cbr_table" t-as="r">
+										<td>
+											<div>
+												<span t-esc="i + 1" />
+												<t t-set="i" t-value="i+1"/>
+											</div>
+										</td>
+										<td>
+											<span t-esc="r.penetration"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading"/>
+										</td>
+										<td>
+											<span t-esc="r.load"/>
+										</td>
+									</tr>
+								</tbody>
+						</table>
 					</div>
 
 					<div t-if="graphCbr" style="margin-top: 20px;">
@@ -1338,8 +1470,44 @@
 					<div t-if="data.cbr_visible and fromEln"  style="margin-top: 10px;">
 						CBR From Graph 
 					</div>
+
+					<div t-if="data.cbr_visible and not fromEln"  style="margin-top: 10px;">
+						CBR From Graph 
+					</div>
 					
 					<div t-if="data.cbr_visible and fromEln"  style="margin-top: 5px;" class="cbrformula">
+
+						<div>
+							<div>
+								CBR at 2.5mm Penetration = (PT/PS) X 100
+							</div>
+							<div>
+								From Graph PT = <span t-esc="load2"/>
+							</div>
+							<div>
+								PS = 1370
+							</div>
+							<div >
+								CBR = <span t-esc="round(load2 / 1370 * 100 , 2)"/>
+							</div>
+						</div>
+
+						<div>
+							<div>
+								CBR at 5mm Penetration = (PT/PS) X 100
+							</div>
+							<div>
+								From Graph PT = <span t-esc="load5"/>
+							</div>
+							<div>
+								PS = 2055
+							</div>
+							<div>
+								CBR = <span t-esc="round(load5 / 2055 * 100 , 2)"/>
+							</div>
+						</div>
+					</div>
+					<div t-if="data.cbr_visible and not fromEln"  style="margin-top: 5px;" class="cbrformula">
 
 						<div>
 							<div>
@@ -1376,6 +1544,10 @@
 						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load2 / 1370 * 100 , 2)"/></b>
 					</div>
 
+					<div t-if="data.cbr_visible and not fromEln"  style="margin-top: 10px;">
+						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load2 / 1370 * 100 , 2)"/></b>
+					</div>
+
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
 							<div>
@@ -1403,66 +1575,79 @@
 							</div>
 						</div>
 						
-						<div class="signatureContainer girdgird">
-							<div>
-								<div>
-									<b>
-										Checked By
-									</b>
-								</div>
-								<div style="height:20px">
+						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+									<div>
+										<div>
+											<b>
+												Checked By
+											</b>
+										</div>
+										<div style="height: 40px;">
+											<t t-if="eln.sample_id.checkby_signature_required">
+												<div t-if="eln.sample_id.check_by.employee_id.signature">
+													<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
+												</div>
+												
+											</t>
+										</div>
+										<div>
+											<b>
+												<span t-esc="eln.sample_id.check_by.name"/>
+											</b>
+										</div>
+										<div>
+											<b>
+												(<span t-esc="eln.sample_id.check_by.job_title"/>)
+											</b>
+										</div>
+									</div>
 
-								</div>
-								<div>
-									<b>
-										<span t-esc="eln.technician.name"/>
-									</b>
-								</div>
-								<div>
-									<b>
-										(Authorized Signatory)
-									</b>
+									<div>
+										<div >
+											<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+										</div>
+										<div style="padding-top:5px">
+											Format No. <span t-esc="eln.material.test_format_no"/>
+										</div>
+									</div>
+									<div>
+										<div>
+											<b>
+												Approved By 
+											</b>
+											
+										</div>
+										<div style="height: 40px;">
+											<t t-if="eln.sample_id.approveby_signature_required">
+												<div t-if="eln.sample_id.approved_by.employee_id.signature">
+													<img t-att-src="'data:image/png;base64,' + eln.sample_id.approved_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 35px;margin-top:1px; z-index: -10;"/>
+												</div>
+												
+											</t>
+										</div>
+										<div>
+											<b>
+											<span t-esc="eln.sample_id.approved_by.name"/>
+											</b>
+										</div>
+										
+										<div>
+											<b>
+												(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+											</b>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div>
-								<div>
-									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-								</div>
-								<div style="padding-top:5px">
-									Format No. <span t-esc="eln.material.test_format_no"/>
-								</div>
-							</div>
-							<div>
-								<div>
-									<b>
-										Approved By 
-									</b>
-									
-								</div>
-								<div style="height:20px">
-
-								</div>
-								<div>
-									<b>
-									<span t-esc="eln.sample_id.approved_by.name"/>
-									</b>
-								</div>
-								
-								<div>
-									<b>
-										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
-									</b>
-								</div>
-
-								
+							<!-- <div style="text-align:center;margin-top:25px">
+								......End of Report......
+							</div> -->
+							<div style="margin-top: 20px; text-align: center;">
+								<p style="border-top: 1px dashed #000; padding-top: 10px;">
+									...... End Of Report......
+								</p>
 							</div>
 						</div>
-						<div style="text-align:center;margin-top:25px">
-							......End of Report......
-						</div>
-					</div>
-					
-				</div>
 			</t>
 		</t>
 	</template>
