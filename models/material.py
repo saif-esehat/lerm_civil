@@ -259,10 +259,25 @@ class AccountMoveLineInherited(models.Model):
     report_no = fields.Char(string="Report No")
     pricelist_id = fields.Many2one("product.pricelist",string="Pricelist",compute='_compute_pricelist')
     product_id = fields.Many2one('product.product', string='Product', ondelete='restrict')
+    # report_ids = fields.Many2many("lerm.srf.sample",compute="_compute_report_ids")
     report_no1 = fields.Many2many("lerm.srf.sample", string="KES No.",domain="['&',('state', '=', '4-in_report'),('invoice_status', '!=', '2-invoiced'),'|',('srf_id.customer', '=', partner_id),('srf_id.billing_customer', '=', partner_id)]")
 
-   
 
+    @api.onchange('partner_id')
+    def _compute_report_ids(self):
+        report_ids = []
+        samples = self.env['lerm.srf.sample'].sudo().search([('state', '=', '4-in_report'),('invoice_status', '!=', '2-invoiced')])
+        # for sample in samples:
+        #     if sample.srf_id.billing_customer.id == self.partner_id.id:
+        #         report_ids.append(sample)
+        # import wdb; wdb.set_trace();
+        # self.report_ids = samples
+        
+
+                
+
+
+    
     @api.onchange("pricelist_id")
     def onchange_pricelist_id(self):
         for record in self:

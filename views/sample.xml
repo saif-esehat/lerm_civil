@@ -35,7 +35,7 @@
                                 type="object"
                                 name="print_non_nabl_report"
                                 string="Print Non-NABL Report"
-                                attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"
+                                attrs="{'invisible': [('state', 'not in', ('4-in_report')),('scope', 'not in', ('non_nabl'))]}"
                                 />
 
                         <button type="object" 

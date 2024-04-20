@@ -184,7 +184,7 @@
 						</thead>
 						<tbody>
 						<!-- Normal Consistency  -->
-							<tr t-if="cement.normal_consistency_visible and cement.normal_consistency_nabl == 'pass' and nabl and not fromEln">
+							<tr t-if="cement.normal_consistency_visible and cement.normal_consistency_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -327,7 +327,7 @@
 							</tr>
 
 						<!-- Initial Setting Time  -->
-							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'pass' and nabl and not fromEln">
+							<tr t-if="cement.initial_setting_time_visible and cement.initial_setting_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 							
 								
 								<td>
@@ -475,7 +475,7 @@
 							</tr>
 
 						<!-- Final Setting Time  -->
-							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'pass' and nabl and not fromEln">
+							<tr t-if="cement.final_setting_time_visible and cement.final_setting_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 							
 							
 								<td>
@@ -622,7 +622,7 @@
 
 
 						<!-- Dry Sieving  -->
-							<tr t-if="cement.dry_sieving_visible and cement.dry_seiving_nabl == 'pass' and nabl and not fromEln">
+							<tr t-if="cement.dry_sieving_visible and cement.dry_seiving_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -765,7 +765,7 @@
 
 
 						<!-- Density  -->
-							<tr t-if="cement.density_visible and cement.density_nabl == 'pass' and nabl and not fromEln">
+							<tr t-if="cement.density_visible and cement.density_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 
 								<td>
 									<span t-esc="i + 1" />
@@ -911,7 +911,7 @@
 
 
 						<!-- Soundness  -->
-							<tr t-if="cement.soundness_visible and cement.soundness_nabl == 'pass' and nabl and not fromEln">
+							<tr t-if="cement.soundness_visible and cement.soundness_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -1053,7 +1053,7 @@
 
 
 						<!-- Fineness  -->
-							<tr t-if="cement.fineness_blaine_visible and cement.fineness_nabl == 'pass' and nabl and not fromEln">
+							<tr t-if="cement.fineness_blaine_visible and cement.fineness_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -1194,7 +1194,7 @@
 
 						<t t-if="i &lt;= 4">
 						<!-- Compressive Strength  -->
-							<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass')) and nabl and not fromEln">
+							<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass')) and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 								<td>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -1293,7 +1293,7 @@
 
 
 						<!-- 3 Days  -->
-							<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass' and nabl and not fromEln">
+							<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 								<td>
 									<span>a</span>
 								</td>
@@ -1444,7 +1444,7 @@
 
 
 						<!-- 7 Days  -->
-							<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass' and nabl and not fromEln">
+							<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 								<td>
 									<span>b</span>
 								</td>
@@ -1596,7 +1596,7 @@
 
 
 						<!-- 28 Days  -->
-								<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass' and nabl and not fromEln">
+								<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 									<td>
 										<span>c</span>
 									</td>
@@ -1751,7 +1751,7 @@
 							<table>
 								<tbody>
 									<!-- Compressive Strength  -->
-									<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass')) and nabl and not fromEln">
+									<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass')) and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 										<td>
 											<span t-esc="i + 1" />
 											<t t-set="i" t-value="i+1"/>
@@ -1783,6 +1783,7 @@
 										</td>
 									</tr>
 
+									<t t-if="(o.sample_id.scope == 'non_nabl' and not nabl) or (o.sample_id.scope == 'nabl' and not nabl)">
 									<tr t-if="((cement.compressive_28_visible and cement.compressive_28days_nabl == 'fail') or (cement.compressive_7_visible and cement.compressive_7days_nabl == 'fail') or (cement.compressive_3_visible and cement.compressive_3days_nabl == 'fail')) and not nabl and not fromEln">
 										<td>
 											<span t-esc="i + 1" />
@@ -1814,6 +1815,7 @@
 											
 										</td>
 									</tr>
+									</t>
 
 
 									<tr t-if="((cement.compressive_28_visible ) or (cement.compressive_7_visible ) or (cement.compressive_3_visible)) and fromEln">
@@ -1850,7 +1852,7 @@
 
 
 								<!-- 3 Days  -->
-									<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass' and nabl and not fromEln">
+									<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 										<td>
 											<span>a</span>
 										</td>
@@ -1900,6 +1902,7 @@
 									</tr>
 
 
+									<t t-if="(o.sample_id.scope == 'non_nabl' and not nabl) or (o.sample_id.scope == 'nabl' and not nabl)">
 									<tr t-if="cement.compressive_3_visible and cement.compressive_3days_nabl == 'fail' and not nabl and not fromEln">
 										<td>
 											<span>a</span>
@@ -1948,6 +1951,7 @@
 											<span t-field="cement.compressive_3days_conformity"/>
 										</td>
 									</tr>
+									</t>
 
 
 									<tr t-if="cement.compressive_3_visible and fromEln">
@@ -2001,7 +2005,7 @@
 
 
 								<!-- 7 Days  -->
-									<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass' and nabl and not fromEln">
+									<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 										<td>
 											<span>b</span>
 										</td>
@@ -2051,6 +2055,7 @@
 										</td>
 									</tr>
 
+									<t t-if="(o.sample_id.scope == 'non_nabl' and not nabl) or (o.sample_id.scope == 'nabl' and not nabl)">
 									<tr t-if="cement.compressive_7_visible and cement.compressive_7days_nabl == 'fail' and not nabl and not fromEln">
 										<td>
 											<span>b</span>
@@ -2100,6 +2105,7 @@
 											<span t-field="cement.compressive_7days_conformity"/>
 										</td>
 									</tr>
+									</t>
 
 									<tr t-if="cement.compressive_7_visible and fromEln">
 										<td>
@@ -2153,7 +2159,7 @@
 
 
 								<!-- 28 Days  -->
-										<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass' and nabl and not fromEln">
+										<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'pass' and nabl and not fromEln and not o.sample_id.scope == 'non_nabl'">
 											<td>
 												<span>c</span>
 											</td>
@@ -2202,6 +2208,7 @@
 											</td>
 										</tr>
 
+										<t t-if="(o.sample_id.scope == 'non_nabl' and not nabl) or (o.sample_id.scope == 'nabl' and not nabl)">
 										<tr t-if="cement.compressive_28_visible and cement.compressive_28days_nabl == 'fail' and not nabl and not fromEln">
 											<td>
 												<span>c</span>
@@ -2250,6 +2257,7 @@
 												<span t-field="cement.compressive_28days_conformity"/>
 											</td>
 										</tr>
+										</t>
 
 										<tr t-if="cement.compressive_28_visible and fromEln">
 											<td>
