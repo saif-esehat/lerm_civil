@@ -52,7 +52,8 @@ class SRFEditWizard(models.TransientModel):
         samples = self.env['lerm.civil.srf'].search([("id","=",self.srf_id.id)]).samples
         for sample in samples:
             sample.write({
-                'customer_id': self.customer.id,
+                'customer_id': self.customer.id
+                # 'sample_received_date':self.srf_date
             })
         
     

@@ -29,7 +29,9 @@ class WMMReport(models.AbstractModel):
         nabl = data.get('nabl')
         fromEln = data.get('fromEln')
         inreport_value = data.get('inreport', None)
-        if fromEln == False:
+        if data.get('report_wizard') == True:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
+        elif fromEln == False:
             if 'active_id' in data['context']:
                 eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
             else:

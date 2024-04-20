@@ -17,7 +17,10 @@ class ElnReport(models.AbstractModel):
         nabl = data.get('nabl')
         print(data , 'dataaaaaaaaaaaaaa')
         # stamp = data['inreport']
-        if 'active_id' in data['context']:
+        # import wdb;wdb.set_trace();
+        if data.get('report_wizard') == True:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
+        elif 'active_id' in data['context']:
             # stamp = data['inreport']
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
