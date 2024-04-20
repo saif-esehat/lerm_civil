@@ -95,7 +95,7 @@ class WMMReport(models.AbstractModel):
             max_x = round(max_x, 2)
             print("Y_MAX",max_y)
             print("X_MAX",max_x)
-#    
+    
 
         
             # Perform cubic spline interpolation
@@ -128,7 +128,7 @@ class WMMReport(models.AbstractModel):
             # plt.yticks([1.60, 1.62, 1.64, 1.66, 1.68, 1.70, 1.72, 1.74, 1.76, 1.78, 1.80])
 
             # edit range here
-            plt.yticks(np.arange(min_y*0.99 , max_y*1.1 , max_y/100))
+            plt.yticks(np.arange(min_y*0.99 ,max_y*1.1 , max_y/100))
 
 
             if max_x != min_x:
