@@ -1171,7 +1171,7 @@ class CreateSampleWizard(models.TransientModel):
 
         # @api.one
         def allot_sample(self):
-            # import wdb;wdb.set_trace()
+            import wdb;wdb.set_trace()
 
             active_ids = self.env.context.get('active_ids')
             for id in active_ids:

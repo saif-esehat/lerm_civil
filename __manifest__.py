@@ -11,6 +11,7 @@
     'views/enviroment_register.xml',
     'reports/wizard_reports/sample_report.xml',
     'reports/wizard_reports/ulr_report.xml',
+    'views/wizards/sample_print_report_wizard.xml',
     'views/lerm.xml',
     'views/groups.xml',
     'views/res_company.xml',
