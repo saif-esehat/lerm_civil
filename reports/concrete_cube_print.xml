@@ -239,7 +239,7 @@
 										ID MARK/Location
 									</span>
 								</th>
-								<th style="text-align: center;font-weight: bold;width:150px;">
+								<th style="text-align: center;font-weight: bold;width:100px;">
 									<span>
 										Grade
 									</span>
@@ -375,7 +375,7 @@
 						</table>
 					</div>
 					<div style="page-break-inside: avoid;">
-						<div style="margin-top:20px" class="noteContainer">
+						<div style="margin-top:10px" class="noteContainer">
 							<div>
 								<b>Note :-</b>
 							</div>
@@ -471,7 +471,7 @@
 						<!-- <div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div> -->
-						<div style="margin-top: 30px; text-align: center;">
+						<div style="margin-top: 10px; text-align: center;">
 							<p style="border-top: 1px dashed #000; padding-top: 10px;">
 								...... End Of Report......
 							</p>

@@ -65,7 +65,7 @@ class ConcreteBeamReport(models.AbstractModel):
             "grade_id":eln.grade_id.id
         }
         model = eln.get_product_base_calc_line(data).ir_model.model
-        concrete_beam_data = self.env[model].search([("id","=",eln.model_id)])
+        concrete_beam_data = self.env[model].sudo().search([("id","=",eln.model_id)])
         for ids in concrete_beam_data.child_lines:
             print("childline length",ids.length)
         return {

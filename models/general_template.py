@@ -184,7 +184,9 @@ class GeneralReport(models.AbstractModel):
         inreport_value = data.get('inreport', None)
         print(data['context'])
         nabl = data.get('nabl')
-        if 'active_id' in data['context']:
+        if data.get('report_wizard') == True:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
+        elif 'active_id' in data['context']:
             # stamp = data['context']['inreport']
             # print(stamp , 'stamp value')
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
@@ -657,6 +659,7 @@ class SoilReport(models.AbstractModel):
             except:
                 min_y = 0
             try:
+                # max_x = round(max(x_values),2)
                 max_x = x_values[y_values.index(max_y)]
             except:
                 max_x = 100
@@ -671,9 +674,8 @@ class SoilReport(models.AbstractModel):
             # Format max_y and max_x to display 2 digits after the decimal point
             max_y = round(max_y , 2)
             max_x = round(max_x, 2)
-            print("Y_MAX",max_y)
-            print("X_MAX",max_x)
-#    
+
+    
 
         
             # Perform cubic spline interpolation
@@ -706,13 +708,13 @@ class SoilReport(models.AbstractModel):
             # plt.yticks([1.60, 1.62, 1.64, 1.66, 1.68, 1.70, 1.72, 1.74, 1.76, 1.78, 1.80])
 
             # edit range here
-            plt.yticks(np.arange(min_y*0.99 , max_y*1.1 , max_y/100))
+            plt.yticks(np.arange(min_y , round(max_y,2) + 0.2 , (max_y - min_y) / 5))
 
 
             if max_x != min_x:
-                plt.xticks(np.arange(min_x, max_x + 1.0, (max_x - min_x) / 5))
+                plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
             
-        
+            plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
             plt.xlabel('% Moisture')
             plt.ylabel('Dry density in gm/cc')
             plt.title('% Moisture vs Dry density in gm/cc')
@@ -739,6 +741,32 @@ class SoilReport(models.AbstractModel):
             for line in general_data.soil_table:
                 cbrx_values.append(line.penetration)
                 cbry_values.append(line.load)
+
+            try:
+                max_y = max(cbry_values)
+            except:
+                max_y = 100
+            try:
+                min_y = round(min(cbry_values),2)
+            except:
+                min_y = 0
+            try:
+                # max_x = round(max(x_values),2)
+                max_x = cbrx_values[cbry_values.index(max_y)]
+            except:
+                max_x = 100
+            try:
+                min_x = round(min(cbrx_values),2)
+            except:
+                min_x = 0 
+            
+            
+
+
+            # Format max_y and max_x to display 2 digits after the decimal point
+            max_y = round(max_y , 2)
+            max_x = round(max_x, 2)
+
             
             # Perform cubic spline interpolation
             cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 100)
@@ -765,8 +793,14 @@ class SoilReport(models.AbstractModel):
             ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
 
             # Set the y-axis tick marks
-            plt.xticks(range(0 , 15 , 1))
-            plt.yticks(range(0 , 481 , 50))
+            # plt.xticks(range(0 , 15 , 1))
+            # plt.yticks(range(0 , 481 , 50))
+
+            plt.yticks(np.arange(min_y , max_y + 0.2 , (max_y - min_y) / 5))
+
+
+            if max_x != min_x:
+                plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
             
             plt.xlabel('Penetration in mm')
             plt.ylabel('Load')
