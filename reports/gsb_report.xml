@@ -150,15 +150,19 @@
 								</td>
                                 <td colspan="2">Percentage of Passing (in %) observed				
 								</td>
-								<td colspan="2">Requirements as per
-								 <span>
+								<td colspan="2">Limit as Per MORTH Grade I
+								 <!-- <span>
 								 	<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','64fecdf5-6741-4817-95f4-5e53a0676c5f')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
 											<span t-field="parameter.specification"/>
 										</t>
                                 	</t>
-								 </span>
+								 </span> -->
 								</td>
+								 <td colspan="2">Limit as Per MORTH Grade II
+				
+								</td>
+
 
                             </tr>
 							<t t-set="k" t-value="0"/>
@@ -171,33 +175,62 @@
 								<td colspan="2" >
 									<span t-esc="r['passing_percent']"/>
 								</td>
-								<td colspan="2" t-if="k == 1">
-										<span>100%</span>
+								   <td colspan="2" t-if="k == 1">
+										<span>100</span>
 									</td>
 									<td colspan="2" t-if="k == 2">
-										<span>95% - 100%</span>
+										<span>80 - 100 %</span>
 									</td>
 									<td colspan="2" t-if="k == 3">
-										<span>60% - 80%</span>
+										<span>55 - 90 %</span>
 									</td>
 									<td colspan="2" t-if="k == 4">
-										<span>40% - 60%</span>
+										<span>35 - 65 %</span>
 									</td>
 									<td colspan="2" t-if="k == 5">
-										<span>25% - 40%</span>
+										<span>25% - 55 %</span>
 									</td>
 									<td colspan="2" t-if="k == 6">
-										<span>15% - 30%</span>
+										<span>20 - 40 %</span>
 									</td>
 									<td colspan="2" t-if="k == 7">
-										<span>8% - 22%</span>
+										<span>10 - 15 %</span>
 									</td>
 									<td colspan="2" t-if="k == 8">
 										<span>0% - 5%</span>
 									</td>
-									<td colspan="2" t-if="k == 9">
+									<!-- <td colspan="2" t-if="k == 9">
 										<span>0% - 5%</span>
+									</td> -->
+								    <td colspan="2" t-if="k == 1">
+										<span>-</span>
 									</td>
+									<td colspan="2" t-if="k == 2">
+										<span>100</span>
+									</td>
+									<td colspan="2" t-if="k == 3">
+										<span>70 - 100 %</span>
+									</td>
+									<td colspan="2" t-if="k == 4">
+										<span>50 - 80 %</span>
+									</td>
+									<td colspan="2" t-if="k == 5">
+										<span>40 - 65 %</span>
+									</td>
+									<td colspan="2" t-if="k == 6">
+										<span>30 - 50 %</span>
+									</td>
+									<td colspan="2" t-if="k == 7">
+										<span>10 - 15 %</span>
+									</td>
+									<td colspan="2" t-if="k == 8">
+										<span>0 - 5 %</span>
+									</td>
+									<!-- <td colspan="2" t-if="k == 9">
+										<span>0% - 5%</span>
+									</td> -->
+
+									
 							</tr>
 						</table>
                         
@@ -212,14 +245,23 @@
 								</td>
                                 <td colspan="2">Percentage of Passing (in %) observed				
 								</td>
-								<td colspan="2">Requirements as per
-								 <span>
+								<td colspan="2">Limit as Per MORTH Grade I
+								 <!-- <span>
 								 	<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','64fecdf5-6741-4817-95f4-5e53a0676c5f')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
 											<span t-field="parameter.specification"/>
 										</t>
                                 	</t>
-								 </span>
+								 </span> -->
+								</td>
+								<td colspan="2">Limit as Per MORTH Grade II
+								 <!-- <span>
+								 	<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','64fecdf5-6741-4817-95f4-5e53a0676c5f')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+                                	</t>
+								 </span> -->
 								</td>
 
                             </tr>
@@ -233,32 +275,56 @@
 								<td colspan="2" >
 									<span t-esc="r['passing_percent']"/>
 								</td>
-								<td colspan="2" t-if="k == 1">
-										<span>100%</span>
+								   <td colspan="2" t-if="k == 1">
+										<span>100</span>
 									</td>
 									<td colspan="2" t-if="k == 2">
-										<span>95% - 100%</span>
+										<span>80 - 100 %</span>
 									</td>
 									<td colspan="2" t-if="k == 3">
-										<span>60% - 80%</span>
+										<span>55 - 90 %</span>
 									</td>
 									<td colspan="2" t-if="k == 4">
-										<span>40% - 60%</span>
+										<span>35 - 65 %</span>
 									</td>
 									<td colspan="2" t-if="k == 5">
-										<span>25% - 40%</span>
+										<span>25% - 55 %</span>
 									</td>
 									<td colspan="2" t-if="k == 6">
-										<span>15% - 30%</span>
+										<span>20 - 40 %</span>
 									</td>
 									<td colspan="2" t-if="k == 7">
-										<span>8% - 22%</span>
+										<span>10 - 15 %</span>
 									</td>
 									<td colspan="2" t-if="k == 8">
 										<span>0% - 5%</span>
 									</td>
-									<td colspan="2" t-if="k == 9">
+									<!-- <td colspan="2" t-if="k == 9">
 										<span>0% - 5%</span>
+									</td> -->
+									<td colspan="2" t-if="k == 1">
+										<span>-</span>
+									</td>
+									<td colspan="2" t-if="k == 2">
+										<span>100</span>
+									</td>
+									<td colspan="2" t-if="k == 3">
+										<span>70 - 100 %</span>
+									</td>
+									<td colspan="2" t-if="k == 4">
+										<span>50 - 80 %</span>
+									</td>
+									<td colspan="2" t-if="k == 5">
+										<span>40 - 65 %</span>
+									</td>
+									<td colspan="2" t-if="k == 6">
+										<span>30 - 50 %</span>
+									</td>
+									<td colspan="2" t-if="k == 7">
+										<span>10 - 15 %</span>
+									</td>
+									<td colspan="2" t-if="k == 8">
+										<span>0 - 5 %</span>
 									</td>
 							</tr>
 						</table>
