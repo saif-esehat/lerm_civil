@@ -1362,16 +1362,16 @@ class CoarseAggregateMechanical(models.Model):
                     line.write({'cumulative_retained': round(previous_line_record + line.percent_retained,2)})
                     line.write({'passing_percent': round(100-(previous_line_record + line.percent_retained),2)})
                     print("Previous Cumulative",previous_line_record)
-                    
 
-    
+   
 
 
     @api.depends('sieve_analysis_child_lines.wt_retained')
     def _compute_total_sieve(self):
         for record in self:
             print("recordd",record)
-            record.total_sieve_analysis = sum(record.sieve_analysis_child_lines.mapped('wt_retained'))
+            total = sum(record.sieve_analysis_child_lines.mapped('wt_retained'))
+            record.total_sieve_analysis = round(total)
 
 
     # @api.depends('sieve_analysis_child_lines.wt_retained')

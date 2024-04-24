@@ -138,6 +138,8 @@ class WMMReport(models.AbstractModel):
                 plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
 
             plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
+            plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
+
             
 
             
