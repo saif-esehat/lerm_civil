@@ -382,7 +382,7 @@ class FineAggregate(models.Model):
 
     sieve_analysis_child_lines = fields.One2many('mechanical.fine.aggregate.sieve.analysis.line','parent_id',string="Parameter",
                                                   default=lambda self: self._default_sieve_analysis_child_lines())
-    total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
+    total_sieve_analysis = fields.Float(string="Total",compute="_compute_total_sieve")
     # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
 
     fineness_modulus = fields.Float(string="Fineness Modulus", compute="_compute_fineness_modulus")
