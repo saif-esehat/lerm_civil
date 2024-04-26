@@ -40,6 +40,8 @@ class ConcreteBeamReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
+        # import wdb; wdb.set_trace()
+
         if data.get('report_wizard') == True:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
         elif 'active_id' in data['context']:
@@ -65,7 +67,7 @@ class ConcreteBeamReport(models.AbstractModel):
             "grade_id":eln.grade_id.id
         }
         model = eln.get_product_base_calc_line(data).ir_model.model
-        concrete_beam_data = self.env[model].search([("id","=",eln.model_id)])
+        concrete_beam_data = self.env[model].sudo().search([("id","=",eln.model_id)])
         for ids in concrete_beam_data.child_lines:
             print("childline length",ids.length)
         return {

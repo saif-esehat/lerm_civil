@@ -29,13 +29,13 @@
                                 type="object"
                                 name="print_nabl_report"
                                 string="Print NABL Report"
-                                attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"
+                                attrs="{'invisible': [('print_button_visible', '=', False)]}"
                                 />
                         <button
                                 type="object"
                                 name="print_non_nabl_report"
                                 string="Print Non-NABL Report"
-                                attrs="{'invisible': [('state', 'not in', ('4-in_report')),('scope', 'not in', ('non_nabl'))]}"
+                                attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"
                                 />
 
                         <button type="object" 
@@ -131,7 +131,8 @@
                         <field name="witness" attrs="{'invisible': [('has_witness','!=',True)]}"/>
                     </group>
                     <group style="width:50%">
-                        <field name="scope" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
+                        <!-- <field name="scope" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/> -->
+                        <field name="scope" />
                     </group>
                     <group style="width:100%">
                         <field name="sample_description" attrs="{'readonly': [('state', '!=', '1-allotment_pending')]}"/>
@@ -189,7 +190,11 @@
 
                      <group>
                         <button name="open_form" type="object" string="Open Form" attrs="{'invisible':[('product_or_form_based','=',False)]}"/>
-                    </group>    
+                
+                    </group>  
+                    <group>
+                        <field name="print_button_visible" invisible="1"/>                
+                    </group>  
                     
            
                     <field invisible="1" name="parameters" nolabel="1" options="{'no_create': True, 'no_open': True}" />

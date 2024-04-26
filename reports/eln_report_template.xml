@@ -47,10 +47,12 @@
 						<tr>
 							<td colspan="3">Test Report no :
 							</td>
-							<td colspan="3">
+							<td t-if="(o.sample_id.scope = 'non_nabl'" colspan="3">
+								<span t-field="o.kes_no"/><span>N</span>
+							</td>
+							<td t-if="(o.sample_id.scope != 'non_nabl')" colspan="3">
 								<span t-field="o.kes_no"/>
 							</td>
-							
 							<td colspan="3">Report Issue Date :
 							</td>
 							<td colspan="3">
