@@ -1454,7 +1454,7 @@
                                             <span>8% - 30%</span>
                                         </td>
                                         <td colspan="2" t-if="k == 7">
-                                            <span>0% - 20%</span>
+                                            <span>0% - 10%</span>
                                         </td>
 
 
