@@ -3276,5 +3276,17 @@
 		</t>
 		</t>
 	</template>
+
+
+	 <!-- <template id="purchase_order_inherit" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//div[@id='total']" position="after">
+              
+                    <div >
+                        <span>Total in words: </span>
+                        <span t-field="tax_totals"/>
+                    </div>
+               
+            </xpath>
+    </template> -->
 	
 </odoo>

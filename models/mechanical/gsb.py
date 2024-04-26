@@ -174,11 +174,11 @@ class GsbMechanical(models.Model):
 
         default_dry_sieve_sizes = []
         default_elongated_sieve_sizes = []
-        dry_sieve_sizes = ['53 mm','26.5 mm', '9.5 mm', '4.75 mm','2.36 mm','850 mic','425 mic','75 mic','pan']
+        dry_sieve_sizes = ['75.0 mm','53.0 mm','26.5 mm', '9.50 mm', '4.75 mm','2.36 mm','425 mic','75 mic']
         elongation_sieve_sizes = ['63 mm', '50 mm', '40 mm', '31.5 mm', '25 mm','20 mm','16 mm','12.5 mm','10 mm','6.3 mm']
 
 
-        for i in range(9):  # You can change the number of default lines as needed
+        for i in range(8):  # You can change the number of default lines as needed
             size = {
                 'sieve_size': dry_sieve_sizes[i] # Set the default product
                 # Set the default quantity

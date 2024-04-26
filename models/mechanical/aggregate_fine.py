@@ -382,7 +382,7 @@ class FineAggregate(models.Model):
 
     sieve_analysis_child_lines = fields.One2many('mechanical.fine.aggregate.sieve.analysis.line','parent_id',string="Parameter",
                                                   default=lambda self: self._default_sieve_analysis_child_lines())
-    total_sieve_analysis = fields.Integer(string="Total",compute="_compute_total_sieve")
+    total_sieve_analysis = fields.Float(string="Total",compute="_compute_total_sieve")
     # cumulative = fields.Float(string="Cumulative",compute="_compute_cumulative")
 
     fineness_modulus = fields.Float(string="Fineness Modulus", compute="_compute_fineness_modulus")
@@ -400,9 +400,9 @@ class FineAggregate(models.Model):
             (0, 0, {'sieve_size': '4.75 mm'}),
             (0, 0, {'sieve_size': '2.36 mm'}),
             (0, 0, {'sieve_size': '1.18 mm'}),
-            (0, 0, {'sieve_size': '600 µm'}),
-            (0, 0, {'sieve_size': '300 µm'}),
-            (0, 0, {'sieve_size': '150 µm'})
+            (0, 0, {'sieve_size': '600 micron'}),
+            (0, 0, {'sieve_size': '300 micron'}),
+            (0, 0, {'sieve_size': '150 micron'})
         ]
         return default_lines
 

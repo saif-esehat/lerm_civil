@@ -1351,22 +1351,20 @@ class CoarseAggregateMechanical(models.Model):
                 if previous_line == 0:
                     if line.percent_retained == 0:
                         # print("Percent retained 0",line.percent_retained)
-                        line.write({'cumulative_retained': round(line.percent_retained,2)})
+                        line.write({'cumulative_retained': round(line.percent_retained + line.percent_retained,2)})
                         line.write({'passing_percent': 100 })
                     else:
                         # print("Percent retained else",line.percent_retained)
-                        line.write({'cumulative_retained': round(line.percent_retained,2)})
-                        line.write({'passing_percent': round(100 -line.percent_retained,2)})
+                        line.write({'cumulative_retained': round(line.percent_retained + line.percent_retained,2)})
+                        line.write({'passing_percent': round(100 -line.percent_retained - line.percent_retained,2)})
                 else:
                     previous_line_record = self.env['mechanical.coarse.aggregate.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
-                    line.write({'cumulative_retained': round(previous_line_record + line.percent_retained,2)})
+                    line.write({'cumulative_retained': previous_line_record + line.percent_retained})
                     line.write({'passing_percent': round(100-(previous_line_record + line.percent_retained),2)})
                     print("Previous Cumulative",previous_line_record)
                     
 
     
-
-
     @api.depends('sieve_analysis_child_lines.wt_retained')
     def _compute_total_sieve(self):
         for record in self:
@@ -1709,9 +1707,9 @@ class SieveAnalysisLine(models.Model):
     serial_no = fields.Integer(string="Sr. No", readonly=True, copy=False, default=1)
     sieve_size = fields.Char(string="IS Sieve Size mm")
     wt_retained = fields.Float(string="Wt. Retained in gms")
-    percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained",digits=(16,3))
-    cumulative_retained = fields.Float(string="Cum. Retained %", store=True,digits=(16,3))
-    passing_percent = fields.Float(string="Passing %",digits=(16,3))
+    percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained",digits=(16,2))
+    cumulative_retained = fields.Float(string="Cum. Retained %", store=True,digits=(16,2))
+    passing_percent = fields.Float(string="Passing %",digits=(16,2))
 
 
 
@@ -1737,13 +1735,14 @@ class SieveAnalysisLine(models.Model):
         if 'parent_id' in vals or 'wt_retained' in vals:
             for record in self:
                 if record.parent_id and record.parent_id == vals.get('parent_id') and 'wt_retained' in vals:
-                    record.percent_retained = round((vals['wt_retained'] / record.parent_id.total * 100),2) if record.parent_id.total else 0
+                    record.percent_retained = vals['wt_retained'] / record.parent_id.total * 100 if record.parent_id.total else 0
 
             new_self = super(SieveAnalysisLine, self).write(vals)
 
             if 'wt_retained' in vals:
                 for record in self:
-                    record.parent_id._compute_total_sieve()
+                    # record.parent_id._compute_total()
+                    pass
 
             return new_self
 

@@ -111,6 +111,7 @@ class WptDatasheet(models.AbstractModel):
             else:
                 eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
             model_id = eln.model_id
+           
             # differnt location for product based
             # model_name = eln.material.product_based_calculation[0].ir_model.name 
             model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
