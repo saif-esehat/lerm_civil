@@ -188,7 +188,7 @@
 
 
 
-							<tr t-if="flyash.initial_setting_time_visible and (flyash.initial_setting_nabl == 'pass' and nabl or flyash.initial_setting_nabl == 'fail' and not nabl) and not fromEln">
+							<tr t-if="flyash.initial_setting_time_visible and (flyash.initial_setting_nabl == 'pass' and nabl or (flyash.initial_setting_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl) and not fromEln">
 
 
 								<td style="text-align: center;">
@@ -336,7 +336,7 @@
 								
 							</tr> -->
 
-							<tr t-if="flyash.final_setting_time_visible and (flyash.final_setting_nabl == 'pass' and nabl or flyash.final_setting_nabl == 'fail' and not nabl) and not fromEln">
+							<tr t-if="flyash.final_setting_time_visible and (flyash.final_setting_nabl == 'pass' and nabl or (flyash.final_setting_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl) and not fromEln">
 								<!-- <tr> -->
 
 								<td style="text-align: center;">
@@ -435,7 +435,7 @@
 
 
 
-							<tr t-if="flyash.particles_retained_visible and (flyash.prcent_retaind_nabl == 'pass' and nabl or flyash.prcent_retaind_nabl == 'fail' and not nabl) and not fromEln">
+							<tr t-if="flyash.particles_retained_visible and (flyash.prcent_retaind_nabl == 'pass' and nabl or (flyash.prcent_retaind_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -531,7 +531,7 @@
 
 
 
-							<tr t-if="flyash.soundness_visible and (flyash.expansion_soundness_nabl == 'pass' and nabl or flyash.expansion_soundness_nabl == 'fail' and not nabl) and not fromEln">
+							<tr t-if="flyash.soundness_visible and (flyash.expansion_soundness_nabl == 'pass' and nabl or (flyash.expansion_soundness_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -625,7 +625,7 @@
 
 
 
-							<tr t-if="flyash.specigic_gravity_visible and (flyash.average_specific_gravity_nabl == 'pass' and nabl or flyash.average_specific_gravity_nabl == 'fail' and not nabl) and not fromEln">
+							<tr t-if="flyash.specigic_gravity_visible and (flyash.average_specific_gravity_nabl == 'pass' and nabl or (flyash.average_specific_gravity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -719,7 +719,7 @@
 
 
 
-							<tr t-if="flyash.fineness_blaine_visible and (flyash.fineness_blaine_nabl == 'pass' and nabl or flyash.fineness_blaine_nabl == 'fail' and not nabl) and not fromEln">
+							<tr t-if="flyash.fineness_blaine_visible and (flyash.fineness_blaine_nabl == 'pass' and nabl or (flyash.fineness_blaine_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -812,7 +812,7 @@
 
 
 
-							<tr t-if="flyash.lime_reactivity_visible and (flyash.lime_reactivity_nabl == 'pass' and nabl or flyash.lime_reactivity_nabl == 'fail' and not nabl) and not fromEln">
+							<tr t-if="flyash.lime_reactivity_visible and (flyash.lime_reactivity_nabl == 'pass' and nabl or (flyash.lime_reactivity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -908,7 +908,7 @@
 							<t t-if="i &lt;= 5">
 
 						
-								<tr t-if="flyash.compressive_visible and (flyash.compressive_strength_of_sample_nabl == 'pass' and nabl or flyash.compressive_strength_of_sample_nabl == 'fail' and not nabl) and not fromEln" >
+								<tr t-if="flyash.compressive_visible and (flyash.compressive_strength_of_sample_nabl == 'pass' and nabl or (flyash.compressive_strength_of_sample_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl) and not fromEln" >
 									<td style="text-align: center;padding:0px">
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>

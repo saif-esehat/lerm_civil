@@ -92,6 +92,7 @@
                                 <field name='casting_date' />
                                 <field name='date_testing'/>
                                 <field name='instrument'/>
+                                <!-- <field name="file_upload_eln"/> -->
                                 <field name='grade_ids' invisible="1"/>
                                 <field name='ir_model' invisible="1"/>
 

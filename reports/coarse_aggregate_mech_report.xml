@@ -231,7 +231,7 @@
 							</tr>
 						</thead>
 						<tbody >
-							<tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or data.specific_gravity_nabl == 'fail' and not nabl)">
+							<tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or (data.specific_gravity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -272,7 +272,7 @@
 								
 							</tr>
 
-							<tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or data.specific_gravity_nabl == 'fail' and not nabl)">
+							<tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or (data.specific_gravity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -313,7 +313,7 @@
 								
 							</tr>
 
-							<tr t-if="data.loose_bulk_visible and (data.loose_bulk_density_nabl == 'pass' and nabl or data.loose_bulk_density_nabl == 'fail' and not nabl)">
+							<tr t-if="data.loose_bulk_visible and (data.loose_bulk_density_nabl == 'pass' and nabl or (data.loose_bulk_density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -354,7 +354,7 @@
 								
 							</tr>
 
-							<tr  t-if="data.rodded_bulk_visible and (data.rodded_bulk_density_nabl == 'pass' and nabl or data.rodded_bulk_density_nabl == 'fail' and not nabl)">
+							<tr  t-if="data.rodded_bulk_visible and (data.rodded_bulk_density_nabl == 'pass' and nabl or (data.rodded_bulk_density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -395,7 +395,7 @@
 								
 							</tr>
 
-                            <tr t-if="data.impact_visible and (data.impact_value_nabl == 'pass' and nabl or data.impact_value_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.impact_visible and (data.impact_value_nabl == 'pass' and nabl or (data.impact_value_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -436,7 +436,7 @@
 								
 							</tr>
 
-                            <tr t-if="data.crushing_visible and (data.average_crushing_value_nabl == 'pass' and nabl or data.average_crushing_value_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.crushing_visible and (data.average_crushing_value_nabl == 'pass' and nabl or (data.average_crushing_value_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -477,7 +477,7 @@
 								
 							</tr>
 
-                            <tr t-if="data.elongation_visible and (data.aggregate_combine_nabl == 'pass' and nabl or data.aggregate_combine_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.elongation_visible and (data.aggregate_combine_nabl == 'pass' and nabl or (data.aggregate_combine_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -518,7 +518,7 @@
 								
 							</tr>
 
-                            <tr t-if="data.flakiness_visible and (data.aggregate_combine_nabl == 'pass' and nabl or data.aggregate_combine_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.flakiness_visible and (data.aggregate_combine_nabl == 'pass' and nabl or (data.aggregate_combine_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -559,7 +559,7 @@
 								
 							</tr>
 
-                            <tr t-if="data.abrasion_visible and (data.abrasion_value_percentage_nabl == 'pass' and nabl or data.abrasion_value_percentage_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.abrasion_visible and (data.abrasion_value_percentage_nabl == 'pass' and nabl or (data.abrasion_value_percentage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -600,7 +600,7 @@
 								
 							</tr>
 
-							<tr t-if="data.fine10_visible and (data.load_10percent_fine_values_nabl == 'pass' and nabl or data.load_10percent_fine_values_nabl == 'fail' and not nabl)">
+							<tr t-if="data.fine10_visible and (data.load_10percent_fine_values_nabl == 'pass' and nabl or (data.load_10percent_fine_values_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -641,7 +641,7 @@
 								
 							</tr>
 
-							<tr t-if="data.soundness_mgso4_visible and (data.soundness_mgso4_nabl == 'pass' and nabl or data.soundness_mgso4_nabl == 'fail' and not nabl)">
+							<tr t-if="data.soundness_mgso4_visible and (data.soundness_mgso4_nabl == 'pass' and nabl or (data.soundness_mgso4_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -682,7 +682,7 @@
 								
 							</tr>
 
-                            <tr t-if="data.soundness_na2so4_visible and (data.soundness_na2so4_nabl == 'pass' and nabl or data.soundness_na2so4_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.soundness_na2so4_visible and (data.soundness_na2so4_nabl == 'pass' and nabl or (data.soundness_na2so4_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -723,7 +723,7 @@
 								
 							</tr>
 
-                            <tr t-if="data.finer75_visible and (data.material_finer75_nabl == 'pass' and nabl or data.material_finer75_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.finer75_visible and (data.material_finer75_nabl == 'pass' and nabl or (data.material_finer75_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -764,7 +764,7 @@
 								
 							</tr> 
 							  
-                            <tr t-if="data.clay_lump_visible and (data.clay_lumps_percent_nabl == 'pass' and nabl or data.clay_lumps_percent_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.clay_lump_visible and (data.clay_lumps_percent_nabl == 'pass' and nabl or (data.clay_lumps_percent_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -805,7 +805,7 @@
 								
 							</tr>   
 
-                            <tr t-if="data.light_weight_visible and (data.light_weight_percent_nabl == 'pass' and nabl or data.light_weight_percent_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.light_weight_visible and (data.light_weight_percent_nabl == 'pass' and nabl or (data.light_weight_percent_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -846,7 +846,7 @@
 								
 							</tr>
 
-							<tr t-if="data.angularity_visible and (data.angularity_number_conformity_nabl == 'pass' and nabl or data.angularity_number_conformity_nabl == 'fail' and not nabl)">
+							<tr t-if="data.angularity_visible and (data.angularity_number_conformity_nabl == 'pass' and nabl or (data.angularity_number_conformity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -884,7 +884,7 @@
                                         </t>
 									</span>
 								</td>
-								
+								 <!-- or eln.sample_id.scope != 'nabl' -->
 							</tr>      
 
 							<tr t-if="data.aggregate_grading_visible">

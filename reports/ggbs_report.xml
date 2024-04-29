@@ -238,7 +238,7 @@
 								
 							</tr>
 
-							<tr t-if="ggbs.specific_gravity_visible and ggbs.specific_gravity_nabl == 'fail' and not nabl and not fromEln">
+							<tr t-if="ggbs.specific_gravity_visible and (ggbs.specific_gravity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -371,7 +371,7 @@
 							</tr>
 
 
-							<tr  t-if="ggbs.fineness_visible and ggbs.specific_gravity_nabl == 'fail' and nabl and not fromEln">
+							<tr  t-if="ggbs.fineness_visible and (ggbs.specific_gravity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and nabl and not fromEln">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -505,7 +505,7 @@
 								
 							</tr>
 
-							<tr t-if="ggbs.slag_activity_7_visible and ggbs.slag_7days_nabl == 'fail' and not nabl and not fromEln">
+							<tr t-if="ggbs.slag_activity_7_visible and (ggbs.slag_7days_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln">
 								<td style="border-bottom:none;text-align: center;">
 									
 								</td>
@@ -655,7 +655,7 @@
 							</tr>
 
 
-							<tr t-if="ggbs.slag_activity_7_visible and ggbs.slag_7days_nabl == 'fail' and not nabl and not fromEln">
+							<tr t-if="ggbs.slag_activity_7_visible and (ggbs.slag_7days_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln">
 
 								<td style="border-bottom:none;border-top:none">
 									<span></span>
@@ -803,7 +803,7 @@
 							</tr>
 
 
-							<tr t-if="ggbs.slag_activity_7_visible and ggbs.slag_7days_nabl == 'fail' and not nabl and not fromEln">
+							<tr t-if="ggbs.slag_activity_7_visible and (ggbs.slag_7days_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln">
 								<td style="border-bottom:none;border-top:none;text-align: center;"> 
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -939,7 +939,7 @@
 							</tr>
 
 
-							<tr t-if="ggbs.slag_activity_28_visible and ggbs.slag_28days_nabl == 'fail' and not nabl and not fromEln">
+							<tr t-if="ggbs.slag_activity_28_visible and (ggbs.slag_28days_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln">
 								<td style="border-bottom:none;border-top:none;text-align: center;">
 									
 								</td>
@@ -1089,7 +1089,7 @@
 							</tr>
 
 
-							<tr t-if="ggbs.slag_activity_28_visible and ggbs.slag_28days_nabl == 'fail' and not nabl and not fromEln">
+							<tr t-if="ggbs.slag_activity_28_visible and (ggbs.slag_28days_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln">
 
 								<td style="border-bottom:none;border-top:none">
 									<span></span>
@@ -1237,7 +1237,7 @@
 							</tr>
 
 
-							<tr t-if="ggbs.slag_activity_28_visible and ggbs.slag_28days_nabl == 'fail' and not nabl and not fromEln">
+							<tr t-if="ggbs.slag_activity_28_visible and (ggbs.slag_28days_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln">
 								<td style="border-bottom:none;border-top:none;text-align: center;"> 
 									<!-- <span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/> -->

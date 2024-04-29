@@ -80,6 +80,9 @@ class ELN(models.Model):
     instrument = fields.Many2one('maintenance.equipment',string="Instrument")
     sop = fields.Html(string='SOP',compute="comput_sop")
     date_testing = fields.Date("Date of Testing",compute="_compute_date_testing")
+    # data_sheet = fields.Binary(string="Data Sheet", attachment=True)
+
+  
 
     @api.depends('sample_id')
     def _compute_date_testing(self):
@@ -382,6 +385,13 @@ class ELN(models.Model):
     #         })
     #     self.write({'state': '2-confirm'})
     def confirm_eln(self):
+
+        # if not self.data_sheet:
+        #     raise ValidationError("Please attach a data sheet before confirming ELN.")
+
+        
+            
+
         self.sample_id.write({'state':'3-pending_verification'})
         self.sample_id.parameters_result.unlink()
             

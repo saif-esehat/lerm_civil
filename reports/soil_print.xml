@@ -354,7 +354,7 @@
 								<!-- </tr>
 							</div> -->
 							<t t-set="i" t-value="0"/>
-							<tr t-if="data.liquid_limit_visible and (data.liquid_limit_nabl == 'pass' and nabl or data.liquid_limit_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.liquid_limit_visible and (data.liquid_limit_nabl == 'pass' and nabl or (data.liquid_limit_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -445,7 +445,7 @@
 								
 							</tr>
 
-							<tr t-if="data.plastic_limit_visible and (data.plasticity_index_nabl == 'pass' and nabl or data.plasticity_index_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.plastic_limit_visible and (data.plasticity_index_nabl == 'pass' and nabl or (data.plasticity_index_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -538,7 +538,7 @@
 
 							</tr>
 
-							<tr t-if="data.plastic_limit_visible and (data.plasticity_index_nabl == 'pass' and nabl or data.plasticity_index_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.plastic_limit_visible and (data.plasticity_index_nabl == 'pass' and nabl or (data.plasticity_index_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -636,7 +636,7 @@
 							</tr> 
 
 
-							<tr t-if="data.fsi_visible and (data.max_fsi_nabl == 'pass' and nabl or data.max_fsi_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.fsi_visible and (data.max_fsi_nabl == 'pass' and nabl or (data.max_fsi_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -732,7 +732,7 @@
 
 
 
-							<tr t-if="data.heavy_visible and (data.heavy_table_nabl == 'pass' and nabl or data.heavy_table_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.heavy_visible and (data.heavy_table_nabl == 'pass' and nabl or (data.heavy_table_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -822,7 +822,7 @@
 
 
 
-							 <tr t-if="data.light_omc_visible and (data.light_omc_table_nabl == 'pass' and nabl or data.light_omc_table_nabl == 'fail' and not nabl  and not fromEln)">
+							 <tr t-if="data.light_omc_visible and (data.light_omc_table_nabl == 'pass' and nabl or (data.light_omc_table_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl  and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -912,7 +912,7 @@
 
 
  
-							<tr t-if="data.dry_density_visible and (data.degree_of_compaction_nabl == 'pass' and nabl or data.degree_of_compaction_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.dry_density_visible and (data.degree_of_compaction_nabl == 'pass' and nabl or (data.degree_of_compaction_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -1002,7 +1002,7 @@
 							</tr>
 
 
-							<tr t-if="data.moisture_content_visible and (data.moisture_content_nabl == 'pass' and nabl or data.moisture_content_nabl == 'fail' and not nabl and not fromEln)">
+							<tr t-if="data.moisture_content_visible and (data.moisture_content_nabl == 'pass' and nabl or (data.moisture_content_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />

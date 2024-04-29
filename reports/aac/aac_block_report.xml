@@ -304,7 +304,7 @@
 						</tr>
 
 
-						<tr t-if="data.moisture_visible and data.moisture_nabl == 'fail' and not nabl">
+						<tr t-if="data.moisture_visible and (data.moisture_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
                             <td colspan="1">
 								<div>
 									<span t-esc="i + 1" />
@@ -389,7 +389,7 @@
 						</tr>
 
 
-						<tr t-if="data.density_visible and data.density_nabl == 'fail' and not nabl">
+						<tr t-if="data.density_visible and (data.density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
                             <td colspan="1">
 								<div>
 									<span t-esc="i + 1" />
@@ -474,7 +474,7 @@
 						</tr>
 
 
-						<tr t-if="data.drying_shrinkage_visible and data.drying_shrinkage_aac_nabl == 'fail' and not nabl">
+						<tr t-if="data.drying_shrinkage_visible and (data.drying_shrinkage_aac_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
                             <td colspan="1">
 								<div>
 									<span t-esc="i + 1" />
@@ -599,7 +599,7 @@
 
 						</tr> -->
 
-						  <tr t-if="data.compressive_strength_visible and (data.compressive_strength_nabl == 'pass' and nabl or data.compressive_strength_nabl == 'fail' and not nabl)">
+						  <tr t-if="data.compressive_strength_visible and (data.compressive_strength_nabl == 'pass' and nabl or (data.compressive_strength_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                     <td colspan="1" >
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
