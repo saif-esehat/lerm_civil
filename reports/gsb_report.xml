@@ -278,7 +278,7 @@
 									<span t-esc="r['passing_percent']"/>
 								</td>
 								   <td colspan="2" t-if="k == 1">
-										<span>100</span>
+										<span>100 %</span>
 									</td>
 									<td colspan="2" t-if="k == 2">
 										<span>80 - 100 %</span>
@@ -308,7 +308,7 @@
 										<span>-</span>
 									</td>
 									<td colspan="2" t-if="k == 2">
-										<span>100</span>
+										<span>100 %</span>
 									</td>
 									<td colspan="2" t-if="k == 3">
 										<span>70 - 100 %</span>

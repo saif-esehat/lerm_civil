@@ -318,7 +318,7 @@
 							<tr>
 								<td colspan="12">Material/Test Name :
 									<![CDATA[&nbsp;]]>
-									<span t-field="o.material.name"/>
+									<span t-field="o.material.lab_name"/>
 								</td>
 							</tr>
 						</table>
@@ -3274,5 +3274,17 @@
 		</t>
 		</t>
 	</template>
+
+
+	 <!-- <template id="purchase_order_inherit" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//div[@id='total']" position="after">
+              
+                    <div >
+                        <span>Total in words: </span>
+                        <span t-field="tax_totals"/>
+                    </div>
+               
+            </xpath>
+    </template> -->
 	
 </odoo>

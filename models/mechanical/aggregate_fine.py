@@ -400,9 +400,9 @@ class FineAggregate(models.Model):
             (0, 0, {'sieve_size': '4.75 mm'}),
             (0, 0, {'sieve_size': '2.36 mm'}),
             (0, 0, {'sieve_size': '1.18 mm'}),
-            (0, 0, {'sieve_size': '600 µm'}),
-            (0, 0, {'sieve_size': '300 µm'}),
-            (0, 0, {'sieve_size': '150 µm'})
+            (0, 0, {'sieve_size': '600 micron'}),
+            (0, 0, {'sieve_size': '300 micron'}),
+            (0, 0, {'sieve_size': '150 micron'})
         ]
         return default_lines
 
