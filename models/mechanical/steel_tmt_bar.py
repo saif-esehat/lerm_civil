@@ -669,6 +669,15 @@ class SteelTmtBarLine(models.Model):
                         else:
                             result.nabl_status = 'non-nabl'
                         continue
+                    if result.parameter.internal_id == '9156ec17-ae78-4f98-987f-af5d39e407f2':
+                        result.result_char =self.fracture
+                        continue
+                    if result.parameter.internal_id == 'addd0c61-adb6-447d-b668-1fba0744680f':
+                        result.result_char = self.bend_test1
+                        continue
+                    if result.parameter.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
+                        result.result_char = self.re_bend_test1
+                        continue
 
         return {
                 'view_mode': 'form',
