@@ -13,7 +13,7 @@
 				</div>
 				
 			</div>
-			<div class="row backgroundimage" style="opacity:0.3; font-size:100px; width:85%; text-align:center;top:500px; right:100px; position: fixed; z-index:99;">
+			<div class="row backgroundimage" style="opacity:0.2; font-size:100px; width:85%; text-align:center;top:500px; right:100px; position: fixed; z-index:-99;">
 				<img src="/lerm_civil/static/src/img/watermark.jpg" style="width:100%;"/>
 			</div>
 			<!-- <div class="container_eln row" style="position: fixed; z-index:99;margin-bottom:20px;">
@@ -47,10 +47,10 @@
 						<tr>
 							<td colspan="3">Test Report no :
 							</td>
-							<td t-if="(o.sample_id.scope = 'non_nabl'" colspan="3">
+							<td t-if="(not nabl)" colspan="3">
 								<span t-field="o.kes_no"/><span>N</span>
 							</td>
-							<td t-if="(o.sample_id.scope != 'non_nabl')" colspan="3">
+							<td t-if="(nabl)" colspan="3">
 								<span t-field="o.kes_no"/>
 							</td>
 							<td colspan="3">Report Issue Date :

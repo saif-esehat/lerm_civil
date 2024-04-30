@@ -127,6 +127,7 @@ class GgbsMechanical(models.Model):
         for record in self:
             if record.wt_cement != 0:
                 record.normal_consistency_cement = (record.wt_water_req_cement / record.wt_cement)*100
+                
             else:
                 record.normal_consistency_cement = 0
 
@@ -737,6 +738,38 @@ class GgbsMechanical(models.Model):
 
     def open_eln_page(self):
         # import wdb; wdb.set_trace()
+        for result in self.eln_ref.parameters_result:
+                    if result.parameter.internal_id == '84946eb6-b44a-48cc-9d41-198f55346af0':
+                        result.result_char = self.normal_consistency
+                        continue
+                    if result.parameter.internal_id == '10071b15-baa4-466f-a6a7-044da708f265':
+                        result.result_char = self.average_specific_gravity
+                        if self.specific_gravity_nabl == 'pass':
+                            result.nabl_status = 'nabl'
+                        else:
+                            result.nabl_status = 'non-nabl'
+                        continue
+                    if result.parameter.internal_id == '55b3df61-8e67-4e94-86ea-98d9472f5c71':
+                        result.result_char = self.slag_activity_index_7days
+                        if self.specific_gravity_nabl == 'pass':
+                            result.nabl_status = 'nabl'
+                        else:
+                            result.nabl_status = 'non-nabl'
+                        continue
+                    if result.parameter.internal_id == 'ca17d450-c526-4092-a3a7-6b0ff7e69c0a':
+                        result.result_char = self.fineness_air_permeability
+                        if self.fineness_nabl == 'pass':
+                            result.nabl_status = 'nabl'
+                        else:
+                            result.nabl_status = 'non-nabl'
+                        continue
+                    if result.parameter.internal_id == 'c28cde20-f42a-4405-b127-b5d84fe78485':
+                        result.result_char = self.slag_activity_index_28days
+                        if self.slag_28days_nabl == 'pass':
+                            result.nabl_status = 'nabl'
+                        else:
+                            result.nabl_status = 'non-nabl'
+                        continue
 
         return {
                 'view_mode': 'form',
