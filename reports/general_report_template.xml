@@ -28,7 +28,10 @@
 						<tr>
 							<td colspan="3">Report no :
 							</td>
-							<td colspan="3">
+							<td t-if="(not nabl)" colspan="3">
+								<span t-field="o.kes_no"/><span>N</span>
+							</td>
+							<td t-if="(nabl)" colspan="3">
 								<span t-field="o.kes_no"/>
 							</td>
 							<td colspan="3">Report Date :

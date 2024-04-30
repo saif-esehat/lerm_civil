@@ -11,6 +11,8 @@ class FreeSwellIndex(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('mechanical.soil.free.swell.index.line','parent_id',string="Parameter")
 
+   
+
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()

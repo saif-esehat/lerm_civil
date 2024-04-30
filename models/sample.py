@@ -154,6 +154,7 @@ class LermSampleForm(models.Model):
         ('3-closed', 'Closed'),
     ], string='Invoice Status',  store=True, default='1-uninvoiced')
 
+    print_button_visible = fields.Boolean("Print Nabl visible",compute="_compute_print_nabl_visible")
    
 
    
@@ -189,6 +190,11 @@ class LermSampleForm(models.Model):
         string='Datasheet Upload',
         help='Attach multiple images to the sample',
     )
+    # file_upload = fields.Binary(string="Data Sheet", attachment=True)
+
+    
+   
+   
 
     report_upload = fields.Many2many(
         'ir.attachment',
@@ -198,6 +204,7 @@ class LermSampleForm(models.Model):
         string='Report Upload',
         help='Attach multiple images to the sample',
     )
+
 
    
     # @api.depends('client_refrence')
@@ -305,6 +312,14 @@ class LermSampleForm(models.Model):
     #         sample.write({'ulr_no': ref})
 
     #     return sample
+    @api.depends('scope','state')
+    def _compute_print_nabl_visible(self):
+        for record in self:
+            if record.scope == 'nabl' and record.state == '4-in_report':
+                record.print_button_visible = True
+            else:
+                record.print_button_visible =  False
+
 
     def cancel_sample(self):
         # import wdb;wdb.set_trace()
@@ -578,7 +593,7 @@ class LermSampleForm(models.Model):
 
         return {
             'type': 'ir.actions.report',
-            'report_type': 'qweb-pdf',
+            'report_type': 'qweb-html',
             'report_name': template_name,
             'report_file': template_name,
             'data' : {'fromsample' : True , 'inreport' : inreport , 'nabl' : False,'fromEln':False}

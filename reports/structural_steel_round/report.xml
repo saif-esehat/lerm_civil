@@ -413,7 +413,7 @@
 							</tr>
 
 
-							<tr  t-if="data.proof_yeid_stress1_nabl == 'pass' and nabl or data.proof_yeid_stress1_nabl == 'fail' and not nabl">
+							<tr  t-if="data.proof_yeid_stress1_nabl == 'pass' and nabl or (data.proof_yeid_stress1_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -452,7 +452,7 @@
 							</tr>
 
 
-							<tr t-if="data.ult_tens_strgth1_nabl == 'pass' and nabl or data.ult_tens_strgth1_nabl == 'fail' and not nabl">
+							<tr t-if="data.ult_tens_strgth1_nabl == 'pass' and nabl or (data.ult_tens_strgth1_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -489,7 +489,7 @@
 							</tr>
 
 
-							<tr t-if="data.elongation1_nabl == 'pass' and nabl or data.elongation1_nabl == 'fail' and not nabl">
+							<tr t-if="data.elongation1_nabl == 'pass' and nabl or (data.elongation1_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
