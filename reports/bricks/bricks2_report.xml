@@ -133,7 +133,7 @@
 
 					<!-- 1 Compressive strength  -->
 
-					<div t-if="brick.compressive_strength_visible and (brick.comp_strength_nabl == 'pass' and nabl or brick.comp_strength_nabl == 'fail' and not nabl)" style="margin-top:20px;">
+					<div t-if="brick.compressive_strength_visible and (brick.comp_strength_nabl == 'pass' and nabl or (brick.comp_strength_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)" style="margin-top:20px;">
 						<td>
 							<span>
 								<strong>Compressive strength As per IS:</strong><![CDATA[&nbsp;]]>

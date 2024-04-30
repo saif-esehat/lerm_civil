@@ -748,7 +748,7 @@
                                 </tr>
 
                                  <!-- Density -->
-                                <tr t-if="data.block_density_visible and (data.block_density_nabl == 'pass' and nabl or data.block_density_nabl == 'fail' and not nabl)">
+                                <tr t-if="data.block_density_visible and (data.block_density_nabl == 'pass' and nabl or (data.block_density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                     <td colspan="1" style="text-align: center;">
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
@@ -785,7 +785,7 @@
                                 </tr>
 
                                  <!-- Moisture Movement -->
-                                 <tr t-if="data.moisture_movment_visible and (data.moisture_movment_nabl == 'pass' and nabl or data.moisture_movment_nabl == 'fail' and not nabl)">
+                                 <tr t-if="data.moisture_movment_visible and (data.moisture_movment_nabl == 'pass' and nabl or (data.moisture_movment_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                     <td colspan="1" style="text-align: center;">
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
@@ -824,7 +824,7 @@
 
 
                                  <!-- Drying Shrinkage -->
-                                 <tr t-if="data.drying_shrinkage_visible and (data.drying_shrinkage_nabl == 'pass' and nabl or data.drying_shrinkage_nabl == 'fail' and not nabl)">
+                                 <tr t-if="data.drying_shrinkage_visible and (data.drying_shrinkage_nabl == 'pass' and nabl or (data.drying_shrinkage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                     <td colspan="1" style="text-align: center;">
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
@@ -863,7 +863,7 @@
 
 
                                  <!-- Water Absorption -->
-                                 <tr t-if="data.water_absorption_visible and (data.water_absorption_nabl == 'pass' and nabl or data.water_absorption_nabl == 'fail' and not nabl)">
+                                 <tr t-if="data.water_absorption_visible and (data.water_absorption_nabl == 'pass' and nabl or (data.water_absorption_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                     <td colspan="1" style="text-align: center;">
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
@@ -902,7 +902,7 @@
                                <t t-if="i &lt;= 6">
 
                                  <!-- Compressive Strength -->
-                                 <tr t-if="data.compressive_visible and (data.compressive_nabl == 'pass' and nabl or data.compressive_nabl == 'fail' and not nabl)">
+                                 <tr t-if="data.compressive_visible and (data.compressive_nabl == 'pass' and nabl or (data.compressive_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                     <td colspan="1" style="text-align: center;">
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>
@@ -995,7 +995,7 @@
 						</thead>
 						<tbody>
                           <!-- Compressive Strength -->
-                                 <tr t-if="data.compressive_visible and (data.compressive_nabl == 'pass' and nabl or data.compressive_nabl == 'fail' and not nabl)">
+                                 <tr t-if="data.compressive_visible and (data.compressive_nabl == 'pass' and nabl or (data.compressive_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                     <td colspan="1" style="text-align: center;">
                                         <span t-esc="i + 1" />
                                         <t t-set="i" t-value="i+1"/>

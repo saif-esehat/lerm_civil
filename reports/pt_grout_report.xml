@@ -176,7 +176,7 @@
 							</thead>
 							<tbody >
 								<!-- fludity visible -->
-							<tr t-if="ptgrout.fludity_visible and (ptgrout.fludity_nabl == 'pass' and nabl or ptgrout.fludity_nabl == 'fail' and not nabl ) and not fromEln">
+							<tr t-if="ptgrout.fludity_visible and (ptgrout.fludity_nabl == 'pass' and nabl or (ptgrout.fludity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl ) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -267,7 +267,7 @@
 							</tr>
 
 								<!-- initial setting time visible -->
-							<tr t-if="ptgrout.initial_setting_time_visible and (ptgrout.initial_setting_nabl == 'pass' and nabl or ptgrout.initial_setting_nabl == 'fail' and not nabl ) and not fromEln">
+							<tr t-if="ptgrout.initial_setting_time_visible and (ptgrout.initial_setting_nabl == 'pass' and nabl or (ptgrout.initial_setting_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl ) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -358,7 +358,7 @@
 							</tr>
 
 								<!-- final setting time visible -->
-							<tr t-if="ptgrout.final_setting_time_visible and (ptgrout.final_setting_nabl == 'pass' and nabl or ptgrout.final_setting_nabl == 'fail' and not nabl ) and not fromEln">
+							<tr t-if="ptgrout.final_setting_time_visible and (ptgrout.final_setting_nabl == 'pass' and nabl or (ptgrout.final_setting_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl ) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -449,7 +449,7 @@
 							</tr>
 
 							 	<!-- bleeding_visible -->
-							<tr t-if="ptgrout.bleeding_visible and (ptgrout.bleeding_nabl == 'pass' and nabl or ptgrout.bleeding_nabl == 'fail' and not nabl ) and not fromEln">
+							<tr t-if="ptgrout.bleeding_visible and (ptgrout.bleeding_nabl == 'pass' and nabl or (ptgrout.bleeding_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl ) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -542,7 +542,7 @@
 							</tr>
 
 								<!-- volume_change_visible -->
-							<tr t-if="ptgrout.volume_change_visible and (ptgrout.volume_nabl_1 == 'pass' and nabl or ptgrout.volume_nabl_1 == 'fail' and not nabl ) and not fromEln">
+							<tr t-if="ptgrout.volume_change_visible and (ptgrout.volume_nabl_1 == 'pass' and nabl or (ptgrout.volume_nabl_1 == 'fail' or eln.sample_id.scope != 'nabl') and not nabl ) and not fromEln">
 								<td style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -635,7 +635,7 @@
 							</tr>
 									<!-- Compressive Strength -->
 
-							<tr t-if="ptgrout.compressive_strength_visible and (ptgrout.compressive_strength_nabl == 'pass' and nabl or ptgrout.compressive_strength_nabl == 'fail' and not nabl ) and not fromEln" style="text-align: center;min-height:25px">
+							<tr t-if="ptgrout.compressive_strength_visible and (ptgrout.compressive_strength_nabl == 'pass' and nabl or (ptgrout.compressive_strength_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl ) and not fromEln" style="text-align: center;min-height:25px">
 									<td style="text-align: center;padding:0px">
 										<span t-esc="i + 1" />
 										<t t-set="i" t-value="i+1"/>
@@ -644,10 +644,10 @@
 										<div style="text-align: center; border-bottom:1px solid black;min-height:50px">
 											   <span t-field="env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_name"/>
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or ptgrout.days7_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom:1px solid black;min-height:25px">
+										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or (ptgrout.days7_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)" style="text-align: center; border-bottom:1px solid black;min-height:25px">
 											7 days
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or ptgrout.days28_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
+										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or (ptgrout.days28_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)" style="text-align: center;min-height:25px">
 											28 days
 										</div>	
 									</td>
@@ -655,7 +655,7 @@
 										<div style="text-align: center; border-bottom: 1px solid black;min-height:50px">
 											<!-- <span t-field="ptgrout.comp_average_casting_7days" t-options='{"widget": "float", "precision": 2}'/> -->
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or ptgrout.days7_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom: 1px solid black;min-height:25px">
+										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or (ptgrout.days7_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)" style="text-align: center; border-bottom: 1px solid black;min-height:25px">
 											<!-- <span t-field="ptgrout.compressive_strength_7_days" t-options='{"widget": "float", "precision": 2}'/> -->
 											<span>
 												<t t-if="ptgrout.status_7days">
@@ -666,7 +666,7 @@
 												</t>
 											</span>
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or ptgrout.days28_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
+										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or (ptgrout.days28_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)" style="text-align: center;min-height:25px">
 											
 											<!-- <span t-field="ptgrout.compressive_strength_28_days" t-options='{"widget": "float", "precision": 2}'/> -->
 											<span>
@@ -698,10 +698,10 @@
 									     </t>
 							        	</t>
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or ptgrout.days7_nabl == 'fail' and not nabl)" style="text-align: center; border-bottom:1px solid black;min-height:25px">
+										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days7_nabl == 'pass' and nabl or (ptgrout.days7_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)" style="text-align: center; border-bottom:1px solid black;min-height:25px">
 											27 Min
 										</div>
-										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or ptgrout.days28_nabl == 'fail' and not nabl)" style="text-align: center;min-height:25px">
+										<div t-if="ptgrout.compressive_strength_visible and (ptgrout.days28_nabl == 'pass' and nabl or (ptgrout.days28_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)" style="text-align: center;min-height:25px">
 											30 Min
 										</div>	
 									</td>

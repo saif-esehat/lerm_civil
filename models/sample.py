@@ -190,6 +190,11 @@ class LermSampleForm(models.Model):
         string='Datasheet Upload',
         help='Attach multiple images to the sample',
     )
+    # file_upload = fields.Binary(string="Data Sheet", attachment=True)
+
+    
+   
+   
 
     report_upload = fields.Many2many(
         'ir.attachment',
@@ -199,6 +204,7 @@ class LermSampleForm(models.Model):
         string='Report Upload',
         help='Attach multiple images to the sample',
     )
+
 
    
     # @api.depends('client_refrence')

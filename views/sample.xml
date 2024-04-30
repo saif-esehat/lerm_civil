@@ -358,6 +358,8 @@
                 <field name="state" string="State" />
                 <field name="conformity" string="Conformity" />
 
+                
+
 
                  <!-- <searchpanel>
                         <field name="status" string="Technicians" enable_counters="1"/>

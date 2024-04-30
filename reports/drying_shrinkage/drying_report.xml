@@ -177,7 +177,7 @@
 								
 								
 							
-							<tr t-if="drying.drying_shrinkage_visible and  (drying.drying_shrinkage_nabl == 'pass' and nabl or drying.drying_shrinkage_nabl == 'fail' and not nabl )">
+							<tr t-if="drying.drying_shrinkage_visible and  (drying.drying_shrinkage_nabl == 'pass' and nabl or (drying.drying_shrinkage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
@@ -215,7 +215,7 @@
 							</tr>
 
 
-							<tr t-if="drying.moisture_movement_visible and  (drying.moisture_movement_nabl == 'pass' and nabl or drying.moisture_movement_nabl == 'fail' and not nabl )">
+							<tr t-if="drying.moisture_movement_visible and  (drying.moisture_movement_nabl == 'pass' and nabl or (drying.moisture_movement_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
 								<td style="text-align: center;padding:0px">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>

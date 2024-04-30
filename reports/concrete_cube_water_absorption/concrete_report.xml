@@ -122,6 +122,7 @@
 						<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>: 
 						
 					</div>
+					
 				
 					<table>
 						<thead>
@@ -251,6 +252,7 @@
 							
 						</table>
 					</div>
+				
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
 							<div>

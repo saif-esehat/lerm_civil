@@ -419,7 +419,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="data.yield_nabl == 'pass' and nabl or data.yield_nabl == 'fail' and not nabl">
+							<tr t-if="data.yield_nabl == 'pass' and nabl or (data.yield_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -456,7 +456,7 @@
 							</tr>
 
 
-							<tr t-if="data.uts_nabl == 'pass' and nabl or data.uts_nabl == 'fail' and not nabl">
+							<tr t-if="data.uts_nabl == 'pass' and nabl or (data.uts_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -493,7 +493,7 @@
 							</tr>
 
 						
-							<tr t-if="data.elongation_nabl == 'pass' and nabl or data.elongation_nabl == 'fail' and not nabl">
+							<tr t-if="data.elongation_nabl == 'pass' and nabl or (data.elongation_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>

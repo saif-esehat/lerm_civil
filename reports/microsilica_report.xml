@@ -177,7 +177,7 @@
 
 							<!--1 Accelerated pozzolanic activity index with portland cement , 7 Days in % -->
 
-						<tr t-if="microsilica.compressive_visible and (microsilica.accelerated_pozzolanic_nabl == 'pass' and nabl or microsilica.accelerated_pozzolanic_nabl == 'fail' and not nabl and not fromEln)">
+						<tr t-if="microsilica.compressive_visible and (microsilica.accelerated_pozzolanic_nabl == 'pass' and nabl or (microsilica.accelerated_pozzolanic_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 							
 
 							
@@ -282,7 +282,7 @@
 							</td>
 						</tr>
 							<!--2 Oversize % Retained on 45 Micron wet sieve -->
-						<tr t-if="microsilica.oversize_retain_visible and (microsilica.oversize_retained_nabl == 'pass' and nabl or microsilica.oversize_retained_nabl == 'fail' and not nabl and not fromEln)">
+						<tr t-if="microsilica.oversize_retain_visible and (microsilica.oversize_retained_nabl == 'pass' and nabl or (microsilica.oversize_retained_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>2</span>
@@ -408,7 +408,7 @@
 
 
 							<!--3 Specific Gravity -->
-						<tr t-if="microsilica.specific_gravity_visible and (microsilica.specific_gravity_nabl == 'pass' and nabl or microsilica.specific_gravity_nabl == 'fail' and not nabl and not fromEln)">
+						<tr t-if="microsilica.specific_gravity_visible and (microsilica.specific_gravity_nabl == 'pass' and nabl or (microsilica.specific_gravity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>3</span>
@@ -516,7 +516,7 @@
 							
 						</tr>
 							<!--4 Compressive Strength -->
-						<tr t-if="microsilica.compressive_strength_visible and (microsilica.comp_strngth_7_days_nabl == 'pass' and nabl or microsilica.comp_strngth_7_days_nabl == 'fail' and not nabl and not fromEln)">	
+						<tr t-if="microsilica.compressive_strength_visible and (microsilica.comp_strngth_7_days_nabl == 'pass' and nabl or (microsilica.comp_strngth_7_days_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">	
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>4</span>
@@ -691,7 +691,7 @@
 						</tr>
 
 							<!--5 Oversize Percent Retained on 45 Micron IS sieve variation from Avg. % -->
-						<tr t-if="microsilica.oversize_percent_retain_visible and (microsilica.oversize_retained_nabl == 'pass' and nabl or microsilica.oversize_retained_nabl == 'fail' and not nabl and not fromEln)">
+						<tr t-if="microsilica.oversize_percent_retain_visible and (microsilica.oversize_retained_nabl == 'pass' and nabl or (microsilica.oversize_retained_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>5</span>
@@ -816,7 +816,7 @@
 						</tr>
 
 							<!--6 Dry Loose Bulk Density -->
-						<tr t-if="microsilica.bulk_density_visible and (microsilica.bulk_density_nabl == 'pass' and nabl or microsilica.bulk_density_nabl == 'fail' and not nabl and not fromEln)">
+						<tr t-if="microsilica.bulk_density_visible and (microsilica.bulk_density_nabl == 'pass' and nabl or (microsilica.bulk_density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 							<!-- <td colspan="1" style="text-align: center;">
 								<div>
 									<span>6</span>

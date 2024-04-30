@@ -238,7 +238,7 @@
 							</tr>
 
 
-							<tr  t-if="data.ult_tens_strgth_nabl == 'pass' and nabl or data.ult_tens_strgth_nabl == 'fail' and not nabl">
+							<tr  t-if="data.ult_tens_strgth_nabl == 'pass' and nabl or (data.ult_tens_strgth_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl">
 								<td >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_name"/>
                                 </td>
@@ -266,7 +266,7 @@
 							</tr>
 
 
-							<tr  t-if="data.total_elongation_nabl == 'pass' and nabl or data.total_elongation_nabl == 'fail' and not nabl" >
+							<tr  t-if="data.total_elongation_nabl == 'pass' and nabl or (data.total_elongation_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl" >
 								<td >
                                     <span t-field="env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_name"/>
                                 </td>

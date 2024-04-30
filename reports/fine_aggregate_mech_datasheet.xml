@@ -1524,7 +1524,7 @@
                                 
                             
 
-                            <tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or data.specific_gravity_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or (data.specific_gravity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -1572,7 +1572,7 @@
 
 
 
-                            <tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or data.specific_gravity_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or (data.specific_gravity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
@@ -1623,7 +1623,7 @@
 
 
 
-                            <tr t-if="data.loose_bulk_visible and (data.loose_bulk_density_nabl == 'pass' and nabl or data.loose_bulk_density_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.loose_bulk_visible and (data.loose_bulk_density_nabl == 'pass' and nabl or (data.loose_bulk_density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
@@ -1672,7 +1672,7 @@
                                 </td>
                             </tr>
 
-                            <tr t-if="data.rodded_bulk_visible and (data.rodded_bulk_density_nabl == 'pass' and nabl or data.rodded_bulk_density_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.rodded_bulk_visible and (data.rodded_bulk_density_nabl == 'pass' and nabl or (data.rodded_bulk_density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
@@ -1721,7 +1721,7 @@
                             </tr>
 
 
-                            <tr t-if="data.moisture_content_visible and (data.moisture_content_nabl == 'pass' and nabl or data.moisture_content_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.moisture_content_visible and (data.moisture_content_nabl == 'pass' and nabl or (data.moisture_content_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
@@ -1770,7 +1770,7 @@
                             </tr>
 
 
-                            <tr t-if="data.soundness_mgso4_visible and (data.soundness_mgso4_nabl == 'pass' and nabl or data.soundness_mgso4_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.soundness_mgso4_visible and (data.soundness_mgso4_nabl == 'pass' and nabl or (data.soundness_mgso4_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
@@ -1818,7 +1818,7 @@
                                 </td>
                             </tr>
 
-                            <tr t-if="data.soundness_na2so4_visible and (data.soundness_na2so4_nabl == 'pass' and nabl or data.soundness_na2so4_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.soundness_na2so4_visible and (data.soundness_na2so4_nabl == 'pass' and nabl or (data.soundness_na2so4_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
@@ -1866,7 +1866,7 @@
                                 </td>
                             </tr>
                        
-                            <tr t-if="data.clay_lump_visible and (data.clay_lumps_percent_nabl == 'pass' and nabl or data.clay_lumps_percent_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.clay_lump_visible and (data.clay_lumps_percent_nabl == 'pass' and nabl or (data.clay_lumps_percent_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
@@ -1921,7 +1921,7 @@
                         <table>
                         
 
-                            <tr t-if="data.light_weight_visible and (data.light_weight_percent_nabl == 'pass' and nabl or data.light_weight_percent_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.light_weight_visible and (data.light_weight_percent_nabl == 'pass' and nabl or (data.light_weight_percent_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
@@ -1969,7 +1969,7 @@
                                 </td>
                             </tr>
 
-                            <tr t-if="data.finer75_visible and (data.material_finer75_nabl == 'pass' and nabl or data.material_finer75_nabl == 'fail' and not nabl)">
+                            <tr t-if="data.finer75_visible and (data.material_finer75_nabl == 'pass' and nabl or (data.material_finer75_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
                                     <div>
                                         <span t-esc="i + 1" />
