@@ -148,7 +148,7 @@
                                     <field name="test_method" optional="show" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" string="Parameter Test Method" />
                                     <field name="specification_permissible_limit" optional="show" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />                                    
                                     <field name="specification" optional="show" attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" />
-                                    <field name="nabl_status" optional="show" attrs="{'invisible': [('parent.is_product_based_calculation', '=', True)], 'readonly': [('result_type', '=', 'number')]}" />
+                                    <field name="nabl_status" optional="show" attrs="{'readonly': [('result_type', '=', 'number')]}" />
                                     <!-- <field name="nabl_status"  attrs="{'column_invisible': [('parent.is_product_based_calculation', '=', True)]}" /> -->
                                     <field name="conformity_status"  optional="show"
                                            decoration-success="conformity_status == 'pass'" 
