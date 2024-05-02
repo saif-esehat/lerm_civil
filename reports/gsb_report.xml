@@ -1065,18 +1065,7 @@
 										<span t-field="data.aggregate_flakiness"  t-options='{"widget": "float", "precision": 2}'/>
 									</div>
 								</td>
-								<td colspan="2" style="text-align: center;">
-									<div>
-										<span>
-											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')]).unit.name"/>
-										</span>
-									</div>
-									</td>
-									<td colspan="2" style="text-align: center;">
-										<div>
-											<span t-field="data.aggregate_flakiness"  t-options='{"widget": "float", "precision": 2}'/>
-										</div>
-									</td>
+								
 									<td colspan="2" style="text-align: center;border-bottom:none;">
 										<div>
 											<span>
@@ -1171,18 +1160,7 @@
 										<span t-field="data.aggregate_elongation"  t-options='{"widget": "float", "precision": 2}'/>
 									</div>
 								</td>
-								<td colspan="2" style="text-align: center;">
-									<div>
-										<span>
-											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')]).unit.name"/>
-										</span>
-									</div>
-									</td>
-									<td colspan="2" style="text-align: center;">
-										<div>
-											<span t-field="data.aggregate_elongation"  t-options='{"widget": "float", "precision": 2}'/>
-										</div>
-									</td>
+								
 									<td colspan="2" style="text-align: center;border-top:none;">
 										<div>
 											<span>

@@ -210,33 +210,33 @@
 					<table style="margin-top:10px">
 
 							<tr cols="12" t-if="data.water_absorbtion_visible or data.elongation_visible or data.flakiness_visible or data.abrasion_visible or data.impact_visible or data.plastic_visible or data.liquid_limit_visible or data.plasticity_index_visible" >
-							    <th style="text-align: center;">
+							    <th style="text-align: center; width: 5%;">
 									<span>
 										Sr. No
 									</span>
 								</th >
-								<th colspan="2" style="text-align: center;" > 
+								<th colspan="2" style="text-align: center; width: 20%;" > 
 									<span>
 										Test Parameter
 									</span>
 								</th>
-								<th colspan="2" style="text-align: center;">
+								<th colspan="2" style="text-align: center; width: 10%;">
 									<span>
 										Unit
 									</span>
 								</th>
 								
-								<th colspan="2" style="text-align: center;">
+								<th colspan="2" style="text-align: center; width: 10%;">
 									<span>
 										Test Result
 									</span>
 								</th>
-								<th colspan="2" style="max-width: 250px;text-align: center;">
+								<th colspan="2" style="text-align: center; width: 30%;">
 									<span>
 										<span t-esc="eln.material.specifications"/>
 									</span>
 								</th>
-								<th colspan="2" style="max-width: 200px;text-align: center;">
+								<th colspan="2" style="text-align: center; width: 30%;">
 									<span>
 										<span t-esc="eln.material.method_reference"/>
 										
@@ -927,36 +927,36 @@
 
 					</table>
 
-						<div t-if="i &gt; 5" style="page-break-after: always;"/>
+						<div t-if="i &gt; 3" style="page-break-after: always;"/>
 						<table>
-							<tr cols="12" t-if="i &gt; 5" >
-							    <th style="text-align: center;">
+							<tr cols="12" t-if="i &gt; 3">
+							    <th style="text-align: center; width: 5%;">
 									<span>
 										Sr. No
 									</span>
 								</th >
-								<th colspan="2" style="text-align: center;" > 
+								<th colspan="2" style="text-align: center; width: 20%;" > 
 									<span>
 										Test Parameter
 									</span>
 								</th>
-								<th colspan="2" style="text-align: center;">
+								<th colspan="2" style="text-align: center; width: 10%;">
 									<span>
 										Unit
 									</span>
 								</th>
 								
-								<th colspan="2" style="text-align: center;">
+								<th colspan="2" style="text-align: center; width: 10%;">
 									<span>
 										Test Result
 									</span>
 								</th>
-								<th colspan="2" style="max-width: 250px;text-align: center;">
+								<th colspan="2" style="text-align: center; width: 30%;">
 									<span>
 										<span t-esc="eln.material.specifications"/>
 									</span>
 								</th>
-								<th colspan="2" style="max-width: 200px;text-align: center;">
+								<th colspan="2" style="text-align: center; width: 30%;">
 									<span>
 										<span t-esc="eln.material.method_reference"/>
 										
