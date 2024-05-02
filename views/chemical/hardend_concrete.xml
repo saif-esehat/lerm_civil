@@ -425,6 +425,45 @@
                         <field name='average_reduction_nabl'/>
                     </group> 
 
+
+
+                     <!-- cement_conten  -->
+                    <group attrs="{'invisible': [('cement_conten_visible', '=', False)]}">
+                        <h1>
+                            <field name="cement_content_name" readonly="1" nolabel="1"/>
+                            <field name="cement_conten_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('cement_conten_visible', '=', False)]}">
+                      <group style="white-space:nowrap; width:60%">
+                      <field name="cement_content_mass"/>
+                       
+                      <field name="cement_content_residue"/>
+                       
+                      <field name="cement_content_residue_af"/>
+                       
+                      <field name="cement_content_diff"/>
+                       
+                      <field name="cement_content_sio2"/>
+                       
+                      <field name="cement_content"/>
+                                              
+                      </group>
+
+                    </group>
+                      <group attrs="{'invisible': [('cement_conten_visible', '=', False)]}">
+                          
+                        <field name='cement_content_conformity'
+                               decoration-success="cement_content_conformity == 'pass'" 
+                               decoration-danger="cement_content_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='cement_content_nabl'/>
+                    </group> 
+
+
+                    
+
                 
                 </sheet>
             </form>

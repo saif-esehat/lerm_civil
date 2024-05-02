@@ -682,6 +682,79 @@
 					</div>
 
 
+					  <!-- cement_content_ -->
+                  <div t-if="data.cement_conten_visible" style="margin-top:20px">
+					
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_name"/>
+						</div>
+
+                        <table style="margin-top:20px">
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Mass of Sample taken :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_mass"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt of crucible+ignited residue :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_residue"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt of crucible+After HF residue :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_residue_af"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Diff=A2-A3 :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_diff"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Sio2=A4*100/A1 :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_sio2"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Cement Content=A5/0.2140 :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content"/>	
+								</td>
+                                
+							</tr>
+                          
+                        </table>
+                </div>
+
+
 			
 						
 
