@@ -171,6 +171,11 @@ class FlexuralStrengthConcreteBeam(models.Model):
 
     def open_eln_page(self):
         # import wdb; wdb.set_trace()
+        for result in self.eln_ref.parameters_result:
+            if result.parameter.internal_id == '19edc74f-c7b2-45b6-8696-e97c19e81993':
+                result.result_char = round(self.average_flexural_strength,2)
+                continue
+            
 
         return {
                 'view_mode': 'form',
