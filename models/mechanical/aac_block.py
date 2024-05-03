@@ -44,7 +44,23 @@ class AacBlockMechanical(models.Model):
 
     def open_eln_page(self):
         # import wdb; wdb.set_trace()
+        for result in self.eln_ref.parameters_result:
+                    if result.parameter.internal_id == '0fc481e6-8097-4275-b80f-48ebdbcfe244':
+                        result.result_char = round(self.average_moisture_content,2)
+                        if self.moisture_nabl == 'pass':
+                            result.nabl_status = 'nabl'
+                        else:
+                            result.nabl_status = 'non-nabl'
+                        continue
 
+                    if result.parameter.internal_id == '6af641b7-4ef4-4e51-abeb-57dd2abe29a4':
+                        result.result_char = round(self.average_density,2)
+                        if self.density_nabl == 'pass':
+                            result.nabl_status = 'nabl'
+                        else:
+                            result.nabl_status = 'non-nabl'
+                        continue
+                   
         return {
                 'view_mode': 'form',
                 'res_model': "lerm.eln",
