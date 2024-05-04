@@ -118,6 +118,14 @@ class MechanicalConcreteCube(models.Model):
 
     def open_eln_page(self):
         # import wdb; wdb.set_trace()
+        for result in self.eln_ref.parameters_result:
+            if result.parameter.internal_id == 'eb26db03-17c1-48ac-8462-9671e4d3d09f':
+                result.result_char = round(self.average_strength,2)
+                if self.nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
 
         return {
                 'view_mode': 'form',

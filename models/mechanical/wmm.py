@@ -238,19 +238,19 @@ class WmmMechanical(models.Model):
             record.water_absorbtion_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','51e6dcfa-6d14-468e-8488-6d100818e924')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','51e6dcfa-6d14-468e-8488-6d100818e924')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.water_absorbtion - record.water_absorbtion*mu_value
-                    upper = record.water_absorbtion + record.water_absorbtion*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.water_absorbtion_nabl = 'pass'
-                        break
-                    else:
-                        record.water_absorbtion_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.water_absorbtion - record.water_absorbtion*mu_value
+            upper = record.water_absorbtion + record.water_absorbtion*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.water_absorbtion_nabl = 'pass'
+                break
+            else:
+                record.water_absorbtion_nabl = 'fail'
 
 
 
@@ -347,19 +347,19 @@ class WmmMechanical(models.Model):
             record.aggregate_flakiness_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','b8390baa-2d4b-47f4-b9ee-7a4a5b176b97')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','b8390baa-2d4b-47f4-b9ee-7a4a5b176b97')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.aggregate_flakiness - record.aggregate_flakiness*mu_value
-                    upper = record.aggregate_flakiness + record.aggregate_flakiness*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.aggregate_flakiness_nabl = 'pass'
-                        break
-                    else:
-                        record.aggregate_flakiness_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.aggregate_flakiness - record.aggregate_flakiness*mu_value
+            upper = record.aggregate_flakiness + record.aggregate_flakiness*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.aggregate_flakiness_nabl = 'pass'
+                break
+            else:
+                record.aggregate_flakiness_nabl = 'fail'
 
 
 
@@ -484,19 +484,19 @@ class WmmMechanical(models.Model):
             record.abrasion_value_percentage_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','7edace9a-a4ae-451c-a4cf-36d2c042ed7d')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','7edace9a-a4ae-451c-a4cf-36d2c042ed7d')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.abrasion_value_percentage - record.abrasion_value_percentage*mu_value
-                    upper = record.abrasion_value_percentage + record.abrasion_value_percentage*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.abrasion_value_percentage_nabl = 'pass'
-                        break
-                    else:
-                        record.abrasion_value_percentage_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.abrasion_value_percentage - record.abrasion_value_percentage*mu_value
+            upper = record.abrasion_value_percentage + record.abrasion_value_percentage*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.abrasion_value_percentage_nabl = 'pass'
+                break
+            else:
+                record.abrasion_value_percentage_nabl = 'fail'
 
     # Impact Value 
     impact_value_name = fields.Char("Name",default="Impact Value")
@@ -555,19 +555,19 @@ class WmmMechanical(models.Model):
             record.average_impact_value_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','aaea4989-7446-446e-a018-8a5f9dcfd549')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','aaea4989-7446-446e-a018-8a5f9dcfd549')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_impact_value - record.average_impact_value*mu_value
-                    upper = record.average_impact_value + record.average_impact_value*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.average_impact_value_nabl = 'pass'
-                        break
-                    else:
-                        record.average_impact_value_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_impact_value - record.average_impact_value*mu_value
+            upper = record.average_impact_value + record.average_impact_value*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.average_impact_value_nabl = 'pass'
+                break
+            else:
+                record.average_impact_value_nabl = 'fail'
 
     # Liquid Limit
     liquid_limit_name = fields.Char("Name",default="Liquid Limit")
@@ -649,19 +649,19 @@ class WmmMechanical(models.Model):
             record.liquid_limit_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','88627a7b-c438-4d13-bfde-330ee0005734')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','88627a7b-c438-4d13-bfde-330ee0005734')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.liquid_limit - record.liquid_limit*mu_value
-                    upper = record.liquid_limit + record.liquid_limit*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.liquid_limit_nabl = 'pass'
-                        break
-                    else:
-                        record.liquid_limit_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.liquid_limit - record.liquid_limit*mu_value
+            upper = record.liquid_limit + record.liquid_limit*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.liquid_limit_nabl = 'pass'
+                break
+            else:
+                record.liquid_limit_nabl = 'fail'
 
 
 
@@ -726,19 +726,19 @@ class WmmMechanical(models.Model):
             record.average_plastic_moisture_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','ed625cc1-4295-4d00-977f-205b7a508363')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','ed625cc1-4295-4d00-977f-205b7a508363')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_plastic_moisture - record.average_plastic_moisture*mu_value
-                    upper = record.average_plastic_moisture + record.average_plastic_moisture*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.average_plastic_moisture_nabl = 'pass'
-                        break
-                    else:
-                        record.average_plastic_moisture_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_plastic_moisture - record.average_plastic_moisture*mu_value
+            upper = record.average_plastic_moisture + record.average_plastic_moisture*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.average_plastic_moisture_nabl = 'pass'
+                break
+            else:
+                record.average_plastic_moisture_nabl = 'fail'
 
     # Plasticity Index
     plasticity_index_visible = fields.Boolean("Plasticity Index Visible",compute="_compute_visible")
@@ -790,19 +790,19 @@ class WmmMechanical(models.Model):
             record.plasticity_index_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','6fd54acc-61fd-478f-9bcf-6817965312f1')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','6fd54acc-61fd-478f-9bcf-6817965312f1')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.plasticity_index - record.plasticity_index*mu_value
-                    upper = record.plasticity_index + record.plasticity_index*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.plasticity_index_nabl = 'pass'
-                        break
-                    else:
-                        record.plasticity_index_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.plasticity_index - record.plasticity_index*mu_value
+            upper = record.plasticity_index + record.plasticity_index*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.plasticity_index_nabl = 'pass'
+                break
+            else:
+                record.plasticity_index_nabl = 'fail'
 
     # Density Relation Heavy Compaction
     density_relation_name = fields.Char("Name",default="Density Relation Using Heavy Compaction")

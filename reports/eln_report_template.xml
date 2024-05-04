@@ -53,12 +53,28 @@
 							<td t-if="(nabl)" colspan="3">
 								<span t-field="o.kes_no"/>
 							</td> -->
-							<td t-if="(not nabl)" colspan="3">
+							<t t-if="fromEln">
+								<td t-if="(eln.sample_id.scope == 'non_nabl')" colspan="3">
+									<span t-field="o.kes_no"/><span>N</span>
+								</td>
+								<td t-if="(eln.sample_id.scope == 'nabl')" colspan="3">
+									<span t-field="o.kes_no"/>
+								</td>
+							</t>
+							<t t-else="">
+								<td t-if="(eln.sample_id.scope == 'non_nabl') or not nabl" colspan="3">
+									<span t-field="o.kes_no"/><span>N</span>
+								</td>
+								<td t-if="(eln.sample_id.scope == 'nabl') or nabl" colspan="3">
+									<span t-field="o.kes_no"/>
+								</td>
+							</t>
+							<!-- <td t-if="(eln.sample_id.scope == 'non_nabl' or not nabl) and not fromEln" colspan="3">
 								<span t-field="o.kes_no"/><span>N</span>
 							</td>
-							<td t-if="(nabl)" colspan="3">
+							<td t-if="(eln.sample_id.scope == 'nabl' or nabl) and not fromEln" colspan="3">
 								<span t-field="o.kes_no"/>
-							</td>
+							</td> -->
 							<td colspan="3">Report Issue Date :
 							</td>
 							<td colspan="3">
