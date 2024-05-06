@@ -152,23 +152,38 @@
 										Water Absorption  %	
 									</span>
 								</th>
-								
+								<th style="text-align: center;font-weight: bold;">	 
+									<span>
+										Average Water Absorption %
+									</span>
+								</th>
+								<th style="text-align: center;font-weight: bold;">	 
+									<span>
+										Correction Factor = Volume (mm3) / (Surface Area (mm2) * 12.5)
+									</span>
+								</th>
+								<th style="text-align: center;font-weight: bold;">	 
+									<span>
+										Water Absorption after correction Factor
+									</span>
+								</th>
 								
 							</tr>
 						</thead>
 						<tbody>
-							<!-- <t t-set="i" t-value="0"/> -->
+							<t t-set="i" t-value="0"/>
 							<!-- non nabl -->
+							<t t-set="child_lines" t-value="len(data.child_lines)"/>
 							<tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'fail' and not nabl">
-								<!-- <td>
+								<td>
 									<div>
 										<span t-esc="i + 1"/>
 										<t t-set="i" t-value="i+1"/>
 									</div>
-                  				</td> -->
-								<td style="text-align: center;">
+                  				</td>
+								<!-- <td style="text-align: center;">
 									<span t-esc="r.sr_no"/>
-								</td>
+								</td> -->
 								<td style="text-align: center;">
 									<span t-esc="r.sample_id"/>
 								</td>
@@ -182,6 +197,21 @@
 								<td style="text-align: center;">
 									<span t-esc="r.water_absorption_percent" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
+								<t t-if="i== 1">
+								<td t-att-rowspan='child_lines' style="text-align: center; vertical-align: middle;">
+									<span t-field="data.average_concrete_cube_water" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+								</t>
+								<t t-if="i== 1">
+								<td t-att-rowspan='child_lines' style="text-align: center; vertical-align: middle;">
+									<span t-field="data.average_concrete_cube_water" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+								</t>
+								<t t-if="i== 1">
+								<td t-att-rowspan='child_lines' style="text-align: center; vertical-align: middle;">
+									<span t-field="data.water_correction_factor" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+								</t>
 								
 							</tr>
 
@@ -209,13 +239,14 @@
 								<td style="text-align: center;">
 									<span t-esc="r.water_absorption_percent" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
+								
 							</tr>
 
 							
 						</tbody>
 					</table>
 
-					<div style="margin-top:10px">
+					<!-- <div style="margin-top:10px">
 						<table>
 							<tr t-if="data.nabl == 'pass' and nabl"> 
 								<td colspan="12">Average Water Absorption %	 :<![CDATA[&nbsp;]]>
@@ -251,7 +282,7 @@
 							</tr>
 							
 						</table>
-					</div>
+					</div> -->
 				
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
