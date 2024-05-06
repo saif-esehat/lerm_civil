@@ -750,7 +750,7 @@ class WmmMechanical(models.Model):
     @api.depends('average_plastic_moisture','liquid_limit')
     def _compute_plasticity_limit(self):
         for record in self:
-            record.plasticity_index = 46.14 - record.average_plastic_moisture
+            record.plasticity_index = record.liquid_limit - record.average_plastic_moisture
 
     plasticity_index_conformity = fields.Selection([
             ('pass', 'Pass'),
