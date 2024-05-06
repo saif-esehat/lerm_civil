@@ -634,50 +634,50 @@ class SteelTmtBarLine(models.Model):
     def open_eln_page(self):
         # import wdb; wdb.set_trace()
         for result in self.eln_ref.parameters_result:
-                    if result.parameter.internal_id == '7da4cce7-4027-4d73-955e-ca7f7a2a2228':
-                        result.result_char = round(self.ult_tens_strgth,2)
-                        if self.uts_nabl == 'pass':
-                            result.nabl_status = 'nabl'
-                        else:
-                            result.nabl_status = 'non-nabl'
-                        continue
-                    if result.parameter.internal_id == 'c732ed77-4c06-4cd4-ae85-b7424c1a24c7':
-                        result.result_char = round(self.proof_yeid_stress,2)
-                        if self.yield_nabl == 'pass':
-                            result.nabl_status = 'nabl'
-                        else:
-                            result.nabl_status = 'non-nabl'
-                        continue
-                    if result.parameter.internal_id == 'b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725':
-                        result.result_char = self.percent_elongation
-                        if self.elongation_nabl == 'pass':
-                            result.nabl_status = 'nabl'
-                        else:
-                            result.nabl_status = 'non-nabl'
-                        continue
-                    if result.parameter.internal_id == 'de4bb55e-9318-4725-ac44-fd1850d9e2eb':
-                        result.result_char = round(self.ts_ys_ratio,2)
-                        if self.ts_ys_nabl == 'pass':
-                            result.nabl_status = 'nabl'
-                        else:
-                            result.nabl_status = 'non-nabl'
-                        continue
-                    if result.parameter.internal_id == '15558232-8a13-472c-b10d-1fc011e63aeb':
-                        result.result_char = round(self.weight_per_meter,3)
-                        if self.weight_per_meter_nabl == 'pass':
-                            result.nabl_status = 'nabl'
-                        else:
-                            result.nabl_status = 'non-nabl'
-                        continue
-                    if result.parameter.internal_id == '9156ec17-ae78-4f98-987f-af5d39e407f2':
-                        result.result_char =self.fracture
-                        continue
-                    if result.parameter.internal_id == 'addd0c61-adb6-447d-b668-1fba0744680f':
-                        result.result_char = self.bend_test1
-                        continue
-                    if result.parameter.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
-                        result.result_char = self.re_bend_test1
-                        continue
+            if result.parameter.internal_id == '7da4cce7-4027-4d73-955e-ca7f7a2a2228':
+                result.result_char = round(self.ult_tens_strgth,2)
+                if self.uts_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            if result.parameter.internal_id == 'c732ed77-4c06-4cd4-ae85-b7424c1a24c7':
+                result.result_char = round(self.proof_yeid_stress,2)
+                if self.yield_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            if result.parameter.internal_id == 'b4ae8d8f-9cbd-4bf5-abe4-c0bf0379b725':
+                result.result_char = self.percent_elongation
+                if self.elongation_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            if result.parameter.internal_id == 'de4bb55e-9318-4725-ac44-fd1850d9e2eb':
+                result.result_char = round(self.ts_ys_ratio,2)
+                if self.ts_ys_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            if result.parameter.internal_id == '15558232-8a13-472c-b10d-1fc011e63aeb':
+                result.result_char = round(self.weight_per_meter,3)
+                if self.weight_per_meter_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            if result.parameter.internal_id == '9156ec17-ae78-4f98-987f-af5d39e407f2':
+                result.result_char =self.fracture
+                continue
+            if result.parameter.internal_id == 'addd0c61-adb6-447d-b668-1fba0744680f':
+                result.result_char = self.bend_test1
+                continue
+            if result.parameter.internal_id == 'f781bfd8-550b-45f4-81ac-43f856d147b8':
+                result.result_char = self.re_bend_test1
+                continue
 
         return {
                 'view_mode': 'form',

@@ -1565,6 +1565,63 @@ class CoarseAggregateMechanical(models.Model):
 
     def open_eln_page(self):
         # import wdb; wdb.set_trace()
+        for result in self.eln_ref.parameters_result:
+            # crushing 
+            if result.parameter.internal_id == 'ee2d3ead-3bf8-4ae5-8e5d-dfe983111f71':
+                result.result_char = round(self.average_crushing_value,2)
+                if self.average_crushing_value_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # abrasion 
+            if result.parameter.internal_id == '37f2161e-5cc0-413f-b76c-10478c65baf9':
+                result.result_char = round(self.abrasion_value_percentage,2)
+                if self.abrasion_value_percentage_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # specific gravity 
+            if result.parameter.internal_id == '3114db41-cfa7-49ad-9324-fcdbc9661038':
+                result.result_char = round(self.specific_gravity,2)
+                if self.specific_gravity_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # impact value 
+            if result.parameter.internal_id == '2bd241bd-4bc3-4fe0-bea2-c1c15ff867a2':
+                result.result_char = round(self.average_impact_value,2)
+                if self.impact_value_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # fine 10
+            if result.parameter.internal_id == '5f506c08-4369-491d-93a6-030514c29661':
+                result.result_char = round(self.load_10percent_fine_values,2)
+                if self.load_10percent_fine_values_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # soundness na2so4
+            if result.parameter.internal_id == '153f3c8b-6ccb-4db0-b89d-02db61f61e81':
+                result.result_char = round(self.soundness_na2so4,2)
+                if self.soundness_na2so4_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # soundness mgso4
+            if result.parameter.internal_id == '89650e58-11a6-42af-8eb7-187467443a79':
+                result.result_char = round(self.soundness_mgso4,2)
+                if self.soundness_mgso4_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
 
         return {
                 'view_mode': 'form',
