@@ -209,6 +209,10 @@
 								<td style="text-align: center;">
 									<span t-esc="r.water_absorption_percent" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
+
+								<td>
+									<span t-field="data.average_concrete_cube_water" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
 							</tr>
 
 							

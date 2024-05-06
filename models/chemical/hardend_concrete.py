@@ -675,7 +675,7 @@ class ChemicalHasdenedConcrete(models.Model):
             else:
                 record.sulphate_nabl = 'fail'
 
-
+    # Cement Content 
     cement_content_name = fields.Char("Name",default="Cement Content")
     cement_conten_visible = fields.Boolean("Cement Content",compute="_compute_visible")
 
@@ -763,7 +763,80 @@ class ChemicalHasdenedConcrete(models.Model):
                 record.cement_content_nabl = 'fail'
 
 
+    cement_content_1_name = fields.Char("Name",default="Cement Content -1")
+    cement_content_1_visible = fields.Boolean("Cement Content",compute="_compute_visible")
 
+    cement_content_wt_sample = fields.Float("Wt of Sample (gm)")
+    cement_content_br = fields.Float("BR of 0.01N EDTA")
+    cement_content_normality = fields.Float("Normality of EDTA")
+    cement_content_dilution = fields.Float("Dilution")
+    cement_content_br_n_dilution = fields.Float("BR *0.05608*N*100*dilution/S.wt " , compute="_compute_cement_content_br_n_dilution")
+    cement_content_1 = fields.Float("Cement Content", compute="_compute_cement_content")
+
+
+
+    @api.depends('cement_content_wt_sample','cement_content_br','cement_content_normality','cement_content_dilution')
+    def _compute_cement_content_br_n_dilution(self):
+        for record in self:
+            if record.cement_content_wt_sample != 0:
+                cement_content_br_n_dilution = (record.cement_content_br * record.cement_content_normality * 0.5608 * record.cement_content_dilution * 100)/record.cement_content_wt_sample
+                record.cement_content_br_n_dilution = round(cement_content_br_n_dilution,2)
+
+    @api.depends('cement_content_br_n_dilution')
+    def _compute_cement_content(self):
+        for record in self:
+            cement_content_1 = (record.cement_content_br_n_dilution * 100 )/63.5
+            record.cement_content_1 = round(cement_content_1,2)
+
+    cement_content_1_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity",compute="_compute_cement_content_1_conformity", store=True)
+
+    @api.depends('cement_content','eln_ref','grade')
+    def _compute_cement_content_1_conformity(self):
+        
+        for record in self:
+            record.cement_content_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.cement_content - record.cement_content*mu_value
+                    upper = record.cement_content + record.cement_content*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.cement_content_1_conformity = 'pass'
+                        break
+                    else:
+                        record.cement_content_1_conformity = 'fail'
+
+    cement_content_1_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_cement_content_1_nabl",  store=True)
+
+    @api.depends('cement_content','eln_ref','grade')
+    def _compute_cement_content_1_nabl(self):
+        
+        for record in self:
+            record.cement_content_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')])
+            materials = self.env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.cement_content - record.cement_content*mu_value
+            upper = record.cement_content + record.cement_content*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.cement_content_1_nabl = 'pass'
+                break
+            else:
+                record.cement_content_1_nabl = 'fail'
 
 
     
@@ -779,6 +852,7 @@ class ChemicalHasdenedConcrete(models.Model):
             record.chloride_visible1 = False
             record.chloride_visible2 = False
             record.cement_conten_visible = False
+            record.cement_conten_1_visible = False
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
                 if sample.internal_id == 'e9f2301d-bba0-42a2-bca8-ecbc5882a2b7':
@@ -797,6 +871,8 @@ class ChemicalHasdenedConcrete(models.Model):
                     record.chloride_visible2 = True
                 if sample.internal_id == 'd8bbd906-0f24-4c77-abc6-b2a8a00d91e6':
                     record.cement_conten_visible = True
+                if sample.internal_id == '97527435-edbc-4d33-817f-9596b56b4cd0':
+                    record.cement_conten_1_visible = True
                     	
 
     

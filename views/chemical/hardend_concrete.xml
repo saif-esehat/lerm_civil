@@ -462,6 +462,41 @@
                     </group> 
 
 
+                <!-- cement content 1 -->
+                <group attrs="{'invisible': [('cement_content_1_visible', '=', False)]}">
+                        <h1>
+                            <field name="cement_content_1_name" readonly="1" nolabel="1"/>
+                            <field name="cement_content_1_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('cement_content_1_visible', '=', False)]}">
+                      <group style="white-space:nowrap; width:60%">
+                      <field name="cement_content_wt_sample"/>
+                       
+                      <field name="cement_content_br"/>
+                       
+                      <field name="cement_content_normality"/>
+                       
+                      <field name="cement_content_dilution"/>
+                       
+                      <field name="cement_content_br_n_dilution"/>
+                       
+                      <field name="cement_content_1"/>
+                                              
+                      </group>
+
+                    </group>
+                      <group attrs="{'invisible': [('cement_content_1_visible', '=', False)]}">
+                          
+                        <field name='cement_content_1_conformity'
+                               decoration-success="cement_content_1_conformity == 'pass'" 
+                               decoration-danger="cement_content_1_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='cement_content_1_nabl'/>
+                    </group> 
+
+
                     
 
                 

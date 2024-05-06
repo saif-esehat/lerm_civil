@@ -754,6 +754,80 @@
                         </table>
                 </div>
 
+				<!-- Cement Content 1 -->
+
+				<div t-if="data.cement_content_1_visible" style="margin-top:20px">
+					
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_name"/>
+						</div>
+
+                        <table style="margin-top:20px">
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt of Sample (gm) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_wt_sample"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">BR of 0.01N EDTA :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_br"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Normality of EDTA :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_normality"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Dilution :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_dilution"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">BR *0.05608*N*100*dilution/S.wt :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_br_n_dilution"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Cement Content :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_1"/>	
+								</td>
+                                
+							</tr>
+                          
+                        </table>
+                </div>
+
+
 
 			
 						
