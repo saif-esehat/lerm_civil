@@ -22,12 +22,19 @@ class GsbReport(models.AbstractModel):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
         inreport_value = data.get('inreport', None)
         nabl = data.get('nabl')
+        fromEln = data.get('fromEln')
         if data.get('report_wizard') == True:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
-        elif 'active_id' in data['context']:
-            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        elif fromEln == False:
+            if 'active_id' in data['context']:
+                eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(docids)
         else:
-            eln = self.env['lerm.eln'].sudo().browse(docids) 
+            if 'active_id' in data['context']:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['context']['active_id'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(docids)
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         qr.add_data(eln.kes_no)
         qr.make(fit=True)
@@ -186,6 +193,7 @@ class GsbReport(models.AbstractModel):
             except:
                 min_y = 0
             try:
+                # max_x = round(max(x_values),2)
                 max_x = x_values[y_values.index(max_y)]
             except:
                 max_x = 100
@@ -235,13 +243,14 @@ class GsbReport(models.AbstractModel):
             # plt.yticks([1.60, 1.62, 1.64, 1.66, 1.68, 1.70, 1.72, 1.74, 1.76, 1.78, 1.80])
 
             # edit range here
-            plt.yticks(np.arange(min_y*0.99 , max_y*1.1 , max_y/100))
+            plt.yticks(np.arange(min_y , max_y + 0.2 , (max_y - min_y) / 5))
 
 
             if max_x != min_x:
-                plt.xticks(np.arange(min_x, max_x + 1.0, (max_x - min_x) / 5))
+                plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
             
-        
+            plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
+
             plt.xlabel('% Moisture')
             plt.ylabel('Dry density in gm/cc')
             plt.title('% Moisture vs Dry density in gm/cc')
@@ -296,7 +305,7 @@ class GsbReport(models.AbstractModel):
 
             # Set the y-axis tick marks
             plt.xticks(range(0, 15, 1))
-            plt.yticks(range(0, 481, 50))
+            plt.yticks(range(0, math.ceil(max(cbry_values)), 50))
             
             plt.xlabel('Penetration in mm')
             plt.ylabel('Load')

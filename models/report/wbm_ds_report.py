@@ -153,7 +153,7 @@ class WbmReport(models.AbstractModel):
 
         # Set the y-axis tick marks
         plt.xticks(range(0 , 15 , 1))
-        plt.yticks(range(0 , 901 , 50))
+        plt.yticks(range(0, math.ceil(max(cbry_values)), 50))
         
         plt.xlabel('Penetration in mm')
         plt.ylabel('Load')

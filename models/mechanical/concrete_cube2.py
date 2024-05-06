@@ -176,19 +176,19 @@ class MechanicalConcreteCube(models.Model):
             record.nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_strength - record.average_strength*mu_value
-                    upper = record.average_strength + record.average_strength*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.nabl = 'pass'
-                        break
-                    else:
-                        record.nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_strength - record.average_strength*mu_value
+            upper = record.average_strength + record.average_strength*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.nabl = 'pass'
+                break
+            else:
+                record.nabl = 'fail'
 
 
     @api.depends('average_strength','eln_ref','grade','age_of_days','difference')

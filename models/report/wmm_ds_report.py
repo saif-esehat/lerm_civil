@@ -130,11 +130,18 @@ class WMMReport(models.AbstractModel):
             # plt.yticks([1.60, 1.62, 1.64, 1.66, 1.68, 1.70, 1.72, 1.74, 1.76, 1.78, 1.80])
 
             # edit range here
-            plt.yticks(np.arange(min_y*0.99 ,max_y*1.1 , max_y/100))
+            plt.yticks(np.arange(min_y , max_y + 0.2 , (max_y - min_y) / 5))
 
 
             if max_x != min_x:
-                plt.xticks(np.arange(min_x, max_x + 1.0, (max_x - min_x) / 5))
+                # plt.xticks(np.arange(min_x, max_x + 1.0, (max_x - min_x) / 5))
+                plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
+
+            plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
+            plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
+
+            
+
             
         
             plt.xlabel('% Moisture')
@@ -259,7 +266,7 @@ class WMMReport(models.AbstractModel):
 
             # Set the y-axis tick marks
             plt.xticks(range(0 , 15 , 1))
-            plt.yticks(range(0 , 901 , 50))
+            plt.yticks(range(0, math.ceil(max(cbry_values)), 50))
             
             plt.xlabel('Penetration in mm')
             plt.ylabel('Load')

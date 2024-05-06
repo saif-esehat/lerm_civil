@@ -96,6 +96,18 @@ class SRFEditWizard(models.TransientModel):
                 record.name_works = name_work
             else:
                 record.name_works = None
+
+    # @api.depends('customer')
+    # def _compute_name_work(self):
+    #     for record in self:
+    #         customer = record.customer
+    #         if(customer):
+    #             name_work = record.env['res.partner'].search([("id","=",record.customer.id)]).projects
+    #             print("Name Work",name_work)
+    #             record.name_works = name_work
+
+    #         else:
+    #             record.name_works = None
     
     @api.depends('customer')
     def compute_other_ids(self):

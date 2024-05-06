@@ -229,19 +229,13 @@ class SrfForm(models.Model):
     def _compute_name_work(self):
         for record in self:
             if record.customer:
+                # import wdb; wdb.set_trace() 
                 child_ids = record.env['res.partner'].sudo().search([('child_ids', 'in',record.customer.id)])
                 if child_ids:
-                    partner_record = record.env['res.partner'].browse(child_ids.id) + record.env['res.partner'].browse(record.customer.id)
+                    partner_record = record.env['res.partner'].browse(child_ids.id)
                 else:
                     partner_record = record.env['res.partner'].browse(record.customer.id)
-                project_ids = []
-                
-                # import wdb; wdb.set_trace() 
-                for partner in partner_record:
-                    for projects in partner.projects:
-                        project_ids.append(projects.id)
-                project_ids = list(set(project_ids))
-                name_work = record.env['res.partner.project'].sudo().search([('id','=',project_ids)])
+                name_work = partner_record.projects
                 print("Name Work", name_work)
                 record.name_works = name_work
             else:

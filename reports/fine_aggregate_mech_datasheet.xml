@@ -275,173 +275,7 @@
 
                     </div>
 
-                    <!-- <div t-if="data.specific_gravity_visible" style="margin-top:20px">
-                        <div style="text-align:center;font-size:18px;font-weight: bold">
-                            Water Absorption (%)
-                        </div>
-                        <table style="margin-top:30px;">
-
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center;max-width:100px ">
-                                        <span style="font-weight: bold;">
-                                            Particulars
-                                        </span>
-                                    </th>
-                                    <th style="text-align: center;max-width:100px">
-                                        <span style="font-weight: bold;">
-                                            Result
-                                        </span>
-                                    </th>
-
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-
-                                    <td style="text-align: ">
-                                        <span style="text-align: center;">
-                                            Weight of empty Pycnometer in gms
-                                        </span>
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <span style="text-align: center;">
-                                            <span t-field="data.wt_of_empty_pycnometer1" />
-                                        </span>
-                                    </td>
-
-                                </tr>
-                                <tr>
-
-                                    <td style="text-align: ">
-                                        <span style="text-align: center;">
-                                            Weight of Pycnometer with full of water in gms
-                                        </span>
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <span style="text-align: center;">
-                                            <span t-field="data.wt_of_pycnometer1" />
-                                        </span>
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td style="text-align: ">
-                                        <span style="text-align: center;">
-                                            [Weight of Pycnometer + Saturated surface dry Aggregate] in gms
-                                        </span>
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <span style="text-align: center;">
-                                            <span t-field="data.wt_of_pycnometer_surface_dry1"/>
-                                        </span>
-                                    </td>
-
-
-
-                                </tr>
-                                <tr>
-
-                                    <td style="text-align: ">
-                                        <span style="text-align: center;">
-                                            [Weight of Pycnometer + Saturated surface dry Aggregate + Water] in gms
-                                        </span>
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <span style="text-align: center;">
-                                            <span t-field="data.wt_of_pycnometer_surface_dry_water1"/>
-                                        </span>
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td style="text-align: ">
-                                        <span style="text-align: center;">
-                                            Weight of Saturated surface dry Aggregate in gms
-                                        </span>
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <span style="text-align: center;">
-                                            <span t-field="data.wt_of_saturated_surface_dry1" />
-                                        </span>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td style="text-align: ">
-                                        <span style="text-align: center;">
-                                            Weight of Oven dried Aggregate in gms
-                                        </span>
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <span style="text-align: center;">
-                                            <span t-field="data.wt_of_oven_dried1" />
-                                        </span>
-                                    </td>
-
-                                </tr>
-                                <tr>
-
-                                    <td style="text-align: ">
-                                        <span style="text-align: center;">
-                                            Volume of water displaced by saturated surface dry aggregate 		
-                                        </span>
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <span style="text-align: center;">
-                                            <span t-field="data.volume_of_water1" />
-                                        </span>
-                                    </td>
-
-                                </tr>
-                                <tr>
-
-                                    <td style="text-align: ">
-                                        <span style="text-align: center;">
-                                            SPECIFIC GRAVITY 			 		
-                                        </span>
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <span style="text-align: center;">
-                                            <span t-field="data.specific_gravity1" t-options='{"widget": "float", "precision": 2}'/>
-                                        </span>
-                                    </td>
-
-                                </tr>
-                                <tr>
-
-                                    <td style="text-align: ">
-                                        <span style="text-align: center;">
-                                            Water absorption %		 		
-                                        </span>
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <span style="text-align: center;">
-                                            <span t-field="data.specific_gravity1" t-options='{"widget": "float", "precision": 2}'/>
-                                        </span>
-                                    </td>
-
-                                </tr>
-                            </tbody>
-
-                        </table>
-
-                    </div>
- -->
+                    
 
                     <div t-if="data.loose_bulk_visible" style="margin-top:20px">
                         <div style="text-align:center;font-size:18px;font-weight: bold">
@@ -1363,20 +1197,15 @@
 
 
 
-                    <div style="margin-top:10px;">
+                    <!-- <div style="margin-top:10px;">
 
                         <span t-esc="eln.material.test_parameter"/>
 
-                    </div>
+                    </div> -->
                     <div t-if="data.sieve_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
-							<!-- Sieve Analysis -->
-                            <span t-field="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).parameter_name"/>
-                            <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','318d72a1-7188-4086-b132-62b50e63f5d1')]).parameter_table" t-as="parameter">
-                                <t t-if="parameter.grade.id == eln.grade_id.id">
-                                    <span t-field="parameter.specification"/>
-                                </t>
-                            </t>
+							<span>Sieve Analysis </span>
+							<span t-esc="o.material.test_parameter "/> 
 						</div>
 						<table t-if="data.sieve_visible">
 							<tr cols="12">
@@ -1486,43 +1315,40 @@
 					</div>         
 
                   <t t-set="i" t-value="0"/>
-                    <table>
-                                <tr cols="12">
-                                    <th colspan="1" style="text-align: center;">
-                                        <span>Sr. No</span>
-                                    </th>
-                                    <th colspan="2" style="text-align: center;">
-                                        <span>Test Parameter</span>
-                                    </th>
-                                    <th colspan="2" style="text-align: center;">
-									<span>
-										Unit
-									</span>
-								    </th>
-                                   
-                                    <th colspan="2" style="text-align: center;">
-                                        <span>Test Result</span>
-                                    </th>
-                                        
-                                    <th colspan="2" style="max-width: 250px; text-align: center;">
-                                        <span>
-                                            <span t-esc="eln.material.specifications"/>
-                                        </span>
-                                    </th>
-                           
-                                    <th colspan="2" style="max-width: 200px; text-align: center;">
-									<span>
-										<span t-esc="eln.material.method_reference"/>
-										
-									</span>
-							    	</th>
-                                    <th style="text-align: center;" t-if="eln.conformity">
-                                        <span style="font-weight: bold;">Confirmity Status</span>
-                                    </th>
-                                </tr>
-
+                    <table style="margin-top:20px;">
+                            <tr cols="12">
+                                <th colspan="1" style="text-align: center;">
+                                    <span>Sr. No</span>
+                                </th>
+                                <th colspan="2" style="text-align: center;">
+                                    <span>Test Parameter</span>
+                                </th>
+                                <th colspan="2" style="text-align: center;">
+                                <span>
+                                    Unit
+                                </span>
+                                </th>
                                 
-                            
+                                <th colspan="2" style="text-align: center;">
+                                    <span>Test Result</span>
+                                </th>
+                                    
+                                <th colspan="2" style="max-width: 250px; text-align: center;">
+                                    <span>
+                                        <span t-esc="eln.material.specifications"/>
+                                    </span>
+                                </th>
+                        
+                                <th colspan="2" style="max-width: 200px; text-align: center;">
+                                <span>
+                                    <span t-esc="eln.material.method_reference"/>
+                                    
+                                </span>
+                                </th>
+                                <th style="text-align: center;" t-if="eln.conformity">
+                                    <span style="font-weight: bold;">Confirmity Status</span>
+                                </th>
+                            </tr>
 
                             <tr t-if="data.specific_gravity_visible and (data.specific_gravity_nabl == 'pass' and nabl or (data.specific_gravity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td colspan="1" style="text-align: center;">
@@ -1619,9 +1445,9 @@
 
                                 </td>
                             </tr>
-
-
-
+                            </table>
+                            <div t-if="i &gt; 1" style="page-break-after: always;"/>
+                            <table> 
 
                             <tr t-if="data.loose_bulk_visible and (data.loose_bulk_density_nabl == 'pass' and nabl or (data.loose_bulk_density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
@@ -1913,13 +1739,7 @@
 
                                 </td>
                             </tr>
-
-
                             
-                        </table>
-						<div t-if="i &gt; 6" style="page-break-after: always;"/>
-                        <table>
-                        
 
                             <tr t-if="data.light_weight_visible and (data.light_weight_percent_nabl == 'pass' and nabl or (data.light_weight_percent_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                 <td colspan="1" style="text-align: center;">
