@@ -239,6 +239,21 @@
 								<td style="text-align: center;">
 									<span t-esc="r.water_absorption_percent" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
+								<t t-if="i== 1">
+								<td t-att-rowspan='child_lines' style="text-align: center; vertical-align: middle;">
+									<span t-field="data.average_concrete_cube_water" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+								</t>
+								<t t-if="i== 1">
+								<td t-att-rowspan='child_lines' style="text-align: center; vertical-align: middle;">
+									<span t-field="data.average_concrete_cube_water" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+								</t>
+								<t t-if="i== 1">
+								<td t-att-rowspan='child_lines' style="text-align: center; vertical-align: middle;">
+									<span t-field="data.water_correction_factor" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+								</t>
 								
 							</tr>
 
