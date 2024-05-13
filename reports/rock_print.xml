@@ -414,7 +414,7 @@
 							</tr>
 						</thead>
 						<tbody>
-						<tr>
+						<tr t-if="data.porosity_visible">
 							<td style="text-align: center;">
 								<span t-esc="i + 1" />
 								<t t-set="i" t-value="i+1"/>
@@ -452,7 +452,7 @@
 							
 						</tr>
 
-						<tr>
+						<tr t-if="data.water_absorption_visible">
 							<td style="text-align: center;">
 								<span t-esc="i + 1" />
 								<t t-set="i" t-value="i+1"/>
@@ -482,7 +482,7 @@
 							
 						</tr>
 
-						<tr>
+						<tr t-if="data.dry_density_visible">
 							<td style="text-align: center;">
 								<span t-esc="i + 1" />
 								<t t-set="i" t-value="i+1"/>
@@ -510,7 +510,7 @@
 							
 							
 						</tr>
-						<tr>
+						<tr t-if="data.specific_gravity_visible">
 							<td style="text-align: center;">
 								<span t-esc="i + 1" />
 								<t t-set="i" t-value="i+1"/>
@@ -538,7 +538,7 @@
 							
 							
 						</tr>
-						<tr>
+						<tr t-if="data.usc_visible">
 							<td style="text-align: center;">
 								<span t-esc="i + 1" />
 								<t t-set="i" t-value="i+1"/>

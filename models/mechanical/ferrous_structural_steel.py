@@ -254,19 +254,19 @@ class FerrousStructuralSteel(models.Model):
             record.weight_per_meter_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
-            for material in materials:
-                if material.size.id == record.size.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.weight_per_meter - record.weight_per_meter*mu_value
-                    upper = record.weight_per_meter + record.weight_per_meter*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.weight_per_meter_nabl = 'pass'
-                        break
-                    else:
-                        record.weight_per_meter_nabl = 'fail'
+            # for material in materials:
+            #     if material.size.id == record.size.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.weight_per_meter - record.weight_per_meter*mu_value
+            upper = record.weight_per_meter + record.weight_per_meter*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.weight_per_meter_nabl = 'pass'
+                break
+            else:
+                record.weight_per_meter_nabl = 'fail'
 
     @api.depends('weight_per_meter','eln_ref','size')
     def _compute_weight_per_meter_conformity(self):
@@ -340,19 +340,19 @@ class FerrousStructuralSteel(models.Model):
             record.uts_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
-                    upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.uts_nabl = 'pass'
-                        break
-                    else:
-                        record.uts_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.ult_tens_strgth - record.ult_tens_strgth*mu_value
+            upper = record.ult_tens_strgth + record.ult_tens_strgth*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.uts_nabl = 'pass'
+                break
+            else:
+                record.uts_nabl = 'fail'
 
     @api.depends('eln_ref','grade')
     def _compute_requirement_utl(self):
@@ -396,19 +396,19 @@ class FerrousStructuralSteel(models.Model):
             record.elongation_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.elongation - record.elongation*mu_value
-                    upper = record.elongation + record.elongation*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.elongation_nabl = 'pass'
-                        break
-                    else:
-                        record.elongation_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.elongation - record.elongation*mu_value
+            upper = record.elongation + record.elongation*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.elongation_nabl = 'pass'
+                break
+            else:
+                record.elongation_nabl = 'fail'
 
     @api.depends('eln_ref','grade')
     def _compute_requirement_elongation(self):
@@ -454,19 +454,19 @@ class FerrousStructuralSteel(models.Model):
             record.yield_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.proof_yeid_stress - record.proof_yeid_stress*mu_value
-                    upper = record.proof_yeid_stress + record.proof_yeid_stress*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.yield_nabl = 'pass'
-                        break
-                    else:
-                        record.yield_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.proof_yeid_stress - record.proof_yeid_stress*mu_value
+            upper = record.proof_yeid_stress + record.proof_yeid_stress*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.yield_nabl = 'pass'
+                break
+            else:
+                record.yield_nabl = 'fail'
 
 
     @api.depends('eln_ref','grade')

@@ -171,7 +171,7 @@
 										</span>
 									</th>
 									
-									<th>
+									<th style="text-align: center;font-weight: bold;">
 										Test Method
 									</th>
 									<th style="text-align: center;" t-if="eln.conformity">
@@ -369,11 +369,11 @@
 										</span>
 
 									</th>
-									<th>
+									<!-- <th>
 										<span style="font-weight: bold;">
 											Specification
 										</span>
-									</th>
+									</th> -->
 									<th>
 										<span style="font-weight: bold;">
 											Test Method
@@ -465,11 +465,11 @@
 											Height in mm
 										</span>
 									</th>
-									<th style="text-align: center;">
+									<!-- <th style="text-align: center;">
 										<span style="font-weight: bold;">
 											Specification
 										</span>
-									</th>
+									</th> -->
 									<th style="text-align: center;">
 										<span style="font-weight: bold;">
 											Test Method
@@ -554,7 +554,7 @@
 										</span>
 									</th>
 									
-									<th>
+									<th style="text-align: center;font-weight: bold;">
 										Test Method
 									</th>
 									<th style="text-align: center;" t-if="eln.conformity">

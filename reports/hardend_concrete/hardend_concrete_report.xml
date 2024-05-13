@@ -168,7 +168,7 @@
 							</tr>
 						</thead>
 						<tbody >
-                        	<tr t-if="data.ph_visible and (data.ph_average_nabl == 'pass' and nabl or data.ph_average_nabl == 'fail' and not nabl)">
+                        	<tr t-if="data.ph_visible and (data.ph_average_nabl == 'pass' and nabl or (data.ph_average_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -212,7 +212,7 @@
 									</span>
 								</td>
 							</tr>
-                        <tr t-if="data.chloride_visible and (data.chloride_nabl == 'pass' and nabl or data.chloride_nabl == 'fail' and not nabl)">
+                        <tr t-if="data.chloride_visible and (data.chloride_nabl == 'pass' and nabl or (data.chloride_nabl == 'fail'  or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -258,7 +258,7 @@
 							</tr>
 
 
-							 <tr t-if="data.chloride_visible2 and (data.chloride_nabl2 == 'pass' and nabl or data.chloride_nabl2 == 'fail' and not nabl)">
+							 <tr t-if="data.chloride_visible2 and (data.chloride_nabl2 == 'pass' and nabl or (data.chloride_nabl2 == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -305,7 +305,7 @@
 
 
 
-                              <tr t-if="data.chloride_visible1 and (data.chloride_nabl1 == 'pass' and nabl or data.chloride_nabl1 == 'fail' and not nabl)">
+                              <tr t-if="data.chloride_visible1 and (data.chloride_nabl1 == 'pass' and nabl or (data.chloride_nabl1 == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -349,7 +349,7 @@
 									</span>
 								</td>
 							</tr>
-							<tr t-if="data.sulphate_visible and (data.sulphate_nabl == 'pass' and nabl or data.sulphate_nabl == 'fail' and not nabl)">
+							<tr t-if="data.sulphate_visible and (data.sulphate_nabl == 'pass' and nabl or (data.sulphate_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -397,7 +397,7 @@
 							
 						
 							
-							<tr t-if="data.alkali_aggregate_dissolved_visible and (data.average_dissolved_nabl == 'pass' and nabl or data.average_dissolved_nabl == 'fail' and not nabl)">
+							<tr t-if="data.alkali_aggregate_dissolved_visible and (data.average_dissolved_nabl == 'pass' and nabl or (data.average_dissolved_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -441,7 +441,7 @@
                                     </span>
 								</td>
 							</tr>
-							<tr t-if="data.alkali_aggregate_alkalinity_visible and (data.average_reduction_nabl == 'pass' and nabl or data.average_reduction_nabl == 'fail' and not nabl)">
+							<tr t-if="data.alkali_aggregate_alkalinity_visible and (data.average_reduction_nabl == 'pass' and nabl or (data.average_reduction_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -492,7 +492,7 @@
 
 
 
-							<tr t-if="data.cement_conten_visible and (data.cement_content_nabl == 'pass' and nabl or data.cement_content_nabl == 'fail' and not nabl)">
+							<tr t-if="data.cement_conten_visible and (data.cement_content_nabl == 'pass' and nabl or (data.cement_content_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -537,7 +537,7 @@
 								</td>
 							</tr>
 
-							<tr t-if="data.cement_content_1_visible and (data.cement_content_1_nabl == 'pass' and nabl or data.cement_content_1_nabl == 'fail' and not nabl)">
+							<tr t-if="data.cement_content_1_visible and (data.cement_content_1_nabl == 'pass' and nabl or (data.cement_content_1_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -554,7 +554,7 @@
 								
 								<td style="text-align: center;">
 									<span>
-										<span t-field="data.cement_content" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="data.cement_content_1" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
 								</td>
 								<td style="text-align: center;">

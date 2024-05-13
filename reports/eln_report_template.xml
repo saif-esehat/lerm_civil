@@ -357,7 +357,7 @@
 					<t t-set="nabl_parameters" t-value="[]"/>
 
 					<t t-foreach="eln.parameters_result" t-as="parameter">
-						<t t-if="parameter['nabl_status'] == 'non-nabl'">
+						<t t-if="parameter['nabl_status'] == 'non-nabl' or eln.sample_id.scope != 'nabl'">
 							<t t-if="'(depend)' not in parameter['parameter'].parameter_name">
 								<t t-set="non_nabl_parameters" t-value="non_nabl_parameters + [parameter]"/>
 							</t>
