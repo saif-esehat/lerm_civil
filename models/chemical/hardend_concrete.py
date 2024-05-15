@@ -771,7 +771,7 @@ class ChemicalHasdenedConcrete(models.Model):
     cement_content_normality = fields.Float("Normality of EDTA")
     cement_content_dilution = fields.Float("Dilution")
     cement_content_br_n_dilution = fields.Float("BR *0.05608*N*100*dilution/S.wt " , compute="_compute_cement_content_br_n_dilution")
-    cement_content_1 = fields.Float("Cement Content", compute="_compute_cement_content")
+    cement_content_1 = fields.Float("Cement Content", compute="_compute_cement_content_1")
 
 
 
@@ -779,13 +779,16 @@ class ChemicalHasdenedConcrete(models.Model):
     def _compute_cement_content_br_n_dilution(self):
         for record in self:
             if record.cement_content_wt_sample != 0:
-                cement_content_br_n_dilution = (record.cement_content_br * record.cement_content_normality * 0.5608 * record.cement_content_dilution * 100)/record.cement_content_wt_sample
+                cement_content_br_n_dilution = (record.cement_content_br * record.cement_content_normality * 0.05608 * record.cement_content_dilution * 100)/record.cement_content_wt_sample
                 record.cement_content_br_n_dilution = round(cement_content_br_n_dilution,2)
+            else:
+                record.cement_content_br_n_dilution = 0
+
 
     @api.depends('cement_content_br_n_dilution')
-    def _compute_cement_content(self):
+    def _compute_cement_content_1(self):
         for record in self:
-            cement_content_1 = (record.cement_content_br_n_dilution * 100 )/63.5
+            cement_content_1 = record.cement_content_br_n_dilution * 100/63.5
             record.cement_content_1 = round(cement_content_1,2)
 
     cement_content_1_conformity = fields.Selection([
@@ -852,7 +855,7 @@ class ChemicalHasdenedConcrete(models.Model):
             record.chloride_visible1 = False
             record.chloride_visible2 = False
             record.cement_conten_visible = False
-            record.cement_conten_1_visible = False
+            record.cement_content_1_visible = False
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
                 if sample.internal_id == 'e9f2301d-bba0-42a2-bca8-ecbc5882a2b7':
@@ -872,7 +875,7 @@ class ChemicalHasdenedConcrete(models.Model):
                 if sample.internal_id == 'd8bbd906-0f24-4c77-abc6-b2a8a00d91e6':
                     record.cement_conten_visible = True
                 if sample.internal_id == '97527435-edbc-4d33-817f-9596b56b4cd0':
-                    record.cement_conten_1_visible = True
+                    record.cement_content_1_visible = True
                     	
 
     

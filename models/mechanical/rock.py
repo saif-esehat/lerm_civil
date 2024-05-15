@@ -23,6 +23,7 @@ class MechanicalRock(models.Model):
     avg_saturated_spc_gravity = fields.Float("Saturated Specific Gravity",compute="_compute_saturated_spc_gravity")
 
 
+    
 
     @api.depends('child_lines.porosity')
     def _compute_avg_porosity(self):
@@ -82,6 +83,11 @@ class MechanicalRock(models.Model):
             else:
                 record.avg_usc = 0
 
+    porosity_visible = fields.Boolean("Porosity Visible",compute="_compute_visible")
+    specific_gravity_visible = fields.Boolean("Saturated Specific Gravity Visible",compute="_compute_visible")
+    dry_density_visible = fields.Boolean("Dry Density Visible",compute="_compute_visible")
+    water_absorption_visible = fields.Boolean("USC Visible",compute="_compute_visible")
+
 
 
     ### Compute Visible
@@ -90,6 +96,11 @@ class MechanicalRock(models.Model):
         
         for record in self:
             record.usc_visible = False
+            record.porosity_visible = False
+            record.specific_gravity_visible = False
+            record.dry_density_visible = False
+            record.water_absorption_visible = False
+
           
             
             for sample in record.sample_parameters:
@@ -97,6 +108,14 @@ class MechanicalRock(models.Model):
 
                 if sample.internal_id == "a1f9c5d0-0bc7-41a6-a2bb-0fe9d898008d":
                     record.usc_visible = True
+                if sample.internal_id == "a4eb1d5e-9d64-48cd-8277-ad734e0edd84":
+                    record.porosity_visible = True
+                if sample.internal_id == "bf5d3d97-9a52-4242-9a36-2e40e5fc8247":
+                    record.specific_gravity_visible = True
+                if sample.internal_id == "87ec776a-11eb-45ef-addf-e183edabd6dd":
+                    record.dry_density_visible = True
+                if sample.internal_id == "71e24ae1-b9a9-41cb-86a5-89d87312f3d6":
+                    record.water_absorption_visible = True
 
                
 

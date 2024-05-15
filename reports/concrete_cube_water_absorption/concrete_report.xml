@@ -204,7 +204,7 @@
 								</t>
 								<t t-if="i== 1">
 								<td t-att-rowspan='child_lines' style="text-align: center; vertical-align: middle;">
-									<span t-field="data.average_concrete_cube_water" t-options='{"widget": "float", "precision": 2}'/>
+									<span t-field="data.correction_factor" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								</t>
 								<t t-if="i== 1">
@@ -217,15 +217,15 @@
 
 							<!-- nabl -->
 							<tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'pass' and nabl">
-								<!-- <td>
+								<td>
 									<div>
 										<span t-esc="i + 1"/>
 										<t t-set="i" t-value="i+1"/>
 									</div>
-                  				</td> -->
-								<td style="text-align: center;">
+                  				</td>
+								<!-- <td style="text-align: center;">
 									<span t-esc="r.sr_no"/>
-								</td>
+								</td> -->
 								<td style="text-align: center;">
 									<span t-esc="r.sample_id"/>
 								</td>
@@ -246,7 +246,7 @@
 								</t>
 								<t t-if="i== 1">
 								<td t-att-rowspan='child_lines' style="text-align: center; vertical-align: middle;">
-									<span t-field="data.average_concrete_cube_water" t-options='{"widget": "float", "precision": 2}'/>
+									<span t-field="data.correction_factor" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								</t>
 								<t t-if="i== 1">
