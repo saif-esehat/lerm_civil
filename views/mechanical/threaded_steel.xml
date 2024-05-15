@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mech_threaded_steel_view" model="ir.ui.view">
+        <field name="name">mech.threaded.steel.form</field>
+        <field name="model">mech.threaded.steel</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <sheet>
+                   <group>
+                       
+                       
+                         <field name='eln_ref' readonly="1"/>
+                          <field name='name' readonly="1"/>
+                    </group>
+                         
+                            <group>
+                                <group>
+                                    <field name='grade'/>
+                                </group>
+                                <group>
+                                    <field name='size'/>
+                                </group>
+                                
+                            </group>
+                            <group>
+                                <field name="sample_parameters">
+                                    <tree>
+                                        <field name="parameter_name"/>
+                                        <field name="test_method"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            
+
+                            <group style="width:50%"> 
+                                <field name='diameter'/>
+                                <field name='area'/>
+                                <field name='gauge_length'/>
+                                <field name='final_diameter'/>
+                                <field name='final_length'/>
+                                <field name='proof_load'/>
+                                <field name='ultimate_load'/>
+                            </group>
+                            <group attrs="{'invisible': [('yield_visible', '=', False)]}">
+                                <field name='yield_stress'/>
+                                <field name='yield_visible'/>
+
+                            </group>
+                            <group attrs="{'invisible': [('uts_visible', '=', False)]}">
+                                <field name='ult_tens_strgth'/>
+                                <field name='uts_visible'/>
+
+                            </group>
+                            <group attrs="{'invisible': [('elongation_visible', '=', False)]}">
+                                <field name='percent_elongation'/>
+                                <field name='elongation_visible'/>
+
+                            </group>
+                            <group attrs="{'invisible': [('reduction_visible', '=', False)]}">
+                                <field name='reduction_area'/>
+                                <field name='reduction_visible'/>
+
+                            </group>                               
+                            <group>
+                                <field name='fracture'/>
+                            </group>
+
+
+                            
+                            <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
+              
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+
+
+    </data>
+</odoo>

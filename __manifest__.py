@@ -39,6 +39,7 @@
     'views/mechanical/moisture_movement_solid.xml',
     'views/mechanical/flexural_strength_concrete_beam.xml',
     'views/mechanical/precast_kerb_stone.xml',
+    'views/mechanical/threaded_steel.xml',
 
 
     # 'views/mechanical/compressive_strength_concrete_cube.xml',
@@ -218,6 +219,8 @@
     'views/mechanical/concrete_cube_water_absorption.xml',
     'reports/concrete_cube_water_absorption/concrete_datasheet.xml',
     'reports/concrete_cube_water_absorption/concrete_report.xml',
+    'reports/threaded_steel/threaded_steel_report.xml',
+
     # 'views/portal_template.xml'
     
 

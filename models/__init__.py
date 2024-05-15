@@ -71,6 +71,7 @@ from .mechanical import brick_2
 from .mechanical import concrete_cube2
 from .mechanical import soild_concrete_block
 from .mechanical import concrete_cube_water_absorption
+from .mechanical import threaded_steel
 from .ndt import crackdepth
 from .ndt import acilcrackdepth
 from .ndt import covermeter
@@ -103,6 +104,8 @@ from .report import wbm_ds_report
 from .report import isat_ds_report
 from .report import admixture_ds_report
 from .report import precast_ds_report
+from .report import threaded_steel_ds_report
+
 
 
 from . import general_template
