@@ -220,6 +220,8 @@
     'reports/concrete_cube_water_absorption/concrete_datasheet.xml',
     'reports/concrete_cube_water_absorption/concrete_report.xml',
     'reports/threaded_steel/threaded_steel_report.xml',
+    'reports/threaded_steel/threaded_steel_datasheet.xml',
+
 
     # 'views/portal_template.xml'
     
