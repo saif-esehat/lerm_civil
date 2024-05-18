@@ -687,13 +687,13 @@ class Soil(models.Model):
     #         else:
     #             record.plasticity_index = str(46.14 - record.plastic_limit)  # Convert the result to a string if needed
 
-    @api.depends('plastic_limit')
+    @api.depends('plastic_limit','liquid_limit')
     def _compute_plasticity_index(self):
         for record in self:
             if record.plastic_limit == 0.0:
                 record.plasticity_index = 'Null'
             else:
-                plasticity_value = 46.14 - record.plastic_limit
+                plasticity_value = record.liquid_limit - record.plastic_limit
                 # Format the string representation with 2 decimal places
                 record.plasticity_index = '{:.2f}'.format(plasticity_value)
 

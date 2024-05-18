@@ -20,7 +20,7 @@ class ThreadedSteel(models.Model):
     
     diameter = fields.Float(string="Gauge Dia, mm")
     area = fields.Float(string="Area, mm²",compute="_compute_area")
-    gauge_length = fields.Float(string="Gauge Length",digits=(10, 2),compute="_compute_gauge_length")
+    gauge_length = fields.Float(string="Gauge Length",digits=(10, 4),compute="_compute_gauge_length")
     final_diameter = fields.Float(string="Final Dia, mm")
     final_length = fields.Float(string="Final Length",digits=(10, 2))
     proof_load = fields.Float(string="0.2% Proof Load / Yield Load, KN")
@@ -43,14 +43,14 @@ class ThreadedSteel(models.Model):
     def _compute_area(self):
         for record in self:
             area = record.diameter * record.diameter * 3.14/4
-            record.area = round(area,2)
+            record.area = round(area,4)
 
     
     @api.depends('area')
     def _compute_gauge_length(self):
         for record in self:
             gauge_length = 5.65 * math.sqrt(record.area)
-            record.gauge_length = round(gauge_length,2)
+            record.gauge_length = round(gauge_length,0)
 
     @api.depends('proof_load','area')
     def _compute_yield_stress(self):

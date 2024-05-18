@@ -345,6 +345,10 @@
                     <field name="end_date" string="End Date" />
                     <field name="conformity" string="Conformity" />
                     <field name="has_witness" string="Witness" />
+                    <searchpanel>
+                        <field name="state" enable_counters="1" />
+                        <!-- <field name="institute_id" enable_counters="1"/> -->
+                    </searchpanel>
                     </search>
                 </field>
             </record>

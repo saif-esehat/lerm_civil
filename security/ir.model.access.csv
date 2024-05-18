@@ -450,6 +450,8 @@ hod.lerm_civil.mech_threaded_steel,lerm_civil_mech_threaded_steel,lerm_civil.mod
 
 
 
+
+
 quality.lerm_civil.access_sample_reject_wizard,access_sample_reject_wizard,lerm_civil.model_sample_reject_wizard,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_ndt_crack_depth,access_ndt_crack_depth,lerm_civil.model_ndt_crack_depth,kes_quality_manager,1,0,0,0
 quality.lerm_civil.access_ndt_crack_depth_line,access_ndt_crack_depth_line,lerm_civil.model_ndt_crack_depth_line,kes_quality_manager,1,0,0,0
