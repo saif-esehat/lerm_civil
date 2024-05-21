@@ -125,8 +125,8 @@ class CouplerLine(models.Model):
         
         for record in self:
             record.ult_tens_strgth_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -150,8 +150,8 @@ class CouplerLine(models.Model):
         
         for record in self:
             record.ult_tens_strgth_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -176,8 +176,8 @@ class CouplerLine(models.Model):
         
         for record in self:
             record.total_elongation_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -201,8 +201,8 @@ class CouplerLine(models.Model):
         
         for record in self:
             record.total_elongation_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -280,7 +280,7 @@ class CouplerLine(models.Model):
     # @api.depends('eln_ref','grade')
     # def _compute_requirement_utl(self):
     #     for record in self:
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','78a837cc-25e3-460d-802f-7dd858984087')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 req_min = material.req_min
@@ -292,7 +292,7 @@ class CouplerLine(models.Model):
     # @api.depends('eln_ref','grade')
     # def _compute_requirement_yield(self):
     #     for record in self:
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_table
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','73e5f596-972c-46f8-8d2c-3149b00c57df')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 req_min = material.req_min

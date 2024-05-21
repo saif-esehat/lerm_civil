@@ -38,8 +38,8 @@ class ChemicalFineAggregate(models.Model):
         
             for record in self:
                 record.ph_average_conformity = 'fail'
-                line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
-                materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
+                line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
+                materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
                 for material in materials:
                     if material.grade.id == record.grade.id:
                         req_min = material.req_min
@@ -65,8 +65,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.ph_average_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','628cf04d-645d-4794-a0fd-3daabff4b044')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -165,8 +165,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.average_dissolved_silica_conformity_fine = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -190,8 +190,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.average_dissolved_silica_nabl_fine = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fa80a69f-bf0f-4aa3-a9d3-70767e7bf24a')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -286,8 +286,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.average_reduction_alkalinity_conformity_fine = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -311,8 +311,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.average_reduction_alkalinity_nabl_fine = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0437ea07-5283-4248-9430-e5d89866d3c5')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -367,8 +367,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.chloride_percent_conformity_fine = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -392,8 +392,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.chloride_percent_nabl_fine = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c87d2fa3-ba0b-4e64-84d1-e3b23f19dafa')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -445,8 +445,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.sulphate_percent_conformity_fine = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -470,8 +470,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.sulphate_percent_nabl_fine = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f605daf3-ffb4-48c2-aa20-fffb1d556c07')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -535,8 +535,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.na2O_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -561,8 +561,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.na2O_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','03507018-bb06-4362-a2e7-6d70ec7d8870')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value
@@ -626,8 +626,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.k2O_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -652,8 +652,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.k2O_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3997903d-8a2e-49fc-baa1-531f0b805cac')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value
@@ -693,8 +693,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.total_alkali_content_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -719,8 +719,8 @@ class ChemicalFineAggregate(models.Model):
         
         for record in self:
             record.total_alkali_content_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0510b578-b3de-4045-bd55-5f54198e9dc8')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value

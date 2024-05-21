@@ -85,7 +85,7 @@ class MechanicalConcreteCube(models.Model):
     def compute_date_of_casting(self):
         for record in self:
             if record.eln_ref.sample_id:
-                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).date_casting
+                sample_record = self.env['lerm.srf.sample'].sudo().search([('id','=', record.eln_ref.sample_id.id)]).date_casting
                 record.date_of_casting = sample_record
             else:
                 record.date_of_casting = None
@@ -96,7 +96,7 @@ class MechanicalConcreteCube(models.Model):
     def _compute_age_of_days(self):
         for record in self:
             if record.eln_ref.sample_id:
-                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).days_casting
+                sample_record = self.env['lerm.srf.sample'].sudo().search([('id','=', record.eln_ref.sample_id.id)]).days_casting
                 if sample_record == '3':
                     record.age_of_days = '3days'
                 elif sample_record == '7':
@@ -174,8 +174,8 @@ class MechanicalConcreteCube(models.Model):
         
         for record in self:
             record.nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -195,8 +195,8 @@ class MechanicalConcreteCube(models.Model):
     def _compute_confirmity(self):
         for record in self:
             record.confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -296,7 +296,8 @@ class MechanicalConcreteCubeLine(models.Model):
     @api.onchange('parent_id')
     def _onchange_parent_id(self):
         for record in self:
-            sample_id = record.parent_id.eln_ref.sample_id.client_sample_id
+            parent = record.parent_id.sudo()
+            sample_id = parent.eln_ref.sample_id.client_sample_id
             if sample_id:
                 record.id_mark = sample_id
             else:

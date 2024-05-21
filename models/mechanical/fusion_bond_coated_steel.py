@@ -59,7 +59,7 @@ class MechanicalFusionBondSteel(models.Model):
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
-        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # records = self.env['lerm.eln'].sudo().search([('id','=', record.eln_id.id)]).parameters_result
         # print("records",records)
         # self.sample_parameters = records
         for record in self:

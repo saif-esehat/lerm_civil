@@ -168,8 +168,8 @@ class AacBlockMechanical(models.Model):
     def _compute_moisture_confirmity(self):
         for record in self:
             record.moisture_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -188,8 +188,8 @@ class AacBlockMechanical(models.Model):
         
         for record in self:
             record.moisture_nabl = 'pass'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -236,8 +236,8 @@ class AacBlockMechanical(models.Model):
     def _compute_density_confirmity(self):
         for record in self:
             record.density_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -256,8 +256,8 @@ class AacBlockMechanical(models.Model):
         
         for record in self:
             record.density_nabl = 'pass'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -303,8 +303,8 @@ class AacBlockMechanical(models.Model):
     def _compute_drying_shrinkage_confirmity(self):
         for record in self:
             record.drying_shrinkage_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -324,8 +324,8 @@ class AacBlockMechanical(models.Model):
         
         for record in self:
             record.drying_shrinkage_aac_nabl = 'pass'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -370,8 +370,8 @@ class AacBlockMechanical(models.Model):
     def _compute_compressive_strength_confirmity(self):
         for record in self:
             record.compressive_strength_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -390,8 +390,8 @@ class AacBlockMechanical(models.Model):
         
         for record in self:
             record.compressive_strength_nabl = 'pass'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value

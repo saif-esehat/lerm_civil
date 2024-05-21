@@ -38,7 +38,7 @@ class ConcreteSplitTensileStrength(models.Model):
     def _compute_age_of_days(self):
         for record in self:
             if record.eln_ref.sample_id:
-                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).days_casting
+                sample_record = self.env['lerm.srf.sample'].sudo().search([('id','=', record.eln_ref.sample_id.id)]).days_casting
                 if sample_record == '3':
                     record.age_of_days = '3days'
                 elif sample_record == '7':
@@ -56,7 +56,7 @@ class ConcreteSplitTensileStrength(models.Model):
     def compute_date_of_casting(self):
         for record in self:
             if record.eln_ref.sample_id:
-                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).date_casting
+                sample_record = self.env['lerm.srf.sample'].sudo().search([('id','=', record.eln_ref.sample_id.id)]).date_casting
                 record.date_of_casting = sample_record
             else:
                 record.date_of_casting = None
@@ -158,7 +158,7 @@ class ConcreteSplitTensileStrength(models.Model):
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
-        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # records = self.env['lerm.eln'].sudo().search([('id','=', record.eln_id.id)]).parameters_result
         # print("records",records)
         # self.sample_parameters = records
         for record in self:

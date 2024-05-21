@@ -42,8 +42,8 @@ class ThreadedSteel(models.Model):
     @api.depends('diameter')
     def _compute_area(self):
         for record in self:
-            area = record.diameter * record.diameter * 3.14/4
-            record.area = round(area,4)
+            area = record.diameter * record.diameter * 3.1416/4
+            record.area = round(area,2)
 
     
     @api.depends('area')

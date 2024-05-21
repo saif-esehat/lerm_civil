@@ -85,8 +85,8 @@ class SolidConcreteBlock(models.Model):
         
         for record in self:
             record.block_density_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -107,8 +107,8 @@ class SolidConcreteBlock(models.Model):
         
         for record in self:
             record.block_density_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -153,8 +153,8 @@ class SolidConcreteBlock(models.Model):
         
         for record in self:
             record.moisture_movment_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -175,8 +175,8 @@ class SolidConcreteBlock(models.Model):
         
         for record in self:
             record.moisture_movment_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -221,8 +221,8 @@ class SolidConcreteBlock(models.Model):
         
         for record in self:
             record.drying_shrinkage_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -243,8 +243,8 @@ class SolidConcreteBlock(models.Model):
         
         for record in self:
             record.drying_shrinkage_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -286,8 +286,8 @@ class SolidConcreteBlock(models.Model):
     def _compute_water_absorption_conformity(self):
         for record in self:
             record.water_absorption_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -306,8 +306,8 @@ class SolidConcreteBlock(models.Model):
     def _compute_water_absorption_nabl(self):
         for record in self:
             record.water_absorption_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id', '=', '0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -405,8 +405,8 @@ class SolidConcreteBlock(models.Model):
         
         for record in self:
             record.compressive_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -427,8 +427,8 @@ class SolidConcreteBlock(models.Model):
         
         for record in self:
             record.compressive_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -525,7 +525,7 @@ class SolidConcreteBlock(models.Model):
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
-        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # records = self.env['lerm.eln'].sudo().search([('id','=', record.eln_id.id)]).parameters_result
         # print("records",records)
         # self.sample_parameters = records
         for record in self:

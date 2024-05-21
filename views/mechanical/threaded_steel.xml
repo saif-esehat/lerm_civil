@@ -37,7 +37,7 @@
 
                             <group style="width:50%"> 
                                 <field name='diameter'/>
-                                <field name='area'/>
+                                <field name='area' t-options='{"widget": "float", "precision": 2}'/>
                                 <field name='gauge_length'/>
                                 <field name='final_diameter'/>
                                 <field name='final_length'/>

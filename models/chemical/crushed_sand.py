@@ -38,8 +38,8 @@ class ChemicalCrushedSand(models.Model):
         
             for record in self:
                 record.ph_conformity = 'fail'
-                line = self.env['lerm.parameter.master'].search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')])
-                materials = self.env['lerm.parameter.master'].search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')]).parameter_table
+                line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')])
+                materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')]).parameter_table
                 for material in materials:
                     if material.grade.id == record.grade.id:
                         req_min = material.req_min
@@ -65,8 +65,8 @@ class ChemicalCrushedSand(models.Model):
         
     #     for record in self:
     #         record.ph_nabl = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 lab_min = line.lab_min_value
@@ -87,8 +87,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.ph_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','481fb826-5804-40f1-b7a1-54d435149afb')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value
@@ -186,8 +186,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.dissolved_silica_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -211,8 +211,8 @@ class ChemicalCrushedSand(models.Model):
         
     #     for record in self:
     #         record.dissolved_silica_nabl = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 lab_min = line.lab_min_value
@@ -232,8 +232,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.dissolved_silica_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3a228b5d-5c83-4bb7-b6c7-2e7767b6181b')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value
@@ -327,8 +327,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.reduction_alkalinity_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -352,8 +352,8 @@ class ChemicalCrushedSand(models.Model):
         
     #     for record in self:
     #         record.reduction_alkalinity_nabl = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 lab_min = line.lab_min_value
@@ -373,8 +373,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.reduction_alkalinity_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98067b4a-3581-4712-b691-3df067e49a2c')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value
@@ -444,8 +444,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.chloride_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -469,8 +469,8 @@ class ChemicalCrushedSand(models.Model):
         
     #     for record in self:
     #         record.chloride_nabl = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 lab_min = line.lab_min_value
@@ -492,8 +492,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.chloride_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','83c6e99e-d967-4162-8124-93fc8240ae24')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value
@@ -544,8 +544,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.sulphate_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -569,8 +569,8 @@ class ChemicalCrushedSand(models.Model):
         
     #     for record in self:
     #         record.avrg_avrg_sulphate_nabl = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 lab_min = line.lab_min_value
@@ -590,8 +590,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.avrg_avrg_sulphate_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8765b291-5596-4d10-9702-0e221e9379cd')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value
@@ -658,8 +658,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.na2O_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3380972d-6290-4e34-aa61-6a707a4d788a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3380972d-6290-4e34-aa61-6a707a4d788a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3380972d-6290-4e34-aa61-6a707a4d788a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3380972d-6290-4e34-aa61-6a707a4d788a')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -684,8 +684,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.na2O_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3380972d-6290-4e34-aa61-6a707a4d788a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3380972d-6290-4e34-aa61-6a707a4d788a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3380972d-6290-4e34-aa61-6a707a4d788a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3380972d-6290-4e34-aa61-6a707a4d788a')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value
@@ -749,8 +749,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.k2O_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ec3bb101-9088-4156-8af5-608a64fe4b7b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ec3bb101-9088-4156-8af5-608a64fe4b7b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ec3bb101-9088-4156-8af5-608a64fe4b7b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ec3bb101-9088-4156-8af5-608a64fe4b7b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -775,8 +775,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.k2O_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ec3bb101-9088-4156-8af5-608a64fe4b7b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ec3bb101-9088-4156-8af5-608a64fe4b7b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ec3bb101-9088-4156-8af5-608a64fe4b7b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ec3bb101-9088-4156-8af5-608a64fe4b7b')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value
@@ -816,8 +816,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.total_alkali_content_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','338565ad-67d6-4795-880b-def72791b2c3')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','338565ad-67d6-4795-880b-def72791b2c3')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','338565ad-67d6-4795-880b-def72791b2c3')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','338565ad-67d6-4795-880b-def72791b2c3')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -842,8 +842,8 @@ class ChemicalCrushedSand(models.Model):
         
         for record in self:
             record.total_alkali_content_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','338565ad-67d6-4795-880b-def72791b2c3')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','338565ad-67d6-4795-880b-def72791b2c3')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','338565ad-67d6-4795-880b-def72791b2c3')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','338565ad-67d6-4795-880b-def72791b2c3')]).parameter_table
             
             lab_min = line.lab_min_value
             lab_max = line.lab_max_value

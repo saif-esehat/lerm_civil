@@ -40,8 +40,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.loose_bulk_density_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -65,8 +65,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.loose_bulk_density_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a90cdbd7-3fa3-4b83-ae31-9d281767188c')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -119,8 +119,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.rodded_bulk_density_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -144,8 +144,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.rodded_bulk_density_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','769b7052-d658-4d14-a5cc-c21dbedeb760')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -202,8 +202,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.specific_gravity_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -227,8 +227,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.specific_gravity_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7f3b339f-4d39-4c11-94c3-7029e238b76b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -301,8 +301,8 @@ class FineAggregate(models.Model):
         
     #     for record in self:
     #         record.water_absorption_conformity = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 req_min = material.req_min
@@ -326,8 +326,8 @@ class FineAggregate(models.Model):
         
     #     for record in self:
     #         record.water_absorption_nabl = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f8088f5b-226c-42ce-a78a-572391879ab4')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 lab_min = line.lab_min_value
@@ -422,7 +422,7 @@ class FineAggregate(models.Model):
     #                     line.write({'cumulative_retained': line.percent_retained})
     #                     line.write({'passing_percent': 100 -line.percent_retained})
     #             else:
-    #                 previous_line_record = self.env['mechanical.fine.aggregate.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+    #                 previous_line_record = self.env['mechanical.fine.aggregate.sieve.analysis.line'].sudo().search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
     #                 line.write({'cumulative_retained': previous_line_record + line.percent_retained})
     #                 line.write({'passing_percent': 100-(previous_line_record + line.percent_retained)})
     #                 print("Previous Cumulative",previous_line_record)
@@ -442,7 +442,7 @@ class FineAggregate(models.Model):
                         line.write({'cumulative_retained': round(line.percent_retained + line.percent_retained,2)})
                         line.write({'passing_percent': round(100 -line.percent_retained - line.percent_retained,2)})
                 else:
-                    previous_line_record = self.env['mechanical.fine.aggregate.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+                    previous_line_record = self.env['mechanical.fine.aggregate.sieve.analysis.line'].sudo().search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
                     line.write({'cumulative_retained': round(previous_line_record + line.percent_retained,2)})
                     line.write({'passing_percent': round(100-(previous_line_record + line.percent_retained),2)})
                     print("Previous Cumulative",previous_line_record)
@@ -474,8 +474,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.soundness_na2so4_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -499,8 +499,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.soundness_na2so4_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7b921a25-4dc4-4752-a247-d8a223ffbec0')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -558,8 +558,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.soundness_mgso4_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -583,8 +583,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.soundness_mgso4_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a0e7aaf3-68ff-4e75-830d-91ae04c98f32')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -645,8 +645,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.material_finer75_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -670,8 +670,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.material_finer75_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -715,8 +715,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.clay_lumps_percent_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -740,8 +740,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.clay_lumps_percent_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','02d32c6b-9881-4152-9e79-9a660e2dda39')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -783,8 +783,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.light_weight_percent_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -808,8 +808,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.light_weight_percent_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c0340cb7-3f4a-4c15-a453-d63694b71f1d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -858,8 +858,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.moisture_content_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -883,8 +883,8 @@ class FineAggregate(models.Model):
         
         for record in self:
             record.moisture_content_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d77f5a84-a7b2-47c9-852a-1289ac09ef23')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -1009,7 +1009,7 @@ class FineAggregate(models.Model):
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
-        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # records = self.env['lerm.eln'].sudo().search([('id','=', record.eln_id.id)]).parameters_result
         # print("records",records)
         # self.sample_parameters = records
         for record in self:

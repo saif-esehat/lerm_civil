@@ -70,8 +70,8 @@ class MechanicalBricks(models.Model):
     def _compute_comp_strength_conformity(self):
         for record in self:
             record.comp_strength_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')]).parameter_table
             for material in materials:
                 
                     req_min = material.req_min
@@ -91,8 +91,8 @@ class MechanicalBricks(models.Model):
         
         for record in self:
             record.comp_strength_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -253,8 +253,8 @@ class MechanicalBricks(models.Model):
     def _compute_water_absorption_confirmity(self):
         for record in self:
             record.water_absorption_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')]).parameter_table
             for material in materials:
                 
                     req_min = material.req_min
@@ -274,8 +274,8 @@ class MechanicalBricks(models.Model):
         
         for record in self:
             record.water_absorption_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -407,7 +407,7 @@ class MechanicalBricks(models.Model):
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
-        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # records = self.env['lerm.eln'].sudo().search([('id','=', record.eln_id.id)]).parameters_result
         # print("records",records)
         # self.sample_parameters = records
         for record in self:
