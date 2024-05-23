@@ -292,7 +292,7 @@ class RCMT(models.Model):
     def _compute_age_of_days(self):
         for record in self:
             if record.eln_ref.sample_id:
-                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).days_casting
+                sample_record = self.env['lerm.srf.sample'].sudo().search([('id','=', record.eln_ref.sample_id.id)]).days_casting
                 if sample_record == '3':
                     record.age_of_days = '3days'
                 elif sample_record == '7':
@@ -340,7 +340,7 @@ class RCMT(models.Model):
     def compute_date_of_casting(self):
         for record in self:
             if record.eln_ref.sample_id:
-                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).date_casting
+                sample_record = self.env['lerm.srf.sample'].sudo().search([('id','=', record.eln_ref.sample_id.id)]).date_casting
                 record.date_of_casting = sample_record
             else:
                 record.date_of_casting = None
@@ -350,8 +350,8 @@ class RCMT(models.Model):
     def _compute_rcmt_nabl(self):
         for record in self:
             record.rcmt_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id', '=', '36f86e6e-391c-4d7b-818d-28f7b75ea261')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id', '=', '36f86e6e-391c-4d7b-818d-28f7b75ea261')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id', '=', '36f86e6e-391c-4d7b-818d-28f7b75ea261')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id', '=', '36f86e6e-391c-4d7b-818d-28f7b75ea261')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -377,8 +377,8 @@ class RCMT(models.Model):
         
         for record in self:
             record.rcmt_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','36f86e6e-391c-4d7b-818d-28f7b75ea261')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','36f86e6e-391c-4d7b-818d-28f7b75ea261')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','36f86e6e-391c-4d7b-818d-28f7b75ea261')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','36f86e6e-391c-4d7b-818d-28f7b75ea261')]).parameter_table
             for material in materials:
                 # if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -431,7 +431,7 @@ class RCMT(models.Model):
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
-        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # records = self.env['lerm.eln'].sudo().search([('id','=', record.eln_id.id)]).parameters_result
         # print("records",records)
         # self.sample_parameters = records
         for record in self:

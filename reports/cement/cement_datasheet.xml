@@ -72,26 +72,7 @@
 							Setting Time
 						</div>
 						<table>
-							<tr cols="12">
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.temp_percent_setting"/>
-								</td>
-								<td colspan="6">Test Start Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.start_date_setting"/>
-								</td>
-							</tr>
-							<tr cols="12">
-								<td colspan="6">Humidity :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.humidity_percent_setting"/>
-								</td>
-								<td colspan="6">Test End Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.end_date_setting"/>
-								</td>
-							</tr>
+							
 							<tr cols="12">
 								<td colspan="6">Weight of Cement(g) :
 									<![CDATA[&nbsp;]]>
@@ -212,29 +193,7 @@
 						<div style="text-align:center;font-size:18px">
 							Density
 						</div>
-						<table>
-							<tr cols="12">
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.temp_percent_density"/>
-								</td>
-								<td colspan="6">Test Start Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.start_date_density"/>
-								</td>
-							</tr>
-							<tr cols="12">
-								<td colspan="6">Humidity :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.humidity_percent_density"/>
-								</td>
-								<td colspan="6">Test End Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.end_date_density"/>
-								</td>
-							</tr>
-
-						</table>
+						
 						<table style="margin-top:20px">
 							<tr cols="12">
 								<td colspan="6">Trial 1
@@ -310,29 +269,7 @@
 						<div style="text-align:center;font-size:18px">
 							Soundness by Le-Chatelier Method
 						</div>
-						<table>
-							<tr cols="12">
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.temp_percent_soundness"/>
-								</td>
-								<td colspan="6">Test Start Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.start_date_soundness"/>
-								</td>
-							</tr>
-							<tr cols="12">
-								<td colspan="6">Humidity :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.humidity_percent_soundness"/>
-								</td>
-								<td colspan="6">Test End Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.end_date_soundness"/>
-								</td>
-							</tr>
-
-						</table>
+						
 						<table style="margin-top:20px">
 							<tr cols="12">
 								<td colspan="6">Weight of Cement(g) :
@@ -397,29 +334,7 @@
 						<div style="text-align:center;font-size:18px">
 							Fineness by Dry Sieving
 						</div>
-						<table>
-							<tr cols="12">
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.temp_percent_dry_sieving"/>
-								</td>
-								<td colspan="6">Test Start Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.start_date_dry_sieving"/>
-								</td>
-							</tr>
-							<tr cols="12">
-								<td colspan="6">Humidity :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.humidity_percent_dry_sieving"/>
-								</td>
-								<td colspan="6">Test End Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.end_date_dry_sieving"/>
-								</td>
-							</tr>
-
-						</table>
+						
 						
 						<table style="margin-top:20px">
 
@@ -473,29 +388,7 @@
 						<div style="text-align:center;font-size:18px">
 							Compressive Strength
 						</div>
-						<table>
-							<tr cols="12">
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.temp_percent_compressive"/>
-								</td>
-								<td colspan="6">Test Start Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.start_date_compressive"/>
-								</td>
-							</tr>
-							<tr cols="12">
-								<td colspan="6">Humidity :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.humidity_percent_compressive"/>
-								</td>
-								<td colspan="6">Test End Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.end_date_compressive"/>
-								</td>
-							</tr>
-
-						</table>
+						
 						<table style="margin-top:20px">
 							
 							<tr cols="12">
@@ -795,29 +688,7 @@
 						<div style="text-align:center;font-size:18px">
 							Fineness By Blaine Air Permeability Method (m²/kg)
 						</div>
-						<table>
-							<tr cols="12">
-								<td colspan="6">Temperature :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.temp_percent_fineness"/>
-								</td>
-								<td colspan="6">Test Start Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.start_date_fineness"/>
-								</td>
-							</tr>
-							<tr cols="12">
-								<td colspan="6">Humidity :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.humidity_percent_fineness"/>
-								</td>
-								<td colspan="6">Test End Date :
-									<![CDATA[&nbsp;]]>
-									<span t-field="data.end_date_fineness"/>
-								</td>
-							</tr>
-
-						</table>
+						
 						<table style="margin-top:20px">
 							<tr cols="12">
 								<td colspan="6">Observation

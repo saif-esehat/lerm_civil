@@ -1224,6 +1224,8 @@ class CreateSampleWizard(models.TransientModel):
                         'size_id':sample.size_id.id,
                         'grade_id':sample.grade_id.id,
                         'department_id':sample.department_id,
+                        'casting_date':sample.casting_date,
+
                     })
                     # import wdb;wdb.set_trace()
                     sample.write({'state':'2-alloted' , 'technicians':self.technicians.id , 'eln_id':eln_id.id})
