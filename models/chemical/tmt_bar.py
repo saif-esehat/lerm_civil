@@ -43,8 +43,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.carbon_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ee5b7bb7-65ad-4970-b2eb-1a45e3ab2332')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ee5b7bb7-65ad-4970-b2eb-1a45e3ab2332')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ee5b7bb7-65ad-4970-b2eb-1a45e3ab2332')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ee5b7bb7-65ad-4970-b2eb-1a45e3ab2332')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -68,8 +68,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.carbon_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ee5b7bb7-65ad-4970-b2eb-1a45e3ab2332')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ee5b7bb7-65ad-4970-b2eb-1a45e3ab2332')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ee5b7bb7-65ad-4970-b2eb-1a45e3ab2332')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ee5b7bb7-65ad-4970-b2eb-1a45e3ab2332')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -112,8 +112,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.manganese_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3bc58369-dcc7-4021-9b02-760f3d6cbd87')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3bc58369-dcc7-4021-9b02-760f3d6cbd87')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3bc58369-dcc7-4021-9b02-760f3d6cbd87')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3bc58369-dcc7-4021-9b02-760f3d6cbd87')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -137,8 +137,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.manganese_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3bc58369-dcc7-4021-9b02-760f3d6cbd87')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3bc58369-dcc7-4021-9b02-760f3d6cbd87')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3bc58369-dcc7-4021-9b02-760f3d6cbd87')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3bc58369-dcc7-4021-9b02-760f3d6cbd87')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -189,8 +189,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.silicon_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3c96ee94-7af5-4525-8def-951d69554357')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3c96ee94-7af5-4525-8def-951d69554357')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3c96ee94-7af5-4525-8def-951d69554357')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3c96ee94-7af5-4525-8def-951d69554357')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -214,8 +214,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.silicon_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3c96ee94-7af5-4525-8def-951d69554357')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3c96ee94-7af5-4525-8def-951d69554357')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3c96ee94-7af5-4525-8def-951d69554357')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3c96ee94-7af5-4525-8def-951d69554357')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -252,8 +252,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.carbon_equivalent_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ecdb4dc9-db86-4eb2-9fca-228fcf598db3')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ecdb4dc9-db86-4eb2-9fca-228fcf598db3')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ecdb4dc9-db86-4eb2-9fca-228fcf598db3')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ecdb4dc9-db86-4eb2-9fca-228fcf598db3')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -277,8 +277,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.carbon_equivalent_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ecdb4dc9-db86-4eb2-9fca-228fcf598db3')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ecdb4dc9-db86-4eb2-9fca-228fcf598db3')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ecdb4dc9-db86-4eb2-9fca-228fcf598db3')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ecdb4dc9-db86-4eb2-9fca-228fcf598db3')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -326,8 +326,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.sulphur_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c69460b7-2c6f-4a77-b045-5f72ed3294fc')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c69460b7-2c6f-4a77-b045-5f72ed3294fc')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c69460b7-2c6f-4a77-b045-5f72ed3294fc')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c69460b7-2c6f-4a77-b045-5f72ed3294fc')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -351,8 +351,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.sulphur_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c69460b7-2c6f-4a77-b045-5f72ed3294fc')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c69460b7-2c6f-4a77-b045-5f72ed3294fc')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c69460b7-2c6f-4a77-b045-5f72ed3294fc')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c69460b7-2c6f-4a77-b045-5f72ed3294fc')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -408,8 +408,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.phosphorous_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e66bf431-dafa-4e10-b140-79a890d1fc4b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e66bf431-dafa-4e10-b140-79a890d1fc4b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e66bf431-dafa-4e10-b140-79a890d1fc4b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e66bf431-dafa-4e10-b140-79a890d1fc4b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -433,8 +433,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.phosphorous_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e66bf431-dafa-4e10-b140-79a890d1fc4b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e66bf431-dafa-4e10-b140-79a890d1fc4b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e66bf431-dafa-4e10-b140-79a890d1fc4b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e66bf431-dafa-4e10-b140-79a890d1fc4b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -474,8 +474,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.sulphur_phosphorous_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d9b9cf1a-e726-4331-9a94-e7db04bfec71')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d9b9cf1a-e726-4331-9a94-e7db04bfec71')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d9b9cf1a-e726-4331-9a94-e7db04bfec71')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d9b9cf1a-e726-4331-9a94-e7db04bfec71')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -499,8 +499,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.sulphur_phosphorous_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d9b9cf1a-e726-4331-9a94-e7db04bfec71')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d9b9cf1a-e726-4331-9a94-e7db04bfec71')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d9b9cf1a-e726-4331-9a94-e7db04bfec71')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d9b9cf1a-e726-4331-9a94-e7db04bfec71')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -548,8 +548,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.chromium_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','344403ea-5f80-4bb4-8e12-18be7aa2f65b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','344403ea-5f80-4bb4-8e12-18be7aa2f65b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','344403ea-5f80-4bb4-8e12-18be7aa2f65b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','344403ea-5f80-4bb4-8e12-18be7aa2f65b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -573,8 +573,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.chromium_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','344403ea-5f80-4bb4-8e12-18be7aa2f65b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','344403ea-5f80-4bb4-8e12-18be7aa2f65b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','344403ea-5f80-4bb4-8e12-18be7aa2f65b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','344403ea-5f80-4bb4-8e12-18be7aa2f65b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -628,8 +628,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.nickel_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','bae8f4e5-4f48-44ae-88bb-6ab69023b89b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bae8f4e5-4f48-44ae-88bb-6ab69023b89b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bae8f4e5-4f48-44ae-88bb-6ab69023b89b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bae8f4e5-4f48-44ae-88bb-6ab69023b89b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -653,8 +653,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.nickel_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','bae8f4e5-4f48-44ae-88bb-6ab69023b89b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bae8f4e5-4f48-44ae-88bb-6ab69023b89b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bae8f4e5-4f48-44ae-88bb-6ab69023b89b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bae8f4e5-4f48-44ae-88bb-6ab69023b89b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -711,8 +711,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.molybdenum_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a56a1c53-aeda-4fd8-ace1-b00828550266')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a56a1c53-aeda-4fd8-ace1-b00828550266')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a56a1c53-aeda-4fd8-ace1-b00828550266')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a56a1c53-aeda-4fd8-ace1-b00828550266')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -736,8 +736,8 @@ class TMTBar(models.Model):
         
         for record in self:
             record.molybdenum_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a56a1c53-aeda-4fd8-ace1-b00828550266')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a56a1c53-aeda-4fd8-ace1-b00828550266')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a56a1c53-aeda-4fd8-ace1-b00828550266')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a56a1c53-aeda-4fd8-ace1-b00828550266')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value

@@ -53,8 +53,8 @@ class MechanicalDryingShrinkage(models.Model):
         
         for record in self:
             record.drying_shrinkage_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -78,8 +78,8 @@ class MechanicalDryingShrinkage(models.Model):
         
         for record in self:
             record.drying_shrinkage_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -141,8 +141,8 @@ class MechanicalDryingShrinkage(models.Model):
         
         for record in self:
             record.moisture_movement_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -166,8 +166,8 @@ class MechanicalDryingShrinkage(models.Model):
         
         for record in self:
             record.moisture_movement_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -232,7 +232,7 @@ class MechanicalDryingShrinkage(models.Model):
     
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
-        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # records = self.env['lerm.eln'].sudo().search([('id','=', record.eln_id.id)]).parameters_result
         # print("records",records)
         # self.sample_parameters = records
         for record in self:

@@ -111,8 +111,8 @@ class Soil(models.Model):
         
         for record in self:
             record.max_fsi_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -136,8 +136,8 @@ class Soil(models.Model):
         
         for record in self:
             record.max_fsi_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -192,7 +192,7 @@ class Soil(models.Model):
                     line.write({'passing_percent': 100})
 
                 else:
-                    previous_line_record = self.env['mechanical.soil.sieve.analysis.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+                    previous_line_record = self.env['mechanical.soil.sieve.analysis.line'].sudo().search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
                     line.write({'cumulative_retained': previous_line_record + line.percent_retained})
                     line.write({'passing_percent': 100-(previous_line_record + line.percent_retained)})
                     print("Previous Cumulative",previous_line_record)
@@ -254,8 +254,8 @@ class Soil(models.Model):
         
         for record in self:
             record.heavy_table_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -279,8 +279,8 @@ class Soil(models.Model):
         
         for record in self:
             record.heavy_table_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -381,8 +381,8 @@ class Soil(models.Model):
         
         for record in self:
             record.light_omc_table_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -406,8 +406,8 @@ class Soil(models.Model):
         
         for record in self:
             record.light_omc_table_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -528,8 +528,8 @@ class Soil(models.Model):
         
         for record in self:
             record.liquid_limit_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -553,8 +553,8 @@ class Soil(models.Model):
         
         for record in self:
             record.liquid_limit_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -624,8 +624,8 @@ class Soil(models.Model):
         
         for record in self:
             record.plasticity_index_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -649,8 +649,8 @@ class Soil(models.Model):
         
         for record in self:
             record.plasticity_index_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -687,13 +687,13 @@ class Soil(models.Model):
     #         else:
     #             record.plasticity_index = str(46.14 - record.plastic_limit)  # Convert the result to a string if needed
 
-    @api.depends('plastic_limit')
+    @api.depends('plastic_limit','liquid_limit')
     def _compute_plasticity_index(self):
         for record in self:
             if record.plastic_limit == 0.0:
                 record.plasticity_index = 'Null'
             else:
-                plasticity_value = 46.14 - record.plastic_limit
+                plasticity_value = record.liquid_limit - record.plastic_limit
                 # Format the string representation with 2 decimal places
                 record.plasticity_index = '{:.2f}'.format(plasticity_value)
 
@@ -728,8 +728,8 @@ class Soil(models.Model):
         
     #     for record in self:
     #         record.plasticity_index_conformity1 = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 req_min = material.req_min
@@ -753,8 +753,8 @@ class Soil(models.Model):
         
     #     for record in self:
     #         record.plasticity_index_nabl1 = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1411e90a-70ac-4f77-b544-26e5b8d6dd71')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 lab_min = line.lab_min_value
@@ -809,8 +809,8 @@ class Soil(models.Model):
         
         for record in self:
             record.degree_of_compaction_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -834,8 +834,8 @@ class Soil(models.Model):
         
         for record in self:
             record.degree_of_compaction_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -877,8 +877,8 @@ class Soil(models.Model):
         
         for record in self:
             record.moisture_content_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -902,8 +902,8 @@ class Soil(models.Model):
         
         for record in self:
             record.moisture_content_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -1010,7 +1010,7 @@ class Soil(models.Model):
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
-        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # records = self.env['lerm.eln'].sudo().search([('id','=', record.eln_id.id)]).parameters_result
         # print("records",records)
         # self.sample_parameters = records
         for record in self:

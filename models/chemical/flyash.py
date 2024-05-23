@@ -37,8 +37,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.Silica_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -62,8 +62,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.Silica_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6b064931-b820-44dd-a096-99c2666bd191')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -131,8 +131,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.r2o3_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -156,8 +156,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.r2o3_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','de00fb1d-bf64-4c65-b098-b22066eed595')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -204,8 +204,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.ferric_oxide_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -229,8 +229,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.ferric_oxide_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f41a3a24-c81f-480d-88b1-5f0711870d3d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -271,8 +271,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.alumina_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -296,8 +296,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.alumina_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','399adf9d-d71d-486b-b40b-676b09173d18')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -350,8 +350,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.cao_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -375,8 +375,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.cao_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','cad7aa77-fad0-44bf-a374-48c100f86bfe')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -425,8 +425,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.mgo_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -450,8 +450,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.mgo_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a50a3026-4c50-4314-83b2-8c66b259756a')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -508,8 +508,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.calicum_oxide_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -533,8 +533,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.calicum_oxide_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -590,8 +590,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.magnesium_oxide_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -615,8 +615,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.magnesium_oxide_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bff1cbf6-c067-430d-9391-616a077daa73')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -667,8 +667,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.so3_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -692,8 +692,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.so3_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','789c0940-27b3-42a0-aacf-4d2a8d2e9a19')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -751,8 +751,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.loi_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -776,8 +776,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.loi_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e09ddd61-2d20-4d5a-b922-bea8bbdeea72')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -834,8 +834,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.na2o_round_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -859,8 +859,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.na2o_round_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -916,8 +916,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.k2o_round_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -941,8 +941,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.k2o_round_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -983,8 +983,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.available_alkalis_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -1008,8 +1008,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.available_alkalis_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -1068,8 +1068,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.chloride_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -1093,8 +1093,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.chloride_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ab368a42-36c6-44f2-81af-7b81a6ea81e7')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -1135,8 +1135,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.combined_percentage_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -1160,8 +1160,8 @@ class ChemicalFlyAsh(models.Model):
         
         for record in self:
             record.combined_percentage_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value

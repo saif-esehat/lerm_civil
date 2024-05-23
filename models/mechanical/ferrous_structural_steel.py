@@ -231,8 +231,8 @@ class FerrousStructuralSteel(models.Model):
         # for record in self:
         #     # print("Steel Size",record.size)
         #     record.weight_per_meter_nabl = 'fail'
-        #     line = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')])
-        #     materials = self.env['lerm.parameter.master'].search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
+        #     line = self.env['lerm.parameter.master'].sudo().search([('parameter_name','=','Weight per Meter (TMT Steel)')])
+        #     materials = self.env['lerm.parameter.master'].sudo().search([('parameter_name','=','Weight per Meter (TMT Steel)')]).parameter_table
         #     for material in materials:
         #         # print("Materials size",material.size.id)
         #         if material.size.id == record.size.id:
@@ -252,8 +252,8 @@ class FerrousStructuralSteel(models.Model):
 
         for record in self:
             record.weight_per_meter_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
             # for material in materials:
             #     if material.size.id == record.size.id:
             lab_min = line.lab_min_value
@@ -272,8 +272,8 @@ class FerrousStructuralSteel(models.Model):
     def _compute_weight_per_meter_conformity(self):
         for record in self:
             record.weight_per_meter_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
             for material in materials:
                 if material.size.id == record.size.id:
                     req_min = material.req_min
@@ -292,9 +292,9 @@ class FerrousStructuralSteel(models.Model):
     def _compute_requirement_weight_per_meter(self):
         for record in self:
             # record.requirement_yield = 0
-            # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
-            # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
+            # line = self.env['eln.parameters.result'].sudo().search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
+            # materials = self.env['lerm.parameter.master'].sudo().search([('id','=',line.id)]).parameter_table
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','15558232-8a13-472c-b10d-1fc011e63aeb')]).parameter_table
             for material in materials:
                 if material.size.id == record.size.id:
                     req_min = material.req_min
@@ -317,8 +317,8 @@ class FerrousStructuralSteel(models.Model):
         
         for record in self:
             record.uts_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -338,8 +338,8 @@ class FerrousStructuralSteel(models.Model):
         
         for record in self:
             record.uts_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -357,7 +357,7 @@ class FerrousStructuralSteel(models.Model):
     @api.depends('eln_ref','grade')
     def _compute_requirement_utl(self):
         for record in self:
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')]).parameter_table
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','16892ec9-a355-4139-a89c-894914a98e46')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -373,8 +373,8 @@ class FerrousStructuralSteel(models.Model):
        
         for record in self:
             record.elongation_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -394,8 +394,8 @@ class FerrousStructuralSteel(models.Model):
        
         for record in self:
             record.elongation_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -414,9 +414,9 @@ class FerrousStructuralSteel(models.Model):
     def _compute_requirement_elongation(self):
         for record in self:
             # record.requirement_elongation = 0
-            # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','% Elongation (TMT)')]).parameter
-            # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_table
+            # line = self.env['eln.parameters.result'].sudo().search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','% Elongation (TMT)')]).parameter
+            # materials = self.env['lerm.parameter.master'].sudo().search([('id','=',line.id)]).parameter_table
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5f37e595-2775-40d1-be6f-8caec0bd8c79')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -431,8 +431,8 @@ class FerrousStructuralSteel(models.Model):
     
         for record in self:
             record.yield_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -452,8 +452,8 @@ class FerrousStructuralSteel(models.Model):
     
         for record in self:
             record.yield_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -473,9 +473,9 @@ class FerrousStructuralSteel(models.Model):
     def _compute_requirement_yield(self):
         for record in self:
             # record.requirement_yield = 0
-            # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
-            # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')]).parameter_table
+            # line = self.env['eln.parameters.result'].sudo().search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
+            # materials = self.env['lerm.parameter.master'].sudo().search([('id','=',line.id)]).parameter_table
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b021be03-5450-4c21-b7c7-94a14a118935')]).parameter_table
             
             for material in materials:
                 print("DATA ", material)
@@ -491,8 +491,8 @@ class FerrousStructuralSteel(models.Model):
 
         for record in self:
             record.ts_ys_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -513,8 +513,8 @@ class FerrousStructuralSteel(models.Model):
 
         for record in self:
             record.ts_ys_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -533,9 +533,9 @@ class FerrousStructuralSteel(models.Model):
     def _compute_requirement_ts_ys(self):
         for record in self:
             # record.requirement_yield = 0
-            # line = self.env['eln.parameters.result'].search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
-            # materials = self.env['lerm.parameter.master'].search([('id','=',line.id)]).parameter_table
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
+            # line = self.env['eln.parameters.result'].sudo().search([('eln_id','=',record.eln_ref.id),('parameter.parameter_name','=','Yield Stress (TMT)')]).parameter
+            # materials = self.env['lerm.parameter.master'].sudo().search([('id','=',line.id)]).parameter_table
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','de4bb55e-9318-4725-ac44-fd1850d9e2eb')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -690,9 +690,9 @@ class FerrousStructuralSteel(models.Model):
 
     # @api.depends('tests')
     # def _compute_visible(self):
-    #     fracture_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Fracture')])
-    #     bend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Bend Test')])
-    #     rebend_test = self.env['mechanical.tmt.test'].search([('name', '=', 'Rebend Test')])
+    #     fracture_test = self.env['mechanical.tmt.test'].sudo().search([('name', '=', 'Fracture')])
+    #     bend_test = self.env['mechanical.tmt.test'].sudo().search([('name', '=', 'Bend Test')])
+    #     rebend_test = self.env['mechanical.tmt.test'].sudo().search([('name', '=', 'Rebend Test')])
 
 
     #     for record in self:

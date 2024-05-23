@@ -52,8 +52,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.so3_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a58cb5bc-d2d2-4756-81d2-6571ae81a813')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a58cb5bc-d2d2-4756-81d2-6571ae81a813')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a58cb5bc-d2d2-4756-81d2-6571ae81a813')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a58cb5bc-d2d2-4756-81d2-6571ae81a813')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -77,8 +77,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.so3_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a58cb5bc-d2d2-4756-81d2-6571ae81a813')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a58cb5bc-d2d2-4756-81d2-6571ae81a813')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a58cb5bc-d2d2-4756-81d2-6571ae81a813')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a58cb5bc-d2d2-4756-81d2-6571ae81a813')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -140,8 +140,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.loss_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','df12ceda-8e7d-4cb0-af54-0561796f5fdf')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df12ceda-8e7d-4cb0-af54-0561796f5fdf')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df12ceda-8e7d-4cb0-af54-0561796f5fdf')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df12ceda-8e7d-4cb0-af54-0561796f5fdf')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -165,8 +165,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.loss_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','df12ceda-8e7d-4cb0-af54-0561796f5fdf')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df12ceda-8e7d-4cb0-af54-0561796f5fdf')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df12ceda-8e7d-4cb0-af54-0561796f5fdf')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df12ceda-8e7d-4cb0-af54-0561796f5fdf')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -221,8 +221,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.cao1_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','80cbb8c4-5b52-4c0b-97f8-b5b66af79982')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','80cbb8c4-5b52-4c0b-97f8-b5b66af79982')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','80cbb8c4-5b52-4c0b-97f8-b5b66af79982')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','80cbb8c4-5b52-4c0b-97f8-b5b66af79982')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -246,8 +246,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.cao1_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','80cbb8c4-5b52-4c0b-97f8-b5b66af79982')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','80cbb8c4-5b52-4c0b-97f8-b5b66af79982')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','80cbb8c4-5b52-4c0b-97f8-b5b66af79982')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','80cbb8c4-5b52-4c0b-97f8-b5b66af79982')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -305,8 +305,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.mgo_conformity1 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3ef8ce36-8db8-4557-ad95-14b199bc9ff0')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3ef8ce36-8db8-4557-ad95-14b199bc9ff0')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3ef8ce36-8db8-4557-ad95-14b199bc9ff0')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3ef8ce36-8db8-4557-ad95-14b199bc9ff0')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -330,8 +330,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.mgo_nabl1 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3ef8ce36-8db8-4557-ad95-14b199bc9ff0')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3ef8ce36-8db8-4557-ad95-14b199bc9ff0')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3ef8ce36-8db8-4557-ad95-14b199bc9ff0')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3ef8ce36-8db8-4557-ad95-14b199bc9ff0')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -385,8 +385,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.cao_conformity2 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','abc60d60-0e94-4a2a-a08f-04650534fa9f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','abc60d60-0e94-4a2a-a08f-04650534fa9f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','abc60d60-0e94-4a2a-a08f-04650534fa9f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','abc60d60-0e94-4a2a-a08f-04650534fa9f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -410,8 +410,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.cao_nabl2 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','abc60d60-0e94-4a2a-a08f-04650534fa9f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','abc60d60-0e94-4a2a-a08f-04650534fa9f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','abc60d60-0e94-4a2a-a08f-04650534fa9f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','abc60d60-0e94-4a2a-a08f-04650534fa9f')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -462,8 +462,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.mgo_conformity2 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b3b623fc-ff8b-44b8-884b-869139ff0912')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b3b623fc-ff8b-44b8-884b-869139ff0912')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b3b623fc-ff8b-44b8-884b-869139ff0912')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b3b623fc-ff8b-44b8-884b-869139ff0912')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -487,8 +487,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.mgo_nabl2 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b3b623fc-ff8b-44b8-884b-869139ff0912')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b3b623fc-ff8b-44b8-884b-869139ff0912')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b3b623fc-ff8b-44b8-884b-869139ff0912')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b3b623fc-ff8b-44b8-884b-869139ff0912')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -539,8 +539,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.free_lime_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','1959c613-48ed-494d-93a3-b4c831e37b51')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','1959c613-48ed-494d-93a3-b4c831e37b51')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1959c613-48ed-494d-93a3-b4c831e37b51')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1959c613-48ed-494d-93a3-b4c831e37b51')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -564,8 +564,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.free_lime_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','1959c613-48ed-494d-93a3-b4c831e37b51')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','1959c613-48ed-494d-93a3-b4c831e37b51')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1959c613-48ed-494d-93a3-b4c831e37b51')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1959c613-48ed-494d-93a3-b4c831e37b51')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -618,8 +618,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.soluble_sodium_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e54abac7-52ff-41a2-8ef1-cd536cde4e2d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e54abac7-52ff-41a2-8ef1-cd536cde4e2d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e54abac7-52ff-41a2-8ef1-cd536cde4e2d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e54abac7-52ff-41a2-8ef1-cd536cde4e2d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -643,8 +643,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.soluble_sodium_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e54abac7-52ff-41a2-8ef1-cd536cde4e2d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e54abac7-52ff-41a2-8ef1-cd536cde4e2d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e54abac7-52ff-41a2-8ef1-cd536cde4e2d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e54abac7-52ff-41a2-8ef1-cd536cde4e2d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -728,8 +728,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.free_water_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c3ac1330-a4d9-4526-9533-4130ff635bf6')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c3ac1330-a4d9-4526-9533-4130ff635bf6')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c3ac1330-a4d9-4526-9533-4130ff635bf6')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c3ac1330-a4d9-4526-9533-4130ff635bf6')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -753,8 +753,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.free_water_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c3ac1330-a4d9-4526-9533-4130ff635bf6')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c3ac1330-a4d9-4526-9533-4130ff635bf6')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c3ac1330-a4d9-4526-9533-4130ff635bf6')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c3ac1330-a4d9-4526-9533-4130ff635bf6')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -811,8 +811,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.combined_water_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','1afa0443-8649-48a3-b73e-49f9fbb08d3d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','1afa0443-8649-48a3-b73e-49f9fbb08d3d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1afa0443-8649-48a3-b73e-49f9fbb08d3d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1afa0443-8649-48a3-b73e-49f9fbb08d3d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -836,8 +836,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.combined_water_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','1afa0443-8649-48a3-b73e-49f9fbb08d3d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','1afa0443-8649-48a3-b73e-49f9fbb08d3d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1afa0443-8649-48a3-b73e-49f9fbb08d3d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1afa0443-8649-48a3-b73e-49f9fbb08d3d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -891,8 +891,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.calcium_oxide_conformity2 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -916,8 +916,8 @@ class ChemicalGyspum(models.Model):
         
         for record in self:
             record.calcium_oxide_nabl2 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','966341bc-cef0-49da-8f72-df520a8c702e')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value

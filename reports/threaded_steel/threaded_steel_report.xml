@@ -105,8 +105,7 @@
 					</div>
 				
 			<div style="padding-top:2px">
-				<span style="font-size:12px;" t-esc="o.material.test_parameter "/> 
-					Results
+				<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>: 
             </div>
 
 		
@@ -162,11 +161,12 @@
 								<td style="text-align: center;">
 									<span t-esc="data.diameter"/>
 								</td>
-
-
 								<td style="text-align: center; vertical-align: middle;">
 									
 								</td>
+
+
+								
 
 								
 							</tr>
@@ -328,8 +328,14 @@
 								</td>
 
 
-								<td style="text-align: center; vertical-align: middle;">
-									
+								<td style="text-align: center;">
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','4d303b20-3c0d-406a-99fd-2342f5284def')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
+									</span>
 								</td>
 
 								
@@ -352,8 +358,14 @@
 								</td>
 
 
-								<td style="text-align: center; vertical-align: middle;">
-									
+								<td style="text-align: center;">
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cfd57c73-61d9-4c56-a219-cb99719ef035')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
+									</span>
 								</td>
 
 								
@@ -376,8 +388,14 @@
 								</td>
 
 
-								<td style="text-align: center; vertical-align: middle;">
-									
+								<td style="text-align: center;">
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0fa60911-adbd-4beb-a10b-7a2447c6a92a')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
+									</span>
 								</td>
 
 								
@@ -400,8 +418,14 @@
 								</td>
 
 
-								<td style="text-align: center; vertical-align: middle;">
-									
+								<td style="text-align: center;">
+									<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','de8d91bc-9326-45d1-b35c-8c777f0e665b')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+												<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
+									</span>
 								</td>
 
 								

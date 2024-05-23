@@ -1029,7 +1029,7 @@
     </record>
 
     <record id="threaded_steel_mech_datasheet_action" model="ir.actions.report">
-        <field name="name">Threaded Steel Report</field>
+        <field name="name">Threaded Steel Datasheet</field>
         <field name="model">lerm.eln</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">lerm_civil.threaded_steel_mech_datasheet</field>

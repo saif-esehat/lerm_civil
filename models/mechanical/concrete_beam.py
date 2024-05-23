@@ -43,7 +43,7 @@ class FlexuralStrengthConcreteBeam(models.Model):
     def _compute_age_of_days(self):
         for record in self:
             if record.eln_ref.sample_id:
-                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).days_casting
+                sample_record = self.env['lerm.srf.sample'].sudo().search([('id','=', record.eln_ref.sample_id.id)]).days_casting
                 if sample_record == '3':
                     record.age_of_days = '3days'
                 elif sample_record == '7':
@@ -101,7 +101,7 @@ class FlexuralStrengthConcreteBeam(models.Model):
     def compute_date_of_casting(self):
         for record in self:
             if record.eln_ref.sample_id:
-                sample_record = self.env['lerm.srf.sample'].search([('id','=', record.eln_ref.sample_id.id)]).date_casting
+                sample_record = self.env['lerm.srf.sample'].sudo().search([('id','=', record.eln_ref.sample_id.id)]).date_casting
                 record.date_of_casting = sample_record
             else:
                 record.date_of_casting = None
@@ -240,7 +240,8 @@ class FlexuralStrengthConcreteBeamLine(models.Model):
     def _compute_id_mark(self):
         for record in self:
             try:
-                record.id_mark = record.parent_id.eln_ref.sample_id.client_sample_id
+                parent = record.parent_id.sudo()
+                record.id_mark = parent.eln_ref.sample_id.client_sample_id
             except:
                 record.id_mark = ""
 

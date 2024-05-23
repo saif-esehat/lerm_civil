@@ -137,8 +137,8 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.normal_consistency_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -162,21 +162,21 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.normal_consistency_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.normal_consistency_fly_1 - record.normal_consistency_fly_1*mu_value
-                    upper = record.normal_consistency_fly_1 + record.normal_consistency_fly_1*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.normal_consistency_nabl = 'pass'
-                        break
-                    else:
-                        record.normal_consistency_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df1f22bb-1b3c-43ae-9c20-5421b6d6edf9')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.normal_consistency_fly_1 - record.normal_consistency_fly_1*mu_value
+            upper = record.normal_consistency_fly_1 + record.normal_consistency_fly_1*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.normal_consistency_nabl = 'pass'
+                break
+            else:
+                record.normal_consistency_nabl = 'fail'
 
 
 
@@ -325,8 +325,8 @@ class FlyaschNormalConsistency(models.Model):
     def _compute_initial_setting_conformity(self):
         for record in self:
             record.initial_setting_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d3ec12bd-6bbe-4fdf-9571-a5a099be0293')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d3ec12bd-6bbe-4fdf-9571-a5a099be0293')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d3ec12bd-6bbe-4fdf-9571-a5a099be0293')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d3ec12bd-6bbe-4fdf-9571-a5a099be0293')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -347,19 +347,19 @@ class FlyaschNormalConsistency(models.Model):
             record.initial_setting_nabl = 'fail'
             line = self.env['lerm.parameter.master'].search([('internal_id','=','d3ec12bd-6bbe-4fdf-9571-a5a099be0293')])
             materials = self.env['lerm.parameter.master'].search([('internal_id','=','d3ec12bd-6bbe-4fdf-9571-a5a099be0293')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = float(record.initial_setting_time_minutes_unrounded) - float(record.initial_setting_time_minutes_unrounded)*mu_value
-                    upper = float(record.initial_setting_time_minutes_unrounded) + float(record.initial_setting_time_minutes_unrounded)*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.initial_setting_nabl = 'pass'
-                        break
-                    else:
-                        record.initial_setting_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = float(record.initial_setting_time_minutes_unrounded) - float(record.initial_setting_time_minutes_unrounded)*mu_value
+            upper = float(record.initial_setting_time_minutes_unrounded) + float(record.initial_setting_time_minutes_unrounded)*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.initial_setting_nabl = 'pass'
+                break
+            else:
+                record.initial_setting_nabl = 'fail'
 
 
     @api.depends('time_water_added', 'time_needle_fails')
@@ -414,8 +414,8 @@ class FlyaschNormalConsistency(models.Model):
     def _compute_final_setting_conformity(self):
         for record in self:
             record.final_setting_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -434,21 +434,21 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.final_setting_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = float(record.final_setting_time_minutes_unrounded) - float(record.final_setting_time_minutes_unrounded)*mu_value
-                    upper = float(record.final_setting_time_minutes_unrounded) + float(record.final_setting_time_minutes_unrounded)*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.final_setting_nabl = 'pass'
-                        break
-                    else:
-                        record.final_setting_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','dd22e8dc-6526-4fcc-a5ec-18cc1ae10857')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = float(record.final_setting_time_minutes_unrounded) - float(record.final_setting_time_minutes_unrounded)*mu_value
+            upper = float(record.final_setting_time_minutes_unrounded) + float(record.final_setting_time_minutes_unrounded)*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.final_setting_nabl = 'pass'
+                break
+            else:
+                record.final_setting_nabl = 'fail'
 
 
 
@@ -526,8 +526,8 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.prcent_retaind_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -551,21 +551,21 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.prcent_retaind_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.prcent_retaind - record.prcent_retaind*mu_value
-                    upper = record.prcent_retaind + record.prcent_retaind*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.prcent_retaind_nabl = 'pass'
-                        break
-                    else:
-                        record.prcent_retaind_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','53dc6524-0da6-4ec4-a91e-d41c44f5edb5')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.prcent_retaind - record.prcent_retaind*mu_value
+            upper = record.prcent_retaind + record.prcent_retaind*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.prcent_retaind_nabl = 'pass'
+                break
+            else:
+                record.prcent_retaind_nabl = 'fail'
 
 
 
@@ -659,8 +659,8 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.expansion_soundness_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -684,21 +684,21 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.expansion_soundness_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.expansion_soundness - record.expansion_soundness*mu_value
-                    upper = record.expansion_soundness + record.expansion_soundness*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.expansion_soundness_nabl = 'pass'
-                        break
-                    else:
-                        record.expansion_soundness_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','84b0584b-91b0-4153-87ef-11b6954a9837')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.expansion_soundness - record.expansion_soundness*mu_value
+            upper = record.expansion_soundness + record.expansion_soundness*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.expansion_soundness_nabl = 'pass'
+                break
+            else:
+                record.expansion_soundness_nabl = 'fail'
 
 
 
@@ -779,8 +779,8 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.average_specific_gravity_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -804,21 +804,21 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.average_specific_gravity_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_specific_gravity - record.average_specific_gravity*mu_value
-                    upper = record.average_specific_gravity + record.average_specific_gravity*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.average_specific_gravity_nabl = 'pass'
-                        break
-                    else:
-                        record.average_specific_gravity_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ed8d0da4-1d2c-4d3b-9ebe-ecb0b5e1221e')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_specific_gravity - record.average_specific_gravity*mu_value
+            upper = record.average_specific_gravity + record.average_specific_gravity*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.average_specific_gravity_nabl = 'pass'
+                break
+            else:
+                record.average_specific_gravity_nabl = 'fail'
 
 
 
@@ -1028,8 +1028,8 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.compressive_strength_of_sample_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -1053,21 +1053,21 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.compressive_strength_of_sample_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.compressive_strength_of_sample - record.compressive_strength_of_sample*mu_value
-                    upper = record.compressive_strength_of_sample + record.compressive_strength_of_sample*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.compressive_strength_of_sample_nabl = 'pass'
-                        break
-                    else:
-                        record.compressive_strength_of_sample_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c35093e4-98f0-419e-94cd-1844af4393f5')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.compressive_strength_of_sample - record.compressive_strength_of_sample*mu_value
+            upper = record.compressive_strength_of_sample + record.compressive_strength_of_sample*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.compressive_strength_of_sample_nabl = 'pass'
+                break
+            else:
+                record.compressive_strength_of_sample_nabl = 'fail'
 
 
 
@@ -1208,8 +1208,8 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.lime_reactivity_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -1233,21 +1233,21 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.lime_reactivity_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
-                    upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.lime_reactivity_nabl = 'pass'
-                        break
-                    else:
-                        record.lime_reactivity_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','842b2aec-c97d-4d83-a9f2-2eb112eae116')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.compressive_strength_28_days - record.compressive_strength_28_days*mu_value
+            upper = record.compressive_strength_28_days + record.compressive_strength_28_days*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.lime_reactivity_nabl = 'pass'
+                break
+            else:
+                record.lime_reactivity_nabl = 'fail'
 
 
 
@@ -1462,8 +1462,8 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.fineness_blaine_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -1487,21 +1487,21 @@ class FlyaschNormalConsistency(models.Model):
         
         for record in self:
             record.fineness_blaine_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
-                    upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.fineness_blaine_nabl = 'pass'
-                        break
-                    else:
-                        record.fineness_blaine_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','97be6095-6047-4781-9885-0b8b29050fda')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.fineness_air_permeability - record.fineness_air_permeability*mu_value
+            upper = record.fineness_air_permeability + record.fineness_air_permeability*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.fineness_blaine_nabl = 'pass'
+                break
+            else:
+                record.fineness_blaine_nabl = 'fail'
 
 
 

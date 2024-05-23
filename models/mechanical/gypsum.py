@@ -277,8 +277,8 @@ class GypsumMechanical(models.Model):
     # def _compute_compressive_7days_conformity(self):
     #     for record in self:
     #         record.compressive_7days_conformity = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
     #         for material in materials:
     #             if material.grade.id == record.grade.id:
     #                 req_min = material.req_min
@@ -297,8 +297,8 @@ class GypsumMechanical(models.Model):
         
     #     for record in self:
     #         record.compressive_7days_nabl = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a267dec2-59df-4c9d-827b-69778c31c29b')]).parameter_table
             
     #         lab_min = line.lab_min_value
     #         lab_max = line.lab_max_value
@@ -353,11 +353,11 @@ class GypsumMechanical(models.Model):
 
     @api.depends('tests')
     def _compute_visible(self):
-        normal_consistency_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Normal Consistency')])
-        setting_time_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Setting Time')])
-        bulk_density_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Dry Bulk Density')])
-        coarse_particle_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Free From Coarse Particle')])
-        compressive_test = self.env['mechanical.gypsum.test'].search([('name', '=', 'Compressive Strength')])
+        normal_consistency_test = self.env['mechanical.gypsum.test'].sudo().search([('name', '=', 'Normal Consistency')])
+        setting_time_test = self.env['mechanical.gypsum.test'].sudo().search([('name', '=', 'Setting Time')])
+        bulk_density_test = self.env['mechanical.gypsum.test'].sudo().search([('name', '=', 'Dry Bulk Density')])
+        coarse_particle_test = self.env['mechanical.gypsum.test'].sudo().search([('name', '=', 'Free From Coarse Particle')])
+        compressive_test = self.env['mechanical.gypsum.test'].sudo().search([('name', '=', 'Compressive Strength')])
 
 
 

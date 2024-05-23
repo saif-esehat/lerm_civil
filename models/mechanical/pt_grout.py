@@ -25,7 +25,7 @@ class PtGrout(models.Model):
 
     @api.depends('eln_ref')
     def _compute_sample_parameters(self):
-        # records = self.env['lerm.eln'].search([('id','=', record.eln_id.id)]).parameters_result
+        # records = self.env['lerm.eln'].sudo().search([('id','=', record.eln_id.id)]).parameters_result
         # print("records",records)
         # self.sample_parameters = records
         for record in self:
@@ -76,8 +76,8 @@ class PtGrout(models.Model):
         
         for record in self:
             record.fludity_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','1e31d717-331a-4e71-8887-ef37cf38c7dd')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','1e31d717-331a-4e71-8887-ef37cf38c7dd')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1e31d717-331a-4e71-8887-ef37cf38c7dd')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','1e31d717-331a-4e71-8887-ef37cf38c7dd')]).parameter_table
             for material in materials:
                 # if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -122,8 +122,8 @@ class PtGrout(models.Model):
     def _compute_initial_setting_conformity(self):
         for record in self:
             record.initial_setting_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -142,8 +142,8 @@ class PtGrout(models.Model):
         
         for record in self:
             record.initial_setting_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','0fd53f55-7350-4597-8057-139ef15f07fe')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -210,8 +210,8 @@ class PtGrout(models.Model):
     def _compute_final_setting_conformity(self):
         for record in self:
             record.final_setting_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -230,8 +230,8 @@ class PtGrout(models.Model):
         
         for record in self:
             record.final_setting_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9377b0ab-5cad-4cbe-a6f5-1cee158d2d0e')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -336,8 +336,8 @@ class PtGrout(models.Model):
     def _compute_bleeding_confirmity_confirmity(self):
         for record in self:
             record.bleeding_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table
             for material in materials:
                 
                     req_min = material.req_min
@@ -364,8 +364,8 @@ class PtGrout(models.Model):
         
         for record in self:
             record.bleeding_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','950eafa7-9b4f-4025-b34c-75a33149cc6f')]).parameter_table
             for material in materials:
                 # if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -418,8 +418,8 @@ class PtGrout(models.Model):
     def _compute_volume_change_confirmity(self):
         for record in self:
             record.volume_change_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table
             for material in materials:
                 
                     req_min = material.req_min
@@ -445,8 +445,8 @@ class PtGrout(models.Model):
         
         for record in self:
             record.volume_nabl_1 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d8d143f8-2c21-4a5d-beb8-366c6a3e4b93')]).parameter_table
             for material in materials:
                 # if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -501,8 +501,8 @@ class PtGrout(models.Model):
         
         for record in self:
             record.compressive_strength_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
             for material in materials:
                 # if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -550,8 +550,8 @@ class PtGrout(models.Model):
     def _compute_compressive_strength_7days_confirmity(self):
         for record in self:
             record.compressive_strength_7days_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
             for material in materials:
                 
                     req_min = material.req_min
@@ -571,8 +571,8 @@ class PtGrout(models.Model):
         
     #     for record in self:
     #         record.compressive_strength_7days_nabl_pt = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
     #         for material in materials:
     #             # if material.grade.id == record.grade.id:
     #                 lab_min = line.lab_min_value
@@ -597,8 +597,8 @@ class PtGrout(models.Model):
         
         for record in self:
             record.days7_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
             for material in materials:
                 # if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -673,8 +673,8 @@ class PtGrout(models.Model):
     def _compute_compressive_strength_28days_confirmity(self):
         for record in self:
             record.compressive_strength_28days_confirmity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
             for material in materials:
                 
                     req_min = material.req_min
@@ -694,8 +694,8 @@ class PtGrout(models.Model):
         
     #     for record in self:
     #         record.compressive_strength_28days_nabl_pt = 'fail'
-    #         line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
-    #         materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
     #         for material in materials:
     #             # if material.grade.id == record.grade.id:
     #                 lab_min = line.lab_min_value
@@ -720,8 +720,8 @@ class PtGrout(models.Model):
         
         for record in self:
             record.days28_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a40b79f8-39e1-4ca3-8c9d-f28fb1f9b12e')]).parameter_table
             for material in materials:
                 # if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -786,11 +786,11 @@ class PtGrout(models.Model):
     ### Compute Visible
     @api.depends('sample_parameters')
     def _compute_visible(self):
-        # fluidity_test = self.env['mechanical.grout.test'].search([('name', '=', 'Fluidity')])
-        # setting_time_test = self.env['mechanical.grout.test'].search([('name', '=', 'Setting Time')])
-        # bleeding_test = self.env['mechanical.grout.test'].search([('name', '=', 'Bleeding')])
-        # volume_change_test = self.env['mechanical.grout.test'].search([('name', '=', 'Volume Change')])
-        # compressive_strength_test = self.env['mechanical.grout.test'].search([('name', '=', 'Compressive Strength')])
+        # fluidity_test = self.env['mechanical.grout.test'].sudo().search([('name', '=', 'Fluidity')])
+        # setting_time_test = self.env['mechanical.grout.test'].sudo().search([('name', '=', 'Setting Time')])
+        # bleeding_test = self.env['mechanical.grout.test'].sudo().search([('name', '=', 'Bleeding')])
+        # volume_change_test = self.env['mechanical.grout.test'].sudo().search([('name', '=', 'Volume Change')])
+        # compressive_strength_test = self.env['mechanical.grout.test'].sudo().search([('name', '=', 'Compressive Strength')])
 
         for record in self:
             record.fludity_visible = False

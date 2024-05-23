@@ -139,7 +139,7 @@ class GsbMechanical(models.Model):
                         line.write({'cumulative_retained': round(line.percent_retained + line.percent_retained,2)})
                         line.write({'passing_percent': round(100 -line.percent_retained - line.percent_retained,2)})
                 else:
-                    previous_line_record = self.env['mech.gsb.dry.gradation.line'].search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
+                    previous_line_record = self.env['mech.gsb.dry.gradation.line'].sudo().search([("serial_no", "=", previous_line),("parent_id","=",self.id)]).cumulative_retained
                     line.write({'cumulative_retained': round(previous_line_record + line.percent_retained,2)})
                     line.write({'passing_percent': round(100-(previous_line_record + line.percent_retained),2)})
                     print("Previous Cumulative",previous_line_record)
@@ -223,8 +223,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.water_absorbtion_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -248,8 +248,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.water_absorbtion_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d9bdbd78-4e73-44ca-93ed-442f74cd1e9b')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -330,8 +330,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.aggregate_flakiness_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -355,8 +355,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.aggregate_flakiness_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','06308898-70fb-4c47-baec-9880be12d765')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -384,8 +384,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.aggregate_elongation_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -409,8 +409,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.aggregate_elongation_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9588ef56-599e-4569-8cd2-48e1dc120714')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -463,8 +463,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.abrasion_value_percentage_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -488,8 +488,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.abrasion_value_percentage_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3c23309f-3f1c-4aca-ac94-3c2bb0f034e2')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -534,8 +534,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.average_impact_value_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -559,8 +559,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.average_impact_value_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -627,8 +627,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.liquid_limit_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -652,8 +652,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.liquid_limit_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','b9d7a9f7-3ed1-4021-90a2-47651f0ed81d')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -702,8 +702,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.average_plastic_moisture_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -727,8 +727,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.average_plastic_moisture_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','6da5a1a2-f86e-4a5f-bd15-a5b0c173b5ed')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value
@@ -766,8 +766,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.plasticity_index_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -791,8 +791,8 @@ class GsbMechanical(models.Model):
         
         for record in self:
             record.plasticity_index_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','c6c06cf6-1611-4790-9410-ef5db6233932')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     lab_min = line.lab_min_value

@@ -38,8 +38,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
             for record in self:
                 record.ph_average_conformity = 'fail'
-                line = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')])
-                materials = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')]).parameter_table
+                line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')])
+                materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')]).parameter_table
                 for material in materials:
                     if material.grade.id == record.grade.id:
                         req_min = material.req_min
@@ -65,8 +65,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.ph_average_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e9f2301d-bba0-42a2-bca8-ecbc5882a2b7')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -173,8 +173,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.average_dissolved_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -199,8 +199,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.average_dissolved_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','e714e0ff-0fec-4367-86a6-1e89d42810e9')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -295,8 +295,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.average_reduction_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -320,8 +320,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.average_reduction_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','5ddb48f6-5260-4db7-a3a5-94f341db6d97')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -378,8 +378,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.chloride_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -403,8 +403,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.chloride_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','034d2729-961c-40ae-a642-a26f03a2db5a')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -462,8 +462,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.chloride_conformity1 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -487,8 +487,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.chloride_nabl1 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f324e2d6-649f-4223-887e-aec3d85dffa9')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -543,8 +543,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.chloride_conformity2 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -568,8 +568,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.chloride_nabl2 = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','98d321ee-f77f-434c-8bae-3711912c80f5')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -634,8 +634,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.sulphate_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -659,8 +659,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.sulphate_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7dfdb9dd-0d82-4c89-bab8-3853a78dbab3')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -721,8 +721,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.cement_content_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -746,8 +746,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.cement_content_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
@@ -800,8 +800,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.cement_content_conformity = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_table
             for material in materials:
                 if material.grade.id == record.grade.id:
                     req_min = material.req_min
@@ -825,8 +825,8 @@ class ChemicalHasdenedConcrete(models.Model):
         
         for record in self:
             record.cement_content_nabl = 'fail'
-            line = self.env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')])
-            materials = self.env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_table
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_table
             # for material in materials:
             #     if material.grade.id == record.grade.id:
             lab_min = line.lab_min_value
