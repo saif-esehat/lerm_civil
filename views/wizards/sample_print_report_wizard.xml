@@ -23,6 +23,12 @@
                             class="oe_highlight" 
                             name="print_non_nabl_report"
                             string="Print Non NABL Report"/>
+
+                    <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="print_datasheet"
+                            string="Print Datasheet"/>
                     <button
                             type="object"
                             name="discard_print"

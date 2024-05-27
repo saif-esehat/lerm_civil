@@ -63,8 +63,11 @@ class DataSheetReport(models.AbstractModel):
                 # import wdb ; wdb.set_trace()
                 eln = self.env['lerm.eln'].sudo().browse(docids)
         else:
-
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
+        model_id = eln.model_id
         
         datasheet_data = []
         prev_data = None

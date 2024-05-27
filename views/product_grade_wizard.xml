@@ -7,12 +7,18 @@
             <field name="arch" type="xml">
                 <form string="Add Grade Line">
                     <group>
-                        <field name="product_id" required="1"/>
+                        <field name="product_id" required="1" attrs="{'invisible': [('product_template_visible', '=', False)]}"/>
+                        <field name="product_product" required="1" attrs="{'invisible': [('product_product_visible', '=', False)]}"/>
+
                         <field name="grade" domain="[('id', 'in', grade_ids)]"/>
                         <field name="grade_ids" invisible="1"/>
                         <field name="main_report_template"/>
                         <field name="datasheet_report_template"/>
                         <field name="ir_model"/>
+                        <field name="product_template_visible" invisible="1"/>
+                        <field name="product_product_visible" invisible="1"/>
+
+
                     </group>
                     <footer>
                         <button name="add_grade_line" string="Add Grade Line" type="object" class="btn-primary"/>
