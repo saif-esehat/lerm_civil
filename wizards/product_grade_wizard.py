@@ -8,6 +8,7 @@ class ProductGradeWizard(models.TransientModel):
     _description = 'Product Grade Wizard'
 
     product_id = fields.Many2one('product.template', string="Product")
+
     grade = fields.Many2one("lerm.grade.line", string="Grade")
     grade_ids = fields.Many2many("lerm.grade.line", string="Grade",compute="compute_grade_table")
     main_report_template = fields.Many2one('ir.actions.report', string="Main Report Template")

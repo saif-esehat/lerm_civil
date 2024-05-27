@@ -391,9 +391,9 @@ class ELN(models.Model):
 
         
             
-
-        self.sample_id.write({'state':'3-pending_verification'})
-        self.sample_id.parameters_result.unlink()
+        sample_id = self.sample_id.sudo()
+        sample_id.write({'state':'3-pending_verification'})
+        sample_id.parameters_result.unlink()
             
         start_date = self.start_date
         
@@ -418,7 +418,7 @@ class ELN(models.Model):
                 raise ValidationError("Not all parameters are calculated. Please ensure all parameters are calculated before proceeding.")
 
         for result in self.parameters_result:
-            self.env["sample.parameters.result"].create({
+            self.env["sample.parameters.result"].sudo().create({
                 'sample_id':self.sample_id.id,
                 'parameter': result.parameter.id,
                 'result': result.result,
@@ -430,12 +430,13 @@ class ELN(models.Model):
 
 
     def reupdate_result(self):
-        sample = self.sample_id
+        sample = self.sample_id.sudo()
+        # sample = self.sample_id
         # import wdb;wdb.set_trace()
         # print(sample)
-        sample.parameters_result.unlink()
+        sample.parameters_result.sudo().unlink()
         for result in self.parameters_result:
-            sample.parameters_result.create({
+            sample.parameters_result.sudo().create({
                 'sample_id':self.sample_id.id,
                 'parameter': result.parameter.id,
                 'result': result.result,
