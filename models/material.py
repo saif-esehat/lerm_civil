@@ -250,7 +250,7 @@ class ProductProduct(models.Model):
             'res_model': 'product.grade.wizard',
             'view_mode': 'form',
             'target': 'new',
-            'context': {'default_product_id': self.id},
+            'context': {'default_product_product': self.id},
         }
     
 

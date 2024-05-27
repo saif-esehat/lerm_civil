@@ -86,13 +86,25 @@ class DataSheetReport(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data):
-        if 'active_id' in data['context']:
-            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        # if 'active_id' in data['context']:
+        #     eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        # else:
+        #     eln = self.env['lerm.eln'].sudo().browse(docids) 
+        # model_id = eln.parameters_result.model_id
+        if data['fromsample'] == True:
+            if 'active_id' in data['context']:
+                # import wdb ; wdb.set_trace()
+                eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+            else:
+                # import wdb ; wdb.set_trace()
+                eln = self.env['lerm.eln'].sudo().browse(docids)
         else:
-            eln = self.env['lerm.eln'].sudo().browse(docids) 
-        model_id = eln.parameters_result.model_id
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
+        model_id = eln.model_id
         model_name = eln.parameters_result.parameter[0].ir_model.name
-        print(model_name , 'ajay')
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
             columns = self.get_visible_table_fields(model_name)
@@ -278,13 +290,18 @@ class SteelTmtBarDataSheet(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data):
+        # import wdb ; wdb.set_trace()
+
         if data['fromsample'] == True:
             if 'active_id' in data['context']:
                 eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
             else:
                 eln = self.env['lerm.eln'].sudo().browse(docids) 
         else:
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         model_id = eln.model_id
         # differnt location for product based
         model_name = eln.material.product_based_calculation[0].ir_model.name 
@@ -309,8 +326,10 @@ class CementDataSheet(models.AbstractModel):
             else:
                 eln = self.env['lerm.eln'].sudo().browse(docids) 
         else:
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
-        model_id = eln.model_id
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
@@ -335,8 +354,10 @@ class GypsumDataSheet(models.AbstractModel):
             else:
                 eln = self.env['lerm.eln'].sudo().browse(docids) 
         else:
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
-        model_id = eln.model_id
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
@@ -366,8 +387,10 @@ class FlyashDatasheet(models.AbstractModel):
             else:
                 eln = self.env['lerm.eln'].sudo().browse(docids) 
         else:
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
-        model_id = eln.model_id
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
@@ -392,8 +415,10 @@ class GgbsDataSheet(models.AbstractModel):
             else:
                 eln = self.env['lerm.eln'].sudo().browse(docids) 
         else:
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
-        model_id = eln.model_id
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
@@ -449,8 +474,10 @@ class PTGroutDatasheet(models.AbstractModel):
             else:
                 eln = self.env['lerm.eln'].sudo().browse(docids) 
         else:
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
-        model_id = eln.model_id
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
@@ -523,8 +550,10 @@ class ConcreteCubeCompresiveDatasheet(models.AbstractModel):
             else:
                 eln = self.env['lerm.eln'].sudo().browse(docids) 
         else:
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
-        model_id = eln.model_id
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         print(eln.material.parameter_table1[0].parameter_name , 'parameter')
         parameter_data = self.env['lerm.parameter.master'].sudo().search([('internal_id','=',eln.material.parameter_table1[0].internal_id)])
@@ -869,8 +898,10 @@ class SoilDatasheet(models.AbstractModel):
             else:
                 eln = self.env['lerm.eln'].sudo().browse(docids) 
         else:
-            eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
-        model_id = eln.model_id
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         print(eln.material.parameter_table1[0].parameter_name , 'parameter')
         parameter_data = self.env['lerm.parameter.master'].sudo().search([('internal_id','=',eln.material.parameter_table1[0].internal_id)])
