@@ -69,6 +69,8 @@
                         <field name="site_address"/>
                         <field name="client_refrence" attrs="{'readonly': [('state', 'in', ('2-confirm'))]}"/>
                         <field name="date_editable" invisible="1"/>
+                        <field name="active" invisible='1'/>
+
 
                     </group>
                     <group style="width:50%">
@@ -215,6 +217,7 @@
                         <field name="grade_ids" invisible='1'/>
                         <field name='conformity'/>
                         <field name="sample" attrs="{'invisible': [('is_update','!=',True)]}" readonly="1"/>
+
                         <!--<field name="grade_ids" invisible='1'/> -->
                     </group>
                     <group style="width:50%">
