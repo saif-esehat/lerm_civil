@@ -71,6 +71,8 @@
                                 <field name='conformity' readonly="1"/>
                                 <field name='has_witness'/>
                                 <field name='is_product_based_calculation'/>
+                                <field name='file_upload' widget="many2many_binary"/>
+
                                 <!-- <field name='is_form_based_calculation'/> -->
                                 <field name='invisible_fetch_inputs' invisible="1" />
                                 <field name='size_ids' invisible="1"/>
@@ -96,10 +98,6 @@
                                 <field name='grade_ids' invisible="1"/>
                                 <field name='ir_model' invisible="1"/>
                                 <!-- <field name='report_upload'/> -->
-                                <!-- <field name='file_upload' /> -->
-
-
-
 
                             </group>
                         </group>
