@@ -326,12 +326,16 @@ class CementDataSheet(models.AbstractModel):
             else:
                 eln = self.env['lerm.eln'].sudo().browse(docids) 
         else:
-            if data['report_wizard'] == True:
-                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            if data['report_wizard']:
+                if data['report_wizard'] == True:
+                    eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+                else:
+                    eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
             else:
                 eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
+        model_id = eln.model_id
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
@@ -360,6 +364,7 @@ class GypsumDataSheet(models.AbstractModel):
                 eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
+        model_id = eln.model_id
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
@@ -393,6 +398,7 @@ class FlyashDatasheet(models.AbstractModel):
                 eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
+        model_id = eln.model_id
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
@@ -421,6 +427,7 @@ class GgbsDataSheet(models.AbstractModel):
                 eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
+        model_id = eln.model_id
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
@@ -480,6 +487,7 @@ class PTGroutDatasheet(models.AbstractModel):
                 eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
         # differnt location for product based
         # model_name = eln.material.product_based_calculation[0].ir_model.name 
+        model_id = eln.model_id
         model_name = eln.material.product_based_calculation.filtered(lambda record: record.grade.id == eln.grade_id.id).ir_model.name
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
@@ -557,6 +565,7 @@ class ConcreteCubeCompresiveDatasheet(models.AbstractModel):
         # differnt location for product based
         print(eln.material.parameter_table1[0].parameter_name , 'parameter')
         parameter_data = self.env['lerm.parameter.master'].sudo().search([('internal_id','=',eln.material.parameter_table1[0].internal_id)])
+        model_id = eln.model_id
         model_name = eln.material.product_based_calculation[0].ir_model.name 
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)
@@ -905,6 +914,7 @@ class SoilDatasheet(models.AbstractModel):
         # differnt location for product based
         print(eln.material.parameter_table1[0].parameter_name , 'parameter')
         parameter_data = self.env['lerm.parameter.master'].sudo().search([('internal_id','=',eln.material.parameter_table1[0].internal_id)])
+        model_id = eln.model_id
         model_name = eln.material.product_based_calculation[0].ir_model.name 
         if model_name:
             general_data = self.env[model_name].sudo().browse(model_id)

@@ -95,6 +95,9 @@
                                 <!-- <field name="file_upload_eln"/> -->
                                 <field name='grade_ids' invisible="1"/>
                                 <field name='ir_model' invisible="1"/>
+                                <!-- <field name='report_upload'/> -->
+                                <!-- <field name='file_upload' /> -->
+
 
 
 

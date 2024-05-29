@@ -82,7 +82,28 @@ class ELN(models.Model):
     date_testing = fields.Date("Date of Testing",compute="_compute_date_testing")
     # data_sheet = fields.Binary(string="Data Sheet", attachment=True)
 
-  
+    # file_upload = fields.Many2many(
+    #     'ir.attachment',
+    #     'lerm_file_upload_eln_rel',
+    #     'eln_id',
+    #     'attachment_id_123',
+    #     string='Datasheet Upload',
+    #     help='Attach multiple images to the sample',
+    # )
+
+    
+   
+   
+
+    # report_upload = fields.Many2many(
+    #     'ir.attachment',
+    #     'lerm_report_upload_eln_rel',
+    #     'sample_id',
+    #     'attachment_id',
+    #     string='Report Upload',
+    #     help='Attach multiple images to the sample',
+    # )
+
 
     @api.depends('sample_id')
     def _compute_date_testing(self):
@@ -517,7 +538,7 @@ class ELN(models.Model):
             'report_type': 'qweb-html',
             'report_name': template_name,
             'report_file': template_name,
-            'data' : {'fromsample' : False,'eln_id':self.id},
+            'data' : {'fromsample' : False,'eln_id':self.id,'report_wizard':False}
             
         }
         
