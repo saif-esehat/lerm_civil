@@ -465,6 +465,7 @@ class ELN(models.Model):
         sample = self.sample_id
         # import wdb;wdb.set_trace()
         # print(sample)
+        self.sample_id.sudo().file_upload = self.file_upload
         sample.parameters_result.unlink()
         for result in self.parameters_result:
             sample.parameters_result.create({
