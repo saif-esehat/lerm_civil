@@ -84,12 +84,20 @@ class ELN(models.Model):
 
     # file_upload = fields.Many2many(
     #     'ir.attachment',
-    #     'lerm_file_upload_eln_rel',
+    #     'lerm_report_upload_rel_eln',
     #     'eln_id',
-    #     'attachment_id_123',
+    #     'attachment_id_1',
     #     string='Datasheet Upload',
     #     help='Attach multiple images to the sample',
     # )
+
+    file_upload = fields.Many2many(
+        'ir.attachment',
+        string='Datasheet Upload',
+        help='Attach multiple images to the sample',
+    )
+
+    
 
     
    
@@ -97,9 +105,6 @@ class ELN(models.Model):
 
     # report_upload = fields.Many2many(
     #     'ir.attachment',
-    #     'lerm_report_upload_eln_rel',
-    #     'sample_id',
-    #     'attachment_id',
     #     string='Report Upload',
     #     help='Attach multiple images to the sample',
     # )
@@ -421,6 +426,12 @@ class ELN(models.Model):
         # Ensure end_date is not before start_date
         if self.end_date and self.end_date < start_date:
             raise ValidationError("End Date cannot be before Start Date")
+        # import wdb;wdb.set_trace()
+        
+        # if len(self.file_upload) > 0:
+        #     self.sample_id.sudo().file_upload = self.file_upload
+        # else:
+        #     raise ValidationError("Please attach datasheet before submitting")
         
         # If end_date is not provided, set it to the next day after start_date
         if not self.end_date:
@@ -455,6 +466,7 @@ class ELN(models.Model):
         # sample = self.sample_id
         # import wdb;wdb.set_trace()
         # print(sample)
+        # self.sample_id.sudo().file_upload = self.file_upload
         sample.parameters_result.sudo().unlink()
         for result in self.parameters_result:
             sample.parameters_result.sudo().create({
