@@ -87,12 +87,20 @@
         <field name="name">Sample</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">lerm.srf.sample</field>
-        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_mode">tree,kanban,form,graph</field>
         <field name="domain">[('status','=','2-confirmed')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Sample</p>
         </field>
     </record>
+
+    <!-- <record id="action_lerm_srf_sample_graph" model="ir.actions.act_window">
+        <field name="name">lerm.srf.sample</field>
+        <field name="res_model">lerm.srf.sample</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="sample_graph_view"/>
+    </record> -->
+    
 
     <record id="rejected_sample_action" model="ir.actions.act_window">
         <field name="name">Rejected Sample</field>
@@ -150,7 +158,7 @@
         <field name="name">Sample</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">lerm.srf.sample</field>
-        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_mode">tree,kanban,form,graph</field>
         <field name="domain">[('status','=','2-confirmed'),('state','=','4-in_report')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Sample In Report</p>
@@ -161,7 +169,7 @@
         <field name="name">Lab Notebook</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">lerm.eln</field>
-        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_mode">tree,kanban,form,graph</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">ELN</p>
         </field>
@@ -270,6 +278,8 @@
         action="lerm_sample_print_reports_action"
         groups="lerm_civil.kes_admin_access_group,lerm_civil.kes_report"
         sequence="11" />
+
+    <!-- <menuitem id="menu_sample_graph" name="Sample Graph" parent="lerm_transaction_data" action="action_lerm_srf_sample_graph" sequence="10"/> -->
 
 
     <menuitem id="lerm_product_item_param_master"

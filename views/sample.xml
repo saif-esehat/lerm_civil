@@ -414,6 +414,19 @@
             </form>
         </field>
     </record>
+    <record id="sample_graph_view" model="ir.ui.view">
+        <field name="name">lerm.srf.sample.graph</field>
+        <field name="model">lerm.srf.sample</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="state" type="row"/>
+                <!-- <field name="create_date" interval="month" type="col"/> -->
+            </graph>
+        </field>
+
+    </record>
+
+    
 
     </data>
 
