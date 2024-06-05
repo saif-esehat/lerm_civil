@@ -126,6 +126,8 @@ class ELN(models.Model):
                     days_casting = 21
                 elif record.sample_id.days_casting == '28':
                     days_casting = 28
+                elif record.sample_id.days_casting == '45':
+                    days_casting = 45
                 elif record.sample_id.days_casting == '56':
                     days_casting = 56
                 elif record.sample_id.days_casting == '112':

@@ -161,6 +161,7 @@ class SrfForm(models.Model):
         ('14', '14 Days'),
         ('21', '21 Days'),
         ('28', '28 Days'),
+        ('45', '45 Days'),
         ('56', '56 Days'),
         ('112', '112 Days'),
     ], string='Days of casting', default='3')
@@ -746,6 +747,7 @@ class CreateSampleWizard(models.TransientModel):
         ('14', '14 Days'),
         ('21', '21 Days'),
         ('28', '28 Days'),
+        ('45', '45 Days'),
         ('56', '56 Days'),
         ('112', '112 Days'),
     ], string='Days of Testing', default='3')
