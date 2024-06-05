@@ -884,6 +884,63 @@ class ChemicalHasdenedConcrete(models.Model):
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()
+        for result in self.eln_ref.parameters_result:
+            # ph 
+            if result.parameter.internal_id == 'e9f2301d-bba0-42a2-bca8-ecbc5882a2b7':
+                result.result_char = round(self.ph_average,2)
+                if self.ph_average_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Dissolved Silica 
+            if result.parameter.internal_id == 'e714e0ff-0fec-4367-86a6-1e89d42810e9':
+                result.result_char = round(self.average_dissolved_silica,2)
+                if self.average_dissolved_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Chloride
+            if result.parameter.internal_id == '034d2729-961c-40ae-a642-a26f03a2db5a':
+                result.result_char = round(self.chloride_percent,2)
+                if self.chloride_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Sulphate 
+            if result.parameter.internal_id == '7dfdb9dd-0d82-4c89-bab8-3853a78dbab3':
+                result.result_char = round(self.sulphate_percent,2)
+                if self.sulphate_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Alkali Aggregate
+            if result.parameter.internal_id == '5ddb48f6-5260-4db7-a3a5-94f341db6d97':
+                result.result_char = round(self.average_reduction_alkalinity,2)
+                if self.average_reduction_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Chloride 1 
+            if result.parameter.internal_id == 'f324e2d6-649f-4223-887e-aec3d85dffa9':
+                result.result_char = round(self.chloride_acide,2)
+                if self.chloride_nabl1 == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Chloride 2
+            if result.parameter.internal_id == '98d321ee-f77f-434c-8bae-3711912c80f5':
+                result.result_char = round(self.chloride_percent2,2)
+                if self.chloride_nabl2 == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
         record = super(ChemicalHasdenedConcrete, self).create(vals)
         # record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
