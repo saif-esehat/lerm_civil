@@ -221,6 +221,8 @@
     'reports/concrete_cube_water_absorption/concrete_report.xml',
     'reports/threaded_steel/threaded_steel_report.xml',
     'reports/threaded_steel/threaded_steel_datasheet.xml',
+    'reports/bricks_burnt_clay/bricks_burnt_clay_report.xml',
+    'reports/bricks_burnt_clay/bricks_burnt_clay_datasheet.xml',
 
 
     # 'views/portal_template.xml'

@@ -1590,6 +1590,10 @@ class CoarseAggregateMechanical(models.Model):
                 else:
                     result.nabl_status = 'non-nabl'
                 continue
+            # water absorbtion
+            if result.parameter.internal_id == '22ee804f-41a3-4fd1-a301-a8d9180fba10':
+                result.result_char = round(self.water_absorption,2)
+                continue 
             # impact value 
             if result.parameter.internal_id == '2bd241bd-4bc3-4fe0-bea2-c1c15ff867a2':
                 result.result_char = round(self.average_impact_value,2)
@@ -1622,6 +1626,8 @@ class CoarseAggregateMechanical(models.Model):
                 else:
                     result.nabl_status = 'non-nabl'
                 continue
+            
+
 
         return {
                 'view_mode': 'form',
