@@ -20,17 +20,17 @@
                                 </td>
                                 <td colspan="1">Sample
 								</td>
-                                <td colspan="1">Weight of Empty Cylinder in gms
+                                <td colspan="1">Weight of Empty Cylinder in gms (W1)
 								</td>
-                                <td colspan="2">Total weight of oven dried ( 4.0 hrs ) aggregate sample filling the cylindrical measure in gms
+                                <td colspan="2">Total weight of oven dried ( 4.0 hrs ) aggregate sample filling the cylindrical measure in gms (W2)
 								</td>
-                                <td colspan="2">Total weight of aggeregate in the cylinder in gms
+                                <td colspan="2">Total weight of aggeregate in the cylinder in gms (A = W2-W2)
 								</td>
-                                <td colspan="2">Weight of aggregate fines passing 2.36 mm sieve after  the application of Load gms
+                                <td colspan="2">Weight of aggregate fines passing 2.36 mm sieve after  the application of Load gms (B)
 								</td>
-                                <td colspan="2">Weight of aggregate retained on 2.36 mm sieve after the test in gms
+                                <td colspan="2">Weight of aggregate retained on 2.36 mm sieve after the test in gms (W3 = A-B)
 								</td>
-                                <td colspan="1">Aggregate Crushing value
+                                <td colspan="1">Aggregate Crushing value (B/A *100)
 								</td>
                             </tr>
                             
@@ -67,7 +67,7 @@
 						</table>
                         <table style="margin-top:5px">
                         <tr cols="12">
-								<td colspan="6">Average Aggregate Crushing Value :
+								<td colspan="6">Average Aggregate Crushing Value %:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -91,7 +91,7 @@
 						
                         <table style="margin-top:20px">
 							<tr cols="12">
-								<td colspan="6">Weight of saturated surface dry (SSD) sample in air in gms :
+								<td colspan="6">Weight of saturated surface dry (SSD) sample in air in gms A:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -100,7 +100,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Weight of saturated sample in water in gms :
+								<td colspan="6">Weight of saturated sample in water in gms B :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -109,7 +109,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Oven dried weight of sample in gms :
+								<td colspan="6">Oven dried weight of sample in gms C :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -118,7 +118,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Specific Gravity :
+								<td colspan="6">Specific Gravity (C/(A-B)):
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -127,7 +127,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Water absorption % :
+								<td colspan="6">Water absorption % ((A-c)/C*100):
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -149,17 +149,17 @@
                                 </td>
                                 <td colspan="2">Sample
 								</td>
-                                <td colspan="1">Weight of cylindrical measure in gms
+                                <td colspan="1">Weight of cylindrical measure in gms W1
 								</td>
-                                <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample + cylindrical measure in gms
+                                <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample + cylindrical measure in gms W2
 								</td>
-                                <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms
+                                <td colspan="1">Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms W3 = W2-W1
 								</td>
-                                <td colspan="2">Wt. of aggregate passing 2.36 mm sieve after the test in gms
+                                <td colspan="2">Wt. of aggregate passing 2.36 mm sieve after the test in gms W4
 								</td>
-                                <td colspan="2">Wt. of aggregate retained on 2.36 mm sieve after the test in gms
+                                <td colspan="2">Wt. of aggregate retained on 2.36 mm sieve after the test in gms W5 = W3-W4
 								</td>
-                                <td colspan="2">Aggregate Crushing value
+                                <td colspan="2">Aggregate Crushing value (W4/W3)*100
 								</td>
                             </tr>
                             
@@ -197,7 +197,7 @@
 						</table>
                         <table style="margin-top:5px">
                         <tr cols="12">
-								<td colspan="6">Average Aggregate Impact Value :
+								<td colspan="6">Average Aggregate Impact Value %:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -221,7 +221,7 @@
 						</div>
 						<table style="margin-top:20px">
 							<tr cols="12">
-								<td colspan="6">Total weight of Sample in gms :
+								<td colspan="6">Total weight of Sample in gms W1:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -230,7 +230,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Weight of Passing sample in 1.70 mm IS sieve in gms :
+								<td colspan="6">Weight of Passing sample in 1.70 mm IS sieve in gms W2:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -239,7 +239,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Weight of Retain sample in 1.70 mm IS sieve in gms :
+								<td colspan="6">Weight of Retain sample in 1.70 mm IS sieve in gms W3 = W1-W2:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -248,7 +248,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Abrasion Value (%) :
+								<td colspan="6">Abrasion Value (%) (W2/W1*100):
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -286,7 +286,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Percentage of Fines :
+								<td colspan="6">Percentage of Fines Y= [(B/A)*100]:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -304,7 +304,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Load for 10 percent fines value :
+								<td colspan="6">Load for 10 percent fines value [14 * X / (Y + 4)] KN:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -386,7 +386,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Soundness :
+								<td colspan="6">Soundness %:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -467,7 +467,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Soundness :
+								<td colspan="6">Soundness %:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -646,7 +646,7 @@
 							</td>
 							<td colspan="2">Elongated Retained in gms
 							</td>
-							<td colspan="2">Flakiness Retained in gms
+							<td colspan="2">Flakiness Passing in gms
 							</td>
 						</tr>
 
@@ -675,7 +675,7 @@
 					</table>
 					<table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">Total :
+							<td colspan="6">Total Wt:
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -684,7 +684,7 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Total Elongation :
+							<td colspan="6">Total Wt Retained in gms :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -693,7 +693,7 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Total Flakiness :
+							<td colspan="6">Total wt Passing in gms :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -703,7 +703,7 @@
 						</tr>
 
 						<tr cols="12">
-							<td colspan="6">Aggregate Elongation :
+							<td colspan="6">Aggregate Elongation in %:
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -712,7 +712,7 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Aggregate Flakiness :
+							<td colspan="6">Aggregate Flakiness in %:
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -721,7 +721,7 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Aggregate Combined :
+							<td colspan="6">Aggregate Combined in %:
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -743,7 +743,7 @@
 						</div>
 						<table style="margin-top:20px">
 							<tr cols="12">
-								<td colspan="6">Weight of Sample in gms :
+								<td colspan="6">Weight of Sample in gms A:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -752,7 +752,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Weight of dry sample after retained in 75 microns :
+								<td colspan="6">Weight of dry sample after retained in 75 microns B:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -761,12 +761,12 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Material finer than 75 micron in % :
+								<td colspan="6">Material finer than 75 micron in % D = [(A-B)/A]*100:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
 									<![CDATA[&nbsp;]]>
-									<span t-field="data.wt_sample_finer75"  t-options='{"widget": "float", "precision": 2}'/>
+									<span t-field="data.material_finer75"  t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 							</tr>
 						</table>
@@ -780,7 +780,7 @@
 						</div>
 						<table style="margin-top:20px">
 							<tr cols="12">
-								<td colspan="6">Weight of Sample in gms :
+								<td colspan="6">Weight of Sample in gms W:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -789,7 +789,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Weight of dry sample after retained in 75 microns :
+								<td colspan="6">Weight of dry sample after retained in 75 microns R:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -798,7 +798,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Material finer than 75 micron in % :
+								<td colspan="6">Clay Lumps in %  L=[(W-R)/W]*100:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -817,7 +817,7 @@
 						</div>
 						<table style="margin-top:20px">
 							<tr cols="12">
-								<td colspan="6">Weight of Sample in gms :
+								<td colspan="6">Weight of Sample in gms W:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -826,7 +826,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Weight of dry sample after retained in 75 microns :
+								<td colspan="6">Weight of Decanted Sample (Light weight Particle) W1 :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -835,7 +835,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Material finer than 75 micron in % :
+								<td colspan="6">Light Weight Particle in % :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -854,7 +854,7 @@
 						</div>
 						<table style="margin-top:20px">
 							<tr cols="12">
-								<td colspan="6">Weight of Empty Bucket in kg :
+								<td colspan="6">Weight of Empty Bucket in kg A:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -863,7 +863,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Volume of Bucket in cubic meter :
+								<td colspan="6">Volume of Bucket litre (B) :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -872,7 +872,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">[Sample Weight + Bucket  Weight] in kg :
+								<td colspan="6">[Sample Weight + Bucket  Weight] in kg C:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -881,7 +881,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Sample Weight in kg :
+								<td colspan="6">Sample Weight in kg D = C-A:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -890,7 +890,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Loose Bulk Density in kg per cubic meter :
+								<td colspan="6">Loose Bulk Density in kg per litre (D/B) :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -904,11 +904,11 @@
                     <!-- Rodded Bulk Density  -->
                     <div t-if="data.rodded_bulk_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
-							Loose Bulk Density (LBD)
+							Rodded Bulk Density (RBD)
 						</div>
 						<table style="margin-top:20px">
 							<tr cols="12">
-								<td colspan="6">Weight of Empty Bucket in kg :
+								<td colspan="6">Weight of Empty Bucket in kg A:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -917,7 +917,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Volume of Bucket in cubic meter :
+								<td colspan="6">Volume of Bucket in Litre (B) :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -926,7 +926,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">[Sample Weight + Bucket  Weight] in kg :
+								<td colspan="6">[Sample Weight + Bucket  Weight] in kg C:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -935,7 +935,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Sample Weight in kg :
+								<td colspan="6">Sample Weight in kg (D= C-A):
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -944,7 +944,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Rodded Bulk Density in kg per cubic meter :
+								<td colspan="6">Rodded Bulk Density in kg per litre (D/B) :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -1112,7 +1112,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Angularity number :
+								<td colspan="6">Angularity number [67 - (100*W)/(C * GA)]:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">

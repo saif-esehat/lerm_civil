@@ -6,7 +6,10 @@
         <field name="name">chemical.hardened.concrete.form</field>
         <field name="model">chemical.hardened.concrete</field>
         <field name="arch" type="xml">
-            <form>
+            <!-- <form attrs="{'edit': [('state', '=', '1-draft')]}"> -->
+            <form >
+
+                <field readonly="1" name="state" widget="statusbar"/>
                 <sheet>
                 <group >
                     <h1>
