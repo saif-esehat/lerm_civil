@@ -504,7 +504,8 @@
 								</td> -->
 								
 								<td  style="text-align: center;vertical-align: middle;">
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_name"/>
+									<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_name"/> -->
+									<span>Cement Content</span>
 								</td>
 								
 								<td style="text-align: center;">
@@ -549,7 +550,8 @@
 								</td> -->
 								
 								<td  style="text-align: center;vertical-align: middle;">
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_name"/>
+									<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_name"/> -->
+									<span>Cement Content</span>
 								</td>
 								
 								<td style="text-align: center;">

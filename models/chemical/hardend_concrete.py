@@ -675,8 +675,9 @@ class ChemicalHasdenedConcrete(models.Model):
             else:
                 record.sulphate_nabl = 'fail'
 
+    # Names for cement content and cement content is exchanged
     # Cement Content 
-    cement_content_name = fields.Char("Name",default="Cement Content")
+    cement_content_name = fields.Char("Name",default="Cement Content 1")
     cement_conten_visible = fields.Boolean("Cement Content",compute="_compute_visible")
 
     cement_content_mass = fields.Float("Mass of Sample taken",digits=(16, 4))
@@ -763,7 +764,7 @@ class ChemicalHasdenedConcrete(models.Model):
                 record.cement_content_nabl = 'fail'
 
 
-    cement_content_1_name = fields.Char("Name",default="Cement Content -1")
+    cement_content_1_name = fields.Char("Name",default="Cement Content")
     cement_content_1_visible = fields.Boolean("Cement Content",compute="_compute_visible")
 
     cement_content_wt_sample = fields.Float("Wt of Sample (gm)")
@@ -884,6 +885,14 @@ class ChemicalHasdenedConcrete(models.Model):
     @api.model
     def create(self, vals):
         # import wdb;wdb.set_trace()
+        
+        record = super(ChemicalHasdenedConcrete, self).create(vals)
+        # record.get_all_fields()
+        record.eln_ref.write({'model_id':record.id})
+        return record
+    
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
         for result in self.eln_ref.parameters_result:
             # ph 
             if result.parameter.internal_id == 'e9f2301d-bba0-42a2-bca8-ecbc5882a2b7':
@@ -941,10 +950,31 @@ class ChemicalHasdenedConcrete(models.Model):
                 else:
                     result.nabl_status = 'non-nabl'
                 continue
-        record = super(ChemicalHasdenedConcrete, self).create(vals)
-        # record.get_all_fields()
-        record.eln_ref.write({'model_id':record.id})
-        return record
+            # Cement Content
+            if result.parameter.internal_id == 'd8bbd906-0f24-4c77-abc6-b2a8a00d91e6':
+                result.result_char = round(self.cement_content,2)
+                if self.cement_content_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Cement Content 1
+            if result.parameter.internal_id == '97527435-edbc-4d33-817f-9596b56b4cd0':
+                result.result_char = round(self.cement_content_1,2)
+                if self.cement_content_1_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
 
 
         
