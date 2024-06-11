@@ -169,7 +169,7 @@
 
 						</tr>
 						<tr t-if="data.dimension_visible">
-                            <td>a</td>
+                            <td>A</td>
                             <td>Length</td>
                             <td>
 								<span>
@@ -201,7 +201,7 @@
 
 						</tr>
 						<tr t-if="data.dimension_visible">
-                            <td>b</td>
+                            <td>B</td>
                             <td>Width</td>
                             <td>
 								<span>
@@ -233,7 +233,7 @@
 
 						</tr>
 						<tr t-if="data.dimension_visible">
-                            <td>c</td>
+                            <td>C</td>
                             <td>Height</td>
                             <td>
 								<span>
