@@ -134,33 +134,35 @@
 					</div>
 					
                     <table style="margin-top:15px">
+					<thead>
 
-                        <th>
+                        <tr style="height:20px;">
                             <td rowspan="1" >Sr No</td>
-                            <td rowspan="2" >Test Parameters</td>
-                            <td rowspan="2" >Unit</td>
-                            <td rowspan="2" >Test Method</td>
-                            <td rowspan="2"> Test Result</td>
+                            <td rowspan="1" >Test Parameters</td>
+                            <td rowspan="1" >Unit</td>
+                            <td rowspan="1" >Test Method</td>
+                            <td rowspan="1"> Test Result</td>
                             <td rowspan="1"> Limit As per
 								<span t-field="eln.material.specifications"></span>
 							</td>
                             <td rowspan="1" t-if="eln.conformity">Conformity</td>
 
-						</th>
-                        <!-- <tr>
-                            <td rowspan="1">Grade-1</td>
-						</tr> -->
+						</tr>
+					</thead>
+					
+                        
 						<t t-set="i" t-value="0"/>
+					<tbody>
 
 						<tr t-if="data.dimension_visible">
-							<td colspan="1">
+							<td >
 								<div>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</div>
                   			</td>
                             <td>Dimension 24 blocks</td>
-                            <td colspan="2"></td>
+                            <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -636,44 +638,45 @@
 
 						</tr> -->
 
-						  <tr t-if="data.compressive_strength_visible and (data.compressive_strength_nabl == 'pass' and nabl or (data.compressive_strength_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
-                                    <td colspan="1" >
-                                        <span t-esc="i + 1" />
-                                        <t t-set="i" t-value="i+1"/>
-                                    </td>
-                                    <td >
-                                        <span>
-                                            <span t-field="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_name"/>
-                                        </span>
-                                    </td>
-                                    <td >
-                                        <span>
-                                            <span t-field="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).unit.name"/>
-                                        </span>
-                                    </td>
-                                    <td >
-                                        <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
-                                            </t>
-                                        </t>
-                                    </td>
-                                    <td >
-                                        <span t-esc="data.average_compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
-                                    </td>
-                                    <td >
-                                        <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                            </t>
-                                        </t>
-                                    </td>
-                                    <td  t-if="eln.conformity">
-                                        <span t-esc="data.compressive_strength_confirmity"/>
-                                    </td>
-                                </tr>
+						<tr t-if="data.compressive_strength_visible and (data.compressive_strength_nabl == 'pass' and nabl or (data.compressive_strength_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
+								<td colspan="1" >
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								<td >
+									<span >Compresive Strength</span>
+								</td>
+								<td >
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).unit.name"/>
+									</span>
+								</td>
+								<td >
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
+								</td>
+								<td >
+									<span t-esc="data.average_compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+								<td >
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b20eeeca-cb61-45db-91c5-0167b27a9ab5')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.permissable_limit"/>
+										</t>
+									</t>
+								</td>
+								<td  t-if="eln.conformity">
+									<span t-esc="data.compressive_strength_confirmity"/>
+								</td>
+						</tr>
 
-                    </table>
+                    
+					</tbody>
+					
+					</table>
 
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">

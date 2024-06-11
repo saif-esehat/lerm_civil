@@ -6,7 +6,10 @@
         <field name="name">chemical.hardened.concrete.form</field>
         <field name="model">chemical.hardened.concrete</field>
         <field name="arch" type="xml">
-            <form>
+            <!-- <form attrs="{'edit': [('state', '=', '1-draft')]}"> -->
+            <form >
+
+                <field readonly="1" name="state" widget="statusbar"/>
                 <sheet>
                 <group >
                     <h1>
@@ -494,6 +497,38 @@
                                decoration-danger="cement_content_1_conformity == 'fail'" 
                                readonly="1"/>
                         <field name='cement_content_1_nabl'/>
+                    </group> 
+
+
+                <group attrs="{'invisible': [('lime_visible', '=', False)]}">
+                        <h1>
+                            <field name="lime_name" readonly="1" nolabel="1"/>
+                            <field name="lime_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('lime_visible', '=', False)]}">
+                      <group style="white-space:nowrap; width:60%">
+                      <field name="lime_wt_sample"/>
+                       
+                      <field name="lime_br"/>
+                       
+                      <field name="lime_normality"/>
+                       
+                      <field name="lime_dilution"/>
+                       
+                      <field name="lime_br_n_dilution"/>
+                                              
+                      </group>
+
+                    </group>
+                      <group attrs="{'invisible': [('lime_visible', '=', False)]}">
+                          
+                        <field name='lime_conformity'
+                               decoration-success="lime_conformity == 'pass'" 
+                               decoration-danger="lime_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='lime_nabl'/>
                     </group> 
                     <button
                             type="object"

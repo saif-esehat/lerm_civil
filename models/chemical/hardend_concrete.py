@@ -12,6 +12,10 @@ class ChemicalHasdenedConcrete(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+    state = fields.Selection([
+        ('1-draft', 'In-Test'),
+        ('2-confirm', 'In-Check'),
+    ], string='State',default='1-draft')
 
 
     ph_name = fields.Char("Name",default="pH of 1 % Solution in water")
@@ -780,7 +784,7 @@ class ChemicalHasdenedConcrete(models.Model):
     def _compute_cement_content_br_n_dilution(self):
         for record in self:
             if record.cement_content_wt_sample != 0:
-                cement_content_br_n_dilution = (record.cement_content_br * record.cement_content_normality * 0.05608 * record.cement_content_dilution * 100)/record.cement_content_wt_sample
+                cement_content_br_n_dilution = (record.cement_content_br * 0.05608 * record.cement_content_normality * 100 * record.cement_content_dilution )/record.cement_content_wt_sample
                 record.cement_content_br_n_dilution = round(cement_content_br_n_dilution,2)
             else:
                 record.cement_content_br_n_dilution = 0
@@ -842,8 +846,78 @@ class ChemicalHasdenedConcrete(models.Model):
             else:
                 record.cement_content_1_nabl = 'fail'
 
+    # Lime 
+    lime_name = fields.Char("Name",default="Lime")
+    lime_visible = fields.Boolean("Cement Content",compute="_compute_visible")
 
+    lime_wt_sample = fields.Float("Wt of Sample (gm)")
+    lime_br = fields.Float("BR of 0.01N EDTA")
+    lime_normality = fields.Float("Normality of EDTA")
+    lime_dilution = fields.Float("Dilution")
+    lime_br_n_dilution = fields.Float("BR *0.05608*N*100*dilution/S.wt " , compute="_compute_lime_br_n_dilution")
     
+
+    @api.depends('lime_wt_sample','lime_br','lime_normality','lime_dilution')
+    def _compute_lime_br_n_dilution(self):
+        for record in self:
+            if record.lime_wt_sample != 0:
+                lime_br_n_dilution = (record.lime_br * 0.05608 * record.lime_normality * 100 * record.lime_dilution )/record.lime_wt_sample
+                record.lime_br_n_dilution = round(lime_br_n_dilution,2)
+            else:
+                record.lime_br_n_dilution = 0
+
+
+    lime_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity",compute="_compute_lime_conformity", store=True)
+
+    @api.depends('cement_content','eln_ref','grade')
+    def _compute_lime_conformity(self):
+        
+        for record in self:
+            record.lime_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.lime_br_n_dilution - record.lime_br_n_dilution*mu_value
+                    upper = record.lime_br_n_dilution + record.lime_br_n_dilution*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.lime_conformity = 'pass'
+                        break
+                    else:
+                        record.lime_conformity = 'fail'
+
+    lime_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_lime_nabl",  store=True)
+
+    @api.depends('lime_br_n_dilution','eln_ref','grade')
+    def _compute_lime_nabl(self):
+        
+        for record in self:
+            record.lime_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.lime_br_n_dilution - record.lime_br_n_dilution*mu_value
+            upper = record.lime_br_n_dilution + record.lime_br_n_dilution*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.lime_nabl = 'pass'
+                break
+            else:
+                record.lime_nabl = 'fail'
+
+
 
     @api.depends('sample_parameters')
     def _compute_visible(self):
@@ -857,6 +931,8 @@ class ChemicalHasdenedConcrete(models.Model):
             record.chloride_visible2 = False
             record.cement_conten_visible = False
             record.cement_content_1_visible = False
+            record.lime_visible = False
+
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
                 if sample.internal_id == 'e9f2301d-bba0-42a2-bca8-ecbc5882a2b7':
@@ -877,6 +953,8 @@ class ChemicalHasdenedConcrete(models.Model):
                     record.cement_conten_visible = True
                 if sample.internal_id == '97527435-edbc-4d33-817f-9596b56b4cd0':
                     record.cement_content_1_visible = True
+                if sample.internal_id == 'ad567820-1a05-4d8b-bc7e-f58b42f78076':
+                    record.lime_visible = True
                     	
 
     
@@ -890,6 +968,14 @@ class ChemicalHasdenedConcrete(models.Model):
         # record.get_all_fields()
         record.eln_ref.write({'model_id':record.id})
         return record
+
+    def read(self, fields=None, load='_classic_read'):
+
+        self._compute_sample_parameters()
+        self._compute_visible()
+        
+
+        return super(ChemicalHasdenedConcrete, self).read(fields=fields, load=load)
     
     def open_eln_page(self):
         # import wdb; wdb.set_trace()
@@ -966,6 +1052,15 @@ class ChemicalHasdenedConcrete(models.Model):
                 else:
                     result.nabl_status = 'non-nabl'
                 continue
+            # Lime
+            if result.parameter.internal_id == 'ad567820-1a05-4d8b-bc7e-f58b42f78076':
+                result.result_char = round(self.lime_br_n_dilution,2)
+                if self.lime_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+
 
         return {
                 'view_mode': 'form',

@@ -895,6 +895,64 @@ class ChemicalCrushedSand(models.Model):
                     record.total_alkali_content_visible = True
                     	
 
+
+
+    def open_eln_page(self):
+        # import wdb; wdb.set_trace()
+        for result in self.eln_ref.parameters_result:
+            # ph 
+            if result.parameter.internal_id == '481fb826-5804-40f1-b7a1-54d435149afb':
+                result.result_char = round(self.ph_average,2)
+                if self.ph_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            
+            # Chloride
+            if result.parameter.internal_id == '83c6e99e-d967-4162-8124-93fc8240ae24':
+                result.result_char = round(self.chloride_percent,2)
+                if self.chloride_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Sulphate 
+            if result.parameter.internal_id == '8765b291-5596-4d10-9702-0e221e9379cd':
+                result.result_char = round(self.sulphate_percent,2)
+                if self.avrg_avrg_sulphate_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Alkali Aggregate
+            if result.parameter.internal_id == '98067b4a-3581-4712-b691-3df067e49a2c':
+                result.result_char = round(self.average_reduction_alkalinity,2)
+                if self.reduction_alkalinity_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            # Alkali Dissolved
+            if result.parameter.internal_id == '3a228b5d-5c83-4bb7-b6c7-2e7767b6181b':
+                result.result_char = round(self.average_dissolved_silica,2)
+                if self.dissolved_silica_nabl == 'pass':
+                    result.nabl_status = 'nabl'
+                else:
+                    result.nabl_status = 'non-nabl'
+                continue
+            
+
+        return {
+                'view_mode': 'form',
+                'res_model': "lerm.eln",
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.eln_ref.id,
+                
+            }
+
+
     
           
 

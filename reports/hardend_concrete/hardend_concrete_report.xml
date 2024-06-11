@@ -583,6 +583,49 @@
 									</span>
 								</td>
 							</tr>
+							
+							<!-- Lime  -->
+
+							<tr t-if="data.lime_visible and (data.lime_nabl == 'pass' and nabl or (data.lime_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
+								<td style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).parameter_name"/>
+								</td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="data.lime_br_n_dilution" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+							</tr>
+
 
 
 							
