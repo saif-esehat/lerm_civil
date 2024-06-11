@@ -226,7 +226,7 @@ class FlexuralStrengthConcreteBeamLine(models.Model):
     parent_id = fields.Many2one('mechanical.flexural.strength.concrete.beam',string="Parent Id")
 
     sr_no = fields.Integer(string="Sr No", readonly=True, copy=False, default=1)
-    id_mark = fields.Char(string="ID MARK/ Location" , compute="_compute_id_mark", inverse="_inverse_id_mark")
+    id_mark = fields.Char(string="ID MARK/ Location")
     length = fields.Integer(string="Length of span ( L ) in mm")
     depth = fields.Float(string="Depth (d) in mm")
     width = fields.Float(string="Width (mm)")
