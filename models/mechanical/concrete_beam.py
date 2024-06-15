@@ -226,7 +226,7 @@ class FlexuralStrengthConcreteBeamLine(models.Model):
     parent_id = fields.Many2one('mechanical.flexural.strength.concrete.beam',string="Parent Id")
 
     sr_no = fields.Integer(string="Sr No", readonly=True, copy=False, default=1)
-    id_mark = fields.Char(string="ID MARK/ Location")
+    id_mark = fields.Char(string="ID MARK/ Location",compute="_onchange_parent_id",inverse="_onchange_id_mark",store=True)
     length = fields.Integer(string="Length of span ( L ) in mm")
     depth = fields.Float(string="Depth (d) in mm")
     width = fields.Float(string="Width (mm)")
@@ -237,18 +237,29 @@ class FlexuralStrengthConcreteBeamLine(models.Model):
     # flexural_strength_3 = fields.Float(string="Flexural Strength in N/mm2", compute="_compute_flexural_strength_three")
 
     @api.depends('parent_id')
-    def _compute_id_mark(self):
+    def _onchange_parent_id(self):
         for record in self:
-            try:
-                parent = record.parent_id.sudo()
-                record.id_mark = parent.eln_ref.sample_id.client_sample_id
-            except:
-                record.id_mark = ""
+            parent = record.parent_id.sudo()
+            sample_id = parent.eln_ref.sample_id.client_sample_id
+            # import wdb; wdb.set_trace()
 
-    def _inverse_id_mark(self):
+            if sample_id and record.id_mark == False:
+                record.id_mark = sample_id
+            # else:
+            #     record.id_mark = ""
+
+    @api.depends('id_mark')
+    def _onchange_id_mark(self):
         for record in self:
-            return
+            if record.id_mark and not record.parent_id.eln_ref.sample_id.client_sample_id:
+                record.parent_id.sudo().eln_ref.sample_id.client_sample_id = record.id_mark
 
+    # def read(self, fields=None, load='_classic_read'):
+
+    #     self._onchange_parent_id()
+    #     self._onchange_id_mark()
+        
+    #     return super(FlexuralStrengthConcreteBeamLine, self).read(fields=fields, load=load)
     
     @api.depends('failure_load', 'length', 'depth', 'width')
     def _compute_flexural_strength(self):

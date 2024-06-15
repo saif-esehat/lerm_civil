@@ -50,6 +50,13 @@
 						</div> -->
 						<div style="text-align:center;font-size:18px">
 							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_name"/>
+							<span>
+							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_table" t-as="parameter">
+								<t t-if="parameter.grade.id == eln.grade_id.id">
+									<span t-field="parameter.specification"/>
+								</t>
+							</t>
+						</span>
 						</div>
 						<table style="margin-top:20px">
 				
@@ -121,13 +128,13 @@
 									<span t-esc="r['width']"/>
 								</td>
                                 <td colspan="2" style="text-align: center;">
-									<span t-esc="r['wt_of_sample']"/>
+									<span t-esc="r['wt_of_sample']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<span t-esc="r['fracture_distance']"/>
 								</td>
 								<td colspan="2" style="text-align: center;">
-									<span t-esc="r['failure_load']"/>
+									<span t-esc="r['failure_load']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<span t-esc="r['flexural_strength']" t-options='{"widget": "float", "precision": 2}'/>
