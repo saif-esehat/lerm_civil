@@ -116,7 +116,7 @@
                             <tr cols="12">
                                 <td colspan="1" style="text-align: center;"><b>Sample No.</b></td>
                                 <td colspan="1" style="text-align: center;"><b>Final wet measurment W4</b></td>
-                                <td colspan="2" style="text-align: center;"><b>Moisture Movement in % </b></td>
+                                <td colspan="2" style="text-align: center;"><b>Moisture Movement in % [(W2 - W4)/W3]*100</b></td>
                                 
                             </tr>
                             

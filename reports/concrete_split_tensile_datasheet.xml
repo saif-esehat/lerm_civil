@@ -395,7 +395,7 @@
 									<span t-esc="r['breaking_load']"/>
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="r['split_strength']" t-options='{"widget": "float", "precision": 1}'/>
+									<span t-esc="r['split_strength']" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 								
 								

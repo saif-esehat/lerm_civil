@@ -54,7 +54,7 @@ class ReallocationWizard(models.TransientModel):
                     'has_witness':sample.has_witness,
                     'size_id':sample.size_id.id,
                     'grade_id':sample.grade_id.id,
-                    'casting_date':sample.casting_date,
+                    'casting_date':sample.date_casting,
 
                 })
             sample.write({'state':'2-alloted' ,
