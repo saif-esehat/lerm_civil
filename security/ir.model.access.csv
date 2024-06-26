@@ -991,8 +991,13 @@ master.parameter,lerm_civil_parameter_master,model_lerm_parameter_master,lerm_ci
 master.parameter.table,lerm_civil_parameter_master_table,model_lerm_parameter_master_table,lerm_civil.lerm_master,1,1,1,1
 master.dependent_inputs,lerm_civil_dependent_input_master,model_lerm_dependent_inputs,lerm_civil.lerm_master,1,1,1,1
 master.group,lerm_civil_group,model_lerm_civil_group,lerm_civil.lerm_master,1,1,1,1
-master.product.template,lerm_civil_product,model_product_template,lerm_civil.lerm_master,1,1,1,1
-master.product.product,lerm_civil_product,model_product_product,lerm_civil.lerm_master,1,1,1,1
+master.product.template,lerm_civil_product,model_product_template,lerm_civil.lerm_master,1,0,0,0
+master.product.product,lerm_civil_product,model_product_product,lerm_civil.lerm_master,1,0,0,0
+
+productmaster.product.product,lerm_civil_product,model_product_product,lerm_civil.lerm_product_master,1,1,1,1
+productmaster.product.template,lerm_civil_product,model_product_template,lerm_civil.lerm_product_master,1,1,1,1
+
+
 
 
 report.print_reports_wizard,print_reports_wizard,model_print_reports_wizard,lerm_civil.kes_report,1,1,1,1

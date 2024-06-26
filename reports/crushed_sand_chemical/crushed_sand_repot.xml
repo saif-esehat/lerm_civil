@@ -161,7 +161,7 @@
 						</thead>
 						<tbody >
 								<!-- dissolved silica visible Start -->
-							<tr t-if="data.alkali_aggregate_dissolved_visible and (data.dissolved_silica_nabl == 'pass' and nabl or data.dissolved_silica_nabl == 'fail' and not nabl)">
+							<tr t-if="data.alkali_aggregate_dissolved_visible and (data.dissolved_silica_nabl == 'pass' and nabl or (data.dissolved_silica_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -203,7 +203,7 @@
 
 								<!-- Alkali Aggregate Reactivity Start -->
 
-							<tr t-if="data.alkali_aggregate_alkalinity_visible and (data.reduction_alkalinity_nabl == 'pass' and nabl or data.reduction_alkalinity_nabl == 'fail' and not nabl)">
+							<tr t-if="data.alkali_aggregate_alkalinity_visible and (data.reduction_alkalinity_nabl == 'pass' and nabl or (data.reduction_alkalinity_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -248,7 +248,7 @@
 
 								<!-- chloride Start -->
 
-							<tr t-if="data.chloride_visible and (data.chloride_nabl == 'pass' and nabl or data.chloride_nabl == 'fail' and not nabl)">
+							<tr t-if="data.chloride_visible and (data.chloride_nabl == 'pass' and nabl or (data.chloride_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -290,7 +290,7 @@
 							</tr>
 
 								<!-- sulphate Start -->
-							<tr t-if="data.sulphate_visible and (data.avrg_avrg_sulphate_nabl == 'pass' and nabl or data.avrg_avrg_sulphate_nabl == 'fail' and not nabl)">
+							<tr t-if="data.sulphate_visible and (data.avrg_avrg_sulphate_nabl == 'pass' and nabl or (data.avrg_avrg_sulphate_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -333,7 +333,7 @@
 							</tr>
 
 								<!-- ph Start -->
-							<tr t-if="data.ph_visible and (data.ph_nabl == 'pass' and nabl or data.ph_nabl == 'fail' and not nabl)">
+							<tr t-if="data.ph_visible and (data.ph_nabl == 'pass' and nabl or (data.ph_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -379,7 +379,7 @@
 							</tr>
 
 
-							<tr t-if="data.na2O_name_visible and (data.na2O_nabl == 'pass' and nabl or data.na2O_nabl == 'fail' and not nabl)">
+							<tr t-if="data.na2O_name_visible and (data.na2O_nabl == 'pass' and nabl or (data.na2O_nabl == 'fail'or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -425,7 +425,7 @@
 							</tr>
 
 
-							<tr t-if="data.k2O_name_visible and (data.k2O_nabl == 'pass' and nabl or data.k2O_nabl == 'fail' and not nabl)">
+							<tr t-if="data.k2O_name_visible and (data.k2O_nabl == 'pass' and nabl or (data.k2O_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
@@ -470,7 +470,7 @@
 								
 							</tr>
 
-							<tr t-if="data.total_alkali_content_visible and (data.total_alkali_content_nabl == 'pass' and nabl or data.total_alkali_content_nabl == 'fail' and not nabl)">
+							<tr t-if="data.total_alkali_content_visible and (data.total_alkali_content_nabl == 'pass' and nabl or (data.total_alkali_content_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td style="text-align: center;">
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>

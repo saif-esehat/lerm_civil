@@ -14,15 +14,15 @@
 						End Date. <![CDATA[&nbsp;]]> <span t-esc="eln.end_date"/>
 					</div> -->
 				
-					<span style="text-align:left; display: flex; justify-content: space-between; margin-right: 6rem;" >
+					<span style="text-align:left; display: flex; justify-content: space-between; margin-right: 4rem;" >
 						FORMAT No. <span t-esc="eln.material.data_sheet_format_no.name"/>
 					</span>
 					
-					<span style="text-align:center; display: flex; justify-content: space-between;  margin-left: 6rem;  margin-right: 3rem;">
+					<span style="text-align:center; display: flex; justify-content: space-between;  margin-left: 5rem;  margin-right: 3rem;">
 						Job No. <span t-esc="eln.kes_no"/>
 					</span>
 					
-					<span style="text-align:right; display: flex; justify-content: space-between;  margin-left: 4rem;  ">
+					<span style="text-align:left; display: flex; justify-content: space-between;  margin-left: 4rem;  ">
 						Date. <span t-esc="eln.end_date"/>
 					</span>
 				

@@ -145,21 +145,20 @@
                 <search>
                     <field name="internal_id" string="Internal ID" />
                     <field name="parameter_name" string="Parameter Name" />
+                    <field name="material" string="Material" />
+                    <field name="discipline" string="Discipline" />
+                    <field name="group" string="Group" />
                     <field name="datasheet_no" string="Datasheet Format No" />
                     <field name="lab_min_value" string="Lab min Value" />
                     <field name="lab_max_value" string="Lab max Value" />
                     <field name="nabl_min_value" string="Nabl min value" />
                     <field name="nabl_max_value" string="Nabl max value" />
-                    <field name="client_min_value" string="Client min Value" />
-                    <field name="client_max_value" string="Client max Value" />
                     <field name="time_based" string="Time Based" />
                     <field name="unit" string="Unit" />
                     <field name="calculated" string="Pseudo Parameter" />
                     <field name="calculation_type" string="Calculation Type" />
                     <field name="test_method" string="Parameter Test Method" />
                     <field name="nabl_select" string="NABL" />
-                    <field name="group" string="Group" />
-                    <field name="material" string="Material" />
                 </search>
             </field>
         </record>
