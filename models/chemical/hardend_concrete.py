@@ -845,8 +845,107 @@ class ChemicalHasdenedConcrete(models.Model):
             else:
                 record.cement_content_1_nabl = 'fail'
 
+    # cement Aggregate ratio 
+    cement_aggregate_ratio_name = fields.Char("Name",default="Cement Aggregate Ratio")
+    cement_aggregate_ratio_visible = fields.Boolean("Cement Aggregate Ratio",compute="_compute_visible")
 
-    
+    cement_aggregate_ratio_wt_sample = fields.Float("Wt of Sample (gm)")
+    cement_aggregate_ratio_br = fields.Float("BR of 0.01N EDTA")
+    cement_aggregate_ratio_normality = fields.Float("Normality of EDTA")
+    cement_aggregate_ratio_dilution = fields.Float("Dilution")
+    cement_aggregate_ratio_br_n_dilution = fields.Float("BR *0.05608*N*100*dilution/S.wt " , compute="_compute_cement_aggregate_br_n_dilution")
+    cement_content_aggregate_ratio = fields.Float("Cement Content ", compute="_compute_cement_content_aggregate_ratio")
+    cement_aggregate_percent = fields.Float('Aggregate %',compute="_commpute_aggregate_percent")
+    cement_aggregate_ratio = fields.Float('Ratio',compute="_compute_cement_aggregate_ratio")
+    cement_aggregate_ratio_result = fields.Char('Cement Content Ratio 1:H',compute="_compute_cement_aggregate_ratio_result")
+
+
+    @api.depends('cement_aggregate_ratio_wt_sample','cement_aggregate_ratio_normality','cement_aggregate_ratio_br','cement_aggregate_ratio_dilution')
+    def _compute_cement_aggregate_br_n_dilution(self):
+        for record in self:
+            if record.cement_aggregate_ratio_wt_sample !=0:
+                br = (record.cement_aggregate_ratio_br * record.cement_aggregate_ratio_normality * 0.05608 * record.cement_aggregate_ratio_dilution * 100)/record.cement_aggregate_ratio_wt_sample
+                record.cement_aggregate_ratio_br_n_dilution = round(br,2)
+            else:
+                record.cement_aggregate_ratio_br_n_dilution = 0
+
+
+    @api.depends('cement_aggregate_ratio_br_n_dilution')
+    def _compute_cement_content_aggregate_ratio(self):
+        for record in self:
+            cement_content_aggregate_ratio = (record.cement_aggregate_ratio_br_n_dilution * 100)/63.5
+            record.cement_content_aggregate_ratio = round(cement_content_aggregate_ratio,2)
+
+    @api.depends('cement_content_aggregate_ratio')
+    def _commpute_aggregate_percent(self):
+        for record in self:
+            record.cement_aggregate_percent = 100 - record.cement_content_aggregate_ratio 
+
+    @api.depends('cement_aggregate_percent','cement_content_aggregate_ratio')
+    def _compute_cement_aggregate_ratio(self):
+        for record in self:
+            if record.cement_content_aggregate_ratio !=0:
+                ratio = record.cement_aggregate_percent / record.cement_content_aggregate_ratio
+                record.cement_aggregate_ratio = round(ratio,2)
+            else:
+                record.cement_aggregate_ratio = 0
+
+    @api.depends('cement_aggregate_ratio')
+    def _compute_cement_aggregate_ratio_result(self):
+        for record in self:
+            result = "1:"+str(record.cement_aggregate_ratio)
+            record.cement_aggregate_ratio_result = result
+
+    cement_aggregate_ratio_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity",compute="_compute_cement_aggregate_ratio_conformity", store=True)
+
+    @api.depends('cement_content','eln_ref','grade')
+    def _compute_cement_aggregate_ratio_conformity(self):
+        
+        for record in self:
+            record.cement_content_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9fa390be-1b85-4a6e-908d-cf3068e5ced4')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9fa390be-1b85-4a6e-908d-cf3068e5ced4')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.cement_content - record.cement_content*mu_value
+                    upper = record.cement_content + record.cement_content*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.cement_aggregate_ratio_conformity = 'pass'
+                        break
+                    else:
+                        record.cement_aggregate_ratio_conformity = 'fail'
+
+    cement_aggregate_ratio_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL",compute="_compute_cement_aggregate_ratio_nabl",  store=True)
+
+    @api.depends('cement_content','eln_ref','grade')
+    def _compute_cement_aggregate_ratio_nabl(self):
+        
+        for record in self:
+            record.cement_content_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9fa390be-1b85-4a6e-908d-cf3068e5ced4')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','9fa390be-1b85-4a6e-908d-cf3068e5ced4')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.cement_content - record.cement_content*mu_value
+            upper = record.cement_content + record.cement_content*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.cement_aggregate_ratio_nabl = 'pass'
+                break
+            else:
+                record.cement_aggregate_ratio_nabl = 'fail'
+
 
     @api.depends('sample_parameters')
     def _compute_visible(self):
@@ -860,6 +959,7 @@ class ChemicalHasdenedConcrete(models.Model):
             record.chloride_visible2 = False
             record.cement_conten_visible = False
             record.cement_content_1_visible = False
+            record.cement_aggregate_ratio_visible = False
             for sample in record.sample_parameters:
                 print("Samples internal id",sample.internal_id)
                 if sample.internal_id == 'e9f2301d-bba0-42a2-bca8-ecbc5882a2b7':
@@ -880,6 +980,8 @@ class ChemicalHasdenedConcrete(models.Model):
                     record.cement_conten_visible = True
                 if sample.internal_id == '97527435-edbc-4d33-817f-9596b56b4cd0':
                     record.cement_content_1_visible = True
+                if sample.internal_id == '9fa390be-1b85-4a6e-908d-cf3068e5ced4':
+                    record.cement_aggregate_ratio_visible = True
                     	
 
     

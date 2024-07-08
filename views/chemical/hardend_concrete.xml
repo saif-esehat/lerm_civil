@@ -497,7 +497,53 @@
                                decoration-danger="cement_content_1_conformity == 'fail'" 
                                readonly="1"/>
                         <field name='cement_content_1_nabl'/>
-                    </group> 
+                    </group>
+                    
+                    <!-- Cement Aggregate Ratio   -->
+                <group attrs="{'invisible': [('cement_aggregate_ratio_visible', '=', False)]}">
+                        <h1>
+                            <field name="cement_aggregate_ratio_name" readonly="1" nolabel="1"/>
+                            <field name="cement_aggregate_ratio_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('cement_aggregate_ratio_visible', '=', False)]}">
+                      <group style="white-space:nowrap; width:60%">
+                      <field name="cement_aggregate_ratio_wt_sample"/>
+                       
+                      <field name="cement_aggregate_ratio_br"/>
+                       
+                      <field name="cement_aggregate_ratio_normality"/>
+                       
+                      <field name="cement_aggregate_ratio_dilution"/>
+                       
+                      <field name="cement_aggregate_ratio_br_n_dilution"/>
+                       
+                      <field name="cement_content_aggregate_ratio"/>
+
+                      <field name="cement_aggregate_percent"/>
+
+
+                      <field name="cement_aggregate_ratio"/>
+
+
+                      <field name="cement_aggregate_ratio_result"/>
+
+                                              
+                      </group>
+
+                    </group>
+                      <group attrs="{'invisible': [('cement_aggregate_ratio_visible', '=', False)]}">
+                          
+                        <field name='cement_aggregate_ratio_conformity'
+                               decoration-success="cement_aggregate_ratio_conformity == 'pass'" 
+                               decoration-danger="cement_aggregate_ratio_conformity == 'fail'" 
+                               readonly="1"/>
+                        <field name='cement_aggregate_ratio_nabl'/>
+                    </group>
+
+
+
                     <button
                             type="object"
                             class="oe_highlight" 
