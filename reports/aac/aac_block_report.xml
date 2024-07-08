@@ -170,12 +170,8 @@
 
 						</tr>
 						<tr t-if="data.dimension_visible">
-                            <td>a</td>
-                            <td>
-								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','32134e16-d5ef-4319-ad7c-f10e03b326ae')]).parameter_name"/>
-								</span>
-							</td>
+                            <td><div><span>A</span></div></td>
+                            <td>Length</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','32134e16-d5ef-4319-ad7c-f10e03b326ae')]).unit.name"/>
@@ -206,12 +202,8 @@
 
 						</tr>
 						<tr t-if="data.dimension_visible">
-                            <td>b</td>
-                            <td>
-								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','c52d3b4f-7dd4-4f98-acbb-a39c076e33f9')]).parameter_name"/>
-								</span>
-							</td>
+                            <td><div><span>B</span></div></td>
+                            <td>Width</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','c52d3b4f-7dd4-4f98-acbb-a39c076e33f9')]).unit.name"/>
@@ -242,12 +234,8 @@
 
 						</tr>
 						<tr t-if="data.dimension_visible">
-                            <td>c</td>
-                            <td>
-								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a3cbfb75-e743-408e-8077-5d2f2ba22edc')]).parameter_name"/>
-								</span>
-							</td>
+                            <td><div><span>C</span></div></td>
+                            <td>Height</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a3cbfb75-e743-408e-8077-5d2f2ba22edc')]).unit.name"/>

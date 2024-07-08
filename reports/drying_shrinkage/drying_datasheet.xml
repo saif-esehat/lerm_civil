@@ -45,9 +45,16 @@
                     <!-- Core sample and its dimension  -->
                     
                    
-                     <div style="margin-top:20px">
+                     <div style="margin-top:20px" t-if="data.drying_shrinkage_visible">
                         <div style="text-align:center;font-size:18px">
                             <b>Drying Shrinkage</b>
+                            <span>
+                                <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_table" t-as="parameter">
+                                    <t t-if="parameter.grade.id == eln.grade_id.id">
+                                        <span t-field="parameter.specification"/>
+                                    </t>
+                                </t>
+                            </span>
                         </div>
                         <table>
                             <tr cols="12">
@@ -94,15 +101,22 @@
 
 
 
-                    <div style="margin-top:20px">
+                    <div style="margin-top:20px" t-if="data.moisture_movement_visible">
                         <div style="text-align:center;font-size:18px">
                             <b>Moisture Movement</b>
+                            <span>
+                                <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_table" t-as="parameter">
+                                    <t t-if="parameter.grade.id == eln.grade_id.id">
+                                        <span t-field="parameter.specification"/>
+                                    </t>
+                                </t>
+                            </span>
                         </div>
                         <table>
                             <tr cols="12">
                                 <td colspan="1" style="text-align: center;"><b>Sample No.</b></td>
                                 <td colspan="1" style="text-align: center;"><b>Final wet measurment W4</b></td>
-                                <td colspan="2" style="text-align: center;"><b>Moisture Movement in % </b></td>
+                                <td colspan="2" style="text-align: center;"><b>Moisture Movement in % [(W2 - W4)/W3]*100</b></td>
                                 
                             </tr>
                             

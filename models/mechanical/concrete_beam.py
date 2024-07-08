@@ -257,12 +257,9 @@ class FlexuralStrengthConcreteBeamLine(models.Model):
     # def read(self, fields=None, load='_classic_read'):
 
     #     self._onchange_parent_id()
+    #     self._onchange_id_mark()
         
-
     #     return super(FlexuralStrengthConcreteBeamLine, self).read(fields=fields, load=load)
-
-
-
     
     @api.depends('failure_load', 'length', 'depth', 'width')
     def _compute_flexural_strength(self):

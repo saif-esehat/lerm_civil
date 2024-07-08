@@ -917,6 +917,7 @@ class ChemicalHasdenedConcrete(models.Model):
             else:
                 record.lime_nabl = 'fail'
 
+   
 
 
     @api.depends('sample_parameters')

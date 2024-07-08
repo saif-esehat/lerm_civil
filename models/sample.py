@@ -381,6 +381,8 @@ class LermSampleForm(models.Model):
                 'default_sample_description':self.sample_description,
                 'default_client_sample_id':self.client_sample_id,
                 'default_days_casting':self.days_casting,
+                'default_casting':self.casting,
+
 
                 'default_date_casting':self.date_casting,
                 'default_customer_id':self.customer_id.id,

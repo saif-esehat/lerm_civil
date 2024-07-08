@@ -5,7 +5,7 @@
 			<!-- <t t-call="web.basic_layout"> -->
 			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
                 <div style="text-align:center;font-size:18px">
-                    Compressive Strength of Concrete Cube By ACT
+                    Compressive Strength of Concrete Cube By ACT <span t-esc="o.material.test_parameter "/> 
                 </div>
                 <div class="container_eln" style="margin-top:5px">
 				 <table style="margin-top:20px">
@@ -66,13 +66,13 @@
 						<tr cols="12">
 							<td colspan="2">Sr no 
 							</td>
+							<td colspan="2">ID Mark
+							</td>
                             <td colspan="2">Length 
 							</td>
                             <td colspan="2">Width
 							</td>
                             <td colspan="2">Area
-							</td>
-                             <td colspan="2">ID Mark
 							</td>
 							<td colspan="4">Weight of Sample in kgs
 							</td>
@@ -94,6 +94,9 @@
 								</div>
 							</td>
 							<td colspan="2">
+								<span t-esc="r['id_mark']"/>
+							</td>
+							<td colspan="2">
 								<span t-esc="r['length']"/>
 							</td>
                             <td colspan="2">
@@ -102,9 +105,7 @@
                             <td colspan="2">
 								<span t-esc="r['area']"/>
 							</td>
-                            <td colspan="2">
-								<span t-esc="r['id_mark']"/>
-							</td>
+                            
 
 							<td colspan="4">
 								<span t-esc="r['weight_sample']"/>
@@ -121,7 +122,7 @@
 					</table>
 					<table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">Compressive Strength Avg. N/mm² :
+							<td colspan="6">Compressive Strength Avg. N/mm² Ra:
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -133,7 +134,7 @@
 					</table>
                     <table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">ACT Compressive  N/mm² :
+							<td colspan="6">ACT Compressive  N/mm² 8.09 + 1.64 * Ra:
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">

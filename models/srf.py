@@ -929,7 +929,8 @@ class CreateSampleWizard(models.TransientModel):
         eln = self.env['lerm.eln'].search([('sample_id','=',sample.id)])
         eln.sudo().write({
             'grade_id':grade_id,
-            'size_id':size_id
+            'size_id':size_id,
+            'casting_date':self.date_casting
         })
 
         # import wdb; wdb.set_trace()

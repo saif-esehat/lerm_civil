@@ -151,7 +151,7 @@ class ELN(models.Model):
     def _compute_casting_date(self):
         for record in self:
             if record.sample_id.casting:
-                record.casting_date = record.sample_id.casting_date
+                record.casting_date = record.sample_id.date_casting
             else:
                 record.casting_date = None
 
