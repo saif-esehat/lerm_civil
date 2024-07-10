@@ -487,13 +487,7 @@
                        
                       <field name="cement_content_1"/>
 
-                      <!-- aggregate ratio -->
-
-                      <field name="aggregate_percentage"/>
-
-                      <field name="ratio"/>
-
-                      <field name="cement_aggregate_ratio"/>
+                     
 
 
 
