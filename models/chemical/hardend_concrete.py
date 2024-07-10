@@ -776,6 +776,11 @@ class ChemicalHasdenedConcrete(models.Model):
     cement_content_dilution = fields.Float("Dilution")
     cement_content_br_n_dilution = fields.Float("BR *0.05608*N*100*dilution/S.wt " , compute="_compute_cement_content_br_n_dilution")
     cement_content_1 = fields.Float("Cement Content", compute="_compute_cement_content_1")
+    
+    #aggregate ratio
+
+   
+
 
 
 
@@ -794,6 +799,10 @@ class ChemicalHasdenedConcrete(models.Model):
         for record in self:
             cement_content_1 = record.cement_content_br_n_dilution * 100/63.5
             record.cement_content_1 = round(cement_content_1,2)
+
+    #compute aggregate ratio
+    
+   
 
     cement_content_1_conformity = fields.Selection([
             ('pass', 'Pass'),

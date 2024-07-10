@@ -823,6 +823,38 @@
 								</td>
                                 
 							</tr>
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Aggregate Percentage :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.aggregate_percentage"/>	
+								</td>
+                                
+							</tr>
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Ratio :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.ratio"/>	
+								</td>
+                                
+							</tr>
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Cement Aggregate Ratio :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_aggregate_ratio"/>	
+								</td>
+                                
+							</tr>
+							
+                          
                           
                         </table>
                 </div>

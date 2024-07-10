@@ -159,18 +159,18 @@
         </record>
 
         <!-- Restrict access to account models -->
-        <record id="account_access_rule" model="ir.rule">
+        <!-- <record id="account_access_rule" model="ir.rule">
             <field name="name">No Access to Account Models</field>
             <field name="model_id" ref="account.model_account_move"/>
             <field name="groups" eval="[(4, ref('lerm_civil.group_no_account_access'))]"/>
-            <field name="domain_force">[(1, '=', 0)]</field> <!-- Deny access -->
-        </record>
+            <field name="domain_force">[(1, '=', 0)]</field> 
+        </record> -->
         
     
         <!-- Hide Account menu -->
-        <record id="account.menu_finance" model="ir.ui.menu">
+        <!-- <record id="account.menu_finance" model="ir.ui.menu">
             <field name="groups" eval="[(4, ref('lerm_civil.group_no_account_access'))]"/>
-        </record>
+        </record> -->
 
 
         <!-- <record id="account.menu_finance" model="ir.ui.menu">
