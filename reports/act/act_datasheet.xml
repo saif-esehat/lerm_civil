@@ -5,7 +5,7 @@
 			<!-- <t t-call="web.basic_layout"> -->
 			<t t-call="lerm_civil.data_sheet_header_generaltemplate">
                 <div style="text-align:center;font-size:18px">
-                    Compressive Strength of Concrete Cube By ACT <span t-esc="o.material.test_parameter "/> 
+                    Compressive Strength of Concrete Cube By ACT <span t-esc="eln.material.test_parameter "/> 
                 </div>
                 <div class="container_eln" style="margin-top:5px">
 				 <table style="margin-top:20px">
