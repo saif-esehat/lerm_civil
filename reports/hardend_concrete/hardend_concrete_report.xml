@@ -504,7 +504,8 @@
 								</td> -->
 								
 								<td  style="text-align: center;vertical-align: middle;">
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_name"/>
+									<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','d8bbd906-0f24-4c77-abc6-b2a8a00d91e6')]).parameter_name"/> -->
+									<span>Cement Content</span>
 								</td>
 								
 								<td style="text-align: center;">
@@ -549,7 +550,8 @@
 								</td> -->
 								
 								<td  style="text-align: center;vertical-align: middle;">
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_name"/>
+									<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','97527435-edbc-4d33-817f-9596b56b4cd0')]).parameter_name"/> -->
+									<span>Cement Content</span>
 								</td>
 								
 								<td style="text-align: center;">
@@ -581,6 +583,92 @@
 									</span>
 								</td>
 							</tr>
+							
+							<!-- Lime  -->
+
+							<tr t-if="data.lime_visible and (data.lime_nabl == 'pass' and nabl or (data.lime_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
+								<td style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).parameter_name"/>
+								</td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="data.lime_br_n_dilution" t-options='{"widget": "float", "precision": 2}'/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+							</tr>
+
+
+							<!-- cement Aggregate Ratio -->
+							<tr t-if="data.cement_aggregate_ratio_visible and (data.cement_aggregate_ratio_nabl == 'pass' and nabl or (data.cement_aggregate_ratio_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
+								<td style="text-align: center;">
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</td>
+
+								
+								<td  style="text-align: center;vertical-align: middle;">
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','9fa390be-1b85-4a6e-908d-cf3068e5ced4')]).parameter_name"/>
+								</td>
+								
+								<td style="text-align: center;">
+									<span>
+										<span t-field="data.cement_aggregate_ratio_result"/>
+									</span>									
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','9fa390be-1b85-4a6e-908d-cf3068e5ced4')]).unit.name"/>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9fa390be-1b85-4a6e-908d-cf3068e5ced4')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.permissable_limit"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								<td style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9fa390be-1b85-4a6e-908d-cf3068e5ced4')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+							</tr>
+
 
 
 							

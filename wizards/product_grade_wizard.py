@@ -66,7 +66,7 @@ class ProductGradeWizard(models.TransientModel):
 
         grade_line_data = {
             'product_id': product_template.id,
-            'product_product': product_template.id,
+            # 'product_product': product_product.id,
 
             'grade': self.grade.id,
             'main_report_template': self.main_report_template.id,

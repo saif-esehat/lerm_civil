@@ -8,6 +8,13 @@
 			<t t-call="lerm_civil.mechanical_data_sheet_header">
                 <div style="text-align:center;font-size:18px;font-weight: bold">
                     Concrete Split Tensile Strength	
+					<span>
+						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','51ff18a6-226c-4dbf-9389-7cc72b090e66')]).parameter_table" t-as="parameter">
+							<t t-if="parameter.grade.id == eln.grade_id.id">
+								<span t-field="parameter.specification"/>
+							</t>
+						</t>
+					</span>
                 </div>
 
                 <div class="container_eln" style="margin-top:5px">

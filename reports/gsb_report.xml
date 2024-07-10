@@ -1453,7 +1453,7 @@
 											<span t-esc="r.proving_reading"/>
 										</td>
 										<td>
-											<span t-esc="r.load"/>
+											<span t-esc="r.load" t-options='{"widget": "float", "precision": 2}'/>
 										</td>
 									</tr>
 								</tbody>
@@ -1501,7 +1501,7 @@
 											<span t-esc="r.proving_reading"/>
 										</td>
 										<td>
-											<span t-esc="r.load"/>
+											<span t-esc="r.load" t-options='{"widget": "float", "precision": 2}'/>
 										</td>
 									</tr>
 								</tbody>

@@ -5,6 +5,13 @@
 			 <t t-call="lerm_civil.mechanical_data_sheet_header">
 				<div style="text-align:center;font-size:18px">
                     Concrete Cube Water Absorption
+					<span>
+						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','2002fc5d-b01c-47c1-a37c-332e37a412a7')]).parameter_table" t-as="parameter">
+							<t t-if="parameter.grade.id == eln.grade_id.id">
+								<span t-field="parameter.specification"/>
+							</t>
+						</t>
+					</span>
 					<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_name"/> -->
                 </div>
 				<div class="container_eln" style="margin-top:5px">

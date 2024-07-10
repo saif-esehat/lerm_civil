@@ -50,13 +50,7 @@
 						</div> -->
 						<div style="text-align:center;font-size:18px">
 							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_name"/>
-							<span>
-								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_table" t-as="parameter">
-									<t t-if="parameter.grade.id == eln.grade_id.id">
-										<span t-field="parameter.specification"/>
-									</t>
-								</t>
-							</span>
+							<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>
 							<span>
 							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_table" t-as="parameter">
 								<t t-if="parameter.grade.id == eln.grade_id.id">

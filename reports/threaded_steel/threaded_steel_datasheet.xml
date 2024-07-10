@@ -76,7 +76,7 @@
 									mm2
 								</td>
 								<td style="text-align: center;">
-									<span t-esc="data.area"/>
+									<span t-esc="data.area" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
 
 

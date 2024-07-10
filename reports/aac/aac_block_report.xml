@@ -165,11 +165,12 @@
                             <td ></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                             <td  t-if="eln.conformity"></td>
 
 						</tr>
 						<tr t-if="data.dimension_visible">
-                            <td>A</td>
+                            <td><div><span>A</span></div></td>
                             <td>Length</td>
                             <td>
 								<span>
@@ -201,7 +202,7 @@
 
 						</tr>
 						<tr t-if="data.dimension_visible">
-                            <td>B</td>
+                            <td><div><span>B</span></div></td>
                             <td>Width</td>
                             <td>
 								<span>
@@ -233,7 +234,7 @@
 
 						</tr>
 						<tr t-if="data.dimension_visible">
-                            <td>C</td>
+                            <td><div><span>C</span></div></td>
                             <td>Height</td>
                             <td>
 								<span>
@@ -271,7 +272,11 @@
 									<t t-set="i" t-value="i+1"/>
 								</div>
                   			</td>
-                            <td>Moisture Content</td>
+                            <td>
+								<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_name"/>
+								</span>
+							</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).unit.name"/>
@@ -313,7 +318,11 @@
 									<t t-set="i" t-value="i+1"/>
 								</div>
                   			</td>
-                            <td>Moisture Content</td>
+                            <td>
+								<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_name"/>
+								</span>
+							</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).unit.name"/>
@@ -356,7 +365,11 @@
 									<t t-set="i" t-value="i+1"/>
 								</div>
                   			</td>
-							<td>Block Density</td>
+							<td>
+								<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_name"/>
+								</span>
+							</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).unit.name"/>
@@ -398,7 +411,11 @@
 									<t t-set="i" t-value="i+1"/>
 								</div>
                   			</td>
-							<td>Block Density </td>
+							<td>
+								<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_name"/>
+								</span>
+							</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).unit.name"/>
@@ -441,7 +458,11 @@
 									<t t-set="i" t-value="i+1"/>
 								</div>
                   			</td>
-                            <td>Drying Shrinkage</td>
+                            <td>
+								<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_name"/>
+								</span>
+							</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).unit.name"/>
@@ -483,7 +504,11 @@
 									<t t-set="i" t-value="i+1"/>
 								</div>
                   			</td>
-                            <td>Drying Shrinkage</td>
+                            <td>
+								<span>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_name"/>
+								</span>
+							</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).unit.name"/>

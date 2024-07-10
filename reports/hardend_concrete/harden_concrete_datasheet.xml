@@ -860,6 +860,176 @@
                 </div>
 
 
+				<!-- Lime -->
+
+				<div t-if="data.lime_visible" style="margin-top:20px">
+					
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','ad567820-1a05-4d8b-bc7e-f58b42f78076')]).parameter_name"/>
+						</div>
+
+                        <table style="margin-top:20px">
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt of Sample (gm) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.lime_wt_sample"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">BR of 0.01N EDTA :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.lime_br"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Normality of EDTA :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.lime_normality"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Dilution :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.lime_dilution"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">BR *0.05608*N*100*dilution/S.wt :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.lime_br_n_dilution"/>	
+								</td>
+                                
+							</tr>
+                            
+                          
+                        </table>
+                </div>
+
+				<!-- cement Aggregate Ratio -->
+				<div t-if="data.cement_aggregate_ratio_visible" style="margin-top:20px">
+					
+						<div style="text-align:center;font-size:18px">
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','9fa390be-1b85-4a6e-908d-cf3068e5ced4')]).parameter_name"/>
+						</div>
+
+                        <table style="margin-top:20px">
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Wt of Sample (gm) :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_aggregate_ratio_wt_sample"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">BR of 0.01N EDTA :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_aggregate_ratio_br"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Normality of EDTA :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_aggregate_ratio_normality"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Dilution :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_aggregate_ratio_dilution"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">BR *0.05608*N*100*dilution/S.wt :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_aggregate_ratio_br_n_dilution"/>	
+								</td>
+                                
+							</tr>
+                            <tr cols="12" style="margin-top:20px">
+								<td colspan="6">Cement Content :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_content_aggregate_ratio"/>	
+								</td>
+                                
+							</tr>
+
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Aggregate % :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_aggregate_percent"/>	
+								</td>
+                                
+							</tr>
+
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Ratio :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_aggregate_ratio"/>	
+								</td>
+                                
+							</tr>
+
+							<tr cols="12" style="margin-top:20px">
+								<td colspan="6">Cement Content Ratio 1:H :
+									<![CDATA[&nbsp;]]>
+									
+								</td>
+                                <td colspan="6">
+									<span t-field="data.cement_aggregate_ratio_result"/>	
+								</td>
+                                
+							</tr>
+                          
+                        </table>
+                </div>
+
+
 
 			
 						

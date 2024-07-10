@@ -704,11 +704,23 @@
 									</td>
 
 
-									<td style="text-align: center; vertical-align: middle;">
+									<!-- <td style="text-align: center; vertical-align: middle;">
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','f781bfd8-550b-45f4-81ac-43f856d147b8')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
 												<span t-field="parameter.permissable_limit"/>
 											</t>
+										</t>
+									</td> -->
+									<td style="text-align: center; vertical-align: middle;">
+										<t t-if="data.re_bend_test1 == 'satisfactory'">
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','f781bfd8-550b-45f4-81ac-43f856d147b8')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.permissable_limit"/>
+												</t>
+											</t>
+										</t>
+										<t t-else="">
+											<span>Cracks Observed</span>
 										</t>
 									</td>
 									<!-- <td style="text-align: center; vertical-align: middle;">
@@ -738,14 +750,20 @@
 									</td>
 									<td style="text-align: center;">
 										<span t-esc="data.bend_test1"/>
+										
 									</td>
 
 
 									<td style="text-align: center; vertical-align: middle;">
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','addd0c61-adb6-447d-b668-1fba0744680f')]).parameter_table" t-as="parameter">
-											<t t-if="parameter.grade.id == eln.grade_id.id">
-												<span t-field="parameter.permissable_limit"/>
+										<t t-if="data.bend_test1 == 'satisfactory'">
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','addd0c61-adb6-447d-b668-1fba0744680f')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.permissable_limit"/>
+												</t>
 											</t>
+										</t>
+										<t t-else="">
+											<span>Cracks Observed</span>
 										</t>
 									</td>
 									<!-- <td style="text-align: center; vertical-align: middle;">

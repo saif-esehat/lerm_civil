@@ -10,7 +10,6 @@ class SampleReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
 
 
-        # import wdb; 
         eln = self.env['lerm.eln'].sudo().search([("sample_id","=",docids[0])])
         # wdb.set_trace()
 

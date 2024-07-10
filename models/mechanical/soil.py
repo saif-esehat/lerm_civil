@@ -138,19 +138,19 @@ class Soil(models.Model):
             record.max_fsi_nabl = 'fail'
             line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')])
             materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a2ae0d2c-ca64-44dd-b0ae-228aacf04998')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.max_fsi - record.max_fsi*mu_value
-                    upper = record.max_fsi + record.max_fsi*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.max_fsi_nabl = 'pass'
-                        break
-                    else:
-                        record.max_fsi_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.max_fsi - record.max_fsi*mu_value
+            upper = record.max_fsi + record.max_fsi*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.max_fsi_nabl = 'pass'
+                break
+            else:
+                record.max_fsi_nabl = 'fail'
     
     
 
@@ -281,20 +281,20 @@ class Soil(models.Model):
             record.heavy_table_nabl = 'fail'
             line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')])
             materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','d5ccc1b6-20fb-4843-aa0e-2ee981be0d7c')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.mmd - record.mmd*mu_value
-                    upper = record.mmd + record.mmd*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.heavy_table_nabl = 'pass'
-                        break
-                    else:
-                        record.heavy_table_nabl = 'fail'
-    
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.mmd - record.mmd*mu_value
+            upper = record.mmd + record.mmd*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.heavy_table_nabl = 'pass'
+                break
+            else:
+                record.heavy_table_nabl = 'fail'
+
 
     graph_image_density = fields.Binary("Line Chart", compute="_compute_graph_image_density", store=True)
 
@@ -408,19 +408,19 @@ class Soil(models.Model):
             record.light_omc_table_nabl = 'fail'
             line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')])
             materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.mmd_light_omc - record.mmd_light_omc*mu_value
-                    upper = record.mmd_light_omc + record.mmd_light_omc*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.light_omc_table_nabl = 'pass'
-                        break
-                    else:
-                        record.light_omc_table_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.mmd_light_omc - record.mmd_light_omc*mu_value
+            upper = record.mmd_light_omc + record.mmd_light_omc*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.light_omc_table_nabl = 'pass'
+                break
+            else:
+                record.light_omc_table_nabl = 'fail'
     
 
     @api.depends('light_omc_table.dry_density')
@@ -555,19 +555,19 @@ class Soil(models.Model):
             record.liquid_limit_nabl = 'fail'
             line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')])
             materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','8fc72243-7202-4d62-864b-8efa58b6b61f')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.liquid_limit - record.liquid_limit*mu_value
-                    upper = record.liquid_limit + record.liquid_limit*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.liquid_limit_nabl = 'pass'
-                        break
-                    else:
-                        record.liquid_limit_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.liquid_limit - record.liquid_limit*mu_value
+            upper = record.liquid_limit + record.liquid_limit*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.liquid_limit_nabl = 'pass'
+                break
+            else:
+                record.liquid_limit_nabl = 'fail'
     
     
     # def calculate_result(self):
@@ -651,19 +651,19 @@ class Soil(models.Model):
             record.plasticity_index_nabl = 'fail'
             line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')])
             materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','f797da97-2ff0-4b81-aca1-0e07dab7cd87')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.plastic_limit - record.plastic_limit*mu_value
-                    upper = record.plastic_limit + record.plastic_limit*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.plasticity_index_nabl = 'pass'
-                        break
-                    else:
-                        record.plasticity_index_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.plastic_limit - record.plastic_limit*mu_value
+            upper = record.plastic_limit + record.plastic_limit*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.plasticity_index_nabl = 'pass'
+                break
+            else:
+                record.plasticity_index_nabl = 'fail'
 
 
 
@@ -836,19 +836,19 @@ class Soil(models.Model):
             record.degree_of_compaction_nabl = 'fail'
             line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')])
             materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','bfc0b682-0c28-4c8b-924f-7e6988a658ee')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.avg_degree_of_compaction - record.avg_degree_of_compaction*mu_value
-                    upper = record.avg_degree_of_compaction + record.avg_degree_of_compaction*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.degree_of_compaction_nabl = 'pass'
-                        break
-                    else:
-                        record.degree_of_compaction_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.avg_degree_of_compaction - record.avg_degree_of_compaction*mu_value
+            upper = record.avg_degree_of_compaction + record.avg_degree_of_compaction*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.degree_of_compaction_nabl = 'pass'
+                break
+            else:
+                record.degree_of_compaction_nabl = 'fail'
 
 
 
@@ -904,19 +904,19 @@ class Soil(models.Model):
             record.moisture_content_nabl = 'fail'
             line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')])
             materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average_block - record.average_block*mu_value
-                    upper = record.average_block + record.average_block*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.moisture_content_nabl = 'pass'
-                        break
-                    else:
-                        record.moisture_content_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average_block - record.average_block*mu_value
+            upper = record.average_block + record.average_block*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.moisture_content_nabl = 'pass'
+                break
+            else:
+                record.moisture_content_nabl = 'fail'
 
 
 

@@ -566,8 +566,123 @@
 							
 							
 						</tr>
+						
 					</tbody>
 				</table>
+				<!-- <table>
+					<thead>
+							<tr>
+								
+								<th style="text-align: center; width: 25%;">
+									<span style="font-weight: bold;">
+										Parameter
+									</span>
+								</th>
+								
+
+								<th style="text-align: center; width: 10%;">
+									<span style="font-weight: bold;">
+										Observation
+									</span>
+								</th>
+
+							</tr>
+					</thead>
+					<tbody>
+						<tr t-if="data.usc_visible">
+							
+							<td  >
+								<span>Location</span>
+							</td>
+							
+							<td  style="text-align: center;">
+								<span t-esc="data.location"/>
+							</td>
+	
+						</tr>
+
+						<tr t-if="data.usc_visible">
+							
+							<td  >
+								<span>Sample No</span>
+							</td>
+							
+							<td style="text-align: center;">
+								<span t-esc="data.sr_no"/>
+							</td>
+	
+						</tr>
+						<tr t-if="data.usc_visible">
+							
+							<td  >
+								<span>Depth in (mtr)</span>
+							</td>
+							
+							<td style="text-align: center;">
+								<span t-esc="data.depth"/>
+							</td>
+						</tr>
+						<tr t-if="data.usc_visible">
+							
+							<td  >
+								<span>Dia in mm</span>
+							</td>
+							
+							<td style="text-align: center;">
+								<span t-esc="data.diameter"/>
+							</td>
+
+						</tr>
+						<tr t-if="data.usc_visible">
+							
+							<td  >
+								<span>Length in mm</span>
+							</td>
+							
+							<td style="text-align: center;">
+								<span t-esc="data.length"/>
+							</td>
+	
+						</tr>
+
+						<tr t-if="data.usc_visible">
+							
+							<td  >
+								<span>L/D Ratio</span>
+							</td>
+							
+							<td style="text-align: center;">
+								<span t-esc="data.ld_ratio"/>
+							</td>
+
+						</tr>
+
+						<tr t-if="data.usc_visible">
+							
+							<td  >
+								<span>Area in mm2</span>
+							</td>
+							
+							<td style="text-align: center;">
+								<span t-esc="data.area"/>
+							</td>
+							
+						</tr>
+						<tr t-if="data.usc_visible">
+							
+							<td  >
+								<span>Load in KN</span>
+							</td>
+							
+							<td style="text-align: center;">
+								<span t-esc="data.load"/>
+							</td>
+	
+						</tr>
+						
+					</tbody>
+					
+				</table> -->
 
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">

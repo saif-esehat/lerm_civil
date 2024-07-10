@@ -80,19 +80,19 @@ class MechanicalDryingShrinkage(models.Model):
             record.drying_shrinkage_nabl = 'fail'
             line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')])
             materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_table
-            for material in materials:
-                if material.grade.id == record.grade.id:
-                    lab_min = line.lab_min_value
-                    lab_max = line.lab_max_value
-                    mu_value = line.mu_value
-                    
-                    lower = record.average1 - record.average1*mu_value
-                    upper = record.average1 + record.average1*mu_value
-                    if lower >= lab_min and upper <= lab_max:
-                        record.drying_shrinkage_nabl = 'pass'
-                        break
-                    else:
-                        record.drying_shrinkage_nabl = 'fail'
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.average1 - record.average1*mu_value
+            upper = record.average1 + record.average1*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.drying_shrinkage_nabl = 'pass'
+                break
+            else:
+                record.drying_shrinkage_nabl = 'fail'
 
 
 

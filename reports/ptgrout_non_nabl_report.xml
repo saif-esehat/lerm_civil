@@ -191,11 +191,9 @@
 									<span t-field="o.material.name"/>
 								</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 
-								<!-- <td colspan="12" style="font-weight: bold;">Environmental Condition : -->
-									<!-- <span t-field="o.sample_id.sample_description"/> -->
-								<!-- </td> -->
+								
 							    <td colspan="3" style="font-weight: bold;">Room Temp :
 									<![CDATA[&nbsp;]]>
 								</td>
@@ -208,7 +206,7 @@
 								<td colspan="3">
 									
 								</td>
-							</tr>
+							</tr> -->
 
 						</table>
 					</div>

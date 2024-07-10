@@ -16,12 +16,14 @@ class ReallocationWizard(models.TransientModel):
             
             eln_id = record.env['lerm.eln'].search([('sample_id','=',record.env.context.get('active_id'))])
             compressive_strength_id = record.env['mechanical.concrete.cube'].search([('sample_id','=',record.env.context.get('active_id'))])
-            compressive_strength_lines = record.env['mechanical.concrete.cube.line'].search([('parent_id','=',compressive_strength_id.id)])
+            # compressive_strength_lines = record.env['mechanical.concrete.cube.line'].search([('parent_id','=',compressive_strength_id.id)])
+
             parameters_result_ids = record.env['eln.parameters.result'].search([('eln_id','=',eln_id.id)])
             parameters_inputs_ids = record.env['eln.parameters.inputs'].search([('eln_id','=',eln_id.id)])
 
-            
-            compressive_strength_lines.unlink()
+            for comp_records in compressive_strength_id:
+                compressive_strength_lines = record.env['mechanical.concrete.cube.line'].search([('parent_id','=',comp_records.id)])
+                compressive_strength_lines.unlink()
             compressive_strength_id.unlink()
             # import wdb ; wdb.set_trace()
 
