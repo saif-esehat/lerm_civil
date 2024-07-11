@@ -2294,7 +2294,7 @@
 						<div style="margin-top:20px" t-if="data.plastic_limit_visible">
 							<table>
 								<tr cols="12">
-									<td colspan="12">Average of % Moisture :
+									<td colspan="6">Average of % Moisture :
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/>
 									</td>
@@ -2310,10 +2310,21 @@
 									</td>
 								</tr>
 							</table> -->
-							
-							<div>
-								<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
+
+							<div style="margin-top:20px" t-if="data.plastic_limit_visible">
+							<table>
+								<tr cols="12">
+									<td colspan="6">Plasticity index=Liquid limit-Plastic limit :
+										<![CDATA[&nbsp;]]>
+										<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
+									</td>
+								</tr>
+							</table>
 							</div>
+							
+							<!-- <div>
+								<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
+							</div> -->
 
 							<div>
 								<span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit" />
