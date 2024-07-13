@@ -148,8 +148,8 @@
 								<td colspan="1"  style="border-bottom:none;text-align: center; font-weight: bold;">Unit
 								</td>
 								
-                                <!-- <td colspan="3" style="text-align: center;">Test Method
-								</td>	 -->
+                                <td colspan="3" style="text-align: center;">Specification : IS 3812 (Part 1) : 2013
+								</td>	 
 								<th colspan="4" style="text-align: center;font-weight: bold;">
 									<span>
 										<span t-esc="eln.material.method_reference"/>
@@ -170,6 +170,8 @@
 								</td>
                                 <td colspan="2" style="text-align: center;font-weight: bold;">Calcareous pulverized fuel Ash 
 								</td>	
+							</tr>
+							<tr cols="12">
 							</tr>
 						</thead>
 						<tbody>
@@ -790,8 +792,8 @@
 								<td colspan="1" style="border-bottom:none;text-align: center; font-weight: bold;">Unit
 								</td>
 								
-                                <!-- <td colspan="3" style="text-align: center;">Test Method
-								</td>	 -->
+                                <td colspan="3" style="text-align: center;">Specification: IS 3812 (Part 1) : 2013
+								</td>	 
 								<th colspan="4" style="text-align: center;font-weight: bold;">
 									<span>
 										<span t-esc="eln.material.method_reference"/>

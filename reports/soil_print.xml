@@ -1114,62 +1114,62 @@
 								<tr>
 									<th>
 										<span>
-											Determination No
+											Determination No.
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Mould + Compacted sample in gm
+											Weight of Mould + Compacted sample in gm (C)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of compacted sample in gm
+											Weight of compacted sample in gm (D) C-A
 										</span>
 									</th>
 									<th>
 										<span>
-											Bulk Density of sample in gm/cc
+											Bulk Density of sample in gm/cc (E) D-B
 										</span>
 									</th>
 									<th>
 										<span>
-											Container No
+											Container No.
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Container in gm
+											Weight of Container in gm (F)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Container + wet sample in gm
+											Weight of Container + wet sample in gm (G)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Container + dry sample in gm
+											Weight of Container + dry sample in gm (H)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of dry sample in gm
+											Weight of dry sample in gm (I)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of moisture in gm
+											Weight of moisture in gm (J) G-H
 										</span>
 									</th>
 									<th>
 										<span>
-											% Moisture
+											% Moisture (K) J/I*100
 										</span>
 									</th>
 									<th>
 										<span>
-											Dry density in gm/cc
+											Dry density in gm/cc (100*E)/(100+K)
 										</span>
 									</th>
 								</tr>
@@ -1218,12 +1218,12 @@
 
 							<table t-if="data.heavy_visible or data.light_omc_visible and fromEln " style="margin-top : 10px">
 								<tr>
-									<td colspan="3">Weight of Mould in gm :
+									<td colspan="3">Weight of Mould in gm (A) :
 									</td>
 									<td colspan="3">
 										<span t-field="data.wt_of_modul" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
-									<td colspan="3">Volume of Mould in cc :
+									<td colspan="3">Volume of Mould in cc (B) :
 									</td>
 									<td colspan="3">
 										<span t-field="data.vl_of_modul" t-options='{"widget": "float", "precision": 2}'/>
@@ -1747,11 +1747,11 @@
 							<table>
 								
 								<tr cols="12">
-									<td colspan="6">Weight of Mould in gm :
+									<td colspan="6">Weight of Mould in gm (A):
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.wt_of_modul" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
-									<td colspan="6">Volume of Mould in cc :
+									<td colspan="6">Volume of Mould in cc (B) :
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.vl_of_modul" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
@@ -1768,63 +1768,63 @@
 									</th>
 									<th>
 										<span>
-											Determination No
+											Determination No.
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Mould + Compacted sample in gm
+											Weight of Mould + Compacted sample in gm (C)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of compacted sample in gm
+											Weight of compacted sample in gm (D) C-A
 										</span>
 									</th>
 									<th>
 										<span>
-											Bulk Density of sample in gm/cc
+											Bulk Density of sample in gm/cc (E) D-B
 										</span>
 									</th>
 									<th>
 										<span>
-											Container No
+											Container No.
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Container in gm
+											Weight of Container in gm (F)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Container + wet sample in gm
+											Weight of Container + wet sample in gm (G)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Container + dry sample in gm
+											Weight of Container + dry sample in gm (H)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of dry sample in gm
+											Weight of dry sample in gm (I)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of   moisture in gm
+											Weight of   moisture in gm (J) G-H
 
 										</span>
 									</th>
 									<th>
 										<span>
-											% Moisture
+											% Moisture (K) J/I*100
 										</span>
 									</th>
 									<th>
 										<span>
-											Dry density in gm/cc
+											Dry density in gm/cc (100*E)/(100+K)
 										</span>
 									</th>
 								</tr>
@@ -1928,11 +1928,11 @@
 									</td>
 								</tr> -->
 								<tr cols="12">
-									<td colspan="6">Weight of Mould in gm :
+									<td colspan="6">Weight of Mould in gm (A) :
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.wt_of_modul_light_omc" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
-									<td colspan="6">Volume of Mould in cc :
+									<td colspan="6">Volume of Mould in cc (B) :
 										<![CDATA[&nbsp;]]>
 										<span t-field="data.vl_of_modul_light_omc" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
@@ -1949,63 +1949,63 @@
 									</th>
 									<th>
 										<span>
-											Determination No
+											Determination No.
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Mould + Compacted sample in gm
+											Weight of Mould + Compacted sample in gm (C)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of compacted sample in gm
+											Weight of compacted sample in gm (D) C-A
 										</span>
 									</th>
 									<th>
 										<span>
-											Bulk Density of sample in gm/cc
+											Bulk Density of sample in gm/cc (E) D-B
 										</span>
 									</th>
 									<th>
 										<span>
-											Container No
+											Container No.
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Container in gm
+											Weight of Container in gm (F)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Container + wet sample in gm
+											Weight of Container + wet sample in gm (G)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of Container + dry sample in gm
+											Weight of Container + dry sample in gm (H)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of dry sample in gm
+											Weight of dry sample in gm (I)
 										</span>
 									</th>
 									<th>
 										<span>
-											Weight of   moisture in gm
+											Weight of   moisture in gm (J) G-H
 
 										</span>
 									</th>
 									<th>
 										<span>
-											% Moisture
+											% Moisture (K) J/I*100
 										</span>
 									</th>
 									<th>
 										<span>
-											Dry density in gm/cc
+											Dry density in gm/cc (100*E)/(100+K)
 										</span>
 									</th>
 								</tr>
@@ -2311,7 +2311,7 @@
 								</tr>
 							</table> -->
 
-							<div style="margin-top:20px" t-if="data.plastic_limit_visible">
+							<!-- <div style="margin-top:10px" t-if="data.plastic_limit_visible"> -->
 							<table>
 								<tr cols="12">
 									<td colspan="6">Plasticity index=Liquid limit-Plastic limit :
@@ -2320,7 +2320,7 @@
 									</td>
 								</tr>
 							</table>
-							</div>
+							<!-- </div> -->
 							
 							<!-- <div>
 								<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
@@ -2360,7 +2360,7 @@
 									</th>
 									<th>
 										<span>
-											Water content of sample RMM in Y m
+											Water content of sample RMM in % m
 										</span>
 									</th>
 									<th>
@@ -2505,7 +2505,7 @@
 									</th>
 									<th>
 										<span>
-											% Moisture Content
+											% Moisture Content = (W1-W)/W*100
 										</span>
 									</th>
 								</tr>
