@@ -148,14 +148,16 @@
 								<td colspan="1"  style="border-bottom:none;text-align: center; font-weight: bold;">Unit
 								</td>
 								
-                                <td colspan="3" style="text-align: center;">Specification : IS 3812 (Part 1) : 2013
+                                <td colspan="3" style="text-align: center; font-weight: bold;">Specification : IS 3812 (Part 1) : 2013
 								</td>	 
-								<th colspan="4" style="text-align: center;font-weight: bold;">
+								 <th colspan="4" style="border: 1px solid black; text-align: center; font-weight: bold;">
 									<span>
 										<span t-esc="eln.material.method_reference"/>
 										
 									</span>
-								</th>
+								</th> 
+								
+
 							</tr>
                             <tr cols="12">
 								<td colspan="1" style="border-top:none">
@@ -171,8 +173,8 @@
                                 <td colspan="2" style="text-align: center;font-weight: bold;">Calcareous pulverized fuel Ash 
 								</td>	
 							</tr>
-							<tr cols="12">
-							</tr>
+							<!-- <tr cols="12">
+							</tr> -->
 						</thead>
 						<tbody>
 
