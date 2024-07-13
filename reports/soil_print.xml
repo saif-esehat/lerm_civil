@@ -2187,7 +2187,7 @@
 							</table>
 						</div>
 
-						<div t-if="data.liquid_limit_visible" style="margin-top:20px" >
+						<!-- <div t-if="data.liquid_limit_visible" style="margin-top:20px" >   >>>>>>
 							<table>
 								<tr cols="12">
 									<td colspan="6">Liquid Limit :
@@ -2196,9 +2196,9 @@
 									</td>
 								</tr>
 							</table>
-						</div>
+						</div> -->
 					</div>
-
+ 
 
 					<div t-if="data.plastic_limit_visible">
 						
@@ -2326,9 +2326,9 @@
 								<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
 							</div> -->
 
-							<div>
+							<!-- <div>   >>>>>
 								<span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit" />
-							</div>
+							</div> -->
 						</div>
 					</div>
 
