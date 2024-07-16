@@ -839,7 +839,7 @@
 
                     <div t-if="data.clay_lump_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
-							Determination of Clay Lumps
+							Determination of Clay Lumps IS 2386 (Part-2) :1963 RA 2021
 							<span>
 								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','d7e389bc-21ad-41eb-a602-f448f996eb2f')]).parameter_table" t-as="parameter">
 									<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -859,7 +859,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Weight of dry sample after retained in 75 microns R:
+								<td colspan="6">Weight of dry sample after Removal of clay Lumps - R
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -883,7 +883,7 @@
 
                     <div t-if="data.light_weight_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
-							Determination of Light Weight Particles
+							Determination of Light Weight Particles IS 2386 (Part-2) :1963 RA 2021
 							<span>
 								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','e7cc6b68-2550-4e1e-a28e-8526295e733f')]).parameter_table" t-as="parameter">
 									<t t-if="parameter.grade.id == eln.grade_id.id">
