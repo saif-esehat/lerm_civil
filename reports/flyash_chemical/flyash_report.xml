@@ -986,6 +986,15 @@
 										<span t-field="data.calcareous15"/>
 									</span>									
 								</td>
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
 								
 								
 								
@@ -1025,6 +1034,15 @@
 									<span>
 										<span t-field="data.calcareous15"/>
 									</span>									
+								</td>
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','4ddec5e4-d9eb-480b-8965-78c1d92f7349')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
 								</td>
 								
 								
@@ -1067,6 +1085,16 @@
 										<span t-field="data.calcareous15"/>
 									</span>									
 								</td>
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
+								</td>
+								
 								
 								
 								
@@ -1109,6 +1137,15 @@
 									<span>
 										<span t-field="data.calcareous15"/>
 									</span>									
+								</td>
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
 								</td>
 								
 								
@@ -1153,6 +1190,15 @@
 									<span>
 										<span t-field="data.calcareous15"/>
 									</span>									
+								</td>
+								<td colspan="1" style="text-align: center;">
+									<span>
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).parameter_table" t-as="parameter">
+                                            <t t-if="parameter.grade.id == eln.grade_id.id">
+                                                <span t-field="parameter.specification"/>
+                                            </t>
+                                        </t>
+									</span>
 								</td>
 								
 								
