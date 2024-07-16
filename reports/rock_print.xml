@@ -134,7 +134,7 @@
 
 					<div style="margin-top:20px" t-if="data.usc_visible">
                         <div style="text-align:center;font-size:18px">
-                            <b>UCS IS 9143: 1979</b>
+                            <b>UCS </b>
                         </div>
                         <table>
                             <tr cols="12">
