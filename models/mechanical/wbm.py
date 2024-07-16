@@ -362,15 +362,10 @@ class WbmMechanical(models.Model):
     #     for record in self:
     #         record.plasticity_index = record.liquid_limit - record.average_plastic_moisture
 
-    @api.depends('average_plastic_moisture')
+    @api.depends('average_plastic_moisture','liquid_limit')
     def _compute_plasticity_limit(self):
         for record in self:
-            if record.average_plastic_moisture == 0.0:
-                record.plasticity_index = 'Null'
-            else:
-                plasticity_value = 46.14 - record.average_plastic_moisture
-                # Format the string representation with 2 decimal places
-                record.plasticity_index = '{:.2f}'.format(plasticity_value)
+            record.plasticity_index = record.liquid_limit - record.average_plastic_moisture
 
     # Density Relation Heavy Compaction
     density_relation_name = fields.Char("Name",default="Density Relation Using Heavy Compaction")
