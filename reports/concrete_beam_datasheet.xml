@@ -45,9 +45,9 @@
 
 			
                     <div>
-						<!-- <div style="text-align:center;font-size:18px;font-weight: bold">
+						 <div style="text-align:center;font-size:18px;font-weight: bold">
 							Flexural Strength of Concrete Beam										
-						</div> -->
+						</div> 
 						<div style="text-align:center;font-size:18px">
 							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','19edc74f-c7b2-45b6-8696-e97c19e81993')]).parameter_name"/>
 							<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>

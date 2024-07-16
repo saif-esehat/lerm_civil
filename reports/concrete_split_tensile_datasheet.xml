@@ -51,12 +51,13 @@
 							</td>
 						</tr>
                     </table>
+					
                     <!-- Concrete Split Tensile Strength -->
                     
                     <div t-if="data.splite_tensile_visible" style="margin-top:20px">
-                        <!-- <div style="text-align:center;font-size:18px">
+                       <div style="text-align:center;font-size:18px">
                             <b>Concrete Split Tensile Strength</b>
-                        </div> -->
+                        </div>
 						<div style="text-align:center;font-size:18px">
 							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','51ff18a6-226c-4dbf-9389-7cc72b090e66')]).parameter_name"/>
 						</div>
