@@ -205,24 +205,30 @@
                         <div>
                             <div>
                                 <b>
-                                    (JR Chemist)
+                                    Tested By
                                 </b>
                             </div>
+							<div style="height:40px">
+
+							</div>
                             <div>
                                 <b>
-                                    Tested By
+                                    (JR Chemist)
                                 </b>
                             </div>
                         </div>
                         <div style="margin-left:500px">
                             <div>
                                 <b>
-                                    (<span t-esc="eln.sample_id.approved_by.job_title"/>)
+                                    Checked By
                                 </b>
                             </div>
+							<div style="height:40px">
+
+							</div>
                             <div>
                                 <b>
-                                    Checked By
+                                    (<span t-esc="eln.sample_id.approved_by.job_title"/>)
                                 </b>
                             </div>
                         </div>

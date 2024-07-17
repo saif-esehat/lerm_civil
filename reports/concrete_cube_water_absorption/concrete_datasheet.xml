@@ -58,7 +58,7 @@
 							</tr>
 						</table>
 						<div style="text-align:center;font-size:18px;margin-top:25px">
-							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','eb26db03-17c1-48ac-8462-9671e4d3d09f')]).parameter_name"/>
+							<span t-field="env['lerm.parameter.master'].search([('internal_id','=','2002fc5d-b01c-47c1-a37c-332e37a412a7')]).parameter_name"/>
 							<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>
 						</div>
 					</div>
