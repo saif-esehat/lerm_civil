@@ -137,7 +137,7 @@
 					<thead>
 
                         <tr style="height:20px;">
-                            <td rowspan="1" >Sr No</td>
+                            <td rowspan="1" >Sr.No</td>
                             <td rowspan="1" >Test Parameters</td>
                             <td rowspan="1" >Unit</td>
                             <td rowspan="1" >Test Method</td>
@@ -161,7 +161,7 @@
 									<t t-set="i" t-value="i+1"/>
 								</div>
                   			</td>
-                            <td>Dimension 24 blocks</td>
+                            <td>Dimension </td>
                             <td ></td>
                             <td></td>
                             <td></td>
@@ -171,7 +171,7 @@
 						</tr>
 						<tr t-if="data.dimension_visible">
                             <td><div><span>A</span></div></td>
-                            <td>Length</td>
+                            <td>Length (Avg)</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','32134e16-d5ef-4319-ad7c-f10e03b326ae')]).unit.name"/>
@@ -203,7 +203,7 @@
 						</tr>
 						<tr t-if="data.dimension_visible">
                             <td><div><span>B</span></div></td>
-                            <td>Width</td>
+                            <td>Width (Avg)</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','c52d3b4f-7dd4-4f98-acbb-a39c076e33f9')]).unit.name"/>
@@ -235,7 +235,7 @@
 						</tr>
 						<tr t-if="data.dimension_visible">
                             <td><div><span>C</span></div></td>
-                            <td>Height</td>
+                            <td>Height (Avg)</td>
                             <td>
 								<span>
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a3cbfb75-e743-408e-8077-5d2f2ba22edc')]).unit.name"/>
@@ -274,7 +274,7 @@
                   			</td>
                             <td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_name"/> (Avg)
 								</span>
 							</td>
                             <td>
@@ -320,7 +320,7 @@
                   			</td>
                             <td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_name"/> (Avg)
 								</span>
 							</td>
                             <td>
@@ -367,7 +367,7 @@
                   			</td>
 							<td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_name"/> (Avg)
 								</span>
 							</td>
                             <td>
@@ -413,7 +413,7 @@
                   			</td>
 							<td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_name"/> (Avg)
 								</span>
 							</td>
                             <td>
@@ -460,7 +460,7 @@
                   			</td>
                             <td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_name"/> (Avg)
 								</span>
 							</td>
                             <td>
@@ -506,7 +506,7 @@
                   			</td>
                             <td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_name"/> (Avg)
 								</span>
 							</td>
                             <td>
@@ -632,7 +632,7 @@
 									<t t-set="i" t-value="i+1"/>
 								</td>
 								<td >
-									<span >Compresive Strength</span>
+									<span >Compresive Strength (Avg)</span>
 								</td>
 								<td >
 									<span>
