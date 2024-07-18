@@ -106,6 +106,18 @@
                                 </td>
                             </tr>
                         </table>
+                        <!-- added -->
+                        <table style="margin-top:20px">
+                            <tr cols="12">
+                                <td colspan="6">Fineness Modulus :
+                                                                                                            <![CDATA[&nbsp;]]>
+                                </td>
+                                <td colspan="6">
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="data.fineness_modulus"/>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
                     <div t-if="data.specific_gravity_visible" style="margin-top:20px">
@@ -1311,6 +1323,18 @@
                                         </td>
 							</tr>
 						</table>
+                        <!-- added -->
+                        <table style="margin-top:20px">
+                            <tr cols="12">
+                                <td colspan="6">Fineness Modulus :
+                                                                                                            <![CDATA[&nbsp;]]>
+                                </td>
+                                <td colspan="6">
+                                    <![CDATA[&nbsp;]]>
+                                    <span t-field="data.fineness_modulus"/>
+                                </td>
+                            </tr>
+                        </table>
                         
 					</div>         
 
