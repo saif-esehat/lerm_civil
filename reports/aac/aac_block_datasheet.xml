@@ -45,7 +45,7 @@
 				<!-- Dimension -->
                 <div t-if="data.dimension_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
-							Dimension IS 2185 (Part-3):1984
+							Dimension 
 							<span>
 								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6a8fbf6a-ac79-4102-aeda-622dc0f973f6')]).parameter_table" t-as="parameter">
 									<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -124,7 +124,7 @@
                 <!-- Moisture Content  -->
 				<div t-if="data.moisture_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
-						Moisture Content IS 6441 (Part1) 1972
+						Moisture Content 
 						<span>
 							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0fc481e6-8097-4275-b80f-48ebdbcfe244')]).parameter_table" t-as="parameter">
 								<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -186,7 +186,7 @@
 				<!-- Block Density  -->
 				<div t-if="data.moisture_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
-						Block Density IS 6441 (Part1) 1972
+						Block Density 
 						<span>
 							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','6af641b7-4ef4-4e51-abeb-57dd2abe29a4')]).parameter_table" t-as="parameter">
 								<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -264,7 +264,7 @@
 				<!-- Drying Shrinkage  -->
 				<div t-if="data.drying_shrinkage_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
-						Drying Shrinkage IS 6441 (Part1) 1972
+						Drying Shrinkage 
 						<span>
 							<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','73b3be25-b1a2-4dac-b8cb-e077770af52f')]).parameter_table" t-as="parameter">
 								<t t-if="parameter.grade.id == eln.grade_id.id">

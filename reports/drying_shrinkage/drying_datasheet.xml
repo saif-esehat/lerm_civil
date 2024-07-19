@@ -47,7 +47,15 @@
                    
                      <div style="margin-top:20px" t-if="data.drying_shrinkage_visible">
                         <div style="text-align:center;font-size:18px">
-                            <b>Drying Shrinkage IS 516 (Part 6) : 2020</b> 
+                            Drying Shrinkage 
+                            <!-- added -->
+                            <span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
+							</span>
 
                             
 							<!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_name"/>
@@ -109,7 +117,16 @@
 
                     <div style="margin-top:20px" t-if="data.moisture_movement_visible">
                         <div style="text-align:center;font-size:18px">
-                         <b>Moisture Movement IS 516 (Part 6) : 2020</b> 
+                         Moisture Movement 
+                         <!-- added -->
+                            <span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
+							</span>
+                          
                         <!-- <span t-field="env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_name"/>
 							<span style="font-weight: bold;" t-esc="eln.material.test_parameter"/>
 						     -->

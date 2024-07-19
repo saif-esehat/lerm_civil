@@ -4,8 +4,8 @@
 		<t t-call="web.html_container">
 			 <t t-call="lerm_civil.mechanical_data_sheet_header">
 				<div style="text-align:center;font-size:18px">
-                    Concrete Cube Water Absorption BS 1881 (Part 122): 2011
-					<span>
+                    Concrete Cube Water Absorption 
+					 <span>
 						<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','2002fc5d-b01c-47c1-a37c-332e37a412a7')]).parameter_table" t-as="parameter">
 							<t t-if="parameter.grade.id == eln.grade_id.id">
 								<span t-field="parameter.specification"/>
