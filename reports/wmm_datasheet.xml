@@ -59,7 +59,7 @@
 						Dry Gradation
 						<!-- added -->
 						<span>
-								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','df2105e2-a55f-47ac-aee6-9f37d733ccca')]).parameter_table" t-as="parameter">
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','64fecdf5-6741-4817-95f4-5e53a0676c5f')]).parameter_table" t-as="parameter">
 									<t t-if="parameter.grade.id == eln.grade_id.id">
 										<span t-field="parameter.specification"/>
 									</t>

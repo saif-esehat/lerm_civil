@@ -256,7 +256,7 @@
 
                                     <td style="text-align: ">
                                         <span style="text-align: center;">
-                                            Volume of water displaced by saturated surface dry aggregate : C=(W2-W1)-(W4-W3) M1	
+                                            Volume of water displaced by saturated surface dry aggregate : C=(W2-W1)-(W4-W3) 	
                                         </span>
                                     </td>
 
@@ -664,6 +664,14 @@
                     <div t-if="data.finer75_visible" style="margin-top:20px">
                         <div style="text-align:center;font-size:18px;font-weight: bold">
                             Finer than 75 micron
+                            <!-- added -->
+                            <span>
+                                    <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','237ca3ca-3db7-4782-b863-1dc33be92bc2')]).parameter_table" t-as="parameter">
+                                        <t t-if="parameter.grade.id == eln.grade_id.id">
+                                            <span t-field="parameter.specification"/>
+                                        </t>
+                                    </t>
+                            </span>		
                         </div>
                         <table style="margin-top:30px;">
 

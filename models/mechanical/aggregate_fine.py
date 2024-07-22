@@ -535,7 +535,7 @@ class FineAggregate(models.Model):
             (0, 0, {'sieve_size_passing': '600 µ', 'sieve_size_retained': '300 µ'}),
             (0, 0, {'sieve_size_passing': '1.18 mm', 'sieve_size_retained': '600 µ'}),
             (0, 0, {'sieve_size_passing': '2.36 mm', 'sieve_size_retained': '1.18 mm'}),
-            (0, 0, {'sieve_size_passing': '4.47 mm', 'sieve_size_retained': '2.36 mm'}),
+            (0, 0, {'sieve_size_passing': '4.75 mm', 'sieve_size_retained': '2.36 mm'}),
             (0, 0, {'sieve_size_passing': '10 mm', 'sieve_size_retained': '4.75 mm'})
         ]
         return default_lines
@@ -621,7 +621,7 @@ class FineAggregate(models.Model):
             (0, 0, {'sieve_size_passing': '600 µ', 'sieve_size_retained': '300 µ'}),
             (0, 0, {'sieve_size_passing': '1.18 mm', 'sieve_size_retained': '600 µ'}),
             (0, 0, {'sieve_size_passing': '2.36 mm', 'sieve_size_retained': '1.18 mm'}),
-            (0, 0, {'sieve_size_passing': '4.47 mm', 'sieve_size_retained': '2.36 mm'}),
+            (0, 0, {'sieve_size_passing': '4.75 mm', 'sieve_size_retained': '2.36 mm'}),
             (0, 0, {'sieve_size_passing': '10 mm', 'sieve_size_retained': '4.75 mm'})
         ]
         return default_lines
@@ -1051,7 +1051,7 @@ class SieveAnalysisLine(models.Model):
     sieve_size = fields.Char(string="IS Sieve Size")
     wt_retained = fields.Float(string="Wt. Retained in gms")
     percent_retained = fields.Float(string='% Retained', compute="_compute_percent_retained")
-    cumulative_retained = fields.Float(string="Cum. Retained %", store=True)
+    cumulative_retained = fields.Float(string="Cum. Retained %", compute="_compute_cum_retained", store=True)
     passing_percent = fields.Float(string="Passing %")
 
 
@@ -1116,6 +1116,7 @@ class SieveAnalysisLine(models.Model):
     def _compute_cum_retained(self):
         self.cumulative_retained=0
         
+    
 
 
     def get_previous_record(self):
