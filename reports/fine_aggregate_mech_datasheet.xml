@@ -1396,7 +1396,7 @@
 							</tr>
 						</table>
                         <!-- added -->
-                        <table style="margin-top:20px">
+                        <!-- <table style="margin-top:20px">
                             <tr cols="12">
                                 <td colspan="6">Fineness Modulus :
                                                                                                             <![CDATA[&nbsp;]]>
@@ -1406,7 +1406,7 @@
                                     <span t-field="data.fineness_modulus"/>
                                 </td>
                             </tr>
-                        </table>
+                        </table> -->
                         
 					</div>         
 
