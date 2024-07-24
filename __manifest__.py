@@ -98,7 +98,9 @@
     'views/mechanical/gsb.xml',
     'views/mechanical/wbm.xml',
     'views/mechanical/isat.xml',
+    'views/mechanical/bricks_burnt_clay.xml',
     'views/chemical/crushed_sand.xml',
+
 
 
     'views/product_grade_wizard.xml',
