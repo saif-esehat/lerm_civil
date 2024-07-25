@@ -30,6 +30,7 @@ from .report import coarse_aggregate_mechanical
 from .report import paver_block_report
 from .report import fine_aggregate_ds_report
 from .report import bricks2_ds_report
+from .report import bricks_burntclay_ds_report
 from .report import concrete_beam_ds_report
 from .report import solid_concrete_block_ds_report
 from .report import rock_print

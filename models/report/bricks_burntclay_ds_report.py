@@ -7,7 +7,7 @@ from lxml import etree
 
 
 class BrickBurntClayDatasheet(models.AbstractModel):
-    _name = 'report.lerm_civil.lerm_brick_burntclay_datasheet'
+    _name = 'report.lerm_civil.lerm_brick_burnt_clay_datasheet'
     _description = 'Brick Burnt Clay DataSheet'
     
     @api.model
@@ -40,7 +40,7 @@ class BrickBurntClayDatasheet(models.AbstractModel):
 
 
 class BrickBurntClayReport(models.AbstractModel):
-    _name = 'report.lerm_civil.lerm_brick_burntclay_report'
+    _name = 'report.lerm_civil.lerm_bricks_burnt_clay_report'
     _description = 'Brick Burnt Clay Report'
     
     @api.model
