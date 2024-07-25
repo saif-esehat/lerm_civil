@@ -495,43 +495,8 @@ class FineAggregate(models.Model):
     #                 print("Previous Cumulative",previous_line_record)
 
 
-# added
-    def calculate_sieve(self): 
-        for record in self:
-            previous_cumulative = 0
-            for line in record.sieve_analysis_child_lines:
-                print("Rows", str(line.percent_retained))
-                previous_line = line.serial_no - 1
-                
-                if previous_line == 0:
-                    
-                    cumulative_retained = line.percent_retained
-                    passing_percent = 100 - cumulative_retained
-                else:
-                    # Fetch the previous line's cumulative_retained
-                    previous_line_record = self.env['mechanical.fine.aggregate.sieve.analysis.line'].sudo().search([
-                        ("serial_no", "=", previous_line),
-                        ("parent_id", "=", self.id)
-                    ], limit=1)
-                    
-                    if previous_line_record:
-                        previous_cumulative = previous_line_record.cumulative_retained
-                    
-                    # Update cumulative_retained and passing_percent
-                    cumulative_retained = previous_cumulative + line.percent_retained
-                    passing_percent = 100 - cumulative_retained
-                
-                # Update the line values
-                line.write({
-                    'cumulative_retained': round(cumulative_retained, 2),
-                    'passing_percent': round(passing_percent, 2),
-                })
-                
-                print("Updated Cumulative Retained:", cumulative_retained)
-                print("Updated Passing Percent:", passing_percent)
 
-                # Update previous_cumulative for the next line
-                previous_cumulative = cumulative_retained
+    
 
 
     
