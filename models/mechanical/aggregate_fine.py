@@ -393,12 +393,7 @@ class FineAggregate(models.Model):
             fineness_modulus = sum(line.cumulative_retained for line in record.sieve_analysis_child_lines)/100
             record.fineness_modulus = fineness_modulus
 
-    # @api.depends('sieve_analysis_child_lines.cumulative_retained')
-    # def _compute_fineness_modulus(self):
-    #     for record in self:
-    #         total_cumulative = (100-sum(line.cumulative_retained for line in record.sieve_analysis_child_lines))
-    #         fineness_modulus = total_cumulative / 100
-    #         record.fineness_modulus = fineness_modulus
+    
 
     @api.model
     def _default_sieve_analysis_child_lines(self):
