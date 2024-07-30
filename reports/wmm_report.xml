@@ -1185,7 +1185,7 @@
 										DETERMINATION OF WATER CONTENT-DRY 
 									</div>
 									<div>
-										DENSITY RELATION USING HEAVY COMPACTION :
+										DENSITY RELATION USING HEAVY COMPACTION : Test Method 
 										<span> 
 											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','fc19b116-3cb1-448a-8bb0-8f48657ae86b')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -1202,27 +1202,27 @@
 								<tr cols="12">
 									<td colspan="1">Determination No
 									</td>
-									<td colspan="1">Weight of Mould + Compacted sample in gm
+									<td colspan="1">Weight of Mould + Compacted sample in gm (C)
 									</td>
-									<td colspan="1">Weight of compacted sample in gm
+									<td colspan="1">Weight of compacted sample in gm (D) C-A
 									</td>
-									<td colspan="1">Bulk Density of sample in gm/cc
+									<td colspan="1">Bulk Density of sample in gm/cc (E) D/B
 									</td>
 									<td colspan="1">Container No
 									</td>
-									<td colspan="1">Weight of Container in gm
+									<td colspan="1">Weight of Container in gm (F)
 									</td>
-									<td colspan="1">Weight of Container + wet sample in gm
+									<td colspan="1">Weight of Container + wet sample in gm (G)
 									</td>
-									<td colspan="1">Weight of Container + dry sample in gm
+									<td colspan="1">Weight of Container + dry sample in gm (H)
 									</td>
-									<td colspan="1">Weight of dry sample in gm
+									<td colspan="1">Weight of dry sample in gm (I)
 									</td>
-									<td colspan="1">Weight of moisture in gm
+									<td colspan="1">Weight of moisture in gm (J) G-H
 									</td>
-									<td colspan="1">% Moisture
+									<td colspan="1">% Moisture (K) J/I*100
 									</td>
-									<td colspan="1">Dry density in gm/cc
+									<td colspan="1">Dry density in gm/cc (100*E)/(100+K)
 									</td>
 
 							
@@ -1275,12 +1275,12 @@
 
 							<table  t-if="data.density_relation_visible" style="margin-top : 10px">
 								<tr>
-									<td colspan="3">Weight of Mould in gm :
+									<td colspan="3">Weight of Mould in gm  (A) :
 									</td>
 									<td colspan="3">
 										<span t-field="data.wt_of_modul"/>
 									</td>
-									<td colspan="3">Volume of Mould in cc :
+									<td colspan="3">Volume of Mould in cc (B) :
 									</td>
 									<td colspan="3">
 										<span t-field="data.vl_of_modul"/>

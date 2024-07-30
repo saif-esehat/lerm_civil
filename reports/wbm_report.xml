@@ -142,10 +142,7 @@
 					
 					<!-- added -->
 							<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
-									<div>
-										Sieve Analysis
-									</div>
-									
+									Sieve Analysis
 										<span> 
 											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','48b74892-3497-4b7f-819a-a26f25c9848')]).parameter_table" t-as="parameter">
 												<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -154,7 +151,7 @@
 											</t>
 										</span>
 									
-								</div>
+							</div>
 
 
 					<table style="margin-top:15px">
@@ -565,7 +562,7 @@
 										DETERMINATION OF WATER CONTENT-DRY 
 									</div>
 									<div>
-										DENSITY RELATION USING HEAVY COMPACTION : 
+										DENSITY RELATION USING HEAVY COMPACTION : Test Method 
 										<span>
 											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','fc19b116-3cb1-448a-8bb0-8f48657ae86b')]).parameter_table" t-as="parameter">
 												<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -587,17 +584,17 @@
 										</th>
 										<th>
 											<span>
-											Weight of Mould + Compacted sample in gm
+											Weight of Mould + Compacted sample in gm (C)
 											</span>
 										</th>
 										<th>
 											<span>
-											Weight of compacted sample in gm
+											Weight of compacted sample in gm (D) C-A
 											</span>
 										</th>
 										<th>
 											<span>
-											Bulk Density of sample in gm/cc
+											Bulk Density of sample in gm/cc (E) D/B
 											</span>
 										</th>
 										<th>
@@ -607,32 +604,37 @@
 										</th>
 										<th>
 											<span>
-											Weight of Container in gm
+											Weight of Container in gm (F)
 											</span>
 										</th>
 										<th>
 											<span>
-											Weight of Container + wet sample in gm
+											Weight of Container + wet sample in gm (G)
 											</span>
 										</th>
 										<th>
 											<span>
-											Weight of Container + dry sample in gm
+											Weight of Container + dry sample in gm (H)
 											</span>
 										</th>
 										<th>
 											<span>
-											Weight of dry sample in gm
+											Weight of dry sample in gm (I)
+											</span>
+										</th>
+										<th>
+										<span>
+											Weight of moisture in gm (J) G-H
+										</span>
+									    </th>
+										<th>
+											<span>
+											% Moisture (K) J/I*100
 											</span>
 										</th>
 										<th>
 											<span>
-											% Moisture
-											</span>
-										</th>
-										<th>
-											<span>
-											Dry density in gm/cc
+											Dry density in gm/cc (100*E)/(100+K)
 											</span>
 										</th>
 									</tr>
@@ -678,12 +680,12 @@
 
 							<table style="margin-top : 10px">
 								<tr>
-									<td colspan="3">Weight of Mould in gm :
+									<td colspan="3">Weight of Mould in gm (A) :
 									</td>
 									<td colspan="3">
 										<span t-field="data.wt_of_modul" t-options='{"widget": "float", "precision": 2}'/>
 									</td>
-									<td colspan="3">Volume of Mould in cc :
+									<td colspan="3">Volume of Mould in cc (B) :
 									</td>
 									<td colspan="3">
 										<span t-field="data.vl_of_modul" t-options='{"widget": "float", "precision": 2}'/>
@@ -860,7 +862,7 @@
 								</ul>
 							</div>
 						</div>
-						<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
+						<!-- <div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
 
 							<div>
 								<div>
@@ -931,9 +933,65 @@
 								</b>
 							</div>
 						</div>
-						<!-- </div> -->
+						 </div>
 						<div style="text-align:center;margin-top:25px">
 						......End of Report......
+						</div> -->
+						<div class="signatureContainer girdgird" style="margin-top:50px;page-break-inside: avoid;">
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:30px">
+
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.sample_id.check_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(<span t-esc="eln.sample_id.check_by.job_title"/>)
+									</b>
+								</div>
+							</div>
+							<div>
+								<div>
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By 
+									</b>
+									
+								</div>
+								<div style="height:30px">
+
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>) 
+									</b>
+								</div>
+								
+							</div>
+						</div>
+					    <!-- </div> -->
+						<div style="text-align:center;margin-top:25px">
+							......End of Report......
 						</div>
 					</div>
 
@@ -941,6 +999,4 @@
 			</t>
 		</t>
 	</template>
-
-
 </odoo>

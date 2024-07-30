@@ -647,7 +647,7 @@
 
                     <table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">Weight of Mould in gm :
+							<td colspan="6">Weight of Mould in gm (A) :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -656,7 +656,7 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Volume of Mould in cc :
+							<td colspan="6">Volume of Mould in cc (B) :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -672,27 +672,27 @@
 						<tr cols="12">
 							<td colspan="1">Determination No
 							</td>
-							<td colspan="1">Weight of Mould + Compacted sample in gm
+							<td colspan="1">Weight of Mould + Compacted sample in gm (C)
 							</td>
-                            <td colspan="1">Weight of compacted sample in gm
+                            <td colspan="1">Weight of compacted sample in gm (D) C-A
 							</td>
-							<td colspan="1">Bulk Density of sample in gm/cc
+							<td colspan="1">Bulk Density of sample in gm/cc (E) D/B
 							</td>
 							<td colspan="1">Container No
 							</td>
-                            <td colspan="1">Weight of Container in gm
+                            <td colspan="1">Weight of Container in gm (F)
 							</td>
-                            <td colspan="1">Weight of Container + wet sample in gm
+                            <td colspan="1">Weight of Container + wet sample in gm (G)
 							</td>
-                            <td colspan="1">Weight of Container + dry sample in gm
+                            <td colspan="1">Weight of Container + dry sample in gm (H)
 							</td>
-							<td colspan="1">Weight of dry sample in gm
+							<td colspan="1">Weight of dry sample in  (I)
 							</td>
-							<td colspan="1">Weight of moisture in gm
+							<td colspan="1">Weight of moisture in gm (J) G-H
 							</td>
-                            <td colspan="1">% Moisture
+                            <td colspan="1">% Moisture (K) J/I*100
 							</td>
-                            <td colspan="1">Dry density in gm/cc
+                            <td colspan="1">Dry density in gm/cc (100*E)/(100+K)
 							</td>
 
 							
