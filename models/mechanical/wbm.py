@@ -153,7 +153,8 @@ class WbmMechanical(models.Model):
 
         default_dry_sieve_sizes = []
         default_elongated_sieve_sizes = []
-        dry_sieve_sizes = ['63 mm','53 mm','45 mm','22.4','12.2 mm','pan']
+        # corrected
+        dry_sieve_sizes = ['75 mm','63 mm','53 mm','45 mm','22.4 mm','pan']    
         elongation_sieve_sizes = ['63 mm', '50 mm', '40 mm', '31.5 mm', '25 mm','20 mm','16 mm','12.5 mm','10 mm','6.3 mm','4.75 mm','2.36 mm','1.18 mm','Pan']
 
 

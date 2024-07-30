@@ -139,6 +139,23 @@
 							</tr>
 						</table>
 					</div>
+					
+					<!-- added -->
+							<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
+									<div>
+										Sieve Analysis
+									</div>
+									
+										<span> 
+											<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','48b74892-3497-4b7f-819a-a26f25c9848')]).parameter_table" t-as="parameter">
+												<t t-if="parameter.grade.id == eln.grade_id.id">
+													<span t-field="parameter.specification"/>
+												</t>
+											</t>
+										</span>
+									
+								</div>
+
 
 					<table style="margin-top:15px">
 
@@ -216,16 +233,16 @@
 									<span>100%</span>
 								</td>
 								<td colspan="2" t-if="k == 2">
-									<span>95% - 100%</span>
+									<span>90% - 100%</span>
 								</td>
 								<td colspan="2" t-if="k == 3">
-									<span>60% - 80%</span>
+									<span>25% - 75%</span>
 								</td>
 								<td colspan="2" t-if="k == 4">
-									<span>40% - 60%</span>
+									<span>0% - 15%</span>
 								</td>
 								<td colspan="2" t-if="k == 5">
-									<span>25% - 40%</span>
+									<span>0% - 5%</span>
 								</td>
 								<td colspan="2" t-if="k == 6">
 									<span>15% - 30%</span>

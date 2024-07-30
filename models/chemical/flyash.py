@@ -961,7 +961,7 @@ class ChemicalFlyAsh(models.Model):
 
     # Available alkalis  % = A+B (0.65)
 
-    available_alkalis_name = fields.Char("Name", default="Available alkalis")
+    available_alkalis_name = fields.Char("Name", default="Available alkalies as Na2O")
     available_alkalis_visible = fields.Boolean("Available alkalis", compute="_compute_visible")
 
     siliceous13 = fields.Char(string="Siliceous Pulverized Fuel Ash" ,  default="1.5 Max")
