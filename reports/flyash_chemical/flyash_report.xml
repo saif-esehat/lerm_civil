@@ -775,13 +775,13 @@
 
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.siliceous15"/>
+										<span t-field="data.siliceous13"/>
 									</span>									
 								</td>
 
 								<td colspan="2" style="text-align: center;">
 									<span>
-										<span t-field="data.calcareous15"/>
+										<span t-field="data.calcareous13"/>
 									</span>									
 								</td>
 								<td colspan="1" style="text-align: center;">
@@ -827,13 +827,13 @@
 
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.siliceous15"/>
+										<span t-field="data.siliceous11"/>
 									</span>									
 								</td>
 
 								<td colspan="2" style="text-align: center;">
 									<span>
-										<span t-field="data.calcareous15"/>
+										<span t-field="data.calcareous11"/>
 									</span>									
 								</td>
 								<td colspan="1" style="text-align: center;">
@@ -881,13 +881,13 @@
 
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.siliceous15"/>
+										<span t-field="data.siliceous12"/>
 									</span>									
 								</td>
 
 								<td colspan="2" style="text-align: center;">
 									<span>
-										<span t-field="data.calcareous15"/>
+										<span t-field="data.calcareous12"/>
 									</span>									
 								</td>
 								<td colspan="1" style="text-align: center;">
