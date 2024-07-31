@@ -56,6 +56,7 @@
             </div>
         </div>
 	</template>
+
     <template id="compresive_concrete_cube_report">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
@@ -282,7 +283,8 @@
 						<tbody>
 							<!-- <t t-set="i" t-value="0"/> -->
 							<!-- non nabl -->
-							<tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'fail' and not nabl">
+							<tr  t-foreach="data.child_lines" t-as="r">
+							<!-- t-if="data.nabl == 'fail' and not nabl"> -->
 								<!-- <td>
 									<div>
 										<span t-esc="i + 1"/>
@@ -319,14 +321,15 @@
 							</tr>
 
 							<!-- nabl -->
-							<tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'pass' and nabl">
+							<!-- <tr  t-foreach="data.child_lines" t-as="r">  -->
+							<!-- t-if="data.nabl == 'pass' and nabl"> -->
 								<!-- <td>
 									<div>
 										<span t-esc="i + 1"/>
 										<t t-set="i" t-value="i+1"/>
 									</div>
                   				</td> -->
-								<td style="text-align: center;">
+								<!-- <td style="text-align: center;">
 									<span t-esc="r.sr_no"/>
 								</td>
 								<td style="text-align: center;">
@@ -353,7 +356,7 @@
 								<td style="text-align: center;">
 									<span t-esc="r.compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-							</tr>
+							</tr> -->
 
 							
 						</tbody>
