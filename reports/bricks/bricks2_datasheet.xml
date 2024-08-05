@@ -4,7 +4,7 @@
     <t t-call="web.html_container">
 	<t t-call="lerm_civil.data_sheet_header_generaltemplate">
 		<div style="text-align:center;font-size:18px;font-weight: bold">
-			Brick
+			Brick Fly Ash
 		</div>
 		<div class="container_eln" style="margin-top:5px">
             <table style="margin-top:20px">
@@ -44,7 +44,15 @@
 
             <div t-if="data.compressive_strength_visible" style="margin-top:20px">
 				<div style="text-align:center;font-size:18px;font-weight: bold">
-						Compressive Strength
+						Compressive 
+                        <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+							</span>
+                        
 				</div>
                 <table style="margin-top:30px;">
                 
@@ -312,7 +320,7 @@
 				</table>
                 <table style="margin-top: 20px">
 					<tr>
-						<td style="font-weight: bold;">Average Compressive Strength</td>
+						<td style="font-weight: bold;">Average Compressive Strength.N/mm²</td>
 						<td style="text-align: center;"><span t-field="data.avrg_compressive_strength" t-options='{"widget": "float", "precision": 2}'/></td>
 					</tr>
 				</table>	
@@ -409,6 +417,14 @@
             <div t-if="data.dimension_visible" style="margin-top:20px">
 				<div style="text-align:center;font-size:18px;font-weight: bold">
 						Dimension (mm) 
+                        <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','cf278290-8d5d-4f45-8afb-b911f9cafe41')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+							</span>
+
 				</div>
                 <div style="text-align:center;font-size:18px;font-weight: bold">
                         20 Bricks 
@@ -476,6 +492,13 @@
             <div t-if="data.water_absorbtion_visible" style="margin-top:20px">
 				<div style="text-align:center;font-size:18px;font-weight: bold">
 						Water Absorption
+                        <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','537e20c5-f3ab-4b19-af25-91a4671baf5f')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+							</span>
 				</div>
                 <table style="margin-top:30px;">
                 
@@ -518,7 +541,7 @@
                             
                             <td style="text-align: center;max-width:200px">
                                 <span style="text-align: center;">
-                                    Initial wt ater 24 hr emersion water
+                                    Initial wt ater 24 hr emersion water (W1)
                                 </span>    
                             </td>
                             
@@ -554,7 +577,7 @@
                             
                             <td style="text-align: center;max-width:200px">
                                 <span style="text-align: center;">
-                                    Final wt after 24 hr oven
+                                    Final wt after 24 hr oven (W2)
                                 </span>    
                             </td>
                             
@@ -591,7 +614,7 @@
                             
                             <td style="text-align: center;max-width:200px">
                                 <span style="text-align: center;">
-                                    Water Absorption, % 
+                                    Water Absorption, % = [(W1-W2)/W2 * 100]
                                 </span>    
                             </td>
                             

@@ -88,6 +88,7 @@ class WMMReport(models.AbstractModel):
                 min_x = round(min(x_values),2)
             except:
                 min_x = 0 
+        
             
             
 
