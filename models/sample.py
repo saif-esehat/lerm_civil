@@ -508,11 +508,14 @@ class LermSampleForm(models.Model):
             self.approved_by = self.env.user
             if not result.verified:
                 raise ValidationError("Not all parameters are verified. Please ensure all parameters are verified before proceeding.")
-        self.write({'state': '4-in_report'})
-        eln = self.env['lerm.eln'].sudo().search([('sample_id','=',self.id)])
-        approved_by = self.env.user
-        eln.write({'state':'3-approved'})
-
+        if len(self.file_upload) > 0:
+            self.write({'state': '4-in_report'})
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',self.id)])
+            approved_by = self.env.user
+            eln.write({'state':'3-approved'})
+        else:
+            raise ValidationError("Please attach datasheet before submitting")
+        
 
     # def reject_pending_sample(self):
     #     self.write({'state': '2-alloted'})

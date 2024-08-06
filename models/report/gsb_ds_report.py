@@ -193,8 +193,8 @@ class GsbReport(models.AbstractModel):
             except:
                 min_y = 0
             try:
-                # max_x = round(max(x_values),2)
-                max_x = x_values[y_values.index(max_y)]
+                max_x = round(max(x_values),2)
+                # max_x = x_values[y_values.index(max_y)]
             except:
                 max_x = 100
             try:
