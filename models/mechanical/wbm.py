@@ -301,6 +301,10 @@ class WbmMechanical(models.Model):
     remarks_liquid_limit = fields.Selection([
         ('plastic', 'Plastic'),
         ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
+
+    liquid_limit_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
     
 
      # def calculate_result(self):
