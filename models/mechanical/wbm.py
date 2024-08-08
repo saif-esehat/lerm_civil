@@ -302,9 +302,10 @@ class WbmMechanical(models.Model):
         ('plastic', 'Plastic'),
         ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
 
-    liquid_limit_conformity = fields.Selection([
-            ('pass', 'Pass'),
-            ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
+    # added
+    # liquid_limit_conformity = fields.Selection([
+    #         ('pass', 'Pass'),
+    #         ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
     
 
      # def calculate_result(self):
@@ -333,6 +334,59 @@ class WbmMechanical(models.Model):
             result = (container2Moisture * 100 - ((container2Moisture - container3Moisture) * 100 * (25 - cont2blow)) / (cont3blow - cont2blow)) / 100
             print(result, 'final result')
         self.write({'liquid_limit': result})
+
+    
+    # added
+    # @api.depends('liquid_limit','eln_ref','grade')
+    # def _compute_liquid_limit_conformity(self):
+        
+    #     for record in self:
+    #         record.liquid_limit_conformity = 'fail'
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','07bc2253-d02d-43fd-b4a7-dd5a6c6cd36e')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','07bc2253-d02d-43fd-b4a7-dd5a6c6cd36e')]).parameter_table
+    #         for material in materials:
+    #             if material.grade.id == record.grade.id:
+    #                 req_min = material.req_min
+    #                 req_max = material.req_max
+    #                 mu_value = line.mu_value
+                    
+    #                 lower = record.liquid_limit - record.liquid_limit*mu_value
+    #                 upper = record.liquid_limit + record.liquid_limit*mu_value
+    #                 if lower >= req_min and upper <= req_max:
+    #                     record.liquid_limit_conformity = 'pass'
+    #                     break
+    #                 else:
+    #                     record.liquid_limit_conformity = 'fail'
+
+    # liquid_limit_nabl = fields.Selection([
+    #     ('pass', 'NABL'),
+    #     ('fail', 'Non-NABL')], string="NABL", compute="_compute_liquid_limit_value_nabl", store=True)
+
+    
+    
+    # @api.depends('liquid_limit','eln_ref','grade')
+    # def _compute_liquid_limit_value_nabl(self):
+        
+    #     for record in self:
+    #         record.liquid_limit_nabl = 'fail'
+    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','07bc2253-d02d-43fd-b4a7-dd5a6c6cd36e')])
+    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','07bc2253-d02d-43fd-b4a7-dd5a6c6cd36e')]).parameter_table
+    #         # for material in materials:
+    #         #     if material.grade.id == record.grade.id:
+    #         lab_min = line.lab_min_value
+    #         lab_max = line.lab_max_value
+    #         mu_value = line.mu_value
+            
+    #         lower = record.liquid_limit - record.liquid_limit*mu_value
+    #         upper = record.liquid_limit + record.liquid_limit*mu_value
+    #         if lower >= lab_min and upper <= lab_max:
+    #             record.liquid_limit_nabl = 'pass'
+    #             break
+    #         else:
+    #             record.liquid_limit_nabl = 'fail'
+
+
+
 
 
 

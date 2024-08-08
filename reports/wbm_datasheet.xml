@@ -349,6 +349,14 @@
 				<div t-if="data.liquid_limit_visible" style="margin-top:20px">
 					<div style="text-align:center;font-size:18px">
 						Liquid Limit
+						<!-- added -->
+						<span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','07bc2253-d02d-43fd-b4a7-dd5a6c6cd36e')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+						</span>
 					</div>
 					
 

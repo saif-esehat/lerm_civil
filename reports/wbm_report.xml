@@ -139,8 +139,73 @@
 							</tr>
 						</table>
 					</div>
+
+					<!-- <div t-if="data.dry_gradation_visible" style="margin-top:5px">
+						<div style="text-align:center;font-size:18px">
+							<span>Sieve Analysis </span>
+							<span t-esc="o.material.test_parameter "/> 
+						</div>
+						<table t-if="data.dry_gradation_visible">
+							<tr cols="12">
+                                <td colspan="2">IS Sieve Size (% Passing through)
+								</td>
+                                <td colspan="2">Test Result				
+								</td>
+								<td colspan="2">Limit as per MORTH Specification
+								 <span>
+								 	<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','48b74892-3497-4b7f-819a-a26f25c9848')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+                                	</t>
+								 </span>
+								</td>
+
+                            </tr>
+							<t t-set="k" t-value="0"/>
+							<tr t-foreach="data.dry_gradation_table" t-as="r" t-if="'pan' != r['sieve_size']">
+								
+								<td colspan="2" >
+									<t t-set="k" t-value="k+1"/>
+									<span t-esc="r['sieve_size']"/>
+								</td>
+								<td colspan="2" >
+									<span t-esc="r['passing_percent']"/>
+								</td>
+								<td colspan="2" t-if="k == 1">
+									<span>100%</span>
+								</td>
+								<td colspan="2" t-if="k == 2">
+									<span>90% - 100%</span>
+								</td>
+								<td colspan="2" t-if="k == 3">
+									<span>25% - 75%</span>
+								</td>
+								<td colspan="2" t-if="k == 4">
+									<span>0% - 15%</span>
+								</td>
+								<td colspan="2" t-if="k == 5">
+									<span>0% - 5%</span>
+								</td>
+								<td colspan="2" t-if="k == 6">
+									<span>15% - 30%</span>
+								</td>
+								<td colspan="2" t-if="k == 7">
+									<span>8% - 22%</span>
+								</td>
+								<td colspan="2" t-if="k == 8">
+									<span>0% - 5%</span>
+								</td>
+								<td colspan="2" t-if="k == 9">
+									<span>0% - 5%</span> 
+								</td>
+							</tr>
+						</table>
+                        
+					</div> -->
+
 					
-					<!-- added -->
+					<!-- added  -->
 							<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
 									Sieve Analysis
 										<span> 
@@ -151,12 +216,12 @@
 											</t>
 										</span>
 									
-							</div>
+							 </div> 
 
 
 					<table style="margin-top:15px">
 
-						<tr cols="12">
+						<tr cols="12"> 
 							<th colspan="1">
 								<span>
 										Sr. No
@@ -251,10 +316,10 @@
 									<span>0% - 5%</span>
 								</td>
 								<td colspan="2" t-if="k == 9">
-									<!-- <span>0% - 5%</span> -->
+									 <span>0% - 5%</span> 
 								</td>
 							</tr>
-						</div>
+						</div> 
 						<tr>
 							<td colspan="1">
 								<div>
@@ -268,7 +333,7 @@
 								</div>
 							</td>
 							<td colspan="2">
-								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','88627a7b-c438-4d13-bfde-330ee0005734')]).parameter_table" t-as="parameter">
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','07bc2253-d02d-43fd-b4a7-dd5a6c6cd36e')]).parameter_table" t-as="parameter">
 									<t t-if="parameter.grade.id == eln.grade_id.id">
 										<span t-field="parameter.specification"/>
 									</t>
@@ -282,12 +347,13 @@
 							<td colspan="2">
 								<div>
 									<span>
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','88627a7b-c438-4d13-bfde-330ee0005734')]).parameter_table" t-as="parameter">
+										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','07bc2253-d02d-43fd-b4a7-dd5a6c6cd36e')]).parameter_table" t-as="parameter">
 											<t t-if="parameter.grade.id == eln.grade_id.id">
 												<span t-field="parameter.permissable_limit"/>
 											</t>
 										</t>
 									</span>
+
 								</div>
 							</td>
 						</tr>
