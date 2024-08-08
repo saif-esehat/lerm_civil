@@ -47,7 +47,14 @@
                     
                     <div t-if="data.dimension_visible" style="margin-top:20px">
                         <div style="text-align:center;font-size:18px">
-                            <b>Dimension</b>
+                            Dimension
+                            <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','68e3da78-7440-44b3-8f19-2f7e3c0de618')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+                            </span>
                         </div>
                         <table>
                             <tr cols="12">
@@ -77,19 +84,19 @@
                         </table>
                         <table style="margin-top:5px">
                             <tr cols="12">
-                                <td colspan="6"><b>Average Length :</b></td>
+                                <td colspan="6"><b>Average Length (mm):</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_length" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
-                                <td colspan="6"><b>Average Width :</b></td>
+                                <td colspan="6"><b>Average Width (mm):</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_width" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
-                                <td colspan="6"><b>Average Height :</b></td>
+                                <td colspan="6"><b>Average Height (mm):</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.avreage_height2" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
@@ -104,7 +111,14 @@
                     
                     <div t-if="data.compressive_visible" style="margin-top:20px">
                         <div style="text-align:center;font-size:18px">
-                            <b>Compressive Strength</b>
+                            Compressive strength
+                            <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+                            </span>
                         </div>
                         <table>
                             <tr cols="12">
@@ -160,14 +174,21 @@
 
                    <div t-if="data.block_density_visible" style="margin-top:20px">
                         <div style="text-align:center;font-size:18px">
-                            <b>Block Density</b>
+                            Block Density
+                            <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','e2190504-cc89-4334-a001-4766f9c65e24')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+                            </span>
                         </div>
                         <table>
                             <tr cols="12">
                                 <td colspan="1" style="text-align: center;"><b>Sr No.</b></td>
-                                <td colspan="2" style="text-align: center;"><b>Length mm</b></td>
-                                <td colspan="1" style="text-align: center;"><b>Height mm</b></td>
-                                <td colspan="2" style="text-align: center;"><b>Thickness mm</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Length cm</b></td>
+                                <td colspan="1" style="text-align: center;"><b>Height cm</b></td>
+                                <td colspan="2" style="text-align: center;"><b>Thickness cm</b></td>
                                 <td colspan="1" style="text-align: center;"><b>Volume Cm3</b></td>
                                 <td colspan="1" style="text-align: center;"><b>Initial Weight of the Specimenkg</b></td>
                                 <td colspan="1" style="text-align: center;"><b>Final Weight of the Specimen after Oven Dry kg</b></td>
@@ -207,7 +228,7 @@
                             </tr>
                         </table>
                         <table style="margin-top:5px">
-                            <tr cols="12">
+                            <!-- <tr cols="12">
                                 <td colspan="6"><b>Average Length :</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_length1" t-options='{"widget": "float", "precision": 1}'/>
@@ -224,7 +245,7 @@
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_thickness" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <tr cols="12">
                                 <td colspan="6"><b>Average Block Density :</b></td>
                                 <td colspan="6" style="text-align: center;">
@@ -238,7 +259,14 @@
                     <!-- Moisture Movement -->
                     <div t-if="data.moisture_movment_visible" style="margin-top:20px">
                         <div style="text-align:center;font-size:18px">
-                            <b>Moisture Movement</b>
+                            Moisture Movement
+                            <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','89acdd9a-0b60-4ab4-92fa-3b7756bab153')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+                            </span>
                         </div>
                         <table>
                             <tr cols="12">
@@ -272,7 +300,7 @@
                         </table>
                         <table style="margin-top:5px">
                             <tr cols="12">
-                                <td colspan="6"><b>Average :</b></td>
+                                <td colspan="6"><b>Average (%):</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_moisture_movment" t-options='{"widget": "float", "precision": 2}'/>
                                 </td>
@@ -286,7 +314,14 @@
                     <!-- Drying Shrinkage -->
                     <div t-if="data.drying_shrinkage_visible" style="margin-top:20px">
                         <div style="text-align:center;font-size:18px">
-                            <b>Drying Shrinkage </b>
+                            Drying Shrinkage 
+                            <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','32aee782-8018-4833-a365-d72ccb6f47bd')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+                            </span>
                         </div>
                         <table>
                             <tr cols="12">
@@ -325,7 +360,7 @@
                         </table>
                         <table style="margin-top:5px">
                             <tr cols="12">
-                                <td colspan="6"><b>Average :</b></td>
+                                <td colspan="6"><b>Average (%) :</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_drying_shrinkage" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
@@ -339,7 +374,14 @@
                     <!-- Water Absorption -->
                     <div t-if="data.water_absorption_visible" style="margin-top:20px">
                         <div style="text-align:center;font-size:18px">
-                            <b>Water Absorption </b>
+                           Water Absorption 
+                           <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0faf6556-4902-4926-a6bd-ed0024dc5929')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+                            </span>
                         </div>
                         <table>
                             <tr cols="12">
@@ -374,7 +416,7 @@
                         </table>
                         <table style="margin-top:5px">
                             <tr cols="12">
-                                <td colspan="6"><b>Average :</b></td>
+                                <td colspan="6"><b>Average (%) :</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_water_absorption" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>

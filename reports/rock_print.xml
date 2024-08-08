@@ -121,15 +121,15 @@
                     </div>
 					<table style="margin-top: 20px">
 						<tr>
-							<td style="font-weight: bold;">Average porosity</td>
+							<td style="font-weight: bold;">Average porosity %</td>
 							<td style="text-align: center;"><span t-field="data.avg_porosity" t-options='{"widget": "float", "precision": 2}'/></td>
 						</tr>
 						<tr>
-							<td style="font-weight: bold;">Average Water Absorption</td>
+							<td style="font-weight: bold;">Average Water Absorption %</td>
 							<td style="text-align: center;"><span t-field="data.avg_water_absorption" t-options='{"widget": "float", "precision": 2}'/></td>
 						</tr>
 						<tr>
-							<td style="font-weight: bold;">Dry Density</td>
+							<td style="font-weight: bold;">Dry Density gm/cc</td>
 							<td style="text-align: center;"><span t-field="data.avg_dry_density" t-options='{"widget": "float", "precision": 2}'/></td>
 						</tr>
 						<tr>
@@ -205,7 +205,7 @@
                     </div>
 					<table style="margin-top: 20px" t-if="data.usc_visible">
 						<tr>
-							<td style="font-weight: bold;">UCS Average</td>
+							<td style="font-weight: bold;">UCS Average.N/mm²</td>
 							<td style="text-align: center;"><span t-field="data.avg_usc" t-options='{"widget": "float", "precision": 2}'/></td>
 						</tr>
 					</table>
@@ -218,36 +218,49 @@
                     <!-- authorizeRowDataSheet -->
                     
                     <div class="authorizeRowDataSheet">
-                        <div>
+						<div>
                             <div>
                                 <b>
-                                    Tested By
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
                                 </b>
                             </div>
+                            <div>
+                                <b>
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
+                                </b>
+                            </div>
+						</div>
+						<div style="margin-left:500px">
+							
+							<div>
+								<b>
+									Approved By
+								</b>
+							</div>
 							<div style="height:40px">
 
 							</div>
-                            <div>
-                                <b>
-                                    (JR Chemist)
-                                </b>
-                            </div>
-                        </div>
-                        <div style="margin-left:500px">
-                            <div>
-                                <b>
-                                    Checked By
-                                </b>
-                            </div>
-							<div style="height:40px">
-
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
 							</div>
-                            <div>
-                                <b>
-                                    (<span t-esc="eln.sample_id.approved_by.job_title"/>)
-                                </b>
-                            </div>
-                        </div>
+							
+							<div>
+								<b>
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
+								</b>
+							</div>
+						</div>
                     </div>
                     
                 </div>
