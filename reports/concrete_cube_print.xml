@@ -364,7 +364,7 @@
 
 					<div style="margin-top:10px">
 						<table>
-							<tr t-if="data.nabl == 'pass' and nabl"> 
+							<!-- <tr t-if="data.nabl == 'pass' and nabl"> 
 								<td colspan="12">Avg. Compressive Strength N/mm2 :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
@@ -374,7 +374,15 @@
 									<span t-field="data.average_strength"/>
 								</td>
 							</tr>
-							
+							 -->
+							 <!-- added -->
+							<tr cols="12">
+                                <td colspan="6"><b>Avg. Compressive Strength (N/mm2) :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_strength" />
+                                </td>
+                            </tr>
+                           
 						</table>
 					</div>
 					<div style="page-break-inside: avoid;">

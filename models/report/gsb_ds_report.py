@@ -278,6 +278,35 @@ class GsbReport(models.AbstractModel):
             for line in general_data.cbr_table:
                 cbrx_values.append(line.penetration)
                 cbry_values.append(line.load)
+
+            # added
+            try:
+                max_y = max(cbry_values)
+            except:
+                max_y = 100
+            try:
+                min_y = round(min(cbry_values),2)
+            except:
+                min_y = 0
+            try:
+                # max_x = round(max(x_values),2)
+                max_x = cbrx_values[cbry_values.index(max_y)]
+            except:
+                max_x = 100
+            try:
+                min_x = round(min(cbrx_values),2)
+            except:
+                min_x = 0 
+            
+            
+
+
+            # Format max_y and max_x to display 2 digits after the decimal point
+            max_y = round(max_y , 2)
+            max_x = round(max_x, 2)
+
+            # added
+
             
             # Perform cubic spline interpolation
             cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 1000)
