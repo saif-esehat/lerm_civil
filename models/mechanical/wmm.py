@@ -580,9 +580,9 @@ class WmmMechanical(models.Model):
         ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
     
 
-    # liquid_limit_conformity = fields.Selection([
-    #         ('pass', 'Pass'),
-    #         ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
+    liquid_limit_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
     
 
 
