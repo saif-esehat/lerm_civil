@@ -44,7 +44,7 @@
 
             <div t-if="data.compressive_strength_visible" style="margin-top:20px">
 				<div style="text-align:center;font-size:18px;font-weight: bold">
-						Compressive 
+						Compressive Strength
                         <span>
 								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','b0eecb4f-9287-48c7-a607-bf1b64a8115d')]).parameter_table" t-as="parameter">
 									<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -331,6 +331,13 @@
             <div t-if="data.efflorescence_visible" style="margin-top:20px">
 				<div style="text-align:center;font-size:18px;font-weight: bold">
 						Efflorescence
+                         <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','baa9df3c-d27d-4ef9-9b27-e8eb4e7ae6ac')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+							</span>
 				</div>
                 <table style="margin-top:30px;">
                 
