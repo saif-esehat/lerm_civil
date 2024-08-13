@@ -506,6 +506,10 @@
 										<span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit" />
 									</div>
 								</td>
+								
+
+								<!-- <span t-esc="data.remarks_liquid_limit if data.liquid_limit == 0.00 else format(data.liquid_limit, '.2f')" /> -->
+
 								<td colspan="2" style="text-align: center;">
 									<div>
 										<span>
