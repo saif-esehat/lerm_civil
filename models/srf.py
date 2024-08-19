@@ -156,6 +156,7 @@ class SrfForm(models.Model):
     casting = fields.Boolean(string="Casting")
     
     days_casting = fields.Selection([
+        ('1', '1 Days'),
         ('3', '3 Days'),
         ('7', '7 Days'),
         ('14', '14 Days'),
@@ -742,6 +743,7 @@ class CreateSampleWizard(models.TransientModel):
     # grade_ids = fields.Many2many('lerm.grade.line',string="Grade Ids")
     # qty_ids = fields.Many2many('lerm.qty.line',string="Qty Ids")
     days_casting = fields.Selection([
+        ('1', '1 Days'),
         ('3', '3 Days'),
         ('7', '7 Days'),
         ('14', '14 Days'),

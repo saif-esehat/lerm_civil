@@ -41,6 +41,7 @@ class ActCompressiveStrength(models.Model):
 
 
     age_of_days = fields.Selection([
+        ('1days', '1 Days'),
         ('3days', '3 Days'),
         ('7days', '7 Days'),
         ('14days', '14 Days'),
@@ -72,7 +73,9 @@ class ActCompressiveStrength(models.Model):
     def compute_difference(self):
         for record in self:
             age_of_days = 0
-            if record.age_of_days == '3days':
+            if record.age_of_days == '1days':
+                age_of_days = 1
+            elif record.age_of_days == '3days':
                 age_of_days = 3
             elif record.age_of_days == '7days':
                 age_of_days = 7
@@ -120,7 +123,9 @@ class ActCompressiveStrength(models.Model):
         for record in self:
             if record.eln_ref.sample_id:
                 sample_record = self.env['lerm.srf.sample'].sudo().search([('id','=', record.eln_ref.sample_id.id)]).days_casting
-                if sample_record == '3':
+                if sample_record == '1':
+                    record.age_of_days = '1days'
+                elif sample_record == '3':
                     record.age_of_days = '3days'
                 elif sample_record == '7':
                     record.age_of_days = '7days'

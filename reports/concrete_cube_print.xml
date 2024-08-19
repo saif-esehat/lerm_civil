@@ -283,8 +283,8 @@
 						<tbody>
 							<!-- <t t-set="i" t-value="0"/> -->
 							<!-- non nabl -->
-							<tr  t-foreach="data.child_lines" t-as="r">
-							<!-- t-if="data.nabl == 'fail' and not nabl"> -->
+							<!-- <tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'fail' and not nabl">  -->
+							<tr t-foreach="data.child_lines" t-as="r"  t-if="data.nabl == 'fail' and not nabl">
 								<!-- <td>
 									<div>
 										<span t-esc="i + 1"/>
@@ -321,15 +321,10 @@
 							</tr>
 
 							<!-- nabl -->
-							<!-- <tr  t-foreach="data.child_lines" t-as="r">  -->
-							<!-- t-if="data.nabl == 'pass' and nabl"> -->
-								<!-- <td>
-									<div>
-										<span t-esc="i + 1"/>
-										<t t-set="i" t-value="i+1"/>
-									</div>
-                  				</td> -->
-								<!-- <td style="text-align: center;">
+							<!-- <tr t-foreach="data.child_lines" t-as="r" t-if="data.child_lines and (data.child_lines == 'pass' and nabl or (data.child_lines == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)"> -->
+							<tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'pass' and nabl">  
+								
+								<td style="text-align: center;">
 									<span t-esc="r.sr_no"/>
 								</td>
 								<td style="text-align: center;">
@@ -356,7 +351,7 @@
 								<td style="text-align: center;">
 									<span t-esc="r.compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
-							</tr> -->
+							</tr> 
 
 							
 						</tbody>
@@ -364,7 +359,8 @@
 
 					<div style="margin-top:10px">
 						<table>
-							<!-- <tr t-if="data.nabl == 'pass' and nabl"> 
+						<tr t-if="data.nabl == 'pass' and nabl">  
+							<!-- <tr t-if="data.child_lines and (data.child_lines == 'pass' and nabl or (data.child_lines == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)"> -->
 								<td colspan="12">Avg. Compressive Strength N/mm2 :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_strength"/>
 								</td>
@@ -374,14 +370,14 @@
 									<span t-field="data.average_strength"/>
 								</td>
 							</tr>
-							 -->
-							 <!-- added -->
+							
+							 <!-- added
 							<tr cols="12">
                                 <td colspan="6"><b>Avg. Compressive Strength (N/mm2) :</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_strength" />
                                 </td>
-                            </tr>
+                            </tr> -->
                            
 						</table>
 					</div>

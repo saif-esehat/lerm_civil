@@ -365,7 +365,12 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										    <span t-esc="data.remarks_liquid_limit if data.liquid_limit == 0.00 else data.liquid_limit" t-options='{"widget": "float", "precision": 2}' />
+										<t t-if="data.liquid_limit == 0.00">
+										    <span t-esc="data.remarks_liquid_limit"/>
+										</t>
+										<t t-else="">
+										    <span t-esc="data.liquid_limit"  t-options='{"widget": "float", "precision": 2}'/>
+										</t>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -411,7 +416,13 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										      <span t-esc="data.remarks_liquid_limit if data.liquid_limit == 0.00 else data.liquid_limit" />
+										      <!-- <span t-esc="data.remarks_liquid_limit if data.liquid_limit == 0.00 else data.liquid_limit" /> -->
+										<t t-if="data.liquid_limit == 0.00">
+										    <span t-esc="data.remarks_liquid_limit"/>
+										</t>
+										<t t-else="">
+										    <span t-esc="data.liquid_limit"  t-options='{"widget": "float", "precision": 2}'/>
+										</t>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -456,7 +467,13 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										<span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit" t-options='{"widget": "float", "precision": 2}'/>
+										<t t-if="data.plastic_limit == 0.00">
+										    <span t-esc="data.remarks_plastic"/>
+										</t>
+										<t t-else="">
+										    <span t-esc="data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/>
+										</t>
+										<!-- <span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/> -->
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -503,7 +520,13 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										<span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit" />
+										<t t-if="data.plastic_limit == 0.00">
+										    <span t-esc="data.remarks_plastic"/>
+										</t>
+										<t t-else="">
+										    <span t-esc="data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/>
+										</t>
+										<!-- <span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/> -->
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
