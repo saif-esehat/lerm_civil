@@ -529,6 +529,8 @@
 										<!-- <span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/> -->
 									</div>
 								</td>
+								
+
 								<td colspan="2" style="text-align: center;">
 									<div>
 										<span>
