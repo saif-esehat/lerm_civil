@@ -61,6 +61,7 @@ from .mechanical import gypsum
 from .mechanical import structural_steel
 from .mechanical import bricks
 from .mechanical import dry_density_sand_replacment
+from .mechanical import field_density_sand_replacement
 from .mechanical import fly_ash
 from .mechanical import microsilica
 from .mechanical import wpt
