@@ -56,12 +56,17 @@ class WbmMechanical(models.Model):
         return field_values
 
     @api.depends('eln_ref')
-    def _compute_sample_parameters(self):
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
+
+    # @api.depends('eln_ref')
+    # def _compute_sample_parameters(self):
         
-        for record in self:
-            records = record.eln_ref.parameters_result.parameter.ids
-            record.sample_parameters = records
-            print("Records",records)
+    #     for record in self:
+    #         records = record.eln_ref.parameters_result.parameter.ids
+    #         record.sample_parameters = records
+    #         print("Records",records)
 
     @api.depends('eln_ref','sample_parameters')
     def _compute_visible(self):
@@ -303,9 +308,9 @@ class WbmMechanical(models.Model):
         ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
 
     # added
-    # liquid_limit_conformity = fields.Selection([
-    #         ('pass', 'Pass'),
-    #         ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
+    liquid_limit_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", store=True)
     
 
      # def calculate_result(self):
@@ -358,9 +363,9 @@ class WbmMechanical(models.Model):
     #                 else:
     #                     record.liquid_limit_conformity = 'fail'
 
-    # liquid_limit_nabl = fields.Selection([
-    #     ('pass', 'NABL'),
-    #     ('fail', 'Non-NABL')], string="NABL", compute="_compute_liquid_limit_value_nabl", store=True)
+    liquid_limit_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", store=True)
 
     
     

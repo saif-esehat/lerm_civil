@@ -56,6 +56,7 @@ class WmmMechanical(models.Model):
 
         return field_values
     
+    # added
     @api.depends('eln_ref')
     def _compute_grade_id(self):
         if self.eln_ref:
