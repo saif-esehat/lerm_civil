@@ -148,7 +148,7 @@
 							</tr>
                            <tr>
 								<td colspan="12">
-									<span style="font-weight: bold;">Correction Factor = Volume (mm3) / (Surface Area (mm2) * 12.5) :</span>
+									<span style="font-weight: bold;">Correction Factor As Per Graph :</span>
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.correction_factor"/>
 								</td>

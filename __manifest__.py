@@ -63,6 +63,8 @@
     'views/mechanical/bricks.xml',
     'views/mechanical/compressive_strength_brick.xml',
     'views/mechanical/dry_density_sand_replacement.xml',
+    # added
+    'views/mechanical/field_density_sand_replacement.xml', 
     'views/mechanical/cement_compatablity.xml',
     'views/mechanical/brick_2.xml',
     'views/chemical/fine_aggregate.xml',

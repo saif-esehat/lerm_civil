@@ -308,9 +308,9 @@ class WbmMechanical(models.Model):
         ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
 
     # added
-    liquid_limit_conformity = fields.Selection([
-            ('pass', 'Pass'),
-            ('fail', 'Fail')], string="Conformity", store=True)
+    # liquid_limit_conformity = fields.Selection([
+    #         ('pass', 'Pass'),
+    #         ('fail', 'Fail')], string="Conformity", compute="_compute_liquid_limit_conformity", store=True)
     
 
      # def calculate_result(self):
@@ -363,9 +363,9 @@ class WbmMechanical(models.Model):
     #                 else:
     #                     record.liquid_limit_conformity = 'fail'
 
-    liquid_limit_nabl = fields.Selection([
-        ('pass', 'NABL'),
-        ('fail', 'Non-NABL')], string="NABL", store=True)
+    # liquid_limit_nabl = fields.Selection([
+    #     ('pass', 'NABL'),
+    #     ('fail', 'Non-NABL')], string="NABL", compute="_compute_liquid_limit_value_nabl", store=True)
 
     
     
