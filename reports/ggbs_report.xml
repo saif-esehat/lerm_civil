@@ -1351,9 +1351,9 @@
 									<li t-if="eln.remarks">
 										<span t-esc="eln.remarks"/>
 									</li>
-									<li>
+									<!-- <li>
 										Specific Gravity - Derived Parameter
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</div>
