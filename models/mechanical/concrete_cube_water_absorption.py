@@ -275,7 +275,7 @@ class MechanicalConcreteCubeLine(models.Model):
     parent_id = fields.Many2one('concrete.cube.water.absorption',string="Parent Id")
 
     sr_no = fields.Integer(string="Sr.No.",readonly=True, copy=False, default=1)
-    sample_id = fields.Integer(string="Sample ID")
+    sample_id = fields.Char(string="Sample ID")
     oven_dry_weight = fields.Float(string="Oven Dry Weight After 72 Hrs.(kg)" ,digits=(12,3))
     weight_immersion = fields.Float(string="Weight of Immersion in water after 30 Minutes (kg)" ,digits=(12,3))
     water_absorption_percent = fields.Float(string="Water Absorption %",compute="_compute_water_absorption_percent" ,digits=(12,2))
