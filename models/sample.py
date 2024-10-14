@@ -220,25 +220,31 @@ class LermSampleForm(models.Model):
     )
 
 
-    # Automatically set the user who uploaded the datasheet
-    @api.onchange('file_upload')
-    def _onchange_file_upload(self):
-        if self.file_upload:
-            self.file_upload_user_id = self.env.user  # Set current user
+    # write method to track file uploads from portal
+    def write(self, vals):
+        res = super(SampleModel, self).write(vals)
+
+        # Check for datasheet uploads
+        if vals.get('file_upload'):
+            attachments = self.env['ir.attachment'].browse(vals.get('file_upload')[0][2])
+            attachment_names = ', '.join(attachments.mapped('name'))
+            self.file_upload_user_id = self.env.user
             self.message_post(
-                body="New datasheet file(s) uploaded by %s." % self.file_upload_user_id.name,
+                body="New datasheet file(s) uploaded by %s: %s" % (self.file_upload_user_id.name, attachment_names),
                 subtype="mail.mt_comment"
             )
 
-    # Automatically set the user who uploaded the report
-    @api.onchange('report_upload')
-    def _onchange_report_upload(self):
-        if self.report_upload:
-            self.report_upload_user_id = self.env.user  # Set current user
+        # Check for report uploads
+        if vals.get('report_upload'):
+            attachments = self.env['ir.attachment'].browse(vals.get('report_upload')[0][2])
+            attachment_names = ', '.join(attachments.mapped('name'))
+            self.report_upload_user_id = self.env.user
             self.message_post(
-                body="New report file(s) uploaded by %s." % self.report_upload_user_id.name,
+                body="New report file(s) uploaded by %s: %s" % (self.report_upload_user_id.name, attachment_names),
                 subtype="mail.mt_comment"
             )
+
+        return res
 
     #uptill
 
