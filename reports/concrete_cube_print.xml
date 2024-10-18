@@ -321,15 +321,15 @@
 							</tr>
 
 							<!-- nabl -->
-							<!-- <tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'pass' and nabl">  
-							<tr t-foreach="data.child_lines" t-as="r" t-if="data.child_lines and (data.child_lines == 'pass' and nabl or (data.child_lines == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)"> -->
-								<!-- <td>
+							<!-- <tr  t-foreach="data.child_lines" t-as="r" t-if="data.nabl == 'pass' and nabl">   -->
+							<!-- <tr t-foreach="data.child_lines" t-as="r" t-if="data.child_lines and (data.child_lines == 'pass' and nabl or (data.child_lines == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
+								<td>
 									<div>
 										<span t-esc="i + 1"/>
 										<t t-set="i" t-value="i+1"/>
 									</div>
-                  				</td> -->
-								<!-- <td style="text-align: center;">
+                  				</td> 
+								 <td style="text-align: center;">
 									<span t-esc="r.sr_no"/>
 								</td>
 								<td style="text-align: center;">
