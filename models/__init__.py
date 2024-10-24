@@ -141,5 +141,5 @@ from .report import act_compressive_strength_ds_report
 from .mechanical import drying_shrinkage
 from .report import drying_shrinkage_ds_report
 from .report import concrete_cube_water_ds_report
-from .chemical import wire_mesh
+
 # from .import dash_bord

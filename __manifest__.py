@@ -102,7 +102,7 @@
     'views/mechanical/isat.xml',
     'views/mechanical/bricks_burnt_clay.xml',
     'views/chemical/crushed_sand.xml',
-    'views/chemical/wire_mesh.xml',
+    ``
 
 
 
