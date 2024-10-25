@@ -192,13 +192,7 @@ class LermSampleForm(models.Model):
         help='Attach multiple images to the sample',
     )
     # file_upload = fields.Binary(string="Data Sheet", attachment=True)
-    #added
-    # Field to track who uploaded the datasheet
-    # file_upload_user_id = fields.Many2one(
-    #     'res.users',
-    #     string="Datasheet Uploaded By",
-    #     readonly=True,
-    # )
+    
     
    
    
@@ -211,42 +205,7 @@ class LermSampleForm(models.Model):
         string='Report Upload',
         help='Attach multiple images to the sample',
     )
-    #added
-    # Field to track who uploaded the report
-    # report_upload_user_id = fields.Many2one(
-    #     'res.users',
-    #     string="Report Uploaded By",
-    #     readonly=True,
-    # )
-
-
-    # write method to track file uploads from portal
-    # def write(self, vals):
-    #     res = super(SampleModel, self).write(vals)
-
-    #     # Check for datasheet uploads
-    #     if vals.get('file_upload'):
-    #         attachments = self.env['ir.attachment'].browse(vals.get('file_upload')[0][2])
-    #         attachment_names = ', '.join(attachments.mapped('name'))
-    #         self.file_upload_user_id = self.env.user
-    #         self.message_post(
-    #             body="New datasheet file(s) uploaded by %s: %s" % (self.file_upload_user_id.name, attachment_names),
-    #             subtype="mail.mt_comment"
-    #         )
-
-    #     # Check for report uploads
-    #     if vals.get('report_upload'):
-    #         attachments = self.env['ir.attachment'].browse(vals.get('report_upload')[0][2])
-    #         attachment_names = ', '.join(attachments.mapped('name'))
-    #         self.report_upload_user_id = self.env.user
-    #         self.message_post(
-    #             body="New report file(s) uploaded by %s: %s" % (self.report_upload_user_id.name, attachment_names),
-    #             subtype="mail.mt_comment"
-    #         )
-
-    #     return res
-
-    #uptill
+    
 
    
     # @api.depends('client_refrence')

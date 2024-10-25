@@ -397,6 +397,7 @@
 						</td>
 						<td colspan="3">% Weight Retained
 						</td>
+						
 					</tr>
 
 					<t t-set="i" t-value="0"/>
@@ -906,6 +907,12 @@
 						<td style="font-weight: bold;">Average</td>
 						<td style="text-align: center;"><span t-field="data.avrg_oversize_percent"/></td>
 					</tr>
+					<!-- added -->
+					<tr>
+						<td style="font-weight: bold;">Variation from Avg. %</td>
+						<td style="text-align: center;"><span t-field="data.variation_from_avg_percent"/></td>
+					</tr>
+					<!-- uptill -->
 				</table>	
 			</div>
 
