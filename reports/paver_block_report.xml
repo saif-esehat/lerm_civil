@@ -1206,11 +1206,14 @@
                        <t t-set="i" t-value="0"/>
                         <thead>
                             <tr>
-                               
+                                <th>Sr.No </th>
                                 <th>Length in Avg mm </th>
                                 <th>Width in Avg mm</th>
                                 <th>Thickness in Avg mm</th>
-                                <th>Plan Area</th>
+                                
+
+
+                                
                                <!-- <th  style="max-width: 250px;">
                                 <span>
                                     <span t-esc="eln.material.specifications"/>
@@ -1228,6 +1231,24 @@
                         </thead>
                         <tbody>
                             <!-- <t t-foreach="docs" t-as="line"> -->
+                            <!-- added -->
+                            <t t-foreach="data.child_lines" t-as="line"> 
+                            <tr>
+                                <td style="text-align: center;">
+                                    <t t-esc="line.sr_no"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <t t-esc="line.length" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <t t-esc="line.hight" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <t t-esc="line.width" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                               
+                            </tr>
+                            </t>
                                 <tr t-if="data.dimension_visible">
                                  
                                     <td style="text-align: center;"><t t-esc="data.average_length" t-options='{"widget": "float", "precision": 2}'/></td>
