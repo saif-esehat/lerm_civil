@@ -226,10 +226,10 @@ class LermSampleForm(models.Model):
     def _onchange_file_upload(self):
         if self.file_upload:
             self.file_upload_user_id = self.env.user  # Set current user
-            self.message_post(
-                body="New datasheet file(s) uploaded by %s." % self.file_upload_user_id.name,
-                subtype="mail.mt_comment"
-            )
+            # self.message_post(
+            #     body="New datasheet file(s) uploaded by %s." % self.file_upload_user_id.name,
+            #     subtype="mail.mt_comment"
+            # )
 
     # Automatically set the user who uploaded the report
     @api.onchange('report_upload')
