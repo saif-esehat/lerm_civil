@@ -192,14 +192,9 @@ class LermSampleForm(models.Model):
         string='Datasheet Upload',
         help='Attach multiple images to the sample',
     )
+    
     # file_upload = fields.Binary(string="Data Sheet", attachment=True)
-    #added
-    # Field to track who uploaded the datasheet
-    file_upload_user_id = fields.Many2one(
-        'res.users',
-        string="Datasheet Uploaded By",
-        readonly=True,
-    )
+    
     
    
    
@@ -214,32 +209,14 @@ class LermSampleForm(models.Model):
     )
     #added
     # Field to track who uploaded the report
-    report_upload_user_id = fields.Many2one(
-        'res.users',
-        string="Report Uploaded By",
-        readonly=True,
-    )
+    # report_upload_user_id = fields.Many2one(
+    #     'res.users',
+    #     string="Report Uploaded By",
+    #     readonly=True,
+    # )
 
 
-    # Automatically set the user who uploaded the datasheet
-    @api.onchange('file_upload')
-    def _onchange_file_upload(self):
-        if self.file_upload:
-            self.file_upload_user_id = self.env.user  # Set current user
-            # self.message_post(
-            #     body="New datasheet file(s) uploaded by %s." % self.file_upload_user_id.name,
-            #     subtype="mail.mt_comment"
-            # )
-
-    # Automatically set the user who uploaded the report
-    @api.onchange('report_upload')
-    def _onchange_report_upload(self):
-        if self.report_upload:
-            self.report_upload_user_id = self.env.user  # Set current user
-            self.message_post(
-                body="New report file(s) uploaded by %s." % self.report_upload_user_id.name,
-                subtype="mail.mt_comment"
-            )
+    
 
     #uptill
 

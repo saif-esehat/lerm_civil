@@ -169,14 +169,12 @@
                         <field name="product_or_form_based" />
                     </group> 
                     <group>
-                      <group>
-                            <!-- added -->
-                          <field name="file_upload" widget="many2many_binary" options="{'no_create': True}"/>
-                          <field name="file_upload_user_id" readonly="1" />
+                      <group >
+                            <!-- added  options="{'no_create': True}"-->
+                          <field name="file_upload" widget="many2many_binary" />
                       </group>
-                      <group>
-                          <field name="report_upload" widget="many2many_binary" options="{'no_create': True}"/>
-                          <field name="report_upload_user_id" readonly="1" />
+                      <group >
+                          <field name="report_upload" widget="many2many_binary" />
                           <!-- uptill -->
                       </group>
                       <group>
