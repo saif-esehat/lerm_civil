@@ -670,7 +670,12 @@ class Microsilica(models.Model):
     
     oversize_percent_tables = fields.One2many('oversize.retain.percent.line','parent_id',string="Oversize 45 Grain Micron")
     avrg_oversize_percent = fields.Float(string="Average",compute="_compute_avrg_oversize_percent",digits=(16, 3))
-    
+    # added
+    variation_from_avg_percent = fields.Float(string="Variation from Avg.(%)", compute="_compute_variation_from_avg_percent", digits=(16, 2))
+    # uptill
+
+
+
     @api.depends('oversize_percent_tables.retain_wt_percent')
     def _compute_avrg_oversize_percent(self):
         for record in self:
@@ -679,6 +684,18 @@ class Microsilica(models.Model):
                 record.avrg_oversize_percent = sum(retain_wt_percent) / len(retain_wt_percent)
             else:
                 record.avrg_oversize_percent = 0.0
+
+    # added
+
+    @api.depends('oversize_percent_tables.variation_from_avrg')
+    def _compute_variation_from_avg_percent(self):
+        for record in self:
+            variations = record.oversize_percent_tables.mapped('variation_from_avrg')
+            positive_variations = [v for v in variations if v > 0]
+            record.highest_positive_variation = max(positive_variations) if positive_variations else 0.0
+
+    # uptill
+
 
     oversize_percent_retain_conformity = fields.Selection([
         ('pass', 'Pass'),

@@ -207,18 +207,7 @@ class LermSampleForm(models.Model):
         string='Report Upload',
         help='Attach multiple images to the sample',
     )
-    #added
-    # Field to track who uploaded the report
-    # report_upload_user_id = fields.Many2one(
-    #     'res.users',
-    #     string="Report Uploaded By",
-    #     readonly=True,
-    # )
-
-
     
-
-    #uptill
 
    
     # @api.depends('client_refrence')
