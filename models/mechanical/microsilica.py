@@ -692,7 +692,7 @@ class Microsilica(models.Model):
         for record in self:
             variations = record.oversize_percent_tables.mapped('variation_from_avrg')
             positive_variations = [v for v in variations if v > 0]
-            record.highest_positive_variation = max(positive_variations) if positive_variations else 0.0
+            record.variation_from_avg_percent = max(positive_variations) if positive_variations else 0.0
 
     # uptill
 
