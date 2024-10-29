@@ -116,7 +116,8 @@ class WbmReport(models.AbstractModel):
 
         # Close the Matplotlib plot to free up resources
         plt.close()
-        
+
+     
         
         
         # Prepare data for the chart
