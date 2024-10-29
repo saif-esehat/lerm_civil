@@ -271,7 +271,7 @@
 								</th>
 								 <th style="text-align: center;" t-if="eln.conformity">
 									<span style="font-weight: bold;">
-										Confirmity Status
+										 Status
 									</span>
 							   	</th> 
 							</tr>
