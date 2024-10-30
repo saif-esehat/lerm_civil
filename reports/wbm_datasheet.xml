@@ -106,7 +106,7 @@
 							</td>
 							<td colspan="2">Elongated Retained in gms
 							</td>
-							<td colspan="2">Flakiness Retained in gms
+							<td colspan="2">Flakiness Passing in gms
 							</td>
 						</tr>
 
@@ -144,7 +144,7 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Total Elongation :
+							<td colspan="6">Total Wt Retained in gms :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -153,7 +153,7 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Total Flakiness :
+							<td colspan="6">Total  Wt Passing in gms :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -163,7 +163,7 @@
 						</tr>
 
 						<tr cols="12">
-							<td colspan="6">Aggregate Elongation :
+							<td colspan="6">Aggregate Elongation in % :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -172,7 +172,7 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Aggregate Flakiness :
+							<td colspan="6">Aggregate Flakiness in %:
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -181,7 +181,7 @@
 							
 						</tr>
                         <tr cols="12">
-							<td colspan="6">Aggregate Combined :
+							<td colspan="6">Aggregate Combined in %:
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -215,17 +215,17 @@
 						<tr cols="12">
 							<td colspan="1">Sr no 
 							</td>
-							<td colspan="1">Weight of cylindrical measure in gms
+							<td colspan="1">Weight of cylindrical measure in gms W1
 							</td>
-							<td colspan="2">Total Wt. of Oven dried (4 hrs) aggregate sample + cylindrical measure in gms
+							<td colspan="2">Total Wt. of Oven dried (4 hrs) aggregate sample + cylindrical measure in gms W2
 							</td>
-							<td colspan="2">Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms
+							<td colspan="2">Total Wt. of Oven dried (4 hrs) aggregate sample filling the cylindrical measure in gms W3 = W2 - W1
 							</td>
-                            <td colspan="2">Wt. of aggregate passing 2.36 mm sieve after the test in gms
+                            <td colspan="2">Wt. of aggregate passing 2.36 mm sieve after the test in gms  W4 
 							</td>
-							<td colspan="2">Wt. of aggregate retained on 2.36 mm sieve after the test in gms
+							<td colspan="2">Wt. of aggregate retained on 2.36 mm sieve after the test in gms  W5 = W3 - W4
 							</td>
-							<td colspan="2">Impact value
+							<td colspan="2">Impact value   =  (W4 / W3) * 100 
 							</td>
 
 							
@@ -264,7 +264,7 @@
 					</table>
 					<table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">Average Impact Value :
+							<td colspan="6">Average Impact Value in % :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -292,7 +292,7 @@
 						</div>
 						<table style="margin-top:20px">
 							<tr cols="12">
-								<td colspan="6">Total weight of Sample in gms :
+								<td colspan="6">Total weight of Sample in gms W1 :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -301,7 +301,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Weight of Passing sample in 1.70 mm IS sieve in gms :
+								<td colspan="6">Weight of Passing sample in 1.70 mm IS sieve in gms  W2 :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -310,7 +310,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Weight of Retain sample in 1.70 mm IS sieve in gms :
+								<td colspan="6">Weight of Retain sample in 1.70 mm IS sieve in gms  W3 = W1 - W2 :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -319,7 +319,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Abrasion Value (%) :
+								<td colspan="6">Abrasion Value  (W2/W1)*100  (%) :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -356,7 +356,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Oven dried weight of sample in gms, C :
+								<td colspan="6">Oven dried weight of sample in gms, B :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -365,7 +365,7 @@
 								</td>
 							</tr>
                             <tr cols="12">
-								<td colspan="6">Water absorption % :
+								<td colspan="6">Water absorption  ((A - B) / B) * 100  % :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="6">
@@ -449,7 +449,7 @@
 					</table>
 					<table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">Liquid Limit :
+							<td colspan="6">Liquid Limit % :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -535,7 +535,7 @@
 					</table>
 					<table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">Average :
+							<td colspan="6">	Plastic Limit % :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
@@ -574,7 +574,7 @@
 
 					<table style="margin-top:20px">
 						<tr cols="12">
-							<td colspan="6">Plasticity Index :
+							<td colspan="6">Plasticity Index =  Liquid Limit - 	Plastic Limit  :
 								<![CDATA[&nbsp;]]>
 							</td>
 							<td colspan="6">
