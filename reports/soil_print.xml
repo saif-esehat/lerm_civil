@@ -171,6 +171,138 @@
 						<span t-esc="eln.material.test_parameter"/>
 					</div> -->
 
+					
+						<!-- field density -->
+						<div style="page-break-inside: avoid; margin-top: 20px;">
+							<table t-if="data.field_density_visible and fromEln" style="width:100%; border-collapse: collapse;">
+								<tr>
+									<td colspan="4" style="text-align:center; letter-spacing: 2px; border: 1px solid black; padding: 10px;">
+										<div>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).test_method.test_method"/>
+										</div>
+									</td>
+								</tr>
+								</table>
+
+									<div>
+										<table style="margin-top: 10px; text-align: right;">
+											<tr>
+												<td style="font-weight: bold;">MDD:</td>
+												<td>
+													<span t-field="data.mmd_fielddencity" t-options='{"widget": "float", "precision": 2}'/>
+												</td>
+											</tr>
+											<tr>
+												<td style="font-weight: bold;">OMC:</td>
+												<td>
+													<span t-field="data.omc_fielddencity" t-options='{"widget": "float", "precision": 2}'/>
+												</td>
+											</tr>
+										</table>
+									</div>
+
+
+							<table t-if="data.field_density_visible and fromEln " style="margin-top:30px;">
+							<thead>
+								<tr style="font-weight: bold;">
+									<th>Parameter</th>
+									<th>Observation-1</th>
+									<th>Observation-2</th>
+									<th>Observation-3</th>
+								</tr>
+							</thead>
+							<tbody>
+							   		
+									<tr>
+									<td>Weight of sample from hole Ww in gm</td>
+									<td><span t-esc="data.field_density_table[0].wt_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].wt_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].wt_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Water content of sample m in % By RMM</td>
+									<td><span t-esc="data.field_density_table[0].water_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].water_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].water_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Weight of sand + Cylinder before pouring W1 in gm</td>
+									<td><span t-esc="data.field_density_table[0].wt_of_before_cylinder" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].wt_of_before_cylinder" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].wt_of_before_cylinder" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Weight of sand + Cylinder after pouring W2 in gm</td>
+									<td><span t-esc="data.field_density_table[0].wt_of_after_cylinder" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].wt_of_after_cylinder" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].wt_of_after_cylinder" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Weight of sand in cone W3 in gm</td>
+									<td><span t-esc="data.field_density_table[0].wt_of_sand_cone" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].wt_of_sand_cone" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].wt_of_sand_cone" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Weight of sand in hole W4 = (W1-W2-W3) in gm</td>
+									<td><span t-esc="data.field_density_table[0].wt_of_sand_hole" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].wt_of_sand_hole" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].wt_of_sand_hole" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Density of sand Ys in gm/cc</td>
+									<td><span t-esc="data.field_density_table[0].density_of_sand" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].density_of_sand" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].density_of_sand" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Volume of hole V= W4 / Ys in cc</td>
+									<td><span t-esc="data.field_density_table[0].volume_of_hole" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].volume_of_hole" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].volume_of_hole" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Bulk Density of sample Yb = Ww / V in gm/cc</td>
+									<td><span t-esc="data.field_density_table[0].bulk_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].bulk_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].bulk_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Dry Density of sample Yd = (100 Yb) / (100 + m)</td>
+									<td><span t-esc="data.field_density_table[0].dry_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].dry_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].dry_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+								<tr>
+									<td>Degree of Compaction in %</td>
+									<td><span t-esc="data.field_density_table[0].degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[1].degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="data.field_density_table[2].degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/></td>
+								</tr>
+															
+									
+
+							</tbody>
+							
+
+							</table>
+							<table t-if="data.field_density_visible and fromEln" style="margin-top:10px;">
+							<tr>
+								<td style="text-align: center; font-weight: bold; padding: 2px;">Average Degree of Compaction</td>
+								<td style="text-align: center;">
+									<span t-field="data.avg_degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+							</tr>
+						</table>
+
+							
+
+
+							
+						</div>
+
+
+					<!-- uptill -->
 
 						<div t-if="data.sieve_visible" style="margin-top:20px">
 						<div style="text-align:center;font-size:18px">
@@ -951,7 +1083,7 @@
 
 
 							<!-- added -->
-							<tr t-if="data.field_density_visible and (data.degree_of_compaction_nabl == 'pass' and nabl or (data.degree_of_compaction_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
+							<!-- <tr t-if="data.field_density_visible and (data.degree_of_compaction_nabl == 'pass' and nabl or (data.degree_of_compaction_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -966,6 +1098,7 @@
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','2f38ad10-1ebd-4437-ba47-2633e8d9ec27')]).unit.name"/>
 									</span>
 								</td>
+
 								<td colspan="2" style="text-align: center;">
 									<div>
 										<span t-field="data.avg_degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/>
@@ -1038,7 +1171,7 @@
 								</td>
 								
 								
-							</tr>
+							</tr> -->
 							<!-- uptill -->
 
 
@@ -1141,6 +1274,7 @@
 
 
 					</table>
+					
 					
 					<div style="page-break-inside: avoid;margin-top:20px">
 
@@ -1413,6 +1547,9 @@
 					<div  t-if="data.soil_visible "  style="margin-top: 10px;">
 						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load2 / 1370 * 100 , 2)"/></b>
 					</div>
+
+
+					
 
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
