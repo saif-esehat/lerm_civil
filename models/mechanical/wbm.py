@@ -779,21 +779,66 @@ class WbmMechanical(models.Model):
 
     def generate_line_chart_density(self):
         # Prepare data for the chart
-        x_values = []
-        y_values = []
-        for line in self.density_relation_table:
-            x_values.append(line.moisture)
-            y_values.append(line.dry_density)
+        # x_values = []
+        # y_values = []
+        # for line in self.density_relation_table:
+        #     x_values.append(line.moisture)
+        #     y_values.append(line.dry_density)
         
-        # Create the line chart
-        plt.plot(x_values, y_values, marker='o')
+        # # Create the line chart
+        # plt.plot(x_values, y_values, marker='o')
+        # plt.xlabel('% Moisture')
+        # plt.ylabel('Dry Density')
+        # plt.title('Density Relation Using Heavy Compaction')
+
+
+        # plt.ylim(bottom=0, top=max(y_values) + 10)
+        
+        # buffer = io.BytesIO()
+        # plt.savefig(buffer, format='png')
+        # plt.close()  # Close the figure to free up resources
+        # buffer.seek(0)
+    
+        # # Convert the chart image to base64
+        # chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
+        # return chart_image
+        plt.figure(figsize=(12, 6))
+        x_value = []
+        y_value = []
+        for line in self.density_relation_table:
+            x_value.append(line.moisture)
+            y_value.append(line.dry_density)
+
+
+
+        plt.plot(x_value, y_value, marker='o')
         plt.xlabel('% Moisture')
         plt.ylabel('Dry Density')
-        plt.title('Density Relation Using Heavy Compaction')
+        plt.title('Light Compaction OMC/MDD')
+
+       
+        # Adjust xlim to add space on both ends of the x-axis
+        plt.xlim(left=5.0, right=max(x_value) + 1.5 )
+
+        plt.ylim(bottom=0, top=max(y_value) + 1.0)
+
+        for i in range(len(x_value)):
+            plt.plot([x_value[i], x_value[i]], [0, y_value[i]], color='black', linestyle='--', alpha=0.5)
+            if i < len(x_value) - 1:
+                plt.plot([x_value[i], x_value[i + 1]], [y_value[i], y_value[i + 1]], color='black', linestyle='-', alpha=0.5)
 
 
-        plt.ylim(bottom=0, top=max(y_values) + 10)
-        
+
+        # Find the index of the maximum y value
+        max_y_index = y_value.index(max(y_value))
+
+        # Add a horizontal line at the maximum y value
+        plt.axhline(y=y_value[max_y_index], color='red', linestyle='--')
+
+        # Add a vertical line at the corresponding x value
+        plt.axvline(x=x_value[max_y_index], color='red', linestyle='--')
+
+
         buffer = io.BytesIO()
         plt.savefig(buffer, format='png')
         plt.close()  # Close the figure to free up resources
@@ -802,6 +847,8 @@ class WbmMechanical(models.Model):
         # Convert the chart image to base64
         chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
         return chart_image
+        plt.close()
+        
     
     @api.depends('density_relation_table')
     def _compute_chart_image_density(self):

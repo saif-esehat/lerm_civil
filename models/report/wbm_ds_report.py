@@ -10,6 +10,7 @@ import numpy as np
 import math
 from scipy.interpolate import CubicSpline , interp1d , Akima1DInterpolator
 from scipy.optimize import minimize_scalar
+from matplotlib.ticker import MultipleLocator, StrMethodFormatter
 
 
 
@@ -117,7 +118,69 @@ class WbmReport(models.AbstractModel):
     #     # Close the Matplotlib plot to free up resources
     #     plt.close()
 
+     
+        
+        
+        # # Prepare data for the chart
+        # plt.figure(figsize=(12, 6))
+        # cbrx_values = []
+        # cbry_values = []
+        # for line in general_data.cbr_table:
+        #     cbrx_values.append(line.penetration)
+        #     cbry_values.append(line.load)
+        
+        # # Perform cubic spline interpolation
+        # cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 100)
+        # cbrcs = CubicSpline(cbrx_values, cbry_values,1)
 
+        # # Create the line chart with a connected smooth line and markers
+        # plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
+        # plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
+
+        # # Add a horizontal line with a label
+        # plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
+        # plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
+
+        # # Add a vertical line with a label
+        # plt.axvline(x=2.5, color='orange', linestyle='--')
+        # plt.axvline(x=5.0, color='orange', linestyle='--')
+        
+        # # Set the grid
+        # ax = plt.gca()
+        # ax.grid(which='both', linestyle='--', linewidth=0.5)
+
+        # # Set the x-axis major and minor tick marks
+        # ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
+        # ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
+
+        # # Set the y-axis tick marks
+        # plt.xticks(range(0 , 15 , 1))
+        # plt.yticks(range(0, math.ceil(max(cbry_values)), 50))
+        
+        # plt.xlabel('Penetration in mm')
+        # plt.ylabel('Load')
+        # plt.title('Penetration in mm vs Load')
+        # plt.legend()
+
+        # # Save the Matplotlib plot to a BytesIO object
+        # buffer2 = BytesIO()
+        # plt.savefig(buffer2, format='png')
+        # cbr_graph_image = base64.b64encode(buffer2.getvalue()).decode('utf-8')
+        # plt.close()
+        
+        # return {
+        #     'eln': eln,
+        #     'data' : general_data,
+        #     'qrcode': qr_code,
+        #     'stamp' : inreport_value,
+        #     'nabl' : nabl,
+        #     'graphHeavy' : graph_image,
+        #     'mdd' : max_y,
+        #     'omc' : max_x,
+        #     'graphCbr' : cbr_graph_image,
+        #     'load2' : cbry_values[5],
+        #     'load5' : cbry_values[8],
+        # }
         plt.figure(figsize=(12, 6))
         x_values = []
         y_values = []
@@ -153,7 +216,7 @@ class WbmReport(models.AbstractModel):
             max_y = round(max_y , 2)
             max_x = round(max_x, 2)
 
-
+    
 
         
             # Perform cubic spline interpolation
@@ -192,6 +255,7 @@ class WbmReport(models.AbstractModel):
             if max_x != min_x:
                 plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
             
+            plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
             plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
             plt.xlabel('% Moisture')
             plt.ylabel('Dry density in gm/cc')
@@ -209,56 +273,92 @@ class WbmReport(models.AbstractModel):
             graph_image = None
             max_y = 0
             max_x = 0
-
-     
         
         
+      
         # Prepare data for the chart
         plt.figure(figsize=(12, 6))
         cbrx_values = []
         cbry_values = []
-        for line in general_data.cbr_table:
-            cbrx_values.append(line.penetration)
-            cbry_values.append(line.load)
-        
-        # Perform cubic spline interpolation
-        cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 100)
-        cbrcs = CubicSpline(cbrx_values, cbry_values,1)
+        if general_data.cbr_table:
+            for line in general_data.cbr_table:
+                cbrx_values.append(line.penetration)
+                cbry_values.append(line.load)
 
-        # Create the line chart with a connected smooth line and markers
-        plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
-        plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
+            try:
+                max_y = max(cbry_values)
+            except:
+                max_y = 100
+            try:
+                min_y = round(min(cbry_values),2)
+            except:
+                min_y = 0
+            try:
+                # max_x = round(max(x_values),2)
+                max_x = cbrx_values[cbry_values.index(max_y)]
+            except:
+                max_x = 100
+            try:
+                min_x = round(min(cbrx_values),2)
+            except:
+                min_x = 0 
+            
+            
 
-        # Add a horizontal line with a label
-        plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
-        plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
 
-        # Add a vertical line with a label
-        plt.axvline(x=2.5, color='orange', linestyle='--')
-        plt.axvline(x=5.0, color='orange', linestyle='--')
-        
-        # Set the grid
-        ax = plt.gca()
-        ax.grid(which='both', linestyle='--', linewidth=0.5)
+            # Format max_y and max_x to display 2 digits after the decimal point
+            max_y = round(max_y , 2)
+            max_x = round(max_x, 2)
 
-        # Set the x-axis major and minor tick marks
-        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
-        ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
+            
+            # Perform cubic spline interpolation
+            cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 100)
+            cbrcs = CubicSpline(cbrx_values, cbry_values)
 
-        # Set the y-axis tick marks
-        plt.xticks(range(0 , 15 , 1))
-        plt.yticks(range(0, math.ceil(max(cbry_values)), 50))
-        
-        plt.xlabel('Penetration in mm')
-        plt.ylabel('Load')
-        plt.title('Penetration in mm vs Load')
-        plt.legend()
+            # Create the line chart with a connected smooth line and markers
+            plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
+            plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
 
-        # Save the Matplotlib plot to a BytesIO object
-        buffer2 = BytesIO()
-        plt.savefig(buffer2, format='png')
-        cbr_graph_image = base64.b64encode(buffer2.getvalue()).decode('utf-8')
-        plt.close()
+            # Add a horizontal line with a label
+            plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
+            plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
+
+            # Add a vertical line with a label
+            plt.axvline(x=2.5, color='orange', linestyle='--')
+            plt.axvline(x=5.0, color='orange', linestyle='--')
+            
+            # Set the grid
+            ax = plt.gca()
+            ax.grid(which='both', linestyle='--', linewidth=0.5)
+
+            # Set the x-axis major and minor tick marks
+            ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
+            ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
+
+            # Set the y-axis tick marks
+            # plt.xticks(range(0 , 15 , 1))
+            # plt.yticks(range(0 , 481 , 50))
+
+            plt.yticks(np.arange(min_y , max_y + 0.2 , (max_y - min_y) / 5))
+
+
+            if max_x != min_x:
+                plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
+            
+            plt.xlabel('Penetration in mm')
+            plt.ylabel('Load')
+            plt.title('Penetration in mm vs Load')
+            plt.legend()
+
+            # Save the Matplotlib plot to a BytesIO object
+            buffer2 = BytesIO()
+            plt.savefig(buffer2, format='png')
+            cbr_graph_image = base64.b64encode(buffer2.getvalue()).decode('utf-8')
+            plt.close()
+        else:
+            cbr_graph_image = None
+            cbry_values = []  # Set to an empty list instead of 0
+            cbrx_values = []
         
         return {
             'eln': eln,
@@ -270,9 +370,10 @@ class WbmReport(models.AbstractModel):
             'mdd' : max_y,
             'omc' : max_x,
             'graphCbr' : cbr_graph_image,
-            'load2' : cbry_values[5],
-            'load5' : cbry_values[8],
+            'load2' : cbry_values[5] if cbry_values else 0,
+            'load5' : cbry_values[8] if cbry_values else 0,
         }
+
 
 class WbmDatasheet(models.AbstractModel):
     _name = 'report.lerm_civil.wbm_mech_datasheet'
