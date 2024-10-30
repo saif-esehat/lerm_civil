@@ -182,7 +182,7 @@
                                     
                                     <td style="text-align: center;max-width:200px">
                                         <span style="text-align: center;">
-                                            Area of Paver Block, mm2
+                                            Area of csv Block, mm2
                                         </span>    
                                     </td>
                                     
@@ -1241,10 +1241,10 @@
                                     <t t-esc="line.length" t-options='{"widget": "float", "precision": 2}'/>
                                 </td>
                                 <td style="text-align: center;">
-                                    <t t-esc="line.hight" t-options='{"widget": "float", "precision": 2}'/>
+                                    <t t-esc="line.width" t-options='{"widget": "float", "precision": 2}'/>
                                 </td>
                                 <td style="text-align: center;">
-                                    <t t-esc="line.width" t-options='{"widget": "float", "precision": 2}'/>
+                                    <t t-esc="line.hight" t-options='{"widget": "float", "precision": 2}'/>
                                 </td>
                                
                             </tr>
