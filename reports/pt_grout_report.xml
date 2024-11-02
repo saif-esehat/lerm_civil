@@ -189,7 +189,7 @@
 								
 								<td style="text-align: center;">
 									<span>
-										<span t-field="ptgrout.water_cement_ratio"/>
+										<span t-field="ptgrout.flow_sec"/>
 									</span>									
 								</td>
 								<td  style="text-align: center; vertical-align: middle;">
