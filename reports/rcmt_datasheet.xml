@@ -60,27 +60,27 @@
                            
                             </tr>
                             <tr>
-                                <td>Date  Time Specime Prepared : </td>
+                                <td>Date &amp; Time Conditioning Started : </td>
                                 <td><span t-field="data.conditioning_started"/></td>
                             </tr>
                             <tr>
-                                <td>Date  Time Specime Prepared : </td>
+                                <td>Date &amp; Time Vaccum Started : </td>
                                 <td><span t-field="data.Vaccum_starte"/></td>
                             </tr>
                             <tr>
-                                 <td>Date  Time Specime Prepared : </td>
+                                 <td>Date &amp; Time Water Added : </td>
                                  <td><span t-field="data.water_added"/></td>
                             </tr>
                             <tr>
-                              <td>Date  Time Specime Prepared : </td>
+                              <td>Date &amp; Time Vaccum Turn Off : </td>
                               <td><span t-field="data.vaccum_turn_off"/></td>
                             </tr>
                             <tr>
-                                 <td>Date  Time Specime Prepared : </td>
+                                 <td>Date &amp; Time Soaking Started : </td>
                                  <td><span t-field="data.soaking_started"/></td>
                             </tr>
                             <tr>
-                              <td>Date  Time Specime Prepared : </td>
+                              <td>Date &amp; Time Soaking completed : </td>
                               <td><span t-field="data.soaking_completed"/></td>
                             </tr>
                           
