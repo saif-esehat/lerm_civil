@@ -123,6 +123,7 @@ class UpvLine(models.Model):
     def _compute_quality(self):
         for record in self:
             string1 = "M25"
+            # string1 = self.parent_id.grade_id.grade
             string2 = self.parent_id.grade_id.grade
             print("String 2:", string2)  # Add this line for debugging
             
@@ -138,7 +139,7 @@ class UpvLine(models.Model):
                 if record.velocity > 4.5:
                     record.quality = 'excellent'
             
-                elif numeric_part1 > numeric_part2 and 3.5 <= record.velocity <= 4.5:
+                elif numeric_part1 >= numeric_part2 and 3.5 <= record.velocity <= 4.5:
                     record.quality = 'good'
                 elif numeric_part1 < numeric_part2 and 3.75 <= record.velocity <= 4.5:
                     record.quality = 'good'
