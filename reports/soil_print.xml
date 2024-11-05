@@ -206,9 +206,10 @@
 							<thead>
 								<tr style="font-weight: bold;">
 									<th>Parameter</th>
-									<th>Observation-1</th>
-									<th>Observation-2</th>
-									<th>Observation-3</th>
+									
+									<t t-foreach="range(len(data.field_density_table))" t-as="i">
+										<th>Observation-<t t-esc="i + 1"/></th>
+									</t>
 								</tr>
 							</thead>
 							<tbody>
