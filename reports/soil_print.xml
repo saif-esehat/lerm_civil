@@ -185,7 +185,7 @@
 								</table>
 
 									<div>
-										<table style="margin-top: 10px; text-align: right;">
+										<table t-if="data.field_density_visible" style="margin-top: 10px; text-align: right;">
 											<tr>
 												<td style="font-weight: bold;">MDD:</td>
 												<td>
