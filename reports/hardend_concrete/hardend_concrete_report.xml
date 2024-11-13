@@ -414,7 +414,7 @@
 								
 								<td style="text-align: center;">
 									<span>
-										<span t-field="data.average_dissolved_silica" t-options='{"widget": "float", "precision": 2}'/>
+										<span t-field="data.average_dissolved_silica" t-options='{"widget": "float", "precision": 4}'/>
 									</span>									
 								</td>
 								<td style="text-align: center;">
