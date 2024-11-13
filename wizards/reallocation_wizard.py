@@ -61,7 +61,9 @@ class ReallocationWizard(models.TransientModel):
                 })
             sample.write({'state':'2-alloted' ,
                            'technicians':record.technicians.id,
-                           'filled_by':record.technicians.id
+                           'filled_by':record.technicians.id,
+                           'file_upload':False,
+                           'report_upload':False
                            })
 
             return {'type': 'ir.actions.act_window_close'}
