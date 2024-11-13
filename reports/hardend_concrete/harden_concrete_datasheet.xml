@@ -456,7 +456,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.wt_blank_crucible_after_ignition" t-options='{"widget": "float", "precision": 2}'/>
+									<span t-field="data.wt_blank_crucible_after_ignition" t-options='{"widget": "float", "precision": 4}'/>
 									
 								</td>
 							</tr>
@@ -467,7 +467,7 @@
 									
 								</td>
                                 <td colspan="6">
-									<span t-field="data.wt_blank_crucible_after_hf" t-options='{"widget": "float", "precision": 2}'/>
+									<span t-field="data.wt_blank_crucible_after_hf" t-options='{"widget": "float", "precision": 4}'/>
 									
 								</td>
 							</tr>
