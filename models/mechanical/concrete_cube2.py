@@ -23,6 +23,7 @@ class MechanicalConcreteCube(models.Model):
         ('14days', '14 Days'),
         ('21days', '21 Days'),
         ('28days', '28 Days'),
+        ('45days', '45 Days'),
         ('56days', '56 Days'),
         ('112days', '112 Days'),
     ], string='Age', default='28days',required=True,compute="_compute_age_of_days")
@@ -59,6 +60,8 @@ class MechanicalConcreteCube(models.Model):
                 age_of_days = 21
             elif record.age_of_days == '28days':
                 age_of_days = 28
+            elif record.age_of_days == '45days':
+                age_of_days = 45
             elif record.age_of_days == '56days':
                 age_of_days = 56
             elif record.age_of_days == '112days':
@@ -107,6 +110,8 @@ class MechanicalConcreteCube(models.Model):
                     record.age_of_days = '21days'
                 elif sample_record == '28':
                     record.age_of_days = '28days'
+                elif sample_record == '45':
+                    record.age_of_days = '45days'
                 elif sample_record == '56':
                     record.age_of_days = '56days'
                 elif sample_record == '112':

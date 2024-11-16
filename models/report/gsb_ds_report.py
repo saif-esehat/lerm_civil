@@ -195,8 +195,10 @@ class GsbReport(models.AbstractModel):
             try:
                 # max_x = round(max(x_values),2)
                 max_x = x_values[y_values.index(max_y)]
+                omc = x_values[y_values.index(max_y)]
             except:
                 max_x = 100
+                omc = 100
             try:
                 min_x = round(min(x_values),2)
             except:
@@ -225,10 +227,10 @@ class GsbReport(models.AbstractModel):
 
             
             # Add a horizontal line with a label
-            plt.axhline(y=max_y, color='green', linestyle='--', label=f'Max Y = {max_y}')
+            plt.axhline(y=max_y, color='green', linestyle='--')
 
             # Add a vertical line with a label
-            plt.axvline(x=max_x, color='orange', linestyle='--', label=f'Max X = {max_x}')
+            plt.axvline(x=max_x, color='orange', linestyle='--')
 
             
             # Set the grid
@@ -278,35 +280,6 @@ class GsbReport(models.AbstractModel):
             for line in general_data.cbr_table:
                 cbrx_values.append(line.penetration)
                 cbry_values.append(line.load)
-
-            # added
-            try:
-                max_y = max(cbry_values)
-            except:
-                max_y = 100
-            try:
-                min_y = round(min(cbry_values),2)
-            except:
-                min_y = 0
-            try:
-                # max_x = round(max(x_values),2)
-                max_x = cbrx_values[cbry_values.index(max_y)]
-            except:
-                max_x = 100
-            try:
-                min_x = round(min(cbrx_values),2)
-            except:
-                min_x = 0 
-            
-            
-
-
-            # Format max_y and max_x to display 2 digits after the decimal point
-            max_y = round(max_y , 2)
-            max_x = round(max_x, 2)
-
-            # added
-
             
             # Perform cubic spline interpolation
             cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 1000)
@@ -359,7 +332,7 @@ class GsbReport(models.AbstractModel):
             'nabl' : nabl,
             'graphHeavy' : graph_image,
             'mdd' : max_y,
-            'omc' : max_x,
+            'omc' : omc,
             'graphCbr' : cbr_graph_image,
             'load2' : cbry_values[5] if cbry_values else 0,  # Access the index if cbry_values is not empty
             'load5' : cbry_values[8] if cbry_values else 0,

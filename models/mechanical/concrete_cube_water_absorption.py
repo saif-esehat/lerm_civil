@@ -14,7 +14,7 @@ class MechanicalConcreteCube(models.Model):
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     child_lines = fields.One2many('concrete.cube.water.absorption.line','parent_id',string="Parameter")
     average_concrete_cube_water = fields.Float(string="Average Water Absorption %", compute="_compute_average_concrete_cube_water",digits=(12,2))
-    correction_factor = fields.Integer(string="Correction Factor = Volume (mm3) / (Surface Area (mm2) * 12.5)")
+    correction_factor = fields.Float(string="Correction Factor = Volume (mm3) / (Surface Area (mm2) * 12.5)")
     water_correction_factor = fields.Float(string="Water Absorption after correction Factor",compute="_compute_water_correction_factor")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
@@ -275,7 +275,7 @@ class MechanicalConcreteCubeLine(models.Model):
     parent_id = fields.Many2one('concrete.cube.water.absorption',string="Parent Id")
 
     sr_no = fields.Integer(string="Sr.No.",readonly=True, copy=False, default=1)
-    sample_id = fields.Integer(string="Sample ID")
+    sample_id = fields.Char(string="Sample ID")
     oven_dry_weight = fields.Float(string="Oven Dry Weight After 72 Hrs.(kg)" ,digits=(12,3))
     weight_immersion = fields.Float(string="Weight of Immersion in water after 30 Minutes (kg)" ,digits=(12,3))
     water_absorption_percent = fields.Float(string="Water Absorption %",compute="_compute_water_absorption_percent" ,digits=(12,2))

@@ -646,9 +646,9 @@ class DryingShrinkageLine(models.Model):
     parent_id = fields.Many2one('mechanical.solid.concrete.block',string="Parent Id")
    
     sr_no = fields.Integer(string="Sr.No.", readonly=True, copy=False, default=1)
-    wet_measurment = fields.Float(string="Wet measuremet of the Block",digits=(12, 3))
+    wet_measurment = fields.Float(string="Wet measurement of the Block",digits=(12, 3))
     dry_measurment = fields.Float(string="Dry Measurement of the Block",digits=(12, 3))
-    dry_lengths = fields.Float(string="Dry Lenth")
+    dry_lengths = fields.Float(string="Dry Length")
     drying_shrinkage = fields.Float(string="Drying Shrinkage %", compute="_compute_drying_shrinkage1",digits=(12, 4))
 
 
@@ -657,7 +657,7 @@ class DryingShrinkageLine(models.Model):
     def _compute_drying_shrinkage1(self):
         for record in self:
             if record.dry_lengths != 0:
-                record.drying_shrinkage = record.wet_measurment - record.dry_measurment / record.dry_lengths * 100
+                record.drying_shrinkage = (record.wet_measurment - record.dry_measurment) / record.dry_lengths * 100
             else:
                 record.drying_shrinkage = 0.0
 

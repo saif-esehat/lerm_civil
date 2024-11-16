@@ -185,7 +185,7 @@
 								</table>
 
 									<div>
-										<table style="margin-top: 10px; text-align: right;">
+										<table t-if="data.field_density_visible" style="margin-top: 10px; text-align: right;">
 											<tr>
 												<td style="font-weight: bold;">MDD:</td>
 												<td>
@@ -206,9 +206,10 @@
 							<thead>
 								<tr style="font-weight: bold;">
 									<th>Parameter</th>
-									<th>Observation-1</th>
-									<th>Observation-2</th>
-									<th>Observation-3</th>
+									
+									<t t-foreach="range(len(data.field_density_table))" t-as="i">
+										<th>Observation-<t t-esc="i + 1"/></th>
+									</t>
 								</tr>
 							</thead>
 							<tbody>
@@ -363,7 +364,7 @@
 					</div>
 					<table style="margin-top:15px">
 
-							<tr cols="12">
+							<tr cols="12" t-if="data.liquid_limit_visible or data.plastic_limit_visible or data.fsi_visible">
 								<th colspan="1" style="text-align: center;">
 									<span>
 										Sr. No
@@ -402,78 +403,7 @@
 									</span>
 							   	</th> 
 							</tr>
-							<!-- <div t-if="data.sieve_visible" style="margin-top:20px">
-								
-								<tr cols="12">
-									<td colspan="1">
-									</td>
-									<td colspan="2">
-                                            <span t-field="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).parameter_name"/>
-                                    </td>
-									<td colspan="2">
-										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','5a0ac62b-5c56-475b-9a89-93a59c9ee3a2')]).parameter_table" t-as="parameter">
-											<t t-if="parameter.grade.id == eln.grade_id.id">
-												<span t-field="parameter.specification"/>
-											</t>
-										</t>
-									</td>
-									<td colspan="2">			
-									</td>
-									<td colspan="2">
-									
-									</td>
-
-								</tr>
-								<t t-set="i" t-value="0"/>
-								<t t-set="k" t-value="0"/>
-								<tr t-foreach="data.child_lines" t-as="r" t-if="'pan' not in r['sieve_size']">
-									<td colspan="1">
-										<div>
-											<span t-esc="i + 1" t-if="i == 0"/>
-											<t t-set="i" t-value="i+1" t-if="i == 0"/>
-										</div>
-									</td>
-									<td colspan="2" >
-										<t t-set="k" t-value="k+1"/>
-										<span t-esc="r['sieve_size']"/>
-									</td>
-									
-									<td colspan="2" >
-										<span>
-											
-										</span>
-									</td>
-									<td colspan="2" >
-										<span t-esc="r['passing_percent']" t-options='{"widget": "float", "precision": 2}'/>
-									</td>
-									<td colspan="2" t-if="k == 1">
-										<span>100%</span>
-									</td>
-									<td colspan="2" t-if="k == 2">
-										<span>95% - 100%</span>
-									</td>
-									<td colspan="2" t-if="k == 3">
-										<span>60% - 80%</span>
-									</td>
-									<td colspan="2" t-if="k == 4">
-										<span>40% - 60%</span>
-									</td>
-									<td colspan="2" t-if="k == 5">
-										<span>25% - 40%</span>
-									</td>
-									<td colspan="2" t-if="k == 6">
-										<span>15% - 30%</span>
-									</td>
-									<td colspan="2" t-if="k == 7">
-										<span>8% - 22%</span>
-									</td>
-									<td colspan="2" t-if="k == 8">
-										<span>0% - 5%</span>
-									</td>
-									<td colspan="2" t-if="k == 9"> -->
-									<!-- </td> -->
-								<!-- </tr>
-							</div> -->
+							
 							<t t-set="i" t-value="0"/>
 							<tr t-if="data.liquid_limit_visible and (data.liquid_limit_nabl == 'pass' and nabl or (data.liquid_limit_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
@@ -492,7 +422,12 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										    <span t-esc="data.remarks_liquid_limit if data.liquid_limit == 0.00 else data.liquid_limit" t-options='{"widget": "float", "precision": 2}' />
+										<t t-if="data.liquid_limit == 0.00">
+										    <span t-esc="data.remarks_liquid_limit"/>
+										</t>
+										<t t-else="">
+										    <span t-esc="data.liquid_limit"  t-options='{"widget": "float", "precision": 2}'/>
+										</t>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -538,7 +473,13 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										      <span t-esc="data.remarks_liquid_limit if data.liquid_limit == 0.00 else data.liquid_limit" t-options='{"widget": "float", "precision": 2}' />
+										      <!-- <span t-esc="data.remarks_liquid_limit if data.liquid_limit == 0.00 else data.liquid_limit" /> -->
+										<t t-if="data.liquid_limit == 0.00">
+										    <span t-esc="data.remarks_liquid_limit"/>
+										</t>
+										<t t-else="">
+										    <span t-esc="data.liquid_limit"  t-options='{"widget": "float", "precision": 2}'/>
+										</t>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -583,7 +524,13 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										<span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit" t-options='{"widget": "float", "precision": 2}'/>
+										<t t-if="data.plastic_limit == 0.00">
+										    <span t-esc="data.remarks_plastic"/>
+										</t>
+										<t t-else="">
+										    <span t-esc="data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/>
+										</t>
+										<!-- <span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/> -->
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -630,7 +577,13 @@
 								</td>
 								<td colspan="2" style="text-align: center;">
 									<div>
-										<span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit" t-options='{"widget": "float", "precision": 2}'/>
+										<t t-if="data.plastic_limit == 0.00">
+										    <span t-esc="data.remarks_plastic"/>
+										</t>
+										<t t-else="">
+										    <span t-esc="data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/>
+										</t>
+										<!-- <span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit"  t-options='{"widget": "float", "precision": 2}'/> -->
 									</div>
 								</td>
 								
@@ -2417,7 +2370,7 @@
 							</table>
 						</div>
 
-						<!-- <div t-if="data.liquid_limit_visible" style="margin-top:20px" >   >>>>>>
+						<!-- <div t-if="data.liquid_limit_visible" style="margin-top:20px" >  
 							<table>
 								<tr cols="12">
 									<td colspan="6">Liquid Limit :
@@ -2556,7 +2509,7 @@
 								<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
 							</div> -->
 
-							<!-- <div>   >>>>>
+							<!-- <div>  
 								<span t-esc="data.remarks_plastic if data.plastic_limit == 0.00 else data.plastic_limit" />
 							</div> -->
 						</div>

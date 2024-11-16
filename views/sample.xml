@@ -172,11 +172,10 @@
                       <group >
                             
                           <field name="file_upload" widget="many2many_binary" />
-                         
                       </group>
                       <group >
                           <field name="report_upload" widget="many2many_binary" />
-                          
+                          <!-- uptill -->
                       </group>
                       <group>
                           <field name="checkby_signature_required" attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"/>

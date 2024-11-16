@@ -113,10 +113,10 @@ class WMMReport(models.AbstractModel):
 
             
             # Add a horizontal line with a label
-            plt.axhline(y=max_y, color='green', linestyle='--', label=f'Max Y = {max_y}')
+            plt.axhline(y=max_y, color='green', linestyle='--')
 
             # Add a vertical line with a label
-            plt.axvline(x=max_x, color='orange', linestyle='--', label=f'Max X = {max_x}')
+            plt.axvline(x=max_x, color='orange', linestyle='--')
 
             
             # Set the grid

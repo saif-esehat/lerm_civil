@@ -113,6 +113,7 @@ class LermSampleForm(models.Model):
     grade_ids = fields.Many2many('lerm.grade.line',string="Grade Ids",compute="compute_grade_ids")
     qty_ids = fields.Many2many('lerm.qty.line',string="Qty Ids",compute="compute_qty_ids")
     days_casting = fields.Selection([
+        ('1', '1 Days'),
         ('3', '3 Days'),
         ('7', '7 Days'),
         ('14', '14 Days'),
@@ -191,6 +192,7 @@ class LermSampleForm(models.Model):
         string='Datasheet Upload',
         help='Attach multiple images to the sample',
     )
+    
     # file_upload = fields.Binary(string="Data Sheet", attachment=True)
     
     
@@ -508,11 +510,14 @@ class LermSampleForm(models.Model):
             self.approved_by = self.env.user
             if not result.verified:
                 raise ValidationError("Not all parameters are verified. Please ensure all parameters are verified before proceeding.")
-        self.write({'state': '4-in_report'})
-        eln = self.env['lerm.eln'].sudo().search([('sample_id','=',self.id)])
-        approved_by = self.env.user
-        eln.write({'state':'3-approved'})
-
+        if len(self.file_upload) > 0:
+            self.write({'state': '4-in_report'})
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',self.id)])
+            approved_by = self.env.user
+            eln.write({'state':'3-approved'})
+        else:
+            raise ValidationError("Please attach datasheet before submitting")
+        
 
     # def reject_pending_sample(self):
     #     self.write({'state': '2-alloted'})

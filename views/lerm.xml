@@ -214,7 +214,7 @@
             <field name="view_mode">form</field>
             <field name="view_id" ref="ulr_reports_wizard"/>
             <field name="target">new</field>
-    </record>
+    </record> -->
 
     <record id="lerm_sample_print_reports_action" model="ir.actions.act_window">
             <field name="name">Sample Print Reports</field>
@@ -223,7 +223,7 @@
             <field name="view_mode">form</field>
             <field name="view_id" ref="print_reports_wizard"/>
             <field name="target">new</field>
-    </record> -->
+    </record>
     
     <menuitem id="lerm_root"
         groups="lerm_civil.lerm_master,lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by,lerm_civil.kes_report"
@@ -262,22 +262,22 @@
         parent="reporting_menu"
         action="lerm_sample_reports_action"
         groups="lerm_civil.kes_admin_access_group,lerm_civil.kes_report"
-        sequence="10" />
+        sequence="10" /> -->
 
 
-    <menuitem id="lerm_ulr_reporting"
+    <!-- <menuitem id="lerm_ulr_reporting"
         name="ULR"
         parent="reporting_menu"
         action="lerm_ulr_reports_action"
         groups="lerm_civil.kes_admin_access_group,lerm_civil.kes_report"
-        sequence="10" />
+        sequence="10" /> -->
 
     <menuitem id="lerm_print_reports_reporting"
         name="Sample"
         parent="reporting_menu"
         action="lerm_sample_print_reports_action"
         groups="lerm_civil.kes_admin_access_group,lerm_civil.kes_report"
-        sequence="11" /> -->
+        sequence="11" />
 
     <!-- <menuitem id="menu_sample_graph" name="Sample Graph" parent="lerm_transaction_data" action="action_lerm_srf_sample_graph" sequence="10"/> -->
 

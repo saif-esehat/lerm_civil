@@ -1412,7 +1412,7 @@
 
                   <t t-set="i" t-value="0"/>
                     <table style="margin-top:20px;">
-                            <tr cols="12">
+                            <tr cols="12" t-if="data.specific_gravity_visible or data.loose_bulk_visible or data.rodded_bulk_visible or data.moisture_content_visible">
                                 <th colspan="1" style="text-align: center;">
                                     <span>Sr. No</span>
                                 </th>

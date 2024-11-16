@@ -156,6 +156,7 @@ class SrfForm(models.Model):
     casting = fields.Boolean(string="Casting")
     
     days_casting = fields.Selection([
+        ('1', '1 Days'),
         ('3', '3 Days'),
         ('7', '7 Days'),
         ('14', '14 Days'),
@@ -742,6 +743,7 @@ class CreateSampleWizard(models.TransientModel):
     # grade_ids = fields.Many2many('lerm.grade.line',string="Grade Ids")
     # qty_ids = fields.Many2many('lerm.qty.line',string="Qty Ids")
     days_casting = fields.Selection([
+        ('1', '1 Days'),
         ('3', '3 Days'),
         ('7', '7 Days'),
         ('14', '14 Days'),
@@ -847,6 +849,7 @@ class CreateSampleWizard(models.TransientModel):
         for record in self:
             if record.material_id:
                 parameters_ids = []
+                print("MATERIAL__IDD",self.env['product.template'].search([('id','=', record.material_id.id)]))
                 product_records = self.env['product.template'].search([('id','=', record.material_id.id)]).parameter_table1
                 record.product_name = self.pricelist.item_ids.search([('pricelist_id','=',self.pricelist.id),('product_tmpl_id.lab_name','=',self.material_id.lab_name)]).product_tmpl_id.id
                 # import wdb; wdb.set_trace()

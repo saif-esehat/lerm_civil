@@ -116,7 +116,9 @@ class ELN(models.Model):
             if record.sample_id.casting and record.sample_id.casting_date:
                 date_casting = record.sample_id.casting_date
                 days_casting = 0
-                if record.sample_id.days_casting == '3':
+                if record.sample_id.days_casting == '1':
+                    days_casting = 1
+                elif record.sample_id.days_casting == '3':
                     days_casting = 3
                 elif record.sample_id.days_casting == '7':
                     days_casting = 7
