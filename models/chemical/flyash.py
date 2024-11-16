@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
+from datetime import datetime , timedelta
 import math
+
 
 class ChemicalFlyAsh(models.Model):
     _name = "chemical.flyash"
@@ -796,6 +798,21 @@ class ChemicalFlyAsh(models.Model):
 
     # Alkali as Na₂O Clause  
 
+    casting_28_name = fields.Char("Name",default="28 Days")
+    casting_date_28days = fields.Date(string="Date of Casting")
+    testing_date_28days = fields.Date(string="Date of Testing",compute="_compute_testing_date_28days")
+    status_28days = fields.Boolean("Done")
+
+    @api.depends('casting_date_28days')
+    def _compute_testing_date_28days(self):
+        for record in self:
+            if record.casting_date_28days:
+                cast_date = fields.Datetime.from_string(record.casting_date_28days)
+                testing_date = cast_date + timedelta(days=28)
+                record.testing_date_28days = fields.Datetime.to_string(testing_date)
+            else:
+                record.testing_date_28days = False
+
     na2o_name = fields.Char("Name", default="Alkali as Na₂O")
     na2o_visible = fields.Boolean("Alkali as Na₂O", compute="_compute_visible")
 
@@ -878,6 +895,22 @@ class ChemicalFlyAsh(models.Model):
 
 
     # Alkali as K₂O 
+
+
+    casting_28_name_k2o = fields.Char("Name",default="28 Days")
+    casting_date_28days_k2o = fields.Date(string="Date of Casting")
+    testing_date_28days_k2o = fields.Date(string="Date of Testing",compute="_compute_testing_date_28days_k2o")
+    status_28days_k2o = fields.Boolean("Done")
+
+    @api.depends('casting_date_28days_k2o')
+    def _compute_testing_date_28days_k2o(self):
+        for record in self:
+            if record.casting_date_28days_k2o:
+                cast_date = fields.Datetime.from_string(record.casting_date_28days_k2o)
+                testing_date = cast_date + timedelta(days=28)
+                record.testing_date_28days_k2o = fields.Datetime.to_string(testing_date)
+            else:
+                record.testing_date_28days_k2o = False
 
     k2o_name = fields.Char("Name", default="Alkali as K₂O")
     k2o_visible = fields.Boolean("Alkali as K₂O", compute="_compute_visible")

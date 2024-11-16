@@ -762,11 +762,21 @@
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_name"/>
 								</td>
 								
-								<td colspan="1" style="text-align: center;">
+								<!-- <td colspan="1" style="text-align: center;">
 									<span>
 										<span t-field="data.available_alkalis" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
-								</td>
+								</td> -->
+								<td colspan="1" style="text-align: center;">
+										<span>
+											<t t-if="data.status_28days and data.status_28days_k2o">
+												<span t-field="data.available_alkalis"  t-options='{"widget": "float", "precision": 2}'/>
+											</t>
+											<t t-else="">
+												Awaited
+											</t>
+										</span>									
+									</td>
 								<td colspan="1" style="text-align: center; vertical-align: middle;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).unit.name"/>
@@ -814,11 +824,21 @@
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_name"/>
 								</td>
 								
-								<td colspan="1" style="text-align: center;">
+								<!-- <td colspan="1" style="text-align: center;">
 									<span>
 										<span t-field="data.na2o_round" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
-								</td>
+								</td> -->
+								<td colspan="1" style="text-align: center;">
+										<span>
+											<t t-if="data.status_28days">
+												<span t-field="data.na2o_round"  t-options='{"widget": "float", "precision": 2}'/>
+											</t>
+											<t t-else="">
+												Awaited
+											</t>
+										</span>									
+									</td>
 								<td colspan="1" style="text-align: center; vertical-align: middle;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).unit.name"/>
@@ -868,11 +888,21 @@
 								</td>
 								
 								
-								<td colspan="1" style="text-align: center;">
+								<!-- <td colspan="1" style="text-align: center;">
 									<span>
 										<span t-field="data.k2o_round" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
-								</td>
+								</td> -->
+								<td colspan="1" style="text-align: center;">
+										<span>
+											<t t-if="data.status_28days_k2o">
+												<span t-field="data.k2o_round"  t-options='{"widget": "float", "precision": 2}'/>
+											</t>
+											<t t-else="">
+												Awaited
+											</t>
+										</span>									
+									</td>
 								<td colspan="1" style="text-align: center; vertical-align: middle;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).unit.name"/>
@@ -1063,11 +1093,21 @@
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_name"/>
 								</td>
 								
-								<td colspan="1" style="text-align: center;">
+								<!-- <td colspan="1" style="text-align: center;">
 									<span>
 										<span t-field="data.available_alkalis" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
-								</td>
+								</td> -->
+								<td colspan="1" style="text-align: center;">
+										<span>
+											<t t-if="data.status_28days and data.status_28days_k2o">
+												<span t-field="data.available_alkalis"  t-options='{"widget": "float", "precision": 2}'/>
+											</t>
+											<t t-else="">
+												Awaited
+											</t>
+										</span>									
+									</td>
 								<td colspan="1" style="text-align: center; vertical-align: middle;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).unit.name"/>
@@ -1116,11 +1156,21 @@
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_name"/>
 								</td>
 								
-								<td colspan="1" style="text-align: center;">
+								<!-- <td colspan="1" style="text-align: center;">
 									<span>
 										<span t-field="data.na2o_round" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
-								</td>
+								</td> -->
+									<td colspan="1" style="text-align: center;">
+										<span>
+											<t t-if="data.status_28days">
+												<span t-field="data.na2o_round"  t-options='{"widget": "float", "precision": 2}'/>
+											</t>
+											<t t-else="">
+												Awaited
+											</t>
+										</span>									
+									</td>
 								<td colspan="1" style="text-align: center; vertical-align: middle;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).unit.name"/>
@@ -1169,11 +1219,21 @@
 								</td>
 								
 								
-								<td colspan="1" style="text-align: center;">
+								<!-- <td colspan="1" style="text-align: center;">
 									<span>
 										<span t-field="data.k2o_round" t-options='{"widget": "float", "precision": 2}'/>
 									</span>									
-								</td>
+								</td> -->
+								<td colspan="1" style="text-align: center;">
+										<span>
+											<t t-if="data.status_28days_k2o">
+												<span t-field="data.k2o_round"  t-options='{"widget": "float", "precision": 2}'/>
+											</t>
+											<t t-else="">
+												Awaited
+											</t>
+										</span>									
+									</td>
 								<td colspan="1" style="text-align: center; vertical-align: middle;">
 									<span>
 										<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).unit.name"/>
