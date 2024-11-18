@@ -747,11 +747,11 @@ class SoilReport(models.AbstractModel):
             plt.scatter(x_values, y_values, marker='o', color='blue', s=30, label='Data Points')
 
             
-            # Add a horizontal line with a label
-            plt.axhline(y=max_y, color='green', linestyle='--', label=f'Max Y = {max_y}')
+            # Add a horizontal line with a label(, linestyle='--', label=f'Max Y = {max_y}', linestyle='--', label=f'Max X = {max_x}')
+            plt.axhline(y=max_y, color='green',linestyle='--')
 
             # Add a vertical line with a label
-            plt.axvline(x=max_x, color='orange', linestyle='--', label=f'Max X = {max_x}')
+            plt.axvline(x=max_x, color='orange',linestyle='--')
 
             
             # Set the grid
@@ -834,7 +834,7 @@ class SoilReport(models.AbstractModel):
             plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
             plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
 
-            # Add a horizontal line with a label
+            # # Add a horizontal line with a label
             plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
             plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
 
