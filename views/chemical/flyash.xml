@@ -431,11 +431,25 @@
                           
                     </group>
 
+                     <group attrs="{'invisible': [('na2o_visible', '=', False)]}">
+                        <h1>
+                            <field name="casting_28_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+                       <group attrs="{'invisible': [('na2o_visible', '=', False)]}">
+                            <field name="status_28days"/>
+                      
+                    </group>
+
                    
 
 
                     <group attrs="{'invisible': [('na2o_visible', '=', False)]}">
                        <group style="white-space:nowrap; width:50%">   
+                            <field name="casting_date_28days"/>
+                            <field name="testing_date_28days"/>
                             <field name="siliceous11"/>
                         
                             <field name="calcareous11" />
@@ -475,11 +489,25 @@
                           
                     </group>
 
+                      <group attrs="{'invisible': [('k2o_visible', '=', False)]}">
+                        <h1>
+                            <field name="casting_28_name_k2o" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+                       <group attrs="{'invisible': [('k2o_visible', '=', False)]}">
+                            <field name="status_28days_k2o"/>
+                      
+                    </group>
+
                    
 
 
                     <group attrs="{'invisible': [('k2o_visible', '=', False)]}">
                        <group style="white-space:nowrap; width:50%">
+                            <field name="casting_date_28days_k2o"/>
+                            <field name="testing_date_28days_k2o"/>
                             <field name="siliceous12"/>
                         
                             <field name="calcareous12" />
