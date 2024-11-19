@@ -580,7 +580,7 @@ class GsbMechanical(models.Model):
     liquid_limit_visible = fields.Boolean("Liquid Limit Visible",compute="_compute_visible")
 
     liquid_limit_table = fields.One2many('mech.gsb.liquid.limit.line','parent_id',string="Liquid Limit")
-    liquid_limit = fields.Float("Liquid Limit")
+    liquid_limit = fields.Float("Liquid Limit",digits=(12,2))
     remarks_liquid_limit = fields.Selection([
         ('plastic', 'Plastic'),
         ('non-plastic', 'Non-Plastic')],"Remarks",store=True)
