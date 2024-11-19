@@ -318,7 +318,7 @@ class Soil(models.Model):
 
        
         # Adjust xlim to add space on both ends of the x-axis
-        plt.xlim(left=5.0, right=max(x_values) + 1.5 )
+        plt.xlim(left=5.0, right=max(x_values) )
 
         plt.ylim(bottom=0, top=max(y_values) + 1.0)
 
