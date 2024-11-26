@@ -229,6 +229,13 @@
     'reports/bricks_burnt_clay/bricks_burnt_clay_report.xml',
     'reports/bricks_burnt_clay/bricks_burnt_clay_datasheet.xml',
 
+    'views/mechanical/stainless_steel_tmt.xml',
+    'reports/stainless_steel/stainless_steel_report.xml',
+    'reports/stainless_steel/stainless_steel_datasheet.xml',
+    'views/mechanical/tile.xml',
+    'reports/tile/tile_datasheet.xml',
+    'reports/tile/tile_report.xml'
+
 
     # 'views/portal_template.xml'
     

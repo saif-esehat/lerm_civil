@@ -2,11 +2,21 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError,ValidationError
 import math
 import re
-
-
+import json
+import base64
+import qrcode
+from io import BytesIO
+from lxml import etree
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
+import math
+from scipy.interpolate import CubicSpline , interp1d , Akima1DInterpolator
+from scipy.optimize import minimize_scalar
+from matplotlib.ticker import MultipleLocator, StrMethodFormatter
 
 class StainlessSteel(models.Model):
-    _name = "mechanical.stainless.steel.tmt"
+    _name = "mechanical.stainless.steel.tmt.bar"
     _inherit = "lerm.eln"
    
     
@@ -134,13 +144,13 @@ class StainlessSteel(models.Model):
     lentgh = fields.Float(string="Length in meter",digits=(10, 3))
     weight = fields.Float(string="Weight, in kg",digits=(10, 3))
     weight_per_meter = fields.Float(string="Weight per meter, kg/m",compute="_compute_weight_per_meter",store=True)
-    crossectional_area = fields.Float(string="Cross sectional Area, mm²",compute="_compute_crossectional_area")
+    crossectional_area = fields.Float(string="Area mm²",compute="_compute_crossectional_area")
     gauge_length = fields.Integer(string="Gauge Length mm",compute="_compute_gauge_length",store=True)
-    elongated_gauge_length = fields.Float(string="Elongated Gauge Length, mm")
+    elongated_gauge_length = fields.Float(string="Final Length, mm")
     percent_elongation = fields.Float(string="% Elongation",compute="_compute_elongation_percent",store=True)
-    yeild_load = fields.Float(string="Yield Load  KN")
+    yeild_load = fields.Float(string="0.2% Proof Load / Yield Load, KN")
     ultimate_load = fields.Float(string="Ultimate Load, Kn")
-    proof_yeid_stress = fields.Float(string="0.2% Proof Stress / Yield Stress N/mm2",compute="_compute_proof_yeid_stress",store=True)
+    proof_yeid_stress = fields.Float(string="0.2% Proof Stress",compute="_compute_proof_yeid_stress",store=True)
     ult_tens_strgth = fields.Float(string="Ultimate Tensile Strength, N/mm2",compute="_compute_ult_tens_strgth",store=True)
     fracture = fields.Char("Fracture (Within Gauge Length)",default="W.G.L")
     eln_ref = fields.Many2one('lerm.eln',string="ELN")
@@ -630,7 +640,8 @@ class StainlessSteel(models.Model):
         for record in self:
             if record.lentgh != 0:
                 # print(record.weight / (0.00785 * record.lentgh))
-                record.crossectional_area = round((record.weight / (0.00785 * record.lentgh)),2)
+                # record.crossectional_area = round((record.weight / (0.00785 * record.lentgh)),2)
+                record.crossectional_area = round((record.weight / record.lentgh)/ (0.00774 ),2)
                 
             else:
                 record.crossectional_area = 0.0
@@ -693,7 +704,7 @@ class StainlessSteel(models.Model):
 
     @api.model
     def create(self, vals):
-        record = super(SteelTmtBarLine, self).create(vals)
+        record = super(StainlessSteel, self).create(vals)
         # import wdb;wdb.set_trace()
         # record.get_all_fields()
         self._compute_size_id()
@@ -714,7 +725,7 @@ class StainlessSteel(models.Model):
         self._compute_requirement_yield()
         self._compute_requirement_utl()
 
-        return super(SteelTmtBarLine, self).read(fields=fields, load=load)
+        return super(StainlessSteel, self).read(fields=fields, load=load)
 
 
     @api.depends('eln_ref')
@@ -833,3 +844,78 @@ class StainlessSteel(models.Model):
             record.sample_parameters = records
             print("Records",records)
             
+
+
+
+class StainlessSteelTmtBar(models.AbstractModel):
+    _name = 'report.lerm_civil.stainless_steel_tmt_bar_report'
+    _description = 'Steel TMT Bar'
+    
+    @api.model
+    def _get_report_values(self, docids, data):
+        # eln = self.env['lerm.eln'].sudo().browse(docids)
+        inreport_value = data.get('inreport', None)
+        nabl = data.get('nabl')
+        if data.get('report_wizard') == True:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
+        elif 'active_id' in data['context']:
+            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+        else:
+            eln = self.env['lerm.eln'].sudo().browse(docids) 
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+        qr.add_data(eln.kes_no)
+        qr.make(fit=True)
+        qr_image = qr.make_image()
+
+        # Convert the QR code image to base64 string
+        buffered = BytesIO()
+        qr_image.save(buffered, format="PNG")
+        qr_image_base64 = base64.b64encode(buffered.getvalue()).decode()
+
+        # Assign the base64 string to a field in the 'srf' object
+        qr_code = qr_image_base64
+        model_id = eln.model_id
+        # differnt location for product based
+        model_name = eln.material.product_based_calculation[0].ir_model.name 
+        if model_name:
+            general_data = self.env[model_name].sudo().browse(model_id)
+        else:
+            general_data = self.env['lerm.eln'].sudo().browse(docids)
+        return {
+            'eln': eln,
+            'data' : general_data,
+            'qrcode': qr_code,
+            'stamp' : inreport_value,
+            'nabl' : nabl
+
+        }
+
+class StainlessSteelTmtBarDataSheet(models.AbstractModel):
+    _name = 'report.lerm_civil.stainless_steel_tmt_bar_datasheet'
+    _description = 'Steel TMT Bar DataSheet'
+    
+    @api.model
+    def _get_report_values(self, docids, data):
+        # import wdb ; wdb.set_trace()
+
+        if data['fromsample'] == True:
+            if 'active_id' in data['context']:
+                eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(docids) 
+        else:
+            if data['report_wizard'] == True:
+                eln = self.env['lerm.eln'].sudo().search([('id','=',data['eln'])])
+            else:
+                eln = self.env['lerm.eln'].sudo().browse(data['eln_id'])
+        model_id = eln.model_id
+        # differnt location for product based
+        model_name = eln.material.product_based_calculation[0].ir_model.name 
+        if model_name:
+            general_data = self.env[model_name].sudo().browse(model_id)
+        else:
+            general_data = self.env['lerm.eln'].sudo().browse(docids)
+        return {
+            'eln': eln,
+            'data' : general_data
+        }
