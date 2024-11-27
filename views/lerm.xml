@@ -239,13 +239,14 @@
     <menuitem id="enviroment_register_menu"
         name="Environment Register"
         parent="lerm_root"
+        groups="kes_admin_access_group"
         action="action_enviroment_register_tree"
         sequence="20"  />
 
 
     <menuitem id="lerm_menu"
         name="Master Data"
-        groups="kes_technician_access_group,kes_admin_access_group,lerm_civil.lerm_master"
+        groups="kes_admin_access_group,lerm_civil.lerm_master"
         parent="lerm_root"
         sequence="20"  />
 
@@ -276,7 +277,7 @@
         name="Sample"
         parent="reporting_menu"
         action="lerm_sample_print_reports_action"
-        groups="lerm_civil.kes_admin_access_group,lerm_civil.kes_report"
+        groups="lerm_civil.kes_admin_access_group"
         sequence="11" />
 
     <!-- <menuitem id="menu_sample_graph" name="Sample Graph" parent="lerm_transaction_data" action="action_lerm_srf_sample_graph" sequence="10"/> -->
@@ -324,7 +325,7 @@
 
     <menuitem id="lerm_sample"
         name="Sample"
-        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_verified_by,lerm_civil.kes_hod_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_hod_access_group,lerm_civil.kes_quality_manager"
         parent="lerm_transaction_data"
         action="test_sample_action"
         sequence="15" />
@@ -371,7 +372,7 @@
         sequence="22" />
     
     <menuitem id="sample_status_pending_approval"
-        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_verified_by,lerm_civil.kes_quality_manager"
         name="Pending Approval"
         parent="sample_status"
         action="sample_pending_approval_action"
@@ -379,7 +380,7 @@
 
 
     <menuitem id="sample_status_in_report"
-        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
+        groups="lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_verified_by,lerm_civil.kes_quality_manager"
         name="In-Report"
         parent="sample_status"
         action="test_sample_pending_in_report_action"

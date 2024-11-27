@@ -405,9 +405,10 @@ class LermSampleForm(models.Model):
     @api.depends('state')
     def compute_form_product_based(self):
         for record in self:
-            record.product_or_form_based = False
+            record.product_or_form_based = True
+            print("SAMPLE STATE",record.state)
             if record.state != '1-allotment_pending':
-                eln_id = self.env['lerm.eln'].search([('sample_id','=',record.id)])
+                eln_id = record.env['lerm.eln'].sudo().search([('sample_id','=',record.id)])
                 if eln_id and eln_id.parameters_result:  # Check if eln_id and parameters_result are not empty
                     print("DATA",eln_id.parameters_result)
                     is_product_based = eln_id.is_product_based_calculation
