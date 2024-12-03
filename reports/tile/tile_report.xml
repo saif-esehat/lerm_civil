@@ -657,7 +657,7 @@
 							</td>
 
                             <td>
-							    <span t-esc="dict(data._fields['observations'].selection).get(data.observations)"/>
+							    <span t-esc="dict(data._fields['observations_chemical'].selection).get(data.observations_chemical)"/>
 							</td>
                             
 							<td>
