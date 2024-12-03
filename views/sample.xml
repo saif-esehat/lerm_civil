@@ -212,12 +212,11 @@
                                     </tree>
                         </field>
                     
-                        
-                    </sheet>
-                    <!-- <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers"/>
-                        <field name="message_ids" widget="mail_thread"/>
-                    </div> -->
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
 
                 </form>
             </field>
@@ -324,8 +323,8 @@
                       <field name="witness" optional="show"/>
                       <field name="scope" optional="show"/>
                       <field name="sample_description" optional="show"/>
-                      <field name="state" widget="badge" optional="show"/>
-                      <field name="invoice_status" optional="show"/>
+                      <field name="state" optional="show" decoration-success= "state == '4-in_report'" decoration-warning= "state == '1-allotment_pending'" decoration-danger= "state == '6-cancelled'" decoration-info= "state == '3-pending_verification'" widget="badge"/>
+                      <field name="invoice_status" optional="show"  decoration-success= "invoice_status == '2-invoiced'" decoration-danger= "invoice_status == '1-uninvoiced'" widget="badge"/>
                       <field name="invoice_number" optional="show"/>
 
                       
