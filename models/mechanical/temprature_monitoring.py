@@ -181,240 +181,6 @@ class EnviromentTemprature(models.Model):
 
 
 
-    # def generate_line_chart_20mm(self):
-    # # Data preparation
-    #     days = []
-    #     core_bottom = []
-    #     core_middle = []
-    #     core_top = []
-    #     cover_bottom = []
-    #     cover_middle = []
-    #     cover_top = []
-    #     ambient = []
-
-    #     # Process data for alignment
-    #     for line in self.child_lines_temprature:
-    #         day = line.day
-    #         if isinstance(line.bottom, list):  # Handle multiple entries for the same day
-    #             for i in range(len(line.bottom)):
-    #                 days.append(day)  # Same day for all entries
-    #                 core_bottom.append(line.bottom[i])
-    #                 core_middle.append(line.middle[i])
-    #                 core_top.append(line.top[i])
-    #                 cover_bottom.append(line.bottom1[i])
-    #                 cover_middle.append(line.middle1[i])
-    #                 cover_top.append(line.top1[i])
-    #                 ambient.append(line.ambient[i])
-    #         else:  # Single value per day
-    #             days.append(day)
-    #             core_bottom.append(line.bottom)
-    #             core_middle.append(line.middle)
-    #             core_top.append(line.top)
-    #             cover_bottom.append(line.bottom1)
-    #             cover_middle.append(line.middle1)
-    #             cover_top.append(line.top1)
-    #             ambient.append(line.ambient)
-
-    #     # Create the plot
-    #     plt.figure(figsize=(14, 8))
-
-    #     # Plot the temperature data
-    #     plt.plot(days, core_bottom, label='Core Area - Bottom', marker='o', color='blue')
-    #     plt.plot(days, core_middle, label='Core Area - Middle', marker='o', color='orange')
-    #     plt.plot(days, core_top, label='Core Area - Top', marker='o', color='green')
-    #     plt.plot(days, cover_bottom, label='Cover Area - Bottom', marker='o', color='red')
-    #     plt.plot(days, cover_middle, label='Cover Area - Middle', marker='o', color='purple')
-    #     plt.plot(days, cover_top, label='Cover Area - Top', marker='o', color='brown')
-    #     plt.plot(days, ambient, label='Ambient', linestyle='--', color='black')
-
-    #     # Add small vertical lines for each day
-    #     unique_days = sorted(set(days))  # Get unique days
-    #     for day in unique_days:
-    #         plt.axvline(x=day, color='gray', linestyle='--', linewidth=0.5, ymin=0, ymax=1)
-
-      
-
-    #     # Customize the graph
-    #     plt.title('Temperature vs. Days', fontsize=16)
-    #     plt.xlabel('Days', fontsize=14)
-    #     plt.ylabel('Temperature (°C)', fontsize=14)
-    #     plt.xticks(fontsize=12)
-    #     plt.yticks(fontsize=12)
-    #     plt.legend(fontsize=12)
-    #     plt.grid(True, which='both', linestyle='--', linewidth=0.5)
-
-    #     # Save the plot to a binary field
-    #     buf = io.BytesIO()
-    #     plt.savefig(buf, format='png', bbox_inches='tight')
-    #     buf.seek(0)
-    #     chart_image20mm = base64.b64encode(buf.read()).decode('utf-8')
-    #     buf.close()
-    #     plt.close()  # Free up memory
-
-    #     return chart_image20mm
-
-    
-    # def generate_line_chart_20mm(self):
-    #     # Data preparation
-    #     days = []
-    #     core_bottom = []
-    #     core_middle = []
-    #     core_top = []
-    #     cover_bottom = []
-    #     cover_middle = []
-    #     cover_top = []
-    #     ambient = []
-
-    #     # Process data for alignment
-    #     for line in self.child_lines_temprature:
-    #         day = line.day
-    #         if isinstance(line.bottom, list):  # Handle multiple entries for the same day
-    #             for i in range(len(line.bottom)):
-    #                 days.append(day)  # Same day for all entries
-    #                 core_bottom.append(line.bottom[i])
-    #                 core_middle.append(line.middle[i])
-    #                 core_top.append(line.top[i])
-    #                 cover_bottom.append(line.bottom1[i])
-    #                 cover_middle.append(line.middle1[i])
-    #                 cover_top.append(line.top1[i])
-    #                 ambient.append(line.ambient[i])
-    #         else:  # Single value per day
-    #             days.append(day)
-    #             core_bottom.append(line.bottom)
-    #             core_middle.append(line.middle)
-    #             core_top.append(line.top)
-    #             cover_bottom.append(line.bottom1)
-    #             cover_middle.append(line.middle1)
-    #             cover_top.append(line.top1)
-    #             ambient.append(line.ambient)
-
-    #     # Create the plot
-    #     plt.figure(figsize=(14, 8))
-
-    #     # Plot the temperature data
-    #     plt.plot(days, core_bottom, label='Core Area - Bottom', marker='o', color='blue')
-    #     plt.plot(days, core_middle, label='Core Area - Middle', marker='o', color='orange')
-    #     plt.plot(days, core_top, label='Core Area - Top', marker='o', color='green')
-    #     plt.plot(days, cover_bottom, label='Cover Area - Bottom', marker='o', color='red')
-    #     plt.plot(days, cover_middle, label='Cover Area - Middle', marker='o', color='purple')
-    #     plt.plot(days, cover_top, label='Cover Area - Top', marker='o', color='brown')
-    #     plt.plot(days, ambient, label='Ambient', linestyle='--', color='black')
-
-    #     # Add vertical lines for each day
-    #     unique_days = sorted(set(days))  # Get unique days
-    #     for day in unique_days:
-    #         plt.axvline(x=day, color='gray', linestyle='--', linewidth=0.5)
-
-    #     # Add horizontal lines connecting points on the same day
-    #     for i in range(len(days) - 1):
-    #         if days[i] == days[i + 1]:  # If it's the same day
-    #             plt.hlines(core_bottom[i], days[i], days[i + 1], color='blue', linestyle='--', alpha=0.5)
-    #             plt.hlines(core_middle[i], days[i], days[i + 1], color='orange', linestyle='--', alpha=0.5)
-    #             plt.hlines(core_top[i], days[i], days[i + 1], color='green', linestyle='--', alpha=0.5)
-    #             plt.hlines(cover_bottom[i], days[i], days[i + 1], color='red', linestyle='--', alpha=0.5)
-    #             plt.hlines(cover_middle[i], days[i], days[i + 1], color='purple', linestyle='--', alpha=0.5)
-    #             plt.hlines(cover_top[i], days[i], days[i + 1], color='brown', linestyle='--', alpha=0.5)
-
-    #     # Customize the graph
-    #     plt.title('Temperature vs. Days', fontsize=16)
-    #     plt.xlabel('Days', fontsize=14)
-    #     plt.ylabel('Temperature (°C)', fontsize=14)
-    #     plt.xticks(unique_days, fontsize=12)  # Ensure ticks are only for unique days
-    #     plt.yticks(fontsize=12)
-    #     plt.legend(fontsize=12)
-    #     plt.grid(True, which='both', linestyle='--', linewidth=0.5)
-
-    #     # Save the plot to a binary field
-    #     buf = io.BytesIO()
-    #     plt.savefig(buf, format='png', bbox_inches='tight')
-    #     buf.seek(0)
-    #     chart_image20mm = base64.b64encode(buf.read()).decode('utf-8')
-    #     buf.close()
-    #     plt.close()  # Free up memory
-
-    #     return chart_image20mm
-
-
-    # def generate_line_chart_20mm(self):
-    
-        # days = []
-        # core_bottom = []
-        # core_middle = []
-        # core_top = []
-        # cover_bottom = []
-        # cover_middle = []
-        # cover_top = []
-        # ambient = []
-
-        # # Process data for alignment
-        # for line in self.child_lines_temprature:
-        #     day = line.day
-        #     if isinstance(line.bottom, list):  # Handle multiple entries for the same day
-        #         for i in range(len(line.bottom)):
-        #             days.append(day)  # Same day for all entries
-        #             core_bottom.append(line.bottom[i])
-        #             core_middle.append(line.middle[i])
-        #             core_top.append(line.top[i])
-        #             cover_bottom.append(line.bottom1[i])
-        #             cover_middle.append(line.middle1[i])
-        #             cover_top.append(line.top1[i])
-        #             ambient.append(line.ambient[i])
-        #     else:  # Single value per day
-        #         days.append(day)
-        #         core_bottom.append(line.bottom)
-        #         core_middle.append(line.middle)
-        #         core_top.append(line.top)
-        #         cover_bottom.append(line.bottom1)
-        #         cover_middle.append(line.middle1)
-        #         cover_top.append(line.top1)
-        #         ambient.append(line.ambient)
-
-        # # Create the plot
-        # plt.figure(figsize=(14, 8))
-
-        # # Plot the temperature data
-        # plt.plot(days, core_bottom, label='Core Area - Bottom', marker='o', color='blue')
-        # plt.plot(days, core_middle, label='Core Area - Middle', marker='o', color='orange')
-        # plt.plot(days, core_top, label='Core Area - Top', marker='o', color='green')
-        # plt.plot(days, cover_bottom, label='Cover Area - Bottom', marker='o', color='red')
-        # plt.plot(days, cover_middle, label='Cover Area - Middle', marker='o', color='purple')
-        # plt.plot(days, cover_top, label='Cover Area - Top', marker='o', color='brown')
-        # plt.plot(days, ambient, label='Ambient', linestyle='--', color='black')
-
-        # # Add vertical lines for each day
-        # unique_days = sorted(set(days))  # Get unique days
-        # for day in unique_days:
-        #     plt.axvline(x=day, color='gray', linestyle='--', linewidth=0.5)
-
-        # # Add horizontal lines connecting points on the same day
-        # for i in range(len(days) - 1):
-        #     if days[i] == days[i + 1]:  # If it's the same day
-        #         plt.hlines(core_bottom[i], days[i], days[i + 1], color='blue', linestyle='--', alpha=0.5)
-        #         plt.hlines(core_middle[i], days[i], days[i + 1], color='orange', linestyle='--', alpha=0.5)
-        #         plt.hlines(core_top[i], days[i], days[i + 1], color='green', linestyle='--', alpha=0.5)
-        #         plt.hlines(cover_bottom[i], days[i], days[i + 1], color='red', linestyle='--', alpha=0.5)
-        #         plt.hlines(cover_middle[i], days[i], days[i + 1], color='purple', linestyle='--', alpha=0.5)
-        #         plt.hlines(cover_top[i], days[i], days[i + 1], color='brown', linestyle='--', alpha=0.5)
-
-        # # Customize the graph
-        # plt.title('Temperature vs. Days', fontsize=16)
-        # plt.xlabel('Days', fontsize=14)
-        # plt.ylabel('Temperature (°C)', fontsize=14)
-        # plt.xticks(unique_days, fontsize=12)  # Ensure ticks are only for unique days
-        # plt.yticks(fontsize=12)
-        # plt.legend(fontsize=12)
-        # plt.grid(True, which='both', linestyle='--', linewidth=0.5)
-
-        # # Save the plot to a binary field
-        # buf = io.BytesIO()
-        # plt.savefig(buf, format='png', bbox_inches='tight')
-        # buf.seek(0)
-        # chart_image20mm = base64.b64encode(buf.read()).decode('utf-8')
-        # buf.close()
-        # plt.close()  # Free up memory
-
-        # return chart_image20mm
-
     def generate_line_chart_20mm(self):
         days = []
         core_bottom = []
@@ -471,7 +237,6 @@ class EnviromentTemprature(models.Model):
             plt.axvline(x=i, color='gray', linestyle='--', linewidth=0.5)
 
         # Customize the graph
-        plt.title('Temperature vs. Days', fontsize=16)
         plt.xlabel('Days', fontsize=14)
         plt.ylabel('Temperature (°C)', fontsize=14)
         plt.xticks(ticks=range(len(unique_days)), labels=unique_days, fontsize=12)  # Set x-ticks to unique days
@@ -491,7 +256,9 @@ class EnviromentTemprature(models.Model):
 
 
     
- 
+    
+  
+
 
     @api.depends('child_lines_temprature')
     def _compute_graph_image_20mm(self):
@@ -501,8 +268,6 @@ class EnviromentTemprature(models.Model):
                 record.graph_image_20mm = chart_image20mm
         except:
             pass 
-
-
 
 
 
@@ -554,6 +319,8 @@ class EnviromentTemprature(models.Model):
             field_values[field_name] = field_value
 
         return field_values
+
+
 
 
 class EnviromentTempratureLine(models.Model):
