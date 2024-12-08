@@ -14,7 +14,7 @@ class SrfReport(models.AbstractModel):
         # import wdb;wdb.set_trace();
 
         srf = self.env['lerm.civil.srf'].sudo().browse(docids)
-        sample = self.env["lerm.srf.sample"].search([('srf_id','=', srf.srf_id)])
+        sample = self.env["lerm.srf.sample"].search([('srf_id','=', srf.id)])
         # qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         # qr.add_data(srf.kes_number)
         # qr.make(fit=True)
