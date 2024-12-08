@@ -8,4 +8,7 @@ class EnviromentRegister(models.Model):
     temp_wet_bulb = fields.Float("Temprature (Wet Bulb)")
     relative_hum = fields.Float("Relative Humidity")
     date_time = fields.Datetime("Date and Time")
+
+
+
     

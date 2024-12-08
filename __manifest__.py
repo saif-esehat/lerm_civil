@@ -234,7 +234,10 @@
     'reports/stainless_steel/stainless_steel_datasheet.xml',
     'views/mechanical/tile.xml',
     'reports/tile/tile_datasheet.xml',
-    'reports/tile/tile_report.xml'
+    'reports/tile/tile_report.xml',
+    'views/mechanical/temprature_monitoring.xml',
+    'reports/temprature_monitoring/temprature_datasheet.xml',
+    'reports/temprature_monitoring/temprature_monitoring_report.xml'
 
 
     # 'views/portal_template.xml'

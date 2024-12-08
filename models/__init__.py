@@ -144,5 +144,7 @@ from .report import concrete_cube_water_ds_report
 from .mechanical import stainless_steel_tmt
 from .mechanical import tile
 from .report import tile_ds_report
+from .mechanical import temprature_monitoring
+from .report import temprature_monitoring_ds_report
 
 # from .import dash_bord
