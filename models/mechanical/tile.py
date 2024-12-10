@@ -15,6 +15,8 @@ class Tile(models.Model):
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
 
+    tile_type = fields.Char(string="Type Of Tile")
+
     @api.depends('eln_ref')
     def _compute_grade_id(self):
         if self.eln_ref:
@@ -66,10 +68,13 @@ class Tile(models.Model):
                 record.average_thickness = 0.0
 
 
-    deviation_length = fields.Float(string="Deviation in Length", compute="_compute_deviation_length",digits=(16,2))
-    deviation_width = fields.Float(string="Deviation in Width", compute="_compute_deviation_width",digits=(16,2))
-    deviation_length_width = fields.Float(string="Deviation in Length & Width", compute="_compute_deviation_length_width",digits=(16,2))
-    deviation_thickness = fields.Float(string="Deviation in Thickness", compute="_compute_deviation_thickness",digits=(16,2))
+    deviation_length = fields.Float(string="Deviation in Length %", compute="_compute_deviation_length",digits=(16,2))
+    deviation_width = fields.Float(string="Deviation in Width %", compute="_compute_deviation_width",digits=(16,2))
+    deviation_length_width = fields.Float(string="Deviation in Length & Width %", compute="_compute_deviation_length_width",digits=(16,2))
+    deviation_thickness = fields.Float(string="Deviation in Thickness %", compute="_compute_deviation_thickness",digits=(16,2))
+
+    requirement_length_width = fields.Char(string="Requirement ,Deviation in Length & Width, %")
+    requirement_thickness = fields.Char(string="Requirement ,Deviation in Thickness,%")
 
     @api.depends('average_length')
     def _compute_deviation_length(self):
@@ -109,14 +114,16 @@ class Tile(models.Model):
     straightness_name = fields.Char("Name",default="Straightness")
     straightness_visible = fields.Boolean("Straightness Visible",compute="_compute_visible")   
 
-    sample_size = fields.Integer(string="Sample Size")
+    sample_size = fields.Integer(string="Sample Size, mm")
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines_straightness = fields.One2many('mechanical.straightness.tile.line','parent_id',string="Parameter")
 
-    average_straightness = fields.Float(string="Average ", compute="_compute_average_straightness",digits=(16,3))
+    average_straightness = fields.Float(string="Average", compute="_compute_average_straightness",digits=(16,3))
 
-    deviation_straightness = fields.Float(string="Deviation from Straightness ",compute="_compute_deviation_straightness", digits=(16,3))
+    deviation_straightness = fields.Float(string="Deviation from Straightness, %",compute="_compute_deviation_straightness", digits=(16,3))
+
+    requirement_straightness = fields.Char(string="Requirement ,Deviation from Straightness, %")
 
 
     @api.depends('child_lines_straightness.straightness1',  'child_lines_straightness.straightness2',  'child_lines_straightness.straightness3',  'child_lines_straightness.straightness4' )
@@ -201,14 +208,15 @@ class Tile(models.Model):
     rectangularity_name = fields.Char("Name",default="Rectangularity")
     rectangularity_visible = fields.Boolean("Rectangularity Visible",compute="_compute_visible")   
 
-    rectangularity_sample_size = fields.Integer(string="Sample Size")
+    rectangularity_sample_size = fields.Integer(string="Sample Size, mm")
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines_rectangularity = fields.One2many('mechanical.rectangularity.tile.line','parent_id',string="Parameter")
 
     average_rectangularity = fields.Float(string="Average ", compute="_compute_average_rectangularity",digits=(16,3))
 
-    deviation_rectangularity = fields.Float(string="Deviation from Rectangularity ",compute="_compute_deviation_rectangularity", digits=(16,3))
+    deviation_rectangularity = fields.Float(string="Deviation from Rectangularity  %",compute="_compute_deviation_rectangularity", digits=(16,3))
+    requirement_rectangularity = fields.Char(string="Requirement ,Deviation from Rectangularity, %")
 
 
     @api.depends('child_lines_rectangularity.rectangularity1',  'child_lines_rectangularity.rectangularity2',  'child_lines_rectangularity.rectangularity3',  'child_lines_rectangularity.rectangularity4' )
@@ -295,15 +303,16 @@ class Tile(models.Model):
     centre_curvature_name = fields.Char("Name",default="Centre Curvature")
     centre_curvature_visible = fields.Boolean("Centre Curvature Visible",compute="_compute_visible")   
 
-    centre_curvature_sample_size = fields.Integer(string="Sample Size")
-    centre_curvature_diagonal  = fields.Integer(string="Diagonal ")
+    centre_curvature_sample_size = fields.Integer(string="Sample Size, mm")
+    centre_curvature_diagonal  = fields.Integer(string="Diagonal, mm")
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines_centre_curvature = fields.One2many('mechanical.centre.curvature.tile.line','parent_id',string="Parameter")
 
     average_centre_curvature = fields.Float(string="Average ", compute="_compute_average_centre_curvature",digits=(16,3))
 
-    deviation_centre_curvature = fields.Float(string="Maximum Centre Curvature,% ",compute="_compute_deviation_centre_curvature", digits=(16,3))
+    deviation_centre_curvature = fields.Float(string="Maximum Centre Curvature, mm ",compute="_compute_deviation_centre_curvature", digits=(16,3))
+    requirement_centre_curvature = fields.Char(string="Requirement ,Maximum Centre Curvature,%")
 
 
     @api.depends('child_lines_centre_curvature.centre_curvature1',  'child_lines_centre_curvature.centre_curvature2',  'child_lines_centre_curvature.centre_curvature3',  'child_lines_centre_curvature.centre_curvature4' )
@@ -390,15 +399,16 @@ class Tile(models.Model):
     edge_curvature_name = fields.Char("Name",default="Edge Curvature")
     edge_curvature_visible = fields.Boolean("Edge Curvature Visible",compute="_compute_visible")   
 
-    edge_curvature_sample_size = fields.Integer(string="Sample Size")
-    edge_curvature_diagonal  = fields.Integer(string="Diagonal ")
+    edge_curvature_sample_size = fields.Integer(string="Sample Size, mm")
+    edge_curvature_diagonal  = fields.Integer(string="Diagonal, mm")
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines_edge_curvature = fields.One2many('mechanical.edge.curvature.tile.line','parent_id',string="Parameter")
 
     average_edge_curvature = fields.Float(string="Average ", compute="_compute_average_edge_curvature",digits=(16,3))
 
-    deviation_edge_curvature = fields.Float(string="Maximum edge Curvature,% ",compute="_compute_deviation_edge_curvature", digits=(16,3))
+    deviation_edge_curvature = fields.Float(string="Maximum Edge Curvature, mm ",compute="_compute_deviation_edge_curvature", digits=(16,3))
+    requirement_edge_curvature = fields.Char(string="Requirement, Maximum Edge Curvature,%")
 
 
     @api.depends('child_lines_edge_curvature.edge_curvature1',  'child_lines_edge_curvature.edge_curvature2',  'child_lines_edge_curvature.edge_curvature3',  'child_lines_edge_curvature.edge_curvature4' )
@@ -483,15 +493,16 @@ class Tile(models.Model):
     warpage_name = fields.Char("Name",default="Warpage")
     warpage_visible = fields.Boolean("Warpage Visible",compute="_compute_visible")   
 
-    warpage_sample_size = fields.Integer(string="Sample Size")
-    warpage_diagonal  = fields.Integer(string="Diagonal ")
+    warpage_sample_size = fields.Integer(string="Sample Size, mm")
+    warpage_diagonal  = fields.Integer(string="Diagonal, mm ")
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines_warpage = fields.One2many('mechanical.warpage.tile.line','parent_id',string="Parameter")
 
     average_warpage = fields.Float(string="Average ", compute="_compute_average_warpage",digits=(16,3))
 
-    deviation_warpage = fields.Float(string="Maximum warpage,% ",compute="_compute_deviation_warpage", digits=(16,3))
+    deviation_warpage = fields.Float(string="Maximum warpage, % ",compute="_compute_deviation_warpage", digits=(16,3))
+    requirement_warpage = fields.Char(string="Requirement, Maximum Warpage, %")
 
 
     @api.depends('child_lines_warpage.warpage1',  'child_lines_warpage.warpage2',  'child_lines_warpage.warpage3',  'child_lines_warpage.warpage4' )
@@ -575,7 +586,7 @@ class Tile(models.Model):
 
      # water absorption and bulk density
 
-    water_bulk_name = fields.Char("Name",default="water absorption and bulk density")
+    water_ab_bulk_name = fields.Char("Name",default="Water Absorption And Bulk Density")
     water_bulk_visible = fields.Boolean("water absorption and bulk density Visible",compute="_compute_visible")   
 
    
@@ -585,8 +596,12 @@ class Tile(models.Model):
 
     average_water_bulk = fields.Float(string="Water Absorption, % (average) ",compute="_compute_average_water_bulk",digits=(16,1))
 
-    individual_water_bulk = fields.Float(string="water Absorption, % (Individual) ",compute="_compute_individual_water_bulk",digits=(16,1))
+    individual_water_bulk = fields.Float(string="Water Absorption, % (Individual) ",compute="_compute_individual_water_bulk",digits=(16,1))
     bulk_density = fields.Float(string="Bulk Density, g/cc",compute="_compute_bulk_density",digits=(16,2))
+
+    requirement_water = fields.Char(string="Requirement, Water Absorption, % (Average)")
+    requirement_water_individual = fields.Char(string="Requirement, Water Absorption, % (Individual)")
+    requirement_bulk = fields.Char(string="Requirement, Bulk Density, g/cc")
 
 
     @api.depends('child_lines_water_bulk.water_obsorption')
@@ -677,18 +692,23 @@ class Tile(models.Model):
 
       # Modulus and rupture and breaking strength
 
-    modulus_name = fields.Char("Name",default="Modulus and rupture and breaking strength")
-    modulus_visible = fields.Boolean("Modulus and rupture and breaking strength Visible",compute="_compute_visible")   
+    modulus_rupture_name = fields.Char("Name",default="Modulus Of Rupture And Breaking Strength")
+    modulus_visible = fields.Boolean("Modulus Of Rupture And Breaking Strength Visible",compute="_compute_visible")   
 
    
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines_modulus = fields.One2many('mechanical.modulus.tile.line','parent_id',string="Parameter")
 
-    average_modulus = fields.Float(string="Modulus of rupture, N/mm2 (Average)",compute="_compute_average_modulus",digits=(16,2))
+    average_modulus = fields.Float(string="Modulus of Rupture, N/mm2 (Average)",compute="_compute_average_modulus",digits=(16,2))
 
-    individual_modulus = fields.Float(string="Modulus of rupture, N/mm2 (Individual)",compute="_compute_individual_modulus",digits=(16,2))
+    individual_modulus = fields.Float(string="Modulus of Rupture, N/mm2 (Individual)",compute="_compute_individual_modulus",digits=(16,2))
     breaking_strenght = fields.Float(string="Breaking Strength, N",compute="_compute_breaking_strenght",digits=(16,1))
+
+    requirement_modulus = fields.Char(string="Requirement ,Modulus of Rupture, N/mm2 (Average)")
+    requirement_modulus_individual = fields.Char(string="Requirement ,Modulus of rupture, N/mm2 (Individual)")
+    requirement_modulus_breaking = fields.Char(string="Requirement ,Breaking Strength, N")
+
 
 
     @api.depends('child_lines_modulus.mor')
@@ -774,8 +794,10 @@ class Tile(models.Model):
 
         # crazing resistance test
 
-    crazing_name = fields.Char("Name",default="Crazing resistance test")
+    crazing_resistance_name = fields.Char("Name",default="Crazing Resistance Test")
     crazing_visible = fields.Boolean("crazing resistance test Visible",compute="_compute_visible")  
+
+    requirement_crazing = fields.Char(string="Requirement, Crazing Resistance Test")
 
 
     observations = fields.Selection(
@@ -791,18 +813,56 @@ class Tile(models.Model):
 
         # chemical resistance test
 
-    chemical_name = fields.Char("Name",default="Chemical resistance test")
+    chemical_resistance_name = fields.Char("Name",default="Resistance to Acidsand Alkalis Glazed Tiles")
     chemical_visible = fields.Boolean("chemical resistance test Visible",compute="_compute_visible")  
 
+    observations_alkalis = fields.Char(string="Observations")
+    requirement_alkalis = fields.Char(string="Requirement, Resistance to Acidsand Alkalis Glazed Tiles")
 
-    observations_chemical = fields.Selection(
-        [
-            ('stain', 'Stain Resistance - Class 2 '),
-            ('chemical', 'Chemical Resistance - A')
-        ],
-        string="Observations",
-        default='chemical',  # Default to "No crazing effect was observed"
-    ) 
+
+
+
+
+      #Resistanceto acidsand alkalis Un Glazed tiles
+
+    observations_alkalis_name = fields.Char("Name",default="Resistance to Acidsand Alkalis Un Glazed Tiles ")
+    observations_alkalis_visible = fields.Boolean("chemical resistance test Visible",compute="_compute_visible")  
+
+    observations_alkalis_un = fields.Char(string="Observations")
+    requirement_alkalis_un = fields.Char(string="Requirement, Resistance to Acidsand Alkalis Un Glazed Tiles")
+ 
+
+#  Scratch hardness According to Moh's Scale
+    
+    scratch_hardness_name = fields.Char("Name",default="Scratch hardness According to Moh's Scale")
+    scratch_hardness_visible = fields.Boolean("Surface Quality",compute="_compute_visible") 
+
+    observations1 = fields.Float(string="Observations")
+    observations2 = fields.Float(string="Observations")
+    observations3 = fields.Float(string="Observations")
+    observations4 = fields.Float(string="Observations")
+    observations5 = fields.Float(string="Observations")
+
+    scratch_hardness_avg = fields.Float(string="Scratch hardness According to Moh's Scale",compute="_compute_scratch_hardness_avg")
+
+    requirement_scratch_hardness = fields.Char(string="Requirement ,Scratch hardness According to Moh's Scale")
+
+    @api.depends('observations1', 'observations2', 'observations3', 'observations4', 'observations5')
+    def _compute_scratch_hardness_avg(self):
+        for record in self:
+            values = [record.observations1, record.observations2, record.observations3, record.observations4, record.observations5]
+            total = sum(value for value in values if value)
+            count = sum(1 for value in values if value)
+            record.scratch_hardness_avg = total / count if count > 0 else 0
+            
+
+
+    surface_quality_name = fields.Char("Name",default="Surface Quality")
+    surface_quality_visible = fields.Boolean("Surface Quality",compute="_compute_visible")  
+
+    observations_surface_quality = fields.Char(string="Observations")
+    requirement_surface_quality = fields.Char(string="Requirement, Surface Quality")
+
 
 
 
@@ -825,6 +885,9 @@ class Tile(models.Model):
             record.modulus_visible = False
             record.crazing_visible = False
             record.chemical_visible = False
+            record.observations_alkalis_visible = False
+            record.surface_quality_visible = False
+            record.scratch_hardness_visible = False
             
             for sample in record.sample_parameters:
                 print("Internal Ids",sample.internal_id)
@@ -860,6 +923,16 @@ class Tile(models.Model):
 
                 if sample.internal_id == "daa5edf4-4f0a-4625-a1b8-4b365204be34":
                     record.chemical_visible = True
+
+                if sample.internal_id == "65eefe82-1c17-43d6-8d24-31cad21f017a":
+                    record.observations_alkalis_visible = True
+
+                if sample.internal_id == "56f97e43-cd99-458c-9bce-4c72ba6d7e84":
+                    record.surface_quality_visible = True
+
+                if sample.internal_id == "ecfb0b0b-0774-4296-af7b-6151fbf4f968":
+                    record.scratch_hardness_visible = True
+
 
 
 
@@ -919,22 +992,22 @@ class DimensionTile(models.Model):
     parent_id = fields.Many2one('mechanical.tile',string="Parent Id")
    
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
-    length1 = fields.Float(string="Length 1")
-    length2 = fields.Float(string="Length 2")
-    length3 = fields.Float(string="Length 3")
-    length4 = fields.Float(string="Length 4")
+    length1 = fields.Float(string="Length, mm 1")
+    length2 = fields.Float(string="Length, mm 2")
+    length3 = fields.Float(string="Length, mm 3")
+    length4 = fields.Float(string="Length, mm 4")
 
-    width1 = fields.Float(string="Width 1")
-    width2 = fields.Float(string="Width 2")
-    width3 = fields.Float(string="Width 3")
-    width4 = fields.Float(string="Width 4")
+    width1 = fields.Float(string="Width, mm 1")
+    width2 = fields.Float(string="Width, mm 2")
+    width3 = fields.Float(string="Width, mm 3")
+    width4 = fields.Float(string="Width, mm 4")
 
-    thickness1 = fields.Float(string="Thickness 1")
-    thickness2 = fields.Float(string="Thickness 2")
-    thickness3 = fields.Float(string="Thickness 3")
-    thickness4 = fields.Float(string="Thickness 4")
-    thickness5 = fields.Float(string="Thickness 5")
-    thickness6 = fields.Float(string="Thickness 6")
+    thickness1 = fields.Float(string="Thickness, mm 1")
+    thickness2 = fields.Float(string="Thickness, mm 2")
+    thickness3 = fields.Float(string="Thickness, mm 3")
+    thickness4 = fields.Float(string="Thickness, mm 4")
+    thickness5 = fields.Float(string="Thickness, mm 5")
+    thickness6 = fields.Float(string="Thickness, mm 6")
 
   
 
@@ -1142,13 +1215,13 @@ class WaterAndBulkTile(models.Model):
    
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
 
-    lenght = fields.Float(string="Length",digits=(12,2))
-    width = fields.Float(string="Width",digits=(12,2))
-    thickness = fields.Float(string="Thickness",digits=(12,2))
-    oven_dry = fields.Float(string="Oven Dry Weight",digits=(12,3))
-    wet_weight = fields.Float(string="Wet Weight",digits=(12,3))
-    water_obsorption = fields.Float(string="Water Absorption",compute="_compute_water_absorption",digits=(12,3))
-    bulk_density = fields.Float(string="Bulk Density",compute="_compute_bulk_density",digits=(12,3))
+    lenght = fields.Float(string="Length, mm",digits=(12,2))
+    width = fields.Float(string="Width, mm",digits=(12,2))
+    thickness = fields.Float(string="Thickness, mm",digits=(12,2))
+    oven_dry = fields.Float(string="Oven Dry Weight, g",digits=(12,3))
+    wet_weight = fields.Float(string="Wet Weight, g",digits=(12,3))
+    water_obsorption = fields.Float(string="Water Absorption , %",compute="_compute_water_absorption",digits=(12,3))
+    bulk_density = fields.Float(string="Bulk Density ,g/cc",compute="_compute_bulk_density",digits=(12,3))
 
 
     @api.depends('wet_weight', 'oven_dry')
@@ -1203,7 +1276,7 @@ class ModulusTile(models.Model):
     width = fields.Float(string="Width",digits=(12,2))
     span = fields.Float(string="Span",digits=(12,2))
     thickness = fields.Float(string="Thickness",digits=(12,2))
-    peak_load = fields.Float(string="PEAK LOAD (NN)",digits=(12,2))
+    peak_load = fields.Float(string="PEAK LOAD (N)",digits=(12,2))
     mor = fields.Float(string="MOR (N/mm2)",compute="_compute_mor_and_bs",digits=(12,2))
     bs = fields.Float(string="BS (N)",compute="_compute_mor_and_bs",digits=(12,1))
 
