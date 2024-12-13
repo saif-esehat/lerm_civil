@@ -204,7 +204,7 @@
                   			</td>
                             <td>Deviation in Thickness </td>
 							    <td>
-								<span t-field="data.average_thickness"/>
+								<span t-field="data.deviation_thickness"/>
 							</td>
 							<td>
 								<span>
@@ -607,7 +607,7 @@
 
 						<tr  t-if="data.water_bulk_visible and (data.bulk_density_nabl == 'pass' and nabl or (data.bulk_density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                             <td ><div><span>a</span></div></td>
-                            <td> water Absorption (average) </td>
+                            <td> Water Absorption (average) </td>
 							  <td>
 								<span t-field="data.average_water_bulk"/>
 							</td>
@@ -643,7 +643,7 @@
 
 						<tr  t-if="data.water_bulk_visible and (data.bulk_density_nabl == 'pass' and nabl or (data.bulk_density_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                             <td ><div><span>b</span></div></td>
-                            <td> water Absorption (Individual) </td>
+                            <td> Water Absorption (Individual) </td>
 							 <td>
 								<span t-field="data.individual_water_bulk"/>
 							</td>

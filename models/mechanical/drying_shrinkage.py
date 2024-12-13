@@ -18,8 +18,8 @@ class MechanicalDryingShrinkage(models.Model):
     drying_shrinkage_name = fields.Char("Name", default="Drying Shrinkage")
     drying_shrinkage_visible = fields.Boolean("Drying Shrinkage", compute="_compute_visible")
 
-    drying_child_lines = fields.One2many('drying.shrinkage.line','parent_id',string="Parameter",
-                                         default=lambda self: self._default_drying_child_lines() )
+    drying_child_lines = fields.One2many('drying.shrinkage.line','parent_id',string="Parameter" )
+    #   default=lambda self: self._default_drying_child_lines()
 
     average1 = fields.Float("Average %",compute="_compute_average_initial_drying",digits=(16, 3))
 
@@ -33,15 +33,15 @@ class MechanicalDryingShrinkage(models.Model):
                 record.average1 = 0
 
 
-    @api.model
-    def _default_drying_child_lines(self):
-        default_lines = [
-            (0, 0, {'sr_no': 'R1'}),
-            (0, 0, {'sr_no': 'R2'}),
-            (0, 0, {'sr_no': 'R3'}),
+    # @api.model
+    # def _default_drying_child_lines(self):
+    #     default_lines = [
+    #         (0, 0, {'sr_no': 'R1'}),
+    #         (0, 0, {'sr_no': 'R2'}),
+    #         (0, 0, {'sr_no': 'R3'}),
            
-        ]
-        return default_lines
+    #     ]
+    #     return default_lines
     
 
     drying_shrinkage_conformity = fields.Selection([
@@ -105,8 +105,8 @@ class MechanicalDryingShrinkage(models.Model):
     moisture_movement_name = fields.Char("Name", default="Moisture Movement")
     moisture_movement_visible = fields.Boolean("Moisture Movement", compute="_compute_visible")
 
-    moisture_child_lines = fields.One2many('moisture.movment.line','parent_id',string="Parameter",
-                                           default=lambda self: self._default_moisture_child_lines())
+    moisture_child_lines = fields.One2many('moisture.movment.line','parent_id',string="Parameter")
+    #  default=lambda self: self._default_moisture_child_lines()
 
    
 
@@ -122,15 +122,15 @@ class MechanicalDryingShrinkage(models.Model):
             else:
                 record.average2 = 0
 
-    @api.model
-    def _default_moisture_child_lines(self):
-        default_lines = [
-            (0, 0, {'sr_no': 'R1'}),
-            (0, 0, {'sr_no': 'R2'}),
-            (0, 0, {'sr_no': 'R3'}),
+    # @api.model
+    # def _default_moisture_child_lines(self):
+    #     default_lines = [
+    #         (0, 0, {'sr_no': 'R1'}),
+    #         (0, 0, {'sr_no': 'R2'}),
+    #         (0, 0, {'sr_no': 'R3'}),
            
-        ]
-        return default_lines
+    #     ]
+    #     return default_lines
     
     moisture_movement_conformity = fields.Selection([
             ('pass', 'Pass'),
@@ -267,6 +267,7 @@ class MechanicalDryingShrinkageLine(models.Model):
     parent_id = fields.Many2one('drying.shrinkage',string="Parent Id")
    
     sr_no = fields.Char(string="Sample No.")
+    id_mark = fields.Char(string="ID Mark/Location")
     original_length = fields.Float("original length measurment W1",digits=(16, 3))
     dry_mesurment = fields.Float("Dry measurement ,W2",digits=(16, 3))
     dry_length = fields.Float("Dry length , W3",digits=(16, 3))
@@ -302,11 +303,28 @@ class MechanicalDryingShrinkageLine(models.Model):
     #     for index, record in enumerate(records):
     #         record.sr_no = index + 1
 
+    @api.onchange('parent_id')
+    def _onchange_parent_id(self):
+        for record in self:
+            parent = record.parent_id.sudo()
+            sample_id = parent.eln_ref.sample_id.client_sample_id
+            if sample_id:
+                record.id_mark = sample_id
+            else:
+                record.id_mark = ""
+
+    @api.onchange('id_mark')
+    def _onchange_id_mark(self):
+        for record in self:
+            if record.id_mark and not record.parent_id.eln_ref.sample_id.client_sample_id:
+                record.parent_id.eln_ref.sample_id.client_sample_id = record.id_mark
+
 class MoistureMovementLine(models.Model):
     _name = "moisture.movment.line"
     parent_id = fields.Many2one('drying.shrinkage',string="Parent Id")
    
     sr_no = fields.Char(string="Sample No.")
+    id_mark = fields.Char(string="ID Mark/Location")
 
     final_wet = fields.Float("Final wet measurment W4",digits=(16, 3))
    
@@ -325,6 +343,24 @@ class MoistureMovementLine(models.Model):
                     record.moisture_movement = 0
             else:
                 record.moisture_movement = 0
+
+
+
+    @api.onchange('parent_id')
+    def _onchange_parent_id(self):
+        for record in self:
+            parent = record.parent_id.sudo()
+            sample_id = parent.eln_ref.sample_id.client_sample_id
+            if sample_id:
+                record.id_mark = sample_id
+            else:
+                record.id_mark = ""
+
+    @api.onchange('id_mark')
+    def _onchange_id_mark(self):
+        for record in self:
+            if record.id_mark and not record.parent_id.eln_ref.sample_id.client_sample_id:
+                record.parent_id.eln_ref.sample_id.client_sample_id = record.id_mark
 
    
 

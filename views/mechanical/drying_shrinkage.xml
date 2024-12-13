@@ -40,8 +40,9 @@
                     </group>
                      <group attrs="{'invisible': [('drying_shrinkage_visible', '=', False)]}">
                        <field name="drying_child_lines" nolabel="1" >
-                            <tree editable="bottom">
+                            <tree >
                                 <field name='sr_no'/>
+                                <field name='id_mark'/>
                                 <field name='original_length'/>
                                 <field name='dry_mesurment'/>
                                 <field name='dry_length'/>
@@ -75,10 +76,12 @@
                     </group>
                     <group attrs="{'invisible': [('moisture_movement_visible', '=', False)]}">
                        <field name="moisture_child_lines" nolabel="1" >
-                            <tree editable="bottom">
+                            <tree >
                                 <field name='sr_no'/>
+                                <field name='id_mark'/>
                                 <field name='final_wet'/>
                                 <field name='moisture_movement'/>
+                                 <field name="parent_id" invisible="1"/>
                                
                             </tree>
                            
@@ -107,6 +110,55 @@
             </form>
         </field>
         </record>
+
+        <record id="mechanical_drying_shrinkage_line_view" model="ir.ui.view">
+        <field name="name">drying.shrinkage.line.form</field>
+        <field name="model">drying.shrinkage.line</field>
+        <field name="arch" type="xml">
+            <form>
+            <group>
+            <group>
+            <field name='sr_no'/>
+             <field name='original_length'/>
+                <field name='dry_length'/>
+           
+            </group>
+            <group>
+              <field name='id_mark' />
+               <field name='dry_mesurment'/>
+                  <field name='initial_drying'/>
+
+                  <field name="parent_id" invisible="1"/>
+            </group>
+            </group>
+                
+            </form>
+        </field>
+    </record>
+
+
+        <record id="mechanical_moisture_movment_line_view" model="ir.ui.view">
+        <field name="name">moisture.movment.line.form</field>
+        <field name="model">moisture.movment.line</field>
+        <field name="arch" type="xml">
+            <form>
+            <group>
+            <group>
+            <field name='sr_no'/>
+                <field name='id_mark' />
+                
+            </group>
+            <group>
+                <field name='final_wet' />
+                <field name="moisture_movement" />
+                  <field name="parent_id" invisible="1"/>
+             
+            </group>
+            </group>
+                
+            </form>
+        </field>
+    </record>
 
     </data>
 </odoo>
