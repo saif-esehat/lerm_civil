@@ -260,11 +260,11 @@
 				</div> -->
 
 				<div t-if="drying" style="margin-top:20px;">
-					 <div style="padding-top:5px">
+					 <div style="padding-top:5px" t-if="drying.drying_shrinkage_visible and  (drying.drying_shrinkage_nabl == 'pass' and nabl or (drying.drying_shrinkage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
 						<b>1.<span t-field="env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_name"/></b>
 					</div>
 
-					<table t-if="drying" style="margin-top:20px;">
+					<table t-if="drying.drying_shrinkage_visible and  (drying.drying_shrinkage_nabl == 'pass' and nabl or (drying.drying_shrinkage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )" style="margin-top:20px;">
 						<t t-set="i" t-value="0"/>
 							<thead>
 								<tr >
@@ -305,7 +305,7 @@
 						<tbody >
 						</tbody>
 						<tr t-if="drying.drying_shrinkage_visible and  (drying.drying_shrinkage_nabl == 'pass' and nabl or (drying.drying_shrinkage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
-								<td style="border-bottom: 1px solid black; padding: 10px; display: flex; justify-content: center; align-items: center;">
+								<td style="text-align: center;">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
 								</td>
@@ -323,13 +323,15 @@
                                     </t>
                                 </td>
 							
-								 <td style="border: 1px solid black; padding: 0; text-align: center; vertical-align: middle;"  rowspan="3">
-                                    <t t-foreach="drying.drying_child_lines" t-as="r">
-                                        <div style="border-bottom: 1px solid black; padding: 10px; display: flex; justify-content: center; align-items: center; width: 100%;">
-                                            <span t-field="r.initial_drying" />
-                                        </div>
-                                    </t>
-                                </td>
+							
+								<td style="border: 1px solid black; padding: 0; text-align: center; vertical-align: middle;" rowspan="3">
+									<t t-set="lines_count" t-value="len(drying.drying_child_lines)" />
+									<t t-foreach="enumerate(drying.drying_child_lines)" t-as="r">
+										<div t-att-style="'padding: 10px; display: flex; justify-content: center; align-items: center; width: 100%;' + ('border-bottom: 1px solid black;' if r[0] + 1 != lines_count else '')">
+											<span t-field="r[1].initial_drying" />
+										</div>
+									</t>
+								</td>
 								<td style="border: 1px solid black; padding: 0; text-align: center; vertical-align: middle;"  rowspan="3" >
 									<span style="text-align: center;" >
 											<span t-field="drying.average1" t-options='{"widget": "float", "precision": 3}'/>
@@ -339,7 +341,7 @@
 							
 							</tr>
 							<tr t-if="drying.drying_shrinkage_visible and  (drying.drying_shrinkage_nabl == 'pass' and nabl or (drying.drying_shrinkage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
-								<td style="border-bottom: 1px solid black; padding: 10px; display: flex; justify-content: center; align-items: center;">
+								<td style="text-align: center;">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
 								</td>
@@ -350,7 +352,7 @@
 							
 							</tr>
 							<tr t-if="drying.drying_shrinkage_visible and  (drying.drying_shrinkage_nabl == 'pass' and nabl or (drying.drying_shrinkage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
-								<td style="border-bottom: 1px solid black; padding: 10px; display: flex; justify-content: center; align-items: center;">
+								<td style="text-align: center;">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
 								</td>
@@ -367,11 +369,11 @@
 
                <!-- Moisture Moment -->
 				<div t-if="drying" style="margin-top:20px;">
-					 <div style="padding-top:5px">
+					 <div style="padding-top:5px" t-if="drying.moisture_movement_visible and  (drying.moisture_movement_nabl == 'pass' and nabl or (drying.moisture_movement_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
 						<b>2.<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_name"/></b>
 					</div>
 
-					<table t-if="drying" style="margin-top:20px;">
+					<table t-if="drying.moisture_movement_visible and  (drying.moisture_movement_nabl == 'pass' and nabl or (drying.moisture_movement_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )" style="margin-top:20px;">
 						<t t-set="i" t-value="0"/>
 							<thead>
 								<tr >
@@ -412,7 +414,7 @@
 						<tbody >
 						</tbody>
 						<tr t-if="drying.moisture_movement_visible and  (drying.moisture_movement_nabl == 'pass' and nabl or (drying.moisture_movement_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
-								<td style="border-bottom: 1px solid black; padding: 10px; display: flex; justify-content: center; align-items: center;">
+								<td style="text-align: center;">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
 								</td>
@@ -430,13 +432,15 @@
                                     </t>
                                 </td>
 							
-								 <td style="border: 1px solid black; padding: 0; text-align: center; vertical-align: middle;"  rowspan="3">
-                                    <t t-foreach="drying.moisture_child_lines" t-as="r">
-                                        <div style="border-bottom: 1px solid black; padding: 10px; display: flex; justify-content: center; align-items: center; width: 100%;">
-                                            <span t-field="r.moisture_movement" />
-                                        </div>
-                                    </t>
-                                </td>
+								 
+								<td style="border: 1px solid black; padding: 0; text-align: center; vertical-align: middle;" rowspan="3">
+									<t t-set="lines_count" t-value="len(drying.moisture_child_lines)" />
+									<t t-foreach="enumerate(drying.moisture_child_lines)" t-as="r">
+										<div t-att-style="'padding: 10px; display: flex; justify-content: center; align-items: center; width: 100%;' + ('border-bottom: 1px solid black;' if r[0] + 1 != lines_count else '')">
+											<span t-field="r[1].moisture_movement" />
+										</div>
+									</t>
+								</td>
 								<td style="border: 1px solid black; padding: 0; text-align: center; vertical-align: middle;"  rowspan="3" >
 									<span style="text-align: center;" >
 											<span t-field="drying.average2" t-options='{"widget": "float", "precision": 3}'/>
@@ -446,7 +450,7 @@
 							
 							</tr>
 							<tr t-if="drying.moisture_movement_visible and  (drying.moisture_movement_nabl == 'pass' and nabl or (drying.moisture_movement_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
-								<td style="border-bottom: 1px solid black; padding: 10px; display: flex; justify-content: center; align-items: center;">
+								<td style="text-align: center;">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
 								</td>
@@ -457,7 +461,7 @@
 							
 							</tr>
 							<tr t-if="drying.moisture_movement_visible and  (drying.moisture_movement_nabl == 'pass' and nabl or (drying.moisture_movement_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
-								<td style="border-bottom: 1px solid black; padding: 10px; display: flex; justify-content: center; align-items: center;">
+								<td style="text-align: center;">
                                     <span t-esc="i + 1" />
                                     <t t-set="i" t-value="i+1"/>
 								</td>
