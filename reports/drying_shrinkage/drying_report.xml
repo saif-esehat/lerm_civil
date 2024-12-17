@@ -261,7 +261,7 @@
 
 				<div t-if="drying" style="margin-top:20px;">
 					 <div style="padding-top:5px" t-if="drying.drying_shrinkage_visible and  (drying.drying_shrinkage_nabl == 'pass' and nabl or (drying.drying_shrinkage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
-						<b>1.<span t-field="env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_name"/></b>
+						<b><span t-field="env['lerm.parameter.master'].search([('internal_id','=','20246345-407d-4ce8-ae0d-566bd4e3b52f')]).parameter_name"/></b>
 					</div>
 
 					<table t-if="drying.drying_shrinkage_visible and  (drying.drying_shrinkage_nabl == 'pass' and nabl or (drying.drying_shrinkage_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )" style="margin-top:20px;">
@@ -370,7 +370,7 @@
                <!-- Moisture Moment -->
 				<div t-if="drying" style="margin-top:20px;">
 					 <div style="padding-top:5px" t-if="drying.moisture_movement_visible and  (drying.moisture_movement_nabl == 'pass' and nabl or (drying.moisture_movement_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )">
-						<b>2.<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_name"/></b>
+						<b><span t-field="env['lerm.parameter.master'].search([('internal_id','=','3e59cd18-c281-4737-aa89-5b1190808804')]).parameter_name"/></b>
 					</div>
 
 					<table t-if="drying.moisture_movement_visible and  (drying.moisture_movement_nabl == 'pass' and nabl or (drying.moisture_movement_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl )" style="margin-top:20px;">

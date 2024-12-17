@@ -38,7 +38,7 @@
                     <group>
                             <field name="child_lines_temprature" nolabel="1" >
                                 <tree editable="bottom">
-                                    <!-- <field name='sr_no'/> -->
+                                    <field name='sr_no'/>
                                     <field name="day" />
                                     <field name="date" />
                                    <field name="measurement_time" />
