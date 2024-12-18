@@ -397,7 +397,7 @@
 										
 									</li>
 									<li t-if="eln.remarks">
-										<span t-esc="eln.remarks"/>
+										<span t-esc="eln.remarks" style="font-size:13.5px;"/>
 									</li>
 									<!-- <li t-if="eln.remarks">
 									<p style="font-size: 10px;">
