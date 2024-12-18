@@ -645,7 +645,7 @@
 								
 						
 							</tr>
-							<t t-if="i &lt;= 7">
+							<!-- <t t-if="i &lt;= 7"> -->
 							 <tr t-if="data.combined_percentage_visible and (data.combined_percentage_nabl == 'pass' and nabl or data.combined_percentage_nabl == 'fail' and not nabl)">
 								<td colspan="1" style="text-align: center;">
 									<span t-esc="i + 1" />
@@ -724,13 +724,13 @@
 
 								<td colspan="1" style="text-align: center;">
 									<span>
-										<span t-field="data.siliceous15"/>
+										<span t-field="data.siliceous7"/>
 									</span>									
 								</td>
 
 								<td colspan="2" style="text-align: center;">
 									<span>
-										<span t-field="data.calcareous15"/>
+										<span t-field="data.calcareous7"/>
 									</span>									
 								</td>
 								<td colspan="1" style="text-align: center;">
@@ -934,12 +934,12 @@
 								
 							</tr>
 
-						</t>
+						<!-- </t> -->
 
 						
 						</tbody>
 					</table>
-					<div style="page-break-before: always;">
+					<!-- <div style="page-break-before: always;">
 				
 						<t t-if="i > 7">
 						<table>
@@ -984,12 +984,7 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<!-- <td colspan="2" style="text-align: center;">
-									<span>
-									SiO2 + Al2O3 + Fe2O3 %
-									</span>
-									
-								</td> -->
+								
 								<td colspan="2" style="text-align: center;vertical-align: middle;">
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','fca3ebf1-b4fd-4597-81e1-37bf499c5a35')]).parameter_name"/>
 								</td>
@@ -1083,21 +1078,12 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<!-- <td colspan="2" style="text-align: center;">
-									<span>
-									SiO2 + Al2O3 + Fe2O3 %
-									</span>
-									
-								</td> -->
+							
 								<td colspan="2" style="text-align: center;vertical-align: middle;">
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','5ab486ca-fb44-437b-adeb-8b6928ac43b0')]).parameter_name"/>
 								</td>
 								
-								<!-- <td colspan="1" style="text-align: center;">
-									<span>
-										<span t-field="data.available_alkalis" t-options='{"widget": "float", "precision": 2}'/>
-									</span>									
-								</td> -->
+							
 								<td colspan="1" style="text-align: center;">
 										<span>
 											<t t-if="data.status_28days and data.status_28days_k2o">
@@ -1146,21 +1132,12 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<!-- <td colspan="2" style="text-align: center;">
-									<span>
-									SiO2 + Al2O3 + Fe2O3 %
-									</span>
-									
-								</td> -->
+							
 								<td colspan="2" style="text-align: center;vertical-align: middle;">
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','3ccd6049-2b3d-42a0-a78f-b83e49eeff6a')]).parameter_name"/>
 								</td>
 								
-								<!-- <td colspan="1" style="text-align: center;">
-									<span>
-										<span t-field="data.na2o_round" t-options='{"widget": "float", "precision": 2}'/>
-									</span>									
-								</td> -->
+							
 									<td colspan="1" style="text-align: center;">
 										<span>
 											<t t-if="data.status_28days">
@@ -1208,22 +1185,13 @@
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</td>
-								<!-- <td colspan="2" style="text-align: center;">
-									<span>
-									SiO2 + Al2O3 + Fe2O3 %
-									</span>
-									
-								</td> -->
+						
 								<td colspan="2" style="text-align: center;vertical-align: middle;">
 									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','b6fb80a6-b992-477e-9048-c40b58e28a6c')]).parameter_name"/>
 								</td>
 								
 								
-								<!-- <td colspan="1" style="text-align: center;">
-									<span>
-										<span t-field="data.k2o_round" t-options='{"widget": "float", "precision": 2}'/>
-									</span>									
-								</td> -->
+						
 								<td colspan="1" style="text-align: center;">
 										<span>
 											<t t-if="data.status_28days_k2o">
@@ -1273,7 +1241,7 @@
 								
 						</tbody>
 					  </table>
-				      </t>
+				      </t> -->
 					  <div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
 							<div>
@@ -1358,7 +1326,7 @@
 							......End of Report......
 						</div>
 					</div>
-				</div>
+				<!-- </div> -->
 			</t>
 		</t>
 	</template>
