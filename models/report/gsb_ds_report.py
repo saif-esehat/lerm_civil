@@ -149,10 +149,95 @@ class GsbReport(models.AbstractModel):
             max_x = 0
         
       
-        # Prepare data for the chart
+        # # Prepare data for the chart
+        # plt.figure(figsize=(12, 6))
+        # cbrx_values = []
+        # cbry_values = []
+        # if general_data.cbr_table:
+        #     for line in general_data.cbr_table:
+        #         cbrx_values.append(line.penetration)
+        #         cbry_values.append(line.load)
+
+        #     try:
+        #         max_y = max(cbry_values)
+        #     except:
+        #         max_y = 100
+        #     try:
+        #         min_y = round(min(cbry_values),2)
+        #     except:
+        #         min_y = 0
+        #     try:
+        #         # max_x = round(max(x_values),2)
+        #         max_x = cbrx_values[cbry_values.index(max_y)]
+        #     except:
+        #         max_x = 100
+        #     try:
+        #         min_x = round(min(cbrx_values),2)
+        #     except:
+        #         min_x = 0 
+            
+            
+
+
+        #     # Format max_y and max_x to display 2 digits after the decimal point
+        #     max_y = round(max_y , 2)
+        #     max_x = round(max_x, 2)
+
+            
+        #     # Perform cubic spline interpolation
+        #     cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 100)
+        #     cbrcs = CubicSpline(cbrx_values, cbry_values)
+
+        #     # Create the line chart with a connected smooth line and markers
+        #     plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
+        #     plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
+
+        #     # # Add a horizontal line with a label
+        #     plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
+        #     plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
+
+        #     # Add a vertical line with a label
+        #     plt.axvline(x=2.5, color='orange', linestyle='--')
+        #     plt.axvline(x=5.0, color='orange', linestyle='--')
+            
+        #     # Set the grid
+        #     ax = plt.gca()
+        #     ax.grid(which='both', linestyle='--', linewidth=0.5)
+
+        #     # Set the x-axis major and minor tick marks
+        #     ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
+        #     ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
+
+        #     # Set the y-axis tick marks
+        #     # plt.xticks(range(0 , 15 , 1))
+        #     # plt.yticks(range(0 , 481 , 50))
+
+        #     plt.yticks(np.arange(min_y , max_y + 0.2 , (max_y - min_y) / 5))
+
+
+        #     if max_x != min_x:
+        #         plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
+            
+        #     plt.xlabel('Penetration in mm')
+        #     plt.ylabel('Load')
+        #     plt.title('Penetration in mm vs Load')
+        #     plt.legend()
+
+        #     # Save the Matplotlib plot to a BytesIO object
+        #     buffer2 = BytesIO()
+        #     plt.savefig(buffer2, format='png')
+        #     cbr_graph_image = base64.b64encode(buffer2.getvalue()).decode('utf-8')
+        #     plt.close()
+        # else:
+        #     cbr_graph_image = None
+        #     cbry_values = []  # Set to an empty list instead of 0
+        #     cbrx_values = []
+
         plt.figure(figsize=(12, 6))
         cbrx_values = []
         cbry_values = []
+
+        # Check if cbr_table exists and populate cbrx_values and cbry_values
         if general_data.cbr_table:
             for line in general_data.cbr_table:
                 cbrx_values.append(line.penetration)
@@ -160,68 +245,63 @@ class GsbReport(models.AbstractModel):
 
             try:
                 max_y = max(cbry_values)
-            except:
-                max_y = 100
+            except ValueError:
+                max_y = 100  # Default value if cbry_values is empty
             try:
-                min_y = round(min(cbry_values),2)
-            except:
+                min_y = round(min(cbry_values), 2)
+            except ValueError:
                 min_y = 0
             try:
-                # max_x = round(max(x_values),2)
                 max_x = cbrx_values[cbry_values.index(max_y)]
-            except:
+            except ValueError:
                 max_x = 100
             try:
-                min_x = round(min(cbrx_values),2)
-            except:
-                min_x = 0 
-            
-            
-
+                min_x = round(min(cbrx_values), 2)
+            except ValueError:
+                min_x = 0
 
             # Format max_y and max_x to display 2 digits after the decimal point
-            max_y = round(max_y , 2)
+            max_y = round(max_y, 2)
             max_x = round(max_x, 2)
 
-            
-            # Perform cubic spline interpolation
-            cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 100)
-            cbrcs = CubicSpline(cbrx_values, cbry_values)
+            # Perform cubic spline interpolation if there are enough data points
+            if len(cbrx_values) > 1 and len(cbry_values) > 1:
+                cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 100)
+                cbrcs = CubicSpline(cbrx_values, cbry_values)
 
-            # Create the line chart with a connected smooth line and markers
-            plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
-            plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
+                # Create the line chart with a connected smooth line and markers
+                plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
+                plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
 
-            # # Add a horizontal line with a label
-            plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
-            plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
+                # Add horizontal lines with labels
+                if len(cbry_values) > 8:  # Ensure indices 5 and 8 exist
+                    plt.axhline(y=cbry_values[5], color='green', linestyle='--', label=f'Load at 2.5 mm = {cbry_values[5]}')
+                    plt.axhline(y=cbry_values[8], color='green', linestyle='--', label=f'Load at 5 mm = {cbry_values[8]}')
 
-            # Add a vertical line with a label
-            plt.axvline(x=2.5, color='orange', linestyle='--')
-            plt.axvline(x=5.0, color='orange', linestyle='--')
-            
-            # Set the grid
-            ax = plt.gca()
-            ax.grid(which='both', linestyle='--', linewidth=0.5)
+                # Add vertical lines at specific penetration values
+                plt.axvline(x=2.5, color='orange', linestyle='--')
+                plt.axvline(x=5.0, color='orange', linestyle='--')
 
-            # Set the x-axis major and minor tick marks
-            ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
-            ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
+                # Set the grid
+                ax = plt.gca()
+                ax.grid(which='both', linestyle='--', linewidth=0.5)
 
-            # Set the y-axis tick marks
-            # plt.xticks(range(0 , 15 , 1))
-            # plt.yticks(range(0 , 481 , 50))
+                # Set the x-axis major and minor tick marks
+                ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
+                ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
 
-            plt.yticks(np.arange(min_y , max_y + 0.2 , (max_y - min_y) / 5))
+                # Set the y-axis tick marks
+                plt.yticks(np.arange(min_y, max_y + 0.2, (max_y - min_y) / 5))
 
+                # Set the x-axis tick marks
+                if max_x != min_x:
+                    plt.xticks(np.arange(min_x, max_x + 1.0, (max_x - min_x) / 5))
 
-            if max_x != min_x:
-                plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
-            
-            plt.xlabel('Penetration in mm')
-            plt.ylabel('Load')
-            plt.title('Penetration in mm vs Load')
-            plt.legend()
+                # Set labels and title
+                plt.xlabel('Penetration in mm')
+                plt.ylabel('Load')
+                plt.title('Penetration in mm vs Load')
+                plt.legend()
 
             # Save the Matplotlib plot to a BytesIO object
             buffer2 = BytesIO()
@@ -230,7 +310,7 @@ class GsbReport(models.AbstractModel):
             plt.close()
         else:
             cbr_graph_image = None
-            cbry_values = []  # Set to an empty list instead of 0
+            cbry_values = []  # Reset to empty list
             cbrx_values = []
         
         return {
@@ -240,11 +320,16 @@ class GsbReport(models.AbstractModel):
             'stamp' : inreport_value,
             'nabl' : nabl,
             'graphHeavy' : graph_image,
-            'mdd' : max_y,
-            'omc' : max_x,
-            'graphCbr' : cbr_graph_image,
-            'load2' : cbry_values[5] if cbry_values else 0,
-            'load5' : cbry_values[8] if cbry_values else 0,
+            # 'mdd' : max_y,
+            # 'omc' : max_x,
+            # 'graphCbr' : cbr_graph_image,
+            # 'load2' : cbry_values[5] if cbry_values else 0,
+            # 'load5' : cbry_values[8] if cbry_values else 0,
+            'mdd': max_y if cbry_values else 0,
+            'omc': max_x if cbrx_values else 0,
+            'graphCbr': cbr_graph_image,
+            'load2': cbry_values[5] if len(cbry_values) > 5 else 0,
+            'load5': cbry_values[8] if len(cbry_values) > 8 else 0,
         }
         
             
