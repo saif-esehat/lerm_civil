@@ -229,6 +229,8 @@
                         <field name="material_ids" invisible='1'/>
                         <field name="grade_ids" invisible='1'/>
                         <field name='conformity'/>
+                        <field name='lab_location'/>
+                        <field name='location_name'/>
                         <field name="sample" attrs="{'invisible': [('is_update','!=',True)]}" readonly="1"/>
 
                         <!--<field name="grade_ids" invisible='1'/> -->

@@ -158,11 +158,10 @@ class LermSampleForm(models.Model):
 
     print_button_visible = fields.Boolean("Print Nabl visible",compute="_compute_print_nabl_visible")
    
+    lab_location = fields.Many2one('lerm.lab.master',string="Lab Location")
+    location_name = fields.Many2one('lerm.lab.location.master',string="Location Name")
 
-   
 
-
-   
 
     # file_upload = fields.Binary(string="Datasheet Upload")
     # report_upload = fields.Binary(string="Report Upload")
