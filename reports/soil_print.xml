@@ -181,7 +181,7 @@
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).test_method.test_method"/>
 										</div> -->
 										   <div style="text-align:center;font-size:18px">
-											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','2f38ad10-1ebd-4437-ba47-2633e8d9ec27')]).parameter_name"/>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','2f38ad10-1ebd-4437-ba47-2633e8d9ec27')]).parameter_name"/> <br></br>
 											<span>
 												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','2f38ad10-1ebd-4437-ba47-2633e8d9ec27')]).parameter_table" t-as="parameter">
 													<t t-if="parameter.grade.id == eln.grade_id.id">
