@@ -4,17 +4,29 @@
 	<template id="custom_layout_header_footer_lerm_eln">
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
-				<div t-if="(eln.sample_id.scope == 'nabl' and nabl) or fromEln" class="col-12 imageContainer" >
-					<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
-				</div>
-				
-				<div t-if="(eln.sample_id.scope == 'non_nabl' or not nabl) and not fromEln" class="col-12 imageContainer" >
-					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
-				</div>
+				<t t-if="eln.sample_id.lab_location">
+					<div t-if="(eln.sample_id.scope == 'nabl' and nabl) or fromEln" class="col-12 imageContainer" >
+						<img t-att-src="'data:image/png;base64,' + eln.sample_id.lab_location.header_image.decode('utf-8')"/>
+					</div>
+					
+					<div t-if="(eln.sample_id.scope == 'non_nabl' or not nabl) and not fromEln" class="col-12 imageContainer" >
+						<img t-att-src="'data:image/png;base64,' + eln.sample_id.lab_location.non_nabl_header.decode('utf-8')"/>
+					</div>
+				</t>
+				<t t-else="">
+					<div t-if="(eln.sample_id.scope == 'nabl' and nabl) or fromEln" class="col-12 imageContainer" >
+						<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
+					</div>
+					
+					<div t-if="(eln.sample_id.scope == 'non_nabl' or not nabl) and not fromEln" class="col-12 imageContainer" >
+						<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
+					</div>
+				</t>
 				
 			</div>
 			<div class="row backgroundimage" style="opacity:0.2; font-size:100px; width:85%; text-align:center;top:500px; right:100px; position: fixed; z-index:-99;">
-				<img src="/lerm_civil/static/src/img/watermark.jpg" style="width:100%;"/>
+				
+				<img src="/lerm_civil/static/src/img/watermark.jpg" style="max-height:370px;"/>
 			</div>
 			<!-- <div class="container_eln row" style="position: fixed; z-index:99;margin-bottom:20px;">
 				
@@ -114,7 +126,12 @@
 					</div> -->
 					<div>
 						<div class="footertext">
-							Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+							<t t-if="eln.sample_id.lab_location">
+								<t t-esc="eln.sample_id.lab_location.street"/><t t-esc="eln.sample_id.lab_location.street2"/>
+							</t>
+							<t t-else="">
+								Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+							</t>
 						</div>
 						<div>
 							<!-- <div>

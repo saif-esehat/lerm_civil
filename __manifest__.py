@@ -24,6 +24,7 @@
     'views/sample_range.xml',
     'views/eln.xml',
     'views/contractor.xml',
+    'views/lab_master.xml',
     'views/employee.xml',
     # 'views/mechanical/sieve_analysis.xml',
     'views/mechanical/free_swell_index.xml',
