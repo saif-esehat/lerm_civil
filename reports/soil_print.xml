@@ -177,9 +177,19 @@
 							<table t-if="data.field_density_visible" style="width:100%; border-collapse: collapse;">
 								<tr>
 									<td colspan="4" style="text-align:center; letter-spacing: 2px; border: 1px solid black; padding: 10px;">
-										<div>
+										<!-- <div>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).test_method.test_method"/>
-										</div>
+										</div> -->
+										   <div style="text-align:center;font-size:18px">
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','2f38ad10-1ebd-4437-ba47-2633e8d9ec27')]).parameter_name"/>
+											<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','2f38ad10-1ebd-4437-ba47-2633e8d9ec27')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+													</t>
+												</t>
+											</span>
+                                       </div>
 									</td>
 								</tr>
 								</table>
@@ -187,13 +197,13 @@
 									<div>
 										<table t-if="data.field_density_visible" style="margin-top: 10px; text-align: right;">
 											<tr>
-												<td style="font-weight: bold;">MDD:</td>
+												<td style="font-weight: bold;">MDD gm/cc :</td>
 												<td>
 													<span t-field="data.mmd_fielddencity" t-options='{"widget": "float", "precision": 2}'/>
 												</td>
 											</tr>
 											<tr>
-												<td style="font-weight: bold;">OMC:</td>
+												<td style="font-weight: bold;">OMC % :</td>
 												<td>
 													<span t-field="data.omc_fielddencity" t-options='{"widget": "float", "precision": 2}'/>
 												</td>
@@ -289,7 +299,7 @@
 							</table>
 							<table t-if="data.field_density_visible" style="margin-top:10px;">
 							<tr>
-								<td style="text-align: center; font-weight: bold; padding: 2px;">Average Degree of Compaction</td>
+								<td style="text-align: center; font-weight: bold; padding: 2px;">Average Degree of Compaction % :</td>
 								<td style="text-align: center;">
 									<span t-field="data.avg_degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
