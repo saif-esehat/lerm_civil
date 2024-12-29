@@ -1212,20 +1212,6 @@
                                 <th>Thickness in Avg mm</th>
                                 
 
-
-                                
-                               <!-- <th  style="max-width: 250px;">
-                                <span>
-                                    <span t-esc="eln.material.specifications"/>
-                                </span>
-                                </th>
-                             -->
-                                <!-- <th  style="max-width: 200px;">
-                                <span>
-                                    <span t-esc="eln.material.method_reference"/>
-                                    
-                                </span>
-                                </th> -->
                                
                             </tr>
                         </thead>
@@ -1249,7 +1235,7 @@
                                
                             </tr>
                             </t>
-                                <tr t-if="data.dimension_visible">
+                                <!-- <tr t-if="data.dimension_visible">
                                  
                                     <td style="text-align: center;"><t t-esc="data.average_length" t-options='{"widget": "float", "precision": 2}'/></td>
                                     <td style="text-align: center;"><t t-esc="data.average_hight" t-options='{"widget": "float", "precision": 2}'/></td>
@@ -1257,21 +1243,8 @@
                                     <td style="text-align: center;"><t t-esc="data.plan_area" t-options="{'widget': 'float', 'precision': 2}"/></td>
                                     
                                    
-                                    <!-- <td style="text-align: center; vertical-align: middle;">
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','95fc46f1-ccb9-41c2-9ae2-c8b4610622a1')]).parameter_table" t-as="parameter">
-										<t t-if="parameter.grade.id == eln.grade_id.id">
-											<span t-field="parameter.permissable_limit"/>
-										</t>
-									</t>
-							    	</td> -->
-                                    <!-- <td style="text-align: center; vertical-align: middle;">
-                                        <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','95fc46f1-ccb9-41c2-9ae2-c8b4610622a1')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
-                                            </t>
-                                        </t>
-                                    </td> -->
-                                </tr>
+                            
+                                </tr> -->
                                
                                
                                                 
@@ -1279,6 +1252,33 @@
                             <!-- </t> -->
                         </tbody>
                     </table>
+
+                      <table style="margin-top:5px">
+                            <tr cols="12">
+                                <td colspan="6"><b>Average Length in mm:</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_length" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Average Width in mm:</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_width" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Average Height in mm:</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.average_hight" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                             <tr cols="12">
+                                <td colspan="6"><b>Plan Area in mm² :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.plan_area" t-options='{"widget": "float", "precision": 1}'/>
+                                </td>
+                            </tr>
+                        </table>
 
 
 
@@ -1789,8 +1789,8 @@
                         <thead>
                             <tr>
                                 <th>Sr. No.</th>
-                                <th>Wet Mass of the Block (kg)</th>
-                                <th>Dry Mass of the Block (kg)</th>
+                                <th>Wet Mass of the Block (gm)</th>
+                                <th>Dry Mass of the Block (gm)</th>
                                 <th>Water Absorption, %</th>
                                 <th>Average Water Absorption	</th>
                                  <!-- <th  style="max-width: 250px;">
