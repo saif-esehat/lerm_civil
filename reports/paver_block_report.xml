@@ -1253,7 +1253,7 @@
                         </tbody>
                     </table>
 
-                      <table style="margin-top:5px">
+                      <table  t-if="data.dimension_visible" style="margin-top:5px">
                             <tr cols="12">
                                 <td colspan="6"><b>Average Length in mm:</b></td>
                                 <td colspan="6" style="text-align: center;">
@@ -1272,12 +1272,12 @@
                                     <span t-field="data.average_hight" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
                             </tr>
-                             <tr cols="12">
+                             <!-- <tr cols="12">
                                 <td colspan="6"><b>Plan Area in mm² :</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.plan_area" t-options='{"widget": "float", "precision": 1}'/>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </table>
 
 
