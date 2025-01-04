@@ -181,8 +181,166 @@ class EnviromentTemprature(models.Model):
 
 
 
+    # def generate_line_chart_20mm(self):
+    #     days = []
+    #     core_bottom = []
+    #     core_middle = []
+    #     core_top = []
+    #     cover_bottom = []
+    #     cover_middle = []
+    #     cover_top = []
+    #     ambient = []
+
+    #     # Process data for alignment
+    #     for line in self.child_lines_temprature:
+    #         day = line.day
+    #         if isinstance(line.bottom, list):  # Handle multiple entries for the same day
+    #             for i in range(len(line.bottom)):
+    #                 days.append(day)  # Same day for all entries
+    #                 core_bottom.append(line.bottom[i])
+    #                 core_middle.append(line.middle[i])
+    #                 core_top.append(line.top[i])
+    #                 cover_bottom.append(line.bottom1[i])
+    #                 cover_middle.append(line.middle1[i])
+    #                 cover_top.append(line.top1[i])
+    #                 ambient.append(line.ambient[i])
+    #         else:  # Single value per day
+    #             days.append(day)
+    #             core_bottom.append(line.bottom)
+    #             core_middle.append(line.middle)
+    #             core_top.append(line.top)
+    #             cover_bottom.append(line.bottom1)
+    #             cover_middle.append(line.middle1)
+    #             cover_top.append(line.top1)
+    #             ambient.append(line.ambient)
+
+    #     # Create the plot
+    #     plt.figure(figsize=(14, 8))
+
+    #     # Unique days for plotting
+    #     unique_days = sorted(set(days))
+        
+    #     # Create a mapping from days to indices for plotting
+    #     day_to_index = {day: i for i, day in enumerate(unique_days)}
+
+    #     # Plot the temperature data, using indices for x values
+    #     plt.plot([day_to_index[day] for day in days], core_bottom, label='Core Area - Bottom', marker='o', color='blue')
+    #     plt.plot([day_to_index[day] for day in days], core_middle, label='Core Area - Middle', marker='o', color='orange')
+    #     plt.plot([day_to_index[day] for day in days], core_top, label='Core Area - Top', marker='o', color='green')
+    #     plt.plot([day_to_index[day] for day in days], cover_bottom, label='Cover Area - Bottom', marker='o', color='red')
+    #     plt.plot([day_to_index[day] for day in days], cover_middle, label='Cover Area - Middle', marker='o', color='purple')
+    #     plt.plot([day_to_index[day] for day in days], cover_top, label='Cover Area - Top', marker='o', color='brown')
+    #     plt.plot([day_to_index[day] for day in days], ambient, label='Ambient', linestyle='--', color='black')
+
+    #     # Add vertical lines for each day
+    #     for i, day in enumerate(unique_days):
+    #         plt.axvline(x=i, color='gray', linestyle='--', linewidth=0.5)
+
+    #     # Customize the graph
+    #     plt.xlabel('Days', fontsize=14)
+    #     plt.ylabel('Temperature (°C)', fontsize=14)
+    #     plt.xticks(ticks=range(len(unique_days)), labels=unique_days, fontsize=12)  # Set x-ticks to unique days
+    #     plt.yticks(fontsize=12)
+    #     plt.legend(fontsize=12)
+    #     plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+
+    #     # Save the plot to a binary field
+    #     buf = io.BytesIO()
+    #     plt.savefig(buf, format='png', bbox_inches='tight')
+    #     buf.seek(0)
+    #     chart_image20mm = base64.b64encode(buf.read()).decode('utf-8')
+    #     buf.close()
+    #     plt.close()  # Free up memory
+
+    #     return chart_image20mm
+
+
+    # def generate_line_chart_20mm(self):
+  
+    #     # Data preparation
+    #     sr_no = []  # Serial numbers for x-axis
+    #     core_bottom = []
+    #     core_middle = []
+    #     core_top = []
+    #     cover_bottom = []
+    #     cover_middle = []
+    #     cover_top = []
+    #     ambient = []
+
+    #     current_sr_no = 1  # Starting serial number
+
+    #     # Process data for alignment
+    #     for line in self.child_lines_temprature:
+    #         if isinstance(line.bottom, list):  # Handle multiple entries for the same day
+    #             for i in range(len(line.bottom)):
+    #                 sr_no.append(current_sr_no)  # Use `sr_no` instead of days
+    #                 core_bottom.append(line.bottom[i])
+    #                 core_middle.append(line.middle[i])
+    #                 core_top.append(line.top[i])
+    #                 cover_bottom.append(line.bottom1[i])
+    #                 cover_middle.append(line.middle1[i])
+    #                 cover_top.append(line.top1[i])
+    #                 ambient.append(line.ambient[i])
+    #             current_sr_no += 1  # Increment serial number for each day
+    #         else:  # Single value per day
+    #             sr_no.append(current_sr_no)  # Use `sr_no` instead of days
+    #             core_bottom.append(line.bottom)
+    #             core_middle.append(line.middle)
+    #             core_top.append(line.top)
+    #             cover_bottom.append(line.bottom1)
+    #             cover_middle.append(line.middle1)
+    #             cover_top.append(line.top1)
+    #             ambient.append(line.ambient)
+    #             current_sr_no += 1  # Increment serial number for the next day
+
+    #     # Create the plot
+    #     plt.figure(figsize=(14, 8))
+
+    #     # Plot the temperature data using `sr_no` for x values
+    #     plt.plot(sr_no, core_bottom, label='Core Area - Bottom', marker='o', color='blue')
+    #     plt.plot(sr_no, core_middle, label='Core Area - Middle', marker='o', color='orange')
+    #     plt.plot(sr_no, core_top, label='Core Area - Top', marker='o', color='green')
+    #     plt.plot(sr_no, cover_bottom, label='Cover Area - Bottom', marker='o', color='red')
+    #     plt.plot(sr_no, cover_middle, label='Cover Area - Middle', marker='o', color='purple')
+    #     plt.plot(sr_no, cover_top, label='Cover Area - Top', marker='o', color='brown')
+    #     plt.plot(sr_no, ambient, label='Ambient', linestyle='--', color='black')
+
+    #     # Add vertical lines for each `sr_no`
+    #     for serial in sr_no:
+    #         plt.axvline(x=serial, color='cyan', linestyle='-', linewidth=1)  # Draw vertical line
+
+    #     # Add labels inside the plot area at the bottom for each sr_no
+    #     for i, serial in enumerate(sr_no):
+    #         # Place the label slightly below the minimum y limit of the plot
+    #         plt.text(serial, plt.ylim()[0] - (0.05 * (plt.ylim()[1] - plt.ylim()[0])), 
+    #                 f'SR {serial}', color='cyan', rotation=90, fontsize=10,
+    #                 verticalalignment='top', horizontalalignment='center')
+
+    #     # Customize the graph
+    #     plt.xlabel('Serial Number (SR No.)', fontsize=14)
+    #     plt.ylabel('Temperature (°C)', fontsize=14)
+    #     plt.xticks(ticks=sr_no, labels=[f'SR {serial}' for serial in sr_no], fontsize=10, rotation=45)  # Set x-ticks
+    #     plt.yticks(fontsize=12)
+    #     plt.legend(fontsize=12)
+    #     plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+
+    #     # Save the plot to a binary field
+    #     buf = io.BytesIO()
+    #     plt.savefig(buf, format='png', bbox_inches='tight')
+    #     buf.seek(0)
+    #     chart_image20mm = base64.b64encode(buf.read()).decode('utf-8')
+    #     buf.close()
+    #     plt.close()  # Free up memory
+
+    #     return chart_image20mm
+
     def generate_line_chart_20mm(self):
-        days = []
+        import matplotlib.pyplot as plt
+        import io
+        import base64
+
+        # Data preparation
+        days = []  # Days for x-axis
         core_bottom = []
         core_middle = []
         core_top = []
@@ -217,29 +375,33 @@ class EnviromentTemprature(models.Model):
         # Create the plot
         plt.figure(figsize=(14, 8))
 
-        # Unique days for plotting
-        unique_days = sorted(set(days))
-        
-        # Create a mapping from days to indices for plotting
-        day_to_index = {day: i for i, day in enumerate(unique_days)}
+        # Create a list of x positions for each entry
+        x_positions = list(range(len(days)))  # Create x positions based on the number of entries
 
-        # Plot the temperature data, using indices for x values
-        plt.plot([day_to_index[day] for day in days], core_bottom, label='Core Area - Bottom', marker='o', color='blue')
-        plt.plot([day_to_index[day] for day in days], core_middle, label='Core Area - Middle', marker='o', color='orange')
-        plt.plot([day_to_index[day] for day in days], core_top, label='Core Area - Top', marker='o', color='green')
-        plt.plot([day_to_index[day] for day in days], cover_bottom, label='Cover Area - Bottom', marker='o', color='red')
-        plt.plot([day_to_index[day] for day in days], cover_middle, label='Cover Area - Middle', marker='o', color='purple')
-        plt.plot([day_to_index[day] for day in days], cover_top, label='Cover Area - Top', marker='o', color='brown')
-        plt.plot([day_to_index[day] for day in days], ambient, label='Ambient', linestyle='--', color='black')
+        # Plot the temperature data using x positions for plotting
+        plt.plot(x_positions, core_bottom, label='Core Area - Bottom', marker='o', color='blue')
+        plt.plot(x_positions, core_middle, label='Core Area - Middle', marker='o', color='orange')
+        plt.plot(x_positions, core_top, label='Core Area - Top', marker='o', color='green')
+        plt.plot(x_positions, cover_bottom, label='Cover Area - Bottom', marker='o', color='red')
+        plt.plot(x_positions, cover_middle, label='Cover Area - Middle', marker='o', color='purple')
+        plt.plot(x_positions, cover_top, label='Cover Area - Top', marker='o', color='brown')
+        plt.plot(x_positions, ambient, label='Ambient', linestyle='--', color='black')
 
         # Add vertical lines for each day
-        for i, day in enumerate(unique_days):
-            plt.axvline(x=i, color='gray', linestyle='--', linewidth=0.5)
+        for pos in x_positions:
+            plt.axvline(x=pos, color='cyan', linestyle='-', linewidth=1)  # Draw vertical line
+
+        # Add day labels inside the plot area for each position
+        for i, day in enumerate(days):
+            # Place the label slightly below the minimum y limit of the plot
+            plt.text(i, plt.ylim()[0] - (0.05 * (plt.ylim()[1] - plt.ylim()[0])), 
+                    day, color='cyan', rotation=90, fontsize=10,
+                    verticalalignment='top', horizontalalignment='center')
 
         # Customize the graph
         plt.xlabel('Days', fontsize=14)
         plt.ylabel('Temperature (°C)', fontsize=14)
-        plt.xticks(ticks=range(len(unique_days)), labels=unique_days, fontsize=12)  # Set x-ticks to unique days
+        plt.xticks(ticks=x_positions, labels=days, fontsize=10, rotation=45)  # Set x-ticks to days
         plt.yticks(fontsize=12)
         plt.legend(fontsize=12)
         plt.grid(True, which='both', linestyle='--', linewidth=0.5)
@@ -255,12 +417,8 @@ class EnviromentTemprature(models.Model):
         return chart_image20mm
 
 
-    
 
 
-        
-    
-  
 
 
     @api.depends('child_lines_temprature')
