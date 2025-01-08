@@ -745,6 +745,148 @@
                     </div>
 
 				</div>
+				<!-- added -->
+					<div t-if="data.gsb_field_density_visible">
+						
+							<div style="text-align:center;">
+								<p style="font-size:15px"><b><span t-field="data.field_density_name"/></b></p>
+								<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','p4587910-b27e-48c6-81b8-826521442541')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
+								</span>
+							</div>
+							
+						<table style="margin-top:30px;">
+							<thead>
+								<tr>
+									<th>
+										<span>
+											Determination No
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of sample from hole in gm Ww
+										</span>
+									</th>
+									<th>
+										<span>
+											Water content of sample m in % By RMM
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of sand + Cylinder before pouring in gm W1
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of sand + Cylinder after pouring in gm  W2
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of sand in cone  in gm W3
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of sand in hole in gm W4
+										</span>
+									</th>
+									<th>
+										<span>
+											Density of sand in gm/cc Ys
+										</span>
+									</th>
+									<th>
+										<span>
+											Volume of hole in cc V = W4/Ys
+										</span>
+									</th>
+									<th>
+										<span>
+											DBulk Density of sample in gm/cc Yb = Ww/V
+										</span>
+									</th>
+									<th>
+										<span>
+											Dry Density of sample Yd = (100*Yb)/100+m
+										</span>
+									</th>
+									<th>
+										<span>
+											Degree of Compaction % (Yd/Mdd)*100
+										</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- <t t-set="n" t-value="0"/> -->
+								<tr t-foreach="data.gsb_field_density_table" t-as="r">
+									<!-- <td>
+										<div>
+											<span t-esc="n + 1" />
+											<t t-set="n" t-value="n+1"/>
+										</div>
+									</td> -->
+									<td>
+										<span t-esc="r.determination_no"/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_sample" />
+									</td>
+									<td>
+										<span t-esc="r.water_of_sample" />
+									</td>
+									<td>
+										<span t-esc="r.wt_of_before_cylinder" />
+									</td>
+									<td>
+										<span t-esc="r.wt_of_after_cylinder"  />
+									</td>
+									<td>
+										<span t-esc="r.wt_of_sand_cone"  />
+									</td>
+									<td>
+										<span t-esc="r.wt_of_sand_hole"  />
+									</td>
+
+
+									<td>
+										<span t-esc="r.density_of_sand"  />
+									</td>
+									<td>
+										<span t-esc="r.volume_of_hole"  t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.bulk_density_of_sample" t-options='{"widget": "float", "precision": 2}' />
+									</td>
+									<td>
+										<span t-esc="r.dry_density_of_sample"  t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.degree_of_compaction" t-options='{"widget": "float", "precision": 2}'  />
+									</td>
+									
+								</tr>
+							</tbody>
+						</table>
+					</div>
+						<div style="margin-top:20px" t-if="data.gsb_field_density_visible">
+							<table>
+								<tr cols="12">
+									<td colspan="12">Average degree of compaction %:
+										<![CDATA[&nbsp;]]>
+										<span t-field="data.avg_degree_of_compaction"  t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+								</tr>
+							</table>
+						</div>
+					<!-- uptill -->
 
 
                 <!-- CBR  -->
