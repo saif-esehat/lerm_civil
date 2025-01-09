@@ -1427,7 +1427,7 @@
 							<img t-att-src="'data:image/png;base64,'+str(graphHeavy)" style="max-width: 100%;"/>
 					</div>
 
-					<div  style="margin-top: 10px;">
+					<div t-if="data.heavy_visible or data.light_omc_visible and fromEln " style="margin-top: 10px;">
 						From Graph 
 					</div>
 
