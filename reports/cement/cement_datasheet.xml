@@ -922,6 +922,73 @@
 						</table>
 					</div>
 
+					<div t-if="data.opc_soundness_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+                              <span t-field="env['lerm.parameter.master'].search([('internal_id','=','fh2234553c-5e9c-4335-9ea2-2d87624c23048')]).parameter_name"/>
+                         
+                        </div>
+
+						<table t-if="data.opc_soundness_visible" style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Wt. of Cement (g) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_cement_opc"/>
+								</td>
+								
+							</tr>
+							<tr cols="12">
+								<td colspan="6">Wt.of water required (g) :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.water_required_opc"/>
+								</td>
+								
+							</tr>
+						</table>
+						
+						
+						<table style="margin-top:20px">
+
+							<tr cols="12">
+								<td colspan="3">Sr no 
+								</td>
+								<td colspan="3">Intial Length (L1) 
+								</td>
+								<td colspan="3">Final Length(L2)
+								</td>
+								<td colspan="3">Expansion ((L2-L1)/L1)x 100, %
+								</td>
+							</tr>
+
+							<t t-set="i" t-value="0"/>
+							<tr t-foreach="data.opc_soundness_table" t-as="r">
+								<td colspan="3">
+									<div>
+										<span t-esc="i + 1" />
+										<t t-set="i" t-value="i+1"/>
+									</div>
+                  				</td>
+								<td colspan="3">
+									<span t-esc="r['intial_length']"/>
+								</td>
+								<td colspan="3">
+									<span t-esc="r['final_length']"/>
+								</td>
+								<td colspan="3">
+									<span t-esc="r['expantion']"  t-options='{"widget": "float", "precision": 3}'/>
+								</td>
+							</tr>
+						</table>
+						<table t-if="data.opc_soundness_visible" style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Average Expansion % :
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.avg_expantion_opc"  t-options='{"widget": "float", "precision": 3}'/>
+								</td>
+								
+							</tr>
+						</table>
+					</div>
+
 
 					<div class="authorizeRowDataSheet">
 
