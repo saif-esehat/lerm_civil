@@ -721,7 +721,7 @@
 							</td> -->
 							<td style="text-align: center;vertical-align: middle;">
 								<span style="text-align: center;" >
-									<span t-field="microsilica.avrg_oversize_percent" t-options='{"widget": "float", "precision": 2}'/>
+									<span t-field="microsilica.variation_from_avg_percent" t-options='{"widget": "float", "precision": 2}'/>
 								</span>									
 							</td>
 							<!-- <td style="text-align: center;">
@@ -783,7 +783,7 @@
 							</td> -->
 							<td style="text-align: center;vertical-align: middle;">
 								<span style="text-align: center;" >
-									<span t-field="microsilica.avrg_oversize_percent" t-options='{"widget": "float", "precision": 2}'/>
+									<span t-field="microsilica.variation_from_avg_percent" t-options='{"widget": "float", "precision": 2}'/>
 								</span>									
 							</td>
 							<!-- <td style="text-align: center;">
