@@ -559,6 +559,51 @@
                       <field name="fineness_conformity"/>
                       <field name="fineness_nabl"/>
                     </group>
+                          <!-- Soundness by Autoclave Method -->
+
+                     <group attrs="{'invisible': [('opc_soundness_visible', '=', False)]}">
+                        <h1>
+                            <field name="opc_soundness_name" readonly="1" nolabel="1"/>
+                            <field name="opc_soundness_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('opc_soundness_visible', '=', False)]}">
+                        <field name="wt_cement_opc"/>
+                         <field name="water_required_opc"/>
+                    </group>
+                    
+                    <group attrs="{'invisible': [('opc_soundness_visible', '=', False)]}">
+                        <field name="opc_soundness_table"  nolabel="1">
+                        <tree editable="bottom">
+                         <field name="sr_no" /> 
+                          <field name="intial_length" />
+                          <field name="final_length" />
+                          <field name="expantion"/>
+                         
+                        </tree>
+                        </field>
+                    </group>
+                    <group attrs="{'invisible': [('opc_soundness_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                       
+                            <field name="avg_expantion_opc"/>
+                       
+                           
+                    </group>
+
+                       <group attrs="{'invisible': [('opc_soundness_visible', '=', False)]}">
+                     <group style="width:25%" attrs="{'invisible': [('opc_soundness_visible', '=', False)]}">
+                                <field name='avg_expantion_opc_conformity'
+                                       decoration-success="avg_expantion_opc_conformity == 'pass'" 
+                                       decoration-danger="avg_expantion_opc_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('opc_soundness_visible', '=', False)]}">
+                                <field name="avg_expantion_opc_nabl"
+                                       decoration-success="avg_expantion_opc_nabl == 'pass'" 
+                                       decoration-danger="avg_expantion_opc_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group>
                     <button
                             type="object"
                             class="oe_highlight" 

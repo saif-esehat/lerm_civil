@@ -1091,6 +1091,79 @@ class CementPsc(models.Model):
         for record in self:
             record.mean_of_three_measured_times = record.average_time_fineness
 
+       # added
+    # Soundness by Autoclave Method
+    opc_soundness_name = fields.Char("Name",default="Soundness by Autoclave Method")
+    opc_soundness_visible = fields.Boolean("Soundness by Autoclave Method Visible",compute="_compute_visible")
+  
+    opc_soundness_table = fields.One2many('psc.soundness.autoclave.line','parent_id',string="Parameter")
+    wt_cement_opc = fields.Float(string="Wt. of Cement (g)", store=True)
+    water_required_opc = fields.Float(string="Wt.of water required (g)", store=True)
+    avg_expantion_opc = fields.Float(string="Average Expansion %",compute="_compute_avg_expantion_opc",digits=(12,3))
+
+    @api.depends('opc_soundness_table.expantion')
+    def _compute_avg_expantion_opc(self):
+        for record in self:
+            expantion_values = record.opc_soundness_table.mapped('expantion')
+            if expantion_values:
+                avg_expantion_opc = sum(expantion_values) / len(expantion_values)
+                record.avg_expantion_opc = avg_expantion_opc
+            else:
+                record.avg_expantion_opc = 0.0
+
+
+    avg_expantion_opc_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_avg_expantion_opc_conformity", store=True)
+
+
+
+    @api.depends('avg_expantion_opc','eln_ref','grade')
+    def _compute_avg_expantion_opc_conformity(self):
+        
+        for record in self:
+            record.avg_expantion_opc_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fh2234553c-5e9c-4335-9ea2-2d87624c23048')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fh2234553c-5e9c-4335-9ea2-2d87624c23048')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.avg_expantion_opc - record.avg_expantion_opc*mu_value
+                    upper = record.avg_expantion_opc + record.avg_expantion_opc*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.avg_expantion_opc_conformity = 'pass'
+                        break
+                    else:
+                        record.avg_expantion_opc_conformity = 'fail'
+
+    avg_expantion_opc_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_avg_expantion_opc_nabl", store=True)
+
+    @api.depends('avg_expantion_opc','eln_ref','grade')
+    def _compute_avg_expantion_opc_nabl(self):
+        
+        for record in self:
+            record.avg_expantion_opc_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fh2234553c-5e9c-4335-9ea2-2d87624c23048')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','fh2234553c-5e9c-4335-9ea2-2d87624c23048')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.avg_expantion_opc - record.avg_expantion_opc*mu_value
+                    upper = record.avg_expantion_opc + record.avg_expantion_opc*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.avg_expantion_opc_nabl = 'pass'
+                        break
+                    else:
+                        record.avg_expantion_opc_nabl = 'fail'
+
 
             
     ### Compute Visible
@@ -1107,6 +1180,7 @@ class CementPsc(models.Model):
             record.compressive_3_visible = False
             record.compressive_7_visible = False
             record.compressive_28_visible = False
+            record.opc_soundness_visible = False
 
             
 
@@ -1143,6 +1217,9 @@ class CementPsc(models.Model):
                 if sample.internal_id == '97ca92ab-492a-44a2-8245-0c3a2d40e313':
                     record.fineness_blaine_visible = True
                     record.density_visible = True
+
+                if sample.internal_id == 'fh2234553c-5e9c-4335-9ea2-2d87624c23048':
+                    record.opc_soundness_visible = True
 
 
     def open_eln_page(self):
@@ -1320,4 +1397,43 @@ class Casting28DaysLinePsc(models.Model):
                 record.compressive_strength = round((record.crushing_load / record.crosssectional_area) * 1000,2)
             else:
                 record.compressive_strength = 0
+
+
+class SoundnessAutoclaveMethodpsc(models.Model):
+    _name = "psc.soundness.autoclave.line"
+
+    parent_id = fields.Many2one('mechanical.cement.psc')
+
+    sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
+
+    intial_length = fields.Float("Intial Length (L1)",digits=(12,3))
+    final_length = fields.Float("Final Length (L2)",digits=(12,3))
+    expantion = fields.Float("Expansion ((L2-L1)/L1)x 100, %",compute="_compute_expansion_opc",digits=(12,3))
+
+
+    @api.depends('intial_length', 'final_length')
+    def _compute_expansion_opc(self):
+        for record in self:
+            if record.intial_length:  # Avoid division by zero
+                record.expantion = ((record.final_length - record.intial_length) / record.intial_length) * 100
+            else:
+                record.expantion = 0.0
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
+
+        return super(SoundnessAutoclaveMethodpsc, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.sr_no = index + 1
 
