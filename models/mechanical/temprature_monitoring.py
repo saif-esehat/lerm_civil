@@ -1,4 +1,5 @@
-from odoo import models , fields,api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 from datetime import timedelta
 import math
 import re
@@ -36,7 +37,9 @@ class EnviromentTemprature(models.Model):
     #         ('taloja', 'TALOJA')], string="Lab Name")
     concrete_pouring = fields.Text(string="Concrete Pouring and Data Recording")
 
-    child_lines_temprature = fields.One2many('enviroment.tempraturee.line','parent_id',string="Parameter")
+    child_lines_temprature = fields.One2many('enviroment.tempraturee.line','parent_id',string="Parameter", copy=True)
+
+    
 
     peak_max_temp = fields.Char(
         string="Peak Concrete Temperature ",  compute="_compute_peak_max_middle1", store=True
@@ -540,3 +543,6 @@ class EnviromentTempratureLine(models.Model):
         records = self.sorted('id')
         for index, record in enumerate(records):
             record.sr_no = index + 1
+
+
+   
