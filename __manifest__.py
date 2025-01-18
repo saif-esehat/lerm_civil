@@ -238,7 +238,22 @@
     'reports/tile/tile_report.xml',
     'views/mechanical/temprature_monitoring.xml',
     'reports/temprature_monitoring/temprature_datasheet.xml',
-    'reports/temprature_monitoring/temprature_monitoring_report.xml'
+    'reports/temprature_monitoring/temprature_monitoring_report.xml',
+    'views/mechanical/natural_building_stone.xml',
+    'reports/natural_stone/natural_datasheet.xml',
+    'reports/natural_stone/natural_report.xml',
+    'views/mechanical/door.xml',
+    'reports/door/door_datasheet.xml',
+    'reports/door/door_report.xml',
+    'views/mechanical/gypsum_plaster_board.xml',
+    'reports/gypsum_plaster/gypsum_datasheet.xml',
+    'reports/gypsum_plaster/gypsum_plaster_report.xml',
+    'views/mechanical/particle_board.xml',
+    'reports/particle_board/particle_datasheet.xml',
+    'reports/particle_board/particle_report.xml',
+    'views/mechanical/shuttering_plywood.xml',
+    'reports/shuttering_plywood/shuttering_datasheet.xml',
+    'reports/shuttering_plywood/shuttering_report.xml',
 
 
     # 'views/portal_template.xml'
