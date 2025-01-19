@@ -85,6 +85,7 @@ class WmmMechanical(models.Model):
             record.plasticity_index_visible = False
             record.density_relation_visible = False
             record.cbr_visible = False
+            record.wmm_density_visible = False
 
 
             for sample in record.sample_parameters:
@@ -114,6 +115,9 @@ class WmmMechanical(models.Model):
                     record.density_relation_visible = True
                 if sample.internal_id == '6c0014d9-12d3-45ea-bc23-5b35ec6ffd24':
                     record.cbr_visible = True
+
+                if sample.internal_id == '429h14d9-12d3-45ea-bc23-5b35ec6ffd50':
+                    record.wmm_density_visible = True
                 
 
     # Dry Gradation
@@ -815,6 +819,81 @@ class WmmMechanical(models.Model):
     chart_image_density = fields.Binary("Line Chart", compute="_compute_chart_image_density", store=True)
 
 
+      # added
+    # field Density by Sand Replacement method
+    wmm_density_name = fields.Char("Name",default="Field Density by Sand Replacement method")
+    wmm_density_visible = fields.Boolean("Field Density by Sand Replacement method Visible",compute="_compute_visible")
+    # job_no_dry_density = fields.Char(string="Job No")
+    # material_dry_density = fields.Char(String="Material")
+    # start_date_dry_density = fields.Date("Start Date")
+    # end_date_dry_density = fields.Date("End Date")
+
+    wmm_density_table = fields.One2many('mechanical.wmm.field.dencity.line','parent_id',string="Parameter")
+    mmd_wmm = fields.Float(string="MMD gm/cc", store=True)
+    omc_wmm = fields.Float(string="OMC %", store=True)
+    wmm_degree_of_compaction = fields.Float(string="Degree of Compaction in %",compute="_compute_wmm_degree_of_compaction")
+
+    @api.depends('wmm_density_table.degree_of_compaction')
+    def _compute_wmm_degree_of_compaction(self):
+        for record in self:
+            degree_of_compaction_values = record.wmm_density_table.mapped('degree_of_compaction')
+            if degree_of_compaction_values:
+                wmm_degree_of_compaction = sum(degree_of_compaction_values) / len(degree_of_compaction_values)
+                record.wmm_degree_of_compaction = wmm_degree_of_compaction
+            else:
+                record.wmm_degree_of_compaction = 0.0
+
+    degree_of_compaction_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_degree_of_compaction_conformity", store=True)
+
+    @api.depends('wmm_degree_of_compaction','eln_ref','grade')
+    def _compute_degree_of_compaction_conformity(self):
+        
+        for record in self:
+            record.degree_of_compaction_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','429h14d9-12d3-45ea-bc23-5b35ec6ffd50')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','429h14d9-12d3-45ea-bc23-5b35ec6ffd50')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.wmm_degree_of_compaction - record.wmm_degree_of_compaction*mu_value
+                    upper = record.wmm_degree_of_compaction + record.wmm_degree_of_compaction*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.degree_of_compaction_conformity = 'pass'
+                        break
+                    else:
+                        record.degree_of_compaction_conformity = 'fail'
+
+    degree_of_compaction_nabl = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail')], string="NABL", compute="_compute_degree_of_compaction_nabl", store=True)
+
+    @api.depends('wmm_degree_of_compaction','eln_ref','grade')
+    def _compute_degree_of_compaction_nabl(self):
+        
+        for record in self:
+            record.degree_of_compaction_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','429h14d9-12d3-45ea-bc23-5b35ec6ffd50')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','429h14d9-12d3-45ea-bc23-5b35ec6ffd50')]).parameter_table
+            # for material in materials:
+            #     if material.grade.id == record.grade.id:
+            lab_min = line.lab_min_value
+            lab_max = line.lab_max_value
+            mu_value = line.mu_value
+            
+            lower = record.wmm_degree_of_compaction - record.wmm_degree_of_compaction*mu_value
+            upper = record.wmm_degree_of_compaction + record.wmm_degree_of_compaction*mu_value
+            if lower >= lab_min and upper <= lab_max:
+                record.degree_of_compaction_nabl = 'pass'
+                break
+            else:
+                record.degree_of_compaction_nabl = 'fail'
+
+
 
     def generate_line_chart_density(self):
         # Prepare data for the chart
@@ -1167,3 +1246,84 @@ class ImpactValueLine(models.Model):
                 rec.impact_value = (rec.wt_of_aggregate_passing / rec.total_wt_aggregate) * 100
             else:
                 rec.impact_value = 0.0
+
+
+#added
+class WmmFieldDencityLine(models.Model):
+    _name = "mechanical.wmm.field.dencity.line"
+    parent_id = fields.Many2one('mechanical.wmm',string="Parent Id")
+   
+    determination_no = fields.Integer(string="Determination No",readonly=True, copy=False, default=1)
+    wt_of_sample = fields.Integer(string="Weight of sample gm")
+    water_of_sample = fields.Integer(string="Water content of sample RMM")
+    wt_of_before_cylinder = fields.Integer(string="Weight of sand + Cylinder before pouring gm")
+    wt_of_after_cylinder = fields.Integer(string="Weight of sand + Cylinder after pouring gm")
+    wt_of_sand_cone = fields.Integer(string="Weight of sand in cone gm")
+    wt_of_sand_hole = fields.Integer(string="Weight of sand in hole gm", compute="_compute_sand_hole")
+    density_of_sand = fields.Float(string="Density of sand gm/cc")
+    volume_of_hole = fields.Float(string="Volume of hole cc",compute="_compute_volume_of_hole")
+    bulk_density_of_sample = fields.Float(string="Bulk Density of sample gm/cc",compute="_compute_bulk_density")
+    dry_density_of_sample = fields.Float(string="Dry Density of sample",compute="_compute_dry_density")
+    degree_of_compaction = fields.Float(string="Degree of Compaction %",compute="_compute_degree_of_compaction")
+
+    
+
+
+    @api.depends('wt_of_before_cylinder','wt_of_after_cylinder','wt_of_sand_cone')
+    def _compute_sand_hole(self):
+        for record in self:
+            record.wt_of_sand_hole = record.wt_of_before_cylinder - record.wt_of_after_cylinder - record.wt_of_sand_cone
+
+
+    @api.depends('wt_of_sand_hole', 'density_of_sand')
+    def _compute_volume_of_hole(self):
+        for record in self:
+            if record.density_of_sand != 0:
+                record.volume_of_hole = record.wt_of_sand_hole / record.density_of_sand
+            else:
+                record.volume_of_hole = 0.0
+
+ 
+
+
+    @api.depends('wt_of_sample', 'volume_of_hole')
+    def _compute_bulk_density(self):
+        for record in self:
+            if record.volume_of_hole != 0:  # Avoid division by zero
+                record.bulk_density_of_sample = record.wt_of_sample / record.volume_of_hole
+            else:
+                record.bulk_density_of_sample = 0.0
+
+    @api.depends('bulk_density_of_sample', 'water_of_sample')
+    def _compute_dry_density(self):
+        for record in self:
+            if record.water_of_sample + 100 != 0:  # Avoid division by zero
+                record.dry_density_of_sample = (100 * record.bulk_density_of_sample) / (record.water_of_sample + 100)
+            else:
+                record.dry_density_of_sample = 0.0
+
+    @api.depends('dry_density_of_sample', 'parent_id.mmd_wmm')
+    def _compute_degree_of_compaction(self):
+        for record in self:
+            if record.parent_id.mmd_wmm != 0:  # Access mmd_wmm from parent_id
+                record.degree_of_compaction = (record.dry_density_of_sample / record.parent_id.mmd_wmm) * 100
+            else:
+                record.degree_of_compaction = 0.0
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('determination_no'))
+                vals['determination_no'] = max_serial_no + 1
+
+        return super(WmmFieldDencityLine, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.determination_no = index + 1

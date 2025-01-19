@@ -138,6 +138,144 @@
 							</tr>
 						</table>
 					</div>
+
+					<!-- field density -->
+						<div style="page-break-inside: avoid; margin-top: 20px;">
+							<table t-if="data.wmm_density_visible" style="width:100%; border-collapse: collapse;">
+								<tr>
+									<td colspan="4" style="text-align:center; letter-spacing: 2px; border: 1px solid black; padding: 10px;">
+										<!-- <div>
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).test_method.test_method"/>
+										</div> -->
+										   <div style="text-align:center;font-size:18px">
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','429h14d9-12d3-45ea-bc23-5b35ec6ffd50')]).parameter_name"/> <br></br>
+											<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','429h14d9-12d3-45ea-bc23-5b35ec6ffd50')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+													</t>
+												</t>
+											</span>
+                                       </div>
+									</td>
+								</tr>
+								</table>
+
+									<div>
+										<table t-if="data.wmm_density_visible" style="margin-top: 10px; text-align: right;">
+											<tr>
+												<td style="font-weight: bold;">MDD gm/cc :</td>
+												<td>
+													<span t-field="data.mmd_wmm" t-options='{"widget": "float", "precision": 2}'/>
+												</td>
+											</tr>
+											<tr>
+												<td style="font-weight: bold;">OMC % :</td>
+												<td>
+													<span t-field="data.omc_wmm" t-options='{"widget": "float", "precision": 2}'/>
+												</td>
+											</tr>
+										</table>
+									</div>
+
+
+							<table t-if="data.wmm_density_visible" style="margin-top:30px;">
+							<thead>
+								<tr style="font-weight: bold;">
+									<th>Parameter</th>
+									
+									<t t-foreach="range(len(data.wmm_density_table))" t-as="i">
+										<th>Observation-<t t-esc="i + 1"/></th>
+									</t>
+								</tr>
+							</thead>
+							<tbody>
+							   		
+									<tr>
+									<td>Weight of sample from hole Ww in gm</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.wt_of_sample" t-options='{"widget": "integer"}'/></td>
+									</t>
+								</tr>
+								<tr>
+									<td>Water content of sample m in % By RMM</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.water_of_sample" t-options='{"widget": "integer"}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Weight of sand + Cylinder before pouring W1 in gm</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.wt_of_before_cylinder" t-options='{"widget": "integer"}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Weight of sand + Cylinder after pouring W2 in gm</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.wt_of_after_cylinder" t-options='{"widget": "integer"}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Weight of sand in cone W3 in gm</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.wt_of_sand_cone" t-options='{"widget": "integer"}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Weight of sand in hole W4 = (W1-W2-W3) in gm</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.wt_of_sand_hole" t-options='{"widget": "integer"}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Density of sand Ys in gm/cc</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.density_of_sand" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Volume of hole V= W4 / Ys in cc</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.volume_of_hole" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Bulk Density of sample Yb = Ww / V in gm/cc</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.bulk_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Dry Density of sample Yd = (100 Yb) / (100 + m)</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.dry_density_of_sample" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Degree of Compaction in %</td>
+									<t t-foreach="data.wmm_density_table" t-as="r">
+									<td><span t-esc="r.degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+															
+									
+
+							</tbody>
+							
+
+							</table>
+							<table t-if="data.wmm_density_visible" style="margin-top:10px;">
+							<tr>
+								<td style="text-align: center; font-weight: bold; padding: 2px;">Average Degree of Compaction % :</td>
+								<td style="text-align: center;">
+									<span t-field="data.wmm_degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+							</tr>
+						</table>	
+						</div>
+
+
+					<!-- uptill -->
 					<!-- <div style="padding-top:2px">
 				       <span t-esc="o.material.test_parameter "/> 
 					</div> -->
