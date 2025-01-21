@@ -150,6 +150,10 @@
                        
                             <field name="drying_shrinkage_aac_nabl"/>
                         </group>
+                      <group>
+                        <field name="drying_grade1"/>
+                        <field name="drying_grade2"/>
+                        </group>
                     </group>
                     
 
@@ -177,6 +181,10 @@
                             <field name="compressive_strength_confirmity"/>
                        
                             <field name="compressive_strength_nabl"/>
+                        </group>
+                        <group>
+                        <field name="compressive_grade1"/>
+                        <field name="compressive_grade2"/>
                         </group>
                     </group>
                      <button

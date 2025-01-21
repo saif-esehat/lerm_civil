@@ -287,6 +287,8 @@ class AacBlockMechanical(models.Model):
 
     drying_shrinkage_table = fields.One2many('mech.aac.drying.shrinkage.line','parent_id')
     average_drying_shrinkage = fields.Float("Average Drying Shrinkage",compute="_compute_average_drying_shrinkage")
+    drying_grade1 = fields.Char("Specification Grade - 1")
+    drying_grade2 = fields.Char("Specification Grade - 2")
     drying_shrinkage_confirmity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
@@ -356,6 +358,8 @@ class AacBlockMechanical(models.Model):
 
     compressive_strength_table = fields.One2many('mech.aac.compressive.strength.line','parent_id')
     average_compressive_strength = fields.Float("Average Compressive Strength",compute="_compute_average_compressive_strength")
+    compressive_grade1 = fields.Char("Specification Grade - 1")
+    compressive_grade2 = fields.Char("Specification Grade - 2")
     compressive_strength_confirmity = fields.Selection([
         ('pass', 'Pass'),
         ('fail', 'Fail'),
@@ -484,15 +488,24 @@ class AacDryingShrinkageLine(models.Model):
     @api.depends('initial_length','final_length')
     def _compute_change_length(self):
         for record in self:
-            record.change_length = record.initial_length - record.final_length
+            record.change_length = record.final_length - record.initial_length
 
-    @api.depends('change_length','length')
+    # @api.depends('change_length','length')
+    # def _compute_drying_shrinkage(self):
+    #     for record in self:
+    #         if record.length != 0:
+    #             record.drying_shrinkage = round(record.change_length / record.length * 100,2)
+    #         else:
+    #             record.drying_shrinkage = 0
+
+    @api.depends('initial_length', 'final_length', 'length')
     def _compute_drying_shrinkage(self):
         for record in self:
-            if record.length != 0:
-                record.drying_shrinkage = round(record.change_length / record.length * 100,2)
+            if record.length:  # Avoid division by zero
+                record.drying_shrinkage = ((record.final_length - record.initial_length) / record.length) * 100
             else:
-                record.drying_shrinkage = 0
+                record.drying_shrinkage = 0.0
+
 
 
 class AacCompressiveStrengthLine(models.Model):
