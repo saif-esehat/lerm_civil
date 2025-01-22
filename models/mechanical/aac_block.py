@@ -110,11 +110,21 @@ class AacBlockMechanical(models.Model):
     # Dimension
     dimension_name = fields.Char(default="Dimension")
     dimension_visible = fields.Boolean(compute="_compute_visible")
+    
 
     dimension_table = fields.One2many('mech.aac.dimension.line','parent_id')
     average_length = fields.Float('Average Length',compute="_compute_average_length")
+    length_grade1 = fields.Char("Length pecification Grade - 1")
+    length_grade2 = fields.Char("Length Specification Grade - 2")
+
     average_width = fields.Float('Average Width',compute="_compute_average_width")
+    width_grade1 = fields.Char("Width Specification Grade - 1")
+    width_grade2 = fields.Char("Width Specification Grade - 2")
+
     average_height = fields.Float('Average Height',compute="_compute_average_height")
+
+    height_grade1 = fields.Char("Height Specification Grade - 1")
+    height_grade2 = fields.Char("Height Specification Grade - 2")
 
 
 
@@ -151,6 +161,8 @@ class AacBlockMechanical(models.Model):
     # Moisture Content
     moisture_name = fields.Char(default="Moisture Content")
     moisture_visible = fields.Boolean(compute="_compute_visible")
+    moisture_grade1 = fields.Char("Specification Grade - 1")
+    moisture_grade2 = fields.Char("Specification Grade - 2")
 
     moisture_content_table = fields.One2many('mech.aac.moisture.line','parent_id')
     average_moisture_content = fields.Float("Average Moisture Content %",compute="_compute_average_moisture_content")
@@ -216,6 +228,9 @@ class AacBlockMechanical(models.Model):
     # Density 
     density_name = fields.Char(default="Density")
     density_visible = fields.Boolean(compute="_compute_visible")
+
+    density_grade1 = fields.Char("Specification Grade - 1")
+    density_grade2 = fields.Char("Specification Grade - 2")
 
     density_unit = fields.Char("Unit",default="mm",readonly=True)
 
@@ -286,7 +301,7 @@ class AacBlockMechanical(models.Model):
     drying_shrinkage_visible = fields.Boolean(compute="_compute_visible")
 
     drying_shrinkage_table = fields.One2many('mech.aac.drying.shrinkage.line','parent_id')
-    average_drying_shrinkage = fields.Float("Average Drying Shrinkage",compute="_compute_average_drying_shrinkage")
+    average_drying_shrinkage = fields.Float("Average Drying Shrinkage",compute="_compute_average_drying_shrinkage",digits=(12,3))
     drying_grade1 = fields.Char("Specification Grade - 1")
     drying_grade2 = fields.Char("Specification Grade - 2")
     drying_shrinkage_confirmity = fields.Selection([
@@ -480,10 +495,10 @@ class AacDryingShrinkageLine(models.Model):
     parent_id = fields.Many2one('mechanical.aac.block', string="Parent Id")
 
     length = fields.Float('Length of Specimen')
-    initial_length = fields.Float('Initial Length L1 in mm')
-    final_length = fields.Float('Final Length L2 in mm')
-    change_length = fields.Float('Change in Length in mm',compute="_compute_change_length")
-    drying_shrinkage = fields.Float('Drying Shrinkage in %',compute="_compute_drying_shrinkage")
+    initial_length = fields.Float('Initial Length L1 in mm',digits=(12,3))
+    final_length = fields.Float('Final Length L2 in mm',digits=(12,3))
+    change_length = fields.Float('Change in Length in mm',compute="_compute_change_length",digits=(12,3))
+    drying_shrinkage = fields.Float('Drying Shrinkage in %',compute="_compute_drying_shrinkage",digits=(12,3))
 
     @api.depends('initial_length','final_length')
     def _compute_change_length(self):
@@ -505,7 +520,6 @@ class AacDryingShrinkageLine(models.Model):
                 record.drying_shrinkage = ((record.final_length - record.initial_length) / record.length) * 100
             else:
                 record.drying_shrinkage = 0.0
-
 
 
 class AacCompressiveStrengthLine(models.Model):

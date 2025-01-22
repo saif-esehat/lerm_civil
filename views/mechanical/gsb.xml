@@ -334,6 +334,12 @@
                     </group>
                 </group>
                 
+                 <group attrs="{'invisible': [('density_relation_visible', '=', False)]}">
+                     <field name='mmd'/>
+                     <field name='omc'/>
+              
+                    </group>
+                
 
 
                 <!-- CBR -->
