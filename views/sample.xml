@@ -180,6 +180,7 @@
                         <group>
                             <field name="checkby_signature_required" attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"/>
                             <field name="approveby_signature_required" attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"/>
+                             <field name="testedby_signature_required" attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"/>
 
                         </group>
                         <group>
