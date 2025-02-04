@@ -1536,7 +1536,7 @@
                             <!-- </t> -->
                         </tbody>
                     </table>
-                    <div style="page-break-before: always;"></div>
+                    <!-- <div style="page-break-before: always;"></div> -->
 
                      <div t-if="data.paver_visible" style="margin-top:10px;">
 					
