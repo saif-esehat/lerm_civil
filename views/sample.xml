@@ -122,6 +122,8 @@
                             <field name="group_ids" invisible='1'/>
                             <field name="size_ids" invisible='1'/>
                             <field name="qty_ids" invisible='1'/>
+                            <field name="lab_location"/>
+
                         </group>
                         <group style="width:100%">
                             <field name="sample_reject_reason" attrs="{'required': [('sample_condition', '=', 'non_satisfactory')], 'readonly': [('state', '!=', '1-allotment_pending')]}"/>
