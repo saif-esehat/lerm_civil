@@ -429,6 +429,8 @@
                       
                     </group>
 
+
+                     
                      <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
                         <field name='requirement_water' col="4"/>
                          <field name='requirement_water_individual' col="4"/>

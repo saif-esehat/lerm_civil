@@ -15,12 +15,15 @@ class Tile(models.Model):
     eln_ref = fields.Many2one('lerm.eln',string="Eln")
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
 
-    tile_type = fields.Char(string="Type Of Tile")
 
     @api.depends('eln_ref')
     def _compute_grade_id(self):
         if self.eln_ref:
             self.grade = self.eln_ref.grade_id.id
+
+    tile_type = fields.Char(string="Type Of Tile")
+
+    
 
 
     # Dimension
@@ -612,6 +615,8 @@ class Tile(models.Model):
             count = len(record.child_lines_water_bulk)
             record.average_water_bulk = total / count if count > 0 else 0.0
 
+   
+
 
     @api.depends('child_lines_water_bulk.water_obsorption')
     def _compute_individual_water_bulk(self):
@@ -632,6 +637,8 @@ class Tile(models.Model):
             count = len(record.child_lines_water_bulk)
             record.bulk_density = total / count if count > 0 else 0.0
 
+   
+   
 
     bulk_density_conformity = fields.Selection([
             ('pass', 'Pass'),
