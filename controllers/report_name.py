@@ -149,3 +149,53 @@ class MyReportName(ReportController):
             )
             raise werkzeug.exceptions.InternalServerError(response=res) from e
 
+
+    @http.route(['/download_report/<int:eln_id>'], type='http', auth="public", website=True)
+    def report_download_eln(self, eln_id):
+
+        # Fetch the ELN record
+        eln = request.env['lerm.eln'].sudo().search([('id', '=', eln_id)], limit=1)
+        sample = eln.sample_id
+        if not eln:
+            return request.not_found()
+        is_product_based = eln.is_product_based_calculation
+        if is_product_based == True:
+            template_name = eln.material.product_based_calculation[0].main_report_template.report_name
+        else:
+            template_name = eln.parameters_result.parameter[0].main_report_template.report_name
+
+        # Get the correct report action
+        report = report = request.env.ref('lerm_civil.aac_block_report_action')
+
+        if not report:
+            return request.not_found()
+
+        pdf_data = report.sudo()._render_qweb_pdf([eln.id])[0]
+        
+        # import wdb; wdb.set_trace()
+        
+
+
+        # Generate the PDF using `_render_qweb_pdf`
+        return request.make_response(pdf_data, headers=[
+            ('Content-Type', 'application/pdf'),
+            ('Content-Disposition', f'attachment; filename="AAC_Report_{eln_id}.pdf"')
+        ])
+
+
+
+    # @http.route(['/verification/gpcerificate/<int:certificate_id>'], type="http", auth='none')
+    # def VerifyGPCertificate(self,certificate_id,**kw ):
+    #     try:
+    #         certificate = request.env['gp.exam.schedule'].sudo().search([('id','=',certificate_id)])
+    #         if certificate.state == "3-certified":
+    #             certificate_id = certificate.id
+    #         else:
+    #             raise ValidationError("Certificate Not Found or Not Generated")
+                
+    #     except:
+    #         raise ValidationError("Certificate Not Found or Not Generated")
+    #     report_action = request.env.ref('bes.report_gp_certificate')
+    #     pdf, _ = report_action.sudo()._render_qweb_pdf(int(certificate_id))
+    #     pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', u'%s' % len(pdf))]
+    #     return request.make_response(pdf, headers=pdfhttpheaders)
