@@ -165,14 +165,22 @@ class MyReportName(ReportController):
             template_name = eln.parameters_result.parameter[0].main_report_template.report_name
 
         # Get the correct report action
-        report = report = request.env.ref('lerm_civil.aac_block_report_action')
+        # import wdb; wdb.set_trace()
+        report_action = request.env['ir.actions.report']._get_report_from_name(template_name)
+
+        if report_action:
+            report_xml_id = request.env['ir.model.data'].sudo().search([
+                ('model', '=', 'ir.actions.report'),
+                ('res_id', '=', report_action.id)
+            ], limit=1).name
+
+        report = request.env.ref('lerm_civil.'+report_xml_id)
 
         if not report:
             return request.not_found()
 
         pdf_data = report.sudo()._render_qweb_pdf([eln.id])[0]
         
-        # import wdb; wdb.set_trace()
         
 
 
