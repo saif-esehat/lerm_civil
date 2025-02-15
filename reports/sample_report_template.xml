@@ -52,7 +52,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Customer Name :
+								<td colspan="12">#Customer Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.customer.name"/><br/>
 									<span t-field="o.srf_id.customer.street"/>
@@ -65,7 +65,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Project / Site Address :
+								<td colspan="12">#Project / Site Address :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.site_address.name"/>
 									<span t-field="o.srf_id.site_address.street"/>
@@ -78,41 +78,41 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Sample Description :
+								<td colspan="12">#Sample Description :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Sample Id :
+								<td colspan="12">#Sample Id :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_no"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Size :
+								<td colspan="6">#Size :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.size_id.size"/>
 								</td>
-								<td colspan="6">Grade :
+								<td colspan="6">#Grade :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.grade_id.grade"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Brand :
+								<td colspan="6">#Brand :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.brand"/>
 								</td>
-								<td colspan="6">Consultant Name :
+								<td colspan="6">#Consultant Name :
 									<![CDATA[&nbsp;]]>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Client Name :
+								<td colspan="6">#Client Name :
 									<![CDATA[&nbsp;]]>
 								</td>
-								<td colspan="6">Client Reference :
+								<td colspan="6">#Client Reference :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.client_refrence"/>
 								</td>
