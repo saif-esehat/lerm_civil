@@ -35,7 +35,10 @@ class MicrosilicaReport(models.AbstractModel):
                 eln = self.env['lerm.eln'].sudo().browse(docids)
         
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
-        qr.add_data(eln.kes_no)
+        # qr.add_data(eln.kes_no)
+        url = self.env['ir.config_parameter'].sudo().search([('key','=','web.base.url')]).value
+        url = url +'/download_report/'+ str(eln.id)
+        qr.add_data(url)
         qr.make(fit=True)
         qr_image = qr.make_image()
 
@@ -52,7 +55,7 @@ class MicrosilicaReport(models.AbstractModel):
             "grade_id":eln.grade_id.id
         }
         model = eln.get_product_base_calc_line(data).ir_model.model
-        microsilica_data = self.env[model].search([("id","=",eln.model_id)])
+        microsilica_data = self.env[model].sudo().search([("id","=",eln.model_id)])
         print(microsilica_data.control_compressive_strength_7_days)
         return {
             'eln': eln,
