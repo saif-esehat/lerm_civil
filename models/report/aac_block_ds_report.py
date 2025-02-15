@@ -17,9 +17,9 @@ class AacBlockReport(models.AbstractModel):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
         nabl = data.get('nabl')
         if data.get('report_wizard') == True:
-            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
-        elif 'active_id' in data['context']:
-            eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
+            eln = self.env['lerm.eln'].sudo().search([('sample_id', '=', data['sample'])])
+        elif 'active_id' in data.get('context', {}):
+            eln = self.env['lerm.eln'].sudo().search([('sample_id', '=', data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids)
         
@@ -30,6 +30,8 @@ class AacBlockReport(models.AbstractModel):
         qr.add_data(url)
         qr.make(fit=True)
         qr_image = qr.make_image()
+        # import wdb; wdb.set_trace()
+
 
         # Convert the QR code image to base64 string
         buffered = BytesIO()

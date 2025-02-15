@@ -198,7 +198,7 @@ class GeneralReport(models.AbstractModel):
         nabl = data.get('nabl')
         if data.get('report_wizard') == True:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
-        elif 'active_id' in data['context']:
+        elif 'active_id' in data.get('context', {}):
             # stamp = data['context']['inreport']
             # print(stamp , 'stamp value')
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
@@ -253,7 +253,7 @@ class SteelTmtBar(models.AbstractModel):
         nabl = data.get('nabl')
         if data.get('report_wizard') == True:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
-        elif 'active_id' in data['context']:
+        elif 'active_id' in data.get('context', {}):
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids) 
@@ -515,7 +515,7 @@ class ConcreteCubeCompresiveReport(models.AbstractModel):
         nabl = data.get('nabl')
         if data.get('report_wizard') == True:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
-        elif 'active_id' in data['context']:
+        elif 'active_id' in data.get('context', {}):
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
             eln = self.env['lerm.eln'].sudo().browse(docids)
