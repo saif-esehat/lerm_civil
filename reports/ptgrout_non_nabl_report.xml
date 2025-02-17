@@ -39,7 +39,7 @@
 										<!-- <table> -->
 											<tr>
 												<td colspan="3" style=" width: 30%; height: 100px; font-weight: bold;">
-													Customer/Party Name :
+													#Customer/Party Name :
 												</td>
 												<td colspan="3">
 												<span t-field="o.srf_id.customer.name"/><br/>
@@ -103,24 +103,24 @@
 									,
 									<span t-field="o.srf_id.site_address.country_id"/>
 								</td> -->
-								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+								<td colspan="12">#Project / Site Address : <![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.name_work"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12" style="font-weight: bold;">Sample Description : <![CDATA[&nbsp;]]>
+								<td colspan="12" style="font-weight: bold;">#Sample Description : <![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
 								
 							</tr>
 							<tr>
-								<td colspan="3" style="font-weight: bold;">Sample Id Mark:
+								<td colspan="3" style="font-weight: bold;">#Sample Id Mark:
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="3">
 									<span t-field="o.sample_id.client_sample_id"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Sample Condition :
+								<td colspan="3" style="font-weight: bold;">#Sample Condition :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td>
@@ -142,13 +142,13 @@
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Brand :
+							    <td colspan="3" style="font-weight: bold;">#Brand :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="3">
 									<span t-field="o.sample_id.brand"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Consultant Name :
+								<td colspan="3" style="font-weight: bold;">#Consultant Name :
 									<![CDATA[&nbsp;]]>
 								</td >
 								<td colspan="3">
@@ -156,13 +156,13 @@
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="3" style="font-weight: bold;">Client Name :
+							    <td colspan="3" style="font-weight: bold;">#Client Name :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td colspan="3">
 										<span t-field="o.srf_id.client"/>
 								</td>
-								<td colspan="3" style="font-weight: bold;">Client Reference :
+								<td colspan="3" style="font-weight: bold;">#Client Reference :
 									<![CDATA[&nbsp;]]>
 								</td>
 								<td>
