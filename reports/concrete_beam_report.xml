@@ -101,12 +101,12 @@
 								</td>
 							</tr>
 							<tr>
-							    <td colspan="6" >Age in Days :
+							    <td colspan="6" >#Age in Days :
 									<![CDATA[&nbsp;]]>
 									<span t-field="concrete_beam.age_of_test"/>
 								</td>
 								
-								<td colspan="6" >Date of Casting :
+								<td colspan="6" >#Date of Casting :
 									<![CDATA[&nbsp;]]>
 									<span t-field="concrete_beam.date_of_casting"/>
 								</td>

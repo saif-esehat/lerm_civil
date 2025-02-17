@@ -248,7 +248,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.temperature"/>°C
 								</td>
-								<td colspan="3">Structure Age :
+								<td colspan="3">#Structure Age :
 									<![CDATA[&nbsp;]]>
 									<span t-field="data.structure"/>
 								</td>
