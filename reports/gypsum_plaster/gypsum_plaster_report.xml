@@ -369,7 +369,7 @@
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
 										<li>
-										#information's are provided by customer.
+										# - Information provided by the customer.
 									</li>
 									<li t-if="eln.has_witness">
 										Test witnessed by : <span t-esc="eln.witness_name"/>
