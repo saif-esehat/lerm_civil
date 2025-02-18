@@ -109,7 +109,7 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="rcmt.age_of_test"/>
 								</td> -->
-								<td colspan="12">Date of Casting :
+								<td colspan="12">#Date of Casting :
 									<![CDATA[&nbsp;]]>
 									<span t-field="rcmt.date_of_casting"/>
 								</td>
