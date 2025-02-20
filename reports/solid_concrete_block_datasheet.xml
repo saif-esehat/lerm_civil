@@ -954,7 +954,7 @@
                                     </td>
                                 </tr>
 
-                               <t t-if="i &lt;= 6">
+                               <!-- <t t-if="i &lt;= 6"> -->
 
                                  <!-- Compressive Strength -->
                                  <tr t-if="data.compressive_visible and (data.compressive_nabl == 'pass' and nabl or (data.compressive_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
@@ -992,11 +992,11 @@
                                         <span t-esc="data.compressive_conformity"/>
                                     </td>
                                 </tr>
-                            </t>
+                            <!-- </t> -->
   
                            
                     </table>
-                    <t t-if="i &gt; 6">
+                    <!-- <t t-if="i &gt; 6">
 						<div style="page-break-before: always;"></div>
 
 						<table>
@@ -1032,12 +1032,7 @@
 									</span>
 							     	</th>
 								
-                                    <!-- <th  style="max-width: 200px;">
-									<span>
-										<span t-esc="eln.material.method_reference"/>
-										
-									</span>
-							    	</th> -->
+                                    
 
                                     <th style="text-align: center;" t-if="eln.conformity">
 									<span style="font-weight: bold;">
@@ -1049,7 +1044,6 @@
 							
 						</thead>
 						<tbody>
-                          <!-- Compressive Strength -->
                                  <tr t-if="data.compressive_visible and (data.compressive_nabl == 'pass' and nabl or (data.compressive_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                                     <td colspan="1" style="text-align: center;">
                                         <span t-esc="i + 1" />
@@ -1066,13 +1060,6 @@
                                      <td style="text-align: center; vertical-align: middle;">
                                         <span t-esc="data.avg_compressive_strength" t-options='{"widget": "float", "precision": 2}'/>
                                     </td>
-                                    <!-- <td style="text-align: center; vertical-align: middle;">
-                                        <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table" t-as="parameter">
-                                            <t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.specification"/>
-                                            </t>
-                                        </t>
-                                    </td> -->
                                    
                                     <td style="text-align: center; vertical-align: middle;">
                                         <t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','3402d345-b96e-4ed1-a545-dd5b2a6e259a')]).parameter_table" t-as="parameter">
@@ -1088,7 +1075,7 @@
 				
 						</tbody>
 					</table>
-				</t>
+				</t> -->
 
                     
 					<div style="page-break-inside: avoid;">
