@@ -81,6 +81,30 @@
                      <field name='water_absorbtion_nabl' col="4"/>
                     </group>
 
+
+                      <!-- specific_gravity_wmm_visible -->
+                    <group attrs="{'invisible': [('specific_gravity_wbm_visible', '=', False)]}">
+                        <h1>
+                            <field name="specific_gravity_wbm_name" readonly="1" nolabel="1"/>
+                            <field name="specific_gravity_wbm_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('specific_gravity_wbm_visible', '=', False)]}" style="white-space:nowrap; width:60%">
+                        <field name="wt_ssd_wbm"/>
+                        <field name="wt_saturated_wbm"/>
+                        <field name="oven_dried_wbm"/>
+                         <field name="specific_gravity_wbm"/>
+                    </group>
+                     <group attrs="{'invisible': [('specific_gravity_wbm_visible', '=', False)]}">
+                       
+                        <field  name="specific_gravity_wbm_conformity"
+                                        decoration-success="specific_gravity_wbm_conformity == 'pass'" 
+                                        decoration-danger="specific_gravity_wbm_conformity == 'fail'" 
+                                        readonly="1" />
+                        <field  name="specific_gravity_wbm_nabl" />
+                         
+                    </group>
+
                     <!-- Elongation and Flakiness  -->
                     <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                         <h1>

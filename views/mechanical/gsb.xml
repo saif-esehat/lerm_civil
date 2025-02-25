@@ -83,6 +83,30 @@
                     </group>
 
 
+                    <!-- specific_gravity_gsb_visible -->
+                    <group attrs="{'invisible': [('specific_gravity_gsb_visible', '=', False)]}">
+                        <h1>
+                            <field name="specific_gravity_gsb_name" readonly="1" nolabel="1"/>
+                            <field name="specific_gravity_gsb_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                    <group attrs="{'invisible': [('specific_gravity_gsb_visible', '=', False)]}" style="white-space:nowrap; width:60%">
+                        <field name="wt_ssd_gsb"/>
+                        <field name="wt_saturated_gsb"/>
+                        <field name="oven_dried_gsb"/>
+                         <field name="specific_gravity_gsb"/>
+                    </group>
+                     <group attrs="{'invisible': [('specific_gravity_gsb_visible', '=', False)]}">
+                       
+                        <field  name="specific_gravity_gsb_conformity"
+                                        decoration-success="specific_gravity_gsb_conformity == 'pass'" 
+                                        decoration-danger="specific_gravity_gsb_conformity == 'fail'" 
+                                        readonly="1" />
+                        <field  name="specific_gravity_gsb_nabl" />
+                         
+                    </group>
+
+
                     <!-- Elongation and Flakiness  -->
                     <group attrs="{'invisible': ['|', ('elongation_visible', '=', False), ('flakiness_visible', '=', False)]}">
                         <h1>

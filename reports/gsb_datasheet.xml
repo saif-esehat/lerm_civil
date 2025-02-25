@@ -418,6 +418,62 @@
 						</table>
 					</div>
 
+                 <!-- Specific Gravity -->
+				<div t-if="data.specific_gravity_gsb_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							Specific Gravity 
+							<!-- added -->
+							<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','k2543lpu58-b27e-48c6-81b8-826521442541')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
+							</span>
+						</div>
+						<table style="margin-top:20px">
+							<tr cols="12">
+								<td colspan="6">Weight of saturated surface dry (SSD) sample in air in gms, A :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_ssd_gsb"/>
+								</td>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Weight of saturated sample in water in gms, B :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.wt_saturated_gsb"/>
+								</td>
+							</tr>
+                            <tr cols="12">
+								<td colspan="6">Oven dried weight of sample in gms, C :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.oven_dried_gsb"/>
+								</td>
+							</tr>
+
+							  <tr cols="12">
+								<td colspan="6">Specific Gravity, [C/(A-B)] :
+									<![CDATA[&nbsp;]]>
+								</td>
+								<td colspan="6">
+									<![CDATA[&nbsp;]]>
+									<span t-field="data.specific_gravity_gsb" t-options='{"widget": "float", "precision": 2}'/>
+								</td>
+							</tr>
+                            
+                            
+						</table>
+					</div>
+
 
 
                 <!-- Liquid Limit -->
