@@ -559,7 +559,7 @@
 								This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 							</li>
 								<li>
-										#information's are provided by customer.
+										# - Information provided by the customer.
 									</li>
 							<t t-foreach="data.notes" t-as="note" style="margin-bottom: 0px;margin-top: 0px;">
 								<li style="margin-bottom: 0px;margin-top: 0px;">

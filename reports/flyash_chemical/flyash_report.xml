@@ -1260,7 +1260,7 @@
 									</li>
 
 									<li>
-										#information's are provided by customer.
+										# - Information provided by the customer.
 									</li>
 									
 									<li t-if="eln.has_witness">
