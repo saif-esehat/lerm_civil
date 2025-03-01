@@ -816,7 +816,7 @@
 
 
 
-							<tr t-if="data.heavy_visible and (data.heavy_table_nabl == 'pass' and nabl or (data.heavy_table_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
+							<!-- <tr t-if="data.heavy_visible and (data.heavy_table_nabl == 'pass' and nabl or (data.heavy_table_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -992,7 +992,7 @@
 								</td>
 								
 								
-							</tr>
+							</tr> -->
 
 
  
