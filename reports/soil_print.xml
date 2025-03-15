@@ -1282,7 +1282,7 @@
 					
 					<div style="page-break-inside: avoid;margin-top:20px">
 
-						<table t-if="data.heavy_visible or data.light_omc_visible and fromEln">
+						<table t-if="data.heavy_visible">
 							<tr>
 								<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
 									<div>
@@ -1297,7 +1297,7 @@
 								</div>
 							</tr>
 
-							<table t-if="data.heavy_visible or data.light_omc_visible and fromEln " style="margin-top:30px;">
+							<table t-if="data.heavy_visible" style="margin-top:30px;">
 							<thead>
 								<tr>
 									<th>
@@ -1404,7 +1404,7 @@
 							</tbody>
 						</table>
 
-							<table t-if="data.heavy_visible or data.light_omc_visible and fromEln " style="margin-top : 10px">
+							<table t-if="data.heavy_visible " style="margin-top : 10px">
 								<tr>
 									<td colspan="3">Weight of Mould in gm (A) :
 									</td>
@@ -1425,11 +1425,11 @@
 							<img t-att-src="'data:image/png;base64,'+str(graphHeavy)" style="max-width: 100%;"/>
 					</div>
 
-					<div t-if="data.heavy_visible or data.light_omc_visible and fromEln " style="margin-top: 10px;">
+					<div t-if="data.heavy_visible" style="margin-top: 10px;">
 						From Graph 
 					</div>
 
-					<table t-if="data.heavy_visible or data.light_omc_visible and fromEln " style="margin-top: 10px;">
+					<table t-if="data.heavy_visible" style="margin-top: 10px;">
 						<tr>
 							<td colspan="3">MDD :</td>
 							<td colspan="3">
@@ -1441,6 +1441,172 @@
 							</td>
 						</tr>
 					</table>	
+
+
+
+
+
+						<div style="page-break-inside: avoid;margin-top:20px">
+
+						<table t-if="data.light_omc_visible">
+							<tr>
+								<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
+									<div>
+										DETERMINATION OF WATER CONTENT-DRY 
+									</div>
+									<div>
+										DENSITY RELATION USING LIGHT COMPACTION : Test Method 
+										<span> 
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).test_method.test_method"/>
+										</span>
+									</div>
+								</div>
+							</tr>
+
+							<table t-if="data.light_omc_visible " style="margin-top:30px;">
+							<thead>
+								<tr>
+									<th>
+										<span>
+											Determination No.
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Mould + Compacted sample in gm (C)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of compacted sample in gm (D) C-A
+										</span>
+									</th>
+									<th>
+										<span>
+											Bulk Density of sample in gm/cc (E) D/B
+										</span>
+									</th>
+									<th>
+										<span>
+											Container No.
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Container in gm (F)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Container + wet sample in gm (G)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Container + dry sample in gm (H)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of dry sample in gm (I)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of moisture in gm (J) G-H
+										</span>
+									</th>
+									<th>
+										<span>
+											% Moisture (K) J/I*100
+										</span>
+									</th>
+									<th>
+										<span>
+											Dry density in gm/cc (100*E)/(100+K)
+										</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr t-foreach="data.light_omc_table" t-as="r">
+									<td>
+										<span t-esc="r.determination_no"/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_modul_compact" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_compact" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.bulk_density" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.container_no" t-options='{"widget": "float", "precision": 0}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_container" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_container_wet" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_container_dry" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_dry_sample" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_moisture" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.moisture" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.dry_density" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+							<table t-if="data.light_omc_visible" style="margin-top : 10px">
+								<tr>
+									<td colspan="3">Weight of Mould in gm (A) :
+									</td>
+									<td colspan="3">
+										<span t-field="data.wt_of_modul_light_omc" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td colspan="3">Volume of Mould in cc (B) :
+									</td>
+									<td colspan="3">
+										<span t-field="data.vl_of_modul_light_omc" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+								</tr>
+							</table>
+						</table>
+					</div>
+
+					<div t-if="graphLight" style="margin-top: 20px;">
+							<img t-att-src="'data:image/png;base64,'+str(graphLight)" style="max-width: 100%;"/>
+					</div>
+
+					<div t-if="data.light_omc_visible" style="margin-top: 10px;">
+						From Graph 
+					</div>
+
+					<table t-if="data.light_omc_visible" style="margin-top: 10px;">
+						<tr>
+							<td colspan="3">MDD :</td>
+							<td colspan="3">
+								<span t-esc="data.mmd_light_omc" t-options='{"widget": "float", "precision": 2}'/> <![CDATA[&nbsp;]]> gm/cc
+							</td>
+							<td colspan="3">OMC :</td>
+							<td colspan="3">
+								<span t-esc="data.omc_light_omc" t-options='{"widget": "float", "precision": 2}'/> <![CDATA[&nbsp;]]> %
+							</td>
+						</tr>
+					</table>
 					
 					<div  style="page-break-inside: avoid;margin-top:20px">
 						<table t-if="data.soil_visible">
