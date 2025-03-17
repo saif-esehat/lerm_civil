@@ -33,7 +33,10 @@ class CementReport(models.AbstractModel):
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         # qr.add_data(eln.kes_no)
         url = self.env['ir.config_parameter'].sudo().search([('key','=','web.base.url')]).value
-        url = url +'/download_report/'+ str(eln.id)
+        if nabl:
+            url = url +'/download_report/nabl/'+ str(eln.id)
+        else:
+            url = url +'/download_report/nonnabl/'+ str(eln.id)
         qr.add_data(url)
         qr.make(fit=True)
         qr_image = qr.make_image()
@@ -79,7 +82,10 @@ class CementReportOpc43(models.AbstractModel):
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         # qr.add_data(eln.kes_no)
         url = self.env['ir.config_parameter'].sudo().search([('key','=','web.base.url')]).value
-        url = url +'/download_report/'+ str(eln.id)
+        if nabl:
+            url = url +'/download_report/nabl/'+ str(eln.id)
+        else:
+            url = url +'/download_report/nonnabl/'+ str(eln.id)
         qr.add_data(url)
         qr.make(fit=True)
         qr_image = qr.make_image()
@@ -123,7 +129,10 @@ class CementReportOpc43(models.AbstractModel):
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         # qr.add_data(eln.kes_no)
         url = self.env['ir.config_parameter'].sudo().search([('key','=','web.base.url')]).value
-        url = url +'/download_report/'+ str(eln.id)
+        if nabl:
+            url = url +'/download_report/nabl/'+ str(eln.id)
+        else:
+            url = url +'/download_report/nonnabl/'+ str(eln.id)
         qr.add_data(url)
         qr.make(fit=True)
         qr_image = qr.make_image()

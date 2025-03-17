@@ -85,6 +85,7 @@ class GsbMechanical(models.Model):
             record.density_relation_visible = False
             record.cbr_visible = False
             record.gsb_field_density_visible = False
+            record.specific_gravity_gsb_visible = False
 
 
             for sample in record.sample_parameters:
@@ -117,6 +118,83 @@ class GsbMechanical(models.Model):
 
                 if sample.internal_id == 'p4587910-b27e-48c6-81b8-826521442541':
                     record.gsb_field_density_visible = True
+
+                if sample.internal_id == 'k2543lpu58-b27e-48c6-81b8-826521442541':
+                    record.specific_gravity_gsb_visible = True
+
+
+      # Specific Gravity  
+    specific_gravity_gsb_name = fields.Char(default="Specific Gravity ")
+    specific_gravity_gsb_visible = fields.Boolean(compute="_compute_visible")
+
+    wt_ssd_gsb = fields.Integer('Weight of saturated surface dry (SSD) sample in air in gms, A')
+    wt_saturated_gsb = fields.Float('Weight of saturated sample in water in gms, B')
+    oven_dried_gsb = fields.Float('Oven dried weight of sample in gms, C')
+    specific_gravity_gsb = fields.Float('Specific Gravity, [C/(A-B)]',compute="_compute_specific_gravity")
+
+
+    @api.depends('wt_ssd_gsb', 'wt_saturated_gsb', 'oven_dried_gsb')
+    def _compute_specific_gravity(self):
+        for record in self:
+            if record.wt_ssd_gsb and record.wt_saturated_gsb:
+                try:
+                    record.specific_gravity_gsb = record.oven_dried_gsb / (record.wt_ssd_gsb - record.wt_saturated_gsb)
+                except ZeroDivisionError:
+                    record.specific_gravity_gsb = 0.0  # Avoid division by zero
+            else:
+                record.specific_gravity_gsb = 0.0
+
+    specific_gravity_gsb_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_specific_gravity_gsb_conformity", store=True)
+
+
+
+    @api.depends('specific_gravity_gsb','eln_ref','grade')
+    def _compute_specific_gravity_gsb_conformity(self):
+        
+        for record in self:
+            record.specific_gravity_gsb_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','k2543lpu58-b27e-48c6-81b8-826521442541')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','k2543lpu58-b27e-48c6-81b8-826521442541')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.specific_gravity_gsb - record.specific_gravity_gsb*mu_value
+                    upper = record.specific_gravity_gsb + record.specific_gravity_gsb*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.specific_gravity_gsb_conformity = 'pass'
+                        break
+                    else:
+                        record.specific_gravity_gsb_conformity = 'fail'
+
+    specific_gravity_gsb_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_specific_gravity_gsb_nabl", store=True)
+
+    @api.depends('specific_gravity_gsb','eln_ref','grade')
+    def _compute_specific_gravity_gsb_nabl(self):
+        
+        for record in self:
+            record.specific_gravity_gsb_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','k2543lpu58-b27e-48c6-81b8-826521442541')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','k2543lpu58-b27e-48c6-81b8-826521442541')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.specific_gravity_gsb - record.specific_gravity_gsb*mu_value
+                    upper = record.specific_gravity_gsb + record.specific_gravity_gsb*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.specific_gravity_gsb_nabl = 'pass'
+                        break
+                    else:
+                        record.specific_gravity_gsb_nabl = 'fail'
 
 
         # added

@@ -86,6 +86,7 @@ class WmmMechanical(models.Model):
             record.density_relation_visible = False
             record.cbr_visible = False
             record.wmm_density_visible = False
+            record.specific_gravity_wmm_visible = False
 
 
             for sample in record.sample_parameters:
@@ -118,6 +119,84 @@ class WmmMechanical(models.Model):
 
                 if sample.internal_id == '429h14d9-12d3-45ea-bc23-5b35ec6ffd50':
                     record.wmm_density_visible = True
+
+                if sample.internal_id == '356klu87-12d3-45ea-bc23-5b35ec6ffd50':
+                    record.specific_gravity_wmm_visible = True
+
+
+      # Specific Gravity  
+    specific_gravity_wmm_name = fields.Char(default="Specific Gravity ")
+    specific_gravity_wmm_visible = fields.Boolean(compute="_compute_visible")
+
+    wt_ssd_wmm = fields.Integer('Weight of saturated surface dry (SSD) sample in air in gms, A')
+    wt_saturated_wmm = fields.Float('Weight of saturated sample in water in gms, B')
+    oven_dried_wmm = fields.Float('Oven dried weight of sample in gms, C')
+    specific_gravity_wmm = fields.Float('Specific Gravity, [C/(A-B)]',compute="_compute_specific_gravity")
+
+
+    @api.depends('wt_ssd_wmm', 'wt_saturated_wmm', 'oven_dried_wmm')
+    def _compute_specific_gravity(self):
+        for record in self:
+            if record.wt_ssd_wmm and record.wt_saturated_wmm:
+                try:
+                    record.specific_gravity_wmm = record.oven_dried_wmm / (record.wt_ssd_wmm - record.wt_saturated_wmm)
+                except ZeroDivisionError:
+                    record.specific_gravity_wmm = 0.0  # Avoid division by zero
+            else:
+                record.specific_gravity_wmm = 0.0
+
+    specific_gravity_wmm_conformity = fields.Selection([
+            ('pass', 'Pass'),
+            ('fail', 'Fail')], string="Conformity", compute="_compute_specific_gravity_wmm_conformity", store=True)
+
+
+
+    @api.depends('specific_gravity_wmm','eln_ref','grade')
+    def _compute_specific_gravity_wmm_conformity(self):
+        
+        for record in self:
+            record.specific_gravity_wmm_conformity = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','356klu87-12d3-45ea-bc23-5b35ec6ffd50')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','356klu87-12d3-45ea-bc23-5b35ec6ffd50')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    req_min = material.req_min
+                    req_max = material.req_max
+                    mu_value = line.mu_value
+                    
+                    lower = record.specific_gravity_wmm - record.specific_gravity_wmm*mu_value
+                    upper = record.specific_gravity_wmm + record.specific_gravity_wmm*mu_value
+                    if lower >= req_min and upper <= req_max:
+                        record.specific_gravity_wmm_conformity = 'pass'
+                        break
+                    else:
+                        record.specific_gravity_wmm_conformity = 'fail'
+
+    specific_gravity_wmm_nabl = fields.Selection([
+        ('pass', 'NABL'),
+        ('fail', 'Non-NABL')], string="NABL", compute="_compute_specific_gravity_wmm_nabl", store=True)
+
+    @api.depends('specific_gravity_wmm','eln_ref','grade')
+    def _compute_specific_gravity_wmm_nabl(self):
+        
+        for record in self:
+            record.specific_gravity_wmm_nabl = 'fail'
+            line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','356klu87-12d3-45ea-bc23-5b35ec6ffd50')])
+            materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','356klu87-12d3-45ea-bc23-5b35ec6ffd50')]).parameter_table
+            for material in materials:
+                if material.grade.id == record.grade.id:
+                    lab_min = line.lab_min_value
+                    lab_max = line.lab_max_value
+                    mu_value = line.mu_value
+                    
+                    lower = record.specific_gravity_wmm - record.specific_gravity_wmm*mu_value
+                    upper = record.specific_gravity_wmm + record.specific_gravity_wmm*mu_value
+                    if lower >= lab_min and upper <= lab_max:
+                        record.specific_gravity_wmm_nabl = 'pass'
+                        break
+                    else:
+                        record.specific_gravity_wmm_nabl = 'fail'
+
                 
 
     # Dry Gradation
