@@ -62,7 +62,8 @@ class ELN(models.Model):
         ('1-draft', 'In-Test'),
         ('2-confirm', 'In-Check'),
         ('3-approved','Approved'),
-        ('4-rejected','Rejected')
+        ('4-rejected','Rejected'),
+        ('5-cancelled','Cancelled')
     ], string='State',default='1-draft')
     start_date = fields.Date(string="Start Date")
     end_date = fields.Date(string="End Date")

@@ -743,6 +743,100 @@ class SoilReport(models.AbstractModel):
             max_y = 0
             max_x = 0
 
+            # Light Compaction-OMC
+
+        plt.figure(figsize=(12, 6))
+        x_values = []
+        y_values = []
+        # import wdb;wdb.set_trace()
+        for line in general_data.light_omc_table:
+            x_values.append(line.moisture)
+            y_values.append(line.dry_density)
+
+
+        if general_data.light_omc_table:
+            try:
+                max_y = max(y_values)
+            except:
+                max_y = 100
+            try:
+                min_y = round(min(y_values),2)
+            except:
+                min_y = 0
+            try:
+                # max_x = round(max(x_values),2)
+                max_x = x_values[y_values.index(max_y)]
+            except:
+                max_x = 100
+            try:
+                min_x = round(min(x_values),2)
+            except:
+                min_x = 0 
+            
+            
+
+
+            # Format max_y and max_x to display 2 digits after the decimal point
+            max_y = round(max_y , 2)
+            max_x = round(max_x, 2)
+
+    
+
+        
+            # Perform cubic spline interpolation
+            x_smooth = np.linspace(min(x_values), max(x_values), 100)
+            # cs = CubicSpline(x_values, y_values,1)
+            # cs = interp1d(x_values, y_values,kind='cubic')
+            cs = Akima1DInterpolator(x_values, y_values)
+
+            # Create the line chart with a connected smooth line and markers
+            plt.plot(x_smooth, cs(x_smooth), color='red', label='Smooth Curve')
+            plt.scatter(x_values, y_values, marker='o', color='blue', s=30, label='Data Points')
+
+            
+            # Add a horizontal line with a label(, linestyle='--', label=f'Max Y = {max_y}', linestyle='--', label=f'Max X = {max_x}')
+            plt.axhline(y=max_y, color='green',linestyle='--')
+
+            # Add a vertical line with a label
+            plt.axvline(x=max_x, color='orange',linestyle='--')
+
+            
+            # Set the grid
+            ax = plt.gca()
+            ax.grid(which='both', linestyle='--', linewidth=0.5)
+
+            # Set the x-axis major and minor tick marks
+            ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
+            ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
+
+            # Set the y-axis tick marks
+            # plt.yticks([1.60, 1.62, 1.64, 1.66, 1.68, 1.70, 1.72, 1.74, 1.76, 1.78, 1.80])
+
+            # edit range here
+            plt.yticks(np.arange(min_y , round(max_y,2) + 0.2 , (max_y - min_y) / 5))
+
+
+            if max_x != min_x:
+                plt.xticks(np.arange(min_x, round(max(x_values),2) + 1.0, (max_x - min_x) / 5))
+            
+            plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
+            plt.xlabel('% Moisture')
+            plt.ylabel('Dry density in gm/cc')
+            plt.title('% Moisture vs Dry density in gm/cc')
+            plt.legend()
+
+            # Save the Matplotlib plot to a BytesIO object
+            buffer = BytesIO()
+            plt.savefig(buffer, format='png')
+            graph_image_light = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+            # Close the Matplotlib plot to free up resources
+            plt.close()
+        else:
+            graph_image_light = None
+            max_y = 0
+            max_x = 0
+
             
 
         plt.figure(figsize=(12, 6))
@@ -832,6 +926,7 @@ class SoilReport(models.AbstractModel):
             'stamp' : inreport_value,
             'nabl' : nabl,
             'graphHeavy' : graph_image,
+            'graphLight' : graph_image_light,
             # 'mdd' : max_y,
             # 'omc' : max_x,
             # 'graphCbr' : cbr_graph_image,
