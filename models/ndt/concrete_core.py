@@ -8,6 +8,7 @@ class ConcreteCore(models.Model):
     _rec_name = "name"
 
     name = fields.Char("Name",default="Concrete Core")
+   
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.concrete.core.line','parent_id',string="Parameter")
@@ -15,6 +16,16 @@ class ConcreteCore(models.Model):
     structure = fields.Char("Structure")
 
     notes = fields.One2many('ndt.concrete.core.notes','parent_id',string="Notes")
+
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
+
+
+
+   
 
 
     
@@ -27,6 +38,13 @@ class ConcreteCore(models.Model):
         for record in self:
             total_value = sum(record.child_lines.mapped('final_cube_strength'))
             record.average = round((total_value / len(record.child_lines) if record.child_lines else 0.0),2)
+
+
+     #  Concrete Core Density
+
+    # temperature = fields.Float("Temperature °C")
+    # structure = fields.Char("Structure")
+
 
    
     @api.model
