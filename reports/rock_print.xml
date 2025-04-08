@@ -94,7 +94,7 @@
                                     <span t-esc="r['wt_sample_water']"/>
                                 </td>
                                 <td colspan="3" style="text-align: center;">
-                                    <span t-esc="r['oven_dry_wt']"/>
+                                    <span t-esc="r['oven_dry_wt']" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                                  <td colspan="3" style="text-align: center;">
                                     <span t-esc="r['porosity']" t-options='{"widget": "float", "precision": 2}'/>
@@ -539,7 +539,7 @@
 								<tr>
 									<td>Oven dry weight of sample in kg, Ms</td>
 									<t t-foreach="data.child_lines" t-as="r">
-									<td><span t-esc="r.oven_dry_wt" t-options='{"widget": "float", "precision": 2}'/></td>
+									<td><span t-esc="r.oven_dry_wt" t-options='{"widget": "float", "precision": 3}'/></td>
 								</t>
 								</tr>
 								<tr>
