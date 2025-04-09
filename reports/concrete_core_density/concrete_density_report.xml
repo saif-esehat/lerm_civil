@@ -187,13 +187,13 @@
 								<span t-esc="r['id_location']"/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['weight']"/>
+								<span t-esc="r['weight']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['daimeter']"/>
+								<span t-esc="r['daimeter']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td colspan="2">
-								<span t-esc="r['height']"/>
+								<span t-esc="r['height']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="2">
 								<span t-esc="r['volume']"  t-options='{"widget": "float", "precision": 2}'/>

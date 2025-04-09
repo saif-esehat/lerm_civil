@@ -154,10 +154,10 @@ class ConcreteCubeDensityLine(models.Model):
 
     sr_no = fields.Integer(string="Sample",readonly=True, copy=False, default=1)
     id_location = fields.Char(string="ID MARK/ Location")
-    weight = fields.Float(string="Weight ( Kg )")
-    length = fields.Float(string="Length ( mm )")
-    width = fields.Float(string="Width ( mm )")
-    height = fields.Float(string="Height  ( mm )")
+    weight = fields.Float(string="Weight ( Kg )",digits=(12,3))
+    length = fields.Float(string="Length ( mm )",digits=(12,2))
+    width = fields.Float(string="Width ( mm )",digits=(12,2))
+    height = fields.Float(string="Height  ( mm )",digits=(12,2))
     volume = fields.Float(string="Volume (mm3)",compute="_compute_volume_and_density", store=True)
     density = fields.Float(string="Density (Kg/m3 )",compute="_compute_volume_and_density", store=True,digits=(16,2))
 
