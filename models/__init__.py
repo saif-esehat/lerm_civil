@@ -157,5 +157,7 @@ from .mechanical import particle_board
 from .report import particle_ds_report
 from .mechanical import shuttering_plywood
 from .report import shuttering_plywood_ds_report
+from .mechanical import concret_core_density
+from .mechanical import concrete_cube_density
 
 # from .import dash_bord

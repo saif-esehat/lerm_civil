@@ -254,6 +254,12 @@
     'views/mechanical/shuttering_plywood.xml',
     'reports/shuttering_plywood/shuttering_datasheet.xml',
     'reports/shuttering_plywood/shuttering_report.xml',
+    'views/mechanical/concret_core_density.xml',
+    'reports/concrete_core_density/concrete_density_datasheet.xml',
+    'reports/concrete_core_density/concrete_density_report.xml',
+    'views/mechanical/concrete_cube_density.xml',
+    'reports/concrete_cube_density/cube_density_datasheet.xml',
+    'reports/concrete_cube_density/cube_density_report.xml'
 
 
     # 'views/portal_template.xml'
