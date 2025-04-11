@@ -155,10 +155,10 @@ class ConcreteCoreDensityLine(models.Model):
 
     sr_no = fields.Integer(string="Sample",readonly=True, copy=False, default=1)
     id_location = fields.Char(string="ID MARK/ Location")
-    weight = fields.Float(string="Weight ( Kg )")
-    daimeter = fields.Float(string="Daimeter ( mm )")
-    height = fields.Float(string="Height  ( mm )")
-    volume = fields.Float(string="Volume (mm3)",compute="_compute_volume_and_density", store=True)
+    weight = fields.Float(string="Weight ( Kg )",digits=(12,3))
+    daimeter = fields.Float(string="Daimeter ( mm )",digits=(12,2))
+    height = fields.Float(string="Height  ( mm )" ,digits=(12,2))
+    volume = fields.Float(string="Volume (mm3)",compute="_compute_volume_and_density", store=True,digits=(12,2))
     density = fields.Float(string="Density (Kg/m3 )",compute="_compute_volume_and_density", store=True,digits=(16,2))
 
 

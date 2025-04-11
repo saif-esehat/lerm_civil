@@ -30,7 +30,7 @@
                         <group>
 
                         <field name="child_lines_core_density" nolabel="1" >
-                            <tree editable="bottom">
+                            <tree >
                                 <field name="sr_no" />
                                 <field name="id_location" />
                                 <field name="weight"/>
@@ -75,30 +75,29 @@
         </field>
     </record>
   
-    <!-- <record id="mechanical_concrete_cube_line_view" model="ir.ui.view">
-        <field name="name">mechanical.concrete.cube.line.form</field>
-        <field name="model">mechanical.concrete.cube.line</field>
+    <record id="mechanical_concrete_core_density_line_view" model="ir.ui.view">
+        <field name="name">concrete.core.density.line.form</field>
+        <field name="model">concrete.core.density.line</field>
         <field name="arch" type="xml">
             <form>
             <group>
             <group>
             <field name='sr_no' string="Sr. NO"/>
-                <field name='id_mark' string="ID Mark/Location"/>
-                <field name='length' string="Length (mm)"/>
-                <field name='width' string="Width (mm)"/>
-                <field name='area' string="Area (mm²)"/>
+                <field name='id_location' string="ID Mark/Location"/>
+                <field name='weight' string="Weight ( Kg )"/>
+                <field name='daimeter' string="Daimeter ( mm )"/>
             </group>
             <group>
-                <field name='wt_sample' string="Weight of Sample in kg"/>
-                <field name="crushing_load" string="Crushing Load in kN"/>
-                <field name='compressive_strength' string="Compressive Strength N/mm²"/>
+                <field name='height' string="Height  ( mm )"/>
+                <field name="volume" string="Volume (mm3)"/>
+                <field name='density' string="Density (Kg/m3 )"/>
                 <field name="parent_id" invisible="1"/>
             </group>
             </group>
                 
             </form>
         </field>
-    </record> -->
+    </record>
 
     </data>
 </odoo>

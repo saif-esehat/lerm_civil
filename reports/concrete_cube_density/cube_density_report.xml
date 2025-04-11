@@ -167,11 +167,11 @@
 							</td>
 							 <td colspan="1">Width ( mm )
 							</td>
-							<td colspan="2">Height  ( mm )
+							<td colspan="1">Height  ( mm )
 							</td>
-							<td colspan="2">Volume (mm3)
+							<td colspan="1">Volume (mm3)
 							</td>
-                            <td colspan="2">Density (Kg/m3 )
+                            <td colspan="1">Density (Kg/m3 )
 							</td>
                             
 						
@@ -189,21 +189,21 @@
 								<span t-esc="r['id_location']"/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['weight']"/>
+								<span t-esc="r['weight']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['length']"/>
+								<span t-esc="r['length']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
-                            <td colspan="2">
-								<span t-esc="r['width']"/>
+                            <td colspan="1">
+								<span t-esc="r['width']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
-							  <td colspan="2">
-								<span t-esc="r['height']"/>
+							  <td colspan="1">
+								<span t-esc="r['height']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
-							<td colspan="2">
+							<td colspan="1">
 								<span t-esc="r['volume']"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
-							<td colspan="2">
+							<td colspan="1">
 								<span t-esc="r['density']"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
