@@ -48,8 +48,7 @@
 							
 								<td colspan="6">Date of Casting :
 									<![CDATA[&nbsp;]]>
-									</td>
-									<td>
+									
 									<span t-field="data.date_of_casting"/>
 								</td>
 							</tr>
@@ -99,25 +98,25 @@
 							<td colspan="1" style="text-align: center;">
 								<span t-esc="r['sr_no']"/>
 							</td>
-                            <td colspan="1">
+                            <td colspan="1"  style="text-align: center;">
 								<span t-esc="r['id_location']"/>
 							</td>
-							<td colspan="1">
+							<td colspan="1"  style="text-align: center;">
 								<span t-esc="r['weight']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
-							<td colspan="1">
+							<td colspan="1"  style="text-align: center;">
 								<span t-esc="r['length']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
-                            <td colspan="1">
+                            <td colspan="1"  style="text-align: center;">
 								<span t-esc="r['width']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
-							<td colspan="1">
+							<td colspan="1"  style="text-align: center;">
 								<span t-esc="r['height']" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
-							<td colspan="1">
+							<td colspan="1"  style="text-align: center;">
 								<span t-esc="r['volume']"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
-							<td colspan="1">
+							<td colspan="1"  style="text-align: center;">
 								<span t-esc="r['density']"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
@@ -128,10 +127,12 @@
 
                     <table style="margin-top:5px">
                             <tr cols="12">
-                                <td colspan="6"><b>Avg (kg/m3):</b></td>
-                                <td colspan="6" style="text-align: center;">
+                                <td>Avg (kg/m3):<![CDATA[&nbsp;]]>
+                                
                                     <span t-field="data.average_core_density" t-options='{"widget": "float", "precision": 2}'/>
                                 </td>
+
+							
                             </tr>
                            
                            
