@@ -155,23 +155,23 @@
 					</td> -->
 
 					 <table style="margin-top:20px">
-					<thead style="background-color: #d3d3d3;">
+					<thead >
 						<tr cols="12">
-							<td colspan="1">Sample
+							<td colspan="1" style="text-align: center;font-weight: bold;">Sample
 							</td>
-							<td colspan="1">ID MARK/ Location
+							<td colspan="1" style="text-align: center;font-weight: bold;">ID MARK/ Location
 							</td>
-							<td colspan="1">Weight ( Kg )
+							<td colspan="1" style="text-align: center;font-weight: bold;">Weight ( Kg )
 							</td>
-                            <td colspan="1">Length ( mm )
+                            <td colspan="1" style="text-align: center;font-weight: bold;">Length ( mm )
 							</td>
-							 <td colspan="1">Width ( mm )
+							 <td colspan="1" style="text-align: center;font-weight: bold;">Width ( mm )
 							</td>
-							<td colspan="1">Height  ( mm )
+							<td colspan="1" style="text-align: center;font-weight: bold;">Height  ( mm )
 							</td>
-							<td colspan="1">Volume (mm3)
+							<td colspan="1" style="text-align: center;font-weight: bold;">Volume (mm3)
 							</td>
-                            <td colspan="1">Density (Kg/m3 )
+                            <td colspan="1" style="text-align: center;font-weight: bold;">Density (Kg/m3 )
 							</td>
                             
 						
@@ -182,7 +182,7 @@
 
 						<t t-set="i" t-value="0"/>
 						<tr t-foreach="data.child_lines_core_density" t-as="r">
-							<td colspan="1">
+							<td colspan="1" style="text-align: center;">
 								<span t-esc="r['sr_no']"/>
 							</td>
                             <td colspan="1">
