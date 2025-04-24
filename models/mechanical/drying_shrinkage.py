@@ -328,7 +328,7 @@ class MoistureMovementLine(models.Model):
 
     final_wet = fields.Float("Final wet measurment W4",digits=(16, 3))
    
-    moisture_movement = fields.Float("Moisture Movement in %",compute="_compute_moisture_movement",digits=(16, 4))
+    moisture_movement = fields.Float("Moisture Movement in %",compute="_compute_moisture_movement",digits=(16, 3))
 
     @api.depends('final_wet', 'parent_id.drying_child_lines.dry_mesurment', 'parent_id.drying_child_lines.dry_length')
     def _compute_moisture_movement(self):
