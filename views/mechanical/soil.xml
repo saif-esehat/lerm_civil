@@ -369,7 +369,24 @@
                       <field name="chart_image_cbr" widget="image" readonly="1"/>
                     </group>
                     
-                    
+                    <group attrs="{'invisible': [('soil_visible', '=', False)]}">
+                        <group style="width:50%; white-space: nowrap;">
+                          <field name="ps_2mm" />
+                          <field name="pt_2mm" />
+                          <field name="cbr_2mm" />
+                        </group>
+                        <group style="width:50%; white-space: nowrap;">
+                          <field name="ps_5mm" />
+                          <field name="pt_5mm" />
+                          <field name="cbr_5mm" />
+                          
+                        </group>
+
+                        
+                    </group>
+                    <group>
+                      <field name="cbr_result" />
+                    </group>
                    
                    
                  

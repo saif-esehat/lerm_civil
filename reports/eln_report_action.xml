@@ -1105,6 +1105,9 @@
     </record>
 
 
+  
+
+
     <record id="temprature_monitoring_datasheet_action" model="ir.actions.report">
         <field name="name">Temprature Monitoring Datasheet</field>
         <field name="model">lerm.eln</field>
