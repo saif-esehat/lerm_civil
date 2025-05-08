@@ -1272,4 +1272,27 @@
     <field name="binding_type">report</field>
 </record>
 
+
+
+<record id="compresive_concrete_cylinder_datasheet_action" model="ir.actions.report">
+    <field name="name"> Compresive strength Cylinder DataSheet</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.compresive_concrete_cylinder_datasheet</field>
+    <field name="report_file">lerm_civil.compresive_concrete_cylinder_datasheet</field>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">report</field>
+</record>
+
+
+<record id="compresive_concrete_cylinder_report_action" model="ir.actions.report">
+    <field name="name">Compresive Strength Cylinder Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.compresive_concrete_cylinder_report</field>
+    <field name="report_file">lerm_civil.compresive_concrete_cylinder_report</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+</record>
+
 </odoo>

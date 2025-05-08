@@ -259,7 +259,10 @@
     'reports/concrete_core_density/concrete_density_report.xml',
     'views/mechanical/concrete_cube_density.xml',
     'reports/concrete_cube_density/cube_density_datasheet.xml',
-    'reports/concrete_cube_density/cube_density_report.xml'
+    'reports/concrete_cube_density/cube_density_report.xml',
+    'views/mechanical/concrete_cylinder.xml',
+    'reports/concrete_cylinder/concrete_cylinder_datasheet.xml',
+    'reports/concrete_cylinder/concrete_cylinder_report.xml'
 
 
     # 'views/portal_template.xml'

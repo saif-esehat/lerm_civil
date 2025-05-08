@@ -49,7 +49,7 @@ product.template.admin,product_template,model_product_template,lerm_civil.kes_ad
 eln.parameters.admin,eln_parameters,model_eln_parameters,lerm_civil.kes_admin_access_group,1,1,1,1
 eln.spreadsheets.admin,eln_spreadsheets,model_eln_spreadsheets,lerm_civil.kes_admin_access_group,1,1,1,1
 lerm.parameter.master.admin,lerm_parameter_master,model_lerm_parameter_master,lerm_civil.kes_admin_access_group,1,1,1,1
-lerm.grade.line.admin,lerm_grade_line,model_lerm_grade_line,lerm_civil.kes_admin_access_group,1,1,1,1
+lerm.grade.line.admin,lerm_grade_line,model_lerm_grade_line,lerm_civil.kes_admin_access_group,1,0,0,0
 lerm.size.line.admin,lerm_size_line,model_lerm_size_line,lerm_civil.kes_admin_access_group,1,1,1,1
 sample.range.line.admin,sample_range_line,model_sample_range_line,lerm_civil.kes_admin_access_group,1,1,1,1
 lerm.qty.line.admin,lerm_qty_line,model_lerm_qty_line,lerm_civil.kes_admin_access_group,1,1,1,1
@@ -498,6 +498,9 @@ hod.lerm_civil.access_mechanical_concrete_core_density,access_mechanical_concret
 hod.lerm_civil.access_mechanical_concrete_cube_density,access_mechanical_concrete_cube_density,lerm_civil.model_mechanical_concrete_cube_density,base.group_user,1,0,0,0
 hod.lerm_civil.access_mechanical_concrete_cube_density_line,access_mechanical_concrete_cube_density_line,lerm_civil.model_mechanical_concrete_cube_density_line,base.group_user,1,0,0,0
 
+hod.lerm_civil.access_mechanical_concrete_cylinder,access_mechanical_concrete_cylinder,lerm_civil.model_mechanical_concrete_cylinder,base.group_user,1,0,0,0
+hod.lerm_civil.access_mechanical_concrete_cylinder_line,access_mechanical_concrete_cylinder_line,lerm_civil.model_mechanical_concrete_cylinder_line,base.group_user,1,0,0,0
+
 
 
 
@@ -788,6 +791,9 @@ quality.lerm_civil.access_concrete_core_density_line,access_concrete_core_densit
 quality.lerm_civil.access_mechanical_concrete_core_density,access_mechanical_concrete_core_density,lerm_civil.model_mechanical_concrete_core_density,base.group_user,1,0,0,0
 quality.lerm_civil.access_mechanical_concrete_cube_density,access_mechanical_concrete_cube_density,lerm_civil.model_mechanical_concrete_cube_density,base.group_user,1,0,0,0
 quality.lerm_civil.access_mechanical_concrete_cube_density_line,access_mechanical_concrete_cube_density_line,lerm_civil.model_mechanical_concrete_cube_density_line,base.group_user,1,0,0,0
+
+quality.lerm_civil.access_mechanical_concrete_cylinder,access_mechanical_concrete_cylinder,lerm_civil.model_mechanical_concrete_cylinder,base.group_user,1,0,0,0
+quality.lerm_civil.access_mechanical_concrete_cylinder_line,access_mechanical_concrete_cylinder_line,lerm_civil.model_mechanical_concrete_cylinder_line,base.group_user,1,0,0,0
 
 
 
@@ -1094,6 +1100,9 @@ technician.lerm_civil.access_mechanical_concrete_cube_density_line,access_mechan
 
 technician.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_technician_access_group,1,0,0,0
 technician.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_technician_access_group,1,0,0,0
+
+technician.lerm_civil.access_mechanical_concrete_cylinder,access_mechanical_concrete_cylinder,lerm_civil.model_mechanical_concrete_cylinder,base.group_user,1,1,1,1
+technician.lerm_civil.access_mechanical_concrete_cylinder_line,access_mechanical_concrete_cylinder_line,lerm_civil.model_mechanical_concrete_cylinder_line,base.group_user,1,1,1,1
 
 
 
