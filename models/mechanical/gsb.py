@@ -86,6 +86,7 @@ class GsbMechanical(models.Model):
             record.cbr_visible = False
             record.gsb_field_density_visible = False
             record.specific_gravity_gsb_visible = False
+            record.gsb_infra_visible = False
 
 
             for sample in record.sample_parameters:
@@ -121,6 +122,9 @@ class GsbMechanical(models.Model):
 
                 if sample.internal_id == 'k2543lpu58-b27e-48c6-81b8-826521442541':
                     record.specific_gravity_gsb_visible = True
+
+                if sample.internal_id == '2145kjytl321-b27e-48c6-81b8-8265214422143':
+                    record.gsb_infra_visible = True
 
 
       # Specific Gravity  
@@ -1070,6 +1074,87 @@ class GsbMechanical(models.Model):
                 record.chart_image_cbr = chart_image
         except:
             pass 
+
+
+      # CBR Infrastructure
+
+    gsb_infra_name = fields.Char("Name",default="California Bearing Ratio")
+    gsb_infra_visible = fields.Boolean("California Bearing Ratio Visible",compute="_compute_visible")
+    
+    gsb_infra_table = fields.One2many('mechanical.gsb.infra.cbr.line','parent_id',string="CBR")
+    chart_image_cbr_infra = fields.Binary("Line Chart", compute="_compute_chart_image_cbr_infra_gsb", store=True)
+
+
+    def gsb_line_chart_cbr_infra(self):
+        # Prepare data for the chart
+        x_values = []
+        y_values = []
+        for line in self.gsb_infra_table:
+            x_values.append(line.penetration1)
+            y_values.append(line.load1)
+        
+        # Create the line chart
+        plt.plot(x_values, y_values, marker='o')
+        plt.xlabel('Penetration')
+        plt.ylabel('Load')
+        plt.title('CBR')
+
+
+        plt.ylim(bottom=0, top=max(y_values) + 10)
+        
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()  # Close the figure to free up resources
+        buffer.seek(0)
+    
+        # Convert the chart image to base64
+        chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
+        return chart_image
+    
+    @api.depends('gsb_infra_table')
+    def _compute_chart_image_cbr_infra_gsb(self):
+        try:
+            for record in self:
+                chart_image = record.gsb_line_chart_cbr_infra()
+                record.chart_image_cbr_infra = chart_image
+        except:
+            pass 
+
+
+
+class GsbInfraCBRLine(models.Model):
+    _name = "mechanical.gsb.infra.cbr.line"
+    parent_id = fields.Many2one('mechanical.gsb',string="Parent Id")
+
+    penetration1 = fields.Float(string="Penetration in mm")
+    proving_reading1 = fields.Float(string="Proving Ring Reading 1")
+
+    proving_reading2 = fields.Float(string="Proving Ring Reading 2")
+    proving_reading3 = fields.Float(string="Proving Ring Reading 2")
+
+    proving_reading_avg = fields.Integer(string="Proving Ring Reading Avg.",compute="_compute_avg_reading")
+
+    load1 = fields.Float(string="Load in Kg", compute="_compute_load")
+
+
+    @api.depends('proving_reading1', 'proving_reading2', 'proving_reading3')
+    def _compute_avg_reading(self):
+        for rec in self:
+            readings = [rec.proving_reading1, rec.proving_reading2, rec.proving_reading3]
+            if any(readings):
+                avg = sum(readings) / 3
+                if avg <= 5.5:
+                    rec.proving_reading_avg = math.floor(avg)
+                else:
+                    rec.proving_reading_avg = math.ceil(avg)
+            else:
+                rec.proving_reading_avg = 0
+
+
+    @api.depends('proving_reading_avg')
+    def _compute_load(self):
+        for record in self:
+            record.load1 = record.proving_reading_avg * 5.88
 
 
 

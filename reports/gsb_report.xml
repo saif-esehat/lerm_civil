@@ -1824,6 +1824,147 @@
 						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load2 / 1370 * 100 , 2)"/></b>
 					</div>
 
+
+
+
+
+
+					  <!-- CBR Ifra -->
+					<div  style="page-break-inside: avoid;margin-top:20px">
+						
+						<table t-if="data.gsb_infra_visible">
+								<tr>
+									<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
+										<div>
+											LABORATORY DETERMINATION OF CBR : Test Method  : <![CDATA[&nbsp;]]> <span t-field="env['lerm.parameter.master'].search([('internal_id','=','2145kjytl321-b27e-48c6-81b8-8265214422143')]).test_method.test_method"/>
+
+										</div>
+										<div>
+											CONDITION SOAKED 1 Div. = 6.96kg
+										</div>
+									</div>
+								</tr>
+						</table>
+
+						<table t-if="data.gsb_infra_visible and data.gsb_infra_table" style="margin-top:10px;">
+								<thead>
+									<tr>
+										<th>
+											<span>
+												Sr. No
+											</span>
+										</th>
+										<th>
+											<span>
+												Penetration in mm
+											</span>
+										</th>
+
+										<th>
+											<span>
+												Proving Ring Reading 1
+											</span>
+										</th>
+										<th>
+											<span>
+												Proving Ring Reading 2
+											</span>
+										</th>
+										<th>
+											<span>
+												Proving Ring Reading 3
+											</span>
+										</th>
+										<th>
+											<span>
+												Proving Ring Reading Avg.
+											</span>
+										</th>
+
+										<th>
+											<span>
+												Load in Kg
+											</span>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-set="i" t-value="0"/>
+									<tr t-foreach="data.gsb_infra_table" t-as="r">
+										<td>
+											<div>
+												<span t-esc="i + 1" />
+												<t t-set="i" t-value="i+1"/>
+											</div>
+										</td>
+										<td>
+											<span t-esc="r.penetration1"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading1"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading2"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading3"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading_avg"/>
+										</td>
+										<td>
+											<span t-esc="r.load1" t-options='{"widget": "float", "precision": 2}'/>
+										</td>
+									</tr>
+								</tbody>
+						</table>
+					</div>
+
+					<div t-if="graphCbr1" style="margin-top: 20px;">
+							<img t-att-src="'data:image/png;base64,'+str(graphCbr1)" style="max-width: 100%;"/>
+					</div>
+
+					<div t-if="data.gsb_infra_visible"  style="margin-top: 10px;">
+						CBR From Graph 
+					</div>
+					
+					<div t-if="data.gsb_infra_visible"  style="margin-top: 5px;" class="cbrformula">
+
+						<div>
+							<div>
+								CBR at 2.5mm Penetration = (PT/PS) X 100
+							</div>
+							<div>
+								From Graph PT = <span t-esc="load2"/>
+							</div>
+							<div>
+								PS = 1370
+							</div>
+							<div >
+								CBR = <span t-esc="round(load2 / 1370 * 100 , 2)"/>
+							</div>
+						</div>
+
+						<div>
+							<div>
+								CBR at 5mm Penetration = (PT/PS) X 100
+							</div>
+							<div>
+								From Graph PT = <span t-esc="load5"/>
+							</div>
+							<div>
+								PS = 2055
+							</div>
+							<div>
+								CBR = <span t-esc="round(load5 / 2055 * 100 , 2)"/>
+							</div>
+						</div>
+					</div>
+					
+					<div t-if="data.gsb_infra_visible"  style="margin-top: 10px;">
+						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load2 / 1370 * 100 , 2)"/></b>
+					</div>
+
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">
 							<div>
