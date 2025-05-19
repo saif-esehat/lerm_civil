@@ -171,9 +171,9 @@
 						
 					</td> -->
 
-					<table style="margin-top:30px;">
+					<table style="margin-top:30px;" t-if="data.compressive_visible and (data.nabl == 'pass' and nabl or (data.nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 						<thead>
-							<tr>
+							<tr >
 								<th style="text-align: center;"> 
 									<span>
 										Sr. No
@@ -261,17 +261,18 @@
 
 					<div style="margin-top:10px">
 						<table>
-						<tr t-if="data.nabl == 'pass' and nabl or (eln.sample_id.scope != 'nabl')">  
-							<!-- <tr t-if="data.child_lines and (data.child_lines == 'pass' and nabl or (data.child_lines == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)"> -->
+						<!-- <tr t-if="data.nabl == 'pass' and nabl or (eln.sample_id.scope != 'nabl')">   -->
+							<tr t-if="data.compressive_visible and (data.nabl == 'pass' and nabl or (data.nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td colspan="12">Avg. Compressive Strength N/mm2 :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_concrete_cylinder"/>
 								</td>
 							</tr>
-							<tr t-if="data.nabl == 'fail' and not nabl"> 
+							<!-- <tr t-if="data.nabl == 'fail' and not nabl">  -->
+							<!-- <tr t-if="data.compressive_visible and (data.nabl == 'pass' and nabl or (data.nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
 								<td colspan="12">Result - Average Compressive Strength N/mm2 :<![CDATA[&nbsp;]]>
 									<span t-field="data.average_concrete_cylinder"/>
 								</td>
-							</tr>
+							</tr> -->
 							
 							
 							 <!-- added

@@ -10,6 +10,7 @@ class MechanicalConcreteCylinder(models.Model):
     _rec_name = "name"
 
     name = fields.Char("Name",default="Compressive Strength of Concrete Cylinder")
+    compressive_visible = fields.Boolean("Compressive Strength of Concrete Cylinder",compute="_compute_visible")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
     
@@ -110,58 +111,7 @@ class MechanicalConcreteCylinder(models.Model):
                         record.confirmity = 'not_applicable'
 
 
-    # average_concrete_cylinder_conformity = fields.Selection([
-    #         ('pass', 'Pass'),
-    #         ('fail', 'Fail')], string="Conformity", compute="_compute_average_concrete_cylinder_conformity", store=True)
-
-
-
-    # @api.depends('average_concrete_cylinder','eln_ref','grade')
-    # def _compute_average_concrete_cylinder_conformity(self):
-        
-    #     for record in self:
-    #         record.average_concrete_cylinder_conformity = 'fail'
-    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3214587lkop-7a9c-4616-bad5-88eb1b29087y')])
-    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3214587lkop-7a9c-4616-bad5-88eb1b29087y')]).parameter_table
-    #         for material in materials:
-    #             if material.grade.id == record.grade.id:
-    #                 req_min = material.req_min
-    #                 req_max = material.req_max
-    #                 mu_value = line.mu_value
-                    
-    #                 lower = record.average_concrete_cylinder - record.average_concrete_cylinder*mu_value
-    #                 upper = record.average_concrete_cylinder + record.average_concrete_cylinder*mu_value
-    #                 if lower >= req_min and upper <= req_max:
-    #                     record.average_concrete_cylinder_conformity = 'pass'
-    #                     break
-    #                 else:
-    #                     record.average_concrete_cylinder_conformity = 'fail'
-
-    # average_concrete_cylinder_nabl = fields.Selection([
-    #     ('pass', 'NABL'),
-    #     ('fail', 'Non-NABL')], string="NABL", compute="_compute_average_concrete_cylinder_nabl", store=True)
-
-    # @api.depends('average_concrete_cylinder','eln_ref','grade')
-    # def _compute_average_concrete_cylinder_nabl(self):
-        
-    #     for record in self:
-    #         record.average_concrete_cylinder_nabl = 'fail'
-    #         line = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3214587lkop-7a9c-4616-bad5-88eb1b29087y')])
-    #         materials = self.env['lerm.parameter.master'].sudo().search([('internal_id','=','3214587lkop-7a9c-4616-bad5-88eb1b29087y')]).parameter_table
-    #         for material in materials:
-    #             if material.grade.id == record.grade.id:
-    #                 lab_min = line.lab_min_value
-    #                 lab_max = line.lab_max_value
-    #                 mu_value = line.mu_value
-                    
-    #                 lower = record.average_concrete_cylinder - record.average_concrete_cylinder*mu_value
-    #                 upper = record.average_concrete_cylinder + record.average_concrete_cylinder*mu_value
-    #                 if lower >= lab_min and upper <= lab_max:
-    #                     record.average_concrete_cylinder_nabl = 'pass'
-    #                     break
-    #                 else:
-    #                     record.average_concrete_cylinder_nabl = 'fail'
-
+    
 
 
     @api.depends('child_lines_concrete_cylinder.compressive_strenght')
@@ -244,6 +194,24 @@ class MechanicalConcreteCylinder(models.Model):
             else:
                 age_of_days = 0
             record.difference = record.age_of_test - age_of_days
+
+
+
+    ### Compute Visible
+    @api.depends('sample_parameters')
+    def _compute_visible(self):
+        
+        for record in self:
+            record.compressive_visible = False
+       
+          
+            
+            for sample in record.sample_parameters:
+                print("Internal Ids",sample.internal_id)
+
+                if sample.internal_id == "3214587lkop-7a9c-4616-bad5-88eb1b29087y":
+                    record.compressive_visible = True
+                
 
 
 
