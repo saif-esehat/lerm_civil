@@ -368,6 +368,37 @@
                     <group attrs="{'invisible': [('soil_visible', '=', False)]}">
                       <field name="chart_image_cbr" widget="image" readonly="1"/>
                     </group>
+
+
+
+
+
+                     <!-- CBR  Infra-->
+                     <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
+                        <h1>
+                            <field name="soil_infra_name" readonly="1" nolabel="1"/>
+                            <field name="soil_infra_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                   
+                    <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
+                      <field name="soil_infra_table">
+                        <tree editable="bottom">
+                          <field name="penetration1"/>
+                          <field name="proving_reading1"/>
+                           <field name="proving_reading2"/>
+                            <field name="proving_reading3"/>
+                           
+                            <field name="proving_reading_avg"/>
+                          <field name="load1"/>
+                          <!-- <field name="wt_retained"/> -->
+                        </tree>
+                      </field>
+                      
+                    </group>
+                    <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
+                      <field name="chart_image_cbr_infra" widget="image" readonly="1"/>
+                    </group>
                     
                     <group attrs="{'invisible': [('soil_visible', '=', False)]}">
                         <group style="width:50%; white-space: nowrap;">

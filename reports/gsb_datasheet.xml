@@ -989,6 +989,92 @@
                     </div>
 
 				</div>
+
+
+
+				<div t-if="data.gsb_infra_visible" style="margin-top:20px">
+								<div style="text-align:center;font-size:18px">
+									CBR
+								</div>
+
+				            <table  style="margin-top:20px;">
+								<thead>
+									<tr>
+										<th>
+											<span>
+												Sr. No
+											</span>
+										</th>
+										<th>
+											<span>
+												Penetration in mm
+											</span>
+										</th>
+
+										<th>
+											<span>
+												Proving Ring Reading 1
+											</span>
+										</th>
+										<th>
+											<span>
+												Proving Ring Reading 2
+											</span>
+										</th>
+										<th>
+											<span>
+												Proving Ring Reading 3
+											</span>
+										</th>
+										<th>
+											<span>
+												Proving Ring Reading Avg.
+											</span>
+										</th>
+
+										<th>
+											<span>
+												Load in Kg
+											</span>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-set="i" t-value="0"/>
+									<tr t-foreach="data.gsb_infra_table" t-as="r">
+										<td>
+											<div>
+												<span t-esc="i + 1" />
+												<t t-set="i" t-value="i+1"/>
+											</div>
+										</td>
+										<td>
+											<span t-esc="r.penetration1"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading1"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading2"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading3"/>
+										</td>
+										<td>
+											<span t-esc="r.proving_reading_avg"/>
+										</td>
+										<td>
+											<span t-esc="r.load1" t-options='{"widget": "float", "precision": 2}'/>
+										</td>
+									</tr>
+								</tbody>
+						</table>
+
+						<div t-if="data.chart_image_cbr_infra" style="margin-top: 20px;">
+                        <img t-att-src="'data:image/png;base64,' + data.chart_image_cbr_infra.decode('utf-8')" style="max-width: 100%;"/>
+                    </div>
+					</div>
+
 				</div>
 
 				<div class="authorizeRowDataSheet">
