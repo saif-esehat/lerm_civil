@@ -639,8 +639,18 @@
 									</span>
 								</td>
 								<td colspan="2" style="text-align: center;">
-									<div>
+									<!-- <div>
 										<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
+									</div> -->
+									<div>
+										<t t-set="use_remark" t-value="data.remarks_plastic or False" />
+										<t t-if="use_remark">
+											<span t-esc="use_remark" />
+										</t>
+										<t t-else="">
+											<t t-set="plasticity_index_float" t-value="0.0 if data.plasticity_index == 'non-plastic' else float(data.plasticity_index)" />
+											<span t-esc="plasticity_index_float" t-options='{"widget": "float", "precision": 2}' />
+										</t>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -687,8 +697,18 @@
 									</span>
 								</td>
 								<td colspan="2" style="text-align: center;">
-									<div>
+									<!-- <div>
 										<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
+									</div> -->
+									<div>
+										<t t-set="use_remark" t-value="data.remarks_plastic or False" />
+										<t t-if="use_remark">
+											<span t-esc="use_remark" />
+										</t>
+										<t t-else="">
+											<t t-set="plasticity_index_float" t-value="0.0 if data.plasticity_index == 'non-plastic' else float(data.plasticity_index)" />
+											<span t-esc="plasticity_index_float" t-options='{"widget": "float", "precision": 2}' />
+										</t>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
