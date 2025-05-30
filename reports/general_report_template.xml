@@ -8,12 +8,12 @@
 				</div>
 				
 				<div t-if="not nabl" class="col-12 imageContainer" >
-					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
+					<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
 				</div>
 				
 			</div>
 			<div class="row backgroundimage" style="opacity:0.3; font-size:100px; width:85%; text-align:center;top:500px; right:100px; position: fixed; z-index:99;">
-				<img src="/lerm_civil/static/src/img/watermark.jpg" style="width:100%;"/>
+				<img src="/lerm_civil/static/src/img/watermark.png" style="width:100%;"/>
 			</div>
 
 			
@@ -61,7 +61,7 @@
 					</div> -->
 					<div>
 						<div class="footertext">
-							Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+							316, The Great Eastern Galleria, Plot-20, Sector-4 Nerul, Navimumbai-400703
 						</div>
 						<div>
 							<!-- <div>
@@ -75,7 +75,7 @@
 								<div style="margin-left:90px">
 									<div class="footertext">
 										<span>
-											Email : sales@knackengineeringservices.com <span style="padding-left:10px">Website :  www.knackengineeringservices.com</span> 
+											Email : henry.dsa@esehat.org <span style="padding-left:10px">Website :  www.lerm.in</span> 
 										</span>
 									</div>
 									<div class="footertext">

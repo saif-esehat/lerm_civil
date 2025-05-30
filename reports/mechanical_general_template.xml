@@ -27,7 +27,7 @@
 					</span>
 				
 					<div style="text-align:center;margin-top:12px">	
-						KNACK ENGINEERING SERVICES PVT LTD
+						Esehat Meditech Ltd.
 					</div>
 					<div style="text-align:center;">
 						TEST DATA SHEET
@@ -41,17 +41,7 @@
         </div>
 		<div t-attf-class="footer o_standard_footer">
             <div class="text-center" style="border-top: 1px solid black;">
-                <!-- <ul class="list-inline mb4">
-                    <div class="footertext">
-						Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
-					</div>
-					<div class="footertext">
-						Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
-					</div>
-					<div class="footertext">
-						CIN No.: U45209MH2017PTC291168
-					</div>
-                </ul> -->
+            
 				
                 <div t-if="report_type == 'pdf'" class="footertext">
                     Page: <span class="page"/> / <span class="topage"/>

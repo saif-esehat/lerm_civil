@@ -42,7 +42,7 @@
 
 
 
-    
+    # 'security/ir.model.access.csv',
     ],
     'assets': {
     'web.assets_backend':[
