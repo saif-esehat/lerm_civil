@@ -15,6 +15,7 @@ from . import enviroment_register
 from . import employee
 from . import invoice
 from . import lab_master
+from . import general_template
 
 
 

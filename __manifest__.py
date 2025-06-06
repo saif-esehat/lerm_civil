@@ -6,6 +6,7 @@
  'version': '13.0.1', 
  'depends':['base' , 'contacts','stock','product' , 'mail','documents','documents_spreadsheet','lerm_civil_inv','attachment_indexation','maintenance','portal'],
  'data': [
+    'security/ir.model.access.csv',
     'security/security.xml',
     'data/sequence.xml',
     'views/enviroment_register.xml',

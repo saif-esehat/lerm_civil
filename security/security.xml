@@ -46,6 +46,11 @@
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
 
+        <!-- <record model="res.groups" id="kes_technician_access_mechanical">
+            <field name="name">Technician Mechanical</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
+        </record> -->
+
         <record model="res.groups" id="kes_checked_by">
             <field name="name">Checked by</field>
             <field name="category_id" ref="kes_lerm_access_categories"/>
@@ -88,6 +93,9 @@
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
 
+
+       
+
         <record id="hod_discipline_record" model="ir.rule">
             <field name="name">HOD can see only their Discipline</field>
             <field ref="model_lerm_srf_sample" name="model_id"/>
@@ -113,6 +121,8 @@
             <field name="active" eval="True"/>
         </record>
 
+   
+
 
         <record id="technician_eln_record_mechanical" model="ir.rule">
             <field name="name">Technician can only see their eln</field>
@@ -125,6 +135,11 @@
             <field name="perm_unlink" eval="False"/>
             <field name="active" eval="True"/>
         </record>
+       
+
+        
+
+      
 
         <record id="technician_eln_record_chemical" model="ir.rule">
             <field name="name">Technician can only see their eln</field>
@@ -211,30 +226,7 @@
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
 
-        <!-- Restrict access to account models -->
-        <!-- <record id="account_access_rule" model="ir.rule">
-            <field name="name">No Access to Account Models</field>
-            <field name="model_id" ref="account.model_account_move"/>
-            <field name="groups" eval="[(4, ref('lerm_civil.group_no_account_access'))]"/>
-            <field name="domain_force">[(1, '=', 0)]</field> 
-        </record> -->
-        
-    
-        <!-- Hide Account menu -->
-        <!-- <record id="account.menu_finance" model="ir.ui.menu">
-            <field name="groups" eval="[(4, ref('lerm_civil.group_no_account_access'))]"/>
-        </record> -->
-
-
-        <!-- <record id="account.menu_finance" model="ir.ui.menu">
-            <field name="groups" eval="[(4, ref('lerm_civil.kes_admin_access_group')), (3, ref('lerm_civil.group_no_account_access'))]"/>
-        </record>
-        <record id="account.menu_finance_receivables" model="ir.ui.menu">
-            <field name="groups" eval="[(4, ref('lerm_civil.kes_admin_access_group')), (3, ref('lerm_civil.group_no_account_access'))]"/>
-        </record>
-        <record id="account.menu_account_customer" model="ir.ui.menu">
-            <field name="groups" eval="[(4, ref('lerm_civil.kes_admin_access_group')), (3, ref('lerm_civil.group_no_account_access'))]"/>
-        </record> -->
+      
 
     </data>
 </odoo>
